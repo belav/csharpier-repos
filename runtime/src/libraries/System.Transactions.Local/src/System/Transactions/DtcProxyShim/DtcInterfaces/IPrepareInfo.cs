@@ -7,7 +7,11 @@ using System.Runtime.InteropServices.Marshalling;
 namespace System.Transactions.DtcProxyShim.DtcInterfaces;
 
 // https://docs.microsoft.com/previous-versions/windows/desktop/ms686533(v=vs.85)
-[GeneratedComInterface, Guid("80c7bfd0-87ee-11ce-8081-0080c758527e"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+[
+    GeneratedComInterface,
+    Guid("80c7bfd0-87ee-11ce-8081-0080c758527e"),
+    InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+]
 internal partial interface IPrepareInfo
 {
     void GetPrepareInfoSize(out uint pcbPrepInfo);

@@ -55,11 +55,9 @@
 //
 //---------------------------------------------------------------------------
 using System;
-
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
-
 // We use spec version 0-9 for common constants such as frame types,
 // error codes, and the frame end byte, since they don't vary *within
 // the versions we support*. Obviously we may need to revisit this if
@@ -69,17 +67,19 @@ using CommonFraming = RabbitMQ.Client.Framing.v0_9;
 namespace RabbitMQ.Client.Impl
 {
     ///<summary>Small ISession implementation used during channel quiescing.</summary>
-    public class QuiescingSession: SessionBase
+    public class QuiescingSession : SessionBase
     {
         public ShutdownEventArgs m_reason;
         public int m_replyClassId;
         public int m_replyMethodId;
 
-        public QuiescingSession(ConnectionBase connection,
-                                int channelNumber,
-                                ShutdownEventArgs reason,
-                                int replyClassId,
-                                int replyMethodId)
+        public QuiescingSession(
+            ConnectionBase connection,
+            int channelNumber,
+            ShutdownEventArgs reason,
+            int replyClassId,
+            int replyMethodId
+        )
             : base(connection, channelNumber)
         {
             m_reason = reason;
@@ -89,10 +89,13 @@ namespace RabbitMQ.Client.Impl
 
         public override void HandleFrame(Frame frame)
         {
-            if (frame.Type == CommonFraming.Constants.FrameMethod) {
+            if (frame.Type == CommonFraming.Constants.FrameMethod)
+            {
                 MethodBase method = Connection.Protocol.DecodeMethodFrom(frame.GetReader());
-                if ((method.ProtocolClassId == m_replyClassId)
-                    && (method.ProtocolMethodId == m_replyMethodId))
+                if (
+                    (method.ProtocolClassId == m_replyClassId)
+                    && (method.ProtocolMethodId == m_replyMethodId)
+                )
                 {
                     // This is the reply we were looking for. Release
                     // the channel with the reason we were passed in

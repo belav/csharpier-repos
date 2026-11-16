@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
 
         public override bool IsInvalid => handle == IntPtr.Zero;
 
-        public sqlite3_blob DangerousGetWrapper()
-            => _wrapper!;
+        public sqlite3_blob DangerousGetWrapper() => _wrapper!;
 
         protected override bool ReleaseHandle()
         {

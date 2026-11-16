@@ -31,7 +31,8 @@ namespace System.Diagnostics.Tracing
         /// <param name="group">The field that starts the group</param>
         private TraceLoggingMetadataCollector(
             TraceLoggingMetadataCollector other,
-            FieldMetadata group)
+            FieldMetadata group
+        )
         {
             this.impl = other.impl;
             this.currentGroup = group;
@@ -41,11 +42,7 @@ namespace System.Diagnostics.Tracing
         /// The field tags to be used for the next field.
         /// This will be reset to None each time a field is written.
         /// </summary>
-        internal EventFieldTags Tags
-        {
-            get;
-            set;
-        }
+        internal EventFieldTags Tags { get; set; }
 
         internal int ScratchSize => this.impl.scratchSize;
 
@@ -79,14 +76,18 @@ namespace System.Diagnostics.Tracing
         {
             TraceLoggingMetadataCollector result = this;
 
-            if (name != null || // Normal.
-                this.BeginningBufferedArray) // Error, FieldMetadata's constructor will throw the appropriate exception.
+            if (
+                name != null
+                || // Normal.
+                this.BeginningBufferedArray
+            ) // Error, FieldMetadata's constructor will throw the appropriate exception.
             {
                 var newGroup = new FieldMetadata(
                     name!,
                     TraceLoggingDataType.Struct,
                     this.Tags,
-                    this.BeginningBufferedArray);
+                    this.BeginningBufferedArray
+                );
                 this.AddField(newGroup);
                 result = new TraceLoggingMetadataCollector(this, newGroup);
             }
@@ -282,11 +283,7 @@ namespace System.Diagnostics.Tracing
 
             this.impl.AddScalar(2);
             this.impl.AddNonscalar();
-            this.AddField(new FieldMetadata(
-                name,
-                type,
-                this.Tags,
-                metadata));
+            this.AddField(new FieldMetadata(name, type, this.Tags, metadata));
         }
 
         internal byte[] GetMetadata()

@@ -17,9 +17,7 @@ namespace System.Web.Http.WebHost.Routing
         private readonly string _virtualPathRoot;
 
         public HostedHttpRouteCollection(RouteCollection routeCollection)
-            : this(routeCollection, virtualPathRoot: null)
-        {
-        }
+            : this(routeCollection, virtualPathRoot: null) { }
 
         public HostedHttpRouteCollection(RouteCollection routeCollection, string virtualPathRoot)
         {
@@ -80,7 +78,11 @@ namespace System.Web.Http.WebHost.Routing
                     return route.HttpRoute;
                 }
 
-                throw Error.ArgumentOutOfRange("index", index, SRResources.RouteCollectionOutOfRange);
+                throw Error.ArgumentOutOfRange(
+                    "index",
+                    index,
+                    SRResources.RouteCollectionOutOfRange
+                );
             }
         }
 
@@ -105,7 +107,10 @@ namespace System.Web.Http.WebHost.Routing
 
             RouteData routeData = _routeCollection.GetRouteData(httpContextBase);
             // If the match is from an IgnoreRoute, do not return a RouteData but return a null, which will be treated as a 404 NoRouteMatched.
-            if (routeData != null && !(routeData.RouteHandler is System.Web.Routing.StopRoutingHandler))
+            if (
+                routeData != null
+                && !(routeData.RouteHandler is System.Web.Routing.StopRoutingHandler)
+            )
             {
                 return new HostedHttpRouteData(routeData);
             }
@@ -114,7 +119,11 @@ namespace System.Web.Http.WebHost.Routing
         }
 
         /// <inheritdoc/>
-        public override IHttpVirtualPathData GetVirtualPath(HttpRequestMessage request, string name, IDictionary<string, object> values)
+        public override IHttpVirtualPathData GetVirtualPath(
+            HttpRequestMessage request,
+            string name,
+            IDictionary<string, object> values
+        )
         {
             if (request == null)
             {
@@ -138,9 +147,17 @@ namespace System.Web.Http.WebHost.Routing
                 return null;
             }
 
-            RequestContext requestContext = new RequestContext(httpContextBase, routeData.ToRouteData());
-            RouteValueDictionary routeValues = values != null ? new RouteValueDictionary(values) : new RouteValueDictionary();
-            VirtualPathData virtualPathData = _routeCollection.GetVirtualPath(requestContext, name, routeValues);
+            RequestContext requestContext = new RequestContext(
+                httpContextBase,
+                routeData.ToRouteData()
+            );
+            RouteValueDictionary routeValues =
+                values != null ? new RouteValueDictionary(values) : new RouteValueDictionary();
+            VirtualPathData virtualPathData = _routeCollection.GetVirtualPath(
+                requestContext,
+                name,
+                routeValues
+            );
 
             if (virtualPathData != null)
             {
@@ -150,7 +167,8 @@ namespace System.Web.Http.WebHost.Routing
                 {
                     if (routeValues.Remove(HttpWebRoute.HttpRouteKey))
                     {
-                        VirtualPathData virtualPathDataWithoutHttpRouteValue = _routeCollection.GetVirtualPath(requestContext, name, routeValues);
+                        VirtualPathData virtualPathDataWithoutHttpRouteValue =
+                            _routeCollection.GetVirtualPath(requestContext, name, routeValues);
                         if (virtualPathDataWithoutHttpRouteValue != null)
                         {
                             virtualPathData = virtualPathDataWithoutHttpRouteValue;
@@ -165,7 +183,13 @@ namespace System.Web.Http.WebHost.Routing
         }
 
         /// <inheritdoc/>
-        public override IHttpRoute CreateRoute(string uriTemplate, IDictionary<string, object> defaults, IDictionary<string, object> constraints, IDictionary<string, object> dataTokens, HttpMessageHandler handler)
+        public override IHttpRoute CreateRoute(
+            string uriTemplate,
+            IDictionary<string, object> defaults,
+            IDictionary<string, object> constraints,
+            IDictionary<string, object> dataTokens,
+            HttpMessageHandler handler
+        )
         {
             if (constraints != null)
             {
@@ -179,7 +203,11 @@ namespace System.Web.Http.WebHost.Routing
         }
 
         /// <inheritdoc/>
-        protected override void ValidateConstraint(string routeTemplate, string name, object constraint)
+        protected override void ValidateConstraint(
+            string routeTemplate,
+            string name,
+            object constraint
+        )
         {
             // In WebHost the constraint might be IHttpRouteConstraint or IRouteConstraint (System.Web) or a string
             HttpWebRoute.ValidateConstraint(routeTemplate, name, constraint);
@@ -268,12 +296,18 @@ namespace System.Web.Http.WebHost.Routing
 
         private static NotSupportedException NotSupportedByRouteCollection()
         {
-            return Error.NotSupported(SRResources.RouteCollectionNotSupported, typeof(HostedHttpRouteCollection).Name);
+            return Error.NotSupported(
+                SRResources.RouteCollectionNotSupported,
+                typeof(HostedHttpRouteCollection).Name
+            );
         }
 
         private static NotSupportedException NotSupportedByHostedRouteCollection()
         {
-            return Error.NotSupported(SRResources.RouteCollectionUseDirectly, typeof(RouteCollection).Name);
+            return Error.NotSupported(
+                SRResources.RouteCollectionUseDirectly,
+                typeof(RouteCollection).Name
+            );
         }
     }
 }

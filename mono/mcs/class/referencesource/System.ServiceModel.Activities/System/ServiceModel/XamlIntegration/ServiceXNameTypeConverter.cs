@@ -10,13 +10,17 @@ namespace System.ServiceModel.XamlIntegration
     using System.Xml.Linq;
 
     public class ServiceXNameTypeConverter : TypeConverter
-    {                           
+    {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             return XNameTypeConverterHelper.CanConvertFrom(sourceType);
         }
-        
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             string stringValue = value as string;
             if (!string.IsNullOrEmpty(stringValue))
@@ -27,15 +31,21 @@ namespace System.ServiceModel.XamlIntegration
                     return XName.Get(stringValue);
                 }
             }
-            return XNameTypeConverterHelper.ConvertFrom(context, value) ?? base.ConvertFrom(context, culture, value);
+            return XNameTypeConverterHelper.ConvertFrom(context, value)
+                ?? base.ConvertFrom(context, culture, value);
         }
-        
+
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
             return XNameTypeConverterHelper.CanConvertTo(destinationType);
         }
-        
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             XName name = value as XName;
             if (destinationType == typeof(string) && name != null)
@@ -47,8 +57,10 @@ namespace System.ServiceModel.XamlIntegration
                 }
                 else
                 {
-                    string result = (string)(XNameTypeConverterHelper.ConvertTo(context, value, destinationType) ??
-                        base.ConvertTo(context, culture, value, destinationType));
+                    string result = (string)(
+                        XNameTypeConverterHelper.ConvertTo(context, value, destinationType)
+                        ?? base.ConvertTo(context, culture, value, destinationType)
+                    );
                     if (IsQualifiedName(result))
                     {
                         return result;
@@ -64,8 +76,8 @@ namespace System.ServiceModel.XamlIntegration
             }
             else
             {
-                return XNameTypeConverterHelper.ConvertTo(context, value, destinationType) ?? 
-                    base.ConvertTo(context, culture, value, destinationType);
+                return XNameTypeConverterHelper.ConvertTo(context, value, destinationType)
+                    ?? base.ConvertTo(context, culture, value, destinationType);
             }
         }
 

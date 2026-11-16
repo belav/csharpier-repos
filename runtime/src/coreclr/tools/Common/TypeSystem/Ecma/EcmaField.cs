@@ -13,15 +13,15 @@ namespace Internal.TypeSystem.Ecma
     {
         private static class FieldFlags
         {
-            public const int BasicMetadataCache     = 0x0001;
-            public const int Static                 = 0x0002;
-            public const int InitOnly               = 0x0004;
-            public const int Literal                = 0x0008;
-            public const int HasRva                 = 0x0010;
+            public const int BasicMetadataCache = 0x0001;
+            public const int Static = 0x0002;
+            public const int InitOnly = 0x0004;
+            public const int Literal = 0x0008;
+            public const int HasRva = 0x0010;
 
             public const int AttributeMetadataCache = 0x0100;
-            public const int ThreadStatic           = 0x0200;
-            public const int Intrinsic              = 0x0400;
+            public const int ThreadStatic = 0x0200;
+            public const int Intrinsic = 0x0400;
 
             // Computed when field type is computed
             public const int HasEmbeddedSignatureData = 0x0800;
@@ -48,59 +48,46 @@ namespace Internal.TypeSystem.Ecma
 
         EntityHandle EcmaModule.IEntityHandleObject.Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         }
-
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _type.Module.Context;
-            }
+            get { return _type.Module.Context; }
         }
 
         public override DefType OwningType
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         }
 
         public EcmaModule Module
         {
-            get
-            {
-                return _type.EcmaModule;
-            }
+            get { return _type.EcmaModule; }
         }
 
         public MetadataReader MetadataReader
         {
-            get
-            {
-                return _type.MetadataReader;
-            }
+            get { return _type.MetadataReader; }
         }
 
         public FieldDefinitionHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         }
 
         private TypeDesc InitializeFieldType()
         {
             var metadataReader = MetadataReader;
-            BlobReader signatureReader = metadataReader.GetBlobReader(metadataReader.GetFieldDefinition(_handle).Signature);
+            BlobReader signatureReader = metadataReader.GetBlobReader(
+                metadataReader.GetFieldDefinition(_handle).Signature
+            );
 
-            EcmaSignatureParser parser = new EcmaSignatureParser(Module, signatureReader, NotFoundBehavior.Throw);
+            EcmaSignatureParser parser = new EcmaSignatureParser(
+                Module,
+                signatureReader,
+                NotFoundBehavior.Throw
+            );
             var fieldType = parser.ParseFieldSignature(out EmbeddedSignatureData[] data);
 
             if (data != null)
@@ -134,14 +121,19 @@ namespace Internal.TypeSystem.Ecma
         public override EmbeddedSignatureData[] GetEmbeddedSignatureData()
         {
             var metadataReader = MetadataReader;
-            BlobReader signatureReader = metadataReader.GetBlobReader(metadataReader.GetFieldDefinition(_handle).Signature);
+            BlobReader signatureReader = metadataReader.GetBlobReader(
+                metadataReader.GetFieldDefinition(_handle).Signature
+            );
 
-            EcmaSignatureParser parser = new EcmaSignatureParser(Module, signatureReader, NotFoundBehavior.Throw);
+            EcmaSignatureParser parser = new EcmaSignatureParser(
+                Module,
+                signatureReader,
+                NotFoundBehavior.Throw
+            );
             var fieldType = parser.ParseFieldSignature(out var embeddedSig);
             Debug.Assert(fieldType == FieldType);
             return embeddedSig;
         }
-
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         private int InitializeFieldFlags(int mask)
@@ -176,17 +168,31 @@ namespace Internal.TypeSystem.Ecma
 
                 foreach (var attributeHandle in fieldDefinition.GetCustomAttributes())
                 {
-                    StringHandle namespaceHandle, nameHandle;
-                    if (!metadataReader.GetAttributeNamespaceAndName(attributeHandle, out namespaceHandle, out nameHandle))
+                    StringHandle namespaceHandle,
+                        nameHandle;
+                    if (
+                        !metadataReader.GetAttributeNamespaceAndName(
+                            attributeHandle,
+                            out namespaceHandle,
+                            out nameHandle
+                        )
+                    )
                         continue;
 
-                    if (metadataReader.StringComparer.Equals(nameHandle, "ThreadStaticAttribute")
-                        && metadataReader.StringComparer.Equals(namespaceHandle, "System"))
+                    if (
+                        metadataReader.StringComparer.Equals(nameHandle, "ThreadStaticAttribute")
+                        && metadataReader.StringComparer.Equals(namespaceHandle, "System")
+                    )
                     {
                         flags |= FieldFlags.ThreadStatic;
                     }
-                    else if (metadataReader.StringComparer.Equals(nameHandle, "IntrinsicAttribute")
-                        && metadataReader.StringComparer.Equals(namespaceHandle, "System.Runtime.CompilerServices"))
+                    else if (
+                        metadataReader.StringComparer.Equals(nameHandle, "IntrinsicAttribute")
+                        && metadataReader.StringComparer.Equals(
+                            namespaceHandle,
+                            "System.Runtime.CompilerServices"
+                        )
+                    )
                     {
                         flags |= FieldFlags.Intrinsic;
                     }
@@ -216,7 +222,10 @@ namespace Internal.TypeSystem.Ecma
         {
             get
             {
-                return (GetFieldFlags(FieldFlags.BasicMetadataCache | FieldFlags.Static) & FieldFlags.Static) != 0;
+                return (
+                        GetFieldFlags(FieldFlags.BasicMetadataCache | FieldFlags.Static)
+                        & FieldFlags.Static
+                    ) != 0;
             }
         }
 
@@ -224,8 +233,11 @@ namespace Internal.TypeSystem.Ecma
         {
             get
             {
-                return IsStatic &&
-                    (GetFieldFlags(FieldFlags.AttributeMetadataCache | FieldFlags.ThreadStatic) & FieldFlags.ThreadStatic) != 0;
+                return IsStatic
+                    && (
+                        GetFieldFlags(FieldFlags.AttributeMetadataCache | FieldFlags.ThreadStatic)
+                        & FieldFlags.ThreadStatic
+                    ) != 0;
             }
         }
 
@@ -233,7 +245,10 @@ namespace Internal.TypeSystem.Ecma
         {
             get
             {
-                return (GetFieldFlags(FieldFlags.BasicMetadataCache | FieldFlags.InitOnly) & FieldFlags.InitOnly) != 0;
+                return (
+                        GetFieldFlags(FieldFlags.BasicMetadataCache | FieldFlags.InitOnly)
+                        & FieldFlags.InitOnly
+                    ) != 0;
             }
         }
 
@@ -241,7 +256,10 @@ namespace Internal.TypeSystem.Ecma
         {
             get
             {
-                return (GetFieldFlags(FieldFlags.BasicMetadataCache | FieldFlags.HasRva) & FieldFlags.HasRva) != 0;
+                return (
+                        GetFieldFlags(FieldFlags.BasicMetadataCache | FieldFlags.HasRva)
+                        & FieldFlags.HasRva
+                    ) != 0;
             }
         }
 
@@ -249,16 +267,16 @@ namespace Internal.TypeSystem.Ecma
         {
             get
             {
-                return (GetFieldFlags(FieldFlags.BasicMetadataCache | FieldFlags.Literal) & FieldFlags.Literal) != 0;
+                return (
+                        GetFieldFlags(FieldFlags.BasicMetadataCache | FieldFlags.Literal)
+                        & FieldFlags.Literal
+                    ) != 0;
             }
         }
 
         public FieldAttributes Attributes
         {
-            get
-            {
-                return MetadataReader.GetFieldDefinition(_handle).Attributes;
-            }
+            get { return MetadataReader.GetFieldDefinition(_handle).Attributes; }
         }
 
         private string InitializeName()
@@ -280,8 +298,13 @@ namespace Internal.TypeSystem.Ecma
 
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName)
         {
-            return !MetadataReader.GetCustomAttributeHandle(MetadataReader.GetFieldDefinition(_handle).GetCustomAttributes(),
-                attributeNamespace, attributeName).IsNil;
+            return !MetadataReader
+                .GetCustomAttributeHandle(
+                    MetadataReader.GetFieldDefinition(_handle).GetCustomAttributes(),
+                    attributeNamespace,
+                    attributeName
+                )
+                .IsNil;
         }
 
         public override MarshalAsDescriptor GetMarshalAsDescriptor()
@@ -290,8 +313,14 @@ namespace Internal.TypeSystem.Ecma
             FieldDefinition definition = reader.GetFieldDefinition(_handle);
             if ((definition.Attributes & FieldAttributes.HasFieldMarshal) != 0)
             {
-                BlobReader marshalAsReader = reader.GetBlobReader(definition.GetMarshallingDescriptor());
-                EcmaSignatureParser parser = new EcmaSignatureParser(_type.EcmaModule, marshalAsReader, NotFoundBehavior.Throw);
+                BlobReader marshalAsReader = reader.GetBlobReader(
+                    definition.GetMarshallingDescriptor()
+                );
+                EcmaSignatureParser parser = new EcmaSignatureParser(
+                    _type.EcmaModule,
+                    marshalAsReader,
+                    NotFoundBehavior.Throw
+                );
                 return parser.ParseMarshalAsDescriptor();
             }
 
@@ -307,7 +336,9 @@ namespace Internal.TypeSystem.Ecma
         public static int GetFieldRvaValue(this EcmaField field)
         {
             Debug.Assert(field.HasRva);
-            return field.MetadataReader.GetFieldDefinition(field.Handle).GetRelativeVirtualAddress();
+            return field
+                .MetadataReader.GetFieldDefinition(field.Handle)
+                .GetRelativeVirtualAddress();
         }
 
         /// <summary>
@@ -316,7 +347,9 @@ namespace Internal.TypeSystem.Ecma
         public static byte[] GetFieldRvaData(this EcmaField field)
         {
             Debug.Assert(field.HasRva);
-            int addr = field.MetadataReader.GetFieldDefinition(field.Handle).GetRelativeVirtualAddress();
+            int addr = field
+                .MetadataReader.GetFieldDefinition(field.Handle)
+                .GetRelativeVirtualAddress();
             var memBlock = field.Module.PEReader.GetSectionData(addr).GetContent();
 
             int size = field.FieldType.GetElementSize().AsInt;

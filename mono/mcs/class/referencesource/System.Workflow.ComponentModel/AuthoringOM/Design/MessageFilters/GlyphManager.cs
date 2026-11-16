@@ -1,35 +1,31 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Drawing;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Windows.Forms;
     using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing;
     using System.Drawing.Design;
     using System.Drawing.Drawing2D;
-    using System.Collections.Generic;
-    using System.ComponentModel.Design;
+    using System.Windows.Forms;
     using System.Workflow.ComponentModel.Design;
 
     #region Class ActivityDesignerGlyphCollection
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ActivityDesignerGlyphCollection : List<DesignerGlyph>
     {
-        public ActivityDesignerGlyphCollection()
-        {
-        }
+        public ActivityDesignerGlyphCollection() { }
 
         public ActivityDesignerGlyphCollection(IEnumerable<DesignerGlyph> glyphs)
-            : base(glyphs)
-        {
-        }
+            : base(glyphs) { }
 
         public ActivityDesignerGlyphCollection(ActivityDesignerGlyphCollection glyphs)
-            : base(glyphs)
-        {
-        }
+            : base(glyphs) { }
 
         internal DesignerGlyph this[Type type]
         {
@@ -59,7 +55,9 @@ namespace System.Workflow.ComponentModel.Design
     #endregion
 
     #region Class DesignerGlyph
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public abstract class DesignerGlyph
     {
         public const int HighestPriority = 0;
@@ -79,18 +77,12 @@ namespace System.Workflow.ComponentModel.Design
 
         public virtual bool CanBeActivated
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public virtual int Priority
         {
-            get
-            {
-                return DesignerGlyph.NormalPriority;
-            }
+            get { return DesignerGlyph.NormalPriority; }
         }
 
         public virtual Rectangle GetBounds(ActivityDesigner designer, bool activated)
@@ -101,11 +93,14 @@ namespace System.Workflow.ComponentModel.Design
             return designer.Bounds;
         }
 
-        protected abstract void OnPaint(Graphics graphics, bool activated, AmbientTheme ambientTheme, ActivityDesigner designer);
+        protected abstract void OnPaint(
+            Graphics graphics,
+            bool activated,
+            AmbientTheme ambientTheme,
+            ActivityDesigner designer
+        );
 
-        protected virtual void OnActivate(ActivityDesigner designer)
-        {
-        }
+        protected virtual void OnActivate(ActivityDesigner designer) { }
 
         internal void DrawActivated(Graphics graphics, ActivityDesigner designer)
         {
@@ -134,15 +129,14 @@ namespace System.Workflow.ComponentModel.Design
     {
         #region Members and Constructor
         // cache all the services so that in the dispose we properly clean up ourselves
-        private List<IDesignerGlyphProvider> designerGlyphProviders = new List<IDesignerGlyphProvider>();
+        private List<IDesignerGlyphProvider> designerGlyphProviders =
+            new List<IDesignerGlyphProvider>();
 
         // these two variables are only valid during MouseEnter and MouseLeave of a glyph
         private DesignerGlyph activeGlyph = null;
         private ActivityDesigner activeDesigner = null;
 
-        internal GlyphManager()
-        {
-        }
+        internal GlyphManager() { }
 
         protected override void Dispose(bool disposing)
         {
@@ -150,7 +144,8 @@ namespace System.Workflow.ComponentModel.Design
             this.activeGlyph = null;
             this.activeDesigner = null;
 
-            IServiceContainer serviceContainer = GetService(typeof(IServiceContainer)) as IServiceContainer;
+            IServiceContainer serviceContainer =
+                GetService(typeof(IServiceContainer)) as IServiceContainer;
             if (serviceContainer != null)
             {
                 if (GetService(typeof(IDesignerGlyphProviderService)) != null)
@@ -166,7 +161,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             base.Initialize(parentView);
 
-            IServiceContainer serviceContainer = GetService(typeof(IServiceContainer)) as IServiceContainer;
+            IServiceContainer serviceContainer =
+                GetService(typeof(IServiceContainer)) as IServiceContainer;
             if (serviceContainer != null)
             {
                 if (GetService(typeof(IDesignerGlyphProviderService)) != null)
@@ -200,22 +196,27 @@ namespace System.Workflow.ComponentModel.Design
             return false;
         }
 
-
         protected override bool OnMouseMove(MouseEventArgs eventArgs)
         {
-            RefreshActiveGlyph(ParentView.ClientPointToLogical(new Point(eventArgs.X, eventArgs.Y)));
+            RefreshActiveGlyph(
+                ParentView.ClientPointToLogical(new Point(eventArgs.X, eventArgs.Y))
+            );
             return false;
         }
 
         protected override bool OnMouseEnter(MouseEventArgs eventArgs)
         {
-            RefreshActiveGlyph(ParentView.ClientPointToLogical(new Point(eventArgs.X, eventArgs.Y)));
+            RefreshActiveGlyph(
+                ParentView.ClientPointToLogical(new Point(eventArgs.X, eventArgs.Y))
+            );
             return false;
         }
 
         protected override bool OnMouseHover(MouseEventArgs eventArgs)
         {
-            RefreshActiveGlyph(ParentView.ClientPointToLogical(new Point(eventArgs.X, eventArgs.Y)));
+            RefreshActiveGlyph(
+                ParentView.ClientPointToLogical(new Point(eventArgs.X, eventArgs.Y))
+            );
             return false;
         }
         #endregion
@@ -238,15 +239,15 @@ namespace System.Workflow.ComponentModel.Design
 
         ReadOnlyCollection<IDesignerGlyphProvider> IDesignerGlyphProviderService.GlyphProviders
         {
-            get
-            {
-                return this.designerGlyphProviders.AsReadOnly();
-            }
+            get { return this.designerGlyphProviders.AsReadOnly(); }
         }
         #endregion
 
         #region Internal methods
-        internal void DrawDesignerGlyphs(ActivityDesignerPaintEventArgs e, ActivityDesigner designer)
+        internal void DrawDesignerGlyphs(
+            ActivityDesignerPaintEventArgs e,
+            ActivityDesigner designer
+        )
         {
             foreach (DesignerGlyph glyph in GetDesignerGlyphs(designer))
                 glyph.Draw(e.Graphics, designer);
@@ -281,19 +282,26 @@ namespace System.Workflow.ComponentModel.Design
             {
                 DesignerGlyph previousActiveGlyph = this.activeGlyph;
 
-                if (this.activeGlyph == null || !this.activeGlyph.GetBounds(this.activeDesigner, true).Contains(point))
+                if (
+                    this.activeGlyph == null
+                    || !this.activeGlyph.GetBounds(this.activeDesigner, true).Contains(point)
+                )
                 {
                     ActivityDesigner newActiveDesigner = null;
                     DesignerGlyph newActiveGlyph = GlyphFromPoint(point, out newActiveDesigner);
 
                     if (this.activeGlyph != null)
-                        parentView.InvalidateLogicalRectangle(this.activeGlyph.GetBounds(this.activeDesigner, true));
+                        parentView.InvalidateLogicalRectangle(
+                            this.activeGlyph.GetBounds(this.activeDesigner, true)
+                        );
 
                     this.activeGlyph = newActiveGlyph;
                     this.activeDesigner = newActiveDesigner;
 
                     if (this.activeGlyph != null)
-                        parentView.InvalidateLogicalRectangle(this.activeGlyph.GetBounds(this.activeDesigner, true));
+                        parentView.InvalidateLogicalRectangle(
+                            this.activeGlyph.GetBounds(this.activeDesigner, true)
+                        );
                 }
 
                 if (previousActiveGlyph != this.activeGlyph)
@@ -335,7 +343,11 @@ namespace System.Workflow.ComponentModel.Design
             {
                 RectangleCollection collection = new RectangleCollection();
                 {
-                    ActivityDesigner[] containedDesigners = GetActivityDesigners(parentView.ClientRectangleToLogical(new Rectangle(Point.Empty, parentView.ViewPortSize)));
+                    ActivityDesigner[] containedDesigners = GetActivityDesigners(
+                        parentView.ClientRectangleToLogical(
+                            new Rectangle(Point.Empty, parentView.ViewPortSize)
+                        )
+                    );
                     foreach (ActivityDesigner designer in containedDesigners)
                     {
                         if (!collection.IsPointInsideAnyRectangle(point))
@@ -361,7 +373,7 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         //Please note that before changing this algorithm, you need to know that changing this algorithm
-        //will affect the z order of the designers and will affect the way glyphs are drawn. 
+        //will affect the z order of the designers and will affect the way glyphs are drawn.
         //Here what we are using depth first search algorithm to maintain the Z order.
         //Please note that even though one might think the algo might cause some inefficiency, the algo
         //has been timed for huge workflow and typically takes < 20ms to execute
@@ -377,7 +389,8 @@ namespace System.Workflow.ComponentModel.Design
                 Stack<object> designerStack = new Stack<object>();
 
                 designerStack.Push(rootDesigner);
-                CompositeActivityDesigner compositeDesigner = rootDesigner as CompositeActivityDesigner;
+                CompositeActivityDesigner compositeDesigner =
+                    rootDesigner as CompositeActivityDesigner;
                 if (compositeDesigner != null && compositeDesigner.ContainedDesigners.Count > 0)
                     designerStack.Push(compositeDesigner.ContainedDesigners);
 
@@ -389,11 +402,19 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         foreach (ActivityDesigner activityDesigner in designers)
                         {
-                            if ((viewPortEmpty || logicalViewPort.IntersectsWith(activityDesigner.Bounds)) && activityDesigner.IsVisible)
+                            if (
+                                (
+                                    viewPortEmpty
+                                    || logicalViewPort.IntersectsWith(activityDesigner.Bounds)
+                                ) && activityDesigner.IsVisible
+                            )
                             {
                                 designerStack.Push(activityDesigner);
                                 compositeDesigner = activityDesigner as CompositeActivityDesigner;
-                                if (compositeDesigner != null && compositeDesigner.ContainedDesigners.Count > 0)
+                                if (
+                                    compositeDesigner != null
+                                    && compositeDesigner.ContainedDesigners.Count > 0
+                                )
                                     designerStack.Push(compositeDesigner.ContainedDesigners);
                             }
                         }

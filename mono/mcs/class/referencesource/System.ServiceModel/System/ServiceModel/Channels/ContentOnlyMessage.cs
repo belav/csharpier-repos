@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.ServiceModel;
     using System.IO;
+    using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
     using System.Xml;
 
@@ -57,10 +57,7 @@ namespace System.ServiceModel.Channels
 
         public override MessageVersion Version
         {
-            get
-            {
-                return headers.MessageVersion;
-            }
+            get { return headers.MessageVersion; }
         }
 
         protected override void OnBodyToString(XmlDictionaryWriter writer)
@@ -81,10 +78,7 @@ namespace System.ServiceModel.Channels
 
         public override bool IsEmpty
         {
-            get
-            {
-                return String.IsNullOrEmpty(this.data);
-            }
+            get { return String.IsNullOrEmpty(this.data); }
         }
 
         protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
@@ -99,8 +93,6 @@ namespace System.ServiceModel.Channels
     class NullMessage : StringMessage
     {
         public NullMessage()
-            : base(string.Empty)
-        {
-        }
+            : base(string.Empty) { }
     }
 }

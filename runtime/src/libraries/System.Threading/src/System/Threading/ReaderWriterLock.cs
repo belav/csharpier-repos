@@ -53,7 +53,9 @@ namespace System.Threading
         {
             get
             {
-                ThreadLocalLockEntry? threadLocalLockEntry = ThreadLocalLockEntry.GetCurrent(_lockID);
+                ThreadLocalLockEntry? threadLocalLockEntry = ThreadLocalLockEntry.GetCurrent(
+                    _lockID
+                );
                 if (threadLocalLockEntry != null)
                 {
                     return threadLocalLockEntry._readerLevel > 0;
@@ -79,7 +81,9 @@ namespace System.Threading
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(millisecondsTimeout, -1);
 
-            ThreadLocalLockEntry threadLocalLockEntry = ThreadLocalLockEntry.GetOrCreateCurrent(_lockID);
+            ThreadLocalLockEntry threadLocalLockEntry = ThreadLocalLockEntry.GetOrCreateCurrent(
+                _lockID
+            );
 
             // Check for the fast path
             if (Interlocked.CompareExchange(ref _state, LockStates.Reader, 0) == 0)
@@ -114,22 +118,32 @@ namespace System.Threading
                     int knownState = currentState;
 
                     // Reader need not wait if there are only readers and no writer
-                    if (knownState < LockStates.ReadersMask ||
-                        (
-                            (knownState & LockStates.ReaderSignaled) != 0 &&
-                            (knownState & LockStates.Writer) == 0 &&
-                            (
+                    if (
+                        knownState < LockStates.ReadersMask
+                        || (
+                            (knownState & LockStates.ReaderSignaled) != 0
+                            && (knownState & LockStates.Writer) == 0
+                            && (
                                 // A waiting reader, after successfully completing the wait, expects that it can become a
                                 // reader, so ensure that there is enough room for waiting readers and this potential reader.
                                 (
-                                    (knownState & LockStates.ReadersMask) +
-                                    ((knownState & LockStates.WaitingReadersMask) >> LockStates.WaitingReadersShift)
-                                ) <= LockStates.ReadersMask - 2
+                                    (knownState & LockStates.ReadersMask)
+                                    + (
+                                        (knownState & LockStates.WaitingReadersMask)
+                                        >> LockStates.WaitingReadersShift
+                                    )
+                                )
+                                <= LockStates.ReadersMask - 2
                             )
-                        ))
+                        )
+                    )
                     {
                         // Add to readers
-                        currentState = Interlocked.CompareExchange(ref _state, knownState + LockStates.Reader, knownState);
+                        currentState = Interlocked.CompareExchange(
+                            ref _state,
+                            knownState + LockStates.Reader,
+                            knownState
+                        );
                         if (currentState == knownState)
                         {
                             // One more reader
@@ -141,14 +155,20 @@ namespace System.Threading
                     // Check for too many readers or waiting readers, or if signaling is in progress. The check for signaling
                     // prevents new readers from starting to wait for a read lock while the previous set of waiting readers are
                     // being granted their lock. This is necessary to guarantee thread safety for the 'finally' block below.
-                    if ((knownState & LockStates.ReadersMask) == LockStates.ReadersMask ||
-                        (knownState & LockStates.WaitingReadersMask) == LockStates.WaitingReadersMask ||
-                        (knownState & LockStates.CachingEvents) == LockStates.ReaderSignaled)
+                    if (
+                        (knownState & LockStates.ReadersMask) == LockStates.ReadersMask
+                        || (knownState & LockStates.WaitingReadersMask)
+                            == LockStates.WaitingReadersMask
+                        || (knownState & LockStates.CachingEvents) == LockStates.ReaderSignaled
+                    )
                     {
                         // Sleep for a while, then update to the latest state and try again
                         int sleepDurationMilliseconds = 100;
-                        if ((knownState & LockStates.ReadersMask) == LockStates.ReadersMask ||
-                            (knownState & LockStates.WaitingReadersMask) == LockStates.WaitingReadersMask)
+                        if (
+                            (knownState & LockStates.ReadersMask) == LockStates.ReadersMask
+                            || (knownState & LockStates.WaitingReadersMask)
+                                == LockStates.WaitingReadersMask
+                        )
                         {
                             sleepDurationMilliseconds = 1000;
                         }
@@ -183,7 +203,11 @@ namespace System.Threading
                     }
 
                     // Add to waiting readers
-                    currentState = Interlocked.CompareExchange(ref _state, knownState + LockStates.WaitingReader, knownState);
+                    currentState = Interlocked.CompareExchange(
+                        ref _state,
+                        knownState + LockStates.WaitingReader,
+                        knownState
+                    );
                     if (currentState != knownState)
                     {
                         continue;
@@ -205,7 +229,9 @@ namespace System.Threading
                         {
                             // Become a reader
                             Debug.Assert((_state & LockStates.ReaderSignaled) != 0);
-                            Debug.Assert((_state & LockStates.ReadersMask) < LockStates.ReadersMask);
+                            Debug.Assert(
+                                (_state & LockStates.ReadersMask) < LockStates.ReadersMask
+                            );
                             modifyState += LockStates.Reader;
                         }
                     }
@@ -222,8 +248,11 @@ namespace System.Threading
                             // ReaderSignaled bit is set, new requests for a write lock must spin or wait to acquire the lock,
                             // so it is safe for this thread to acquire a read lock and call ReleaseReaderLock() as a shortcut
                             // to do the work of releasing other waiters.
-                            if ((knownState & LockStates.ReaderSignaled) != 0 &&
-                                (knownState & LockStates.WaitingReadersMask) == LockStates.WaitingReader)
+                            if (
+                                (knownState & LockStates.ReaderSignaled) != 0
+                                && (knownState & LockStates.WaitingReadersMask)
+                                    == LockStates.WaitingReader
+                            )
                             {
                                 if (readerEvent == null)
                                 {
@@ -234,11 +263,16 @@ namespace System.Threading
                                 // Ensure the event is signaled before resetting it, since the ReaderSignaled state is set
                                 // before the event is set.
                                 readerEvent.Wait();
-                                Debug.Assert((_state & LockStates.ReadersMask) < LockStates.ReadersMask);
+                                Debug.Assert(
+                                    (_state & LockStates.ReadersMask) < LockStates.ReadersMask
+                                );
 
                                 // Reset the event and lower reader signaled flag
                                 readerEvent.Reset();
-                                Interlocked.Add(ref _state, LockStates.Reader - LockStates.ReaderSignaled);
+                                Interlocked.Add(
+                                    ref _state,
+                                    LockStates.Reader - LockStates.ReaderSignaled
+                                );
 
                                 // Honor the original status
                                 ++threadLocalLockEntry._readerLevel;
@@ -275,7 +309,8 @@ namespace System.Threading
         }
 
         [UnsupportedOSPlatform("browser")]
-        public void AcquireReaderLock(TimeSpan timeout) => AcquireReaderLock(ToTimeoutMilliseconds(timeout));
+        public void AcquireReaderLock(TimeSpan timeout) =>
+            AcquireReaderLock(ToTimeoutMilliseconds(timeout));
 
         public void AcquireWriterLock(int millisecondsTimeout)
         {
@@ -310,7 +345,11 @@ namespace System.Threading
                     if (knownState == 0 || knownState == LockStates.CachingEvents)
                     {
                         // Can be a writer
-                        currentState = Interlocked.CompareExchange(ref _state, knownState + LockStates.Writer, knownState);
+                        currentState = Interlocked.CompareExchange(
+                            ref _state,
+                            knownState + LockStates.Writer,
+                            knownState
+                        );
                         if (currentState == knownState)
                         {
                             // Only writer
@@ -320,7 +359,10 @@ namespace System.Threading
                     }
 
                     // Check for too many waiting writers
-                    if ((knownState & LockStates.WaitingWritersMask) == LockStates.WaitingWritersMask)
+                    if (
+                        (knownState & LockStates.WaitingWritersMask)
+                        == LockStates.WaitingWritersMask
+                    )
                     {
                         Thread.Sleep(1000);
                         spinCount = 0;
@@ -353,7 +395,11 @@ namespace System.Threading
                     }
 
                     // Add to waiting writers
-                    currentState = Interlocked.CompareExchange(ref _state, knownState + LockStates.WaitingWriter, knownState);
+                    currentState = Interlocked.CompareExchange(
+                        ref _state,
+                        knownState + LockStates.WaitingWriter,
+                        knownState
+                    );
                     if (currentState != knownState)
                     {
                         continue;
@@ -379,9 +425,12 @@ namespace System.Threading
                         // Make the state changes determined above
                         knownState = Interlocked.Add(ref _state, modifyState) - modifyState;
 
-                        if (!waitSucceeded &&
-                            (knownState & LockStates.WriterSignaled) != 0 &&
-                            (knownState & LockStates.WaitingWritersMask) == LockStates.WaitingWriter)
+                        if (
+                            !waitSucceeded
+                            && (knownState & LockStates.WriterSignaled) != 0
+                            && (knownState & LockStates.WaitingWritersMask)
+                                == LockStates.WaitingWriter
+                        )
                         {
                             if (writerEvent == null)
                             {
@@ -392,8 +441,10 @@ namespace System.Threading
                             while (true)
                             {
                                 knownState = _state;
-                                if ((knownState & LockStates.WriterSignaled) == 0 ||
-                                    (knownState & LockStates.WaitingWritersMask) != 0)
+                                if (
+                                    (knownState & LockStates.WriterSignaled) == 0
+                                    || (knownState & LockStates.WaitingWritersMask) != 0
+                                )
                                 {
                                     break;
                                 }
@@ -438,7 +489,8 @@ namespace System.Threading
             return;
         }
 
-        public void AcquireWriterLock(TimeSpan timeout) => AcquireWriterLock(ToTimeoutMilliseconds(timeout));
+        public void AcquireWriterLock(TimeSpan timeout) =>
+            AcquireWriterLock(ToTimeoutMilliseconds(timeout));
 
         public void ReleaseReaderLock()
         {
@@ -479,7 +531,10 @@ namespace System.Threading
                 knownState = currentState;
                 int modifyState = -LockStates.Reader;
 
-                if ((knownState & (LockStates.ReadersMask | LockStates.ReaderSignaled)) == LockStates.Reader)
+                if (
+                    (knownState & (LockStates.ReadersMask | LockStates.ReaderSignaled))
+                    == LockStates.Reader
+                )
                 {
                     isLastReader = true;
                     if ((knownState & LockStates.WaitingWritersMask) != 0)
@@ -521,7 +576,10 @@ namespace System.Threading
                         }
                         modifyState += LockStates.ReaderSignaled;
                     }
-                    else if (knownState == LockStates.Reader && (_readerEvent != null || _writerEvent != null))
+                    else if (
+                        knownState == LockStates.Reader
+                        && (_readerEvent != null || _writerEvent != null)
+                    )
                     {
                         cacheEvents = true;
                         modifyState += LockStates.CachingEvents;
@@ -530,7 +588,11 @@ namespace System.Threading
 
                 Debug.Assert((knownState & LockStates.Writer) == 0);
                 Debug.Assert((knownState & LockStates.ReadersMask) != 0);
-                currentState = Interlocked.CompareExchange(ref _state, knownState + modifyState, knownState);
+                currentState = Interlocked.CompareExchange(
+                    ref _state,
+                    knownState + modifyState,
+                    knownState
+                );
             } while (currentState != knownState);
 
             // Check for last reader
@@ -630,7 +692,10 @@ namespace System.Threading
                     }
                     modifyState += LockStates.WriterSignaled;
                 }
-                else if (knownState == LockStates.Writer && (_readerEvent != null || _writerEvent != null))
+                else if (
+                    knownState == LockStates.Writer
+                    && (_readerEvent != null || _writerEvent != null)
+                )
                 {
                     cacheEvents = true;
                     modifyState += LockStates.CachingEvents;
@@ -638,7 +703,11 @@ namespace System.Threading
 
                 Debug.Assert((knownState & LockStates.ReadersMask) == 0);
                 Debug.Assert((knownState & LockStates.Writer) != 0);
-                currentState = Interlocked.CompareExchange(ref _state, knownState + modifyState, knownState);
+                currentState = Interlocked.CompareExchange(
+                    ref _state,
+                    knownState + modifyState,
+                    knownState
+                );
             } while (currentState != knownState);
 
             // Check for waiting readers
@@ -699,7 +768,11 @@ namespace System.Threading
                 lockCookie._readerLevel = threadLocalLockEntry._readerLevel;
 
                 // If there is only one reader, try to convert reader to a writer
-                int knownState = Interlocked.CompareExchange(ref _state, LockStates.Writer, LockStates.Reader);
+                int knownState = Interlocked.CompareExchange(
+                    ref _state,
+                    LockStates.Writer,
+                    LockStates.Reader
+                );
                 if (knownState == LockStates.Reader)
                 {
                     // Thread is no longer a reader
@@ -740,7 +813,8 @@ namespace System.Threading
         }
 
         [UnsupportedOSPlatform("browser")]
-        public LockCookie UpgradeToWriterLock(TimeSpan timeout) => UpgradeToWriterLock(ToTimeoutMilliseconds(timeout));
+        public LockCookie UpgradeToWriterLock(TimeSpan timeout) =>
+            UpgradeToWriterLock(ToTimeoutMilliseconds(timeout));
 
         public void DowngradeFromWriterLock(ref LockCookie lockCookie)
         {
@@ -753,13 +827,15 @@ namespace System.Threading
             // Validate cookie
             LockCookieFlags flags = lockCookie._flags;
             ushort requestedWriterLevel = lockCookie._writerLevel;
-            if ((flags & LockCookieFlags.Invalid) != 0 ||
-                lockCookie._threadID != threadID ||
-                (
+            if (
+                (flags & LockCookieFlags.Invalid) != 0
+                || lockCookie._threadID != threadID
+                || (
                     // Cannot downgrade to a writer level that is greater than or equal to the current
-                    (flags & (LockCookieFlags.OwnedWriter | LockCookieFlags.OwnedNone)) != 0 &&
-                    _writerLevel <= requestedWriterLevel
-                ))
+                    (flags & (LockCookieFlags.OwnedWriter | LockCookieFlags.OwnedNone)) != 0
+                    && _writerLevel <= requestedWriterLevel
+                )
+            )
             {
                 throw GetInvalidLockCookieException();
             }
@@ -769,7 +845,9 @@ namespace System.Threading
             {
                 Debug.Assert(_writerLevel > 0);
 
-                ThreadLocalLockEntry threadLocalLockEntry = ThreadLocalLockEntry.GetOrCreateCurrent(_lockID);
+                ThreadLocalLockEntry threadLocalLockEntry = ThreadLocalLockEntry.GetOrCreateCurrent(
+                    _lockID
+                );
 
                 // Downgrade to a reader
                 _writerID = InvalidThreadID;
@@ -808,7 +886,11 @@ namespace System.Threading
                     }
 
                     Debug.Assert((knownState & LockStates.ReadersMask) == 0);
-                    currentState = Interlocked.CompareExchange(ref _state, knownState + modifyState, knownState);
+                    currentState = Interlocked.CompareExchange(
+                        ref _state,
+                        knownState + modifyState,
+                        knownState
+                    );
                 } while (currentState != knownState);
 
                 // Check for waiting readers
@@ -919,7 +1001,9 @@ namespace System.Threading
 
             if (_writerID == threadID || ThreadLocalLockEntry.GetCurrent(_lockID) != null)
             {
-                throw new SynchronizationLockException(SR.ReaderWriterLock_RestoreLockWithOwnedLocks);
+                throw new SynchronizationLockException(
+                    SR.ReaderWriterLock_RestoreLockWithOwnedLocks
+                );
             }
 
             LockCookieFlags flags = lockCookie._flags;
@@ -950,12 +1034,19 @@ namespace System.Threading
                 else if ((flags & LockCookieFlags.OwnedReader) != 0)
                 {
                     // This thread should not already be a reader else bad things can happen
-                    ThreadLocalLockEntry threadLocalLockEntry = ThreadLocalLockEntry.GetOrCreateCurrent(_lockID);
+                    ThreadLocalLockEntry threadLocalLockEntry =
+                        ThreadLocalLockEntry.GetOrCreateCurrent(_lockID);
                     Debug.Assert(threadLocalLockEntry.IsFree);
 
                     int knownState = _state;
-                    if (knownState < LockStates.ReadersMask &&
-                        Interlocked.CompareExchange(ref _state, knownState + LockStates.Reader, knownState) == knownState)
+                    if (
+                        knownState < LockStates.ReadersMask
+                        && Interlocked.CompareExchange(
+                            ref _state,
+                            knownState + LockStates.Reader,
+                            knownState
+                        ) == knownState
+                    )
                     {
                         // Restore reader nesting level
                         threadLocalLockEntry._readerLevel = lockCookie._readerLevel;
@@ -991,7 +1082,9 @@ namespace System.Threading
             else if ((flags & LockCookieFlags.OwnedReader) != 0)
             {
                 AcquireReaderLock(Timeout.Infinite);
-                ThreadLocalLockEntry? threadLocalLockEntry = ThreadLocalLockEntry.GetCurrent(_lockID);
+                ThreadLocalLockEntry? threadLocalLockEntry = ThreadLocalLockEntry.GetCurrent(
+                    _lockID
+                );
                 Debug.Assert(threadLocalLockEntry != null);
                 threadLocalLockEntry._readerLevel = lockCookie._readerLevel;
             }
@@ -1023,7 +1116,11 @@ namespace System.Threading
             }
 
             currentEvent = new ManualResetEventSlim(false, 0);
-            ManualResetEventSlim? previousEvent = Interlocked.CompareExchange(ref _readerEvent, currentEvent, null);
+            ManualResetEventSlim? previousEvent = Interlocked.CompareExchange(
+                ref _readerEvent,
+                currentEvent,
+                null
+            );
             if (previousEvent == null)
             {
                 return currentEvent;
@@ -1044,7 +1141,11 @@ namespace System.Threading
             }
 
             currentEvent = new AutoResetEvent(false);
-            AutoResetEvent? previousEvent = Interlocked.CompareExchange(ref _writerEvent, currentEvent, null);
+            AutoResetEvent? previousEvent = Interlocked.CompareExchange(
+                ref _writerEvent,
+                currentEvent,
+                null
+            );
             if (previousEvent == null)
             {
                 return currentEvent;
@@ -1109,7 +1210,11 @@ namespace System.Threading
             var timeoutMilliseconds = (long)timeout.TotalMilliseconds;
 
             ArgumentOutOfRangeException.ThrowIfLessThan(timeoutMilliseconds, -1, nameof(timeout));
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(timeoutMilliseconds, int.MaxValue, nameof(timeout));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                timeoutMilliseconds,
+                int.MaxValue,
+                nameof(timeout)
+            );
 
             return (int)timeoutMilliseconds;
         }
@@ -1134,16 +1239,24 @@ namespace System.Threading
                 HResult = errorHResult;
             }
 
-            [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-            public ReaderWriterLockApplicationException(SerializationInfo info, StreamingContext context)
-                : base(info, context)
-            {
-            }
+            [Obsolete(
+                Obsoletions.LegacyFormatterImplMessage,
+                DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+                UrlFormat = Obsoletions.SharedUrlFormat
+            )]
+            public ReaderWriterLockApplicationException(
+                SerializationInfo info,
+                StreamingContext context
+            )
+                : base(info, context) { }
         }
 
         private static ReaderWriterLockApplicationException GetTimeoutException()
         {
-            return new ReaderWriterLockApplicationException(HResults.ERROR_TIMEOUT, SR.ReaderWriterLock_Timeout);
+            return new ReaderWriterLockApplicationException(
+                HResults.ERROR_TIMEOUT,
+                SR.ReaderWriterLock_Timeout
+            );
         }
 
         /// <summary>
@@ -1153,15 +1266,18 @@ namespace System.Threading
         /// </summary>
         private static ReaderWriterLockApplicationException GetNotOwnerException()
         {
-            return
-                new ReaderWriterLockApplicationException(
-                    IncorrectButCompatibleNotOwnerExceptionHResult,
-                    SR.ReaderWriterLock_NotOwner);
+            return new ReaderWriterLockApplicationException(
+                IncorrectButCompatibleNotOwnerExceptionHResult,
+                SR.ReaderWriterLock_NotOwner
+            );
         }
 
         private static ReaderWriterLockApplicationException GetInvalidLockCookieException()
         {
-            return new ReaderWriterLockApplicationException(HResults.E_INVALIDARG, SR.ReaderWriterLock_InvalidLockCookie);
+            return new ReaderWriterLockApplicationException(
+                HResults.E_INVALIDARG,
+                SR.ReaderWriterLock_InvalidLockCookie
+            );
         }
 
         // This would normally be a [Flags] enum, but due to the limited types on which methods of Interlocked operate, and to
@@ -1171,22 +1287,30 @@ namespace System.Threading
         {
             // Reader increment
             public const int Reader = 0x1;
+
             // Max number of readers
             public const int ReadersMask = 0x3ff;
+
             // Reader event is or is about to be signaled
             public const int ReaderSignaled = 0x400;
+
             // Writer event is or is about to be signaled
             public const int WriterSignaled = 0x800;
             public const int Writer = 0x1000;
+
             // Waiting reader increment
             public const int WaitingReader = 0x2000;
+
             // Max number of waiting readers (maximum count must be less than or equal to the maximum count of readers)
             public const int WaitingReadersMask = 0x7FE000;
             public const int WaitingReadersShift = 13;
+
             // Waiting writer increment
             public const int WaitingWriter = 0x800000;
+
             // Max number of waiting writers
             public const int WaitingWritersMask = unchecked((int)0xFF800000);
+
             // Events are being cached (for all intents and purposes, "cached" means "disposed of"). New acquire requests cannot
             // become waiters during this time since they need the events for waiting. Once events are disposed of and the
             // state is changed, new to-be-waiters can recreate the events they need.
@@ -1217,17 +1341,23 @@ namespace System.Threading
             }
 
             public bool HasLockID(long lockID) => _lockID == lockID;
+
             public bool IsFree => _readerLevel == 0;
 
             [Conditional("DEBUG")]
-            private static void VerifyNoNonemptyEntryInListAfter(long lockID, ThreadLocalLockEntry afterEntry)
+            private static void VerifyNoNonemptyEntryInListAfter(
+                long lockID,
+                ThreadLocalLockEntry afterEntry
+            )
             {
                 Debug.Assert(lockID != 0);
                 Debug.Assert(afterEntry != null);
 
-                for (ThreadLocalLockEntry? currentEntry = afterEntry._next;
+                for (
+                    ThreadLocalLockEntry? currentEntry = afterEntry._next;
                     currentEntry != null;
-                    currentEntry = currentEntry._next)
+                    currentEntry = currentEntry._next
+                )
                 {
                     Debug.Assert(currentEntry._lockID != lockID || currentEntry.IsFree);
                 }
@@ -1238,7 +1368,11 @@ namespace System.Threading
                 Debug.Assert(lockID != 0);
 
                 ThreadLocalLockEntry? headEntry = t_lockEntryHead;
-                for (ThreadLocalLockEntry? currentEntry = headEntry; currentEntry != null; currentEntry = currentEntry._next)
+                for (
+                    ThreadLocalLockEntry? currentEntry = headEntry;
+                    currentEntry != null;
+                    currentEntry = currentEntry._next
+                )
                 {
                     if (currentEntry._lockID == lockID)
                     {
@@ -1266,7 +1400,10 @@ namespace System.Threading
                 return GetOrCreateCurrentSlow(lockID, headEntry);
             }
 
-            private static ThreadLocalLockEntry GetOrCreateCurrentSlow(long lockID, ThreadLocalLockEntry? headEntry)
+            private static ThreadLocalLockEntry GetOrCreateCurrentSlow(
+                long lockID,
+                ThreadLocalLockEntry? headEntry
+            )
             {
                 Debug.Assert(lockID != 0);
                 Debug.Assert(headEntry == t_lockEntryHead);
@@ -1283,9 +1420,12 @@ namespace System.Threading
                         emptyEntry = headEntry;
                     }
 
-                    for (ThreadLocalLockEntry? previousEntry = headEntry, currentEntry = headEntry._next;
+                    for (
+                        ThreadLocalLockEntry? previousEntry = headEntry,
+                            currentEntry = headEntry._next;
                         currentEntry != null;
-                        previousEntry = currentEntry, currentEntry = currentEntry._next)
+                        previousEntry = currentEntry, currentEntry = currentEntry._next
+                    )
                     {
                         if (currentEntry._lockID == lockID)
                         {
@@ -1349,6 +1489,6 @@ namespace System.Threading
         OwnedWriter = 0x20000,
         OwnedReader = 0x40000,
 
-        Invalid = ~(Upgrade | Release | OwnedNone | OwnedWriter | OwnedReader)
+        Invalid = ~(Upgrade | Release | OwnedNone | OwnedWriter | OwnedReader),
     }
 }

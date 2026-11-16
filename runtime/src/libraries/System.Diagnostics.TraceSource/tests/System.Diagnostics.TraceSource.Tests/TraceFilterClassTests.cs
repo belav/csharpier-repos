@@ -12,7 +12,16 @@ namespace System.Diagnostics.TraceSourceTests
         {
             var cache = new TraceEventCache();
             var filter = new TestTraceFilter(true);
-            filter.ShouldTrace(cache, "Source", TraceEventType.Critical, 1, "Message", new object[] { "arg1" }, null, new object[] { "Data1" });
+            filter.ShouldTrace(
+                cache,
+                "Source",
+                TraceEventType.Critical,
+                1,
+                "Message",
+                new object[] { "arg1" },
+                null,
+                new object[] { "Data1" }
+            );
         }
     }
 }

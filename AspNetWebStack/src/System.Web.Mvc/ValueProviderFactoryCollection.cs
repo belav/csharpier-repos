@@ -12,16 +12,15 @@ namespace System.Web.Mvc
         private ValueProviderFactory[] _combinedItems;
         private IDependencyResolver _dependencyResolver;
 
-        public ValueProviderFactoryCollection()
-        {
-        }
+        public ValueProviderFactoryCollection() { }
 
         public ValueProviderFactoryCollection(IList<ValueProviderFactory> list)
-            : base(list)
-        {
-        }
+            : base(list) { }
 
-        internal ValueProviderFactoryCollection(IList<ValueProviderFactory> list, IDependencyResolver dependencyResolver)
+        internal ValueProviderFactoryCollection(
+            IList<ValueProviderFactory> list,
+            IDependencyResolver dependencyResolver
+        )
             : base(list)
         {
             _dependencyResolver = dependencyResolver;
@@ -34,7 +33,10 @@ namespace System.Web.Mvc
                 ValueProviderFactory[] combinedItems = _combinedItems;
                 if (combinedItems == null)
                 {
-                    combinedItems = MultiServiceResolver.GetCombined<ValueProviderFactory>(Items, _dependencyResolver);
+                    combinedItems = MultiServiceResolver.GetCombined<ValueProviderFactory>(
+                        Items,
+                        _dependencyResolver
+                    );
                     _combinedItems = combinedItems;
                 }
                 return combinedItems;

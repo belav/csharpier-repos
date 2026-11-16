@@ -545,18 +545,15 @@ public class FormDataMetadataFactoryTests
         Assert.Equal(FormDataTypeKind.Object, metadata.Kind);
         Assert.False(metadata.IsRecursive);
         Assert.NotNull(metadata.Constructor);
-        Assert.Collection(
-            metadata.ConstructorParameters,
-            parameter =>
-            {
-                Assert.Equal("id", parameter.Name);
-                Assert.NotNull(parameter.ParameterMetadata);
-                Assert.Equal(typeof(int), parameter.ParameterMetadata.Type);
-                Assert.Equal(FormDataTypeKind.Primitive, parameter.ParameterMetadata.Kind);
-                Assert.Null(parameter.ParameterMetadata.Constructor);
-                Assert.Empty(parameter.ParameterMetadata.Properties);
-            }
-        );
+        Assert.Collection(metadata.ConstructorParameters, parameter =>
+        {
+            Assert.Equal("id", parameter.Name);
+            Assert.NotNull(parameter.ParameterMetadata);
+            Assert.Equal(typeof(int), parameter.ParameterMetadata.Type);
+            Assert.Equal(FormDataTypeKind.Primitive, parameter.ParameterMetadata.Kind);
+            Assert.Null(parameter.ParameterMetadata.Constructor);
+            Assert.Empty(parameter.ParameterMetadata.Properties);
+        });
     }
 
     [Fact]

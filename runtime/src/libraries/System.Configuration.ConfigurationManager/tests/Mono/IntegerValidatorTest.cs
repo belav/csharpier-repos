@@ -31,9 +31,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Xml;
-using System.IO;
 using System.Configuration;
+using System.IO;
+using System.Xml;
 using Xunit;
 
 namespace MonoTests.System.Configuration
@@ -97,10 +97,7 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void Validate_Resolution()
         {
-            IntegerValidator v = new IntegerValidator(20000,
-                                   50000,
-                                   false,
-                                   3000);
+            IntegerValidator v = new IntegerValidator(20000, 50000, false, 3000);
 
             AssertExtensions.Throws<ArgumentException>(null, () => v.Validate(40000));
         }
@@ -121,14 +118,20 @@ namespace MonoTests.System.Configuration
             [ConfigurationProperty("integerValidatorMinValue")]
             public IntegerValidatorMinValueChildElement IntegerValidatorMinValue
             {
-                get { return (IntegerValidatorMinValueChildElement)base["integerValidatorMinValue"]; }
+                get
+                {
+                    return (IntegerValidatorMinValueChildElement)base["integerValidatorMinValue"];
+                }
                 set { base["integerValidatorMinValue"] = value; }
             }
 
             [ConfigurationProperty("integerValidatorMaxValue")]
             public IntegerValidatorMaxValueChildElement IntegerValidatorMaxValue
             {
-                get { return (IntegerValidatorMaxValueChildElement)base["integerValidatorMaxValue"]; }
+                get
+                {
+                    return (IntegerValidatorMaxValueChildElement)base["integerValidatorMaxValue"];
+                }
                 set { base["integerValidatorMaxValue"] = value; }
             }
         }
@@ -157,7 +160,9 @@ namespace MonoTests.System.Configuration
         public void IntegerValidatorMinValueTest()
         {
             var section = new TestSection();
-            section.Load(@"<someSection><integerValidatorMinValue theProperty=""15"" /></someSection>");
+            section.Load(
+                @"<someSection><integerValidatorMinValue theProperty=""15"" /></someSection>"
+            );
             Assert.Equal(15, section.IntegerValidatorMinValue.TheProperty);
         }
 
@@ -165,7 +170,9 @@ namespace MonoTests.System.Configuration
         public void IntegerValidatorMaxValueTest()
         {
             var section = new TestSection();
-            section.Load(@"<someSection><integerValidatorMaxValue theProperty=""25"" /></someSection>");
+            section.Load(
+                @"<someSection><integerValidatorMaxValue theProperty=""25"" /></someSection>"
+            );
             Assert.Equal(25, section.IntegerValidatorMaxValue.TheProperty);
         }
         #endregion

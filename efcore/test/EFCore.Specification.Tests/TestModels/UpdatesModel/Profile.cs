@@ -23,8 +23,5 @@ public class Profile
     public int? Id13 { get; set; }
     public long? Id14 { get; set; }
 
-    public virtual
-        LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly
-        ?
-        User { get; set; }
+    public virtual LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly? User { get; set; }
 }

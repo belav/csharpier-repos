@@ -14,7 +14,9 @@ namespace System.ServiceModel.Description
     [DebuggerDisplay("Name={name}, IsInitiating={isInitiating}, IsTerminating={isTerminating}")]
     public class OperationDescription
     {
-        internal const string SessionOpenedAction = Channels.WebSocketTransportSettings.ConnectionOpenedAction;
+        internal const string SessionOpenedAction = Channels
+            .WebSocketTransportSettings
+            .ConnectionOpenedAction;
         XmlName name;
         bool isInitiating;
         bool isTerminating;
@@ -42,12 +44,21 @@ namespace System.ServiceModel.Description
             if (name.Length == 0)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("name", SR.GetString(SR.SFxOperationDescriptionNameCannotBeEmpty)));
+                    new ArgumentOutOfRangeException(
+                        "name",
+                        SR.GetString(SR.SFxOperationDescriptionNameCannotBeEmpty)
+                    )
+                );
             }
-            this.name = new XmlName(name, true /*isEncoded*/);
+            this.name = new XmlName(
+                name,
+                true /*isEncoded*/
+            );
             if (declaringContract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("declaringContract");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "declaringContract"
+                );
             }
             this.declaringContract = declaringContract;
             this.isInitiating = true;
@@ -58,7 +69,11 @@ namespace System.ServiceModel.Description
             this.knownTypes = new Collection<Type>();
         }
 
-        internal OperationDescription(string name, ContractDescription declaringContract, bool validateRpcWrapperName)
+        internal OperationDescription(
+            string name,
+            ContractDescription declaringContract,
+            bool validateRpcWrapperName
+        )
             : this(name, declaringContract)
         {
             this.validateRpcWrapperName = validateRpcWrapperName;
@@ -69,7 +84,7 @@ namespace System.ServiceModel.Description
             get { return this.Behaviors; }
         }
 
-        [EditorBrowsable(EditorBrowsableState.Never)] 
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public KeyedByTypeCollection<IOperationBehavior> Behaviors
         {
             get { return behaviors; }
@@ -120,7 +135,9 @@ namespace System.ServiceModel.Description
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
             }
@@ -157,7 +174,9 @@ namespace System.ServiceModel.Description
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("DeclaringContract");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "DeclaringContract"
+                    );
                 }
                 else
                 {
@@ -222,38 +241,27 @@ namespace System.ServiceModel.Description
             get { return name.EncodedName; }
         }
 
-        internal bool IsValidateRpcWrapperName { get { return validateRpcWrapperName; } }
-
-
-        //This property is set during contract inference in a hosted workflow scenario. This is required to handle correct
-        //transactional invocation from the dispatcher in regards to scenarios involving the TransactedReceiveScope activity
-        internal bool IsInsideTransactedReceiveScope
+        internal bool IsValidateRpcWrapperName
         {
-            get;
-            set;
+            get { return validateRpcWrapperName; }
         }
 
         //This property is set during contract inference in a hosted workflow scenario. This is required to handle correct
         //transactional invocation from the dispatcher in regards to scenarios involving the TransactedReceiveScope activity
-        internal bool IsFirstReceiveOfTransactedReceiveScopeTree
-        {
-            get;
-            set;
-        }
+        internal bool IsInsideTransactedReceiveScope { get; set; }
 
-        internal Type TaskTResult
-        {
-            get;
-            set;
-        }
+        //This property is set during contract inference in a hosted workflow scenario. This is required to handle correct
+        //transactional invocation from the dispatcher in regards to scenarios involving the TransactedReceiveScope activity
+        internal bool IsFirstReceiveOfTransactedReceiveScopeTree { get; set; }
+
+        internal Type TaskTResult { get; set; }
 
         internal bool HasOutputParameters
         {
             get
             {
                 // For non-oneway operations, Messages[1] is the 'response'
-                return (this.Messages.Count > 1) &&
-                    (this.Messages[1].Body.Parts.Count > 0);
+                return (this.Messages.Count > 1) && (this.Messages[1].Body.Parts.Count > 0);
             }
         }
 
@@ -267,7 +275,11 @@ namespace System.ServiceModel.Description
         {
             if (this.Messages.Count != 1 && this.Messages.Count != 2)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new System.InvalidOperationException(SR.GetString(SR.SFxOperationMustHaveOneOrTwoMessages, this.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new System.InvalidOperationException(
+                        SR.GetString(SR.SFxOperationMustHaveOneOrTwoMessages, this.Name)
+                    )
+                );
             }
         }
 

@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             string waitDialogTitle,
             string waitDialogMessage,
             IProgress<CodeAnalysisProgress> progressTracker,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Get the fix multiple occurrences code fix for the given diagnostics with source locations.
@@ -44,6 +45,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             string waitDialogTitle,
             string waitDialogMessage,
             IProgress<CodeAnalysisProgress> progressTracker,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

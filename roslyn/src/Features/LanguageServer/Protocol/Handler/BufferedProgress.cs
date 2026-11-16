@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             _buffer = underlyingProgress == null ? ArrayBuilder<T>.GetInstance() : null;
         }
 
-        public void Dispose()
-            => _buffer?.Free();
+        public void Dispose() => _buffer?.Free();
 
         /// <summary>
         /// Report a value either in a streaming or buffered fashion depending on what the client supports.
@@ -60,14 +59,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         /// all calls to <see cref="Report(T)"/> have been made.  Not safe to call concurrently with any call to <see
         /// cref="Report(T)"/>.
         /// </summary>
-        public T[]? GetValues()
-            => _buffer?.ToArray();
+        public T[]? GetValues() => _buffer?.ToArray();
     }
 
     internal static class BufferedProgress
     {
-        public static BufferedProgress<T> Create<T>(IProgress<T>? progress)
-            => new BufferedProgress<T>(progress);
+        public static BufferedProgress<T> Create<T>(IProgress<T>? progress) =>
+            new BufferedProgress<T>(progress);
 
         public static void Report<T>(this BufferedProgress<T[]> progress, T item)
         {

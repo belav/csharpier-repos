@@ -18,5 +18,6 @@ public interface IPropertyAddedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessPropertyAdded(
         IConventionPropertyBuilder propertyBuilder,
-        IConventionContext<IConventionPropertyBuilder> context);
+        IConventionContext<IConventionPropertyBuilder> context
+    );
 }

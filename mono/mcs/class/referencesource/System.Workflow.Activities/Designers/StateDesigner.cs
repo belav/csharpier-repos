@@ -1,29 +1,29 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.CodeDom;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Drawing.Design;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
+    using System.ComponentModel.Design.Serialization;
     using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Globalization;
     using System.IO;
+    using System.Reflection;
+    using System.Resources;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Windows.Forms;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Runtime.Serialization;
-    using Microsoft.Win32;
-    using System.Runtime.InteropServices;
     using System.Workflow.ComponentModel.Serialization;
-    using System.Globalization;
-    using System.ComponentModel.Design.Serialization;
-    using System.Resources;
+    using Microsoft.Win32;
 
     #region StateDesigner Class
     [DesignerSerializer(typeof(StateDesignerLayoutSerializer), typeof(WorkflowMarkupSerializer))]
@@ -67,13 +67,7 @@ namespace System.Workflow.Activities
         private string _helpText;
         private bool _needsAutoLayout = false;
 
-        // 
-
-
-
-
-
-
+        //
 
         private bool _addingSetState = true;
         private bool _removingSetState = true;
@@ -84,9 +78,7 @@ namespace System.Workflow.Activities
         /// <summary>
         /// Default constructor for the StateDesigner
         /// </summary>
-        public StateDesigner()
-        {
-        }
+        public StateDesigner() { }
 
         protected override void Initialize(Activity activity)
         {
@@ -105,10 +97,13 @@ namespace System.Workflow.Activities
         private void EnsureDesignerExtender()
         {
             bool addExtender = true;
-            IExtenderListService extenderListService = GetService(typeof(IExtenderListService)) as IExtenderListService;
+            IExtenderListService extenderListService =
+                GetService(typeof(IExtenderListService)) as IExtenderListService;
             if (extenderListService != null)
             {
-                foreach (IExtenderProvider extenderProvider in extenderListService.GetExtenderProviders())
+                foreach (
+                    IExtenderProvider extenderProvider in extenderListService.GetExtenderProviders()
+                )
                 {
                     if (extenderProvider.GetType() == typeof(StateDesignerPropertyExtender))
                     {
@@ -120,10 +115,13 @@ namespace System.Workflow.Activities
 
             if (addExtender)
             {
-                IExtenderProviderService extenderProviderService = GetService(typeof(IExtenderProviderService)) as IExtenderProviderService;
+                IExtenderProviderService extenderProviderService =
+                    GetService(typeof(IExtenderProviderService)) as IExtenderProviderService;
                 if (extenderProviderService != null)
                 {
-                    extenderProviderService.AddExtenderProvider(new StateDesignerPropertyExtender());
+                    extenderProviderService.AddExtenderProvider(
+                        new StateDesignerPropertyExtender()
+                    );
                     TypeDescriptor.Refresh(Activity);
                 }
             }
@@ -133,7 +131,9 @@ namespace System.Workflow.Activities
         {
             if (disposing)
             {
-                _designerLinkLayout.MouseDown -= new MouseEventHandler(this.StateDesignerLinkMouseDown);
+                _designerLinkLayout.MouseDown -= new MouseEventHandler(
+                    this.StateDesignerLinkMouseDown
+                );
             }
 
             base.Dispose(disposing);
@@ -147,10 +147,7 @@ namespace System.Workflow.Activities
 
         public override bool CanExpandCollapse
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override object FirstSelectableObject
@@ -181,7 +178,9 @@ namespace System.Workflow.Activities
                     return this.ActiveDesigner.Activity;
 
                 if (this.DesignersParser.Ordered.Count > 0)
-                    return this.DesignersParser.Ordered[this.DesignersParser.Ordered.Count - 1].Activity;
+                    return this.DesignersParser
+                        .Ordered[this.DesignersParser.Ordered.Count - 1]
+                        .Activity;
 
                 return null;
             }
@@ -189,10 +188,7 @@ namespace System.Workflow.Activities
 
         public override Point Location
         {
-            get
-            {
-                return base.Location;
-            }
+            get { return base.Location; }
             set
             {
                 if (base.Location == value)
@@ -223,7 +219,7 @@ namespace System.Workflow.Activities
                     }
 
                     // note that we must use base.Location instead of
-                    // value in the line below, because the 
+                    // value in the line below, because the
                     // base implementation of the Location property may
                     // auto adjust the value depending on auto layouting
                     // characteristics
@@ -235,10 +231,7 @@ namespace System.Workflow.Activities
 
         public override Size Size
         {
-            get
-            {
-                return base.Size;
-            }
+            get { return base.Size; }
             set
             {
                 if (this.HasActiveDesigner && !this.PerformingLayout && !this.IsRootStateDesigner)
@@ -311,18 +304,12 @@ namespace System.Workflow.Activities
                 }
                 return base.Image;
             }
-            protected set
-            {
-                base.Image = value;
-            }
+            protected set { base.Image = value; }
         }
 
         protected override Rectangle ExpandButtonRectangle
         {
-            get
-            {
-                return Rectangle.Empty;
-            }
+            get { return Rectangle.Empty; }
         }
 
         /// <summary>
@@ -338,14 +325,20 @@ namespace System.Workflow.Activities
 
                 if (!this.HasActiveDesigner)
                 {
-                    foreach (EventDrivenDesigner eventDrivenDesigner in this.DesignersParser.EventDrivenDesigners)
+                    foreach (
+                        EventDrivenDesigner eventDrivenDesigner in this.DesignersParser.EventDrivenDesigners
+                    )
                     {
-                        Layout selectedLayout = this.RootDesignerLayout.GetLayout(eventDrivenDesigner);
+                        Layout selectedLayout = this.RootDesignerLayout.GetLayout(
+                            eventDrivenDesigner
+                        );
                         if (selectedLayout != null)
                         {
                             if (eventDrivenDesigner.IsSelected)
                             {
-                                LayoutSelectionGlyph glyph = new LayoutSelectionGlyph(selectedLayout);
+                                LayoutSelectionGlyph glyph = new LayoutSelectionGlyph(
+                                    selectedLayout
+                                );
                                 glyphs.Add(glyph);
                             }
                             if (!eventDrivenDesigner.Activity.Enabled)
@@ -356,14 +349,20 @@ namespace System.Workflow.Activities
                         }
                     }
 
-                    foreach (StateInitializationDesigner stateInitializationDesigner in this.DesignersParser.StateInitializationDesigners)
+                    foreach (
+                        StateInitializationDesigner stateInitializationDesigner in this.DesignersParser.StateInitializationDesigners
+                    )
                     {
-                        Layout selectedLayout = this.RootDesignerLayout.GetLayout(stateInitializationDesigner);
+                        Layout selectedLayout = this.RootDesignerLayout.GetLayout(
+                            stateInitializationDesigner
+                        );
                         if (selectedLayout != null)
                         {
                             if (stateInitializationDesigner.IsSelected)
                             {
-                                LayoutSelectionGlyph glyph = new LayoutSelectionGlyph(selectedLayout);
+                                LayoutSelectionGlyph glyph = new LayoutSelectionGlyph(
+                                    selectedLayout
+                                );
                                 glyphs.Add(glyph);
                             }
                             if (!stateInitializationDesigner.Activity.Enabled)
@@ -374,14 +373,20 @@ namespace System.Workflow.Activities
                         }
                     }
 
-                    foreach (StateFinalizationDesigner stateFinalizationDesigner in this.DesignersParser.StateFinalizationDesigners)
+                    foreach (
+                        StateFinalizationDesigner stateFinalizationDesigner in this.DesignersParser.StateFinalizationDesigners
+                    )
                     {
-                        Layout selectedLayout = this.RootDesignerLayout.GetLayout(stateFinalizationDesigner);
+                        Layout selectedLayout = this.RootDesignerLayout.GetLayout(
+                            stateFinalizationDesigner
+                        );
                         if (selectedLayout != null)
                         {
                             if (stateFinalizationDesigner.IsSelected)
                             {
-                                LayoutSelectionGlyph glyph = new LayoutSelectionGlyph(selectedLayout);
+                                LayoutSelectionGlyph glyph = new LayoutSelectionGlyph(
+                                    selectedLayout
+                                );
                                 glyphs.Add(glyph);
                             }
                             if (!stateFinalizationDesigner.Activity.Enabled)
@@ -430,53 +435,67 @@ namespace System.Workflow.Activities
                 {
                     _verbs = new ActivityDesignerVerbCollection();
 
-                    ActivityDesignerVerb stateMachineView = new ActivityDesignerVerb(this,
+                    ActivityDesignerVerb stateMachineView = new ActivityDesignerVerb(
+                        this,
                         DesignerVerbGroup.General,
                         DR.GetString(DR.StateMachineView),
                         new EventHandler(OnStateMachineView),
-                        new EventHandler(OnStatusStateMachineView));
+                        new EventHandler(OnStatusStateMachineView)
+                    );
                     _verbs.Add(stateMachineView);
 
-                    ActivityDesignerVerb setAsInitialState = new ActivityDesignerVerb(this,
+                    ActivityDesignerVerb setAsInitialState = new ActivityDesignerVerb(
+                        this,
                         DesignerVerbGroup.General,
                         DR.GetString(DR.SetAsInitialState),
                         new EventHandler(OnSetAsInitialState),
-                        new EventHandler(OnStatusSetAsInitialState));
+                        new EventHandler(OnStatusSetAsInitialState)
+                    );
                     _verbs.Add(setAsInitialState);
 
-                    ActivityDesignerVerb setAsCompletedState = new ActivityDesignerVerb(this,
+                    ActivityDesignerVerb setAsCompletedState = new ActivityDesignerVerb(
+                        this,
                         DesignerVerbGroup.General,
                         DR.GetString(DR.SetAsCompletedState),
                         new EventHandler(OnSetAsCompletedState),
-                        new EventHandler(OnStatusSetAsCompletedState));
+                        new EventHandler(OnStatusSetAsCompletedState)
+                    );
                     _verbs.Add(setAsCompletedState);
 
-                    ActivityDesignerVerb addState = new ActivityDesignerVerb(this,
+                    ActivityDesignerVerb addState = new ActivityDesignerVerb(
+                        this,
                         DesignerVerbGroup.General,
                         DR.GetString(DR.AddState),
                         new EventHandler(OnAddState),
-                        new EventHandler(OnStatusAddState));
+                        new EventHandler(OnStatusAddState)
+                    );
                     _verbs.Add(addState);
 
-                    ActivityDesignerVerb addEventDrivenVerb = new ActivityDesignerVerb(this,
+                    ActivityDesignerVerb addEventDrivenVerb = new ActivityDesignerVerb(
+                        this,
                         DesignerVerbGroup.General,
                         DR.GetString(DR.AddEventDriven),
                         new EventHandler(OnAddEventDriven),
-                        new EventHandler(OnStatusAddEventDriven));
+                        new EventHandler(OnStatusAddEventDriven)
+                    );
                     _verbs.Add(addEventDrivenVerb);
 
-                    ActivityDesignerVerb addStateInitialization = new ActivityDesignerVerb(this,
+                    ActivityDesignerVerb addStateInitialization = new ActivityDesignerVerb(
+                        this,
                         DesignerVerbGroup.General,
                         DR.GetString(DR.AddStateInitialization),
                         new EventHandler(OnAddStateInitialization),
-                        new EventHandler(OnStatusAddStateInitialization));
+                        new EventHandler(OnStatusAddStateInitialization)
+                    );
                     _verbs.Add(addStateInitialization);
 
-                    ActivityDesignerVerb addStateFinalization = new ActivityDesignerVerb(this,
+                    ActivityDesignerVerb addStateFinalization = new ActivityDesignerVerb(
+                        this,
                         DesignerVerbGroup.General,
                         DR.GetString(DR.AddStateFinalization),
                         new EventHandler(OnAddStateFinalization),
-                        new EventHandler(OnStatusAddStateFinalization));
+                        new EventHandler(OnStatusAddStateFinalization)
+                    );
                     _verbs.Add(addStateFinalization);
                 }
 
@@ -488,10 +507,7 @@ namespace System.Workflow.Activities
 
         protected override bool ShowConnectorsInForeground
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         #endregion Protected Properties
@@ -500,10 +516,7 @@ namespace System.Workflow.Activities
 
         internal ActivityDesigner ActiveDesigner
         {
-            get
-            {
-                return _activeDesigner;
-            }
+            get { return _activeDesigner; }
             set
             {
                 if (_activeDesigner == value)
@@ -558,40 +571,25 @@ namespace System.Workflow.Activities
         // it is necessary to add a SetState activity or not. For example,
         // when the user manually draws a connector, we need to add a corresponding
         // SetState activity, but when the user adds a SetState activity directly
-        // to the event driven, we have code that will automatically create a 
+        // to the event driven, we have code that will automatically create a
         // corresponding connector. When this happens OnConnectorAdded gets called
-        // but we cannot add another SetState, otherwise we will end up with 
+        // but we cannot add another SetState, otherwise we will end up with
         // duplicate SetState activities.
         internal bool AddingSetState
         {
-            get
-            {
-                return _addingSetState;
-            }
-            set
-            {
-                _addingSetState = value;
-            }
+            get { return _addingSetState; }
+            set { _addingSetState = value; }
         }
 
         internal bool RemovingSetState
         {
-            get
-            {
-                return _removingSetState;
-            }
-            set
-            {
-                _removingSetState = value;
-            }
+            get { return _removingSetState; }
+            set { _removingSetState = value; }
         }
 
         internal bool PerformingLayout
         {
-            get
-            {
-                return this.RootStateDesigner._performingLayout;
-            }
+            get { return this.RootStateDesigner._performingLayout; }
             set
             {
                 Debug.Assert(this.IsRootStateDesigner);
@@ -621,18 +619,12 @@ namespace System.Workflow.Activities
                 }
                 return _designersParser;
             }
-            set
-            {
-                _designersParser = value;
-            }
+            set { _designersParser = value; }
         }
 
         internal bool HasActiveDesigner
         {
-            get
-            {
-                return (this.ActiveDesigner != null);
-            }
+            get { return (this.ActiveDesigner != null); }
         }
 
         private bool IsStateCustomActivity
@@ -640,8 +632,7 @@ namespace System.Workflow.Activities
             get
             {
                 StateActivity state = (StateActivity)this.Activity;
-                if (StateMachineHelpers.IsStateMachine(state) ||
-                    state.Parent != null)
+                if (StateMachineHelpers.IsStateMachine(state) || state.Parent != null)
                     return false;
                 else
                     return true;
@@ -662,10 +653,7 @@ namespace System.Workflow.Activities
 
         private bool DragDropActive
         {
-            get
-            {
-                return _dragDropActive;
-            }
+            get { return _dragDropActive; }
             set
             {
                 if (value == _dragDropActive)
@@ -677,10 +665,7 @@ namespace System.Workflow.Activities
 
         private DesignerLinkLayout InlineLayout
         {
-            get
-            {
-                return _designerLinkLayout;
-            }
+            get { return _designerLinkLayout; }
         }
 
         internal bool IsRootStateDesigner
@@ -689,12 +674,12 @@ namespace System.Workflow.Activities
             {
                 // if the site is null, then it means
                 // that the designer was created buy not
-                // added to the WorkflowView yet. In 
+                // added to the WorkflowView yet. In
                 // this case we cannot assume that just because
                 // the activity is the root just because
                 // it doesn't have a parent
-                return (this.Activity.Site != null) &&
-                    StateMachineHelpers.IsRootState((StateActivity)this.Activity);
+                return (this.Activity.Site != null)
+                    && StateMachineHelpers.IsRootState((StateActivity)this.Activity);
             }
         }
 
@@ -719,7 +704,9 @@ namespace System.Workflow.Activities
             {
                 if (_rootStateDesigner == null)
                 {
-                    StateActivity rootState = StateMachineHelpers.GetRootState((StateActivity)this.Activity);
+                    StateActivity rootState = StateMachineHelpers.GetRootState(
+                        (StateActivity)this.Activity
+                    );
                     _rootStateDesigner = GetDesigner(rootState) as StateDesigner;
                 }
                 return _rootStateDesigner;
@@ -728,10 +715,7 @@ namespace System.Workflow.Activities
 
         public override Size MinimumSize
         {
-            get
-            {
-                return _minimumSize;
-            }
+            get { return _minimumSize; }
         }
 
         private Layout RootDesignerLayout
@@ -744,10 +728,7 @@ namespace System.Workflow.Activities
                 }
                 return _rootDesignerLayout;
             }
-            set
-            {
-                _rootDesignerLayout = value;
-            }
+            set { _rootDesignerLayout = value; }
         }
 
         internal ISelectionService SelectionService
@@ -756,7 +737,8 @@ namespace System.Workflow.Activities
             {
                 if (_selectionService == null)
                 {
-                    _selectionService = (ISelectionService)this.GetService(typeof(ISelectionService));
+                    _selectionService = (ISelectionService)
+                        this.GetService(typeof(ISelectionService));
                     _selectionService.SelectionChanged += new EventHandler(SelectionChanged);
                 }
                 return _selectionService;
@@ -784,14 +766,8 @@ namespace System.Workflow.Activities
 
         internal Cursor Cursor
         {
-            get
-            {
-                return this.ParentView.Cursor;
-            }
-            set
-            {
-                this.ParentView.Cursor = value;
-            }
+            get { return this.ParentView.Cursor; }
+            set { this.ParentView.Cursor = value; }
         }
 
         private Point TopConnectionPoint
@@ -818,14 +794,8 @@ namespace System.Workflow.Activities
 
         private bool NeedsAutoLayout
         {
-            get
-            {
-                return _needsAutoLayout;
-            }
-            set
-            {
-                _needsAutoLayout = value;
-            }
+            get { return _needsAutoLayout; }
+            set { _needsAutoLayout = value; }
         }
 
         #endregion Private Properties
@@ -836,15 +806,19 @@ namespace System.Workflow.Activities
 
         #region Public Methods
 
-        public override bool CanInsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public override bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
-            if (this.HasActiveDesigner ||
-                this.IsStateCustomActivity)
+            if (this.HasActiveDesigner || this.IsStateCustomActivity)
                 return false;
 
             StateActivity state = (StateActivity)this.Activity;
-            if (StateMachineHelpers.IsLeafState(state) &&
-                StateMachineHelpers.IsCompletedState(state))
+            if (
+                StateMachineHelpers.IsLeafState(state)
+                && StateMachineHelpers.IsCompletedState(state)
+            )
                 return false;
 
             ReadOnlyCollection<Type> validChildTypes = ValidChildTypes;
@@ -888,9 +862,7 @@ namespace System.Workflow.Activities
             // call base
             base.EnsureVisibleContainedDesigner(containedDesigner);
 
-            // 
-
-
+            //
 
             if (!_ensuringVisible)
             {
@@ -907,7 +879,10 @@ namespace System.Workflow.Activities
             _ensuringVisible = false;
         }
 
-        public override object GetNextSelectableObject(object current, DesignerNavigationDirection direction)
+        public override object GetNextSelectableObject(
+            object current,
+            DesignerNavigationDirection direction
+        )
         {
             Activity activity = current as Activity;
             if (activity == null)
@@ -926,11 +901,16 @@ namespace System.Workflow.Activities
             if (indexOf < 0)
                 return null;
 
-            if (current is EventDrivenActivity ||
-                current is StateInitializationActivity ||
-                current is StateFinalizationActivity)
+            if (
+                current is EventDrivenActivity
+                || current is StateInitializationActivity
+                || current is StateFinalizationActivity
+            )
             {
-                if (direction == DesignerNavigationDirection.Left || direction == DesignerNavigationDirection.Right)
+                if (
+                    direction == DesignerNavigationDirection.Left
+                    || direction == DesignerNavigationDirection.Right
+                )
                     return null;
 
                 if (direction == DesignerNavigationDirection.Down)
@@ -972,7 +952,10 @@ namespace System.Workflow.Activities
                 }
                 else
                 {
-                    if (direction == DesignerNavigationDirection.Left || direction == DesignerNavigationDirection.Up)
+                    if (
+                        direction == DesignerNavigationDirection.Left
+                        || direction == DesignerNavigationDirection.Up
+                    )
                     {
                         if (indexOf > 0)
                             return ordered[indexOf - 1].Activity;
@@ -1036,8 +1019,10 @@ namespace System.Workflow.Activities
 
         protected override bool CanConnect(ConnectionPoint source, ConnectionPoint target)
         {
-            DesignerLayoutConnectionPoint sourceDesignerLayoutConnectionPoint = source as DesignerLayoutConnectionPoint;
-            DesignerLayoutConnectionPoint targetDesignerLayoutConnectionPoint = target as DesignerLayoutConnectionPoint;
+            DesignerLayoutConnectionPoint sourceDesignerLayoutConnectionPoint =
+                source as DesignerLayoutConnectionPoint;
+            DesignerLayoutConnectionPoint targetDesignerLayoutConnectionPoint =
+                target as DesignerLayoutConnectionPoint;
 
             if (sourceDesignerLayoutConnectionPoint == null)
             {
@@ -1046,7 +1031,10 @@ namespace System.Workflow.Activities
             }
             else
             {
-                if (sourceDesignerLayoutConnectionPoint.DesignerLayout.ActivityDesigner is StateFinalizationDesigner)
+                if (
+                    sourceDesignerLayoutConnectionPoint.DesignerLayout.ActivityDesigner
+                    is StateFinalizationDesigner
+                )
                     return false;
             }
 
@@ -1057,13 +1045,22 @@ namespace System.Workflow.Activities
             }
             else
             {
-                if (targetDesignerLayoutConnectionPoint.DesignerLayout.ActivityDesigner is StateFinalizationDesigner)
+                if (
+                    targetDesignerLayoutConnectionPoint.DesignerLayout.ActivityDesigner
+                    is StateFinalizationDesigner
+                )
                     return false;
             }
 
             bool canConnect =
-                (sourceDesignerLayoutConnectionPoint == null && targetDesignerLayoutConnectionPoint != null) ||
-                (sourceDesignerLayoutConnectionPoint != null && targetDesignerLayoutConnectionPoint == null);
+                (
+                    sourceDesignerLayoutConnectionPoint == null
+                    && targetDesignerLayoutConnectionPoint != null
+                )
+                || (
+                    sourceDesignerLayoutConnectionPoint != null
+                    && targetDesignerLayoutConnectionPoint == null
+                );
 
             return canConnect;
         }
@@ -1092,21 +1089,42 @@ namespace System.Workflow.Activities
                         connectionPoints.Add(new ConnectionPoint(this, DesignerEdges.Bottom, 0));
                 }
 
-                int leftConnectionIndex = 0, rightConnectionIndex = 0;
+                int leftConnectionIndex = 0,
+                    rightConnectionIndex = 0;
                 foreach (DesignerLayout layout in this.DesignerLayouts.Values)
                 {
                     if (!this.IsRootStateDesigner)
                     {
-                        if ((edges & DesignerEdges.Left) > 0 && layout.LeftConnectionPoint != Point.Empty)
+                        if (
+                            (edges & DesignerEdges.Left) > 0
+                            && layout.LeftConnectionPoint != Point.Empty
+                        )
                         {
-                            connectionPoints.Add(new DesignerLayoutConnectionPoint(this, leftConnectionIndex, (CompositeActivity)layout.ActivityDesigner.Activity, DesignerEdges.Left));
+                            connectionPoints.Add(
+                                new DesignerLayoutConnectionPoint(
+                                    this,
+                                    leftConnectionIndex,
+                                    (CompositeActivity)layout.ActivityDesigner.Activity,
+                                    DesignerEdges.Left
+                                )
+                            );
                             leftConnectionIndex += 1;
                         }
                     }
 
-                    if ((edges & DesignerEdges.Right) > 0 && layout.RightConnectionPoint != Point.Empty)
+                    if (
+                        (edges & DesignerEdges.Right) > 0
+                        && layout.RightConnectionPoint != Point.Empty
+                    )
                     {
-                        connectionPoints.Add(new DesignerLayoutConnectionPoint(this, rightConnectionIndex, (CompositeActivity)layout.ActivityDesigner.Activity, DesignerEdges.Right));
+                        connectionPoints.Add(
+                            new DesignerLayoutConnectionPoint(
+                                this,
+                                rightConnectionIndex,
+                                (CompositeActivity)layout.ActivityDesigner.Activity,
+                                DesignerEdges.Right
+                            )
+                        );
                         rightConnectionIndex += 1;
                     }
                 }
@@ -1128,7 +1146,10 @@ namespace System.Workflow.Activities
             {
                 if (!this.IsRootStateDesigner)
                 {
-                    if ((edges & DesignerEdges.Left) > 0 && layout.LeftConnectionPoint != Point.Empty)
+                    if (
+                        (edges & DesignerEdges.Left) > 0
+                        && layout.LeftConnectionPoint != Point.Empty
+                    )
                         connections.Add(layout.LeftConnectionPoint);
                 }
                 if ((edges & DesignerEdges.Right) > 0 && layout.RightConnectionPoint != Point.Empty)
@@ -1148,8 +1169,10 @@ namespace System.Workflow.Activities
 
             // We need to make sure that the source connection point
             // is always the event handler
-            DesignerLayoutConnectionPoint sourceDesignerLayoutConnectionPoint = connector.Source as DesignerLayoutConnectionPoint;
-            DesignerLayoutConnectionPoint targetDesignerLayoutConnectionPoint = connector.Target as DesignerLayoutConnectionPoint;
+            DesignerLayoutConnectionPoint sourceDesignerLayoutConnectionPoint =
+                connector.Source as DesignerLayoutConnectionPoint;
+            DesignerLayoutConnectionPoint targetDesignerLayoutConnectionPoint =
+                connector.Target as DesignerLayoutConnectionPoint;
             if (sourceDesignerLayoutConnectionPoint == null)
             {
                 Debug.Assert(targetDesignerLayoutConnectionPoint != null);
@@ -1168,15 +1191,24 @@ namespace System.Workflow.Activities
             {
                 SetStateActivity setState = new SetStateActivity();
                 setState.TargetStateName = target.AssociatedDesigner.Activity.QualifiedName;
-                CompositeActivityDesigner compositeDesigner = (CompositeActivityDesigner)StateDesigner.GetDesigner(sourceDesignerLayoutConnectionPoint.EventHandler);
+                CompositeActivityDesigner compositeDesigner = (CompositeActivityDesigner)
+                    StateDesigner.GetDesigner(sourceDesignerLayoutConnectionPoint.EventHandler);
                 List<Activity> activitiesToInsert = new List<Activity>();
                 activitiesToInsert.Add(setState);
-                compositeDesigner.InsertActivities(new HitTestInfo(compositeDesigner, HitTestLocations.Designer), activitiesToInsert.AsReadOnly());
+                compositeDesigner.InsertActivities(
+                    new HitTestInfo(compositeDesigner, HitTestLocations.Designer),
+                    activitiesToInsert.AsReadOnly()
+                );
                 connector.SetStateName = setState.QualifiedName;
             }
             connector.TargetStateName = target.AssociatedDesigner.Activity.QualifiedName;
-            connector.SourceStateName = sourceDesignerLayoutConnectionPoint.EventHandler.Parent.QualifiedName;
-            connector.EventHandlerName = sourceDesignerLayoutConnectionPoint.EventHandler.QualifiedName;
+            connector.SourceStateName = sourceDesignerLayoutConnectionPoint
+                .EventHandler
+                .Parent
+                .QualifiedName;
+            connector.EventHandlerName = sourceDesignerLayoutConnectionPoint
+                .EventHandler
+                .QualifiedName;
         }
 
         protected override void OnConnectorRemoved(ConnectorEventArgs e)
@@ -1184,23 +1216,40 @@ namespace System.Workflow.Activities
             base.OnConnectorRemoved(e);
 
             StateDesignerConnector connector = e.Connector as StateDesignerConnector;
-            if (connector == null || string.IsNullOrEmpty(connector.SetStateName) || !this.RootStateDesigner.RemovingSetState)
+            if (
+                connector == null
+                || string.IsNullOrEmpty(connector.SetStateName)
+                || !this.RootStateDesigner.RemovingSetState
+            )
                 return;
 
-            DesignerLayoutConnectionPoint sourceDesignerLayoutConnectionPoint = connector.Source as DesignerLayoutConnectionPoint;
+            DesignerLayoutConnectionPoint sourceDesignerLayoutConnectionPoint =
+                connector.Source as DesignerLayoutConnectionPoint;
             if (sourceDesignerLayoutConnectionPoint != null)
             {
-                CompositeActivityDesigner compositeDesigner = StateDesigner.GetDesigner(sourceDesignerLayoutConnectionPoint.EventHandler) as CompositeActivityDesigner;
-                if (compositeDesigner != null && sourceDesignerLayoutConnectionPoint.EventHandler != null)
+                CompositeActivityDesigner compositeDesigner =
+                    StateDesigner.GetDesigner(sourceDesignerLayoutConnectionPoint.EventHandler)
+                    as CompositeActivityDesigner;
+                if (
+                    compositeDesigner != null
+                    && sourceDesignerLayoutConnectionPoint.EventHandler != null
+                )
                 {
-                    Activity setStateActivity = StateDesigner.FindActivityByQualifiedName(sourceDesignerLayoutConnectionPoint.EventHandler, connector.SetStateName);
+                    Activity setStateActivity = StateDesigner.FindActivityByQualifiedName(
+                        sourceDesignerLayoutConnectionPoint.EventHandler,
+                        connector.SetStateName
+                    );
                     if (setStateActivity != null)
                     {
                         List<Activity> activitiesToRemove = new List<Activity>();
                         activitiesToRemove.Add(setStateActivity);
-                        CompositeActivityDesigner setStateParentDesigner = StateDesigner.GetDesigner(setStateActivity.Parent) as CompositeActivityDesigner;
+                        CompositeActivityDesigner setStateParentDesigner =
+                            StateDesigner.GetDesigner(setStateActivity.Parent)
+                            as CompositeActivityDesigner;
                         if (setStateParentDesigner != null)
-                            setStateParentDesigner.RemoveActivities(activitiesToRemove.AsReadOnly());
+                            setStateParentDesigner.RemoveActivities(
+                                activitiesToRemove.AsReadOnly()
+                            );
                     }
                 }
             }
@@ -1216,26 +1265,43 @@ namespace System.Workflow.Activities
             if (stateDesignerConnector == null)
                 return;
 
-            if (!stateDesignerConnector.Target.AssociatedDesigner.Activity.QualifiedName.Equals(stateDesignerConnector.TargetStateName))
+            if (
+                !stateDesignerConnector.Target.AssociatedDesigner.Activity.QualifiedName.Equals(
+                    stateDesignerConnector.TargetStateName
+                )
+            )
             {
                 StateActivity rootState = (StateActivity)this.RootStateDesigner.Activity;
                 // target state has changed
-                SetStateActivity setState = FindActivityByQualifiedName(rootState, stateDesignerConnector.SetStateName) as SetStateActivity;
+                SetStateActivity setState =
+                    FindActivityByQualifiedName(rootState, stateDesignerConnector.SetStateName)
+                    as SetStateActivity;
                 if (setState != null)
                 {
-                    StateActivity targetState = (StateActivity)stateDesignerConnector.Target.AssociatedDesigner.Activity;
-                    PropertyDescriptor property = GetPropertyDescriptor(setState, SetStateActivity.TargetStateNamePropertyName);
+                    StateActivity targetState = (StateActivity)
+                        stateDesignerConnector.Target.AssociatedDesigner.Activity;
+                    PropertyDescriptor property = GetPropertyDescriptor(
+                        setState,
+                        SetStateActivity.TargetStateNamePropertyName
+                    );
                     property.SetValue(setState, targetState.QualifiedName);
                     stateDesignerConnector.TargetStateName = targetState.QualifiedName;
                 }
             }
 
-            StateDesigner.DesignerLayoutConnectionPoint sourceConnectionPoint = (StateDesigner.DesignerLayoutConnectionPoint)stateDesignerConnector.Source;
-            if (!sourceConnectionPoint.EventHandler.QualifiedName.Equals(stateDesignerConnector.EventHandlerName))
+            StateDesigner.DesignerLayoutConnectionPoint sourceConnectionPoint =
+                (StateDesigner.DesignerLayoutConnectionPoint)stateDesignerConnector.Source;
+            if (
+                !sourceConnectionPoint.EventHandler.QualifiedName.Equals(
+                    stateDesignerConnector.EventHandlerName
+                )
+            )
             {
                 StateActivity rootState = (StateActivity)this.RootStateDesigner.Activity;
                 // source state has changed
-                SetStateActivity setState = FindActivityByQualifiedName(rootState, stateDesignerConnector.SetStateName) as SetStateActivity;
+                SetStateActivity setState =
+                    FindActivityByQualifiedName(rootState, stateDesignerConnector.SetStateName)
+                    as SetStateActivity;
                 if (setState != null)
                 {
                     IDesignerHost designerHost = GetService(typeof(IDesignerHost)) as IDesignerHost;
@@ -1245,19 +1311,31 @@ namespace System.Workflow.Activities
 
                     try
                     {
-                        CompositeActivityDesigner previousSetStateParentDesigner = (CompositeActivityDesigner)StateDesigner.GetDesigner(setState.Parent);
+                        CompositeActivityDesigner previousSetStateParentDesigner =
+                            (CompositeActivityDesigner)StateDesigner.GetDesigner(setState.Parent);
                         List<Activity> activitiesToRemove = new List<Activity>();
                         activitiesToRemove.Add(setState);
-                        previousSetStateParentDesigner.RemoveActivities(activitiesToRemove.AsReadOnly());
+                        previousSetStateParentDesigner.RemoveActivities(
+                            activitiesToRemove.AsReadOnly()
+                        );
 
-                        DesignerLayoutConnectionPoint source = (DesignerLayoutConnectionPoint)stateDesignerConnector.Source;
-                        CompositeActivityDesigner newSetStateParentDesigner = (CompositeActivityDesigner)StateDesigner.GetDesigner(source.EventHandler);
+                        DesignerLayoutConnectionPoint source = (DesignerLayoutConnectionPoint)
+                            stateDesignerConnector.Source;
+                        CompositeActivityDesigner newSetStateParentDesigner =
+                            (CompositeActivityDesigner)
+                                StateDesigner.GetDesigner(source.EventHandler);
                         List<Activity> activitiesToInsert = new List<Activity>();
                         activitiesToInsert.Add(setState);
-                        newSetStateParentDesigner.InsertActivities(new HitTestInfo(newSetStateParentDesigner, HitTestLocations.Designer), activitiesToInsert.AsReadOnly());
+                        newSetStateParentDesigner.InsertActivities(
+                            new HitTestInfo(newSetStateParentDesigner, HitTestLocations.Designer),
+                            activitiesToInsert.AsReadOnly()
+                        );
 
                         stateDesignerConnector.EventHandlerName = source.EventHandler.QualifiedName;
-                        stateDesignerConnector.SourceStateName = source.EventHandler.Parent.QualifiedName;
+                        stateDesignerConnector.SourceStateName = source
+                            .EventHandler
+                            .Parent
+                            .QualifiedName;
 
                         if (transaction != null)
                             transaction.Commit();
@@ -1344,12 +1422,16 @@ namespace System.Workflow.Activities
 
         #endregion Mouse event handlers
 
-        protected override void OnContainedActivitiesChanged(ActivityCollectionChangeEventArgs listChangeArgs)
+        protected override void OnContainedActivitiesChanged(
+            ActivityCollectionChangeEventArgs listChangeArgs
+        )
         {
             base.OnContainedActivitiesChanged(listChangeArgs);
 
-            if (this.ActiveDesigner != null &&
-                listChangeArgs.RemovedItems.Contains(this.ActiveDesigner.Activity))
+            if (
+                this.ActiveDesigner != null
+                && listChangeArgs.RemovedItems.Contains(this.ActiveDesigner.Activity)
+            )
             {
                 SetActiveDesigner(null);
             }
@@ -1365,7 +1447,7 @@ namespace System.Workflow.Activities
                 {
                     if (this.ActiveDesigner == null)
                     {
-                        // UpdateConnectors depends on having the 
+                        // UpdateConnectors depends on having the
                         // RootDesignerLayout refreshed at least once
                         this.UpdateConnectors();
                     }
@@ -1387,15 +1469,18 @@ namespace System.Workflow.Activities
 
                 if (IsRootDesigner && InvokingDesigner == null)
                     RecalculateRootDesignerSize();
-
             }
 #if DEBUG
             catch (Exception exception)
             {
-                Trace.WriteLine(String.Format(
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    "Unhandled exception in {0}.OnLayoutPosition: {1}",
-                    typeof(StateDesigner), exception));
+                Trace.WriteLine(
+                    String.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "Unhandled exception in {0}.OnLayoutPosition: {1}",
+                        typeof(StateDesigner),
+                        exception
+                    )
+                );
                 throw;
             }
 #endif
@@ -1410,7 +1495,8 @@ namespace System.Workflow.Activities
         {
             // make sure that if we add event handlers, the states
             // are moved down so they're still visible
-            int minimumY = _eventHandlersLayout.Bounds.Bottom + DefaultStateDesignerAutoLayoutDistance;
+            int minimumY =
+                _eventHandlersLayout.Bounds.Bottom + DefaultStateDesignerAutoLayoutDistance;
             int deltaY = 0;
             Rectangle moveBounds = Rectangle.Empty;
             int freeSpaceHeight = int.MaxValue;
@@ -1431,7 +1517,10 @@ namespace System.Workflow.Activities
                         }
                         else
                         {
-                            freeSpaceHeight = Math.Min(freeSpaceHeight, stateDesigner.Location.Y - minimumY);
+                            freeSpaceHeight = Math.Min(
+                                freeSpaceHeight,
+                                stateDesigner.Location.Y - minimumY
+                            );
                         }
                     }
                 }
@@ -1453,14 +1542,27 @@ namespace System.Workflow.Activities
                             if (stateDesigner.Location.Y < minimumY)
                                 stateDesigner.Location = new Point(location.X, location.Y + deltaY);
                             else
-                                stateDesigner.Location = new Point(location.X, location.Y + moveBounds.Height + DefaultStateDesignerAutoLayoutDistance - freeSpaceHeight);
+                                stateDesigner.Location = new Point(
+                                    location.X,
+                                    location.Y
+                                        + moveBounds.Height
+                                        + DefaultStateDesignerAutoLayoutDistance
+                                        - freeSpaceHeight
+                                );
                             maximumY = Math.Max(maximumY, stateDesigner.Bounds.Bottom);
                         }
                     }
                 }
                 if (maximumY > this.Bounds.Bottom)
                 {
-                    Size newSize = new Size(this.Size.Width, this.Size.Height + ((maximumY + DefaultStateDesignerAutoLayoutDistance) - this.Bounds.Bottom));
+                    Size newSize = new Size(
+                        this.Size.Width,
+                        this.Size.Height
+                            + (
+                                (maximumY + DefaultStateDesignerAutoLayoutDistance)
+                                - this.Bounds.Bottom
+                            )
+                    );
                     this.Size = newSize;
                 }
             }
@@ -1470,7 +1572,8 @@ namespace System.Workflow.Activities
         {
             Debug.Assert(!this.HasActiveDesigner && this.NeedsAutoLayout);
 
-            int maximumY = _eventHandlersLayout.Bounds.Bottom + DefaultStateDesignerAutoLayoutDistance;
+            int maximumY =
+                _eventHandlersLayout.Bounds.Bottom + DefaultStateDesignerAutoLayoutDistance;
             foreach (ActivityDesigner designer in this.ContainedDesigners)
             {
                 if (IsContainedDesignerVisible(designer))
@@ -1500,7 +1603,10 @@ namespace System.Workflow.Activities
                 if (IsContainedDesignerVisible(designer))
                 {
                     Rectangle bounds = designer.Bounds;
-                    bounds.Offset(Separator.Width - this.Location.X, Separator.Height - this.Location.Y);
+                    bounds.Offset(
+                        Separator.Width - this.Location.X,
+                        Separator.Height - this.Location.Y
+                    );
                     newSize.Width = Math.Max(newSize.Width, bounds.Right);
                     newSize.Height = Math.Max(newSize.Height, bounds.Bottom);
                 }
@@ -1516,42 +1622,51 @@ namespace System.Workflow.Activities
             try
             {
 #endif
-            if (this.IsRootStateDesigner)
-                this.PerformingLayout = true;
+                if (this.IsRootStateDesigner)
+                    this.PerformingLayout = true;
 
-            if (this.HasActiveDesigner)
-            {
-                // If we are in the event driven view, 
-                // then we need to make sure that the size
-                // of this designer will be as small as possible
-                _minimumSize = Size.Empty;
-                this.Size = Size.Empty;
-            }
-            else
-            {
-                this.NeedsAutoLayout = this.Size.IsEmpty;
-            }
+                if (this.HasActiveDesigner)
+                {
+                    // If we are in the event driven view,
+                    // then we need to make sure that the size
+                    // of this designer will be as small as possible
+                    _minimumSize = Size.Empty;
+                    this.Size = Size.Empty;
+                }
+                else
+                {
+                    this.NeedsAutoLayout = this.Size.IsEmpty;
+                }
 
-            Size newSize = base.OnLayoutSize(e);
+                Size newSize = base.OnLayoutSize(e);
 
-            Graphics graphics = e.Graphics;
-            ActivityDesignerTheme designerTheme = e.DesignerTheme;
-            AmbientTheme ambientTheme = e.AmbientTheme;
+                Graphics graphics = e.Graphics;
+                ActivityDesignerTheme designerTheme = e.DesignerTheme;
+                AmbientTheme ambientTheme = e.AmbientTheme;
 
-            RefreshRootDesignerLayout();
+                RefreshRootDesignerLayout();
 
-            this.RootDesignerLayout.OnLayoutSize(graphics, designerTheme, ambientTheme, newSize);
-            _minimumSize = this.RootDesignerLayout.MinimumSize;
+                this.RootDesignerLayout.OnLayoutSize(
+                    graphics,
+                    designerTheme,
+                    ambientTheme,
+                    newSize
+                );
+                _minimumSize = this.RootDesignerLayout.MinimumSize;
 
-            return this.RootDesignerLayout.Size;
+                return this.RootDesignerLayout.Size;
 #if DEBUG
             }
             catch (Exception exception)
             {
-                Trace.WriteLine(String.Format(
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    "Unhandled exception in {0}.OnLayoutSize: {1}",
-                    typeof(StateDesigner), exception));
+                Trace.WriteLine(
+                    String.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "Unhandled exception in {0}.OnLayoutSize: {1}",
+                        typeof(StateDesigner),
+                        exception
+                    )
+                );
                 throw;
             }
 #endif
@@ -1567,16 +1682,20 @@ namespace System.Workflow.Activities
             try
             {
 #endif
-            this.RootDesignerLayout.OnPaint(graphics, designerTheme, ambientTheme);
-            this.PaintContainedDesigners(e);
+                this.RootDesignerLayout.OnPaint(graphics, designerTheme, ambientTheme);
+                this.PaintContainedDesigners(e);
 #if DEBUG
             }
             catch (Exception exception)
             {
-                Trace.WriteLine(String.Format(
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    "Unhandled exception in {0}.OnPaint: {1}",
-                    typeof(StateDesigner), exception));
+                Trace.WriteLine(
+                    String.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "Unhandled exception in {0}.OnPaint: {1}",
+                        typeof(StateDesigner),
+                        exception
+                    )
+                );
             }
 #endif
         }
@@ -1601,7 +1720,9 @@ namespace System.Workflow.Activities
             if (this.HasActiveDesigner)
                 return false;
 
-            if (!CanInsertActivities(new HitTestInfo(this, HitTestLocations.Designer), e.Activities))
+            if (
+                !CanInsertActivities(new HitTestInfo(this, HitTestLocations.Designer), e.Activities)
+            )
                 return false;
 
             bool ctrlKeyPressed = ((e.KeyState & 8) == 8);
@@ -1613,7 +1734,14 @@ namespace System.Workflow.Activities
                     if (activity.Site != null)
                     {
                         ActivityDesigner activityDesigner = StateDesigner.GetDesigner(activity);
-                        if (activityDesigner == null || activityDesigner.ParentDesigner == null || !activityDesigner.ParentDesigner.CanMoveActivities(moveLocation, new List<Activity>(new Activity[] { activity }).AsReadOnly()))
+                        if (
+                            activityDesigner == null
+                            || activityDesigner.ParentDesigner == null
+                            || !activityDesigner.ParentDesigner.CanMoveActivities(
+                                moveLocation,
+                                new List<Activity>(new Activity[] { activity }).AsReadOnly()
+                            )
+                        )
                         {
                             return false;
                         }
@@ -1633,7 +1761,10 @@ namespace System.Workflow.Activities
             else
             {
                 bool ctrlKeyPressed = ((e.KeyState & 8) == 8);
-                if (ctrlKeyPressed && (e.AllowedEffect & DragDropEffects.Copy) == DragDropEffects.Copy)
+                if (
+                    ctrlKeyPressed
+                    && (e.AllowedEffect & DragDropEffects.Copy) == DragDropEffects.Copy
+                )
                     return DragDropEffects.Copy;
                 else if ((e.AllowedEffect & DragDropEffects.Move) == DragDropEffects.Move)
                     return DragDropEffects.Move;
@@ -1647,7 +1778,10 @@ namespace System.Workflow.Activities
             Point snapPoint = new Point(e.Y, e.Y);
             if (!this.HasActiveDesigner)
             {
-                int eventHandlersLayoutBottom = this._statesLayout.EventHandlersLayout.Bounds.Bottom;
+                int eventHandlersLayoutBottom = this._statesLayout
+                    .EventHandlersLayout
+                    .Bounds
+                    .Bottom;
                 if (snapPoint.Y <= eventHandlersLayoutBottom)
                     snapPoint.Y = eventHandlersLayoutBottom + 1;
             }
@@ -1667,12 +1801,15 @@ namespace System.Workflow.Activities
                 this.RootStateDesigner.RemovingSetState = false;
 
                 StateActivity rootState = (StateActivity)this.Activity;
-                ReadOnlyCollection<TransitionInfo> transitions = TransitionInfo.ParseStateMachine(rootState);
+                ReadOnlyCollection<TransitionInfo> transitions = TransitionInfo.ParseStateMachine(
+                    rootState
+                );
                 Connector[] connectors = new Connector[this.Connectors.Count];
                 this.Connectors.CopyTo(connectors, 0);
                 foreach (Connector connector in connectors)
                 {
-                    StateDesignerConnector stateDesignerConnector = connector as StateDesignerConnector;
+                    StateDesignerConnector stateDesignerConnector =
+                        connector as StateDesignerConnector;
                     if (stateDesignerConnector == null)
                     {
                         RemoveConnector(connector);
@@ -1698,19 +1835,30 @@ namespace System.Workflow.Activities
                 {
                     if (transitionInfo.Connector == null && transitionInfo.TargetState != null)
                     {
-                        DesignerLayoutConnectionPoint source = GetEventHandlerConnectionPoint(transitionInfo.EventHandler);
-                        ConnectionPoint target = GetTargetStateConnectionPoint(transitionInfo.TargetState);
+                        DesignerLayoutConnectionPoint source = GetEventHandlerConnectionPoint(
+                            transitionInfo.EventHandler
+                        );
+                        ConnectionPoint target = GetTargetStateConnectionPoint(
+                            transitionInfo.TargetState
+                        );
 
                         if (source != null && target != null)
                         {
                             this.RootStateDesigner.AddingSetState = false;
                             try
                             {
-                                StateDesignerConnector stateDesignerConnector = (StateDesignerConnector)this.AddConnector(source, target);
-                                stateDesignerConnector.SetStateName = transitionInfo.SetState.QualifiedName;
-                                stateDesignerConnector.TargetStateName = transitionInfo.SetState.TargetStateName;
+                                StateDesignerConnector stateDesignerConnector =
+                                    (StateDesignerConnector)this.AddConnector(source, target);
+                                stateDesignerConnector.SetStateName = transitionInfo
+                                    .SetState
+                                    .QualifiedName;
+                                stateDesignerConnector.TargetStateName = transitionInfo
+                                    .SetState
+                                    .TargetStateName;
                                 if (transitionInfo.EventHandler != null)
-                                    stateDesignerConnector.EventHandlerName = transitionInfo.EventHandler.QualifiedName;
+                                    stateDesignerConnector.EventHandlerName = transitionInfo
+                                        .EventHandler
+                                        .QualifiedName;
                             }
                             finally
                             {
@@ -1719,15 +1867,18 @@ namespace System.Workflow.Activities
                         }
                     }
                 }
-
             }
 #if DEBUG
             catch (Exception exception)
             {
-                Trace.WriteLine(String.Format(
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    "Unhandled exception in {0}.UpdateConnectors: {1}",
-                    typeof(StateDesigner), exception));
+                Trace.WriteLine(
+                    String.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "Unhandled exception in {0}.UpdateConnectors: {1}",
+                        typeof(StateDesigner),
+                        exception
+                    )
+                );
                 throw;
             }
 #endif
@@ -1751,12 +1902,19 @@ namespace System.Workflow.Activities
             return null;
         }
 
-        private DesignerLayoutConnectionPoint GetEventHandlerConnectionPoint(CompositeActivity eventHandler)
+        private DesignerLayoutConnectionPoint GetEventHandlerConnectionPoint(
+            CompositeActivity eventHandler
+        )
         {
             Debug.Assert(eventHandler != null);
             StateDesigner sourceStateDesigner = (StateDesigner)GetDesigner(eventHandler.Parent);
             DesignerLayout eventHandlerLayout;
-            if (!sourceStateDesigner.DesignerLayouts.TryGetValue(eventHandler, out eventHandlerLayout))
+            if (
+                !sourceStateDesigner.DesignerLayouts.TryGetValue(
+                    eventHandler,
+                    out eventHandlerLayout
+                )
+            )
                 return null;
 
             int connectionIndex = 0;
@@ -1771,7 +1929,12 @@ namespace System.Workflow.Activities
                 connectionIndex++;
             }
 
-            return new DesignerLayoutConnectionPoint(sourceStateDesigner, connectionIndex, eventHandler, DesignerEdges.Right);
+            return new DesignerLayoutConnectionPoint(
+                sourceStateDesigner,
+                connectionIndex,
+                eventHandler,
+                DesignerEdges.Right
+            );
         }
 
         private ConnectionPoint GetTargetStateConnectionPoint(StateActivity targetState)
@@ -1791,9 +1954,13 @@ namespace System.Workflow.Activities
 
             try
             {
-                ISelectionService selectionService = this.GetService(typeof(ISelectionService)) as ISelectionService;
+                ISelectionService selectionService =
+                    this.GetService(typeof(ISelectionService)) as ISelectionService;
                 if (selectionService != null)
-                    selectionService.SetSelectedComponents(new object[] { this.Activity }, SelectionTypes.Primary);
+                    selectionService.SetSelectedComponents(
+                        new object[] { this.Activity },
+                        SelectionTypes.Primary
+                    );
 
                 SetLeafActiveDesigner(this, null);
 
@@ -1817,7 +1984,9 @@ namespace System.Workflow.Activities
                 this.DesignerLayouts.Clear();
                 _designersParser = new ContainedDesignersParser(this.ContainedDesigners);
 
-                foreach (StateInitializationDesigner stateInitializationDesigner in this.DesignersParser.StateInitializationDesigners)
+                foreach (
+                    StateInitializationDesigner stateInitializationDesigner in this.DesignersParser.StateInitializationDesigners
+                )
                 {
                     DesignerLayout layout = new DesignerLayout(stateInitializationDesigner);
                     this.DesignerLayouts[stateInitializationDesigner.Activity] = layout;
@@ -1825,14 +1994,18 @@ namespace System.Workflow.Activities
                 }
 
                 // we now add the EventDrivenDesigners
-                foreach (EventDrivenDesigner eventDrivenDesigner in this.DesignersParser.EventDrivenDesigners)
+                foreach (
+                    EventDrivenDesigner eventDrivenDesigner in this.DesignersParser.EventDrivenDesigners
+                )
                 {
                     DesignerLayout layout = new DesignerLayout(eventDrivenDesigner);
                     this.DesignerLayouts[eventDrivenDesigner.Activity] = layout;
                     _eventHandlersLayout.Layouts.Add(layout);
                 }
 
-                foreach (StateFinalizationDesigner stateFinalizationDesigner in this.DesignersParser.StateFinalizationDesigners)
+                foreach (
+                    StateFinalizationDesigner stateFinalizationDesigner in this.DesignersParser.StateFinalizationDesigners
+                )
                 {
                     DesignerLayout layout = new DesignerLayout(stateFinalizationDesigner);
                     this.DesignerLayouts[stateFinalizationDesigner.Activity] = layout;
@@ -1856,19 +2029,27 @@ namespace System.Workflow.Activities
             DesignerTransaction transaction = null;
             StateActivity state = (StateActivity)this.Activity;
             if (designerHost != null)
-                transaction = designerHost.CreateTransaction(SR.GetUndoSetAsInitialState(state.Name));
+                transaction = designerHost.CreateTransaction(
+                    SR.GetUndoSetAsInitialState(state.Name)
+                );
 
             try
             {
                 StateActivity rootState = StateMachineHelpers.GetRootState(state);
 
-                PropertyDescriptor initialStateProperty = GetPropertyDescriptor(rootState, StateMachineWorkflowActivity.InitialStateNamePropertyName);
+                PropertyDescriptor initialStateProperty = GetPropertyDescriptor(
+                    rootState,
+                    StateMachineWorkflowActivity.InitialStateNamePropertyName
+                );
                 initialStateProperty.SetValue(rootState, state.Name);
 
                 string completedStateName = StateMachineHelpers.GetCompletedStateName(rootState);
                 if (completedStateName == state.Name)
                 {
-                    PropertyDescriptor completedStateProperty = GetPropertyDescriptor(rootState, StateMachineWorkflowActivity.CompletedStateNamePropertyName);
+                    PropertyDescriptor completedStateProperty = GetPropertyDescriptor(
+                        rootState,
+                        StateMachineWorkflowActivity.CompletedStateNamePropertyName
+                    );
                     completedStateProperty.SetValue(rootState, "");
                 }
 
@@ -1890,19 +2071,27 @@ namespace System.Workflow.Activities
             DesignerTransaction transaction = null;
             StateActivity state = (StateActivity)this.Activity;
             if (designerHost != null)
-                transaction = designerHost.CreateTransaction(SR.GetUndoSetAsCompletedState(state.Name));
+                transaction = designerHost.CreateTransaction(
+                    SR.GetUndoSetAsCompletedState(state.Name)
+                );
 
             try
             {
                 StateActivity rootState = StateMachineHelpers.GetRootState(state);
 
-                PropertyDescriptor completedStateProperty = GetPropertyDescriptor(rootState, StateMachineWorkflowActivity.CompletedStateNamePropertyName);
+                PropertyDescriptor completedStateProperty = GetPropertyDescriptor(
+                    rootState,
+                    StateMachineWorkflowActivity.CompletedStateNamePropertyName
+                );
                 completedStateProperty.SetValue(rootState, state.Name);
 
                 string initialStateName = StateMachineHelpers.GetInitialStateName(rootState);
                 if (initialStateName == state.Name)
                 {
-                    PropertyDescriptor initialStateProperty = GetPropertyDescriptor(rootState, StateMachineWorkflowActivity.InitialStateNamePropertyName);
+                    PropertyDescriptor initialStateProperty = GetPropertyDescriptor(
+                        rootState,
+                        StateMachineWorkflowActivity.InitialStateNamePropertyName
+                    );
                     initialStateProperty.SetValue(rootState, "");
                 }
 
@@ -1918,7 +2107,10 @@ namespace System.Workflow.Activities
             }
         }
 
-        private static PropertyDescriptor GetPropertyDescriptor(Activity activity, string propertyName)
+        private static PropertyDescriptor GetPropertyDescriptor(
+            Activity activity,
+            string propertyName
+        )
         {
             PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(activity);
             PropertyDescriptor property = properties.Find(propertyName, false);
@@ -1963,24 +2155,26 @@ namespace System.Workflow.Activities
                     this,
                     hitTestInfo,
                     new List<Activity>(new Activity[] { child }).AsReadOnly(),
-                    string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    DR.GetString(DR.AddingChild),
-                    child.GetType().Name));
+                    string.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        DR.GetString(DR.AddingChild),
+                        child.GetType().Name
+                    )
+                );
 
                 // If the number of child activities has increased, the branch add was successful, so
                 // make sure the highest indexed branch is visible
                 if (ContainedDesigners.Count > designerCount && ContainedDesigners.Count > 0)
                     ContainedDesigners[ContainedDesigners.Count - 1].EnsureVisible();
 
-                this.SelectionService.SetSelectedComponents(new object[] { child }, SelectionTypes.Primary);
+                this.SelectionService.SetSelectedComponents(
+                    new object[] { child },
+                    SelectionTypes.Primary
+                );
             }
         }
 
-        // 
-
-
-
-
+        //
 
         private bool GetIsEditable()
         {
@@ -1997,9 +2191,10 @@ namespace System.Workflow.Activities
                 {
                     StateActivity state = (StateActivity)this.Activity;
                     StateActivity rootState = StateMachineHelpers.GetRootState(state);
-                    enabled = StateMachineHelpers.IsLeafState(state) &&
-                        StateMachineHelpers.IsStateMachine(rootState) &&
-                        !StateMachineHelpers.IsInitialState(state);
+                    enabled =
+                        StateMachineHelpers.IsLeafState(state)
+                        && StateMachineHelpers.IsStateMachine(rootState)
+                        && !StateMachineHelpers.IsInitialState(state);
                 }
                 verb.Visible = enabled;
                 verb.Enabled = enabled;
@@ -2017,15 +2212,16 @@ namespace System.Workflow.Activities
                     StateActivity state = (StateActivity)this.Activity;
                     StateActivity rootState = StateMachineHelpers.GetRootState(state);
                     enabled =
-                        StateMachineHelpers.IsLeafState(state) &&
-                        StateMachineHelpers.IsStateMachine(rootState) &&
-                        !StateMachineHelpers.IsCompletedState(state) &&
-                        (state.Activities.Count == 0);
+                        StateMachineHelpers.IsLeafState(state)
+                        && StateMachineHelpers.IsStateMachine(rootState)
+                        && !StateMachineHelpers.IsCompletedState(state)
+                        && (state.Activities.Count == 0);
                 }
                 verb.Visible = enabled;
                 verb.Enabled = enabled;
             }
         }
+
         internal void OnStatusAddState(object sender, EventArgs e)
         {
             ActivityDesignerVerb verb = sender as ActivityDesignerVerb;
@@ -2041,7 +2237,13 @@ namespace System.Workflow.Activities
                     isCompletedState = StateMachineHelpers.IsCompletedState(state);
                 }
 
-                enabled = GetIsEditable() && (!this.HasActiveDesigner) && !isInitialState && !isCompletedState && !IsLocked && !IsStateCustomActivity;
+                enabled =
+                    GetIsEditable()
+                    && (!this.HasActiveDesigner)
+                    && !isInitialState
+                    && !isCompletedState
+                    && !IsLocked
+                    && !IsStateCustomActivity;
                 verb.Visible = enabled;
                 verb.Enabled = enabled;
             }
@@ -2054,8 +2256,16 @@ namespace System.Workflow.Activities
             {
                 bool enabled;
                 StateActivity state = (StateActivity)this.Activity;
-                bool isCompletedState = (StateMachineHelpers.IsLeafState(state) && StateMachineHelpers.IsCompletedState(state));
-                enabled = GetIsEditable() && (!this.HasActiveDesigner) && !isCompletedState && !IsLocked && !IsStateCustomActivity;
+                bool isCompletedState = (
+                    StateMachineHelpers.IsLeafState(state)
+                    && StateMachineHelpers.IsCompletedState(state)
+                );
+                enabled =
+                    GetIsEditable()
+                    && (!this.HasActiveDesigner)
+                    && !isCompletedState
+                    && !IsLocked
+                    && !IsStateCustomActivity;
                 verb.Visible = enabled;
                 verb.Enabled = enabled;
             }
@@ -2069,9 +2279,19 @@ namespace System.Workflow.Activities
                 bool enabled;
                 StateActivity state = (StateActivity)this.Activity;
                 bool isLeafState = (StateMachineHelpers.IsLeafState(state));
-                bool isCompletedState = (isLeafState && StateMachineHelpers.IsCompletedState(state));
-                bool hasStateInitialization = this.DesignersParser.StateInitializationDesigners.Count > 0;
-                enabled = GetIsEditable() && (!this.HasActiveDesigner) && isLeafState && !isCompletedState && !hasStateInitialization && !IsLocked && !IsStateCustomActivity;
+                bool isCompletedState = (
+                    isLeafState && StateMachineHelpers.IsCompletedState(state)
+                );
+                bool hasStateInitialization =
+                    this.DesignersParser.StateInitializationDesigners.Count > 0;
+                enabled =
+                    GetIsEditable()
+                    && (!this.HasActiveDesigner)
+                    && isLeafState
+                    && !isCompletedState
+                    && !hasStateInitialization
+                    && !IsLocked
+                    && !IsStateCustomActivity;
                 verb.Visible = enabled;
                 verb.Enabled = enabled;
             }
@@ -2085,9 +2305,19 @@ namespace System.Workflow.Activities
                 bool enabled;
                 StateActivity state = (StateActivity)this.Activity;
                 bool isLeafState = (StateMachineHelpers.IsLeafState(state));
-                bool isCompletedState = (isLeafState && StateMachineHelpers.IsCompletedState(state));
-                bool hasStateFinalization = this.DesignersParser.StateFinalizationDesigners.Count > 0;
-                enabled = GetIsEditable() && (!this.HasActiveDesigner) && isLeafState && !isCompletedState && !hasStateFinalization && !IsLocked && !IsStateCustomActivity;
+                bool isCompletedState = (
+                    isLeafState && StateMachineHelpers.IsCompletedState(state)
+                );
+                bool hasStateFinalization =
+                    this.DesignersParser.StateFinalizationDesigners.Count > 0;
+                enabled =
+                    GetIsEditable()
+                    && (!this.HasActiveDesigner)
+                    && isLeafState
+                    && !isCompletedState
+                    && !hasStateFinalization
+                    && !IsLocked
+                    && !IsStateCustomActivity;
                 verb.Visible = enabled;
                 verb.Enabled = enabled;
             }
@@ -2110,9 +2340,11 @@ namespace System.Workflow.Activities
             {
                 StateActivity state = (StateActivity)this.Activity;
                 Activity selection = this.SelectionService.PrimarySelection as Activity;
-                if (selection != null &&
-                    state.Activities.Contains(selection) &&
-                    this.ActiveDesigner.Activity != selection)
+                if (
+                    selection != null
+                    && state.Activities.Contains(selection)
+                    && this.ActiveDesigner.Activity != selection
+                )
                 {
                     ActivityDesigner activityDesigner = GetDesigner(selection);
                     if (!(activityDesigner is StateDesigner))
@@ -2137,8 +2369,11 @@ namespace System.Workflow.Activities
             else
             {
                 activeDesignerName = designer.Activity.QualifiedName;
-                if (this.HasActiveDesigner && (this.ActiveDesigner.Activity.QualifiedName == activeDesignerName))
-                    return; // Nothing to do. 
+                if (
+                    this.HasActiveDesigner
+                    && (this.ActiveDesigner.Activity.QualifiedName == activeDesignerName)
+                )
+                    return; // Nothing to do.
             }
 
             IDesignerHost designerHost = GetService(typeof(IDesignerHost)) as IDesignerHost;
@@ -2164,7 +2399,10 @@ namespace System.Workflow.Activities
             }
         }
 
-        private void SetLeafActiveDesigner(StateDesigner parentDesigner, ActivityDesigner activityDesigner)
+        private void SetLeafActiveDesigner(
+            StateDesigner parentDesigner,
+            ActivityDesigner activityDesigner
+        )
         {
             StateDesigner stateDesigner = parentDesigner;
             while (true)
@@ -2205,20 +2443,30 @@ namespace System.Workflow.Activities
             this.ActiveDesigner = activeDesigner;
         }
 
-        private void SetActiveDesignerHelper(StateDesigner stateDesigner, ActivityDesigner activeDesigner)
+        private void SetActiveDesignerHelper(
+            StateDesigner stateDesigner,
+            ActivityDesigner activeDesigner
+        )
         {
-            WorkflowDesignerLoader workflowDesignerLoader = GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+            WorkflowDesignerLoader workflowDesignerLoader =
+                GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
             if (workflowDesignerLoader != null && workflowDesignerLoader.InDebugMode)
             {
                 stateDesigner.ActiveDesigner = activeDesigner;
             }
             else
             {
-                PropertyDescriptor activeDesignerProperty = GetPropertyDescriptor(stateDesigner.Activity, ActiveDesignerNamePropertyName);
+                PropertyDescriptor activeDesignerProperty = GetPropertyDescriptor(
+                    stateDesigner.Activity,
+                    ActiveDesignerNamePropertyName
+                );
                 if (activeDesigner == null)
                     activeDesignerProperty.SetValue(stateDesigner.Activity, null);
                 else
-                    activeDesignerProperty.SetValue(stateDesigner.Activity, activeDesigner.Activity.QualifiedName);
+                    activeDesignerProperty.SetValue(
+                        stateDesigner.Activity,
+                        activeDesigner.Activity.QualifiedName
+                    );
             }
         }
 
@@ -2250,7 +2498,8 @@ namespace System.Workflow.Activities
 
             if (activity != null && activity.Site != null)
             {
-                IDesignerHost designerHost = activity.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                IDesignerHost designerHost =
+                    activity.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
                 if (designerHost != null)
                     designer = designerHost.GetDesigner(activity) as ActivityDesigner;
             }
@@ -2263,11 +2512,10 @@ namespace System.Workflow.Activities
             Image image = null;
             if (designer.DesignerTheme != null && designer.DesignerTheme.DesignerImage != null)
                 image = designer.DesignerTheme.DesignerImage;
+            else if (designer.Image == null)
+                image = ActivityToolboxItem.GetToolboxImage(designer.Activity.GetType());
             else
-                if (designer.Image == null)
-                    image = ActivityToolboxItem.GetToolboxImage(designer.Activity.GetType());
-                else
-                    image = designer.Image;
+                image = designer.Image;
 
             return image;
         }
@@ -2284,7 +2532,10 @@ namespace System.Workflow.Activities
         internal static Image GetCompletedStateDesignerImage(StateDesigner stateDesigner)
         {
             StateMachineTheme stateDesignerTheme = stateDesigner.DesignerTheme as StateMachineTheme;
-            if (stateDesignerTheme != null && stateDesignerTheme.CompletedStateDesignerImage != null)
+            if (
+                stateDesignerTheme != null
+                && stateDesignerTheme.CompletedStateDesignerImage != null
+            )
                 return stateDesignerTheme.CompletedStateDesignerImage;
             else
                 return StateDesigner.CompletedState;
@@ -2358,7 +2609,6 @@ namespace System.Workflow.Activities
                 }
             }
 
-
             #endregion
             bool IExtenderProvider.CanExtend(object extendee)
             {
@@ -2383,7 +2633,10 @@ namespace System.Workflow.Activities
     #region Class StateDesignerLayoutSerializer
     internal class StateDesignerLayoutSerializer : FreeformActivityDesignerLayoutSerializer
     {
-        protected override PropertyInfo[] GetProperties(WorkflowMarkupSerializationManager serializationManager, object obj)
+        protected override PropertyInfo[] GetProperties(
+            WorkflowMarkupSerializationManager serializationManager,
+            object obj
+        )
         {
             List<PropertyInfo> properties = new List<PropertyInfo>();
             StateDesigner stateDesigner = obj as StateDesigner;
@@ -2391,10 +2644,17 @@ namespace System.Workflow.Activities
             {
                 foreach (PropertyInfo property in base.GetProperties(serializationManager, obj))
                 {
-                    if (property.Name.Equals("Location", StringComparison.Ordinal) ||
-                        property.Name.Equals("Size", StringComparison.Ordinal))
+                    if (
+                        property.Name.Equals("Location", StringComparison.Ordinal)
+                        || property.Name.Equals("Size", StringComparison.Ordinal)
+                    )
                     {
-                        properties.Add(new ExtendedPropertyInfo(property, new GetValueHandler(stateDesigner.OnGetPropertyValue)));
+                        properties.Add(
+                            new ExtendedPropertyInfo(
+                                property,
+                                new GetValueHandler(stateDesigner.OnGetPropertyValue)
+                            )
+                        );
                     }
                     else
                     {
@@ -2414,7 +2674,10 @@ namespace System.Workflow.Activities
 
     #region Class ExtendedPropertyInfo
     //
-    internal delegate object GetValueHandler(ExtendedPropertyInfo extendedProperty, object extendee);
+    internal delegate object GetValueHandler(
+        ExtendedPropertyInfo extendedProperty,
+        object extendee
+    );
 
     internal sealed class ExtendedPropertyInfo : PropertyInfo
     {
@@ -2432,34 +2695,22 @@ namespace System.Workflow.Activities
         #region Property Info overrides
         public override string Name
         {
-            get
-            {
-                return this.realPropertyInfo.Name;
-            }
+            get { return this.realPropertyInfo.Name; }
         }
 
         public override Type DeclaringType
         {
-            get
-            {
-                return this.realPropertyInfo.DeclaringType;
-            }
+            get { return this.realPropertyInfo.DeclaringType; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return this.realPropertyInfo.ReflectedType;
-            }
+            get { return this.realPropertyInfo.ReflectedType; }
         }
 
         public override Type PropertyType
         {
-            get
-            {
-                return this.realPropertyInfo.PropertyType;
-            }
+            get { return this.realPropertyInfo.PropertyType; }
         }
 
         public override MethodInfo[] GetAccessors(bool nonPublic)
@@ -2477,7 +2728,13 @@ namespace System.Workflow.Activities
             return this.realPropertyInfo.GetSetMethod(nonPublic);
         }
 
-        public override object GetValue(object obj, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
+        public override object GetValue(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        )
         {
             if (OnGetValue != null)
                 return OnGetValue(this, obj);
@@ -2485,7 +2742,14 @@ namespace System.Workflow.Activities
                 return null;
         }
 
-        public override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
+        public override void SetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        )
         {
             this.realPropertyInfo.SetValue(obj, value, invokeAttr, binder, index, culture);
         }
@@ -2497,26 +2761,17 @@ namespace System.Workflow.Activities
 
         public override PropertyAttributes Attributes
         {
-            get
-            {
-                return this.realPropertyInfo.Attributes;
-            }
+            get { return this.realPropertyInfo.Attributes; }
         }
 
         public override bool CanRead
         {
-            get
-            {
-                return this.realPropertyInfo.CanRead;
-            }
+            get { return this.realPropertyInfo.CanRead; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return this.realPropertyInfo.CanWrite;
-            }
+            get { return this.realPropertyInfo.CanWrite; }
         }
         #endregion
 
@@ -2536,8 +2791,6 @@ namespace System.Workflow.Activities
             return this.realPropertyInfo.IsDefined(attributeType, inherit);
         }
         #endregion
-
-
     }
     #endregion
 
@@ -2549,7 +2802,11 @@ namespace System.Workflow.Activities
             return UITypeEditorEditStyle.Modal;
         }
 
-        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
+        public override object EditValue(
+            ITypeDescriptorContext context,
+            IServiceProvider provider,
+            object value
+        )
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.AddExtension = true;
@@ -2578,16 +2835,11 @@ namespace System.Workflow.Activities
         private Image _completedStateDesignerImage;
 
         public StateMachineTheme(WorkflowTheme theme)
-            : base(theme)
-        {
-        }
+            : base(theme) { }
 
         public override Size ConnectorSize
         {
-            get
-            {
-                return _connectorSize;
-            }
+            get { return _connectorSize; }
         }
 
         protected override void Dispose(bool disposing)
@@ -2610,14 +2862,8 @@ namespace System.Workflow.Activities
         [SRCategory(SR.ForegroundCategory)]
         public Color ConnectorColor
         {
-            get
-            {
-                return _connectorColor;
-            }
-            set
-            {
-                _connectorColor = value;
-            }
+            get { return _connectorColor; }
+            set { _connectorColor = value; }
         }
 
         [SRDescription(SR.InitialStateImagePathDescription)]
@@ -2625,21 +2871,25 @@ namespace System.Workflow.Activities
         [Editor(typeof(ImageBrowserEditor), typeof(UITypeEditor))]
         public virtual string InitialStateDesignerImagePath
         {
-            get
-            {
-                return _initialStateDesignerImagePath;
-            }
+            get { return _initialStateDesignerImagePath; }
             set
             {
                 if (ReadOnly)
                     throw new InvalidOperationException(DR.GetString(DR.ThemePropertyReadOnly));
 
-                if (value != null && value.Length > 0 && value.Contains(Path.DirectorySeparatorChar.ToString()) && Path.IsPathRooted(value))
+                if (
+                    value != null
+                    && value.Length > 0
+                    && value.Contains(Path.DirectorySeparatorChar.ToString())
+                    && Path.IsPathRooted(value)
+                )
                 {
                     value = GetRelativePath(ContainingTheme.ContainingFileDirectory, value);
 
                     if (!IsValidImageResource(this, ContainingTheme.ContainingFileDirectory, value))
-                        throw new InvalidOperationException(DR.GetString(DR.Error_InvalidImageResource));
+                        throw new InvalidOperationException(
+                            DR.GetString(DR.Error_InvalidImageResource)
+                        );
                 }
 
                 this._initialStateDesignerImagePath = value;
@@ -2656,21 +2906,25 @@ namespace System.Workflow.Activities
         [Editor(typeof(ImageBrowserEditor), typeof(UITypeEditor))]
         public virtual string CompletedStateDesignerImagePath
         {
-            get
-            {
-                return _completedStateDesignerImagePath;
-            }
+            get { return _completedStateDesignerImagePath; }
             set
             {
                 if (ReadOnly)
                     throw new InvalidOperationException(DR.GetString(DR.ThemePropertyReadOnly));
 
-                if (value != null && value.Length > 0 && value.Contains(Path.DirectorySeparatorChar.ToString()) && Path.IsPathRooted(value))
+                if (
+                    value != null
+                    && value.Length > 0
+                    && value.Contains(Path.DirectorySeparatorChar.ToString())
+                    && Path.IsPathRooted(value)
+                )
                 {
                     value = GetRelativePath(ContainingTheme.ContainingFileDirectory, value);
 
                     if (!IsValidImageResource(this, ContainingTheme.ContainingFileDirectory, value))
-                        throw new InvalidOperationException(DR.GetString(DR.Error_InvalidImageResource));
+                        throw new InvalidOperationException(
+                            DR.GetString(DR.Error_InvalidImageResource)
+                        );
                 }
 
                 this._completedStateDesignerImagePath = value;
@@ -2700,8 +2954,15 @@ namespace System.Workflow.Activities
         {
             get
             {
-                if (_initialStateDesignerImage == null && !String.IsNullOrEmpty(_initialStateDesignerImagePath))
-                    _initialStateDesignerImage = GetImageFromPath(this, ContainingTheme.ContainingFileDirectory, _initialStateDesignerImagePath);
+                if (
+                    _initialStateDesignerImage == null
+                    && !String.IsNullOrEmpty(_initialStateDesignerImagePath)
+                )
+                    _initialStateDesignerImage = GetImageFromPath(
+                        this,
+                        ContainingTheme.ContainingFileDirectory,
+                        _initialStateDesignerImagePath
+                    );
                 return _initialStateDesignerImage;
             }
         }
@@ -2712,13 +2973,24 @@ namespace System.Workflow.Activities
         {
             get
             {
-                if (_completedStateDesignerImage == null && !String.IsNullOrEmpty(_completedStateDesignerImagePath))
-                    _completedStateDesignerImage = GetImageFromPath(this, ContainingTheme.ContainingFileDirectory, _completedStateDesignerImagePath);
+                if (
+                    _completedStateDesignerImage == null
+                    && !String.IsNullOrEmpty(_completedStateDesignerImagePath)
+                )
+                    _completedStateDesignerImage = GetImageFromPath(
+                        this,
+                        ContainingTheme.ContainingFileDirectory,
+                        _completedStateDesignerImagePath
+                    );
                 return _completedStateDesignerImage;
             }
         }
 
-        internal static bool IsValidImageResource(DesignerTheme designerTheme, string directory, string path)
+        internal static bool IsValidImageResource(
+            DesignerTheme designerTheme,
+            string directory,
+            string path
+        )
         {
             Image image = GetImageFromPath(designerTheme, directory, path);
             bool validImage = (image != null);
@@ -2730,28 +3002,37 @@ namespace System.Workflow.Activities
         internal static string GetRelativePath(string pathFrom, string pathTo)
         {
             Uri uri = new Uri(pathFrom);
-            string relativePath = Uri.UnescapeDataString(uri.MakeRelativeUri(new Uri(pathTo)).ToString());
-            relativePath = relativePath.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
+            string relativePath = Uri.UnescapeDataString(
+                uri.MakeRelativeUri(new Uri(pathTo)).ToString()
+            );
+            relativePath = relativePath.Replace(
+                Path.AltDirectorySeparatorChar,
+                Path.DirectorySeparatorChar
+            );
             if (!relativePath.Contains(Path.DirectorySeparatorChar.ToString()))
                 relativePath = "." + Path.DirectorySeparatorChar + relativePath;
             return relativePath;
         }
 
-        internal static Image GetImageFromPath(DesignerTheme designerTheme, string directory, string path)
+        internal static Image GetImageFromPath(
+            DesignerTheme designerTheme,
+            string directory,
+            string path
+        )
         {
             Bitmap image = null;
             if (path.Contains(Path.DirectorySeparatorChar.ToString()) && directory.Length > 0)
             {
-                string imageFilePath = System.Web.HttpUtility.UrlDecode((new Uri(new Uri(directory), path).LocalPath));
+                string imageFilePath = System.Web.HttpUtility.UrlDecode(
+                    (new Uri(new Uri(directory), path).LocalPath)
+                );
                 if (File.Exists(imageFilePath))
                 {
                     try
                     {
                         image = new Bitmap(imageFilePath);
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
             }
             else if (designerTheme.DesignerType != null)
@@ -2761,17 +3042,22 @@ namespace System.Workflow.Activities
                 {
                     string nameSpace = path.Substring(0, index);
                     string name = path.Substring(index + 1);
-                    if (nameSpace != null && nameSpace.Length > 0 &&
-                        name != null && name.Length > 0)
+                    if (
+                        nameSpace != null
+                        && nameSpace.Length > 0
+                        && name != null
+                        && name.Length > 0
+                    )
                     {
                         try
                         {
-                            ResourceManager resourceManager = new ResourceManager(nameSpace, designerTheme.DesignerType.Assembly);
+                            ResourceManager resourceManager = new ResourceManager(
+                                nameSpace,
+                                designerTheme.DesignerType.Assembly
+                            );
                             image = resourceManager.GetObject(name) as Bitmap;
                         }
-                        catch
-                        {
-                        }
+                        catch { }
                     }
                 }
             }
@@ -2781,7 +3067,6 @@ namespace System.Workflow.Activities
 
             return image;
         }
-
     }
     #endregion
 

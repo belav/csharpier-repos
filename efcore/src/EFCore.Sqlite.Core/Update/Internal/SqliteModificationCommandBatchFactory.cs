@@ -18,7 +18,8 @@ public class SqliteModificationCommandBatchFactory : IModificationCommandBatchFa
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqliteModificationCommandBatchFactory(
-        ModificationCommandBatchFactoryDependencies dependencies)
+        ModificationCommandBatchFactoryDependencies dependencies
+    )
     {
         Dependencies = dependencies;
     }
@@ -34,6 +35,6 @@ public class SqliteModificationCommandBatchFactory : IModificationCommandBatchFa
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ModificationCommandBatch Create()
-        => new SingularModificationCommandBatch(Dependencies);
+    public virtual ModificationCommandBatch Create() =>
+        new SingularModificationCommandBatch(Dependencies);
 }

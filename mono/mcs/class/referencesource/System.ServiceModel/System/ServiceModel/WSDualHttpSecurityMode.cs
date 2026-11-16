@@ -13,8 +13,9 @@ namespace System.ServiceModel
     {
         internal static bool IsDefined(WSDualHttpSecurityMode value)
         {
-            return (value == WSDualHttpSecurityMode.None ||
-                value == WSDualHttpSecurityMode.Message);
+            return (
+                value == WSDualHttpSecurityMode.None || value == WSDualHttpSecurityMode.Message
+            );
         }
     }
 }

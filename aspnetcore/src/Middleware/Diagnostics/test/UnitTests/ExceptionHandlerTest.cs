@@ -35,20 +35,17 @@ public class ExceptionHandlerTest
                     {
                         app.UseExceptionHandler("/handle-errors");
 
-                        app.Map(
-                            "/handle-errors",
-                            (innerAppBuilder) =>
-                            {
-                                innerAppBuilder.Run(
-                                    async (httpContext) =>
-                                    {
-                                        await httpContext.Response.WriteAsync(
-                                            "Handled error in a custom way."
-                                        );
-                                    }
-                                );
-                            }
-                        );
+                        app.Map("/handle-errors", (innerAppBuilder) =>
+                        {
+                            innerAppBuilder.Run(
+                                async (httpContext) =>
+                                {
+                                    await httpContext.Response.WriteAsync(
+                                        "Handled error in a custom way."
+                                    );
+                                }
+                            );
+                        });
 
                         app.Run(
                             (RequestDelegate)(
@@ -110,20 +107,17 @@ public class ExceptionHandlerTest
 
                         app.UseExceptionHandler("/handle-errors");
 
-                        app.Map(
-                            "/handle-errors",
-                            (innerAppBuilder) =>
-                            {
-                                innerAppBuilder.Run(
-                                    async (httpContext) =>
-                                    {
-                                        await httpContext.Response.WriteAsync(
-                                            "Handled error in a custom way."
-                                        );
-                                    }
-                                );
-                            }
-                        );
+                        app.Map("/handle-errors", (innerAppBuilder) =>
+                        {
+                            innerAppBuilder.Run(
+                                async (httpContext) =>
+                                {
+                                    await httpContext.Response.WriteAsync(
+                                        "Handled error in a custom way."
+                                    );
+                                }
+                            );
+                        });
 
                         app.Run(
                             async (httpContext) =>
@@ -183,21 +177,18 @@ public class ExceptionHandlerTest
 
                         app.UseExceptionHandler("/handle-errors");
 
-                        app.Map(
-                            "/handle-errors",
-                            (innerAppBuilder) =>
-                            {
-                                innerAppBuilder.Run(
-                                    async (httpContext) =>
-                                    {
-                                        Assert.True(httpContext.Response.Body.CanSeek);
-                                        Assert.Equal(0, httpContext.Response.Body.Position);
+                        app.Map("/handle-errors", (innerAppBuilder) =>
+                        {
+                            innerAppBuilder.Run(
+                                async (httpContext) =>
+                                {
+                                    Assert.True(httpContext.Response.Body.CanSeek);
+                                    Assert.Equal(0, httpContext.Response.Body.Position);
 
-                                        await httpContext.Response.WriteAsync(expectedResponseBody);
-                                    }
-                                );
-                            }
-                        );
+                                    await httpContext.Response.WriteAsync(expectedResponseBody);
+                                }
+                            );
+                        });
 
                         app.Run(
                             async (context) =>
@@ -247,32 +238,29 @@ public class ExceptionHandlerTest
                     {
                         app.UseExceptionHandler("/handle-errors");
 
-                        app.Map(
-                            "/handle-errors",
-                            (innerAppBuilder) =>
-                            {
-                                innerAppBuilder.Run(
-                                    async (httpContext) =>
-                                    {
-                                        httpContext.Response.Headers.Add(
-                                            "Cache-Control",
-                                            new[] { "max-age=600" }
-                                        );
-                                        httpContext.Response.Headers.Add(
-                                            "Pragma",
-                                            new[] { "max-age=600" }
-                                        );
-                                        httpContext.Response.Headers.Add(
-                                            "Expires",
-                                            new[] { expiresTime }
-                                        );
-                                        httpContext.Response.Headers.Add("ETag", new[] { "12345" });
+                        app.Map("/handle-errors", (innerAppBuilder) =>
+                        {
+                            innerAppBuilder.Run(
+                                async (httpContext) =>
+                                {
+                                    httpContext.Response.Headers.Add(
+                                        "Cache-Control",
+                                        new[] { "max-age=600" }
+                                    );
+                                    httpContext.Response.Headers.Add(
+                                        "Pragma",
+                                        new[] { "max-age=600" }
+                                    );
+                                    httpContext.Response.Headers.Add(
+                                        "Expires",
+                                        new[] { expiresTime }
+                                    );
+                                    httpContext.Response.Headers.Add("ETag", new[] { "12345" });
 
-                                        await httpContext.Response.WriteAsync(expectedResponseBody);
-                                    }
-                                );
-                            }
-                        );
+                                    await httpContext.Response.WriteAsync(expectedResponseBody);
+                                }
+                            );
+                        });
 
                         app.Run(
                             (context) =>
@@ -319,20 +307,17 @@ public class ExceptionHandlerTest
                     {
                         app.UseExceptionHandler("/handle-errors");
 
-                        app.Map(
-                            "/handle-errors",
-                            (innerAppBuilder) =>
-                            {
-                                innerAppBuilder.Run(
-                                    async (httpContext) =>
-                                    {
-                                        await httpContext.Response.WriteAsync(
-                                            "Handled error in a custom way."
-                                        );
-                                    }
-                                );
-                            }
-                        );
+                        app.Map("/handle-errors", (innerAppBuilder) =>
+                        {
+                            innerAppBuilder.Run(
+                                async (httpContext) =>
+                                {
+                                    await httpContext.Response.WriteAsync(
+                                        "Handled error in a custom way."
+                                    );
+                                }
+                            );
+                        });
 
                         app.Run(
                             async (httpContext) =>
@@ -408,20 +393,16 @@ public class ExceptionHandlerTest
 
                         app.UseExceptionHandler("/handle-errors");
 
-                        app.Map(
-                            "/handle-errors",
-                            (innerAppBuilder) =>
-                            {
-                                innerAppBuilder.Run(
-                                    async (httpContext) =>
-                                    {
-                                        httpContext.Response.StatusCode =
-                                            StatusCodes.Status404NotFound;
-                                        await httpContext.Response.WriteAsync("Custom 404");
-                                    }
-                                );
-                            }
-                        );
+                        app.Map("/handle-errors", (innerAppBuilder) =>
+                        {
+                            innerAppBuilder.Run(
+                                async (httpContext) =>
+                                {
+                                    httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
+                                    await httpContext.Response.WriteAsync("Custom 404");
+                                }
+                            );
+                        });
 
                         app.Run(httpContext =>
                         {
@@ -492,20 +473,17 @@ public class ExceptionHandlerTest
 
                         app.UseExceptionHandler("/handle-errors");
 
-                        app.Map(
-                            "/handle-errors",
-                            (innerAppBuilder) =>
-                            {
-                                innerAppBuilder.Run(
-                                    async (httpContext) =>
-                                    {
-                                        await httpContext.Response.WriteAsync(
-                                            "Handled error in a custom way."
-                                        );
-                                    }
-                                );
-                            }
-                        );
+                        app.Map("/handle-errors", (innerAppBuilder) =>
+                        {
+                            innerAppBuilder.Run(
+                                async (httpContext) =>
+                                {
+                                    await httpContext.Response.WriteAsync(
+                                        "Handled error in a custom way."
+                                    );
+                                }
+                            );
+                        });
 
                         app.Run(
                             async (httpContext) =>
@@ -571,20 +549,17 @@ public class ExceptionHandlerTest
                             app.ApplicationServices.GetRequiredService<DiagnosticListener>();
 
                         app.UseExceptionHandler("/handle-errors");
-                        app.Map(
-                            "/handle-errors",
-                            (innerAppBuilder) =>
-                            {
-                                innerAppBuilder.Run(
-                                    async (httpContext) =>
-                                    {
-                                        await httpContext.Response.WriteAsync(
-                                            "Handled error in a custom way."
-                                        );
-                                    }
-                                );
-                            }
-                        );
+                        app.Map("/handle-errors", (innerAppBuilder) =>
+                        {
+                            innerAppBuilder.Run(
+                                async (httpContext) =>
+                                {
+                                    await httpContext.Response.WriteAsync(
+                                        "Handled error in a custom way."
+                                    );
+                                }
+                            );
+                        });
                         app.Run(context =>
                         {
                             throw new Exception("Test exception");
@@ -697,31 +672,25 @@ public class ExceptionHandlerTest
 
                         app.UseExceptionHandler("/non-existent-hander");
 
-                        app.Map(
-                            "/handle-errors",
-                            (innerAppBuilder) =>
-                            {
-                                innerAppBuilder.Run(
-                                    async (httpContext) =>
-                                    {
-                                        await httpContext.Response.WriteAsync(
-                                            "Handled error in a custom way."
-                                        );
-                                    }
-                                );
-                            }
-                        );
-
-                        app.Map(
-                            "/throw",
-                            (innerAppBuilder) =>
-                            {
-                                innerAppBuilder.Run(httpContext =>
+                        app.Map("/handle-errors", (innerAppBuilder) =>
+                        {
+                            innerAppBuilder.Run(
+                                async (httpContext) =>
                                 {
-                                    throw new ApplicationException("Something bad happened.");
-                                });
-                            }
-                        );
+                                    await httpContext.Response.WriteAsync(
+                                        "Handled error in a custom way."
+                                    );
+                                }
+                            );
+                        });
+
+                        app.Map("/throw", (innerAppBuilder) =>
+                        {
+                            innerAppBuilder.Run(httpContext =>
+                            {
+                                throw new ApplicationException("Something bad happened.");
+                            });
+                        });
                     });
             })
             .Build();
@@ -765,16 +734,13 @@ public class ExceptionHandlerTest
                     {
                         app.UseExceptionHandler();
 
-                        app.Map(
-                            "/throw",
-                            (innerAppBuilder) =>
+                        app.Map("/throw", (innerAppBuilder) =>
+                        {
+                            innerAppBuilder.Run(httpContext =>
                             {
-                                innerAppBuilder.Run(httpContext =>
-                                {
-                                    throw new InvalidOperationException("Something bad happened.");
-                                });
-                            }
-                        );
+                                throw new InvalidOperationException("Something bad happened.");
+                            });
+                        });
                     });
             })
             .Build();
@@ -789,12 +755,10 @@ public class ExceptionHandlerTest
             Assert.Equal(string.Empty, await response.Content.ReadAsStringAsync());
         }
 
-        Assert.DoesNotContain(
-            sink.Writes,
-            w =>
-                w.LogLevel == LogLevel.Warning
-                && w.EventId == 4
-                && w.Message == "No exception handler was found, rethrowing original exception."
+        Assert.DoesNotContain(sink.Writes, w =>
+            w.LogLevel == LogLevel.Warning
+            && w.EventId == 4
+            && w.Message == "No exception handler was found, rethrowing original exception."
         );
     }
 
@@ -819,16 +783,13 @@ public class ExceptionHandlerTest
                             });
                         });
 
-                        app.Map(
-                            "/throw",
-                            (innerAppBuilder) =>
+                        app.Map("/throw", (innerAppBuilder) =>
+                        {
+                            innerAppBuilder.Run(httpContext =>
                             {
-                                innerAppBuilder.Run(httpContext =>
-                                {
-                                    throw new InvalidOperationException("Something bad happened.");
-                                });
-                            }
-                        );
+                                throw new InvalidOperationException("Something bad happened.");
+                            });
+                        });
                     });
             })
             .Build();
@@ -874,14 +835,11 @@ public class ExceptionHandlerTest
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.Map(
-                "/handle-errors",
-                c =>
-                {
-                    c.Response.StatusCode = 200;
-                    return c.Response.WriteAsync("Handled");
-                }
-            );
+            endpoints.Map("/handle-errors", c =>
+            {
+                c.Response.StatusCode = 200;
+                return c.Response.WriteAsync("Handled");
+            });
         });
 
         app.Run(
@@ -934,14 +892,11 @@ public class ExceptionHandlerTest
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.Map(
-                "/handle-errors",
-                c =>
-                {
-                    c.Response.StatusCode = 200;
-                    return c.Response.WriteAsync("Handled");
-                }
-            );
+            endpoints.Map("/handle-errors", c =>
+            {
+                c.Response.StatusCode = 200;
+                return c.Response.WriteAsync("Handled");
+            });
         });
 
         app.Run(
@@ -993,14 +948,11 @@ public class ExceptionHandlerTest
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.Map(
-                "/handle-errors",
-                c =>
-                {
-                    c.Response.StatusCode = 200;
-                    return c.Response.WriteAsync("Handled");
-                }
-            );
+            endpoints.Map("/handle-errors", c =>
+            {
+                c.Response.StatusCode = 200;
+                return c.Response.WriteAsync("Handled");
+            });
         });
 
         app.Run(
@@ -1060,14 +1012,11 @@ public class ExceptionHandlerTest
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.Map(
-                "/handle-errors",
-                c =>
-                {
-                    c.Response.StatusCode = 200;
-                    return c.Response.WriteAsync("Handled");
-                }
-            );
+            endpoints.Map("/handle-errors", c =>
+            {
+                c.Response.StatusCode = 200;
+                return c.Response.WriteAsync("Handled");
+            });
         });
 
         app.Run(
@@ -1139,14 +1088,11 @@ public class ExceptionHandlerTest
         await instrumentCollector.WaitForMeasurementsAsync(minCount: 1).DefaultTimeout();
 
         // Assert
-        Assert.Collection(
-            instrumentCollector.GetMeasurementSnapshot(),
-            m =>
-            {
-                Assert.True(m.Value > 0);
-                Assert.Equal(404, (int)m.Tags["http.response.status_code"]);
-                Assert.Equal("System.Exception", (string)m.Tags["error.type"]);
-            }
-        );
+        Assert.Collection(instrumentCollector.GetMeasurementSnapshot(), m =>
+        {
+            Assert.True(m.Value > 0);
+            Assert.Equal(404, (int)m.Tags["http.response.status_code"]);
+            Assert.Equal("System.Exception", (string)m.Tags["error.type"]);
+        });
     }
 }

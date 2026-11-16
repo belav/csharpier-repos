@@ -13,18 +13,17 @@ namespace System.Workflow.Activities
     [ProvideProperty("WorkflowServiceAttributes", typeof(Activity))]
     internal sealed class WorkflowServiceAttributesPropertyProviderExtender : IExtenderProvider
     {
-        internal WorkflowServiceAttributesPropertyProviderExtender()
-        {
-        }
+        internal WorkflowServiceAttributesPropertyProviderExtender() { }
 
         public bool CanExtend(object extendee)
         {
-            return ((extendee is Activity) && (((Activity) extendee).Parent == null));
+            return ((extendee is Activity) && (((Activity)extendee).Parent == null));
         }
 
         public WorkflowServiceAttributes GetWorkflowServiceAttributes(Activity activity)
         {
-            return activity.GetValue(ReceiveActivity.WorkflowServiceAttributesProperty) as WorkflowServiceAttributes;
+            return activity.GetValue(ReceiveActivity.WorkflowServiceAttributesProperty)
+                as WorkflowServiceAttributes;
         }
 
         public void SetWorkflowServiceAttributes(Activity activity, WorkflowServiceAttributes value)

@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
-namespace System {
-    
+namespace System
+{
     using System;
     using System.Diagnostics.Contracts;
 
@@ -22,11 +22,11 @@ namespace System {
     [ContractClassFor(typeof(IFormattable))]
     internal abstract class IFormattableContract : IFormattable
     {
-       String IFormattable.ToString(String format, IFormatProvider formatProvider)
-       {
-           Contract.Ensures(Contract.Result<String>() != null);
- 	       throw new NotImplementedException();
-       }
+        String IFormattable.ToString(String format, IFormatProvider formatProvider)
+        {
+            Contract.Ensures(Contract.Result<String>() != null);
+            throw new NotImplementedException();
+        }
     }
 #endif // CONTRACTS_FULL
 }

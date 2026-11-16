@@ -41,7 +41,13 @@ namespace System.ComponentModel.Composition
         {
             Assert.Throws<ArgumentNullException>("constraint", () =>
             {
-                new ImportDefinition((Expression<Func<ExportDefinition, bool>>)null, "", ImportCardinality.ExactlyOne, false, false);
+                new ImportDefinition(
+                    (Expression<Func<ExportDefinition, bool>>)null,
+                    "",
+                    ImportCardinality.ExactlyOne,
+                    false,
+                    false
+                );
             });
         }
 
@@ -83,7 +89,13 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var definition = new ImportDefinition(e, "", ImportCardinality.ExactlyOne, false, false);
+                var definition = new ImportDefinition(
+                    e,
+                    "",
+                    ImportCardinality.ExactlyOne,
+                    false,
+                    false
+                );
 
                 Assert.Equal(e, definition.Constraint);
             }
@@ -96,7 +108,13 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var definition = new ImportDefinition(d => true, "", ImportCardinality.ExactlyOne, e, false);
+                var definition = new ImportDefinition(
+                    d => true,
+                    "",
+                    ImportCardinality.ExactlyOne,
+                    e,
+                    false
+                );
 
                 Assert.Equal(e, definition.IsRecomposable);
             }
@@ -109,7 +127,13 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var definition = new ImportDefinition(d => true, "", ImportCardinality.ExactlyOne, false, e);
+                var definition = new ImportDefinition(
+                    d => true,
+                    "",
+                    ImportCardinality.ExactlyOne,
+                    false,
+                    e
+                );
 
                 Assert.Equal(e, definition.IsPrerequisite);
             }
@@ -129,7 +153,13 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var definition = new ImportDefinition(d => true, e.Input, ImportCardinality.ExactlyOne, false, false);
+                var definition = new ImportDefinition(
+                    d => true,
+                    e.Input,
+                    ImportCardinality.ExactlyOne,
+                    false,
+                    false
+                );
 
                 Assert.Equal(e.Output, definition.ContractName);
             }
@@ -161,15 +191,31 @@ namespace System.ComponentModel.Composition
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void ToString_ValueAsConstraintArgument_ShouldReturnConstraintProperty()
         {
-            var expectations = new ExpectationCollection<Expression<Func<ExportDefinition, bool>>, string>();
-            expectations.Add(d => d.ContractName == "ContractName", @"d.ContractName ==? ""ContractName""");
-            expectations.Add(d => d.ContractName.Equals("ContractName"), @"d.ContractName.Equals\(""ContractName""\)");
-            expectations.Add(d => (string)d.Metadata["Name"] == "Value", @"Convert\(d.Metadata.get_Item\(""Name""\)\) ==? ""Value""");
+            var expectations =
+                new ExpectationCollection<Expression<Func<ExportDefinition, bool>>, string>();
+            expectations.Add(
+                d => d.ContractName == "ContractName",
+                @"d.ContractName ==? ""ContractName"""
+            );
+            expectations.Add(
+                d => d.ContractName.Equals("ContractName"),
+                @"d.ContractName.Equals\(""ContractName""\)"
+            );
+            expectations.Add(
+                d => (string)d.Metadata["Name"] == "Value",
+                @"Convert\(d.Metadata.get_Item\(""Name""\)\) ==? ""Value"""
+            );
             expectations.Add(d => true, "True");
 
             foreach (var e in expectations)
             {
-                var item = new ImportDefinition(e.Input, "", ImportCardinality.ExactlyOne, false, false);
+                var item = new ImportDefinition(
+                    e.Input,
+                    "",
+                    ImportCardinality.ExactlyOne,
+                    false,
+                    false
+                );
 
                 Assert.Matches(e.Output, item.ToString());
             }
@@ -179,10 +225,20 @@ namespace System.ComponentModel.Composition
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void ToString_DerivedImportDefinition_ShouldReturnOverriddenConstraintProperty()
         {
-            var expectations = new ExpectationCollection<Expression<Func<ExportDefinition, bool>>, string>();
-            expectations.Add(d => d.ContractName == "ContractName", @"d.ContractName ==? ""ContractName""");
-            expectations.Add(d => d.ContractName.Equals("ContractName"), @"d.ContractName.Equals\(""ContractName""\)");
-            expectations.Add(d => (string)d.Metadata["Name"] == "Value", @"Convert\(d.Metadata.get_Item\(""Name""\)\) ==? ""Value""");
+            var expectations =
+                new ExpectationCollection<Expression<Func<ExportDefinition, bool>>, string>();
+            expectations.Add(
+                d => d.ContractName == "ContractName",
+                @"d.ContractName ==? ""ContractName"""
+            );
+            expectations.Add(
+                d => d.ContractName.Equals("ContractName"),
+                @"d.ContractName.Equals\(""ContractName""\)"
+            );
+            expectations.Add(
+                d => (string)d.Metadata["Name"] == "Value",
+                @"Convert\(d.Metadata.get_Item\(""Name""\)\) ==? ""Value"""
+            );
             expectations.Add(d => true, "True");
 
             foreach (var e in expectations)
@@ -196,7 +252,13 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void EmptyContractName_ShouldMatchAllContractNames()
         {
-            var importDefinition = new ImportDefinition(ed => true, string.Empty, ImportCardinality.ZeroOrMore, false, false);
+            var importDefinition = new ImportDefinition(
+                ed => true,
+                string.Empty,
+                ImportCardinality.ZeroOrMore,
+                false,
+                false
+            );
 
             var shouldMatch1 = new ExportDefinition("contract1", null);
             var shouldMatch2 = new ExportDefinition("contract2", null);
@@ -205,9 +267,7 @@ namespace System.ComponentModel.Composition
             Assert.True(importDefinition.IsConstraintSatisfiedBy(shouldMatch2));
         }
 
-        private class NoOverridesImportDefinition : ImportDefinition
-        {
-        }
+        private class NoOverridesImportDefinition : ImportDefinition { }
 
         private class DerivedImportDefinition : ImportDefinition
         {

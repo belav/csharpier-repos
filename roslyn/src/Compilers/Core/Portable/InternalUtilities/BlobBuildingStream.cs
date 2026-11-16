@@ -7,8 +7,8 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection.Metadata;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Roslyn.Utilities
 {
@@ -17,7 +17,8 @@ namespace Roslyn.Utilities
     /// </summary>
     internal sealed class BlobBuildingStream : Stream
     {
-        private static readonly ObjectPool<BlobBuildingStream> s_pool = new ObjectPool<BlobBuildingStream>(() => new BlobBuildingStream());
+        private static readonly ObjectPool<BlobBuildingStream> s_pool =
+            new ObjectPool<BlobBuildingStream>(() => new BlobBuildingStream());
         private readonly BlobBuilder _builder;
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace Roslyn.Utilities
         ///
         /// 32 KB is:
         ///
-        /// * Large enough to handle 99.6% all VB and C# files in Roslyn and CoreFX 
+        /// * Large enough to handle 99.6% all VB and C# files in Roslyn and CoreFX
         ///   without allocating additional chunks.
         ///
         /// * Small enough to avoid the large object heap.
@@ -87,13 +88,11 @@ namespace Roslyn.Utilities
 
         public void Free()
         {
-            _builder.Clear();  // frees all but first chunk
+            _builder.Clear(); // frees all but first chunk
             s_pool.Free(this); // return first chunk to pool
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         protected override void Dispose(bool disposing)
         {
@@ -121,6 +120,5 @@ namespace Roslyn.Utilities
             get { throw new NotSupportedException(); }
             set { throw new NotSupportedException(); }
         }
-
     }
 }

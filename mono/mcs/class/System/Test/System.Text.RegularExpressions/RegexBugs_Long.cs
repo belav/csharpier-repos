@@ -4,14 +4,15 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Text.RegularExpressions
 {
-	[TestFixture]
-	public class RegexBugs2
-	{		
-		[Test]
-		[Category("MultiThreaded")]
-		public void BugXamarin7578 ()
-		{			
-			string testData = @"\id aaaaaaaaaaaaaaaaa
+    [TestFixture]
+    public class RegexBugs2
+    {
+        [Test]
+        [Category("MultiThreaded")]
+        public void BugXamarin7578()
+        {
+            string testData =
+                @"\id aaaaaaaaaaaaaaaaa
 
 
 
@@ -1985,26 +1986,25 @@ namespace MonoTests.System.Text.RegularExpressions
 \Q 24 DISSz JOSÉ z SzUS IRMÃOS: zU MORRO; PORÉM DzUS CzRTzMzNTz VOS VISITzRÁ z VOS FzRÁ SUBIR DzSTz TzRRz PzRz z TzRRz QUz JUROU DzR z zBRzÃO, z ISzQUz z z JzCÓ.
 \Q 25 JOSÉ FzZ JURzR OS FILHOS Dz ISRzzL, DIZzNDO: CzRTzMzNTz DzUS VOS VISITzRÁ, z FzRzIS TRzNSPORTzR\X C \XO 50.25 \XT ÊX 13.19; JS 24.32; HB 11.22\X* OS MzUS OSSOS DzQUI.
 \Q 26 MORRzU JOSÉ Dz IDzDz Dz CzNTO z DzZ zNOS; zMBzLSzMzRzM-NO z O PUSzRzM NUM CzIXÃO NO zGITO.";
-			
-			
-			
-		string rePattern = @"(\\id .*\n)(.*\n)*\\c\s+1\s*\n|(\\(z?m?s\d?|r) .*\r\n)(\\(z?m?s\d?|z?m?r|z?s?r|i\w+)\b.*\r\n)*|\\f .*?\\f\*|\\x .*?\\x\*";
-			
-			Action a = () => 
-			{
-				var re = new Regex(rePattern);
-				foreach(var i in re.Matches(testData))
-				{
-					Console.WriteLine(i);	
-				}
-			};
-			
-			// works.
-			a();
-			
-			// doesn't work.
-			IAsyncResult result = a.BeginInvoke(null,null);
-			a.EndInvoke(result);
-		}
-	}
+
+            string rePattern =
+                @"(\\id .*\n)(.*\n)*\\c\s+1\s*\n|(\\(z?m?s\d?|r) .*\r\n)(\\(z?m?s\d?|z?m?r|z?s?r|i\w+)\b.*\r\n)*|\\f .*?\\f\*|\\x .*?\\x\*";
+
+            Action a = () =>
+            {
+                var re = new Regex(rePattern);
+                foreach (var i in re.Matches(testData))
+                {
+                    Console.WriteLine(i);
+                }
+            };
+
+            // works.
+            a();
+
+            // doesn't work.
+            IAsyncResult result = a.BeginInvoke(null, null);
+            a.EndInvoke(result);
+        }
+    }
 }

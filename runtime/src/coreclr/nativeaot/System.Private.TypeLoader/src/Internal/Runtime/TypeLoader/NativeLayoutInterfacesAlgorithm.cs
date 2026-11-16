@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.NativeFormat;
 using Internal.Runtime.Augments;
 using Internal.TypeSystem;
@@ -18,9 +17,17 @@ namespace Internal.Runtime.TypeLoader
         public override DefType[] ComputeRuntimeInterfaces(TypeDesc type)
         {
             TypeBuilderState state = type.GetOrCreateTypeBuilderState();
-            int totalInterfaces = RuntimeAugments.GetInterfaceCount(state.TemplateType.RuntimeTypeHandle);
+            int totalInterfaces = RuntimeAugments.GetInterfaceCount(
+                state.TemplateType.RuntimeTypeHandle
+            );
 
-            TypeLoaderLogger.WriteLine("Building runtime interfaces for type " + type.ToString() + " (total interfaces = " + totalInterfaces.LowLevelToString() + ") ...");
+            TypeLoaderLogger.WriteLine(
+                "Building runtime interfaces for type "
+                    + type.ToString()
+                    + " (total interfaces = "
+                    + totalInterfaces.LowLevelToString()
+                    + ") ..."
+            );
 
             DefType[] interfaces = new DefType[totalInterfaces];
             int numInterfaces = 0;
@@ -35,15 +42,24 @@ namespace Internal.Runtime.TypeLoader
                     // There should be no duplicates
                     Debug.Assert(!InterfaceInSet(interfaces, numInterfaces, baseInterface));
                     interfaces[numInterfaces++] = baseInterface;
-                    TypeLoaderLogger.WriteLine("    -> Added basetype interface " + baseInterface.ToString() + " on type " + type.ToString());
+                    TypeLoaderLogger.WriteLine(
+                        "    -> Added basetype interface "
+                            + baseInterface.ToString()
+                            + " on type "
+                            + type.ToString()
+                    );
                 }
             }
 
             NativeParser typeInfoParser = state.GetParserForNativeLayoutInfo();
-            NativeParser interfaceParser = typeInfoParser.GetParserForBagElementKind(BagElementKind.ImplementedInterfaces);
+            NativeParser interfaceParser = typeInfoParser.GetParserForBagElementKind(
+                BagElementKind.ImplementedInterfaces
+            );
             TypeDesc[] implementedInterfaces;
             if (!interfaceParser.IsNull)
-                implementedInterfaces = state.NativeLayoutInfo.LoadContext.GetTypeSequence(ref interfaceParser);
+                implementedInterfaces = state.NativeLayoutInfo.LoadContext.GetTypeSequence(
+                    ref interfaceParser
+                );
             else
                 implementedInterfaces = TypeDesc.EmptyTypes;
 
@@ -59,7 +75,12 @@ namespace Internal.Runtime.TypeLoader
                     continue;
                 interfaces[numInterfaces++] = interfaceTypeAsDefType;
 
-                TypeLoaderLogger.WriteLine("    -> Added interface " + interfaceTypeAsDefType.ToString() + " on type " + type.ToString());
+                TypeLoaderLogger.WriteLine(
+                    "    -> Added interface "
+                        + interfaceTypeAsDefType.ToString()
+                        + " on type "
+                        + type.ToString()
+                );
 
                 foreach (var inheritedInterface in interfaceTypeAsDefType.RuntimeInterfaces)
                 {
@@ -67,7 +88,12 @@ namespace Internal.Runtime.TypeLoader
                     if (InterfaceInSet(interfaces, numInterfaces, inheritedInterface))
                         continue;
                     interfaces[numInterfaces++] = inheritedInterface;
-                    TypeLoaderLogger.WriteLine("    -> Added inherited interface " + inheritedInterface.ToString() + " on type " + type.ToString());
+                    TypeLoaderLogger.WriteLine(
+                        "    -> Added inherited interface "
+                            + inheritedInterface.ToString()
+                            + " on type "
+                            + type.ToString()
+                    );
                 }
             }
 
@@ -80,7 +106,11 @@ namespace Internal.Runtime.TypeLoader
         /// <summary>
         /// Checks if the interface exists in the list of interfaces
         /// </summary>
-        private static bool InterfaceInSet(DefType[] interfaces, int numInterfaces, DefType interfaceType)
+        private static bool InterfaceInSet(
+            DefType[] interfaces,
+            int numInterfaces,
+            DefType interfaceType
+        )
         {
             for (int i = 0; i < numInterfaces; i++)
             {

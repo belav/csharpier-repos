@@ -14,6 +14,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         SK_PropertySymbol,
         SK_EventSymbol,
         SK_Scope,
-        SK_IndexerSymbol
+        SK_IndexerSymbol,
     }
 }

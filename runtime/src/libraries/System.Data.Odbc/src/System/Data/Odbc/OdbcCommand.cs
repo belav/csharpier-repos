@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.ComponentModel;            //Component
+using System.ComponentModel; //Component
 using System.Data.Common;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -16,19 +16,23 @@ using System.Runtime.CompilerServices;
 
 namespace System.Data.Odbc
 {
-    [Designer("Microsoft.VSDesigner.Data.VS.OdbcCommandDesigner, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Designer(
+        "Microsoft.VSDesigner.Data.VS.OdbcCommandDesigner, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     [ToolboxItem(true)]
     public sealed class OdbcCommand : DbCommand, ICloneable
     {
         private static int s_objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System.Threading.Interlocked.Increment(ref s_objectTypeCount);
+        internal readonly int ObjectID = System.Threading.Interlocked.Increment(
+            ref s_objectTypeCount
+        );
 
         private string? _commandText;
         private CommandType _commandType;
         private int _commandTimeout = ADP.DefaultCommandTimeout;
         private UpdateRowSource _updatedRowSource = UpdateRowSource.Both;
         private bool _designTimeInvisible;
-        private bool _isPrepared;                        // true if the command is prepared
+        private bool _isPrepared; // true if the command is prepared
 
         private OdbcConnection? _connection;
         private OdbcTransaction? _transaction;
@@ -37,29 +41,37 @@ namespace System.Data.Odbc
 
         private CMDWrapper? _cmdWrapper;
 
-        private OdbcParameterCollection? _parameterCollection;   // Parameter collection
+        private OdbcParameterCollection? _parameterCollection; // Parameter collection
 
         private ConnectionState _cmdState;
 
-        public OdbcCommand() : base()
+        public OdbcCommand()
+            : base()
         {
             GC.SuppressFinalize(this);
         }
 
-        public OdbcCommand(string? cmdText) : this()
+        public OdbcCommand(string? cmdText)
+            : this()
         {
             // note: arguments are assigned to properties so we do not have to trace them.
             // We still need to include them into the argument list of the definition!
             CommandText = cmdText;
         }
 
-        public OdbcCommand(string? cmdText, OdbcConnection? connection) : this()
+        public OdbcCommand(string? cmdText, OdbcConnection? connection)
+            : this()
         {
             CommandText = cmdText;
             Connection = connection;
         }
 
-        public OdbcCommand(string? cmdText, OdbcConnection? connection, OdbcTransaction? transaction) : this()
+        public OdbcCommand(
+            string? cmdText,
+            OdbcConnection? connection,
+            OdbcTransaction? transaction
+        )
+            : this()
         {
             CommandText = cmdText;
             Connection = connection;
@@ -142,29 +154,25 @@ namespace System.Data.Odbc
                 _parameterCollection = null;
                 CommandText = null;
             }
-            _cmdWrapper = null;                         // let go of the CommandWrapper
+            _cmdWrapper = null; // let go of the CommandWrapper
             _isPrepared = false;
 
-            base.Dispose(disposing);    // notify base classes
+            base.Dispose(disposing); // notify base classes
         }
 
         internal bool Canceling
         {
-            get
-            {
-                return _cmdWrapper!.Canceling;
-            }
+            get { return _cmdWrapper!.Canceling; }
         }
 
         [AllowNull]
-        [Editor("Microsoft.VSDesigner.Data.Odbc.Design.OdbcCommandTextEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [Editor(
+            "Microsoft.VSDesigner.Data.Odbc.Design.OdbcCommandTextEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
         public override string CommandText
         {
-            get
-            {
-                return _commandText ?? string.Empty;
-            }
+            get { return _commandText ?? string.Empty; }
             set
             {
                 if (_commandText != value)
@@ -177,10 +185,7 @@ namespace System.Data.Odbc
 
         public override int CommandTimeout
         { // V1.2.3300, XXXCommand V1.0.5000
-            get
-            {
-                return _commandTimeout;
-            }
+            get { return _commandTimeout; }
             set
             {
                 if (value < 0)
@@ -209,9 +214,7 @@ namespace System.Data.Odbc
             return (ADP.DefaultCommandTimeout != _commandTimeout);
         }
 
-        [
-        DefaultValue(System.Data.CommandType.Text),
-        ]
+        [DefaultValue(System.Data.CommandType.Text)]
         public override CommandType CommandType
         {
             get
@@ -236,14 +239,13 @@ namespace System.Data.Odbc
             }
         }
 
-        [Editor("Microsoft.VSDesigner.Data.Design.DbConnectionEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [Editor(
+            "Microsoft.VSDesigner.Data.Design.DbConnectionEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
         public new OdbcConnection? Connection
         {
-            get
-            {
-                return _connection;
-            }
+            get { return _connection; }
             set
             {
                 if (value != _connection)
@@ -259,34 +261,19 @@ namespace System.Data.Odbc
 
         protected override DbConnection? DbConnection
         { // V1.2.3300
-            get
-            {
-                return Connection;
-            }
-            set
-            {
-                Connection = (OdbcConnection?)value;
-            }
+            get { return Connection; }
+            set { Connection = (OdbcConnection?)value; }
         }
 
         protected override DbParameterCollection DbParameterCollection
         { // V1.2.3300
-            get
-            {
-                return Parameters;
-            }
+            get { return Parameters; }
         }
 
         protected override DbTransaction? DbTransaction
         { // V1.2.3300
-            get
-            {
-                return Transaction;
-            }
-            set
-            {
-                Transaction = (OdbcTransaction?)value;
-            }
+            get { return Transaction; }
+            set { Transaction = (OdbcTransaction?)value; }
         }
 
         // @devnote: By default, the cmd object is visible on the design surface (i.e. VS7 Server Tray)
@@ -294,17 +281,14 @@ namespace System.Data.Odbc
         // when the DataAdapter design wizard generates the insert/update/delete commands it will
         // set the DesignTimeVisible property to false so that cmds won't appear as individual objects
         [
-        DefaultValue(true),
-        DesignOnly(true),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DefaultValue(true),
+            DesignOnly(true),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
         ]
         public override bool DesignTimeVisible
         { // V1.2.3300, XXXCommand V1.0.5000
-            get
-            {
-                return !_designTimeInvisible;
-            }
+            get { return !_designTimeInvisible; }
             set
             {
                 _designTimeInvisible = !value;
@@ -314,15 +298,10 @@ namespace System.Data.Odbc
 
         internal bool HasParameters
         {
-            get
-            {
-                return (null != _parameterCollection);
-            }
+            get { return (null != _parameterCollection); }
         }
 
-        [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        ]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public new OdbcParameterCollection Parameters
         {
             get
@@ -335,17 +314,14 @@ namespace System.Data.Odbc
             }
         }
 
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new OdbcTransaction? Transaction
         {
             get
             {
                 if ((null != _transaction) && (null == _transaction.Connection))
                 {
-                    _transaction = null;       // Dawn of the Dead
+                    _transaction = null; // Dawn of the Dead
                 }
                 return _transaction;
             }
@@ -359,15 +335,10 @@ namespace System.Data.Odbc
             }
         }
 
-        [
-        DefaultValue(System.Data.UpdateRowSource.Both),
-        ]
+        [DefaultValue(System.Data.UpdateRowSource.Both)]
         public override UpdateRowSource UpdatedRowSource
         { // V1.2.3300, XXXCommand V1.0.5000
-            get
-            {
-                return _updatedRowSource;
-            }
+            get { return _updatedRowSource; }
             set
             {
                 switch (value)
@@ -388,7 +359,6 @@ namespace System.Data.Odbc
         {
             return _cmdWrapper!.GetDescriptorHandle(attribute);
         }
-
 
         // GetStatementHandle
         // ------------------
@@ -461,7 +431,6 @@ namespace System.Data.Odbc
                 }
             }
         }
-
 
         object ICloneable.Clone()
         {
@@ -552,42 +521,63 @@ namespace System.Data.Odbc
 
         public new OdbcDataReader ExecuteReader()
         {
-            return ExecuteReader(0/*CommandBehavior*/);
+            return ExecuteReader(
+                0 /*CommandBehavior*/
+            );
         }
-
 
         public new OdbcDataReader ExecuteReader(CommandBehavior behavior)
         {
             return ExecuteReaderObject(behavior, ADP.ExecuteReader, true);
         }
 
-        internal OdbcDataReader ExecuteReaderFromSQLMethod(object?[]? methodArguments,
-                                                            ODBC32.SQL_API method)
+        internal OdbcDataReader ExecuteReaderFromSQLMethod(
+            object?[]? methodArguments,
+            ODBC32.SQL_API method
+        )
         {
-            return ExecuteReaderObject(CommandBehavior.Default, method.ToString(), true, methodArguments, method);
+            return ExecuteReaderObject(
+                CommandBehavior.Default,
+                method.ToString(),
+                true,
+                methodArguments,
+                method
+            );
         }
 
-        private OdbcDataReader ExecuteReaderObject(CommandBehavior behavior, string method, bool needReader)
+        private OdbcDataReader ExecuteReaderObject(
+            CommandBehavior behavior,
+            string method,
+            bool needReader
+        )
         { // MDAC 68324
             if ((CommandText == null) || (CommandText.Length == 0))
             {
                 throw (ADP.CommandTextRequired(method));
             }
             // using all functions to tell ExecuteReaderObject that
-            return ExecuteReaderObject(behavior, method, needReader, null, ODBC32.SQL_API.SQLEXECDIRECT);
+            return ExecuteReaderObject(
+                behavior,
+                method,
+                needReader,
+                null,
+                ODBC32.SQL_API.SQLEXECDIRECT
+            );
         }
 
-        private OdbcDataReader ExecuteReaderObject(CommandBehavior behavior,
-                                                   string method,
-                                                   bool needReader,
-                                                   object?[]? methodArguments,
-                                                   ODBC32.SQL_API odbcApiMethod)
+        private OdbcDataReader ExecuteReaderObject(
+            CommandBehavior behavior,
+            string method,
+            bool needReader,
+            object?[]? methodArguments,
+            ODBC32.SQL_API odbcApiMethod
+        )
         { // MDAC 68324
             OdbcDataReader? localReader = null;
             try
             {
-                DisposeDeadDataReader();    // this is a no-op if cmdState is not Fetching
-                ValidateConnectionAndTransaction(method);  // cmdState will change to Executing
+                DisposeDeadDataReader(); // this is a no-op if cmdState is not Fetching
+                ValidateConnectionAndTransaction(method); // cmdState will change to Executing
 
                 if (0 != (CommandBehavior.SingleRow & behavior))
                 {
@@ -620,9 +610,11 @@ namespace System.Data.Odbc
                 //Not all drivers support timeout. So fail silently if error
                 if (!Connection!.ProviderInfo.NoQueryTimeout)
                 {
-                    TrySetStatementAttribute(stmt,
+                    TrySetStatementAttribute(
+                        stmt,
                         ODBC32.SQL_ATTR.QUERY_TIMEOUT,
-                        (IntPtr)this.CommandTimeout);
+                        (IntPtr)this.CommandTimeout
+                    );
                 }
 
                 // todo: If we remember the state we can omit a lot of SQLSetStmtAttrW calls ...
@@ -631,7 +623,10 @@ namespace System.Data.Odbc
                 {
                     if (Connection.IsV3Driver)
                     {
-                        if (!Connection.ProviderInfo.NoSqlSoptSSNoBrowseTable && !Connection.ProviderInfo.NoSqlSoptSSHiddenColumns)
+                        if (
+                            !Connection.ProviderInfo.NoSqlSoptSSNoBrowseTable
+                            && !Connection.ProviderInfo.NoSqlSoptSSHiddenColumns
+                        )
                         {
                             // Need to get the metadata information
 
@@ -642,8 +637,16 @@ namespace System.Data.Odbc
                             {
                                 if (!_cmdWrapper._ssKeyInfoModeOn)
                                 {
-                                    TrySetStatementAttribute(stmt, (ODBC32.SQL_ATTR)ODBC32.SQL_SOPT_SS.NOBROWSETABLE, (IntPtr)ODBC32.SQL_NB.ON);
-                                    TrySetStatementAttribute(stmt, (ODBC32.SQL_ATTR)ODBC32.SQL_SOPT_SS.HIDDEN_COLUMNS, (IntPtr)ODBC32.SQL_HC.ON);
+                                    TrySetStatementAttribute(
+                                        stmt,
+                                        (ODBC32.SQL_ATTR)ODBC32.SQL_SOPT_SS.NOBROWSETABLE,
+                                        (IntPtr)ODBC32.SQL_NB.ON
+                                    );
+                                    TrySetStatementAttribute(
+                                        stmt,
+                                        (ODBC32.SQL_ATTR)ODBC32.SQL_SOPT_SS.HIDDEN_COLUMNS,
+                                        (IntPtr)ODBC32.SQL_HC.ON
+                                    );
                                     _cmdWrapper._ssKeyInfoModeOff = false;
                                     _cmdWrapper._ssKeyInfoModeOn = true;
                                 }
@@ -652,8 +655,16 @@ namespace System.Data.Odbc
                             {
                                 if (!_cmdWrapper._ssKeyInfoModeOff)
                                 {
-                                    TrySetStatementAttribute(stmt, (ODBC32.SQL_ATTR)ODBC32.SQL_SOPT_SS.NOBROWSETABLE, (IntPtr)ODBC32.SQL_NB.OFF);
-                                    TrySetStatementAttribute(stmt, (ODBC32.SQL_ATTR)ODBC32.SQL_SOPT_SS.HIDDEN_COLUMNS, (IntPtr)ODBC32.SQL_HC.OFF);
+                                    TrySetStatementAttribute(
+                                        stmt,
+                                        (ODBC32.SQL_ATTR)ODBC32.SQL_SOPT_SS.NOBROWSETABLE,
+                                        (IntPtr)ODBC32.SQL_NB.OFF
+                                    );
+                                    TrySetStatementAttribute(
+                                        stmt,
+                                        (ODBC32.SQL_ATTR)ODBC32.SQL_SOPT_SS.HIDDEN_COLUMNS,
+                                        (IntPtr)ODBC32.SQL_HC.OFF
+                                    );
                                     _cmdWrapper._ssKeyInfoModeOff = true;
                                     _cmdWrapper._ssKeyInfoModeOn = false;
                                 }
@@ -662,8 +673,10 @@ namespace System.Data.Odbc
                     }
                 }
 
-                if (localReader.IsBehavior(CommandBehavior.KeyInfo) ||
-                    localReader.IsBehavior(CommandBehavior.SchemaOnly))
+                if (
+                    localReader.IsBehavior(CommandBehavior.KeyInfo)
+                    || localReader.IsBehavior(CommandBehavior.SchemaOnly)
+                )
                 {
                     retcode = stmt.Prepare(CommandText);
 
@@ -683,7 +696,9 @@ namespace System.Data.Odbc
                     //for the common case of using no parameters.
                     if ((null != _parameterCollection) && (0 < _parameterCollection.Count))
                     {
-                        int parameterBufferSize = _parameterCollection.CalcParameterBufferSize(this);
+                        int parameterBufferSize = _parameterCollection.CalcParameterBufferSize(
+                            this
+                        );
 
                         if (null == parameterBuffer || parameterBuffer.Length < parameterBufferSize)
                         {
@@ -706,12 +721,19 @@ namespace System.Data.Odbc
                         // Can't get the KeyInfo after command execution (SQL Server only since it does not support multiple
                         // results on the same connection). Stored procedures (SP) do not return metadata before actual execution
                         // Need to check the column count since the command type may not be set to SP for a SP.
-                        if ((localReader.IsBehavior(CommandBehavior.KeyInfo) || localReader.IsBehavior(CommandBehavior.SchemaOnly))
-                            && (CommandType != CommandType.StoredProcedure))
+                        if (
+                            (
+                                localReader.IsBehavior(CommandBehavior.KeyInfo)
+                                || localReader.IsBehavior(CommandBehavior.SchemaOnly)
+                            ) && (CommandType != CommandType.StoredProcedure)
+                        )
                         {
                             short cColsAffected;
                             retcode = stmt.NumberOfResultColumns(out cColsAffected);
-                            if (retcode == ODBC32.SQLRETURN.SUCCESS || retcode == ODBC32.SQLRETURN.SUCCESS_WITH_INFO)
+                            if (
+                                retcode == ODBC32.SQLRETURN.SUCCESS
+                                || retcode == ODBC32.SQLRETURN.SUCCESS_WITH_INFO
+                            )
                             {
                                 if (cColsAffected > 0)
                                 {
@@ -752,52 +774,67 @@ namespace System.Data.Odbc
                                 break;
 
                             case ODBC32.SQL_API.SQLTABLES:
-                                retcode = stmt.Tables((string)methodArguments![0]!,  //TableCatalog
-                                    (string)methodArguments[1]!,  //TableSchema,
-                                    (string)methodArguments[2]!,  //TableName
-                                    (string)methodArguments[3]!); //TableType
+                                retcode = stmt.Tables(
+                                    (string)methodArguments![0]!, //TableCatalog
+                                    (string)methodArguments[1]!, //TableSchema,
+                                    (string)methodArguments[2]!, //TableName
+                                    (string)methodArguments[3]!
+                                ); //TableType
                                 break;
 
                             case ODBC32.SQL_API.SQLCOLUMNS:
-                                retcode = stmt.Columns((string)methodArguments![0]!,  //TableCatalog
-                                    (string)methodArguments[1]!,  //TableSchema
-                                    (string)methodArguments[2]!,  //TableName
-                                    (string)methodArguments[3]!); //ColumnName
+                                retcode = stmt.Columns(
+                                    (string)methodArguments![0]!, //TableCatalog
+                                    (string)methodArguments[1]!, //TableSchema
+                                    (string)methodArguments[2]!, //TableName
+                                    (string)methodArguments[3]!
+                                ); //ColumnName
                                 break;
 
                             case ODBC32.SQL_API.SQLPROCEDURES:
-                                retcode = stmt.Procedures((string)methodArguments![0]!,  //ProcedureCatalog
-                                    (string)methodArguments[1]!,  //ProcedureSchema
-                                    (string)methodArguments[2]!); //procedureName
+                                retcode = stmt.Procedures(
+                                    (string)methodArguments![0]!, //ProcedureCatalog
+                                    (string)methodArguments[1]!, //ProcedureSchema
+                                    (string)methodArguments[2]!
+                                ); //procedureName
                                 break;
 
                             case ODBC32.SQL_API.SQLPROCEDURECOLUMNS:
-                                retcode = stmt.ProcedureColumns((string)methodArguments![0]!,  //ProcedureCatalog
-                                    (string)methodArguments[1]!,  //ProcedureSchema
-                                    (string)methodArguments[2]!,  //procedureName
-                                    (string)methodArguments[3]!); //columnName
+                                retcode = stmt.ProcedureColumns(
+                                    (string)methodArguments![0]!, //ProcedureCatalog
+                                    (string)methodArguments[1]!, //ProcedureSchema
+                                    (string)methodArguments[2]!, //procedureName
+                                    (string)methodArguments[3]!
+                                ); //columnName
                                 break;
 
                             case ODBC32.SQL_API.SQLSTATISTICS:
-                                retcode = stmt.Statistics((string)methodArguments![0]!,  //TableCatalog
-                                    (string)methodArguments[1]!,  //TableSchema
-                                    (string)methodArguments[2]!,  //TableName
-                                    (short)methodArguments[3]!,   //IndexTrpe
-                                    (short)methodArguments[4]!);  //Accuracy
+                                retcode = stmt.Statistics(
+                                    (string)methodArguments![0]!, //TableCatalog
+                                    (string)methodArguments[1]!, //TableSchema
+                                    (string)methodArguments[2]!, //TableName
+                                    (short)methodArguments[3]!, //IndexTrpe
+                                    (short)methodArguments[4]!
+                                ); //Accuracy
                                 break;
 
                             case ODBC32.SQL_API.SQLGETTYPEINFO:
-                                retcode = stmt.GetTypeInfo((short)methodArguments![0]!);  //SQL Type
+                                retcode = stmt.GetTypeInfo((short)methodArguments![0]!); //SQL Type
                                 break;
 
                             default:
                                 // this should NEVER happen
-                                Debug.Fail("ExecuteReaderObjectcalled with unsupported ODBC API method.");
+                                Debug.Fail(
+                                    "ExecuteReaderObjectcalled with unsupported ODBC API method."
+                                );
                                 throw ADP.InvalidOperation(method.ToString());
                         }
 
                         //Note: Execute will return NO_DATA for Update/Delete non-row returning queries
-                        if ((ODBC32.SQLRETURN.SUCCESS != retcode) && (ODBC32.SQLRETURN.NO_DATA != retcode))
+                        if (
+                            (ODBC32.SQLRETURN.SUCCESS != retcode)
+                            && (ODBC32.SQLRETURN.NO_DATA != retcode)
+                        )
                         {
                             _connection!.HandleError(stmt, retcode);
                         }
@@ -898,7 +935,6 @@ namespace System.Data.Odbc
 
             retcode = stmt.Prepare(CommandText);
 
-
             if (ODBC32.SQLRETURN.SUCCESS != retcode)
             {
                 _connection.HandleError(stmt, retcode);
@@ -906,14 +942,17 @@ namespace System.Data.Odbc
             _isPrepared = true;
         }
 
-
-
-        private void TrySetStatementAttribute(OdbcStatementHandle stmt, ODBC32.SQL_ATTR stmtAttribute, IntPtr value)
+        private void TrySetStatementAttribute(
+            OdbcStatementHandle stmt,
+            ODBC32.SQL_ATTR stmtAttribute,
+            IntPtr value
+        )
         {
             ODBC32.SQLRETURN retcode = stmt.SetStatementAttribute(
                 stmtAttribute,
                 value,
-                ODBC32.SQL_IS.UINTEGER);
+                ODBC32.SQL_IS.UINTEGER
+            );
 
             if (retcode == ODBC32.SQLRETURN.ERROR)
             {
@@ -960,23 +999,25 @@ namespace System.Data.Odbc
             _cmdState = ConnectionState.Executing;
         }
     }
+
     internal sealed class CMDWrapper
     {
-        private OdbcStatementHandle? _stmt;                  // hStmt
-        private OdbcStatementHandle? _keyinfostmt;           // hStmt for keyinfo
+        private OdbcStatementHandle? _stmt; // hStmt
+        private OdbcStatementHandle? _keyinfostmt; // hStmt for keyinfo
 
-        internal OdbcDescriptorHandle? _hdesc;              // hDesc
+        internal OdbcDescriptorHandle? _hdesc; // hDesc
 
-        internal CNativeBuffer? _nativeParameterBuffer;      // Native memory for internal memory management
+        internal CNativeBuffer? _nativeParameterBuffer; // Native memory for internal memory management
+
         // (Performance optimization)
 
-        internal CNativeBuffer? _dataReaderBuf;         // Reusable DataReader buffer
+        internal CNativeBuffer? _dataReaderBuf; // Reusable DataReader buffer
 
-        private readonly OdbcConnection _connection;        // Connection
-        private bool _canceling;             // true if the command is canceling
+        private readonly OdbcConnection _connection; // Connection
+        private bool _canceling; // true if the command is canceling
         internal bool _hasBoundColumns;
-        internal bool _ssKeyInfoModeOn;       // tells us if the SqlServer specific options are on
-        internal bool _ssKeyInfoModeOff;      // a tri-state value would be much better ...
+        internal bool _ssKeyInfoModeOn; // tells us if the SqlServer specific options are on
+        internal bool _ssKeyInfoModeOff; // a tri-state value would be much better ...
 
         internal CMDWrapper(OdbcConnection connection)
         {
@@ -985,22 +1026,13 @@ namespace System.Data.Odbc
 
         internal bool Canceling
         {
-            get
-            {
-                return _canceling;
-            }
-            set
-            {
-                _canceling = value;
-            }
+            get { return _canceling; }
+            set { _canceling = value; }
         }
 
         internal OdbcConnection Connection
         {
-            get
-            {
-                return _connection;
-            }
+            get { return _connection; }
         }
 
         internal bool HasBoundColumns
@@ -1008,10 +1040,7 @@ namespace System.Data.Odbc
             //            get {
             //                return _hasBoundColumns;
             //            }
-            set
-            {
-                _hasBoundColumns = value;
-            }
+            set { _hasBoundColumns = value; }
         }
 
         internal OdbcStatementHandle? StatementHandle
@@ -1021,10 +1050,7 @@ namespace System.Data.Odbc
 
         internal OdbcStatementHandle? KeyInfoStatement
         {
-            get
-            {
-                return _keyinfostmt;
-            }
+            get { return _keyinfostmt; }
         }
 
         internal void CreateKeyInfoStatementHandle()
@@ -1064,6 +1090,7 @@ namespace System.Data.Odbc
                 handle.Dispose();
             }
         }
+
         internal void DisposeStatementHandle()
         {
             DisposeKeyInfoStatementHandle();

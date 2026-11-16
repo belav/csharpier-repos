@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IdentityModel.Tokens;
 using System.Collections.ObjectModel;
+using System.IdentityModel.Tokens;
+using System.Text;
 
 namespace System.IdentityModel.Tokens
 {
@@ -12,8 +12,8 @@ namespace System.IdentityModel.Tokens
     /// </summary>
     /// <remarks>
     /// For example, a SamlSecurityToken has no notion of how to encrypt
-    /// itself, so to issue an encrypted SAML11 assertion, wrap a 
-    /// SamlSecurityToken with an EncryptedSecurityToken and provide 
+    /// itself, so to issue an encrypted SAML11 assertion, wrap a
+    /// SamlSecurityToken with an EncryptedSecurityToken and provide
     /// appropriate EncryptingCredentials.
     /// </remarks>
     public class EncryptedSecurityToken : SecurityToken
@@ -26,7 +26,10 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="token">The <see cref="SecurityToken"/> to encrypt.</param>
         /// <param name="encryptingCredentials">The <see cref="EncryptingCredentials"/> to use for encryption.</param>
-        public EncryptedSecurityToken(SecurityToken token, EncryptingCredentials encryptingCredentials)
+        public EncryptedSecurityToken(
+            SecurityToken token,
+            EncryptingCredentials encryptingCredentials
+        )
         {
             if (null == token)
             {
@@ -34,7 +37,9 @@ namespace System.IdentityModel.Tokens
             }
             if (null == encryptingCredentials)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("encryptingCredentials");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "encryptingCredentials"
+                );
             }
 
             _encryptingCredentials = encryptingCredentials;
@@ -76,7 +81,9 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Inherited from <see cref="SecurityToken"/>.
         /// </summary>
-        public override bool MatchesKeyIdentifierClause(SecurityKeyIdentifierClause keyIdentifierClause)
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
             return _realToken.MatchesKeyIdentifierClause(keyIdentifierClause);
         }
@@ -84,7 +91,9 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Inherited from <see cref="SecurityToken"/>.
         /// </summary>
-        public override SecurityKey ResolveKeyIdentifierClause(SecurityKeyIdentifierClause keyIdentifierClause)
+        public override SecurityKey ResolveKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
             return _realToken.ResolveKeyIdentifierClause(keyIdentifierClause);
         }

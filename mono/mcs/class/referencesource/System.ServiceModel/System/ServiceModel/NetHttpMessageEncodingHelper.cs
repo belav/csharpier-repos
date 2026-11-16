@@ -8,8 +8,7 @@ namespace System.ServiceModel
     {
         internal static bool IsDefined(NetHttpMessageEncoding value)
         {
-            return
-                value == NetHttpMessageEncoding.Binary
+            return value == NetHttpMessageEncoding.Binary
                 || value == NetHttpMessageEncoding.Text
                 || value == NetHttpMessageEncoding.Mtom;
         }

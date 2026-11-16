@@ -15,7 +15,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 public class SqlServerLineStringMethodTranslator : IMethodCallTranslator
 {
     private static readonly MethodInfo GetPointN = typeof(LineString).GetRuntimeMethod(
-        nameof(LineString.GetPointN), new[] { typeof(int) })!;
+        nameof(LineString.GetPointN),
+        new[] { typeof(int) }
+    )!;
 
     private readonly IRelationalTypeMappingSource _typeMappingSource;
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -28,7 +30,8 @@ public class SqlServerLineStringMethodTranslator : IMethodCallTranslator
     /// </summary>
     public SqlServerLineStringMethodTranslator(
         IRelationalTypeMappingSource typeMappingSource,
-        ISqlExpressionFactory sqlExpressionFactory)
+        ISqlExpressionFactory sqlExpressionFactory
+    )
     {
         _typeMappingSource = typeMappingSource;
         _sqlExpressionFactory = sqlExpressionFactory;
@@ -44,25 +47,24 @@ public class SqlServerLineStringMethodTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (Equals(method, GetPointN)
-            && instance != null)
+        if (Equals(method, GetPointN) && instance != null)
         {
             return _sqlExpressionFactory.Function(
                 instance,
                 "STPointN",
                 new[]
                 {
-                    _sqlExpressionFactory.Add(
-                        arguments[0],
-                        _sqlExpressionFactory.Constant(1))
+                    _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1)),
                 },
                 nullable: true,
                 instancePropagatesNullability: true,
                 argumentsPropagateNullability: new[] { true },
                 method.ReturnType,
-                _typeMappingSource.FindMapping(method.ReturnType, instance.TypeMapping!.StoreType));
+                _typeMappingSource.FindMapping(method.ReturnType, instance.TypeMapping!.StoreType)
+            );
         }
 
         return null;

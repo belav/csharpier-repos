@@ -25,7 +25,6 @@
 
 using Xunit;
 
-
 namespace System.Data.Tests
 {
     public class ForeignKeyConstraintTest2
@@ -61,7 +60,8 @@ namespace System.Data.Tests
             dtParent.PrimaryKey = new DataColumn[] { dtParent.Columns[0] };
             ds.EnforceConstraints = true;
 
-            ForeignKeyConstraint fc1, fc2;
+            ForeignKeyConstraint fc1,
+                fc2;
             fc1 = new ForeignKeyConstraint(dtParent.Columns[0], dtChild.Columns[0]);
 
             fc2 = new ForeignKeyConstraint(dtParent.Columns[0], dtChild.Columns[1]);
@@ -141,7 +141,10 @@ namespace System.Data.Tests
         {
             DataSet ds = GetNewDataSet();
 
-            ForeignKeyConstraint fc = new ForeignKeyConstraint(ds.Tables[0].Columns[0], ds.Tables[1].Columns[0]);
+            ForeignKeyConstraint fc = new ForeignKeyConstraint(
+                ds.Tables[0].Columns[0],
+                ds.Tables[1].Columns[0]
+            );
             fc.AcceptRejectRule = Data.AcceptRejectRule.Cascade;
             ds.Tables[1].Constraints.Add(fc);
 
@@ -188,10 +191,16 @@ namespace System.Data.Tests
             // Ctor ArgumentException
             AssertExtensions.Throws<ArgumentException>(null, () =>
             {
-                fc = new ForeignKeyConstraint(new DataColumn[] { dtParent.Columns[0] }, new DataColumn[] { dtChild.Columns[0], dtChild.Columns[1] });
+                fc = new ForeignKeyConstraint(
+                    new DataColumn[] { dtParent.Columns[0] },
+                    new DataColumn[] { dtChild.Columns[0], dtChild.Columns[1] }
+                );
             });
 
-            fc = new ForeignKeyConstraint(new DataColumn[] { dtParent.Columns[0], dtParent.Columns[1] }, new DataColumn[] { dtChild.Columns[0], dtChild.Columns[2] });
+            fc = new ForeignKeyConstraint(
+                new DataColumn[] { dtParent.Columns[0], dtParent.Columns[1] },
+                new DataColumn[] { dtChild.Columns[0], dtChild.Columns[2] }
+            );
 
             // Add constraint to table - ArgumentException
             AssertExtensions.Throws<ArgumentException>(null, () =>
@@ -211,7 +220,10 @@ namespace System.Data.Tests
             dtParent.Constraints.Clear();
             dtChild.Constraints.Clear();
 
-            fc = new ForeignKeyConstraint(new DataColumn[] { dtParent.Columns[0] }, new DataColumn[] { dtChild.Columns[0] });
+            fc = new ForeignKeyConstraint(
+                new DataColumn[] { dtParent.Columns[0] },
+                new DataColumn[] { dtChild.Columns[0] }
+            );
             // Ctor
 
             // Child Table Constraints Count
@@ -245,7 +257,9 @@ namespace System.Data.Tests
 
             dtChild.Constraints.Clear();
             dtParent.Constraints.Clear();
-            ds.Relations.Add(new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0]));
+            ds.Relations.Add(
+                new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0])
+            );
 
             // Relation - Child Table Constraints Count
             Assert.Equal(1, dtChild.Constraints.Count);
@@ -282,7 +296,11 @@ namespace System.Data.Tests
         {
             DataTable dtParent = DataProvider.CreateParentDataTable();
             DataTable dtChild = DataProvider.CreateChildDataTable();
-            ForeignKeyConstraint fc = new ForeignKeyConstraint("myForeignKey", new DataColumn[] { dtParent.Columns[0] }, new DataColumn[] { dtChild.Columns[0] });
+            ForeignKeyConstraint fc = new ForeignKeyConstraint(
+                "myForeignKey",
+                new DataColumn[] { dtParent.Columns[0] },
+                new DataColumn[] { dtChild.Columns[0] }
+            );
             // Ctor
 
             // Ctor - name
@@ -344,7 +362,10 @@ namespace System.Data.Tests
             ds1.Tables.Add(DataProvider.CreateParentDataTable());
             ds1.Tables.Add(DataProvider.CreateChildDataTable());
 
-            ForeignKeyConstraint fc1 = new ForeignKeyConstraint(ds1.Tables[0].Columns[0], ds1.Tables[1].Columns[1]);
+            ForeignKeyConstraint fc1 = new ForeignKeyConstraint(
+                ds1.Tables[0].Columns[0],
+                ds1.Tables[1].Columns[1]
+            );
             fc1.DeleteRule = Rule.SetNull;
             ds1.Tables[1].Constraints.Add(fc1);
 
@@ -411,7 +432,10 @@ namespace System.Data.Tests
             var ds = new DataSet();
             ds.Tables.Add(dtChild);
             ds.Tables.Add(dtParent);
-            ForeignKeyConstraint fc = new ForeignKeyConstraint(dtParent.Columns[0], dtChild.Columns[0]);
+            ForeignKeyConstraint fc = new ForeignKeyConstraint(
+                dtParent.Columns[0],
+                dtChild.Columns[0]
+            );
 
             Assert.Equal(0, dtChild.Constraints.Count);
 
@@ -435,7 +459,9 @@ namespace System.Data.Tests
 
             dtChild.Constraints.Clear();
             dtParent.Constraints.Clear();
-            ds.Relations.Add(new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0]));
+            ds.Relations.Add(
+                new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0])
+            );
 
             Assert.Equal(1, dtChild.Constraints.Count);
 
@@ -467,7 +493,10 @@ namespace System.Data.Tests
                 ds.Tables.Add(DataProvider.CreateChildDataTable());
                 ds.Tables["Parent"].Columns["ParentId"].Expression = "2";
 
-                ForeignKeyConstraint fc = new ForeignKeyConstraint(ds.Tables[0].Columns[0], ds.Tables[1].Columns[0]);
+                ForeignKeyConstraint fc = new ForeignKeyConstraint(
+                    ds.Tables[0].Columns[0],
+                    ds.Tables[1].Columns[0]
+                );
             });
         }
 
@@ -481,7 +510,10 @@ namespace System.Data.Tests
                 ds.Tables.Add(DataProvider.CreateChildDataTable());
                 ds.Tables["Child"].Columns["ParentId"].Expression = "2";
 
-                ForeignKeyConstraint fc = new ForeignKeyConstraint(ds.Tables[0].Columns[0], ds.Tables[1].Columns[0]);
+                ForeignKeyConstraint fc = new ForeignKeyConstraint(
+                    ds.Tables[0].Columns[0],
+                    ds.Tables[1].Columns[0]
+                );
             });
         }
 
@@ -489,7 +521,10 @@ namespace System.Data.Tests
         public void UpdateRule1()
         {
             DataSet ds = GetNewDataSet();
-            ForeignKeyConstraint fc = new ForeignKeyConstraint(ds.Tables[0].Columns[0], ds.Tables[1].Columns[0]);
+            ForeignKeyConstraint fc = new ForeignKeyConstraint(
+                ds.Tables[0].Columns[0],
+                ds.Tables[1].Columns[0]
+            );
             fc.UpdateRule = Rule.Cascade;
             ds.Tables[1].Constraints.Add(fc);
 
@@ -511,7 +546,10 @@ namespace System.Data.Tests
             {
                 DataSet ds = GetNewDataSet();
                 ds.Tables[0].PrimaryKey = null;
-                ForeignKeyConstraint fc = new ForeignKeyConstraint(ds.Tables[0].Columns[0], ds.Tables[1].Columns[0]);
+                ForeignKeyConstraint fc = new ForeignKeyConstraint(
+                    ds.Tables[0].Columns[0],
+                    ds.Tables[1].Columns[0]
+                );
                 fc.UpdateRule = Rule.None;
                 ds.Tables[1].Constraints.Add(fc);
 
@@ -529,7 +567,10 @@ namespace System.Data.Tests
         public void UpdateRule3()
         {
             DataSet ds = GetNewDataSet();
-            ForeignKeyConstraint fc = new ForeignKeyConstraint(ds.Tables[0].Columns[0], ds.Tables[1].Columns[1]);
+            ForeignKeyConstraint fc = new ForeignKeyConstraint(
+                ds.Tables[0].Columns[0],
+                ds.Tables[1].Columns[1]
+            );
             fc.UpdateRule = Rule.SetDefault;
             ds.Tables[1].Constraints.Add(fc);
 
@@ -541,7 +582,6 @@ namespace System.Data.Tests
             DataRow dr = ds.Tables[0].NewRow();
             dr["ParentId"] = 777;
             ds.Tables[0].Rows.Add(dr);
-
 
             ds.Tables[0].Rows.Find(1)["ParentId"] = 8;
 
@@ -556,7 +596,10 @@ namespace System.Data.Tests
         public void UpdateRule4()
         {
             DataSet ds = GetNewDataSet();
-            ForeignKeyConstraint fc = new ForeignKeyConstraint(ds.Tables[0].Columns[0], ds.Tables[1].Columns[0]);
+            ForeignKeyConstraint fc = new ForeignKeyConstraint(
+                ds.Tables[0].Columns[0],
+                ds.Tables[1].Columns[0]
+            );
             fc.UpdateRule = Rule.SetNull;
             ds.Tables[1].Constraints.Add(fc);
 
@@ -580,6 +623,7 @@ namespace System.Data.Tests
 
             return ds1;
         }
+
         [Fact]
         public void ForeignConstraint_DateTimeModeTest()
         {
@@ -596,7 +640,9 @@ namespace System.Data.Tests
             t2.Constraints.Clear();
             t2.Columns[0].DateTimeMode = DataSetDateTime.Local;
             // DataColumn type should not match, and exception should be raised
-            Assert.Throws<InvalidOperationException>(() => t2.Constraints.Add("fk", t1.Columns[0], t2.Columns[0]));
+            Assert.Throws<InvalidOperationException>(() =>
+                t2.Constraints.Add("fk", t1.Columns[0], t2.Columns[0])
+            );
         }
 
         [Fact]
@@ -609,16 +655,16 @@ namespace System.Data.Tests
             DataColumn colParentID = dataTable.Columns.Add("ParentID", typeof(int));
 
             // table PK (ID, Culture)
-            dataTable.Constraints.Add(new UniqueConstraint(
-                "MenuPK",
-                new DataColumn[] { colID, colCulture },
-                true));
+            dataTable.Constraints.Add(
+                new UniqueConstraint("MenuPK", new DataColumn[] { colID, colCulture }, true)
+            );
 
             // add a FK referencing the same table: (ID, Culture) <- (ParentID, Culture)
             ForeignKeyConstraint fkc = new ForeignKeyConstraint(
                 "MenuParentFK",
                 new DataColumn[] { colID, colCulture },
-                new DataColumn[] { colParentID, colCulture });
+                new DataColumn[] { colParentID, colCulture }
+            );
 
             dataTable.Constraints.Add(fkc);
         }

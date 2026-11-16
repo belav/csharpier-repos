@@ -14,9 +14,8 @@ namespace System.Net.Http
             private static readonly byte[] s_crlfBytes = "\r\n"u8.ToArray();
             private static readonly byte[] s_finalChunkBytes = "0\r\n\r\n"u8.ToArray();
 
-            public ChunkedEncodingWriteStream(HttpConnection connection) : base(connection)
-            {
-            }
+            public ChunkedEncodingWriteStream(HttpConnection connection)
+                : base(connection) { }
 
             public override void Write(ReadOnlySpan<byte> buffer)
             {
@@ -42,7 +41,10 @@ namespace System.Net.Http
                 connection.Write(s_crlfBytes);
             }
 
-            public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken ignored)
+            public override ValueTask WriteAsync(
+                ReadOnlyMemory<byte> buffer,
+                CancellationToken ignored
+            )
             {
                 BytesWritten += buffer.Length;
 
@@ -53,18 +55,25 @@ namespace System.Net.Http
                 // here are those that are already covered by the token having been registered with
                 // to close the connection.
 
-                ValueTask task = buffer.Length == 0 ?
-                    // Don't write if nothing was given, especially since we don't want to accidentally send a 0 chunk,
-                    // which would indicate end of body.  Instead, just ensure no content is stuck in the buffer.
-                    connection.FlushAsync(async: true) :
-                    WriteChunkAsync(connection, buffer);
+                ValueTask task =
+                    buffer.Length == 0
+                        ?
+                        // Don't write if nothing was given, especially since we don't want to accidentally send a 0 chunk,
+                        // which would indicate end of body.  Instead, just ensure no content is stuck in the buffer.
+                        connection.FlushAsync(async: true)
+                        : WriteChunkAsync(connection, buffer);
 
                 return task;
 
-                static async ValueTask WriteChunkAsync(HttpConnection connection, ReadOnlyMemory<byte> buffer)
+                static async ValueTask WriteChunkAsync(
+                    HttpConnection connection,
+                    ReadOnlyMemory<byte> buffer
+                )
                 {
                     // Write chunk length in hex followed by \r\n
-                    await connection.WriteHexInt32Async(buffer.Length, async: true).ConfigureAwait(false);
+                    await connection
+                        .WriteHexInt32Async(buffer.Length, async: true)
+                        .ConfigureAwait(false);
                     await connection.WriteAsync(s_crlfBytes).ConfigureAwait(false);
 
                     // Write chunk contents followed by \r\n

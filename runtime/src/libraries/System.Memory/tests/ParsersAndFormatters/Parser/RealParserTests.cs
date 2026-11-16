@@ -12,22 +12,38 @@ namespace System.Buffers.Text.Tests
         // The actual tests are defined in: src\Common\tests\System\RealParserTestsBase.netcoreapp.cs
 
         //  We need 1 additional byte, per length, for the terminating null
-        private const int DoubleNumberBufferLength = 767 + 1 + 1;  // 767 for the longest input + 1 for rounding: 4.9406564584124654E-324
-        private const int SingleNumberBufferLength = 112 + 1 + 1;  // 112 for the longest input + 1 for rounding: 1.40129846E-45
+        private const int DoubleNumberBufferLength = 767 + 1 + 1; // 767 for the longest input + 1 for rounding: 4.9406564584124654E-324
+        private const int SingleNumberBufferLength = 112 + 1 + 1; // 112 for the longest input + 1 for rounding: 1.40129846E-45
 
         protected override string InvariantToStringDouble(double d)
         {
             Span<byte> s = stackalloc byte[DoubleNumberBufferLength];
-            bool formatSucceeded = Utf8Formatter.TryFormat(d, s, out int bytesWritten, StandardFormat.Parse("E17"));
-            Assert.True(formatSucceeded, $"Failed to format {d.ToString("G17", CultureInfo.InvariantCulture)}");
+            bool formatSucceeded = Utf8Formatter.TryFormat(
+                d,
+                s,
+                out int bytesWritten,
+                StandardFormat.Parse("E17")
+            );
+            Assert.True(
+                formatSucceeded,
+                $"Failed to format {d.ToString("G17", CultureInfo.InvariantCulture)}"
+            );
             return s.ToUtf16String();
         }
 
         protected override string InvariantToStringSingle(float f)
         {
             Span<byte> s = stackalloc byte[SingleNumberBufferLength];
-            bool formatSucceeded = Utf8Formatter.TryFormat(f, s, out int bytesWritten, StandardFormat.Parse("E9"));
-            Assert.True(formatSucceeded, $"Failed to format {f.ToString("G9", CultureInfo.InvariantCulture)}");
+            bool formatSucceeded = Utf8Formatter.TryFormat(
+                f,
+                s,
+                out int bytesWritten,
+                StandardFormat.Parse("E9")
+            );
+            Assert.True(
+                formatSucceeded,
+                $"Failed to format {f.ToString("G9", CultureInfo.InvariantCulture)}"
+            );
             return s.ToUtf16String();
         }
 

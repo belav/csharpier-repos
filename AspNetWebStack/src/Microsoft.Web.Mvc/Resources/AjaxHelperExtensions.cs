@@ -18,9 +18,19 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="routeValues"></param>
         /// <param name="ajaxOptions"></param>
         /// <returns></returns>
-        public static MvcForm BeginResourceForm(this AjaxHelper ajax, string controllerName, object routeValues, AjaxOptions ajaxOptions)
+        public static MvcForm BeginResourceForm(
+            this AjaxHelper ajax,
+            string controllerName,
+            object routeValues,
+            AjaxOptions ajaxOptions
+        )
         {
-            return ajax.BeginResourceForm(controllerName, routeValues, ajaxOptions, ActionType.Retrieve);
+            return ajax.BeginResourceForm(
+                controllerName,
+                routeValues,
+                ajaxOptions,
+                ActionType.Retrieve
+            );
         }
 
         /// <summary>
@@ -32,12 +42,22 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="ajaxOptions"></param>
         /// <param name="actionType"></param>
         /// <returns></returns>
-        public static MvcForm BeginResourceForm(this AjaxHelper ajax, string controllerName, object routeValues, AjaxOptions ajaxOptions, ActionType actionType)
+        public static MvcForm BeginResourceForm(
+            this AjaxHelper ajax,
+            string controllerName,
+            object routeValues,
+            AjaxOptions ajaxOptions,
+            ActionType actionType
+        )
         {
             switch (actionType)
             {
                 case ActionType.GetUpdateForm:
-                    return ajax.BeginRouteForm(controllerName + "-editForm", routeValues, ajaxOptions);
+                    return ajax.BeginRouteForm(
+                        controllerName + "-editForm",
+                        routeValues,
+                        ajaxOptions
+                    );
                 case ActionType.GetCreateForm:
                     return ajax.BeginRouteForm(controllerName + "-createForm", ajaxOptions);
                 case ActionType.Retrieve:
@@ -63,9 +83,20 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="routeValues"></param>
         /// <param name="ajaxOptions"></param>
         /// <returns></returns>
-        public static MvcHtmlString ResourceLink(this AjaxHelper ajax, string controllerName, object routeValues, AjaxOptions ajaxOptions)
+        public static MvcHtmlString ResourceLink(
+            this AjaxHelper ajax,
+            string controllerName,
+            object routeValues,
+            AjaxOptions ajaxOptions
+        )
         {
-            return ajax.ResourceLink(controllerName, controllerName, routeValues, ajaxOptions, ActionType.Retrieve);
+            return ajax.ResourceLink(
+                controllerName,
+                controllerName,
+                routeValues,
+                ajaxOptions,
+                ActionType.Retrieve
+            );
         }
 
         /// <summary>
@@ -77,9 +108,21 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="routeValues"></param>
         /// <param name="ajaxOptions"></param>
         /// <returns></returns>
-        public static MvcHtmlString ResourceLink(this AjaxHelper ajax, string controllerName, string linkText, object routeValues, AjaxOptions ajaxOptions)
+        public static MvcHtmlString ResourceLink(
+            this AjaxHelper ajax,
+            string controllerName,
+            string linkText,
+            object routeValues,
+            AjaxOptions ajaxOptions
+        )
         {
-            return ajax.ResourceLink(linkText, controllerName, routeValues, ajaxOptions, ActionType.Retrieve);
+            return ajax.ResourceLink(
+                linkText,
+                controllerName,
+                routeValues,
+                ajaxOptions,
+                ActionType.Retrieve
+            );
         }
 
         /// <summary>
@@ -92,12 +135,24 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="ajaxOptions"></param>
         /// <param name="actionType"></param>
         /// <returns></returns>
-        public static MvcHtmlString ResourceLink(this AjaxHelper ajax, string controllerName, string linkText, object routeValues, AjaxOptions ajaxOptions, ActionType actionType)
+        public static MvcHtmlString ResourceLink(
+            this AjaxHelper ajax,
+            string controllerName,
+            string linkText,
+            object routeValues,
+            AjaxOptions ajaxOptions,
+            ActionType actionType
+        )
         {
             switch (actionType)
             {
                 case ActionType.GetUpdateForm:
-                    return ajax.RouteLink(linkText, controllerName + "-editForm", routeValues, ajaxOptions);
+                    return ajax.RouteLink(
+                        linkText,
+                        controllerName + "-editForm",
+                        routeValues,
+                        ajaxOptions
+                    );
                 case ActionType.GetCreateForm:
                     return ajax.RouteLink(linkText, controllerName + "-createForm", ajaxOptions);
                 case ActionType.Retrieve:

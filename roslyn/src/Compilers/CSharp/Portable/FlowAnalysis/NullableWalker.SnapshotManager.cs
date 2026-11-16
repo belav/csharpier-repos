@@ -29,13 +29,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// The snapshot array should be sorted in ascending order by the position tuple element in order for the binary search algorithm to
             /// function correctly.
             /// </summary>
-            private readonly ImmutableArray<(int position, Snapshot snapshot)> _incrementalSnapshots;
+            private readonly ImmutableArray<(
+                int position,
+                Snapshot snapshot
+            )> _incrementalSnapshots;
 
             private readonly ImmutableDictionary<(BoundNode?, Symbol), Symbol> _updatedSymbolsMap;
 
-            private static readonly Func<(int position, Snapshot snapshot), int, int> BinarySearchComparer = (current, target) => current.position.CompareTo(target);
+            private static readonly Func<
+                (int position, Snapshot snapshot),
+                int,
+                int
+            > BinarySearchComparer = (current, target) => current.position.CompareTo(target);
 
-            private SnapshotManager(ImmutableArray<SharedWalkerState> walkerSharedStates, ImmutableArray<(int position, Snapshot snapshot)> incrementalSnapshots, ImmutableDictionary<(BoundNode?, Symbol), Symbol> updatedSymbolsMap)
+            private SnapshotManager(
+                ImmutableArray<SharedWalkerState> walkerSharedStates,
+                ImmutableArray<(int position, Snapshot snapshot)> incrementalSnapshots,
+                ImmutableDictionary<(BoundNode?, Symbol), Symbol> updatedSymbolsMap
+            )
             {
                 _walkerSharedStates = walkerSharedStates;
                 _incrementalSnapshots = incrementalSnapshots;
@@ -82,14 +93,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null;
             }
 
-            internal bool TryGetUpdatedSymbol(BoundNode node, Symbol symbol, [NotNullWhen(true)] out Symbol? updatedSymbol)
+            internal bool TryGetUpdatedSymbol(
+                BoundNode node,
+                Symbol symbol,
+                [NotNullWhen(true)] out Symbol? updatedSymbol
+            )
             {
                 return _updatedSymbolsMap.TryGetValue((node, symbol), out updatedSymbol);
             }
 
             private Snapshot GetSnapshotForPosition(int position)
             {
-                var snapshotIndex = _incrementalSnapshots.BinarySearch(position, BinarySearchComparer);
+                var snapshotIndex = _incrementalSnapshots.BinarySearch(
+                    position,
+                    BinarySearchComparer
+                );
 
                 if (snapshotIndex < 0)
                 {
@@ -97,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     snapshotIndex = (~snapshotIndex) - 1;
 
                     // If there was none in the snapshots before the target position, just take index 0
-                    if (snapshotIndex < 0) snapshotIndex = 0;
+                    if (snapshotIndex < 0)
+                        snapshotIndex = 0;
                 }
 
                 return _incrementalSnapshots[snapshotIndex].snapshot;
@@ -112,13 +131,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 int nodePosition = node.Syntax.SpanStart;
-                int position = _incrementalSnapshots.BinarySearch(nodePosition, BinarySearchComparer);
+                int position = _incrementalSnapshots.BinarySearch(
+                    nodePosition,
+                    BinarySearchComparer
+                );
 
                 if (position < 0)
                 {
                     Debug.Fail($"Did not find a snapshot for {node} `{node.Syntax}.`");
                 }
-                Debug.Assert(_walkerSharedStates.Length > _incrementalSnapshots[position].snapshot.SharedStateIndex, $"Did not find shared state for {node} `{node.Syntax}`.");
+                Debug.Assert(
+                    _walkerSharedStates.Length
+                        > _incrementalSnapshots[position].snapshot.SharedStateIndex,
+                    $"Did not find shared state for {node} `{node.Syntax}`."
+                );
             }
 
             internal void VerifyUpdatedSymbols()
@@ -126,12 +152,24 @@ namespace Microsoft.CodeAnalysis.CSharp
                 foreach (var ((expr, originalSymbol), updatedSymbol) in _updatedSymbolsMap)
                 {
                     var debugText = expr?.Syntax.ToFullString() ?? originalSymbol.ToDisplayString();
-                    Debug.Assert((object)originalSymbol != updatedSymbol, $"Recorded exact same symbol for {debugText}");
-                    RoslynDebug.Assert(originalSymbol is object, $"Recorded null original symbol for {debugText}");
-                    RoslynDebug.Assert(updatedSymbol is object, $"Recorded null updated symbol for {debugText}");
-                    Debug.Assert(AreCloseEnough(originalSymbol, updatedSymbol), @$"Symbol for `{debugText}` changed:
+                    Debug.Assert(
+                        (object)originalSymbol != updatedSymbol,
+                        $"Recorded exact same symbol for {debugText}"
+                    );
+                    RoslynDebug.Assert(
+                        originalSymbol is object,
+                        $"Recorded null original symbol for {debugText}"
+                    );
+                    RoslynDebug.Assert(
+                        updatedSymbol is object,
+                        $"Recorded null updated symbol for {debugText}"
+                    );
+                    Debug.Assert(
+                        AreCloseEnough(originalSymbol, updatedSymbol),
+                        @$"Symbol for `{debugText}` changed:
 Was {originalSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}
-Now {updatedSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}");
+Now {updatedSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}"
+                    );
                 }
             }
 #endif
@@ -148,7 +186,16 @@ Now {updatedSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}");
                 /// need any more information to serve as a key.
                 /// All other symbol types are stored mapped to exactly the same type as was provided.
                 /// </remarks>
-                private readonly ImmutableDictionary<(BoundNode?, Symbol), Symbol>.Builder _updatedSymbolMap = ImmutableDictionary.CreateBuilder<(BoundNode?, Symbol), Symbol>(ExpressionAndSymbolEqualityComparer.Instance, Symbols.SymbolEqualityComparer.ConsiderEverything);
+                private readonly ImmutableDictionary<
+                    (BoundNode?, Symbol),
+                    Symbol
+                >.Builder _updatedSymbolMap = ImmutableDictionary.CreateBuilder<
+                    (BoundNode?, Symbol),
+                    Symbol
+                >(
+                    ExpressionAndSymbolEqualityComparer.Instance,
+                    Symbols.SymbolEqualityComparer.ConsiderEverything
+                );
 
                 /// <summary>
                 /// Shared walker states are the parts of the walker state that are not unique at a single position,
@@ -156,29 +203,46 @@ Now {updatedSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}");
                 /// so entering a lambda or local function will create a new state here. The indexes in this array
                 /// correspond to <see cref="Snapshot.SharedStateIndex"/>.
                 /// </summary>
-                private readonly ArrayBuilder<SharedWalkerState> _walkerStates = ArrayBuilder<SharedWalkerState>.GetInstance();
+                private readonly ArrayBuilder<SharedWalkerState> _walkerStates =
+                    ArrayBuilder<SharedWalkerState>.GetInstance();
+
                 /// <summary>
                 /// Snapshots are kept in a dictionary of position -> snapshot at that position. These are stored in descending order.
                 /// </summary>
-                private readonly SortedDictionary<int, Snapshot> _incrementalSnapshots = new SortedDictionary<int, Snapshot>();
+                private readonly SortedDictionary<int, Snapshot> _incrementalSnapshots =
+                    new SortedDictionary<int, Snapshot>();
+
                 /// <summary>
                 /// Every walker is walking a specific symbol, and can potentially walk each symbol multiple times
                 /// to get to a stable state. Each of these symbols gets a single shared state slot, which this
                 /// dictionary keeps track of. These slots correspond to indexes into <see cref="_walkerStates"/>.
                 /// </summary>
-                private readonly PooledDictionary<Symbol, int> _symbolToSlot = PooledDictionary<Symbol, int>.GetInstance();
+                private readonly PooledDictionary<Symbol, int> _symbolToSlot = PooledDictionary<
+                    Symbol,
+                    int
+                >.GetInstance();
                 private int _currentWalkerSlot = -1;
 
                 internal SnapshotManager ToManagerAndFree()
                 {
-                    Debug.Assert(_currentWalkerSlot == -1, "Attempting to finalize snapshots before all walks completed");
+                    Debug.Assert(
+                        _currentWalkerSlot == -1,
+                        "Attempting to finalize snapshots before all walks completed"
+                    );
                     Debug.Assert(_symbolToSlot.Count == _walkerStates.Count);
                     Debug.Assert(_symbolToSlot.Count > 0);
                     _symbolToSlot.Free();
-                    var snapshotsArray = EnumerableExtensions.SelectAsArray<KeyValuePair<int, Snapshot>, (int, Snapshot)>(_incrementalSnapshots, (kvp) => (kvp.Key, kvp.Value));
+                    var snapshotsArray = EnumerableExtensions.SelectAsArray<
+                        KeyValuePair<int, Snapshot>,
+                        (int, Snapshot)
+                    >(_incrementalSnapshots, (kvp) => (kvp.Key, kvp.Value));
 
                     var updatedSymbols = _updatedSymbolMap.ToImmutable();
-                    return new SnapshotManager(_walkerStates.ToImmutableAndFree(), snapshotsArray, updatedSymbols);
+                    return new SnapshotManager(
+                        _walkerStates.ToImmutableAndFree(),
+                        snapshotsArray,
+                        updatedSymbols
+                    );
                 }
 
                 internal int EnterNewWalker(Symbol symbol)
@@ -217,10 +281,17 @@ Now {updatedSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}");
 
                     // Note that we can't use Add here, as this is potentially not the stable
                     // state of this node and we could get updated states later.
-                    _incrementalSnapshots[node.Syntax.SpanStart] = new Snapshot(currentState.CreateSnapshot(), _currentWalkerSlot);
+                    _incrementalSnapshots[node.Syntax.SpanStart] = new Snapshot(
+                        currentState.CreateSnapshot(),
+                        _currentWalkerSlot
+                    );
                 }
 
-                internal void SetUpdatedSymbol(BoundNode node, Symbol originalSymbol, Symbol updatedSymbol)
+                internal void SetUpdatedSymbol(
+                    BoundNode node,
+                    Symbol originalSymbol,
+                    Symbol updatedSymbol
+                )
                 {
 #if DEBUG
                     Debug.Assert(AreCloseEnough(originalSymbol, updatedSymbol));

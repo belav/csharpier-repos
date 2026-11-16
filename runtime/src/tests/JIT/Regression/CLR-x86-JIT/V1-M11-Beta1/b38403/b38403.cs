@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -23,7 +24,8 @@ namespace Test
 
         static void Static1(float param4, AA param5)
         {
-            while (AA.m_bStatic1) ;
+            while (AA.m_bStatic1)
+                ;
         }
 
         [Fact]

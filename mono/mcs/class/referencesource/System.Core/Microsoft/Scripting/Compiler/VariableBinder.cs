@@ -1,11 +1,11 @@
 ﻿/* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -17,44 +17,49 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Dynamic.Utils;
-
 #if SILVERLIGHT
 using System.Core;
 #endif
 
 #if CLR2
-namespace Microsoft.Scripting.Ast.Compiler {
+namespace Microsoft.Scripting.Ast.Compiler
+{
 #else
-namespace System.Linq.Expressions.Compiler {
+namespace System.Linq.Expressions.Compiler
+{
 #endif
     /// <summary>
     /// Determines if variables are closed over in nested lambdas and need to
     /// be hoisted.
     /// </summary>
-    internal sealed class VariableBinder : ExpressionVisitor {
+    internal sealed class VariableBinder : ExpressionVisitor
+    {
         private readonly AnalyzedTree _tree = new AnalyzedTree();
         private readonly Stack<CompilerScope> _scopes = new Stack<CompilerScope>();
         private readonly Stack<BoundConstants> _constants = new Stack<BoundConstants>();
         private bool _inQuote;
 
-        internal static AnalyzedTree Bind(LambdaExpression lambda) {
+        internal static AnalyzedTree Bind(LambdaExpression lambda)
+        {
             var binder = new VariableBinder();
             binder.Visit(lambda);
             return binder._tree;
         }
 
-        private VariableBinder() {
-        }
+        private VariableBinder() { }
 
-        protected internal override Expression VisitConstant(ConstantExpression node) {
+        protected internal override Expression VisitConstant(ConstantExpression node)
+        {
             // If we're in Quote, we can ignore constants completely
-            if (_inQuote) {
+            if (_inQuote)
+            {
                 return node;
             }
-            
+
             // Constants that can be emitted into IL don't need to be stored on
             // the delegate
-            if (ILGen.CanEmitConstant(node.Value, node.Type)) {
+            if (ILGen.CanEmitConstant(node.Value, node.Type))
+            {
                 return node;
             }
 
@@ -62,19 +67,24 @@ namespace System.Linq.Expressions.Compiler {
             return node;
         }
 
-        protected internal override Expression VisitUnary(UnaryExpression node) {
-            if (node.NodeType == ExpressionType.Quote) {
+        protected internal override Expression VisitUnary(UnaryExpression node)
+        {
+            if (node.NodeType == ExpressionType.Quote)
+            {
                 bool savedInQuote = _inQuote;
                 _inQuote = true;
                 Visit(node.Operand);
                 _inQuote = savedInQuote;
-            } else {
+            }
+            else
+            {
                 Visit(node.Operand);
             }
             return node;
         }
 
-        protected internal override Expression VisitLambda<T>(Expression<T> node) {
+        protected internal override Expression VisitLambda<T>(Expression<T> node)
+        {
             _scopes.Push(_tree.Scopes[node] = new CompilerScope(node, true));
             _constants.Push(_tree.Constants[node] = new BoundConstants());
             Visit(MergeScopes(node));
@@ -83,11 +93,13 @@ namespace System.Linq.Expressions.Compiler {
             return node;
         }
 
-        protected internal override Expression VisitInvocation(InvocationExpression node) {
+        protected internal override Expression VisitInvocation(InvocationExpression node)
+        {
             LambdaExpression lambda = node.LambdaOperand;
 
             // optimization: inline code for literal lambda's directly
-            if (lambda != null) {
+            if (lambda != null)
+            {
                 // visit the lambda, but treat it more like a scope
                 _scopes.Push(_tree.Scopes[lambda] = new CompilerScope(lambda, false));
                 Visit(MergeScopes(lambda));
@@ -100,8 +112,10 @@ namespace System.Linq.Expressions.Compiler {
             return base.VisitInvocation(node);
         }
 
-        protected internal override Expression VisitBlock(BlockExpression node) {
-            if (node.Variables.Count == 0) {
+        protected internal override Expression VisitBlock(BlockExpression node)
+        {
+            if (node.Variables.Count == 0)
+            {
                 Visit(node.Expressions);
                 return node;
             }
@@ -111,8 +125,10 @@ namespace System.Linq.Expressions.Compiler {
             return node;
         }
 
-        protected override CatchBlock VisitCatchBlock(CatchBlock node) {
-            if (node.Variable == null) {
+        protected override CatchBlock VisitCatchBlock(CatchBlock node)
+        {
+            if (node.Variable == null)
+            {
                 Visit(node.Body);
                 return node;
             }
@@ -125,12 +141,16 @@ namespace System.Linq.Expressions.Compiler {
         // If the immediate child is another scope, merge it into this one
         // This is an optimization to save environment allocations and
         // array accesses.
-        private ReadOnlyCollection<Expression> MergeScopes(Expression node) {
+        private ReadOnlyCollection<Expression> MergeScopes(Expression node)
+        {
             ReadOnlyCollection<Expression> body;
             var lambda = node as LambdaExpression;
-            if (lambda != null) {
+            if (lambda != null)
+            {
                 body = new ReadOnlyCollection<Expression>(new[] { lambda.Body });
-            }  else {
+            }
+            else
+            {
                 body = ((BlockExpression)node).Expressions;
             }
 
@@ -138,24 +158,32 @@ namespace System.Linq.Expressions.Compiler {
 
             // A block body is mergeable if the body only contains one single block node containing variables,
             // and the child block has the same type as the parent block.
-            while (body.Count == 1 && body[0].NodeType == ExpressionType.Block) {
+            while (body.Count == 1 && body[0].NodeType == ExpressionType.Block)
+            {
                 var block = (BlockExpression)body[0];
 
-                if (block.Variables.Count > 0) {
+                if (block.Variables.Count > 0)
+                {
                     // Make sure none of the variables are shadowed. If any
                     // are, we can't merge it.
-                    foreach (var v in block.Variables) {
-                        if (currentScope.Definitions.ContainsKey(v)) {
+                    foreach (var v in block.Variables)
+                    {
+                        if (currentScope.Definitions.ContainsKey(v))
+                        {
                             return body;
                         }
                     }
 
                     // Otherwise, merge it
-                    if (currentScope.MergedScopes == null) {
-                        currentScope.MergedScopes = new Set<object>(ReferenceEqualityComparer<object>.Instance);
+                    if (currentScope.MergedScopes == null)
+                    {
+                        currentScope.MergedScopes = new Set<object>(
+                            ReferenceEqualityComparer<object>.Instance
+                        );
                     }
                     currentScope.MergedScopes.Add(block);
-                    foreach (var v in block.Variables) {
+                    foreach (var v in block.Variables)
+                    {
                         currentScope.Definitions.Add(v, VariableStorageKind.Local);
                     }
                 }
@@ -165,8 +193,8 @@ namespace System.Linq.Expressions.Compiler {
             return body;
         }
 
-
-        protected internal override Expression VisitParameter(ParameterExpression node) {
+        protected internal override Expression VisitParameter(ParameterExpression node)
+        {
             Reference(node, VariableStorageKind.Local);
 
             //
@@ -174,7 +202,8 @@ namespace System.Linq.Expressions.Compiler {
             // it is used a lot.
             //
             CompilerScope referenceScope = null;
-            foreach (CompilerScope scope in _scopes) {
+            foreach (CompilerScope scope in _scopes)
+            {
                 //
                 // There are two times we care about references:
                 //   1. When we enter a lambda, we want to cache frequently
@@ -183,14 +212,16 @@ namespace System.Linq.Expressions.Compiler {
                 //      want to cache it immediately when we allocate the
                 //      closure slot for it
                 //
-                if (scope.IsMethod || scope.Definitions.ContainsKey(node)) {
+                if (scope.IsMethod || scope.Definitions.ContainsKey(node))
+                {
                     referenceScope = scope;
                     break;
                 }
             }
 
             Debug.Assert(referenceScope != null);
-            if (referenceScope.ReferenceCount == null) {
+            if (referenceScope.ReferenceCount == null)
+            {
                 referenceScope.ReferenceCount = new Dictionary<ParameterExpression, int>();
             }
 
@@ -198,42 +229,57 @@ namespace System.Linq.Expressions.Compiler {
             return node;
         }
 
-        protected internal override Expression VisitRuntimeVariables(RuntimeVariablesExpression node) {
-            foreach (var v in node.Variables) {
+        protected internal override Expression VisitRuntimeVariables(
+            RuntimeVariablesExpression node
+        )
+        {
+            foreach (var v in node.Variables)
+            {
                 // Force hoisting of these variables
                 Reference(v, VariableStorageKind.Hoisted);
             }
             return node;
         }
 
-        private void Reference(ParameterExpression node, VariableStorageKind storage) {
+        private void Reference(ParameterExpression node, VariableStorageKind storage)
+        {
             CompilerScope definition = null;
-            foreach (CompilerScope scope in _scopes) {
-                if (scope.Definitions.ContainsKey(node)) {
+            foreach (CompilerScope scope in _scopes)
+            {
+                if (scope.Definitions.ContainsKey(node))
+                {
                     definition = scope;
                     break;
                 }
                 scope.NeedsClosure = true;
-                if (scope.IsMethod) {
+                if (scope.IsMethod)
+                {
                     storage = VariableStorageKind.Hoisted;
                 }
             }
-            if (definition == null) {
+            if (definition == null)
+            {
                 throw Error.UndefinedVariable(node.Name, node.Type, CurrentLambdaName);
             }
-            if (storage == VariableStorageKind.Hoisted) {
-                if (node.IsByRef) {
+            if (storage == VariableStorageKind.Hoisted)
+            {
+                if (node.IsByRef)
+                {
                     throw Error.CannotCloseOverByRef(node.Name, CurrentLambdaName);
                 }
                 definition.Definitions[node] = VariableStorageKind.Hoisted;
             }
         }
 
-        private string CurrentLambdaName {
-            get {
-                foreach (var scope in _scopes) {
+        private string CurrentLambdaName
+        {
+            get
+            {
+                foreach (var scope in _scopes)
+                {
                     var lambda = scope.Node as LambdaExpression;
-                    if (lambda != null) {
+                    if (lambda != null)
+                    {
                         return lambda.Name;
                     }
                 }

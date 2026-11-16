@@ -11,7 +11,9 @@ namespace Roslyn.Test.Utilities
 {
     public class TestStream : Stream
     {
-        private readonly bool? _canRead, _canSeek, _canWrite;
+        private readonly bool? _canRead,
+            _canSeek,
+            _canWrite;
         private readonly Func<byte[], int, int, int> _readFunc;
         private readonly long? _length;
         private readonly Func<long> _getPosition;
@@ -28,7 +30,8 @@ namespace Roslyn.Test.Utilities
             Func<long> getPosition = null,
             Action<long> setPosition = null,
             Stream backingStream = null,
-            Action dispose = null)
+            Action dispose = null
+        )
         {
             _canRead = canRead;
             _canSeek = canSeek;
@@ -65,7 +68,6 @@ namespace Roslyn.Test.Utilities
                 }
                 throw new NotImplementedException();
             }
-
             set
             {
                 if (!CanSeek)

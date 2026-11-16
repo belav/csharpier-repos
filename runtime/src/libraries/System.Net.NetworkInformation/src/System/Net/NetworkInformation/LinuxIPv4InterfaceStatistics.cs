@@ -23,7 +23,8 @@ namespace System.Net.NetworkInformation
         public override long IncomingPacketsWithErrors => _statistics.IncomingPacketsWithErrors;
 
         [UnsupportedOSPlatform("linux")]
-        public override long IncomingUnknownProtocolPackets => _statistics.IncomingUnknownProtocolPackets;
+        public override long IncomingUnknownProtocolPackets =>
+            _statistics.IncomingUnknownProtocolPackets;
 
         public override long NonUnicastPacketsReceived => _statistics.NonUnicastPacketsReceived;
 

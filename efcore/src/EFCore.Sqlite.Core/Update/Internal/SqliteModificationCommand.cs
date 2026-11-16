@@ -18,9 +18,7 @@ public class SqliteModificationCommand : ModificationCommand
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqliteModificationCommand(in ModificationCommandParameters modificationCommandParameters)
-        : base(modificationCommandParameters)
-    {
-    }
+        : base(modificationCommandParameters) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -28,10 +26,10 @@ public class SqliteModificationCommand : ModificationCommand
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqliteModificationCommand(in NonTrackedModificationCommandParameters modificationCommandParameters)
-        : base(modificationCommandParameters)
-    {
-    }
+    public SqliteModificationCommand(
+        in NonTrackedModificationCommandParameters modificationCommandParameters
+    )
+        : base(modificationCommandParameters) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,11 +37,15 @@ public class SqliteModificationCommand : ModificationCommand
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override void ProcessSinglePropertyJsonUpdate(ref ColumnModificationParameters parameters)
+    protected override void ProcessSinglePropertyJsonUpdate(
+        ref ColumnModificationParameters parameters
+    )
     {
         var property = parameters.Property!;
 
-        var propertyProviderClrType = (property.GetTypeMapping().Converter?.ProviderClrType ?? property.ClrType).UnwrapNullableType();
+        var propertyProviderClrType = (
+            property.GetTypeMapping().Converter?.ProviderClrType ?? property.ClrType
+        ).UnwrapNullableType();
 
         // SQLite has no bool type, so if we simply sent the bool as-is, we'd get 1/0 in the JSON document.
         // To get an actual unquoted true/false value, we pass "true"/"false" string through the json() minifier, which does this.
@@ -61,8 +63,8 @@ public class SqliteModificationCommand : ModificationCommand
                 {
                     true => "true",
                     false => "false",
-                    _ => throw new UnreachableException()
-                }
+                    _ => throw new UnreachableException(),
+                },
             };
 
             return;

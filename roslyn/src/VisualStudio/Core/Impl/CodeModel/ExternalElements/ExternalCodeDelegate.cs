@@ -14,18 +14,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE.CodeDelegate))]
-    public sealed class ExternalCodeDelegate : AbstractExternalCodeType, EnvDTE80.CodeDelegate2, EnvDTE.CodeDelegate, EnvDTE.CodeType, EnvDTE80.CodeElement2, EnvDTE.CodeElement
+    public sealed class ExternalCodeDelegate
+        : AbstractExternalCodeType,
+            EnvDTE80.CodeDelegate2,
+            EnvDTE.CodeDelegate,
+            EnvDTE.CodeType,
+            EnvDTE80.CodeElement2,
+            EnvDTE.CodeElement
     {
-        internal static EnvDTE.CodeDelegate Create(CodeModelState state, ProjectId projectId, ITypeSymbol typeSymbol)
+        internal static EnvDTE.CodeDelegate Create(
+            CodeModelState state,
+            ProjectId projectId,
+            ITypeSymbol typeSymbol
+        )
         {
             var element = new ExternalCodeDelegate(state, projectId, typeSymbol);
             return (EnvDTE.CodeDelegate)ComAggregate.CreateAggregatedObject(element);
         }
 
         private ExternalCodeDelegate(CodeModelState state, ProjectId projectId, ITypeSymbol symbol)
-            : base(state, projectId, symbol)
-        {
-        }
+            : base(state, projectId, symbol) { }
 
         public override EnvDTE.vsCMElement Kind
         {
@@ -44,15 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 
         public EnvDTE.CodeTypeRef Type
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         public bool IsGeneric

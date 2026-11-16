@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-using static System.Runtime.Intrinsics.X86.Avx;
-using System.Runtime.Intrinsics.X86;
-using System.Runtime.Intrinsics;
-using System.Runtime.CompilerServices;
 using System;
+using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
+using static System.Runtime.Intrinsics.X86.Avx;
 
 public static class VectorMath
 {
@@ -75,7 +75,11 @@ public static class VectorMath
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector256<float> Log(Vector256<float> value)
     {
-        Vector256<float> invalidMask = Compare(value, Vector256<float>.Zero, FloatComparisonMode.OrderedLessThanOrEqualNonSignaling);
+        Vector256<float> invalidMask = Compare(
+            value,
+            Vector256<float>.Zero,
+            FloatComparisonMode.OrderedLessThanOrEqualNonSignaling
+        );
         Vector256<float> x = Max(value, MinNormPos.AsSingle());
         Vector256<int> ei = Avx2.ShiftRightLogical(x.AsInt32(), 23);
         x = Or(And(x, MantMask.AsSingle()), Point5);
@@ -102,5 +106,4 @@ public static class VectorMath
         x = Add(Add(x, y), Multiply(e, LogQ2));
         return Or(x, invalidMask);
     }
-
 }

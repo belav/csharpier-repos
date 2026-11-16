@@ -13,16 +13,12 @@ builder.WebHost.ConfigureKestrel(
     (context, options) =>
     {
         // Port configured for WebTransport
-        options.Listen(
-            IPAddress.Any,
-            5007,
-            listenOptions =>
-            {
-                listenOptions.UseHttps(GenerateManualCertificate());
-                listenOptions.UseConnectionLogging();
-                listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-            }
-        );
+        options.Listen(IPAddress.Any, 5007, listenOptions =>
+        {
+            listenOptions.UseHttps(GenerateManualCertificate());
+            listenOptions.UseConnectionLogging();
+            listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+        });
     }
 );
 var host = builder.Build();

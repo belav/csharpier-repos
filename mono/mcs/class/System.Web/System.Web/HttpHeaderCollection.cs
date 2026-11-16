@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,50 +30,55 @@ using System.Web.Util;
 
 namespace System.Web
 {
-	sealed class HttpHeaderCollection : NameValueCollection
-	{
-		bool? headerCheckingEnabled;
+    sealed class HttpHeaderCollection : NameValueCollection
+    {
+        bool? headerCheckingEnabled;
 
-		public HttpHeaderCollection () : base (StringComparer.OrdinalIgnoreCase)
-		{
-		}
+        public HttpHeaderCollection()
+            : base(StringComparer.OrdinalIgnoreCase) { }
 
-		bool HeaderCheckingEnabled {
-			get {
-				if (headerCheckingEnabled == null)
-					headerCheckingEnabled = HttpRuntime.Section.EnableHeaderChecking;
+        bool HeaderCheckingEnabled
+        {
+            get
+            {
+                if (headerCheckingEnabled == null)
+                    headerCheckingEnabled = HttpRuntime.Section.EnableHeaderChecking;
 
-				return (bool)headerCheckingEnabled;
-			}
-		}
-				
-		public override void Add (string name, string value)
-		{
-			EncodeAndSetHeader (name, value, false);
-		}
+                return (bool)headerCheckingEnabled;
+            }
+        }
 
-		public override void Set (string name, string value)
-		{
-			EncodeAndSetHeader (name, value, true);
-		}
+        public override void Add(string name, string value)
+        {
+            EncodeAndSetHeader(name, value, false);
+        }
 
-		void EncodeAndSetHeader (string name, string value, bool replaceExisting)
-		{
-			if (String.IsNullOrEmpty (name) || String.IsNullOrEmpty (value))
-				return;
+        public override void Set(string name, string value)
+        {
+            EncodeAndSetHeader(name, value, true);
+        }
 
-			string encName, encValue;
-			if (HeaderCheckingEnabled) {
-				HttpEncoder.Current.HeaderNameValueEncode (name, value, out encName, out encValue);
-			} else {
-				encName = name;
-				encValue = value;
-			}
+        void EncodeAndSetHeader(string name, string value, bool replaceExisting)
+        {
+            if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(value))
+                return;
 
-			if (replaceExisting)
-				base.Set (encName, encValue);
-			else
-				base.Add (encName, encValue);
-		}
-	}
+            string encName,
+                encValue;
+            if (HeaderCheckingEnabled)
+            {
+                HttpEncoder.Current.HeaderNameValueEncode(name, value, out encName, out encValue);
+            }
+            else
+            {
+                encName = name;
+                encValue = value;
+            }
+
+            if (replaceExisting)
+                base.Set(encName, encValue);
+            else
+                base.Add(encName, encValue);
+        }
+    }
 }

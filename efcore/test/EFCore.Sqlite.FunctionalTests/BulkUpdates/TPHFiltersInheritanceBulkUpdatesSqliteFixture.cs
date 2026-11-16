@@ -5,6 +5,5 @@ namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
 public class TPHFiltersInheritanceBulkUpdatesSqliteFixture : TPHInheritanceBulkUpdatesSqliteFixture
 {
-    public override bool EnableFilters
-        => true;
+    public override bool EnableFilters => true;
 }

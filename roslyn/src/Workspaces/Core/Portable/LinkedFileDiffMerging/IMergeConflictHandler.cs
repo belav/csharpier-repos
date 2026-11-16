@@ -11,6 +11,9 @@ namespace Microsoft.CodeAnalysis
 {
     internal interface IMergeConflictHandler
     {
-        IEnumerable<TextChange> CreateEdits(SourceText originalSourceText, IEnumerable<UnmergedDocumentChanges> unmergedChanges);
+        IEnumerable<TextChange> CreateEdits(
+            SourceText originalSourceText,
+            IEnumerable<UnmergedDocumentChanges> unmergedChanges
+        );
     }
 }

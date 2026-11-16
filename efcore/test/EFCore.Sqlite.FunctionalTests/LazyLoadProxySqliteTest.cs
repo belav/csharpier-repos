@@ -3,12 +3,11 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class LazyLoadProxySqliteTest : LazyLoadProxyTestBase<LazyLoadProxySqliteTest.LoadSqliteFixture>
+public class LazyLoadProxySqliteTest
+    : LazyLoadProxyTestBase<LazyLoadProxySqliteTest.LoadSqliteFixture>
 {
     public LazyLoadProxySqliteTest(LoadSqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalFact]
     public void IsLoaded_is_not_set_if_loading_principal_collection_fails()
@@ -112,7 +111,8 @@ public class LazyLoadProxySqliteTest : LazyLoadProxyTestBase<LazyLoadProxySqlite
         public override InterceptionResult<DbDataReader> ReaderExecuting(
             DbCommand command,
             CommandEventData eventData,
-            InterceptionResult<DbDataReader> result)
+            InterceptionResult<DbDataReader> result
+        )
         {
             if (Throw)
             {
@@ -123,8 +123,8 @@ public class LazyLoadProxySqliteTest : LazyLoadProxyTestBase<LazyLoadProxySqlite
         }
     }
 
-    protected override string SerializedBlogs2
-        => """
+    protected override string SerializedBlogs2 =>
+        """
 {
   "$id": "1",
   "$values": [
@@ -903,8 +903,8 @@ public class LazyLoadProxySqliteTest : LazyLoadProxyTestBase<LazyLoadProxySqlite
 }
 """;
 
-    protected override string SerializedBlogs1
-        => """
+    protected override string SerializedBlogs1 =>
+        """
 [
   {
     "Writer": {
@@ -1588,10 +1588,9 @@ public class LazyLoadProxySqliteTest : LazyLoadProxyTestBase<LazyLoadProxySqlite
     {
         public ThrowingInterceptor Interceptor { get; } = new();
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder.UseLazyLoadingProxies().AddInterceptors(Interceptor));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder.UseLazyLoadingProxies().AddInterceptors(Interceptor));
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
     }
 }

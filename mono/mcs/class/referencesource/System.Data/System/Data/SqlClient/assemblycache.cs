@@ -21,27 +21,29 @@
 
 using System;
 using System.Collections;
-using System.Runtime.InteropServices;
-using System.Reflection;
-using System.Globalization;
-using System.Diagnostics;
+using System.Data.Common;
 using System.Data.Sql;
 using System.Data.SqlTypes;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security;
-using System.Security.Policy;
 using System.Security.Permissions;
-using System.Data.Common;
-
+using System.Security.Policy;
 using Microsoft.SqlServer.Server;
 
-namespace System.Data.SqlClient {
-
-    internal sealed class AssemblyCache {
-        private AssemblyCache() { /* prevent utility class from being insantiated*/
+namespace System.Data.SqlClient
+{
+    internal sealed class AssemblyCache
+    {
+        private AssemblyCache()
+        { /* prevent utility class from being insantiated*/
         }
 
-        internal static int GetLength(Object inst){
+        internal static int GetLength(Object inst)
+        {
             //caller should have allocated enough, based on MaxByteSize
             return SerializationHelperSql9.SizeInBytes(inst);
         }
@@ -50,21 +52,24 @@ namespace System.Data.SqlClient {
         //then we we have to make corresponding changes here.
         //please also change sqludcdatetime.cs, sqltime.cs and sqldate.cs
 
-        internal static SqlUdtInfo GetInfoFromType(Type t) {
+        internal static SqlUdtInfo GetInfoFromType(Type t)
+        {
             Debug.Assert(t != null, "Type object cant be NULL");
 
             Type orig = t;
-            do {
+            do
+            {
                 SqlUdtInfo attr = SqlUdtInfo.TryGetFromType(t);
 
-                if (attr != null ) {
+                if (attr != null)
+                {
                     return attr;
                 }
-                else {
+                else
+                {
                     t = t.BaseType;
                 }
-            }
-            while (t != null);
+            } while (t != null);
 
             throw SQL.UDTInvalidSqlType(orig.AssemblyQualifiedName);
         }

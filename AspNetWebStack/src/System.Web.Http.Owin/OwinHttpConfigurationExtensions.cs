@@ -21,8 +21,11 @@ namespace System.Web.Http
         /// performed by the host is ignored. The remaining pipeline within the <see cref="HttpServer"/>, including
         /// <see cref="IAuthenticationFilter"/>s, is then the exclusive authority for authentication.
         /// </remarks>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
-            Justification = "Message handler should be disposed with parent configuration.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Message handler should be disposed with parent configuration."
+        )]
         public static void SuppressDefaultHostAuthentication(this HttpConfiguration configuration)
         {
             if (configuration == null)

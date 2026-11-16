@@ -8,9 +8,7 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class AuthorizationPolicyTypeElement : ConfigurationElement
     {
-        public AuthorizationPolicyTypeElement()
-        {
-        }
+        public AuthorizationPolicyTypeElement() { }
 
         public AuthorizationPolicyTypeElement(string policyType)
         {
@@ -21,7 +19,10 @@ namespace System.ServiceModel.Configuration
             this.PolicyType = policyType;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.PolicyType, Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.PolicyType,
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 1)]
         public string PolicyType
         {

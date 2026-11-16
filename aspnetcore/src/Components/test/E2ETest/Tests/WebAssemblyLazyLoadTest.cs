@@ -222,13 +222,10 @@ public class WebAssemblyLazyLoadTest : ServerTestBase<ToggleExecutionModeServerF
         var log = Browser.Manage().Logs.GetLog(LogType.Browser);
         foreach (var message in messages)
         {
-            Assert.DoesNotContain(
-                log,
-                entry =>
-                {
-                    return entry.Level == LogLevel.Severe && entry.Message.Contains(message);
-                }
-            );
+            Assert.DoesNotContain(log, entry =>
+            {
+                return entry.Level == LogLevel.Severe && entry.Message.Contains(message);
+            });
         }
     }
 
@@ -237,13 +234,10 @@ public class WebAssemblyLazyLoadTest : ServerTestBase<ToggleExecutionModeServerF
         var log = Browser.Manage().Logs.GetLog(LogType.Browser);
         foreach (var message in messages)
         {
-            Assert.Contains(
-                log,
-                entry =>
-                {
-                    return entry.Level == LogLevel.Severe && entry.Message.Contains(message);
-                }
-            );
+            Assert.Contains(log, entry =>
+            {
+                return entry.Level == LogLevel.Severe && entry.Message.Contains(message);
+            });
         }
     }
 }

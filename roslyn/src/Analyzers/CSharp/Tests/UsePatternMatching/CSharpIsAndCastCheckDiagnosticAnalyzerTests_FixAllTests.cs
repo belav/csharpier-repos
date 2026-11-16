@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         public async Task FixAllInDocument1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -44,14 +44,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -66,7 +67,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
         }
     }
-}");
+}"
+            );
         }
     }
 }

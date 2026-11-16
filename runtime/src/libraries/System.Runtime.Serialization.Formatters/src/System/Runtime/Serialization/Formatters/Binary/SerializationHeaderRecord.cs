@@ -20,7 +20,13 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
         internal SerializationHeaderRecord() { }
 
-        internal SerializationHeaderRecord(BinaryHeaderEnum binaryHeaderEnum, int topId, int headerId, int majorVersion, int minorVersion)
+        internal SerializationHeaderRecord(
+            BinaryHeaderEnum binaryHeaderEnum,
+            int topId,
+            int headerId,
+            int majorVersion,
+            int minorVersion
+        )
         {
             _binaryHeaderEnum = binaryHeaderEnum;
             _topId = topId;
@@ -56,7 +62,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
             _majorVersion = GetInt32(headerBytes, 9);
             if (_majorVersion > BinaryFormatterMajorVersion)
             {
-                throw new SerializationException(SR.Format(SR.Serialization_InvalidFormat, BitConverter.ToString(headerBytes)));
+                throw new SerializationException(
+                    SR.Format(SR.Serialization_InvalidFormat, BitConverter.ToString(headerBytes))
+                );
             }
 
             // binaryHeaderEnum has already been read

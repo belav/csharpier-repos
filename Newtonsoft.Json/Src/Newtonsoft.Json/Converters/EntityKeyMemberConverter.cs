@@ -62,7 +62,8 @@ namespace Newtonsoft.Json.Converters
             EnsureReflectionObject(value.GetType());
             MiscellaneousUtils.Assert(_reflectionObject != null);
 
-            DefaultContractResolver? resolver = serializer.ContractResolver as DefaultContractResolver;
+            DefaultContractResolver? resolver =
+                serializer.ContractResolver as DefaultContractResolver;
 
             string keyName = (string)_reflectionObject.GetValue(value, KeyPropertyName)!;
             object? keyValue = _reflectionObject.GetValue(value, ValuePropertyName);
@@ -70,16 +71,34 @@ namespace Newtonsoft.Json.Converters
             Type? keyValueType = keyValue?.GetType();
 
             writer.WriteStartObject();
-            writer.WritePropertyName((resolver != null) ? resolver.GetResolvedPropertyName(KeyPropertyName) : KeyPropertyName);
+            writer.WritePropertyName(
+                (resolver != null)
+                    ? resolver.GetResolvedPropertyName(KeyPropertyName)
+                    : KeyPropertyName
+            );
             writer.WriteValue(keyName);
-            writer.WritePropertyName((resolver != null) ? resolver.GetResolvedPropertyName(TypePropertyName) : TypePropertyName);
+            writer.WritePropertyName(
+                (resolver != null)
+                    ? resolver.GetResolvedPropertyName(TypePropertyName)
+                    : TypePropertyName
+            );
             writer.WriteValue(keyValueType?.FullName);
 
-            writer.WritePropertyName((resolver != null) ? resolver.GetResolvedPropertyName(ValuePropertyName) : ValuePropertyName);
+            writer.WritePropertyName(
+                (resolver != null)
+                    ? resolver.GetResolvedPropertyName(ValuePropertyName)
+                    : ValuePropertyName
+            );
 
             if (keyValueType != null)
             {
-                if (JsonSerializerInternalWriter.TryConvertToString(keyValue!, keyValueType, out string? valueJson))
+                if (
+                    JsonSerializerInternalWriter.TryConvertToString(
+                        keyValue!,
+                        keyValueType,
+                        out string? valueJson
+                    )
+                )
                 {
                     writer.WriteValue(valueJson);
                 }
@@ -100,9 +119,21 @@ namespace Newtonsoft.Json.Converters
         {
             reader.ReadAndAssert();
 
-            if (reader.TokenType != JsonToken.PropertyName || !string.Equals(reader.Value?.ToString(), propertyName, StringComparison.OrdinalIgnoreCase))
+            if (
+                reader.TokenType != JsonToken.PropertyName
+                || !string.Equals(
+                    reader.Value?.ToString(),
+                    propertyName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                throw new JsonSerializationException("Expected JSON property '{0}'.".FormatWith(CultureInfo.InvariantCulture, propertyName));
+                throw new JsonSerializationException(
+                    "Expected JSON property '{0}'.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        propertyName
+                    )
+                );
             }
         }
 
@@ -114,7 +145,12 @@ namespace Newtonsoft.Json.Converters
         /// <param name="existingValue">The existing value of object being read.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
-        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+        public override object? ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object? existingValue,
+            JsonSerializer serializer
+        )
         {
             EnsureReflectionObject(objectType);
             MiscellaneousUtils.Assert(_reflectionObject != null);
@@ -133,7 +169,11 @@ namespace Newtonsoft.Json.Converters
 
             ReadAndAssertProperty(reader, ValuePropertyName);
             reader.ReadAndAssert();
-            _reflectionObject.SetValue(entityKeyMember, ValuePropertyName, serializer.Deserialize(reader, t));
+            _reflectionObject.SetValue(
+                entityKeyMember,
+                ValuePropertyName,
+                serializer.Deserialize(reader, t)
+            );
 
             reader.ReadAndAssert();
 
@@ -144,7 +184,11 @@ namespace Newtonsoft.Json.Converters
         {
             if (_reflectionObject == null)
             {
-                _reflectionObject = ReflectionObject.Create(objectType, KeyPropertyName, ValuePropertyName);
+                _reflectionObject = ReflectionObject.Create(
+                    objectType,
+                    KeyPropertyName,
+                    ValuePropertyName
+                );
             }
         }
 

@@ -5,12 +5,11 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.ObjectModel;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.Runtime.Serialization;
-    using System.IdentityModel.Tokens;
     using System.IdentityModel.Selectors;
-    
+    using System.IdentityModel.Tokens;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     sealed class MessageSecurityTokenVersion : SecurityTokenVersion
     {
@@ -30,7 +29,8 @@ namespace System.ServiceModel.Security
             false,
             XD.SecurityXXX2005Dictionary.Namespace.Value,
             XD.TrustFeb2005Dictionary.Namespace.Value,
-            XD.SecureConversationFeb2005Dictionary.Namespace.Value);
+            XD.SecureConversationFeb2005Dictionary.Namespace.Value
+        );
         static MessageSecurityTokenVersion wss10bsp10 = new MessageSecurityTokenVersion(
             SecurityVersion.WSSecurity10,
             TrustVersion.WSTrustFeb2005,
@@ -40,7 +40,8 @@ namespace System.ServiceModel.Security
             XD.SecurityJan2004Dictionary.Namespace.Value,
             XD.TrustFeb2005Dictionary.Namespace.Value,
             XD.SecureConversationFeb2005Dictionary.Namespace.Value,
-            bsp10ns);
+            bsp10ns
+        );
         static MessageSecurityTokenVersion wss11bsp10 = new MessageSecurityTokenVersion(
             SecurityVersion.WSSecurity11,
             TrustVersion.WSTrustFeb2005,
@@ -50,7 +51,8 @@ namespace System.ServiceModel.Security
             XD.SecurityXXX2005Dictionary.Namespace.Value,
             XD.TrustFeb2005Dictionary.Namespace.Value,
             XD.SecureConversationFeb2005Dictionary.Namespace.Value,
-            bsp10ns);
+            bsp10ns
+        );
         static MessageSecurityTokenVersion wss10oasisdec2005bsp10 = new MessageSecurityTokenVersion(
             SecurityVersion.WSSecurity10,
             TrustVersion.WSTrust13,
@@ -60,7 +62,7 @@ namespace System.ServiceModel.Security
             XD.SecurityXXX2005Dictionary.Namespace.Value,
             DXD.TrustDec2005Dictionary.Namespace.Value,
             DXD.SecureConversationDec2005Dictionary.Namespace.Value
-            );
+        );
         static MessageSecurityTokenVersion wss11oasisdec2005 = new MessageSecurityTokenVersion(
             SecurityVersion.WSSecurity11,
             TrustVersion.WSTrust13,
@@ -70,7 +72,7 @@ namespace System.ServiceModel.Security
             XD.SecurityJan2004Dictionary.Namespace.Value,
             DXD.TrustDec2005Dictionary.Namespace.Value,
             DXD.SecureConversationDec2005Dictionary.Namespace.Value
-            );
+        );
         static MessageSecurityTokenVersion wss11oasisdec2005bsp10 = new MessageSecurityTokenVersion(
             SecurityVersion.WSSecurity11,
             TrustVersion.WSTrust13,
@@ -80,64 +82,51 @@ namespace System.ServiceModel.Security
             XD.SecurityXXX2005Dictionary.Namespace.Value,
             DXD.TrustDec2005Dictionary.Namespace.Value,
             DXD.SecureConversationDec2005Dictionary.Namespace.Value
-            );
+        );
 
         public static MessageSecurityTokenVersion WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005
         {
-            get
-            {
-                return wss11;
-            }
+            get { return wss11; }
         }
 
         public static MessageSecurityTokenVersion WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005BasicSecurityProfile10
         {
-            get
-            {
-                return wss11bsp10;
-            }
+            get { return wss11bsp10; }
         }
 
         public static MessageSecurityTokenVersion WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005BasicSecurityProfile10
         {
-            get
-            {
-                return wss10bsp10;
-            }
+            get { return wss10bsp10; }
         }
 
         public static MessageSecurityTokenVersion WSSecurity10WSTrust13WSSecureConversation13BasicSecurityProfile10
         {
-            get
-            {
-                return wss10oasisdec2005bsp10;
-            }
+            get { return wss10oasisdec2005bsp10; }
         }
 
         public static MessageSecurityTokenVersion WSSecurity11WSTrust13WSSecureConversation13
         {
-            get
-            {
-                return wss11oasisdec2005;
-            }
+            get { return wss11oasisdec2005; }
         }
 
         public static MessageSecurityTokenVersion WSSecurity11WSTrust13WSSecureConversation13BasicSecurityProfile10
         {
-            get
-            {
-                return wss11oasisdec2005bsp10;
-            }
+            get { return wss11oasisdec2005bsp10; }
         }
 
-        public static MessageSecurityTokenVersion GetSecurityTokenVersion(SecurityVersion version, bool emitBspAttributes)
+        public static MessageSecurityTokenVersion GetSecurityTokenVersion(
+            SecurityVersion version,
+            bool emitBspAttributes
+        )
         {
             if (version == SecurityVersion.WSSecurity10)
             {
                 if (emitBspAttributes)
                     return MessageSecurityTokenVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005BasicSecurityProfile10;
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
             }
             else if (version == SecurityVersion.WSSecurity11)
             {
@@ -148,11 +137,20 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
         }
 
-        MessageSecurityTokenVersion(SecurityVersion securityVersion, TrustVersion trustVersion, SecureConversationVersion secureConversationVersion, string toString, bool emitBspRequiredAttributes, params string[] supportedSpecs)
+        MessageSecurityTokenVersion(
+            SecurityVersion securityVersion,
+            TrustVersion trustVersion,
+            SecureConversationVersion secureConversationVersion,
+            string toString,
+            bool emitBspRequiredAttributes,
+            params string[] supportedSpecs
+        )
             : base()
         {
             this.emitBspRequiredAttributes = emitBspRequiredAttributes;
@@ -165,34 +163,22 @@ namespace System.ServiceModel.Security
 
         public bool EmitBspRequiredAttributes
         {
-            get
-            {
-                return this.emitBspRequiredAttributes;
-            }
+            get { return this.emitBspRequiredAttributes; }
         }
 
         public SecurityVersion SecurityVersion
         {
-            get
-            {
-                return this.securityVersion;
-            }
+            get { return this.securityVersion; }
         }
 
         public TrustVersion TrustVersion
         {
-            get
-            {
-                return this.trustVersion;
-            }
+            get { return this.trustVersion; }
         }
 
         public SecureConversationVersion SecureConversationVersion
         {
-            get
-            {
-                return this.secureConversationVersion;
-            }
+            get { return this.secureConversationVersion; }
         }
 
         public override ReadOnlyCollection<string> GetSecuritySpecifications()

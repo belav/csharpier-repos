@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,55 +26,54 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Text.RegularExpressions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Text.RegularExpressions {
+namespace MonoCasTests.System.Text.RegularExpressions
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class MatchCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class MatchCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            Match m = Match.Empty;
+            Assert.IsNotNull(m, "Empty");
+            Assert.IsNotNull(m.Groups, "Groups");
+            Assert.AreSame(m, m.NextMatch(), "NextMatch");
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+            Match sm = Match.Synchronized(m);
+            Assert.IsNotNull(sm, "Synchronized");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			Match m = Match.Empty;
-			Assert.IsNotNull (m, "Empty");
-			Assert.IsNotNull (m.Groups, "Groups");
-			Assert.AreSame (m, m.NextMatch (), "NextMatch");
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void Result_Deny_Unrestricted()
+        {
+            Match.Empty.Result(String.Empty);
+        }
 
-			Match sm = Match.Synchronized (m);
-			Assert.IsNotNull (sm, "Synchronized");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void Result_Deny_Unrestricted ()
-		{
-			Match.Empty.Result (String.Empty);
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			MethodInfo mi = typeof (Match).GetProperty ("Empty").GetGetMethod ();
-			Assert.IsNotNull (mi, "Empty");
-			Assert.IsNotNull (mi.Invoke (null, null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            MethodInfo mi = typeof(Match).GetProperty("Empty").GetGetMethod();
+            Assert.IsNotNull(mi, "Empty");
+            Assert.IsNotNull(mi.Invoke(null, null), "invoke");
+        }
+    }
 }

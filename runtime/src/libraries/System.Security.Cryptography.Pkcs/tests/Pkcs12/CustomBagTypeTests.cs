@@ -24,20 +24,19 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             byte[] encoded = builder.Encode();
 
             const string expectedHex =
-                "3033020103302E06092A864886F70D010701A021041F301D301B06092A864886" +
-                "F70D010701A00E040C300A3008060100A003040102";
+                "3033020103302E06092A864886F70D010701A021041F301D301B06092A864886"
+                + "F70D010701A00E040C300A3008060100A003040102";
 
-            Assert.Equal(
-                expectedHex,
-                encoded.ByteArrayToHex());
+            Assert.Equal(expectedHex, encoded.ByteArrayToHex());
         }
 
         [Fact]
         public static void ReadCustomType()
         {
             byte[] input = (
-                "3033020103302E06092A864886F70D010701A021041F301D301B06092A864886" +
-                "F70D010701A00E040C300A3008060100A003040102").HexToByteArray();
+                "3033020103302E06092A864886F70D010701A021041F301D301B06092A864886"
+                + "F70D010701A00E040C300A3008060100A003040102"
+            ).HexToByteArray();
 
             Pkcs12Info info = Pkcs12Info.Decode(input, out _, skipCopy: true);
             Assert.Equal(Pkcs12IntegrityMode.None, info.IntegrityMode);
@@ -65,8 +64,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         public static void CopyCustomType()
         {
             const string startHex =
-                "3033020103302E06092A864886F70D010701A021041F301D301B06092A864886" +
-                "F70D010701A00E040C300A3008060100A003040102";
+                "3033020103302E06092A864886F70D010701A021041F301D301B06092A864886"
+                + "F70D010701A00E040C300A3008060100A003040102";
 
             Pkcs12Info info = Pkcs12Info.Decode(startHex.HexToByteArray(), out _, skipCopy: true);
             // This next line implicitly asserts no encryption, and a couple of Single
@@ -86,14 +85,10 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         private class CustomBagType : Pkcs12SafeBag
         {
             public CustomBagType(byte value)
-                : this(new byte[] { 4, 1, value })
-            {
-            }
+                : this(new byte[] { 4, 1, value }) { }
 
-            public CustomBagType(ReadOnlyMemory<byte> encoded, bool skipCopy=false)
-                : base("0.0", encoded, skipCopy)
-            {
-            }
+            public CustomBagType(ReadOnlyMemory<byte> encoded, bool skipCopy = false)
+                : base("0.0", encoded, skipCopy) { }
 
             public byte Value
             {

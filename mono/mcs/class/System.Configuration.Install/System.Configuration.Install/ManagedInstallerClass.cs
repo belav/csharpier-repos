@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,24 +31,22 @@ using System.Runtime.InteropServices;
 
 namespace System.Configuration.Install
 {
-	[GuidAttribute ("42EB0342-0393-448f-84AA-D4BEB0283595")]
-	[ComVisible (true)]
-	public class ManagedInstallerClass : IManagedInstaller
-	{
-		public ManagedInstallerClass ()
-		{
-		}
+    [GuidAttribute("42EB0342-0393-448f-84AA-D4BEB0283595")]
+    [ComVisible(true)]
+    public class ManagedInstallerClass : IManagedInstaller
+    {
+        public ManagedInstallerClass() { }
 
-		[MonoTODO]
-		public static void InstallHelper (string[] args)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static void InstallHelper(string[] args)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		int IManagedInstaller.ManagedInstall (string argString, int hInstall)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        int IManagedInstaller.ManagedInstall(string argString, int hInstall)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

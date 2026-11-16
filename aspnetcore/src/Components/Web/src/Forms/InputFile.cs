@@ -64,9 +64,8 @@ public class InputFile : ComponentBase, IInputFileJsCallbacks, IDisposable
         builder.OpenElement(0, "input");
         builder.AddMultipleAttributes(1, AdditionalAttributes);
         builder.AddAttribute(2, "type", "file");
-        builder.AddElementReferenceCapture(
-            3,
-            elementReference => _inputFileElement = elementReference
+        builder.AddElementReferenceCapture(3, elementReference =>
+            _inputFileElement = elementReference
         );
         builder.CloseElement();
     }

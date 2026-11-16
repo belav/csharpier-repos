@@ -35,30 +35,46 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 return nonComplexifiedSpans.Concat(complexifiedSpans);
             }
 
-            private IEnumerable<InlineRenameReplacement> GetNonComplexifiedReplacements(DocumentId documentId)
+            private IEnumerable<InlineRenameReplacement> GetNonComplexifiedReplacements(
+                DocumentId documentId
+            )
             {
                 var modifiedSpans = _conflicts.GetModifiedSpanMap(documentId);
                 var locationsForDocument = _conflicts.GetRelatedLocationsForDocument(documentId);
 
                 // The RenamedSpansTracker doesn't currently track unresolved conflicts for
-                // unmodified locations.  If the document wasn't modified, we can just use the 
-                // original span as the new span, but otherwise we need to filter out 
-                // locations that aren't in modifiedSpans. 
+                // unmodified locations.  If the document wasn't modified, we can just use the
+                // original span as the new span, but otherwise we need to filter out
+                // locations that aren't in modifiedSpans.
                 if (modifiedSpans.Any())
                 {
-                    return locationsForDocument.Where(loc => modifiedSpans.ContainsKey(loc.ConflictCheckSpan))
-                                               .Select(loc => new InlineRenameReplacement(loc, modifiedSpans[loc.ConflictCheckSpan]));
+                    return locationsForDocument
+                        .Where(loc => modifiedSpans.ContainsKey(loc.ConflictCheckSpan))
+                        .Select(loc => new InlineRenameReplacement(
+                            loc,
+                            modifiedSpans[loc.ConflictCheckSpan]
+                        ));
                 }
                 else
                 {
-                    return locationsForDocument.Select(loc => new InlineRenameReplacement(loc, loc.ConflictCheckSpan));
+                    return locationsForDocument.Select(loc => new InlineRenameReplacement(
+                        loc,
+                        loc.ConflictCheckSpan
+                    ));
                 }
             }
 
-            private IEnumerable<InlineRenameReplacement> GetComplexifiedReplacements(DocumentId documentId)
+            private IEnumerable<InlineRenameReplacement> GetComplexifiedReplacements(
+                DocumentId documentId
+            )
             {
-                return _conflicts.GetComplexifiedSpans(documentId)
-                    .Select(s => new InlineRenameReplacement(InlineRenameReplacementKind.Complexified, s.oldSpan, s.newSpan));
+                return _conflicts
+                    .GetComplexifiedSpans(documentId)
+                    .Select(s => new InlineRenameReplacement(
+                        InlineRenameReplacementKind.Complexified,
+                        s.oldSpan,
+                        s.newSpan
+                    ));
             }
         }
     }

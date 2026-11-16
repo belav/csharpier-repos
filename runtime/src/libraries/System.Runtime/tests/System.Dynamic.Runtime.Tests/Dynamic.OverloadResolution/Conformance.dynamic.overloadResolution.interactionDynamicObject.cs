@@ -46,8 +46,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.inte
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.integeregereractionDynamicObject.integeregereraction002.integeregereraction002
 {
     public class Test
@@ -91,8 +89,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.inte
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.integeregereractionDynamicObject.integeregereraction003.integeregereraction003
 {
     public class Test
@@ -113,7 +109,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.inte
                 }
                 catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
                 {
-                    ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, ex.Message, "object", "Bar");
+                    ret = ErrorVerifier.Verify(
+                        ErrorMessageId.NoSuchMember,
+                        ex.Message,
+                        "object",
+                        "Bar"
+                    );
                     if (ret)
                         return 0; //it means we did the right thing
                 }
@@ -138,8 +139,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.inte
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.integeregereractionDynamicObject.integeregereraction006.integeregereraction006
 {
     public class Test
@@ -160,7 +159,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.inte
                 }
                 catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
                 {
-                    ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, ex.Message, "object", "Bar");
+                    ret = ErrorVerifier.Verify(
+                        ErrorMessageId.NoSuchMember,
+                        ex.Message,
+                        "object",
+                        "Bar"
+                    );
                     if (ret)
                         return 0; //it means we did the right thing
                 }

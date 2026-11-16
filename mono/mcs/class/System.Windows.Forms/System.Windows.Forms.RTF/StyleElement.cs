@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,97 +26,90 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms.RTF {
-
+namespace System.Windows.Forms.RTF
+{
 #if RTF_LIB
-	public
+    public
 #else
-	internal
+    internal
 #endif
-	class StyleElement {
-		#region Local Variables
-		private TokenClass	token_class;
-		private Major		major;
-		private Minor		minor;
-		private int		param;
-		private string		text;
-		private StyleElement	next;
-		#endregion Local Variables
+    class StyleElement
+    {
+        #region Local Variables
+        private TokenClass token_class;
+        private Major major;
+        private Minor minor;
+        private int param;
+        private string text;
+        private StyleElement next;
+        #endregion Local Variables
 
-		#region Constructors
-		public StyleElement(Style s, TokenClass token_class, Major major, Minor minor, int param, string text) {
-			this.token_class = token_class;
-			this.major = major;
-			this.minor = minor;
-			this.param = param;
-			this.text = text;
+        #region Constructors
+        public StyleElement(
+            Style s,
+            TokenClass token_class,
+            Major major,
+            Minor minor,
+            int param,
+            string text
+        )
+        {
+            this.token_class = token_class;
+            this.major = major;
+            this.minor = minor;
+            this.param = param;
+            this.text = text;
 
-			lock (s) {
-				if (s.Elements == null) {
-					s.Elements = this;
-				} else {
-					StyleElement se = s.Elements;
-					while (se.next != null)
-						se = se.next;
-					se.next = this;
-				}
-			}
-		}
-		#endregion	// Constructors
+            lock (s)
+            {
+                if (s.Elements == null)
+                {
+                    s.Elements = this;
+                }
+                else
+                {
+                    StyleElement se = s.Elements;
+                    while (se.next != null)
+                        se = se.next;
+                    se.next = this;
+                }
+            }
+        }
+        #endregion	// Constructors
 
-		#region Properties
-		public TokenClass TokenClass {
-			get {
-				return token_class;
-			}
+        #region Properties
+        public TokenClass TokenClass
+        {
+            get { return token_class; }
+            set { token_class = value; }
+        }
 
-			set {
-				token_class = value;
-			}
-		}
+        public Major Major
+        {
+            get { return major; }
+            set { major = value; }
+        }
 
-		public Major Major {
-			get {
-				return major;
-			}
+        public Minor Minor
+        {
+            get { return minor; }
+            set { minor = value; }
+        }
 
-			set {
-				major = value;
-			}
-		}
+        public int Param
+        {
+            get { return param; }
+            set { param = value; }
+        }
 
-		public Minor Minor {
-			get {
-				return minor;
-			}
+        public string Text
+        {
+            get { return text; }
+            set { text = value; }
+        }
+        #endregion	// Properties
 
-			set {
-				minor = value;
-			}
-		}
-
-		public int Param {
-			get {
-				return param;
-			}
-
-			set {
-				param = value;
-			}
-		}
-
-		public string Text {
-			get {
-				return text;
-			}
-
-			set {
-				text = value;
-			}
-		}
-		#endregion	// Properties
-
-		#region	Methods
-		#endregion	// Methods
-	}
+        #region	Methods
+        #endregion	// Methods
+    }
 }

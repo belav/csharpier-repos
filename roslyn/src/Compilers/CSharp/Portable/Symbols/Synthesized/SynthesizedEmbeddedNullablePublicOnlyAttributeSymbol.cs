@@ -13,7 +13,8 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed class SynthesizedEmbeddedNullablePublicOnlyAttributeSymbol : SynthesizedEmbeddedAttributeSymbolBase
+    internal sealed class SynthesizedEmbeddedNullablePublicOnlyAttributeSymbol
+        : SynthesizedEmbeddedAttributeSymbolBase
     {
         private readonly ImmutableArray<FieldSymbol> _fields;
         private readonly ImmutableArray<MethodSymbol> _constructors;
@@ -23,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceSymbol containingNamespace,
             ModuleSymbol containingModule,
             NamedTypeSymbol systemAttributeType,
-            TypeSymbol systemBooleanType)
+            TypeSymbol systemBooleanType
+        )
             : base(name, containingNamespace, containingModule, baseType: systemAttributeType)
         {
             _fields = ImmutableArray.Create<FieldSymbol>(
@@ -33,16 +35,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     "IncludesInternals",
                     isPublic: true,
                     isReadOnly: true,
-                    isStatic: false));
+                    isStatic: false
+                )
+            );
 
             _constructors = ImmutableArray.Create<MethodSymbol>(
                 new SynthesizedEmbeddedAttributeConstructorWithBodySymbol(
                     this,
-                    m => ImmutableArray.Create(SynthesizedParameterSymbol.Create(m, TypeWithAnnotations.Create(systemBooleanType), 0, RefKind.None)),
-                    GenerateConstructorBody));
+                    m =>
+                        ImmutableArray.Create(
+                            SynthesizedParameterSymbol.Create(
+                                m,
+                                TypeWithAnnotations.Create(systemBooleanType),
+                                0,
+                                RefKind.None
+                            )
+                        ),
+                    GenerateConstructorBody
+                )
+            );
 
             // Ensure we never get out of sync with the description
-            Debug.Assert(_constructors.Length == AttributeDescription.NullablePublicOnlyAttribute.Signatures.Length);
+            Debug.Assert(
+                _constructors.Length
+                    == AttributeDescription.NullablePublicOnlyAttribute.Signatures.Length
+            );
         }
 
         internal override IEnumerable<FieldSymbol> GetFieldsToEmit() => _fields;
@@ -51,16 +68,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override AttributeUsageInfo GetAttributeUsageInfo()
         {
-            return new AttributeUsageInfo(AttributeTargets.Module, allowMultiple: false, inherited: false);
+            return new AttributeUsageInfo(
+                AttributeTargets.Module,
+                allowMultiple: false,
+                inherited: false
+            );
         }
 
-        private void GenerateConstructorBody(SyntheticBoundNodeFactory factory, ArrayBuilder<BoundStatement> statements, ImmutableArray<ParameterSymbol> parameters)
+        private void GenerateConstructorBody(
+            SyntheticBoundNodeFactory factory,
+            ArrayBuilder<BoundStatement> statements,
+            ImmutableArray<ParameterSymbol> parameters
+        )
         {
             statements.Add(
                 factory.ExpressionStatement(
                     factory.AssignmentExpression(
                         factory.Field(factory.This(), _fields.Single()),
-                        factory.Parameter(parameters.Single()))));
+                        factory.Parameter(parameters.Single())
+                    )
+                )
+            );
         }
     }
 }

@@ -8,22 +8,51 @@ namespace System.Security.Cryptography.X509Certificates
         private sealed class AppleCertificateExporter : UnixExportProvider
         {
             private static ReadOnlySpan<byte> EmptyPkcs7 =>
-            [
-                0x30, 0x23, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x07,
-                0x02, 0xA0, 0x16, 0x30, 0x14, 0x02, 0x01, 0x01, 0x31, 0x00, 0x30, 0x0B,
-                0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x07, 0x01, 0x31,
-                0x00,
-            ];
+                [
+                    0x30,
+                    0x23,
+                    0x06,
+                    0x09,
+                    0x2A,
+                    0x86,
+                    0x48,
+                    0x86,
+                    0xF7,
+                    0x0D,
+                    0x01,
+                    0x07,
+                    0x02,
+                    0xA0,
+                    0x16,
+                    0x30,
+                    0x14,
+                    0x02,
+                    0x01,
+                    0x01,
+                    0x31,
+                    0x00,
+                    0x30,
+                    0x0B,
+                    0x06,
+                    0x09,
+                    0x2A,
+                    0x86,
+                    0x48,
+                    0x86,
+                    0xF7,
+                    0x0D,
+                    0x01,
+                    0x07,
+                    0x01,
+                    0x31,
+                    0x00,
+                ];
 
             public AppleCertificateExporter(ICertificatePalCore cert)
-                : base(cert)
-            {
-            }
+                : base(cert) { }
 
             public AppleCertificateExporter(X509Certificate2Collection certs)
-                : base(certs)
-            {
-            }
+                : base(certs) { }
 
             protected override byte[] ExportPkcs7()
             {
@@ -31,7 +60,12 @@ namespace System.Security.Cryptography.X509Certificates
 
                 if (_singleCertPal != null)
                 {
-                    certHandles = new[] { ((AppleCertificatePal)_singleCertPal).CertificateHandle.DangerousGetHandle() };
+                    certHandles = new[]
+                    {
+                        (
+                            (AppleCertificatePal)_singleCertPal
+                        ).CertificateHandle.DangerousGetHandle(),
+                    };
                 }
                 else if (_certs!.Count > 0)
                 {
@@ -54,7 +88,10 @@ namespace System.Security.Cryptography.X509Certificates
                 return Interop.AppleCrypto.X509ExportPkcs7(certHandles);
             }
 
-            protected override byte[] ExportPkcs8(ICertificatePalCore certificatePal, ReadOnlySpan<char> password)
+            protected override byte[] ExportPkcs8(
+                ICertificatePalCore certificatePal,
+                ReadOnlySpan<char> password
+            )
             {
                 AppleCertificatePal pal = (AppleCertificatePal)certificatePal;
                 return pal.ExportPkcs8(password);

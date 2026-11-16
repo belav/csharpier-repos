@@ -8,17 +8,15 @@ namespace System.ServiceModel.Channels
 
     public abstract class BindingElement
     {
-        protected BindingElement()
-        {
-        }
+        protected BindingElement() { }
 
-        protected BindingElement(BindingElement elementToBeCloned)
-        {
-        }
+        protected BindingElement(BindingElement elementToBeCloned) { }
 
         public abstract BindingElement Clone();
 
-        public virtual IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public virtual IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
@@ -26,7 +24,10 @@ namespace System.ServiceModel.Channels
             return context.BuildInnerChannelFactory<TChannel>();
         }
 
-        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context) where TChannel : class, IChannel
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
+            where TChannel : class, IChannel
         {
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
@@ -42,7 +43,8 @@ namespace System.ServiceModel.Channels
             return context.CanBuildInnerChannelFactory<TChannel>();
         }
 
-        public virtual bool CanBuildChannelListener<TChannel>(BindingContext context) where TChannel : class, IChannel
+        public virtual bool CanBuildChannelListener<TChannel>(BindingContext context)
+            where TChannel : class, IChannel
         {
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
@@ -50,16 +52,23 @@ namespace System.ServiceModel.Channels
             return context.CanBuildInnerChannelListener<TChannel>();
         }
 
-        public abstract T GetProperty<T>(BindingContext context) where T : class;
+        public abstract T GetProperty<T>(BindingContext context)
+            where T : class;
 
-        internal T GetIndividualProperty<T>() where T : class
+        internal T GetIndividualProperty<T>()
+            where T : class
         {
-            return this.GetProperty<T>(new BindingContext(new CustomBinding(), new BindingParameterCollection()));
+            return this.GetProperty<T>(
+                new BindingContext(new CustomBinding(), new BindingParameterCollection())
+            );
         }
 
         internal virtual bool IsMatch(BindingElement b)
         {
-            Fx.Assert(true, "Should not be called unless this binding element is used in one of the standard bindings. In which case, please re-implement the IsMatch() method.");
+            Fx.Assert(
+                true,
+                "Should not be called unless this binding element is used in one of the standard bindings. In which case, please re-implement the IsMatch() method."
+            );
             return false;
         }
     }

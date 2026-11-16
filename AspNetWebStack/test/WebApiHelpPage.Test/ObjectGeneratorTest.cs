@@ -55,9 +55,13 @@ namespace WebApiHelpPageWebHost.UnitTest
         [InlineData(typeof(Tuple<string, int>))]
         [InlineData(typeof(Tuple<string, int, double, DateTime>))]
         [InlineData(typeof(Tuple<string, int, double, DateTime, Tuple<int?>>))]
-        [InlineData(typeof(Tuple<string, int, double, DateTime, Tuple<int?>, Tuple<double, string>>))]
+        [InlineData(
+            typeof(Tuple<string, int, double, DateTime, Tuple<int?>, Tuple<double, string>>)
+        )]
         [InlineData(typeof(Tuple<string, int, double, Type, DateTimeOffset, byte, sbyte>))]
-        [InlineData(typeof(Tuple<string, int, double, Type, DateTimeOffset, byte, sbyte, Tuple<char, uint>>))]
+        [InlineData(
+            typeof(Tuple<string, int, double, Type, DateTimeOffset, byte, sbyte, Tuple<char, uint>>)
+        )]
         [InlineData(typeof(MyGenericType<int, string>))]
         [InlineData(typeof(MyGenericType<int, Tuple<string, DateTime>>))]
         [InlineData(typeof(MyGenericType<MyGenericType<DateTime, HttpVerbs>, string>))]
@@ -87,8 +91,14 @@ namespace WebApiHelpPageWebHost.UnitTest
         [InlineData(typeof(List<int>), typeof(int))]
         [InlineData(typeof(List<Nullable<double>>), typeof(double))]
         [InlineData(typeof(List<DateTime>), typeof(DateTime))]
-        [InlineData(typeof(IEnumerable<KeyValuePair<string, int>>), typeof(KeyValuePair<string, int>))]
-        [InlineData(typeof(IEnumerable<KeyValuePair<DateTime, int?>>), typeof(KeyValuePair<DateTime, int?>))]
+        [InlineData(
+            typeof(IEnumerable<KeyValuePair<string, int>>),
+            typeof(KeyValuePair<string, int>)
+        )]
+        [InlineData(
+            typeof(IEnumerable<KeyValuePair<DateTime, int?>>),
+            typeof(KeyValuePair<DateTime, int?>)
+        )]
         [InlineData(typeof(IEnumerable), typeof(object))]
         [InlineData(typeof(ICollection), typeof(object))]
         [InlineData(typeof(IList), typeof(object))]
@@ -145,7 +155,11 @@ namespace WebApiHelpPageWebHost.UnitTest
 
         [Theory]
         [InlineData(typeof(Dictionary<string, int>), typeof(string), typeof(int))]
-        [InlineData(typeof(Dictionary<string, Dictionary<Customer, Order>>), typeof(string), typeof(Dictionary<Customer, Order>))]
+        [InlineData(
+            typeof(Dictionary<string, Dictionary<Customer, Order>>),
+            typeof(string),
+            typeof(Dictionary<Customer, Order>)
+        )]
         [InlineData(typeof(Hashtable), typeof(object), typeof(object))]
         [InlineData(typeof(IDictionary), typeof(object), typeof(object))]
         [InlineData(typeof(IDictionary<string, DateTime>), typeof(string), typeof(DateTime))]

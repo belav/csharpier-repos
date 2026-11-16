@@ -10,14 +10,16 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpForrSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpForrSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "forr";
 
         [WpfFact]
         public async Task InsertForrSnippetInMethodTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 class Program
                 {
                     public void Method()
@@ -25,7 +27,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class Program
                 {
                     public void Method()
@@ -36,13 +40,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertForrSnippetInMethodUsedIncrementorTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 class Program
                 {
                     public void Method()
@@ -51,7 +57,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class Program
                 {
                     public void Method()
@@ -63,13 +71,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertForrSnippetInMethodUsedIncrementorsTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 class Program
                 {
                     public void Method()
@@ -78,7 +88,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class Program
                 {
                     public void Method()
@@ -90,26 +102,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertForrSnippetInGlobalContextTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 $$
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 for (int i = length - 1; i >= 0; i--)
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertForrSnippetInConstructorTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 class Program
                 {
                     public Program()
@@ -117,7 +135,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class Program
                 {
                     public Program()
@@ -128,14 +148,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertForrSnippetInLocalFunctionTest()
         {
             // TODO: fix this test when bug with simplifier failing to find correct node is fixed
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 class Program
                 {
                     public void Method()
@@ -146,7 +168,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         }
                     }
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class Program
                 {
                     public void Method()
@@ -160,14 +184,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertForrSnippetInAnonymousFunctionTest()
         {
             // TODO: fix this test when bug with simplifier failing to find correct node is fixed
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 class Program
                 {
                     public void Method()
@@ -178,7 +204,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         };
                     }
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class Program
                 {
                     public void Method()
@@ -192,14 +220,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertForrSnippetInParenthesizedLambdaExpressionTest()
         {
             // TODO: fix this test when bug with simplifier failing to find correct node is fixed
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 class Program
                 {
                     public void Method()
@@ -210,7 +240,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         };
                     }
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class Program
                 {
                     public void Method()
@@ -224,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -232,7 +265,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             // In non-inline reversed for snippet type of expression `length - 1` is unknown,
             // so it cannot be simplified to `var`. Therefore having explicit `int` type here is expected
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 <Workspace>
                     <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                     <Document FilePath="/0/Test0.cs">class Program
@@ -251,7 +285,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     </AnalyzerConfigDocument>
                     </Project>
                 </Workspace>
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class Program
                 {
                     public void Method()
@@ -262,7 +298,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfTheory]
@@ -278,7 +315,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("nuint")]
         public async Task InsertInlineForrSnippetInMethodTest(string inlineExpressionType)
         {
-            await VerifyCustomCommitProviderAsync($$"""
+            await VerifyCustomCommitProviderAsync(
+                $$"""
                 class Program
                 {
                     public void Method({{inlineExpressionType}} l)
@@ -286,7 +324,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         l.$$
                     }
                 }
-                """, ItemToCommit, $$"""
+                """,
+                ItemToCommit,
+                $$"""
                 class Program
                 {
                     public void Method({{inlineExpressionType}} l)
@@ -297,7 +337,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfTheory]
@@ -313,23 +354,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("nuint")]
         public async Task InsertInlineForrSnippetInGlobalContextTest(string inlineExpressionType)
         {
-            await VerifyCustomCommitProviderAsync($$"""
+            await VerifyCustomCommitProviderAsync(
+                $$"""
                 {{inlineExpressionType}} l;
                 l.$$
-                """, ItemToCommit, $$"""
+                """,
+                ItemToCommit,
+                $$"""
                 {{inlineExpressionType}} l;
                 for ({{inlineExpressionType}} i = l - 1; i >= 0; i--)
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [WpfTheory]
         [InlineData("string")]
         [InlineData("System.DateTime")]
         [InlineData("System.Action")]
-        public async Task NoInlineForrSnippetForIncorrectTypeInMethodTest(string inlineExpressionType)
+        public async Task NoInlineForrSnippetForIncorrectTypeInMethodTest(
+            string inlineExpressionType
+        )
         {
             var markup = $$"""
                 class Program
@@ -348,7 +395,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("string")]
         [InlineData("System.DateTime")]
         [InlineData("System.Action")]
-        public async Task NoInlineForrSnippetForIncorrectTypeInGlobalContextTest(string inlineExpressionType)
+        public async Task NoInlineForrSnippetForIncorrectTypeInGlobalContextTest(
+            string inlineExpressionType
+        )
         {
             var markup = $$"""
                 {{inlineExpressionType}} l;
@@ -361,7 +410,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task ProduceVarWithSpecificCodeStyleForInlineSnippetTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 <Workspace>
                     <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                     <Document FilePath="/0/Test0.cs">class Program
@@ -380,7 +430,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     </AnalyzerConfigDocument>
                     </Project>
                 </Workspace>
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class Program
                 {
                     public void Method(int l)
@@ -391,7 +443,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -441,7 +494,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -475,13 +532,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
         [InlineData("// comment")]
         [InlineData("/* comment */")]
-        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest1(string trivia)
+        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest1(
+            string trivia
+        )
         {
             var markupBeforeCommit = $$"""
                 {{trivia}}
@@ -496,7 +559,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -504,7 +571,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("#if true")]
         [InlineData("#pragma warning disable CS0108")]
         [InlineData("#nullable enable")]
-        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest2(string trivia)
+        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest2(
+            string trivia
+        )
         {
             var markupBeforeCommit = $$"""
                 {{trivia}}
@@ -520,7 +589,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
     }
 }

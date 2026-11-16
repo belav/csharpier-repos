@@ -52,8 +52,12 @@ namespace Microsoft.CodeAnalysis
 
         public int GetHashCode(AdditionalText obj)
         {
-            return Hash.Combine(PathUtilities.Comparer.GetHashCode(obj.Path),
-                                ByteSequenceComparer.GetHashCode(GetTextOrNullIfBinary(obj)?.GetChecksum() ?? ImmutableArray<byte>.Empty));
+            return Hash.Combine(
+                PathUtilities.Comparer.GetHashCode(obj.Path),
+                ByteSequenceComparer.GetHashCode(
+                    GetTextOrNullIfBinary(obj)?.GetChecksum() ?? ImmutableArray<byte>.Empty
+                )
+            );
         }
 
         private static SourceText? GetTextOrNullIfBinary(AdditionalText text)

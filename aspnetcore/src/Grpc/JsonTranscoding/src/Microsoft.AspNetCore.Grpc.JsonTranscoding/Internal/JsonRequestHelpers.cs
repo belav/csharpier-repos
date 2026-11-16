@@ -109,8 +109,7 @@ internal static class JsonRequestHelpers
             response.ContentType = MediaType.ReplaceEncoding("application/json", encoding);
         }
 
-        var e =
-            GetStatusDetails(trailers)
+        var e = GetStatusDetails(trailers)
             ?? new Google.Rpc.Status { Message = status.Detail, Code = (int)status.StatusCode };
 
         await WriteResponseMessage(response, encoding, e, options, CancellationToken.None);
@@ -463,19 +462,16 @@ internal static class JsonRequestHelpers
         string path
     )
     {
-        return serverCallContext.DescriptorInfo.PathDescriptorsCache.GetOrAdd(
-            path,
-            p =>
-            {
-                ServiceDescriptorHelpers.TryResolveDescriptors(
-                    requestMessage.Descriptor,
-                    p.Split('.'),
-                    allowJsonName: true,
-                    out var pathDescriptors
-                );
-                return pathDescriptors;
-            }
-        );
+        return serverCallContext.DescriptorInfo.PathDescriptorsCache.GetOrAdd(path, p =>
+        {
+            ServiceDescriptorHelpers.TryResolveDescriptors(
+                requestMessage.Descriptor,
+                p.Split('.'),
+                allowJsonName: true,
+                out var pathDescriptors
+            );
+            return pathDescriptors;
+        });
     }
 
     public static async ValueTask SendMessage<TResponse>(

@@ -12,7 +12,6 @@ using System.Globalization;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Schema;
-
 #if WEB_EXTENSIONS_CODE
 using System.Web.Resources;
 #else
@@ -31,33 +30,37 @@ namespace Microsoft.VSDesigner.WCFModel
     internal class SchemaMerger
     {
         // xml serializable attributes
-        private static Type[] xmlSerializationAttributes = new Type[] {
-                            typeof(System.Xml.Serialization.XmlElementAttribute),
-                            typeof(System.Xml.Serialization.XmlAttributeAttribute),
-                            typeof(System.Xml.Serialization.XmlAnyAttributeAttribute),
-                            typeof(System.Xml.Serialization.XmlAnyElementAttribute),
-                            typeof(System.Xml.Serialization.XmlTextAttribute),
+        private static Type[] xmlSerializationAttributes = new Type[]
+        {
+            typeof(System.Xml.Serialization.XmlElementAttribute),
+            typeof(System.Xml.Serialization.XmlAttributeAttribute),
+            typeof(System.Xml.Serialization.XmlAnyAttributeAttribute),
+            typeof(System.Xml.Serialization.XmlAnyElementAttribute),
+            typeof(System.Xml.Serialization.XmlTextAttribute),
         };
 
         // elements in the schema (we don't process annotation node)
-        private static SchemaTopLevelItemType[] schemaTopLevelItemTypes = new SchemaTopLevelItemType[] {
-            new SchemaTopLevelItemType(typeof(XmlSchemaType), "type"),
-            new SchemaTopLevelItemType(typeof(XmlSchemaElement), "element"),
-            new SchemaTopLevelItemType(typeof(XmlSchemaAttribute), "attribute"),
-            new SchemaTopLevelItemType(typeof(XmlSchemaGroup), "group"),
-            new SchemaTopLevelItemType(typeof(XmlSchemaAttributeGroup), "attributeGroup"),
-        };
+        private static SchemaTopLevelItemType[] schemaTopLevelItemTypes =
+            new SchemaTopLevelItemType[]
+            {
+                new SchemaTopLevelItemType(typeof(XmlSchemaType), "type"),
+                new SchemaTopLevelItemType(typeof(XmlSchemaElement), "element"),
+                new SchemaTopLevelItemType(typeof(XmlSchemaAttribute), "attribute"),
+                new SchemaTopLevelItemType(typeof(XmlSchemaGroup), "group"),
+                new SchemaTopLevelItemType(typeof(XmlSchemaAttributeGroup), "attributeGroup"),
+            };
 
         // when properties defined in those types are different, we only report warnings, but not error messages
-        private static Type[] ignorablePropertyTypes = new Type[] {
+        private static Type[] ignorablePropertyTypes = new Type[]
+        {
             typeof(XmlAttribute[]),
             typeof(XmlElement[]),
             typeof(XmlNode[]),
             typeof(XmlSchemaAnnotation),
         };
 
-        private readonly static XmlAttribute[] emptyXmlAttributeCollection = new XmlAttribute[0];
-        private readonly static object[] emptyCollection = new object[0];
+        private static readonly XmlAttribute[] emptyXmlAttributeCollection = new XmlAttribute[0];
+        private static readonly object[] emptyCollection = new object[0];
 
         /// <summary>
         /// Merge and remove duplicated part from the schema list
@@ -66,7 +69,11 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="importErrors">error messages</param>
         /// <param name="duplicatedSchemas">error messages</param>
         /// <remarks></remarks>
-        internal static void MergeSchemas(IEnumerable<XmlSchema> schemaList, IList<ProxyGenerationError> importErrors, out IEnumerable<XmlSchema> duplicatedSchemas)
+        internal static void MergeSchemas(
+            IEnumerable<XmlSchema> schemaList,
+            IList<ProxyGenerationError> importErrors,
+            out IEnumerable<XmlSchema> duplicatedSchemas
+        )
         {
             if (schemaList == null)
             {
@@ -81,7 +88,10 @@ namespace Microsoft.VSDesigner.WCFModel
             duplicatedSchemas = duplicatedSchemaList;
 
             // types, elements, groups have their own name space
-            Dictionary<XmlQualifiedName, XmlSchemaObject>[] knownItemTables = new Dictionary<XmlQualifiedName, XmlSchemaObject>[schemaTopLevelItemTypes.Length];
+            Dictionary<XmlQualifiedName, XmlSchemaObject>[] knownItemTables = new Dictionary<
+                XmlQualifiedName,
+                XmlSchemaObject
+            >[schemaTopLevelItemTypes.Length];
             for (int i = 0; i < schemaTopLevelItemTypes.Length; i++)
             {
                 knownItemTables[i] = new Dictionary<XmlQualifiedName, XmlSchemaObject>();
@@ -89,15 +99,23 @@ namespace Microsoft.VSDesigner.WCFModel
 
             foreach (XmlSchema schema in schemaList)
             {
-
                 bool hasNewDefinedItems = false;
                 List<XmlSchemaObject> duplicatedItems = new List<XmlSchemaObject>();
 
                 for (int i = 0; i < schemaTopLevelItemTypes.Length; i++)
                 {
-                    Dictionary<XmlQualifiedName, XmlSchemaObject> knownItemTable = knownItemTables[i];
+                    Dictionary<XmlQualifiedName, XmlSchemaObject> knownItemTable = knownItemTables[
+                        i
+                    ];
                     int knownItemCount = knownItemTable.Count;
-                    FindDuplicatedItems(schema, schemaTopLevelItemTypes[i].ItemType, schemaTopLevelItemTypes[i].Name, knownItemTable, duplicatedItems, importErrors);
+                    FindDuplicatedItems(
+                        schema,
+                        schemaTopLevelItemTypes[i].ItemType,
+                        schemaTopLevelItemTypes[i].Name,
+                        knownItemTable,
+                        duplicatedItems,
+                        importErrors
+                    );
                     if (knownItemTable.Count > knownItemCount)
                     {
                         hasNewDefinedItems = true;
@@ -128,14 +146,14 @@ namespace Microsoft.VSDesigner.WCFModel
         /// </summary>
         /// <remarks></remarks>
         private static void FindDuplicatedItems(
-                    XmlSchema schema,
-                    Type itemType,
-                    string itemTypeName,
-                    Dictionary<XmlQualifiedName, XmlSchemaObject> knownItemTable,
-                    List<XmlSchemaObject> duplicatedItems,
-                    IList<ProxyGenerationError> importErrors)
+            XmlSchema schema,
+            Type itemType,
+            string itemTypeName,
+            Dictionary<XmlQualifiedName, XmlSchemaObject> knownItemTable,
+            List<XmlSchemaObject> duplicatedItems,
+            IList<ProxyGenerationError> importErrors
+        )
         {
-
             string targetNamespace = schema.TargetNamespace;
             if (String.IsNullOrEmpty(targetNamespace))
             {
@@ -146,8 +164,10 @@ namespace Microsoft.VSDesigner.WCFModel
             {
                 if (itemType.IsInstanceOfType(item))
                 {
-
-                    XmlQualifiedName combinedName = new XmlQualifiedName(GetSchemaItemName(item), targetNamespace);
+                    XmlQualifiedName combinedName = new XmlQualifiedName(
+                        GetSchemaItemName(item),
+                        targetNamespace
+                    );
 
                     XmlSchemaObject originalItem = null;
                     if (knownItemTable.TryGetValue(combinedName, out originalItem))
@@ -158,13 +178,21 @@ namespace Microsoft.VSDesigner.WCFModel
                         {
                             differentLocation = CombinePath(".", differentLocation);
                             importErrors.Add(
-                                    new ProxyGenerationError(
-                                        ProxyGenerationError.GeneratorState.MergeMetadata,
-                                        String.Empty,
-                                        new InvalidOperationException(
-                                            String.Format(CultureInfo.CurrentCulture, WCFModelStrings.ReferenceGroup_DuplicatedSchemaItems, itemTypeName, combinedName.ToString(), schema.SourceUri, originalItem.SourceUri, differentLocation)
+                                new ProxyGenerationError(
+                                    ProxyGenerationError.GeneratorState.MergeMetadata,
+                                    String.Empty,
+                                    new InvalidOperationException(
+                                        String.Format(
+                                            CultureInfo.CurrentCulture,
+                                            WCFModelStrings.ReferenceGroup_DuplicatedSchemaItems,
+                                            itemTypeName,
+                                            combinedName.ToString(),
+                                            schema.SourceUri,
+                                            originalItem.SourceUri,
+                                            differentLocation
                                         )
                                     )
+                                )
                             );
                         }
                         else if (!String.IsNullOrEmpty(differentLocation))
@@ -172,14 +200,22 @@ namespace Microsoft.VSDesigner.WCFModel
                             // warning: ignorable difference found
                             differentLocation = CombinePath(".", differentLocation);
                             importErrors.Add(
-                                    new ProxyGenerationError(
-                                        ProxyGenerationError.GeneratorState.MergeMetadata,
-                                        String.Empty,
-                                        new InvalidOperationException(
-                                            String.Format(CultureInfo.CurrentCulture, WCFModelStrings.ReferenceGroup_DuplicatedSchemaItemsIgnored, itemTypeName, combinedName.ToString(), schema.SourceUri, originalItem.SourceUri, differentLocation)
-                                        ),
-                                        true        // isWarning = true
-                                    )
+                                new ProxyGenerationError(
+                                    ProxyGenerationError.GeneratorState.MergeMetadata,
+                                    String.Empty,
+                                    new InvalidOperationException(
+                                        String.Format(
+                                            CultureInfo.CurrentCulture,
+                                            WCFModelStrings.ReferenceGroup_DuplicatedSchemaItemsIgnored,
+                                            itemTypeName,
+                                            combinedName.ToString(),
+                                            schema.SourceUri,
+                                            originalItem.SourceUri,
+                                            differentLocation
+                                        )
+                                    ),
+                                    true // isWarning = true
+                                )
                             );
                         }
                         duplicatedItems.Add(item);
@@ -203,7 +239,11 @@ namespace Microsoft.VSDesigner.WCFModel
         ///  return true, with empty differentLocation -- no difference found
         ///  return true, with non-empty differentLocation -- ignorable difference found under that location
         /// </remarks>
-        private static bool AreSchemaObjectsEquivalent(XmlSchemaObject originalItem, XmlSchemaObject item, out string differentLocation)
+        private static bool AreSchemaObjectsEquivalent(
+            XmlSchemaObject originalItem,
+            XmlSchemaObject item,
+            out string differentLocation
+        )
         {
             differentLocation = String.Empty;
 
@@ -220,13 +260,19 @@ namespace Microsoft.VSDesigner.WCFModel
             {
                 if (IsPersistedProperty(property))
                 {
-
                     bool ignorableProperty = ShouldIgnoreSchemaProperty(property);
 
                     object originalValue = property.GetValue(originalItem, new object[] { });
                     object newValue = property.GetValue(item, new object[] { });
 
-                    if (!CompareSchemaPropertyValues(property, originalValue, newValue, out differentLocation) && !ignorableProperty)
+                    if (
+                        !CompareSchemaPropertyValues(
+                            property,
+                            originalValue,
+                            newValue,
+                            out differentLocation
+                        ) && !ignorableProperty
+                    )
                     {
                         return false;
                     }
@@ -246,7 +292,12 @@ namespace Microsoft.VSDesigner.WCFModel
         /// </summary>
         /// <return>true: if the value are same</return>
         /// <remarks></remarks>
-        private static bool CompareSchemaPropertyValues(PropertyInfo propertyInfo, object originalValue, object newValue, out string differentLocation)
+        private static bool CompareSchemaPropertyValues(
+            PropertyInfo propertyInfo,
+            object originalValue,
+            object newValue,
+            out string differentLocation
+        )
         {
             differentLocation = String.Empty;
 
@@ -267,10 +318,22 @@ namespace Microsoft.VSDesigner.WCFModel
                     newValue = emptyXmlAttributeCollection;
                 }
 
-                XmlAttribute differentAttribute1, differentAttribute2;
-                if (!CompareXmlAttributeCollections((XmlAttribute[])originalValue, (XmlAttribute[])newValue, out differentAttribute1, out differentAttribute2))
+                XmlAttribute differentAttribute1,
+                    differentAttribute2;
+                if (
+                    !CompareXmlAttributeCollections(
+                        (XmlAttribute[])originalValue,
+                        (XmlAttribute[])newValue,
+                        out differentAttribute1,
+                        out differentAttribute2
+                    )
+                )
                 {
-                    differentLocation = GetSchemaPropertyNameInXml(propertyInfo, differentAttribute1, differentAttribute2);
+                    differentLocation = GetSchemaPropertyNameInXml(
+                        propertyInfo,
+                        differentAttribute1,
+                        differentAttribute2
+                    );
                     return false;
                 }
                 return true;
@@ -287,10 +350,22 @@ namespace Microsoft.VSDesigner.WCFModel
                     newValue = emptyCollection;
                 }
 
-                object differentItem1, differentItem2;
-                if (!CompareSchemaCollections((System.Collections.ICollection)originalValue, (System.Collections.ICollection)newValue, out differentItem1, out differentItem2, out differentLocation))
+                object differentItem1,
+                    differentItem2;
+                if (
+                    !CompareSchemaCollections(
+                        (System.Collections.ICollection)originalValue,
+                        (System.Collections.ICollection)newValue,
+                        out differentItem1,
+                        out differentItem2,
+                        out differentLocation
+                    )
+                )
                 {
-                    differentLocation = CombinePath(GetSchemaPropertyNameInXml(propertyInfo, differentItem1, differentItem2), differentLocation);
+                    differentLocation = CombinePath(
+                        GetSchemaPropertyNameInXml(propertyInfo, differentItem1, differentItem2),
+                        differentLocation
+                    );
                     return false;
                 }
                 else
@@ -298,7 +373,14 @@ namespace Microsoft.VSDesigner.WCFModel
                     if (!String.IsNullOrEmpty(differentLocation))
                     {
                         // ignorable difference...
-                        differentLocation = CombinePath(GetSchemaPropertyNameInXml(propertyInfo, differentItem1, differentItem2), differentLocation);
+                        differentLocation = CombinePath(
+                            GetSchemaPropertyNameInXml(
+                                propertyInfo,
+                                differentItem1,
+                                differentItem2
+                            ),
+                            differentLocation
+                        );
                     }
                     return true;
                 }
@@ -306,19 +388,28 @@ namespace Microsoft.VSDesigner.WCFModel
 
             if (originalValue == null || newValue == null)
             {
-                differentLocation = CombinePath(GetSchemaPropertyNameInXml(propertyInfo, originalValue, newValue), differentLocation);
+                differentLocation = CombinePath(
+                    GetSchemaPropertyNameInXml(propertyInfo, originalValue, newValue),
+                    differentLocation
+                );
                 return false;
             }
 
             if (originalValue.GetType() != newValue.GetType())
             {
-                differentLocation = CombinePath(GetSchemaPropertyNameInXml(propertyInfo, originalValue, newValue), differentLocation);
+                differentLocation = CombinePath(
+                    GetSchemaPropertyNameInXml(propertyInfo, originalValue, newValue),
+                    differentLocation
+                );
                 return false;
             }
 
             if (!CompareSchemaValues(originalValue, newValue, out differentLocation))
             {
-                differentLocation = CombinePath(GetSchemaPropertyNameInXml(propertyInfo, originalValue, newValue), differentLocation);
+                differentLocation = CombinePath(
+                    GetSchemaPropertyNameInXml(propertyInfo, originalValue, newValue),
+                    differentLocation
+                );
                 return false;
             }
             else
@@ -326,7 +417,10 @@ namespace Microsoft.VSDesigner.WCFModel
                 // ignorable difference...
                 if (!String.IsNullOrEmpty(differentLocation))
                 {
-                    differentLocation = CombinePath(GetSchemaPropertyNameInXml(propertyInfo, originalValue, newValue), differentLocation);
+                    differentLocation = CombinePath(
+                        GetSchemaPropertyNameInXml(propertyInfo, originalValue, newValue),
+                        differentLocation
+                    );
                 }
                 return true;
             }
@@ -337,7 +431,11 @@ namespace Microsoft.VSDesigner.WCFModel
         /// </summary>
         /// <return></return>
         /// <remarks></remarks>
-        private static bool CompareSchemaValues(object originalValue, object newValue, out string differentLocation)
+        private static bool CompareSchemaValues(
+            object originalValue,
+            object newValue,
+            out string differentLocation
+        )
         {
             differentLocation = String.Empty;
 
@@ -353,7 +451,11 @@ namespace Microsoft.VSDesigner.WCFModel
 
             if (originalValue is XmlSchemaObject)
             {
-                return AreSchemaObjectsEquivalent((XmlSchemaObject)originalValue, (XmlSchemaObject)newValue, out differentLocation);
+                return AreSchemaObjectsEquivalent(
+                    (XmlSchemaObject)originalValue,
+                    (XmlSchemaObject)newValue,
+                    out differentLocation
+                );
             }
 
             if (originalValue is XmlAttribute)
@@ -363,7 +465,11 @@ namespace Microsoft.VSDesigner.WCFModel
 
             if (originalValue is XmlElement)
             {
-                return CompareXmlElements((XmlElement)originalValue, (XmlElement)newValue, out differentLocation);
+                return CompareXmlElements(
+                    (XmlElement)originalValue,
+                    (XmlElement)newValue,
+                    out differentLocation
+                );
             }
 
             if (originalValue is XmlText)
@@ -379,10 +485,14 @@ namespace Microsoft.VSDesigner.WCFModel
         /// </summary>
         /// <return></return>
         /// <remarks></remarks>
-        private static bool CompareSchemaCollections(System.Collections.IEnumerable originalCollection, System.Collections.IEnumerable newCollection,
-                out object differentItem1, out object differentItem2, out string differentLocation)
+        private static bool CompareSchemaCollections(
+            System.Collections.IEnumerable originalCollection,
+            System.Collections.IEnumerable newCollection,
+            out object differentItem1,
+            out object differentItem2,
+            out string differentLocation
+        )
         {
-
             differentLocation = String.Empty;
 
             System.Collections.IEnumerator list1 = originalCollection.GetEnumerator();
@@ -408,8 +518,7 @@ namespace Microsoft.VSDesigner.WCFModel
                     ignorableDifferenceItem2 = differentItem2;
                     ignorableDifferenceLocation = differentLocation;
                 }
-            }
-            while (differentItem1 != null && differentItem2 != null);
+            } while (differentItem1 != null && differentItem2 != null);
 
             Debug.Assert(differentItem1 == null && differentItem2 == null);
 
@@ -427,9 +536,17 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         private static bool CompareXmlAttributes(XmlAttribute attribute1, XmlAttribute attribute2)
         {
-            return String.Equals(attribute1.LocalName, attribute2.LocalName, StringComparison.Ordinal) &&
-                    String.Equals(attribute1.NamespaceURI, attribute2.NamespaceURI, StringComparison.Ordinal) &&
-                    String.Equals(attribute1.Value, attribute2.Value, StringComparison.Ordinal);
+            return String.Equals(
+                    attribute1.LocalName,
+                    attribute2.LocalName,
+                    StringComparison.Ordinal
+                )
+                && String.Equals(
+                    attribute1.NamespaceURI,
+                    attribute2.NamespaceURI,
+                    StringComparison.Ordinal
+                )
+                && String.Equals(attribute1.Value, attribute2.Value, StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -437,7 +554,12 @@ namespace Microsoft.VSDesigner.WCFModel
         /// </summary>
         /// <return></return>
         /// <remarks></remarks>
-        private static bool CompareXmlAttributeCollections(System.Collections.ICollection attributeCollection1, System.Collections.ICollection attributeCollection2, out XmlAttribute differentAttribute1, out XmlAttribute differentAttribute2)
+        private static bool CompareXmlAttributeCollections(
+            System.Collections.ICollection attributeCollection1,
+            System.Collections.ICollection attributeCollection2,
+            out XmlAttribute differentAttribute1,
+            out XmlAttribute differentAttribute2
+        )
         {
             differentAttribute1 = null;
             differentAttribute2 = null;
@@ -445,9 +567,18 @@ namespace Microsoft.VSDesigner.WCFModel
             XmlAttribute[] attributeArray1 = GetSortedAttributeArray(attributeCollection1);
             XmlAttribute[] attributeArray2 = GetSortedAttributeArray(attributeCollection2);
 
-            object differentItem1, differentItem2;
+            object differentItem1,
+                differentItem2;
             string differentLocation;
-            if (!CompareSchemaCollections(attributeArray1, attributeArray2, out differentItem1, out differentItem2, out differentLocation))
+            if (
+                !CompareSchemaCollections(
+                    attributeArray1,
+                    attributeArray2,
+                    out differentItem1,
+                    out differentItem2,
+                    out differentLocation
+                )
+            )
             {
                 differentAttribute1 = (XmlAttribute)differentItem1;
                 differentAttribute2 = (XmlAttribute)differentItem2;
@@ -461,7 +592,9 @@ namespace Microsoft.VSDesigner.WCFModel
         /// </summary>
         /// <return></return>
         /// <remarks></remarks>
-        private static XmlAttribute[] GetSortedAttributeArray(System.Collections.ICollection attributeCollection)
+        private static XmlAttribute[] GetSortedAttributeArray(
+            System.Collections.ICollection attributeCollection
+        )
         {
             XmlAttribute[] attributeArray = new XmlAttribute[attributeCollection.Count];
             int index = 0;
@@ -479,31 +612,69 @@ namespace Microsoft.VSDesigner.WCFModel
         /// </summary>
         /// <return></return>
         /// <remarks></remarks>
-        private static bool CompareXmlElements(XmlElement element1, XmlElement element2, out string differentLocation)
+        private static bool CompareXmlElements(
+            XmlElement element1,
+            XmlElement element2,
+            out string differentLocation
+        )
         {
             differentLocation = String.Empty;
 
-            if (!String.Equals(element1.LocalName, element2.LocalName, StringComparison.Ordinal) ||
-                    !String.Equals(element1.NamespaceURI, element2.NamespaceURI, StringComparison.Ordinal))
+            if (
+                !String.Equals(element1.LocalName, element2.LocalName, StringComparison.Ordinal)
+                || !String.Equals(
+                    element1.NamespaceURI,
+                    element2.NamespaceURI,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 return false;
             }
 
-            XmlAttribute differentAttribute1, differentAttribute2;
-            if (!CompareXmlAttributeCollections(element1.Attributes, element2.Attributes, out differentAttribute1, out differentAttribute2))
+            XmlAttribute differentAttribute1,
+                differentAttribute2;
+            if (
+                !CompareXmlAttributeCollections(
+                    element1.Attributes,
+                    element2.Attributes,
+                    out differentAttribute1,
+                    out differentAttribute2
+                )
+            )
             {
-                string attributeName1 = differentAttribute1 != null ? "@" + differentAttribute1.LocalName : String.Empty;
-                string attributeName2 = differentAttribute2 != null ? "@" + differentAttribute2.LocalName : String.Empty;
+                string attributeName1 =
+                    differentAttribute1 != null
+                        ? "@" + differentAttribute1.LocalName
+                        : String.Empty;
+                string attributeName2 =
+                    differentAttribute2 != null
+                        ? "@" + differentAttribute2.LocalName
+                        : String.Empty;
                 differentLocation = CombineTwoNames(attributeName1, attributeName2);
                 return false;
             }
 
-            object differentChild1, differentChild2;
-            if (!CompareSchemaCollections(element1.ChildNodes, element2.ChildNodes, out differentChild1, out differentChild2, out differentLocation))
+            object differentChild1,
+                differentChild2;
+            if (
+                !CompareSchemaCollections(
+                    element1.ChildNodes,
+                    element2.ChildNodes,
+                    out differentChild1,
+                    out differentChild2,
+                    out differentLocation
+                )
+            )
             {
-                string child1Name = differentChild1 != null ? ((XmlNode)differentChild1).LocalName : String.Empty;
-                string child2Name = differentChild2 != null ? ((XmlNode)differentChild2).LocalName : String.Empty;
-                differentLocation = CombinePath(CombineTwoNames(child1Name, child2Name), differentLocation);
+                string child1Name =
+                    differentChild1 != null ? ((XmlNode)differentChild1).LocalName : String.Empty;
+                string child2Name =
+                    differentChild2 != null ? ((XmlNode)differentChild2).LocalName : String.Empty;
+                differentLocation = CombinePath(
+                    CombineTwoNames(child1Name, child2Name),
+                    differentLocation
+                );
                 return false;
             }
             return true;
@@ -571,7 +742,11 @@ namespace Microsoft.VSDesigner.WCFModel
         /// </summary>
         /// <return></return>
         /// <remarks></remarks>
-        private static string GetSchemaPropertyNameInXml(PropertyInfo property, object value1, object value2)
+        private static string GetSchemaPropertyNameInXml(
+            PropertyInfo property,
+            object value1,
+            object value2
+        )
         {
             object[] propertyAttributes = property.GetCustomAttributes(true);
             string name = String.Empty;
@@ -629,7 +804,10 @@ namespace Microsoft.VSDesigner.WCFModel
         /// a helper function to generate names
         /// </summary>
         /// <remarks></remarks>
-        private static string GetSchemaPropertyNameInXmlHelper(object[] propertyAttributes, object value)
+        private static string GetSchemaPropertyNameInXmlHelper(
+            object[] propertyAttributes,
+            object value
+        )
         {
             if (value != null)
             {
@@ -637,11 +815,15 @@ namespace Microsoft.VSDesigner.WCFModel
                 {
                     if (attribute is System.Xml.Serialization.XmlAttributeAttribute)
                     {
-                        return "@" + ((System.Xml.Serialization.XmlAttributeAttribute)attribute).AttributeName;
+                        return "@"
+                            + (
+                                (System.Xml.Serialization.XmlAttributeAttribute)attribute
+                            ).AttributeName;
                     }
                     if (attribute is System.Xml.Serialization.XmlElementAttribute)
                     {
-                        System.Xml.Serialization.XmlElementAttribute elementAttribute = (System.Xml.Serialization.XmlElementAttribute)attribute;
+                        System.Xml.Serialization.XmlElementAttribute elementAttribute =
+                            (System.Xml.Serialization.XmlElementAttribute)attribute;
                         Type elementType = elementAttribute.Type;
                         if (elementType == null || elementType.IsInstanceOfType(value))
                         {
@@ -650,7 +832,12 @@ namespace Microsoft.VSDesigner.WCFModel
                                 string itemName = GetSchemaItemName((XmlSchemaObject)value);
                                 if (itemName.Length > 0)
                                 {
-                                    return String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}[@name='{1}']", elementAttribute.ElementName, itemName);
+                                    return String.Format(
+                                        System.Globalization.CultureInfo.InvariantCulture,
+                                        "{0}[@name='{1}']",
+                                        elementAttribute.ElementName,
+                                        itemName
+                                    );
                                 }
                             }
                             return elementAttribute.ElementName;
@@ -753,10 +940,13 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         private class AttributeComparer : System.Collections.Generic.IComparer<XmlAttribute>
         {
-
             public int Compare(System.Xml.XmlAttribute x, System.Xml.XmlAttribute y)
             {
-                int namespaceResult = String.Compare(x.NamespaceURI, y.NamespaceURI, StringComparison.Ordinal);
+                int namespaceResult = String.Compare(
+                    x.NamespaceURI,
+                    y.NamespaceURI,
+                    StringComparison.Ordinal
+                );
                 if (namespaceResult != 0)
                 {
                     return namespaceResult;
@@ -767,5 +957,3 @@ namespace Microsoft.VSDesigner.WCFModel
         }
     }
 }
-
-

@@ -38,5 +38,5 @@ public enum SqlServerValueGenerationStrategy
     /// <summary>
     ///     A pattern that uses a database sequence to generate values for the column.
     /// </summary>
-    Sequence
+    Sequence,
 }

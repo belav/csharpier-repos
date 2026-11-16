@@ -1,33 +1,35 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Hosting;
 using System.CommandLine.NamingConventionBinder;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using static HostingPlayground.HostingPlaygroundLogEvents;
 
 namespace HostingPlayground
 {
     class Program
     {
-        static Task Main(string[] args) => BuildCommandLine()
-            .UseHost(_ => Host.CreateDefaultBuilder(),
-                host =>
-                {
-                    host.ConfigureServices(services =>
+        static Task Main(string[] args) =>
+            BuildCommandLine()
+                .UseHost(
+                    _ => Host.CreateDefaultBuilder(),
+                    host =>
                     {
-                        services.AddSingleton<IGreeter, Greeter>();
-                    });
-                })
-            .InvokeAsync(args);
+                        host.ConfigureServices(services =>
+                        {
+                            services.AddSingleton<IGreeter, Greeter>();
+                        });
+                    }
+                )
+                .InvokeAsync(args);
 
         private static CliConfiguration BuildCommandLine()
         {
-            var root = new CliRootCommand(@"$ dotnet run --name 'Joe'"){
-                new CliOption<string>("--name"){
-                    Required = true
-                }
+            var root = new CliRootCommand(@"$ dotnet run --name 'Joe'")
+            {
+                new CliOption<string>("--name") { Required = true },
             };
             root.Action = CommandHandler.Create<GreeterOptions, IHost>(Run);
             return new CliConfiguration(root);

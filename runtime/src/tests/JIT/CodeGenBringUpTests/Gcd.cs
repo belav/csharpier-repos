@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_Gcd
 {
     const int Pass = 100;
@@ -14,7 +14,7 @@ public class BringUpTest_Gcd
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     internal static void print(int a, int b)
     {
-         Console.WriteLine("GCD: " + a + "," + b);
+        Console.WriteLine("GCD: " + a + "," + b);
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -22,23 +22,23 @@ public class BringUpTest_Gcd
     {
         print(a, b);
         int result;
-        if (b == 0) 
-          result = a;
-        else if (a < b) 
-          result = Gcd(b, a);
+        if (b == 0)
+            result = a;
+        else if (a < b)
+            result = Gcd(b, a);
         else
-          result = Gcd(b, a%b);
+            result = Gcd(b, a % b);
 
         return result;
     }
-
 
     [Fact]
     public static int TestEntryPoint()
     {
         int s = Gcd(36, 81);
         Console.WriteLine("GCD is " + s);
-        if (s != 9) return Fail;
-        return Pass;        
+        if (s != 9)
+            return Fail;
+        return Pass;
     }
 }

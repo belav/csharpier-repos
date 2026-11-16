@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -15,39 +15,42 @@
 ** Date:    Microsoft 30, 2000
 **
 ===========================================================*/
-namespace System.Runtime.Remoting.Activation {
+namespace System.Runtime.Remoting.Activation
+{
+    using System;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Contexts;
     using System.Runtime.Remoting.Messaging;
     using System.Security.Permissions;
-    using System;
-    [System.Security.SecurityCritical]  // auto-generated
+
+    [System.Security.SecurityCritical] // auto-generated
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class UrlAttribute : ContextAttribute
     {
         private String url;
         private static String propertyName = "UrlAttribute";
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public UrlAttribute(String callsiteURL) :base(propertyName)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public UrlAttribute(String callsiteURL)
+            : base(propertyName)
         {
-            if(null == callsiteURL)
+            if (null == callsiteURL)
             {
                 // Invalid arg
                 throw new ArgumentNullException("callsiteURL");
             }
             url = callsiteURL;
-        }        
-
+        }
 
         // Object::Equals
         // Override the default implementation which just compares the names
         [System.Security.SecuritySafeCritical] // overrides public transparent member
         public override bool Equals(Object o)
         {
-            return (o is IContextProperty) && (o is UrlAttribute) && 
-                   (((UrlAttribute)o).UrlValue.Equals(url));
+            return (o is IContextProperty)
+                && (o is UrlAttribute)
+                && (((UrlAttribute)o).UrlValue.Equals(url));
         }
 
         [System.Security.SecuritySafeCritical] // overrides public transparent member
@@ -55,17 +58,17 @@ namespace System.Runtime.Remoting.Activation {
         {
             return this.url.GetHashCode();
         }
-        
+
         // Override ContextAttribute's implementation of IContextAttribute::IsContextOK
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [System.Runtime.InteropServices.ComVisible(true)]
         public override bool IsContextOK(Context ctx, IConstructionCallMessage msg)
         {
             return false;
         }
-    
+
         // Override ContextAttribute's impl. of IContextAttribute::GetPropForNewCtx
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [System.Runtime.InteropServices.ComVisible(true)]
         public override void GetPropertiesForNewContext(IConstructionCallMessage ctorMsg)
         {
@@ -75,12 +78,11 @@ namespace System.Runtime.Remoting.Activation {
             // the specified URL.
             return;
         }
-        
+
         public String UrlValue
         {
-            [System.Security.SecurityCritical]  // auto-generated_required
-            get { return url; }            
+            [System.Security.SecurityCritical] // auto-generated_required
+            get { return url; }
         }
     }
 } // namespace
-

@@ -302,14 +302,10 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
             {
                 webHostBuilder.UseKestrel(options =>
                 {
-                    options.Listen(
-                        IPAddress.Loopback,
-                        0,
-                        endpoint =>
-                        {
-                            endpoint.UseHttps("negotiateAuthCert.pfx", "testPassword");
-                        }
-                    );
+                    options.Listen(IPAddress.Loopback, 0, endpoint =>
+                    {
+                        endpoint.UseHttps("negotiateAuthCert.pfx", "testPassword");
+                    });
                 });
                 webHostBuilder.Configure(app =>
                 {
@@ -325,93 +321,75 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
 
     private static void ConfigureEndpoints(IEndpointRouteBuilder builder)
     {
-        builder.Map(
-            "/Anonymous1",
-            context =>
+        builder.Map("/Anonymous1", context =>
+        {
+            Assert.Equal("HTTP/1.1", context.Request.Protocol);
+            Assert.False(context.User.Identity.IsAuthenticated, "Anonymous");
+            return Task.CompletedTask;
+        });
+
+        builder.Map("/Anonymous2", context =>
+        {
+            Assert.Equal("HTTP/2", context.Request.Protocol);
+            Assert.False(context.User.Identity.IsAuthenticated, "Anonymous");
+            return Task.CompletedTask;
+        });
+
+        builder.Map("/Authenticate", async context =>
+        {
+            if (!context.User.Identity.IsAuthenticated)
             {
-                Assert.Equal("HTTP/1.1", context.Request.Protocol);
-                Assert.False(context.User.Identity.IsAuthenticated, "Anonymous");
-                return Task.CompletedTask;
-            }
-        );
-
-        builder.Map(
-            "/Anonymous2",
-            context =>
-            {
-                Assert.Equal("HTTP/2", context.Request.Protocol);
-                Assert.False(context.User.Identity.IsAuthenticated, "Anonymous");
-                return Task.CompletedTask;
-            }
-        );
-
-        builder.Map(
-            "/Authenticate",
-            async context =>
-            {
-                if (!context.User.Identity.IsAuthenticated)
-                {
-                    await context.ChallengeAsync();
-                    return;
-                }
-
-                Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
-                var name = context.User.Identity.Name;
-                Assert.False(string.IsNullOrEmpty(name), "name");
-                await context.Response.WriteAsync(name);
-            }
-        );
-
-        builder.Map(
-            "/AuthenticateWebSocket",
-            async context =>
-            {
-                if (!context.User.Identity.IsAuthenticated)
-                {
-                    await context.ChallengeAsync();
-                    return;
-                }
-
-                if (!context.WebSockets.IsWebSocketRequest)
-                {
-                    context.Response.StatusCode = 400;
-                    return;
-                }
-
-                Assert.False(string.IsNullOrEmpty(context.User.Identity.Name), "name");
-
-                WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
-
-                await webSocket.SendAsync(
-                    Encoding.UTF8.GetBytes("Hello World!"),
-                    WebSocketMessageType.Text,
-                    endOfMessage: true,
-                    context.RequestAborted
-                );
-            }
-        );
-
-        builder.Map(
-            "/AlreadyAuthenticated",
-            async context =>
-            {
-                Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
-                Assert.True(context.User.Identity.IsAuthenticated, "Authenticated");
-                var name = context.User.Identity.Name;
-                Assert.False(string.IsNullOrEmpty(name), "name");
-                await context.Response.WriteAsync(name);
-            }
-        );
-
-        builder.Map(
-            "/Unauthorized",
-            async context =>
-            {
-                // Simulate Authorization failure
-                var result = await context.AuthenticateAsync();
                 await context.ChallengeAsync();
+                return;
             }
-        );
+
+            Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
+            var name = context.User.Identity.Name;
+            Assert.False(string.IsNullOrEmpty(name), "name");
+            await context.Response.WriteAsync(name);
+        });
+
+        builder.Map("/AuthenticateWebSocket", async context =>
+        {
+            if (!context.User.Identity.IsAuthenticated)
+            {
+                await context.ChallengeAsync();
+                return;
+            }
+
+            if (!context.WebSockets.IsWebSocketRequest)
+            {
+                context.Response.StatusCode = 400;
+                return;
+            }
+
+            Assert.False(string.IsNullOrEmpty(context.User.Identity.Name), "name");
+
+            WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
+
+            await webSocket.SendAsync(
+                Encoding.UTF8.GetBytes("Hello World!"),
+                WebSocketMessageType.Text,
+                endOfMessage: true,
+                context.RequestAborted
+            );
+        });
+
+        builder.Map("/AlreadyAuthenticated", async context =>
+        {
+            Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
+            Assert.True(context.User.Identity.IsAuthenticated, "Authenticated");
+            var name = context.User.Identity.Name;
+            Assert.False(string.IsNullOrEmpty(name), "name");
+            await context.Response.WriteAsync(name);
+        });
+
+        builder.Map("/Unauthorized", async context =>
+        {
+            // Simulate Authorization failure
+            var result = await context.AuthenticateAsync();
+            await context.ChallengeAsync();
+        });
     }
 
     // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade. WinHttpHandler does.

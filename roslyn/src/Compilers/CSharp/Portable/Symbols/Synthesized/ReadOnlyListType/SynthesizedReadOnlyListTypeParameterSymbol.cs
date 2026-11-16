@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         private readonly SynthesizedReadOnlyListTypeSymbol _containingType;
 
-        internal SynthesizedReadOnlyListTypeParameterSymbol(SynthesizedReadOnlyListTypeSymbol containingType)
+        internal SynthesizedReadOnlyListTypeParameterSymbol(
+            SynthesizedReadOnlyListTypeSymbol containingType
+        )
         {
             _containingType = containingType;
         }
@@ -42,22 +44,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<Location> Locations => _containingType.Locations;
 
-        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => _containingType.DeclaringSyntaxReferences;
+        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+            _containingType.DeclaringSyntaxReferences;
 
         internal override bool? IsNotNullable => null;
 
         internal override bool? ReferenceTypeConstraintIsNullable => null;
 
-        internal override void EnsureAllConstraintsAreResolved()
-        {
-        }
+        internal override void EnsureAllConstraintsAreResolved() { }
 
-        internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(ConsList<TypeParameterSymbol> inProgress) => ImmutableArray<TypeWithAnnotations>.Empty;
+        internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(
+            ConsList<TypeParameterSymbol> inProgress
+        ) => ImmutableArray<TypeWithAnnotations>.Empty;
 
-        internal override TypeSymbol GetDeducedBaseType(ConsList<TypeParameterSymbol> inProgress) => ContainingAssembly.GetSpecialType(SpecialType.System_Object);
+        internal override TypeSymbol GetDeducedBaseType(ConsList<TypeParameterSymbol> inProgress) =>
+            ContainingAssembly.GetSpecialType(SpecialType.System_Object);
 
-        internal override NamedTypeSymbol GetEffectiveBaseClass(ConsList<TypeParameterSymbol> inProgress) => ContainingAssembly.GetSpecialType(SpecialType.System_Object);
+        internal override NamedTypeSymbol GetEffectiveBaseClass(
+            ConsList<TypeParameterSymbol> inProgress
+        ) => ContainingAssembly.GetSpecialType(SpecialType.System_Object);
 
-        internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(ConsList<TypeParameterSymbol> inProgress) => ImmutableArray<NamedTypeSymbol>.Empty;
+        internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
+            ConsList<TypeParameterSymbol> inProgress
+        ) => ImmutableArray<NamedTypeSymbol>.Empty;
     }
 }

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
     /// <threadsafety static="false" instance="false"/>
     internal class PerformanceQueue
     {
-        private readonly int _maxSampleSize, _minSampleSize;
+        private readonly int _maxSampleSize,
+            _minSampleSize;
         private readonly LinkedList<Snapshot> _snapshots;
 
         private int _snapshotsSinceLastReport;
@@ -36,6 +37,7 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         }
 
         public int Count => _snapshots.Count;
+
         public void Add(IEnumerable<(string analyzerId, TimeSpan timeSpan)> rawData, int unitCount)
         {
             if (_snapshots.Count < _maxSampleSize)
@@ -56,7 +58,13 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             _snapshotsSinceLastReport++;
         }
 
-        public void GetPerformanceData(List<(string analyzerId, double average, double stddev)> aggregatedPerformanceDataPerAnalyzer)
+        public void GetPerformanceData(
+            List<(
+                string analyzerId,
+                double average,
+                double stddev
+            )> aggregatedPerformanceDataPerAnalyzer
+        )
         {
             if (_snapshotsSinceLastReport < _minSampleSize)
             {
@@ -114,7 +122,9 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             }
         }
 
-        private static (double average, double stddev) GetAverageAndAdjustedStandardDeviation(List<double> data)
+        private static (double average, double stddev) GetAverageAndAdjustedStandardDeviation(
+            List<double> data
+        )
         {
             var average = data.Average();
             var stddev = Math.Sqrt(data.Select(ms => Math.Pow(ms - average, 2)).Average());
@@ -126,29 +136,35 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         private class Snapshot
         {
             /// <summary>
-            /// Raw performance data. 
+            /// Raw performance data.
             /// Keyed by analyzer unique number got from AnalyzerNumberAssigner.
             /// Value is delta (TimeSpan - minSpan) among span in this snapshot
             /// </summary>
             private readonly Dictionary<int, double> _performanceMap;
 
-            public Snapshot(IEnumerable<(string analyzerId, TimeSpan timeSpan)> snapshot, int unitCount)
-                : this(Convert(snapshot), unitCount)
-            {
-            }
+            public Snapshot(
+                IEnumerable<(string analyzerId, TimeSpan timeSpan)> snapshot,
+                int unitCount
+            )
+                : this(Convert(snapshot), unitCount) { }
 
-            public Snapshot(IEnumerable<(int assignedAnalyzerNumber, TimeSpan timeSpan)> rawData, int unitCount)
+            public Snapshot(
+                IEnumerable<(int assignedAnalyzerNumber, TimeSpan timeSpan)> rawData,
+                int unitCount
+            )
             {
                 _performanceMap = new Dictionary<int, double>();
 
                 Reset(_performanceMap, rawData, unitCount);
             }
 
-            public void Update(IEnumerable<(string analyzerId, TimeSpan timeSpan)> rawData, int unitCount)
-                => Reset(_performanceMap, Convert(rawData), unitCount);
+            public void Update(
+                IEnumerable<(string analyzerId, TimeSpan timeSpan)> rawData,
+                int unitCount
+            ) => Reset(_performanceMap, Convert(rawData), unitCount);
 
-            public void AppendAnalyzers(HashSet<int> analyzerSet)
-                => analyzerSet.UnionWith(_performanceMap.Keys);
+            public void AppendAnalyzers(HashSet<int> analyzerSet) =>
+                analyzerSet.UnionWith(_performanceMap.Keys);
 
             public double? GetTimeSpanInMillisecond(int assignedAnalyzerNumber)
             {
@@ -161,7 +177,10 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             }
 
             private static void Reset(
-                Dictionary<int, double> map, IEnumerable<(int assignedAnalyzerNumber, TimeSpan timeSpan)> rawData, int fileCount)
+                Dictionary<int, double> map,
+                IEnumerable<(int assignedAnalyzerNumber, TimeSpan timeSpan)> rawData,
+                int fileCount
+            )
             {
                 // get smallest timespan in the snapshot
                 var minSpan = rawData.Select(kv => kv.timeSpan).Min();
@@ -174,12 +193,17 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 // map is normalized to current timespan - min timspan of the snapshot
                 foreach (var (assignedAnalyzerNumber, timeSpan) in rawData)
                 {
-                    map[assignedAnalyzerNumber] = (timeSpan.TotalMilliseconds - minSpan.TotalMilliseconds) / fileCount;
+                    map[assignedAnalyzerNumber] =
+                        (timeSpan.TotalMilliseconds - minSpan.TotalMilliseconds) / fileCount;
                 }
             }
 
-            private static IEnumerable<(int assignedAnalyzerNumber, TimeSpan timeSpan)> Convert(IEnumerable<(string analyzerId, TimeSpan timeSpan)> rawData)
-                => rawData.Select(kv => (AnalyzerNumberAssigner.Instance.GetUniqueNumber(kv.analyzerId), kv.timeSpan));
+            private static IEnumerable<(int assignedAnalyzerNumber, TimeSpan timeSpan)> Convert(
+                IEnumerable<(string analyzerId, TimeSpan timeSpan)> rawData
+            ) =>
+                rawData.Select(kv =>
+                    (AnalyzerNumberAssigner.Instance.GetUniqueNumber(kv.analyzerId), kv.timeSpan)
+                );
         }
 
         /// <summary>
@@ -201,8 +225,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 _idMap = new Dictionary<string, int>();
             }
 
-            public int GetUniqueNumber(DiagnosticAnalyzer analyzer)
-                => GetUniqueNumber(analyzer.GetAnalyzerId());
+            public int GetUniqueNumber(DiagnosticAnalyzer analyzer) =>
+                GetUniqueNumber(analyzer.GetAnalyzerId());
 
             public int GetUniqueNumber(string analyzerName)
             {

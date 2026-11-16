@@ -19,7 +19,8 @@ namespace System.Data.Common
         // location so that the catcher of the exception will have the appropriate call stack.
         // This class is used so that there will be compile time checking of error messages.
 
-        internal static Task<T> CreatedTaskWithCancellation<T>() => Task.FromCanceled<T>(new CancellationToken(true));
+        internal static Task<T> CreatedTaskWithCancellation<T>() =>
+            Task.FromCanceled<T>(new CancellationToken(true));
 
         // this method accepts BID format as an argument, this attribute allows FXCopBid rule to validate calls to it
         static partial void TraceException(string trace, Exception e)
@@ -33,7 +34,10 @@ namespace System.Data.Common
 
         internal static void TraceExceptionForCapture(Exception e)
         {
-            Debug.Assert(IsCatchableExceptionType(e), "Invalid exception type, should have been re-thrown!");
+            Debug.Assert(
+                IsCatchableExceptionType(e),
+                "Invalid exception type, should have been re-thrown!"
+            );
             TraceException("<comm.ADP.TraceException|ERR|CATCH> '{0}'", e);
         }
 
@@ -52,6 +56,7 @@ namespace System.Data.Common
                 throw Argument(SR.Format(SR.ADP_EmptyString, parameterName));
             }
         }
+
         internal static void CheckArgumentLength(Array value, string parameterName)
         {
             CheckArgumentNull(value, parameterName);
@@ -126,7 +131,9 @@ namespace System.Data.Common
         }
 
         // KeyRestrictionBehavior
-        internal static ArgumentOutOfRangeException InvalidKeyRestrictionBehavior(KeyRestrictionBehavior value)
+        internal static ArgumentOutOfRangeException InvalidKeyRestrictionBehavior(
+            KeyRestrictionBehavior value
+        )
         {
 #if DEBUG
             switch (value)
@@ -157,7 +164,9 @@ namespace System.Data.Common
         }
 
         // IDataAdapter.MissingMappingAction
-        internal static ArgumentOutOfRangeException InvalidMissingMappingAction(MissingMappingAction value)
+        internal static ArgumentOutOfRangeException InvalidMissingMappingAction(
+            MissingMappingAction value
+        )
         {
 #if DEBUG
             switch (value)
@@ -173,7 +182,9 @@ namespace System.Data.Common
         }
 
         // IDataAdapter.MissingSchemaAction
-        internal static ArgumentOutOfRangeException InvalidMissingSchemaAction(MissingSchemaAction value)
+        internal static ArgumentOutOfRangeException InvalidMissingSchemaAction(
+            MissingSchemaAction value
+        )
         {
 #if DEBUG
             switch (value)
@@ -255,7 +266,10 @@ namespace System.Data.Common
             return InvalidEnumerationValue(typeof(UpdateStatus), (int)value);
         }
 
-        internal static ArgumentOutOfRangeException NotSupportedStatementType(StatementType value, string method)
+        internal static ArgumentOutOfRangeException NotSupportedStatementType(
+            StatementType value,
+            string method
+        )
         {
             return NotSupportedEnumerationValue(typeof(StatementType), value.ToString(), method);
         }
@@ -267,6 +281,7 @@ namespace System.Data.Common
         {
             return Argument(SR.ADP_InvalidKey, parameterName);
         }
+
         internal static ArgumentException InvalidValue(string parameterName)
         {
             return Argument(SR.ADP_InvalidValue, parameterName);
@@ -283,9 +298,15 @@ namespace System.Data.Common
         //
         // Generic Data Provider Collection
         //
-        internal static Exception CollectionUniqueValue(Type itemType, string propertyName, string? propertyValue)
+        internal static Exception CollectionUniqueValue(
+            Type itemType,
+            string propertyName,
+            string? propertyValue
+        )
         {
-            return Argument(SR.Format(SR.ADP_CollectionUniqueValue, itemType.Name, propertyName, propertyValue));
+            return Argument(
+                SR.Format(SR.ADP_CollectionUniqueValue, itemType.Name, propertyName, propertyValue)
+            );
         }
 
         // IDbDataAdapter.Fill(Schema)
@@ -303,25 +324,48 @@ namespace System.Data.Common
         }
 
         // DataColumnMapping.GetDataColumnBySchemaAction
-        internal static InvalidOperationException ColumnSchemaExpression(string? srcColumn, string cacheColumn)
+        internal static InvalidOperationException ColumnSchemaExpression(
+            string? srcColumn,
+            string cacheColumn
+        )
         {
             return DataMapping(SR.Format(SR.ADP_ColumnSchemaExpression, srcColumn, cacheColumn));
         }
 
         // DataColumnMapping.GetDataColumnBySchemaAction
-        internal static InvalidOperationException ColumnSchemaMismatch(string? srcColumn, Type srcType, DataColumn column)
+        internal static InvalidOperationException ColumnSchemaMismatch(
+            string? srcColumn,
+            Type srcType,
+            DataColumn column
+        )
         {
-            return DataMapping(SR.Format(SR.ADP_ColumnSchemaMismatch, srcColumn, srcType.Name, column.ColumnName, column.DataType.Name));
+            return DataMapping(
+                SR.Format(
+                    SR.ADP_ColumnSchemaMismatch,
+                    srcColumn,
+                    srcType.Name,
+                    column.ColumnName,
+                    column.DataType.Name
+                )
+            );
         }
 
         // DataColumnMapping.GetDataColumnBySchemaAction
-        internal static InvalidOperationException ColumnSchemaMissing(string cacheColumn, string tableName, string? srcColumn)
+        internal static InvalidOperationException ColumnSchemaMissing(
+            string cacheColumn,
+            string tableName,
+            string? srcColumn
+        )
         {
             if (string.IsNullOrEmpty(tableName))
             {
-                return InvalidOperation(SR.Format(SR.ADP_ColumnSchemaMissing1, cacheColumn, tableName, srcColumn));
+                return InvalidOperation(
+                    SR.Format(SR.ADP_ColumnSchemaMissing1, cacheColumn, tableName, srcColumn)
+                );
             }
-            return DataMapping(SR.Format(SR.ADP_ColumnSchemaMissing2, cacheColumn, tableName, srcColumn));
+            return DataMapping(
+                SR.Format(SR.ADP_ColumnSchemaMissing2, cacheColumn, tableName, srcColumn)
+            );
         }
 
         // DataColumnMappingCollection.GetColumnMappingBySchemaAction
@@ -331,7 +375,10 @@ namespace System.Data.Common
         }
 
         // DataTableMapping.GetDataTableBySchemaAction
-        internal static InvalidOperationException MissingTableSchema(string cacheTable, string srcTable)
+        internal static InvalidOperationException MissingTableSchema(
+            string cacheTable,
+            string srcTable
+        )
         {
             return DataMapping(SR.Format(SR.ADP_MissingTableSchema, cacheTable, srcTable));
         }
@@ -355,37 +402,63 @@ namespace System.Data.Common
         {
             return Argument(SR.ADP_InvalidSourceColumn, parameter);
         }
+
         internal static Exception ColumnsAddNullAttempt(string parameter)
         {
-            return CollectionNullValue(parameter, typeof(DataColumnMappingCollection), typeof(DataColumnMapping));
+            return CollectionNullValue(
+                parameter,
+                typeof(DataColumnMappingCollection),
+                typeof(DataColumnMapping)
+            );
         }
+
         internal static Exception ColumnsDataSetColumn(string cacheColumn)
         {
-            return CollectionIndexString(typeof(DataColumnMapping), ADP.DataSetColumn, cacheColumn, typeof(DataColumnMappingCollection));
+            return CollectionIndexString(
+                typeof(DataColumnMapping),
+                ADP.DataSetColumn,
+                cacheColumn,
+                typeof(DataColumnMappingCollection)
+            );
         }
+
         internal static Exception ColumnsIndexInt32(int index, IColumnMappingCollection collection)
         {
             return CollectionIndexInt32(index, collection.GetType(), collection.Count);
         }
+
         internal static Exception ColumnsIndexSource(string srcColumn)
         {
-            return CollectionIndexString(typeof(DataColumnMapping), ADP.SourceColumn, srcColumn, typeof(DataColumnMappingCollection));
+            return CollectionIndexString(
+                typeof(DataColumnMapping),
+                ADP.SourceColumn,
+                srcColumn,
+                typeof(DataColumnMappingCollection)
+            );
         }
+
         internal static Exception ColumnsIsNotParent(ICollection collection)
         {
             return ParametersIsNotParent(typeof(DataColumnMapping), collection);
         }
+
         internal static Exception ColumnsIsParent(ICollection collection)
         {
             return ParametersIsParent(typeof(DataColumnMapping), collection);
         }
+
         internal static Exception ColumnsUniqueSourceColumn(string? srcColumn)
         {
             return CollectionUniqueValue(typeof(DataColumnMapping), ADP.SourceColumn, srcColumn);
         }
+
         internal static Exception NotADataColumnMapping(object value)
         {
-            return CollectionInvalidType(typeof(DataColumnMappingCollection), typeof(DataColumnMapping), value);
+            return CollectionInvalidType(
+                typeof(DataColumnMappingCollection),
+                typeof(DataColumnMapping),
+                value
+            );
         }
 
         //
@@ -395,44 +468,73 @@ namespace System.Data.Common
         {
             return Argument(SR.ADP_InvalidSourceTable, parameter);
         }
+
         internal static Exception TablesAddNullAttempt(string parameter)
         {
-            return CollectionNullValue(parameter, typeof(DataTableMappingCollection), typeof(DataTableMapping));
+            return CollectionNullValue(
+                parameter,
+                typeof(DataTableMappingCollection),
+                typeof(DataTableMapping)
+            );
         }
+
         internal static Exception TablesDataSetTable(string cacheTable)
         {
-            return CollectionIndexString(typeof(DataTableMapping), ADP.DataSetTable, cacheTable, typeof(DataTableMappingCollection));
+            return CollectionIndexString(
+                typeof(DataTableMapping),
+                ADP.DataSetTable,
+                cacheTable,
+                typeof(DataTableMappingCollection)
+            );
         }
+
         internal static Exception TablesIndexInt32(int index, ITableMappingCollection collection)
         {
             return CollectionIndexInt32(index, collection.GetType(), collection.Count);
         }
+
         internal static Exception TablesIsNotParent(ICollection collection)
         {
             return ParametersIsNotParent(typeof(DataTableMapping), collection);
         }
+
         internal static Exception TablesIsParent(ICollection collection)
         {
             return ParametersIsParent(typeof(DataTableMapping), collection);
         }
+
         internal static Exception TablesSourceIndex(string srcTable)
         {
-            return CollectionIndexString(typeof(DataTableMapping), ADP.SourceTable, srcTable, typeof(DataTableMappingCollection));
+            return CollectionIndexString(
+                typeof(DataTableMapping),
+                ADP.SourceTable,
+                srcTable,
+                typeof(DataTableMappingCollection)
+            );
         }
+
         internal static Exception TablesUniqueSourceTable(string? srcTable)
         {
             return CollectionUniqueValue(typeof(DataTableMapping), ADP.SourceTable, srcTable);
         }
+
         internal static Exception NotADataTableMapping(object value)
         {
-            return CollectionInvalidType(typeof(DataTableMappingCollection), typeof(DataTableMapping), value);
+            return CollectionInvalidType(
+                typeof(DataTableMappingCollection),
+                typeof(DataTableMapping),
+                value
+            );
         }
 
         //
         // IDbCommand
         //
 
-        internal static InvalidOperationException UpdateConnectionRequired(StatementType statementType, bool isRowUpdatingCommand)
+        internal static InvalidOperationException UpdateConnectionRequired(
+            StatementType statementType,
+            bool isRowUpdatingCommand
+        )
         {
             string resource;
             if (isRowUpdatingCommand)
@@ -470,7 +572,11 @@ namespace System.Data.Common
         internal static InvalidOperationException ConnectionRequired_Res(string method) =>
             InvalidOperation("ADP_ConnectionRequired_" + method);
 
-        internal static InvalidOperationException UpdateOpenConnectionRequired(StatementType statementType, bool isRowUpdatingCommand, ConnectionState state)
+        internal static InvalidOperationException UpdateOpenConnectionRequired(
+            StatementType statementType,
+            bool isRowUpdatingCommand,
+            ConnectionState state
+        )
         {
             string resource;
             if (isRowUpdatingCommand)
@@ -526,32 +632,45 @@ namespace System.Data.Common
         //
         internal static Exception InvalidMaxRecords(string parameter, int max)
         {
-            return Argument(SR.Format(SR.ADP_InvalidMaxRecords, max.ToString(CultureInfo.InvariantCulture)), parameter);
+            return Argument(
+                SR.Format(SR.ADP_InvalidMaxRecords, max.ToString(CultureInfo.InvariantCulture)),
+                parameter
+            );
         }
+
         internal static Exception InvalidStartRecord(string parameter, int start)
         {
-            return Argument(SR.Format(SR.ADP_InvalidStartRecord, start.ToString(CultureInfo.InvariantCulture)), parameter);
+            return Argument(
+                SR.Format(SR.ADP_InvalidStartRecord, start.ToString(CultureInfo.InvariantCulture)),
+                parameter
+            );
         }
+
         internal static Exception FillRequires(string parameter)
         {
             return ArgumentNull(parameter);
         }
+
         internal static Exception FillRequiresSourceTableName(string parameter)
         {
             return Argument(SR.ADP_FillRequiresSourceTableName, parameter);
         }
+
         internal static Exception FillChapterAutoIncrement()
         {
             return InvalidOperation(SR.ADP_FillChapterAutoIncrement);
         }
+
         internal static InvalidOperationException MissingDataReaderFieldType(int index)
         {
             return DataAdapter(SR.Format(SR.ADP_MissingDataReaderFieldType, index));
         }
+
         internal static InvalidOperationException OnlyOneTableForStartRecordOrMaxRecords()
         {
             return DataAdapter(SR.ADP_OnlyOneTableForStartRecordOrMaxRecords);
         }
+
         //
         // DbDataAdapter.Update
         //
@@ -559,20 +678,32 @@ namespace System.Data.Common
         {
             return ArgumentNull(parameter);
         }
-        internal static InvalidOperationException UpdateRequiresSourceTable(string defaultSrcTableName)
+
+        internal static InvalidOperationException UpdateRequiresSourceTable(
+            string defaultSrcTableName
+        )
         {
-            return InvalidOperation(SR.Format(SR.ADP_UpdateRequiresSourceTable, defaultSrcTableName));
+            return InvalidOperation(
+                SR.Format(SR.ADP_UpdateRequiresSourceTable, defaultSrcTableName)
+            );
         }
+
         internal static InvalidOperationException UpdateRequiresSourceTableName(string srcTable)
         {
             return InvalidOperation(SR.Format(SR.ADP_UpdateRequiresSourceTableName, srcTable));
         }
+
         internal static ArgumentNullException UpdateRequiresDataTable(string parameter)
         {
             return ArgumentNull(parameter);
         }
 
-        internal static Exception UpdateConcurrencyViolation(StatementType statementType, int affected, int expected, DataRow[] dataRows)
+        internal static Exception UpdateConcurrencyViolation(
+            StatementType statementType,
+            int affected,
+            int expected,
+            DataRow[] dataRows
+        )
         {
             string resource;
             switch (statementType)
@@ -595,12 +726,23 @@ namespace System.Data.Common
                 default:
                     throw ADP.InvalidStatementType(statementType);
             }
-            DBConcurrencyException exception = new DBConcurrencyException(SR.Format(resource, affected.ToString(CultureInfo.InvariantCulture), expected.ToString(CultureInfo.InvariantCulture)), null, dataRows);
+            DBConcurrencyException exception = new DBConcurrencyException(
+                SR.Format(
+                    resource,
+                    affected.ToString(CultureInfo.InvariantCulture),
+                    expected.ToString(CultureInfo.InvariantCulture)
+                ),
+                null,
+                dataRows
+            );
             TraceExceptionAsReturnValue(exception);
             return exception;
         }
 
-        internal static InvalidOperationException UpdateRequiresCommand(StatementType statementType, bool isRowUpdatingCommand)
+        internal static InvalidOperationException UpdateRequiresCommand(
+            StatementType statementType,
+            bool isRowUpdatingCommand
+        )
         {
             string resource;
             if (isRowUpdatingCommand)
@@ -634,18 +776,24 @@ namespace System.Data.Common
             }
             return InvalidOperation(resource);
         }
+
         internal static ArgumentException UpdateMismatchRowTable(int i)
         {
-            return Argument(SR.Format(SR.ADP_UpdateMismatchRowTable, i.ToString(CultureInfo.InvariantCulture)));
+            return Argument(
+                SR.Format(SR.ADP_UpdateMismatchRowTable, i.ToString(CultureInfo.InvariantCulture))
+            );
         }
+
         internal static DataException RowUpdatedErrors()
         {
             return Data(SR.ADP_RowUpdatedErrors);
         }
+
         internal static DataException RowUpdatingErrors()
         {
             return Data(SR.ADP_RowUpdatingErrors);
         }
+
         internal static InvalidOperationException ResultsNotAllowedDuringBatch()
         {
             return DataAdapter(SR.ADP_ResultsNotAllowedDuringBatch);
@@ -658,38 +806,47 @@ namespace System.Data.Common
         {
             return InvalidOperation(SR.ADP_DynamicSQLJoinUnsupported);
         }
+
         internal static InvalidOperationException DynamicSQLNoTableInfo()
         {
             return InvalidOperation(SR.ADP_DynamicSQLNoTableInfo);
         }
+
         internal static InvalidOperationException DynamicSQLNoKeyInfoDelete()
         {
             return InvalidOperation(SR.ADP_DynamicSQLNoKeyInfoDelete);
         }
+
         internal static InvalidOperationException DynamicSQLNoKeyInfoUpdate()
         {
             return InvalidOperation(SR.ADP_DynamicSQLNoKeyInfoUpdate);
         }
+
         internal static InvalidOperationException DynamicSQLNoKeyInfoRowVersionDelete()
         {
             return InvalidOperation(SR.ADP_DynamicSQLNoKeyInfoRowVersionDelete);
         }
+
         internal static InvalidOperationException DynamicSQLNoKeyInfoRowVersionUpdate()
         {
             return InvalidOperation(SR.ADP_DynamicSQLNoKeyInfoRowVersionUpdate);
         }
+
         internal static InvalidOperationException DynamicSQLNestedQuote(string name, string quote)
         {
             return InvalidOperation(SR.Format(SR.ADP_DynamicSQLNestedQuote, name, quote));
         }
+
         internal static InvalidOperationException NoQuoteChange()
         {
             return InvalidOperation(SR.ADP_NoQuoteChange);
         }
+
         internal static InvalidOperationException MissingSourceCommand()
         {
             return InvalidOperation(SR.ADP_MissingSourceCommand);
         }
+
         internal static InvalidOperationException MissingSourceCommandConnection()
         {
             return InvalidOperation(SR.ADP_MissingSourceCommandConnection);
@@ -706,10 +863,13 @@ namespace System.Data.Common
 
         internal static DataRow[] SelectAdapterRows(DataTable dataTable, bool sorted)
         {
-            const DataRowState rowStates = DataRowState.Added | DataRowState.Deleted | DataRowState.Modified;
+            const DataRowState rowStates =
+                DataRowState.Added | DataRowState.Deleted | DataRowState.Modified;
 
             // equivalent to but faster than 'return dataTable.Select("", "", rowStates);'
-            int countAdded = 0, countDeleted = 0, countModifed = 0;
+            int countAdded = 0,
+                countDeleted = 0,
+                countModifed = 0;
             DataRowCollection rowCollection = dataTable.Rows;
             foreach (DataRow dataRow in rowCollection)
             {
@@ -822,7 +982,12 @@ namespace System.Data.Common
             }
         }
 
-        private static int GenerateUniqueName(Dictionary<string, int> hash, ref string columnName, int index, int uniqueIndex)
+        private static int GenerateUniqueName(
+            Dictionary<string, int> hash,
+            ref string columnName,
+            int index,
+            int uniqueIndex
+        )
         {
             for (; ; ++uniqueIndex)
             {

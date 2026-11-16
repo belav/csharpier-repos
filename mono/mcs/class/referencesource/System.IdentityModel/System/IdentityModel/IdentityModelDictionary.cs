@@ -4,12 +4,14 @@
 
 namespace System.IdentityModel
 {
-    using System.Xml;
     using System.Collections.Generic;
+    using System.Xml;
 
     class IdentityModelDictionary : IXmlDictionary
     {
-        static public readonly IdentityModelDictionary Version1 = new IdentityModelDictionary(new IdentityModelStringsVersion1());
+        public static readonly IdentityModelDictionary Version1 = new IdentityModelDictionary(
+            new IdentityModelStringsVersion1()
+        );
         IdentityModelStrings strings;
         int count;
         XmlDictionaryString[] dictionaryStrings;
@@ -22,12 +24,9 @@ namespace System.IdentityModel
             this.count = strings.Count;
         }
 
-        static public IdentityModelDictionary CurrentVersion
+        public static IdentityModelDictionary CurrentVersion
         {
-            get
-            {
-                return Version1;
-            }
+            get { return Version1; }
         }
 
         public XmlDictionaryString CreateString(string value, int key)
@@ -38,7 +37,9 @@ namespace System.IdentityModel
         public bool TryLookup(string key, out XmlDictionaryString value)
         {
             if (key == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("key"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("key")
+                );
             if (this.dictionary == null)
             {
                 Dictionary<string, int> dictionary = new Dictionary<string, int>(count);
@@ -75,7 +76,9 @@ namespace System.IdentityModel
         public bool TryLookup(XmlDictionaryString key, out XmlDictionaryString value)
         {
             if (key == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("key"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("key")
+                );
             if (key.Dictionary == this)
             {
                 value = key;

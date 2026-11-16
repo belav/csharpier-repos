@@ -10,7 +10,8 @@ namespace Microsoft.Interop.JavaScript
         public StubCodeContext _inner;
         public override bool SingleFrameSpansNativeContext => _inner.SingleFrameSpansNativeContext;
 
-        public override bool AdditionalTemporaryStateLivesAcrossStages => _inner.AdditionalTemporaryStateLivesAcrossStages;
+        public override bool AdditionalTemporaryStateLivesAcrossStages =>
+            _inner.AdditionalTemporaryStateLivesAcrossStages;
 
         public override (string managed, string native) GetIdentifiers(TypePositionInfo info)
         {

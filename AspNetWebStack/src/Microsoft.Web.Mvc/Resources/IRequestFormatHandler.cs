@@ -28,6 +28,10 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="bindingContext"></param>
         /// <param name="requestFormat"></param>
         /// <returns></returns>
-        object Deserialize(ControllerContext controllerContext, ModelBindingContext bindingContext, ContentType requestFormat);
+        object Deserialize(
+            ControllerContext controllerContext,
+            ModelBindingContext bindingContext,
+            ContentType requestFormat
+        );
     }
 }

@@ -15,12 +15,18 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal class UnassignedAddressTakenVariablesWalker : DefiniteAssignmentPass
     {
-        private UnassignedAddressTakenVariablesWalker(CSharpCompilation compilation, Symbol member, BoundNode node)
-            : base(compilation, member, node, strictAnalysis: true)
-        {
-        }
+        private UnassignedAddressTakenVariablesWalker(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node
+        )
+            : base(compilation, member, node, strictAnalysis: true) { }
 
-        internal static HashSet<PrefixUnaryExpressionSyntax> Analyze(CSharpCompilation compilation, Symbol member, BoundNode node)
+        internal static HashSet<PrefixUnaryExpressionSyntax> Analyze(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node
+        )
         {
             var walker = new UnassignedAddressTakenVariablesWalker(compilation, member, node);
             try
@@ -36,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private readonly HashSet<PrefixUnaryExpressionSyntax> _result = new HashSet<PrefixUnaryExpressionSyntax>();
+        private readonly HashSet<PrefixUnaryExpressionSyntax> _result =
+            new HashSet<PrefixUnaryExpressionSyntax>();
 
         private HashSet<PrefixUnaryExpressionSyntax> Analyze(ref bool badRegion)
         {
@@ -49,7 +56,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             return _result;
         }
 
-        protected override void ReportUnassigned(Symbol symbol, SyntaxNode node, int slot, bool skipIfUseBeforeDeclaration)
+        protected override void ReportUnassigned(
+            Symbol symbol,
+            SyntaxNode node,
+            int slot,
+            bool skipIfUseBeforeDeclaration
+        )
         {
             if (node.Parent.Kind() == SyntaxKind.AddressOfExpression)
             {
@@ -59,7 +71,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitAddressOfOperator(BoundAddressOfOperator node)
         {
-            // Pretend address-of is a pure read (i.e. no write) - would we see an 
+            // Pretend address-of is a pure read (i.e. no write) - would we see an
             // unassigned diagnostic?
             VisitRvalue(node.Operand);
             return null;

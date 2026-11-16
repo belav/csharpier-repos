@@ -34,11 +34,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
         // This member is serialized and deserialized with no change.
         public int Member1 { get; set; }
 
-        // The value of this field is set and reset during and 
+        // The value of this field is set and reset during and
         // after serialization.
         public string Member2 { get; set; }
 
-        // This field is not serialized. The OnDeserializedAttribute 
+        // This field is not serialized. The OnDeserializedAttribute
         // is used to set the member value after serialization.
         [JsonIgnore]
         public string Member3 { get; set; }
@@ -92,7 +92,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
         [OnError]
         internal void OnErrorMethod(StreamingContext context, ErrorContext errorContext)
         {
-            Member5 = "Error message for member " + errorContext.Member + " = " + errorContext.Error.Message;
+            Member5 =
+                "Error message for member "
+                + errorContext.Member
+                + " = "
+                + errorContext.Error.Message;
             errorContext.Handled = true;
         }
     }

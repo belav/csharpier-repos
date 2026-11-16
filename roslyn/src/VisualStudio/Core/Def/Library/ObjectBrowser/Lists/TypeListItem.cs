@@ -12,7 +12,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
     {
         private readonly TypeKind _typeKind;
 
-        internal TypeListItem(ProjectId projectId, INamedTypeSymbol typeSymbol, string displayText, string fullNameText, string searchText, bool isHidden)
+        internal TypeListItem(
+            ProjectId projectId,
+            INamedTypeSymbol typeSymbol,
+            string displayText,
+            string fullNameText,
+            string searchText,
+            bool isHidden
+        )
             : base(projectId, typeSymbol, displayText, fullNameText, searchText, isHidden)
         {
             _typeKind = typeSymbol.TypeKind;

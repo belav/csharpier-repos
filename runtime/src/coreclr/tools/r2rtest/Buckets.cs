@@ -16,11 +16,16 @@ namespace R2RTest
 
         public Buckets()
         {
-            _bucketMap = new Dictionary<string, List<ProcessInfo>>(StringComparer.OrdinalIgnoreCase);
+            _bucketMap = new Dictionary<string, List<ProcessInfo>>(
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
-        public void AddCompilation(ProcessInfo process) => Add(AnalyzeCompilationFailure(process), process);
-        public void AddExecution(ProcessInfo process) => Add(AnalyzeExecutionFailure(process), process);
+        public void AddCompilation(ProcessInfo process) =>
+            Add(AnalyzeCompilationFailure(process), process);
+
+        public void AddExecution(ProcessInfo process) =>
+            Add(AnalyzeExecutionFailure(process), process);
 
         public void Add(string bucket, ProcessInfo process)
         {
@@ -43,7 +48,9 @@ namespace R2RTest
 
         public void WriteToStream(StreamWriter output, bool detailed)
         {
-            output.WriteLine($@"#buckets: {_bucketMap.Count}, #failures: {_bucketMap.Sum(b => b.Value.Count)}");
+            output.WriteLine(
+                $@"#buckets: {_bucketMap.Count}, #failures: {_bucketMap.Sum(b => b.Value.Count)}"
+            );
 
             if (_bucketMap.Count == 0)
             {
@@ -51,10 +58,13 @@ namespace R2RTest
                 return;
             }
 
-            IEnumerable<KeyValuePair<string, List<ProcessInfo>>> orderedBuckets = _bucketMap.OrderByDescending(bucket => bucket.Value.Count);
+            IEnumerable<KeyValuePair<string, List<ProcessInfo>>> orderedBuckets =
+                _bucketMap.OrderByDescending(bucket => bucket.Value.Count);
             foreach (KeyValuePair<string, List<ProcessInfo>> bucketKvp in orderedBuckets)
             {
-                bucketKvp.Value.Sort((a, b) => a.Parameters.OutputFileName.CompareTo(b.Parameters.OutputFileName));
+                bucketKvp.Value.Sort(
+                    (a, b) => a.Parameters.OutputFileName.CompareTo(b.Parameters.OutputFileName)
+                );
                 output.WriteLine($@"    [{bucketKvp.Value.Count} failures] {bucketKvp.Key}");
             }
 
@@ -86,7 +96,9 @@ namespace R2RTest
                         }
                         catch (Exception ex)
                         {
-                            output.WriteLine($"Error reading file {failure.Parameters.LogPath}: {ex.Message}");
+                            output.WriteLine(
+                                $"Error reading file {failure.Parameters.LogPath}: {ex.Message}"
+                            );
                         }
                         output.WriteLine();
                     }
@@ -108,14 +120,16 @@ namespace R2RTest
                 for (int lineIndex = 2; lineIndex < lines.Length; lineIndex++)
                 {
                     string line = lines[lineIndex];
-                    if (line.Length == 0 ||
-                        line.StartsWith("EXEC : warning") ||
-                        line.StartsWith("To repro,") ||
-                        line.StartsWith("Emitting R2R PE file") ||
-                        line.StartsWith("Moving R2R PE file") ||
-                        line.StartsWith("Warning: ") ||
-                        line.StartsWith("Info: ") ||
-                        line == "Assertion Failed")
+                    if (
+                        line.Length == 0
+                        || line.StartsWith("EXEC : warning")
+                        || line.StartsWith("To repro,")
+                        || line.StartsWith("Emitting R2R PE file")
+                        || line.StartsWith("Moving R2R PE file")
+                        || line.StartsWith("Warning: ")
+                        || line.StartsWith("Info: ")
+                        || line == "Assertion Failed"
+                    )
                     {
                         continue;
                     }
@@ -153,15 +167,22 @@ namespace R2RTest
                         }
                         return line;
                     }
-                    else if (line.StartsWith("Unhandled exception", StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        line.StartsWith("Unhandled exception", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         int leftBracket = line.IndexOf('[');
                         int rightBracket = line.IndexOf(']', leftBracket + 1);
                         if (leftBracket >= 0 && rightBracket > leftBracket)
                         {
-                            line = line.Substring(0, leftBracket) + line.Substring(rightBracket + 1);
+                            line =
+                                line.Substring(0, leftBracket) + line.Substring(rightBracket + 1);
                         }
-                        for (int detailLineIndex = lineIndex + 1; detailLineIndex < lines.Length; detailLineIndex++)
+                        for (
+                            int detailLineIndex = lineIndex + 1;
+                            detailLineIndex < lines.Length;
+                            detailLineIndex++
+                        )
                         {
                             string detailLine = lines[detailLineIndex].TrimStart();
                             if (!detailLine.StartsWith("--->"))
@@ -174,7 +195,10 @@ namespace R2RTest
                     }
                     else if (line.StartsWith("Fatal error", StringComparison.OrdinalIgnoreCase))
                     {
-                        if (lineIndex + 1 < lines.Length && lines[lineIndex + 1].TrimStart().StartsWith("at "))
+                        if (
+                            lineIndex + 1 < lines.Length
+                            && lines[lineIndex + 1].TrimStart().StartsWith("at ")
+                        )
                         {
                             line += lines[lineIndex + 1];
                         }

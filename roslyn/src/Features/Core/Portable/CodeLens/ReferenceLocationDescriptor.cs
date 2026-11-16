@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
         string beforeReferenceText1,
         string beforeReferenceText2,
         string afterReferenceText1,
-        string afterReferenceText2)
+        string afterReferenceText2
+    )
     {
         /// <summary>
         /// Fully qualified name of the symbol containing the reference location

@@ -84,9 +84,8 @@ public class MapConnectionHandlerTests
     {
         var authCount = 0;
         using (
-            var host = BuildWebHost<AuthConnectionHandler>(
-                "/auth",
-                options => authCount += options.AuthorizationData.Count
+            var host = BuildWebHost<AuthConnectionHandler>("/auth", options =>
+                authCount += options.AuthorizationData.Count
             )
         )
         {
@@ -117,9 +116,8 @@ public class MapConnectionHandlerTests
     {
         var authCount = 0;
         using (
-            var host = BuildWebHost<InheritedAuthConnectionHandler>(
-                "/auth",
-                options => authCount += options.AuthorizationData.Count
+            var host = BuildWebHost<InheritedAuthConnectionHandler>("/auth", options =>
+                authCount += options.AuthorizationData.Count
             )
         )
         {
@@ -150,9 +148,8 @@ public class MapConnectionHandlerTests
     {
         var authCount = 0;
         using (
-            var host = BuildWebHost<DoubleAuthConnectionHandler>(
-                "/auth",
-                options => authCount += options.AuthorizationData.Count
+            var host = BuildWebHost<DoubleAuthConnectionHandler>("/auth", options =>
+                authCount += options.AuthorizationData.Count
             )
         )
         {
@@ -182,16 +179,11 @@ public class MapConnectionHandlerTests
     public void MapConnectionHandlerFindsAttributesFromEndPointAndOptions()
     {
         var authCount = 0;
-        using (
-            var host = BuildWebHost<AuthConnectionHandler>(
-                "/auth",
-                options =>
-                {
-                    authCount += options.AuthorizationData.Count;
-                    options.AuthorizationData.Add(new AuthorizeAttribute());
-                }
-            )
-        )
+        using (var host = BuildWebHost<AuthConnectionHandler>("/auth", options =>
+            {
+                authCount += options.AuthorizationData.Count;
+                options.AuthorizationData.Add(new AuthorizeAttribute());
+            }))
         {
             host.Start();
 
@@ -219,15 +211,10 @@ public class MapConnectionHandlerTests
     public void MapConnectionHandlerEndPointRoutingFindsAttributesOnHub()
     {
         var authCount = 0;
-        using (
-            var host = BuildWebHost<AuthConnectionHandler>(
-                "/path",
-                options =>
-                {
-                    authCount += options.AuthorizationData.Count;
-                }
-            )
-        )
+        using (var host = BuildWebHost<AuthConnectionHandler>("/path", options =>
+            {
+                authCount += options.AuthorizationData.Count;
+            }))
         {
             host.Start();
 
@@ -255,16 +242,11 @@ public class MapConnectionHandlerTests
     public void MapConnectionHandlerEndPointRoutingFindsAttributesFromOptions()
     {
         var authCount = 0;
-        using (
-            var host = BuildWebHost<AuthConnectionHandler>(
-                "/path",
-                options =>
-                {
-                    authCount += options.AuthorizationData.Count;
-                    options.AuthorizationData.Add(new AuthorizeAttribute());
-                }
-            )
-        )
+        using (var host = BuildWebHost<AuthConnectionHandler>("/path", options =>
+            {
+                authCount += options.AuthorizationData.Count;
+                options.AuthorizationData.Add(new AuthorizeAttribute());
+            }))
         {
             host.Start();
 
@@ -374,15 +356,12 @@ public class MapConnectionHandlerTests
     {
         void ConfigureRoutes(IEndpointRouteBuilder endpoints)
         {
-            endpoints.MapConnectionHandler<AuthConnectionHandler>(
-                "/path",
-                options =>
-                {
-                    options.Transports = HttpTransportType.ServerSentEvents;
-                    options.ApplicationMaxBufferSize = 2;
-                    options.CloseOnAuthenticationExpiration = true;
-                }
-            );
+            endpoints.MapConnectionHandler<AuthConnectionHandler>("/path", options =>
+            {
+                options.Transports = HttpTransportType.ServerSentEvents;
+                options.ApplicationMaxBufferSize = 2;
+                options.CloseOnAuthenticationExpiration = true;
+            });
         }
 
         using (var host = BuildWebHost(ConfigureRoutes))
@@ -448,15 +427,13 @@ public class MapConnectionHandlerTests
     [WebSocketsSupportedCondition]
     public async Task MapConnectionHandlerWithWebSocketSubProtocolSetsProtocol()
     {
-        using var host = BuildWebHost<MyConnectionHandler>(
-            "/socket",
-            options =>
-                options.WebSockets.SubProtocolSelector = subprotocols =>
-                {
-                    Assert.Equal(new[] { "protocol1", "protocol2" }, subprotocols.ToArray());
-                    return "protocol1";
-                }
-        );
+        using var host = BuildWebHost<MyConnectionHandler>("/socket", options => options
+                .WebSockets
+                .SubProtocolSelector = subprotocols =>
+            {
+                Assert.Equal(new[] { "protocol1", "protocol2" }, subprotocols.ToArray());
+                return "protocol1";
+            });
 
         await host.StartAsync();
 

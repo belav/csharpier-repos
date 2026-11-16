@@ -10,6 +10,7 @@ namespace System.Reflection.Tests
     {
         public int* field;
         public char* Property { get; set; }
+
         public void Method(byte* ptr, int expected)
         {
             Assert.Equal(expected, unchecked((int)ptr));
@@ -202,7 +203,10 @@ namespace System.Reflection.Tests
         {
             var obj = new PointerHolder();
             MethodInfo method = typeof(PointerHolder).GetMethod("Method");
-            method.Invoke(obj, new[] { Pointer.Box(unchecked((void*)value), typeof(byte*)), value });
+            method.Invoke(
+                obj,
+                new[] { Pointer.Box(unchecked((void*)value), typeof(byte*)), value }
+            );
         }
 
         [Fact]
@@ -237,7 +241,9 @@ namespace System.Reflection.Tests
         public void UIntPtrMethodParameter(uint value)
         {
             var obj = new PointerHolder();
-            MethodInfo method = typeof(PointerHolder).GetMethod(nameof(PointerHolder.MethodWithVoidPointer));
+            MethodInfo method = typeof(PointerHolder).GetMethod(
+                nameof(PointerHolder.MethodWithVoidPointer)
+            );
             method.Invoke(obj, new object[] { (UIntPtr)value });
         }
 
@@ -249,7 +255,10 @@ namespace System.Reflection.Tests
             MethodInfo method = typeof(PointerHolder).GetMethod("Method");
             AssertExtensions.Throws<ArgumentException>(null, () =>
             {
-                method.Invoke(obj, new[] { Pointer.Box(unchecked((void*)value), typeof(long*)), value });
+                method.Invoke(
+                    obj,
+                    new[] { Pointer.Box(unchecked((void*)value), typeof(long*)), value }
+                );
             });
         }
 

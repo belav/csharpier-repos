@@ -443,8 +443,8 @@ internal sealed class OutputCacheMiddleware
             var response = context.HttpContext.Response;
             var headers = response.Headers;
 
-            context.CachedResponseValidFor =
-                context.ResponseExpirationTimeSpan ?? _options.DefaultExpirationTimeSpan;
+            context.CachedResponseValidFor = context.ResponseExpirationTimeSpan
+                ?? _options.DefaultExpirationTimeSpan;
 
             // Setting the date on the raw response headers.
             headers.Date = HeaderUtilities.FormatDate(context.ResponseTime!.Value);

@@ -13,9 +13,17 @@ namespace System.ComponentModel.Composition.AttributedModel
 {
     internal static class AttributedModelDiscovery
     {
-        public static ComposablePartDefinition? CreatePartDefinitionIfDiscoverable(Type type, ICompositionElement? origin)
+        public static ComposablePartDefinition? CreatePartDefinitionIfDiscoverable(
+            Type type,
+            ICompositionElement? origin
+        )
         {
-            AttributedPartCreationInfo creationInfo = new AttributedPartCreationInfo(type, null, false, origin);
+            AttributedPartCreationInfo creationInfo = new AttributedPartCreationInfo(
+                type,
+                null,
+                false,
+                origin
+            );
             if (!creationInfo.IsPartDiscoverable())
             {
                 return null;
@@ -24,11 +32,21 @@ namespace System.ComponentModel.Composition.AttributedModel
             return new ReflectionComposablePartDefinition(creationInfo);
         }
 
-        public static ReflectionComposablePartDefinition CreatePartDefinition(Type type, PartCreationPolicyAttribute? partCreationPolicy, bool ignoreConstructorImports, ICompositionElement? origin)
+        public static ReflectionComposablePartDefinition CreatePartDefinition(
+            Type type,
+            PartCreationPolicyAttribute? partCreationPolicy,
+            bool ignoreConstructorImports,
+            ICompositionElement? origin
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
-            AttributedPartCreationInfo creationInfo = new AttributedPartCreationInfo(type, partCreationPolicy, ignoreConstructorImports, origin);
+            AttributedPartCreationInfo creationInfo = new AttributedPartCreationInfo(
+                type,
+                partCreationPolicy,
+                ignoreConstructorImports,
+                origin
+            );
 
             return new ReflectionComposablePartDefinition(creationInfo);
         }
@@ -38,43 +56,81 @@ namespace System.ComponentModel.Composition.AttributedModel
             ArgumentNullException.ThrowIfNull(attributedPart);
 
             // If given an instance then we want to pass the default composition options because we treat it as a shared part
-            ReflectionComposablePartDefinition definition = AttributedModelDiscovery.CreatePartDefinition(attributedPart.GetType(), PartCreationPolicyAttribute.Shared, true, (ICompositionElement?)null);
+            ReflectionComposablePartDefinition definition =
+                AttributedModelDiscovery.CreatePartDefinition(
+                    attributedPart.GetType(),
+                    PartCreationPolicyAttribute.Shared,
+                    true,
+                    (ICompositionElement?)null
+                );
 
             return new ReflectionComposablePart(definition, attributedPart);
         }
 
-        public static ReflectionComposablePart CreatePart(object attributedPart, ReflectionContext reflectionContext)
+        public static ReflectionComposablePart CreatePart(
+            object attributedPart,
+            ReflectionContext reflectionContext
+        )
         {
             ArgumentNullException.ThrowIfNull(attributedPart);
             ArgumentNullException.ThrowIfNull(reflectionContext);
 
             // If given an instance then we want to pass the default composition options because we treat it as a shared part
-            var mappedType = reflectionContext.MapType(IntrospectionExtensions.GetTypeInfo(attributedPart.GetType()));
+            var mappedType = reflectionContext.MapType(
+                IntrospectionExtensions.GetTypeInfo(attributedPart.GetType())
+            );
             if (mappedType.Assembly.ReflectionOnly)
             {
-                throw new ArgumentException(SR.Format(SR.Argument_ReflectionContextReturnsReflectionOnlyType, nameof(reflectionContext)), nameof(reflectionContext));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Argument_ReflectionContextReturnsReflectionOnlyType,
+                        nameof(reflectionContext)
+                    ),
+                    nameof(reflectionContext)
+                );
             }
 
-            ReflectionComposablePartDefinition definition = AttributedModelDiscovery.CreatePartDefinition(mappedType, PartCreationPolicyAttribute.Shared, true, (ICompositionElement?)null);
+            ReflectionComposablePartDefinition definition =
+                AttributedModelDiscovery.CreatePartDefinition(
+                    mappedType,
+                    PartCreationPolicyAttribute.Shared,
+                    true,
+                    (ICompositionElement?)null
+                );
 
             return CreatePart(definition, attributedPart);
         }
 
-        public static ReflectionComposablePart CreatePart(ComposablePartDefinition partDefinition, object attributedPart)
+        public static ReflectionComposablePart CreatePart(
+            ComposablePartDefinition partDefinition,
+            object attributedPart
+        )
         {
             ArgumentNullException.ThrowIfNull(partDefinition);
             ArgumentNullException.ThrowIfNull(attributedPart);
 
-            return new ReflectionComposablePart((ReflectionComposablePartDefinition)partDefinition, attributedPart);
+            return new ReflectionComposablePart(
+                (ReflectionComposablePartDefinition)partDefinition,
+                attributedPart
+            );
         }
 
-        public static ReflectionParameterImportDefinition CreateParameterImportDefinition(ParameterInfo parameter, ICompositionElement origin)
+        public static ReflectionParameterImportDefinition CreateParameterImportDefinition(
+            ParameterInfo parameter,
+            ICompositionElement origin
+        )
         {
             Requires.NotNull(parameter, nameof(parameter));
 
             ReflectionParameter reflectionParameter = parameter.ToReflectionParameter();
-            IAttributedImport attributedImport = AttributedModelDiscovery.GetAttributedImport(reflectionParameter, parameter);
-            ImportType importType = new ImportType(reflectionParameter.ReturnType, attributedImport.Cardinality);
+            IAttributedImport attributedImport = AttributedModelDiscovery.GetAttributedImport(
+                reflectionParameter,
+                parameter
+            );
+            ImportType importType = new ImportType(
+                reflectionParameter.ReturnType,
+                attributedImport.Cardinality
+            );
 
             if (importType.IsPartCreator)
             {
@@ -89,7 +145,9 @@ namespace System.ComponentModel.Composition.AttributedModel
                         false,
                         true,
                         CreationPolicy.NonShared,
-                        CompositionServices.GetImportMetadata(importType, attributedImport)));
+                        CompositionServices.GetImportMetadata(importType, attributedImport)
+                    )
+                );
             }
             else
             {
@@ -101,17 +159,27 @@ namespace System.ComponentModel.Composition.AttributedModel
                     attributedImport.Cardinality,
                     attributedImport.RequiredCreationPolicy,
                     CompositionServices.GetImportMetadata(importType, attributedImport),
-                    origin);
+                    origin
+                );
             }
         }
 
-        public static ReflectionMemberImportDefinition CreateMemberImportDefinition(MemberInfo member, ICompositionElement origin)
+        public static ReflectionMemberImportDefinition CreateMemberImportDefinition(
+            MemberInfo member,
+            ICompositionElement origin
+        )
         {
             Requires.NotNull(member, nameof(member));
 
             ReflectionWritableMember reflectionMember = member.ToReflectionWritableMember();
-            IAttributedImport attributedImport = AttributedModelDiscovery.GetAttributedImport(reflectionMember, member);
-            ImportType importType = new ImportType(reflectionMember.ReturnType, attributedImport.Cardinality);
+            IAttributedImport attributedImport = AttributedModelDiscovery.GetAttributedImport(
+                reflectionMember,
+                member
+            );
+            ImportType importType = new ImportType(
+                reflectionMember.ReturnType,
+                attributedImport.Cardinality
+            );
 
             if (importType.IsPartCreator)
             {
@@ -126,7 +194,9 @@ namespace System.ComponentModel.Composition.AttributedModel
                         attributedImport.AllowRecomposition,
                         false,
                         CreationPolicy.NonShared,
-                        CompositionServices.GetImportMetadata(importType, attributedImport)));
+                        CompositionServices.GetImportMetadata(importType, attributedImport)
+                    )
+                );
             }
             else
             {
@@ -142,11 +212,15 @@ namespace System.ComponentModel.Composition.AttributedModel
                     isPrerequisite,
                     attributedImport.RequiredCreationPolicy,
                     CompositionServices.GetImportMetadata(importType, attributedImport),
-                    origin);
+                    origin
+                );
             }
         }
 
-        private static IAttributedImport GetAttributedImport(ReflectionItem item, ICustomAttributeProvider attributeProvider)
+        private static IAttributedImport GetAttributedImport(
+            ReflectionItem item,
+            ICustomAttributeProvider attributeProvider
+        )
         {
             IAttributedImport[] imports = attributeProvider.GetAttributes<IAttributedImport>(false);
 

@@ -56,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             IUIThreadOperationExecutor uiThreadOperationExecutor,
             IDiagnosticAnalyzerService diagnosticService,
             ICodeActionEditHandlerService editHandlerService,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _threadingContext = threadingContext;
             _workspace = workspace;
@@ -68,21 +69,36 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             _listener = listenerProvider.GetListener(FeatureAttribute.ErrorList);
         }
 
-        public async Task InitializeAsync(IAsyncServiceProvider serviceProvider, CancellationToken cancellationToken)
+        public async Task InitializeAsync(
+            IAsyncServiceProvider serviceProvider,
+            CancellationToken cancellationToken
+        )
         {
-            var errorList = await serviceProvider.GetServiceAsync<SVsErrorList, IErrorList>(_threadingContext.JoinableTaskFactory, throwOnFailure: false).ConfigureAwait(false);
+            var errorList = await serviceProvider
+                .GetServiceAsync<SVsErrorList, IErrorList>(
+                    _threadingContext.JoinableTaskFactory,
+                    throwOnFailure: false
+                )
+                .ConfigureAwait(false);
             _tableControl = errorList?.TableControl;
 
             // Add command handlers for bulk suppression commands.
-            var menuCommandService = await serviceProvider.GetServiceAsync<IMenuCommandService, IMenuCommandService>(_threadingContext.JoinableTaskFactory, throwOnFailure: false).ConfigureAwait(false);
+            var menuCommandService = await serviceProvider
+                .GetServiceAsync<IMenuCommandService, IMenuCommandService>(
+                    _threadingContext.JoinableTaskFactory,
+                    throwOnFailure: false
+                )
+                .ConfigureAwait(false);
             if (menuCommandService != null)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
                 AddErrorListSetSeverityMenuHandlers(menuCommandService);
 
                 // The Add/Remove suppression(s) have been moved to the VS code analysis layer, so we don't add the commands here.
 
-                // TODO: Figure out how to access menu commands registered by CodeAnalysisPackage and 
+                // TODO: Figure out how to access menu commands registered by CodeAnalysisPackage and
                 //       add the commands here if we cannot find the new command(s) in the code analysis layer.
 
                 // AddSuppressionsCommandHandlers(menuCommandService);
@@ -93,15 +109,50 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         {
             Contract.ThrowIfFalse(_threadingContext.HasMainThread);
 
-            AddCommand(menuCommandService, ID.RoslynCommands.ErrorListSetSeveritySubMenu, delegate { }, OnErrorListSetSeveritySubMenuStatus);
+            AddCommand(
+                menuCommandService,
+                ID.RoslynCommands.ErrorListSetSeveritySubMenu,
+                delegate { },
+                OnErrorListSetSeveritySubMenuStatus
+            );
 
             // Severity menu items
-            AddCommand(menuCommandService, ID.RoslynCommands.ErrorListSetSeverityDefault, SetSeverityHandler, delegate { });
-            AddCommand(menuCommandService, ID.RoslynCommands.ErrorListSetSeverityError, SetSeverityHandler, delegate { });
-            AddCommand(menuCommandService, ID.RoslynCommands.ErrorListSetSeverityWarning, SetSeverityHandler, delegate { });
-            AddCommand(menuCommandService, ID.RoslynCommands.ErrorListSetSeverityInfo, SetSeverityHandler, delegate { });
-            AddCommand(menuCommandService, ID.RoslynCommands.ErrorListSetSeverityHidden, SetSeverityHandler, delegate { });
-            AddCommand(menuCommandService, ID.RoslynCommands.ErrorListSetSeverityNone, SetSeverityHandler, delegate { });
+            AddCommand(
+                menuCommandService,
+                ID.RoslynCommands.ErrorListSetSeverityDefault,
+                SetSeverityHandler,
+                delegate { }
+            );
+            AddCommand(
+                menuCommandService,
+                ID.RoslynCommands.ErrorListSetSeverityError,
+                SetSeverityHandler,
+                delegate { }
+            );
+            AddCommand(
+                menuCommandService,
+                ID.RoslynCommands.ErrorListSetSeverityWarning,
+                SetSeverityHandler,
+                delegate { }
+            );
+            AddCommand(
+                menuCommandService,
+                ID.RoslynCommands.ErrorListSetSeverityInfo,
+                SetSeverityHandler,
+                delegate { }
+            );
+            AddCommand(
+                menuCommandService,
+                ID.RoslynCommands.ErrorListSetSeverityHidden,
+                SetSeverityHandler,
+                delegate { }
+            );
+            AddCommand(
+                menuCommandService,
+                ID.RoslynCommands.ErrorListSetSeverityNone,
+                SetSeverityHandler,
+                delegate { }
+            );
         }
 
         /// <summary>
@@ -111,10 +162,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             IMenuCommandService menuCommandService,
             int commandId,
             EventHandler invokeHandler,
-            EventHandler beforeQueryStatus)
+            EventHandler beforeQueryStatus
+        )
         {
             var commandIdWithGroupId = new CommandID(Guids.RoslynGroupId, commandId);
-            var command = new OleMenuCommand(invokeHandler, delegate { }, beforeQueryStatus, commandIdWithGroupId);
+            var command = new OleMenuCommand(
+                invokeHandler,
+                delegate { },
+                beforeQueryStatus,
+                commandIdWithGroupId
+            );
             menuCommandService.AddCommand(command);
             return command;
         }
@@ -147,25 +204,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             command.Enabled = command.Visible && !KnownUIContexts.SolutionBuildingContext.IsActive;
         }
 
-        private void OnAddSuppressionsInSource(object sender, EventArgs e)
-            => _suppressionFixService.AddSuppressions(selectedErrorListEntriesOnly: true, suppressInSource: true, projectHierarchy: null);
+        private void OnAddSuppressionsInSource(object sender, EventArgs e) =>
+            _suppressionFixService.AddSuppressions(
+                selectedErrorListEntriesOnly: true,
+                suppressInSource: true,
+                projectHierarchy: null
+            );
 
-        private void OnAddSuppressionsInSuppressionFile(object sender, EventArgs e)
-            => _suppressionFixService.AddSuppressions(selectedErrorListEntriesOnly: true, suppressInSource: false, projectHierarchy: null);
+        private void OnAddSuppressionsInSuppressionFile(object sender, EventArgs e) =>
+            _suppressionFixService.AddSuppressions(
+                selectedErrorListEntriesOnly: true,
+                suppressInSource: false,
+                projectHierarchy: null
+            );
 
-        private void OnRemoveSuppressions(object sender, EventArgs e)
-            => _suppressionFixService.RemoveSuppressions(selectedErrorListEntriesOnly: true, projectHierarchy: null);
+        private void OnRemoveSuppressions(object sender, EventArgs e) =>
+            _suppressionFixService.RemoveSuppressions(
+                selectedErrorListEntriesOnly: true,
+                projectHierarchy: null
+            );
 
         private void OnErrorListSetSeveritySubMenuStatus(object sender, EventArgs e)
         {
             // For now, we only enable the Set severity menu when a single configurable diagnostic is selected in the error list
             // and we can update/create an editorconfig file for the configuration entry.
-            // In future, we can enable support for configuring in presence of multi-selection. 
+            // In future, we can enable support for configuring in presence of multi-selection.
             var command = (MenuCommand)sender;
             var selectedEntry = TryGetSingleSelectedEntry();
-            command.Visible = selectedEntry != null &&
-                !SuppressionHelpers.IsNotConfigurableDiagnostic(selectedEntry) &&
-                TryGetPathToAnalyzerConfigDoc(selectedEntry, out _, out _);
+            command.Visible =
+                selectedEntry != null
+                && !SuppressionHelpers.IsNotConfigurableDiagnostic(selectedEntry)
+                && TryGetPathToAnalyzerConfigDoc(selectedEntry, out _, out _);
             command.Enabled = command.Visible && !KnownUIContexts.SolutionBuildingContext.IsActive;
         }
 
@@ -191,7 +260,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             }
         }
 
-        private async Task SetSeverityHandlerAsync(ReportDiagnostic reportDiagnostic, DiagnosticData selectedDiagnostic, Project project)
+        private async Task SetSeverityHandlerAsync(
+            ReportDiagnostic reportDiagnostic,
+            DiagnosticData selectedDiagnostic,
+            Project project
+        )
         {
             try
             {
@@ -200,43 +273,67 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     title: ServicesVSResources.Updating_severity,
                     defaultDescription: ServicesVSResources.Updating_severity,
                     allowCancellation: true,
-                    showProgress: true);
+                    showProgress: true
+                );
 
-                var newSolution = await ConfigureSeverityAsync(context.UserCancellationToken).ConfigureAwait(false);
-                var operations = ImmutableArray.Create<CodeActionOperation>(new ApplyChangesOperation(newSolution));
-                using var scope = context.AddScope(allowCancellation: true, ServicesVSResources.Updating_severity);
-                await _editHandlerService.ApplyAsync(
-                    _workspace,
-                    project.Solution,
-                    fromDocument: null,
-                    operations,
-                    title: ServicesVSResources.Updating_severity,
-                    scope.GetCodeAnalysisProgress(),
-                    context.UserCancellationToken).ConfigureAwait(false);
+                var newSolution = await ConfigureSeverityAsync(context.UserCancellationToken)
+                    .ConfigureAwait(false);
+                var operations = ImmutableArray.Create<CodeActionOperation>(
+                    new ApplyChangesOperation(newSolution)
+                );
+                using var scope = context.AddScope(
+                    allowCancellation: true,
+                    ServicesVSResources.Updating_severity
+                );
+                await _editHandlerService
+                    .ApplyAsync(
+                        _workspace,
+                        project.Solution,
+                        fromDocument: null,
+                        operations,
+                        title: ServicesVSResources.Updating_severity,
+                        scope.GetCodeAnalysisProgress(),
+                        context.UserCancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (selectedDiagnostic.DocumentId != null)
                 {
                     // Kick off diagnostic re-analysis for affected document so that the configured diagnostic gets refreshed.
                     _ = Task.Run(() =>
                     {
-                        _diagnosticService.Reanalyze(_workspace, projectIds: null, documentIds: SpecializedCollections.SingletonEnumerable(selectedDiagnostic.DocumentId), highPriority: true);
+                        _diagnosticService.Reanalyze(
+                            _workspace,
+                            projectIds: null,
+                            documentIds: SpecializedCollections.SingletonEnumerable(
+                                selectedDiagnostic.DocumentId
+                            ),
+                            highPriority: true
+                        );
                     });
                 }
             }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex))
-            {
-            }
+            catch (OperationCanceledException) { }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
 
             return;
 
             // Local functions.
-            async System.Threading.Tasks.Task<Solution> ConfigureSeverityAsync(CancellationToken cancellationToken)
+            async System.Threading.Tasks.Task<Solution> ConfigureSeverityAsync(
+                CancellationToken cancellationToken
+            )
             {
-                var diagnostic = await selectedDiagnostic.ToDiagnosticAsync(project, cancellationToken).ConfigureAwait(false);
-                return await ConfigurationUpdater.ConfigureSeverityAsync(reportDiagnostic, diagnostic, project, cancellationToken).ConfigureAwait(false);
+                var diagnostic = await selectedDiagnostic
+                    .ToDiagnosticAsync(project, cancellationToken)
+                    .ConfigureAwait(false);
+                return await ConfigurationUpdater
+                    .ConfigureSeverityAsync(
+                        reportDiagnostic,
+                        diagnostic,
+                        project,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
@@ -247,8 +344,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 return null;
             }
 
-            if (!_tableControl.SelectedEntry.TryGetSnapshot(out var snapshot, out var index) ||
-                snapshot is not AbstractTableEntriesSnapshot<DiagnosticTableItem> roslynSnapshot)
+            if (
+                !_tableControl.SelectedEntry.TryGetSnapshot(out var snapshot, out var index)
+                || snapshot is not AbstractTableEntriesSnapshot<DiagnosticTableItem> roslynSnapshot
+            )
             {
                 return null;
             }
@@ -256,14 +355,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             return roslynSnapshot.GetItem(index)?.Data;
         }
 
-        private bool TryGetPathToAnalyzerConfigDoc(DiagnosticData selectedDiagnostic, [NotNullWhen(true)] out Project? project, [NotNullWhen(true)] out string? pathToAnalyzerConfigDoc)
+        private bool TryGetPathToAnalyzerConfigDoc(
+            DiagnosticData selectedDiagnostic,
+            [NotNullWhen(true)] out Project? project,
+            [NotNullWhen(true)] out string? pathToAnalyzerConfigDoc
+        )
         {
             project = _workspace.CurrentSolution.GetProject(selectedDiagnostic.ProjectId);
             pathToAnalyzerConfigDoc = project?.TryGetAnalyzerConfigPathForProjectConfiguration();
             return pathToAnalyzerConfigDoc is not null;
         }
 
-        private static ReportDiagnostic? TryMapSelectedItemToReportDiagnostic(MenuCommand selectedItem)
+        private static ReportDiagnostic? TryMapSelectedItemToReportDiagnostic(
+            MenuCommand selectedItem
+        )
         {
             if (selectedItem.CommandID.Guid == Guids.RoslynGroupId)
             {
@@ -275,7 +380,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     ID.RoslynCommands.ErrorListSetSeverityInfo => ReportDiagnostic.Info,
                     ID.RoslynCommands.ErrorListSetSeverityHidden => ReportDiagnostic.Hidden,
                     ID.RoslynCommands.ErrorListSetSeverityNone => ReportDiagnostic.Suppress,
-                    _ => (ReportDiagnostic?)null
+                    _ => (ReportDiagnostic?)null,
                 };
             }
 

@@ -11,17 +11,25 @@ namespace System
     public static partial class MemoryExtensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool EqualsOrdinalIgnoreCaseUtf8(this ReadOnlySpan<byte> span, ReadOnlySpan<byte> value)
+        internal static bool EqualsOrdinalIgnoreCaseUtf8(
+            this ReadOnlySpan<byte> span,
+            ReadOnlySpan<byte> value
+        )
         {
             // For UTF-8 ist is possible for two spans of different byte length
             // to compare as equal under an OrdinalIgnoreCase comparison.
 
-            if ((span.Length | value.Length) == 0)  // span.Length == value.Length == 0
+            if ((span.Length | value.Length) == 0) // span.Length == value.Length == 0
             {
                 return true;
             }
 
-            return Ordinal.EqualsIgnoreCaseUtf8(ref MemoryMarshal.GetReference(span), span.Length, ref MemoryMarshal.GetReference(value), value.Length);
+            return Ordinal.EqualsIgnoreCaseUtf8(
+                ref MemoryMarshal.GetReference(span),
+                span.Length,
+                ref MemoryMarshal.GetReference(value),
+                value.Length
+            );
         }
 
         /// <summary>
@@ -30,7 +38,11 @@ namespace System
         /// <param name="span">The source span.</param>
         /// <param name="value">The sequence to compare to the beginning of the source span.</param>
         /// <param name="comparisonType">One of the enumeration values that determines how the <paramref name="span"/> and <paramref name="value"/> are compared.</param>
-        internal static bool StartsWithUtf8(this ReadOnlySpan<byte> span, ReadOnlySpan<byte> value, StringComparison comparisonType)
+        internal static bool StartsWithUtf8(
+            this ReadOnlySpan<byte> span,
+            ReadOnlySpan<byte> value,
+            StringComparison comparisonType
+        )
         {
             string.CheckStringComparison(comparisonType);
 
@@ -39,13 +51,21 @@ namespace System
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
                 {
-                    return CultureInfo.CurrentCulture.CompareInfo.IsPrefixUtf8(span, value, string.GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CultureInfo.CurrentCulture.CompareInfo.IsPrefixUtf8(
+                        span,
+                        value,
+                        string.GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
                 }
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
                 {
-                    return CompareInfo.Invariant.IsPrefixUtf8(span, value, string.GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CompareInfo.Invariant.IsPrefixUtf8(
+                        span,
+                        value,
+                        string.GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
                 }
 
                 case StringComparison.Ordinal:
@@ -62,17 +82,25 @@ namespace System
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool StartsWithOrdinalIgnoreCaseUtf8(this ReadOnlySpan<byte> span, ReadOnlySpan<byte> value)
+        internal static bool StartsWithOrdinalIgnoreCaseUtf8(
+            this ReadOnlySpan<byte> span,
+            ReadOnlySpan<byte> value
+        )
         {
             // For UTF-8 ist is possible for two spans of different byte length
             // to compare as equal under an OrdinalIgnoreCase comparison.
 
-            if ((span.Length | value.Length) == 0)  // span.Length == value.Length == 0
+            if ((span.Length | value.Length) == 0) // span.Length == value.Length == 0
             {
                 return true;
             }
 
-            return Ordinal.StartsWithIgnoreCaseUtf8(ref MemoryMarshal.GetReference(span), span.Length, ref MemoryMarshal.GetReference(value), value.Length);
+            return Ordinal.StartsWithIgnoreCaseUtf8(
+                ref MemoryMarshal.GetReference(span),
+                span.Length,
+                ref MemoryMarshal.GetReference(value),
+                value.Length
+            );
         }
     }
 }

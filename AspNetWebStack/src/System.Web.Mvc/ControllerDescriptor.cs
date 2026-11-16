@@ -33,7 +33,11 @@ namespace System.Web.Mvc
 
         public abstract Type ControllerType { get; }
 
-        [SuppressMessage("Microsoft.Security", "CA2119:SealMethodsThatSatisfyPrivateInterfaces", Justification = "This is overridden elsewhere in System.Web.Mvc")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2119:SealMethodsThatSatisfyPrivateInterfaces",
+            Justification = "This is overridden elsewhere in System.Web.Mvc"
+        )]
         public virtual string UniqueId
         {
             get { return _uniqueId.Value; }
@@ -44,7 +48,10 @@ namespace System.Web.Mvc
             return DescriptorUtil.CreateUniqueId(GetType(), ControllerName, ControllerType);
         }
 
-        public abstract ActionDescriptor FindAction(ControllerContext controllerContext, string actionName);
+        public abstract ActionDescriptor FindAction(
+            ControllerContext controllerContext,
+            string actionName
+        );
 
         public abstract ActionDescriptor[] GetCanonicalActions();
 
@@ -65,7 +72,8 @@ namespace System.Web.Mvc
 
         public virtual IEnumerable<FilterAttribute> GetFilterAttributes(bool useCache)
         {
-            return GetCustomAttributes(typeof(FilterAttribute), inherit: true).Cast<FilterAttribute>();
+            return GetCustomAttributes(typeof(FilterAttribute), inherit: true)
+                .Cast<FilterAttribute>();
         }
 
         public virtual bool IsDefined(Type attributeType, bool inherit)

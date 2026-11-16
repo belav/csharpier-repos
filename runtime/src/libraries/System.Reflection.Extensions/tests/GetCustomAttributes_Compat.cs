@@ -15,17 +15,27 @@ namespace System.Reflection.Tests
 
             Assembly assembly = typeof(GetCustomAttributes_Compat).GetTypeInfo().Assembly;
 
-            attributes = CustomAttributeExtensions.GetCustomAttributes(assembly, typeof(MyAttribute));
+            attributes = CustomAttributeExtensions.GetCustomAttributes(
+                assembly,
+                typeof(MyAttribute)
+            );
             CheckReturnType(attributes);
 
-            attributes = CustomAttributeExtensions.GetCustomAttributes(assembly.ManifestModule, typeof(MyAttribute));
+            attributes = CustomAttributeExtensions.GetCustomAttributes(
+                assembly.ManifestModule,
+                typeof(MyAttribute)
+            );
             CheckReturnType(attributes);
 
             TypeInfo ti = typeof(GetCustomAttributes_Compat).GetTypeInfo();
             attributes = CustomAttributeExtensions.GetCustomAttributes(ti, typeof(MyAttribute));
             CheckReturnType(attributes);
 
-            attributes = CustomAttributeExtensions.GetCustomAttributes(ti, typeof(MyAttribute), true);
+            attributes = CustomAttributeExtensions.GetCustomAttributes(
+                ti,
+                typeof(MyAttribute),
+                true
+            );
             CheckReturnType(attributes);
 
             ParameterInfo p = ti.GetDeclaredMethod("CheckReturnType").GetParameters()[0];
@@ -33,7 +43,11 @@ namespace System.Reflection.Tests
             attributes = CustomAttributeExtensions.GetCustomAttributes(p, typeof(MyAttribute));
             CheckReturnType(attributes);
 
-            attributes = CustomAttributeExtensions.GetCustomAttributes(p, typeof(MyAttribute), true);
+            attributes = CustomAttributeExtensions.GetCustomAttributes(
+                p,
+                typeof(MyAttribute),
+                true
+            );
             CheckReturnType(attributes);
         }
 
@@ -44,8 +58,6 @@ namespace System.Reflection.Tests
             Assert.Equal(expectedType, actualType);
         }
 
-        public class MyAttribute : Attribute
-        {
-        }
+        public class MyAttribute : Attribute { }
     }
 }

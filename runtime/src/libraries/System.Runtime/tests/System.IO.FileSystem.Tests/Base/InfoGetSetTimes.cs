@@ -7,7 +7,8 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public abstract class InfoGetSetTimes<T> : BaseGetSetTimes<T> where T : FileSystemInfo
+    public abstract class InfoGetSetTimes<T> : BaseGetSetTimes<T>
+        where T : FileSystemInfo
     {
         protected abstract void InvokeCreate(T item);
 
@@ -26,7 +27,8 @@ namespace System.IO.Tests
                     function.Kind == DateTimeKind.Local
                         ? DateTime.FromFileTime(0).Ticks
                         : DateTime.FromFileTimeUtc(0).Ticks,
-                    function.Getter(item).Ticks);
+                    function.Getter(item).Ticks
+                );
             });
         }
 

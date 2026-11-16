@@ -30,19 +30,18 @@
 
 using Mono.XBuild.Utilities;
 
-namespace Microsoft.Build.BuildEngine {
-	public static class Utilities {
+namespace Microsoft.Build.BuildEngine
+{
+    public static class Utilities
+    {
+        public static string Escape(string unescapedExpression)
+        {
+            return MSBuildUtils.Escape(unescapedExpression);
+        }
 
-		public static string Escape (string unescapedExpression)
-		{
-			return MSBuildUtils.Escape (unescapedExpression);
-		}
-
-		internal static string FromMSBuildPath (string relPath)
-		{
-			return MSBuildUtils.FromMSBuildPath (relPath);
-		}
-	}
-
+        internal static string FromMSBuildPath(string relPath)
+        {
+            return MSBuildUtils.FromMSBuildPath(relPath);
+        }
+    }
 }
-

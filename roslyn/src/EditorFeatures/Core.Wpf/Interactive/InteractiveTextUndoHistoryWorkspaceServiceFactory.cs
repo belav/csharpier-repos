@@ -14,27 +14,40 @@ using Microsoft.VisualStudio.Text.Operations;
 
 namespace Microsoft.CodeAnalysis.Interactive
 {
-    [ExportWorkspaceServiceFactory(typeof(ITextUndoHistoryWorkspaceService), WorkspaceKind.Interactive), Shared]
-    internal sealed class InteractiveTextUndoHistoryWorkspaceServiceFactory : IWorkspaceServiceFactory
+    [
+        ExportWorkspaceServiceFactory(
+            typeof(ITextUndoHistoryWorkspaceService),
+            WorkspaceKind.Interactive
+        ),
+        Shared
+    ]
+    internal sealed class InteractiveTextUndoHistoryWorkspaceServiceFactory
+        : IWorkspaceServiceFactory
     {
         private readonly TextUndoHistoryWorkspaceService _serviceSingleton;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InteractiveTextUndoHistoryWorkspaceServiceFactory(ITextUndoHistoryRegistry textUndoHistoryRegistry)
-            => _serviceSingleton = new TextUndoHistoryWorkspaceService(textUndoHistoryRegistry);
+        public InteractiveTextUndoHistoryWorkspaceServiceFactory(
+            ITextUndoHistoryRegistry textUndoHistoryRegistry
+        ) => _serviceSingleton = new TextUndoHistoryWorkspaceService(textUndoHistoryRegistry);
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => _serviceSingleton;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            _serviceSingleton;
 
         private class TextUndoHistoryWorkspaceService : ITextUndoHistoryWorkspaceService
         {
             private readonly ITextUndoHistoryRegistry _textUndoHistoryRegistry;
 
-            public TextUndoHistoryWorkspaceService(ITextUndoHistoryRegistry textUndoHistoryRegistry)
-                => _textUndoHistoryRegistry = textUndoHistoryRegistry;
+            public TextUndoHistoryWorkspaceService(
+                ITextUndoHistoryRegistry textUndoHistoryRegistry
+            ) => _textUndoHistoryRegistry = textUndoHistoryRegistry;
 
-            public bool TryGetTextUndoHistory(Workspace editorWorkspace, ITextBuffer textBuffer, out ITextUndoHistory undoHistory)
+            public bool TryGetTextUndoHistory(
+                Workspace editorWorkspace,
+                ITextBuffer textBuffer,
+                out ITextUndoHistory undoHistory
+            )
             {
                 undoHistory = null;
 

@@ -51,8 +51,10 @@ namespace Newtonsoft.Json.Tests.Issues
             IAsyncDisposable asyncDisposable = reader;
             await asyncDisposable.DisposeAsync();
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(() => reader.ReadAsync(),
-                "Unexpected state: Closed. Path '', line 1, position 0.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                () => reader.ReadAsync(),
+                "Unexpected state: Closed. Path '', line 1, position 0."
+            );
         }
 
         [Test]
@@ -60,7 +62,12 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             MemoryStream ms = new MemoryStream();
             Stream s = new AsyncOnlyStream(ms);
-            StreamWriter sr = new StreamWriter(s, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false), 2, leaveOpen: true);
+            StreamWriter sr = new StreamWriter(
+                s,
+                new UTF8Encoding(encoderShouldEmitUTF8Identifier: false),
+                2,
+                leaveOpen: true
+            );
             await using (JsonTextWriter writer = new JsonTextWriter(sr))
             {
                 await writer.WriteStartObjectAsync();
@@ -76,7 +83,12 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             MemoryStream ms = new MemoryStream();
             Stream s = new AsyncOnlyStream(ms);
-            StreamWriter sr = new StreamWriter(s, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false), 2, leaveOpen: true);
+            StreamWriter sr = new StreamWriter(
+                s,
+                new UTF8Encoding(encoderShouldEmitUTF8Identifier: false),
+                2,
+                leaveOpen: true
+            );
             JsonTextWriter writer = new JsonTextWriter(sr);
             await writer.WriteStartObjectAsync();
 
@@ -101,7 +113,9 @@ namespace Newtonsoft.Json.Tests.Issues
                 // It's ok to call Flush if the content was already processed with FlushAsync.
                 if (_unflushedContentLength > 0)
                 {
-                    throw new Exception($"Flush when there is {_unflushedContentLength} bytes buffered.");
+                    throw new Exception(
+                        $"Flush when there is {_unflushedContentLength} bytes buffered."
+                    );
                 }
             }
 
@@ -126,7 +140,12 @@ namespace Newtonsoft.Json.Tests.Issues
                 throw new NotSupportedException();
             }
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 return _innerStream.ReadAsync(buffer, offset, count, cancellationToken);
             }
@@ -136,7 +155,12 @@ namespace Newtonsoft.Json.Tests.Issues
                 throw new NotSupportedException();
             }
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 _unflushedContentLength += count;
                 return _innerStream.WriteAsync(buffer, offset, count, cancellationToken);

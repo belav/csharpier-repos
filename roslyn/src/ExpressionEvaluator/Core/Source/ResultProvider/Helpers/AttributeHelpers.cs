@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
     internal static class AttributeHelpers
     {
-        internal static DkmClrCustomTypeInfo GetCustomTypeInfo(this IList<CustomAttributeData> attributes)
+        internal static DkmClrCustomTypeInfo GetCustomTypeInfo(
+            this IList<CustomAttributeData> attributes
+        )
         {
             ReadOnlyCollection<byte> dynamicFlags = null;
             ReadOnlyCollection<string> tupleElementNames = null;
@@ -24,7 +26,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 {
                     dynamicFlags = GetDynamicFlags(attribute);
                 }
-                else if (attributeType.IsType("System.Runtime.CompilerServices", "TupleElementNamesAttribute"))
+                else if (
+                    attributeType.IsType(
+                        "System.Runtime.CompilerServices",
+                        "TupleElementNamesAttribute"
+                    )
+                )
                 {
                     tupleElementNames = GetTupleElementNames(attribute);
                 }
@@ -32,14 +39,17 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return CustomTypeInfo.Create(dynamicFlags, tupleElementNames);
         }
 
-        private static ReadOnlyCollection<CustomAttributeTypedArgument> GetAttributeArrayArgumentValue(CustomAttributeTypedArgument argument)
+        private static ReadOnlyCollection<CustomAttributeTypedArgument> GetAttributeArrayArgumentValue(
+            CustomAttributeTypedArgument argument
+        )
         {
             // Per https://msdn.microsoft.com/en-us/library/system.reflection.customattributetypedargument.argumenttype(v=vs.110).aspx,
             // if ArgumentType indicates an array, then Value will actually be a ReadOnlyCollection.
             return (ReadOnlyCollection<CustomAttributeTypedArgument>)argument.Value;
         }
 
-        private static readonly ReadOnlyCollection<byte> DynamicFlagsTrue = new ReadOnlyCollection<byte>(new byte[] { 1 });
+        private static readonly ReadOnlyCollection<byte> DynamicFlagsTrue =
+            new ReadOnlyCollection<byte>(new byte[] { 1 });
 
         private static ReadOnlyCollection<byte> GetDynamicFlags(CustomAttributeData attribute)
         {
@@ -69,7 +79,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return null;
         }
 
-        private static ReadOnlyCollection<string> GetTupleElementNames(CustomAttributeData attribute)
+        private static ReadOnlyCollection<string> GetTupleElementNames(
+            CustomAttributeData attribute
+        )
         {
             var arguments = attribute.ConstructorArguments;
             if (arguments.Count == 1)

@@ -27,7 +27,8 @@ public class SnapshotModelProcessor : ISnapshotModelProcessor
     /// </summary>
     public SnapshotModelProcessor(
         IOperationReporter operationReporter,
-        IModelRuntimeInitializer modelRuntimeInitializer)
+        IModelRuntimeInitializer modelRuntimeInitializer
+    )
     {
         _operationReporter = operationReporter;
         _relationalNames = new HashSet<string>(
@@ -36,7 +37,8 @@ public class SnapshotModelProcessor : ISnapshotModelProcessor
                 .Where(p => p.Name != nameof(RelationalAnnotationNames.Prefix))
                 .Select(p => (string)p.GetValue(null)!)
                 .Where(v => v.IndexOf(':') > 0)
-                .Select(v => v[(RelationalAnnotationNames.Prefix.Length - 1)..]));
+                .Select(v => v[(RelationalAnnotationNames.Prefix.Length - 1)..])
+        );
         _modelRuntimeInitializer = modelRuntimeInitializer;
     }
 
@@ -75,7 +77,11 @@ public class SnapshotModelProcessor : ISnapshotModelProcessor
             }
         }
 
-        return _modelRuntimeInitializer.Initialize((IModel)model, designTime: true, validationLogger: null);
+        return _modelRuntimeInitializer.Initialize(
+            (IModel)model,
+            designTime: true,
+            validationLogger: null
+        );
     }
 
     private void ProcessCollection(IEnumerable<IReadOnlyAnnotatable> metadata, string version)
@@ -90,10 +96,14 @@ public class SnapshotModelProcessor : ISnapshotModelProcessor
     {
         ProcessElement((IReadOnlyAnnotatable)entityType, version);
 
-        if ((version.StartsWith("2.0", StringComparison.Ordinal)
-                || version.StartsWith("2.1", StringComparison.Ordinal))
+        if (
+            (
+                version.StartsWith("2.0", StringComparison.Ordinal)
+                || version.StartsWith("2.1", StringComparison.Ordinal)
+            )
             && entityType is IMutableEntityType mutableEntityType
-            && !entityType.IsOwned())
+            && !entityType.IsOwned()
+        )
         {
             UpdateOwnedTypes(mutableEntityType);
         }
@@ -101,8 +111,10 @@ public class SnapshotModelProcessor : ISnapshotModelProcessor
 
     private void ProcessElement(IReadOnlyAnnotatable? metadata, string version)
     {
-        if (version.StartsWith("1.", StringComparison.Ordinal)
-            && metadata is IMutableAnnotatable mutableMetadata)
+        if (
+            version.StartsWith("1.", StringComparison.Ordinal)
+            && metadata is IMutableAnnotatable mutableMetadata
+        )
         {
             foreach (var annotation in mutableMetadata.GetAnnotations().ToList())
             {
@@ -123,7 +135,8 @@ public class SnapshotModelProcessor : ISnapshotModelProcessor
                         else if (!Equals(duplicate.Value, annotation.Value))
                         {
                             _operationReporter.WriteWarning(
-                                DesignStrings.MultipleAnnotationConflict(stripped[1..]));
+                                DesignStrings.MultipleAnnotationConflict(stripped[1..])
+                            );
                         }
                     }
                 }
@@ -133,17 +146,26 @@ public class SnapshotModelProcessor : ISnapshotModelProcessor
 
     private static void UpdateSequences(IReadOnlyModel model, string version)
     {
-        if ((!version.StartsWith("1.", StringComparison.Ordinal)
+        if (
+            (
+                !version.StartsWith("1.", StringComparison.Ordinal)
                 && !version.StartsWith("2.", StringComparison.Ordinal)
-                && !version.StartsWith("3.", StringComparison.Ordinal))
-            || model is not IMutableModel mutableModel)
+                && !version.StartsWith("3.", StringComparison.Ordinal)
+            ) || model is not IMutableModel mutableModel
+        )
         {
             return;
         }
 
-        var sequences = model.GetAnnotations()
+        var sequences = model
+            .GetAnnotations()
 #pragma warning disable CS0618 // Type or member is obsolete
-            .Where(a => a.Name.StartsWith(RelationalAnnotationNames.SequencePrefix, StringComparison.Ordinal))
+            .Where(a =>
+                a.Name.StartsWith(
+                    RelationalAnnotationNames.SequencePrefix,
+                    StringComparison.Ordinal
+                )
+            )
             .Select(a => new Sequence(model, a.Name));
 #pragma warning restore CS0618 // Type or member is obsolete
 
@@ -161,7 +183,9 @@ public class SnapshotModelProcessor : ISnapshotModelProcessor
 
     private static void UpdateOwnedTypes(IMutableEntityType entityType)
     {
-        var ownerships = entityType.GetDeclaredReferencingForeignKeys().Where(fk => fk is { IsOwnership: true, IsUnique: true })
+        var ownerships = entityType
+            .GetDeclaredReferencingForeignKeys()
+            .Where(fk => fk is { IsOwnership: true, IsUnique: true })
             .ToList();
         foreach (var ownership in ownerships)
         {
@@ -172,18 +196,24 @@ public class SnapshotModelProcessor : ISnapshotModelProcessor
             {
                 ownership.SetProperties(
                     ownership.Properties,
-                    ownership.PrincipalEntityType.FindPrimaryKey()!);
+                    ownership.PrincipalEntityType.FindPrimaryKey()!
+                );
 
-                if (oldPrincipalKey is IConventionKey conventionKey
-                    && conventionKey.GetConfigurationSource() == ConfigurationSource.Convention)
+                if (
+                    oldPrincipalKey is IConventionKey conventionKey
+                    && conventionKey.GetConfigurationSource() == ConfigurationSource.Convention
+                )
                 {
                     oldPrincipalKey.DeclaringEntityType.RemoveKey(oldPrincipalKey);
                 }
 
                 foreach (var oldProperty in oldPrincipalKey.Properties)
                 {
-                    if (oldProperty is IConventionProperty conventionProperty
-                        && conventionProperty.GetConfigurationSource() == ConfigurationSource.Convention)
+                    if (
+                        oldProperty is IConventionProperty conventionProperty
+                        && conventionProperty.GetConfigurationSource()
+                            == ConfigurationSource.Convention
+                    )
                     {
                         oldProperty.DeclaringType.RemoveProperty(oldProperty);
                     }

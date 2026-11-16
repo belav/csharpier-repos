@@ -26,7 +26,10 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 {
     [UseExportProvider]
-    [Trait(Traits.Feature, Traits.Features.Diagnostics), Trait(Traits.Feature, Traits.Features.Tagging)]
+    [
+        Trait(Traits.Feature, Traits.Features.Diagnostics),
+        Trait(Traits.Feature, Traits.Features.Tagging)
+    ]
     public class DiagnosticsClassificationTaggerProviderTests
     {
         [WpfTheory, CombinatorialData]
@@ -35,14 +38,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             var analyzer = new Analyzer(diagnosticId: "test", throughAdditionalLocations);
             var analyzerMap = new Dictionary<string, ImmutableArray<DiagnosticAnalyzer>>
             {
-                {  LanguageNames.CSharp, ImmutableArray.Create<DiagnosticAnalyzer>(analyzer) }
+                { LanguageNames.CSharp, ImmutableArray.Create<DiagnosticAnalyzer>(analyzer) },
             };
 
-            using var workspace = TestWorkspace.CreateCSharp(new string[] { "class A { }", "class E { }" }, parseOptions: CSharpParseOptions.Default, composition: SquiggleUtilities.CompositionWithSolutionCrawler);
-            using var wrapper = new DiagnosticTaggerWrapper<DiagnosticsClassificationTaggerProvider, ClassificationTag>(workspace, analyzerMap);
+            using var workspace = TestWorkspace.CreateCSharp(
+                new string[] { "class A { }", "class E { }" },
+                parseOptions: CSharpParseOptions.Default,
+                composition: SquiggleUtilities.CompositionWithSolutionCrawler
+            );
+            using var wrapper = new DiagnosticTaggerWrapper<
+                DiagnosticsClassificationTaggerProvider,
+                ClassificationTag
+            >(workspace, analyzerMap);
 
             var firstDocument = workspace.Documents.First();
-            var tagger = wrapper.TaggerProvider.CreateTagger<ClassificationTag>(firstDocument.GetTextBuffer());
+            var tagger = wrapper.TaggerProvider.CreateTagger<ClassificationTag>(
+                firstDocument.GetTextBuffer()
+            );
             using var disposable = tagger as IDisposable;
             // test first update
             await wrapper.WaitForTags();
@@ -56,7 +68,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
                 Assert.Equal(new Span(0, 10), spans[0].Span.Span);
 
-                Assert.Equal(ClassificationTypeDefinitions.UnnecessaryCode, spans[0].Tag.ClassificationType.Classification);
+                Assert.Equal(
+                    ClassificationTypeDefinitions.UnnecessaryCode,
+                    spans[0].Tag.ClassificationType.Classification
+                );
             }
             else
             {
@@ -66,8 +81,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 Assert.Equal(new Span(0, 1), spans[0].Span.Span);
                 Assert.Equal(new Span(9, 1), spans[1].Span.Span);
 
-                Assert.Equal(ClassificationTypeDefinitions.UnnecessaryCode, spans[0].Tag.ClassificationType.Classification);
-                Assert.Equal(ClassificationTypeDefinitions.UnnecessaryCode, spans[1].Tag.ClassificationType.Classification);
+                Assert.Equal(
+                    ClassificationTypeDefinitions.UnnecessaryCode,
+                    spans[0].Tag.ClassificationType.Classification
+                );
+                Assert.Equal(
+                    ClassificationTypeDefinitions.UnnecessaryCode,
+                    spans[1].Tag.ClassificationType.Classification
+                );
             }
         }
 
@@ -80,12 +101,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             {
                 _throughAdditionalLocations = throughAdditionalLocations;
                 _rule = new(
-                    diagnosticId, "test", "test", "test", DiagnosticSeverity.Error, true,
-                    customTags: DiagnosticCustomTags.Create(isUnnecessary: true, isConfigurable: false, isCustomConfigurable: false, EnforceOnBuild.Never));
+                    diagnosticId,
+                    "test",
+                    "test",
+                    "test",
+                    DiagnosticSeverity.Error,
+                    true,
+                    customTags: DiagnosticCustomTags.Create(
+                        isUnnecessary: true,
+                        isConfigurable: false,
+                        isCustomConfigurable: false,
+                        EnforceOnBuild.Never
+                    )
+                );
             }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-                => ImmutableArray.Create(_rule);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(_rule);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -94,24 +126,35 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     var primaryLocation = Location.Create(c.Tree, new TextSpan(0, 10));
                     if (!_throughAdditionalLocations)
                     {
-                        c.ReportDiagnostic(DiagnosticHelper.Create(
-                            _rule, primaryLocation,
-                            NotificationOption2.Error,
-                            additionalLocations: null,
-                            properties: null));
+                        c.ReportDiagnostic(
+                            DiagnosticHelper.Create(
+                                _rule,
+                                primaryLocation,
+                                NotificationOption2.Error,
+                                additionalLocations: null,
+                                properties: null
+                            )
+                        );
                     }
                     else
                     {
-                        var additionalLocations = ImmutableArray.Create(Location.Create(c.Tree, new TextSpan(0, 10)));
+                        var additionalLocations = ImmutableArray.Create(
+                            Location.Create(c.Tree, new TextSpan(0, 10))
+                        );
                         var additionalUnnecessaryLocations = ImmutableArray.Create(
                             Location.Create(c.Tree, new TextSpan(0, 1)),
-                            Location.Create(c.Tree, new TextSpan(9, 1)));
+                            Location.Create(c.Tree, new TextSpan(9, 1))
+                        );
 
-                        c.ReportDiagnostic(DiagnosticHelper.CreateWithLocationTags(
-                            _rule, primaryLocation,
-                            NotificationOption2.Error,
-                            additionalLocations,
-                            additionalUnnecessaryLocations));
+                        c.ReportDiagnostic(
+                            DiagnosticHelper.CreateWithLocationTags(
+                                _rule,
+                                primaryLocation,
+                                NotificationOption2.Error,
+                                additionalLocations,
+                                additionalUnnecessaryLocations
+                            )
+                        );
                     }
                 });
             }
@@ -127,23 +170,36 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             var analyzer = new Analyzer(diagnosticId, throughAdditionalLocations: false);
             var analyzerMap = new Dictionary<string, ImmutableArray<DiagnosticAnalyzer>>
             {
-                {  LanguageNames.CSharp, ImmutableArray.Create<DiagnosticAnalyzer>(analyzer) }
+                { LanguageNames.CSharp, ImmutableArray.Create<DiagnosticAnalyzer>(analyzer) },
             };
 
-            using var workspace = TestWorkspace.CreateCSharp(new string[] { "class A { }", "class E { }" }, parseOptions: CSharpParseOptions.Default, composition: SquiggleUtilities.CompositionWithSolutionCrawler);
+            using var workspace = TestWorkspace.CreateCSharp(
+                new string[] { "class A { }", "class E { }" },
+                parseOptions: CSharpParseOptions.Default,
+                composition: SquiggleUtilities.CompositionWithSolutionCrawler
+            );
 
             // Set fading option
             var fadingOption = GetFadingOptionForDiagnostic(diagnosticId);
-            workspace.GlobalOptions.SetGlobalOption(fadingOption, LanguageNames.CSharp, fadingOptionValue);
+            workspace.GlobalOptions.SetGlobalOption(
+                fadingOption,
+                LanguageNames.CSharp,
+                fadingOptionValue
+            );
 
             // Add mapping from diagnostic ID to fading option
             IDEDiagnosticIdToOptionMappingHelper.AddFadingOptionMapping(diagnosticId, fadingOption);
 
             // Set up the tagger
-            using var wrapper = new DiagnosticTaggerWrapper<DiagnosticsClassificationTaggerProvider, ClassificationTag>(workspace, analyzerMap);
+            using var wrapper = new DiagnosticTaggerWrapper<
+                DiagnosticsClassificationTaggerProvider,
+                ClassificationTag
+            >(workspace, analyzerMap);
 
             var firstDocument = workspace.Documents.First();
-            var tagger = wrapper.TaggerProvider.CreateTagger<ClassificationTag>(firstDocument.GetTextBuffer());
+            var tagger = wrapper.TaggerProvider.CreateTagger<ClassificationTag>(
+                firstDocument.GetTextBuffer()
+            );
             using var disposable = tagger as IDisposable;
             // test first update
             await wrapper.WaitForTags();
@@ -162,15 +218,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
                 Assert.Equal(new Span(0, 10), spans[0].Span.Span);
 
-                Assert.Equal(ClassificationTypeDefinitions.UnnecessaryCode, spans[0].Tag.ClassificationType.Classification);
+                Assert.Equal(
+                    ClassificationTypeDefinitions.UnnecessaryCode,
+                    spans[0].Tag.ClassificationType.Classification
+                );
             }
         }
 
-        private static PerLanguageOption2<bool> GetFadingOptionForDiagnostic(string diagnosticId)
-            => diagnosticId switch
+        private static PerLanguageOption2<bool> GetFadingOptionForDiagnostic(string diagnosticId) =>
+            diagnosticId switch
             {
-                IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId => FadingOptions.FadeOutUnusedImports,
-                IDEDiagnosticIds.RemoveUnreachableCodeDiagnosticId => FadingOptions.FadeOutUnreachableCode,
+                IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId =>
+                    FadingOptions.FadeOutUnusedImports,
+                IDEDiagnosticIds.RemoveUnreachableCodeDiagnosticId =>
+                    FadingOptions.FadeOutUnreachableCode,
                 _ => throw ExceptionUtilities.UnexpectedValue(diagnosticId),
             };
     }

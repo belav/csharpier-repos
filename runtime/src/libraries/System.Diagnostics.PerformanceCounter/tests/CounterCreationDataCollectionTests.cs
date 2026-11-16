@@ -20,7 +20,11 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void CounterCreationDataCollection_CreateCounterCreationDataCollection_CCDC()
         {
-            CounterCreationData[] ccds = { new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase), new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase) };
+            CounterCreationData[] ccds =
+            {
+                new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase),
+                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase),
+            };
             CounterCreationDataCollection ccdc1 = new CounterCreationDataCollection(ccds);
             CounterCreationDataCollection ccdc2 = new CounterCreationDataCollection(ccdc1);
 
@@ -30,7 +34,11 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void CounterCreationDataCollection_CreateCounterCreationDataCollection_Array()
         {
-            CounterCreationData[] ccds = { new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase), new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase) };
+            CounterCreationData[] ccds =
+            {
+                new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase),
+                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase),
+            };
             CounterCreationDataCollection ccdc = new CounterCreationDataCollection(ccds);
             Assert.Equal(2, ccdc.Count);
             Assert.True(ccdc.Contains(ccds[0]));
@@ -49,10 +57,18 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void CounterCreationDataCollection_SetIndex2()
         {
-            CounterCreationData[] ccds = { new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase), new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase) };
+            CounterCreationData[] ccds =
+            {
+                new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase),
+                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase),
+            };
             CounterCreationDataCollection ccdc = new CounterCreationDataCollection(ccds);
 
-            CounterCreationData ccd = new CounterCreationData("Simple3", "Simple Help", PerformanceCounterType.RawBase);
+            CounterCreationData ccd = new CounterCreationData(
+                "Simple3",
+                "Simple Help",
+                PerformanceCounterType.RawBase
+            );
 
             ccdc[1] = ccd;
 
@@ -62,7 +78,11 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void CounterCreationDataCollection_Remove()
         {
-            CounterCreationData[] ccds = { new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase), new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase) };
+            CounterCreationData[] ccds =
+            {
+                new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase),
+                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase),
+            };
             CounterCreationDataCollection ccdc = new CounterCreationDataCollection(ccds);
 
             ccdc.Remove(ccds[0]);
@@ -72,10 +92,18 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void CounterCreationDataCollection_Insert()
         {
-            CounterCreationData[] ccds = { new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase), new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase) };
+            CounterCreationData[] ccds =
+            {
+                new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase),
+                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase),
+            };
             CounterCreationDataCollection ccdc = new CounterCreationDataCollection(ccds);
 
-            CounterCreationData ccd = new CounterCreationData("Simple3", "Simple Help", PerformanceCounterType.RawBase);
+            CounterCreationData ccd = new CounterCreationData(
+                "Simple3",
+                "Simple Help",
+                PerformanceCounterType.RawBase
+            );
             ccdc.Insert(1, ccd);
 
             Assert.True(ccdc.Contains(ccd));
@@ -85,7 +113,11 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void CounterCreationDataCollection_CopyTo()
         {
-            CounterCreationData[] ccds = { new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase), new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase) };
+            CounterCreationData[] ccds =
+            {
+                new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase),
+                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase),
+            };
             CounterCreationDataCollection ccdc = new CounterCreationDataCollection(ccds);
 
             CounterCreationData[] ccds2 = new CounterCreationData[2];
@@ -100,7 +132,8 @@ namespace System.Diagnostics.Tests
         {
             if (!PerformanceCounterCategory.Exists("AverageCounter64SampleCategory"))
             {
-                CounterCreationDataCollection counterDataCollection = new CounterCreationDataCollection();
+                CounterCreationDataCollection counterDataCollection =
+                    new CounterCreationDataCollection();
 
                 // Add the counter.
                 CounterCreationData averageCount64 = new CounterCreationData();
@@ -115,9 +148,12 @@ namespace System.Diagnostics.Tests
                 counterDataCollection.Add(averageCount64Base);
 
                 // Create the category.
-                PerformanceCounterCategory.Create("AverageCounter64SampleCategory",
+                PerformanceCounterCategory.Create(
+                    "AverageCounter64SampleCategory",
                     "Demonstrates usage of the AverageCounter64 performance counter type.",
-                    PerformanceCounterCategoryType.SingleInstance, counterDataCollection);
+                    PerformanceCounterCategoryType.SingleInstance,
+                    counterDataCollection
+                );
             }
 
             Assert.True(PerformanceCounterCategory.Exists("AverageCounter64SampleCategory"));

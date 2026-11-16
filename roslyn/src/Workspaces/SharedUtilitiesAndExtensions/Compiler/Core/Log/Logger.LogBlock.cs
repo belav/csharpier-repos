@@ -14,9 +14,17 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         // Regardless of how many tasks we can run in parallel on the machine, we likely won't need more than 256
         // instrumentation points in flight at a given time.
         // Use an object pool since we may be logging up to 1-10k events/second
-        private static readonly ObjectPool<RoslynLogBlock> s_pool = new(() => new RoslynLogBlock(s_pool!), Math.Min(Environment.ProcessorCount * 8, 256));
+        private static readonly ObjectPool<RoslynLogBlock> s_pool = new(
+            () => new RoslynLogBlock(s_pool!),
+            Math.Min(Environment.ProcessorCount * 8, 256)
+        );
 
-        private static IDisposable CreateLogBlock(FunctionId functionId, LogMessage message, int blockId, CancellationToken cancellationToken)
+        private static IDisposable CreateLogBlock(
+            FunctionId functionId,
+            LogMessage message,
+            int blockId,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(s_currentLogger);
 
@@ -31,7 +39,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         /// </summary>
         private class RoslynLogBlock(ObjectPool<RoslynLogBlock> pool) : IDisposable
         {
-
             // these need to be cleared before putting back to pool
             private ILogger? _logger;
             private LogMessage? _logMessage;
@@ -41,7 +48,13 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             private int _tick;
             private int _blockId;
 
-            public void Construct(ILogger logger, FunctionId functionId, LogMessage logMessage, int blockId, CancellationToken cancellationToken)
+            public void Construct(
+                ILogger logger,
+                FunctionId functionId,
+                LogMessage logMessage,
+                int blockId,
+                CancellationToken cancellationToken
+            )
             {
                 _logger = logger;
                 _functionId = functionId;

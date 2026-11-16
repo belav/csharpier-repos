@@ -56,10 +56,12 @@
 //---------------------------------------------------------------------------
 using System;
 
-namespace RabbitMQ.Client.Content {
+namespace RabbitMQ.Client.Content
+{
     ///<summary>Analyzes messages binary-compatible with QPid's
     ///"BytesMessage" wire encoding.</summary>
-    public interface IBytesMessageReader: IMessageReader {
+    public interface IBytesMessageReader : IMessageReader
+    {
         ///<summary>Reads an int from the message body.</summary>
         int ReadInt32();
 

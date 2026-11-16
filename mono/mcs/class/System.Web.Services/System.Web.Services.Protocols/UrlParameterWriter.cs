@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.UrlParameterWriter.cs
 //
 // Author:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,29 +29,28 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Web.Services;
 using System.IO;
+using System.Web.Services;
 
-namespace System.Web.Services.Protocols {
-	public class UrlParameterWriter : UrlEncodedParameterWriter {
+namespace System.Web.Services.Protocols
+{
+    public class UrlParameterWriter : UrlEncodedParameterWriter
+    {
+        #region Constructors
 
-		#region Constructors
+        public UrlParameterWriter() { }
 
-		public UrlParameterWriter () 
-		{
-		}
-		
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
-		public override string GetRequestUrl (string url, object[] parameters)
-		{
-			StringWriter sw = new StringWriter ();
-			Encode (sw, parameters);
-			return url + "?" + sw.ToString ();
-		}
+        public override string GetRequestUrl(string url, object[] parameters)
+        {
+            StringWriter sw = new StringWriter();
+            Encode(sw, parameters);
+            return url + "?" + sw.ToString();
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

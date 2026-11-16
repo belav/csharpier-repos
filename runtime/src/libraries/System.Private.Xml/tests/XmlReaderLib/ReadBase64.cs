@@ -36,7 +36,13 @@ namespace System.Xml.Tests
             DataReader.Close();
             return base.Terminate(objParam);
         }
-        private bool VerifyInvalidReadBase64(int iBufferSize, int iIndex, int iCount, Type exceptionType)
+
+        private bool VerifyInvalidReadBase64(
+            int iBufferSize,
+            int iIndex,
+            int iCount,
+            Type exceptionType
+        )
         {
             bool bPassed = false;
             byte[] buffer = new byte[iBufferSize];
@@ -44,7 +50,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME1);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return true;
+            if (CheckCanReadBinaryContent())
+                return true;
             try
             {
                 DataReader.ReadContentAsBase64(buffer, iIndex, iCount);
@@ -63,7 +70,8 @@ namespace System.Xml.Tests
         {
             ReloadSource();
             PositionOnNodeType(nt);
-            if (CheckCanReadBinaryContent()) return;
+            if (CheckCanReadBinaryContent())
+                return;
             try
             {
                 byte[] buffer = new byte[1];
@@ -88,7 +96,8 @@ namespace System.Xml.Tests
             string value = DataReader.Value;
             CError.WriteLine("Name=" + name);
             CError.WriteLine("Value=" + value);
-            if (CheckCanReadBinaryContent()) return;
+            if (CheckCanReadBinaryContent())
+                return;
 
             byte[] buffer = new byte[1];
             int nBytes = DataReader.ReadContentAsBase64(buffer, 0, 1);
@@ -110,7 +119,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME1);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             base64len = DataReader.ReadContentAsBase64(base64, 0, base64.Length);
 
@@ -120,7 +130,11 @@ namespace System.Xml.Tests
                 strActbase64 += System.BitConverter.ToChar(base64, i);
             }
 
-            CError.Compare(strActbase64, (strTextBase64 + strNumBase64), "Compare All Valid Base64");
+            CError.Compare(
+                strActbase64,
+                (strTextBase64 + strNumBase64),
+                "Compare All Valid Base64"
+            );
             return TEST_PASS;
         }
 
@@ -133,7 +147,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME3);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             base64len = DataReader.ReadContentAsBase64(base64, 0, base64.Length);
 
@@ -156,7 +171,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME4);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             base64len = DataReader.ReadContentAsBase64(base64, 0, base64.Length);
 
@@ -179,7 +195,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME5);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             base64len = DataReader.ReadContentAsBase64(base64, 0, base64.Length);
 
@@ -189,7 +206,11 @@ namespace System.Xml.Tests
                 strActbase64 += System.BitConverter.ToChar(base64, i);
             }
 
-            CError.Compare(strActbase64, (strTextBase64 + strNumBase64), "Compare All Valid Base64");
+            CError.Compare(
+                strActbase64,
+                (strTextBase64 + strNumBase64),
+                "Compare All Valid Base64"
+            );
             return TEST_PASS;
         }
 
@@ -202,7 +223,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME6);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             base64len = DataReader.ReadContentAsBase64(base64, 0, base64.Length);
 
@@ -223,31 +245,41 @@ namespace System.Xml.Tests
         [Variation("ReadBase64 with count > buffer size")]
         public int ReadBase64_7()
         {
-            return BoolToLTMResult(VerifyInvalidReadBase64(5, 0, 6, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBase64(5, 0, 6, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBase64 with count < 0")]
         public int ReadBase64_8()
         {
-            return BoolToLTMResult(VerifyInvalidReadBase64(5, 2, -1, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBase64(5, 2, -1, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBase64 with index > buffer size")]
         public int ReadBase64_9()
         {
-            return BoolToLTMResult(VerifyInvalidReadBase64(5, 5, 1, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBase64(5, 5, 1, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBase64 with index < 0")]
         public int ReadBase64_10()
         {
-            return BoolToLTMResult(VerifyInvalidReadBase64(5, -1, 1, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBase64(5, -1, 1, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBase64 with index + count exceeds buffer")]
         public int ReadBase64_11()
         {
-            return BoolToLTMResult(VerifyInvalidReadBase64(5, 0, 10, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBase64(5, 0, 10, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBase64 index & count =0")]
@@ -259,7 +291,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME1);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             iCount = DataReader.ReadContentAsBase64(buffer, 0, 0);
 
@@ -276,14 +309,19 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME4);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             string strActbase64 = "";
             for (int i = 0; i < base64len; i = i + 2)
             {
                 DataReader.ReadContentAsBase64(base64, i, 2);
                 strActbase64 = (System.BitConverter.ToChar(base64, i)).ToString();
-                CError.Compare(string.Compare(strActbase64, 0, strTextBase64, i / 2, 1), 0, "Compare All Valid Base64");
+                CError.Compare(
+                    string.Compare(strActbase64, 0, strTextBase64, i / 2, 1),
+                    0,
+                    "Compare All Valid Base64"
+                );
             }
 
             return TEST_PASS;
@@ -296,7 +334,8 @@ namespace System.Xml.Tests
 
             DataReader.PositionOnElement(ST_ELEM_NAME4);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             try
             {
@@ -319,8 +358,8 @@ namespace System.Xml.Tests
             DataReader.Read();
             var line = ((IXmlLineInfo)DataReader.Internal).LinePosition;
 
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
-
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             byte[] buffer = new byte[10];
             int nRead = 0;
@@ -331,7 +370,13 @@ namespace System.Xml.Tests
             }
             catch (XmlException e)
             {
-                if (IsXmlNodeReader() || IsXmlNodeReaderDataDoc() || IsXPathNavigatorReader() || IsXmlValidatingReader() || IsCharCheckingReader())
+                if (
+                    IsXmlNodeReader()
+                    || IsXmlNodeReaderDataDoc()
+                    || IsXPathNavigatorReader()
+                    || IsXmlValidatingReader()
+                    || IsCharCheckingReader()
+                )
                     CheckException("Xml_InvalidBase64Value", e);
                 else
                 {
@@ -348,7 +393,8 @@ namespace System.Xml.Tests
 
             DataReader.PositionOnElement("ElemNum");
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             byte[] buffer = new byte[10];
             int nRead = DataReader.ReadContentAsBase64(buffer, 0, 8);
@@ -367,7 +413,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement("ElemNum");
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             byte[] buffer = new byte[30];
 
@@ -395,7 +442,8 @@ namespace System.Xml.Tests
 
             DataReader.PositionOnElement("ROOT");
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             int result = 0;
             int nRead;
@@ -419,7 +467,8 @@ namespace System.Xml.Tests
             ReloadSourceStr(strxml);
             DataReader.PositionOnElement("B");
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             try
             {
@@ -445,7 +494,8 @@ namespace System.Xml.Tests
             ReloadSourceStr(strxml);
             DataReader.PositionOnElement("abc");
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             for (int i = 0; i < 4; i++)
             {
@@ -471,7 +521,8 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement("abc");
 
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             for (int i = 0; i < 2; i++)
             {
@@ -488,7 +539,13 @@ namespace System.Xml.Tests
             }
             catch (XmlException e)
             {
-                if (IsXmlNodeReader() || IsXmlNodeReaderDataDoc() || IsXPathNavigatorReader() || IsXmlValidatingReader() || IsCharCheckingReader())
+                if (
+                    IsXmlNodeReader()
+                    || IsXmlNodeReaderDataDoc()
+                    || IsXPathNavigatorReader()
+                    || IsXmlValidatingReader()
+                    || IsCharCheckingReader()
+                )
                     CheckException("Xml_InvalidBase64Value", e);
                 else
                     CheckXmlException("Xml_UserException", e, 1, 6);
@@ -526,7 +583,8 @@ namespace System.Xml.Tests
 
             DataReader.PositionOnElement("base64");
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             CError.WriteLine("ReadBase64 method... ");
             CError.WriteLine(int.MaxValue);
@@ -583,14 +641,20 @@ namespace System.Xml.Tests
             return base.Terminate(objParam);
         }
 
-        private bool VerifyInvalidReadBase64(int iBufferSize, int iIndex, int iCount, Type exceptionType)
+        private bool VerifyInvalidReadBase64(
+            int iBufferSize,
+            int iIndex,
+            int iCount,
+            Type exceptionType
+        )
         {
             bool bPassed = false;
             byte[] buffer = new byte[iBufferSize];
 
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME1);
-            if (CheckCanReadBinaryContent()) return true;
+            if (CheckCanReadBinaryContent())
+                return true;
 
             try
             {
@@ -610,7 +674,8 @@ namespace System.Xml.Tests
         {
             ReloadSource();
             PositionOnNodeType(nt);
-            if (CheckCanReadBinaryContent()) return;
+            if (CheckCanReadBinaryContent())
+                return;
             try
             {
                 byte[] buffer = new byte[1];
@@ -637,7 +702,8 @@ namespace System.Xml.Tests
 
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME1);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             base64len = DataReader.ReadElementContentAsBase64(base64, 0, base64.Length);
 
@@ -647,7 +713,11 @@ namespace System.Xml.Tests
                 strActbase64 += System.BitConverter.ToChar(base64, i);
             }
 
-            CError.Compare(strActbase64, (strTextBase64 + strNumBase64), "Compare All Valid Base64");
+            CError.Compare(
+                strActbase64,
+                (strTextBase64 + strNumBase64),
+                "Compare All Valid Base64"
+            );
             return TEST_PASS;
         }
 
@@ -659,7 +729,8 @@ namespace System.Xml.Tests
 
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME3);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             base64len = DataReader.ReadElementContentAsBase64(base64, 0, base64.Length);
 
@@ -681,7 +752,8 @@ namespace System.Xml.Tests
 
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME4);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             base64len = DataReader.ReadElementContentAsBase64(base64, 0, base64.Length);
 
@@ -703,7 +775,8 @@ namespace System.Xml.Tests
 
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME5);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             base64len = DataReader.ReadElementContentAsBase64(base64, 0, base64.Length);
 
@@ -713,7 +786,11 @@ namespace System.Xml.Tests
                 strActbase64 += System.BitConverter.ToChar(base64, i);
             }
 
-            CError.Compare(strActbase64, (strTextBase64 + strNumBase64), "Compare All Valid Base64");
+            CError.Compare(
+                strActbase64,
+                (strTextBase64 + strNumBase64),
+                "Compare All Valid Base64"
+            );
             return TEST_PASS;
         }
 
@@ -725,7 +802,8 @@ namespace System.Xml.Tests
 
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME6);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             base64len = DataReader.ReadElementContentAsBase64(base64, 0, base64.Length);
 
@@ -746,31 +824,41 @@ namespace System.Xml.Tests
         [Variation("ReadBase64 with count > buffer size")]
         public int ReadBase64_7()
         {
-            return BoolToLTMResult(VerifyInvalidReadBase64(5, 0, 6, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBase64(5, 0, 6, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBase64 with count < 0")]
         public int ReadBase64_8()
         {
-            return BoolToLTMResult(VerifyInvalidReadBase64(5, 2, -1, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBase64(5, 2, -1, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBase64 with index > buffer size")]
         public int ReadBase64_9()
         {
-            return BoolToLTMResult(VerifyInvalidReadBase64(5, 5, 1, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBase64(5, 5, 1, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBase64 with index < 0")]
         public int ReadBase64_10()
         {
-            return BoolToLTMResult(VerifyInvalidReadBase64(5, -1, 1, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBase64(5, -1, 1, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBase64 with index + count exceeds buffer")]
         public int ReadBase64_11()
         {
-            return BoolToLTMResult(VerifyInvalidReadBase64(5, 0, 10, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBase64(5, 0, 10, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBase64 index & count =0")]
@@ -781,7 +869,8 @@ namespace System.Xml.Tests
 
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME1);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             iCount = DataReader.ReadElementContentAsBase64(buffer, 0, 0);
 
             CError.Compare(iCount, 0, "has to be zero");
@@ -796,13 +885,18 @@ namespace System.Xml.Tests
 
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME4);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             string strActbase64 = "";
             for (int i = 0; i < base64len; i = i + 2)
             {
                 DataReader.ReadElementContentAsBase64(base64, i, 2);
                 strActbase64 = (System.BitConverter.ToChar(base64, i)).ToString();
-                CError.Compare(string.Compare(strActbase64, 0, strTextBase64, i / 2, 1), 0, "Compare All Valid Base64");
+                CError.Compare(
+                    string.Compare(strActbase64, 0, strTextBase64, i / 2, 1),
+                    0,
+                    "Compare All Valid Base64"
+                );
             }
 
             return TEST_PASS;
@@ -814,7 +908,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BASE64_TEST);
 
             DataReader.PositionOnElement(ST_ELEM_NAME4);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             try
             {
                 DataReader.ReadElementContentAsBase64(null, 0, 0);
@@ -833,7 +928,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BASE64_TEST);
 
             DataReader.PositionOnElement("ElemErr");
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             var line = ((IXmlLineInfo)DataReader.Internal).LinePosition + "ElemErr".Length + 1;
 
             byte[] buffer = new byte[10];
@@ -845,7 +941,13 @@ namespace System.Xml.Tests
             }
             catch (XmlException e)
             {
-                if (IsXmlNodeReader() || IsXmlNodeReaderDataDoc() || IsXPathNavigatorReader() || IsXmlValidatingReader() || IsCharCheckingReader())
+                if (
+                    IsXmlNodeReader()
+                    || IsXmlNodeReaderDataDoc()
+                    || IsXPathNavigatorReader()
+                    || IsXmlValidatingReader()
+                    || IsCharCheckingReader()
+                )
                     CheckException("Xml_InvalidBase64Value", e);
                 else
                     CheckXmlException("Xml_UserException", e, 1, line);
@@ -859,7 +961,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BASE64_TEST);
 
             DataReader.PositionOnElement("ElemNum");
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             byte[] buffer = new byte[10];
             int nRead = DataReader.ReadElementContentAsBase64(buffer, 0, 8);
@@ -876,7 +979,8 @@ namespace System.Xml.Tests
         {
             ReloadSource(EREADER_TYPE.BASE64_TEST);
             DataReader.PositionOnElement("ElemNum");
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             byte[] buffer = new byte[30];
 
@@ -902,7 +1006,8 @@ namespace System.Xml.Tests
             ReloadSourceStr(strxml);
 
             DataReader.PositionOnElement("ROOT");
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             int result = 0;
             int nRead;
@@ -925,7 +1030,8 @@ namespace System.Xml.Tests
             string strxml = "<B>" + new string('c', 5000);
             ReloadSourceStr(strxml);
             DataReader.PositionOnElement("B");
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             try
             {
@@ -950,7 +1056,8 @@ namespace System.Xml.Tests
 
             ReloadSourceStr(strxml);
             DataReader.PositionOnElement("abc");
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             for (int i = 0; i < 4; i++)
             {
@@ -974,7 +1081,8 @@ namespace System.Xml.Tests
 
             ReloadSourceStr(strxml);
             DataReader.PositionOnElement("abc");
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             for (int i = 0; i < 2; i++)
             {
@@ -991,7 +1099,13 @@ namespace System.Xml.Tests
             }
             catch (XmlException e)
             {
-                if (IsXmlNodeReader() || IsXmlNodeReaderDataDoc() || IsXPathNavigatorReader() || IsXmlValidatingReader() || IsCharCheckingReader())
+                if (
+                    IsXmlNodeReader()
+                    || IsXmlNodeReaderDataDoc()
+                    || IsXPathNavigatorReader()
+                    || IsXmlValidatingReader()
+                    || IsCharCheckingReader()
+                )
                     CheckException("Xml_InvalidBase64Value", e);
                 else
                     CheckXmlException("Xml_UserException", e, 1, 6);
@@ -1005,7 +1119,12 @@ namespace System.Xml.Tests
         //[Variation("ReadBase64 runs into an Overflow", Params = new object[] { "10000000" })]
         public int ReadBase64RunsIntoOverflow()
         {
-            if (CheckCanReadBinaryContent() || IsSubtreeReader() || IsCharCheckingReader() || IsWrappedReader())
+            if (
+                CheckCanReadBinaryContent()
+                || IsSubtreeReader()
+                || IsCharCheckingReader()
+                || IsWrappedReader()
+            )
                 return TEST_SKIPPED;
             int totalfilesize = Convert.ToInt32(CurVariation.Params[0].ToString());
             CError.WriteLine(" totalfilesize = " + totalfilesize);
@@ -1065,7 +1184,8 @@ namespace System.Xml.Tests
             ReloadSource(filename);
 
             DataReader.MoveToContent();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             int bytes = -1;
 
             StringBuilder output = new StringBuilder();
@@ -1088,7 +1208,8 @@ namespace System.Xml.Tests
         [Variation("SubtreeReader inserted attributes don't work with ReadContentAsBase64")]
         public int SubtreeReaderInsertedAttributesWorkWithReadContentAsBase64()
         {
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             string strxml1 = "<root xmlns='";
             string strxml2 = "'><bar/></root>";
@@ -1117,7 +1238,8 @@ namespace System.Xml.Tests
         {
             string xml = "<elem0>123<elem1>123<elem2>123</elem2>123</elem1>123</elem0>";
             ReloadSource(new StringReader(xml));
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             byte[] buffer = new byte[3];
             int startPos = 0;
             int readSize = 3;
@@ -1145,7 +1267,8 @@ namespace System.Xml.Tests
         {
             string xml = "<elem0>12%45<elem1>12%45<elem2>12%45</elem2>12%45</elem1>12%45</elem0>";
             ReloadSource(new StringReader(xml));
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             byte[] buffer = new byte[5];
             int currentSize = 0;
 
@@ -1155,7 +1278,15 @@ namespace System.Xml.Tests
                 try
                 {
                     currentSize = DataReader.ReadContentAsBase64(buffer, 0, 5);
-                    if (!(IsCharCheckingReader() || IsXmlNodeReader() || IsXmlNodeReaderDataDoc() || IsXmlValidatingReader() || IsXPathNavigatorReader()))
+                    if (
+                        !(
+                            IsCharCheckingReader()
+                            || IsXmlNodeReader()
+                            || IsXmlNodeReaderDataDoc()
+                            || IsXmlValidatingReader()
+                            || IsXPathNavigatorReader()
+                        )
+                    )
                         return TEST_FAIL;
                 }
                 catch (XmlException)
@@ -1172,7 +1303,8 @@ namespace System.Xml.Tests
         {
             string xml = "<elem0>123</elem0>";
             ReloadSourceStr(xml);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             byte[] buffer = new byte[3];
 
             DataReader.Read();
@@ -1188,21 +1320,37 @@ namespace System.Xml.Tests
         {
             string xml = "<elem0>123</elem0>";
             ReloadSourceStr(xml);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             byte[] buffer = new byte[3];
 
             DataReader.Read();
             DataReader.Read();
             CError.Compare(DataReader.ReadContentAsBase64(buffer, 0, 1), 1, "size");
-            CError.Compare(DataReader.Value, (IsCharCheckingReader() || IsXmlNodeReader() || IsXmlNodeReaderDataDoc() || IsXmlValidatingReader() || IsXPathNavigatorReader()) ? "123" : "3", "value");
+            CError.Compare(
+                DataReader.Value,
+                (
+                    IsCharCheckingReader()
+                    || IsXmlNodeReader()
+                    || IsXmlNodeReaderDataDoc()
+                    || IsXmlValidatingReader()
+                    || IsXPathNavigatorReader()
+                )
+                    ? "123"
+                    : "3",
+                "value"
+            );
             DataReader.Close();
             return TEST_PASS;
         }
 
-        [Variation("goto to huge text node, read several chars with ReadContentAsBase64 and Move forward with .Read()")]
+        [Variation(
+            "goto to huge text node, read several chars with ReadContentAsBase64 and Move forward with .Read()"
+        )]
         public int TestReadBase64_32()
         {
-            string xml = "<elem0>1234567 89 1234 123345 5676788 5567712 34567 89 1234 123345 5676788 55677</elem0>";
+            string xml =
+                "<elem0>1234567 89 1234 123345 5676788 5567712 34567 89 1234 123345 5676788 55677</elem0>";
             ReloadSource(new StringReader(xml));
             byte[] buffer = new byte[5];
 
@@ -1212,13 +1360,18 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.ReadContentAsBase64(buffer, 0, 5), 5, "size");
             }
-            catch (NotSupportedException) { return TEST_PASS; }
+            catch (NotSupportedException)
+            {
+                return TEST_PASS;
+            }
             DataReader.Read();
             DataReader.Close();
             return TEST_PASS;
         }
 
-        [Variation("goto to huge text node with invalid chars, read several chars with ReadContentAsBase64 and Move forward with .Read()")]
+        [Variation(
+            "goto to huge text node with invalid chars, read several chars with ReadContentAsBase64 and Move forward with .Read()"
+        )]
         public int TestReadBase64_33()
         {
             string xml = "<elem0>123 $^ 56789 abcdefg hij klmn opqrst  12345 uvw xy ^ z</elem0>";
@@ -1232,8 +1385,14 @@ namespace System.Xml.Tests
                 CError.Compare(DataReader.ReadContentAsBase64(buffer, 0, 5), 5, "size");
                 DataReader.Read();
             }
-            catch (XmlException) { return TEST_PASS; }
-            catch (NotSupportedException) { return TEST_PASS; }
+            catch (XmlException)
+            {
+                return TEST_PASS;
+            }
+            catch (NotSupportedException)
+            {
+                return TEST_PASS;
+            }
             finally
             {
                 DataReader.Close();
@@ -1253,7 +1412,8 @@ namespace System.Xml.Tests
             {
                 ReloadSource(new StringReader(xml));
                 DataReader.Read();
-                if (IsBinaryReader()) DataReader.Read();
+                if (IsBinaryReader())
+                    DataReader.Read();
                 DataReader.MoveToAttribute(0);
                 CError.Compare(DataReader.Value, "default", "value");
                 CError.Equals(DataReader.ReadContentAsBase64(buffer, 0, 8), 5, "size");
@@ -1266,11 +1426,19 @@ namespace System.Xml.Tests
         [Variation("call ReadContentAsBase64 on two or more nodes and whitespace")]
         public int TestReadReadBase64_35()
         {
-            string xml = @"<elem0>   123" + "\n" + @" <elem1>" + "\r" + @"123
+            string xml =
+                @"<elem0>   123"
+                + "\n"
+                + @" <elem1>"
+                + "\r"
+                + @"123
 <elem2>
-123  </elem2>" + "\r\n" + @"  123</elem1>          123           </elem0>";
+123  </elem2>"
+                + "\r\n"
+                + @"  123</elem1>          123           </elem0>";
             ReloadSource(new StringReader(xml));
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             byte[] buffer = new byte[3];
             int startPos = 0;
             int readSize = 3;
@@ -1296,11 +1464,19 @@ namespace System.Xml.Tests
         [Variation("call ReadContentAsBase64 on two or more nodes and whitespace after call Value")]
         public int TestReadReadBase64_36()
         {
-            string xml = @"<elem0>   123" + "\n" + @" <elem1>" + "\r" + @"123
+            string xml =
+                @"<elem0>   123"
+                + "\n"
+                + @" <elem1>"
+                + "\r"
+                + @"123
 <elem2>
-123  </elem2>" + "\r\n" + @"  123</elem1>          123           </elem0>";
+123  </elem2>"
+                + "\r\n"
+                + @"  123</elem1>          123           </elem0>";
             ReloadSource(new StringReader(xml));
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             byte[] buffer = new byte[3];
             int startPos = 0;
             int readSize = 3;

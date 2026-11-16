@@ -3,10 +3,10 @@
 //
 
 // This is a test case created by briansul. it compares
-// the result of a constant against the result of a variable shift operation. 
+// the result of a constant against the result of a variable shift operation.
 // It never repro'ed the actual issue, but it tests some of
-// the changes done by brian to the product code. 
-// Well, and it runs fast. 
+// the changes done by brian to the product code.
+// Well, and it runs fast.
 
 using System;
 using Xunit;
@@ -358,7 +358,6 @@ public class Program
         return x << 64;
     }
 
-
     static void TestSHL()
     {
         long x = 1;
@@ -691,7 +690,6 @@ public class Program
 
             x *= 5;
         }
-
     }
 
     static long VSHR(long x, int s)
@@ -1018,7 +1016,6 @@ public class Program
     {
         return x >> 64;
     }
-
 
     static void TestSHR()
     {
@@ -1352,7 +1349,6 @@ public class Program
 
             x *= 5;
         }
-
     }
 
     static ulong VSZR(ulong x, int s)
@@ -1679,7 +1675,6 @@ public class Program
     {
         return x >> 64;
     }
-
 
     static void TestSZR()
     {
@@ -2013,7 +2008,6 @@ public class Program
 
             x *= 5;
         }
-
     }
 
     [Fact]
@@ -2035,8 +2029,5 @@ public class Program
             Console.WriteLine("!!!!!!!!! FAILED !!!!!!!!!!!!");
             return 666;
         }
-
-
     }
 }
-

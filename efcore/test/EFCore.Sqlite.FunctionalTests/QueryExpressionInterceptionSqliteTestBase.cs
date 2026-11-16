@@ -3,39 +3,38 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public abstract class QueryExpressionInterceptionSqliteTestBase : QueryExpressionInterceptionTestBase
+public abstract class QueryExpressionInterceptionSqliteTestBase
+    : QueryExpressionInterceptionTestBase
 {
     protected QueryExpressionInterceptionSqliteTestBase(InterceptionSqliteFixtureBase fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public abstract class InterceptionSqliteFixtureBase : InterceptionFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<IInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkSqlite(), injectedInterceptors);
+            IEnumerable<IInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkSqlite(),
+                injectedInterceptors
+            );
     }
 
     public class QueryExpressionInterceptionSqliteTest
-        : QueryExpressionInterceptionSqliteTestBase, IClassFixture<QueryExpressionInterceptionSqliteTest.InterceptionSqliteFixture>
+        : QueryExpressionInterceptionSqliteTestBase,
+            IClassFixture<QueryExpressionInterceptionSqliteTest.InterceptionSqliteFixture>
     {
         public QueryExpressionInterceptionSqliteTest(InterceptionSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {
-            protected override string StoreName
-                => "QueryExpressionInterception";
+            protected override string StoreName => "QueryExpressionInterception";
 
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => false;
+            protected override bool ShouldSubscribeToDiagnosticListener => false;
         }
     }
 
@@ -43,18 +42,16 @@ public abstract class QueryExpressionInterceptionSqliteTestBase : QueryExpressio
         : QueryExpressionInterceptionSqliteTestBase,
             IClassFixture<QueryExpressionInterceptionWithDiagnosticsSqliteTest.InterceptionSqliteFixture>
     {
-        public QueryExpressionInterceptionWithDiagnosticsSqliteTest(InterceptionSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public QueryExpressionInterceptionWithDiagnosticsSqliteTest(
+            InterceptionSqliteFixture fixture
+        )
+            : base(fixture) { }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {
-            protected override string StoreName
-                => "QueryExpressionInterceptionWithDiagnostics";
+            protected override string StoreName => "QueryExpressionInterceptionWithDiagnostics";
 
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => true;
+            protected override bool ShouldSubscribeToDiagnosticListener => true;
         }
     }
 }

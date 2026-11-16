@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.WebSockets {
+namespace System.Web.WebSockets
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -41,8 +42,8 @@ namespace System.Web.WebSockets {
     //    "1#element" requires at least one; and "1#2element" allows one or
     //    two.
 
-    internal static class SubProtocolUtil {
-
+    internal static class SubProtocolUtil
+    {
         // RFC 2616, sec. 2.2:
         // LWS            = [CRLF] 1*( SP | HT )
         // We use a subset: _lwsTrimChars = SP | HT
@@ -50,11 +51,13 @@ namespace System.Web.WebSockets {
         private static readonly char[] _splitChars = new char[] { ',' };
 
         // Returns a value stating whether the specified SubProtocol is valid
-        public static bool IsValidSubProtocolName(string subprotocol) {
+        public static bool IsValidSubProtocolName(string subprotocol)
+        {
             return (!String.IsNullOrEmpty(subprotocol) && subprotocol.All(IsValidSubProtocolChar));
         }
 
-        private static bool IsValidSubProtocolChar(char c) {
+        private static bool IsValidSubProtocolChar(char c)
+        {
             return ('\u0021' <= c && c <= '\u007e' && !IsSeparatorChar(c));
         }
 
@@ -63,8 +66,10 @@ namespace System.Web.WebSockets {
         //                | "," | ";" | ":" | "\" | <">
         //                | "/" | "[" | "]" | "?" | "="
         //                | "{" | "}" | SP | HT
-        private static bool IsSeparatorChar(char c) {
-            switch (c) {
+        private static bool IsSeparatorChar(char c)
+        {
+            switch (c)
+            {
                 case '(':
                 case ')':
                 case '<':
@@ -92,23 +97,28 @@ namespace System.Web.WebSockets {
         }
 
         // Returns a list of preferred subprotocols by parsing an incoming header value, or null if the incoming header was improperly formatted.
-        public static List<string> ParseHeader(string headerValue) {
-            if (headerValue == null) {
+        public static List<string> ParseHeader(string headerValue)
+        {
+            if (headerValue == null)
+            {
                 // No incoming values
                 return null;
             }
 
             List<string> subprotocols = new List<string>();
-            foreach (string subprotocolCandidate in headerValue.Split(_splitChars)) {
+            foreach (string subprotocolCandidate in headerValue.Split(_splitChars))
+            {
                 string subprotocolCandidateTrimmed = subprotocolCandidate.Trim(_lwsTrimChars); // remove LWS according to '#' rule
 
                 // skip LWS between commas according to '#' rule
-                if (subprotocolCandidateTrimmed.Length == 0) {
+                if (subprotocolCandidateTrimmed.Length == 0)
+                {
                     continue;
                 }
 
                 // reject improperly formatted header values
-                if (!IsValidSubProtocolName(subprotocolCandidateTrimmed)) {
+                if (!IsValidSubProtocolName(subprotocolCandidateTrimmed))
+                {
                     return null;
                 }
 
@@ -116,18 +126,19 @@ namespace System.Web.WebSockets {
                 subprotocols.Add(subprotocolCandidateTrimmed);
             }
 
-            if (subprotocols.Count == 0) {
+            if (subprotocols.Count == 0)
+            {
                 // header is improperly formatted (contained no usable values)
                 return null;
             }
 
-            if (subprotocols.Distinct(StringComparer.Ordinal).Count() != subprotocols.Count) {
+            if (subprotocols.Distinct(StringComparer.Ordinal).Count() != subprotocols.Count)
+            {
                 // header is improperly formatted (contained duplicate values)
                 return null;
             }
 
             return subprotocols;
         }
-
     }
 }

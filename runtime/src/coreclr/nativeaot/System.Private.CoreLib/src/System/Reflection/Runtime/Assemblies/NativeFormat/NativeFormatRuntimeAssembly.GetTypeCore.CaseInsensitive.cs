@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.TypeInfos;
-
 using Internal.Metadata.NativeFormat;
 using Internal.Reflection.Core;
 
@@ -29,20 +28,25 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
             switch (handleType)
             {
                 case HandleType.TypeDefinition:
-                    {
-                        TypeDefinitionHandle typeDefinitionHandle = typeDefOrForwarderHandle.ToTypeDefinitionHandle(reader);
-                        return typeDefinitionHandle.ResolveTypeDefinition(reader);
-                    }
+                {
+                    TypeDefinitionHandle typeDefinitionHandle =
+                        typeDefOrForwarderHandle.ToTypeDefinitionHandle(reader);
+                    return typeDefinitionHandle.ResolveTypeDefinition(reader);
+                }
                 case HandleType.TypeForwarder:
-                    {
-                        TypeForwarder typeForwarder = typeDefOrForwarderHandle.ToTypeForwarderHandle(reader).GetTypeForwarder(reader);
-                        ScopeReferenceHandle destinationScope = typeForwarder.Scope;
-                        RuntimeAssemblyName destinationAssemblyName = destinationScope.ToRuntimeAssemblyName(reader);
-                        RuntimeAssemblyInfo destinationAssembly = RuntimeAssemblyInfo.GetRuntimeAssemblyIfExists(destinationAssemblyName);
-                        if (destinationAssembly == null)
-                            return null;
-                        return destinationAssembly.GetTypeCoreCaseInsensitive(fullName);
-                    }
+                {
+                    TypeForwarder typeForwarder = typeDefOrForwarderHandle
+                        .ToTypeForwarderHandle(reader)
+                        .GetTypeForwarder(reader);
+                    ScopeReferenceHandle destinationScope = typeForwarder.Scope;
+                    RuntimeAssemblyName destinationAssemblyName =
+                        destinationScope.ToRuntimeAssemblyName(reader);
+                    RuntimeAssemblyInfo destinationAssembly =
+                        RuntimeAssemblyInfo.GetRuntimeAssemblyIfExists(destinationAssemblyName);
+                    if (destinationAssembly == null)
+                        return null;
+                    return destinationAssembly.GetTypeCoreCaseInsensitive(fullName);
+                }
                 default:
                     throw new InvalidOperationException();
             }
@@ -76,8 +80,10 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
             {
                 MetadataReader reader = scope.Reader;
                 ScopeDefinition scopeDefinition = scope.ScopeDefinition;
-                IEnumerable<NamespaceDefinitionHandle> topLevelNamespaceHandles = new NamespaceDefinitionHandle[] { scopeDefinition.RootNamespaceDefinition };
-                IEnumerable<NamespaceDefinitionHandle> allNamespaceHandles = reader.GetTransitiveNamespaces(topLevelNamespaceHandles);
+                IEnumerable<NamespaceDefinitionHandle> topLevelNamespaceHandles =
+                    new NamespaceDefinitionHandle[] { scopeDefinition.RootNamespaceDefinition };
+                IEnumerable<NamespaceDefinitionHandle> allNamespaceHandles =
+                    reader.GetTransitiveNamespaces(topLevelNamespaceHandles);
                 foreach (NamespaceDefinitionHandle namespaceHandle in allNamespaceHandles)
                 {
                     string ns = namespaceHandle.ToNamespaceName(reader);
@@ -85,19 +91,34 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
                         ns += ".";
                     ns = ns.ToLowerInvariant();
 
-                    NamespaceDefinition namespaceDefinition = namespaceHandle.GetNamespaceDefinition(reader);
-                    foreach (TypeDefinitionHandle typeDefinitionHandle in namespaceDefinition.TypeDefinitions)
+                    NamespaceDefinition namespaceDefinition =
+                        namespaceHandle.GetNamespaceDefinition(reader);
+                    foreach (
+                        TypeDefinitionHandle typeDefinitionHandle in namespaceDefinition.TypeDefinitions
+                    )
                     {
-                        string fullName = ns + typeDefinitionHandle.GetTypeDefinition(reader).Name.GetString(reader).ToLowerInvariant();
+                        string fullName =
+                            ns
+                            + typeDefinitionHandle
+                                .GetTypeDefinition(reader)
+                                .Name.GetString(reader)
+                                .ToLowerInvariant();
                         if (!dict.TryGetValue(fullName, out _))
                         {
                             dict.Add(fullName, new QHandle(reader, typeDefinitionHandle));
                         }
                     }
 
-                    foreach (TypeForwarderHandle typeForwarderHandle in namespaceDefinition.TypeForwarders)
+                    foreach (
+                        TypeForwarderHandle typeForwarderHandle in namespaceDefinition.TypeForwarders
+                    )
                     {
-                        string fullName = ns + typeForwarderHandle.GetTypeForwarder(reader).Name.GetString(reader).ToLowerInvariant();
+                        string fullName =
+                            ns
+                            + typeForwarderHandle
+                                .GetTypeForwarder(reader)
+                                .Name.GetString(reader)
+                                .ToLowerInvariant();
                         if (!dict.TryGetValue(fullName, out _))
                         {
                             dict.Add(fullName, new QHandle(reader, typeForwarderHandle));

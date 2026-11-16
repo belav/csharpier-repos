@@ -11,16 +11,16 @@ namespace System.Data.Common.QueryCache
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Common.Internal.Materialization;
+    using System.Data.Entity.Util;
     using System.Data.EntityClient;
     using System.Data.Metadata.Edm;
     using System.Data.Objects.Internal;
     using System.Diagnostics;
     using System.Threading;
-    using System.Data.Common.Internal.Materialization;
-    using System.Data.Entity.Util;
 
     /// <summary>
-    /// Provides Query Execution Plan Caching Service 
+    /// Provides Query Execution Plan Caching Service
     /// </summary>
     /// <remarks>
     /// Thread safe.
@@ -44,7 +44,7 @@ namespace System.Data.Common.QueryCache
         #endregion
 
         #region Fields
-        
+
         /// <summary>
         /// cache lock object
         /// </summary>
@@ -53,7 +53,10 @@ namespace System.Data.Common.QueryCache
         /// <summary>
         /// cache data
         /// </summary>
-        private readonly Dictionary<QueryCacheKey, QueryCacheEntry> _cacheData = new Dictionary<QueryCacheKey, QueryCacheEntry>(32);
+        private readonly Dictionary<QueryCacheKey, QueryCacheEntry> _cacheData = new Dictionary<
+            QueryCacheKey,
+            QueryCacheEntry
+        >(32);
 
         /// <summary>
         /// soft maximum number of entries in the cache
@@ -66,12 +69,12 @@ namespace System.Data.Common.QueryCache
         private readonly int _sweepingTriggerHighMark;
 
         /// <summary>
-        /// Eviction timer 
+        /// Eviction timer
         /// </summary>
         private readonly EvictionTimer _evictionTimer;
 
         #endregion
-        
+
         #region Construction and Initialization
 
         /// <summary>
@@ -80,7 +83,11 @@ namespace System.Data.Common.QueryCache
         /// <returns>A new instance of <see cref="QueryCacheManager"/> configured with default entry count, load factor and recycle period</returns>
         internal static QueryCacheManager Create()
         {
-            return new QueryCacheManager(AppSettings.QueryCacheSize, DefaultHighMarkPercentageFactor, DefaultRecyclerPeriodInMilliseconds);
+            return new QueryCacheManager(
+                AppSettings.QueryCacheSize,
+                DefaultHighMarkPercentageFactor,
+                DefaultRecyclerPeriodInMilliseconds
+            );
         }
 
         /// <summary>
@@ -101,7 +108,10 @@ namespace System.Data.Common.QueryCache
         private QueryCacheManager(int maximumSize, float loadFactor, int recycleMillis)
         {
             Debug.Assert(maximumSize > 0, "Maximum size must be greater than zero");
-            Debug.Assert(loadFactor > 0 && loadFactor <= 1, "Load factor must be greater than 0.0 and less than or equal to 1.0");
+            Debug.Assert(
+                loadFactor > 0 && loadFactor <= 1,
+                "Load factor must be greater than 0.0 and less than or equal to 1.0"
+            );
             Debug.Assert(recycleMillis >= 0, "Recycle period in milliseconds must not be negative");
 
             //
@@ -117,9 +127,9 @@ namespace System.Data.Common.QueryCache
             //
             // Initialize Recycler
             //
-            this._evictionTimer = new EvictionTimer(this, recycleMillis);           
+            this._evictionTimer = new EvictionTimer(this, recycleMillis);
         }
-                
+
         #endregion
 
         #region 'External' interface
@@ -135,7 +145,10 @@ namespace System.Data.Common.QueryCache
         /// was added instead.
         /// </param>
         /// <returns>true if the output entry was already found; false if it had to be added.</returns>
-        internal bool TryLookupAndAdd(QueryCacheEntry inQueryCacheEntry, out QueryCacheEntry outQueryCacheEntry)
+        internal bool TryLookupAndAdd(
+            QueryCacheEntry inQueryCacheEntry,
+            out QueryCacheEntry outQueryCacheEntry
+        )
         {
             Debug.Assert(null != inQueryCacheEntry, "qEntry must not be null");
 
@@ -143,7 +156,9 @@ namespace System.Data.Common.QueryCache
 
             lock (_cacheDataLock)
             {
-                if (!_cacheData.TryGetValue(inQueryCacheEntry.QueryCacheKey, out outQueryCacheEntry))
+                if (
+                    !_cacheData.TryGetValue(inQueryCacheEntry.QueryCacheKey, out outQueryCacheEntry)
+                )
                 {
                     //
                     // add entry to cache data
@@ -205,14 +220,17 @@ namespace System.Data.Common.QueryCache
         #endregion
 
         #region Private Members
-        
+
         /// <summary>
         /// lookup service
         /// </summary>
         /// <param name="queryCacheKey"></param>
         /// <param name="queryCacheEntry"></param>
         /// <returns>true if cache hit, false if cache miss</returns>
-        private bool TryInternalCacheLookup( QueryCacheKey queryCacheKey, out QueryCacheEntry queryCacheEntry )
+        private bool TryInternalCacheLookup(
+            QueryCacheKey queryCacheKey,
+            out QueryCacheEntry queryCacheEntry
+        )
         {
             Debug.Assert(null != queryCacheKey, "queryCacheKey must not be null");
 
@@ -238,14 +256,13 @@ namespace System.Data.Common.QueryCache
                 //
                 queryCacheEntry.QueryCacheKey.UpdateHit();
             }
-            
+
             return bHit;
         }
 
-
         /// <summary>
         /// Recycler handler. This method is called directly by the eviction timer.
-        /// It should take no action beyond invoking the <see cref="SweepCache"/> method on the 
+        /// It should take no action beyond invoking the <see cref="SweepCache"/> method on the
         /// cache manager instance passed as <paramref name="state"/>.
         /// </summary>
         /// <param name="state">The cache manager instance on which the 'recycle' handler should be invoked</param>
@@ -257,7 +274,7 @@ namespace System.Data.Common.QueryCache
         /// <summary>
         /// Aging factor
         /// </summary>
-        private static readonly int[] _agingFactor = {1,1,2,4,8,16};
+        private static readonly int[] _agingFactor = { 1, 1, 2, 4, 8, 16 };
         private static readonly int AgingMaxIndex = _agingFactor.Length - 1;
 
         /// <summary>
@@ -307,7 +324,8 @@ namespace System.Data.Common.QueryCache
                                 agingIndex = AgingMaxIndex;
                             }
                             cacheKeys[i].AgingIndex = agingIndex;
-                            cacheKeys[i].HitCount = cacheKeys[i].HitCount >> _agingFactor[agingIndex];
+                            cacheKeys[i].HitCount =
+                                cacheKeys[i].HitCount >> _agingFactor[agingIndex];
                         }
                     }
                 }
@@ -323,11 +341,11 @@ namespace System.Data.Common.QueryCache
                 this._evictionTimer.Resume();
             }
         }
-              
+
         #endregion
 
         #region IDisposable Members
-        
+
         /// <summary>
         /// Dispose instance
         /// </summary>
@@ -376,11 +394,16 @@ namespace System.Data.Common.QueryCache
                 {
                     if (_timer == null)
                     {
-                        this._timer = new Timer(QueryCacheManager.CacheRecyclerHandler, _cacheManager, _period, _period);
+                        this._timer = new Timer(
+                            QueryCacheManager.CacheRecyclerHandler,
+                            _cacheManager,
+                            _period,
+                            _period
+                        );
                     }
                 }
             }
-                        
+
             /// <summary>
             /// Permanently stops the eviction timer.
             /// It will no longer generate periodic callbacks and further calls to <see cref="Suspend"/>, <see cref="Resume"/>, or <see cref="Stop"/>,
@@ -412,7 +435,7 @@ namespace System.Data.Common.QueryCache
             }
 
             /// <summary>
-            /// Pauses the operation of the eviction timer. 
+            /// Pauses the operation of the eviction timer.
             /// </summary>
             /// <returns>
             ///   If this eviction timer has already been stopped (using the <see cref="Stop"/> method), returns <c>false</c>;

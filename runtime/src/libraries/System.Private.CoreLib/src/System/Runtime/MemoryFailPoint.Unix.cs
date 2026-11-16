@@ -12,7 +12,10 @@ namespace System.Runtime
             return IntPtr.Size == 4 ? uint.MaxValue : ulong.MaxValue;
         }
 
-        private static bool CheckForAvailableMemory(out ulong availPageFile, out ulong totalAddressSpaceFree)
+        private static bool CheckForAvailableMemory(
+            out ulong availPageFile,
+            out ulong totalAddressSpaceFree
+        )
         {
             // TODO: Implement
             availPageFile = 0;

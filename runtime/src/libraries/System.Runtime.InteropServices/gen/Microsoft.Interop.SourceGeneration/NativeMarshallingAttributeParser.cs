@@ -11,17 +11,30 @@ namespace Microsoft.Interop
         private readonly Compilation _compilation;
         private readonly GeneratorDiagnosticsBag _diagnostics;
 
-        public NativeMarshallingAttributeParser(Compilation compilation, GeneratorDiagnosticsBag diagnostics)
+        public NativeMarshallingAttributeParser(
+            Compilation compilation,
+            GeneratorDiagnosticsBag diagnostics
+        )
         {
             _compilation = compilation;
             _diagnostics = diagnostics;
         }
 
-        public bool CanParseAttributeType(INamedTypeSymbol attributeType) => attributeType.ToDisplayString() == TypeNames.NativeMarshallingAttribute;
+        public bool CanParseAttributeType(INamedTypeSymbol attributeType) =>
+            attributeType.ToDisplayString() == TypeNames.NativeMarshallingAttribute;
 
-        public MarshallingInfo? ParseAttribute(AttributeData attributeData, ITypeSymbol type, int indirectionDepth, UseSiteAttributeProvider useSiteAttributes, GetMarshallingInfoCallback marshallingInfoCallback)
+        public MarshallingInfo? ParseAttribute(
+            AttributeData attributeData,
+            ITypeSymbol type,
+            int indirectionDepth,
+            UseSiteAttributeProvider useSiteAttributes,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        )
         {
-            Debug.Assert(attributeData.AttributeClass!.ToDisplayString() == TypeNames.NativeMarshallingAttribute);
+            Debug.Assert(
+                attributeData.AttributeClass!.ToDisplayString()
+                    == TypeNames.NativeMarshallingAttribute
+            );
             CountInfo countInfo = NoCountInfo.Instance;
             if (useSiteAttributes.TryGetUseSiteAttributeInfo(indirectionDepth, out var useSiteInfo))
             {
@@ -43,7 +56,7 @@ namespace Microsoft.Interop
                 countInfo,
                 _diagnostics,
                 _compilation
-                );
+            );
         }
     }
 }

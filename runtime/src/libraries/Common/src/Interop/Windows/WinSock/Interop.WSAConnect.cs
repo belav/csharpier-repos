@@ -17,7 +17,8 @@ internal static partial class Interop
             IntPtr inBuffer,
             IntPtr outBuffer,
             IntPtr sQOS,
-            IntPtr gQOS);
+            IntPtr gQOS
+        );
 
         internal static SocketError WSAConnect(
             SafeSocketHandle socketHandle,
@@ -25,7 +26,16 @@ internal static partial class Interop
             IntPtr inBuffer,
             IntPtr outBuffer,
             IntPtr sQOS,
-            IntPtr gQOS) =>
-            WSAConnect(socketHandle, socketAddress, socketAddress.Length, inBuffer, outBuffer, sQOS, gQOS);
+            IntPtr gQOS
+        ) =>
+            WSAConnect(
+                socketHandle,
+                socketAddress,
+                socketAddress.Length,
+                inBuffer,
+                outBuffer,
+                sQOS,
+                gQOS
+            );
     }
 }

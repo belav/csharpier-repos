@@ -26,28 +26,29 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.Collections;
 using NUnit.Framework;
 
 namespace MonoTests.System.Collections
 {
-	[TestFixture]
-	public class StructuralComparisonsTest
-	{
-		[Test]
-		public void EqualsTest ()
-		{
-			int[] a1 = new[] { 9, 1, 3, 4 };
-			int[] a2 = new[] { 9, 1, 3, 4 };
+    [TestFixture]
+    public class StructuralComparisonsTest
+    {
+        [Test]
+        public void EqualsTest()
+        {
+            int[] a1 = new[] { 9, 1, 3, 4 };
+            int[] a2 = new[] { 9, 1, 3, 4 };
 
-			Assert.IsTrue (StructuralComparisons.StructuralEqualityComparer.Equals (a1, a2), "#1");
-			Assert.IsFalse (StructuralComparisons.StructuralEqualityComparer.Equals (null, a2), "#2");
-			Assert.IsFalse (StructuralComparisons.StructuralEqualityComparer.Equals (a1, null), "#3");
-			Assert.IsTrue (StructuralComparisons.StructuralEqualityComparer.Equals (null, null), "#4");
-			Assert.IsTrue (StructuralComparisons.StructuralEqualityComparer.Equals (4, 4), "#5");
-			Assert.IsFalse (StructuralComparisons.StructuralEqualityComparer.Equals (4, 5), "#6");
-		}
-	}
+            Assert.IsTrue(StructuralComparisons.StructuralEqualityComparer.Equals(a1, a2), "#1");
+            Assert.IsFalse(StructuralComparisons.StructuralEqualityComparer.Equals(null, a2), "#2");
+            Assert.IsFalse(StructuralComparisons.StructuralEqualityComparer.Equals(a1, null), "#3");
+            Assert.IsTrue(
+                StructuralComparisons.StructuralEqualityComparer.Equals(null, null),
+                "#4"
+            );
+            Assert.IsTrue(StructuralComparisons.StructuralEqualityComparer.Equals(4, 4), "#5");
+            Assert.IsFalse(StructuralComparisons.StructuralEqualityComparer.Equals(4, 5), "#6");
+        }
+    }
 }
-

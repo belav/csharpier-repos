@@ -30,8 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ImmutableArray<Alias> aliases,
             MethodSymbol containingMethod,
             EETypeNameDecoder typeNameDecoder,
-            Binder next) :
-            base(next)
+            Binder next
+        )
+            : base(next)
         {
             _syntax = syntax;
             _containingMethod = containingMethod;
@@ -47,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     typeNameDecoder,
                     containingMethod,
                     sourceAssembly,
-                    alias);
+                    alias
+                );
                 aliasesBuilder.Add(local);
 
                 if (alias.Kind == DkmClrAliasKind.ReturnValue)
@@ -67,9 +69,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             LookupOptions options,
             Binder originalBinder,
             bool diagnose,
-            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
-            if ((options & (LookupOptions.NamespaceAliasesOnly | LookupOptions.NamespacesOrTypesOnly | LookupOptions.LabelsOnly)) != 0)
+            if (
+                (
+                    options
+                    & (
+                        LookupOptions.NamespaceAliasesOnly
+                        | LookupOptions.NamespacesOrTypesOnly
+                        | LookupOptions.LabelsOnly
+                    )
+                ) != 0
+            )
             {
                 return;
             }
@@ -78,29 +90,74 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             {
                 var valueText = name.Substring(2);
                 ulong address;
-                if (!ulong.TryParse(valueText, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture, out address))
+                if (
+                    !ulong.TryParse(
+                        valueText,
+                        NumberStyles.AllowHexSpecifier,
+                        CultureInfo.InvariantCulture,
+                        out address
+                    )
+                )
                 {
                     // Invalid value should have been caught by Lexer.
                     throw ExceptionUtilities.UnexpectedValue(valueText);
                 }
-                var local = new ObjectAddressLocalSymbol(_containingMethod, name, this.Compilation.GetSpecialType(SpecialType.System_Object), address);
-                result.MergeEqual(this.CheckViability(local, arity, options, null, diagnose, ref useSiteInfo, basesBeingResolved));
+                var local = new ObjectAddressLocalSymbol(
+                    _containingMethod,
+                    name,
+                    this.Compilation.GetSpecialType(SpecialType.System_Object),
+                    address
+                );
+                result.MergeEqual(
+                    this.CheckViability(
+                        local,
+                        arity,
+                        options,
+                        null,
+                        diagnose,
+                        ref useSiteInfo,
+                        basesBeingResolved
+                    )
+                );
             }
             else
             {
                 LocalSymbol lowercaseReturnValueAlias;
                 if (_lowercaseReturnValueAliases.TryGetValue(name, out lowercaseReturnValueAlias))
                 {
-                    result.MergeEqual(this.CheckViability(lowercaseReturnValueAlias, arity, options, null, diagnose, ref useSiteInfo, basesBeingResolved));
+                    result.MergeEqual(
+                        this.CheckViability(
+                            lowercaseReturnValueAlias,
+                            arity,
+                            options,
+                            null,
+                            diagnose,
+                            ref useSiteInfo,
+                            basesBeingResolved
+                        )
+                    );
                 }
                 else
                 {
-                    base.LookupSymbolsInSingleBinder(result, name, arity, basesBeingResolved, options, originalBinder, diagnose, ref useSiteInfo);
+                    base.LookupSymbolsInSingleBinder(
+                        result,
+                        name,
+                        arity,
+                        basesBeingResolved,
+                        options,
+                        originalBinder,
+                        diagnose,
+                        ref useSiteInfo
+                    );
                 }
             }
         }
 
-        internal sealed override void AddLookupSymbolsInfoInSingleBinder(LookupSymbolsInfo info, LookupOptions options, Binder originalBinder)
+        internal sealed override void AddLookupSymbolsInfoInSingleBinder(
+            LookupSymbolsInfo info,
+            LookupOptions options,
+            Binder originalBinder
+        )
         {
             throw new NotImplementedException();
         }
@@ -110,12 +167,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return _aliases;
         }
 
-        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(SyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
+            SyntaxNode scopeDesignator
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(CSharpSyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
+            CSharpSyntaxNode scopeDesignator
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }

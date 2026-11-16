@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
@@ -26,34 +25,22 @@ namespace Internal.IL.Stubs
 
         public MethodDesc TargetMethod
         {
-            get
-            {
-                return _targetMethod;
-            }
+            get { return _targetMethod; }
         }
 
         public PInvokeMetadata PInvokeMetadata
         {
-            get
-            {
-                return _targetMethod.GetPInvokeMethodMetadata();
-            }
+            get { return _targetMethod.GetPInvokeMethodMetadata(); }
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _targetMethod.Context;
-            }
+            get { return _targetMethod.Context; }
         }
 
         public override TypeDesc FieldType
         {
-            get
-            {
-                return Context.GetHelperType("InteropHelpers").GetNestedType("MethodFixupCell");
-            }
+            get { return Context.GetHelperType("InteropHelpers").GetNestedType("MethodFixupCell"); }
         }
 
         public override EmbeddedSignatureData[] GetEmbeddedSignatureData() => null;
@@ -62,50 +49,32 @@ namespace Internal.IL.Stubs
 
         public override bool HasRva
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool IsInitOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsLiteral
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsStatic
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool IsThreadStatic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override DefType OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName)
@@ -115,10 +84,7 @@ namespace Internal.IL.Stubs
 
         public override string Name
         {
-            get
-            {
-                return _targetMethod.Name;
-            }
+            get { return _targetMethod.Name; }
         }
     }
 }

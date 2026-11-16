@@ -9,14 +9,11 @@ public class ManyToManyTrackingSqliteTest
     : ManyToManyTrackingRelationalTestBase<ManyToManyTrackingSqliteTest.ManyToManyTrackingSqliteFixture>
 {
     public ManyToManyTrackingSqliteTest(ManyToManyTrackingSqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class ManyToManyTrackingSqliteFixture : ManyToManyTrackingRelationalFixture
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
@@ -43,7 +40,9 @@ public class ManyToManyTrackingSqliteTest
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             modelBuilder
-                .SharedTypeEntity<Dictionary<string, object>>("UnidirectionalJoinOneToThreePayloadFullShared")
+                .SharedTypeEntity<Dictionary<string, object>>(
+                    "UnidirectionalJoinOneToThreePayloadFullShared"
+                )
                 .IndexerProperty<string>("Payload")
                 .HasDefaultValue("Generated");
 

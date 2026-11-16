@@ -15,7 +15,11 @@ namespace System.Net.Http
             _poolManager = poolManager;
         }
 
-        internal override ValueTask<HttpResponseMessage> SendAsync(HttpRequestMessage request, bool async, CancellationToken cancellationToken)
+        internal override ValueTask<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            bool async,
+            CancellationToken cancellationToken
+        )
         {
             return _poolManager.SendAsync(request, async, doRequestAuth: true, cancellationToken);
         }

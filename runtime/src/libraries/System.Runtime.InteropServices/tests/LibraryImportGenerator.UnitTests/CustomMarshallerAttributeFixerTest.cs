@@ -8,22 +8,32 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Interop.UnitTests.Verifiers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.Interop.Analyzers;
+using Microsoft.Interop.UnitTests.Verifiers;
 using static Microsoft.Interop.Analyzers.CustomMarshallerAttributeAnalyzer;
 
 namespace LibraryImportGenerator.UnitTests
 {
-    internal class CustomMarshallerAttributeFixerTest : CSharpCodeFixVerifier<CustomMarshallerAttributeAnalyzer, CustomMarshallerAttributeFixer>.Test
+    internal class CustomMarshallerAttributeFixerTest
+        : CSharpCodeFixVerifier<
+            CustomMarshallerAttributeAnalyzer,
+            CustomMarshallerAttributeFixer
+        >.Test
     {
         // Sort the diagnostics in a deterministic order even when they only differ by diagnostic message.
         // In particular, sort the equivalent subgroups by their diagnostic descriptor in the order that the fixer's fix-all provider
         // will add the methods.
         // This ensures that the iterative code-fix test will produce the same (deterministic) output as the fix-all tests.
-        protected override ImmutableArray<(Project project, Diagnostic diagnostic)> SortDistinctDiagnostics(IEnumerable<(Project project, Diagnostic diagnostic)> diagnostics)
-            => diagnostics.OrderBy(d => d.diagnostic.Location.GetLineSpan().Path, StringComparer.Ordinal)
+        protected override ImmutableArray<(
+            Project project,
+            Diagnostic diagnostic
+        )> SortDistinctDiagnostics(
+            IEnumerable<(Project project, Diagnostic diagnostic)> diagnostics
+        ) =>
+            diagnostics
+                .OrderBy(d => d.diagnostic.Location.GetLineSpan().Path, StringComparer.Ordinal)
                 .ThenBy(d => d.diagnostic.Location.SourceSpan.Start)
                 .ThenBy(d => d.diagnostic.Location.SourceSpan.End)
                 .ThenBy(d => d.diagnostic.Id)
@@ -40,9 +50,15 @@ namespace LibraryImportGenerator.UnitTests
             /// <param name="descriptor"></param>
             /// <param name="expected"></param>
             /// <returns></returns>
-            private static bool IsEquivalentDescriptor(DiagnosticDescriptor descriptor, DiagnosticDescriptor expected)
+            private static bool IsEquivalentDescriptor(
+                DiagnosticDescriptor descriptor,
+                DiagnosticDescriptor expected
+            )
             {
-                return descriptor.Equals(expected) || descriptor.Equals(DefaultMarshalModeDiagnostics.GetDefaultMarshalModeDiagnostic(expected));
+                return descriptor.Equals(expected)
+                    || descriptor.Equals(
+                        DefaultMarshalModeDiagnostics.GetDefaultMarshalModeDiagnostic(expected)
+                    );
             }
 
             private static int GetOrderIndexFromDescriptor(DiagnosticDescriptor descriptor)
@@ -60,9 +76,17 @@ namespace LibraryImportGenerator.UnitTests
                 // - Free
                 // This order corresponds to the order that the fix-all provider will add the methods.
 
-                if (IsEquivalentDescriptor(descriptor, StatefulMarshallerRequiresFromManagedRule)
-                    || IsEquivalentDescriptor(descriptor, StatelessValueInRequiresConvertToUnmanagedRule)
-                    || IsEquivalentDescriptor(descriptor, StatelessLinearCollectionRequiresTwoParameterAllocateContainerForUnmanagedElementsRule))
+                if (
+                    IsEquivalentDescriptor(descriptor, StatefulMarshallerRequiresFromManagedRule)
+                    || IsEquivalentDescriptor(
+                        descriptor,
+                        StatelessValueInRequiresConvertToUnmanagedRule
+                    )
+                    || IsEquivalentDescriptor(
+                        descriptor,
+                        StatelessLinearCollectionRequiresTwoParameterAllocateContainerForUnmanagedElementsRule
+                    )
+                )
                 {
                     return 0;
                 }
@@ -70,9 +94,14 @@ namespace LibraryImportGenerator.UnitTests
                 {
                     return 1;
                 }
-                if (IsEquivalentDescriptor(descriptor, StatefulMarshallerRequiresFromUnmanagedRule)
+                if (
+                    IsEquivalentDescriptor(descriptor, StatefulMarshallerRequiresFromUnmanagedRule)
                     || IsEquivalentDescriptor(descriptor, StatelessRequiresConvertToManagedRule)
-                    || IsEquivalentDescriptor(descriptor, StatelessLinearCollectionRequiresTwoParameterAllocateContainerForManagedElementsRule))
+                    || IsEquivalentDescriptor(
+                        descriptor,
+                        StatelessLinearCollectionRequiresTwoParameterAllocateContainerForManagedElementsRule
+                    )
+                )
                 {
                     return 2;
                 }
@@ -80,26 +109,57 @@ namespace LibraryImportGenerator.UnitTests
                 {
                     return 3;
                 }
-                if (IsEquivalentDescriptor(descriptor, CallerAllocFromManagedMustHaveBufferSizeRule)
-                    || IsEquivalentDescriptor(descriptor, StatelessLinearCollectionCallerAllocFromManagedMustHaveBufferSizeRule))
+                if (
+                    IsEquivalentDescriptor(descriptor, CallerAllocFromManagedMustHaveBufferSizeRule)
+                    || IsEquivalentDescriptor(
+                        descriptor,
+                        StatelessLinearCollectionCallerAllocFromManagedMustHaveBufferSizeRule
+                    )
+                )
                 {
                     return 4;
                 }
-                if (IsEquivalentDescriptor(descriptor, StatelessLinearCollectionRequiresTwoParameterAllocateContainerForUnmanagedElementsRule))
+                if (
+                    IsEquivalentDescriptor(
+                        descriptor,
+                        StatelessLinearCollectionRequiresTwoParameterAllocateContainerForUnmanagedElementsRule
+                    )
+                )
                 {
                     return 5;
                 }
-                if (IsEquivalentDescriptor(descriptor, StatelessLinearCollectionRequiresTwoParameterAllocateContainerForManagedElementsRule))
+                if (
+                    IsEquivalentDescriptor(
+                        descriptor,
+                        StatelessLinearCollectionRequiresTwoParameterAllocateContainerForManagedElementsRule
+                    )
+                )
                 {
                     return 6;
                 }
-                if (IsEquivalentDescriptor(descriptor, LinearCollectionInRequiresCollectionMethodsRule)
-                    || IsEquivalentDescriptor(descriptor, StatelessLinearCollectionInRequiresCollectionMethodsRule))
+                if (
+                    IsEquivalentDescriptor(
+                        descriptor,
+                        LinearCollectionInRequiresCollectionMethodsRule
+                    )
+                    || IsEquivalentDescriptor(
+                        descriptor,
+                        StatelessLinearCollectionInRequiresCollectionMethodsRule
+                    )
+                )
                 {
                     return 7;
                 }
-                if (IsEquivalentDescriptor(descriptor, LinearCollectionOutRequiresCollectionMethodsRule)
-                    || IsEquivalentDescriptor(descriptor, StatelessLinearCollectionOutRequiresCollectionMethodsRule))
+                if (
+                    IsEquivalentDescriptor(
+                        descriptor,
+                        LinearCollectionOutRequiresCollectionMethodsRule
+                    )
+                    || IsEquivalentDescriptor(
+                        descriptor,
+                        StatelessLinearCollectionOutRequiresCollectionMethodsRule
+                    )
+                )
                 {
                     return 8;
                 }
@@ -127,7 +187,11 @@ namespace LibraryImportGenerator.UnitTests
             }
         }
 
-        public static async Task VerifyCodeFixAsync(string source, string fixedSource, params DiagnosticResult[] diagnostics)
+        public static async Task VerifyCodeFixAsync(
+            string source,
+            string fixedSource,
+            params DiagnosticResult[] diagnostics
+        )
         {
             CustomMarshallerAttributeFixerTest test = new()
             {

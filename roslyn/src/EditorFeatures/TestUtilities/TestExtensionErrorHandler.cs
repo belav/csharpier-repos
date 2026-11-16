@@ -25,36 +25,44 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestExtensionErrorHandler()
-        {
-        }
+        public TestExtensionErrorHandler() { }
 
         public void HandleError(object sender, Exception exception)
         {
             // Work around bug that is fixed in https://devdiv.visualstudio.com/DevDiv/_git/VS-Platform/pullrequest/209513
-            if (exception is NullReferenceException &&
-                exception.StackTrace.Contains("SpanTrackingWpfToolTipPresenter"))
+            if (
+                exception is NullReferenceException
+                && exception.StackTrace.Contains("SpanTrackingWpfToolTipPresenter")
+            )
             {
                 return;
             }
 
             // Work around for https://github.com/dotnet/roslyn/issues/42982
-            if (exception is NullReferenceException &&
-                exception.StackTrace.Contains("Microsoft.CodeAnalysis.Completion.Providers.AbstractEmbeddedLanguageCompletionProvider.GetLanguageProviders"))
+            if (
+                exception is NullReferenceException
+                && exception.StackTrace.Contains(
+                    "Microsoft.CodeAnalysis.Completion.Providers.AbstractEmbeddedLanguageCompletionProvider.GetLanguageProviders"
+                )
+            )
             {
                 return;
             }
 
             // Work around for https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1091056
-            if (exception is InvalidOperationException &&
-                exception.StackTrace.Contains("Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Implementation.CompletionTelemetryHost"))
+            if (
+                exception is InvalidOperationException
+                && exception.StackTrace.Contains(
+                    "Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Implementation.CompletionTelemetryHost"
+                )
+            )
             {
                 return;
             }
 
             // This exception is unexpected and as such we want the containing test case to
             // fail. Unfortuntately throwing an exception here is not going to help because
-            // the editor is going to catch and swallow it. Store it here and wait for the 
+            // the editor is going to catch and swallow it. Store it here and wait for the
             // containing workspace to notice it and throw.
             _exceptions = _exceptions.Add(exception);
         }

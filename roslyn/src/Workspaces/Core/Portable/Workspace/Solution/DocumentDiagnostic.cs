@@ -6,7 +6,11 @@
 
 namespace Microsoft.CodeAnalysis
 {
-    public class DocumentDiagnostic(WorkspaceDiagnosticKind kind, string message, DocumentId documentId) : WorkspaceDiagnostic(kind, message)
+    public class DocumentDiagnostic(
+        WorkspaceDiagnosticKind kind,
+        string message,
+        DocumentId documentId
+    ) : WorkspaceDiagnostic(kind, message)
     {
         public DocumentId DocumentId { get; } = documentId;
     }

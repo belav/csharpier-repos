@@ -44,9 +44,11 @@ namespace Microsoft.Extensions.Options
             if (result?.ErrorMessage is not null)
             {
                 string joinedMembers = string.Join(MemberSeparatorString, result.MemberNames);
-                Errors.Add(joinedMembers.Length != 0
-                    ? $"{joinedMembers}: {result.ErrorMessage}"
-                    : result.ErrorMessage);
+                Errors.Add(
+                    joinedMembers.Length != 0
+                        ? $"{joinedMembers}: {result.ErrorMessage}"
+                        : result.ErrorMessage
+                );
             }
         }
 

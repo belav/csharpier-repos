@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 
-
-
 namespace System.Workflow.ComponentModel
 {
     [Flags]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum DependencyPropertyOptions : byte
     {
         Default = 1,
@@ -14,15 +14,16 @@ namespace System.Workflow.ComponentModel
         Optional = 4,
         Metadata = 8,
         NonSerialized = 16,
-        DelegateProperty = 32
+        DelegateProperty = 32,
     }
-
 
     //overrides so you dont need to do inheritence
     public delegate object GetValueOverride(DependencyObject d);
     public delegate void SetValueOverride(DependencyObject d, object value);
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class PropertyMetadata
     {
         private Attribute[] attributes = null;
@@ -37,57 +38,56 @@ namespace System.Workflow.ComponentModel
         public PropertyMetadata() { }
 
         public PropertyMetadata(object defaultValue)
-            : this(defaultValue, default(DependencyPropertyOptions))
-        {
-
-        }
+            : this(defaultValue, default(DependencyPropertyOptions)) { }
 
         public PropertyMetadata(DependencyPropertyOptions options)
-            : this(null, options)
-        {
+            : this(null, options) { }
 
-        }
         public PropertyMetadata(object defaultValue, DependencyPropertyOptions options)
-            : this(defaultValue, options, null, null, new Attribute[] { })
-        {
+            : this(defaultValue, options, null, null, new Attribute[] { }) { }
 
-        }
         public PropertyMetadata(object defaultValue, params Attribute[] attributes)
-            : this(defaultValue, default(DependencyPropertyOptions), null, null, attributes)
-        {
+            : this(defaultValue, default(DependencyPropertyOptions), null, null, attributes) { }
 
-        }
-        public PropertyMetadata(object defaultValue, DependencyPropertyOptions options, params Attribute[] attributes)
-            : this(defaultValue, options, null, null, attributes)
-        {
+        public PropertyMetadata(
+            object defaultValue,
+            DependencyPropertyOptions options,
+            params Attribute[] attributes
+        )
+            : this(defaultValue, options, null, null, attributes) { }
 
-        }
         public PropertyMetadata(DependencyPropertyOptions options, params Attribute[] attributes)
-            : this(null, options, null, null, attributes)
-        {
+            : this(null, options, null, null, attributes) { }
 
-        }
         public PropertyMetadata(params Attribute[] attributes)
-            : this(null, default(DependencyPropertyOptions), null, null, attributes)
-        {
+            : this(null, default(DependencyPropertyOptions), null, null, attributes) { }
 
-        }
+        public PropertyMetadata(
+            object defaultValue,
+            DependencyPropertyOptions options,
+            GetValueOverride getValueOverride,
+            SetValueOverride setValueOverride
+        )
+            : this(defaultValue, options, getValueOverride, setValueOverride, new Attribute[] { })
+        { }
 
-        public PropertyMetadata(object defaultValue, DependencyPropertyOptions options, GetValueOverride getValueOverride, SetValueOverride setValueOverride)
-            :
-            this(defaultValue, options, getValueOverride, setValueOverride, new Attribute[] { })
-        {
+        public PropertyMetadata(
+            object defaultValue,
+            DependencyPropertyOptions options,
+            GetValueOverride getValueOverride,
+            SetValueOverride setValueOverride,
+            params Attribute[] attributes
+        )
+            : this(defaultValue, options, getValueOverride, setValueOverride, false, attributes) { }
 
-        }
-
-        public PropertyMetadata(object defaultValue, DependencyPropertyOptions options, GetValueOverride getValueOverride, SetValueOverride setValueOverride, params Attribute[] attributes)
-            : this(defaultValue, options, getValueOverride, setValueOverride, false, attributes)
-        {
-
-        }
-
-
-        internal PropertyMetadata(object defaultValue, DependencyPropertyOptions options, GetValueOverride getValueOverride, SetValueOverride setValueOverride, bool shouldAlwaysCallOverride, params Attribute[] attributes)
+        internal PropertyMetadata(
+            object defaultValue,
+            DependencyPropertyOptions options,
+            GetValueOverride getValueOverride,
+            SetValueOverride setValueOverride,
+            bool shouldAlwaysCallOverride,
+            params Attribute[] attributes
+        )
         {
             this.defaultValue = defaultValue;
             this.options = options;
@@ -121,28 +121,26 @@ namespace System.Workflow.ComponentModel
 
         public object DefaultValue
         {
-            get
-            {
-                return this.defaultValue;
-            }
+            get { return this.defaultValue; }
             set
             {
                 if (this.propertySealed)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_SealedPropertyMetadata));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_SealedPropertyMetadata)
+                    );
 
                 this.defaultValue = value;
             }
         }
         public DependencyPropertyOptions Options
         {
-            get
-            {
-                return this.options;
-            }
+            get { return this.options; }
             set
             {
                 if (this.propertySealed)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_SealedPropertyMetadata));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_SealedPropertyMetadata)
+                    );
 
                 this.options = value;
             }
@@ -150,74 +148,55 @@ namespace System.Workflow.ComponentModel
 
         public bool IsMetaProperty
         {
-            get
-            {
-                return (this.options & DependencyPropertyOptions.Metadata) > 0;
-            }
+            get { return (this.options & DependencyPropertyOptions.Metadata) > 0; }
         }
         public bool IsNonSerialized
         {
-            get
-            {
-                return (this.options & DependencyPropertyOptions.NonSerialized) > 0;
-            }
+            get { return (this.options & DependencyPropertyOptions.NonSerialized) > 0; }
         }
 
         public bool IsReadOnly
         {
-            get
-            {
-                return (this.options & DependencyPropertyOptions.ReadOnly) > 0;
-            }
+            get { return (this.options & DependencyPropertyOptions.ReadOnly) > 0; }
         }
 
         public GetValueOverride GetValueOverride
         {
-            get
-            {
-                return this.getValueOverride;
-            }
+            get { return this.getValueOverride; }
             set
             {
                 if (this.propertySealed)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_SealedPropertyMetadata));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_SealedPropertyMetadata)
+                    );
 
                 this.getValueOverride = value;
             }
         }
         public SetValueOverride SetValueOverride
         {
-            get
-            {
-                return this.setValueOverride;
-            }
+            get { return this.setValueOverride; }
             set
             {
                 if (this.propertySealed)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_SealedPropertyMetadata));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_SealedPropertyMetadata)
+                    );
 
                 this.setValueOverride = value;
             }
         }
 
-        protected virtual void OnApply(DependencyProperty dependencyProperty, Type targetType)
-        {
-        }
+        protected virtual void OnApply(DependencyProperty dependencyProperty, Type targetType) { }
 
         protected bool IsSealed
         {
-            get
-            {
-                return this.propertySealed;
-            }
+            get { return this.propertySealed; }
         }
 
         internal bool ShouldAlwaysCallOverride
         {
-            get
-            {
-                return shouldAlwaysCallOverride;
-            }
+            get { return shouldAlwaysCallOverride; }
         }
 
         internal void Seal(DependencyProperty dependencyProperty, Type targetType)

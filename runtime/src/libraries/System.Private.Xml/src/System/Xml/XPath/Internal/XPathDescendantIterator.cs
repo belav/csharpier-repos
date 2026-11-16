@@ -9,10 +9,19 @@ namespace MS.Internal.Xml.XPath
     {
         private int _level;
 
-        public XPathDescendantIterator(XPathNavigator nav, XPathNodeType type, bool matchSelf) : base(nav, type, matchSelf) { }
-        public XPathDescendantIterator(XPathNavigator nav, string name, string namespaceURI, bool matchSelf) : base(nav, name, namespaceURI, matchSelf) { }
+        public XPathDescendantIterator(XPathNavigator nav, XPathNodeType type, bool matchSelf)
+            : base(nav, type, matchSelf) { }
 
-        public XPathDescendantIterator(XPathDescendantIterator it) : base(it)
+        public XPathDescendantIterator(
+            XPathNavigator nav,
+            string name,
+            string namespaceURI,
+            bool matchSelf
+        )
+            : base(nav, name, namespaceURI, matchSelf) { }
+
+        public XPathDescendantIterator(XPathDescendantIterator it)
+            : base(it)
         {
             _level = it._level;
         }

@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private readonly AnalysisValueProvider<TKey, TValue> _analysisValueProvider;
         private readonly Dictionary<TKey, TValue> _valueMap;
 
-        public CompilationAnalysisValueProvider(AnalysisValueProvider<TKey, TValue> analysisValueProvider)
+        public CompilationAnalysisValueProvider(
+            AnalysisValueProvider<TKey, TValue> analysisValueProvider
+        )
         {
             _analysisValueProvider = analysisValueProvider;
             _valueMap = new Dictionary<TKey, TValue>(analysisValueProvider.KeyComparer);

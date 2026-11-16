@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -34,558 +34,710 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Mono.XBuild.Utilities;
 
-namespace Microsoft.Build.BuildEngine {
-	public class Engine {
-		
-		string			binPath;
-		bool			buildEnabled;
-		Dictionary<string, TaskDatabase> defaultTasksTableByToolsVersion;
-		const string		defaultTasksProjectName = "Microsoft.Common.tasks";
-		EventSource		eventSource;
-		bool			buildStarted;
-		//ToolsetDefinitionLocations toolsetLocations;
-		BuildPropertyGroup	global_properties;
-		//IDictionary		importedProjects;
-		List <ILogger>		loggers;
-		//bool			onlyLogCriticalEvents;
-		Dictionary <string, Project>	projects;
-		string defaultToolsVersion;
+namespace Microsoft.Build.BuildEngine
+{
+    public class Engine
+    {
+        string binPath;
+        bool buildEnabled;
+        Dictionary<string, TaskDatabase> defaultTasksTableByToolsVersion;
+        const string defaultTasksProjectName = "Microsoft.Common.tasks";
+        EventSource eventSource;
+        bool buildStarted;
 
-		// the key here represents the project+target+global_properties set
-		Dictionary <string, ITaskItem[]> builtTargetsOutputByName;
-		Stack<Project> currentlyBuildingProjectsStack;
+        //ToolsetDefinitionLocations toolsetLocations;
+        BuildPropertyGroup global_properties;
 
-		static Engine		globalEngine;
-		static Version		version;
+        //IDictionary		importedProjects;
+        List<ILogger> loggers;
 
-		static Engine ()
-		{
-			version = new Version ("0.1");
-		}
-		
-		public Engine ()
-			: this (ToolLocationHelper.GetPathToDotNetFramework (TargetDotNetFrameworkVersion.Version20))
-		{
-		}
+        //bool			onlyLogCriticalEvents;
+        Dictionary<string, Project> projects;
+        string defaultToolsVersion;
 
-		public Engine (ToolsetDefinitionLocations locations)
-			: this (ToolLocationHelper.GetPathToDotNetFramework (TargetDotNetFrameworkVersion.Version20))
-		{
-			//toolsetLocations = locations;
-		}
-		
-		public Engine (BuildPropertyGroup globalProperties)
-			: this (ToolLocationHelper.GetPathToDotNetFramework (TargetDotNetFrameworkVersion.Version20))
-		{
-			this.global_properties = globalProperties;
-		}
+        // the key here represents the project+target+global_properties set
+        Dictionary<string, ITaskItem[]> builtTargetsOutputByName;
+        Stack<Project> currentlyBuildingProjectsStack;
 
-		public Engine (BuildPropertyGroup globalProperties, ToolsetDefinitionLocations locations)
-			: this (ToolLocationHelper.GetPathToDotNetFramework (TargetDotNetFrameworkVersion.Version20))
-		{
-			this.global_properties = globalProperties;
-			//toolsetLocations = locations;
-		}
+        static Engine globalEngine;
+        static Version version;
 
-		// engine should be invoked with path where binary files are
-		// to find microsoft.build.tasks
-		public Engine (string binPath)
-		{
-			this.binPath = binPath;
-			this.buildEnabled = true;
-			this.projects = new Dictionary <string, Project> (StringComparer.OrdinalIgnoreCase);
-			this.eventSource = new EventSource ();
-			this.loggers = new List <ILogger> ();
-			this.buildStarted = false;
-			this.global_properties = new BuildPropertyGroup ();
-			this.builtTargetsOutputByName = new Dictionary<string, ITaskItem[]> ();
-			this.currentlyBuildingProjectsStack = new Stack<Project> ();
-			this.Toolsets = new ToolsetCollection ();
-			LoadDefaultToolsets ();
-			defaultTasksTableByToolsVersion = new Dictionary<string, TaskDatabase> ();
-		}
+        static Engine()
+        {
+            version = new Version("0.1");
+        }
 
-		//FIXME: should be loaded from config file
-		void LoadDefaultToolsets ()
-		{
-			Toolsets.Add (new Toolset ("2.0",
-						ToolLocationHelper.GetPathToDotNetFramework (TargetDotNetFrameworkVersion.Version20)));
-			Toolsets.Add (new Toolset ("3.0",
-						ToolLocationHelper.GetPathToDotNetFramework (TargetDotNetFrameworkVersion.Version30)));
-			Toolsets.Add (new Toolset ("3.5",
-						ToolLocationHelper.GetPathToDotNetFramework (TargetDotNetFrameworkVersion.Version35)));
-			Toolsets.Add (new Toolset ("4.0",
-						ToolLocationHelper.GetPathToDotNetFramework (TargetDotNetFrameworkVersion.Version40)));
+        public Engine()
+            : this(
+                ToolLocationHelper.GetPathToDotNetFramework(TargetDotNetFrameworkVersion.Version20)
+            ) { }
+
+        public Engine(ToolsetDefinitionLocations locations)
+            : this(
+                ToolLocationHelper.GetPathToDotNetFramework(TargetDotNetFrameworkVersion.Version20)
+            )
+        {
+            //toolsetLocations = locations;
+        }
+
+        public Engine(BuildPropertyGroup globalProperties)
+            : this(
+                ToolLocationHelper.GetPathToDotNetFramework(TargetDotNetFrameworkVersion.Version20)
+            )
+        {
+            this.global_properties = globalProperties;
+        }
+
+        public Engine(BuildPropertyGroup globalProperties, ToolsetDefinitionLocations locations)
+            : this(
+                ToolLocationHelper.GetPathToDotNetFramework(TargetDotNetFrameworkVersion.Version20)
+            )
+        {
+            this.global_properties = globalProperties;
+            //toolsetLocations = locations;
+        }
+
+        // engine should be invoked with path where binary files are
+        // to find microsoft.build.tasks
+        public Engine(string binPath)
+        {
+            this.binPath = binPath;
+            this.buildEnabled = true;
+            this.projects = new Dictionary<string, Project>(StringComparer.OrdinalIgnoreCase);
+            this.eventSource = new EventSource();
+            this.loggers = new List<ILogger>();
+            this.buildStarted = false;
+            this.global_properties = new BuildPropertyGroup();
+            this.builtTargetsOutputByName = new Dictionary<string, ITaskItem[]>();
+            this.currentlyBuildingProjectsStack = new Stack<Project>();
+            this.Toolsets = new ToolsetCollection();
+            LoadDefaultToolsets();
+            defaultTasksTableByToolsVersion = new Dictionary<string, TaskDatabase>();
+        }
+
+        //FIXME: should be loaded from config file
+        void LoadDefaultToolsets()
+        {
+            Toolsets.Add(
+                new Toolset(
+                    "2.0",
+                    ToolLocationHelper.GetPathToDotNetFramework(
+                        TargetDotNetFrameworkVersion.Version20
+                    )
+                )
+            );
+            Toolsets.Add(
+                new Toolset(
+                    "3.0",
+                    ToolLocationHelper.GetPathToDotNetFramework(
+                        TargetDotNetFrameworkVersion.Version30
+                    )
+                )
+            );
+            Toolsets.Add(
+                new Toolset(
+                    "3.5",
+                    ToolLocationHelper.GetPathToDotNetFramework(
+                        TargetDotNetFrameworkVersion.Version35
+                    )
+                )
+            );
+            Toolsets.Add(
+                new Toolset(
+                    "4.0",
+                    ToolLocationHelper.GetPathToDotNetFramework(
+                        TargetDotNetFrameworkVersion.Version40
+                    )
+                )
+            );
 #if XBUILD_12
-			Toolsets.Add (new Toolset ("12.0", ToolLocationHelper.GetPathToBuildTools ("12.0")));
+            Toolsets.Add(new Toolset("12.0", ToolLocationHelper.GetPathToBuildTools("12.0")));
 #endif
 #if XBUILD_14
-			Toolsets.Add (new Toolset ("14.0", ToolLocationHelper.GetPathToBuildTools ("14.0")));
+            Toolsets.Add(new Toolset("14.0", ToolLocationHelper.GetPathToBuildTools("14.0")));
 #endif
-		}
-		
-		[MonoTODO]
-		public bool BuildProject (Project project)
-		{
-			if (project == null)
-				throw new ArgumentException ("project");
-			builtTargetsOutputByName.Clear ();
-			return project.Build ();
-		}
-		
-		[MonoTODO]
-		public bool BuildProject (Project project, string targetName)
-		{
-			if (project == null)
-				throw new ArgumentException ("project");
-			if (targetName == null)
-				return false;
+        }
 
-			return BuildProject (project, new string[] { targetName}, null, BuildSettings.None);
-		}
-		
-		[MonoTODO]
-		public bool BuildProject (Project project, string[] targetNames)
-		{
-			return BuildProject (project, targetNames, null, BuildSettings.None);
-		}
+        [MonoTODO]
+        public bool BuildProject(Project project)
+        {
+            if (project == null)
+                throw new ArgumentException("project");
+            builtTargetsOutputByName.Clear();
+            return project.Build();
+        }
 
-		[MonoTODO]
-		public bool BuildProject (Project project,
-					  string[] targetNames,
-					  IDictionary targetOutputs)
-		{
-			return BuildProject (project, targetNames, targetOutputs, BuildSettings.None);
-		}
-		
-		public bool BuildProject (Project project,
-					  string[] targetNames,
-					  IDictionary targetOutputs,
-					  BuildSettings buildFlags)
-		{
-			if (project == null)
-				throw new ArgumentException ("project");
-			if (targetNames == null)
-				return false;
+        [MonoTODO]
+        public bool BuildProject(Project project, string targetName)
+        {
+            if (project == null)
+                throw new ArgumentException("project");
+            if (targetName == null)
+                return false;
 
-			if ((buildFlags & BuildSettings.DoNotResetPreviouslyBuiltTargets) != BuildSettings.DoNotResetPreviouslyBuiltTargets)
-				builtTargetsOutputByName.Clear ();
+            return BuildProject(project, new string[] { targetName }, null, BuildSettings.None);
+        }
 
-			if (defaultToolsVersion != null)
-				// it has been explicitly set, xbuild does this..
-				project.ToolsVersion = defaultToolsVersion;
-			return project.Build (targetNames, targetOutputs, buildFlags);
-		}
+        [MonoTODO]
+        public bool BuildProject(Project project, string[] targetNames)
+        {
+            return BuildProject(project, targetNames, null, BuildSettings.None);
+        }
 
-		[MonoTODO]
-		public bool BuildProjectFile (string projectFile)
-		{
-			return BuildProjectFile (projectFile, new string [0]);
-		}
-		
-		[MonoTODO]
-		public bool BuildProjectFile (string projectFile,
-					      string targetName)
-		{
-			return BuildProjectFile (projectFile,
-			                         targetName == null ? new string [0] : new string [] {targetName});
-		}
-		
-		[MonoTODO]
-		public bool BuildProjectFile (string projectFile,
-					      string[] targetNames)
-		{
-			return BuildProjectFile (projectFile, targetNames, null);
-		}
-		
-		[MonoTODO]
-		public bool BuildProjectFile (string projectFile,
-					      string[] targetNames,
-					      BuildPropertyGroup globalProperties)
-		{
-			return BuildProjectFile (projectFile, targetNames, globalProperties, null, BuildSettings.None);
-		}
-		
-		[MonoTODO]
-		public bool BuildProjectFile (string projectFile,
-					      string[] targetNames,
-					      BuildPropertyGroup globalProperties,
-					      IDictionary targetOutputs)
-		{
-			return BuildProjectFile (projectFile, targetNames, globalProperties, targetOutputs, BuildSettings.None);
-		}
-		
-		public bool BuildProjectFile (string projectFile,
-					      string[] targetNames,
-					      BuildPropertyGroup globalProperties,
-					      IDictionary targetOutputs,
-					      BuildSettings buildFlags)
-		{
-			return BuildProjectFile (projectFile, targetNames, globalProperties, targetOutputs, buildFlags, null);
-		}
-			
-		//FIXME: add a test for null @toolsVersion
-		public bool BuildProjectFile (string projectFile,
-					      string[] targetNames,
-					      BuildPropertyGroup globalProperties,
-					      IDictionary targetOutputs,
-					      BuildSettings buildFlags, string toolsVersion)
-		{
-			bool result = false;
-			try {
-				StartEngineBuild ();
-				result = BuildProjectFileInternal (projectFile, targetNames, globalProperties, targetOutputs, buildFlags, toolsVersion);
-				return result;
-			} catch (InvalidProjectFileException ie) {
-				this.LogErrorWithFilename (projectFile, ie.Message);
-				this.LogMessage (MessageImportance.Low, String.Format ("{0}: {1}", projectFile, ie.ToString ()));
-				return false;
-			} catch (Exception e) {
-				if (buildStarted) {
-					this.LogErrorWithFilename (projectFile, e.Message);
-					this.LogMessage (MessageImportance.Low, String.Format ("{0}: {1}", projectFile, e.ToString ()));
-				}
-				throw;
-			} finally {
-				EndEngineBuild (result);
-			}
-		}
+        [MonoTODO]
+        public bool BuildProject(Project project, string[] targetNames, IDictionary targetOutputs)
+        {
+            return BuildProject(project, targetNames, targetOutputs, BuildSettings.None);
+        }
 
-		bool BuildProjectFileInternal (string projectFile,
-					      string[] targetNames,
-					      BuildPropertyGroup globalProperties,
-					      IDictionary targetOutputs,
-					      BuildSettings buildFlags, string toolsVersion)
-		{
+        public bool BuildProject(
+            Project project,
+            string[] targetNames,
+            IDictionary targetOutputs,
+            BuildSettings buildFlags
+        )
+        {
+            if (project == null)
+                throw new ArgumentException("project");
+            if (targetNames == null)
+                return false;
 
-			if ((buildFlags & BuildSettings.DoNotResetPreviouslyBuiltTargets) != BuildSettings.DoNotResetPreviouslyBuiltTargets)
-				builtTargetsOutputByName.Clear ();
+            if (
+                (buildFlags & BuildSettings.DoNotResetPreviouslyBuiltTargets)
+                != BuildSettings.DoNotResetPreviouslyBuiltTargets
+            )
+                builtTargetsOutputByName.Clear();
 
-			Project project;
+            if (defaultToolsVersion != null)
+                // it has been explicitly set, xbuild does this..
+                project.ToolsVersion = defaultToolsVersion;
+            return project.Build(targetNames, targetOutputs, buildFlags);
+        }
 
-			bool newProject = false;
-			if (!projects.TryGetValue (projectFile, out project)) {
-				project = CreateNewProject ();
-				newProject = true;
-			}
+        [MonoTODO]
+        public bool BuildProjectFile(string projectFile)
+        {
+            return BuildProjectFile(projectFile, new string[0]);
+        }
 
-			BuildPropertyGroup engine_old_grp = null;
-			BuildPropertyGroup project_old_grp = null;
-			if (globalProperties != null) {
-				engine_old_grp = GlobalProperties.Clone (true);
-				project_old_grp = project.GlobalProperties.Clone (true);
+        [MonoTODO]
+        public bool BuildProjectFile(string projectFile, string targetName)
+        {
+            return BuildProjectFile(
+                projectFile,
+                targetName == null ? new string[0] : new string[] { targetName }
+            );
+        }
 
-				// Override project's global properties with the
-				// ones explicitlcur_y specified here
-				foreach (BuildProperty bp in globalProperties)
-					project.GlobalProperties.AddProperty (bp);
+        [MonoTODO]
+        public bool BuildProjectFile(string projectFile, string[] targetNames)
+        {
+            return BuildProjectFile(projectFile, targetNames, null);
+        }
 
-				if (!newProject)
-					project.NeedToReevaluate ();
-			}
+        [MonoTODO]
+        public bool BuildProjectFile(
+            string projectFile,
+            string[] targetNames,
+            BuildPropertyGroup globalProperties
+        )
+        {
+            return BuildProjectFile(
+                projectFile,
+                targetNames,
+                globalProperties,
+                null,
+                BuildSettings.None
+            );
+        }
 
-			if (newProject)
-				project.Load (projectFile);
+        [MonoTODO]
+        public bool BuildProjectFile(
+            string projectFile,
+            string[] targetNames,
+            BuildPropertyGroup globalProperties,
+            IDictionary targetOutputs
+        )
+        {
+            return BuildProjectFile(
+                projectFile,
+                targetNames,
+                globalProperties,
+                targetOutputs,
+                BuildSettings.None
+            );
+        }
 
-			try {
-				string oldProjectToolsVersion = project.ToolsVersion;
-				if (String.IsNullOrEmpty (toolsVersion) && defaultToolsVersion != null)
-					// no tv specified, let the project inherit it from the
-					// engine. 'defaultToolsVersion' will be effective only
-					// it has been overridden. Otherwise, the project's own
-					// tv will be used.
-					project.ToolsVersion = defaultToolsVersion;
-				else
-					project.ToolsVersion = toolsVersion;
+        public bool BuildProjectFile(
+            string projectFile,
+            string[] targetNames,
+            BuildPropertyGroup globalProperties,
+            IDictionary targetOutputs,
+            BuildSettings buildFlags
+        )
+        {
+            return BuildProjectFile(
+                projectFile,
+                targetNames,
+                globalProperties,
+                targetOutputs,
+                buildFlags,
+                null
+            );
+        }
 
-				try {
-					return project.Build (targetNames, targetOutputs, buildFlags);
-				} finally {
-					project.ToolsVersion = oldProjectToolsVersion;
-				}
-			} finally {
-				if (globalProperties != null) {
-					GlobalProperties = engine_old_grp;
-					project.GlobalProperties = project_old_grp;
-				}
-			}
-		}
+        //FIXME: add a test for null @toolsVersion
+        public bool BuildProjectFile(
+            string projectFile,
+            string[] targetNames,
+            BuildPropertyGroup globalProperties,
+            IDictionary targetOutputs,
+            BuildSettings buildFlags,
+            string toolsVersion
+        )
+        {
+            bool result = false;
+            try
+            {
+                StartEngineBuild();
+                result = BuildProjectFileInternal(
+                    projectFile,
+                    targetNames,
+                    globalProperties,
+                    targetOutputs,
+                    buildFlags,
+                    toolsVersion
+                );
+                return result;
+            }
+            catch (InvalidProjectFileException ie)
+            {
+                this.LogErrorWithFilename(projectFile, ie.Message);
+                this.LogMessage(
+                    MessageImportance.Low,
+                    String.Format("{0}: {1}", projectFile, ie.ToString())
+                );
+                return false;
+            }
+            catch (Exception e)
+            {
+                if (buildStarted)
+                {
+                    this.LogErrorWithFilename(projectFile, e.Message);
+                    this.LogMessage(
+                        MessageImportance.Low,
+                        String.Format("{0}: {1}", projectFile, e.ToString())
+                    );
+                }
+                throw;
+            }
+            finally
+            {
+                EndEngineBuild(result);
+            }
+        }
 
-		void CheckBinPath ()
-		{
-			if (BinPath == null) {
-				throw new InvalidOperationException ("Before a project can be instantiated, " +
-					"Engine.BinPath must be set to the location on disk where MSBuild " + 
-					"is installed. This is used to evaluate $(MSBuildBinPath).");
-			}
-		}
+        bool BuildProjectFileInternal(
+            string projectFile,
+            string[] targetNames,
+            BuildPropertyGroup globalProperties,
+            IDictionary targetOutputs,
+            BuildSettings buildFlags,
+            string toolsVersion
+        )
+        {
+            if (
+                (buildFlags & BuildSettings.DoNotResetPreviouslyBuiltTargets)
+                != BuildSettings.DoNotResetPreviouslyBuiltTargets
+            )
+                builtTargetsOutputByName.Clear();
 
-		public Project CreateNewProject ()
-		{
-			return new Project (this);
-		}
+            Project project;
 
-		public Project GetLoadedProject (string projectFullFileName)
-		{
-			if (projectFullFileName == null)
-				throw new ArgumentNullException ("projectFullFileName");
-			
-			Project project;
-			projects.TryGetValue (projectFullFileName, out project);
+            bool newProject = false;
+            if (!projects.TryGetValue(projectFile, out project))
+            {
+                project = CreateNewProject();
+                newProject = true;
+            }
 
-			return project;
-		}
+            BuildPropertyGroup engine_old_grp = null;
+            BuildPropertyGroup project_old_grp = null;
+            if (globalProperties != null)
+            {
+                engine_old_grp = GlobalProperties.Clone(true);
+                project_old_grp = project.GlobalProperties.Clone(true);
 
-		internal void RemoveLoadedProject (Project p)
-		{
-			if (!String.IsNullOrEmpty (p.FullFileName)) {
-				ClearBuiltTargetsForProject (p);
-				projects.Remove (p.FullFileName);
-			}
-		}
+                // Override project's global properties with the
+                // ones explicitlcur_y specified here
+                foreach (BuildProperty bp in globalProperties)
+                    project.GlobalProperties.AddProperty(bp);
 
-		internal void AddLoadedProject (Project p)
-		{
-			if (p.FullFileName != String.Empty)
-				projects.Add (p.FullFileName, p);
-		}
-	
-		public void UnloadProject (Project project)
-		{
-			if (project == null)
-				throw new ArgumentNullException ("project");
+                if (!newProject)
+                    project.NeedToReevaluate();
+            }
 
-			if (project.ParentEngine != this)
-				throw new InvalidOperationException ("The \"Project\" object specified does not belong to the correct \"Engine\" object.");
-			
-			project.CheckUnloaded ();
-			
-			RemoveLoadedProject (project);
-			
-			project.Unload ();
-		}
+            if (newProject)
+                project.Load(projectFile);
 
-		public void UnloadAllProjects ()
-		{
-			IList<Project> values = new List<Project> (projects.Values);
-			foreach (Project p in values)
-				UnloadProject (p);
-		}
+            try
+            {
+                string oldProjectToolsVersion = project.ToolsVersion;
+                if (String.IsNullOrEmpty(toolsVersion) && defaultToolsVersion != null)
+                    // no tv specified, let the project inherit it from the
+                    // engine. 'defaultToolsVersion' will be effective only
+                    // it has been overridden. Otherwise, the project's own
+                    // tv will be used.
+                    project.ToolsVersion = defaultToolsVersion;
+                else
+                    project.ToolsVersion = toolsVersion;
 
-		[MonoTODO]
-		public void RegisterLogger (ILogger logger)
-		{
-			if (logger == null)
-				throw new ArgumentNullException ("logger");
-			
-			logger.Initialize (eventSource);
-			loggers.Add (logger);
-		}
-		
-		[MonoTODO]
-		public void UnregisterAllLoggers ()
-		{
-			// FIXME: check if build succeeded
-			// FIXME: it shouldn't be here
-			if (buildStarted)
-				LogBuildFinished (true);
-			foreach (ILogger i in loggers) {
-				i.Shutdown ();
-			}
-			loggers.Clear ();
-		}
+                try
+                {
+                    return project.Build(targetNames, targetOutputs, buildFlags);
+                }
+                finally
+                {
+                    project.ToolsVersion = oldProjectToolsVersion;
+                }
+            }
+            finally
+            {
+                if (globalProperties != null)
+                {
+                    GlobalProperties = engine_old_grp;
+                    project.GlobalProperties = project_old_grp;
+                }
+            }
+        }
 
-		void StartEngineBuild ()
-		{
-			if (!buildStarted) {
-				LogBuildStarted ();
-				buildStarted = true;
-			}
-		}
+        void CheckBinPath()
+        {
+            if (BinPath == null)
+            {
+                throw new InvalidOperationException(
+                    "Before a project can be instantiated, "
+                        + "Engine.BinPath must be set to the location on disk where MSBuild "
+                        + "is installed. This is used to evaluate $(MSBuildBinPath)."
+                );
+            }
+        }
 
-		void EndEngineBuild (bool succeeded)
-		{
-			if (buildStarted && currentlyBuildingProjectsStack.Count == 0) {
-				LogBuildFinished (succeeded);
-				buildStarted = false;
-			}
-		}
+        public Project CreateNewProject()
+        {
+            return new Project(this);
+        }
 
-		internal void StartProjectBuild (Project project, string [] target_names)
-		{
-			StartEngineBuild ();
+        public Project GetLoadedProject(string projectFullFileName)
+        {
+            if (projectFullFileName == null)
+                throw new ArgumentNullException("projectFullFileName");
 
-			if (currentlyBuildingProjectsStack.Count == 0 ||
-				String.Compare (currentlyBuildingProjectsStack.Peek ().FullFileName, project.FullFileName) != 0)
-					LogProjectStarted (project, target_names);
+            Project project;
+            projects.TryGetValue(projectFullFileName, out project);
 
-			currentlyBuildingProjectsStack.Push (project);
-		}
+            return project;
+        }
 
-		internal void EndProjectBuild (Project project, bool succeeded)
-		{
-			if (!buildStarted)
-				throw new Exception ("build isnt started currently");
+        internal void RemoveLoadedProject(Project p)
+        {
+            if (!String.IsNullOrEmpty(p.FullFileName))
+            {
+                ClearBuiltTargetsForProject(p);
+                projects.Remove(p.FullFileName);
+            }
+        }
 
-			Project top_project = currentlyBuildingProjectsStack.Pop ();
+        internal void AddLoadedProject(Project p)
+        {
+            if (p.FullFileName != String.Empty)
+                projects.Add(p.FullFileName, p);
+        }
 
-			if (String.Compare (project.FullFileName, top_project.FullFileName) != 0)
-				throw new Exception (String.Format (
-							"INTERNAL ERROR: Project finishing is not the same as the one on top " +
-							"of the stack. Project: {0} Top of stack: {1}",
-							project.FullFileName, top_project.FullFileName));
+        public void UnloadProject(Project project)
+        {
+            if (project == null)
+                throw new ArgumentNullException("project");
 
-			if (currentlyBuildingProjectsStack.Count == 0 ||
-				String.Compare (top_project.FullFileName, currentlyBuildingProjectsStack.Peek ().FullFileName) != 0)
-				LogProjectFinished (top_project, succeeded);
+            if (project.ParentEngine != this)
+                throw new InvalidOperationException(
+                    "The \"Project\" object specified does not belong to the correct \"Engine\" object."
+                );
 
-			EndEngineBuild (succeeded);
-		}
+            project.CheckUnloaded();
 
-		internal void ClearBuiltTargetsForProject (Project project)
-		{
-			string project_key = project.GetKeyForTarget (String.Empty, false);
-			var to_remove_keys = BuiltTargetsOutputByName.Keys.Where (key => key.StartsWith (project_key)).ToList ();
-			foreach (string to_remove_key in to_remove_keys)
-				BuiltTargetsOutputByName.Remove (to_remove_key);
-		}
+            RemoveLoadedProject(project);
 
-		void LogProjectStarted (Project project, string [] target_names)
-		{
-			string targets;
-			if (target_names == null || target_names.Length == 0)
-				targets = String.Empty;
-			else
-				targets = String.Join (";", target_names);
+            project.Unload();
+        }
 
-			ProjectStartedEventArgs psea = new ProjectStartedEventArgs ("Project started.", null, project.FullFileName, targets,
-					project.EvaluatedPropertiesAsDictionaryEntries, project.EvaluatedItemsByNameAsDictionaryEntries);
+        public void UnloadAllProjects()
+        {
+            IList<Project> values = new List<Project>(projects.Values);
+            foreach (Project p in values)
+                UnloadProject(p);
+        }
 
-			eventSource.FireProjectStarted (this, psea);
-		}
+        [MonoTODO]
+        public void RegisterLogger(ILogger logger)
+        {
+            if (logger == null)
+                throw new ArgumentNullException("logger");
 
-		void LogProjectFinished (Project project, bool succeeded)
-		{
-			ProjectFinishedEventArgs pfea;
-			pfea = new ProjectFinishedEventArgs ("Project started.", null, project.FullFileName, succeeded);
-			eventSource.FireProjectFinished (this, pfea);
-		}
+            logger.Initialize(eventSource);
+            loggers.Add(logger);
+        }
 
-		void LogBuildStarted ()
-		{
-			BuildStartedEventArgs bsea;
-			bsea = new BuildStartedEventArgs ("Build started.", null);
-			eventSource.FireBuildStarted (this, bsea);
-		}
-		
-		void LogBuildFinished (bool succeeded)
-		{
-			BuildFinishedEventArgs bfea;
-			bfea = new BuildFinishedEventArgs ("Build finished.", null, succeeded);
-			eventSource.FireBuildFinished (this, bfea);
-		}
+        [MonoTODO]
+        public void UnregisterAllLoggers()
+        {
+            // FIXME: check if build succeeded
+            // FIXME: it shouldn't be here
+            if (buildStarted)
+                LogBuildFinished(true);
+            foreach (ILogger i in loggers)
+            {
+                i.Shutdown();
+            }
+            loggers.Clear();
+        }
 
-		internal TaskDatabase GetDefaultTasks (string toolsVersion)
-		{
-			TaskDatabase db;
-			if (defaultTasksTableByToolsVersion.TryGetValue (toolsVersion, out db))
-				return db;
+        void StartEngineBuild()
+        {
+            if (!buildStarted)
+            {
+                LogBuildStarted();
+                buildStarted = true;
+            }
+        }
 
-			var toolset = Toolsets [toolsVersion];
-			if (toolset == null)
-				throw new UnknownToolsVersionException (toolsVersion);
+        void EndEngineBuild(bool succeeded)
+        {
+            if (buildStarted && currentlyBuildingProjectsStack.Count == 0)
+            {
+                LogBuildFinished(succeeded);
+                buildStarted = false;
+            }
+        }
 
-			string toolsPath = toolset.ToolsPath;
-			string tasksFile = Path.Combine (toolsPath, defaultTasksProjectName);
-			this.LogMessage (MessageImportance.Low, "Loading default tasks for ToolsVersion: {0} from {1}", toolsVersion, tasksFile);
+        internal void StartProjectBuild(Project project, string[] target_names)
+        {
+            StartEngineBuild();
 
-			// set a empty taskdb here, because the project loading the tasks
-			// file will try to get the default task db
-			defaultTasksTableByToolsVersion [toolsVersion] = new TaskDatabase ();
+            if (
+                currentlyBuildingProjectsStack.Count == 0
+                || String.Compare(
+                    currentlyBuildingProjectsStack.Peek().FullFileName,
+                    project.FullFileName
+                ) != 0
+            )
+                LogProjectStarted(project, target_names);
 
-			db = defaultTasksTableByToolsVersion [toolsVersion] = RegisterDefaultTasks (tasksFile);
+            currentlyBuildingProjectsStack.Push(project);
+        }
 
-			return db;
-		}
-		
-		TaskDatabase RegisterDefaultTasks (string tasksFile)
-		{
-			Project defaultTasksProject = CreateNewProject ();
-			TaskDatabase db;
-			
-			if (File.Exists (tasksFile)) {
-				defaultTasksProject.Load (tasksFile);
-				db = defaultTasksProject.TaskDatabase;
-			} else {
-				this.LogWarning ("Default tasks file {0} not found, ignoring.", tasksFile);
-				db = new TaskDatabase ();
-			}
+        internal void EndProjectBuild(Project project, bool succeeded)
+        {
+            if (!buildStarted)
+                throw new Exception("build isnt started currently");
 
-			return db;
-		}
+            Project top_project = currentlyBuildingProjectsStack.Pop();
 
-		public string BinPath {
-			get { return binPath; }
-			set { binPath = value; }
-		}
+            if (String.Compare(project.FullFileName, top_project.FullFileName) != 0)
+                throw new Exception(
+                    String.Format(
+                        "INTERNAL ERROR: Project finishing is not the same as the one on top "
+                            + "of the stack. Project: {0} Top of stack: {1}",
+                        project.FullFileName,
+                        top_project.FullFileName
+                    )
+                );
 
-		public bool BuildEnabled {
-			get { return buildEnabled; }
-			set { buildEnabled = value; }
-		}
+            if (
+                currentlyBuildingProjectsStack.Count == 0
+                || String.Compare(
+                    top_project.FullFileName,
+                    currentlyBuildingProjectsStack.Peek().FullFileName
+                ) != 0
+            )
+                LogProjectFinished(top_project, succeeded);
 
-		public static Version Version {
-			get { return version; }
-		}
+            EndEngineBuild(succeeded);
+        }
 
-		public static Engine GlobalEngine {
-			get {
-				if (globalEngine == null)
-					globalEngine = new Engine ();
-				return globalEngine;
-			}
-		}
+        internal void ClearBuiltTargetsForProject(Project project)
+        {
+            string project_key = project.GetKeyForTarget(String.Empty, false);
+            var to_remove_keys = BuiltTargetsOutputByName
+                .Keys.Where(key => key.StartsWith(project_key))
+                .ToList();
+            foreach (string to_remove_key in to_remove_keys)
+                BuiltTargetsOutputByName.Remove(to_remove_key);
+        }
 
-		public BuildPropertyGroup GlobalProperties {
-			get { return global_properties; }
-			set { global_properties = value; }
-		}
-		
-		public ToolsetCollection Toolsets {
-			get; private set;
-		}
+        void LogProjectStarted(Project project, string[] target_names)
+        {
+            string targets;
+            if (target_names == null || target_names.Length == 0)
+                targets = String.Empty;
+            else
+                targets = String.Join(";", target_names);
 
-		public string DefaultToolsVersion {
-			get {
-				// This is used as the fall back version if the
-				// project can't find a version to use
-				return String.IsNullOrEmpty (defaultToolsVersion)
-						?
-						 "4.0"
-						: defaultToolsVersion;
-			}
-			set {
-				if (Toolsets [value] == null)
-					throw new UnknownToolsVersionException (value);
-				defaultToolsVersion = value;
-			}
-		}
-		
-		public bool IsBuilding {
-			get { return buildStarted; }
-		}
-		
-		public bool OnlyLogCriticalEvents {
-			get { return eventSource.OnlyLogCriticalEvents; }
-			set { eventSource.OnlyLogCriticalEvents = value; }
-		}
-		
-		internal EventSource EventSource {
-			get { return eventSource; }
-		}
-		
-		internal Dictionary<string, ITaskItem[]> BuiltTargetsOutputByName {
-			get { return builtTargetsOutputByName; }
-		}
-	}
+            ProjectStartedEventArgs psea = new ProjectStartedEventArgs(
+                "Project started.",
+                null,
+                project.FullFileName,
+                targets,
+                project.EvaluatedPropertiesAsDictionaryEntries,
+                project.EvaluatedItemsByNameAsDictionaryEntries
+            );
+
+            eventSource.FireProjectStarted(this, psea);
+        }
+
+        void LogProjectFinished(Project project, bool succeeded)
+        {
+            ProjectFinishedEventArgs pfea;
+            pfea = new ProjectFinishedEventArgs(
+                "Project started.",
+                null,
+                project.FullFileName,
+                succeeded
+            );
+            eventSource.FireProjectFinished(this, pfea);
+        }
+
+        void LogBuildStarted()
+        {
+            BuildStartedEventArgs bsea;
+            bsea = new BuildStartedEventArgs("Build started.", null);
+            eventSource.FireBuildStarted(this, bsea);
+        }
+
+        void LogBuildFinished(bool succeeded)
+        {
+            BuildFinishedEventArgs bfea;
+            bfea = new BuildFinishedEventArgs("Build finished.", null, succeeded);
+            eventSource.FireBuildFinished(this, bfea);
+        }
+
+        internal TaskDatabase GetDefaultTasks(string toolsVersion)
+        {
+            TaskDatabase db;
+            if (defaultTasksTableByToolsVersion.TryGetValue(toolsVersion, out db))
+                return db;
+
+            var toolset = Toolsets[toolsVersion];
+            if (toolset == null)
+                throw new UnknownToolsVersionException(toolsVersion);
+
+            string toolsPath = toolset.ToolsPath;
+            string tasksFile = Path.Combine(toolsPath, defaultTasksProjectName);
+            this.LogMessage(
+                MessageImportance.Low,
+                "Loading default tasks for ToolsVersion: {0} from {1}",
+                toolsVersion,
+                tasksFile
+            );
+
+            // set a empty taskdb here, because the project loading the tasks
+            // file will try to get the default task db
+            defaultTasksTableByToolsVersion[toolsVersion] = new TaskDatabase();
+
+            db = defaultTasksTableByToolsVersion[toolsVersion] = RegisterDefaultTasks(tasksFile);
+
+            return db;
+        }
+
+        TaskDatabase RegisterDefaultTasks(string tasksFile)
+        {
+            Project defaultTasksProject = CreateNewProject();
+            TaskDatabase db;
+
+            if (File.Exists(tasksFile))
+            {
+                defaultTasksProject.Load(tasksFile);
+                db = defaultTasksProject.TaskDatabase;
+            }
+            else
+            {
+                this.LogWarning("Default tasks file {0} not found, ignoring.", tasksFile);
+                db = new TaskDatabase();
+            }
+
+            return db;
+        }
+
+        public string BinPath
+        {
+            get { return binPath; }
+            set { binPath = value; }
+        }
+
+        public bool BuildEnabled
+        {
+            get { return buildEnabled; }
+            set { buildEnabled = value; }
+        }
+
+        public static Version Version
+        {
+            get { return version; }
+        }
+
+        public static Engine GlobalEngine
+        {
+            get
+            {
+                if (globalEngine == null)
+                    globalEngine = new Engine();
+                return globalEngine;
+            }
+        }
+
+        public BuildPropertyGroup GlobalProperties
+        {
+            get { return global_properties; }
+            set { global_properties = value; }
+        }
+
+        public ToolsetCollection Toolsets { get; private set; }
+
+        public string DefaultToolsVersion
+        {
+            get
+            {
+                // This is used as the fall back version if the
+                // project can't find a version to use
+                return String.IsNullOrEmpty(defaultToolsVersion) ? "4.0" : defaultToolsVersion;
+            }
+            set
+            {
+                if (Toolsets[value] == null)
+                    throw new UnknownToolsVersionException(value);
+                defaultToolsVersion = value;
+            }
+        }
+
+        public bool IsBuilding
+        {
+            get { return buildStarted; }
+        }
+
+        public bool OnlyLogCriticalEvents
+        {
+            get { return eventSource.OnlyLogCriticalEvents; }
+            set { eventSource.OnlyLogCriticalEvents = value; }
+        }
+
+        internal EventSource EventSource
+        {
+            get { return eventSource; }
+        }
+
+        internal Dictionary<string, ITaskItem[]> BuiltTargetsOutputByName
+        {
+            get { return builtTargetsOutputByName; }
+        }
+    }
 }

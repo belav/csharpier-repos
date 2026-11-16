@@ -8,29 +8,32 @@ using Xunit;
 unsafe partial class GenericsNative
 {
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    public interface IComInterface<T> where T : unmanaged
-    {
-    }
+    public interface IComInterface<T>
+        where T : unmanaged { }
 
-    public struct Point1<T> where T : struct
+    public struct Point1<T>
+        where T : struct
     {
         public T e00;
     }
 
-    public struct Point2<T> where T : struct
+    public struct Point2<T>
+        where T : struct
     {
         public T e00;
         public T e01;
     }
 
-    public struct Point3<T> where T : struct
+    public struct Point3<T>
+        where T : struct
     {
         public T e00;
         public T e01;
         public T e02;
     }
 
-    public struct Point4<T> where T : struct
+    public struct Point4<T>
+        where T : struct
     {
         public T e00;
         public T e01;
@@ -39,7 +42,8 @@ unsafe partial class GenericsNative
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public class SequentialClass<T> where T : struct
+    public class SequentialClass<T>
+        where T : struct
     {
         public T e00;
     }

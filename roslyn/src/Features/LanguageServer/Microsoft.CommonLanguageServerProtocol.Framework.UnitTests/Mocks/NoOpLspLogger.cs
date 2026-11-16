@@ -12,27 +12,19 @@ public class NoOpLspLogger : ILspLogger
 {
     public static NoOpLspLogger Instance = new();
 
-    public void LogError(string message, params object[] @params)
-    {
-    }
+    public void LogError(string message, params object[] @params) { }
 
-    public void LogException(Exception exception, string? message = null, params object[] @params)
-    {
-    }
+    public void LogException(
+        Exception exception,
+        string? message = null,
+        params object[] @params
+    ) { }
 
-    public void LogInformation(string message, params object[] @params)
-    {
-    }
+    public void LogInformation(string message, params object[] @params) { }
 
-    public void LogStartContext(string context, params object[] @params)
-    {
-    }
+    public void LogStartContext(string context, params object[] @params) { }
 
-    public void LogEndContext(string context, params object[] @params)
-    {
-    }
+    public void LogEndContext(string context, params object[] @params) { }
 
-    public void LogWarning(string message, params object[] @params)
-    {
-    }
+    public void LogWarning(string message, params object[] @params) { }
 }

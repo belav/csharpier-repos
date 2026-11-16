@@ -20,9 +20,14 @@ namespace PortableAppWithLongPath
 
             Console.WriteLine($"Trying to create `{longPath}`");
             bool success = CreateDirectoryW(longPath, IntPtr.Zero);
-            Console.WriteLine($"CreateDirectoryW with long path {(success ? "succeeded" : $"failed with {Marshal.GetLastWin32Error()}" )}");
+            Console.WriteLine(
+                $"CreateDirectoryW with long path {(success ? "succeeded" : $"failed with {Marshal.GetLastWin32Error()}")}"
+            );
 
-            Directory.Delete(newDir.FullName, true /*recursive*/);
+            Directory.Delete(
+                newDir.FullName,
+                true /*recursive*/
+            );
         }
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]

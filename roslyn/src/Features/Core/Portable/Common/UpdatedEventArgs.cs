@@ -6,10 +6,15 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Common
 {
-    internal class UpdatedEventArgs(object id, Workspace workspace, ProjectId? projectId, DocumentId? documentId) : EventArgs
+    internal class UpdatedEventArgs(
+        object id,
+        Workspace workspace,
+        ProjectId? projectId,
+        DocumentId? documentId
+    ) : EventArgs
     {
         /// <summary>
-        /// The identity of update group. 
+        /// The identity of update group.
         /// </summary>
         public object Id { get; } = id;
 

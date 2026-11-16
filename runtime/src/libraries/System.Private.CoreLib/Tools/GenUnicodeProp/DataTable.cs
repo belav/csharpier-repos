@@ -25,20 +25,39 @@ namespace GenUnicodeProp
         /// <summary>
         /// Create the 12:4:4 data table structure after all the codepoint/value pairs are added by using AddData.
         /// </summary>
-        public void GenerateTable(string name, int level2bits = 4, int level3bits = 4, bool cutOff = false)
+        public void GenerateTable(
+            string name,
+            int level2bits = 4,
+            int level3bits = 4,
+            bool cutOff = false
+        )
         {
             Console.WriteLine();
-            (int _, string[] lines) = GenerateTable(level2bits, level3bits, cutOff, name, Level1Index, Level2Index, Level3Data);
+            (int _, string[] lines) = GenerateTable(
+                level2bits,
+                level3bits,
+                cutOff,
+                name,
+                Level1Index,
+                Level2Index,
+                Level3Data
+            );
             foreach (var l in lines)
                 Console.WriteLine(l);
         }
 
         public void CalculateTableVariants(bool cutOff = false)
         {
-            foreach (((int l2, int l3), (int total, string[] stats)) in (
-              from l2 in Enumerable.Range(1, 7)
-              from l3 in Enumerable.Range(1, 7)
-              select (l2, l3)).AsParallel().Select(l => (l, res: GenerateTable(l.l2, l.l3, cutOff))).OrderBy(v => v.res.Total))
+            foreach (
+                ((int l2, int l3), (int total, string[] stats)) in (
+                    from l2 in Enumerable.Range(1, 7)
+                    from l3 in Enumerable.Range(1, 7)
+                    select (l2, l3)
+                )
+                    .AsParallel()
+                    .Select(l => (l, res: GenerateTable(l.l2, l.l3, cutOff)))
+                    .OrderBy(v => v.res.Total)
+            )
             {
                 Console.WriteLine($"Stats for {l2}:{l3}");
                 foreach (var line in stats)
@@ -46,10 +65,20 @@ namespace GenUnicodeProp
             }
         }
 
-        private (int Total, string[] Stats) GenerateTable(int level2bits, int level3bits, bool cutOff, string? name = null, List<byte>? level1Index = null, List<ushort>? level2Index = null, List<byte>? level3Data = null)
+        private (int Total, string[] Stats) GenerateTable(
+            int level2bits,
+            int level3bits,
+            bool cutOff,
+            string? name = null,
+            List<byte>? level1Index = null,
+            List<ushort>? level2Index = null,
+            List<byte>? level3Data = null
+        )
         {
             if (name != null)
-                Console.WriteLine($"Process {20 - level3bits - level2bits}:{level2bits}:{level3bits} table {name}.");
+                Console.WriteLine(
+                    $"Process {20 - level3bits - level2bits}:{level2bits}:{level3bits} table {name}."
+                );
 
             var level2Hash = new Dictionary<string, ushort>();
             var level3Hash = new Dictionary<string, ushort>();
@@ -130,7 +159,9 @@ namespace GenUnicodeProp
                     Array.Fill(level2RowData, index);
                     if (level2Hash.TryGetValue(string.Join(";", level2RowData), out index))
                     {
-                        while (level1Index!.Count > 0 && level1Index![level1Index.Count - 1] == index)
+                        while (
+                            level1Index!.Count > 0 && level1Index![level1Index.Count - 1] == index
+                        )
                         {
                             level1Index.RemoveAt(level1Index.Count - 1);
                             level1Count--;
@@ -146,12 +177,14 @@ namespace GenUnicodeProp
                 Level2HasBytes = level2uint == 1;
 
             var stats = new string[4];
-            stats[0] = $"level 1: {level1Count,4} [{level1Count *= level1uint,5}]{(level1uint > 1 ? "*" : null)}";
-            stats[1] = $"level 2: {level2Count,4} [{level2Count *= level2uint * level2block,5}]{(level2uint > 1 ? "*" : null)}";
-            stats[2] = $"level 3: {level3Count,4} [{level3Count *= level3block,5}]";
+            stats[0] =
+                $"level 1: {level1Count, 4} [{level1Count *= level1uint, 5}]{(level1uint > 1 ? "*" : null)}";
+            stats[1] =
+                $"level 2: {level2Count, 4} [{level2Count *= level2uint * level2block, 5}]{(level2uint > 1 ? "*" : null)}";
+            stats[2] = $"level 3: {level3Count, 4} [{level3Count *= level3block, 5}]";
 
             var total = level1Count + level2Count + level3Count;
-            stats[3] = $"Total:         {total,5}";
+            stats[3] = $"Total:         {total, 5}";
             return (total, stats);
         }
 

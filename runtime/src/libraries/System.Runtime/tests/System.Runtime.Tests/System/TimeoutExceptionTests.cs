@@ -13,7 +13,11 @@ namespace System.Tests
         public static void Ctor_Empty()
         {
             var exception = new TimeoutException();
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_TIMEOUT, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_TIMEOUT,
+                validateMessage: false
+            );
         }
 
         [Fact]
@@ -21,7 +25,11 @@ namespace System.Tests
         {
             string message = "timeout";
             var exception = new TimeoutException(message);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_TIMEOUT, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_TIMEOUT,
+                message: message
+            );
         }
 
         [Fact]
@@ -30,7 +38,12 @@ namespace System.Tests
             string message = "timeout";
             var innerException = new Exception("Inner exception");
             var exception = new TimeoutException(message, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_TIMEOUT, innerException: innerException, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_TIMEOUT,
+                innerException: innerException,
+                message: message
+            );
         }
     }
 }

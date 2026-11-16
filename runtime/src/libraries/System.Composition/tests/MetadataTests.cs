@@ -3,18 +3,21 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Composition.UnitTests.Util;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
 using Xunit;
-using System.Composition.UnitTests.Util;
 
 namespace System.Composition.UnitTests
 {
     public class MetadataTests : ContainerTests
     {
-        public class CircularM { public string Name { get; set; } }
+        public class CircularM
+        {
+            public string Name { get; set; }
+        }
 
         [Export, ExportMetadata("Name", "A")]
         public class MetadataCircularityA
@@ -50,7 +53,10 @@ namespace System.Composition.UnitTests
         [MetadataAttribute]
         public class ExportWithNameFooAttribute : ExportAttribute
         {
-            public string Name { get { return "Foo"; } }
+            public string Name
+            {
+                get { return "Foo"; }
+            }
         }
 
         [Export, NameNull, NameNull]
@@ -59,9 +65,17 @@ namespace System.Composition.UnitTests
         [ExportWithNameFoo]
         public class SingleNamedExport { }
 
-        public class Named {[DefaultValue(null)] public string Name { get; set; } }
+        public class Named
+        {
+            [DefaultValue(null)]
+            public string Name { get; set; }
+        }
 
-        public class MultiNamed {[DefaultValue(null)] public IEnumerable<string> Name { get; set; } }
+        public class MultiNamed
+        {
+            [DefaultValue(null)]
+            public IEnumerable<string> Name { get; set; }
+        }
 
         [ExportWithNameFoo, Export, ExportMetadata("Priority", 10)]
         public class MultipleExportsOneNamedAndBothPrioritized { }
@@ -72,21 +86,33 @@ namespace System.Composition.UnitTests
         [MetadataAttribute]
         public class NameFooAttribute : Attribute
         {
-            public string Name { get { return "Foo"; } }
+            public string Name
+            {
+                get { return "Foo"; }
+            }
         }
 
-        [Export,
-         ExportMetadata("Name", "A"),
-         ExportMetadata("Name", "B"),
-         ExportMetadata("Name", "B")]
+        [
+            Export,
+            ExportMetadata("Name", "A"),
+            ExportMetadata("Name", "B"),
+            ExportMetadata("Name", "B")
+        ]
         public class MultipleNames { }
 
         [Export, NameFoo]
         public class NamedWithCustomMetadata { }
 
-        public class MultiValuedName { public string[] Name { get; set; } }
+        public class MultiValuedName
+        {
+            public string[] Name { get; set; }
+        }
 
-        public class Prioritized {[DefaultValue(0)] public int Priority { get; set; } }
+        public class Prioritized
+        {
+            [DefaultValue(0)]
+            public int Priority { get; set; }
+        }
 
         [Fact]
         public void MultipleMetadataAttributesWithAPropertyThatReturnsNull()

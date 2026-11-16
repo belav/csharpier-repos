@@ -23,13 +23,16 @@ internal abstract class InstanceConstructorDeclarationBody : MemberBody
     /// </summary>
     public abstract SyntaxNode? ExplicitBody { get; }
 
-    public sealed override SyntaxTree SyntaxTree
-        => InitializerActiveStatement.SyntaxTree;
+    public sealed override SyntaxTree SyntaxTree => InitializerActiveStatement.SyntaxTree;
 
-    public sealed override StateMachineInfo GetStateMachineInfo()
-        => StateMachineInfo.None;
+    public sealed override StateMachineInfo GetStateMachineInfo() => StateMachineInfo.None;
 
-    public sealed override SyntaxNode FindStatementAndPartner(TextSpan span, MemberBody? partnerDeclarationBody, out SyntaxNode? partnerStatement, out int statementPart)
+    public sealed override SyntaxNode FindStatementAndPartner(
+        TextSpan span,
+        MemberBody? partnerDeclarationBody,
+        out SyntaxNode? partnerStatement,
+        out int statementPart
+    )
     {
         var partnerCtorBody = (InstanceConstructorDeclarationBody?)partnerDeclarationBody;
 
@@ -50,7 +53,8 @@ internal abstract class InstanceConstructorDeclarationBody : MemberBody
                 body: InitializerActiveStatement,
                 partnerBody: partnerCtorBody?.InitializerActiveStatement,
                 out partnerStatement,
-                out statementPart);
+                out statementPart
+            );
         }
 
         Debug.Assert(ExplicitBody != null);
@@ -59,14 +63,20 @@ internal abstract class InstanceConstructorDeclarationBody : MemberBody
         Debug.Assert(partnerCtorBody == null || partnerCtorBody.ExplicitBody != null);
 
         return CSharpEditAndContinueAnalyzer.FindStatementAndPartner(
-                span,
-                body: ExplicitBody,
-                partnerBody: partnerCtorBody?.ExplicitBody,
-                out partnerStatement,
-                out statementPart);
+            span,
+            body: ExplicitBody,
+            partnerBody: partnerCtorBody?.ExplicitBody,
+            out partnerStatement,
+            out statementPart
+        );
     }
 
-    public sealed override bool TryMatchActiveStatement(DeclarationBody newBody, SyntaxNode oldStatement, ref int statementPart, [NotNullWhen(true)] out SyntaxNode? newStatement)
+    public sealed override bool TryMatchActiveStatement(
+        DeclarationBody newBody,
+        SyntaxNode oldStatement,
+        ref int statementPart,
+        [NotNullWhen(true)] out SyntaxNode? newStatement
+    )
     {
         var newCtorBody = (InstanceConstructorDeclarationBody)newBody;
 
@@ -76,8 +86,16 @@ internal abstract class InstanceConstructorDeclarationBody : MemberBody
             return true;
         }
 
-        if (ExplicitBody != null && newCtorBody.ExplicitBody != null &&
-            CSharpEditAndContinueAnalyzer.TryMatchActiveStatement(ExplicitBody, newCtorBody.ExplicitBody, oldStatement, out newStatement))
+        if (
+            ExplicitBody != null
+            && newCtorBody.ExplicitBody != null
+            && CSharpEditAndContinueAnalyzer.TryMatchActiveStatement(
+                ExplicitBody,
+                newCtorBody.ExplicitBody,
+                oldStatement,
+                out newStatement
+            )
+        )
         {
             return true;
         }
@@ -94,8 +112,12 @@ internal abstract class InstanceConstructorDeclarationBody : MemberBody
         return false;
     }
 
-    public sealed override Match<SyntaxNode>? ComputeSingleRootMatch(DeclarationBody newBody, IEnumerable<KeyValuePair<SyntaxNode, SyntaxNode>>? knownMatches)
-        => MatchRoot is { } oldRoot && ((InstanceConstructorDeclarationBody)newBody).MatchRoot is { } newRoot
+    public sealed override Match<SyntaxNode>? ComputeSingleRootMatch(
+        DeclarationBody newBody,
+        IEnumerable<KeyValuePair<SyntaxNode, SyntaxNode>>? knownMatches
+    ) =>
+        MatchRoot is { } oldRoot
+        && ((InstanceConstructorDeclarationBody)newBody).MatchRoot is { } newRoot
             ? SyntaxComparer.Statement.ComputeMatch(oldRoot, newRoot, knownMatches)
             : null;
 }

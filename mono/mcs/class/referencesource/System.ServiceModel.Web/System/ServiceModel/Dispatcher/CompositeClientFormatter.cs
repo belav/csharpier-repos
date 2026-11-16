@@ -13,7 +13,11 @@ namespace System.ServiceModel.Dispatcher
     {
         IClientMessageFormatter reply;
         IClientMessageFormatter request;
-        public CompositeClientFormatter(IClientMessageFormatter request, IClientMessageFormatter reply)
+
+        public CompositeClientFormatter(
+            IClientMessageFormatter request,
+            IClientMessageFormatter reply
+        )
         {
             this.request = request;
             this.reply = reply;
@@ -30,4 +34,3 @@ namespace System.ServiceModel.Dispatcher
         }
     }
 }
-

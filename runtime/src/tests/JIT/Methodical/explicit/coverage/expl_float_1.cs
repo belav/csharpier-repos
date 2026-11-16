@@ -29,14 +29,20 @@ internal struct AA
     public static AA[,,] aa_init = new AA[1, 101, 2];
     public static AA[,,] aa_zero = new AA[1, 101, 2];
     public static object b_init = new AA(100);
-    public static AA _init, _zero;
+    public static AA _init,
+        _zero;
 
-    public static float call_target(float arg) { return arg; }
-    public static float call_target_ref(ref float arg) { return arg; }
-
-    public void verify()
+    public static float call_target(float arg)
     {
+        return arg;
     }
+
+    public static float call_target_ref(ref float arg)
+    {
+        return arg;
+    }
+
+    public void verify() { }
 
     public static void verify_all()
     {
@@ -65,7 +71,8 @@ internal struct AA
 
 internal struct BB
 {
-    public static AA f_init, f_zero;
+    public static AA f_init,
+        f_zero;
 }
 
 public static class Test_expl_float_1

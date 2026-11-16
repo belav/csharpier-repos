@@ -17,7 +17,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 /// </remarks>
 /// <typeparam name="T">The type of elements in the hash set.</typeparam>
 public class ObservableHashSet<T>
-    : ISet<T>, IReadOnlyCollection<T>, INotifyCollectionChanged, INotifyPropertyChanged, INotifyPropertyChanging
+    : ISet<T>,
+        IReadOnlyCollection<T>,
+        INotifyCollectionChanged,
+        INotifyPropertyChanged,
+        INotifyPropertyChanging
 {
     private HashSet<T> _set;
 
@@ -26,9 +30,7 @@ public class ObservableHashSet<T>
     ///     that is empty and uses the default equality comparer for the set type.
     /// </summary>
     public ObservableHashSet()
-        : this(EqualityComparer<T>.Default)
-    {
-    }
+        : this(EqualityComparer<T>.Default) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="ObservableHashSet{T}" /> class
@@ -52,9 +54,7 @@ public class ObservableHashSet<T>
     /// </summary>
     /// <param name="collection">The collection whose elements are copied to the new set.</param>
     public ObservableHashSet(IEnumerable<T> collection)
-        : this(collection, EqualityComparer<T>.Default)
-    {
-    }
+        : this(collection, EqualityComparer<T>.Default) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="ObservableHashSet{T}" /> class
@@ -88,8 +88,7 @@ public class ObservableHashSet<T>
     /// </summary>
     public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
-    void ICollection<T>.Add(T item)
-        => Add(item);
+    void ICollection<T>.Add(T item) => Add(item);
 
     /// <summary>
     ///     Removes all elements from the hash set.
@@ -120,8 +119,7 @@ public class ObservableHashSet<T>
     /// <returns>
     ///     <see langword="true" /> if the hash set contains the specified element; otherwise, <see langword="false" />.
     /// </returns>
-    public virtual bool Contains(T item)
-        => _set.Contains(item);
+    public virtual bool Contains(T item) => _set.Contains(item);
 
     /// <summary>
     ///     Copies the elements of the hash set to an array, starting at the specified array index.
@@ -131,8 +129,7 @@ public class ObservableHashSet<T>
     ///     the hash set. The array must have zero-based indexing.
     /// </param>
     /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
-    public virtual void CopyTo(T[] array, int arrayIndex)
-        => _set.CopyTo(array, arrayIndex);
+    public virtual void CopyTo(T[] array, int arrayIndex) => _set.CopyTo(array, arrayIndex);
 
     /// <summary>
     ///     Removes the specified element from the hash set.
@@ -162,14 +159,12 @@ public class ObservableHashSet<T>
     /// <summary>
     ///     Gets the number of elements that are contained in the hash set.
     /// </summary>
-    public virtual int Count
-        => _set.Count;
+    public virtual int Count => _set.Count;
 
     /// <summary>
     ///     Gets a value indicating whether the hash set is read-only.
     /// </summary>
-    public virtual bool IsReadOnly
-        => ((ICollection<T>)_set).IsReadOnly;
+    public virtual bool IsReadOnly => ((ICollection<T>)_set).IsReadOnly;
 
     /// <summary>
     ///     Returns an enumerator that iterates through the hash set.
@@ -177,16 +172,13 @@ public class ObservableHashSet<T>
     /// <returns>
     ///     An enumerator for the hash set.
     /// </returns>
-    public virtual HashSet<T>.Enumerator GetEnumerator()
-        => _set.GetEnumerator();
+    public virtual HashSet<T>.Enumerator GetEnumerator() => _set.GetEnumerator();
 
     /// <inheritdoc />
-    IEnumerator<T> IEnumerable<T>.GetEnumerator()
-        => GetEnumerator();
+    IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
 
     /// <inheritdoc />
-    IEnumerator IEnumerable.GetEnumerator()
-        => GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     /// <summary>
     ///     Adds the specified element to the hash set.
@@ -306,8 +298,7 @@ public class ObservableHashSet<T>
         var removed = _set.Where(i => !copy.Contains(i)).ToList();
         var added = copy.Where(i => !_set.Contains(i)).ToList();
 
-        if (removed.Count == 0
-            && added.Count == 0)
+        if (removed.Count == 0 && added.Count == 0)
         {
             return;
         }
@@ -328,8 +319,7 @@ public class ObservableHashSet<T>
     /// <returns>
     ///     <see langword="true" /> if the hash set is a subset of other; otherwise, <see langword="false" />.
     /// </returns>
-    public virtual bool IsSubsetOf(IEnumerable<T> other)
-        => _set.IsSubsetOf(other);
+    public virtual bool IsSubsetOf(IEnumerable<T> other) => _set.IsSubsetOf(other);
 
     /// <summary>
     ///     Determines whether the hash set is a proper subset of the specified collection.
@@ -338,8 +328,7 @@ public class ObservableHashSet<T>
     /// <returns>
     ///     <see langword="true" /> if the hash set is a proper subset of other; otherwise, <see langword="false" />.
     /// </returns>
-    public virtual bool IsProperSubsetOf(IEnumerable<T> other)
-        => _set.IsProperSubsetOf(other);
+    public virtual bool IsProperSubsetOf(IEnumerable<T> other) => _set.IsProperSubsetOf(other);
 
     /// <summary>
     ///     Determines whether the hash set is a superset of the specified collection.
@@ -348,8 +337,7 @@ public class ObservableHashSet<T>
     /// <returns>
     ///     <see langword="true" /> if the hash set is a superset of other; otherwise, <see langword="false" />.
     /// </returns>
-    public virtual bool IsSupersetOf(IEnumerable<T> other)
-        => _set.IsSupersetOf(other);
+    public virtual bool IsSupersetOf(IEnumerable<T> other) => _set.IsSupersetOf(other);
 
     /// <summary>
     ///     Determines whether the hash set is a proper superset of the specified collection.
@@ -358,8 +346,7 @@ public class ObservableHashSet<T>
     /// <returns>
     ///     <see langword="true" /> if the hash set is a proper superset of other; otherwise, <see langword="false" />.
     /// </returns>
-    public virtual bool IsProperSupersetOf(IEnumerable<T> other)
-        => _set.IsProperSupersetOf(other);
+    public virtual bool IsProperSupersetOf(IEnumerable<T> other) => _set.IsProperSupersetOf(other);
 
     /// <summary>
     ///     Determines whether the current System.Collections.Generic.HashSet`1 object and a specified collection share common elements.
@@ -368,8 +355,7 @@ public class ObservableHashSet<T>
     /// <returns>
     ///     <see langword="true" /> if the hash set and other share at least one common element; otherwise, <see langword="false" />.
     /// </returns>
-    public virtual bool Overlaps(IEnumerable<T> other)
-        => _set.Overlaps(other);
+    public virtual bool Overlaps(IEnumerable<T> other) => _set.Overlaps(other);
 
     /// <summary>
     ///     Determines whether the hash set and the specified collection contain the same elements.
@@ -378,8 +364,7 @@ public class ObservableHashSet<T>
     /// <returns>
     ///     <see langword="true" /> if the hash set is equal to other; otherwise, <see langword="false" />.
     /// </returns>
-    public virtual bool SetEquals(IEnumerable<T> other)
-        => _set.SetEquals(other);
+    public virtual bool SetEquals(IEnumerable<T> other) => _set.SetEquals(other);
 
     /// <summary>
     ///     Copies the elements of the hash set to an array.
@@ -388,8 +373,7 @@ public class ObservableHashSet<T>
     ///     The one-dimensional array that is the destination of the elements copied from
     ///     the hash set. The array must have zero-based indexing.
     /// </param>
-    public virtual void CopyTo(T[] array)
-        => _set.CopyTo(array);
+    public virtual void CopyTo(T[] array) => _set.CopyTo(array);
 
     /// <summary>
     ///     Copies the specified number of elements of the hash set to an array, starting at the specified array index.
@@ -400,8 +384,8 @@ public class ObservableHashSet<T>
     /// </param>
     /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
     /// <param name="count">The number of elements to copy to array.</param>
-    public virtual void CopyTo(T[] array, int arrayIndex, int count)
-        => _set.CopyTo(array, arrayIndex, count);
+    public virtual void CopyTo(T[] array, int arrayIndex, int count) =>
+        _set.CopyTo(array, arrayIndex, count);
 
     /// <summary>
     ///     Removes all elements that match the conditions defined by the specified predicate
@@ -438,48 +422,52 @@ public class ObservableHashSet<T>
     /// <summary>
     ///     Gets the <see cref="IEqualityComparer{T}" /> object that is used to determine equality for the values in the set.
     /// </summary>
-    public virtual IEqualityComparer<T> Comparer
-        => _set.Comparer;
+    public virtual IEqualityComparer<T> Comparer => _set.Comparer;
 
     /// <summary>
     ///     Sets the capacity of the hash set to the actual number of elements it contains, rounded up to a nearby,
     ///     implementation-specific value.
     /// </summary>
-    public virtual void TrimExcess()
-        => _set.TrimExcess();
+    public virtual void TrimExcess() => _set.TrimExcess();
 
     /// <summary>
     ///     Raises the <see cref="PropertyChanged" /> event.
     /// </summary>
     /// <param name="e">Details of the property that changed.</param>
-    protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
-        => PropertyChanged?.Invoke(this, e);
+    protected virtual void OnPropertyChanged(PropertyChangedEventArgs e) =>
+        PropertyChanged?.Invoke(this, e);
 
     /// <summary>
     ///     Raises the <see cref="PropertyChanging" /> event.
     /// </summary>
     /// <param name="e">Details of the property that is changing.</param>
-    protected virtual void OnPropertyChanging(PropertyChangingEventArgs e)
-        => PropertyChanging?.Invoke(this, e);
+    protected virtual void OnPropertyChanging(PropertyChangingEventArgs e) =>
+        PropertyChanging?.Invoke(this, e);
 
-    private void OnCountPropertyChanged()
-        => OnPropertyChanged(ObservableHashSetSingletons.CountPropertyChanged);
+    private void OnCountPropertyChanged() =>
+        OnPropertyChanged(ObservableHashSetSingletons.CountPropertyChanged);
 
-    private void OnCountPropertyChanging()
-        => OnPropertyChanging(ObservableHashSetSingletons.CountPropertyChanging);
+    private void OnCountPropertyChanging() =>
+        OnPropertyChanging(ObservableHashSetSingletons.CountPropertyChanging);
 
-    private void OnCollectionChanged(NotifyCollectionChangedAction action, object? item)
-        => OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, item));
+    private void OnCollectionChanged(NotifyCollectionChangedAction action, object? item) =>
+        OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, item));
 
-    private void OnCollectionChanged(IList newItems, IList oldItems)
-        => OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, newItems, oldItems));
+    private void OnCollectionChanged(IList newItems, IList oldItems) =>
+        OnCollectionChanged(
+            new NotifyCollectionChangedEventArgs(
+                NotifyCollectionChangedAction.Replace,
+                newItems,
+                oldItems
+            )
+        );
 
     /// <summary>
     ///     Raises the <see cref="CollectionChanged" /> event.
     /// </summary>
     /// <param name="e">Details of the change.</param>
-    protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
-        => CollectionChanged?.Invoke(this, e);
+    protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e) =>
+        CollectionChanged?.Invoke(this, e);
 }
 
 internal static class ObservableHashSetSingletons

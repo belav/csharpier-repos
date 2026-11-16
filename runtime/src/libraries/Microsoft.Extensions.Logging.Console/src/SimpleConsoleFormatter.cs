@@ -13,12 +13,15 @@ namespace Microsoft.Extensions.Logging.Console
     internal sealed class SimpleConsoleFormatter : ConsoleFormatter, IDisposable
     {
         private const string LoglevelPadding = ": ";
-        private static readonly string _messagePadding = new string(' ', GetLogLevelString(LogLevel.Information).Length + LoglevelPadding.Length);
-        private static readonly string _newLineWithMessagePadding = Environment.NewLine + _messagePadding;
+        private static readonly string _messagePadding = new string(
+            ' ',
+            GetLogLevelString(LogLevel.Information).Length + LoglevelPadding.Length
+        );
+        private static readonly string _newLineWithMessagePadding =
+            Environment.NewLine + _messagePadding;
 #if NETCOREAPP
-        private static bool IsAndroidOrAppleMobile => OperatingSystem.IsAndroid() ||
-                                                      OperatingSystem.IsTvOS() ||
-                                                      OperatingSystem.IsIOS(); // returns true on MacCatalyst
+        private static bool IsAndroidOrAppleMobile =>
+            OperatingSystem.IsAndroid() || OperatingSystem.IsTvOS() || OperatingSystem.IsIOS(); // returns true on MacCatalyst
 #else
         private static bool IsAndroidOrAppleMobile => false;
 #endif
@@ -44,7 +47,11 @@ namespace Microsoft.Extensions.Logging.Console
 
         internal SimpleConsoleFormatterOptions FormatterOptions { get; set; }
 
-        public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider? scopeProvider, TextWriter textWriter)
+        public override void Write<TState>(
+            in LogEntry<TState> logEntry,
+            IExternalScopeProvider? scopeProvider,
+            TextWriter textWriter
+        )
         {
             string message = logEntry.Formatter(logEntry.State, logEntry.Exception);
             if (logEntry.Exception == null && message == null)
@@ -68,12 +75,21 @@ namespace Microsoft.Extensions.Logging.Console
             }
             if (logLevelString != null)
             {
-                textWriter.WriteColoredMessage(logLevelString, logLevelColors.Background, logLevelColors.Foreground);
+                textWriter.WriteColoredMessage(
+                    logLevelString,
+                    logLevelColors.Background,
+                    logLevelColors.Foreground
+                );
             }
             CreateDefaultLogMessage(textWriter, logEntry, message, scopeProvider);
         }
 
-        private void CreateDefaultLogMessage<TState>(TextWriter textWriter, in LogEntry<TState> logEntry, string message, IExternalScopeProvider? scopeProvider)
+        private void CreateDefaultLogMessage<TState>(
+            TextWriter textWriter,
+            in LogEntry<TState> logEntry,
+            string message,
+            IExternalScopeProvider? scopeProvider
+        )
         {
             bool singleLine = FormatterOptions.SingleLine;
             int eventId = logEntry.EventId.Id;
@@ -132,12 +148,22 @@ namespace Microsoft.Extensions.Logging.Console
                 else
                 {
                     textWriter.Write(_messagePadding);
-                    WriteReplacing(textWriter, Environment.NewLine, _newLineWithMessagePadding, message);
+                    WriteReplacing(
+                        textWriter,
+                        Environment.NewLine,
+                        _newLineWithMessagePadding,
+                        message
+                    );
                     textWriter.Write(Environment.NewLine);
                 }
             }
 
-            static void WriteReplacing(TextWriter writer, string oldValue, string newValue, string message)
+            static void WriteReplacing(
+                TextWriter writer,
+                string oldValue,
+                string newValue,
+                string message
+            )
             {
                 string newMessage = message.Replace(oldValue, newValue);
                 writer.Write(newMessage);
@@ -159,7 +185,7 @@ namespace Microsoft.Extensions.Logging.Console
                 LogLevel.Warning => "warn",
                 LogLevel.Error => "fail",
                 LogLevel.Critical => "crit",
-                _ => throw new ArgumentOutOfRangeException(nameof(logLevel))
+                _ => throw new ArgumentOutOfRangeException(nameof(logLevel)),
             };
         }
 
@@ -167,8 +193,12 @@ namespace Microsoft.Extensions.Logging.Console
         {
             // We shouldn't be outputting color codes for Android/Apple mobile platforms,
             // they have no shell (adb shell is not meant for running apps) and all the output gets redirected to some log file.
-            bool disableColors = (FormatterOptions.ColorBehavior == LoggerColorBehavior.Disabled) ||
-                (FormatterOptions.ColorBehavior == LoggerColorBehavior.Default && (!ConsoleUtils.EmitAnsiColorCodes || IsAndroidOrAppleMobile));
+            bool disableColors =
+                (FormatterOptions.ColorBehavior == LoggerColorBehavior.Disabled)
+                || (
+                    FormatterOptions.ColorBehavior == LoggerColorBehavior.Default
+                    && (!ConsoleUtils.EmitAnsiColorCodes || IsAndroidOrAppleMobile)
+                );
             if (disableColors)
             {
                 return new ConsoleColors(null, null);
@@ -179,33 +209,43 @@ namespace Microsoft.Extensions.Logging.Console
             {
                 LogLevel.Trace => new ConsoleColors(ConsoleColor.Gray, ConsoleColor.Black),
                 LogLevel.Debug => new ConsoleColors(ConsoleColor.Gray, ConsoleColor.Black),
-                LogLevel.Information => new ConsoleColors(ConsoleColor.DarkGreen, ConsoleColor.Black),
+                LogLevel.Information => new ConsoleColors(
+                    ConsoleColor.DarkGreen,
+                    ConsoleColor.Black
+                ),
                 LogLevel.Warning => new ConsoleColors(ConsoleColor.Yellow, ConsoleColor.Black),
                 LogLevel.Error => new ConsoleColors(ConsoleColor.Black, ConsoleColor.DarkRed),
                 LogLevel.Critical => new ConsoleColors(ConsoleColor.White, ConsoleColor.DarkRed),
-                _ => new ConsoleColors(null, null)
+                _ => new ConsoleColors(null, null),
             };
         }
 
-        private void WriteScopeInformation(TextWriter textWriter, IExternalScopeProvider? scopeProvider, bool singleLine)
+        private void WriteScopeInformation(
+            TextWriter textWriter,
+            IExternalScopeProvider? scopeProvider,
+            bool singleLine
+        )
         {
             if (FormatterOptions.IncludeScopes && scopeProvider != null)
             {
                 bool paddingNeeded = !singleLine;
-                scopeProvider.ForEachScope((scope, state) =>
-                {
-                    if (paddingNeeded)
+                scopeProvider.ForEachScope(
+                    (scope, state) =>
                     {
-                        paddingNeeded = false;
-                        state.Write(_messagePadding);
-                        state.Write("=> ");
-                    }
-                    else
-                    {
-                        state.Write(" => ");
-                    }
-                    state.Write(scope);
-                }, textWriter);
+                        if (paddingNeeded)
+                        {
+                            paddingNeeded = false;
+                            state.Write(_messagePadding);
+                            state.Write("=> ");
+                        }
+                        else
+                        {
+                            state.Write(" => ");
+                        }
+                        state.Write(scope);
+                    },
+                    textWriter
+                );
 
                 if (!paddingNeeded && !singleLine)
                 {

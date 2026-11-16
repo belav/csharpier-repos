@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,42 +33,42 @@ using System.Collections;
 using System.ComponentModel;
 using System.IO;
 using System.Text;
-
 using RabbitMQ.Client;
 
+namespace Mono.Messaging.RabbitMQ
+{
+    public class MessagingContextPool
+    {
+        private readonly CreateConnectionDelegate createConnectionDelegate;
+        private readonly ConcurrentLinkedQueue<MessagingContext> pool =
+            new ConcurrentLinkedQueue<MessagingContext>();
+        private readonly MessageFactory messageFactory;
 
+        public MessagingContextPool(
+            MessageFactory messageFactory,
+            CreateConnectionDelegate createConnectionDelegate
+        )
+        {
+            this.messageFactory = messageFactory;
+            this.createConnectionDelegate = createConnectionDelegate;
+        }
 
-namespace Mono.Messaging.RabbitMQ {
+        public MessagingContext GetContext(string host)
+        {
+            MessagingContext context = pool.Dequeue();
+            if (context == null)
+            {
+                context = new MessagingContext(messageFactory, host, createConnectionDelegate);
+                context.Pool = this;
+            }
+            context.Host = host;
 
-	public class MessagingContextPool
-	{
-		private readonly CreateConnectionDelegate createConnectionDelegate;
-		private readonly ConcurrentLinkedQueue<MessagingContext> pool = 
-			new ConcurrentLinkedQueue<MessagingContext>();
-		private readonly MessageFactory messageFactory;
-		
-		public MessagingContextPool (MessageFactory messageFactory, 
-									 CreateConnectionDelegate createConnectionDelegate)
-		{
-			this.messageFactory = messageFactory;
-			this.createConnectionDelegate = createConnectionDelegate;
-		}
-		
-		public MessagingContext GetContext (string host)
-		{
-			MessagingContext context = pool.Dequeue ();
-			if (context == null) {
-				context = new MessagingContext (messageFactory, host, createConnectionDelegate);
-				context.Pool = this;
-			}
-			context.Host = host;
-			
-			return context;
-		}
-		
-		public void ReturnContext (MessagingContext context)
-		{
-			pool.Enqueue (context);
-		}
-	}
+            return context;
+        }
+
+        public void ReturnContext(MessagingContext context)
+        {
+            pool.Enqueue(context);
+        }
+    }
 }

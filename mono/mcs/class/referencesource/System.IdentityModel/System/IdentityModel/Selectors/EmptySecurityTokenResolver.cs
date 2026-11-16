@@ -8,9 +8,15 @@ namespace System.IdentityModel.Selectors
 
     static class EmptySecurityTokenResolver
     {
-        static readonly SecurityTokenResolver _instance 
-            = SecurityTokenResolver.CreateDefaultSecurityTokenResolver( EmptyReadOnlyCollection<SecurityToken>.Instance, false );
+        static readonly SecurityTokenResolver _instance =
+            SecurityTokenResolver.CreateDefaultSecurityTokenResolver(
+                EmptyReadOnlyCollection<SecurityToken>.Instance,
+                false
+            );
 
-        public static SecurityTokenResolver Instance { get { return _instance; } }
+        public static SecurityTokenResolver Instance
+        {
+            get { return _instance; }
+        }
     }
 }

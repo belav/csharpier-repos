@@ -22,45 +22,56 @@ namespace Microsoft.Web.Helpers.Test
         {
             var html = ReCaptcha.GetHtml(GetContext(), "PUBLIC_KEY");
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
-                @"<script src=""http://www.google.com/recaptcha/api/challenge?k=PUBLIC_KEY"" type=""text/javascript""></script>" +
-                @"<noscript>" +
-                @"<iframe frameborder=""0"" height=""300px"" src=""http://www.google.com/recaptcha/api/noscript?k=PUBLIC_KEY"" width=""500px""></iframe><br/><br/>" +
-                @"<textarea cols=""40"" name=""recaptcha_challenge_field"" rows=""3""></textarea>" +
-                @"<input name=""recaptcha_response_field"" type=""hidden"" value=""manual_challenge""/>" +
-                @"</noscript>",
-                html.ToString());
+                @"<script src=""http://www.google.com/recaptcha/api/challenge?k=PUBLIC_KEY"" type=""text/javascript""></script>"
+                    + @"<noscript>"
+                    + @"<iframe frameborder=""0"" height=""300px"" src=""http://www.google.com/recaptcha/api/noscript?k=PUBLIC_KEY"" width=""500px""></iframe><br/><br/>"
+                    + @"<textarea cols=""40"" name=""recaptcha_challenge_field"" rows=""3""></textarea>"
+                    + @"<input name=""recaptcha_response_field"" type=""hidden"" value=""manual_challenge""/>"
+                    + @"</noscript>",
+                html.ToString()
+            );
             XhtmlAssert.Validate1_0(html, addRoot: true);
         }
 
         [Fact]
         public void ReCaptchaOptionsWhenOneOptionAndDefaultRendering()
         {
-            var html = ReCaptcha.GetHtml(GetContext(), "PUBLIC_KEY", options: new { theme = "white" });
+            var html = ReCaptcha.GetHtml(
+                GetContext(),
+                "PUBLIC_KEY",
+                options: new { theme = "white" }
+            );
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
-                @"<script type=""text/javascript"">var RecaptchaOptions={""theme"":""white""};</script>" +
-                @"<script src=""http://www.google.com/recaptcha/api/challenge?k=PUBLIC_KEY"" type=""text/javascript""></script>" +
-                @"<noscript>" +
-                @"<iframe frameborder=""0"" height=""300px"" src=""http://www.google.com/recaptcha/api/noscript?k=PUBLIC_KEY"" width=""500px""></iframe><br/><br/>" +
-                @"<textarea cols=""40"" name=""recaptcha_challenge_field"" rows=""3""></textarea>" +
-                @"<input name=""recaptcha_response_field"" type=""hidden"" value=""manual_challenge""/>" +
-                @"</noscript>",
-                html.ToString());
+                @"<script type=""text/javascript"">var RecaptchaOptions={""theme"":""white""};</script>"
+                    + @"<script src=""http://www.google.com/recaptcha/api/challenge?k=PUBLIC_KEY"" type=""text/javascript""></script>"
+                    + @"<noscript>"
+                    + @"<iframe frameborder=""0"" height=""300px"" src=""http://www.google.com/recaptcha/api/noscript?k=PUBLIC_KEY"" width=""500px""></iframe><br/><br/>"
+                    + @"<textarea cols=""40"" name=""recaptcha_challenge_field"" rows=""3""></textarea>"
+                    + @"<input name=""recaptcha_response_field"" type=""hidden"" value=""manual_challenge""/>"
+                    + @"</noscript>",
+                html.ToString()
+            );
             XhtmlAssert.Validate1_0(html, addRoot: true);
         }
 
         [Fact]
         public void ReCaptchaOptionsWhenMultipleOptionsAndDefaultRendering()
         {
-            var html = ReCaptcha.GetHtml(GetContext(), "PUBLIC_KEY", options: new { theme = "white", tabindex = 5 });
+            var html = ReCaptcha.GetHtml(
+                GetContext(),
+                "PUBLIC_KEY",
+                options: new { theme = "white", tabindex = 5 }
+            );
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
-                @"<script type=""text/javascript"">var RecaptchaOptions={""theme"":""white"",""tabindex"":5};</script>" +
-                @"<script src=""http://www.google.com/recaptcha/api/challenge?k=PUBLIC_KEY"" type=""text/javascript""></script>" +
-                @"<noscript>" +
-                @"<iframe frameborder=""0"" height=""300px"" src=""http://www.google.com/recaptcha/api/noscript?k=PUBLIC_KEY"" width=""500px""></iframe><br/><br/>" +
-                @"<textarea cols=""40"" name=""recaptcha_challenge_field"" rows=""3""></textarea>" +
-                @"<input name=""recaptcha_response_field"" type=""hidden"" value=""manual_challenge""/>" +
-                @"</noscript>",
-                html.ToString());
+                @"<script type=""text/javascript"">var RecaptchaOptions={""theme"":""white"",""tabindex"":5};</script>"
+                    + @"<script src=""http://www.google.com/recaptcha/api/challenge?k=PUBLIC_KEY"" type=""text/javascript""></script>"
+                    + @"<noscript>"
+                    + @"<iframe frameborder=""0"" height=""300px"" src=""http://www.google.com/recaptcha/api/noscript?k=PUBLIC_KEY"" width=""500px""></iframe><br/><br/>"
+                    + @"<textarea cols=""40"" name=""recaptcha_challenge_field"" rows=""3""></textarea>"
+                    + @"<input name=""recaptcha_response_field"" type=""hidden"" value=""manual_challenge""/>"
+                    + @"</noscript>",
+                html.ToString()
+            );
             XhtmlAssert.Validate1_0(html, addRoot: true);
         }
 
@@ -68,17 +79,22 @@ namespace Microsoft.Web.Helpers.Test
         public void ReCaptchaOptionsWhenMultipleOptionsFromDictionaryAndDefaultRendering()
         {
             // verifies that a dictionary will serialize the same as a projection
-            var options = new Dictionary<string, object> { { "theme", "white" }, { "tabindex", 5 } };
+            var options = new Dictionary<string, object>
+            {
+                { "theme", "white" },
+                { "tabindex", 5 },
+            };
             var html = ReCaptcha.GetHtml(GetContext(), "PUBLIC_KEY", options: options);
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
-                @"<script type=""text/javascript"">var RecaptchaOptions={""theme"":""white"",""tabindex"":5};</script>" +
-                @"<script src=""http://www.google.com/recaptcha/api/challenge?k=PUBLIC_KEY"" type=""text/javascript""></script>" +
-                @"<noscript>" +
-                @"<iframe frameborder=""0"" height=""300px"" src=""http://www.google.com/recaptcha/api/noscript?k=PUBLIC_KEY"" width=""500px""></iframe><br/><br/>" +
-                @"<textarea cols=""40"" name=""recaptcha_challenge_field"" rows=""3""></textarea>" +
-                @"<input name=""recaptcha_response_field"" type=""hidden"" value=""manual_challenge""/>" +
-                @"</noscript>",
-                html.ToString());
+                @"<script type=""text/javascript"">var RecaptchaOptions={""theme"":""white"",""tabindex"":5};</script>"
+                    + @"<script src=""http://www.google.com/recaptcha/api/challenge?k=PUBLIC_KEY"" type=""text/javascript""></script>"
+                    + @"<noscript>"
+                    + @"<iframe frameborder=""0"" height=""300px"" src=""http://www.google.com/recaptcha/api/noscript?k=PUBLIC_KEY"" width=""500px""></iframe><br/><br/>"
+                    + @"<textarea cols=""40"" name=""recaptcha_challenge_field"" rows=""3""></textarea>"
+                    + @"<input name=""recaptcha_response_field"" type=""hidden"" value=""manual_challenge""/>"
+                    + @"</noscript>",
+                html.ToString()
+            );
             XhtmlAssert.Validate1_0(html, addRoot: true);
         }
 
@@ -89,13 +105,14 @@ namespace Microsoft.Web.Helpers.Test
             ReCaptcha.HandleValidateResponse(context, "false\nincorrect-captcha-sol");
             var html = ReCaptcha.GetHtml(context, "PUBLIC_KEY");
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
-                @"<script src=""http://www.google.com/recaptcha/api/challenge?k=PUBLIC_KEY&amp;error=incorrect-captcha-sol"" type=""text/javascript""></script>" +
-                @"<noscript>" +
-                @"<iframe frameborder=""0"" height=""300px"" src=""http://www.google.com/recaptcha/api/noscript?k=PUBLIC_KEY"" width=""500px""></iframe><br/><br/>" +
-                @"<textarea cols=""40"" name=""recaptcha_challenge_field"" rows=""3""></textarea>" +
-                @"<input name=""recaptcha_response_field"" type=""hidden"" value=""manual_challenge""/>" +
-                @"</noscript>",
-                html.ToString());
+                @"<script src=""http://www.google.com/recaptcha/api/challenge?k=PUBLIC_KEY&amp;error=incorrect-captcha-sol"" type=""text/javascript""></script>"
+                    + @"<noscript>"
+                    + @"<iframe frameborder=""0"" height=""300px"" src=""http://www.google.com/recaptcha/api/noscript?k=PUBLIC_KEY"" width=""500px""></iframe><br/><br/>"
+                    + @"<textarea cols=""40"" name=""recaptcha_challenge_field"" rows=""3""></textarea>"
+                    + @"<input name=""recaptcha_response_field"" type=""hidden"" value=""manual_challenge""/>"
+                    + @"</noscript>",
+                html.ToString()
+            );
             XhtmlAssert.Validate1_0(html, addRoot: true);
         }
 
@@ -104,13 +121,14 @@ namespace Microsoft.Web.Helpers.Test
         {
             var html = ReCaptcha.GetHtml(GetContext(isSecure: true), "PUBLIC_KEY");
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
-                @"<script src=""https://www.google.com/recaptcha/api/challenge?k=PUBLIC_KEY"" type=""text/javascript""></script>" +
-                @"<noscript>" +
-                @"<iframe frameborder=""0"" height=""300px"" src=""https://www.google.com/recaptcha/api/noscript?k=PUBLIC_KEY"" width=""500px""></iframe><br/><br/>" +
-                @"<textarea cols=""40"" name=""recaptcha_challenge_field"" rows=""3""></textarea>" +
-                @"<input name=""recaptcha_response_field"" type=""hidden"" value=""manual_challenge""/>" +
-                @"</noscript>",
-                html.ToString());
+                @"<script src=""https://www.google.com/recaptcha/api/challenge?k=PUBLIC_KEY"" type=""text/javascript""></script>"
+                    + @"<noscript>"
+                    + @"<iframe frameborder=""0"" height=""300px"" src=""https://www.google.com/recaptcha/api/noscript?k=PUBLIC_KEY"" width=""500px""></iframe><br/><br/>"
+                    + @"<textarea cols=""40"" name=""recaptcha_challenge_field"" rows=""3""></textarea>"
+                    + @"<input name=""recaptcha_response_field"" type=""hidden"" value=""manual_challenge""/>"
+                    + @"</noscript>",
+                html.ToString()
+            );
             XhtmlAssert.Validate1_0(html, addRoot: true);
         }
 
@@ -122,7 +140,19 @@ namespace Microsoft.Web.Helpers.Test
             context.Request.Form["recaptcha_challenge_field"] = "CHALLENGE";
             context.Request.Form["recaptcha_response_field"] = "RESPONSE";
 
-            Assert.Throws<InvalidOperationException>(() => { ReCaptcha.Validate(context, privateKey: "PRIVATE_KEY", virtualPathUtility: virtualPathUtility).ToString(); }, "The captcha cannot be validated because the remote address was not found in the request.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    ReCaptcha
+                        .Validate(
+                            context,
+                            privateKey: "PRIVATE_KEY",
+                            virtualPathUtility: virtualPathUtility
+                        )
+                        .ToString();
+                },
+                "The captcha cannot be validated because the remote address was not found in the request."
+            );
         }
 
         [Fact]
@@ -132,7 +162,13 @@ namespace Microsoft.Web.Helpers.Test
             VirtualPathUtilityBase virtualPathUtility = GetVirtualPathUtility();
             context.Request.ServerVariables["REMOTE_ADDR"] = "127.0.0.1";
 
-            Assert.False(ReCaptcha.Validate(context, privateKey: "PRIVATE_KEY", virtualPathUtility: virtualPathUtility));
+            Assert.False(
+                ReCaptcha.Validate(
+                    context,
+                    privateKey: "PRIVATE_KEY",
+                    virtualPathUtility: virtualPathUtility
+                )
+            );
         }
 
         [Fact]
@@ -144,8 +180,10 @@ namespace Microsoft.Web.Helpers.Test
             context.Request.Form["recaptcha_challenge_field"] = "CHALLENGE";
             context.Request.Form["recaptcha_response_field"] = "RESPONSE";
 
-            Assert.Equal("privatekey=PRIVATE_KEY&remoteip=127.0.0.1&challenge=CHALLENGE&response=RESPONSE",
-                         ReCaptcha.GetValidatePostData(context, "PRIVATE_KEY", virtualPathUtility));
+            Assert.Equal(
+                "privatekey=PRIVATE_KEY&remoteip=127.0.0.1&challenge=CHALLENGE&response=RESPONSE",
+                ReCaptcha.GetValidatePostData(context, "PRIVATE_KEY", virtualPathUtility)
+            );
         }
 
         [Fact]
@@ -158,10 +196,17 @@ namespace Microsoft.Web.Helpers.Test
             context.Request.Form["recaptcha_challenge_field"] = "CHALLENGE";
 
             // Act
-            var validatePostData = ReCaptcha.GetValidatePostData(context, "PRIVATE_KEY", virtualPathUtility);
+            var validatePostData = ReCaptcha.GetValidatePostData(
+                context,
+                "PRIVATE_KEY",
+                virtualPathUtility
+            );
 
             // Assert
-            Assert.Equal("privatekey=PRIVATE_KEY&remoteip=127.0.0.1&challenge=CHALLENGE&response=", validatePostData);
+            Assert.Equal(
+                "privatekey=PRIVATE_KEY&remoteip=127.0.0.1&challenge=CHALLENGE&response=",
+                validatePostData
+            );
         }
 
         [Fact]
@@ -234,7 +279,9 @@ namespace Microsoft.Web.Helpers.Test
             Mock<HttpRequestBase> requestMock = new Mock<HttpRequestBase>();
             requestMock.Setup(request => request.IsSecureConnection).Returns(isSecure);
             requestMock.Setup(request => request.Form).Returns(new NameValueCollection());
-            requestMock.Setup(request => request.ServerVariables).Returns(new NameValueCollection());
+            requestMock
+                .Setup(request => request.ServerVariables)
+                .Returns(new NameValueCollection());
 
             // mock HttpContext
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>();

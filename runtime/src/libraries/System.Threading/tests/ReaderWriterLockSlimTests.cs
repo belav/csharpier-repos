@@ -52,9 +52,15 @@ namespace System.Threading.Tests
                 rwls = new ReaderWriterLockSlim();
                 switch (i)
                 {
-                    case 0: rwls.EnterReadLock(); break;
-                    case 1: rwls.EnterUpgradeableReadLock(); break;
-                    case 2: rwls.EnterWriteLock(); break;
+                    case 0:
+                        rwls.EnterReadLock();
+                        break;
+                    case 1:
+                        rwls.EnterUpgradeableReadLock();
+                        break;
+                    case 2:
+                        rwls.EnterWriteLock();
+                        break;
                 }
                 Assert.Throws<SynchronizationLockException>(() => rwls.Dispose());
             }
@@ -143,7 +149,11 @@ namespace System.Threading.Tests
                 rwls.ExitWriteLock();
             }
 
-            using (ReaderWriterLockSlim rwls = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion))
+            using (
+                ReaderWriterLockSlim rwls = new ReaderWriterLockSlim(
+                    LockRecursionPolicy.SupportsRecursion
+                )
+            )
             {
                 rwls.EnterReadLock();
                 Assert.Throws<LockRecursionException>(() => rwls.EnterWriteLock());
@@ -176,7 +186,10 @@ namespace System.Threading.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(LockRecursionPolicy.NoRecursion)]
         [InlineData(LockRecursionPolicy.SupportsRecursion)]
         public static void InvalidExits(LockRecursionPolicy policy)
@@ -204,13 +217,18 @@ namespace System.Threading.Tests
 
                 using (Barrier barrier = new Barrier(2))
                 {
-                    Task t = Task.Factory.StartNew(() =>
-                    {
-                        rwls.EnterWriteLock();
-                        barrier.SignalAndWait();
-                        barrier.SignalAndWait();
-                        rwls.ExitWriteLock();
-                    }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                    Task t = Task.Factory.StartNew(
+                        () =>
+                        {
+                            rwls.EnterWriteLock();
+                            barrier.SignalAndWait();
+                            barrier.SignalAndWait();
+                            rwls.ExitWriteLock();
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    );
 
                     barrier.SignalAndWait();
                     Assert.Throws<SynchronizationLockException>(() => rwls.ExitWriteLock());
@@ -227,12 +245,20 @@ namespace System.Threading.Tests
             using (ReaderWriterLockSlim rwls = new ReaderWriterLockSlim())
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() => rwls.TryEnterReadLock(-2));
-                Assert.Throws<ArgumentOutOfRangeException>(() => rwls.TryEnterUpgradeableReadLock(-3));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    rwls.TryEnterUpgradeableReadLock(-3)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => rwls.TryEnterWriteLock(-4));
 
-                Assert.Throws<ArgumentOutOfRangeException>(() => rwls.TryEnterReadLock(TimeSpan.MaxValue));
-                Assert.Throws<ArgumentOutOfRangeException>(() => rwls.TryEnterUpgradeableReadLock(TimeSpan.MinValue));
-                Assert.Throws<ArgumentOutOfRangeException>(() => rwls.TryEnterWriteLock(TimeSpan.FromMilliseconds(-2)));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    rwls.TryEnterReadLock(TimeSpan.MaxValue)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    rwls.TryEnterUpgradeableReadLock(TimeSpan.MinValue)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    rwls.TryEnterWriteLock(TimeSpan.FromMilliseconds(-2))
+                );
             }
         }
 
@@ -257,7 +283,8 @@ namespace System.Threading.Tests
                         Assert.False(rwls.TryEnterReadLock(0));
                         Assert.False(rwls.IsReadLockHeld);
                         barrier.SignalAndWait();
-                    }));
+                    })
+                );
             }
         }
 
@@ -282,7 +309,8 @@ namespace System.Threading.Tests
                         Assert.False(rwls.TryEnterWriteLock(0));
                         Assert.False(rwls.IsReadLockHeld);
                         barrier.SignalAndWait();
-                    }));
+                    })
+                );
             }
         }
 
@@ -315,7 +343,8 @@ namespace System.Threading.Tests
                         barrier.SignalAndWait(); // 3
                         rwls.ExitReadLock();
                         barrier.SignalAndWait(); // 4
-                    }));
+                    })
+                );
                 Assert.Equal(0, rwls.CurrentReadCount);
             }
         }
@@ -327,13 +356,18 @@ namespace System.Threading.Tests
             using (ReaderWriterLockSlim rwls = new ReaderWriterLockSlim())
             {
                 rwls.EnterWriteLock();
-                Task t = Task.Factory.StartNew(() =>
-                {
-                    Assert.False(rwls.TryEnterWriteLock(10));
-                    Task.Run(() => are.Set()); // ideally this won't fire until we've called EnterWriteLock, but it's a benign race in that the test will succeed either way
-                    rwls.EnterWriteLock();
-                    rwls.ExitWriteLock();
-                }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                Task t = Task.Factory.StartNew(
+                    () =>
+                    {
+                        Assert.False(rwls.TryEnterWriteLock(10));
+                        Task.Run(() => are.Set()); // ideally this won't fire until we've called EnterWriteLock, but it's a benign race in that the test will succeed either way
+                        rwls.EnterWriteLock();
+                        rwls.ExitWriteLock();
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default
+                );
                 are.WaitOne();
                 rwls.ExitWriteLock();
                 t.GetAwaiter().GetResult();
@@ -347,13 +381,18 @@ namespace System.Threading.Tests
             using (ReaderWriterLockSlim rwls = new ReaderWriterLockSlim())
             {
                 rwls.EnterWriteLock();
-                Task t = Task.Factory.StartNew(() =>
-                {
-                    Assert.False(rwls.TryEnterReadLock(TimeSpan.FromMilliseconds(10)));
-                    Task.Run(() => are.Set()); // ideally this won't fire until we've called EnterReadLock, but it's a benign race in that the test will succeed either way
-                    rwls.EnterReadLock();
-                    rwls.ExitReadLock();
-                }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                Task t = Task.Factory.StartNew(
+                    () =>
+                    {
+                        Assert.False(rwls.TryEnterReadLock(TimeSpan.FromMilliseconds(10)));
+                        Task.Run(() => are.Set()); // ideally this won't fire until we've called EnterReadLock, but it's a benign race in that the test will succeed either way
+                        rwls.EnterReadLock();
+                        rwls.ExitReadLock();
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default
+                );
                 are.WaitOne();
                 rwls.ExitWriteLock();
                 t.GetAwaiter().GetResult();
@@ -367,13 +406,20 @@ namespace System.Threading.Tests
             using (ReaderWriterLockSlim rwls = new ReaderWriterLockSlim())
             {
                 rwls.EnterWriteLock();
-                Task t = Task.Factory.StartNew(() =>
-                {
-                    Assert.False(rwls.TryEnterUpgradeableReadLock(TimeSpan.FromMilliseconds(10)));
-                    Task.Run(() => are.Set()); // ideally this won't fire until we've called EnterReadLock, but it's a benign race in that the test will succeed either way
-                    rwls.EnterUpgradeableReadLock();
-                    rwls.ExitUpgradeableReadLock();
-                }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                Task t = Task.Factory.StartNew(
+                    () =>
+                    {
+                        Assert.False(
+                            rwls.TryEnterUpgradeableReadLock(TimeSpan.FromMilliseconds(10))
+                        );
+                        Task.Run(() => are.Set()); // ideally this won't fire until we've called EnterReadLock, but it's a benign race in that the test will succeed either way
+                        rwls.EnterUpgradeableReadLock();
+                        rwls.ExitUpgradeableReadLock();
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default
+                );
                 are.WaitOne();
                 rwls.ExitWriteLock();
                 t.GetAwaiter().GetResult();
@@ -393,24 +439,23 @@ namespace System.Threading.Tests
                 Thread writeWaiterThread;
                 using (var beforeTryEnterWriteLock = new ManualResetEvent(false))
                 {
-                    writeWaiterThread =
-                        new Thread(() =>
+                    writeWaiterThread = new Thread(() =>
+                    {
+                        // Typical order of execution: 1
+
+                        // Add a writer to the wait list for enough time to allow successive readers to enter the wait list while this
+                        // writer is waiting
+                        beforeTryEnterWriteLock.Set();
+                        if (rwls.TryEnterWriteLock(1000))
                         {
-                            // Typical order of execution: 1
+                            // The typical order of execution is not guaranteed, as sleep times are not guaranteed. For
+                            // instance, before this write lock is added to the wait list, the two new read locks may be
+                            // acquired. In that case, the test may complete before or while the write lock is taken.
+                            rwls.ExitWriteLock();
+                        }
 
-                            // Add a writer to the wait list for enough time to allow successive readers to enter the wait list while this
-                            // writer is waiting
-                            beforeTryEnterWriteLock.Set();
-                            if (rwls.TryEnterWriteLock(1000))
-                            {
-                                // The typical order of execution is not guaranteed, as sleep times are not guaranteed. For
-                                // instance, before this write lock is added to the wait list, the two new read locks may be
-                                // acquired. In that case, the test may complete before or while the write lock is taken.
-                                rwls.ExitWriteLock();
-                            }
-
-                            // Typical order of execution: 4
-                        });
+                        // Typical order of execution: 4
+                    });
                     writeWaiterThread.IsBackground = true;
                     writeWaiterThread.Start();
                     beforeTryEnterWriteLock.WaitOne();
@@ -426,12 +471,11 @@ namespace System.Threading.Tests
                     // Typical order of execution: 5, 6
                     rwls.ExitReadLock();
                 };
-                var readerThreads =
-                    new Thread[]
-                    {
-                        new Thread(EnterAndExitReadLock),
-                        new Thread(EnterAndExitReadLock)
-                    };
+                var readerThreads = new Thread[]
+                {
+                    new Thread(EnterAndExitReadLock),
+                    new Thread(EnterAndExitReadLock),
+                };
                 foreach (var readerThread in readerThreads)
                 {
                     readerThread.IsBackground = true;
@@ -453,7 +497,7 @@ namespace System.Threading.Tests
         [OuterLoop]
         public static void DontReleaseWaitingReadersWhenThereAreWaitingWriters()
         {
-            using(var rwls = new ReaderWriterLockSlim())
+            using (var rwls = new ReaderWriterLockSlim())
             {
                 rwls.EnterUpgradeableReadLock();
                 rwls.EnterWriteLock();
@@ -461,16 +505,15 @@ namespace System.Threading.Tests
 
                 // Add a waiting writer
                 var threads = new Thread[2];
-                using(var beforeEnterWriteLock = new ManualResetEvent(false))
+                using (var beforeEnterWriteLock = new ManualResetEvent(false))
                 {
-                    var thread =
-                        new Thread(() =>
-                        {
-                            beforeEnterWriteLock.Set();
-                            rwls.EnterWriteLock();
-                            // Typical order of execution: 3
-                            rwls.ExitWriteLock();
-                        });
+                    var thread = new Thread(() =>
+                    {
+                        beforeEnterWriteLock.Set();
+                        rwls.EnterWriteLock();
+                        // Typical order of execution: 3
+                        rwls.ExitWriteLock();
+                    });
                     thread.IsBackground = true;
                     thread.Start();
                     threads[0] = thread;
@@ -478,16 +521,15 @@ namespace System.Threading.Tests
                 }
 
                 // Add a waiting reader
-                using(var beforeEnterReadLock = new ManualResetEvent(false))
+                using (var beforeEnterReadLock = new ManualResetEvent(false))
                 {
-                    var thread =
-                        new Thread(() =>
-                        {
-                            beforeEnterReadLock.Set();
-                            rwls.EnterReadLock();
-                            // Typical order of execution: 4
-                            rwls.ExitReadLock();
-                        });
+                    var thread = new Thread(() =>
+                    {
+                        beforeEnterReadLock.Set();
+                        rwls.EnterReadLock();
+                        // Typical order of execution: 4
+                        rwls.ExitReadLock();
+                    });
                     thread.IsBackground = true;
                     thread.Start();
                     threads[1] = thread;

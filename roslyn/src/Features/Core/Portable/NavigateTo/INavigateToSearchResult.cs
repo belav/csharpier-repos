@@ -38,12 +38,13 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 GetPatternMatchKind(result.MatchKind),
                 punctuationStripped: false,
                 result.IsCaseSensitive,
-                result.NameMatchSpans);
+                result.NameMatchSpans
+            );
             return ImmutableArray.Create(patternMatch);
         }
 
-        private static PatternMatchKind GetPatternMatchKind(NavigateToMatchKind matchKind)
-            => matchKind switch
+        private static PatternMatchKind GetPatternMatchKind(NavigateToMatchKind matchKind) =>
+            matchKind switch
             {
                 NavigateToMatchKind.Exact => PatternMatchKind.Exact,
                 NavigateToMatchKind.Prefix => PatternMatchKind.Prefix,
@@ -52,9 +53,11 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 NavigateToMatchKind.None => PatternMatchKind.Fuzzy,
                 NavigateToMatchKind.CamelCaseExact => PatternMatchKind.CamelCaseExact,
                 NavigateToMatchKind.CamelCasePrefix => PatternMatchKind.CamelCasePrefix,
-                NavigateToMatchKind.CamelCaseNonContiguousPrefix => PatternMatchKind.CamelCaseNonContiguousPrefix,
+                NavigateToMatchKind.CamelCaseNonContiguousPrefix =>
+                    PatternMatchKind.CamelCaseNonContiguousPrefix,
                 NavigateToMatchKind.CamelCaseSubstring => PatternMatchKind.CamelCaseSubstring,
-                NavigateToMatchKind.CamelCaseNonContiguousSubstring => PatternMatchKind.CamelCaseNonContiguousSubstring,
+                NavigateToMatchKind.CamelCaseNonContiguousSubstring =>
+                    PatternMatchKind.CamelCaseNonContiguousSubstring,
                 NavigateToMatchKind.Fuzzy => PatternMatchKind.Fuzzy,
                 _ => throw ExceptionUtilities.UnexpectedValue(matchKind),
             };

@@ -14,17 +14,17 @@ using Microsoft.CodeAnalysis.Organizing.Organizers;
 namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
 {
     [ExportSyntaxNodeOrganizer(LanguageNames.CSharp), Shared]
-    internal class InterfaceDeclarationOrganizer : AbstractSyntaxNodeOrganizer<InterfaceDeclarationSyntax>
+    internal class InterfaceDeclarationOrganizer
+        : AbstractSyntaxNodeOrganizer<InterfaceDeclarationSyntax>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InterfaceDeclarationOrganizer()
-        {
-        }
+        public InterfaceDeclarationOrganizer() { }
 
         protected override InterfaceDeclarationSyntax Organize(
             InterfaceDeclarationSyntax syntax,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return syntax.Update(
                 syntax.AttributeLists,
@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
                 syntax.OpenBraceToken,
                 MemberDeclarationsOrganizer.Organize(syntax.Members, cancellationToken),
                 syntax.CloseBraceToken,
-                syntax.SemicolonToken);
+                syntax.SemicolonToken
+            );
         }
     }
 }

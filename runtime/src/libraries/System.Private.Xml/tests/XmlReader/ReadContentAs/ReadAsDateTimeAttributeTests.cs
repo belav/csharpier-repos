@@ -13,7 +13,12 @@ namespace System.Xml.XmlReaderTests
             var reader = Utils.CreateFragmentReader("<Root a='  0002-01-01T00:00:00+00:00  '/>");
             reader.PositionOnElement("Root");
             reader.MoveToAttribute("a");
-            Assert.Equal(new DateTime(2, 1, 1, 0, 0, 0).Add(TimeZoneInfo.Local.GetUtcOffset(new DateTime(2, 1, 1))), (DateTime)reader.ReadContentAs(typeof(DateTime), null));
+            Assert.Equal(
+                new DateTime(2, 1, 1, 0, 0, 0).Add(
+                    TimeZoneInfo.Local.GetUtcOffset(new DateTime(2, 1, 1))
+                ),
+                (DateTime)reader.ReadContentAs(typeof(DateTime), null)
+            );
         }
 
         [Fact]
@@ -22,7 +27,12 @@ namespace System.Xml.XmlReaderTests
             var reader = Utils.CreateFragmentReader("<Root a='9998-12-31T12:59:59-00:00'/>");
             reader.PositionOnElement("Root");
             reader.MoveToAttribute("a");
-            Assert.Equal(new DateTime(9998, 12, 31, 12, 59, 59).Add(TimeZoneInfo.Local.GetUtcOffset(new DateTime(9998, 12, 31))), (DateTime)reader.ReadContentAs(typeof(DateTime), null));
+            Assert.Equal(
+                new DateTime(9998, 12, 31, 12, 59, 59).Add(
+                    TimeZoneInfo.Local.GetUtcOffset(new DateTime(9998, 12, 31))
+                ),
+                (DateTime)reader.ReadContentAs(typeof(DateTime), null)
+            );
         }
 
         [Fact]
@@ -31,7 +41,13 @@ namespace System.Xml.XmlReaderTests
             var reader = Utils.CreateFragmentReader("<Root a='  2000-02-29T23:59:59+13:60  '/>");
             reader.PositionOnElement("Root");
             reader.MoveToAttribute("a");
-            Assert.Equal(new DateTime(2000, 2, 29, 23, 59, 59).Add(TimeZoneInfo.Local.GetUtcOffset(new DateTime(2000, 2, 29)) - new TimeSpan(14, 0, 0)), (DateTime)reader.ReadContentAs(typeof(DateTime), null));
+            Assert.Equal(
+                new DateTime(2000, 2, 29, 23, 59, 59).Add(
+                    TimeZoneInfo.Local.GetUtcOffset(new DateTime(2000, 2, 29))
+                        - new TimeSpan(14, 0, 0)
+                ),
+                (DateTime)reader.ReadContentAs(typeof(DateTime), null)
+            );
         }
 
         [Fact]
@@ -40,7 +56,18 @@ namespace System.Xml.XmlReaderTests
             var reader = Utils.CreateFragmentReader("<Root a='  00:00:00+00:00   '/>");
             reader.PositionOnElement("Root");
             reader.MoveToAttribute("a");
-            Assert.Equal(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, DateTimeKind.Utc).ToLocalTime(), (DateTime)reader.ReadContentAs(typeof(DateTime), null));
+            Assert.Equal(
+                new DateTime(
+                    DateTime.Now.Year,
+                    DateTime.Now.Month,
+                    DateTime.Now.Day,
+                    0,
+                    0,
+                    0,
+                    DateTimeKind.Utc
+                ).ToLocalTime(),
+                (DateTime)reader.ReadContentAs(typeof(DateTime), null)
+            );
         }
 
         [Fact]
@@ -55,7 +82,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDateTimeAttribute6()
         {
-            var reader = Utils.CreateFragmentReader("<Root a='  3000-00-29T23:59:59.999999999999-13:60  '/>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root a='  3000-00-29T23:59:59.999999999999-13:60  '/>"
+            );
             reader.PositionOnElement("Root");
             reader.MoveToAttribute("a");
             Assert.Throws<XmlException>(() => reader.ReadContentAs(typeof(DateTime), null));

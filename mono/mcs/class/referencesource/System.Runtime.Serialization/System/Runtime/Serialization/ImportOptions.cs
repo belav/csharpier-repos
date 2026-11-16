@@ -5,11 +5,11 @@
 namespace System.Runtime.Serialization
 {
     using System;
+    using System.CodeDom.Compiler;
     using System.Collections.Generic;
     using System.Reflection;
     using System.Security;
     using System.Security.Permissions;
-    using System.CodeDom.Compiler;
 
     public class ImportOptions
     {
@@ -96,4 +96,3 @@ namespace System.Runtime.Serialization
         }
     }
 }
-

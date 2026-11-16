@@ -17,14 +17,17 @@ namespace System.Web.Mvc.Html.Test
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => MvcHelper.GetHtmlHelper().DisplayName(expression: null),
-                "expression");
+                "expression"
+            );
         }
 
         [Fact]
         public void DisplayNameWithNoModelMetadataDisplayNameOverride()
         {
             // Act
-            MvcHtmlString result = MvcHelper.GetHtmlHelper().DisplayNameInternal("PropertyName", new MetadataHelper().MetadataProvider.Object);
+            MvcHtmlString result = MvcHelper
+                .GetHtmlHelper()
+                .DisplayNameInternal("PropertyName", new MetadataHelper().MetadataProvider.Object);
 
             // Assert
             Assert.Equal("PropertyName", result.ToHtmlString());
@@ -35,10 +38,14 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             MetadataHelper metadataHelper = new MetadataHelper();
-            metadataHelper.Metadata.Setup(m => m.DisplayName).Returns("Custom display name from metadata");
+            metadataHelper
+                .Metadata.Setup(m => m.DisplayName)
+                .Returns("Custom display name from metadata");
 
             // Act
-            MvcHtmlString result = MvcHelper.GetHtmlHelper().DisplayNameInternal("PropertyName", metadataHelper.MetadataProvider.Object);
+            MvcHtmlString result = MvcHelper
+                .GetHtmlHelper()
+                .DisplayNameInternal("PropertyName", metadataHelper.MetadataProvider.Object);
 
             // Assert
             Assert.Equal("Custom display name from metadata", result.ToHtmlString());
@@ -62,12 +69,22 @@ namespace System.Web.Mvc.Html.Test
             Mock<IViewDataContainer> viewDataContainer = new Mock<IViewDataContainer>();
             viewDataContainer.Setup(c => c.ViewData).Returns(viewData);
 
-            HtmlHelper<Model> html = new HtmlHelper<Model>(viewContext.Object, viewDataContainer.Object);
+            HtmlHelper<Model> html = new HtmlHelper<Model>(
+                viewContext.Object,
+                viewDataContainer.Object
+            );
             viewData.Model = model;
 
             MetadataHelper metadataHelper = new MetadataHelper();
 
-            metadataHelper.MetadataProvider.Setup(p => p.GetMetadataForProperty(It.IsAny<Func<object>>(), typeof(Model), "PropertyName"))
+            metadataHelper
+                .MetadataProvider.Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        typeof(Model),
+                        "PropertyName"
+                    )
+                )
                 .Returns(metadataHelper.Metadata.Object)
                 .Verifiable();
 
@@ -84,12 +101,23 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             MetadataHelper metadataHelper = new MetadataHelper();
 
-            metadataHelper.Metadata = new Mock<ModelMetadata>(metadataHelper.MetadataProvider.Object, null, null, typeof(object), "Custom property name from metadata");
-            metadataHelper.MetadataProvider.Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
+            metadataHelper.Metadata = new Mock<ModelMetadata>(
+                metadataHelper.MetadataProvider.Object,
+                null,
+                null,
+                typeof(object),
+                "Custom property name from metadata"
+            );
+            metadataHelper
+                .MetadataProvider.Setup(p =>
+                    p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>())
+                )
                 .Returns(metadataHelper.Metadata.Object);
 
             // Act
-            MvcHtmlString result = MvcHelper.GetHtmlHelper().DisplayNameInternal("PropertyName", metadataHelper.MetadataProvider.Object);
+            MvcHtmlString result = MvcHelper
+                .GetHtmlHelper()
+                .DisplayNameInternal("PropertyName", metadataHelper.MetadataProvider.Object);
 
             // Assert
             Assert.Equal("Custom property name from metadata", result.ToHtmlString());
@@ -100,12 +128,17 @@ namespace System.Web.Mvc.Html.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                () => MvcHelper.GetHtmlHelper().DisplayNameFor((Expression<Func<Object, Object>>)null),
-                "expression");
+                () =>
+                    MvcHelper
+                        .GetHtmlHelper()
+                        .DisplayNameFor((Expression<Func<Object, Object>>)null),
+                "expression"
+            );
 
             Assert.ThrowsArgumentNull(
                 () => GetEnumerableHtmlHelper().DisplayNameFor((Expression<Func<Foo, Object>>)null),
-                "expression");
+                "expression"
+            );
         }
 
         [Fact]
@@ -114,11 +147,19 @@ namespace System.Web.Mvc.Html.Test
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => MvcHelper.GetHtmlHelper().DisplayNameFor(model => new { foo = "Bar" }),
-                "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions.");
+                "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions."
+            );
 
             Assert.Throws<InvalidOperationException>(
-                () => GetEnumerableHtmlHelper().DisplayNameFor((Expression<Func<IEnumerable<Foo>, object>>)(model => new { foo = "Bar" })),
-                "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions.");
+                () =>
+                    GetEnumerableHtmlHelper()
+                        .DisplayNameFor(
+                            (Expression<Func<IEnumerable<Foo>, object>>)(
+                                model => new { foo = "Bar" }
+                            )
+                        ),
+                "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions."
+            );
         }
 
         [Fact]
@@ -129,7 +170,8 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             MvcHtmlString result = MvcHelper.GetHtmlHelper().DisplayNameFor(model => unknownKey);
-            MvcHtmlString enumerableResult = GetEnumerableHtmlHelper().DisplayNameFor((Expression<Func<IEnumerable<Foo>, string>>)(model => unknownKey));
+            MvcHtmlString enumerableResult = GetEnumerableHtmlHelper()
+                .DisplayNameFor((Expression<Func<IEnumerable<Foo>, string>>)(model => unknownKey));
 
             // Assert
             Assert.Equal("unknownKey", result.ToHtmlString());
@@ -142,12 +184,20 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             MetadataHelper metadataHelper = new MetadataHelper();
 
-            metadataHelper.Metadata.Setup(m => m.DisplayName).Returns("Custom display name from metadata");
+            metadataHelper
+                .Metadata.Setup(m => m.DisplayName)
+                .Returns("Custom display name from metadata");
             string unknownKey = "this is a dummy parameter value";
 
             // Act
-            MvcHtmlString result = MvcHelper.GetHtmlHelper().DisplayNameForInternal(model => unknownKey, metadataHelper.MetadataProvider.Object);
-            MvcHtmlString enumerableResult = GetEnumerableHtmlHelper().DisplayNameForInternal(model => model.Bar, metadataHelper.MetadataProvider.Object);
+            MvcHtmlString result = MvcHelper
+                .GetHtmlHelper()
+                .DisplayNameForInternal(
+                    model => unknownKey,
+                    metadataHelper.MetadataProvider.Object
+                );
+            MvcHtmlString enumerableResult = GetEnumerableHtmlHelper()
+                .DisplayNameForInternal(model => model.Bar, metadataHelper.MetadataProvider.Object);
 
             // Assert
             Assert.Equal("Custom display name from metadata", result.ToHtmlString());
@@ -164,8 +214,14 @@ namespace System.Web.Mvc.Html.Test
             string unknownKey = "this is a dummy parameter value";
 
             // Act
-            MvcHtmlString result = MvcHelper.GetHtmlHelper().DisplayNameForInternal(model => unknownKey, metadataHelper.MetadataProvider.Object);
-            MvcHtmlString enumerableResult = GetEnumerableHtmlHelper().DisplayNameForInternal(model => model.Bar, metadataHelper.MetadataProvider.Object);
+            MvcHtmlString result = MvcHelper
+                .GetHtmlHelper()
+                .DisplayNameForInternal(
+                    model => unknownKey,
+                    metadataHelper.MetadataProvider.Object
+                );
+            MvcHtmlString enumerableResult = GetEnumerableHtmlHelper()
+                .DisplayNameForInternal(model => model.Bar, metadataHelper.MetadataProvider.Object);
 
             // Assert
             Assert.Equal(String.Empty, result.ToHtmlString());
@@ -201,10 +257,16 @@ namespace System.Web.Mvc.Html.Test
             Mock<IViewDataContainer> viewDataContainer = new Mock<IViewDataContainer>();
             viewDataContainer.Setup(c => c.ViewData).Returns(viewData);
 
-            HtmlHelper<NestedProduct> html = new HtmlHelper<NestedProduct>(viewContext.Object, viewDataContainer.Object);
+            HtmlHelper<NestedProduct> html = new HtmlHelper<NestedProduct>(
+                viewContext.Object,
+                viewDataContainer.Object
+            );
 
             // Act
-            MvcHtmlString result = html.DisplayNameForInternal(nested => nested.product.Id, new MetadataHelper().MetadataProvider.Object);
+            MvcHtmlString result = html.DisplayNameForInternal(
+                nested => nested.product.Id,
+                new MetadataHelper().MetadataProvider.Object
+            );
 
             //Assert
             Assert.Equal("Id", result.ToHtmlString());
@@ -212,7 +274,11 @@ namespace System.Web.Mvc.Html.Test
 
         [Theory]
         [PropertyData("HtmlEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void DisplayNameHelpers_EncodeValue(string text, bool htmlEncode, string expectedResult)
+        public void DisplayNameHelpers_EncodeValue(
+            string text,
+            bool htmlEncode,
+            string expectedResult
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<Cart>(model: null);
@@ -264,13 +330,28 @@ namespace System.Web.Mvc.Html.Test
             public MetadataHelper()
             {
                 MetadataProvider = new Mock<ModelMetadataProvider>();
-                Metadata = new Mock<ModelMetadata>(MetadataProvider.Object, null, null, typeof(object), null);
+                Metadata = new Mock<ModelMetadata>(
+                    MetadataProvider.Object,
+                    null,
+                    null,
+                    typeof(object),
+                    null
+                );
 
-                MetadataProvider.Setup(p => p.GetMetadataForProperties(It.IsAny<object>(), It.IsAny<Type>()))
+                MetadataProvider
+                    .Setup(p => p.GetMetadataForProperties(It.IsAny<object>(), It.IsAny<Type>()))
                     .Returns(new ModelMetadata[0]);
-                MetadataProvider.Setup(p => p.GetMetadataForProperty(It.IsAny<Func<object>>(), It.IsAny<Type>(), It.IsAny<string>()))
+                MetadataProvider
+                    .Setup(p =>
+                        p.GetMetadataForProperty(
+                            It.IsAny<Func<object>>(),
+                            It.IsAny<Type>(),
+                            It.IsAny<string>()
+                        )
+                    )
                     .Returns(Metadata.Object);
-                MetadataProvider.Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
+                MetadataProvider
+                    .Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
                     .Returns(Metadata.Object);
             }
         }

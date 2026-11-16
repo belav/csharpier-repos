@@ -23,8 +23,10 @@ namespace GCTest_selfref_cs
             Array a2 = (Array)aref;
             for (int i = a2.GetLowerBound(0); i <= a2.GetUpperBound(0); i++)
             {
-                if (((Array)a2.GetValue(i)).GetLowerBound(0) != 0 ||
-                    ((Array)a2.GetValue(i)).GetUpperBound(0) != 15)
+                if (
+                    ((Array)a2.GetValue(i)).GetLowerBound(0) != 0
+                    || ((Array)a2.GetValue(i)).GetUpperBound(0) != 15
+                )
                 {
                     Console.WriteLine("TEST FAILED!");
                     return 1;

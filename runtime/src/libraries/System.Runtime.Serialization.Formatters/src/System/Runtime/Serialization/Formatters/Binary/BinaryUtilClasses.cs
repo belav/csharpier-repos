@@ -358,7 +358,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
     internal sealed class NameCache
     {
-        private static readonly ConcurrentDictionary<string, object> s_ht = new ConcurrentDictionary<string, object>();
+        private static readonly ConcurrentDictionary<string, object> s_ht =
+            new ConcurrentDictionary<string, object>();
         private string? _name;
 
         internal object? GetCachedValue(string name)
@@ -369,7 +370,6 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
         internal void SetCachedValue(object value) => s_ht[_name!] = value;
     }
-
 
     // Used to fixup value types. Only currently used for valuetypes which are array items.
     internal sealed class ValueFixup
@@ -410,14 +410,22 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     Debug.Assert(_objectInfo!._objectManager != null);
                     if (_objectInfo._isSi)
                     {
-                        _objectInfo._objectManager.RecordDelayedFixup(parent._objectId, _memberName!, record._objectId);
+                        _objectInfo._objectManager.RecordDelayedFixup(
+                            parent._objectId,
+                            _memberName!,
+                            record._objectId
+                        );
                     }
                     else
                     {
                         MemberInfo? memberInfo = _objectInfo.GetMemberInfo(_memberName);
                         if (memberInfo != null)
                         {
-                            _objectInfo._objectManager.RecordFixup(parent._objectId, memberInfo, record._objectId);
+                            _objectInfo._objectManager.RecordFixup(
+                                parent._objectId,
+                                memberInfo,
+                                record._objectId
+                            );
                         }
                     }
                     break;
@@ -510,17 +518,39 @@ namespace System.Runtime.Serialization.Formatters.Binary
             _code = code;
             switch (code)
             {
-                case InternalPrimitiveTypeE.Boolean: _booleanA = (bool[])array; break;
-                case InternalPrimitiveTypeE.Char: _charA = (char[])array; break;
-                case InternalPrimitiveTypeE.Double: _doubleA = (double[])array; break;
-                case InternalPrimitiveTypeE.Int16: _int16A = (short[])array; break;
-                case InternalPrimitiveTypeE.Int32: _int32A = (int[])array; break;
-                case InternalPrimitiveTypeE.Int64: _int64A = (long[])array; break;
-                case InternalPrimitiveTypeE.SByte: _sbyteA = (sbyte[])array; break;
-                case InternalPrimitiveTypeE.Single: _singleA = (float[])array; break;
-                case InternalPrimitiveTypeE.UInt16: _uint16A = (ushort[])array; break;
-                case InternalPrimitiveTypeE.UInt32: _uint32A = (uint[])array; break;
-                case InternalPrimitiveTypeE.UInt64: _uint64A = (ulong[])array; break;
+                case InternalPrimitiveTypeE.Boolean:
+                    _booleanA = (bool[])array;
+                    break;
+                case InternalPrimitiveTypeE.Char:
+                    _charA = (char[])array;
+                    break;
+                case InternalPrimitiveTypeE.Double:
+                    _doubleA = (double[])array;
+                    break;
+                case InternalPrimitiveTypeE.Int16:
+                    _int16A = (short[])array;
+                    break;
+                case InternalPrimitiveTypeE.Int32:
+                    _int32A = (int[])array;
+                    break;
+                case InternalPrimitiveTypeE.Int64:
+                    _int64A = (long[])array;
+                    break;
+                case InternalPrimitiveTypeE.SByte:
+                    _sbyteA = (sbyte[])array;
+                    break;
+                case InternalPrimitiveTypeE.Single:
+                    _singleA = (float[])array;
+                    break;
+                case InternalPrimitiveTypeE.UInt16:
+                    _uint16A = (ushort[])array;
+                    break;
+                case InternalPrimitiveTypeE.UInt32:
+                    _uint32A = (uint[])array;
+                    break;
+                case InternalPrimitiveTypeE.UInt64:
+                    _uint64A = (ulong[])array;
+                    break;
             }
         }
 

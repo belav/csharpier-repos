@@ -27,13 +27,17 @@ namespace System.IdentityModel.Configuration
         public const string DefaultServiceName = ConfigurationStrings.DefaultServiceName;
         public static readonly TimeSpan DefaultMaxClockSkew = new TimeSpan(0, 5, 0);
         internal const string DefaultMaxClockSkewString = "00:05:00";
-        public static readonly X509CertificateValidationMode DefaultCertificateValidationMode = X509CertificateValidationMode.PeerOrChainTrust;
-        public static readonly Type DefaultIssuerNameRegistryType = typeof(ConfigurationBasedIssuerNameRegistry);
+        public static readonly X509CertificateValidationMode DefaultCertificateValidationMode =
+            X509CertificateValidationMode.PeerOrChainTrust;
+        public static readonly Type DefaultIssuerNameRegistryType =
+            typeof(ConfigurationBasedIssuerNameRegistry);
         public static readonly X509RevocationMode DefaultRevocationMode = X509RevocationMode.Online;
-        public static readonly StoreLocation DefaultTrustedStoreLocation = StoreLocation.LocalMachine;
+        public static readonly StoreLocation DefaultTrustedStoreLocation =
+            StoreLocation.LocalMachine;
 #pragma warning restore 1591
 
-        ClaimsAuthenticationManager _claimsAuthenticationManager = new ClaimsAuthenticationManager();
+        ClaimsAuthenticationManager _claimsAuthenticationManager =
+            new ClaimsAuthenticationManager();
         ClaimsAuthorizationManager _claimsAuthorizationManager = new ClaimsAuthorizationManager();
         bool _isInitialized;
         SecurityTokenHandlerCollectionManager _securityTokenHandlerCollectionManager;
@@ -49,7 +53,10 @@ namespace System.IdentityModel.Configuration
         public IdentityConfiguration()
         {
             SystemIdentityModelSection section = SystemIdentityModelSection.Current;
-            IdentityConfigurationElement element = (section != null) ? section.IdentityConfigurationElements.GetElement(DefaultServiceName) : null;
+            IdentityConfigurationElement element =
+                (section != null)
+                    ? section.IdentityConfigurationElements.GetElement(DefaultServiceName)
+                    : null;
             LoadConfiguration(element);
         }
 
@@ -67,7 +74,7 @@ namespace System.IdentityModel.Configuration
         /// Initializes an instance of <see cref="IdentityConfiguration"/>
         /// </summary>
         /// <param name="loadConfig">Whether or not config should be loaded.</param>
-        /// <exception cref="InvalidOperationException">Thrown if loadConfig is set to true but there is no 
+        /// <exception cref="InvalidOperationException">Thrown if loadConfig is set to true but there is no
         /// &lt;System.IdentityModel> configuration element</exception>
         public IdentityConfiguration(bool loadConfig)
         {
@@ -80,7 +87,8 @@ namespace System.IdentityModel.Configuration
                     throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID7027));
                 }
 
-                IdentityConfigurationElement element = section.IdentityConfigurationElements.GetElement(DefaultServiceName);
+                IdentityConfigurationElement element =
+                    section.IdentityConfigurationElements.GetElement(DefaultServiceName);
                 LoadConfiguration(element);
             }
             else
@@ -94,7 +102,7 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         /// <param name="loadConfig">Whether or not config should be loaded.</param>
         /// <param name="serviceCertificate">The service certificate to be used in ServiceTokenResolver and SessionSecurityTokenHandler.</param>
-        /// <exception cref="InvalidOperationException">Thrown if loadConfig is set to true but there is no 
+        /// <exception cref="InvalidOperationException">Thrown if loadConfig is set to true but there is no
         /// &lt;System.IdentityModel> configuration element</exception>
         public IdentityConfiguration(bool loadConfig, X509Certificate2 serviceCertificate)
             : this(loadConfig)
@@ -107,12 +115,14 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         /// <param name="identityConfigurationName">The name of the &lt;service> element from which configuration is to be loaded.</param>
         /// <exception cref="InvalidOperationException">Thrown if there is no &lt;System.IdentityModel> configuration element</exception>
-        /// <remarks>If this constructor is called then a System.IdentityModel config section with the provided name must exist.</remarks>        
+        /// <remarks>If this constructor is called then a System.IdentityModel config section with the provided name must exist.</remarks>
         public IdentityConfiguration(string identityConfigurationName)
         {
             if (identityConfigurationName == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("identityConfigurationName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "identityConfigurationName"
+                );
             }
 
             SystemIdentityModelSection section = SystemIdentityModelSection.Current;
@@ -123,7 +133,9 @@ namespace System.IdentityModel.Configuration
             }
 
             _identityConfigurationName = identityConfigurationName;
-            IdentityConfigurationElement element = section.IdentityConfigurationElements.GetElement(identityConfigurationName);
+            IdentityConfigurationElement element = section.IdentityConfigurationElements.GetElement(
+                identityConfigurationName
+            );
             LoadConfiguration(element);
         }
 
@@ -134,7 +146,10 @@ namespace System.IdentityModel.Configuration
         /// <exception cref="InvalidOperationException">Thrown if there is no &lt;System.IdentityModel> configuration element</exception>
         /// <param name="serviceCertificate">Thrown if there is no &lt;System.IdentityModel> configuration element</param>
         /// <remarks>If this constructor is called then a System.IdentityModel config section with the provided name must exist.</remarks>
-        public IdentityConfiguration(string identityConfigurationName, X509Certificate2 serviceCertificate)
+        public IdentityConfiguration(
+            string identityConfigurationName,
+            X509Certificate2 serviceCertificate
+        )
             : this(identityConfigurationName)
         {
             this.ServiceCertificate = serviceCertificate;
@@ -224,73 +239,92 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         public virtual bool IsInitialized
         {
-            get
-            {
-                return _isInitialized;
-            }
-            protected set
-            {
-                _isInitialized = value;
-            }
+            get { return _isInitialized; }
+            protected set { _isInitialized = value; }
         }
 
-        private static SecurityTokenResolver GetServiceTokenResolver(IdentityConfigurationElement element)
+        private static SecurityTokenResolver GetServiceTokenResolver(
+            IdentityConfigurationElement element
+        )
         {
             try
             {
-                return CustomTypeElement.Resolve<SecurityTokenResolver>(element.ServiceTokenResolver);
+                return CustomTypeElement.Resolve<SecurityTokenResolver>(
+                    element.ServiceTokenResolver
+                );
             }
             catch (ArgumentException inner)
             {
                 throw DiagnosticUtility.ThrowHelperConfigurationError(
-                    element, ConfigurationStrings.ServiceTokenResolver, inner);
+                    element,
+                    ConfigurationStrings.ServiceTokenResolver,
+                    inner
+                );
             }
         }
 
-        private static SecurityTokenResolver GetIssuerTokenResolver(IdentityConfigurationElement element)
+        private static SecurityTokenResolver GetIssuerTokenResolver(
+            IdentityConfigurationElement element
+        )
         {
             try
             {
-                return CustomTypeElement.Resolve<SecurityTokenResolver>(element.IssuerTokenResolver);
+                return CustomTypeElement.Resolve<SecurityTokenResolver>(
+                    element.IssuerTokenResolver
+                );
             }
             catch (ArgumentException inner)
             {
                 throw DiagnosticUtility.ThrowHelperConfigurationError(
-                    element, ConfigurationStrings.IssuerTokenResolver, inner);
+                    element,
+                    ConfigurationStrings.IssuerTokenResolver,
+                    inner
+                );
             }
         }
 
-        private static ClaimsAuthenticationManager GetClaimsAuthenticationManager(IdentityConfigurationElement element)
+        private static ClaimsAuthenticationManager GetClaimsAuthenticationManager(
+            IdentityConfigurationElement element
+        )
         {
             try
             {
-                return CustomTypeElement.Resolve<ClaimsAuthenticationManager>(element.ClaimsAuthenticationManager);
+                return CustomTypeElement.Resolve<ClaimsAuthenticationManager>(
+                    element.ClaimsAuthenticationManager
+                );
             }
             catch (ArgumentException inner)
             {
                 throw DiagnosticUtility.ThrowHelperConfigurationError(
-                    element, ConfigurationStrings.ClaimsAuthenticationManager, inner);
+                    element,
+                    ConfigurationStrings.ClaimsAuthenticationManager,
+                    inner
+                );
             }
         }
 
         private static IssuerNameRegistry GetIssuerNameRegistry(IssuerNameRegistryElement element)
         {
-
             try
             {
-                Type type = string.IsNullOrEmpty(element.Type) ? DefaultIssuerNameRegistryType : Type.GetType(element.Type);
+                Type type = string.IsNullOrEmpty(element.Type)
+                    ? DefaultIssuerNameRegistryType
+                    : Type.GetType(element.Type);
                 return TypeResolveHelper.Resolve<IssuerNameRegistry>(element, type);
             }
             catch (ArgumentException inner)
             {
                 throw DiagnosticUtility.ThrowHelperConfigurationError(
-                    element, ConfigurationStrings.IssuerNameRegistry, inner);
+                    element,
+                    ConfigurationStrings.IssuerNameRegistry,
+                    inner
+                );
             }
         }
 
         /// <summary>
-        /// Updates properties in the <see cref="SecurityTokenHandlerConfiguration"/> objects for the 
-        /// <see cref="SecurityTokenHandlerCollection"/> objects contained in 
+        /// Updates properties in the <see cref="SecurityTokenHandlerConfiguration"/> objects for the
+        /// <see cref="SecurityTokenHandlerCollection"/> objects contained in
         /// <see cref="IdentityConfiguration.SecurityTokenHandlerCollectionManager"/> to be consistent with the property
         /// values on this <see cref="IdentityConfiguration"/> instance.
         /// </summary>
@@ -308,7 +342,12 @@ namespace System.IdentityModel.Configuration
 
             SecurityTokenHandlerCollection defaultCollection = this.SecurityTokenHandlers;
 
-            if (!object.ReferenceEquals(_serviceHandlerConfiguration, defaultCollection.Configuration))
+            if (
+                !object.ReferenceEquals(
+                    _serviceHandlerConfiguration,
+                    defaultCollection.Configuration
+                )
+            )
             {
                 //
                 // If someone has created their own new STHConfig and set it as default, leave that config alone.
@@ -321,27 +360,48 @@ namespace System.IdentityModel.Configuration
             // Update the ServiceTokenResolver of the default TokenHandlerCollection's configuration, if serviceCertificate is set.
             if (this.ServiceCertificate != null)
             {
-                SecurityTokenResolver serviceCertificateResolver = SecurityTokenResolver.CreateDefaultSecurityTokenResolver(new ReadOnlyCollection<SecurityToken>(
-                                                      new SecurityToken[] { new X509SecurityToken(this.ServiceCertificate) }), false);
+                SecurityTokenResolver serviceCertificateResolver =
+                    SecurityTokenResolver.CreateDefaultSecurityTokenResolver(
+                        new ReadOnlyCollection<SecurityToken>(
+                            new SecurityToken[] { new X509SecurityToken(this.ServiceCertificate) }
+                        ),
+                        false
+                    );
 
-                SecurityTokenResolver tokenResolver = this.SecurityTokenHandlers.Configuration.ServiceTokenResolver;
+                SecurityTokenResolver tokenResolver = this.SecurityTokenHandlers
+                    .Configuration
+                    .ServiceTokenResolver;
 
-                if ((tokenResolver != null) && (tokenResolver != EmptySecurityTokenResolver.Instance))
+                if (
+                    (tokenResolver != null)
+                    && (tokenResolver != EmptySecurityTokenResolver.Instance)
+                )
                 {
-                    this.SecurityTokenHandlers.Configuration.ServiceTokenResolver = new AggregateTokenResolver(new SecurityTokenResolver[] { serviceCertificateResolver, tokenResolver });
+                    this.SecurityTokenHandlers.Configuration.ServiceTokenResolver =
+                        new AggregateTokenResolver(
+                            new SecurityTokenResolver[]
+                            {
+                                serviceCertificateResolver,
+                                tokenResolver,
+                            }
+                        );
                 }
                 else
                 {
-                    this.SecurityTokenHandlers.Configuration.ServiceTokenResolver = serviceCertificateResolver;
+                    this.SecurityTokenHandlers.Configuration.ServiceTokenResolver =
+                        serviceCertificateResolver;
                 }
             }
 
             SecurityTokenResolver configuredIssuerTokenResolver = this.IssuerTokenResolver;
 
-            if (this.IssuerTokenResolver == SecurityTokenHandlerConfiguration.DefaultIssuerTokenResolver)
+            if (
+                this.IssuerTokenResolver
+                == SecurityTokenHandlerConfiguration.DefaultIssuerTokenResolver
+            )
             {
                 //
-                // Add the known certificates from WCF's ServiceCredentials in front of 
+                // Add the known certificates from WCF's ServiceCredentials in front of
                 // the default issuer token resolver.
                 //
                 if (this.KnownIssuerCertificates != null)
@@ -355,25 +415,45 @@ namespace System.IdentityModel.Configuration
                             tokens[i] = new X509SecurityToken(this.KnownIssuerCertificates[i]);
                         }
 
-                        SecurityTokenResolver knownCertificateTokenResolver = SecurityTokenResolver.CreateDefaultSecurityTokenResolver(new ReadOnlyCollection<SecurityToken>(tokens), false);
-                        
-                        this.IssuerTokenResolver = new AggregateTokenResolver(new SecurityTokenResolver[] { knownCertificateTokenResolver, configuredIssuerTokenResolver });                       
+                        SecurityTokenResolver knownCertificateTokenResolver =
+                            SecurityTokenResolver.CreateDefaultSecurityTokenResolver(
+                                new ReadOnlyCollection<SecurityToken>(tokens),
+                                false
+                            );
+
+                        this.IssuerTokenResolver = new AggregateTokenResolver(
+                            new SecurityTokenResolver[]
+                            {
+                                knownCertificateTokenResolver,
+                                configuredIssuerTokenResolver,
+                            }
+                        );
                     }
                 }
             }
-            
+
             if (this.CertificateValidationMode != X509CertificateValidationMode.Custom)
             {
-                defaultCollection.Configuration.CertificateValidator = X509Util.CreateCertificateValidator(defaultCollection.Configuration.CertificateValidationMode,
-                                                                                                            defaultCollection.Configuration.RevocationMode,
-                                                                                                            defaultCollection.Configuration.TrustedStoreLocation);
+                defaultCollection.Configuration.CertificateValidator =
+                    X509Util.CreateCertificateValidator(
+                        defaultCollection.Configuration.CertificateValidationMode,
+                        defaultCollection.Configuration.RevocationMode,
+                        defaultCollection.Configuration.TrustedStoreLocation
+                    );
             }
-            else if (object.ReferenceEquals(defaultCollection.Configuration.CertificateValidator, SecurityTokenHandlerConfiguration.DefaultCertificateValidator))
+            else if (
+                object.ReferenceEquals(
+                    defaultCollection.Configuration.CertificateValidator,
+                    SecurityTokenHandlerConfiguration.DefaultCertificateValidator
+                )
+            )
             {
                 //
                 // If the mode is custom but the validator or still default, something has gone wrong.
                 //
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4280)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4280))
+                );
             }
 
             this.IsInitialized = true;
@@ -388,7 +468,6 @@ namespace System.IdentityModel.Configuration
         /// </remarks>
         protected void LoadConfiguration(IdentityConfigurationElement element)
         {
-
             if (element != null)
             {
                 //
@@ -404,7 +483,10 @@ namespace System.IdentityModel.Configuration
                 //
                 if (element.ClaimsAuthorizationManager.IsConfigured)
                 {
-                    _claimsAuthorizationManager = CustomTypeElement.Resolve<ClaimsAuthorizationManager>(element.ClaimsAuthorizationManager);
+                    _claimsAuthorizationManager =
+                        CustomTypeElement.Resolve<ClaimsAuthorizationManager>(
+                            element.ClaimsAuthorizationManager
+                        );
                 }
 
                 //
@@ -424,13 +506,16 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         /// <param name="serviceElement">The <see cref="IdentityConfigurationElement"/> used to configure this instance.</param>
         /// <returns></returns>
-        protected SecurityTokenHandlerCollectionManager LoadHandlers(IdentityConfigurationElement serviceElement)
+        protected SecurityTokenHandlerCollectionManager LoadHandlers(
+            IdentityConfigurationElement serviceElement
+        )
         {
             //
             // We start with a token handler collection manager that contains a single collection that includes the default
             // handlers for the system.
             //
-            SecurityTokenHandlerCollectionManager manager = SecurityTokenHandlerCollectionManager.CreateEmptySecurityTokenHandlerCollectionManager();
+            SecurityTokenHandlerCollectionManager manager =
+                SecurityTokenHandlerCollectionManager.CreateEmptySecurityTokenHandlerCollectionManager();
 
             if (serviceElement != null)
             {
@@ -439,28 +524,44 @@ namespace System.IdentityModel.Configuration
                 //
                 if (serviceElement.SecurityTokenHandlerSets.Count > 0)
                 {
-                    foreach (SecurityTokenHandlerElementCollection handlerElementCollection in serviceElement.SecurityTokenHandlerSets)
+                    foreach (
+                        SecurityTokenHandlerElementCollection handlerElementCollection in serviceElement.SecurityTokenHandlerSets
+                    )
                     {
                         try
                         {
                             SecurityTokenHandlerConfiguration handlerConfiguration;
                             SecurityTokenHandlerCollection handlerCollection;
 
-                            if (string.IsNullOrEmpty(handlerElementCollection.Name) ||
-                                 StringComparer.Ordinal.Equals(handlerElementCollection.Name, ConfigurationStrings.DefaultConfigurationElementName))
+                            if (
+                                string.IsNullOrEmpty(handlerElementCollection.Name)
+                                || StringComparer.Ordinal.Equals(
+                                    handlerElementCollection.Name,
+                                    ConfigurationStrings.DefaultConfigurationElementName
+                                )
+                            )
                             {
                                 //
                                 // For the default collection, merge the IdentityConfiguration with the underlying config, if it exists.
                                 //
-                                if (handlerElementCollection.SecurityTokenHandlerConfiguration.IsConfigured)
+                                if (
+                                    handlerElementCollection
+                                        .SecurityTokenHandlerConfiguration
+                                        .IsConfigured
+                                )
                                 {
                                     //
-                                    // Configuration from a nested configuration object. We start with Service level configuration for 
+                                    // Configuration from a nested configuration object. We start with Service level configuration for
                                     // handlers and then override the collection specific configuration. The result is a new configuration
                                     // object that can only be modified by accessing the collection or handlers configuration properties.
                                     //
-                                    _serviceHandlerConfiguration = LoadHandlerConfiguration(serviceElement);
-                                    handlerConfiguration = LoadHandlerConfiguration(_serviceHandlerConfiguration, handlerElementCollection.SecurityTokenHandlerConfiguration);
+                                    _serviceHandlerConfiguration = LoadHandlerConfiguration(
+                                        serviceElement
+                                    );
+                                    handlerConfiguration = LoadHandlerConfiguration(
+                                        _serviceHandlerConfiguration,
+                                        handlerElementCollection.SecurityTokenHandlerConfiguration
+                                    );
                                 }
                                 else
                                 {
@@ -477,9 +578,16 @@ namespace System.IdentityModel.Configuration
                                 //
                                 // This is a non-default collection. There should be no settings inherited from IdentityConfiguration.
                                 //
-                                if (handlerElementCollection.SecurityTokenHandlerConfiguration.IsConfigured)
+                                if (
+                                    handlerElementCollection
+                                        .SecurityTokenHandlerConfiguration
+                                        .IsConfigured
+                                )
                                 {
-                                    handlerConfiguration = LoadHandlerConfiguration(null, handlerElementCollection.SecurityTokenHandlerConfiguration);
+                                    handlerConfiguration = LoadHandlerConfiguration(
+                                        null,
+                                        handlerElementCollection.SecurityTokenHandlerConfiguration
+                                    );
                                 }
                                 else
                                 {
@@ -490,17 +598,25 @@ namespace System.IdentityModel.Configuration
                                 }
                             }
 
-                            handlerCollection = new SecurityTokenHandlerCollection(handlerConfiguration);
+                            handlerCollection = new SecurityTokenHandlerCollection(
+                                handlerConfiguration
+                            );
                             manager[handlerElementCollection.Name] = handlerCollection;
 
                             foreach (CustomTypeElement handlerElement in handlerElementCollection)
                             {
-                                handlerCollection.Add(CustomTypeElement.Resolve<SecurityTokenHandler>(handlerElement));
+                                handlerCollection.Add(
+                                    CustomTypeElement.Resolve<SecurityTokenHandler>(handlerElement)
+                                );
                             }
                         }
                         catch (ArgumentException inner)
                         {
-                            throw DiagnosticUtility.ThrowHelperConfigurationError(serviceElement, handlerElementCollection.Name, inner);
+                            throw DiagnosticUtility.ThrowHelperConfigurationError(
+                                serviceElement,
+                                handlerElementCollection.Name,
+                                inner
+                            );
                         }
                     }
                 }
@@ -509,7 +625,10 @@ namespace System.IdentityModel.Configuration
                 //
                 if (!manager.ContainsKey(SecurityTokenHandlerCollectionManager.Usage.Default))
                 {
-                    manager[SecurityTokenHandlerCollectionManager.Usage.Default] = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection(_serviceHandlerConfiguration);
+                    manager[SecurityTokenHandlerCollectionManager.Usage.Default] =
+                        SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection(
+                            _serviceHandlerConfiguration
+                        );
                 }
             }
             else
@@ -523,7 +642,10 @@ namespace System.IdentityModel.Configuration
 
                 if (!manager.ContainsKey(SecurityTokenHandlerCollectionManager.Usage.Default))
                 {
-                    manager[SecurityTokenHandlerCollectionManager.Usage.Default] = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection(_serviceHandlerConfiguration);
+                    manager[SecurityTokenHandlerCollectionManager.Usage.Default] =
+                        SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection(
+                            _serviceHandlerConfiguration
+                        );
                 }
             }
 
@@ -533,14 +655,21 @@ namespace System.IdentityModel.Configuration
         /// <summary>
         /// Loads a SecurityTokenHandlerConfiguration using the elements directly under the ServiceElement.
         /// </summary>
-        protected SecurityTokenHandlerConfiguration LoadHandlerConfiguration(IdentityConfigurationElement element)
+        protected SecurityTokenHandlerConfiguration LoadHandlerConfiguration(
+            IdentityConfigurationElement element
+        )
         {
-
-            SecurityTokenHandlerConfiguration handlerConfiguration = new SecurityTokenHandlerConfiguration();
+            SecurityTokenHandlerConfiguration handlerConfiguration =
+                new SecurityTokenHandlerConfiguration();
 
             try
             {
-                if (element.ElementInformation.Properties[ConfigurationStrings.MaximumClockSkew].ValueOrigin != PropertyValueOrigin.Default)
+                if (
+                    element
+                        .ElementInformation
+                        .Properties[ConfigurationStrings.MaximumClockSkew]
+                        .ValueOrigin != PropertyValueOrigin.Default
+                )
                 {
                     handlerConfiguration.MaxClockSkew = element.MaximumClockSkew;
                 }
@@ -551,7 +680,11 @@ namespace System.IdentityModel.Configuration
             }
             catch (ArgumentException inner)
             {
-                throw DiagnosticUtility.ThrowHelperConfigurationError(element, ConfigurationStrings.MaximumClockSkew, inner);
+                throw DiagnosticUtility.ThrowHelperConfigurationError(
+                    element,
+                    ConfigurationStrings.MaximumClockSkew,
+                    inner
+                );
             }
 
             if (element.AudienceUris.IsConfigured)
@@ -560,31 +693,46 @@ namespace System.IdentityModel.Configuration
 
                 foreach (AudienceUriElement audienceUriElement in element.AudienceUris)
                 {
-                    handlerConfiguration.AudienceRestriction.AllowedAudienceUris.Add(new Uri(audienceUriElement.Value, UriKind.RelativeOrAbsolute));
+                    handlerConfiguration.AudienceRestriction.AllowedAudienceUris.Add(
+                        new Uri(audienceUriElement.Value, UriKind.RelativeOrAbsolute)
+                    );
                 }
             }
             if (element.Caches.IsConfigured)
             {
                 if (element.Caches.TokenReplayCache.IsConfigured)
                 {
-                    handlerConfiguration.Caches.TokenReplayCache = CustomTypeElement.Resolve<TokenReplayCache>(element.Caches.TokenReplayCache);
+                    handlerConfiguration.Caches.TokenReplayCache =
+                        CustomTypeElement.Resolve<TokenReplayCache>(
+                            element.Caches.TokenReplayCache
+                        );
                 }
 
                 if (element.Caches.SessionSecurityTokenCache.IsConfigured)
                 {
-                    handlerConfiguration.Caches.SessionSecurityTokenCache = CustomTypeElement.Resolve<SessionSecurityTokenCache>(element.Caches.SessionSecurityTokenCache);
+                    handlerConfiguration.Caches.SessionSecurityTokenCache =
+                        CustomTypeElement.Resolve<SessionSecurityTokenCache>(
+                            element.Caches.SessionSecurityTokenCache
+                        );
                 }
             }
 
             if (element.CertificateValidation.IsConfigured)
             {
                 handlerConfiguration.RevocationMode = element.CertificateValidation.RevocationMode;
-                handlerConfiguration.CertificateValidationMode = element.CertificateValidation.CertificateValidationMode;
-                handlerConfiguration.TrustedStoreLocation = element.CertificateValidation.TrustedStoreLocation;
+                handlerConfiguration.CertificateValidationMode = element
+                    .CertificateValidation
+                    .CertificateValidationMode;
+                handlerConfiguration.TrustedStoreLocation = element
+                    .CertificateValidation
+                    .TrustedStoreLocation;
 
                 if (element.CertificateValidation.CertificateValidator.IsConfigured)
                 {
-                    handlerConfiguration.CertificateValidator = CustomTypeElement.Resolve<X509CertificateValidator>(element.CertificateValidation.CertificateValidator);
+                    handlerConfiguration.CertificateValidator =
+                        CustomTypeElement.Resolve<X509CertificateValidator>(
+                            element.CertificateValidation.CertificateValidator
+                        );
                 }
             }
 
@@ -593,7 +741,9 @@ namespace System.IdentityModel.Configuration
             //
             if (element.IssuerNameRegistry.IsConfigured)
             {
-                handlerConfiguration.IssuerNameRegistry = GetIssuerNameRegistry(element.IssuerNameRegistry);
+                handlerConfiguration.IssuerNameRegistry = GetIssuerNameRegistry(
+                    element.IssuerNameRegistry
+                );
             }
 
             //
@@ -632,7 +782,9 @@ namespace System.IdentityModel.Configuration
 
                 // ExpirationPeriod { TimeSpan }
                 //
-                handlerConfiguration.TokenReplayCacheExpirationPeriod = element.TokenReplayDetection.ExpirationPeriod;
+                handlerConfiguration.TokenReplayCacheExpirationPeriod = element
+                    .TokenReplayDetection
+                    .ExpirationPeriod;
             }
 
             return handlerConfiguration;
@@ -644,9 +796,15 @@ namespace System.IdentityModel.Configuration
         /// <param name="baseConfiguration">Base <see cref="SecurityTokenHandlerConfiguration"/> from which to inherit default values.</param>
         /// <param name="element">The <see cref="SecurityTokenHandlerConfigurationElement"/> from the configuration file.</param>
         /// <returns></returns>
-        protected SecurityTokenHandlerConfiguration LoadHandlerConfiguration(SecurityTokenHandlerConfiguration baseConfiguration, SecurityTokenHandlerConfigurationElement element)
+        protected SecurityTokenHandlerConfiguration LoadHandlerConfiguration(
+            SecurityTokenHandlerConfiguration baseConfiguration,
+            SecurityTokenHandlerConfigurationElement element
+        )
         {
-            SecurityTokenHandlerConfiguration handlerConfiguration = (baseConfiguration == null) ? new SecurityTokenHandlerConfiguration() : baseConfiguration;
+            SecurityTokenHandlerConfiguration handlerConfiguration =
+                (baseConfiguration == null)
+                    ? new SecurityTokenHandlerConfiguration()
+                    : baseConfiguration;
 
             if (element.AudienceUris.IsConfigured)
             {
@@ -661,7 +819,9 @@ namespace System.IdentityModel.Configuration
 
                 foreach (AudienceUriElement audienceUriElement in element.AudienceUris)
                 {
-                    handlerConfiguration.AudienceRestriction.AllowedAudienceUris.Add(new Uri(audienceUriElement.Value, UriKind.RelativeOrAbsolute));
+                    handlerConfiguration.AudienceRestriction.AllowedAudienceUris.Add(
+                        new Uri(audienceUriElement.Value, UriKind.RelativeOrAbsolute)
+                    );
                 }
             }
 
@@ -669,24 +829,37 @@ namespace System.IdentityModel.Configuration
             {
                 if (element.Caches.TokenReplayCache.IsConfigured)
                 {
-                    handlerConfiguration.Caches.TokenReplayCache = CustomTypeElement.Resolve<TokenReplayCache>(element.Caches.TokenReplayCache);
+                    handlerConfiguration.Caches.TokenReplayCache =
+                        CustomTypeElement.Resolve<TokenReplayCache>(
+                            element.Caches.TokenReplayCache
+                        );
                 }
 
                 if (element.Caches.SessionSecurityTokenCache.IsConfigured)
                 {
-                    handlerConfiguration.Caches.SessionSecurityTokenCache = CustomTypeElement.Resolve<SessionSecurityTokenCache>(element.Caches.SessionSecurityTokenCache);
+                    handlerConfiguration.Caches.SessionSecurityTokenCache =
+                        CustomTypeElement.Resolve<SessionSecurityTokenCache>(
+                            element.Caches.SessionSecurityTokenCache
+                        );
                 }
             }
 
             if (element.CertificateValidation.IsConfigured)
             {
                 handlerConfiguration.RevocationMode = element.CertificateValidation.RevocationMode;
-                handlerConfiguration.CertificateValidationMode = element.CertificateValidation.CertificateValidationMode;
-                handlerConfiguration.TrustedStoreLocation = element.CertificateValidation.TrustedStoreLocation;
+                handlerConfiguration.CertificateValidationMode = element
+                    .CertificateValidation
+                    .CertificateValidationMode;
+                handlerConfiguration.TrustedStoreLocation = element
+                    .CertificateValidation
+                    .TrustedStoreLocation;
 
                 if (element.CertificateValidation.CertificateValidator.IsConfigured)
                 {
-                    handlerConfiguration.CertificateValidator = CustomTypeElement.Resolve<X509CertificateValidator>(element.CertificateValidation.CertificateValidator);
+                    handlerConfiguration.CertificateValidator =
+                        CustomTypeElement.Resolve<X509CertificateValidator>(
+                            element.CertificateValidation.CertificateValidator
+                        );
                 }
             }
 
@@ -695,7 +868,9 @@ namespace System.IdentityModel.Configuration
             //
             if (element.IssuerNameRegistry.IsConfigured)
             {
-                handlerConfiguration.IssuerNameRegistry = GetIssuerNameRegistry(element.IssuerNameRegistry);
+                handlerConfiguration.IssuerNameRegistry = GetIssuerNameRegistry(
+                    element.IssuerNameRegistry
+                );
             }
 
             //
@@ -703,7 +878,8 @@ namespace System.IdentityModel.Configuration
             //
             if (element.IssuerTokenResolver.IsConfigured)
             {
-                handlerConfiguration.IssuerTokenResolver = CustomTypeElement.Resolve<SecurityTokenResolver>(element.IssuerTokenResolver);
+                handlerConfiguration.IssuerTokenResolver =
+                    CustomTypeElement.Resolve<SecurityTokenResolver>(element.IssuerTokenResolver);
             }
 
             //
@@ -711,20 +887,34 @@ namespace System.IdentityModel.Configuration
             //
             try
             {
-                if (element.ElementInformation.Properties[ConfigurationStrings.MaximumClockSkew].ValueOrigin != PropertyValueOrigin.Default)
+                if (
+                    element
+                        .ElementInformation
+                        .Properties[ConfigurationStrings.MaximumClockSkew]
+                        .ValueOrigin != PropertyValueOrigin.Default
+                )
                 {
                     handlerConfiguration.MaxClockSkew = element.MaximumClockSkew;
                 }
             }
             catch (ArgumentException inner)
             {
-                throw DiagnosticUtility.ThrowHelperConfigurationError(element, ConfigurationStrings.MaximumClockSkew, inner);
+                throw DiagnosticUtility.ThrowHelperConfigurationError(
+                    element,
+                    ConfigurationStrings.MaximumClockSkew,
+                    inner
+                );
             }
 
             //
             // SaveBootstrapTokens
             //
-            if (element.ElementInformation.Properties[ConfigurationStrings.SaveBootstrapContext].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                element
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.SaveBootstrapContext]
+                    .ValueOrigin != PropertyValueOrigin.Default
+            )
             {
                 handlerConfiguration.SaveBootstrapContext = element.SaveBootstrapContext;
             }
@@ -734,7 +924,8 @@ namespace System.IdentityModel.Configuration
             //
             if (element.ServiceTokenResolver.IsConfigured)
             {
-                handlerConfiguration.ServiceTokenResolver = CustomTypeElement.Resolve<SecurityTokenResolver>(element.ServiceTokenResolver);
+                handlerConfiguration.ServiceTokenResolver =
+                    CustomTypeElement.Resolve<SecurityTokenResolver>(element.ServiceTokenResolver);
             }
 
             //
@@ -754,15 +945,16 @@ namespace System.IdentityModel.Configuration
                 //
                 // ExpirationPeriod { TimeSpan }
                 //
-                handlerConfiguration.TokenReplayCacheExpirationPeriod = element.TokenReplayDetection.ExpirationPeriod;
-
+                handlerConfiguration.TokenReplayCacheExpirationPeriod = element
+                    .TokenReplayDetection
+                    .ExpirationPeriod;
             }
 
             return handlerConfiguration;
         }
 
         /// <summary>
-        /// Gets or sets the maximum allowable time difference between the 
+        /// Gets or sets the maximum allowable time difference between the
         /// system clocks of the two parties that are communicating.
         /// </summary>
         public TimeSpan MaxClockSkew
@@ -776,10 +968,7 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         public string Name
         {
-            get
-            {
-                return _identityConfigurationName;
-            }
+            get { return _identityConfigurationName; }
         }
 
         /// <summary>
@@ -787,10 +976,7 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         public IssuerNameRegistry IssuerNameRegistry
         {
-            get
-            {
-                return _serviceHandlerConfiguration.IssuerNameRegistry;
-            }
+            get { return _serviceHandlerConfiguration.IssuerNameRegistry; }
             set
             {
                 if (value == null)
@@ -813,14 +999,8 @@ namespace System.IdentityModel.Configuration
 
         internal List<X509Certificate2> KnownIssuerCertificates
         {
-            get
-            {
-                return this.knownCertificates;
-            }
-            set
-            {
-                this.knownCertificates = value;
-            }
+            get { return this.knownCertificates; }
+            set { this.knownCertificates = value; }
         }
 
         /// <summary>
@@ -828,10 +1008,7 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         public SecurityTokenResolver IssuerTokenResolver
         {
-            get
-            {
-                return _serviceHandlerConfiguration.IssuerTokenResolver;
-            }
+            get { return _serviceHandlerConfiguration.IssuerTokenResolver; }
             set
             {
                 if (value == null)
@@ -857,10 +1034,7 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         public SecurityTokenResolver ServiceTokenResolver
         {
-            get
-            {
-                return _serviceHandlerConfiguration.ServiceTokenResolver;
-            }
+            get { return _serviceHandlerConfiguration.ServiceTokenResolver; }
             set
             {
                 if (value == null)
@@ -887,10 +1061,7 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         public SecurityTokenHandlerCollectionManager SecurityTokenHandlerCollectionManager
         {
-            get
-            {
-                return _securityTokenHandlerCollectionManager;
-            }
+            get { return _securityTokenHandlerCollectionManager; }
         }
 
         /// <summary>
@@ -903,7 +1074,9 @@ namespace System.IdentityModel.Configuration
         {
             get
             {
-                return _securityTokenHandlerCollectionManager[SecurityTokenHandlerCollectionManager.Usage.Default];
+                return _securityTokenHandlerCollectionManager[
+                    SecurityTokenHandlerCollectionManager.Usage.Default
+                ];
             }
         }
 

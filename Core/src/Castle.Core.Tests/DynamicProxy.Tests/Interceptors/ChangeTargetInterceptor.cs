@@ -14,20 +14,20 @@
 
 namespace Castle.DynamicProxy.Tests.Interceptors
 {
-	public class ChangeTargetInterceptor : IInterceptor
-	{
-		private object target;
+    public class ChangeTargetInterceptor : IInterceptor
+    {
+        private object target;
 
-		public ChangeTargetInterceptor(object target)
-		{
-			this.target = target;
-		}
+        public ChangeTargetInterceptor(object target)
+        {
+            this.target = target;
+        }
 
-		public void Intercept(IInvocation invocation)
-		{
-			IChangeProxyTarget changeTarget = (IChangeProxyTarget) invocation;
-			changeTarget.ChangeInvocationTarget(target);
-			invocation.Proceed();
-		}
-	}
+        public void Intercept(IInvocation invocation)
+        {
+            IChangeProxyTarget changeTarget = (IChangeProxyTarget)invocation;
+            changeTarget.ChangeInvocationTarget(target);
+            invocation.Proceed();
+        }
+    }
 }

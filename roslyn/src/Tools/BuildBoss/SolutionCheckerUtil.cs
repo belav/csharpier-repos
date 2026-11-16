@@ -47,7 +47,10 @@ namespace BuildBoss
             return allGood;
         }
 
-        private bool CheckProjects(TextWriter textWriter, Dictionary<ProjectKey, SolutionProjectData> map)
+        private bool CheckProjects(
+            TextWriter textWriter,
+            Dictionary<ProjectKey, SolutionProjectData> map
+        )
         {
             var solutionMap = new Dictionary<ProjectKey, ProjectData>();
             foreach (var pair in map)
@@ -75,7 +78,10 @@ namespace BuildBoss
             return allGood;
         }
 
-        private bool CheckDuplicate(TextWriter textWriter, out Dictionary<ProjectKey, SolutionProjectData> map)
+        private bool CheckDuplicate(
+            TextWriter textWriter,
+            out Dictionary<ProjectKey, SolutionProjectData> map
+        )
         {
             map = new Dictionary<ProjectKey, SolutionProjectData>();
             var allGood = true;
@@ -105,28 +111,39 @@ namespace BuildBoss
         /// <summary>
         /// Ensure solution files have the proper project system GUID.
         /// </summary>
-        private bool CheckProjectSystemGuid(TextWriter textWriter, IEnumerable<SolutionProjectData> dataList)
+        private bool CheckProjectSystemGuid(
+            TextWriter textWriter,
+            IEnumerable<SolutionProjectData> dataList
+        )
         {
             Guid getExpectedGuid(ProjectData data)
             {
                 var util = data.ProjectUtil;
                 switch (ProjectEntryUtil.GetProjectFileType(data.FilePath))
                 {
-                    case ProjectFileType.CSharp: return ProjectEntryUtil.ManagedProjectSystemCSharp;
-                    case ProjectFileType.Basic: return ProjectEntryUtil.ManagedProjectSystemVisualBasic;
-                    case ProjectFileType.Shared: return ProjectEntryUtil.SharedProject;
-                    default: throw new Exception($"Invalid file path {data.FilePath}");
+                    case ProjectFileType.CSharp:
+                        return ProjectEntryUtil.ManagedProjectSystemCSharp;
+                    case ProjectFileType.Basic:
+                        return ProjectEntryUtil.ManagedProjectSystemVisualBasic;
+                    case ProjectFileType.Shared:
+                        return ProjectEntryUtil.SharedProject;
+                    default:
+                        throw new Exception($"Invalid file path {data.FilePath}");
                 }
             }
 
             var allGood = true;
-            foreach (var data in dataList.Where(x => x.ProjectEntry.ProjectType != ProjectFileType.Tool))
+            foreach (
+                var data in dataList.Where(x => x.ProjectEntry.ProjectType != ProjectFileType.Tool)
+            )
             {
                 var guid = getExpectedGuid(data.ProjectData);
                 if (guid != data.ProjectEntry.TypeGuid)
                 {
                     var name = data.ProjectData.FileName;
-                    textWriter.WriteLine($"Project {name} should have GUID {guid} but has {data.ProjectEntry.TypeGuid}");
+                    textWriter.WriteLine(
+                        $"Project {name} should have GUID {guid} but has {data.ProjectEntry.TypeGuid}"
+                    );
                     allGood = false;
                 }
             }

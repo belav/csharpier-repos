@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,43 +32,36 @@ using System.Runtime.Serialization;
 
 namespace System.Management
 {
-	[Serializable]
-	public class ManagementException : SystemException
-	{
-		public ManagementException ()
-			: this ("system management error has occured")
-		{
-		}
+    [Serializable]
+    public class ManagementException : SystemException
+    {
+        public ManagementException()
+            : this("system management error has occured") { }
 
-		public ManagementException (string message)
-			: base (message)
-		{
-		}
+        public ManagementException(string message)
+            : base(message) { }
 
-		public ManagementException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-		}
+        public ManagementException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-		protected ManagementException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected ManagementException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-		[MonoTODO]
-		public ManagementStatus ErrorCode {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public ManagementStatus ErrorCode
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public ManagementBaseObject ErrorInformation {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public ManagementBaseObject ErrorInformation
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public override void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			base.GetObjectData (info, context);
-		}
-	}
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+        }
+    }
 }
-

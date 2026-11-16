@@ -13,7 +13,11 @@ namespace System.Tests
         public static void Ctor_Empty()
         {
             var exception = new RankException();
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_RANK, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_RANK,
+                validateMessage: false
+            );
         }
 
         [Fact]
@@ -21,7 +25,11 @@ namespace System.Tests
         {
             string message = "bad rank";
             var exception = new RankException(message);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_RANK, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_RANK,
+                message: message
+            );
         }
 
         [Fact]
@@ -30,7 +38,12 @@ namespace System.Tests
             string message = "bad rank";
             var innerException = new Exception("Inner exception");
             var exception = new RankException(message, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_RANK, innerException: innerException, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_RANK,
+                innerException: innerException,
+                message: message
+            );
         }
     }
 }

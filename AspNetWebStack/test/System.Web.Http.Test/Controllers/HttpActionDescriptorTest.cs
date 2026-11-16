@@ -13,7 +13,10 @@ namespace System.Web.Http.Controllers
         [InlineData(typeof(HttpResponseMessage), typeof(ResponseMessageResultConverter))]
         [InlineData(typeof(object), typeof(ValueResultConverter<object>))]
         [InlineData(typeof(string), typeof(ValueResultConverter<string>))]
-        public void GetResultConverter_GetAppropriateConverterInstance(Type actionReturnType, Type expectedConverterType)
+        public void GetResultConverter_GetAppropriateConverterInstance(
+            Type actionReturnType,
+            Type expectedConverterType
+        )
         {
             var result = HttpActionDescriptor.GetResultConverter(actionReturnType);
 
@@ -24,7 +27,9 @@ namespace System.Web.Http.Controllers
         public void GetResultConverter_WhenReturnTypeIsActionResult_ReturnsNull()
         {
             // Act
-            IActionResultConverter converter = HttpActionDescriptor.GetResultConverter(typeof(IHttpActionResult));
+            IActionResultConverter converter = HttpActionDescriptor.GetResultConverter(
+                typeof(IHttpActionResult)
+            );
 
             // Assert
             Assert.Null(converter);
@@ -33,10 +38,14 @@ namespace System.Web.Http.Controllers
         [Fact]
         public void GetResultConverter_WhenTypeIsAnGenericParameterType_Throws()
         {
-            var genericType = typeof(HttpActionDescriptorTest).GetMethod("SampleGenericMethod").ReturnType;
+            var genericType = typeof(HttpActionDescriptorTest)
+                .GetMethod("SampleGenericMethod")
+                .ReturnType;
 
-            Assert.Throws<InvalidOperationException>(() => HttpActionDescriptor.GetResultConverter(genericType),
-                "No action result converter could be constructed for a generic parameter type 'TResult'.");
+            Assert.Throws<InvalidOperationException>(
+                () => HttpActionDescriptor.GetResultConverter(genericType),
+                "No action result converter could be constructed for a generic parameter type 'TResult'."
+            );
         }
 
         public TResult SampleGenericMethod<TResult>()

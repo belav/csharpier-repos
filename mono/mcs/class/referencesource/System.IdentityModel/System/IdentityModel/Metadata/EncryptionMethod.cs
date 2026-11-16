@@ -35,7 +35,6 @@ namespace System.IdentityModel.Metadata
         public Uri Algorithm
         {
             get { return _algorithm; }
-
             set
             {
                 if (value == null)

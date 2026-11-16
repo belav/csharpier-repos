@@ -14,10 +14,9 @@ namespace System.ServiceModel.Description
 
     internal static class ListenUriModeHelper
     {
-        static public bool IsDefined(ListenUriMode mode)
+        public static bool IsDefined(ListenUriMode mode)
         {
-            return mode == ListenUriMode.Explicit
-                || mode == ListenUriMode.Unique;
+            return mode == ListenUriMode.Explicit || mode == ListenUriMode.Unique;
         }
     }
 }

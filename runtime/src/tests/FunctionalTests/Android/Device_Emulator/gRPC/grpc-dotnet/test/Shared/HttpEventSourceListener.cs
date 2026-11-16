@@ -53,7 +53,8 @@ namespace Grpc.Tests.Shared
 
         private static bool IsHttpEventSource(EventSource eventSource)
         {
-            return eventSource.Name.Contains("System.Net.Quic") || eventSource.Name.Contains("System.Net.Http");
+            return eventSource.Name.Contains("System.Net.Quic")
+                || eventSource.Name.Contains("System.Net.Http");
         }
 
         protected override void OnEventWritten(EventWrittenEventArgs eventData)

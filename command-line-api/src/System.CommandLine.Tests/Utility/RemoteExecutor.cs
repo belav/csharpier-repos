@@ -19,7 +19,9 @@ namespace System.CommandLine.Tests.Utility
         {
             if (args.Length < 3)
             {
-                Console.Error.WriteLine("This is not the program you are looking for. Run 'dotnet test' instead.");
+                Console.Error.WriteLine(
+                    "This is not the program you are looking for. Run 'dotnet test' instead."
+                );
                 return -1;
             }
 
@@ -83,13 +85,23 @@ namespace System.CommandLine.Tests.Utility
             return exitCode;
         }
 
-        public static RemoteExecution Execute(Func<string[], int> mainMethod, string[] args = null, ProcessStartInfo psi = null)
-            => Execute(mainMethod.GetMethodInfo(), args, psi);
+        public static RemoteExecution Execute(
+            Func<string[], int> mainMethod,
+            string[] args = null,
+            ProcessStartInfo psi = null
+        ) => Execute(mainMethod.GetMethodInfo(), args, psi);
 
-        public static RemoteExecution Execute(Func<string[], Task<int>> mainMethod, string[] args = null, ProcessStartInfo psi = null)
-            => Execute(mainMethod.GetMethodInfo(), args, psi);
+        public static RemoteExecution Execute(
+            Func<string[], Task<int>> mainMethod,
+            string[] args = null,
+            ProcessStartInfo psi = null
+        ) => Execute(mainMethod.GetMethodInfo(), args, psi);
 
-        private static RemoteExecution Execute(MethodInfo methodInfo, string[] args, ProcessStartInfo psi)
+        private static RemoteExecution Execute(
+            MethodInfo methodInfo,
+            string[] args,
+            ProcessStartInfo psi
+        )
         {
             Type declaringType = methodInfo.DeclaringType;
             string className = declaringType.FullName;
@@ -99,8 +111,10 @@ namespace System.CommandLine.Tests.Utility
             string dotnetExecutable = Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
             string thisAssembly = typeof(RemoteExecutor).Assembly.Location;
             var assembly = (Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly());
-            string entryAssemblyWithoutExtension = Path.Combine(Path.GetDirectoryName(assembly.Location),
-                                                                Path.GetFileNameWithoutExtension(assembly.Location));
+            string entryAssemblyWithoutExtension = Path.Combine(
+                Path.GetDirectoryName(assembly.Location),
+                Path.GetFileNameWithoutExtension(assembly.Location)
+            );
             string runtimeConfig = GetApplicationArgument("--runtimeconfig");
             if (runtimeConfig == null)
             {
@@ -119,8 +133,20 @@ namespace System.CommandLine.Tests.Utility
             psi.FileName = dotnetExecutable;
 
             var argumentList = new List<string>();
-            argumentList.AddRange(new[] { "exec", "--runtimeconfig", runtimeConfig, "--depsfile", depsFile, thisAssembly,
-                                               className, methodName, exceptionFile });
+            argumentList.AddRange(
+                new[]
+                {
+                    "exec",
+                    "--runtimeconfig",
+                    runtimeConfig,
+                    "--depsfile",
+                    depsFile,
+                    thisAssembly,
+                    className,
+                    methodName,
+                    exceptionFile,
+                }
+            );
             if (args != null)
             {
                 argumentList.AddRange(args);
@@ -159,7 +185,10 @@ namespace System.CommandLine.Tests.Utility
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                s_arguments = File.ReadAllText($"/proc/{Diagnostics.Process.GetCurrentProcess().Id}/cmdline").Split(new[] { '\0' });
+                s_arguments = File.ReadAllText(
+                        $"/proc/{Diagnostics.Process.GetCurrentProcess().Id}/cmdline"
+                    )
+                    .Split(new[] { '\0' });
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -169,7 +198,9 @@ namespace System.CommandLine.Tests.Utility
             }
             else
             {
-                throw new PlatformNotSupportedException($"{nameof(GetApplicationArguments)} is not supported on this platform.");
+                throw new PlatformNotSupportedException(
+                    $"{nameof(GetApplicationArguments)} is not supported on this platform."
+                );
             }
 
             return s_arguments;
@@ -179,7 +210,10 @@ namespace System.CommandLine.Tests.Utility
         private static extern IntPtr GetCommandLine();
 
         [DllImport("shell32.dll", SetLastError = true)]
-        private static extern IntPtr CommandLineToArgvW([MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine, out int pNumArgs);
+        private static extern IntPtr CommandLineToArgvW(
+            [MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine,
+            out int pNumArgs
+        );
 
         public static string[] CommandLineToArgs(string commandLine)
         {

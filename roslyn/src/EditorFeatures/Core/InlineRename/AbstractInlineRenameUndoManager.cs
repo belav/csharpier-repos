@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
         protected readonly InlineRenameService InlineRenameService;
         private readonly IGlobalOptionService _globalOptionService;
-        protected readonly Dictionary<ITextBuffer, TBufferState> UndoManagers = new Dictionary<ITextBuffer, TBufferState>();
+        protected readonly Dictionary<ITextBuffer, TBufferState> UndoManagers =
+            new Dictionary<ITextBuffer, TBufferState>();
         protected readonly Stack<ActiveSpanState> UndoStack = new Stack<ActiveSpanState>();
         protected readonly Stack<ActiveSpanState> RedoStack = new Stack<ActiveSpanState>();
         protected ActiveSpanState initialState;
@@ -40,7 +41,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
         private InlineRenameSession _trackedSession;
 
-        public AbstractInlineRenameUndoManager(InlineRenameService inlineRenameService, IGlobalOptionService globalOptionService)
+        public AbstractInlineRenameUndoManager(
+            InlineRenameService inlineRenameService,
+            IGlobalOptionService globalOptionService
+        )
         {
             this.InlineRenameService = inlineRenameService;
             _globalOptionService = globalOptionService;
@@ -48,17 +52,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             InlineRenameService.ActiveSessionChanged += InlineRenameService_ActiveSessionChanged;
         }
 
-        private void InlineRenameService_ActiveSessionChanged(object sender, InlineRenameService.ActiveSessionChangedEventArgs e)
+        private void InlineRenameService_ActiveSessionChanged(
+            object sender,
+            InlineRenameService.ActiveSessionChangedEventArgs e
+        )
         {
             if (_trackedSession is not null)
             {
-                _trackedSession.ReplacementTextChanged -= InlineRenameSession_ReplacementTextChanged;
+                _trackedSession.ReplacementTextChanged -=
+                    InlineRenameSession_ReplacementTextChanged;
             }
 
             if (!_globalOptionService.GetOption(InlineRenameUIOptionsStorage.UseInlineAdornment))
             {
-                // If the user is typing directly into the editor as the only way to change 
-                // the replacement text then we don't need to respond to text changes. The 
+                // If the user is typing directly into the editor as the only way to change
+                // the replacement text then we don't need to respond to text changes. The
                 // listener on the textview that calls UpdateCurrentState will handle
                 // this correctly. This option cannot change when we are currently in a session, so
                 // only hook up as needed
@@ -70,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
             if (_trackedSession is not null)
             {
-                _trackedSession.ReplacementTextChanged += InlineRenameSession_ReplacementTextChanged;
+                _trackedSession.ReplacementTextChanged +=
+                    InlineRenameSession_ReplacementTextChanged;
             }
         }
 
@@ -85,7 +94,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 {
                     ReplacementText = _trackedSession.ReplacementText,
                     SelectionAnchorPoint = currentState.SelectionAnchorPoint,
-                    SelectionActivePoint = currentState.SelectionActivePoint
+                    SelectionActivePoint = currentState.SelectionActivePoint,
                 };
             }
         }
@@ -99,23 +108,35 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             this.currentState = null;
         }
 
-        private void UpdateCurrentState(string replacementText, ITextSelection selection, SnapshotSpan activeSpan)
+        private void UpdateCurrentState(
+            string replacementText,
+            ITextSelection selection,
+            SnapshotSpan activeSpan
+        )
         {
             var snapshot = activeSpan.Snapshot;
             var selectionSpan = selection.GetSnapshotSpansOnBuffer(snapshot.TextBuffer).Single();
 
-            var start = selectionSpan.Start.TranslateTo(snapshot, PointTrackingMode.Positive).Position - activeSpan.Start.Position;
-            var end = selectionSpan.End.TranslateTo(snapshot, PointTrackingMode.Positive).Position - activeSpan.Start.Position;
+            var start =
+                selectionSpan.Start.TranslateTo(snapshot, PointTrackingMode.Positive).Position
+                - activeSpan.Start.Position;
+            var end =
+                selectionSpan.End.TranslateTo(snapshot, PointTrackingMode.Positive).Position
+                - activeSpan.Start.Position;
 
             this.currentState = new ActiveSpanState()
             {
                 ReplacementText = replacementText,
                 SelectionAnchorPoint = selection.IsReversed ? end : start,
-                SelectionActivePoint = selection.IsReversed ? start : end
+                SelectionActivePoint = selection.IsReversed ? start : end,
             };
         }
 
-        public void CreateInitialState(string replacementText, ITextSelection selection, SnapshotSpan startingSpan)
+        public void CreateInitialState(
+            string replacementText,
+            ITextSelection selection,
+            SnapshotSpan startingSpan
+        )
         {
             UpdateCurrentState(replacementText, selection, startingSpan);
             this.initialState = this.currentState;
@@ -130,18 +151,31 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             }
 
             // For now, we will only ever be one Undo away from the beginning of the rename session.  We can
-            // implement Undo merging in the future. 
+            // implement Undo merging in the future.
             var replacementText = singleTrackingSpanTouched.GetText();
             UpdateCurrentState(replacementText, selection, singleTrackingSpanTouched);
 
-            this.InlineRenameService.ActiveSession.ApplyReplacementText(replacementText, propagateEditImmediately: false);
+            this.InlineRenameService.ActiveSession.ApplyReplacementText(
+                replacementText,
+                propagateEditImmediately: false
+            );
         }
 
-        public void UpdateSelection(ITextView textView, ITextBuffer subjectBuffer, ITrackingSpan activeRenameSpan)
+        public void UpdateSelection(
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            ITrackingSpan activeRenameSpan
+        )
         {
             var snapshot = subjectBuffer.CurrentSnapshot;
-            var anchor = new VirtualSnapshotPoint(snapshot, this.currentState.SelectionAnchorPoint + activeRenameSpan.GetStartPoint(snapshot));
-            var active = new VirtualSnapshotPoint(snapshot, this.currentState.SelectionActivePoint + activeRenameSpan.GetStartPoint(snapshot));
+            var anchor = new VirtualSnapshotPoint(
+                snapshot,
+                this.currentState.SelectionAnchorPoint + activeRenameSpan.GetStartPoint(snapshot)
+            );
+            var active = new VirtualSnapshotPoint(
+                snapshot,
+                this.currentState.SelectionActivePoint + activeRenameSpan.GetStartPoint(snapshot)
+            );
             textView.SetSelection(anchor, active);
         }
 
@@ -151,7 +185,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             {
                 this.RedoStack.Push(this.currentState);
                 this.currentState = this.UndoStack.Pop();
-                this.InlineRenameService.ActiveSession.ApplyReplacementText(this.currentState.ReplacementText, propagateEditImmediately: true);
+                this.InlineRenameService.ActiveSession.ApplyReplacementText(
+                    this.currentState.ReplacementText,
+                    propagateEditImmediately: true
+                );
             }
             else
             {
@@ -165,19 +202,42 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             {
                 this.UndoStack.Push(this.currentState);
                 this.currentState = this.RedoStack.Pop();
-                this.InlineRenameService.ActiveSession.ApplyReplacementText(this.currentState.ReplacementText, propagateEditImmediately: true);
+                this.InlineRenameService.ActiveSession.ApplyReplacementText(
+                    this.currentState.ReplacementText,
+                    propagateEditImmediately: true
+                );
             }
         }
 
-        protected abstract void UndoTemporaryEdits(ITextBuffer subjectBuffer, bool disconnect, bool undoConflictResolution);
+        protected abstract void UndoTemporaryEdits(
+            ITextBuffer subjectBuffer,
+            bool disconnect,
+            bool undoConflictResolution
+        );
 
-        protected void ApplyReplacementText(ITextBuffer subjectBuffer, ITextUndoHistory undoHistory, object propagateSpansEditTag, IEnumerable<ITrackingSpan> spans, string replacementText)
+        protected void ApplyReplacementText(
+            ITextBuffer subjectBuffer,
+            ITextUndoHistory undoHistory,
+            object propagateSpansEditTag,
+            IEnumerable<ITrackingSpan> spans,
+            string replacementText
+        )
         {
             // roll back to the initial state for the buffer after conflict resolution
-            this.UndoTemporaryEdits(subjectBuffer, disconnect: false, undoConflictResolution: replacementText == string.Empty);
+            this.UndoTemporaryEdits(
+                subjectBuffer,
+                disconnect: false,
+                undoConflictResolution: replacementText == string.Empty
+            );
 
-            using var transaction = undoHistory.CreateTransaction(GetUndoTransactionDescription(replacementText));
-            using var edit = subjectBuffer.CreateEdit(EditOptions.None, null, propagateSpansEditTag);
+            using var transaction = undoHistory.CreateTransaction(
+                GetUndoTransactionDescription(replacementText)
+            );
+            using var edit = subjectBuffer.CreateEdit(
+                EditOptions.None,
+                null,
+                propagateSpansEditTag
+            );
 
             foreach (var span in spans)
             {
@@ -198,7 +258,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             }
         }
 
-        protected static string GetUndoTransactionDescription(string replacementText)
-            => replacementText == string.Empty ? "Delete Text" : replacementText;
+        protected static string GetUndoTransactionDescription(string replacementText) =>
+            replacementText == string.Empty ? "Delete Text" : replacementText;
     }
 }

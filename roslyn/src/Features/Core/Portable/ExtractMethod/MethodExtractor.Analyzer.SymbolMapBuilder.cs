@@ -13,7 +13,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod
 {
-    internal abstract partial class MethodExtractor<TSelectionResult, TStatementSyntax, TExpressionSyntax>
+    internal abstract partial class MethodExtractor<
+        TSelectionResult,
+        TStatementSyntax,
+        TExpressionSyntax
+    >
     {
         protected abstract partial class Analyzer
         {
@@ -30,13 +34,19 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     SemanticModel semanticModel,
                     SyntaxNode root,
                     TextSpan span,
-                    CancellationToken cancellationToken)
+                    CancellationToken cancellationToken
+                )
                 {
                     Contract.ThrowIfNull(semanticModel);
                     Contract.ThrowIfNull(service);
                     Contract.ThrowIfNull(root);
 
-                    var builder = new SymbolMapBuilder(service, semanticModel, span, cancellationToken);
+                    var builder = new SymbolMapBuilder(
+                        service,
+                        semanticModel,
+                        span,
+                        cancellationToken
+                    );
                     builder.Visit(root);
 
                     return builder._symbolMap;
@@ -46,7 +56,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     ISyntaxFactsService service,
                     SemanticModel semanticModel,
                     TextSpan span,
-                    CancellationToken cancellationToken)
+                    CancellationToken cancellationToken
+                )
                 {
                     _semanticModel = semanticModel;
                     _service = service;
@@ -58,11 +69,13 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 {
                     foreach (var token in node.DescendantTokens())
                     {
-                        if (token.IsMissing ||
-                            token.Width() <= 0 ||
-                            !_service.IsIdentifier(token) ||
-                            !_span.Contains(token.Span) ||
-                            _service.IsNameOfNamedArgument(token.Parent))
+                        if (
+                            token.IsMissing
+                            || token.Width() <= 0
+                            || !_service.IsIdentifier(token)
+                            || !_span.Contains(token.Span)
+                            || _service.IsNameOfNamedArgument(token.Parent)
+                        )
                         {
                             continue;
                         }

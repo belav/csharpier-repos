@@ -14,7 +14,8 @@ namespace Sample
 
         public SpanTask()
         {
-            measurements = new Measurement[] {
+            measurements = new Measurement[]
+            {
                 new ReverseByte(),
                 new ReverseChar(),
                 new IndexOfByte(),
@@ -27,10 +28,7 @@ namespace Sample
 
         public override Measurement[] Measurements
         {
-            get
-            {
-                return measurements;
-            }
+            get { return measurements; }
         }
 
         public abstract class SpanMeasurement : BenchTask.Measurement
@@ -126,6 +124,7 @@ namespace Sample
         class ReverseChar : SpanCharMeasurement
         {
             public override string Name => "Reverse chars";
+
             public override void RunStep()
             {
                 var span = new Span<char>(data);
@@ -136,6 +135,7 @@ namespace Sample
         class IndexOfChar : SpanCharMeasurement
         {
             public override string Name => "IndexOf chars";
+
             public override void RunStep()
             {
                 var span = new Span<char>(data);

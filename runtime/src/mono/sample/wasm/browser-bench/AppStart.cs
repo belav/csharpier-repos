@@ -20,7 +20,8 @@ namespace Sample
 
         public AppStartTask()
         {
-            measurements = new Measurement[] {
+            measurements = new Measurement[]
+            {
                 new PageShow(),
                 new ReachManaged(),
                 new ReachManagedCold(),
@@ -250,12 +251,16 @@ namespace Sample
         {
             [JSImport("globalThis.mainApp.FrameBlazorFirstUI")]
             public static partial Task FrameBlazorFirstUI(string guid, string urlBase);
+
             [JSImport("globalThis.mainApp.PageShow")]
             public static partial Task PageShow(string guid, string urlBase);
+
             [JSImport("globalThis.mainApp.FrameReachedManaged")]
             public static partial Task FrameReachedManaged(string guid, string urlBase);
+
             [JSImport("globalThis.mainApp.SetFramePage")]
             public static partial Task SetFramePage(string page);
+
             [JSImport("globalThis.mainApp.Origin")]
             public static partial string Origin();
         }

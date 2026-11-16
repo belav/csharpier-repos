@@ -12,7 +12,8 @@ namespace System.Security.Cryptography
     {
         private static partial SP800108HmacCounterKdfImplementationBase CreateImplementation(
             ReadOnlySpan<byte> key,
-            HashAlgorithmName hashAlgorithm)
+            HashAlgorithmName hashAlgorithm
+        )
         {
             return new SP800108HmacCounterKdfImplementationManaged(key, hashAlgorithm);
         }
@@ -22,11 +23,18 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             byte[] label,
             byte[] context,
-            int derivedKeyLengthInBytes)
+            int derivedKeyLengthInBytes
+        )
         {
             byte[] result = new byte[derivedKeyLengthInBytes];
 
-            SP800108HmacCounterKdfImplementationManaged.DeriveBytesOneShot(key, hashAlgorithm, label, context, result);
+            SP800108HmacCounterKdfImplementationManaged.DeriveBytesOneShot(
+                key,
+                hashAlgorithm,
+                label,
+                context,
+                result
+            );
 
             return result;
         }
@@ -36,9 +44,16 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<byte> label,
             ReadOnlySpan<byte> context,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
-            SP800108HmacCounterKdfImplementationManaged.DeriveBytesOneShot(key, hashAlgorithm, label, context, destination);
+            SP800108HmacCounterKdfImplementationManaged.DeriveBytesOneShot(
+                key,
+                hashAlgorithm,
+                label,
+                context,
+                destination
+            );
         }
 
         private static partial void DeriveBytesCore(
@@ -46,9 +61,16 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<char> label,
             ReadOnlySpan<char> context,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
-            SP800108HmacCounterKdfImplementationManaged.DeriveBytesOneShot(key, hashAlgorithm, label, context, destination);
+            SP800108HmacCounterKdfImplementationManaged.DeriveBytesOneShot(
+                key,
+                hashAlgorithm,
+                label,
+                context,
+                destination
+            );
         }
     }
 }

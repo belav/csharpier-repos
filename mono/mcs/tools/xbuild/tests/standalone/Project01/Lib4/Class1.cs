@@ -4,8 +4,5 @@ using System.Text;
 
 namespace Lib4
 {
-	public class Class1
-	{
-	
-	}
+    public class Class1 { }
 }

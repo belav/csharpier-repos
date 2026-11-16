@@ -23,15 +23,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
     public class AddParameterTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public AddParameterTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpAddParameterCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpAddParameterCodeFixProvider());
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [Fact]
         public async Task TestMissingWithImplicitConstructor()
@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new [|C|](1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(p: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -137,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new [|C|](1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -171,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(true, 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -205,7 +210,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(1, true);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -239,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(true, 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -259,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new [|C|](1, true);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20708")]
@@ -296,7 +304,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(true, 0, 0);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20708")]
@@ -333,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(0, true, 0);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20708")]
@@ -370,7 +380,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(0, 0, true);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20708")]
@@ -409,7 +420,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(true, 0, 0);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20708")]
@@ -448,7 +460,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(0, true, 0);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20708")]
@@ -487,7 +500,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(0, 0, true);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20973")]
@@ -521,7 +535,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(null, 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20973")]
@@ -555,7 +570,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(null, 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20973")]
@@ -589,7 +605,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(default, 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20973")]
@@ -623,7 +640,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         new C(default, 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
@@ -655,7 +673,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         M1(i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
@@ -693,7 +712,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         M1(i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
@@ -709,7 +729,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         [|GetHashCode|](i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
@@ -735,7 +756,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         Local(2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
@@ -753,7 +775,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         [|a|](2);
                     }
                 }
-                """);
+                """
+            );
             //Should be Action<int> a = (int v) => { };
         }
 
@@ -784,14 +807,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         M1(1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocationExtensionMethod()
         {
-            var code =
-                """
+            var code = """
                 namespace N {
                 static class Extensions
                 {
@@ -807,8 +830,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }}
                 """;
-            var fix =
-                """
+            var fix = """
                 namespace N {
                 static class Extensions
                 {
@@ -831,8 +853,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocationExtensionMethod_StaticInvocationStyle()
         {
             // error CS1501: No overload for method 'ExtensionM1' takes 2 arguments
-            var code =
-                """
+            var code = """
                 namespace N {
                 static class Extensions
                 {
@@ -848,8 +869,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }}
                 """;
-            var fix =
-                """
+            var fix = """
                 namespace N {
                 static class Extensions
                 {
@@ -969,8 +989,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocationImplicitInterface()
         {
-            var code =
-                """
+            var code = """
                 interface I1
                 {
                     void M1();
@@ -1019,8 +1038,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocationImplicitInterfaces()
         {
-            var code =
-                """
+            var code = """
                 interface I1
                 {
                     void M1();
@@ -1102,7 +1120,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         M1(1, 2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
@@ -1126,14 +1145,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                         M1(1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocationOverloads1()
         {
-            var code =
-                """
+            var code = """
                 class C1
                 {
                     void M1(string s) { }
@@ -1144,8 +1163,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C1
                 {
                     void M1(string s) { }
@@ -1156,8 +1174,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix1 =
-                """
+            var fix1 = """
                 class C1
                 {
                     void M1(int v, string s) { }
@@ -1175,8 +1192,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocationOverloads2()
         {
-            var code =
-                """
+            var code = """
                 class C1
                 {
                     void M1(string s1, string s2) { }
@@ -1188,8 +1204,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C1
                 {
                     void M1(string s1, string s2) { }
@@ -1201,8 +1216,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix1 =
-                """
+            var fix1 = """
                 class C1
                 {
                     void M1(string s1, string s2) { }
@@ -1221,8 +1235,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocationTuple1()
         {
-            var code =
-                """
+            var code = """
                 class C1
                 {
                     void M1((int, int) t1)
@@ -1234,8 +1247,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C1
                 {
                     void M1((int, int) t1, (int, string) value)
@@ -1253,8 +1265,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocationTuple2()
         {
-            var code =
-                """
+            var code = """
                 class C1
                 {
                     void M1((int, int) t1)
@@ -1267,8 +1278,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C1
                 {
                     void M1((int, int) t1, (int, string) tup)
@@ -1287,8 +1297,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocationTuple3()
         {
-            var code =
-                """
+            var code = """
                 class C1
                 {
                     void M1((int, int) t1)
@@ -1301,8 +1310,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C1
                 {
                     void M1((int, int) t1, (int i, string s) tup)
@@ -1322,8 +1330,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_Missing_TypeArguments_AddingTypeArgumentAndParameter()
         {
             // error CS0305: Using the generic method 'C1.M1<T>(T)' requires 1 type arguments
-            var code =
-                """
+            var code = """
                 class C1
                 {
                     void M1<T>(T i) { }
@@ -1341,8 +1348,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_Missing_TypeArguments_AddingTypeArgument()
         {
             // error CS0308: The non-generic method 'C1.M1(int)' cannot be used with type arguments
-            var code =
-                """
+            var code = """
                 class C1
                 {
                     void M1(int i) { }
@@ -1361,8 +1367,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_Missing_ExplicitInterfaceImplementation()
         {
             // error CS0539: 'C1.M1(int)' in explicit interface declaration is not a member of interface
-            var code =
-                """
+            var code = """
                 interface I1
                 {
                     void M1();
@@ -1381,8 +1386,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_OverloadResolutionFailure()
         {
             // error CS1503: Argument 1: cannot convert from 'double' to 'int'
-            var code =
-                """
+            var code = """
                 class C1
                 {
                     void M1(int i1, int i2) { }
@@ -1393,8 +1397,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C1
                 {
                     void M1(int i1, int i2) { }
@@ -1412,8 +1415,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_LambdaExpressionParameter()
         {
             // error CS1660: Cannot convert lambda expression to type 'int' because it is not a delegate type
-            var code =
-                """
+            var code = """
                 class C1
                 {
                     void M1(int i1, int i2) { }
@@ -1424,8 +1426,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix =
-                """
+            var fix = """
                 class C1
                 {
                     void M1(int i1, int i2) { }
@@ -1443,8 +1444,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_NamedParameter()
         {
             // error CS1739: The best overload for 'M1' does not have a parameter named 'i2'
-            var code =
-                """
+            var code = """
                 class C1
                 {
                     void M1(int i1) { }
@@ -1454,8 +1454,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix =
-                """
+            var fix = """
                 class C1
                 {
                     void M1(int i1, int i2) { }
@@ -1471,8 +1470,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocationAddTypeParameter_AddTypeParameterIfUserSpecifiesOne_OnlyTypeArgument()
         {
-            var code =
-                """
+            var code = """
                 class C1
                 {
                     void M1() { }
@@ -1489,8 +1487,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocationAddTypeParameter_AddTypeParameterIfUserSpecifiesOne_TypeArgumentAndParameterArgument()
         {
-            var code =
-                """
+            var code = """
                 class C1
                 {
                     void M1() { }
@@ -1507,8 +1504,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocation_ExisitingTypeArgumentIsNotGeneralized()
         {
-            var code =
-                """
+            var code = """
                 class C1
                 {
                     void M1<T>(T v) { }
@@ -1518,8 +1514,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C1
                 {
                     void M1<T>(T v, bool v1) { }
@@ -1536,8 +1531,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_AddParameterToMethodWithParams()
         {
             // error CS1503: Argument 1: cannot convert from 'bool' to 'int'
-            var code =
-                """
+            var code = """
                 class C1
                 {
                     static void M1(params int[] nums) { }
@@ -1547,8 +1541,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C1
                 {
                     static void M1(bool v, params int[] nums) { }
@@ -1565,8 +1558,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_Cascading_FixingVirtualFixesOverrideToo()
         {
             // error CS1501: No overload for method 'M1' takes 1 arguments
-            var code =
-                """
+            var code = """
                 class BaseClass
                 {
                     protected virtual void M1() { }
@@ -1583,8 +1575,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix_DeclarationOnly =
-                """
+            var fix_DeclarationOnly = """
                 class BaseClass
                 {
                     protected virtual void M1(int v) { }
@@ -1601,8 +1592,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix_All =
-                """
+            var fix_All = """
                 class BaseClass
                 {
                     protected virtual void M1(int v) { }
@@ -1626,8 +1616,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocation_Cascading_PartialMethods()
         {
-            var code =
-                """
+            var code = """
                 <Workspace>
                     <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                         <Document>
@@ -1655,8 +1644,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     </Project>
                 </Workspace>
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 <Workspace>
                     <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                         <Document>
@@ -1690,8 +1678,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact]
         public async Task TestInvocation_Cascading_ExtendedPartialMethods()
         {
-            var code =
-                """
+            var code = """
                 <Workspace>
                     <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                         <Document>
@@ -1719,8 +1706,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     </Project>
                 </Workspace>
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 <Workspace>
                     <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                         <Document>
@@ -1754,8 +1740,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocation_Cascading_PartialMethodsInSameDocument()
         {
-            var code =
-                """
+            var code = """
                 namespace N1
                 {
                     partial class C1
@@ -1772,8 +1757,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 namespace N1
                 {
                     partial class C1
@@ -1797,8 +1781,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_Cascading_BaseNotInSource()
         {
             // error CS1501: No overload for method 'M' takes 1 arguments
-            var code =
-                """
+            var code = """
                 <Workspace>
                     <Project Language="C#" CommonReferences="true">
                         <MetadataReferenceFromSource Language="C#" CommonReferences="true">
@@ -1834,8 +1817,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_Cascading_RootNotInSource()
         {
             // error CS1501: No overload for method 'M' takes 1 arguments
-            var code =
-                """
+            var code = """
                 <Workspace>
                     <Project Language="C#" CommonReferences="true">
                         <MetadataReferenceFromSource Language="C#" CommonReferences="true">
@@ -1896,7 +1878,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(code, fixedDocumentWithoutConflictAnnotation, index: 0);
+            await TestInRegularAndScriptAsync(
+                code,
+                fixedDocumentWithoutConflictAnnotation,
+                index: 0
+            );
             await TestInRegularAndScriptAsync(code, fixedDocumentWithConflictAnnotation, index: 1);
         }
 
@@ -1904,8 +1890,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_Cascading_ManyReferencesInManyProjects()
         {
             // error CS1501: No overload for method 'M' takes 1 arguments
-            var code =
-                """
+            var code = """
                 <Workspace>
                     <Project Language="C#" CommonReferences="true" AssemblyName="A1">
                         <Document FilePath="ReferencedDocument">
@@ -1958,8 +1943,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     </Project>
                 </Workspace>
                 """;
-            var fix_All =
-                """
+            var fix_All = """
                 <Workspace>
                     <Project Language="C#" CommonReferences="true" AssemblyName="A1">
                         <Document FilePath="ReferencedDocument">
@@ -2019,8 +2003,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_Cascading_OfferFixCascadingForImplicitInterface()
         {
             // error CS1501: No overload for method 'M1' takes 1 arguments
-            var code =
-                """
+            var code = """
                 interface I1
                 {
                     void M1();
@@ -2034,8 +2017,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix_DeclarationOnly =
-                """
+            var fix_DeclarationOnly = """
                 interface I1
                 {
                     void M1();
@@ -2049,8 +2031,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix_All =
-                """
+            var fix_All = """
                 interface I1
                 {
                     void M1(int v);
@@ -2075,8 +2056,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocation_Cascading_CrossLanguage()
         {
-            var code =
-                """
+            var code = """
                 <Workspace>
                     <Project Language="Visual Basic" CommonReferences="true" AssemblyName="VB1">
                         <Document FilePath="ReferencedDocument">
@@ -2108,8 +2088,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     </Project>
                 </Workspace>
                 """;
-            var fix =
-                """
+            var fix = """
                 <Workspace>
                     <Project Language="Visual Basic" CommonReferences="true" AssemblyName="VB1">
                         <Document FilePath="ReferencedDocument">
@@ -2143,14 +2122,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                 """;
             await TestInRegularAndScriptAsync(code, fix, index: 1);
         }
-
 #endif
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocation_InvocationStyles_Positional_MoreThanOneArgumentToMuch()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M() { }
@@ -2160,8 +2137,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C
                 {
                     void M(int v) { }
@@ -2179,8 +2155,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_InvocationStyles_Positional_WithOptionalParam()
         {
             // error CS1501: No overload for method 'M' takes 2 arguments
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M(int i = 1) { }
@@ -2190,8 +2165,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C
                 {
                     void M(int i = 1, int v = 0) { }
@@ -2208,8 +2182,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_InvocationStyles_Named_WithOptionalParam()
         {
             // error CS1739: The best overload for 'M' does not have a parameter named 'i3'
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M(int i1, int i2 = 1) { }
@@ -2219,8 +2192,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C
                 {
                     void M(int i1, int i2 = 1, int i3 = 0) { }
@@ -2237,8 +2209,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_InvocationStyles_Positional_WithParams()
         {
             // error CS1503: Argument 1: cannot convert from 'string' to 'int'
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M(params int[] ints) { }
@@ -2248,8 +2219,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C
                 {
                     void M(string v, params int[] ints) { }
@@ -2266,8 +2236,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_InvocationStyles_Named_WithTypemissmatch()
         {
             // error CS1503: Argument 1: cannot convert from 'string' to 'int'
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M(int i) { }
@@ -2284,8 +2253,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_InvocationStyles_NamedAndPositional1()
         {
             // error CS1739: The best overload for 'M' does not have a parameter named 'i2'
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M(int i1, string s) { }
@@ -2295,8 +2263,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C
                 {
                     void M(int i1, string s, int i2) { }
@@ -2314,8 +2281,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         {
             // CS1744 is not yet a supported diagnostic (just declaring the diagnostic as supported does not work)
             // error CS1744: Named argument 's' specifies a parameter for which a positional argument has already been given
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M(string s) { }
@@ -2332,8 +2298,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_InvocationStyles_Incomplete_1()
         {
             // error CS1501: No overload for method 'M' takes 1 arguments
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M() { }
@@ -2343,8 +2308,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C
                 {
                     void M(int v) { }
@@ -2361,8 +2325,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestInvocation_InvocationStyles_Incomplete_2()
         {
             // error CS1503: Argument 1: cannot convert from 'string' to 'int'
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M(int v) { }
@@ -2370,8 +2333,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     {
                         [|M|]("text", 1
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C
                 {
                     void M(string v1, int v) { }
@@ -2385,9 +2347,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocation_InvocationStyles_RefParameter()
         {
-            // error CS1501: No overload for method 'M' takes 1 arguments            
-            var code =
-                """
+            // error CS1501: No overload for method 'M' takes 1 arguments
+            var code = """
                 class C
                 {
                     void M() { }
@@ -2398,8 +2359,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C
                 {
                     void M(ref int i) { }
@@ -2416,9 +2376,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocation_InvocationStyles_OutParameter_WithTypeDeclarationOutsideArgument()
         {
-            // error CS1501: No overload for method 'M' takes 1 arguments            
-            var code =
-                """
+            // error CS1501: No overload for method 'M' takes 1 arguments
+            var code = """
                 class C
                 {
                     void M() { }
@@ -2429,8 +2388,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C
                 {
                     void M(out int i) { }
@@ -2447,9 +2405,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocation_InvocationStyles_OutParameter_WithTypeDeclarationInArgument()
         {
-            // error CS1501: No overload for method 'M' takes 1 arguments            
-            var code =
-                """
+            // error CS1501: No overload for method 'M' takes 1 arguments
+            var code = """
                 class C
                 {
                     void M() { }
@@ -2459,8 +2416,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C
                 {
                     void M(out int i) { }
@@ -2476,9 +2432,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21446")]
         public async Task TestInvocation_InvocationStyles_OutParameter_WithVarTypeDeclarationInArgument()
         {
-            // error CS1501: No overload for method 'M' takes 1 arguments            
-            var code =
-                """
+            // error CS1501: No overload for method 'M' takes 1 arguments
+            var code = """
                 class C
                 {
                     void M() { }
@@ -2488,8 +2443,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C
                 {
                     void M(out object i) { }
@@ -2508,8 +2462,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
             // Could be fixed by allowing ElementAccessExpression next to InvocationExpression
             // in AbstractAddParameterCodeFixProvider.RegisterCodeFixesAsync.
             // error CS1501: No overload for method 'this' takes 2 arguments
-            var code =
-                """
+            var code = """
                 public class C {
                     public int this[int i] 
                     { 
@@ -2529,8 +2482,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestThis_DoNotOfferToFixTheConstructorWithTheDiagnosticOnIt()
         {
             // error CS1729: 'C' does not contain a constructor that takes 1 arguments
-            var code =
-                """
+            var code = """
                 public class C {
 
                     public C(): [|this|](1)
@@ -2544,8 +2496,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestThis_Fix_IfACandidateIsAvailable()
         {
             // error CS1729: 'C' does not contain a constructor that takes 2 arguments
-            var code =
-                """
+            var code = """
                 class C 
                 {
                     public C(int i) { }
@@ -2554,8 +2505,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     { }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class C 
                 {
                     public C(int i, int v) { }
@@ -2572,8 +2522,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task TestBase_Fix_IfACandidateIsAvailable()
         {
             // error CS1729: 'B' does not contain a constructor that takes 1 arguments
-            var code =
-                """
+            var code = """
                 public class B
                 {
                     B() { }
@@ -2583,8 +2532,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     public C(int i) : [|base|](i) { }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 public class B
                 {
                     B(int i) { }
@@ -2602,8 +2550,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task LocalFunction_AddParameterToLocalFunctionWithOneParameter()
         {
             // CS1501 No overload for method takes 2 arguments
-            var code =
-                """
+            var code = """
                 class Rsrp
                 {
                   public void M()
@@ -2616,8 +2563,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                   }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class Rsrp
                 {
                   public void M()
@@ -2637,8 +2583,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         public async Task LocalFunction_AddNamedParameterToLocalFunctionWithOneParameter()
         {
             // CS1739: The best overload for 'Local' does not have a parameter named 'mynewparameter'
-            var code =
-                """
+            var code = """
                 class Rsrp
                 {
                     public void M()
@@ -2651,8 +2596,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }
                 """;
-            var fix0 =
-                """
+            var fix0 = """
                 class Rsrp
                 {
                     public void M()
@@ -2703,14 +2647,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
 
                     void MyFunc(BaseClass param1, int newparam) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestOnExtensionGetEnumerator()
         {
-            var code =
-                """
+            var code = """
                 using System.Collections.Generic;
                 namespace N {
                 static class Extensions
@@ -2728,8 +2672,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     }
                 }}
                 """;
-            var fix =
-                """
+            var fix = """
                 using System.Collections.Generic;
                 namespace N {
                 static class Extensions
@@ -2755,51 +2698,52 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
         {
             var code =
                 """
-                using System.Collections.Generic;
-                using System.Threading.Tasks;
-                namespace N {
-                static class Extensions
-                {
-                    public static IAsyncEnumerator<int> GetAsyncEnumerator(this object o)
+                    using System.Collections.Generic;
+                    using System.Threading.Tasks;
+                    namespace N {
+                    static class Extensions
                     {
+                        public static IAsyncEnumerator<int> GetAsyncEnumerator(this object o)
+                        {
+                        }
                     }
-                }
-                class C1
-                {
-                    async Task M1()
+                    class C1
                     {
-                        new object().[|GetAsyncEnumerator|](1);
-                        await foreach (var a in new object());
-                    }
-                }}
-                """ + IAsyncEnumerable;
+                        async Task M1()
+                        {
+                            new object().[|GetAsyncEnumerator|](1);
+                            await foreach (var a in new object());
+                        }
+                    }}
+                    """ + IAsyncEnumerable;
             var fix =
                 """
-                using System.Collections.Generic;
-                using System.Threading.Tasks;
-                namespace N {
-                static class Extensions
-                {
-                    public static IAsyncEnumerator<int> GetAsyncEnumerator(this object o, int v)
+                    using System.Collections.Generic;
+                    using System.Threading.Tasks;
+                    namespace N {
+                    static class Extensions
                     {
+                        public static IAsyncEnumerator<int> GetAsyncEnumerator(this object o, int v)
+                        {
+                        }
                     }
-                }
-                class C1
-                {
-                    async Task M1()
+                    class C1
                     {
-                        new object().GetAsyncEnumerator(1);
-                        await foreach (var a in new object());
-                    }
-                }}
-                """ + IAsyncEnumerable;
+                        async Task M1()
+                        {
+                            new object().GetAsyncEnumerator(1);
+                            await foreach (var a in new object());
+                        }
+                    }}
+                    """ + IAsyncEnumerable;
             await TestInRegularAndScriptAsync(code, fix);
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44271")]
         public async Task TopLevelStatement()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 [|local|](1, 2, 3);
 
                 void local(int x, int y)
@@ -2812,13 +2756,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                 void local(int x, int y, int v)
                 {
                 }
-                """, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+                """,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44271")]
         public async Task TopLevelStatement_Nested()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 void outer()
                 {
                     [|local|](1, 2, 3);
@@ -2837,13 +2784,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42559")]
         public async Task TestAddParameter_ImplicitObjectCreation()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 class C
                 {
                     C(int i) { }
@@ -2864,7 +2813,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                        C c = new(1, 2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48042")]
@@ -2896,13 +2846,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                             => new Abc().Act(param3: 123);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/54408")]
         public async Task TestPositionalRecord()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 var b = "B";
                 var r = [|new R(1, b)|];
 
@@ -2912,7 +2864,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                 {
                     public static class IsExternalInit { }
                 }
-                """, """
+                """,
+                """
                 var b = "B";
                 var r = new R(1, b);
 
@@ -2922,29 +2875,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
                 {
                     public static class IsExternalInit { }
                 }
-                """, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+                """,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
 
         [Fact]
         public async Task Test_PrimaryConstructor_Class()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 var b = ""B"";
 var r = [|new R(1, b)|];
 
 class R(int A);
-", @"
+",
+                @"
 var b = ""B"";
 var r = new R(1, b);
 
 class R(int A, string b);
-", parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp12));
+",
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp12)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/54408")]
         public async Task TestPositionalRecordStruct()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 var b = "B";
                 var r = [|new R(1, b)|];
 
@@ -2954,7 +2914,8 @@ class R(int A, string b);
                 {
                     public static class IsExternalInit { }
                 }
-                """, """
+                """,
+                """
                 var b = "B";
                 var r = new R(1, b);
 
@@ -2964,85 +2925,104 @@ class R(int A, string b);
                 {
                     public static class IsExternalInit { }
                 }
-                """, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+                """,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
 
         [Fact]
         public async Task Test_PrimaryConstructor_Struct()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 var b = ""B"";
 var r = [|new R(1, b)|];
 
 struct R(int A);
-", @"
+",
+                @"
 var b = ""B"";
 var r = new R(1, b);
 
 struct R(int A, string b);
-", parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp12));
+",
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp12)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/56952")]
         public async Task TestRecordsNamingConventions()
         {
-            await TestInRegularAndScript1Async("""
+            await TestInRegularAndScript1Async(
+                """
                 [|new Test("repro")|];
 
                 record Test();
 
-                """, """
+                """,
+                """
                 new Test("repro");
 
                 record Test(string V);
 
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNamingConventions_PrimaryConstructor_Class()
         {
-            await TestInRegularAndScript1Async(@"[|new Test(""repro"")|];
+            await TestInRegularAndScript1Async(
+                @"[|new Test(""repro"")|];
 
 class Test();
-", @"new Test(""repro"");
+",
+                @"new Test(""repro"");
 
 class Test(string v);
-");
+"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/56952")]
         public async Task TestRecordsNamingConventions_RecordStruct()
         {
-            await TestInRegularAndScript1Async("""
+            await TestInRegularAndScript1Async(
+                """
                 [|new Test("repro")|];
 
                 record struct Test();
 
-                """, """
+                """,
+                """
                 new Test("repro");
 
                 record struct Test(string V);
 
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNamingConventions_PrimaryConstructor_Struct()
         {
-            await TestInRegularAndScript1Async(@"[|new Test(""repro"")|];
+            await TestInRegularAndScript1Async(
+                @"[|new Test(""repro"")|];
 
 struct Test();
-", @"new Test(""repro"");
+",
+                @"new Test(""repro"");
 
 struct Test(string v);
-");
+"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61715")]
         public async Task TestMethodGroup1()
         {
-            await TestInRegularAndScript1Async("""
+            await TestInRegularAndScript1Async(
+                """
                 public class Example
                 {
                     public void Add(int x)
@@ -3058,7 +3038,8 @@ struct Test(string v);
                         [|DoSomething|](Add);
                     }
                 }
-                """, """
+                """,
+                """
                 public class Example
                 {
                     public void Add(int x)
@@ -3074,13 +3055,15 @@ struct Test(string v);
                         DoSomething(Add);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61715")]
         public async Task TestMethodGroup2()
         {
-            await TestInRegularAndScript1Async("""
+            await TestInRegularAndScript1Async(
+                """
                 public class Example
                 {
                     public void Add(int x, string y)
@@ -3096,7 +3079,8 @@ struct Test(string v);
                         [|DoSomething|](Add);
                     }
                 }
-                """, """
+                """,
+                """
                 public class Example
                 {
                     public void Add(int x, string y)
@@ -3112,13 +3096,15 @@ struct Test(string v);
                         DoSomething(Add);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61715")]
         public async Task TestMethodGroup3()
         {
-            await TestInRegularAndScript1Async("""
+            await TestInRegularAndScript1Async(
+                """
                 public class Example
                 {
                     public int Add(int x, string y)
@@ -3135,7 +3121,8 @@ struct Test(string v);
                         [|DoSomething|](Add);
                     }
                 }
-                """, """
+                """,
+                """
                 public class Example
                 {
                     public int Add(int x, string y)
@@ -3152,7 +3139,8 @@ struct Test(string v);
                         DoSomething(Add);
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

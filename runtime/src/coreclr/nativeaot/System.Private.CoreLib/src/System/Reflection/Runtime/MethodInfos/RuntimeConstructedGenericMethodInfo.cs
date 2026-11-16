@@ -9,7 +9,6 @@ using System.Reflection;
 using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.ParameterInfos;
 using System.Reflection.Runtime.TypeInfos;
-
 using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.MethodInfos
@@ -19,7 +18,10 @@ namespace System.Reflection.Runtime.MethodInfos
     //
     internal sealed partial class RuntimeConstructedGenericMethodInfo : RuntimeMethodInfo
     {
-        private RuntimeConstructedGenericMethodInfo(RuntimeNamedMethodInfo genericMethodDefinition, RuntimeTypeInfo[] genericTypeArguments)
+        private RuntimeConstructedGenericMethodInfo(
+            RuntimeNamedMethodInfo genericMethodDefinition,
+            RuntimeTypeInfo[] genericTypeArguments
+        )
         {
             _genericMethodDefinition = genericMethodDefinition;
             _genericTypeArguments = genericTypeArguments;
@@ -27,26 +29,17 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public sealed override MethodAttributes Attributes
         {
-            get
-            {
-                return _genericMethodDefinition.Attributes;
-            }
+            get { return _genericMethodDefinition.Attributes; }
         }
 
         public sealed override CallingConventions CallingConvention
         {
-            get
-            {
-                return _genericMethodDefinition.CallingConvention;
-            }
+            get { return _genericMethodDefinition.CallingConvention; }
         }
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
         {
-            get
-            {
-                return _genericMethodDefinition.CustomAttributes;
-            }
+            get { return _genericMethodDefinition.CustomAttributes; }
         }
 
         public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other)
@@ -75,7 +68,8 @@ namespace System.Reflection.Runtime.MethodInfos
             return _genericMethodDefinition.GetHashCode();
         }
 
-        internal sealed override int GenericParameterCount => _genericMethodDefinition.GenericParameterCount;
+        internal sealed override int GenericParameterCount =>
+            _genericMethodDefinition.GenericParameterCount;
 
         public sealed override MethodInfo GetGenericMethodDefinition()
         {
@@ -84,46 +78,35 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public sealed override bool IsConstructedGenericMethod
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public sealed override bool IsGenericMethod
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public sealed override bool IsGenericMethodDefinition
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override MethodBase MetadataDefinitionMethod
         {
-            get
-            {
-                return _genericMethodDefinition.MetadataDefinitionMethod;
-            }
+            get { return _genericMethodDefinition.MetadataDefinitionMethod; }
         }
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                return _genericMethodDefinition.MetadataToken;
-            }
+            get { return _genericMethodDefinition.MetadataToken; }
         }
 
-        [RequiresDynamicCode("The native code for this instantiation might not be available at runtime.")]
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresDynamicCode(
+            "The native code for this instantiation might not be available at runtime."
+        )]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public sealed override MethodInfo MakeGenericMethod(params Type[] typeArguments)
         {
             throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericMethodDefinition, this));
@@ -131,26 +114,17 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public sealed override MethodImplAttributes MethodImplementationFlags
         {
-            get
-            {
-                return _genericMethodDefinition.MethodImplementationFlags;
-            }
+            get { return _genericMethodDefinition.MethodImplementationFlags; }
         }
 
         public sealed override Module Module
         {
-            get
-            {
-                return _genericMethodDefinition.Module;
-            }
+            get { return _genericMethodDefinition.Module; }
         }
 
         public sealed override Type ReflectedType
         {
-            get
-            {
-                return _genericMethodDefinition.ReflectedType;
-            }
+            get { return _genericMethodDefinition.ReflectedType; }
         }
 
         public sealed override string ToString()
@@ -160,45 +134,39 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public sealed override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                return _genericMethodDefinition.GetRuntimeMethodHandle(GetGenericArguments());
-            }
+            get { return _genericMethodDefinition.GetRuntimeMethodHandle(GetGenericArguments()); }
         }
 
         protected sealed override MethodBaseInvoker UncachedMethodInvoker
         {
             get
             {
-                return _genericMethodDefinition.GetUncachedMethodInvoker(_genericTypeArguments, this);
+                return _genericMethodDefinition.GetUncachedMethodInvoker(
+                    _genericTypeArguments,
+                    this
+                );
             }
         }
 
         internal sealed override RuntimeTypeInfo RuntimeDeclaringType
         {
-            get
-            {
-                return _genericMethodDefinition.RuntimeDeclaringType;
-            }
+            get { return _genericMethodDefinition.RuntimeDeclaringType; }
         }
 
         internal sealed override RuntimeTypeInfo[] RuntimeGenericArgumentsOrParameters
         {
-            get
-            {
-                return _genericTypeArguments;
-            }
+            get { return _genericTypeArguments; }
         }
 
         internal sealed override string RuntimeName
         {
-            get
-            {
-                return _genericMethodDefinition.RuntimeName;
-            }
+            get { return _genericMethodDefinition.RuntimeName; }
         }
 
-        internal sealed override RuntimeParameterInfo[] GetRuntimeParameters(RuntimeMethodInfo contextMethod, out RuntimeParameterInfo returnParameter)
+        internal sealed override RuntimeParameterInfo[] GetRuntimeParameters(
+            RuntimeMethodInfo contextMethod,
+            out RuntimeParameterInfo returnParameter
+        )
         {
             return _genericMethodDefinition.GetRuntimeParameters(this, out returnParameter);
         }
@@ -207,11 +175,20 @@ namespace System.Reflection.Runtime.MethodInfos
         {
             get
             {
-                if (_genericMethodDefinition.ReflectedType.Equals(_genericMethodDefinition.DeclaringType))
+                if (
+                    _genericMethodDefinition.ReflectedType.Equals(
+                        _genericMethodDefinition.DeclaringType
+                    )
+                )
                     return this;
 
-                RuntimeNamedMethodInfo newGenericMethodDefinition = (RuntimeNamedMethodInfo)(_genericMethodDefinition.WithReflectedTypeSetToDeclaringType);
-                return RuntimeConstructedGenericMethodInfo.GetRuntimeConstructedGenericMethodInfo(newGenericMethodDefinition, _genericTypeArguments);
+                RuntimeNamedMethodInfo newGenericMethodDefinition = (RuntimeNamedMethodInfo)(
+                    _genericMethodDefinition.WithReflectedTypeSetToDeclaringType
+                );
+                return RuntimeConstructedGenericMethodInfo.GetRuntimeConstructedGenericMethodInfo(
+                    newGenericMethodDefinition,
+                    _genericTypeArguments
+                );
             }
         }
 

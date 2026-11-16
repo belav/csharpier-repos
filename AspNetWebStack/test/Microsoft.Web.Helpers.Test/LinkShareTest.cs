@@ -16,8 +16,12 @@ namespace Microsoft.Web.Helpers.Test
     {
         private static LinkShareSite[] _allLinkShareSites = new[]
         {
-            LinkShareSite.Delicious, LinkShareSite.Digg,
-            LinkShareSite.Facebook, LinkShareSite.Reddit, LinkShareSite.StumbleUpon, LinkShareSite.Twitter
+            LinkShareSite.Delicious,
+            LinkShareSite.Digg,
+            LinkShareSite.Facebook,
+            LinkShareSite.Reddit,
+            LinkShareSite.StumbleUpon,
+            LinkShareSite.Twitter,
         };
 
         [Fact]
@@ -28,7 +32,16 @@ namespace Microsoft.Web.Helpers.Test
             string twitterUserName = String.Empty;
             string twitterTag = String.Empty;
             string actual;
-            actual = LinkShare.GetHtml(pageTitle, pageLinkBack, twitterUserName, twitterTag, LinkShareSite.Facebook, LinkShareSite.All).ToString();
+            actual = LinkShare
+                .GetHtml(
+                    pageTitle,
+                    pageLinkBack,
+                    twitterUserName,
+                    twitterTag,
+                    LinkShareSite.Facebook,
+                    LinkShareSite.All
+                )
+                .ToString();
             Assert.Contains("twitter.com", actual);
             int pos = actual.IndexOf("facebook.com");
             Assert.True(pos > 0);
@@ -83,13 +96,16 @@ namespace Microsoft.Web.Helpers.Test
         {
             Assert.ThrowsArgumentNullOrEmptyString(
                 () => LinkShare.GetHtml(null).ToString(),
-                "pageTitle");
+                "pageTitle"
+            );
         }
 
         [Fact]
         public void Render_WithFacebook_Works()
         {
-            string actualHTML = LinkShare.GetHtml("page-title", "www.foo.com", linkSites: LinkShareSite.Facebook).ToString();
+            string actualHTML = LinkShare
+                .GetHtml("page-title", "www.foo.com", linkSites: LinkShareSite.Facebook)
+                .ToString();
             string expectedHTML =
                 "<a href=\"http://www.facebook.com/sharer.php?u=www.foo.com&amp;t=page-title\" target=\"_blank\" title=\"Share on Facebook\"><img alt=\"Share on Facebook\" src=\"http://facebook.com/favicon.ico\" style=\"border:0; height:16px; width:16px; margin:0 1px;\" title=\"Share on Facebook\" /></a>";
             UnitTestHelper.AssertEqualsIgnoreWhitespace(actualHTML, expectedHTML);
@@ -98,7 +114,13 @@ namespace Microsoft.Web.Helpers.Test
         [Fact]
         public void Render_WithFacebookAndDigg_Works()
         {
-            string actualHTML = LinkShare.GetHtml("page-title", "www.foo.com", linkSites: new[] { LinkShareSite.Facebook, LinkShareSite.Digg }).ToString();
+            string actualHTML = LinkShare
+                .GetHtml(
+                    "page-title",
+                    "www.foo.com",
+                    linkSites: new[] { LinkShareSite.Facebook, LinkShareSite.Digg }
+                )
+                .ToString();
             string expectedHTML =
                 "<a href=\"http://www.facebook.com/sharer.php?u=www.foo.com&amp;t=page-title\" target=\"_blank\" title=\"Share on Facebook\"><img alt=\"Share on Facebook\" src=\"http://facebook.com/favicon.ico\" style=\"border:0; height:16px; width:16px; margin:0 1px;\" title=\"Share on Facebook\" /></a><a href=\"http://digg.com/submit?url=www.foo.com&amp;title=page-title\" target=\"_blank\" title=\"Digg!\"><img alt=\"Digg!\" src=\"http://digg.com/favicon.ico\" style=\"border:0; height:16px; width:16px; margin:0 1px;\" title=\"Digg!\" /></a>";
             UnitTestHelper.AssertEqualsIgnoreWhitespace(actualHTML, expectedHTML);
@@ -107,8 +129,11 @@ namespace Microsoft.Web.Helpers.Test
         [Fact]
         public void Render_WithFacebook_RendersAnchorTitle()
         {
-            string actualHTML = LinkShare.GetHtml("page-title", "www.foo.com", linkSites: LinkShareSite.Facebook).ToString();
-            string expectedHtml = @"<a href=""http://www.facebook.com/sharer.php?u=www.foo.com&amp;t=page-title"" target=""_blank"" title=""Share on Facebook"">
+            string actualHTML = LinkShare
+                .GetHtml("page-title", "www.foo.com", linkSites: LinkShareSite.Facebook)
+                .ToString();
+            string expectedHtml =
+                @"<a href=""http://www.facebook.com/sharer.php?u=www.foo.com&amp;t=page-title"" target=""_blank"" title=""Share on Facebook"">
                 <img alt=""Share on Facebook"" src=""http://facebook.com/favicon.ico"" style=""border:0; height:16px; width:16px; margin:0 1px;"" title=""Share on Facebook"" />
                 </a>";
 
@@ -135,9 +160,12 @@ namespace Microsoft.Web.Helpers.Test
         }
 
         [Fact]
-        public void LinkShare_GetSitesInOrderDoesNotReturnsGoogleBuzzForAll() {
+        public void LinkShare_GetSitesInOrderDoesNotReturnsGoogleBuzzForAll()
+        {
             // Act
-            var result = LinkShare.GetSitesInOrder(linkSites: new LinkShareSite[] { LinkShareSite.All });
+            var result = LinkShare.GetSitesInOrder(
+                linkSites: new LinkShareSite[] { LinkShareSite.All }
+            );
 
             // Assert
             // 2 is the deprecated value for GoogleBuzz
@@ -148,7 +176,9 @@ namespace Microsoft.Web.Helpers.Test
         public void LinkShare_GetSitesInOrderReturnsAllSitesWhenAllIsFirstItem()
         {
             // Act
-            var result = LinkShare.GetSitesInOrder(linkSites: new[] { LinkShareSite.All, LinkShareSite.Reddit });
+            var result = LinkShare.GetSitesInOrder(
+                linkSites: new[] { LinkShareSite.All, LinkShareSite.Reddit }
+            );
 
             // Assert
             Assert.Equal(_allLinkShareSites, result.ToArray());
@@ -158,13 +188,23 @@ namespace Microsoft.Web.Helpers.Test
         public void LinkShare_GetSitesInOrderReturnsSitesInOrderWhenAllIsNotFirstItem()
         {
             // Act
-            var result = LinkShare.GetSitesInOrder(linkSites: new[] { LinkShareSite.Reddit, LinkShareSite.Facebook, LinkShareSite.All });
+            var result = LinkShare.GetSitesInOrder(
+                linkSites: new[] { LinkShareSite.Reddit, LinkShareSite.Facebook, LinkShareSite.All }
+            );
 
             // Assert
-            Assert.Equal(new[]
-            {
-                LinkShareSite.Reddit, LinkShareSite.Facebook, LinkShareSite.Delicious, LinkShareSite.Digg, LinkShareSite.StumbleUpon, LinkShareSite.Twitter
-            }, result.ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    LinkShareSite.Reddit,
+                    LinkShareSite.Facebook,
+                    LinkShareSite.Delicious,
+                    LinkShareSite.Digg,
+                    LinkShareSite.StumbleUpon,
+                    LinkShareSite.Twitter,
+                },
+                result.ToArray()
+            );
         }
 
         [Fact]
@@ -180,7 +220,16 @@ namespace Microsoft.Web.Helpers.Test
                 </a>";
 
             // Act
-            var actualHtml = LinkShare.GetHtml("&&", "www.foo.com", "<Tweeter Bot>", "I <3 Tweets", LinkShareSite.Reddit, LinkShareSite.Twitter).ToString();
+            var actualHtml = LinkShare
+                .GetHtml(
+                    "&&",
+                    "www.foo.com",
+                    "<Tweeter Bot>",
+                    "I <3 Tweets",
+                    LinkShareSite.Reddit,
+                    LinkShareSite.Twitter
+                )
+                .ToString();
 
             // Assert
             UnitTestHelper.AssertEqualsIgnoreWhitespace(expectedHtml, actualHtml);
@@ -189,9 +238,10 @@ namespace Microsoft.Web.Helpers.Test
         [Fact]
         public void LinkshareRendersValidXhtml()
         {
-            string result = "<html> <head> \n <title> </title> \n </head> \n <body> <div> \n" +
-                            LinkShare.GetHtml("any<>title", "my test page <>") +
-                            "\n </div> </body> \n </html>";
+            string result =
+                "<html> <head> \n <title> </title> \n </head> \n <body> <div> \n"
+                + LinkShare.GetHtml("any<>title", "my test page <>")
+                + "\n </div> </body> \n </html>";
             HtmlString htmlResult = new HtmlString(result);
             XhtmlAssert.Validate1_0(htmlResult);
         }

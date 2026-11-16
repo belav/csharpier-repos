@@ -19,7 +19,7 @@ namespace System.Security.Principal
         SystemOperator = 0x225,
         PrintOperator = 0x226,
         BackupOperator = 0x227,
-        Replicator = 0x228
+        Replicator = 0x228,
     }
 
     public class WindowsPrincipal : ClaimsPrincipal
@@ -55,7 +55,11 @@ namespace System.Security.Principal
             NTAccount ntAccount = new NTAccount(role);
             IdentityReferenceCollection source = new IdentityReferenceCollection(1);
             source.Add(ntAccount);
-            IdentityReferenceCollection target = NTAccount.Translate(source, typeof(SecurityIdentifier), false);
+            IdentityReferenceCollection target = NTAccount.Translate(
+                source,
+                typeof(SecurityIdentifier),
+                false
+            );
 
             if (target[0] is SecurityIdentifier sid)
             {
@@ -114,7 +118,10 @@ namespace System.Security.Principal
         public virtual bool IsInRole(WindowsBuiltInRole role)
         {
             if (role < WindowsBuiltInRole.Administrator || role > WindowsBuiltInRole.Replicator)
-                throw new ArgumentException(SR.Format(SR.Arg_EnumIllegalVal, (int)role), nameof(role));
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_EnumIllegalVal, (int)role),
+                    nameof(role)
+                );
 
             return IsInRole((int)role);
         }
@@ -124,8 +131,7 @@ namespace System.Security.Principal
             return IsInRole(
                 new SecurityIdentifier(
                     IdentifierAuthority.NTAuthority,
-                    stackalloc
-                    int[] { Interop.SecurityIdentifier.SECURITY_BUILTIN_DOMAIN_RID, rid }
+                    stackalloc int[] { Interop.SecurityIdentifier.SECURITY_BUILTIN_DOMAIN_RID, rid }
                 )
             );
         }
@@ -150,12 +156,16 @@ namespace System.Security.Principal
             {
                 if (_identity.ImpersonationLevel == TokenImpersonationLevel.None)
                 {
-                    if (!Interop.Advapi32.DuplicateTokenEx(_identity.AccessToken,
-                                                      (uint)TokenAccessLevels.Query,
-                                                      IntPtr.Zero,
-                                                      (uint)TokenImpersonationLevel.Identification,
-                                                      (uint)TokenType.TokenImpersonation,
-                                                      ref token))
+                    if (
+                        !Interop.Advapi32.DuplicateTokenEx(
+                            _identity.AccessToken,
+                            (uint)TokenAccessLevels.Query,
+                            IntPtr.Zero,
+                            (uint)TokenImpersonationLevel.Identification,
+                            (uint)TokenType.TokenImpersonation,
+                            ref token
+                        )
+                    )
                     {
                         throw new SecurityException(Marshal.GetLastPInvokeErrorMessage());
                     }
@@ -164,9 +174,17 @@ namespace System.Security.Principal
                 bool isMember = false;
 
                 // CheckTokenMembership will check if the SID is both present and enabled in the access token.
-                if (!Interop.Advapi32.CheckTokenMembership((_identity.ImpersonationLevel != TokenImpersonationLevel.None ? _identity.AccessToken : token),
-                                                      sid.BinaryForm,
-                                                      ref isMember))
+                if (
+                    !Interop.Advapi32.CheckTokenMembership(
+                        (
+                            _identity.ImpersonationLevel != TokenImpersonationLevel.None
+                                ? _identity.AccessToken
+                                : token
+                        ),
+                        sid.BinaryForm,
+                        ref isMember
+                    )
+                )
                 {
                     throw new SecurityException(Marshal.GetLastPInvokeErrorMessage());
                 }
@@ -180,6 +198,7 @@ namespace System.Security.Principal
         }
 
         // This is called by AppDomain.GetThreadPrincipal() via reflection.
-        private static WindowsPrincipal GetDefaultInstance() => new WindowsPrincipal(WindowsIdentity.GetCurrent());
+        private static WindowsPrincipal GetDefaultInstance() =>
+            new WindowsPrincipal(WindowsIdentity.GetCurrent());
     }
 }

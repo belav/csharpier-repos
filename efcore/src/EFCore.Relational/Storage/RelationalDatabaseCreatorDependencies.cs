@@ -53,7 +53,8 @@ public sealed record RelationalDatabaseCreatorDependencies
         ISqlGenerationHelper sqlGenerationHelper,
         IExecutionStrategy executionStrategy,
         ICurrentDbContext currentContext,
-        IRelationalCommandDiagnosticsLogger commandLogger)
+        IRelationalCommandDiagnosticsLogger commandLogger
+    )
     {
         Connection = connection;
         ModelDiffer = modelDiffer;

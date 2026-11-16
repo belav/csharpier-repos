@@ -8,7 +8,6 @@ using Xunit;
 
 namespace System.IO.Tests.Enumeration
 {
-
     public class SpecialDirectoryTests : FileSystemTest
     {
         private class DirectoryRecursed : FileSystemEnumerator<string>
@@ -16,12 +15,10 @@ namespace System.IO.Tests.Enumeration
             public int ShouldRecurseCalls { get; private set; }
 
             public DirectoryRecursed(string directory, EnumerationOptions options)
-                : base(directory, options)
-            {
-            }
+                : base(directory, options) { }
 
-            protected override string TransformEntry(ref FileSystemEntry entry)
-                =>new string(entry.FileName);
+            protected override string TransformEntry(ref FileSystemEntry entry) =>
+                new string(entry.FileName);
 
             protected override bool ShouldRecurseIntoEntry(ref FileSystemEntry entry)
             {
@@ -33,7 +30,17 @@ namespace System.IO.Tests.Enumeration
         [Fact]
         public void SpecialDirectoriesAreNotUpForRecursion()
         {
-            using (var recursed = new DirectoryRecursed(TestDirectory, new EnumerationOptions { ReturnSpecialDirectories = true, RecurseSubdirectories = true, AttributesToSkip = 0 }))
+            using (
+                var recursed = new DirectoryRecursed(
+                    TestDirectory,
+                    new EnumerationOptions
+                    {
+                        ReturnSpecialDirectories = true,
+                        RecurseSubdirectories = true,
+                        AttributesToSkip = 0,
+                    }
+                )
+            )
             {
                 List<string> results = new List<string>();
                 while (recursed.MoveNext())
@@ -52,14 +59,18 @@ namespace System.IO.Tests.Enumeration
             return new FileSystemEnumerable<string>(
                 directory,
                 (ref FileSystemEntry entry) => new string(entry.FileName),
-                options).ToArray();
+                options
+            ).ToArray();
         }
 
         [Fact]
         public void SkippingHiddenFiles()
         {
             // Files that begin with periods are considered hidden on Unix
-            string[] paths = GetNames(TestDirectory, new EnumerationOptions { ReturnSpecialDirectories = true, AttributesToSkip = 0 });
+            string[] paths = GetNames(
+                TestDirectory,
+                new EnumerationOptions { ReturnSpecialDirectories = true, AttributesToSkip = 0 }
+            );
 
             if (!PlatformDetection.IsWindows10Version20348OrGreater)
             {
@@ -72,11 +83,15 @@ namespace System.IO.Tests.Enumeration
         }
     }
 
-    public class SpecialDirectoryTests_DirectoryInfo_GetDirectories : SpecialDirectoryTests_Enumerable
+    public class SpecialDirectoryTests_DirectoryInfo_GetDirectories
+        : SpecialDirectoryTests_Enumerable
     {
         protected override string[] GetNames(string directory, EnumerationOptions options)
         {
-            return new DirectoryInfo(directory).GetDirectories("*", options).Select(i => i.Name).ToArray();
+            return new DirectoryInfo(directory)
+                .GetDirectories("*", options)
+                .Select(i => i.Name)
+                .ToArray();
         }
     }
 }

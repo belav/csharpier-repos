@@ -18,9 +18,7 @@ namespace System.Web.Http.Tracing.Tracers
         private const string ExecuteActionFilterAsyncMethodName = "ExecuteActionFilterAsync";
 
         public ActionFilterTracer(IActionFilter innerFilter, ITraceWriter traceWriter)
-            : base(innerFilter, traceWriter)
-        {
-        }
+            : base(innerFilter, traceWriter) { }
 
         public new IActionFilter Inner
         {
@@ -32,9 +30,11 @@ namespace System.Web.Http.Tracing.Tracers
             get { return InnerFilter as IActionFilter; }
         }
 
-        Task<HttpResponseMessage> IActionFilter.ExecuteActionFilterAsync(HttpActionContext actionContext,
-                                                                         CancellationToken cancellationToken,
-                                                                         Func<Task<HttpResponseMessage>> continuation)
+        Task<HttpResponseMessage> IActionFilter.ExecuteActionFilterAsync(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken,
+            Func<Task<HttpResponseMessage>> continuation
+        )
         {
             return TraceWriter.TraceBeginEndAsync<HttpResponseMessage>(
                 actionContext.Request,
@@ -43,7 +43,12 @@ namespace System.Web.Http.Tracing.Tracers
                 InnerActionFilter.GetType().Name,
                 ExecuteActionFilterAsyncMethodName,
                 beginTrace: null,
-                execute: () => InnerActionFilter.ExecuteActionFilterAsync(actionContext, cancellationToken, continuation),
+                execute: () =>
+                    InnerActionFilter.ExecuteActionFilterAsync(
+                        actionContext,
+                        cancellationToken,
+                        continuation
+                    ),
                 endTrace: (tr, response) =>
                 {
                     if (response != null)
@@ -51,7 +56,8 @@ namespace System.Web.Http.Tracing.Tracers
                         tr.Status = response.StatusCode;
                     }
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
         }
     }
 }

@@ -8,9 +8,13 @@ namespace System.Diagnostics
     /// </summary>
     internal sealed class RandomNumberGenerator
     {
-        [ThreadStatic] private static RandomNumberGenerator? t_random;
+        [ThreadStatic]
+        private static RandomNumberGenerator? t_random;
 
-        private ulong _s0, _s1, _s2, _s3;
+        private ulong _s0,
+            _s1,
+            _s2,
+            _s3;
 
         public static RandomNumberGenerator Current => t_random ??= new RandomNumberGenerator();
 
@@ -34,8 +38,7 @@ namespace System.Diagnostics
                 _s2 = (_s2 & 0x0FFFFFFFFFFFFFFF) | (_s3 & 0xF000000000000000);
                 _s1 = (_s1 & 0xFFFFFFFFFFFFFF3F) | (_s0 & 0x00000000000000C0);
                 _s3 = (_s3 & 0xFFFFFFFFFFFFFF3F) | (_s2 & 0x00000000000000C0);
-            }
-            while ((_s0 | _s1 | _s2 | _s3) == 0);
+            } while ((_s0 | _s1 | _s2 | _s3) == 0);
         }
 
         private static ulong Rol64(ulong x, int k) => (x << k) | (x >> (64 - k));

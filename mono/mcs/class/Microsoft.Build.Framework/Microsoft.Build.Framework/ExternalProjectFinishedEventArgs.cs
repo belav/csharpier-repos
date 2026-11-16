@@ -25,37 +25,39 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 
-namespace Microsoft.Build.Framework {
-	[Serializable]
-	public class ExternalProjectFinishedEventArgs : CustomBuildEventArgs {
-	
-		string	projectFile;
-		bool	succeeded;
-	
-		protected ExternalProjectFinishedEventArgs ()
-		{
-		}
-		
-		public ExternalProjectFinishedEventArgs (string message,
-							 string helpKeyword,
-							 string senderName,
-							 string projectFile,
-							 bool succeeded)
-			: base (message, helpKeyword, senderName)
-		{
-			this.projectFile = projectFile;
-			this.succeeded = succeeded;
-		}
-		public string ProjectFile {
-			get { return projectFile; }
-		}
-		
-		public bool Succeeded {
-			get { return succeeded; }
-		}
-	}
-}
+namespace Microsoft.Build.Framework
+{
+    [Serializable]
+    public class ExternalProjectFinishedEventArgs : CustomBuildEventArgs
+    {
+        string projectFile;
+        bool succeeded;
 
+        protected ExternalProjectFinishedEventArgs() { }
+
+        public ExternalProjectFinishedEventArgs(
+            string message,
+            string helpKeyword,
+            string senderName,
+            string projectFile,
+            bool succeeded
+        )
+            : base(message, helpKeyword, senderName)
+        {
+            this.projectFile = projectFile;
+            this.succeeded = succeeded;
+        }
+
+        public string ProjectFile
+        {
+            get { return projectFile; }
+        }
+
+        public bool Succeeded
+        {
+            get { return succeeded; }
+        }
+    }
+}

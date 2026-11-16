@@ -20,10 +20,12 @@ namespace System.Runtime.InteropServices.Marshalling
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         None = 0,
+
         /// <summary>
         /// Generate a wrapper for managed objects to enable exposing them through the COM interface.
         /// </summary>
         ManagedObjectWrapper = 0x1,
+
         /// <summary>
         /// Generate a wrapper for COM objects to enable exposing them through the managed interface.
         /// </summary>

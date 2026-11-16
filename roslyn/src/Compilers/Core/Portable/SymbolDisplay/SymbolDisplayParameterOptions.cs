@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis
     public enum SymbolDisplayParameterOptions
     {
         /// <summary>
-        /// Omits parameters from symbol descriptions.    
+        /// Omits parameters from symbol descriptions.
         /// <para>
         /// If this option is combined with <see cref="SymbolDisplayMemberOptions.IncludeParameters"/>, then only
         /// the parentheses will be shown (e.g. M()).
@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis
         None = 0,
 
         /// <summary>
-        /// Includes the <c>this</c> keyword before the first parameter of an extension method in C#. 
+        /// Includes the <c>this</c> keyword before the first parameter of an extension method in C#.
         /// <para>
         /// This option has no effect in Visual Basic.
         /// </para>

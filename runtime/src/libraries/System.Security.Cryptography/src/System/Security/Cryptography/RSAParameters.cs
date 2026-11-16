@@ -7,7 +7,9 @@ using System.Security.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    [System.Runtime.InteropServices.StructLayoutAttribute(
+        System.Runtime.InteropServices.LayoutKind.Sequential
+    )]
     public struct RSAParameters
     {
         public byte[]? D;

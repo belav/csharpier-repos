@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Dynamic.Utils;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-
 using DelegateHelpers = System.Linq.Expressions.Compiler.DelegateHelpers;
 
 namespace System.Dynamic
@@ -26,9 +25,7 @@ namespace System.Dynamic
         /// <summary>
         /// Initializes a new instance of the <see cref="DynamicMetaObjectBinder"/> class.
         /// </summary>
-        protected DynamicMetaObjectBinder()
-        {
-        }
+        protected DynamicMetaObjectBinder() { }
 
         /// <summary>
         /// The result type of the operation.
@@ -47,7 +44,11 @@ namespace System.Dynamic
         /// subsequent occurrences of the dynamic operation, Bind will be called again
         /// to produce a new <see cref="Expression"/> for the new argument types.
         /// </returns>
-        public sealed override Expression Bind(object[] args, ReadOnlyCollection<ParameterExpression> parameters, LabelTarget returnLabel)
+        public sealed override Expression Bind(
+            object[] args,
+            ReadOnlyCollection<ParameterExpression> parameters,
+            LabelTarget returnLabel
+        )
         {
             ArgumentNullException.ThrowIfNull(args);
             ArgumentNullException.ThrowIfNull(parameters);
@@ -64,10 +65,16 @@ namespace System.Dynamic
             {
                 expectedResult = ReturnType;
 
-                if (returnLabel.Type != typeof(void) &&
-                    !TypeUtils.AreReferenceAssignable(returnLabel.Type, expectedResult))
+                if (
+                    returnLabel.Type != typeof(void)
+                    && !TypeUtils.AreReferenceAssignable(returnLabel.Type, expectedResult)
+                )
                 {
-                    throw System.Linq.Expressions.Error.BinderNotCompatibleWithCallSite(expectedResult, this, returnLabel.Type);
+                    throw System.Linq.Expressions.Error.BinderNotCompatibleWithCallSite(
+                        expectedResult,
+                        this,
+                        returnLabel.Type
+                    );
                 }
             }
             else
@@ -91,8 +98,10 @@ namespace System.Dynamic
             BindingRestrictions restrictions = binding.Restrictions;
 
             // Ensure the result matches the expected result type.
-            if (expectedResult != typeof(void) &&
-                !TypeUtils.AreReferenceAssignable(expectedResult, body.Type))
+            if (
+                expectedResult != typeof(void)
+                && !TypeUtils.AreReferenceAssignable(expectedResult, body.Type)
+            )
             {
                 //
                 // Blame the last person that handled the result: assume it's
@@ -100,11 +109,20 @@ namespace System.Dynamic
                 //
                 if (target.Value is IDynamicMetaObjectProvider)
                 {
-                    throw System.Linq.Expressions.Error.DynamicObjectResultNotAssignable(body.Type, target.Value.GetType(), this, expectedResult);
+                    throw System.Linq.Expressions.Error.DynamicObjectResultNotAssignable(
+                        body.Type,
+                        target.Value.GetType(),
+                        this,
+                        expectedResult
+                    );
                 }
                 else
                 {
-                    throw System.Linq.Expressions.Error.DynamicBinderResultNotAssignable(body.Type, this, expectedResult);
+                    throw System.Linq.Expressions.Error.DynamicBinderResultNotAssignable(
+                        body.Type,
+                        this,
+                        expectedResult
+                    );
                 }
             }
 
@@ -115,7 +133,10 @@ namespace System.Dynamic
             {
                 if (restrictions == BindingRestrictions.Empty)
                 {
-                    throw System.Linq.Expressions.Error.DynamicBindingNeedsRestrictions(target.Value!.GetType(), this);
+                    throw System.Linq.Expressions.Error.DynamicBindingNeedsRestrictions(
+                        target.Value!.GetType(),
+                        this
+                    );
                 }
             }
 
@@ -134,7 +155,10 @@ namespace System.Dynamic
             return body;
         }
 
-        private static DynamicMetaObject[] CreateArgumentMetaObjects(object[] args, ReadOnlyCollection<ParameterExpression> parameters)
+        private static DynamicMetaObject[] CreateArgumentMetaObjects(
+            object[] args,
+            ReadOnlyCollection<ParameterExpression> parameters
+        )
         {
             DynamicMetaObject[] mos;
             if (args.Length != 1)
@@ -206,7 +230,10 @@ namespace System.Dynamic
             return MakeDeferred(BindingRestrictions.Combine(args), args);
         }
 
-        private DynamicMetaObject MakeDeferred(BindingRestrictions rs, params DynamicMetaObject[] args)
+        private DynamicMetaObject MakeDeferred(
+            BindingRestrictions rs,
+            params DynamicMetaObject[] args
+        )
         {
             var exprs = DynamicMetaObject.GetExpressions(args);
 
@@ -215,7 +242,12 @@ namespace System.Dynamic
             // Because we know the arguments match the delegate type (we just created the argument types)
             // we go directly to DynamicExpression.Make to avoid a bunch of unnecessary argument validation
             return new DynamicMetaObject(
-                DynamicExpression.Make(ReturnType, delegateType, this, new TrueReadOnlyCollection<Expression>(exprs)),
+                DynamicExpression.Make(
+                    ReturnType,
+                    delegateType,
+                    this,
+                    new TrueReadOnlyCollection<Expression>(exprs)
+                ),
                 rs
             );
         }

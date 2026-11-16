@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Diagnostics;
 using System.Runtime.Intrinsics;
 using System.Security.Cryptography;
 using Xunit;
@@ -58,6 +58,7 @@ public class Runtime_40440
         v[1, 2, 3] = e;
         return UseArrayElementAsCallArgument(v, e);
     }
+
     static bool CheckVector2()
     {
         var v = new Vector2[4, 4, 4];
@@ -141,7 +142,11 @@ public class Runtime_40440
                 return false;
             }
             LargeStruct s2 = (LargeStruct)obj;
-            return (f1 == s2.f1) && (f2 == s2.f2) && (f3 == s2.f3) && (f4 == s2.f4) && (f5 == s2.f5);
+            return (f1 == s2.f1)
+                && (f2 == s2.f2)
+                && (f3 == s2.f3)
+                && (f4 == s2.f4)
+                && (f5 == s2.f5);
         }
     }
 

@@ -75,8 +75,8 @@ public partial class HttpConnectionTests
                         await connection.StartAsync().DefaultTimeout();
                         await connection.DisposeAsync().DefaultTimeout();
                         var exception = await Assert
-                            .ThrowsAsync<ObjectDisposedException>(
-                                async () => await connection.StartAsync()
+                            .ThrowsAsync<ObjectDisposedException>(async () =>
+                                await connection.StartAsync()
                             )
                             .DefaultTimeout();
 
@@ -353,8 +353,8 @@ public partial class HttpConnectionTests
                             .Transport.Output.WriteAsync(new byte[] { 0x42 })
                             .DefaultTimeout();
 
-                        await Assert.ThrowsAsync<HttpRequestException>(
-                            async () => await connection.Transport.Input.ReadAsync()
+                        await Assert.ThrowsAsync<HttpRequestException>(async () =>
+                            await connection.Transport.Input.ReadAsync()
                         );
                     }
                 );
@@ -374,15 +374,12 @@ public partial class HttpConnectionTests
             {
                 var httpHandler = new TestHttpMessageHandler();
 
-                httpHandler.OnGet(
-                    "/?id=00000000-0000-0000-0000-000000000000",
-                    (_, __) =>
-                    {
-                        return Task.FromResult(
-                            ResponseUtils.CreateResponse(HttpStatusCode.InternalServerError)
-                        );
-                    }
-                );
+                httpHandler.OnGet("/?id=00000000-0000-0000-0000-000000000000", (_, __) =>
+                {
+                    return Task.FromResult(
+                        ResponseUtils.CreateResponse(HttpStatusCode.InternalServerError)
+                    );
+                });
 
                 var sse = new ServerSentEventsTransport(
                     new HttpClient(httpHandler),
@@ -393,8 +390,8 @@ public partial class HttpConnectionTests
                     CreateConnection(httpHandler, loggerFactory: LoggerFactory, transport: sse),
                     async (connection) =>
                     {
-                        await Assert.ThrowsAsync<AggregateException>(
-                            () => connection.StartAsync().DefaultTimeout()
+                        await Assert.ThrowsAsync<AggregateException>(() =>
+                            connection.StartAsync().DefaultTimeout()
                         );
                     }
                 );
@@ -409,14 +406,11 @@ public partial class HttpConnectionTests
                 var httpHandler = new TestHttpMessageHandler();
 
                 var connectResponseTcs = new TaskCompletionSource();
-                httpHandler.OnGet(
-                    "/?id=00000000-0000-0000-0000-000000000000",
-                    async (_, __) =>
-                    {
-                        await connectResponseTcs.Task;
-                        return ResponseUtils.CreateResponse(HttpStatusCode.Accepted);
-                    }
-                );
+                httpHandler.OnGet("/?id=00000000-0000-0000-0000-000000000000", async (_, __) =>
+                {
+                    await connectResponseTcs.Task;
+                    return ResponseUtils.CreateResponse(HttpStatusCode.Accepted);
+                });
 
                 var sse = new ServerSentEventsTransport(
                     new HttpClient(httpHandler),
@@ -459,32 +453,29 @@ public partial class HttpConnectionTests
                     }
                 );
 
-                await WithConnectionAsync(
-                    CreateConnection(testHttpHandler),
-                    async (connection) =>
-                    {
-                        // Kick off StartAsync, but don't wait for it
-                        var cts = new CancellationTokenSource();
-                        var startTask = connection.StartAsync(cts.Token);
+                await WithConnectionAsync(CreateConnection(testHttpHandler), async (connection) =>
+                {
+                    // Kick off StartAsync, but don't wait for it
+                    var cts = new CancellationTokenSource();
+                    var startTask = connection.StartAsync(cts.Token);
 
-                        // Wait for the connection to get to the "WaitToContinue" call above,
-                        // which means it has gotten to Negotiate
-                        await negotiateSyncPoint.WaitForSyncPoint().DefaultTimeout();
+                    // Wait for the connection to get to the "WaitToContinue" call above,
+                    // which means it has gotten to Negotiate
+                    await negotiateSyncPoint.WaitForSyncPoint().DefaultTimeout();
 
-                        // Assert that StartAsync has not yet been canceled
-                        Assert.False(startTask.IsCanceled);
+                    // Assert that StartAsync has not yet been canceled
+                    Assert.False(startTask.IsCanceled);
 
-                        // Cancel StartAsync, then "release" the SyncPoint
-                        // so the negotiate handler can keep going
-                        cts.Cancel();
-                        negotiateSyncPoint.Continue();
+                    // Cancel StartAsync, then "release" the SyncPoint
+                    // so the negotiate handler can keep going
+                    cts.Cancel();
+                    negotiateSyncPoint.Continue();
 
-                        // Assert that StartAsync was canceled
-                        await Assert
-                            .ThrowsAsync<TaskCanceledException>(() => startTask)
-                            .DefaultTimeout();
-                    }
-                );
+                    // Assert that StartAsync was canceled
+                    await Assert
+                        .ThrowsAsync<TaskCanceledException>(() => startTask)
+                        .DefaultTimeout();
+                });
             }
         }
 
@@ -511,8 +502,8 @@ public partial class HttpConnectionTests
                         // We aggregate failures that happen when we start the transport. The operation canceled exception will
                         // be an inner exception.
                         var ex = await Assert
-                            .ThrowsAsync<AggregateException>(
-                                async () => await connection.StartAsync(cts.Token)
+                            .ThrowsAsync<AggregateException>(async () =>
+                                await connection.StartAsync(cts.Token)
                             )
                             .DefaultTimeout();
                         Assert.Equal(3, ex.InnerExceptions.Count);
@@ -544,11 +535,8 @@ public partial class HttpConnectionTests
                     async (connection) =>
                     {
                         await Assert
-                            .ThrowsAsync<TaskCanceledException>(
-                                async () =>
-                                    await connection.StartAsync(
-                                        new CancellationToken(canceled: true)
-                                    )
+                            .ThrowsAsync<TaskCanceledException>(async () =>
+                                await connection.StartAsync(new CancellationToken(canceled: true))
                             )
                             .DefaultTimeout();
                     }
@@ -570,14 +558,11 @@ public partial class HttpConnectionTests
             using (StartVerifiableLog(expectedErrorsFilter: ExpectedErrors))
             {
                 var httpHandler = new TestHttpMessageHandler();
-                httpHandler.OnGet(
-                    "/?id=00000000-0000-0000-0000-000000000000",
-                    (_, __) =>
-                    {
-                        // Simulating a cancellationToken canceling this request.
-                        throw new OperationCanceledException("Cancel SSE Start.");
-                    }
-                );
+                httpHandler.OnGet("/?id=00000000-0000-0000-0000-000000000000", (_, __) =>
+                {
+                    // Simulating a cancellationToken canceling this request.
+                    throw new OperationCanceledException("Cancel SSE Start.");
+                });
 
                 var sse = new ServerSentEventsTransport(
                     new HttpClient(httpHandler),
@@ -594,8 +579,8 @@ public partial class HttpConnectionTests
                     async (connection) =>
                     {
                         var ex = await Assert
-                            .ThrowsAsync<AggregateException>(
-                                async () => await connection.StartAsync()
+                            .ThrowsAsync<AggregateException>(async () =>
+                                await connection.StartAsync()
                             )
                             .DefaultTimeout();
                     }
@@ -633,8 +618,8 @@ public partial class HttpConnectionTests
                     ),
                     async (connection) =>
                     {
-                        var ex = await Assert.ThrowsAsync<AggregateException>(
-                            async () => await connection.StartAsync(cts.Token).DefaultTimeout()
+                        var ex = await Assert.ThrowsAsync<AggregateException>(async () =>
+                            await connection.StartAsync(cts.Token).DefaultTimeout()
                         );
                     }
                 );
@@ -643,8 +628,8 @@ public partial class HttpConnectionTests
 
         private static async Task AssertDisposedAsync(HttpConnection connection)
         {
-            var exception = await Assert.ThrowsAsync<ObjectDisposedException>(
-                () => connection.StartAsync()
+            var exception = await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                connection.StartAsync()
             );
             Assert.Equal(typeof(HttpConnection).FullName, exception.ObjectName);
         }

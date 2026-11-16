@@ -78,8 +78,8 @@ public class TagHelpersTest
     {
         // Regression test for https://github.com/dotnet/aspnetcore/issues/15367
         // Arrange
-        var exception = await Assert.ThrowsAsync<HttpRequestException>(
-            async () => await Client.GetAsync("http://localhost/Home/MyHtml")
+        var exception = await Assert.ThrowsAsync<HttpRequestException>(async () =>
+            await Client.GetAsync("http://localhost/Home/MyHtml")
         );
 
         // Assert

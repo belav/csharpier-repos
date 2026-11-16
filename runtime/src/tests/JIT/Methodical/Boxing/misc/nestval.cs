@@ -6,8 +6,15 @@ using Xunit;
 
 namespace BoxTest_nestval_cs
 {
-    internal struct MyBool { public bool val; }
-    internal struct MyInt { public int val; }
+    internal struct MyBool
+    {
+        public bool val;
+    }
+
+    internal struct MyInt
+    {
+        public int val;
+    }
 
     internal struct ArgInfo
     {

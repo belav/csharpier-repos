@@ -70,10 +70,15 @@ namespace System.Web.Razor.Test
             ParserBase expectedCode = new Mock<ParserBase>().Object;
             ParserBase expectedMarkup = new Mock<ParserBase>().Object;
 
-            var mockHost = new Mock<RazorEngineHost>(new CSharpRazorCodeLanguage()) { CallBase = true };
-            mockHost.Setup(h => h.DecorateCodeParser(It.IsAny<CSharpCodeParser>()))
+            var mockHost = new Mock<RazorEngineHost>(new CSharpRazorCodeLanguage())
+            {
+                CallBase = true,
+            };
+            mockHost
+                .Setup(h => h.DecorateCodeParser(It.IsAny<CSharpCodeParser>()))
                 .Returns(expectedCode);
-            mockHost.Setup(h => h.DecorateMarkupParser(It.IsAny<HtmlMarkupParser>()))
+            mockHost
+                .Setup(h => h.DecorateMarkupParser(It.IsAny<HtmlMarkupParser>()))
                 .Returns(expectedMarkup);
             RazorTemplateEngine engine = new RazorTemplateEngine(mockHost.Object);
 
@@ -89,11 +94,20 @@ namespace System.Web.Razor.Test
         public void CreateCodeGeneratorMethodPassesCodeGeneratorThroughDecorateMethodOnHost()
         {
             // Arrange
-            var mockHost = new Mock<RazorEngineHost>(new CSharpRazorCodeLanguage()) { CallBase = true };
+            var mockHost = new Mock<RazorEngineHost>(new CSharpRazorCodeLanguage())
+            {
+                CallBase = true,
+            };
 
-            RazorCodeGenerator expected = new Mock<RazorCodeGenerator>("Foo", "Bar", "Baz", mockHost.Object).Object;
+            RazorCodeGenerator expected = new Mock<RazorCodeGenerator>(
+                "Foo",
+                "Bar",
+                "Baz",
+                mockHost.Object
+            ).Object;
 
-            mockHost.Setup(h => h.DecorateCodeGenerator(It.IsAny<CSharpRazorCodeGenerator>()))
+            mockHost
+                .Setup(h => h.DecorateCodeGenerator(It.IsAny<CSharpRazorCodeGenerator>()))
                 .Returns(expected);
             RazorTemplateEngine engine = new RazorTemplateEngine(mockHost.Object);
 
@@ -116,8 +130,12 @@ namespace System.Web.Razor.Test
             mockEngine.Object.ParseTemplate(reader, cancelToken: source.Token);
 
             // Assert
-            mockEngine.Verify(e => e.ParseTemplateCore(It.Is<SeekableTextReader>(l => l.ReadToEnd() == "foo"),
-                                                       source.Token));
+            mockEngine.Verify(e =>
+                e.ParseTemplateCore(
+                    It.Is<SeekableTextReader>(l => l.ReadToEnd() == "foo"),
+                    source.Token
+                )
+            );
         }
 
         [Fact]
@@ -132,11 +150,24 @@ namespace System.Web.Razor.Test
             string src = "Baz";
 
             // Act
-            mockEngine.Object.GenerateCode(reader, className: className, rootNamespace: ns, sourceFileName: src, cancelToken: source.Token);
+            mockEngine.Object.GenerateCode(
+                reader,
+                className: className,
+                rootNamespace: ns,
+                sourceFileName: src,
+                cancelToken: source.Token
+            );
 
             // Assert
-            mockEngine.Verify(e => e.GenerateCodeCore(It.Is<SeekableTextReader>(l => l.ReadToEnd() == "foo"),
-                                                      className, ns, src, source.Token));
+            mockEngine.Verify(e =>
+                e.GenerateCodeCore(
+                    It.Is<SeekableTextReader>(l => l.ReadToEnd() == "foo"),
+                    className,
+                    ns,
+                    src,
+                    source.Token
+                )
+            );
         }
 
         [Fact]
@@ -178,7 +209,12 @@ namespace System.Web.Razor.Test
             RazorTemplateEngine engine = new RazorTemplateEngine(CreateHost(designTime: true));
 
             // Act
-            GeneratorResults results = engine.GenerateCode(new StringTextBuffer("foo @bar()"), className: null, rootNamespace: null, sourceFileName: "foo.cshtml");
+            GeneratorResults results = engine.GenerateCode(
+                new StringTextBuffer("foo @bar()"),
+                className: null,
+                rootNamespace: null,
+                sourceFileName: "foo.cshtml"
+            );
 
             // Assert
             Assert.True(results.Success);
@@ -192,7 +228,7 @@ namespace System.Web.Razor.Test
         {
             return new RazorEngineHost(new CSharpRazorCodeLanguage())
             {
-                DesignTimeMode = designTime
+                DesignTimeMode = designTime,
             };
         }
     }

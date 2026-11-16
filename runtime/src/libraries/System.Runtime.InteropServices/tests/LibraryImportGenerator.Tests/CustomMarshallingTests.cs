@@ -7,7 +7,6 @@ using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 using NativeExports;
 using SharedTypes;
-
 using Xunit;
 
 namespace LibraryImportGenerator.IntegrationTests
@@ -16,24 +15,33 @@ namespace LibraryImportGenerator.IntegrationTests
     {
         internal partial class Stateless
         {
-            public static string System = "Make sure generated code prefixes type references with global::";
+            public static string System =
+                "Make sure generated code prefixes type references with global::";
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "stringcontainer_deepduplicate")]
-            public static partial void DeepDuplicateStrings(StringContainer strings, out StringContainer pStringsOut);
+            public static partial void DeepDuplicateStrings(
+                StringContainer strings,
+                out StringContainer pStringsOut
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "stringcontainer_reverse_strings")]
             public static partial void ReverseStrings(ref StringContainer strings);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "get_long_bytes_as_double")]
-            public static partial double GetLongBytesAsDouble([MarshalUsing(typeof(DoubleToLongMarshaller))] double d);
+            public static partial double GetLongBytesAsDouble(
+                [MarshalUsing(typeof(DoubleToLongMarshaller))] double d
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "get_bytes_as_double_big_endian")]
-            public static partial double GetBytesAsDoubleBigEndian([MarshalUsing(typeof(DoubleToBytesBigEndianMarshaller))] double d);
+            public static partial double GetBytesAsDoubleBigEndian(
+                [MarshalUsing(typeof(DoubleToBytesBigEndianMarshaller))] double d
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "negate_bools")]
             public static partial void NegateBools(
                 BoolStruct boolStruct,
-                out BoolStruct pBoolStructOut);
+                out BoolStruct pBoolStructOut
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "and_bools_ref")]
             [return: MarshalAs(UnmanagedType.U1)]
@@ -43,16 +51,25 @@ namespace LibraryImportGenerator.IntegrationTests
             public static partial IntWrapper DoubleIntRef(IntWrapper pInt);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "double_int_ref")]
-            public static partial IntWrapperWithoutGetPinnableReference DoubleIntRef(IntWrapperWithoutGetPinnableReference pInt);
+            public static partial IntWrapperWithoutGetPinnableReference DoubleIntRef(
+                IntWrapperWithoutGetPinnableReference pInt
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "return_zero")]
             [return: MarshalUsing(typeof(IntGuaranteedUnmarshal))]
-            public static partial int GuaranteedUnmarshal([MarshalUsing(typeof(ExceptionOnUnmarshal))] out int ret);
+            public static partial int GuaranteedUnmarshal(
+                [MarshalUsing(typeof(ExceptionOnUnmarshal))] out int ret
+            );
 
-            [CustomMarshaller(typeof(int), MarshalMode.ManagedToUnmanagedOut, typeof(IntGuaranteedUnmarshal))]
+            [CustomMarshaller(
+                typeof(int),
+                MarshalMode.ManagedToUnmanagedOut,
+                typeof(IntGuaranteedUnmarshal)
+            )]
             public static unsafe class IntGuaranteedUnmarshal
             {
                 public static bool ConvertToManagedFinallyCalled = false;
+
                 public static int ConvertToManagedFinally(int unmanaged)
                 {
                     ConvertToManagedFinallyCalled = true;
@@ -64,39 +81,67 @@ namespace LibraryImportGenerator.IntegrationTests
         internal partial class Stateful
         {
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "subtract_return_int")]
-            public static partial IntWrapperWithNotification SubtractInts(IntWrapperWithNotification x, IntWrapperWithNotification y);
+            public static partial IntWrapperWithNotification SubtractInts(
+                IntWrapperWithNotification x,
+                IntWrapperWithNotification y
+            );
+
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "subtract_out_int")]
-            public static partial void SubtractInts(IntWrapperWithNotification x, IntWrapperWithNotification y, out IntWrapperWithNotification result);
+            public static partial void SubtractInts(
+                IntWrapperWithNotification x,
+                IntWrapperWithNotification y,
+                out IntWrapperWithNotification result
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "negate_bools")]
             public static partial void NegateBools(
                 [MarshalUsing(typeof(BoolStructMarshallerStateful))] BoolStruct boolStruct,
-                [MarshalUsing(typeof(BoolStructMarshallerStateful))] out BoolStruct pBoolStructOut);
+                [MarshalUsing(typeof(BoolStructMarshallerStateful))] out BoolStruct pBoolStructOut
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "and_bools_ref")]
             [return: MarshalAs(UnmanagedType.U1)]
-            public static partial bool AndBoolsRef([MarshalUsing(typeof(BoolStructMarshallerStateful))] in BoolStruct boolStruct);
+            public static partial bool AndBoolsRef(
+                [MarshalUsing(typeof(BoolStructMarshallerStateful))] in BoolStruct boolStruct
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "double_int_ref")]
-            public static partial IntWrapperWithoutGetPinnableReference DoubleIntRef([MarshalUsing(typeof(IntWrapperWithoutGetPinnableReferenceStatefulMarshaller))] IntWrapperWithoutGetPinnableReference pInt);
+            public static partial IntWrapperWithoutGetPinnableReference DoubleIntRef(
+                [MarshalUsing(typeof(IntWrapperWithoutGetPinnableReferenceStatefulMarshaller))]
+                    IntWrapperWithoutGetPinnableReference pInt
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "double_int_ref")]
-            public static partial IntWrapperWithoutGetPinnableReference DoubleIntRefNoAlloc([MarshalUsing(typeof(IntWrapperWithoutGetPinnableReferenceStatefulNoAllocMarshaller))] IntWrapperWithoutGetPinnableReference pInt);
+            public static partial IntWrapperWithoutGetPinnableReference DoubleIntRefNoAlloc(
+                [MarshalUsing(
+                    typeof(IntWrapperWithoutGetPinnableReferenceStatefulNoAllocMarshaller)
+                )]
+                    IntWrapperWithoutGetPinnableReference pInt
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "double_int_ref")]
             [return: MarshalUsing(typeof(IntWrapperMarshallerStateful))]
-            public static partial IntWrapper DoubleIntRef([MarshalUsing(typeof(IntWrapperMarshallerStateful))] IntWrapper pInt);
+            public static partial IntWrapper DoubleIntRef(
+                [MarshalUsing(typeof(IntWrapperMarshallerStateful))] IntWrapper pInt
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "return_zero")]
             [return: MarshalUsing(typeof(IntGuaranteedUnmarshal))]
-            public static partial int GuaranteedUnmarshal([MarshalUsing(typeof(ExceptionOnUnmarshal))] out int ret);
+            public static partial int GuaranteedUnmarshal(
+                [MarshalUsing(typeof(ExceptionOnUnmarshal))] out int ret
+            );
 
-            [CustomMarshaller(typeof(int), MarshalMode.ManagedToUnmanagedOut, typeof(IntGuaranteedUnmarshal.Marshaller))]
+            [CustomMarshaller(
+                typeof(int),
+                MarshalMode.ManagedToUnmanagedOut,
+                typeof(IntGuaranteedUnmarshal.Marshaller)
+            )]
             public static class IntGuaranteedUnmarshal
             {
                 public unsafe struct Marshaller
                 {
                     public static bool ToManagedFinallyCalled = false;
+
                     public int ToManagedFinally()
                     {
                         ToManagedFinallyCalled = true;
@@ -105,16 +150,20 @@ namespace LibraryImportGenerator.IntegrationTests
 
                     public void FromUnmanaged(int value) { }
 
-                    public void Free() {}
+                    public void Free() { }
                 }
             }
         }
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "reverse_replace_ref_ushort")]
-        public static partial void ReverseReplaceString([MarshalUsing(typeof(Utf16StringMarshaller))] ref string s);
+        public static partial void ReverseReplaceString(
+            [MarshalUsing(typeof(Utf16StringMarshaller))] ref string s
+        );
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "return_length_ushort")]
-        public static partial int ReturnStringLength([MarshalUsing(typeof(Utf16StringMarshaller))] string s);
+        public static partial int ReturnStringLength(
+            [MarshalUsing(typeof(Utf16StringMarshaller))] string s
+        );
     }
 
     public class CustomMarshallingTests
@@ -122,13 +171,12 @@ namespace LibraryImportGenerator.IntegrationTests
         [Fact]
         public void NonBlittableStructWithFree()
         {
-            var stringContainer = new StringContainer
-            {
-                str1 = "Foo",
-                str2 = "Bar"
-            };
+            var stringContainer = new StringContainer { str1 = "Foo", str2 = "Bar" };
 
-            NativeExportsNE.Stateless.DeepDuplicateStrings(stringContainer, out var stringContainer2);
+            NativeExportsNE.Stateless.DeepDuplicateStrings(
+                stringContainer,
+                out var stringContainer2
+            );
 
             Assert.Equal(stringContainer, stringContainer2);
         }
@@ -154,11 +202,16 @@ namespace LibraryImportGenerator.IntegrationTests
         {
             NativeExportsNE.Stateless.IntGuaranteedUnmarshal.ConvertToManagedFinallyCalled = false;
             Assert.Throws<Exception>(() => NativeExportsNE.Stateless.GuaranteedUnmarshal(out _));
-            Assert.True(NativeExportsNE.Stateless.IntGuaranteedUnmarshal.ConvertToManagedFinallyCalled);
+            Assert.True(
+                NativeExportsNE.Stateless.IntGuaranteedUnmarshal.ConvertToManagedFinallyCalled
+            );
 
-            NativeExportsNE.Stateful.IntGuaranteedUnmarshal.Marshaller.ToManagedFinallyCalled = false;
+            NativeExportsNE.Stateful.IntGuaranteedUnmarshal.Marshaller.ToManagedFinallyCalled =
+                false;
             Assert.Throws<Exception>(() => NativeExportsNE.Stateful.GuaranteedUnmarshal(out _));
-            Assert.True(NativeExportsNE.Stateful.IntGuaranteedUnmarshal.Marshaller.ToManagedFinallyCalled);
+            Assert.True(
+                NativeExportsNE.Stateful.IntGuaranteedUnmarshal.Marshaller.ToManagedFinallyCalled
+            );
         }
 
         [Fact]
@@ -168,7 +221,7 @@ namespace LibraryImportGenerator.IntegrationTests
             {
                 b1 = true,
                 b2 = false,
-                b3 = true
+                b3 = true,
             };
 
             NativeExportsNE.Stateless.NegateBools(boolStruct, out BoolStruct boolStructNegated);
@@ -193,16 +246,12 @@ namespace LibraryImportGenerator.IntegrationTests
         [Fact]
         public void NonBlittableStructRef()
         {
-            var stringContainer = new StringContainer
-            {
-                str1 = "Foo",
-                str2 = "Bar"
-            };
+            var stringContainer = new StringContainer { str1 = "Foo", str2 = "Bar" };
 
             var expected = new StringContainer
             {
                 str1 = ReverseUTF8Bytes(stringContainer.str1),
-                str2 = ReverseUTF8Bytes(stringContainer.str2)
+                str2 = ReverseUTF8Bytes(stringContainer.str2),
             };
 
             var stringContainerCopy = stringContainer;
@@ -227,7 +276,7 @@ namespace LibraryImportGenerator.IntegrationTests
             {
                 b1 = b1,
                 b2 = b2,
-                b3 = b3
+                b3 = b3,
             };
 
             Assert.Equal(b1 && b2 && b3, NativeExportsNE.Stateless.AndBoolsRef(container));
@@ -259,14 +308,18 @@ namespace LibraryImportGenerator.IntegrationTests
             IntWrapperWithNotification y = new() { Value = 897 };
             y.InvokeSucceeded += (sender, args) => yNotified = true;
 
-            int oldNumInvokeSucceededOnUninitialized = IntWrapperWithNotification.NumInvokeSucceededOnUninitialized;
+            int oldNumInvokeSucceededOnUninitialized =
+                IntWrapperWithNotification.NumInvokeSucceededOnUninitialized;
 
             int result = NativeExportsNE.Stateful.SubtractInts(x, y).Value;
 
             Assert.Equal(x.Value - y.Value, result);
             Assert.True(xNotified);
             Assert.True(yNotified);
-            Assert.Equal(oldNumInvokeSucceededOnUninitialized, IntWrapperWithNotification.NumInvokeSucceededOnUninitialized);
+            Assert.Equal(
+                oldNumInvokeSucceededOnUninitialized,
+                IntWrapperWithNotification.NumInvokeSucceededOnUninitialized
+            );
         }
 
         [Fact]
@@ -279,14 +332,18 @@ namespace LibraryImportGenerator.IntegrationTests
             IntWrapperWithNotification y = new() { Value = 897 };
             y.InvokeSucceeded += (sender, args) => yNotified = true;
 
-            int oldNumInvokeSucceededOnUninitialized = IntWrapperWithNotification.NumInvokeSucceededOnUninitialized;
+            int oldNumInvokeSucceededOnUninitialized =
+                IntWrapperWithNotification.NumInvokeSucceededOnUninitialized;
 
             NativeExportsNE.Stateful.SubtractInts(x, y, out IntWrapperWithNotification result);
 
             Assert.Equal(x.Value - y.Value, result.Value);
             Assert.True(xNotified);
             Assert.True(yNotified);
-            Assert.Equal(oldNumInvokeSucceededOnUninitialized, IntWrapperWithNotification.NumInvokeSucceededOnUninitialized);
+            Assert.Equal(
+                oldNumInvokeSucceededOnUninitialized,
+                IntWrapperWithNotification.NumInvokeSucceededOnUninitialized
+            );
         }
 
         [Fact]
@@ -296,7 +353,7 @@ namespace LibraryImportGenerator.IntegrationTests
             {
                 b1 = true,
                 b2 = false,
-                b3 = true
+                b3 = true,
             };
 
             NativeExportsNE.Stateful.NegateBools(boolStruct, out BoolStruct boolStructNegated);
@@ -321,7 +378,7 @@ namespace LibraryImportGenerator.IntegrationTests
             {
                 b1 = b1,
                 b2 = b2,
-                b3 = b3
+                b3 = b3,
             };
 
             Assert.Equal(b1 && b2 && b3, NativeExportsNE.Stateful.AndBoolsRef(container));

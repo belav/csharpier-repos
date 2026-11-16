@@ -19,14 +19,20 @@ namespace System.Security.Cryptography
         private CngKey? _lazyKey;
         private bool _disposed;
 
-        public CngAlgorithmCore(Type disposedType) : this()
+        public CngAlgorithmCore(Type disposedType)
+            : this()
         {
             _disposedType = disposedType;
         }
 
         public static CngKey Duplicate(CngKey key)
         {
-            return CngKey.Open(key.HandleNoDuplicate, key.IsEphemeral ? CngKeyHandleOpenOptions.EphemeralKey : CngKeyHandleOpenOptions.None);
+            return CngKey.Open(
+                key.HandleNoDuplicate,
+                key.IsEphemeral
+                    ? CngKeyHandleOpenOptions.EphemeralKey
+                    : CngKeyHandleOpenOptions.None
+            );
         }
 
         public bool IsKeyGeneratedNamedCurve()
@@ -67,7 +73,11 @@ namespace System.Security.Cryptography
                 bool success = BitConverter.TryWriteBytes(keySizeBuffer, keySize);
                 Debug.Assert(success);
 
-                CngProperty keySizeProperty = new CngProperty(KeyPropertyName.Length, keySizeBuffer, CngPropertyOptions.None);
+                CngProperty keySizeProperty = new CngProperty(
+                    KeyPropertyName.Length,
+                    keySizeBuffer,
+                    CngPropertyOptions.None
+                );
                 creationParameters.Parameters.Add(keySizeProperty);
 
                 _lazyKey = CngKey.Create(algorithm, null, creationParameters);
@@ -104,27 +114,39 @@ namespace System.Security.Cryptography
                 CngProperty prop = new CngProperty(
                     Interop.BCrypt.BCryptPropertyStrings.BCRYPT_ECC_PARAMETERS,
                     parametersBlob,
-                    CngPropertyOptions.None);
+                    CngPropertyOptions.None
+                );
                 creationParameters.Parameters.Add(prop);
             }
             else
             {
-                throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CurveNotSupported, curve.Value.CurveType.ToString()));
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.Cryptography_CurveNotSupported, curve.Value.CurveType.ToString())
+                );
             }
 
             try
             {
-                _lazyKey = CngKey.Create(DefaultKeyType ?? CngAlgorithm.ECDsa, null, creationParameters);
+                _lazyKey = CngKey.Create(
+                    DefaultKeyType ?? CngAlgorithm.ECDsa,
+                    null,
+                    creationParameters
+                );
             }
             catch (CryptographicException e)
             {
                 // Map to PlatformNotSupportedException if appropriate
                 ErrorCode errorCode = (ErrorCode)e.HResult;
 
-                if (curve.Value.IsNamed &&
-                    errorCode == ErrorCode.NTE_INVALID_PARAMETER || errorCode == ErrorCode.NTE_NOT_SUPPORTED)
+                if (
+                    curve.Value.IsNamed && errorCode == ErrorCode.NTE_INVALID_PARAMETER
+                    || errorCode == ErrorCode.NTE_NOT_SUPPORTED
+                )
                 {
-                    throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CurveNotSupported, curve.Value.Oid.FriendlyName), e);
+                    throw new PlatformNotSupportedException(
+                        SR.Format(SR.Cryptography_CurveNotSupported, curve.Value.Oid.FriendlyName),
+                        e
+                    );
                 }
                 throw;
             }

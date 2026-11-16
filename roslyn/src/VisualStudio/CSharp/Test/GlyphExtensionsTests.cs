@@ -20,74 +20,73 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
         [Fact]
         public void GetGlyphGroupTests()
         {
-            TestGlyph(
-                StandardGlyphGroup.GlyphAssembly,
-                SymbolKind.Assembly);
-            TestGlyph(
-                StandardGlyphGroup.GlyphAssembly,
-                SymbolKind.NetModule);
-            TestGlyph(
-                StandardGlyphGroup.GlyphGroupNamespace,
-                SymbolKind.Namespace);
-            TestGlyph(
-                StandardGlyphGroup.GlyphGroupType,
-                SymbolKind.TypeParameter);
-            TestGlyph(
-                StandardGlyphGroup.GlyphGroupClass,
-                SymbolKind.DynamicType);
+            TestGlyph(StandardGlyphGroup.GlyphAssembly, SymbolKind.Assembly);
+            TestGlyph(StandardGlyphGroup.GlyphAssembly, SymbolKind.NetModule);
+            TestGlyph(StandardGlyphGroup.GlyphGroupNamespace, SymbolKind.Namespace);
+            TestGlyph(StandardGlyphGroup.GlyphGroupType, SymbolKind.TypeParameter);
+            TestGlyph(StandardGlyphGroup.GlyphGroupClass, SymbolKind.DynamicType);
 
             TestGlyph(
                 StandardGlyphGroup.GlyphExtensionMethodPrivate,
                 SymbolKind.Method,
-                Accessibility.Private);
+                Accessibility.Private
+            );
             TestGlyph(
                 StandardGlyphGroup.GlyphExtensionMethodPrivate,
                 SymbolKind.Method,
                 Accessibility.Private,
                 isExtensionMethod: false,
-                methodKind: MethodKind.ReducedExtension);
+                methodKind: MethodKind.ReducedExtension
+            );
             TestGlyph(
                 StandardGlyphGroup.GlyphExtensionMethodProtected,
-                declaredAccessibility: Accessibility.ProtectedAndInternal);
+                declaredAccessibility: Accessibility.ProtectedAndInternal
+            );
             TestGlyph(
                 StandardGlyphGroup.GlyphExtensionMethodProtected,
-                declaredAccessibility: Accessibility.Protected);
+                declaredAccessibility: Accessibility.Protected
+            );
             TestGlyph(
                 StandardGlyphGroup.GlyphExtensionMethodProtected,
-                declaredAccessibility: Accessibility.ProtectedOrInternal);
+                declaredAccessibility: Accessibility.ProtectedOrInternal
+            );
             TestGlyph(
                 StandardGlyphGroup.GlyphExtensionMethodInternal,
-                declaredAccessibility: Accessibility.Internal);
+                declaredAccessibility: Accessibility.Internal
+            );
             TestGlyph(
                 StandardGlyphGroup.GlyphExtensionMethod,
-                declaredAccessibility: Accessibility.Public);
+                declaredAccessibility: Accessibility.Public
+            );
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupMethod,
                 declaredAccessibility: Accessibility.Public,
-                isExtensionMethod: false);
+                isExtensionMethod: false
+            );
 
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupClass,
                 SymbolKind.PointerType,
-                pointedAtType: (INamedTypeSymbol)CreateSymbolMock(SymbolKind.NamedType, typeKind: TypeKind.Class));
+                pointedAtType: (INamedTypeSymbol)CreateSymbolMock(
+                    SymbolKind.NamedType,
+                    typeKind: TypeKind.Class
+                )
+            );
 
-            TestGlyph(
-                StandardGlyphGroup.GlyphGroupProperty,
-                SymbolKind.Property);
+            TestGlyph(StandardGlyphGroup.GlyphGroupProperty, SymbolKind.Property);
 
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupEnumMember,
                 SymbolKind.Field,
-                containingType: (INamedTypeSymbol)CreateSymbolMock(SymbolKind.NamedType, typeKind: TypeKind.Enum));
+                containingType: (INamedTypeSymbol)CreateSymbolMock(
+                    SymbolKind.NamedType,
+                    typeKind: TypeKind.Enum
+                )
+            );
 
-            TestGlyph(
-                StandardGlyphGroup.GlyphGroupConstant,
-                SymbolKind.Field,
-                isConst: true);
+            TestGlyph(StandardGlyphGroup.GlyphGroupConstant, SymbolKind.Field, isConst: true);
 
-            TestGlyph(
-                StandardGlyphGroup.GlyphGroupField,
-                SymbolKind.Field);
+            TestGlyph(StandardGlyphGroup.GlyphGroupField, SymbolKind.Field);
 
             TestGlyph(StandardGlyphGroup.GlyphGroupVariable, SymbolKind.Parameter);
             TestGlyph(StandardGlyphGroup.GlyphGroupVariable, SymbolKind.Local);
@@ -98,52 +97,68 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupClass,
                 SymbolKind.ArrayType,
-                elementType: (INamedTypeSymbol)CreateSymbolMock(SymbolKind.NamedType, typeKind: TypeKind.Class));
+                elementType: (INamedTypeSymbol)CreateSymbolMock(
+                    SymbolKind.NamedType,
+                    typeKind: TypeKind.Class
+                )
+            );
 
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupClass,
                 SymbolKind.Alias,
-                target: (INamedTypeSymbol)CreateSymbolMock(SymbolKind.NamedType, typeKind: TypeKind.Class));
+                target: (INamedTypeSymbol)CreateSymbolMock(
+                    SymbolKind.NamedType,
+                    typeKind: TypeKind.Class
+                )
+            );
 
             Assert.ThrowsAny<ArgumentException>(() =>
-                TestGlyph(
-                    StandardGlyphGroup.GlyphGroupClass,
-                    (SymbolKind)1000));
+                TestGlyph(StandardGlyphGroup.GlyphGroupClass, (SymbolKind)1000)
+            );
 
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupClass,
                 SymbolKind.NamedType,
-                typeKind: TypeKind.Class);
+                typeKind: TypeKind.Class
+            );
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupDelegate,
                 SymbolKind.NamedType,
-                typeKind: TypeKind.Delegate);
+                typeKind: TypeKind.Delegate
+            );
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupEnum,
                 SymbolKind.NamedType,
-                typeKind: TypeKind.Enum);
+                typeKind: TypeKind.Enum
+            );
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupModule,
                 SymbolKind.NamedType,
-                typeKind: TypeKind.Module);
+                typeKind: TypeKind.Module
+            );
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupInterface,
                 SymbolKind.NamedType,
-                typeKind: TypeKind.Interface);
+                typeKind: TypeKind.Interface
+            );
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupStruct,
                 SymbolKind.NamedType,
-                typeKind: TypeKind.Struct);
+                typeKind: TypeKind.Struct
+            );
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupError,
                 SymbolKind.NamedType,
-                typeKind: TypeKind.Error);
+                typeKind: TypeKind.Error
+            );
 
             Assert.ThrowsAny<Exception>(() =>
                 TestGlyph(
                     StandardGlyphGroup.GlyphGroupClass,
                     SymbolKind.NamedType,
-                    typeKind: TypeKind.Unknown));
+                    typeKind: TypeKind.Unknown
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545015")]
@@ -152,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupOperator,
                 SymbolKind.Method,
-                methodKind: MethodKind.UserDefinedOperator);
+                methodKind: MethodKind.UserDefinedOperator
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545015")]
@@ -161,16 +177,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupOperator,
                 SymbolKind.Method,
-                methodKind: MethodKind.Conversion);
+                methodKind: MethodKind.Conversion
+            );
         }
 
         [Fact]
         public void TestWithEventsMemberGlyph()
         {
-            TestGlyph(
-                StandardGlyphGroup.GlyphGroupField,
-                SymbolKind.Property,
-                isWithEvents: true);
+            TestGlyph(StandardGlyphGroup.GlyphGroupField, SymbolKind.Property, isWithEvents: true);
         }
 
         private static void TestGlyph(
@@ -185,9 +199,22 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             INamespaceOrTypeSymbol target = null,
             ITypeSymbol pointedAtType = null,
             bool isWithEvents = false,
-            TypeKind typeKind = TypeKind.Unknown)
+            TypeKind typeKind = TypeKind.Unknown
+        )
         {
-            var symbol = CreateSymbolMock(kind, declaredAccessibility, isExtensionMethod, methodKind, containingType, isConst, elementType, target, pointedAtType, isWithEvents, typeKind);
+            var symbol = CreateSymbolMock(
+                kind,
+                declaredAccessibility,
+                isExtensionMethod,
+                methodKind,
+                containingType,
+                isConst,
+                elementType,
+                target,
+                pointedAtType,
+                isWithEvents,
+                typeKind
+            );
             Assert.Equal(expectedGlyphGroup, symbol.GetGlyph().GetStandardGlyphGroup());
         }
 
@@ -202,7 +229,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             INamespaceOrTypeSymbol target = null,
             ITypeSymbol pointedAtType = null,
             bool isWithEvents = false,
-            TypeKind typeKind = TypeKind.Unknown)
+            TypeKind typeKind = TypeKind.Unknown
+        )
         {
             var symbolMock = new Mock<ISymbol>(MockBehavior.Strict);
 

@@ -9,6 +9,7 @@ public struct TestStruct
     public int f1;
     public int f2;
 }
+
 public class DelegateStruct
 {
     private delegate TestStruct DelSt(TestStruct st, int x);

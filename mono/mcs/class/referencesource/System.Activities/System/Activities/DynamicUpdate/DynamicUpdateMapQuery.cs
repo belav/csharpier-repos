@@ -20,10 +20,20 @@ namespace System.Activities.DynamicUpdate
         private Activity updatedWorkflowDefinition;
         private Activity originalWorkflowDefinition;
 
-        internal DynamicUpdateMapQuery(DynamicUpdateMap map, Activity updatedWorkflowDefinition, Activity originalWorkflowDefinition)
+        internal DynamicUpdateMapQuery(
+            DynamicUpdateMap map,
+            Activity updatedWorkflowDefinition,
+            Activity originalWorkflowDefinition
+        )
         {
-            Fx.Assert(updatedWorkflowDefinition == updatedWorkflowDefinition.RootActivity, "This parameter must be root of workflow");
-            Fx.Assert(originalWorkflowDefinition == originalWorkflowDefinition.RootActivity, "This parameter must be root of workflow");
+            Fx.Assert(
+                updatedWorkflowDefinition == updatedWorkflowDefinition.RootActivity,
+                "This parameter must be root of workflow"
+            );
+            Fx.Assert(
+                originalWorkflowDefinition == originalWorkflowDefinition.RootActivity,
+                "This parameter must be root of workflow"
+            );
 
             this.map = map;
             this.updatedWorkflowDefinition = updatedWorkflowDefinition;
@@ -52,7 +62,7 @@ namespace System.Activities.DynamicUpdate
             if (variable == null)
             {
                 throw FxTrace.Exception.ArgumentNull("variable");
-            }            
+            }
 
             if (IsInNewDefinition(variable))
             {
@@ -88,7 +98,7 @@ namespace System.Activities.DynamicUpdate
                 IdSpace rootIdSpace;
                 if (this.map.IsForImplementation)
                 {
-                    rootIdSpace = this.originalWorkflowDefinition.ParentOf;                    
+                    rootIdSpace = this.originalWorkflowDefinition.ParentOf;
                 }
                 else
                 {
@@ -98,8 +108,8 @@ namespace System.Activities.DynamicUpdate
                 if (rootIdSpace != null)
                 {
                     return rootIdSpace[entry.OldActivityId];
-                }        
-            }            
+                }
+            }
 
             return null;
         }
@@ -119,9 +129,9 @@ namespace System.Activities.DynamicUpdate
             }
 
             int newIndex = newVariable.Owner.RuntimeVariables.IndexOf(newVariable);
-            int? oldIndex = entry.HasEnvironmentUpdates ?
-                entry.EnvironmentUpdateMap.GetOldVariableIndex(newIndex) :
-                newIndex;
+            int? oldIndex = entry.HasEnvironmentUpdates
+                ? entry.EnvironmentUpdateMap.GetOldVariableIndex(newIndex)
+                : newIndex;
 
             return oldIndex.HasValue ? oldOwner.RuntimeVariables[oldIndex.Value] : null;
         }
@@ -136,12 +146,15 @@ namespace System.Activities.DynamicUpdate
         {
             entry = null;
 
-            if (this.map.TryGetUpdateEntry(oldActivity.InternalId, out entry) && entry.NewActivityId > 0)
+            if (
+                this.map.TryGetUpdateEntry(oldActivity.InternalId, out entry)
+                && entry.NewActivityId > 0
+            )
             {
                 IdSpace rootIdSpace;
                 if (this.map.IsForImplementation)
                 {
-                    rootIdSpace = this.updatedWorkflowDefinition.ParentOf;                    
+                    rootIdSpace = this.updatedWorkflowDefinition.ParentOf;
                 }
                 else
                 {
@@ -151,7 +164,7 @@ namespace System.Activities.DynamicUpdate
                 if (rootIdSpace != null)
                 {
                     return rootIdSpace[entry.NewActivityId];
-                }        
+                }
             }
 
             return null;
@@ -172,9 +185,9 @@ namespace System.Activities.DynamicUpdate
             }
 
             int oldIndex = oldVariable.Owner.RuntimeVariables.IndexOf(oldVariable);
-            int? newIndex = entry.HasEnvironmentUpdates ?
-                entry.EnvironmentUpdateMap.GetNewVariableIndex(oldIndex) :
-                oldIndex;
+            int? newIndex = entry.HasEnvironmentUpdates
+                ? entry.EnvironmentUpdateMap.GetNewVariableIndex(oldIndex)
+                : oldIndex;
 
             return newIndex.HasValue ? newOwner.RuntimeVariables[newIndex.Value] : null;
         }
@@ -195,17 +208,20 @@ namespace System.Activities.DynamicUpdate
                     this.map.TryGetUpdateEntry(currentActivity.InternalId, out entry);
                 }
 
-                if (entry != null &&
-                    (entry.NewActivityId < 1 ||
-                     entry.IsRuntimeUpdateBlocked ||
-                     entry.IsUpdateBlockedByUpdateAuthor))
+                if (
+                    entry != null
+                    && (
+                        entry.NewActivityId < 1
+                        || entry.IsRuntimeUpdateBlocked
+                        || entry.IsUpdateBlockedByUpdateAuthor
+                    )
+                )
                 {
                     return false;
                 }
 
                 currentActivity = currentActivity.Parent;
-            }
-            while (currentActivity != null && currentActivity.MemberOf == rootIdSpace);
+            } while (currentActivity != null && currentActivity.MemberOf == rootIdSpace);
 
             return true;
         }
@@ -223,9 +239,11 @@ namespace System.Activities.DynamicUpdate
             }
             else
             {
-                ThrowNotInDefinition(isVariableOwner, 
+                ThrowNotInDefinition(
+                    isVariableOwner,
                     SR.QueryVariableIsNotInDefinition,
-                    SR.QueryActivityIsNotInDefinition);
+                    SR.QueryActivityIsNotInDefinition
+                );
             }
 
             // We only support either the public or the implementation IdSpace at the root of the workflow.
@@ -234,16 +252,20 @@ namespace System.Activities.DynamicUpdate
             {
                 if (activity.MemberOf.Owner != activity.RootActivity)
                 {
-                    ThrowNotInDefinition(isVariableOwner,
+                    ThrowNotInDefinition(
+                        isVariableOwner,
                         SR.QueryVariableIsPublic(activity.RootActivity),
-                        SR.QueryActivityIsPublic(activity.RootActivity));
+                        SR.QueryActivityIsPublic(activity.RootActivity)
+                    );
                 }
             }
             else if (activity.MemberOf != activity.RootActivity.MemberOf)
             {
-                ThrowNotInDefinition(isVariableOwner,
+                ThrowNotInDefinition(
+                    isVariableOwner,
                     SR.QueryVariableIsInImplementation(activity.MemberOf.Owner),
-                    SR.QueryActivityIsInImplementation(activity.MemberOf.Owner));
+                    SR.QueryActivityIsInImplementation(activity.MemberOf.Owner)
+                );
             }
 
             return result;
@@ -262,7 +284,11 @@ namespace System.Activities.DynamicUpdate
             return IsInNewDefinition(variable.Owner, true);
         }
 
-        private void ThrowNotInDefinition(bool isVariableOwner, string variableMessage, string activityMessage)
+        private void ThrowNotInDefinition(
+            bool isVariableOwner,
+            string variableMessage,
+            string activityMessage
+        )
         {
             if (isVariableOwner)
             {

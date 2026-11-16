@@ -15,7 +15,7 @@ namespace System.DirectoryServices
             Add = 0,
             Delete = 1,
             Update = 2,
-            None = 3
+            None = 3,
         }
 
         private readonly DirectoryEntry _entry;
@@ -76,7 +76,6 @@ namespace System.DirectoryServices
                     return objectArray;
                 }
             }
-
             set
             {
                 try
@@ -188,7 +187,10 @@ namespace System.DirectoryServices
             if (unmanagedResult != 0)
             {
                 //  property not found (IIS provider returns 0x80005006, other provides return 0x8000500D).
-                if ((unmanagedResult == unchecked((int)0x8000500D)) || (unmanagedResult == unchecked((int)0x80005006)))
+                if (
+                    (unmanagedResult == unchecked((int)0x8000500D))
+                    || (unmanagedResult == unchecked((int)0x80005006))
+                )
                 {
                     return;
                 }
@@ -227,7 +229,12 @@ namespace System.DirectoryServices
 
         protected override void OnClearComplete()
         {
-            if (_needNewBehavior && !_allowMultipleChange && _updateType != UpdateType.None && _updateType != UpdateType.Update)
+            if (
+                _needNewBehavior
+                && !_allowMultipleChange
+                && _updateType != UpdateType.None
+                && _updateType != UpdateType.Update
+            )
             {
                 throw new InvalidOperationException(SR.DSPropertyValueSupportOneOperation);
             }
@@ -241,7 +248,7 @@ namespace System.DirectoryServices
             {
                 // On ADSI 2.5 if property has not been assigned any value before,
                 // then IAds::SetInfo() in CommitIfNotCaching returns bad HREsult 0x8007200A, which we ignore.
-                if (e.ErrorCode != unchecked((int)0x8007200A))    //  ERROR_DS_NO_ATTRIBUTE_OR_VALUE
+                if (e.ErrorCode != unchecked((int)0x8007200A)) //  ERROR_DS_NO_ATTRIBUTE_OR_VALUE
                     throw;
             }
         }
@@ -261,13 +268,21 @@ namespace System.DirectoryServices
 
                     object[] allValues = new object[_changeList.Count];
                     _changeList.CopyTo(allValues, 0);
-                    _entry.AdsObject.PutEx((int)AdsPropertyOperation.Append, PropertyName, allValues);
+                    _entry.AdsObject.PutEx(
+                        (int)AdsPropertyOperation.Append,
+                        PropertyName,
+                        allValues
+                    );
 
                     _updateType = UpdateType.Add;
                 }
                 else
                 {
-                    _entry.AdsObject.PutEx((int)AdsPropertyOperation.Append, PropertyName, new object?[] { value });
+                    _entry.AdsObject.PutEx(
+                        (int)AdsPropertyOperation.Append,
+                        PropertyName,
+                        new object?[] { value }
+                    );
                 }
             }
             else
@@ -293,13 +308,21 @@ namespace System.DirectoryServices
                     _changeList.Add(value);
                     object?[] allValues = new object[_changeList.Count];
                     _changeList.CopyTo(allValues, 0);
-                    _entry.AdsObject.PutEx((int)AdsPropertyOperation.Delete, PropertyName, allValues);
+                    _entry.AdsObject.PutEx(
+                        (int)AdsPropertyOperation.Delete,
+                        PropertyName,
+                        allValues
+                    );
 
                     _updateType = UpdateType.Delete;
                 }
                 else
                 {
-                    _entry.AdsObject.PutEx((int)AdsPropertyOperation.Delete, PropertyName, new object?[] { value });
+                    _entry.AdsObject.PutEx(
+                        (int)AdsPropertyOperation.Delete,
+                        PropertyName,
+                        new object?[] { value }
+                    );
                 }
             }
             else
@@ -323,14 +346,26 @@ namespace System.DirectoryServices
             {
                 if (_needNewBehavior)
                 {
-                    _entry.AdsObject.PutEx((int)AdsPropertyOperation.Delete, PropertyName, new object?[] { oldValue });
-                    _entry.AdsObject.PutEx((int)AdsPropertyOperation.Append, PropertyName, new object?[] { newValue });
+                    _entry.AdsObject.PutEx(
+                        (int)AdsPropertyOperation.Delete,
+                        PropertyName,
+                        new object?[] { oldValue }
+                    );
+                    _entry.AdsObject.PutEx(
+                        (int)AdsPropertyOperation.Append,
+                        PropertyName,
+                        new object?[] { newValue }
+                    );
                 }
                 else
                 {
                     object?[] allValues = new object[InnerList.Count];
                     InnerList.CopyTo(allValues, 0);
-                    _entry.AdsObject.PutEx((int)AdsPropertyOperation.Update, PropertyName, allValues);
+                    _entry.AdsObject.PutEx(
+                        (int)AdsPropertyOperation.Update,
+                        PropertyName,
+                        allValues
+                    );
                 }
             }
 

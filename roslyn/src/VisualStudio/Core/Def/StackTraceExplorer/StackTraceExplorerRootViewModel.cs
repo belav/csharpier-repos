@@ -23,7 +23,12 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
         private readonly ClassificationTypeMap _typeMap;
         private readonly IThreadingContext _threadingContext;
 
-        public StackTraceExplorerRootViewModel(IThreadingContext threadingContext, VisualStudioWorkspace workspace, IClassificationFormatMap formatMap, ClassificationTypeMap typeMap)
+        public StackTraceExplorerRootViewModel(
+            IThreadingContext threadingContext,
+            VisualStudioWorkspace workspace,
+            IClassificationFormatMap formatMap,
+            ClassificationTypeMap typeMap
+        )
         {
             _threadingContext = threadingContext;
             _workspace = workspace;
@@ -43,17 +48,25 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
         /// <summary>
         /// Returns true if there's a tab that already matches the text
         /// </summary>
-        public bool ContainsTab(string text)
-            => Tabs.Any(tab => tab.Content.ViewModel.Matches(text));
+        public bool ContainsTab(string text) =>
+            Tabs.Any(tab => tab.Content.ViewModel.Matches(text));
 
-        public async Task AddNewTabAsync(StackTraceAnalysisResult? result, string originalText, CancellationToken cancellationToken)
+        public async Task AddNewTabAsync(
+            StackTraceAnalysisResult? result,
+            string originalText,
+            CancellationToken cancellationToken
+        )
         {
             // Name will always have an index. Use the highest index opened + 1.
-            var highestIndex = Tabs.Count == 0
-                ? 0
-                : Tabs.Max(t => t.NameIndex);
+            var highestIndex = Tabs.Count == 0 ? 0 : Tabs.Max(t => t.NameIndex);
 
-            var newTab = new StackTraceExplorerTab(_threadingContext, _workspace, _formatMap, _typeMap, highestIndex + 1);
+            var newTab = new StackTraceExplorerTab(
+                _threadingContext,
+                _workspace,
+                _formatMap,
+                _typeMap,
+                highestIndex + 1
+            );
             Tabs.Add(newTab);
 
             SelectedTab = newTab;
@@ -61,7 +74,13 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             newTab.OnClosed += Tab_Closed;
             if (result.HasValue)
             {
-                await newTab.Content.ViewModel.SetStackTraceResultAsync(result.Value, originalText, cancellationToken).ConfigureAwait(false);
+                await newTab
+                    .Content.ViewModel.SetStackTraceResultAsync(
+                        result.Value,
+                        originalText,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
@@ -73,12 +92,16 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                 return;
             }
 
-            var result = await StackTraceAnalyzer.AnalyzeAsync(text, cancellationToken).ConfigureAwait(false);
+            var result = await StackTraceAnalyzer
+                .AnalyzeAsync(text, cancellationToken)
+                .ConfigureAwait(false);
             if (SelectedTab is { IsEmpty: true })
             {
                 // Paste in the SelectedTab instead of opening a new tab
                 // for cases where there are no contents in the current tab
-                await SelectedTab.Content.ViewModel.SetStackTraceResultAsync(result, text, cancellationToken).ConfigureAwait(false);
+                await SelectedTab
+                    .Content.ViewModel.SetStackTraceResultAsync(result, text, cancellationToken)
+                    .ConfigureAwait(false);
             }
             else
             {

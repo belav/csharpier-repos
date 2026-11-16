@@ -1,4 +1,5 @@
-﻿namespace System.Web {
+﻿namespace System.Web
+{
     using System;
     using System.ComponentModel;
     using System.Globalization;
@@ -14,8 +15,8 @@
     // thread and how to undo them. See also the comments on
     // HttpApplication.OnThreadEnterPrivate.
 
-    internal sealed class ThreadContext : ISyncContextLock {
-
+    internal sealed class ThreadContext : ISyncContextLock
+    {
         // This is a marker holding the current ThreadContext for the current
         // thread. Uses TLS so that it's not wiped away by ExecutionContext.Run.
         [ThreadStatic]
@@ -30,32 +31,35 @@
         private IPrincipal _originalThreadPrincipal;
         private bool _setCurrentThreadOnHttpContext;
 
-        internal ThreadContext(HttpContext httpContext) {
+        internal ThreadContext(HttpContext httpContext)
+        {
             HttpContext = httpContext;
         }
 
-        internal static ThreadContext Current {
+        internal static ThreadContext Current
+        {
             get { return _currentThreadContext; }
             private set { _currentThreadContext = value; }
         }
 
-        internal bool HasBeenDisassociatedFromThread {
-            get;
-            private set;
-        }
+        internal bool HasBeenDisassociatedFromThread { get; private set; }
 
-        internal HttpContext HttpContext {
-            get;
-            private set;
-        }
+        internal HttpContext HttpContext { get; private set; }
 
         // Associates this ThreadContext with the current thread. This restores certain
         // ambient values associated with the current HttpContext, such as the current
         // user and cultures. It also sets HttpContext.Current.
-        internal void AssociateWithCurrentThread(bool setImpersonationContext) {
+        internal void AssociateWithCurrentThread(bool setImpersonationContext)
+        {
             Debug.Assert(HttpContext != null); // only to be used when context is available
-            Debug.Assert(Current != this, "This ThreadContext is already associated with this thread.");
-            Debug.Assert(!HasBeenDisassociatedFromThread, "This ThreadContext has already been disassociated from a thread.");
+            Debug.Assert(
+                Current != this,
+                "This ThreadContext is already associated with this thread."
+            );
+            Debug.Assert(
+                !HasBeenDisassociatedFromThread,
+                "This ThreadContext has already been disassociated from a thread."
+            );
 
             Debug.Trace("OnThread", GetTraceMessage("Enter1"));
 
@@ -68,7 +72,8 @@
             _originalHttpContext = DisposableHttpContextWrapper.SwitchContext(HttpContext);
 
             // set impersonation on the current thread
-            if (setImpersonationContext) {
+            if (setImpersonationContext)
+            {
                 SetImpersonationContext();
             }
 
@@ -79,7 +84,8 @@
 
             // set ETW trace ID
             Guid g = HttpContext.WorkerRequest.RequestTraceIdentifier;
-            if (g != Guid.Empty) {
+            if (g != Guid.Empty)
+            {
                 CallContext.LogicalSetData("E2ETrace.ActivityID", g);
             }
 
@@ -96,7 +102,8 @@
             // DevDivBugs 75042
             // set current thread in context if there is not there
             // the timeout manager  uses this to abort the correct thread
-            if (HttpContext.CurrentThread == null) {
+            if (HttpContext.CurrentThread == null)
+            {
                 _setCurrentThreadOnHttpContext = true;
                 HttpContext.CurrentThread = Thread.CurrentThread;
             }
@@ -112,7 +119,8 @@
             Debug.Trace("OnThread", GetTraceMessage("Enter2"));
         }
 
-        private ClientImpersonationContext CreateNewClientImpersonationContext() {
+        private ClientImpersonationContext CreateNewClientImpersonationContext()
+        {
             // impersonation is set in the ClientImpersonationContext ctor
             return new ClientImpersonationContext(HttpContext);
         }
@@ -121,10 +129,17 @@
         // associated with the current request are stored in the HttpContext object so that they
         // can be restored the next time a ThreadContext associated with this HttpContext is active.
         // Impersonation and other similar modifications to the current thread are undone.
-        internal void DisassociateFromCurrentThread() {
+        internal void DisassociateFromCurrentThread()
+        {
             Debug.Trace("OnThread", GetTraceMessage("Leave1"));
-            Debug.Assert(Current == this, "This ThreadContext isn't associated with current thread.");
-            Debug.Assert(!HasBeenDisassociatedFromThread, "This ThreadContext has already been disassociated from a thread.");
+            Debug.Assert(
+                Current == this,
+                "This ThreadContext isn't associated with current thread."
+            );
+            Debug.Assert(
+                !HasBeenDisassociatedFromThread,
+                "This ThreadContext has already been disassociated from a thread."
+            );
 
             /*
              * !! IMPORTANT !!
@@ -135,7 +150,8 @@
             HasBeenDisassociatedFromThread = true;
 
             // remove thread if set
-            if (_setCurrentThreadOnHttpContext) {
+            if (_setCurrentThreadOnHttpContext)
+            {
                 HttpContext.CurrentThread = null;
             }
 
@@ -169,10 +185,17 @@
         // ExecutionContext.Run destroys some of our ambient state (HttpContext.Current, etc.),
         // we need to restore it. This method returns an Action which should be called when
         // the call to ExecutionContext.Run is concluding.
-        internal Action EnterExecutionContext() {
+        internal Action EnterExecutionContext()
+        {
             Debug.Trace("OnThread", GetTraceMessage("EnterExecutionContext1"));
-            Debug.Assert(Current == this, "This ThreadContext isn't associated with current thread.");
-            Debug.Assert(!HasBeenDisassociatedFromThread, "This ThreadContext has already been disassociated from a thread.");
+            Debug.Assert(
+                Current == this,
+                "This ThreadContext isn't associated with current thread."
+            );
+            Debug.Assert(
+                !HasBeenDisassociatedFromThread,
+                "This ThreadContext has already been disassociated from a thread."
+            );
 
             /*
              * !! IMPORTANT !!
@@ -183,7 +206,8 @@
             // if AssociateWithCurrentThread also did so.
 
             ClientImpersonationContext executionContextClientImpersonationContext = null;
-            if (_newImpersonationContext != null) {
+            if (_newImpersonationContext != null)
+            {
                 executionContextClientImpersonationContext = CreateNewClientImpersonationContext();
             }
 
@@ -193,7 +217,8 @@
             DisposableHttpContextWrapper.SwitchContext(HttpContext);
 
             Guid g = HttpContext.WorkerRequest.RequestTraceIdentifier;
-            if (g != Guid.Empty) {
+            if (g != Guid.Empty)
+            {
                 CallContext.LogicalSetData("E2ETrace.ActivityID", g);
             }
 
@@ -209,11 +234,13 @@
             Debug.Trace("OnThread", GetTraceMessage("EnterExecutionContext2"));
 
             // This delegate is the cleanup routine.
-            return () => {
+            return () =>
+            {
                 Debug.Trace("OnThread", GetTraceMessage("LeaveExecutionContext1"));
 
                 // Undo any impersonation that we performed.
-                if (executionContextClientImpersonationContext != null) {
+                if (executionContextClientImpersonationContext != null)
+                {
                     executionContextClientImpersonationContext.Undo();
                 }
 
@@ -226,15 +253,35 @@
             };
         }
 
-        private static string GetTraceMessage(string tag) {
+        private static string GetTraceMessage(string tag)
+        {
 #if DBG
             StringBuilder sb = new StringBuilder(256);
             sb.Append(tag);
-            sb.AppendFormat(" Thread={0}", SafeNativeMethods.GetCurrentThreadId().ToString(CultureInfo.InvariantCulture));
-            sb.AppendFormat(" Context={0}", (HttpContext.Current != null) ? HttpContext.Current.GetHashCode().ToString(CultureInfo.InvariantCulture) : "NULL_CTX");
-            sb.AppendFormat(" Principal={0}", (Thread.CurrentPrincipal != null) ? Thread.CurrentPrincipal.GetHashCode().ToString(CultureInfo.InvariantCulture) : "NULL_PRIN");
-            sb.AppendFormat(" Culture={0}", Thread.CurrentThread.CurrentCulture.LCID.ToString(CultureInfo.InvariantCulture));
-            sb.AppendFormat(" UICulture={0}", Thread.CurrentThread.CurrentUICulture.LCID.ToString(CultureInfo.InvariantCulture));
+            sb.AppendFormat(
+                " Thread={0}",
+                SafeNativeMethods.GetCurrentThreadId().ToString(CultureInfo.InvariantCulture)
+            );
+            sb.AppendFormat(
+                " Context={0}",
+                (HttpContext.Current != null)
+                    ? HttpContext.Current.GetHashCode().ToString(CultureInfo.InvariantCulture)
+                    : "NULL_CTX"
+            );
+            sb.AppendFormat(
+                " Principal={0}",
+                (Thread.CurrentPrincipal != null)
+                    ? Thread.CurrentPrincipal.GetHashCode().ToString(CultureInfo.InvariantCulture)
+                    : "NULL_PRIN"
+            );
+            sb.AppendFormat(
+                " Culture={0}",
+                Thread.CurrentThread.CurrentCulture.LCID.ToString(CultureInfo.InvariantCulture)
+            );
+            sb.AppendFormat(
+                " UICulture={0}",
+                Thread.CurrentThread.CurrentUICulture.LCID.ToString(CultureInfo.InvariantCulture)
+            );
             sb.AppendFormat(" ActivityID={0}", CallContext.LogicalGetData("E2ETrace.ActivityID"));
             return sb.ToString();
 #else
@@ -243,21 +290,24 @@
 #endif
         }
 
-
         // Restores the thread's CurrentCulture and CurrentUICulture back to what
         // they were before this ThreadContext was associated with the thread. If
         // any culture has changed from its original value, we squirrel the new
         // culture away in HttpContext so that we can restore it the next time any
         // ThreadContext associated with this HttpContext is active.
-        private void RestoreRequestLevelCulture() {
+        private void RestoreRequestLevelCulture()
+        {
             CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
             CultureInfo currentUICulture = Thread.CurrentThread.CurrentUICulture;
 
-            if (_originalThreadCurrentCulture != null) {
+            if (_originalThreadCurrentCulture != null)
+            {
                 // Avoid the cost of the Demand when setting the culture by comparing the cultures first
-                if (currentCulture != _originalThreadCurrentCulture) {
+                if (currentCulture != _originalThreadCurrentCulture)
+                {
                     HttpRuntime.SetCurrentThreadCultureWithAssert(_originalThreadCurrentCulture);
-                    if (HttpContext != null) {
+                    if (HttpContext != null)
+                    {
                         // remember changed culture for the rest of the request
                         HttpContext.DynamicCulture = currentCulture;
                     }
@@ -266,11 +316,14 @@
                 _originalThreadCurrentCulture = null;
             }
 
-            if (_originalThreadCurrentUICulture != null) {
+            if (_originalThreadCurrentUICulture != null)
+            {
                 // Avoid the cost of the Demand when setting the culture by comparing the cultures first
-                if (currentUICulture != _originalThreadCurrentUICulture) {
+                if (currentUICulture != _originalThreadCurrentUICulture)
+                {
                     Thread.CurrentThread.CurrentUICulture = _originalThreadCurrentUICulture;
-                    if (HttpContext != null) {
+                    if (HttpContext != null)
+                    {
                         // remember changed culture for the rest of the request
                         HttpContext.DynamicUICulture = currentUICulture;
                     }
@@ -281,8 +334,10 @@
         }
 
         // Sets impersonation on the current thread.
-        internal void SetImpersonationContext() {
-            if (_newImpersonationContext == null) {
+        internal void SetImpersonationContext()
+        {
+            if (_newImpersonationContext == null)
+            {
                 _newImpersonationContext = CreateNewClientImpersonationContext();
             }
         }
@@ -291,7 +346,8 @@
         // with the current HttpContext. We do this since the culture of a request can
         // change over its lifetime and isn't necessarily the default for the AppDomain,
         // e.g. if the culture was read from the request headers.
-        private void SetRequestLevelCulture() {
+        private void SetRequestLevelCulture()
+        {
             CultureInfo culture = null;
             CultureInfo uiculture = null;
 
@@ -311,7 +367,8 @@
             // Page also could have its own culture settings
             Page page = HttpContext.CurrentHandler as Page;
 
-            if (page != null) {
+            if (page != null)
+            {
                 if (page.DynamicCulture != null)
                     culture = page.DynamicCulture;
 
@@ -322,11 +379,13 @@
             _originalThreadCurrentCulture = Thread.CurrentThread.CurrentCulture;
             _originalThreadCurrentUICulture = Thread.CurrentThread.CurrentUICulture;
 
-            if (culture != null && culture != Thread.CurrentThread.CurrentCulture) {
+            if (culture != null && culture != Thread.CurrentThread.CurrentCulture)
+            {
                 HttpRuntime.SetCurrentThreadCultureWithAssert(culture);
             }
 
-            if (uiculture != null && uiculture != Thread.CurrentThread.CurrentUICulture) {
+            if (uiculture != null && uiculture != Thread.CurrentThread.CurrentUICulture)
+            {
                 Thread.CurrentThread.CurrentUICulture = uiculture;
             }
         }
@@ -334,16 +393,19 @@
         // Use of IndicateCompletion requires that we synchronize the cultures
         // with what may have been set by user code during execution of the
         // notification.
-        internal void Synchronize() {
+        internal void Synchronize()
+        {
             HttpContext.DynamicCulture = Thread.CurrentThread.CurrentCulture;
             HttpContext.DynamicUICulture = Thread.CurrentThread.CurrentUICulture;
         }
 
         // Undoes any impersonation that we did when associating this ThreadContext
         // with the current thread.
-        internal void UndoImpersonationContext() {
+        internal void UndoImpersonationContext()
+        {
             // remove impersonation on the current thread
-            if (_newImpersonationContext != null) {
+            if (_newImpersonationContext != null)
+            {
                 _newImpersonationContext.Undo();
                 _newImpersonationContext = null;
             }
@@ -351,9 +413,9 @@
 
         // Called by AspNetSynchronizationContext to signal that it is finished
         // processing on the current thread.
-        void ISyncContextLock.Leave() {
+        void ISyncContextLock.Leave()
+        {
             DisassociateFromCurrentThread();
         }
-
     }
 }

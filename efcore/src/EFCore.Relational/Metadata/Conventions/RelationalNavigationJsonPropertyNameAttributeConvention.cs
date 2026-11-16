@@ -12,9 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class RelationalNavigationJsonPropertyNameAttributeConvention :
-    NavigationAttributeConventionBase<JsonPropertyNameAttribute>,
-    INavigationAddedConvention
+public class RelationalNavigationJsonPropertyNameAttributeConvention
+    : NavigationAttributeConventionBase<JsonPropertyNameAttribute>,
+        INavigationAddedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="RelationalNavigationJsonPropertyNameAttributeConvention" />.
@@ -23,7 +23,8 @@ public class RelationalNavigationJsonPropertyNameAttributeConvention :
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public RelationalNavigationJsonPropertyNameAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
         : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
@@ -38,11 +39,15 @@ public class RelationalNavigationJsonPropertyNameAttributeConvention :
     public override void ProcessNavigationAdded(
         IConventionNavigationBuilder navigationBuilder,
         JsonPropertyNameAttribute attribute,
-        IConventionContext<IConventionNavigationBuilder> context)
+        IConventionContext<IConventionNavigationBuilder> context
+    )
     {
         if (!string.IsNullOrWhiteSpace(attribute.Name))
         {
-            navigationBuilder.Metadata.TargetEntityType.Builder.HasJsonPropertyName(attribute.Name, fromDataAnnotation: true);
+            navigationBuilder.Metadata.TargetEntityType.Builder.HasJsonPropertyName(
+                attribute.Name,
+                fromDataAnnotation: true
+            );
         }
     }
 }

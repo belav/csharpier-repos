@@ -18,7 +18,7 @@ using System.Xml;
 namespace System.IdentityModel.Tokens
 {
     /// <summary>
-    /// This class derives from System.IdentityModel.Selectors.SecurityTokenSerializer and wraps a collection of SecurityTokenHandlers. 
+    /// This class derives from System.IdentityModel.Selectors.SecurityTokenSerializer and wraps a collection of SecurityTokenHandlers.
     /// Any call to this serilaizer is delegated to the token handler and delegated to the base class if no token handler
     /// is registered to handle this particular token or KeyIdentifier.
     /// </summary>
@@ -32,15 +32,20 @@ namespace System.IdentityModel.Tokens
         /// <param name="securityTokenHandlerCollection">
         /// The <see cref="SecurityTokenHandlerCollection" /> containing the set of <see cref="SecurityTokenHandler" />
         /// </param>
-        public SecurityTokenSerializerAdapter(SecurityTokenHandlerCollection securityTokenHandlerCollection)
+        public SecurityTokenSerializerAdapter(
+            SecurityTokenHandlerCollection securityTokenHandlerCollection
+        )
         {
             if (securityTokenHandlerCollection == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityTokenHandlerCollection");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenHandlerCollection"
+                );
             }
             _securityTokenHandlers = securityTokenHandlerCollection;
 
-            KeyInfoSerializer serializer = securityTokenHandlerCollection.KeyInfoSerializer as KeyInfoSerializer;
+            KeyInfoSerializer serializer =
+                securityTokenHandlerCollection.KeyInfoSerializer as KeyInfoSerializer;
             if (serializer != null)
             {
                 serializer.InnerSecurityTokenSerializer = this;
@@ -52,12 +57,8 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public SecurityTokenHandlerCollection SecurityTokenHandlers
         {
-            get
-            {
-                return _securityTokenHandlers;
-            }
+            get { return _securityTokenHandlers; }
         }
-
 
         /// <summary>
         /// Checks if one of the wrapped SecurityTokenHandlers or the base WSSecurityTokenSerializer
@@ -87,7 +88,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="reader">Reader to a Security token.</param>
         /// <param name="tokenResolver">Instance of SecurityTokenResolver.</param>
         /// <returns>'True' if the serializer can read the given Security Token.</returns>
-        protected override SecurityToken ReadTokenCore(XmlReader reader, SecurityTokenResolver tokenResolver)
+        protected override SecurityToken ReadTokenCore(
+            XmlReader reader,
+            SecurityTokenResolver tokenResolver
+        )
         {
             return _securityTokenHandlers.ReadToken(reader);
         }
@@ -112,7 +116,12 @@ namespace System.IdentityModel.Tokens
         /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is null.</exception>
         protected override bool CanReadKeyIdentifierCore(XmlReader reader)
         {
-            return (reader.IsStartElement(XmlSignatureConstants.Elements.KeyInfo, XmlSignatureConstants.Namespace));
+            return (
+                reader.IsStartElement(
+                    XmlSignatureConstants.Elements.KeyInfo,
+                    XmlSignatureConstants.Namespace
+                )
+            );
         }
 
         /// <summary>
@@ -129,7 +138,12 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            if (reader.IsStartElement(XmlSignatureConstants.Elements.KeyInfo, XmlSignatureConstants.Namespace))
+            if (
+                reader.IsStartElement(
+                    XmlSignatureConstants.Elements.KeyInfo,
+                    XmlSignatureConstants.Namespace
+                )
+            )
             {
                 KeyInfo keyInfo = new KeyInfo(this);
                 keyInfo.ReadXml(XmlDictionaryReader.CreateDictionaryReader(reader));
@@ -137,22 +151,30 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4192));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperXml(
+                    reader,
+                    SR.GetString(SR.ID4192)
+                );
             }
         }
 
         protected override bool CanWriteKeyIdentifierCore(SecurityKeyIdentifier keyIdentifier)
         {
-            return _securityTokenHandlers.KeyInfoSerializer == null ? false : _securityTokenHandlers.KeyInfoSerializer.CanWriteKeyIdentifier(keyIdentifier);
+            return _securityTokenHandlers.KeyInfoSerializer == null
+                ? false
+                : _securityTokenHandlers.KeyInfoSerializer.CanWriteKeyIdentifier(keyIdentifier);
         }
 
-        protected override void WriteKeyIdentifierCore(XmlWriter writer, SecurityKeyIdentifier keyIdentifier)
+        protected override void WriteKeyIdentifierCore(
+            XmlWriter writer,
+            SecurityKeyIdentifier keyIdentifier
+        )
         {
             _securityTokenHandlers.KeyInfoSerializer.WriteKeyIdentifier(writer, keyIdentifier);
         }
 
         /// <summary>
-        /// Checks if the wrapped SecurityTokenHandler can read the 
+        /// Checks if the wrapped SecurityTokenHandler can read the
         /// SecurityKeyIdentifierClause.
         /// </summary>
         /// <param name="reader">Reader to a SecurityKeyIdentifierClause.</param>
@@ -168,7 +190,9 @@ namespace System.IdentityModel.Tokens
                 }
             }
 
-            return (_securityTokenHandlers.KeyInfoSerializer == null) ? false : _securityTokenHandlers.KeyInfoSerializer.CanReadKeyIdentifierClause(reader);
+            return (_securityTokenHandlers.KeyInfoSerializer == null)
+                ? false
+                : _securityTokenHandlers.KeyInfoSerializer.CanReadKeyIdentifierClause(reader);
         }
 
         /// <summary>
@@ -178,7 +202,9 @@ namespace System.IdentityModel.Tokens
         /// <param name="keyIdentifierClause">SecurityKeyIdentifierClause to be checked.</param>
         /// <returns>'True' if the SecurityTokenKeyIdentifierClause can be written.</returns>
         /// <exception cref="ArgumentNullException">The input parameter 'keyIdentifierClause' is null.</exception>
-        protected override bool CanWriteKeyIdentifierClauseCore(SecurityKeyIdentifierClause keyIdentifierClause)
+        protected override bool CanWriteKeyIdentifierClauseCore(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
             foreach (SecurityTokenHandler securityTokenHandler in _securityTokenHandlers)
             {
@@ -188,7 +214,11 @@ namespace System.IdentityModel.Tokens
                 }
             }
 
-            return (_securityTokenHandlers.KeyInfoSerializer == null) ? false : _securityTokenHandlers.KeyInfoSerializer.CanWriteKeyIdentifierClause(keyIdentifierClause);
+            return (_securityTokenHandlers.KeyInfoSerializer == null)
+                ? false
+                : _securityTokenHandlers.KeyInfoSerializer.CanWriteKeyIdentifierClause(
+                    keyIdentifierClause
+                );
         }
 
         /// <summary>
@@ -206,7 +236,10 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="writer">XmlWriter to write into.</param>
         /// <param name="keyIdentifierClause">SecurityKeyIdentifierClause to be written.</param>
-        protected override void WriteKeyIdentifierClauseCore(XmlWriter writer, SecurityKeyIdentifierClause keyIdentifierClause)
+        protected override void WriteKeyIdentifierClauseCore(
+            XmlWriter writer,
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
             _securityTokenHandlers.WriteKeyIdentifierClause(writer, keyIdentifierClause);
         }

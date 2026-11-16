@@ -1,25 +1,25 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Text;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Reflection;
-    using Microsoft.CSharp;
-    using Microsoft.VisualBasic;
     using System.Collections;
-    using System.Globalization;
-    using System.ComponentModel;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Text;
     using System.Workflow;
-    using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
-    using System.Collections.Specialized;
+    using Microsoft.CSharp;
+    using Microsoft.VisualBasic;
 
     internal sealed class IdentifierCreationService : IIdentifierCreationService
     {
@@ -27,7 +27,10 @@ namespace System.Workflow.ComponentModel.Design
         private WorkflowDesignerLoader loader = null;
         private CodeDomProvider provider = null;
 
-        internal IdentifierCreationService(IServiceProvider serviceProvider, WorkflowDesignerLoader loader)
+        internal IdentifierCreationService(
+            IServiceProvider serviceProvider,
+            WorkflowDesignerLoader loader
+        )
         {
             this.serviceProvider = serviceProvider;
             this.loader = loader;
@@ -39,11 +42,17 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (this.provider == null)
                 {
-                    SupportedLanguages language = CompilerHelpers.GetSupportedLanguage(this.serviceProvider);
+                    SupportedLanguages language = CompilerHelpers.GetSupportedLanguage(
+                        this.serviceProvider
+                    );
                     if (language == SupportedLanguages.CSharp)
-                        this.provider = CompilerHelpers.CreateCodeProviderInstance(typeof(CSharpCodeProvider));
+                        this.provider = CompilerHelpers.CreateCodeProviderInstance(
+                            typeof(CSharpCodeProvider)
+                        );
                     else
-                        this.provider = CompilerHelpers.CreateCodeProviderInstance(typeof(VBCodeProvider));
+                        this.provider = CompilerHelpers.CreateCodeProviderInstance(
+                            typeof(VBCodeProvider)
+                        );
                 }
                 return this.provider;
             }
@@ -62,12 +71,21 @@ namespace System.Workflow.ComponentModel.Design
 
             if (this.Provider != null)
             {
-                SupportedLanguages language = CompilerHelpers.GetSupportedLanguage(this.serviceProvider);
-                if (language == SupportedLanguages.CSharp && identifier.StartsWith("@", StringComparison.Ordinal) ||
-                    language == SupportedLanguages.VB && identifier.StartsWith("[", StringComparison.Ordinal) && identifier.EndsWith("]", StringComparison.Ordinal) ||
-                    !this.Provider.IsValidIdentifier(identifier))
+                SupportedLanguages language = CompilerHelpers.GetSupportedLanguage(
+                    this.serviceProvider
+                );
+                if (
+                    language == SupportedLanguages.CSharp
+                        && identifier.StartsWith("@", StringComparison.Ordinal)
+                    || language == SupportedLanguages.VB
+                        && identifier.StartsWith("[", StringComparison.Ordinal)
+                        && identifier.EndsWith("]", StringComparison.Ordinal)
+                    || !this.Provider.IsValidIdentifier(identifier)
+                )
                 {
-                    throw new Exception(SR.GetString(SR.Error_InvalidLanguageIdentifier, identifier));
+                    throw new Exception(
+                        SR.GetString(SR.Error_InvalidLanguageIdentifier, identifier)
+                    );
                 }
             }
 
@@ -75,14 +93,25 @@ namespace System.Workflow.ComponentModel.Design
             CompositeActivity rootActivity = Helpers.GetRootActivity(activity) as CompositeActivity;
             if (rootActivity != null)
             {
-                foreach (string existingIdentifier in Helpers.GetIdentifiersInCompositeActivity(rootActivity))
+                foreach (
+                    string existingIdentifier in Helpers.GetIdentifiersInCompositeActivity(
+                        rootActivity
+                    )
+                )
                     identifiers[existingIdentifier] = existingIdentifier;
             }
 
             Type customActivityType = GetRootActivityType(this.serviceProvider);
             if (customActivityType != null)
             {
-                foreach (MemberInfo member in customActivityType.GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance))
+                foreach (
+                    MemberInfo member in customActivityType.GetMembers(
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Static
+                            | BindingFlags.Instance
+                    )
+                )
                 {
                     Type memberType = null;
                     if (member is FieldInfo)
@@ -94,16 +123,21 @@ namespace System.Workflow.ComponentModel.Design
             }
 
             if (identifiers.ContainsKey(identifier))
-                throw new ArgumentException(SR.GetString(SR.DuplicateActivityIdentifier, identifier));
+                throw new ArgumentException(
+                    SR.GetString(SR.DuplicateActivityIdentifier, identifier)
+                );
         }
 
         /// <summary>
         /// This method will ensure that the identifiers of the activities to be added to the parent activity
-        /// are unique within the scope of the parent activity.  
+        /// are unique within the scope of the parent activity.
         /// </summary>
         /// <param name="parentActivity">THis activity is the parent activity which the child activities are being added</param>
         /// <param name="childActivities"></param>
-        void IIdentifierCreationService.EnsureUniqueIdentifiers(CompositeActivity parentActivity, ICollection childActivities)
+        void IIdentifierCreationService.EnsureUniqueIdentifiers(
+            CompositeActivity parentActivity,
+            ICollection childActivities
+        )
         {
             if (parentActivity == null)
                 throw new ArgumentNullException("parentActivity");
@@ -134,20 +168,30 @@ namespace System.Workflow.ComponentModel.Design
             }
 
             // get the root activity
-            CompositeActivity rootActivity = Helpers.GetRootActivity(parentActivity) as CompositeActivity;
+            CompositeActivity rootActivity =
+                Helpers.GetRootActivity(parentActivity) as CompositeActivity;
             StringDictionary identifiers = new StringDictionary(); // all the identifiers in the workflow
 
             Type customActivityType = GetRootActivityType(this.serviceProvider);
 
             if (rootActivity != null)
             {
-                foreach (string identifier in Helpers.GetIdentifiersInCompositeActivity(rootActivity))
+                foreach (
+                    string identifier in Helpers.GetIdentifiersInCompositeActivity(rootActivity)
+                )
                     identifiers[identifier] = identifier;
             }
 
             if (customActivityType != null)
             {
-                foreach (MemberInfo member in customActivityType.GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance))
+                foreach (
+                    MemberInfo member in customActivityType.GetMembers(
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Static
+                            | BindingFlags.Instance
+                    )
+                )
                 {
                     Type memberType = null;
                     if (member is FieldInfo)
@@ -165,19 +209,34 @@ namespace System.Workflow.ComponentModel.Design
                 string baseIdentifier = Helpers.GetBaseIdentifier(activity);
                 string finalIdentifier = null;
 
-                if (string.IsNullOrEmpty(activity.Name) || string.Equals(activity.Name, activity.GetType().Name, StringComparison.Ordinal))
-                    finalIdentifier = string.Format(CultureInfo.InvariantCulture, "{0}{1}", new object[] { baseIdentifier, ++index });
+                if (
+                    string.IsNullOrEmpty(activity.Name)
+                    || string.Equals(
+                        activity.Name,
+                        activity.GetType().Name,
+                        StringComparison.Ordinal
+                    )
+                )
+                    finalIdentifier = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}{1}",
+                        new object[] { baseIdentifier, ++index }
+                    );
                 else
                     finalIdentifier = activity.Name;
 
                 while (identifiers.ContainsKey(finalIdentifier))
                 {
-                    finalIdentifier = string.Format(CultureInfo.InvariantCulture, "{0}{1}", new object[] { baseIdentifier, ++index });
+                    finalIdentifier = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}{1}",
+                        new object[] { baseIdentifier, ++index }
+                    );
                     if (this.Provider != null)
                         finalIdentifier = this.Provider.CreateValidIdentifier(finalIdentifier);
                 }
 
-                // add new identifier to collection 
+                // add new identifier to collection
                 identifiers[finalIdentifier] = finalIdentifier;
                 activity.Name = finalIdentifier;
             }
@@ -188,15 +247,20 @@ namespace System.Workflow.ComponentModel.Design
         {
             IDesignerHost host = serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
             if (host == null)
-                throw new Exception(SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName));
+                throw new Exception(
+                    SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName)
+                );
 
             string className = host.RootComponentClassName;
             if (string.IsNullOrEmpty(className))
                 return null;
 
-            ITypeProvider typeProvider = serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
+            ITypeProvider typeProvider =
+                serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
             if (typeProvider == null)
-                throw new Exception(SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName));
+                throw new Exception(
+                    SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName)
+                );
 
             return typeProvider.GetType(className, false);
         }

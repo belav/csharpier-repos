@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,38 +28,38 @@
 //
 
 using System;
+using System.Diagnostics;
+using System.EnterpriseServices;
 using System.Reflection;
 using System.Resources;
-using System.Security;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.EnterpriseServices;
+using System.Security;
 
 // General Information about the System.EnterpriseServices assembly
 
-	[assembly: AssemblyTitle ("System.EnterpriseServices.dll")]
-	[assembly: AssemblyDescription ("System.EnterpriseServices.dll")]
-	[assembly: AssemblyDefaultAlias ("System.EnterpriseServices.dll")]
+[assembly: AssemblyTitle("System.EnterpriseServices.dll")]
+[assembly: AssemblyDescription("System.EnterpriseServices.dll")]
+[assembly: AssemblyDefaultAlias("System.EnterpriseServices.dll")]
 
-	[assembly: AssemblyCompany (Consts.MonoCompany)]
-	[assembly: AssemblyProduct (Consts.MonoProduct)]
-	[assembly: AssemblyCopyright (Consts.MonoCopyright)]
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: SatelliteContractVersion (Consts.FxVersion)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: SatelliteContractVersion(Consts.FxVersion)]
 
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: ComCompatibleVersion (1, 0, 3300, 0)]
+[assembly: ComCompatibleVersion(1, 0, 3300, 0)]
 
-[assembly: ApplicationID ("1e246775-2281-484f-8ad4-044c15b86eb7")]
-[assembly: ApplicationName (".NET Utilities")]
-[assembly: Guid ("4fb2d46f-efc8-4643-bcd0-6e5bfa6a174c")]
+[assembly: ApplicationID("1e246775-2281-484f-8ad4-044c15b86eb7")]
+[assembly: ApplicationName(".NET Utilities")]
+[assembly: Guid("4fb2d46f-efc8-4643-bcd0-6e5bfa6a174c")]
 
-[assembly: CLSCompliant (true)]
-[assembly: AssemblyDelaySign (true)]
+[assembly: CLSCompliant(true)]
+[assembly: AssemblyDelaySign(true)]
 
-[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
-[assembly: CompilationRelaxations (CompilationRelaxations.NoStringInterning)]
-[assembly: ComVisible (true)]
+[assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
+[assembly: CompilationRelaxations(CompilationRelaxations.NoStringInterning)]
+[assembly: ComVisible(true)]

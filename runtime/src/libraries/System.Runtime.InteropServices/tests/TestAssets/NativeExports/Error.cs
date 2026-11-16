@@ -20,10 +20,10 @@ namespace NativeExports
         private class @libc
         {
             [DllImport("libc")]
-            internal static unsafe extern int* __errno_location();
+            internal static extern unsafe int* __errno_location();
 
             [DllImport("libc")]
-            internal static unsafe extern int* __error();
+            internal static extern unsafe int* __error();
         }
 
         [UnmanagedCallersOnly(EntryPoint = "set_error")]
@@ -36,7 +36,11 @@ namespace NativeExports
         }
 
         [UnmanagedCallersOnly(EntryPoint = "set_error_return_string")]
-        public static ushort* SetErrorReturnString(int error, byte shouldSetError, ushort* errorString)
+        public static ushort* SetErrorReturnString(
+            int error,
+            byte shouldSetError,
+            ushort* errorString
+        )
         {
             ushort* ret = (ushort*)Marshal.StringToCoTaskMemUni(new string((char*)errorString));
 

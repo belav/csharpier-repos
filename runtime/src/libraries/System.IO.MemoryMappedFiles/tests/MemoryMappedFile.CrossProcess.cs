@@ -13,8 +13,24 @@ namespace System.IO.MemoryMappedFiles.Tests
         {
             // Create a new file and load it into an MMF
             using (TempFile file = new TempFile(GetTestFilePath(), 4096))
-            using (FileStream fs = new FileStream(file.Path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
-            using (MemoryMappedFile mmf = MemoryMappedFile.CreateFromFile(fs, null, fs.Length, MemoryMappedFileAccess.ReadWrite, HandleInheritability.None, true))
+            using (
+                FileStream fs = new FileStream(
+                    file.Path,
+                    FileMode.Open,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite
+                )
+            )
+            using (
+                MemoryMappedFile mmf = MemoryMappedFile.CreateFromFile(
+                    fs,
+                    null,
+                    fs.Length,
+                    MemoryMappedFileAccess.ReadWrite,
+                    HandleInheritability.None,
+                    true
+                )
+            )
             using (MemoryMappedViewAccessor acc = mmf.CreateViewAccessor())
             {
                 // Write some known data to the map
@@ -26,7 +42,9 @@ namespace System.IO.MemoryMappedFiles.Tests
                 acc.Flush();
 
                 // Spawn and then wait for the other process, which will verify the data and write its own known pattern
-                RemoteExecutor.Invoke(new Action<string>(DataShared_OtherProcess), file.Path).Dispose();
+                RemoteExecutor
+                    .Invoke(new Action<string>(DataShared_OtherProcess), file.Path)
+                    .Dispose();
 
                 // Now verify we're seeing the data from the other process
                 for (int i = 0; i < capacity; i++)
@@ -39,8 +57,24 @@ namespace System.IO.MemoryMappedFiles.Tests
         private static void DataShared_OtherProcess(string path)
         {
             // Open the specified file and load it into a map
-            using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
-            using (MemoryMappedFile mmf = MemoryMappedFile.CreateFromFile(fs, null, fs.Length, MemoryMappedFileAccess.ReadWrite, HandleInheritability.None, true))
+            using (
+                FileStream fs = new FileStream(
+                    path,
+                    FileMode.Open,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite
+                )
+            )
+            using (
+                MemoryMappedFile mmf = MemoryMappedFile.CreateFromFile(
+                    fs,
+                    null,
+                    fs.Length,
+                    MemoryMappedFileAccess.ReadWrite,
+                    HandleInheritability.None,
+                    true
+                )
+            )
             using (MemoryMappedViewAccessor acc = mmf.CreateViewAccessor())
             {
                 // Verify the known pattern written by the other process, then write one of our own
@@ -56,6 +90,5 @@ namespace System.IO.MemoryMappedFiles.Tests
                 acc.Flush();
             }
         }
-
     }
 }

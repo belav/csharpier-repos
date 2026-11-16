@@ -19,6 +19,7 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
             SyntaxNode member,
             AccessibilityModifiersRequired option,
             out SyntaxToken name,
-            out bool modifiersAdded);
+            out bool modifiersAdded
+        );
     }
 }

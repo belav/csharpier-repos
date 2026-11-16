@@ -37,8 +37,7 @@ public interface IDbContextOptionsExtension
     ///     Most extensions do not have dynamic defaults and so this will be a no-op.
     /// </summary>
     /// <param name="options">The options being validated.</param>
-    IDbContextOptionsExtension ApplyDefaults(IDbContextOptions options)
-        => this;
+    IDbContextOptionsExtension ApplyDefaults(IDbContextOptions options) => this;
 
     /// <summary>
     ///     Gives the extension a chance to validate that all options in the extension are valid.

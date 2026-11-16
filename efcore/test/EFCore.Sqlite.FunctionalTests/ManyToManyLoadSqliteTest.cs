@@ -7,11 +7,7 @@ public class ManyToManyLoadSqliteTest
     : ManyToManyLoadSqliteTestBase<ManyToManyLoadSqliteTest.ManyToManyLoadSqliteFixture>
 {
     public ManyToManyLoadSqliteTest(ManyToManyLoadSqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    public class ManyToManyLoadSqliteFixture : ManyToManyLoadSqliteFixtureBase
-    {
-    }
+    public class ManyToManyLoadSqliteFixture : ManyToManyLoadSqliteFixtureBase { }
 }

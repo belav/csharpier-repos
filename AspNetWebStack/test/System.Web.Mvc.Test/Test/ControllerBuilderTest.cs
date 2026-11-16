@@ -34,15 +34,21 @@ namespace System.Web.Mvc.Test
             Assert.Throws<InvalidOperationException>(
                 delegate
                 {
-                    RequestContext reqContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+                    RequestContext reqContext = new RequestContext(
+                        new Mock<HttpContextBase>().Object,
+                        new RouteData()
+                    );
                     reqContext.RouteData.Values["controller"] = "foo";
-                    MvcHandlerWithNoVersionHeader handler = new MvcHandlerWithNoVersionHeader(reqContext)
+                    MvcHandlerWithNoVersionHeader handler = new MvcHandlerWithNoVersionHeader(
+                        reqContext
+                    )
                     {
-                        ControllerBuilder = cb
+                        ControllerBuilder = cb,
                     };
                     handler.ProcessRequest(reqContext.HttpContext);
                 },
-                "An error occurred when trying to create the IControllerFactory 'System.Web.Mvc.Test.ControllerBuilderTest+ControllerFactoryThrowsFromConstructor'. Make sure that the controller factory has a public parameterless constructor.");
+                "An error occurred when trying to create the IControllerFactory 'System.Web.Mvc.Test.ControllerBuilderTest+ControllerFactoryThrowsFromConstructor'. Make sure that the controller factory has a public parameterless constructor."
+            );
         }
 
         [Fact]
@@ -56,15 +62,21 @@ namespace System.Web.Mvc.Test
             Assert.Throws<InvalidOperationException>(
                 delegate
                 {
-                    RequestContext reqContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+                    RequestContext reqContext = new RequestContext(
+                        new Mock<HttpContextBase>().Object,
+                        new RouteData()
+                    );
                     reqContext.RouteData.Values["controller"] = "boo";
-                    MvcHandlerWithNoVersionHeader handler = new MvcHandlerWithNoVersionHeader(reqContext)
+                    MvcHandlerWithNoVersionHeader handler = new MvcHandlerWithNoVersionHeader(
+                        reqContext
+                    )
                     {
-                        ControllerBuilder = cb
+                        ControllerBuilder = cb,
                     };
                     handler.ProcessRequest(reqContext.HttpContext);
                 },
-                "The IControllerFactory 'System.Web.Mvc.Test.ControllerBuilderTest+ControllerFactoryReturnsNull' did not return a controller for the name 'boo'.");
+                "The IControllerFactory 'System.Web.Mvc.Test.ControllerBuilderTest+ControllerFactoryReturnsNull' did not return a controller for the name 'boo'."
+            );
         }
 
         [Fact]
@@ -78,15 +90,21 @@ namespace System.Web.Mvc.Test
             Assert.Throws<Exception>(
                 delegate
                 {
-                    RequestContext reqContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+                    RequestContext reqContext = new RequestContext(
+                        new Mock<HttpContextBase>().Object,
+                        new RouteData()
+                    );
                     reqContext.RouteData.Values["controller"] = "foo";
-                    MvcHandlerWithNoVersionHeader handler = new MvcHandlerWithNoVersionHeader(reqContext)
+                    MvcHandlerWithNoVersionHeader handler = new MvcHandlerWithNoVersionHeader(
+                        reqContext
+                    )
                     {
-                        ControllerBuilder = cb
+                        ControllerBuilder = cb,
                     };
                     handler.ProcessRequest(reqContext.HttpContext);
                 },
-                "ControllerFactoryThrows");
+                "ControllerFactoryThrows"
+            );
         }
 
         [Fact]
@@ -123,8 +141,12 @@ namespace System.Web.Mvc.Test
         {
             ControllerBuilder cb = new ControllerBuilder();
             Assert.ThrowsArgumentNull(
-                delegate { cb.SetControllerFactory((IControllerFactory)null); },
-                "controllerFactory");
+                delegate
+                {
+                    cb.SetControllerFactory((IControllerFactory)null);
+                },
+                "controllerFactory"
+            );
         }
 
         [Fact]
@@ -132,8 +154,12 @@ namespace System.Web.Mvc.Test
         {
             ControllerBuilder cb = new ControllerBuilder();
             Assert.ThrowsArgumentNull(
-                delegate { cb.SetControllerFactory((Type)null); },
-                "controllerFactoryType");
+                delegate
+                {
+                    cb.SetControllerFactory((Type)null);
+                },
+                "controllerFactoryType"
+            );
         }
 
         [Fact]
@@ -141,8 +167,12 @@ namespace System.Web.Mvc.Test
         {
             ControllerBuilder cb = new ControllerBuilder();
             Assert.Throws<ArgumentException>(
-                delegate { cb.SetControllerFactory(typeof(int)); },
-                "The controller factory type 'System.Int32' must implement the IControllerFactory interface.\r\nParameter name: controllerFactoryType");
+                delegate
+                {
+                    cb.SetControllerFactory(typeof(int));
+                },
+                "The controller factory type 'System.Int32' must implement the IControllerFactory interface.\r\nParameter name: controllerFactoryType"
+            );
         }
 
         [Fact]
@@ -177,7 +207,10 @@ namespace System.Web.Mvc.Test
         {
             //Arrange
             Mock<IControllerFactory> factory = new Mock<IControllerFactory>();
-            Resolver<IControllerFactory> resolver = new Resolver<IControllerFactory> { Current = factory.Object };
+            Resolver<IControllerFactory> resolver = new Resolver<IControllerFactory>
+            {
+                Current = factory.Object,
+            };
             ControllerBuilder builder = new ControllerBuilder(resolver);
 
             //Act
@@ -199,14 +232,15 @@ namespace System.Web.Mvc.Test
                 return null;
             }
 
-            public SessionStateBehavior GetControllerSessionBehavior(RequestContext requestContext, string controllerName)
+            public SessionStateBehavior GetControllerSessionBehavior(
+                RequestContext requestContext,
+                string controllerName
+            )
             {
                 return SessionStateBehavior.Default;
             }
 
-            public void ReleaseController(IController controller)
-            {
-            }
+            public void ReleaseController(IController controller) { }
         }
 
         public class ControllerFactoryReturnsNull : IControllerFactory
@@ -216,14 +250,15 @@ namespace System.Web.Mvc.Test
                 return null;
             }
 
-            public SessionStateBehavior GetControllerSessionBehavior(RequestContext requestContext, string controllerName)
+            public SessionStateBehavior GetControllerSessionBehavior(
+                RequestContext requestContext,
+                string controllerName
+            )
             {
                 return SessionStateBehavior.Default;
             }
 
-            public void ReleaseController(IController controller)
-            {
-            }
+            public void ReleaseController(IController controller) { }
         }
 
         public class ControllerFactoryThrows : IControllerFactory
@@ -233,14 +268,15 @@ namespace System.Web.Mvc.Test
                 throw new Exception("ControllerFactoryThrows");
             }
 
-            public SessionStateBehavior GetControllerSessionBehavior(RequestContext requestContext, string controllerName)
+            public SessionStateBehavior GetControllerSessionBehavior(
+                RequestContext requestContext,
+                string controllerName
+            )
             {
                 return SessionStateBehavior.Default;
             }
 
-            public void ReleaseController(IController controller)
-            {
-            }
+            public void ReleaseController(IController controller) { }
         }
 
         public class MockControllerFactory : IControllerFactory
@@ -250,22 +286,21 @@ namespace System.Web.Mvc.Test
                 throw new NotImplementedException();
             }
 
-            public SessionStateBehavior GetControllerSessionBehavior(RequestContext requestContext, string controllerName)
+            public SessionStateBehavior GetControllerSessionBehavior(
+                RequestContext requestContext,
+                string controllerName
+            )
             {
                 return SessionStateBehavior.Default;
             }
 
-            public void ReleaseController(IController controller)
-            {
-            }
+            public void ReleaseController(IController controller) { }
         }
 
         private sealed class MvcHandlerWithNoVersionHeader : MvcHandler
         {
             public MvcHandlerWithNoVersionHeader(RequestContext requestContext)
-                : base(requestContext)
-            {
-            }
+                : base(requestContext) { }
 
             protected internal override void AddVersionHeader(HttpContextBase httpContext)
             {

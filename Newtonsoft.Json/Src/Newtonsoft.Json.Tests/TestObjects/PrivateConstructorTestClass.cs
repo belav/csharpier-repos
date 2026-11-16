@@ -30,18 +30,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public string Name { get; set; }
         public int Age { get; set; }
 
-        private PrivateConstructorTestClass()
-        {
-        }
+        private PrivateConstructorTestClass() { }
 
         // multiple constructors with arguments so the serializer doesn't know what to fall back to
-        private PrivateConstructorTestClass(object a)
-        {
-        }
+        private PrivateConstructorTestClass(object a) { }
 
         // multiple constructors with arguments so the serializer doesn't know what to fall back to
-        private PrivateConstructorTestClass(object a, object b)
-        {
-        }
+        private PrivateConstructorTestClass(object a, object b) { }
     }
 }

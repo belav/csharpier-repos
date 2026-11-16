@@ -19,7 +19,10 @@ namespace Microsoft.Interop
             return SignatureBehavior.ManagedTypeAndAttributes;
         }
 
-        public ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context)
+        public ValueBoundaryBehavior GetValueBoundaryBehavior(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             return ValueBoundaryBehavior.ManagedIdentifier;
         }
@@ -31,7 +34,17 @@ namespace Microsoft.Interop
 
         public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) => false;
 
-        public ByValueMarshalKindSupport SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, TypePositionInfo info, StubCodeContext context, out GeneratorDiagnostic? diagnostic)
-            => ByValueMarshalKindSupportDescriptor.Default.GetSupport(marshalKind, info, context, out diagnostic);
+        public ByValueMarshalKindSupport SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            TypePositionInfo info,
+            StubCodeContext context,
+            out GeneratorDiagnostic? diagnostic
+        ) =>
+            ByValueMarshalKindSupportDescriptor.Default.GetSupport(
+                marshalKind,
+                info,
+                context,
+                out diagnostic
+            );
     }
 }

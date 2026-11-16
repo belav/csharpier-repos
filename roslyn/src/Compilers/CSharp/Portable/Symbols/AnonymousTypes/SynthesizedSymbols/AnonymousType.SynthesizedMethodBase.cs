@@ -6,8 +6,8 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.CSharp.Emit;
+using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
@@ -45,10 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public override NamedTypeSymbol ContainingType
             {
-                get
-                {
-                    return _containingType;
-                }
+                get { return _containingType; }
             }
 
             public override ImmutableArray<Location> Locations
@@ -101,9 +98,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return false; }
             }
 
-            public sealed override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+            public sealed override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+                FlowAnalysisAnnotations.None;
 
-            public sealed override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+            public sealed override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+                ImmutableHashSet<string>.Empty;
 
             public sealed override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotations
             {
@@ -160,25 +159,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return _name; }
             }
 
-            internal sealed override bool IsMetadataNewSlot(bool ignoreInterfaceImplementationChanges = false)
+            internal sealed override bool IsMetadataNewSlot(
+                bool ignoreInterfaceImplementationChanges = false
+            )
             {
                 return false;
             }
 
-            internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+            internal override void AddSynthesizedAttributes(
+                PEModuleBuilder moduleBuilder,
+                ref ArrayBuilder<SynthesizedAttributeData> attributes
+            )
             {
                 base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
-                AddSynthesizedAttribute(ref attributes, Manager.Compilation.TrySynthesizeAttribute(
-                    WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    Manager.Compilation.TrySynthesizeAttribute(
+                        WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor
+                    )
+                );
             }
 
             protected AnonymousTypeManager Manager
             {
                 get
                 {
-                    AnonymousTypeTemplateSymbol template = _containingType as AnonymousTypeTemplateSymbol;
-                    return ((object)template != null) ? template.Manager : ((AnonymousTypePublicSymbol)_containingType).Manager;
+                    AnonymousTypeTemplateSymbol template =
+                        _containingType as AnonymousTypeTemplateSymbol;
+                    return ((object)template != null)
+                        ? template.Manager
+                        : ((AnonymousTypePublicSymbol)_containingType).Manager;
                 }
             }
 
@@ -214,25 +225,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override bool SynthesizesLoweredBoundBody
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
-            protected SyntheticBoundNodeFactory CreateBoundNodeFactory(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+            protected SyntheticBoundNodeFactory CreateBoundNodeFactory(
+                TypeCompilationState compilationState,
+                BindingDiagnosticBag diagnostics
+            )
             {
-                var F = new SyntheticBoundNodeFactory(this, this.GetNonNullSyntaxNode(), compilationState, diagnostics);
+                var F = new SyntheticBoundNodeFactory(
+                    this,
+                    this.GetNonNullSyntaxNode(),
+                    compilationState,
+                    diagnostics
+                );
                 F.CurrentFunction = this;
                 return F;
             }
 
-            internal sealed override int CalculateLocalSyntaxOffset(int localPosition, SyntaxTree localTree)
+            internal sealed override int CalculateLocalSyntaxOffset(
+                int localPosition,
+                SyntaxTree localTree
+            )
             {
                 throw ExceptionUtilities.Unreachable();
             }
 
-            protected override bool HasSetsRequiredMembersImpl => throw ExceptionUtilities.Unreachable();
+            protected override bool HasSetsRequiredMembersImpl =>
+                throw ExceptionUtilities.Unreachable();
         }
     }
 }

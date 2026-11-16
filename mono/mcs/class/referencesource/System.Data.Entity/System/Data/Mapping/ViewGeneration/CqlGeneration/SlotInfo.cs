@@ -11,8 +11,8 @@ using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Common.Utils;
 using System.Data.Mapping.ViewGeneration.Structures;
-using System.Text;
 using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 {
@@ -24,33 +24,55 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
         #region Constructor
         /// <summary>
         /// Creates a <see cref="SlotInfo"/> for a <see cref="CqlBlock"/> X with information about whether this slot is needed by X's parent
-        /// (<paramref name="isRequiredByParent"/>), whether X projects it (<paramref name="isProjected"/>) along with the slot value (<paramref name="slotValue"/>) and 
+        /// (<paramref name="isRequiredByParent"/>), whether X projects it (<paramref name="isProjected"/>) along with the slot value (<paramref name="slotValue"/>) and
         /// the output member path (<paramref name="outputMember"/> (for regular/non-boolean slots) for the slot.
         /// </summary>
-        internal SlotInfo(bool isRequiredByParent, bool isProjected, ProjectedSlot slotValue, MemberPath outputMember)
-            : this(isRequiredByParent, isProjected, slotValue, outputMember, false /* enforceNotNull */)
-        { }
+        internal SlotInfo(
+            bool isRequiredByParent,
+            bool isProjected,
+            ProjectedSlot slotValue,
+            MemberPath outputMember
+        )
+            : this(
+                isRequiredByParent,
+                isProjected,
+                slotValue,
+                outputMember,
+                false /* enforceNotNull */
+            ) { }
 
         /// <summary>
         /// Creates a <see cref="SlotInfo"/> for a <see cref="CqlBlock"/> X with information about whether this slot is needed by X's parent
-        /// (<paramref name="isRequiredByParent"/>), whether X projects it (<paramref name="isProjected"/>) along with the slot value (<paramref name="slotValue"/>) and 
+        /// (<paramref name="isRequiredByParent"/>), whether X projects it (<paramref name="isProjected"/>) along with the slot value (<paramref name="slotValue"/>) and
         /// the output member path (<paramref name="outputMember"/> (for regular/non-boolean slots) for the slot.
         /// </summary>
         /// <param name="enforceNotNull">We need to ensure that _from variables are never null since view generation uses 2-valued boolean logic.
         /// If <paramref name="enforceNotNull"/>=true, the generated Cql adds a condition (AND <paramref name="slotValue"/> NOT NULL).
         /// This flag is used only for boolean slots.</param>
-        internal SlotInfo(bool isRequiredByParent, bool isProjected, ProjectedSlot slotValue, MemberPath outputMember, bool enforceNotNull)
+        internal SlotInfo(
+            bool isRequiredByParent,
+            bool isProjected,
+            ProjectedSlot slotValue,
+            MemberPath outputMember,
+            bool enforceNotNull
+        )
         {
             m_isRequiredByParent = isRequiredByParent;
             m_isProjected = isProjected;
             m_slotValue = slotValue;
             m_outputMember = outputMember;
             m_enforceNotNull = enforceNotNull;
-            Debug.Assert(false == m_isRequiredByParent || m_slotValue != null, "Required slots cannot be null");
-            Debug.Assert(m_slotValue is QualifiedSlot ||
-                         (m_slotValue == null && m_outputMember == null) || // unused boolean slot
-                         (m_slotValue is BooleanProjectedSlot) == (m_outputMember == null),
-                         "If slot is boolean slot, there is no member path for it and vice-versa");
+            Debug.Assert(
+                false == m_isRequiredByParent || m_slotValue != null,
+                "Required slots cannot be null"
+            );
+            Debug.Assert(
+                m_slotValue is QualifiedSlot
+                    || (m_slotValue == null && m_outputMember == null)
+                    || // unused boolean slot
+                    (m_slotValue is BooleanProjectedSlot) == (m_outputMember == null),
+                "If slot is boolean slot, there is no member path for it and vice-versa"
+            );
         }
         #endregion
 
@@ -59,18 +81,22 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
         /// If slot is required by the parent. Can be reset to false in <see cref="ResetIsRequiredByParent"/> method.
         /// </summary>
         private bool m_isRequiredByParent;
+
         /// <summary>
         /// If the node is capable of projecting this slot.
         /// </summary>
         private readonly bool m_isProjected;
+
         /// <summary>
         /// The slot represented by this <see cref="SlotInfo"/>.
         /// </summary>
         private readonly ProjectedSlot m_slotValue;
+
         /// <summary>
         /// The output member path of this slot.
         /// </summary>
         private readonly MemberPath m_outputMember;
+
         /// <summary>
         /// Whether to add AND NOT NULL to Cql.
         /// </summary>

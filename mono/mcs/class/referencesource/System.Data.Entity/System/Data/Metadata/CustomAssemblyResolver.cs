@@ -18,7 +18,10 @@ namespace System.Data.Metadata.Edm
         private Func<AssemblyName, Assembly> _referenceResolver;
         private Func<IEnumerable<Assembly>> _wildcardAssemblyEnumerator;
 
-        internal CustomAssemblyResolver(Func<IEnumerable<Assembly>> wildcardAssemblyEnumerator, Func<AssemblyName, Assembly> referenceResolver)
+        internal CustomAssemblyResolver(
+            Func<IEnumerable<Assembly>> wildcardAssemblyEnumerator,
+            Func<AssemblyName, Assembly> referenceResolver
+        )
         {
             Debug.Assert(wildcardAssemblyEnumerator != null);
             Debug.Assert(referenceResolver != null);
@@ -26,7 +29,10 @@ namespace System.Data.Metadata.Edm
             _referenceResolver = referenceResolver;
         }
 
-        internal override bool TryResolveAssemblyReference(AssemblyName refernceName, out Assembly assembly)
+        internal override bool TryResolveAssemblyReference(
+            AssemblyName refernceName,
+            out Assembly assembly
+        )
         {
             assembly = _referenceResolver(refernceName);
             return assembly != null;
@@ -40,7 +46,6 @@ namespace System.Data.Metadata.Edm
                 throw EntityUtil.InvalidOperation(Strings.WildcardEnumeratorReturnedNull);
             }
             return wildcardAssemblies;
-
         }
     }
 }

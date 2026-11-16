@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using Microsoft.Build.Framework;
@@ -13,7 +13,7 @@ using Microsoft.Build.Framework;
 internal sealed class ProxyFile
 {
     public string TargetFile { get; }
-    public string TempFile   { get; }
+    public string TempFile { get; }
     private FileCache _cache;
 
     public ProxyFile(string targetFile, FileCache cache)
@@ -29,13 +29,18 @@ internal sealed class ProxyFile
             return true;
 
         if (!File.Exists(TempFile))
-            throw new LogAsErrorException($"Could not find the temporary file {TempFile} for target file {TargetFile}. Look for any errors/warnings generated earlier in the build.");
+            throw new LogAsErrorException(
+                $"Could not find the temporary file {TempFile} for target file {TargetFile}. Look for any errors/warnings generated earlier in the build."
+            );
 
         try
         {
             if (!_cache.ShouldCopy(this, out string? cause))
             {
-                _cache.Log.LogMessage(MessageImportance.Low, $"Skipping copying over {TargetFile} as the contents are unchanged");
+                _cache.Log.LogMessage(
+                    MessageImportance.Low,
+                    $"Skipping copying over {TargetFile} as the contents are unchanged"
+                );
                 return false;
             }
 
@@ -44,7 +49,10 @@ internal sealed class ProxyFile
 
             File.Copy(TempFile, TargetFile);
 
-            _cache.Log.LogMessage(MessageImportance.Low, $"Copying {TempFile} to {TargetFile} because {cause}");
+            _cache.Log.LogMessage(
+                MessageImportance.Low,
+                $"Copying {TempFile} to {TargetFile} because {cause}"
+            );
             return true;
         }
         finally

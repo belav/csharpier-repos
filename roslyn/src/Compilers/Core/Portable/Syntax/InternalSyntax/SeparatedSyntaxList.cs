@@ -7,7 +7,8 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 {
-    internal readonly struct SeparatedSyntaxList<TNode> : IEquatable<SeparatedSyntaxList<TNode>> where TNode : GreenNode
+    internal readonly struct SeparatedSyntaxList<TNode> : IEquatable<SeparatedSyntaxList<TNode>>
+        where TNode : GreenNode
     {
         private readonly SyntaxList<GreenNode> _list;
 
@@ -38,26 +39,17 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 
         public int Count
         {
-            get
-            {
-                return (_list.Count + 1) >> 1;
-            }
+            get { return (_list.Count + 1) >> 1; }
         }
 
         public int SeparatorCount
         {
-            get
-            {
-                return _list.Count >> 1;
-            }
+            get { return _list.Count >> 1; }
         }
 
         public TNode? this[int index]
         {
-            get
-            {
-                return (TNode?)_list[index << 1];
-            }
+            get { return (TNode?)_list[index << 1]; }
         }
 
         /// <summary>
@@ -75,12 +67,18 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             return _list;
         }
 
-        public static bool operator ==(in SeparatedSyntaxList<TNode> left, in SeparatedSyntaxList<TNode> right)
+        public static bool operator ==(
+            in SeparatedSyntaxList<TNode> left,
+            in SeparatedSyntaxList<TNode> right
+        )
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(in SeparatedSyntaxList<TNode> left, in SeparatedSyntaxList<TNode> right)
+        public static bool operator !=(
+            in SeparatedSyntaxList<TNode> left,
+            in SeparatedSyntaxList<TNode> right
+        )
         {
             return !left.Equals(right);
         }
@@ -100,7 +98,9 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             return _list.GetHashCode();
         }
 
-        public static implicit operator SeparatedSyntaxList<GreenNode>(SeparatedSyntaxList<TNode> list)
+        public static implicit operator SeparatedSyntaxList<GreenNode>(
+            SeparatedSyntaxList<TNode> list
+        )
         {
             return new SeparatedSyntaxList<GreenNode>(list.GetWithSeparators());
         }

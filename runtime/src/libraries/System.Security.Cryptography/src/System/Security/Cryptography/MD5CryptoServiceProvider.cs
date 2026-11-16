@@ -6,7 +6,11 @@ using System.Diagnostics;
 
 namespace System.Security.Cryptography
 {
-    [Obsolete(Obsoletions.DerivedCryptographicTypesMessage, DiagnosticId = Obsoletions.DerivedCryptographicTypesDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.DerivedCryptographicTypesMessage,
+        DiagnosticId = Obsoletions.DerivedCryptographicTypesDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public sealed class MD5CryptoServiceProvider : MD5
     {

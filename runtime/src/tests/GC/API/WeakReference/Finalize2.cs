@@ -12,7 +12,7 @@ using System.Runtime.CompilerServices;
 public class GetTargetTest
 {
     public WeakReference w;
-    static public bool Passed = false;
+    public static bool Passed = false;
 
     public GetTargetTest(bool trackResurrection)
     {
@@ -48,7 +48,7 @@ public class GetTargetTest
 public class SetTargetTest
 {
     public WeakReference w;
-    static public bool Passed = false;
+    public static bool Passed = false;
 
     public SetTargetTest(bool trackResurrection)
     {
@@ -85,7 +85,7 @@ public class SetTargetTest
 public class IsAliveTest
 {
     public WeakReference w;
-    static public bool Passed = false;
+    public static bool Passed = false;
 
     public IsAliveTest(bool trackResurrection)
     {
@@ -124,7 +124,7 @@ public class NullHandle
     public static GetTargetTest getTargetTest;
     public static SetTargetTest setTargetTest;
     public static IsAliveTest isAliveTest;
-    
+
     public bool RunTests(bool trackResurrection)
     {
         CreateGetTargetTest(trackResurrection);
@@ -143,37 +143,37 @@ public class NullHandle
 
         return ((GetTargetTest.Passed) && (SetTargetTest.Passed) && (IsAliveTest.Passed));
     }
-    
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void CreateGetTargetTest(bool trackResurrection) 
+    public static void CreateGetTargetTest(bool trackResurrection)
     {
         getTargetTest = new GetTargetTest(trackResurrection);
     }
-    
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void CreateSetTargetTest(bool trackResurrection) 
+    public static void CreateSetTargetTest(bool trackResurrection)
     {
         setTargetTest = new SetTargetTest(trackResurrection);
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void CreateIsAliveTest(bool trackResurrection) 
+    public static void CreateIsAliveTest(bool trackResurrection)
     {
         isAliveTest = new IsAliveTest(trackResurrection);
     }
-    
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void DestroyGetTargetTest()
     {
         getTargetTest = null;
     }
-    
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void DestroySetTargetTest()
     {
         setTargetTest = null;
     }
-    
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void DestroyIsAliveTest()
     {

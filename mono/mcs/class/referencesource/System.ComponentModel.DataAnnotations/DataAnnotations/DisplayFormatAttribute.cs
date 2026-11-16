@@ -1,12 +1,18 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace System.ComponentModel.DataAnnotations {
+namespace System.ComponentModel.DataAnnotations
+{
     /// <summary>
     /// Allows overriding various display-related options for a given field. The options have the same meaning as in BoundField.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "We want users to be able to extend this class")]
-    public class DisplayFormatAttribute : Attribute {
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "We want users to be able to extend this class"
+    )]
+    public class DisplayFormatAttribute : Attribute
+    {
         /// <summary>
         /// Gets or sets the format string
         /// </summary>
@@ -37,9 +43,9 @@ namespace System.ComponentModel.DataAnnotations {
         /// <summary>
         /// Default constructor
         /// </summary>
-        public DisplayFormatAttribute() {
+        public DisplayFormatAttribute()
+        {
             this.ConvertEmptyStringToNull = true; // default to true to match behavior in related components
-
 #if !SILVERLIGHT
             this.HtmlEncode = true; // default to true to match behavior in related components
 #endif

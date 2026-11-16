@@ -20,6 +20,6 @@ public static class MutableEntityTypeExtensions
     [Obsolete("Use InMemoryEntityTypeExtensions.SetInMemoryQuery")]
     public static void SetDefiningQuery(
         this IMutableEntityType entityType,
-        LambdaExpression? definingQuery)
-        => ((EntityType)entityType).SetDefiningQuery(definingQuery, ConfigurationSource.Explicit);
+        LambdaExpression? definingQuery
+    ) => ((EntityType)entityType).SetDefiningQuery(definingQuery, ConfigurationSource.Explicit);
 }

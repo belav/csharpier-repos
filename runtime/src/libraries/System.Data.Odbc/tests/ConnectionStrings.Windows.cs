@@ -7,7 +7,6 @@ namespace System.Data.Odbc.Tests
     {
         // Requires http://www.ch-werner.de/sqliteodbc/
         public const string WorkingConnection =
-            "Driver=SQLite3 ODBC Driver;" +
-            "Database=smoketests.sqlite;";
+            "Driver=SQLite3 ODBC Driver;" + "Database=smoketests.sqlite;";
     }
 }

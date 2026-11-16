@@ -11,6 +11,7 @@ namespace System.ServiceModel.Dispatcher
     {
         NoOp,
         SubExpr,
+
         // Flow opcodes
         Branch,
         JumpIfNot,
@@ -22,16 +23,19 @@ namespace System.ServiceModel.Dispatcher
         QueryTree,
         BlockEnd,
         SubRoutine,
+
         // Set Opcodes
         Ordinal,
         LiteralOrdinal,
         Empty,
         Union,
         Merge,
+
         // Boolean opcodes
         ApplyBoolean,
         StartBoolean,
         EndBoolean,
+
         // Relational opcodes
         Relation,
         StringEquals,
@@ -41,10 +45,12 @@ namespace System.ServiceModel.Dispatcher
         NumberRelation,
         NumberInterval,
         NumberIntervalBranch,
+
         // Select/Node Operators
         Select,
         InitialSelect,
         SelectRoot,
+
         // Stack operators
         PushXsltVariable,
         PushBool,
@@ -58,6 +64,7 @@ namespace System.ServiceModel.Dispatcher
         PopContextNodes,
         PushContextCopy,
         PopValueFrame,
+
         // Math opcode
         Plus,
         Minus,
@@ -65,9 +72,11 @@ namespace System.ServiceModel.Dispatcher
         Divide,
         Mod,
         Negate,
+
         // Specialized String operators
         StringPrefix,
         StringPrefixBranch,
+
         // Results
         MatchAlways,
         MatchResult,
@@ -76,7 +85,7 @@ namespace System.ServiceModel.Dispatcher
         MatchSingleFx,
         QuerySingleFx,
         QueryResult,
-        QueryMultipleResult
+        QueryMultipleResult,
     }
 
     enum OpcodeFlags
@@ -94,7 +103,7 @@ namespace System.ServiceModel.Dispatcher
         NoContextCopy = 0x00000200,
         InitialSelect = 0x00000400,
         CompressableSelect = 0x00000800,
-        Fx = 0x00001000
+        Fx = 0x00001000,
     }
 
     abstract class Opcode
@@ -109,6 +118,7 @@ namespace System.ServiceModel.Dispatcher
         static long nextUniqueId = 0;
         internal long uniqueID;
 #endif
+
         internal Opcode(OpcodeID id)
         {
             this.opcodeID = id;
@@ -120,46 +130,25 @@ namespace System.ServiceModel.Dispatcher
 
         internal OpcodeFlags Flags
         {
-            get
-            {
-                return this.flags;
-            }
-            set
-            {
-                this.flags = value;
-            }
+            get { return this.flags; }
+            set { this.flags = value; }
         }
 
         internal OpcodeID ID
         {
-            get
-            {
-                return this.opcodeID;
-            }
+            get { return this.opcodeID; }
         }
 
         internal Opcode Next
         {
-            get
-            {
-                return this.next;
-            }
-            set
-            {
-                this.next = value;
-            }
+            get { return this.next; }
+            set { this.next = value; }
         }
 
         internal Opcode Prev
         {
-            get
-            {
-                return this.prev;
-            }
-            set
-            {
-                this.prev = value;
-            }
+            get { return this.prev; }
+            set { this.prev = value; }
         }
 
 #if DEBUG
@@ -227,8 +216,10 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool IsMultipleResult()
         {
-            return ((this.flags & (OpcodeFlags.Result | OpcodeFlags.Multiple)) ==
-                (OpcodeFlags.Result | OpcodeFlags.Multiple));
+            return (
+                (this.flags & (OpcodeFlags.Result | OpcodeFlags.Multiple))
+                == (OpcodeFlags.Result | OpcodeFlags.Multiple)
+            );
         }
 
         internal virtual void DelinkFromConditional(Opcode child)
@@ -278,7 +269,9 @@ namespace System.ServiceModel.Dispatcher
 
         internal virtual Opcode Eval(NodeSequence sequence, SeekableXPathNavigator node)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.Unexpected));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                new QueryProcessingException(QueryProcessingError.Unexpected)
+            );
         }
 
         internal virtual Opcode EvalSpecial(ProcessingContext context)
@@ -376,7 +369,7 @@ namespace System.ServiceModel.Dispatcher
 #if DEBUG
             return string.Format("{0}(#{1})", this.opcodeID.ToString(), this.uniqueID);
 #else
-return this.opcodeID.ToString();
+            return this.opcodeID.ToString();
 #endif
         }
 #endif
@@ -400,7 +393,8 @@ return this.opcodeID.ToString();
             this.first = first;
             this.first.Prev = null;
 
-            for (this.last = this.first; this.last.Next != null; this.last = this.last.Next);
+            for (this.last = this.first; this.last.Next != null; this.last = this.last.Next)
+                ;
         }
 
 #if FILTEROPTIMIZER
@@ -415,18 +409,12 @@ return this.opcodeID.ToString();
 
         internal Opcode First
         {
-            get
-            {
-                return this.first;
-            }
+            get { return this.first; }
         }
 
         internal Opcode Last
         {
-            get
-            {
-                return this.last;
-            }
+            get { return this.last; }
         }
 
         internal void Append(Opcode opcode)
@@ -486,22 +474,13 @@ return this.opcodeID.ToString();
 
         public int Count
         {
-            get
-            {
-                return this.opcodes.count;
-            }
+            get { return this.opcodes.count; }
         }
 
         public Opcode this[int index]
         {
-            get
-            {
-                return this.opcodes[index];
-            }
-            set
-            {
-                this.opcodes[index] = value;
-            }
+            get { return this.opcodes[index]; }
+            set { this.opcodes[index] = value; }
         }
 
         public void Add(Opcode opcode)

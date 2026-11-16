@@ -15,11 +15,14 @@ namespace System.Data
         private const string DbNullString = "<DBNull>";
 
         // converter classes should have public ctor
-        public DefaultValueTypeConverter()
-        {
-        }
+        public DefaultValueTypeConverter() { }
 
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
@@ -38,7 +41,11 @@ namespace System.Data
             return base.ConvertTo(context, culture, value, destinationType);
         }
 
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value
+        )
         {
             if (value != null && value.GetType() == typeof(string))
             {

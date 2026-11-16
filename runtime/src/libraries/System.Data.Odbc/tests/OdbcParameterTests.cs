@@ -47,131 +47,256 @@ namespace System.Data.Odbc.Tests
             int inputLength = 0;
             int outputLength = 0;
 
-            RunTestProcedure("VARBINARY", 8000, byte8000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "VARBINARY",
+                8000,
+                byte8000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             string outputStr = Encoding.ASCII.GetString(output as byte[]);
             Assert.Equal(str8000, outputStr);
             Assert.Equal(byte8000.Length, inputLength);
             Assert.Equal(byte8000.Length, outputLength);
 
-            RunTestProcedure("VARBINARY", 8000, byte5000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "VARBINARY",
+                8000,
+                byte5000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             outputStr = Encoding.ASCII.GetString(output as byte[]);
             Assert.Equal(str8000, outputStr);
             Assert.Equal(byte5000.Length, inputLength);
             Assert.Equal(byte8000.Length, outputLength);
 
-            RunTestProcedure("VARBINARY", 8000, byte4000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "VARBINARY",
+                8000,
+                byte4000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             outputStr = Encoding.ASCII.GetString(output as byte[]);
             Assert.Equal(str8000, outputStr);
             Assert.Equal(byte4000.Length, inputLength);
             Assert.Equal(str8000.Length, outputLength);
 
-            RunTestProcedure("VARBINARY", 8000, byte2000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "VARBINARY",
+                8000,
+                byte2000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             outputStr = Encoding.ASCII.GetString(output as byte[]);
             Assert.Equal(str4000, outputStr);
             Assert.Equal(byte2000.Length, inputLength);
             Assert.Equal(str4000.Length, outputLength);
 
-            RunTestProcedure("VARBINARY", 8000, byte1000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "VARBINARY",
+                8000,
+                byte1000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             outputStr = Encoding.ASCII.GetString(output as byte[]);
             Assert.Equal(str2000, outputStr);
             Assert.Equal(byte1000.Length, inputLength);
             Assert.Equal(byte2000.Length, outputLength);
 
-            RunTestProcedure("VARCHAR", 8000, str8000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "VARCHAR",
+                8000,
+                str8000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             outputStr = output as string;
             Assert.Equal(str8000, outputStr);
             Assert.Equal(str8000.Length, inputLength);
             Assert.Equal(str8000.Length, outputLength);
 
-            RunTestProcedure("VARCHAR", 8000, str5000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "VARCHAR",
+                8000,
+                str5000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             outputStr = output as string;
             Assert.Equal(str8000, outputStr);
             Assert.Equal(str5000.Length, inputLength);
             Assert.Equal(str8000.Length, outputLength);
 
-            RunTestProcedure("VARCHAR", 8000, str4000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "VARCHAR",
+                8000,
+                str4000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             outputStr = output as string;
             Assert.Equal(str8000, outputStr);
             Assert.Equal(str4000.Length, inputLength);
             Assert.Equal(str8000.Length, outputLength);
 
-            RunTestProcedure("VARCHAR", 8000, str2000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "VARCHAR",
+                8000,
+                str2000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             outputStr = output as string;
             Assert.Equal(str4000, outputStr);
             Assert.Equal(str2000.Length, inputLength);
             Assert.Equal(str4000.Length, outputLength);
 
-            RunTestProcedure("VARCHAR", 8000, str1000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "VARCHAR",
+                8000,
+                str1000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             outputStr = output as string;
             Assert.Equal(str2000, outputStr);
             Assert.Equal(str1000.Length, inputLength);
             Assert.Equal(str2000.Length, outputLength);
 
-            RunTestProcedure("NVARCHAR", 4000, str8000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "NVARCHAR",
+                4000,
+                str8000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             outputStr = output as string;
             Assert.Equal(str4000, outputStr);
             Assert.Equal(str4000.Length * 2, inputLength); // since NVARCHAR takes 2 bytes per character
             Assert.Equal(str4000.Length * 2, outputLength);
 
-            RunTestProcedure("NVARCHAR", 4000, str5000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "NVARCHAR",
+                4000,
+                str5000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             outputStr = output as string;
             Assert.Equal(str4000, outputStr);
             Assert.Equal(str4000.Length * 2, inputLength);
             Assert.Equal(str4000.Length * 2, outputLength);
 
-            RunTestProcedure("NVARCHAR", 4000, str4000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "NVARCHAR",
+                4000,
+                str4000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             outputStr = output as string;
             Assert.Equal(str4000, outputStr);
             Assert.Equal(str4000.Length * 2, inputLength);
             Assert.Equal(str4000.Length * 2, outputLength);
 
-            RunTestProcedure("NVARCHAR", 4000, str2000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "NVARCHAR",
+                4000,
+                str2000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             outputStr = output as string;
             Assert.Equal(str4000, outputStr);
             Assert.Equal(str2000.Length * 2, inputLength);
             Assert.Equal(str4000.Length * 2, outputLength);
 
-            RunTestProcedure("NVARCHAR", 4000, str1000, out output, out inputLength, out outputLength);
+            RunTestProcedure(
+                "NVARCHAR",
+                4000,
+                str1000,
+                out output,
+                out inputLength,
+                out outputLength
+            );
             outputStr = output as string;
             Assert.Equal(str2000, outputStr);
             Assert.Equal(str1000.Length * 2, inputLength);
             Assert.Equal(str2000.Length * 2, outputLength);
         }
 
-        private static void RunTestProcedure(string procDataType, int procDataSize, object v1, out object v2, out int v3, out int v4)
+        private static void RunTestProcedure(
+            string procDataType,
+            int procDataSize,
+            object v1,
+            out object v2,
+            out int v3,
+            out int v4
+        )
         {
             string procName = DataTestUtility.GetUniqueName("ODBCTEST", "", "");
 
             string removeExistingStoredProcSql =
-                $"IF OBJECT_ID('{procName}', 'P') IS NOT NULL " +
-                    $"DROP PROCEDURE {procName};";
+                $"IF OBJECT_ID('{procName}', 'P') IS NOT NULL " + $"DROP PROCEDURE {procName};";
 
             string createTestStoredProcSql =
-                $"CREATE PROCEDURE {procName} (" +
-                    $"@v1 {procDataType}({procDataSize}), " +
-                    $"@v2 {procDataType}({procDataSize}) OUT, " +
-                    "@v3 INTEGER OUT, " +
-                    "@v4 INTEGER OUT) " +
-                "AS BEGIN " +
-                    "SET @v2 = @v1 + @v1; " +
-                    "SET @v3 = datalength(@v1); " +
-                    "SET @v4 = datalength(@v2); " +
-                "END;";
+                $"CREATE PROCEDURE {procName} ("
+                + $"@v1 {procDataType}({procDataSize}), "
+                + $"@v2 {procDataType}({procDataSize}) OUT, "
+                + "@v3 INTEGER OUT, "
+                + "@v4 INTEGER OUT) "
+                + "AS BEGIN "
+                + "SET @v2 = @v1 + @v1; "
+                + "SET @v3 = datalength(@v1); "
+                + "SET @v4 = datalength(@v2); "
+                + "END;";
 
             try
             {
-                DataTestUtility.RunNonQuery(DataTestUtility.OdbcConnStr, removeExistingStoredProcSql);
+                DataTestUtility.RunNonQuery(
+                    DataTestUtility.OdbcConnStr,
+                    removeExistingStoredProcSql
+                );
                 DataTestUtility.RunNonQuery(DataTestUtility.OdbcConnStr, createTestStoredProcSql);
 
                 DbAccessor dbAccessUtil = new DbAccessor();
                 dbAccessUtil.connectSqlServer(DataTestUtility.OdbcConnStr);
-                dbAccessUtil.callProc("{ call "+ procName+"(?,?,?,?) }", procDataType, procDataSize, v1, out v2, out v3, out v4);
+                dbAccessUtil.callProc(
+                    "{ call " + procName + "(?,?,?,?) }",
+                    procDataType,
+                    procDataSize,
+                    v1,
+                    out v2,
+                    out v3,
+                    out v4
+                );
                 dbAccessUtil.commit();
                 dbAccessUtil.disconnect();
             }
             finally
             {
-                DataTestUtility.RunNonQuery(DataTestUtility.OdbcConnStr, removeExistingStoredProcSql);
+                DataTestUtility.RunNonQuery(
+                    DataTestUtility.OdbcConnStr,
+                    removeExistingStoredProcSql
+                );
             }
         }
 
@@ -234,7 +359,15 @@ namespace System.Data.Odbc.Tests
                 }
             }
 
-            public void callProc(string sql, string procDataType, int procDataSize, object v1, out object v2, out int v3, out int v4)
+            public void callProc(
+                string sql,
+                string procDataType,
+                int procDataSize,
+                object v1,
+                out object v2,
+                out int v3,
+                out int v4
+            )
             {
                 using (OdbcCommand command = new OdbcCommand(sql, con, trn))
                 {

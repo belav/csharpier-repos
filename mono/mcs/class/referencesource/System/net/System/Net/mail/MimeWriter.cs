@@ -7,15 +7,15 @@
 namespace System.Net.Mime
 {
     using System;
+    using System.Collections.Specialized;
     using System.IO;
     using System.Text;
-    using System.Collections.Specialized;
 
     /// <summary>
     /// Provides an abstraction for writing a MIME multi-part
     /// message.
     /// </summary>
-    internal class MimeWriter:BaseWriter
+    internal class MimeWriter : BaseWriter
     {
         private static byte[] DASHDASH = new byte[] { (byte)'-', (byte)'-' };
 
@@ -78,7 +78,7 @@ namespace System.Net.Mime
         }
 
         /// <summary>
-        /// Called when the current stream is closed.  Allows us to 
+        /// Called when the current stream is closed.  Allows us to
         /// prepare for the next message part.
         /// </summary>
         /// <param name="sender">Sender of the close event</param>

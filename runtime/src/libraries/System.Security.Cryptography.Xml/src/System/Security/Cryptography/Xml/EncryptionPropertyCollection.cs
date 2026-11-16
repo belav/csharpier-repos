@@ -122,14 +122,8 @@ namespace System.Security.Cryptography.Xml
         [System.Runtime.CompilerServices.IndexerName("ItemOf")]
         public EncryptionProperty this[int index]
         {
-            get
-            {
-                return (EncryptionProperty)((IList)this)[index]!;
-            }
-            set
-            {
-                ((IList)this)[index] = value;
-            }
+            get { return (EncryptionProperty)((IList)this)[index]!; }
+            set { ((IList)this)[index] = value; }
         }
 
         /// <internalonly/>
@@ -139,7 +133,10 @@ namespace System.Security.Cryptography.Xml
             set
             {
                 if (!(value is EncryptionProperty))
-                    throw new ArgumentException(SR.Cryptography_Xml_IncorrectObjectType, nameof(value));
+                    throw new ArgumentException(
+                        SR.Cryptography_Xml_IncorrectObjectType,
+                        nameof(value)
+                    );
 
                 _props[index] = value;
             }

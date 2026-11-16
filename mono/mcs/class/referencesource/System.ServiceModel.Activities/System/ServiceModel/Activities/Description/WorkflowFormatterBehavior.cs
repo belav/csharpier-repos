@@ -29,12 +29,18 @@ namespace System.ServiceModel.Activities.Description
             }
         }
 
-        public void ApplyClientBehavior(OperationDescription operationDescription, System.ServiceModel.Dispatcher.ClientOperation clientOperation)
+        public void ApplyClientBehavior(
+            OperationDescription operationDescription,
+            System.ServiceModel.Dispatcher.ClientOperation clientOperation
+        )
         {
             throw FxTrace.Exception.AsError(new NotImplementedException());
         }
 
-        public void ApplyDispatchBehavior(OperationDescription operationDescription, DispatchOperation dispatchOperation)
+        public void ApplyDispatchBehavior(
+            OperationDescription operationDescription,
+            DispatchOperation dispatchOperation
+        )
         {
             Fx.Assert(operationDescription != null, "OperationDescription cannot be null!");
             Fx.Assert(dispatchOperation != null, "DispatchOperation cannot be null!");
@@ -50,7 +56,11 @@ namespace System.ServiceModel.Activities.Description
             {
                 foreach (Receive receive in this.receives)
                 {
-                    receive.SetFormatter(this.formatter, this.faultFormatter, dispatchOperation.IncludeExceptionDetailInFaults);
+                    receive.SetFormatter(
+                        this.formatter,
+                        this.faultFormatter,
+                        dispatchOperation.IncludeExceptionDetailInFaults
+                    );
                 }
             }
 
@@ -60,12 +70,11 @@ namespace System.ServiceModel.Activities.Description
             dispatchOperation.SerializeReply = false;
         }
 
-        public void AddBindingParameters(OperationDescription operationDescription, BindingParameterCollection bindingParameters)
-        {
-        }
+        public void AddBindingParameters(
+            OperationDescription operationDescription,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        public void Validate(OperationDescription operationDescription)
-        {
-        }
+        public void Validate(OperationDescription operationDescription) { }
     }
 }

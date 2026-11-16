@@ -39,16 +39,21 @@ namespace Newtonsoft.Json.Tests.Linq.ComponentModel
             JObject o = new JObject(
                 new JProperty("First", "String!"),
                 new JProperty("Second", 12345.6789m),
-                new JProperty("Third", new JArray(
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    new JObject(
-                        new JProperty("Fourth", "String!"),
-                        new JProperty("Fifth", new JObject(
-                            new JProperty("Sixth", "String!")))))));
+                new JProperty(
+                    "Third",
+                    new JArray(
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        new JObject(
+                            new JProperty("Fourth", "String!"),
+                            new JProperty("Fifth", new JObject(new JProperty("Sixth", "String!")))
+                        )
+                    )
+                )
+            );
 
             object value;
 

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,93 +29,106 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Xml;
 using System.ServiceModel.Channels;
+using System.Xml;
 
 namespace System.ServiceModel
 {
-	public class EndpointAddressBuilder
-	{
-		Collection<AddressHeader> headers = new Collection<AddressHeader> ();
-		EndpointIdentity identity;
-		Uri uri;
-		string extension, metadata;
+    public class EndpointAddressBuilder
+    {
+        Collection<AddressHeader> headers = new Collection<AddressHeader>();
+        EndpointIdentity identity;
+        Uri uri;
+        string extension,
+            metadata;
 
-		public EndpointAddressBuilder ()
-		{
-		}
+        public EndpointAddressBuilder() { }
 
-		public EndpointAddressBuilder (EndpointAddress address)
-		{
-			identity = address.Identity;
-			uri = address.Uri;
-			foreach (AddressHeader h in address.Headers)
-				headers.Add (h);
-		}
+        public EndpointAddressBuilder(EndpointAddress address)
+        {
+            identity = address.Identity;
+            uri = address.Uri;
+            foreach (AddressHeader h in address.Headers)
+                headers.Add(h);
+        }
 
-		public Collection<AddressHeader> Headers {
-			get { return headers; }
-		}
+        public Collection<AddressHeader> Headers
+        {
+            get { return headers; }
+        }
 
-		public Uri Uri {
-			get { return uri; }
-			set { uri = value; }
-		}
+        public Uri Uri
+        {
+            get { return uri; }
+            set { uri = value; }
+        }
 
-		public EndpointIdentity Identity {
-			get { return identity; }
-			set { identity = value; }
-		}
+        public EndpointIdentity Identity
+        {
+            get { return identity; }
+            set { identity = value; }
+        }
 
 #if !MOBILE
-		public XmlDictionaryReader GetReaderAtExtensions ()
-		{
-			if (extension == null)
-				return null;
-			var r = XmlDictionaryReader.CreateDictionaryReader (XmlReader.Create (new StringReader (extension)));
-			r.MoveToContent ();
-			return r;
-		}
+        public XmlDictionaryReader GetReaderAtExtensions()
+        {
+            if (extension == null)
+                return null;
+            var r = XmlDictionaryReader.CreateDictionaryReader(
+                XmlReader.Create(new StringReader(extension))
+            );
+            r.MoveToContent();
+            return r;
+        }
 
-		public XmlDictionaryReader GetReaderAtMetadata ()
-		{
-			if (metadata == null)
-				return null;
-			var r = XmlDictionaryReader.CreateDictionaryReader (XmlReader.Create (new StringReader (metadata)));
-			r.MoveToContent ();
-			return r;
-		}
+        public XmlDictionaryReader GetReaderAtMetadata()
+        {
+            if (metadata == null)
+                return null;
+            var r = XmlDictionaryReader.CreateDictionaryReader(
+                XmlReader.Create(new StringReader(metadata))
+            );
+            r.MoveToContent();
+            return r;
+        }
 
-		public void SetExtensionReader (XmlDictionaryReader reader)
-		{
-			if (reader == null)
-				extension = null;
-			else {
-				reader.MoveToContent ();
-				extension = reader.ReadOuterXml ();
-			}
-		}
+        public void SetExtensionReader(XmlDictionaryReader reader)
+        {
+            if (reader == null)
+                extension = null;
+            else
+            {
+                reader.MoveToContent();
+                extension = reader.ReadOuterXml();
+            }
+        }
 
-		public void SetMetadataReader (XmlDictionaryReader reader)
-		{
-			if (reader == null)
-				metadata = null;
-			else {
-				reader.MoveToContent ();
-				metadata = reader.ReadOuterXml ();
-			}
-		}
+        public void SetMetadataReader(XmlDictionaryReader reader)
+        {
+            if (reader == null)
+                metadata = null;
+            else
+            {
+                reader.MoveToContent();
+                metadata = reader.ReadOuterXml();
+            }
+        }
 
-		public EndpointAddress ToEndpointAddress ()
-		{
-			return new EndpointAddress (uri, identity,
-				new AddressHeaderCollection (headers), GetReaderAtMetadata (), GetReaderAtExtensions ());
-		}
+        public EndpointAddress ToEndpointAddress()
+        {
+            return new EndpointAddress(
+                uri,
+                identity,
+                new AddressHeaderCollection(headers),
+                GetReaderAtMetadata(),
+                GetReaderAtExtensions()
+            );
+        }
 #else
-		public EndpointAddress ToEndpointAddress ()
-		{
-			return new EndpointAddress (uri, headers.ToArray ());
-		}
+        public EndpointAddress ToEndpointAddress()
+        {
+            return new EndpointAddress(uri, headers.ToArray());
+        }
 #endif
-	}
+    }
 }

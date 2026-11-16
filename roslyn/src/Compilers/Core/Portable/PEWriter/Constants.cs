@@ -14,7 +14,8 @@ namespace Microsoft.Cci
         public const CharSet CharSet_Auto = (CharSet)4;
 
         // Non-portable CallingConvention values:
-        public const System.Runtime.InteropServices.CallingConvention CallingConvention_FastCall = (System.Runtime.InteropServices.CallingConvention)5;
+        public const System.Runtime.InteropServices.CallingConvention CallingConvention_FastCall =
+            (System.Runtime.InteropServices.CallingConvention)5;
 
         // Non-portable UnmanagedType values:
         public const UnmanagedType UnmanagedType_CustomMarshaler = (UnmanagedType)44;
@@ -84,6 +85,6 @@ namespace Microsoft.Cci
         VT_CLSID = 72,
         VT_VECTOR = 0x1000,
         VT_ARRAY = 0x2000,
-        VT_BYREF = 0x4000
+        VT_BYREF = 0x4000,
     }
 }

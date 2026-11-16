@@ -30,99 +30,99 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class WebControl_Width
-		: GHTWebControlBase
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+    public class WebControl_Width : GHTWebControlBase
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			HtmlForm frm  = (HtmlForm)FindControl("Form1");
-			GHTTestBegin(frm);
-			foreach (Type currentType in TypesToTest)
-			{
-				GHTHeader(currentType.ToString());
-				Test(currentType);
-			}
-			GHTTestEnd();
-		}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-		private void Test(Type ctrlType)
-		{
-			Unit unit1;
-			try
-			{
-				this.GHTSubTestBegin(ctrlType, "Valid value");
-				unit1 = new Unit(120);
-				this.TestedControl.Width = unit1;
-			}
-			catch (Exception exception5)
-			{
-				// ProjectData.SetProjectError(exception5);
-				Exception exception1 = exception5;
-				this.GHTSubTestUnexpectedExceptionCaught(exception1);
-				// ProjectData.ClearProjectError();
-			}
-			try
-			{
-				this.GHTSubTestBegin(ctrlType, "Default value");
-				unit1 = this.TestedControl.Width;
-				this.GHTSubTestAddResult("Default width = " + unit1.ToString());
-			}
-			catch (Exception exception6)
-			{
-				// ProjectData.SetProjectError(exception6);
-				Exception exception2 = exception6;
-				this.GHTSubTestUnexpectedExceptionCaught(exception2);
-				// ProjectData.ClearProjectError();
-			}
-			this.GHTSubTestEnd();
-			try
-			{
-				this.GHTSubTestBegin(ctrlType, "Negative value");
-				unit1 = new Unit(-10);
-				this.TestedControl.Width = unit1;
-				this.GHTSubTestExpectedExceptionNotCaught("ArgumentException");
-			}
-			catch (ArgumentException exception7)
-			{
-				// ProjectData.SetProjectError(exception7);
-				// ArgumentException exception3 = exception7;
-				this.GHTSubTestAddResult("Test passed. Expected ArgumentException exception was caught.");
-				// ProjectData.ClearProjectError();
-			}
-			catch (Exception exception8)
-			{
-				// ProjectData.SetProjectError(exception8);
-				Exception exception4 = exception8;
-				this.GHTSubTestUnexpectedExceptionCaught(exception4);
-				// ProjectData.ClearProjectError();
-			}
-			this.GHTSubTestEnd();
-		}
- 
-	}
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(frm);
+            foreach (Type currentType in TypesToTest)
+            {
+                GHTHeader(currentType.ToString());
+                Test(currentType);
+            }
+            GHTTestEnd();
+        }
+
+        private void Test(Type ctrlType)
+        {
+            Unit unit1;
+            try
+            {
+                this.GHTSubTestBegin(ctrlType, "Valid value");
+                unit1 = new Unit(120);
+                this.TestedControl.Width = unit1;
+            }
+            catch (Exception exception5)
+            {
+                // ProjectData.SetProjectError(exception5);
+                Exception exception1 = exception5;
+                this.GHTSubTestUnexpectedExceptionCaught(exception1);
+                // ProjectData.ClearProjectError();
+            }
+            try
+            {
+                this.GHTSubTestBegin(ctrlType, "Default value");
+                unit1 = this.TestedControl.Width;
+                this.GHTSubTestAddResult("Default width = " + unit1.ToString());
+            }
+            catch (Exception exception6)
+            {
+                // ProjectData.SetProjectError(exception6);
+                Exception exception2 = exception6;
+                this.GHTSubTestUnexpectedExceptionCaught(exception2);
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTSubTestEnd();
+            try
+            {
+                this.GHTSubTestBegin(ctrlType, "Negative value");
+                unit1 = new Unit(-10);
+                this.TestedControl.Width = unit1;
+                this.GHTSubTestExpectedExceptionNotCaught("ArgumentException");
+            }
+            catch (ArgumentException exception7)
+            {
+                // ProjectData.SetProjectError(exception7);
+                // ArgumentException exception3 = exception7;
+                this.GHTSubTestAddResult(
+                    "Test passed. Expected ArgumentException exception was caught."
+                );
+                // ProjectData.ClearProjectError();
+            }
+            catch (Exception exception8)
+            {
+                // ProjectData.SetProjectError(exception8);
+                Exception exception4 = exception8;
+                this.GHTSubTestUnexpectedExceptionCaught(exception4);
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTSubTestEnd();
+        }
+    }
 }

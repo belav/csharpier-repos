@@ -17,7 +17,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
         protected override SourceText Create(string source)
         {
             byte[] buffer = GetBytes(Encoding.BigEndianUnicode, source);
-            using (var stream = new MemoryStream(buffer, 0, buffer.Length, writable: false, publiclyVisible: true))
+            using (
+                var stream = new MemoryStream(
+                    buffer,
+                    0,
+                    buffer.Length,
+                    writable: false,
+                    publiclyVisible: true
+                )
+            )
             {
                 return EncodedStringText.Create(stream);
             }

@@ -6,16 +6,14 @@ namespace System.ServiceModel.Configuration
 {
     using System;
     using System.Configuration;
+    using System.Security.Cryptography.X509Certificates;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.Xml;
-    using System.Security.Cryptography.X509Certificates;
 
     public sealed partial class X509PeerCertificateElement : ConfigurationElement
     {
-        public X509PeerCertificateElement()
-        {
-        }
+        public X509PeerCertificateElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.FindValue, DefaultValue = "")]
         [StringValidator(MinLength = 0)]
@@ -32,7 +30,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.StoreLocation, DefaultValue = PeerCredential.DefaultStoreLocation)]
+        [ConfigurationProperty(
+            ConfigurationStrings.StoreLocation,
+            DefaultValue = PeerCredential.DefaultStoreLocation
+        )]
         [StandardRuntimeEnumValidator(typeof(StoreLocation))]
         public StoreLocation StoreLocation
         {
@@ -40,7 +41,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.StoreLocation] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.StoreName, DefaultValue = PeerCredential.DefaultStoreName)]
+        [ConfigurationProperty(
+            ConfigurationStrings.StoreName,
+            DefaultValue = PeerCredential.DefaultStoreName
+        )]
         [StandardRuntimeEnumValidator(typeof(StoreName))]
         public StoreName StoreName
         {
@@ -48,7 +52,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.StoreName] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.X509FindType, DefaultValue = PeerCredential.DefaultFindType)]
+        [ConfigurationProperty(
+            ConfigurationStrings.X509FindType,
+            DefaultValue = PeerCredential.DefaultFindType
+        )]
         [StandardRuntimeEnumValidator(typeof(X509FindType))]
         public X509FindType X509FindType
         {
@@ -60,7 +67,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (null == from)
             {
@@ -80,16 +89,24 @@ namespace System.ServiceModel.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("cert");
             }
             PropertyInformationCollection propertyInfo = this.ElementInformation.Properties;
-            if (propertyInfo[ConfigurationStrings.StoreLocation].ValueOrigin != PropertyValueOrigin.Default
-                || propertyInfo[ConfigurationStrings.StoreName].ValueOrigin != PropertyValueOrigin.Default
-                || propertyInfo[ConfigurationStrings.X509FindType].ValueOrigin != PropertyValueOrigin.Default
-                || propertyInfo[ConfigurationStrings.FindValue].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.StoreLocation].ValueOrigin
+                    != PropertyValueOrigin.Default
+                || propertyInfo[ConfigurationStrings.StoreName].ValueOrigin
+                    != PropertyValueOrigin.Default
+                || propertyInfo[ConfigurationStrings.X509FindType].ValueOrigin
+                    != PropertyValueOrigin.Default
+                || propertyInfo[ConfigurationStrings.FindValue].ValueOrigin
+                    != PropertyValueOrigin.Default
+            )
             {
-                cert.SetCertificate(this.StoreLocation, this.StoreName, this.X509FindType, this.FindValue);
+                cert.SetCertificate(
+                    this.StoreLocation,
+                    this.StoreName,
+                    this.X509FindType,
+                    this.FindValue
+                );
             }
         }
     }
 }
-
-
-

@@ -2,18 +2,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 using System.Globalization;
-using NUnit.Framework;
+using System.Linq;
+using System.Text;
 using AllTypesExample;
-
+using NUnit.Framework;
 
 namespace Test_NUnit_MySql
 {
-
     /// <summary>
-    /// this test will exercise reading of columns of all MySQL types 
+    /// this test will exercise reading of columns of all MySQL types
     /// (such as decimal, decimal?, DateTime? etc)
     /// </summary>
     [TestFixture]
@@ -22,7 +20,10 @@ namespace Test_NUnit_MySql
         public AllTypes CreateDB()
         {
             string DbServer = Environment.GetEnvironmentVariable("DbLinqServer") ?? "localhost";
-            string connStr = string.Format("server={0};user id=LinqUser; password=PLACEHOLDER; database=AllTypes", DbServer);
+            string connStr = string.Format(
+                "server={0};user id=LinqUser; password=PLACEHOLDER; database=AllTypes",
+                DbServer
+            );
 
             //return CreateDB(System.Data.ConnectionState.Closed);
             AllTypes db = new AllTypes(new MySql.Data.MySqlClient.MySqlConnection(connStr));
@@ -90,7 +91,10 @@ namespace Test_NUnit_MySql
             string sql_string = db.GetQueryText(q);
 
             DbLinq_EnumTest enumValue = q.First();
-            Assert.IsTrue(enumValue > 0, "Expected enum value>0 in AllTypes, got enumValue=" + enumValue);
+            Assert.IsTrue(
+                enumValue > 0,
+                "Expected enum value>0 in AllTypes, got enumValue=" + enumValue
+            );
         }
 #endif
 
@@ -98,7 +102,7 @@ namespace Test_NUnit_MySql
         public void AT6_ReadBlob()
         {
             //DbLinq could not read byte[]
-            //This test was contributed by Anatoli Koutsevol 
+            //This test was contributed by Anatoli Koutsevol
 
             Console.WriteLine("from p in db.Othertypes orderby p.DateTime_ select p.blob;");
             AllTypes db = CreateDB();
@@ -136,15 +140,13 @@ namespace Test_NUnit_MySql
             Assert.IsTrue(guidStr == "{0101}");
         }
 #endif
+
         [Test]
         public void Test_Unknown()
         {
             AllTypes db = CreateDB();
 
-            var result = from p in db.OtherTypes
-                         orderby p.DateTime
-                         select
-                             p.Blob;
+            var result = from p in db.OtherTypes orderby p.DateTime select p.Blob;
             foreach (var blob in result)
             {
                 Console.WriteLine("blob[{0}]", blob.Length);
@@ -155,11 +157,15 @@ namespace Test_NUnit_MySql
         public void Test_Select_DateTime_ParseExact()
         {
             AllTypes db = CreateDB();
-            var result = from p in db.ParsingData
-                         select DateTime.ParseExact(p.DateTimeStr, "yyyy.MM.dd", CultureInfo.InvariantCulture);
+            var result =
+                from p in db.ParsingData
+                select DateTime.ParseExact(
+                    p.DateTimeStr,
+                    "yyyy.MM.dd",
+                    CultureInfo.InvariantCulture
+                );
             DateTime dt1 = result.First();
             Assert.IsTrue(dt1.Year == 2008);
         }
-
     }
 }

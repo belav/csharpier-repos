@@ -18,7 +18,7 @@ namespace System.Web.Mvc.Test
                 "~/Areas/{2}/Views/{1}/{0}.cshtml",
                 "~/Areas/{2}/Views/{1}/{0}.vbhtml",
                 "~/Areas/{2}/Views/Shared/{0}.cshtml",
-                "~/Areas/{2}/Views/Shared/{0}.vbhtml"
+                "~/Areas/{2}/Views/Shared/{0}.vbhtml",
             };
 
             // Act
@@ -37,7 +37,7 @@ namespace System.Web.Mvc.Test
                 "~/Areas/{2}/Views/{1}/{0}.cshtml",
                 "~/Areas/{2}/Views/{1}/{0}.vbhtml",
                 "~/Areas/{2}/Views/Shared/{0}.cshtml",
-                "~/Areas/{2}/Views/Shared/{0}.vbhtml"
+                "~/Areas/{2}/Views/Shared/{0}.vbhtml",
             };
 
             // Act
@@ -56,7 +56,7 @@ namespace System.Web.Mvc.Test
                 "~/Areas/{2}/Views/{1}/{0}.cshtml",
                 "~/Areas/{2}/Views/{1}/{0}.vbhtml",
                 "~/Areas/{2}/Views/Shared/{0}.cshtml",
-                "~/Areas/{2}/Views/Shared/{0}.vbhtml"
+                "~/Areas/{2}/Views/Shared/{0}.vbhtml",
             };
 
             // Act
@@ -71,7 +71,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<IViewPageActivator> viewPageActivator = new Mock<IViewPageActivator>();
-            TestableRazorViewEngine viewEngine = new TestableRazorViewEngine(viewPageActivator.Object);
+            TestableRazorViewEngine viewEngine = new TestableRazorViewEngine(
+                viewPageActivator.Object
+            );
 
             //Act & Assert
             Assert.Equal(viewPageActivator.Object, viewEngine.ViewPageActivator);
@@ -82,7 +84,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<IViewPageActivator> viewPageActivator = new Mock<IViewPageActivator>();
-            TestableRazorViewEngine viewEngine = new TestableRazorViewEngine(viewPageActivator.Object);
+            TestableRazorViewEngine viewEngine = new TestableRazorViewEngine(
+                viewPageActivator.Object
+            );
 
             // Act
             RazorView result = (RazorView)viewEngine.CreatePartialView("partial path");
@@ -96,7 +100,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<IViewPageActivator> viewPageActivator = new Mock<IViewPageActivator>();
-            TestableRazorViewEngine viewEngine = new TestableRazorViewEngine(viewPageActivator.Object);
+            TestableRazorViewEngine viewEngine = new TestableRazorViewEngine(
+                viewPageActivator.Object
+            );
 
             // Act
             RazorView result = (RazorView)viewEngine.CreateView("partial path", "master path");
@@ -126,7 +132,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             TestableRazorViewEngine viewEngine = new TestableRazorViewEngine()
             {
-                FileExtensions = new[] { "cshtml", "vbhtml", "razor" }
+                FileExtensions = new[] { "cshtml", "vbhtml", "razor" },
             };
 
             // Act
@@ -135,7 +141,10 @@ namespace System.Web.Mvc.Test
             // Assert
             Assert.Equal("partial path", result.ViewPath);
             Assert.Equal("master path", result.LayoutPath);
-            Assert.Equal(new[] { "cshtml", "vbhtml", "razor" }, result.ViewStartFileExtensions.ToArray());
+            Assert.Equal(
+                new[] { "cshtml", "vbhtml", "razor" },
+                result.ViewStartFileExtensions.ToArray()
+            );
             Assert.True(result.RunViewStartPages);
         }
 
@@ -143,11 +152,7 @@ namespace System.Web.Mvc.Test
         public void FileExtensionsProperty()
         {
             // Arrange
-            string[] expected = new[]
-            {
-                "cshtml",
-                "vbhtml",
-            };
+            string[] expected = new[] { "cshtml", "vbhtml" };
 
             // Act
             RazorViewEngine viewEngine = new RazorViewEngine();
@@ -165,7 +170,7 @@ namespace System.Web.Mvc.Test
                 "~/Views/{1}/{0}.cshtml",
                 "~/Views/{1}/{0}.vbhtml",
                 "~/Views/Shared/{0}.cshtml",
-                "~/Views/Shared/{0}.vbhtml"
+                "~/Views/Shared/{0}.vbhtml",
             };
 
             // Act
@@ -184,7 +189,7 @@ namespace System.Web.Mvc.Test
                 "~/Views/{1}/{0}.cshtml",
                 "~/Views/{1}/{0}.vbhtml",
                 "~/Views/Shared/{0}.cshtml",
-                "~/Views/Shared/{0}.vbhtml"
+                "~/Views/Shared/{0}.vbhtml",
             };
 
             // Act
@@ -203,7 +208,7 @@ namespace System.Web.Mvc.Test
                 "~/Views/{1}/{0}.cshtml",
                 "~/Views/{1}/{0}.vbhtml",
                 "~/Views/Shared/{0}.cshtml",
-                "~/Views/Shared/{0}.vbhtml"
+                "~/Views/Shared/{0}.vbhtml",
             };
 
             // Act
@@ -222,14 +227,10 @@ namespace System.Web.Mvc.Test
         private sealed class TestableRazorViewEngine : RazorViewEngine
         {
             public TestableRazorViewEngine()
-                : base()
-            {
-            }
+                : base() { }
 
             public TestableRazorViewEngine(IViewPageActivator viewPageActivator)
-                : base(viewPageActivator)
-            {
-            }
+                : base(viewPageActivator) { }
 
             public new IViewPageActivator ViewPageActivator
             {
@@ -247,7 +248,10 @@ namespace System.Web.Mvc.Test
             }
 
             // This method should remain overridable in derived view engines
-            protected override bool FileExists(ControllerContext controllerContext, string virtualPath)
+            protected override bool FileExists(
+                ControllerContext controllerContext,
+                string virtualPath
+            )
             {
                 return base.FileExists(controllerContext, virtualPath);
             }

@@ -47,8 +47,7 @@ public class Order
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 
-    protected bool Equals(Order other)
-        => OrderID == other.OrderID;
+    protected bool Equals(Order other) => OrderID == other.OrderID;
 
     public override bool Equals(object obj)
     {
@@ -57,15 +56,10 @@ public class Order
             return false;
         }
 
-        return ReferenceEquals(this, obj)
-            ? true
-            : obj.GetType() == GetType()
-            && Equals((Order)obj);
+        return ReferenceEquals(this, obj) ? true : obj.GetType() == GetType() && Equals((Order)obj);
     }
 
-    public override int GetHashCode()
-        => OrderID.GetHashCode();
+    public override int GetHashCode() => OrderID.GetHashCode();
 
-    public override string ToString()
-        => "Order " + OrderID;
+    public override string ToString() => "Order " + OrderID;
 }

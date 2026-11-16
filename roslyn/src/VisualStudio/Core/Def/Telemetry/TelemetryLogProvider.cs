@@ -17,13 +17,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
         private readonly AggregatingTelemetryLogManager _aggregatingTelemetryLogManager;
         private readonly VisualStudioTelemetryLogManager _visualStudioTelemetryLogManager;
 
-        private TelemetryLogProvider(TelemetrySession session, ILogger telemetryLogger, IAsynchronousOperationListener asyncListener)
+        private TelemetryLogProvider(
+            TelemetrySession session,
+            ILogger telemetryLogger,
+            IAsynchronousOperationListener asyncListener
+        )
         {
-            _aggregatingTelemetryLogManager = new AggregatingTelemetryLogManager(session, asyncListener);
-            _visualStudioTelemetryLogManager = new VisualStudioTelemetryLogManager(session, telemetryLogger);
+            _aggregatingTelemetryLogManager = new AggregatingTelemetryLogManager(
+                session,
+                asyncListener
+            );
+            _visualStudioTelemetryLogManager = new VisualStudioTelemetryLogManager(
+                session,
+                telemetryLogger
+            );
         }
 
-        public static TelemetryLogProvider Create(TelemetrySession session, ILogger telemetryLogger, IAsynchronousOperationListener asyncListener)
+        public static TelemetryLogProvider Create(
+            TelemetrySession session,
+            ILogger telemetryLogger,
+            IAsynchronousOperationListener asyncListener
+        )
         {
             var logProvider = new TelemetryLogProvider(session, telemetryLogger, asyncListener);
 

@@ -743,9 +743,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 01/01/0001 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -757,9 +756,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("01/02/2000 00:00:00\t");
         expected = new DateTime(2000, 1, 2);
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -787,9 +785,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Modify target; verify value is updated and that textboxes linked to the same data are updated
         var expected = new DateTime(2000, 1, 2);
         target.SendKeys("01/02/2000 00:00:00\t");
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -825,9 +822,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 01/01/0001 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            expected,
-            () => DateTimeOffset.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTimeOffset.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(expected, DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -839,9 +835,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("01/02/2000 00:00:00 +08:00\t");
         expected = new DateTimeOffset(new DateTime(2000, 1, 2), TimeSpan.FromHours(8));
-        Browser.Equal(
-            expected,
-            () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -869,9 +864,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Modify target; verify value is updated and that textboxes linked to the same data are updated
         target.SendKeys("01/02/2000 00:00:00 +08:00" + "\t");
         var expected = new DateTimeOffset(new DateTime(2000, 1, 2), TimeSpan.FromHours(8));
-        Browser.Equal(
-            expected,
-            () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -907,9 +901,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 01/01/0001 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(expected, DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -921,9 +914,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("01/02/2000\t");
         expected = new DateOnly(2000, 1, 2);
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -951,9 +943,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Modify target; verify value is updated and that textboxes linked to the same data are updated
         var expected = new DateOnly(2000, 1, 2);
         target.SendKeys("01/02/2000\t");
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -989,9 +980,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 00:00 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(expected, TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -1003,9 +993,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("10:42\t");
         expected = new TimeOnly(10, 42);
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1033,9 +1022,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Modify target; verify value is updated and that textboxes linked to the same data are updated
         var expected = new TimeOnly(8, 5);
         target.SendKeys("08:05\t");
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1080,9 +1068,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("01-02\t");
         expected = new DateTime(DateTime.Now.Year, 1, 2);
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1110,9 +1097,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Modify target; verify value is updated and that textboxes linked to the same data are updated
         target.SendKeys("01-02\t");
         var expected = new DateTime(DateTime.Now.Year, 1, 2);
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1156,9 +1142,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("01-02\t");
         expected = new DateTimeOffset(new DateTime(DateTime.Now.Year, 1, 2), TimeSpan.FromHours(0));
-        Browser.Equal(
-            expected.DateTime,
-            () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
+        Browser.Equal(expected.DateTime, () =>
+            DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
         );
         Assert.Equal(
             expected.DateTime,
@@ -1194,9 +1179,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
             new DateTime(DateTime.Now.Year, 1, 2),
             TimeSpan.FromHours(0)
         );
-        Browser.Equal(
-            expected.DateTime,
-            () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
+        Browser.Equal(expected.DateTime, () =>
+            DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
         );
         Assert.Equal(
             expected.DateTime,
@@ -1243,9 +1227,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("01-02\t");
         expected = new DateOnly(DateTime.Now.Year, 1, 2);
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1273,9 +1256,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Modify target; verify value is updated and that textboxes linked to the same data are updated
         target.SendKeys("01-02\t");
         var expected = new DateOnly(DateTime.Now.Year, 1, 2);
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1320,9 +1302,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("10:42:00\t");
         expected = new TimeOnly(10, 42);
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1350,9 +1331,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Modify target; verify value is updated and that textboxes linked to the same data are updated
         target.SendKeys("08:05:00\t");
         var expected = new TimeOnly(8, 5);
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1381,9 +1361,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Modify target; verify value is updated and that textboxes linked to the same data are updated
         var expected = new DateTime(2000, 1, 2);
         target.SendKeys("01/02/2000 00:00:00\t");
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1396,9 +1375,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys("05/06X");
         Browser.Equal("05/06X", () => target.GetAttribute("value"));
         target.SendKeys("\t");
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -1410,9 +1388,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("05/06\t");
         expected = new DateTime(DateTime.Now.Year, 5, 6);
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1443,9 +1420,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         expected = new DateTime(2000, 1, 2);
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("01/02/2000 00:00:00\t");
-        Browser.Equal(
-            expected.DateTime,
-            () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
+        Browser.Equal(expected.DateTime, () =>
+            DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
         );
         Assert.Equal(
             expected.DateTime,
@@ -1460,12 +1436,10 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys("05/06X");
         Browser.Equal("05/06X", () => target.GetAttribute("value"));
         target.SendKeys("\t");
-        Browser.Equal(
-            expected.DateTime,
-            () =>
-                DateTimeOffset
-                    .Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
-                    .DateTime
+        Browser.Equal(expected.DateTime, () =>
+            DateTimeOffset
+                .Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+                .DateTime
         );
         Assert.Equal(
             expected.DateTime,
@@ -1482,9 +1456,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("05/06\t");
         expected = new DateTime(DateTime.Now.Year, 5, 6);
-        Browser.Equal(
-            expected.DateTime,
-            () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
+        Browser.Equal(expected.DateTime, () =>
+            DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
         );
         Assert.Equal(
             expected.DateTime,
@@ -1527,9 +1500,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("05-06\t");
         expected = new DateTime(DateTime.Now.Year, 5, 6);
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1557,9 +1529,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         var expected = new DateTimeOffset(new DateTime(DateTime.Now.Year, 1, 2));
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("01-02\t");
-        Browser.Equal(
-            expected.DateTime,
-            () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
+        Browser.Equal(expected.DateTime, () =>
+            DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
         );
         Assert.Equal(
             expected.DateTime,
@@ -1574,12 +1545,10 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys("05/06");
         Browser.Equal("05/06", () => target.GetAttribute("value"));
         target.SendKeys("\t");
-        Browser.Equal(
-            expected.DateTime,
-            () =>
-                DateTimeOffset
-                    .Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
-                    .DateTime
+        Browser.Equal(expected.DateTime, () =>
+            DateTimeOffset
+                .Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+                .DateTime
         );
         Assert.Equal(
             expected.DateTime,
@@ -1596,9 +1565,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("05-06\t");
         expected = new DateTime(DateTime.Now.Year, 5, 6);
-        Browser.Equal(
-            expected.DateTime,
-            () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
+        Browser.Equal(expected.DateTime, () =>
+            DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
         );
         Assert.Equal(
             expected.DateTime,
@@ -1623,9 +1591,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Modify target; verify value is updated and that textboxes linked to the same data are updated
         var expected = new DateOnly(2000, 1, 2);
         target.SendKeys("01/02/2000\t");
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1638,9 +1605,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys("05/06X");
         Browser.Equal("05/06X", () => target.GetAttribute("value"));
         target.SendKeys("\t");
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(expected, DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -1652,9 +1618,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("05/06\t");
         expected = new DateOnly(DateTime.Now.Year, 5, 6);
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1695,9 +1660,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("05-06\t");
         expected = new DateOnly(DateTime.Now.Year, 5, 6);
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1720,9 +1684,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Modify target; verify value is updated and that textboxes linked to the same data are updated
         var expected = new TimeOnly(8, 5);
         target.SendKeys("08:05:00\t");
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1735,9 +1698,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys("10:42:00X");
         Browser.Equal("10:42:00X", () => target.GetAttribute("value"));
         target.SendKeys("\t");
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(expected, TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -1749,9 +1711,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("10:42:00\t");
         expected = new TimeOnly(10, 42);
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1792,9 +1753,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys(Keys.Control + "a"); // select all
         target.SendKeys("10:42:00\t");
         expected = new TimeOnly(10, 42);
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1824,9 +1784,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 01/01/0001 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -1838,9 +1797,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#datetime-local-textbox-datetime", "2000-01-02T04:05:06");
         expected = new DateTime(2000, 1, 2, 04, 05, 06);
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1870,9 +1828,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#datetime-local-textbox-nullable-datetime", "2000-01-02T04:05:06");
         var expected = new DateTime(2000, 1, 2, 04, 05, 06);
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1908,9 +1865,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 01/01/0001 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(expected, DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -1922,9 +1878,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#datetime-local-textbox-dateonly", "2000-01-02T04:05:06");
         expected = new DateOnly(2000, 1, 2);
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1954,9 +1909,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#datetime-local-textbox-nullable-dateonly", "2000-01-02T04:05:06");
         var expected = new DateOnly(2000, 1, 2);
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -1992,9 +1946,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 00:00 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(expected, TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -2006,9 +1959,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#datetime-local-textbox-timeonly", "2000-01-02T04:05:00");
         expected = new TimeOnly(4, 5);
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -2038,9 +1990,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#datetime-local-textbox-nullable-timeonly", "2000-01-02T04:05:00");
         var expected = new TimeOnly(4, 5);
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -2081,9 +2032,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 01/01/0001 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -2095,9 +2045,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#month-textbox-datetime", "2000-02");
         expected = new DateTime(2000, 2, 1);
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -2127,9 +2076,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#month-textbox-nullable-datetime", "2000-02");
         var expected = new DateTime(2000, 2, 1);
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -2170,9 +2118,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 01/01/0001 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(expected, DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -2184,9 +2131,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#month-textbox-dateonly", "2000-02");
         expected = new DateOnly(2000, 2, 1);
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -2216,9 +2162,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#month-textbox-nullable-dateonly", "2000-02");
         var expected = new DateOnly(2000, 2, 1);
-        Browser.Equal(
-            expected,
-            () => DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -2254,9 +2199,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 00:00 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            DateTime.Now.Date,
-            () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(DateTime.Now.Date, () =>
+            DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(default, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -2268,9 +2212,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#time-textbox-datetime", "04:05");
         expected = DateTime.Now.Date.Add(new TimeSpan(4, 5, 0));
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -2300,9 +2243,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#time-textbox-nullable-datetime", "05:06");
         var expected = DateTime.Now.Date.Add(new TimeSpan(05, 06, 0));
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -2338,9 +2280,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 00:00 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            TimeOnly.MinValue,
-            () => TimeOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(TimeOnly.MinValue, () =>
+            TimeOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(default, TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -2352,9 +2293,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#time-textbox-timeonly", "04:05");
         expected = new TimeOnly(4, 5);
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -2384,9 +2324,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#time-textbox-nullable-timeonly", "05:06");
         var expected = new TimeOnly(5, 6);
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -2422,9 +2361,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 00:00 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            DateTime.Now.Date,
-            () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(DateTime.Now.Date, () =>
+            DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(default, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -2436,9 +2374,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#time-step-textbox-datetime", "04:05:06");
         expected = DateTime.Now.Date.Add(new TimeSpan(4, 5, 6));
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -2468,9 +2405,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#time-step-textbox-nullable-datetime", "05:06");
         var expected = DateTime.Now.Date.Add(new TimeSpan(05, 06, 0));
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -2506,9 +2442,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 00:00 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            TimeOnly.MinValue,
-            () => TimeOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(TimeOnly.MinValue, () =>
+            TimeOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(default, TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture));
         Assert.Equal(
@@ -2520,9 +2455,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#time-step-textbox-timeonly", "04:05:06");
         expected = new TimeOnly(4, 5, 6);
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -2552,9 +2486,8 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // element directly.
         ApplyInputValue("#time-step-textbox-nullable-timeonly", "05:06");
         var expected = new TimeOnly(5, 6);
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
         Assert.Equal(
             expected,
@@ -2588,18 +2521,16 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 00:00 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            default,
-            () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(default, () =>
+            DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(default, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
 
         // We have to do it this way because the browser gets in the way when sending keys to the input element directly.
         ApplyInputValue("#datetime-local-default-step-textbox-datetime", "2000-01-02T04:05");
         expected = new DateTime(2000, 1, 2, 04, 05, 0);
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
     }
 
@@ -2621,18 +2552,16 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 00:00 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            DateTime.Now.Date,
-            () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(DateTime.Now.Date, () =>
+            DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(default, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
 
         // We have to do it this way because the browser gets in the way when sending keys to the input element directly.
         ApplyInputValue("#time-default-step-textbox-datetime", "04:05");
         expected = DateTime.Now.Date.Add(new TimeSpan(4, 5, 0));
-        Browser.Equal(
-            expected,
-            () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
     }
 
@@ -2654,18 +2583,16 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         // Clear textbox; value updates to 00:00 because that's the default
         target.Clear();
         expected = default;
-        Browser.Equal(
-            default,
-            () => TimeOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+        Browser.Equal(default, () =>
+            TimeOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
         );
         Assert.Equal(default, TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture));
 
         // We have to do it this way because the browser gets in the way when sending keys to the input element directly.
         ApplyInputValue("#time-default-step-textbox-timeonly", "04:05");
         expected = new TimeOnly(4, 5, 0);
-        Browser.Equal(
-            expected,
-            () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+        Browser.Equal(expected, () =>
+            TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture)
         );
     }
 

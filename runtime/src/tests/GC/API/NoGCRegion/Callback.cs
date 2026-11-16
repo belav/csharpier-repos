@@ -15,11 +15,11 @@ public class Test
     public static void AnotherCallback()
     {
         Interlocked.Increment(ref CallbackCounter);
-        GC.RegisterNoGCRegionCallback(19 * 1024 * 1024,  new Action(Callback));
+        GC.RegisterNoGCRegionCallback(19 * 1024 * 1024, new Action(Callback));
         bool thrown = false;
         try
         {
-            GC.RegisterNoGCRegionCallback(19 * 1024 * 1024,  new Action(Callback));
+            GC.RegisterNoGCRegionCallback(19 * 1024 * 1024, new Action(Callback));
         }
         catch (InvalidOperationException ioex)
         {
@@ -49,7 +49,7 @@ public class Test
         bool thrown = false;
         try
         {
-            GC.RegisterNoGCRegionCallback(0,  new Action(Callback));
+            GC.RegisterNoGCRegionCallback(0, new Action(Callback));
         }
         catch (ArgumentOutOfRangeException ex)
         {
@@ -70,7 +70,7 @@ public class Test
         bool thrown = false;
         try
         {
-            GC.RegisterNoGCRegionCallback(-10,  new Action(Callback));
+            GC.RegisterNoGCRegionCallback(-10, new Action(Callback));
         }
         catch (ArgumentOutOfRangeException ex)
         {
@@ -91,7 +91,7 @@ public class Test
         bool thrown = false;
         try
         {
-            GC.RegisterNoGCRegionCallback(10,  null);
+            GC.RegisterNoGCRegionCallback(10, null);
         }
         catch (ArgumentNullException ex)
         {
@@ -108,7 +108,7 @@ public class Test
         bool thrown = false;
         try
         {
-            GC.RegisterNoGCRegionCallback(100 * 1024 * 1024,  new Action(Callback));
+            GC.RegisterNoGCRegionCallback(100 * 1024 * 1024, new Action(Callback));
         }
         catch (InvalidOperationException ex)
         {
@@ -127,11 +127,11 @@ public class Test
     public static void TestExceed()
     {
         bool thrown = false;
-        
+
         try
         {
             GC.TryStartNoGCRegion(10 * 1024 * 1024);
-            GC.RegisterNoGCRegionCallback(100 * 1024 * 1024,  new Action(Callback));
+            GC.RegisterNoGCRegionCallback(100 * 1024 * 1024, new Action(Callback));
         }
         catch (InvalidOperationException ex)
         {
@@ -155,7 +155,7 @@ public class Test
     {
         CallbackCounter = 0;
         GC.TryStartNoGCRegion(10 * 1024 * 1024);
-        GC.RegisterNoGCRegionCallback(5 * 1024 * 1024,  new Action(Callback));
+        GC.RegisterNoGCRegionCallback(5 * 1024 * 1024, new Action(Callback));
         Allocate(oh, 30);
         callbackEvent.WaitOne();
         if (CallbackCounter != 1)
@@ -168,7 +168,7 @@ public class Test
     {
         CallbackCounter = 0;
         GC.TryStartNoGCRegion(10 * 1024 * 1024);
-        GC.RegisterNoGCRegionCallback(2 * 1024 * 1024,  new Action(AnotherCallback));
+        GC.RegisterNoGCRegionCallback(2 * 1024 * 1024, new Action(AnotherCallback));
         Allocate(SOH, 3);
         anotherCallbackEvent.WaitOne();
         Allocate(SOH, 27);
@@ -197,7 +197,7 @@ public class Test
     private static int SOH = 0;
     private static int LOH = 0;
 
-    public unsafe static void Allocate(int oh, int mb)
+    public static unsafe void Allocate(int oh, int mb)
     {
         int overhead = 3 * sizeof(IntPtr);
         for (int i = 0; i < mb; i++)
@@ -207,7 +207,7 @@ public class Test
                 // This loop allocates 1M
                 for (int j = 0; j < 1024 * 1024 / 32; j++)
                 {
-                    byte[] x = new byte[32 - overhead]; 
+                    byte[] x = new byte[32 - overhead];
                     x[0] = 86;
                 }
             }
@@ -224,17 +224,28 @@ public class Test
         int test = 0;
         try
         {
-            test++; TestZero();
-            test++; TestNegative();
-            test++; TestNull();
-            test++; TestNotStarted();
-            test++; TestExceed();
-            test++; TestSimple(SOH);
-            test++; TestSimple(LOH);
-            test++; TestSimple(SOH); // Intentional repeat to make sure it works.
-            test++; TestSimple(LOH);
-            test++; TestCascade();
-            test++; TestLoop();
+            test++;
+            TestZero();
+            test++;
+            TestNegative();
+            test++;
+            TestNull();
+            test++;
+            TestNotStarted();
+            test++;
+            TestExceed();
+            test++;
+            TestSimple(SOH);
+            test++;
+            TestSimple(LOH);
+            test++;
+            TestSimple(SOH); // Intentional repeat to make sure it works.
+            test++;
+            TestSimple(LOH);
+            test++;
+            TestCascade();
+            test++;
+            TestLoop();
         }
         catch (Exception ex)
         {
@@ -246,4 +257,3 @@ public class Test
         return 100;
     }
 }
-

@@ -14,12 +14,10 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security;
-
     using ServiceModelActivity = System.ServiceModel.Diagnostics.ServiceModelActivity;
     using TraceUtility = System.ServiceModel.Diagnostics.TraceUtility;
 
-    sealed class SecurityChannelFactory<TChannel>
-        : LayeredChannelFactory<TChannel>
+    sealed class SecurityChannelFactory<TChannel> : LayeredChannelFactory<TChannel>
     {
         ChannelBuilder channelBuilder;
         SecurityProtocolFactory securityProtocolFactory;
@@ -28,26 +26,54 @@ namespace System.ServiceModel.Channels
         MessageVersion messageVersion;
         ISecurityCapabilities securityCapabilities;
 
-        public SecurityChannelFactory(ISecurityCapabilities securityCapabilities, BindingContext context,
-            SecuritySessionClientSettings<TChannel> sessionClientSettings)
-            : this(securityCapabilities, context, sessionClientSettings.ChannelBuilder, sessionClientSettings.CreateInnerChannelFactory())
+        public SecurityChannelFactory(
+            ISecurityCapabilities securityCapabilities,
+            BindingContext context,
+            SecuritySessionClientSettings<TChannel> sessionClientSettings
+        )
+            : this(
+                securityCapabilities,
+                context,
+                sessionClientSettings.ChannelBuilder,
+                sessionClientSettings.CreateInnerChannelFactory()
+            )
         {
             this.sessionMode = true;
             this.sessionClientSettings = sessionClientSettings;
         }
 
-        public SecurityChannelFactory(ISecurityCapabilities securityCapabilities, BindingContext context, ChannelBuilder channelBuilder, SecurityProtocolFactory protocolFactory)
-            : this(securityCapabilities, context, channelBuilder, protocolFactory, channelBuilder.BuildChannelFactory<TChannel>())
-        {
-        }
+        public SecurityChannelFactory(
+            ISecurityCapabilities securityCapabilities,
+            BindingContext context,
+            ChannelBuilder channelBuilder,
+            SecurityProtocolFactory protocolFactory
+        )
+            : this(
+                securityCapabilities,
+                context,
+                channelBuilder,
+                protocolFactory,
+                channelBuilder.BuildChannelFactory<TChannel>()
+            ) { }
 
-        public SecurityChannelFactory(ISecurityCapabilities securityCapabilities, BindingContext context, ChannelBuilder channelBuilder, SecurityProtocolFactory protocolFactory, IChannelFactory innerChannelFactory)
+        public SecurityChannelFactory(
+            ISecurityCapabilities securityCapabilities,
+            BindingContext context,
+            ChannelBuilder channelBuilder,
+            SecurityProtocolFactory protocolFactory,
+            IChannelFactory innerChannelFactory
+        )
             : this(securityCapabilities, context, channelBuilder, innerChannelFactory)
         {
             this.securityProtocolFactory = protocolFactory;
         }
 
-        SecurityChannelFactory(ISecurityCapabilities securityCapabilities, BindingContext context, ChannelBuilder channelBuilder, IChannelFactory innerChannelFactory)
+        SecurityChannelFactory(
+            ISecurityCapabilities securityCapabilities,
+            BindingContext context,
+            ChannelBuilder channelBuilder,
+            IChannelFactory innerChannelFactory
+        )
             : base(context.Binding, innerChannelFactory)
         {
             this.channelBuilder = channelBuilder;
@@ -56,7 +82,11 @@ namespace System.ServiceModel.Channels
         }
 
         // used by internal test code
-        internal SecurityChannelFactory(Binding binding, SecurityProtocolFactory protocolFactory, IChannelFactory innerChannelFactory)
+        internal SecurityChannelFactory(
+            Binding binding,
+            SecurityProtocolFactory protocolFactory,
+            IChannelFactory innerChannelFactory
+        )
             : base(binding, innerChannelFactory)
         {
             this.securityProtocolFactory = protocolFactory;
@@ -64,35 +94,29 @@ namespace System.ServiceModel.Channels
 
         public ChannelBuilder ChannelBuilder
         {
-            get
-            {
-                return this.channelBuilder;
-            }
+            get { return this.channelBuilder; }
         }
 
         public SecurityProtocolFactory SecurityProtocolFactory
         {
-            get
-            {
-                return this.securityProtocolFactory;
-            }
+            get { return this.securityProtocolFactory; }
         }
 
         public SecuritySessionClientSettings<TChannel> SessionClientSettings
         {
             get
             {
-                Fx.Assert(SessionMode == true, "SessionClientSettings can only be used if SessionMode == true");
+                Fx.Assert(
+                    SessionMode == true,
+                    "SessionClientSettings can only be used if SessionMode == true"
+                );
                 return this.sessionClientSettings;
             }
         }
 
         public bool SessionMode
         {
-            get
-            {
-                return this.sessionMode;
-            }
+            get { return this.sessionMode; }
         }
 
         bool SupportsDuplex
@@ -115,10 +139,7 @@ namespace System.ServiceModel.Channels
 
         public MessageVersion MessageVersion
         {
-            get
-            {
-                return this.messageVersion;
-            }
+            get { return this.messageVersion; }
         }
 
         void CloseProtocolFactory(bool aborted, TimeSpan timeout)
@@ -132,7 +153,9 @@ namespace System.ServiceModel.Channels
 
         public override T GetProperty<T>()
         {
-            if (this.SessionMode && (typeof(T) == typeof(IChannelSecureConversationSessionSettings)))
+            if (
+                this.SessionMode && (typeof(T) == typeof(IChannelSecureConversationSessionSettings))
+            )
             {
                 return (T)(object)this.SessionClientSettings;
             }
@@ -154,26 +177,41 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            List<OperationWithTimeoutBeginCallback> begins = new List<OperationWithTimeoutBeginCallback>();
+            List<OperationWithTimeoutBeginCallback> begins =
+                new List<OperationWithTimeoutBeginCallback>();
             List<OperationEndCallback> ends = new List<OperationEndCallback>();
             begins.Add(new OperationWithTimeoutBeginCallback(base.OnBeginClose));
             ends.Add(new OperationEndCallback(base.OnEndClose));
 
             if (this.securityProtocolFactory != null && !this.SessionMode)
             {
-                begins.Add(new OperationWithTimeoutBeginCallback(this.securityProtocolFactory.BeginClose));
+                begins.Add(
+                    new OperationWithTimeoutBeginCallback(this.securityProtocolFactory.BeginClose)
+                );
                 ends.Add(new OperationEndCallback(this.securityProtocolFactory.EndClose));
             }
 
             if (this.sessionClientSettings != null)
             {
-                begins.Add(new OperationWithTimeoutBeginCallback(this.sessionClientSettings.BeginClose));
+                begins.Add(
+                    new OperationWithTimeoutBeginCallback(this.sessionClientSettings.BeginClose)
+                );
                 ends.Add(new OperationEndCallback(this.sessionClientSettings.EndClose));
             }
 
-            return OperationWithTimeoutComposer.BeginComposeAsyncOperations(timeout, begins.ToArray(), ends.ToArray(), callback, state);
+            return OperationWithTimeoutComposer.BeginComposeAsyncOperations(
+                timeout,
+                begins.ToArray(),
+                ends.ToArray(),
+                callback,
+                state
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -202,27 +240,87 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) == typeof(IOutputChannel))
             {
-                return (TChannel)(object)new SecurityOutputChannel(this, this.securityProtocolFactory, ((IChannelFactory<IOutputChannel>)this.InnerChannelFactory).CreateChannel(address, via), address, via);
+                return (TChannel)
+                    (object)
+                        new SecurityOutputChannel(
+                            this,
+                            this.securityProtocolFactory,
+                            (
+                                (IChannelFactory<IOutputChannel>)this.InnerChannelFactory
+                            ).CreateChannel(address, via),
+                            address,
+                            via
+                        );
             }
             else if (typeof(TChannel) == typeof(IOutputSessionChannel))
             {
-                return (TChannel)(object)new SecurityOutputSessionChannel(this, this.securityProtocolFactory, ((IChannelFactory<IOutputSessionChannel>)this.InnerChannelFactory).CreateChannel(address, via), address, via);
+                return (TChannel)
+                    (object)
+                        new SecurityOutputSessionChannel(
+                            this,
+                            this.securityProtocolFactory,
+                            (
+                                (IChannelFactory<IOutputSessionChannel>)this.InnerChannelFactory
+                            ).CreateChannel(address, via),
+                            address,
+                            via
+                        );
             }
             else if (typeof(TChannel) == typeof(IDuplexChannel))
             {
-                return (TChannel)(object)new SecurityDuplexChannel(this, this.securityProtocolFactory, ((IChannelFactory<IDuplexChannel>)this.InnerChannelFactory).CreateChannel(address, via), address, via);
+                return (TChannel)
+                    (object)
+                        new SecurityDuplexChannel(
+                            this,
+                            this.securityProtocolFactory,
+                            (
+                                (IChannelFactory<IDuplexChannel>)this.InnerChannelFactory
+                            ).CreateChannel(address, via),
+                            address,
+                            via
+                        );
             }
             else if (typeof(TChannel) == typeof(IDuplexSessionChannel))
             {
-                return (TChannel)(object)new SecurityDuplexSessionChannel(this, this.securityProtocolFactory, ((IChannelFactory<IDuplexSessionChannel>)this.InnerChannelFactory).CreateChannel(address, via), address, via);
+                return (TChannel)
+                    (object)
+                        new SecurityDuplexSessionChannel(
+                            this,
+                            this.securityProtocolFactory,
+                            (
+                                (IChannelFactory<IDuplexSessionChannel>)this.InnerChannelFactory
+                            ).CreateChannel(address, via),
+                            address,
+                            via
+                        );
             }
             else if (typeof(TChannel) == typeof(IRequestChannel))
             {
-                return (TChannel)(object)new SecurityRequestChannel(this, this.securityProtocolFactory, ((IChannelFactory<IRequestChannel>)this.InnerChannelFactory).CreateChannel(address, via), address, via);
+                return (TChannel)
+                    (object)
+                        new SecurityRequestChannel(
+                            this,
+                            this.securityProtocolFactory,
+                            (
+                                (IChannelFactory<IRequestChannel>)this.InnerChannelFactory
+                            ).CreateChannel(address, via),
+                            address,
+                            via
+                        );
             }
 
             //typeof(TChannel) == typeof(IRequestSessionChannel)
-            return (TChannel)(object)new SecurityRequestSessionChannel(this, this.securityProtocolFactory, ((IChannelFactory<IRequestSessionChannel>)this.InnerChannelFactory).CreateChannel(address, via), address, via);
+            return (TChannel)
+                (object)
+                    new SecurityRequestSessionChannel(
+                        this,
+                        this.securityProtocolFactory,
+                        (
+                            (IChannelFactory<IRequestSessionChannel>)this.InnerChannelFactory
+                        ).CreateChannel(address, via),
+                        address,
+                        via
+                    );
         }
 
         protected override void OnOpen(TimeSpan timeout)
@@ -235,7 +333,8 @@ namespace System.ServiceModel.Channels
 
         void SetBufferManager()
         {
-            ITransportFactorySettings transportSettings = this.GetProperty<ITransportFactorySettings>();
+            ITransportFactorySettings transportSettings =
+                this.GetProperty<ITransportFactorySettings>();
 
             if (transportSettings == null)
                 return;
@@ -245,9 +344,14 @@ namespace System.ServiceModel.Channels
             if (bufferManager == null)
                 return;
 
-            if (this.SessionMode && this.SessionClientSettings != null && this.SessionClientSettings.SessionProtocolFactory != null)
+            if (
+                this.SessionMode
+                && this.SessionClientSettings != null
+                && this.SessionClientSettings.SessionProtocolFactory != null
+            )
             {
-                this.SessionClientSettings.SessionProtocolFactory.StreamBufferManager = bufferManager;
+                this.SessionClientSettings.SessionProtocolFactory.StreamBufferManager =
+                    bufferManager;
             }
             else
             {
@@ -256,9 +360,18 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new OperationWithTimeoutAsyncResult(new OperationWithTimeoutCallback(this.OnOpen), timeout, callback, state);
+            return new OperationWithTimeoutAsyncResult(
+                new OperationWithTimeoutCallback(this.OnOpen),
+                timeout,
+                callback,
+                state
+            );
         }
 
         protected override void OnEndOpen(IAsyncResult result)
@@ -271,7 +384,12 @@ namespace System.ServiceModel.Channels
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             if (this.SessionMode)
             {
-                this.SessionClientSettings.Open(this, this.InnerChannelFactory, this.ChannelBuilder, timeoutHelper.RemainingTime());
+                this.SessionClientSettings.Open(
+                    this,
+                    this.InnerChannelFactory,
+                    this.ChannelBuilder,
+                    timeoutHelper.RemainingTime()
+                );
             }
             else
             {
@@ -284,8 +402,14 @@ namespace System.ServiceModel.Channels
         {
             if (!this.SupportsDuplex)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.SecurityProtocolFactoryDoesNotSupportDuplex, this.securityProtocolFactory)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SecurityProtocolFactoryDoesNotSupportDuplex,
+                            this.securityProtocolFactory
+                        )
+                    )
+                );
             }
         }
 
@@ -293,8 +417,11 @@ namespace System.ServiceModel.Channels
         {
             if (this.securityProtocolFactory == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.SecurityProtocolFactoryShouldBeSetBeforeThisOperation)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SecurityProtocolFactoryShouldBeSetBeforeThisOperation)
+                    )
+                );
             }
         }
 
@@ -302,11 +429,16 @@ namespace System.ServiceModel.Channels
         {
             if (!this.SupportsRequestReply)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.SecurityProtocolFactoryDoesNotSupportRequestReply, this.securityProtocolFactory)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SecurityProtocolFactoryDoesNotSupportRequestReply,
+                            this.securityProtocolFactory
+                        )
+                    )
+                );
             }
         }
-
 
         abstract class ClientSecurityChannel<UChannel> : SecurityChannel<UChannel>
             where UChannel : class, IChannel
@@ -316,8 +448,13 @@ namespace System.ServiceModel.Channels
             SecurityProtocolFactory securityProtocolFactory;
             ChannelParameterCollection channelParameters;
 
-            protected ClientSecurityChannel(ChannelManagerBase factory, SecurityProtocolFactory securityProtocolFactory,
-                UChannel innerChannel, EndpointAddress to, Uri via)
+            protected ClientSecurityChannel(
+                ChannelManagerBase factory,
+                SecurityProtocolFactory securityProtocolFactory,
+                UChannel innerChannel,
+                EndpointAddress to,
+                Uri via
+            )
                 : base(factory, innerChannel)
             {
                 this.to = to;
@@ -341,19 +478,29 @@ namespace System.ServiceModel.Channels
                 get { return this.via; }
             }
 
-            protected bool TryGetSecurityFaultException(Message faultMessage, out Exception faultException)
+            protected bool TryGetSecurityFaultException(
+                Message faultMessage,
+                out Exception faultException
+            )
             {
                 faultException = null;
                 if (!faultMessage.IsFault)
                 {
                     return false;
                 }
-                MessageFault fault = MessageFault.CreateFault(faultMessage, TransportDefaults.MaxSecurityFaultSize);
+                MessageFault fault = MessageFault.CreateFault(
+                    faultMessage,
+                    TransportDefaults.MaxSecurityFaultSize
+                );
                 faultException = SecurityUtils.CreateSecurityFaultException(fault);
                 return true;
             }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 EnableChannelBindingSupport();
 
@@ -370,12 +517,14 @@ namespace System.ServiceModel.Channels
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
                 EnableChannelBindingSupport();
 
-                SecurityProtocol securityProtocol = this.SecurityProtocolFactory.CreateSecurityProtocol(
-                    this.to,
-                    this.Via,
-                    null,
-                    typeof(TChannel) == typeof(IRequestChannel),
-                    timeoutHelper.RemainingTime());
+                SecurityProtocol securityProtocol =
+                    this.SecurityProtocolFactory.CreateSecurityProtocol(
+                        this.to,
+                        this.Via,
+                        null,
+                        typeof(TChannel) == typeof(IRequestChannel),
+                        timeoutHelper.RemainingTime()
+                    );
                 OnProtocolCreationComplete(securityProtocol);
                 this.SecurityProtocol.Open(timeoutHelper.RemainingTime());
                 base.OnOpen(timeoutHelper.RemainingTime());
@@ -383,18 +532,38 @@ namespace System.ServiceModel.Channels
 
             void EnableChannelBindingSupport()
             {
-                if (this.securityProtocolFactory != null && this.securityProtocolFactory.ExtendedProtectionPolicy != null && this.securityProtocolFactory.ExtendedProtectionPolicy.CustomChannelBinding != null)
+                if (
+                    this.securityProtocolFactory != null
+                    && this.securityProtocolFactory.ExtendedProtectionPolicy != null
+                    && this.securityProtocolFactory.ExtendedProtectionPolicy.CustomChannelBinding
+                        != null
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ExtendedProtectionPolicyCustomChannelBindingNotSupported)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.ExtendedProtectionPolicyCustomChannelBindingNotSupported
+                            )
+                        )
+                    );
                 }
 
                 // Do not enable channel binding if there is no reason as it sets up chunking mode.
-                if ((SecurityUtils.IsChannelBindingDisabled) || (!SecurityUtils.IsSecurityBindingSuitableForChannelBinding(this.SecurityProtocolFactory.SecurityBindingElement as TransportSecurityBindingElement)))
+                if (
+                    (SecurityUtils.IsChannelBindingDisabled)
+                    || (
+                        !SecurityUtils.IsSecurityBindingSuitableForChannelBinding(
+                            this.SecurityProtocolFactory.SecurityBindingElement
+                                as TransportSecurityBindingElement
+                        )
+                    )
+                )
                     return;
 
                 if (InnerChannel != null)
                 {
-                    IChannelBindingProvider cbp = InnerChannel.GetProperty<IChannelBindingProvider>();
+                    IChannelBindingProvider cbp =
+                        InnerChannel.GetProperty<IChannelBindingProvider>();
                     if (cbp != null)
                     {
                         cbp.EnableChannelBindingSupport();
@@ -422,18 +591,31 @@ namespace System.ServiceModel.Channels
             {
                 readonly ClientSecurityChannel<UChannel> clientChannel;
                 TimeoutHelper timeoutHelper;
-                static readonly AsyncCallback openInnerChannelCallback = Fx.ThunkCallback(new AsyncCallback(OpenInnerChannelCallback));
-                static readonly AsyncCallback openSecurityProtocolCallback = Fx.ThunkCallback(new AsyncCallback(OpenSecurityProtocolCallback));
+                static readonly AsyncCallback openInnerChannelCallback = Fx.ThunkCallback(
+                    new AsyncCallback(OpenInnerChannelCallback)
+                );
+                static readonly AsyncCallback openSecurityProtocolCallback = Fx.ThunkCallback(
+                    new AsyncCallback(OpenSecurityProtocolCallback)
+                );
 
-                public OpenAsyncResult(ClientSecurityChannel<UChannel> clientChannel, TimeSpan timeout,
-                    AsyncCallback callback, object state)
+                public OpenAsyncResult(
+                    ClientSecurityChannel<UChannel> clientChannel,
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.timeoutHelper = new TimeoutHelper(timeout);
                     this.clientChannel = clientChannel;
-                    SecurityProtocol securityProtocol = this.clientChannel.SecurityProtocolFactory.CreateSecurityProtocol(this.clientChannel.to,
-                        this.clientChannel.Via,
-                        null, typeof(TChannel) == typeof(IRequestChannel), timeoutHelper.RemainingTime());
+                    SecurityProtocol securityProtocol =
+                        this.clientChannel.SecurityProtocolFactory.CreateSecurityProtocol(
+                            this.clientChannel.to,
+                            this.clientChannel.Via,
+                            null,
+                            typeof(TChannel) == typeof(IRequestChannel),
+                            timeoutHelper.RemainingTime()
+                        );
                     bool completeSelf = this.OnCreateSecurityProtocolComplete(securityProtocol);
                     if (completeSelf)
                     {
@@ -449,7 +631,11 @@ namespace System.ServiceModel.Channels
                 bool OnCreateSecurityProtocolComplete(SecurityProtocol securityProtocol)
                 {
                     this.clientChannel.OnProtocolCreationComplete(securityProtocol);
-                    IAsyncResult result = securityProtocol.BeginOpen(timeoutHelper.RemainingTime(), openSecurityProtocolCallback, this);
+                    IAsyncResult result = securityProtocol.BeginOpen(
+                        timeoutHelper.RemainingTime(),
+                        openSecurityProtocolCallback,
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -467,7 +653,9 @@ namespace System.ServiceModel.Channels
                     OpenAsyncResult self = result.AsyncState as OpenAsyncResult;
                     if (self == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result")
+                        );
                     }
                     Exception completionException = null;
                     bool completeSelf = false;
@@ -494,7 +682,11 @@ namespace System.ServiceModel.Channels
 
                 bool OnSecurityProtocolOpenComplete()
                 {
-                    IAsyncResult result = this.clientChannel.InnerChannel.BeginOpen(this.timeoutHelper.RemainingTime(), openInnerChannelCallback, this);
+                    IAsyncResult result = this.clientChannel.InnerChannel.BeginOpen(
+                        this.timeoutHelper.RemainingTime(),
+                        openInnerChannelCallback,
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -507,7 +699,9 @@ namespace System.ServiceModel.Channels
                 {
                     if (result == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("result"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentNullException("result")
+                        );
                     }
                     if (result.CompletedSynchronously)
                     {
@@ -516,7 +710,9 @@ namespace System.ServiceModel.Channels
                     OpenAsyncResult self = result.AsyncState as OpenAsyncResult;
                     if (self == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result")
+                        );
                     }
                     Exception completionException = null;
                     try
@@ -539,21 +735,37 @@ namespace System.ServiceModel.Channels
 
         class SecurityOutputChannel : ClientSecurityChannel<IOutputChannel>, IOutputChannel
         {
-            public SecurityOutputChannel(ChannelManagerBase factory, SecurityProtocolFactory securityProtocolFactory, IOutputChannel innerChannel, EndpointAddress to, Uri via)
-                : base(factory, securityProtocolFactory, innerChannel, to, via)
-            {
-            }
+            public SecurityOutputChannel(
+                ChannelManagerBase factory,
+                SecurityProtocolFactory securityProtocolFactory,
+                IOutputChannel innerChannel,
+                EndpointAddress to,
+                Uri via
+            )
+                : base(factory, securityProtocolFactory, innerChannel, to, via) { }
 
             public IAsyncResult BeginSend(Message message, AsyncCallback callback, object state)
             {
                 return this.BeginSend(message, this.DefaultSendTimeout, callback, state);
             }
 
-            public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginSend(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 ThrowIfFaulted();
                 ThrowIfDisposedOrNotOpen(message);
-                return new OutputChannelSendAsyncResult(message, this.SecurityProtocol, this.InnerChannel, timeout, callback, state);
+                return new OutputChannelSendAsyncResult(
+                    message,
+                    this.SecurityProtocol,
+                    this.InnerChannel,
+                    timeout,
+                    callback,
+                    state
+                );
             }
 
             public void EndSend(IAsyncResult result)
@@ -571,44 +783,65 @@ namespace System.ServiceModel.Channels
                 ThrowIfFaulted();
                 ThrowIfDisposedOrNotOpen(message);
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-                this.SecurityProtocol.SecureOutgoingMessage(ref message, timeoutHelper.RemainingTime());
+                this.SecurityProtocol.SecureOutgoingMessage(
+                    ref message,
+                    timeoutHelper.RemainingTime()
+                );
                 this.InnerChannel.Send(message, timeoutHelper.RemainingTime());
             }
         }
 
         sealed class SecurityOutputSessionChannel : SecurityOutputChannel, IOutputSessionChannel
         {
-            public SecurityOutputSessionChannel(ChannelManagerBase factory, SecurityProtocolFactory securityProtocolFactory, IOutputSessionChannel innerChannel, EndpointAddress to, Uri via)
-                : base(factory, securityProtocolFactory, innerChannel, to, via)
-            {
-            }
+            public SecurityOutputSessionChannel(
+                ChannelManagerBase factory,
+                SecurityProtocolFactory securityProtocolFactory,
+                IOutputSessionChannel innerChannel,
+                EndpointAddress to,
+                Uri via
+            )
+                : base(factory, securityProtocolFactory, innerChannel, to, via) { }
 
             public IOutputSession Session
             {
-                get
-                {
-                    return ((IOutputSessionChannel)this.InnerChannel).Session;
-                }
+                get { return ((IOutputSessionChannel)this.InnerChannel).Session; }
             }
         }
 
         class SecurityRequestChannel : ClientSecurityChannel<IRequestChannel>, IRequestChannel
         {
-            public SecurityRequestChannel(ChannelManagerBase factory, SecurityProtocolFactory securityProtocolFactory, IRequestChannel innerChannel, EndpointAddress to, Uri via)
-                : base(factory, securityProtocolFactory, innerChannel, to, via)
-            {
-            }
+            public SecurityRequestChannel(
+                ChannelManagerBase factory,
+                SecurityProtocolFactory securityProtocolFactory,
+                IRequestChannel innerChannel,
+                EndpointAddress to,
+                Uri via
+            )
+                : base(factory, securityProtocolFactory, innerChannel, to, via) { }
 
             public IAsyncResult BeginRequest(Message message, AsyncCallback callback, object state)
             {
                 return this.BeginRequest(message, this.DefaultSendTimeout, callback, state);
             }
 
-            public IAsyncResult BeginRequest(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginRequest(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 ThrowIfFaulted();
                 ThrowIfDisposedOrNotOpen(message);
-                return new RequestChannelSendAsyncResult(message, this.SecurityProtocol, this.InnerChannel, this, timeout, callback, state);
+                return new RequestChannelSendAsyncResult(
+                    message,
+                    this.SecurityProtocol,
+                    this.InnerChannel,
+                    this,
+                    timeout,
+                    callback,
+                    state
+                );
             }
 
             public Message EndRequest(IAsyncResult result)
@@ -621,17 +854,23 @@ namespace System.ServiceModel.Channels
                 return this.Request(message, this.DefaultSendTimeout);
             }
 
-            internal Message ProcessReply(Message reply, SecurityProtocolCorrelationState correlationState, TimeSpan timeout)
+            internal Message ProcessReply(
+                Message reply,
+                SecurityProtocolCorrelationState correlationState,
+                TimeSpan timeout
+            )
             {
                 if (reply != null)
                 {
                     if (DiagnosticUtility.ShouldUseActivity)
                     {
                         ServiceModelActivity replyActivity = TraceUtility.ExtractActivity(reply);
-                        if (replyActivity != null &&
-                            correlationState != null &&
-                            correlationState.Activity != null &&
-                            replyActivity.Id != correlationState.Activity.Id)
+                        if (
+                            replyActivity != null
+                            && correlationState != null
+                            && correlationState.Activity != null
+                            && replyActivity.Id != correlationState.Activity.Id
+                        )
                         {
                             using (ServiceModelActivity.BoundOperation(replyActivity))
                             {
@@ -643,7 +882,8 @@ namespace System.ServiceModel.Channels
                             }
                         }
                     }
-                    ServiceModelActivity activity = correlationState == null ? null : correlationState.Activity;
+                    ServiceModelActivity activity =
+                        correlationState == null ? null : correlationState.Activity;
                     using (ServiceModelActivity.BoundOperation(activity))
                     {
                         if (DiagnosticUtility.ShouldUseActivity)
@@ -654,7 +894,11 @@ namespace System.ServiceModel.Channels
                         Exception faultException = null;
                         try
                         {
-                            this.SecurityProtocol.VerifyIncomingMessage(ref reply, timeout, correlationState);
+                            this.SecurityProtocol.VerifyIncomingMessage(
+                                ref reply,
+                                timeout,
+                                correlationState
+                            );
                         }
                         catch (MessageSecurityException)
                         {
@@ -667,7 +911,9 @@ namespace System.ServiceModel.Channels
                         if (faultException != null)
                         {
                             this.Fault(faultException);
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(faultException);
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                                faultException
+                            );
                         }
                     }
                 }
@@ -679,7 +925,12 @@ namespace System.ServiceModel.Channels
                 ThrowIfFaulted();
                 ThrowIfDisposedOrNotOpen(message);
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-                SecurityProtocolCorrelationState correlationState = this.SecurityProtocol.SecureOutgoingMessage(ref message, timeoutHelper.RemainingTime(), null);
+                SecurityProtocolCorrelationState correlationState =
+                    this.SecurityProtocol.SecureOutgoingMessage(
+                        ref message,
+                        timeoutHelper.RemainingTime(),
+                        null
+                    );
                 Message reply = this.InnerChannel.Request(message, timeoutHelper.RemainingTime());
                 return ProcessReply(reply, correlationState, timeoutHelper.RemainingTime());
             }
@@ -687,26 +938,31 @@ namespace System.ServiceModel.Channels
 
         sealed class SecurityRequestSessionChannel : SecurityRequestChannel, IRequestSessionChannel
         {
-            public SecurityRequestSessionChannel(ChannelManagerBase factory, SecurityProtocolFactory securityProtocolFactory, IRequestSessionChannel innerChannel, EndpointAddress to, Uri via)
-                : base(factory, securityProtocolFactory, innerChannel, to, via)
-            {
-            }
+            public SecurityRequestSessionChannel(
+                ChannelManagerBase factory,
+                SecurityProtocolFactory securityProtocolFactory,
+                IRequestSessionChannel innerChannel,
+                EndpointAddress to,
+                Uri via
+            )
+                : base(factory, securityProtocolFactory, innerChannel, to, via) { }
 
             public IOutputSession Session
             {
-                get
-                {
-                    return ((IRequestSessionChannel)this.InnerChannel).Session;
-                }
+                get { return ((IRequestSessionChannel)this.InnerChannel).Session; }
             }
         }
 
         class SecurityDuplexChannel : SecurityOutputChannel, IDuplexChannel
         {
-            public SecurityDuplexChannel(ChannelManagerBase factory, SecurityProtocolFactory securityProtocolFactory, IDuplexChannel innerChannel, EndpointAddress to, Uri via)
-                : base(factory, securityProtocolFactory, innerChannel, to, via)
-            {
-            }
+            public SecurityDuplexChannel(
+                ChannelManagerBase factory,
+                SecurityProtocolFactory securityProtocolFactory,
+                IDuplexChannel innerChannel,
+                EndpointAddress to,
+                Uri via
+            )
+                : base(factory, securityProtocolFactory, innerChannel, to, via) { }
 
             internal IDuplexChannel InnerDuplexChannel
             {
@@ -715,10 +971,7 @@ namespace System.ServiceModel.Channels
 
             public EndpointAddress LocalAddress
             {
-                get
-                {
-                    return this.InnerDuplexChannel.LocalAddress;
-                }
+                get { return this.InnerDuplexChannel.LocalAddress; }
             }
 
             internal virtual bool AcceptUnsecuredFaults
@@ -751,7 +1004,11 @@ namespace System.ServiceModel.Channels
                 return InputChannel.HelpEndReceive(result);
             }
 
-            public virtual IAsyncResult BeginTryReceive(TimeSpan timeout, AsyncCallback callback, object state)
+            public virtual IAsyncResult BeginTryReceive(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 if (DoneReceivingInCurrentState())
                 {
@@ -759,7 +1016,13 @@ namespace System.ServiceModel.Channels
                 }
 
                 ClientDuplexReceiveMessageAndVerifySecurityAsyncResult result =
-                    new ClientDuplexReceiveMessageAndVerifySecurityAsyncResult(this, this.InnerDuplexChannel, timeout, callback, state);
+                    new ClientDuplexReceiveMessageAndVerifySecurityAsyncResult(
+                        this,
+                        this.InnerDuplexChannel,
+                        timeout,
+                        callback,
+                        state
+                    );
                 result.Start();
                 return result;
             }
@@ -772,7 +1035,10 @@ namespace System.ServiceModel.Channels
                     return DoneReceivingAsyncResult.End(doneRecevingResult, out message);
                 }
 
-                return ClientDuplexReceiveMessageAndVerifySecurityAsyncResult.End(result, out message);
+                return ClientDuplexReceiveMessageAndVerifySecurityAsyncResult.End(
+                    result,
+                    out message
+                );
             }
 
             internal Message ProcessMessage(Message message, TimeSpan timeout)
@@ -806,7 +1072,6 @@ namespace System.ServiceModel.Channels
                 return message;
             }
 
-
             public bool TryReceive(TimeSpan timeout, out Message message)
             {
                 if (DoneReceivingInCurrentState())
@@ -829,7 +1094,11 @@ namespace System.ServiceModel.Channels
                 return this.InnerDuplexChannel.WaitForMessage(timeout);
             }
 
-            public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginWaitForMessage(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.InnerDuplexChannel.BeginWaitForMessage(timeout, callback, state);
             }
@@ -842,17 +1111,18 @@ namespace System.ServiceModel.Channels
 
         sealed class SecurityDuplexSessionChannel : SecurityDuplexChannel, IDuplexSessionChannel
         {
-            public SecurityDuplexSessionChannel(ChannelManagerBase factory, SecurityProtocolFactory securityProtocolFactory, IDuplexSessionChannel innerChannel, EndpointAddress to, Uri via)
-                : base(factory, securityProtocolFactory, innerChannel, to, via)
-            {
-            }
+            public SecurityDuplexSessionChannel(
+                ChannelManagerBase factory,
+                SecurityProtocolFactory securityProtocolFactory,
+                IDuplexSessionChannel innerChannel,
+                EndpointAddress to,
+                Uri via
+            )
+                : base(factory, securityProtocolFactory, innerChannel, to, via) { }
 
             public IDuplexSession Session
             {
-                get
-                {
-                    return ((IDuplexSessionChannel)this.InnerChannel).Session;
-                }
+                get { return ((IDuplexSessionChannel)this.InnerChannel).Session; }
             }
 
             internal override bool AcceptUnsecuredFaults
@@ -861,20 +1131,34 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        sealed class RequestChannelSendAsyncResult : ApplySecurityAndSendAsyncResult<IRequestChannel>
+        sealed class RequestChannelSendAsyncResult
+            : ApplySecurityAndSendAsyncResult<IRequestChannel>
         {
             Message reply;
             SecurityRequestChannel securityChannel;
 
-            public RequestChannelSendAsyncResult(Message message, SecurityProtocol protocol, IRequestChannel channel, SecurityRequestChannel securityChannel, TimeSpan timeout,
-                AsyncCallback callback, object state)
+            public RequestChannelSendAsyncResult(
+                Message message,
+                SecurityProtocol protocol,
+                IRequestChannel channel,
+                SecurityRequestChannel securityChannel,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(protocol, channel, timeout, callback, state)
             {
                 this.securityChannel = securityChannel;
                 this.Begin(message, null);
             }
 
-            protected override IAsyncResult BeginSendCore(IRequestChannel channel, Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult BeginSendCore(
+                IRequestChannel channel,
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return channel.BeginRequest(message, timeout, callback, state);
             }
@@ -897,11 +1181,18 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        class ClientDuplexReceiveMessageAndVerifySecurityAsyncResult : ReceiveMessageAndVerifySecurityAsyncResultBase
+        class ClientDuplexReceiveMessageAndVerifySecurityAsyncResult
+            : ReceiveMessageAndVerifySecurityAsyncResultBase
         {
             SecurityDuplexChannel channel;
 
-            public ClientDuplexReceiveMessageAndVerifySecurityAsyncResult(SecurityDuplexChannel channel, IDuplexChannel innerChannel, TimeSpan timeout, AsyncCallback callback, object state)
+            public ClientDuplexReceiveMessageAndVerifySecurityAsyncResult(
+                SecurityDuplexChannel channel,
+                IDuplexChannel innerChannel,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(innerChannel, timeout, callback, state)
             {
                 this.channel = channel;

@@ -32,7 +32,11 @@ namespace R2RTest
 
             IEnumerable<CompilerRunner> runners = options.CompilerRunners(isFramework: false);
 
-            BuildFolderSet folderSet = new BuildFolderSet(Array.Empty<BuildFolder>(), runners, options);
+            BuildFolderSet folderSet = new BuildFolderSet(
+                Array.Empty<BuildFolder>(),
+                runners,
+                options
+            );
             bool success = folderSet.Build();
             folderSet.WriteLogs();
 

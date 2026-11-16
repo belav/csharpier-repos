@@ -12,12 +12,16 @@ public class InMemoryEventIdTest : EventIdTestBase
     [ConditionalFact]
     public void Every_eventId_has_a_logger_method_and_logs_when_level_enabled()
     {
-        var fakeFactories = new Dictionary<Type, Func<object>> { { typeof(IEnumerable<IUpdateEntry>), () => new List<IUpdateEntry>() } };
+        var fakeFactories = new Dictionary<Type, Func<object>>
+        {
+            { typeof(IEnumerable<IUpdateEntry>), () => new List<IUpdateEntry>() },
+        };
 
         TestEventLogging(
             typeof(InMemoryEventId),
             typeof(InMemoryLoggerExtensions),
             new InMemoryLoggingDefinitions(),
-            fakeFactories);
+            fakeFactories
+        );
     }
 }

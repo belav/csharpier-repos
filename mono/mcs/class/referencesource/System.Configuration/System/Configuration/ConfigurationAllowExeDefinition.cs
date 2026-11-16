@@ -4,12 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
-
-    public enum ConfigurationAllowExeDefinition {
-        MachineOnly          = 0,
+namespace System.Configuration
+{
+    public enum ConfigurationAllowExeDefinition
+    {
+        MachineOnly = 0,
         MachineToApplication = 100,
         MachineToRoamingUser = 200,
-        MachineToLocalUser   = 300
+        MachineToLocalUser = 300,
     }
 }

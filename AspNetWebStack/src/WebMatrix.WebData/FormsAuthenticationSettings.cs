@@ -10,13 +10,28 @@ namespace WebMatrix.WebData
     /// </summary>
     public static class FormsAuthenticationSettings
     {
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Login", Justification = "The term Login is used more frequently in ASP.Net")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1726:UsePreferredTerms",
+            MessageId = "Login",
+            Justification = "The term Login is used more frequently in ASP.Net"
+        )]
         public static readonly string LoginUrlKey = "loginUrl";
 
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Login", Justification = "The term Login is used more frequently in ASP.Net")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1726:UsePreferredTerms",
+            MessageId = "Login",
+            Justification = "The term Login is used more frequently in ASP.Net"
+        )]
         public static readonly string DefaultLoginUrl = "~/Account/Login";
 
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Login", Justification = "The term Login is used more frequently in ASP.Net")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1726:UsePreferredTerms",
+            MessageId = "Login",
+            Justification = "The term Login is used more frequently in ASP.Net"
+        )]
         public static readonly string PreserveLoginUrlKey = "PreserveLoginUrl";
     }
 }

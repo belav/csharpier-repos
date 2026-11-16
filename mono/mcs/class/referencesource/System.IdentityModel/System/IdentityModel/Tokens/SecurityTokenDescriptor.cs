@@ -12,7 +12,6 @@ namespace System.IdentityModel.Tokens
     using System.IdentityModel.Protocols.WSTrust;
     using System.Security.Claims;
     using System.Xml;
-
     using RST = System.IdentityModel.Protocols.WSTrust.RequestSecurityToken;
     using RSTR = System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse;
 
@@ -43,18 +42,16 @@ namespace System.IdentityModel.Tokens
         /// <exception cref="InvalidOperationException">Thrown if not an absolute URI.</exception>
         public string AppliesToAddress
         {
-            get 
-            { 
-                return this.appliesToAddress; 
-            }
-
+            get { return this.appliesToAddress; }
             set
             {
                 if (!string.IsNullOrEmpty(value))
                 {
                     if (!UriUtil.CanCreateValidUri(value, UriKind.Absolute))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID2002)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ID2002))
+                        );
                     }
                 }
 
@@ -63,8 +60,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Sets the appropriate things, such as requested security token, inside the RSTR 
-        /// based on what is inside this token descriptor instance.  
+        /// Sets the appropriate things, such as requested security token, inside the RSTR
+        /// based on what is inside this token descriptor instance.
         /// </summary>
         /// <param name="response">The RSTR object that this security token descriptor needs to modify.</param>
         /// <exception cref="ArgumentNullException">When response is null.</exception>
@@ -134,7 +131,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the SecurityKeyIdentifierClause when the token is attached 
+        /// Gets or sets the SecurityKeyIdentifierClause when the token is attached
         /// to the message.
         /// </summary>
         public SecurityKeyIdentifierClause AttachedReference
@@ -189,7 +186,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the unattached token reference to refer to the issued token when it is not 
+        /// Gets or sets the unattached token reference to refer to the issued token when it is not
         /// attached to the message.
         /// </summary>
         public SecurityKeyIdentifierClause UnattachedReference
@@ -226,7 +223,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Adds a <see cref="Claim"/> for the authentication type to the claim collection of 
+        /// Adds a <see cref="Claim"/> for the authentication type to the claim collection of
         /// the <see cref="SecurityTokenDescriptor"/>
         /// </summary>
         /// <param name="authType">The authentication type.</param>
@@ -236,18 +233,24 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Adds <see cref="Claim"/>s for the authentication type and the authentication instant 
+        /// Adds <see cref="Claim"/>s for the authentication type and the authentication instant
         /// to the claim collection of the <see cref="SecurityTokenDescriptor"/>
         /// </summary>
         /// <param name="authType">Specifies the authentication type</param>
-        /// <param name="time">Specifies the authentication instant in UTC. If the input is not in UTC, it is converted to UTC.</param> 
+        /// <param name="time">Specifies the authentication instant in UTC. If the input is not in UTC, it is converted to UTC.</param>
         public void AddAuthenticationClaims(string authType, DateTime time)
         {
             this.Subject.AddClaim(
-                new Claim(ClaimTypes.AuthenticationMethod, authType, ClaimValueTypes.String));
+                new Claim(ClaimTypes.AuthenticationMethod, authType, ClaimValueTypes.String)
+            );
 
             this.Subject.AddClaim(
-                new Claim(ClaimTypes.AuthenticationInstant, XmlConvert.ToString(time.ToUniversalTime(), DateTimeFormats.Generated), ClaimValueTypes.DateTime));
+                new Claim(
+                    ClaimTypes.AuthenticationInstant,
+                    XmlConvert.ToString(time.ToUniversalTime(), DateTimeFormats.Generated),
+                    ClaimValueTypes.DateTime
+                )
+            );
         }
     }
 }

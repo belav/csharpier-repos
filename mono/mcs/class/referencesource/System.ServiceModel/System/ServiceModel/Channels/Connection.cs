@@ -9,8 +9,8 @@ namespace System.ServiceModel.Channels
     using System.Net;
     using System.Runtime;
     using System.ServiceModel;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     // Low level abstraction for a socket/pipe
     interface IConnection
@@ -24,14 +24,34 @@ namespace System.ServiceModel.Channels
         void Close(TimeSpan timeout, bool asyncAndLinger);
         void Shutdown(TimeSpan timeout);
 
-        AsyncCompletionResult BeginWrite(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout,
-            WaitCallback callback, object state);
+        AsyncCompletionResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout,
+            WaitCallback callback,
+            object state
+        );
         void EndWrite();
         void Write(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout);
-        void Write(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout, BufferManager bufferManager);
+        void Write(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout,
+            BufferManager bufferManager
+        );
 
         int Read(byte[] buffer, int offset, int size, TimeSpan timeout);
-        AsyncCompletionResult BeginRead(int offset, int size, TimeSpan timeout, WaitCallback callback, object state);
+        AsyncCompletionResult BeginRead(
+            int offset,
+            int size,
+            TimeSpan timeout,
+            WaitCallback callback,
+            object state
+        );
         int EndRead();
 
         // very ugly listener stuff
@@ -127,8 +147,15 @@ namespace System.ServiceModel.Channels
             return connection.EndValidate(result);
         }
 
-        public virtual AsyncCompletionResult BeginWrite(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout,
-            WaitCallback callback, object state)
+        public virtual AsyncCompletionResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout,
+            WaitCallback callback,
+            object state
+        )
         {
             return connection.BeginWrite(buffer, offset, size, immediate, timeout, callback, state);
         }
@@ -138,12 +165,25 @@ namespace System.ServiceModel.Channels
             connection.EndWrite();
         }
 
-        public virtual void Write(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout)
+        public virtual void Write(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout
+        )
         {
             connection.Write(buffer, offset, size, immediate, timeout);
         }
 
-        public virtual void Write(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout, BufferManager bufferManager)
+        public virtual void Write(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout,
+            BufferManager bufferManager
+        )
         {
             connection.Write(buffer, offset, size, immediate, timeout, bufferManager);
         }
@@ -153,8 +193,13 @@ namespace System.ServiceModel.Channels
             return connection.Read(buffer, offset, size, timeout);
         }
 
-        public virtual AsyncCompletionResult BeginRead(int offset, int size, TimeSpan timeout,
-            WaitCallback callback, object state)
+        public virtual AsyncCompletionResult BeginRead(
+            int offset,
+            int size,
+            TimeSpan timeout,
+            WaitCallback callback,
+            object state
+        )
         {
             return connection.BeginRead(offset, size, timeout, callback, state);
         }
@@ -173,11 +218,14 @@ namespace System.ServiceModel.Channels
         int preReadCount;
 
         public PreReadConnection(IConnection innerConnection, byte[] initialData)
-            : this(innerConnection, initialData, 0, initialData.Length)
-        {
-        }
+            : this(innerConnection, initialData, 0, initialData.Length) { }
 
-        public PreReadConnection(IConnection innerConnection, byte[] initialData, int initialOffset, int initialSize)
+        public PreReadConnection(
+            IConnection innerConnection,
+            byte[] initialData,
+            int initialOffset,
+            int initialSize
+        )
             : base(innerConnection)
         {
             this.preReadData = initialData;
@@ -190,9 +238,23 @@ namespace System.ServiceModel.Channels
             if (this.preReadCount > 0)
             {
                 byte[] tempBuffer = this.preReadData;
-                this.preReadData = DiagnosticUtility.Utility.AllocateByteArray(initialSize + this.preReadCount);
-                Buffer.BlockCopy(tempBuffer, this.preReadOffset, this.preReadData, 0, this.preReadCount);
-                Buffer.BlockCopy(initialData, initialOffset, this.preReadData, this.preReadCount, initialSize);
+                this.preReadData = DiagnosticUtility.Utility.AllocateByteArray(
+                    initialSize + this.preReadCount
+                );
+                Buffer.BlockCopy(
+                    tempBuffer,
+                    this.preReadOffset,
+                    this.preReadData,
+                    0,
+                    this.preReadCount
+                );
+                Buffer.BlockCopy(
+                    initialData,
+                    initialOffset,
+                    this.preReadData,
+                    this.preReadCount,
+                    initialSize
+                );
                 this.preReadOffset = 0;
                 this.preReadCount += initialSize;
             }
@@ -220,14 +282,26 @@ namespace System.ServiceModel.Channels
             return base.Read(buffer, offset, size, timeout);
         }
 
-        public override AsyncCompletionResult BeginRead(int offset, int size, TimeSpan timeout, WaitCallback callback, object state)
+        public override AsyncCompletionResult BeginRead(
+            int offset,
+            int size,
+            TimeSpan timeout,
+            WaitCallback callback,
+            object state
+        )
         {
             ConnectionUtilities.ValidateBufferBounds(AsyncReadBufferSize, offset, size);
 
             if (this.preReadCount > 0)
             {
                 int bytesToCopy = Math.Min(size, this.preReadCount);
-                Buffer.BlockCopy(this.preReadData, this.preReadOffset, AsyncReadBuffer, offset, bytesToCopy);
+                Buffer.BlockCopy(
+                    this.preReadData,
+                    this.preReadOffset,
+                    AsyncReadBuffer,
+                    offset,
+                    bytesToCopy
+                );
                 this.preReadOffset += bytesToCopy;
                 this.preReadCount -= bytesToCopy;
                 this.asyncBytesRead = bytesToCopy;
@@ -258,7 +332,10 @@ namespace System.ServiceModel.Channels
         IConnection connection;
         bool immediate;
 
-        public ConnectionStream(IConnection connection, IDefaultCommunicationTimeouts defaultTimeouts)
+        public ConnectionStream(
+            IConnection connection,
+            IDefaultCommunicationTimeouts defaultTimeouts
+        )
         {
             this.connection = connection;
             this.closeTimeout = defaultTimeouts.CloseTimeout;
@@ -305,8 +382,13 @@ namespace System.ServiceModel.Channels
             {
                 if (value < -1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.ValueMustBeInRange, -1, int.MaxValue)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBeInRange, -1, int.MaxValue)
+                        )
+                    );
                 }
 
                 this.readTimeout = value;
@@ -320,8 +402,13 @@ namespace System.ServiceModel.Channels
             {
                 if (value < -1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.ValueMustBeInRange, -1, int.MaxValue)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBeInRange, -1, int.MaxValue)
+                        )
+                    );
                 }
 
                 this.writeTimeout = value;
@@ -339,7 +426,9 @@ namespace System.ServiceModel.Channels
             get
             {
 #pragma warning suppress 56503 // Microsoft, required by the Stream.Length contract
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.SeekNotSupported))
+                );
             }
         }
 
@@ -348,11 +437,15 @@ namespace System.ServiceModel.Channels
             get
             {
 #pragma warning suppress 56503 // Microsoft, required by the Stream.Position contract
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.SeekNotSupported))
+                );
             }
             set
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.SeekNotSupported))
+                );
             }
         }
 
@@ -377,9 +470,24 @@ namespace System.ServiceModel.Channels
             // NOP
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new WriteAsyncResult(this.connection, buffer, offset, count, this.Immediate, TimeoutHelper.FromMilliseconds(this.WriteTimeout), callback, state);
+            return new WriteAsyncResult(
+                this.connection,
+                buffer,
+                offset,
+                count,
+                this.Immediate,
+                TimeoutHelper.FromMilliseconds(this.WriteTimeout),
+                callback,
+                state
+            );
         }
 
         public override void EndWrite(IAsyncResult asyncResult)
@@ -389,12 +497,32 @@ namespace System.ServiceModel.Channels
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-            connection.Write(buffer, offset, count, this.Immediate, TimeoutHelper.FromMilliseconds(this.WriteTimeout));
+            connection.Write(
+                buffer,
+                offset,
+                count,
+                this.Immediate,
+                TimeoutHelper.FromMilliseconds(this.WriteTimeout)
+            );
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ReadAsyncResult(connection, buffer, offset, count, TimeoutHelper.FromMilliseconds(this.ReadTimeout), callback, state);
+            return new ReadAsyncResult(
+                connection,
+                buffer,
+                offset,
+                count,
+                TimeoutHelper.FromMilliseconds(this.ReadTimeout),
+                callback,
+                state
+            );
         }
 
         public override int EndRead(IAsyncResult asyncResult)
@@ -404,7 +532,12 @@ namespace System.ServiceModel.Channels
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            return this.Read(buffer, offset, count, TimeoutHelper.FromMilliseconds(this.ReadTimeout));
+            return this.Read(
+                buffer,
+                offset,
+                count,
+                TimeoutHelper.FromMilliseconds(this.ReadTimeout)
+            );
         }
 
         protected int Read(byte[] buffer, int offset, int count, TimeSpan timeout)
@@ -414,13 +547,16 @@ namespace System.ServiceModel.Channels
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.SeekNotSupported))
+            );
         }
-
 
         public override void SetLength(long value)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.SeekNotSupported))
+            );
         }
 
         public void Shutdown(TimeSpan timeout)
@@ -490,15 +626,27 @@ namespace System.ServiceModel.Channels
             byte[] buffer;
             int offset;
 
-            public ReadAsyncResult(IConnection connection, byte[] buffer, int offset, int count, TimeSpan timeout,
-                AsyncCallback callback, object state)
+            public ReadAsyncResult(
+                IConnection connection,
+                byte[] buffer,
+                int offset,
+                int count,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(connection, callback, state)
             {
                 this.buffer = buffer;
                 this.offset = offset;
 
-                AsyncCompletionResult readResult = connection.BeginRead(0, Math.Min(count, connection.AsyncReadBufferSize),
-                    timeout, GetWaitCompletion(), this);
+                AsyncCompletionResult readResult = connection.BeginRead(
+                    0,
+                    Math.Min(count, connection.AsyncReadBufferSize),
+                    timeout,
+                    GetWaitCompletion(),
+                    this
+                );
                 if (readResult == AsyncCompletionResult.Completed)
                 {
                     HandleIO(connection);
@@ -521,10 +669,27 @@ namespace System.ServiceModel.Channels
 
         sealed class WriteAsyncResult : IOAsyncResult
         {
-            public WriteAsyncResult(IConnection connection, byte[] buffer, int offset, int count, bool immediate, TimeSpan timeout, AsyncCallback callback, object state)
+            public WriteAsyncResult(
+                IConnection connection,
+                byte[] buffer,
+                int offset,
+                int count,
+                bool immediate,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(connection, callback, state)
             {
-                AsyncCompletionResult writeResult = connection.BeginWrite(buffer, offset, count, immediate, timeout, GetWaitCompletion(), this);
+                AsyncCompletionResult writeResult = connection.BeginWrite(
+                    buffer,
+                    offset,
+                    count,
+                    immediate,
+                    timeout,
+                    GetWaitCompletion(),
+                    this
+                );
                 if (writeResult == AsyncCompletionResult.Completed)
                 {
                     HandleIO(connection);
@@ -579,7 +744,9 @@ namespace System.ServiceModel.Channels
                     {
                         if (this.asyncReadBuffer == null)
                         {
-                            this.asyncReadBuffer = DiagnosticUtility.Utility.AllocateByteArray(innerStream.Connection.AsyncReadBufferSize);
+                            this.asyncReadBuffer = DiagnosticUtility.Utility.AllocateByteArray(
+                                innerStream.Connection.AsyncReadBufferSize
+                            );
                         }
                     }
                 }
@@ -614,7 +781,9 @@ namespace System.ServiceModel.Channels
             get
             {
 #pragma warning suppress 56503 // Not publicly accessible and this should never be called.
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
             }
         }
 
@@ -631,7 +800,10 @@ namespace System.ServiceModel.Channels
             }
             else if (ioException.InnerException is CommunicationObjectAbortedException)
             {
-                return new CommunicationObjectAbortedException(ioException.InnerException.Message, ioException);
+                return new CommunicationObjectAbortedException(
+                    ioException.InnerException.Message,
+                    ioException
+                );
             }
             else if (ioException.InnerException is CommunicationException)
             {
@@ -652,7 +824,9 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(ConvertIOException(ioException));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    ConvertIOException(ioException)
+                );
             }
         }
 
@@ -663,12 +837,16 @@ namespace System.ServiceModel.Channels
 
         public object DuplicateAndClose(int targetProcessId)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public virtual object GetCoreTransport()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public IAsyncResult BeginValidate(Uri uri, AsyncCallback callback, object state)
@@ -681,8 +859,15 @@ namespace System.ServiceModel.Channels
             return this.innerStream.EndValidate(result);
         }
 
-        public AsyncCompletionResult BeginWrite(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout,
-            WaitCallback callback, object state)
+        public AsyncCompletionResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout,
+            WaitCallback callback,
+            object state
+        )
         {
             if (callback == null)
             {
@@ -701,7 +886,13 @@ namespace System.ServiceModel.Channels
             {
                 innerStream.Immediate = immediate;
                 SetWriteTimeout(timeout);
-                IAsyncResult localResult = stream.BeginWrite(buffer, offset, size, this.onWrite, state);
+                IAsyncResult localResult = stream.BeginWrite(
+                    buffer,
+                    offset,
+                    size,
+                    this.onWrite,
+                    state
+                );
 
                 if (!localResult.CompletedSynchronously)
                 {
@@ -714,7 +905,9 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(ConvertIOException(ioException));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    ConvertIOException(ioException)
+                );
             }
             finally
             {
@@ -741,7 +934,9 @@ namespace System.ServiceModel.Channels
                 }
                 catch (IOException ioException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(ConvertIOException(ioException));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        ConvertIOException(ioException)
+                    );
                 }
             }
         }
@@ -772,11 +967,20 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(ConvertIOException(ioException));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    ConvertIOException(ioException)
+                );
             }
         }
 
-        public void Write(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout, BufferManager bufferManager)
+        public void Write(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout,
+            BufferManager bufferManager
+        )
         {
             Write(buffer, offset, size, immediate, timeout);
             bufferManager.ReturnBuffer(buffer);
@@ -811,11 +1015,19 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(ConvertIOException(ioException));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    ConvertIOException(ioException)
+                );
             }
         }
 
-        public AsyncCompletionResult BeginRead(int offset, int size, TimeSpan timeout, WaitCallback callback, object state)
+        public AsyncCompletionResult BeginRead(
+            int offset,
+            int size,
+            TimeSpan timeout,
+            WaitCallback callback,
+            object state
+        )
         {
             ConnectionUtilities.ValidateBufferBounds(AsyncReadBufferSize, offset, size);
             readCallback = callback;
@@ -823,7 +1035,13 @@ namespace System.ServiceModel.Channels
             try
             {
                 SetReadTimeout(timeout);
-                IAsyncResult localResult = stream.BeginRead(AsyncReadBuffer, offset, size, onRead, state);
+                IAsyncResult localResult = stream.BeginRead(
+                    AsyncReadBuffer,
+                    offset,
+                    size,
+                    onRead,
+                    state
+                );
 
                 if (!localResult.CompletedSynchronously)
                 {
@@ -834,7 +1052,9 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(ConvertIOException(ioException));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    ConvertIOException(ioException)
+                );
             }
 
             return AsyncCompletionResult.Completed;
@@ -853,7 +1073,9 @@ namespace System.ServiceModel.Channels
                 }
                 catch (IOException ioException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(ConvertIOException(ioException));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        ConvertIOException(ioException)
+                    );
                 }
             }
 
@@ -875,7 +1097,7 @@ namespace System.ServiceModel.Channels
             this.readResult = result;
             readCallback(result.AsyncState);
         }
-   }
+    }
 
     class ConnectionMessageProperty
     {
@@ -947,27 +1169,47 @@ namespace System.ServiceModel.Channels
         {
             if (offset < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("offset", offset, SR.GetString(
-                    SR.ValueMustBeNonNegative)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "offset",
+                        offset,
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             }
 
             if (offset > bufferSize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("offset", offset, SR.GetString(
-                    SR.OffsetExceedsBufferSize, bufferSize)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "offset",
+                        offset,
+                        SR.GetString(SR.OffsetExceedsBufferSize, bufferSize)
+                    )
+                );
             }
 
             if (size <= 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("size", size, SR.GetString(
-                    SR.ValueMustBePositive)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "size",
+                        size,
+                        SR.GetString(SR.ValueMustBePositive)
+                    )
+                );
             }
 
             int remainingBufferSpace = bufferSize - offset;
             if (size > remainingBufferSpace)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("size", size, SR.GetString(
-                    SR.SizeExceedsRemainingBufferSpace, remainingBufferSpace)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "size",
+                        size,
+                        SR.GetString(SR.SizeExceedsRemainingBufferSpace, remainingBufferSpace)
+                    )
+                );
             }
         }
     }

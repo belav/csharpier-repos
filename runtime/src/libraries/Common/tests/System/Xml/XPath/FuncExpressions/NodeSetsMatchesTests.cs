@@ -26,7 +26,13 @@ namespace XPathTests.FunctionalTests.Expressions.NodeSets
             var testExpression = @"Title | Chap";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -44,7 +50,13 @@ namespace XPathTests.FunctionalTests.Expressions.NodeSets
             var testExpression = @"Title | Chap";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -62,7 +74,13 @@ namespace XPathTests.FunctionalTests.Expressions.NodeSets
             var testExpression = @"Chap//Para";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -80,7 +98,13 @@ namespace XPathTests.FunctionalTests.Expressions.NodeSets
             var testExpression = @"//Chap//Para";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -98,7 +122,13 @@ namespace XPathTests.FunctionalTests.Expressions.NodeSets
             var testExpression = @"Chap/Para";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -116,7 +146,13 @@ namespace XPathTests.FunctionalTests.Expressions.NodeSets
             var testExpression = @"Doc/Para";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -134,7 +170,13 @@ namespace XPathTests.FunctionalTests.Expressions.NodeSets
             var testExpression = @"Chap/Para[Para/Origin]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
     }
 }

@@ -62,7 +62,8 @@ namespace Roslyn.Test.Utilities.Desktop
 
         private RuntimeModuleData(SerializationInfo info, StreamingContext context)
         {
-            var id = (RuntimeModuleDataId)info.GetValue(nameof(ModuleData.Id), typeof(RuntimeModuleDataId));
+            var id = (RuntimeModuleDataId)
+                info.GetValue(nameof(ModuleData.Id), typeof(RuntimeModuleDataId));
             var kind = (OutputKind)info.GetInt32(nameof(ModuleData.Kind));
             var image = info.GetByteArray(nameof(ModuleData.Image));
             var pdb = info.GetByteArray(nameof(ModuleData.Pdb));

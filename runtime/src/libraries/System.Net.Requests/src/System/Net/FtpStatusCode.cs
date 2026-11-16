@@ -66,6 +66,6 @@ namespace System.Net
         ActionNotTakenFileUnavailable = 550,
         ActionAbortedUnknownPageType = 551,
         FileActionAborted = 552,
-        ActionNotTakenFilenameNotAllowed = 553
+        ActionNotTakenFilenameNotAllowed = 553,
     }
 }

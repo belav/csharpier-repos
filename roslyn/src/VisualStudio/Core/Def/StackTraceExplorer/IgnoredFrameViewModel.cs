@@ -15,7 +15,11 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
     {
         private readonly IgnoredFrame _frame;
 
-        public IgnoredFrameViewModel(IgnoredFrame frame, IClassificationFormatMap formatMap, ClassificationTypeMap typeMap)
+        public IgnoredFrameViewModel(
+            IgnoredFrame frame,
+            IClassificationFormatMap formatMap,
+            ClassificationTypeMap typeMap
+        )
             : base(formatMap, typeMap)
         {
             _frame = frame;

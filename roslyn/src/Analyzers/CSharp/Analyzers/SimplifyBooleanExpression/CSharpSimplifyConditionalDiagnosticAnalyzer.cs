@@ -13,16 +13,19 @@ using Microsoft.CodeAnalysis.SimplifyBooleanExpression;
 namespace Microsoft.CodeAnalysis.CSharp.SimplifyBooleanExpression
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpSimplifyConditionalDiagnosticAnalyzer :
-        AbstractSimplifyConditionalDiagnosticAnalyzer<
+    internal class CSharpSimplifyConditionalDiagnosticAnalyzer
+        : AbstractSimplifyConditionalDiagnosticAnalyzer<
             SyntaxKind,
             ExpressionSyntax,
-            ConditionalExpressionSyntax>
+            ConditionalExpressionSyntax
+        >
     {
-        protected override ISyntaxFacts SyntaxFacts
-            => CSharpSyntaxFacts.Instance;
+        protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 
-        protected override CommonConversion GetConversion(SemanticModel semanticModel, ExpressionSyntax node, CancellationToken cancellationToken)
-            => semanticModel.GetConversion(node, cancellationToken).ToCommonConversion();
+        protected override CommonConversion GetConversion(
+            SemanticModel semanticModel,
+            ExpressionSyntax node,
+            CancellationToken cancellationToken
+        ) => semanticModel.GetConversion(node, cancellationToken).ToCommonConversion();
     }
 }

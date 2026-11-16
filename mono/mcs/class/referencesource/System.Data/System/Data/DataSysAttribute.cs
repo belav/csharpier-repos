@@ -8,7 +8,8 @@
 
 /*
  */
-namespace System.Data {
+namespace System.Data
+{
     using System;
     using System.ComponentModel;
 
@@ -20,24 +21,33 @@ namespace System.Data {
     ///    </para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.All)]
-    [Obsolete("DataSysDescriptionAttribute has been deprecated.  https://go.microsoft.com/fwlink/?linkid=14202", false) ]
-    public class DataSysDescriptionAttribute : DescriptionAttribute {
-
+    [Obsolete(
+        "DataSysDescriptionAttribute has been deprecated.  https://go.microsoft.com/fwlink/?linkid=14202",
+        false
+    )]
+    public class DataSysDescriptionAttribute : DescriptionAttribute
+    {
         private bool replaced = false;
 
         /// <devdoc>
         ///     Constructs a new sys description.
         /// </devdoc>
-        [ Obsolete("DataSysDescriptionAttribute has been deprecated.  http://go.microsoft.com/fwlink/?linkid=14202", false) ]
-        public DataSysDescriptionAttribute(string description) : base(description) {
-        }
+        [Obsolete(
+            "DataSysDescriptionAttribute has been deprecated.  http://go.microsoft.com/fwlink/?linkid=14202",
+            false
+        )]
+        public DataSysDescriptionAttribute(string description)
+            : base(description) { }
 
         /// <devdoc>
         ///     Retrieves the description text.
         /// </devdoc>
-        public override string Description {
-            get {
-                if (!replaced) {
+        public override string Description
+        {
+            get
+            {
+                if (!replaced)
+                {
                     replaced = true;
                     DescriptionValue = Res.GetString(base.Description);
                 }

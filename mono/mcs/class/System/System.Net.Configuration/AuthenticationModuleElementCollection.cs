@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,84 +34,87 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
-	[ConfigurationCollection (typeof (AuthenticationModuleElement), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class AuthenticationModuleElementCollection : ConfigurationElementCollection
-	{
-		#region Constructors
+    [ConfigurationCollection(
+        typeof(AuthenticationModuleElement),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
+    public sealed class AuthenticationModuleElementCollection : ConfigurationElementCollection
+    {
+        #region Constructors
 
-		[MonoTODO]
-		public AuthenticationModuleElementCollection ()
-		{
-		}
+        [MonoTODO]
+        public AuthenticationModuleElementCollection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[MonoTODO]
-		public AuthenticationModuleElement this [int index] {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public AuthenticationModuleElement this[int index]
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public new AuthenticationModuleElement this [string name] {
-			get { return (AuthenticationModuleElement) base [name]; }
-			set { base [name] = value; }
-		}
+        [MonoTODO]
+        public new AuthenticationModuleElement this[string name]
+        {
+            get { return (AuthenticationModuleElement)base[name]; }
+            set { base[name] = value; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public void Add (AuthenticationModuleElement element)
-		{
-			BaseAdd (element);
-		}
+        public void Add(AuthenticationModuleElement element)
+        {
+            BaseAdd(element);
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        public void Clear()
+        {
+            BaseClear();
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new AuthenticationModuleElement ();
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new AuthenticationModuleElement();
+        }
 
-		[MonoTODO ("argument exception?")]
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			if (!(element is AuthenticationModuleElement))
-				throw new ArgumentException ("element");
+        [MonoTODO("argument exception?")]
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            if (!(element is AuthenticationModuleElement))
+                throw new ArgumentException("element");
 
-			return ((AuthenticationModuleElement)element).Type;
-		}
+            return ((AuthenticationModuleElement)element).Type;
+        }
 
-		public int IndexOf (AuthenticationModuleElement element)
-		{
-			return BaseIndexOf (element);
-		}
+        public int IndexOf(AuthenticationModuleElement element)
+        {
+            return BaseIndexOf(element);
+        }
 
-		public void Remove (AuthenticationModuleElement element)
-		{
-			BaseRemove (element);
-		}
+        public void Remove(AuthenticationModuleElement element)
+        {
+            BaseRemove(element);
+        }
 
-		public void Remove (string name)
-		{
-			BaseRemove (name);
-		}
+        public void Remove(string name)
+        {
+            BaseRemove(name);
+        }
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-		}
+        public void RemoveAt(int index)
+        {
+            BaseRemoveAt(index);
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }
 
 #endif

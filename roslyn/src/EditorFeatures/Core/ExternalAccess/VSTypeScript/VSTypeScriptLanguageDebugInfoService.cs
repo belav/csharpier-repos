@@ -16,14 +16,33 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
     [ExportLanguageService(typeof(ILanguageDebugInfoService), InternalLanguageNames.TypeScript)]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class VSTypeScriptLanguageDebugInfoService(IVSTypeScriptLanguageDebugInfoServiceImplementation implementation) : ILanguageDebugInfoService
+    internal sealed class VSTypeScriptLanguageDebugInfoService(
+        IVSTypeScriptLanguageDebugInfoServiceImplementation implementation
+    ) : ILanguageDebugInfoService
     {
-        private readonly IVSTypeScriptLanguageDebugInfoServiceImplementation _implementation = implementation;
+        private readonly IVSTypeScriptLanguageDebugInfoServiceImplementation _implementation =
+            implementation;
 
-        public async Task<DebugDataTipInfo> GetDataTipInfoAsync(Document document, int position, CancellationToken cancellationToken)
-            => (await _implementation.GetDataTipInfoAsync(document, position, cancellationToken).ConfigureAwait(false)).UnderlyingObject;
+        public async Task<DebugDataTipInfo> GetDataTipInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            (
+                await _implementation
+                    .GetDataTipInfoAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false)
+            ).UnderlyingObject;
 
-        public async Task<DebugLocationInfo> GetLocationInfoAsync(Document document, int position, CancellationToken cancellationToken)
-            => (await _implementation.GetLocationInfoAsync(document, position, cancellationToken).ConfigureAwait(false)).UnderlyingObject;
+        public async Task<DebugLocationInfo> GetLocationInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            (
+                await _implementation
+                    .GetLocationInfoAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false)
+            ).UnderlyingObject;
     }
 }

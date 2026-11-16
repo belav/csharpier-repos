@@ -20,18 +20,21 @@ namespace System.Text.RegularExpressions.Tests
         where TAnalyzer : DiagnosticAnalyzer, new()
         where TCodeFix : CodeFixProvider, new()
     {
-        public static async Task VerifyAnalyzerAsync(string source, ReferenceAssemblies? references = null)
+        public static async Task VerifyAnalyzerAsync(
+            string source,
+            ReferenceAssemblies? references = null
+        )
         {
             await VerifyCodeFixAsync(source, source, references);
         }
 
-        public static async Task VerifyCodeFixAsync(string source, string fixedSource, ReferenceAssemblies? references = null)
+        public static async Task VerifyCodeFixAsync(
+            string source,
+            string fixedSource,
+            ReferenceAssemblies? references = null
+        )
         {
-            Test test = new Test(references)
-            {
-                TestCode = source,
-                FixedCode = fixedSource,
-            };
+            Test test = new Test(references) { TestCode = source, FixedCode = fixedSource };
 
             await test.RunAsync(CancellationToken.None);
         }
@@ -57,11 +60,18 @@ namespace System.Text.RegularExpressions.Tests
 
             protected override ParseOptions CreateParseOptions()
             {
-                return ((CSharpParseOptions)base.CreateParseOptions()).WithLanguageVersion(LanguageVersion);
+                return ((CSharpParseOptions)base.CreateParseOptions()).WithLanguageVersion(
+                    LanguageVersion
+                );
             }
 
             // CS8795: Partial method '{0}' must have an implementation part because it has accessibility modifiers.
-            protected override bool IsCompilerDiagnosticIncluded(Diagnostic diagnostic, CompilerDiagnostics compilerDiagnostics) => base.IsCompilerDiagnosticIncluded(diagnostic, compilerDiagnostics) && diagnostic.Id != "CS8795";
+            protected override bool IsCompilerDiagnosticIncluded(
+                Diagnostic diagnostic,
+                CompilerDiagnostics compilerDiagnostics
+            ) =>
+                base.IsCompilerDiagnosticIncluded(diagnostic, compilerDiagnostics)
+                && diagnostic.Id != "CS8795";
         }
     }
 }

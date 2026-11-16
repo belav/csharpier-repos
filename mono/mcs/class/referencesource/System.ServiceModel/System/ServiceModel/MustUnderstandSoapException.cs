@@ -4,42 +4,62 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.Xml;
-    using System.Text;
-    using System.Globalization;
     using System.Collections.ObjectModel;
-    using System.ServiceModel.Channels;
+    using System.Globalization;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
+    using System.Text;
+    using System.Xml;
 
     [Serializable]
     internal class MustUnderstandSoapException : CommunicationException
     {
         // for serialization
         public MustUnderstandSoapException() { }
-        protected MustUnderstandSoapException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
+        protected MustUnderstandSoapException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         Collection<MessageHeaderInfo> notUnderstoodHeaders;
         EnvelopeVersion envelopeVersion;
 
-        public MustUnderstandSoapException(Collection<MessageHeaderInfo> notUnderstoodHeaders, EnvelopeVersion envelopeVersion)
+        public MustUnderstandSoapException(
+            Collection<MessageHeaderInfo> notUnderstoodHeaders,
+            EnvelopeVersion envelopeVersion
+        )
         {
             this.notUnderstoodHeaders = notUnderstoodHeaders;
             this.envelopeVersion = envelopeVersion;
         }
 
-        public Collection<MessageHeaderInfo> NotUnderstoodHeaders { get { return this.notUnderstoodHeaders; } }
-        public EnvelopeVersion EnvelopeVersion { get { return this.envelopeVersion; } }
+        public Collection<MessageHeaderInfo> NotUnderstoodHeaders
+        {
+            get { return this.notUnderstoodHeaders; }
+        }
+        public EnvelopeVersion EnvelopeVersion
+        {
+            get { return this.envelopeVersion; }
+        }
 
         internal Message ProvideFault(MessageVersion messageVersion)
         {
             string name = this.notUnderstoodHeaders[0].Name;
             string ns = this.notUnderstoodHeaders[0].Namespace;
-            FaultCode code = new FaultCode(MessageStrings.MustUnderstandFault, this.envelopeVersion.Namespace);
-            FaultReason reason = new FaultReason(SR.GetString(SR.SFxHeaderNotUnderstood, name, ns), CultureInfo.CurrentCulture);
+            FaultCode code = new FaultCode(
+                MessageStrings.MustUnderstandFault,
+                this.envelopeVersion.Namespace
+            );
+            FaultReason reason = new FaultReason(
+                SR.GetString(SR.SFxHeaderNotUnderstood, name, ns),
+                CultureInfo.CurrentCulture
+            );
             MessageFault fault = MessageFault.CreateFault(code, reason);
             string faultAction = messageVersion.Addressing.DefaultFaultAction;
-            Message message = System.ServiceModel.Channels.Message.CreateMessage(messageVersion, fault, faultAction);
+            Message message = System.ServiceModel.Channels.Message.CreateMessage(
+                messageVersion,
+                fault,
+                faultAction
+            );
             if (this.envelopeVersion == EnvelopeVersion.Soap12)
             {
                 this.AddNotUnderstoodHeaders(message.Headers);
@@ -51,7 +71,12 @@ namespace System.ServiceModel
         {
             for (int i = 0; i < notUnderstoodHeaders.Count; ++i)
             {
-                headers.Add(new NotUnderstoodHeader(notUnderstoodHeaders[i].Name, notUnderstoodHeaders[i].Namespace));
+                headers.Add(
+                    new NotUnderstoodHeader(
+                        notUnderstoodHeaders[i].Name,
+                        notUnderstoodHeaders[i].Namespace
+                    )
+                );
             }
         }
 
@@ -76,7 +101,10 @@ namespace System.ServiceModel
                 get { return Message12Strings.Namespace; }
             }
 
-            protected override void OnWriteStartHeader(XmlDictionaryWriter writer, MessageVersion messageVersion)
+            protected override void OnWriteStartHeader(
+                XmlDictionaryWriter writer,
+                MessageVersion messageVersion
+            )
             {
                 writer.WriteStartElement(this.Name, this.Namespace);
                 writer.WriteXmlnsAttribute(null, notUnderstoodNs);
@@ -85,11 +113,13 @@ namespace System.ServiceModel
                 writer.WriteEndAttribute();
             }
 
-            protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+            protected override void OnWriteHeaderContents(
+                XmlDictionaryWriter writer,
+                MessageVersion messageVersion
+            )
             {
                 // empty
             }
         }
     }
 }
-

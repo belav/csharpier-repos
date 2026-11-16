@@ -7,10 +7,9 @@ using SameNamespace = MyAssembly_01;
 
 public class Test
 {
-	public static int Main ()
-	{
-		SameNamespace.GlobalClass.StaticMethod ();
-		return 0;
-	}
+    public static int Main()
+    {
+        SameNamespace.GlobalClass.StaticMethod();
+        return 0;
+    }
 }
-

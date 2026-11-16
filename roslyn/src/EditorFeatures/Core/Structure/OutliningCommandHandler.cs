@@ -17,13 +17,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
     [Name("Outlining Command Handler")]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class OutliningCommandHandler(IOutliningManagerService outliningManagerService) : ICommandHandler<StartAutomaticOutliningCommandArgs>
+    internal sealed class OutliningCommandHandler(IOutliningManagerService outliningManagerService)
+        : ICommandHandler<StartAutomaticOutliningCommandArgs>
     {
-        private readonly IOutliningManagerService _outliningManagerService = outliningManagerService;
+        private readonly IOutliningManagerService _outliningManagerService =
+            outliningManagerService;
 
         public string DisplayName => EditorFeaturesResources.Outlining;
 
-        public bool ExecuteCommand(StartAutomaticOutliningCommandArgs args, CommandExecutionContext context)
+        public bool ExecuteCommand(
+            StartAutomaticOutliningCommandArgs args,
+            CommandExecutionContext context
+        )
         {
             // The editor actually handles this command, we just have to make sure it is enabled.
             return false;

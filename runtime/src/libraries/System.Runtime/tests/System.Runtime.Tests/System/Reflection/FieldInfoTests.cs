@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using Xunit;
 using TestAttributes;
+using Xunit;
 
 namespace System.Reflection.Tests
 {
@@ -15,7 +15,10 @@ namespace System.Reflection.Tests
         [Fact]
         public void ToStringFieldType()
         {
-            Assert.Equal("Int32 int_field", typeof(FieldInfoTests).GetField("int_field").ToString());
+            Assert.Equal(
+                "Int32 int_field",
+                typeof(FieldInfoTests).GetField("int_field").ToString()
+            );
         }
     }
 }

@@ -21,14 +21,19 @@ namespace RecursiveConstraintOnDefaultImplementationOfStaticAbstractMember
         }
     }
 
-    public interface IFactory<TSelf> where TSelf : IFactory<TSelf>
+    public interface IFactory<TSelf>
+        where TSelf : IFactory<TSelf>
     {
         static abstract TSelf Create();
     }
-    public interface IFactoryimpl<TSelf> : IFactory<TSelf> where TSelf : class, IFactory<TSelf>
+
+    public interface IFactoryimpl<TSelf> : IFactory<TSelf>
+        where TSelf : class, IFactory<TSelf>
     {
         static TSelf IFactory<TSelf>.Create() => default;
     }
+
     public abstract class Buggyclass : IFactoryimpl<Buggyclass> { }
+
     class C2 : Buggyclass { }
 }

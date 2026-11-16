@@ -8,7 +8,10 @@ using Microsoft.CodeAnalysis.Syntax.InternalSyntax;
 
 internal static class SyntaxListPoolExtensions
 {
-    public static SyntaxList<SyntaxToken> ToTokenListAndFree(this SyntaxListPool pool, SyntaxListBuilder builder)
+    public static SyntaxList<SyntaxToken> ToTokenListAndFree(
+        this SyntaxListPool pool,
+        SyntaxListBuilder builder
+    )
     {
         var listNode = builder.ToListNode();
         pool.Free(builder);

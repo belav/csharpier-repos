@@ -49,9 +49,8 @@ public class SignalRClientTest
         target.SelectByText("LongPolling");
         Browser.Exists(By.Id("hub-connect")).Click();
 
-        Browser.Equal(
-            "SignalR Client: Echo LongPolling",
-            () => Browser.FindElements(By.CssSelector("li")).FirstOrDefault()?.Text
+        Browser.Equal("SignalR Client: Echo LongPolling", () =>
+            Browser.FindElements(By.CssSelector("li")).FirstOrDefault()?.Text
         );
     }
 
@@ -65,9 +64,8 @@ public class SignalRClientTest
         target.SelectByText("WebSockets");
         Browser.Exists(By.Id("hub-connect")).Click();
 
-        Browser.Equal(
-            "SignalR Client: Echo WebSockets",
-            () => Browser.FindElements(By.CssSelector("li")).FirstOrDefault()?.Text
+        Browser.Equal("SignalR Client: Echo WebSockets", () =>
+            Browser.FindElements(By.CssSelector("li")).FirstOrDefault()?.Text
         );
     }
 
@@ -81,9 +79,8 @@ public class SignalRClientTest
         target.SelectByText("LongPolling");
         Browser.Exists(By.Id("hub-connect")).Click();
 
-        Browser.Equal(
-            "SignalR Client: Echo LongPolling",
-            () => Browser.FindElements(By.CssSelector("li")).FirstOrDefault()?.Text
+        Browser.Equal("SignalR Client: Echo LongPolling", () =>
+            Browser.FindElements(By.CssSelector("li")).FirstOrDefault()?.Text
         );
 
         Browser.Exists(By.Id("hub-useragent")).Click();

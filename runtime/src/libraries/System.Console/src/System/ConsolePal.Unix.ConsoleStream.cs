@@ -21,7 +21,11 @@ namespace System
             /// <param name="handle">The file handle wrapped by this stream.</param>
             /// <param name="access">FileAccess.Read or FileAccess.Write.</param>
             /// <param name="useReadLine">Use ReadLine API for reading.</param>
-            internal UnixConsoleStream(SafeFileHandle handle, FileAccess access, bool useReadLine = false)
+            internal UnixConsoleStream(
+                SafeFileHandle handle,
+                FileAccess access,
+                bool useReadLine = false
+            )
                 : base(access)
             {
                 Debug.Assert(handle != null, "Expected non-null console handle");
@@ -41,8 +45,9 @@ namespace System
 
             public override int Read(Span<byte> buffer) =>
 #if !TARGET_WASI
-                _useReadLine ?
-                    ConsolePal.StdInReader.ReadLine(buffer) :
+                _useReadLine
+                    ? ConsolePal.StdInReader.ReadLine(buffer)
+                    :
 #endif
                     ConsolePal.Read(_handle, buffer);
 

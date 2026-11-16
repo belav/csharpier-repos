@@ -22,28 +22,28 @@ public class Test
     [Fact]
     public static void TestEntryPoint()
     {
-        random = new Random ();
-        VectorSingle_op_Division_VectorSingle_VectorSingle (5);
+        random = new Random();
+        VectorSingle_op_Division_VectorSingle_VectorSingle(5);
     }
 
-    [MethodImpl (MethodImplOptions.NoInlining)]
-    internal static void VectorSingle_op_Division_VectorSingle_VectorSingle (long iterations)
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    internal static void VectorSingle_op_Division_VectorSingle_VectorSingle(long iterations)
     {
-        Vector<float> dividend = CreateRandomVector ();
-        Vector<float> divisor = CreateRandomVector ();
+        Vector<float> dividend = CreateRandomVector();
+        Vector<float> divisor = CreateRandomVector();
 
         Vector<float> result = dividend / divisor;
-        GC.Collect ();
-        for (long iteration = 0L; iteration < iterations; iteration++) {
+        GC.Collect();
+        for (long iteration = 0L; iteration < iterations; iteration++)
+        {
             result = dividend / divisor;
         }
-        GC.KeepAlive (new object [1] { result });
+        GC.KeepAlive(new object[1] { result });
     }
 
-    [MethodImpl (MethodImplOptions.NoInlining)]
-    static Vector<float> CreateRandomVector ()
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static Vector<float> CreateRandomVector()
     {
-        return new Vector<float> ((float)(random.NextDouble () + 1.0));
+        return new Vector<float>((float)(random.NextDouble() + 1.0));
     }
 }
-

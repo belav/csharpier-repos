@@ -11,18 +11,22 @@ namespace System.ServiceModel.MsmqIntegration
     {
         public const string Name = "MsmqIntegrationMessageProperty";
 
-        public static MsmqIntegrationMessageProperty Get(System.ServiceModel.Channels.Message message)
+        public static MsmqIntegrationMessageProperty Get(
+            System.ServiceModel.Channels.Message message
+        )
         {
             if (null == message)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message");
             if (null == message.Properties)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message.Properties");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "message.Properties"
+                );
 
             return message.Properties[Name] as MsmqIntegrationMessageProperty;
         }
 
         object body;
-        public object Body 
+        public object Body
         {
             get { return this.body; }
             set { this.body = value; }
@@ -41,30 +45,30 @@ namespace System.ServiceModel.MsmqIntegration
             get { return this.acknowledgment; }
             internal set { this.acknowledgment = value; }
         }
-            
+
         Uri administrationQueue = null;
         public Uri AdministrationQueue
         {
             get { return this.administrationQueue; }
             set { this.administrationQueue = value; }
         }
-        
+
         int? appSpecific = null;
         public int? AppSpecific
         {
             get { return this.appSpecific; }
             set { this.appSpecific = value; }
         }
-        
+
         DateTime? arrivedTime = null;
-        public DateTime? ArrivedTime 
+        public DateTime? ArrivedTime
         {
             get { return this.arrivedTime; }
             internal set { this.arrivedTime = value; }
         }
 
         bool? authenticated = null;
-        public bool? Authenticated 
+        public bool? Authenticated
         {
             get { return this.authenticated; }
             internal set { this.authenticated = value; }
@@ -83,7 +87,7 @@ namespace System.ServiceModel.MsmqIntegration
             get { return this.correlationId; }
             set { this.correlationId = value; }
         }
-        
+
         Uri destinationQueue = null;
         public Uri DestinationQueue
         {
@@ -123,42 +127,42 @@ namespace System.ServiceModel.MsmqIntegration
         public MessagePriority? Priority
         {
             get { return this.priority; }
-            set 
-            { 
+            set
+            {
                 ValidateMessagePriority(value);
-                this.priority = value; 
+                this.priority = value;
             }
         }
-        
+
         Uri responseQueue = null;
         public Uri ResponseQueue
         {
             get { return this.responseQueue; }
             set { this.responseQueue = value; }
         }
-        
+
         byte[] senderId = null;
-        public byte[] SenderId 
+        public byte[] SenderId
         {
             get { return this.senderId; }
             internal set { this.senderId = value; }
         }
 
         DateTime? sentTime = null;
-        public DateTime? SentTime 
+        public DateTime? SentTime
         {
             get { return this.sentTime; }
             internal set { this.sentTime = value; }
         }
-        
+
         TimeSpan? timeToReachQueue = null;
         public TimeSpan? TimeToReachQueue
         {
             get { return this.timeToReachQueue; }
-            set 
-            { 
+            set
+            {
                 ValidateTimeToReachQueue(value);
-                this.timeToReachQueue = value; 
+                this.timeToReachQueue = value;
             }
         }
 
@@ -169,24 +173,45 @@ namespace System.ServiceModel.MsmqIntegration
 
         static void ValidateMessagePriority(MessagePriority? priority)
         {
-            if (priority.HasValue && (priority.Value < MessagePriority.Lowest || priority.Value > MessagePriority.Highest))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("priority", (int)priority, typeof(MessagePriority)));
+            if (
+                priority.HasValue
+                && (
+                    priority.Value < MessagePriority.Lowest
+                    || priority.Value > MessagePriority.Highest
+                )
+            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "priority",
+                        (int)priority,
+                        typeof(MessagePriority)
+                    )
+                );
         }
 
         static void ValidateTimeToReachQueue(TimeSpan? timeout)
         {
             if (timeout.HasValue && timeout.Value < TimeSpan.Zero)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", timeout,
-                    SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "value",
+                        timeout,
+                        SR.GetString(SR.SFxTimeoutOutOfRange0)
+                    )
+                );
             }
 
             if (timeout.HasValue && TimeoutHelper.IsTooLarge(timeout.Value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", timeout,
-                    SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "value",
+                        timeout,
+                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                    )
+                );
             }
-
         }
     }
 }

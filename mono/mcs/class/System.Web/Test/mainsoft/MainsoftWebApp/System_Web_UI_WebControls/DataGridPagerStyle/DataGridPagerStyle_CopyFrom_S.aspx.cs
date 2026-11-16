@@ -28,112 +28,112 @@
 //
 
 using System;
-using System.Data;
 using System.Collections;
+using System.Data;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class DataGridPagerStyle_CopyFrom_S
-		: GHTBaseWeb 
-	{
-		protected System.Web.UI.WebControls.DataGrid DataGrid1;
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		protected System.Web.UI.WebControls.DataGrid DataGrid2;
-		protected GHTWebControls.GHTSubTest GHTSubTest2;
-		protected System.Web.UI.WebControls.DataGrid DataGrid3;
-		protected GHTWebControls.GHTSubTest GHTSubTest3;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class DataGridPagerStyle_CopyFrom_S : GHTBaseWeb
+    {
+        protected System.Web.UI.WebControls.DataGrid DataGrid1;
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
+        protected System.Web.UI.WebControls.DataGrid DataGrid2;
+        protected GHTWebControls.GHTSubTest GHTSubTest2;
+        protected System.Web.UI.WebControls.DataGrid DataGrid3;
+        protected GHTWebControls.GHTSubTest GHTSubTest3;
 
-		}
-		#endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-			GHTTestBegin(frm);
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
 
-			GHTActiveSubTest = GHTSubTest1;
-			try 
-			{
-				DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
-				DataGrid1.AllowPaging = true;
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+            GHTTestBegin(frm);
 
-				System.Web.UI.WebControls.Style s = new System.Web.UI.WebControls.Style();
-				s.Font.Bold = true;
-				DataGrid1.PagerStyle.CopyFrom(s);
-				DataGrid1.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest1;
+            try
+            {
+                DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
+                DataGrid1.AllowPaging = true;
 
-			GHTActiveSubTest = GHTSubTest2;
-			try 
-			{
-				DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
-				DataGrid2.AllowPaging = true;
+                System.Web.UI.WebControls.Style s = new System.Web.UI.WebControls.Style();
+                s.Font.Bold = true;
+                DataGrid1.PagerStyle.CopyFrom(s);
+                DataGrid1.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-				DataGrid2.PagerStyle.Mode = PagerMode.NumericPages;
+            GHTActiveSubTest = GHTSubTest2;
+            try
+            {
+                DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
+                DataGrid2.AllowPaging = true;
 
-				System.Web.UI.WebControls.Style s = new System.Web.UI.WebControls.Style();
-				s.Font.Bold = true;
-				//s.Height.Pixel(50);
-				//s.Width.Pixel(400);
+                DataGrid2.PagerStyle.Mode = PagerMode.NumericPages;
 
-				DataGrid2.PagerStyle.CopyFrom(s);
-				DataGrid2.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+                System.Web.UI.WebControls.Style s = new System.Web.UI.WebControls.Style();
+                s.Font.Bold = true;
+                //s.Height.Pixel(50);
+                //s.Width.Pixel(400);
 
-			GHTActiveSubTest = GHTSubTest3;
-			try 
-			{
-				DataGrid3.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
-				DataGrid3.AllowPaging = true;
-				DataGrid3.PagerStyle.Mode = PagerMode.NumericPages;
-				DataGrid3.PagerStyle.PageButtonCount = 20;
-				DataGrid3.PageSize = 2;
+                DataGrid2.PagerStyle.CopyFrom(s);
+                DataGrid2.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-				System.Web.UI.WebControls.Style s = new System.Web.UI.WebControls.Style();
-				s.Font.Bold = true;
-				//s.Height.Pixel(50);
-				//s.Width.Pixel(400);
+            GHTActiveSubTest = GHTSubTest3;
+            try
+            {
+                DataGrid3.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
+                DataGrid3.AllowPaging = true;
+                DataGrid3.PagerStyle.Mode = PagerMode.NumericPages;
+                DataGrid3.PagerStyle.PageButtonCount = 20;
+                DataGrid3.PageSize = 2;
 
-				DataGrid3.PagerStyle.CopyFrom(s);
-				DataGrid3.DataBind();;
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+                System.Web.UI.WebControls.Style s = new System.Web.UI.WebControls.Style();
+                s.Font.Bold = true;
+                //s.Height.Pixel(50);
+                //s.Width.Pixel(400);
 
-			GHTTestEnd();
-		}
-	}
+                DataGrid3.PagerStyle.CopyFrom(s);
+                DataGrid3.DataBind();
+                ;
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+
+            GHTTestEnd();
+        }
+    }
 }

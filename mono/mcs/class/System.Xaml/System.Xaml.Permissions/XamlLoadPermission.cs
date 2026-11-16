@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,55 +28,62 @@ using System.Xaml;
 
 namespace System.Xaml.Permissions
 {
-	[Serializable]
-	public sealed class XamlLoadPermission : CodeAccessPermission, IUnrestrictedPermission
-	{
-		public XamlLoadPermission (IEnumerable<XamlAccessLevel> allowedAccess)
-		{
-			AllowedAccess = new List<XamlAccessLevel> (allowedAccess);
-		}
-		public XamlLoadPermission (PermissionState state)
-		{
-			throw new NotImplementedException ();
-		}
-		public XamlLoadPermission (XamlAccessLevel allowedAccess)
-			: this (new XamlAccessLevel [] {allowedAccess})
-		{
-		}
+    [Serializable]
+    public sealed class XamlLoadPermission : CodeAccessPermission, IUnrestrictedPermission
+    {
+        public XamlLoadPermission(IEnumerable<XamlAccessLevel> allowedAccess)
+        {
+            AllowedAccess = new List<XamlAccessLevel>(allowedAccess);
+        }
 
-		public IList<XamlAccessLevel> AllowedAccess { get; private set; }
+        public XamlLoadPermission(PermissionState state)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override IPermission Copy ()
-		{
-			throw new NotImplementedException ();
-		}
-		public override void FromXml (SecurityElement elem)
-		{
-			throw new NotImplementedException ();
-		}
-		public bool Includes (XamlAccessLevel requestedAccess)
-		{
-			throw new NotImplementedException ();
-		}
-		public override IPermission Intersect (IPermission target)
-		{
-			throw new NotImplementedException ();
-		}
-		public override bool IsSubsetOf (IPermission target)
-		{
-			throw new NotImplementedException ();
-		}
-		public bool IsUnrestricted ()
-		{
-			throw new NotImplementedException ();
-		}
-		public override SecurityElement ToXml ()
-		{
-			throw new NotImplementedException ();
-		}
-		public override IPermission Union (IPermission other)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public XamlLoadPermission(XamlAccessLevel allowedAccess)
+            : this(new XamlAccessLevel[] { allowedAccess }) { }
+
+        public IList<XamlAccessLevel> AllowedAccess { get; private set; }
+
+        public override IPermission Copy()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void FromXml(SecurityElement elem)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Includes(XamlAccessLevel requestedAccess)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IPermission Intersect(IPermission target)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool IsSubsetOf(IPermission target)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsUnrestricted()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override SecurityElement ToXml()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IPermission Union(IPermission other)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

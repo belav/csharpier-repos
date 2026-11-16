@@ -7,11 +7,7 @@ public class IdentityDbContext<TUser> : IdentityDbContext<TUser, IdentityRole, s
     where TUser : IdentityUser
 {
     public IdentityDbContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
-    protected IdentityDbContext()
-    {
-    }
+    protected IdentityDbContext() { }
 }

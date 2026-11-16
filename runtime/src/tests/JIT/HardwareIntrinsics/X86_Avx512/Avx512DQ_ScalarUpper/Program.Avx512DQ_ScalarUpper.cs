@@ -8,9 +8,6 @@ namespace JIT.HardwareIntrinsics.X86._Avx512DQ_ScalarUpper
 {
     public static partial class Program
     {
-        static Program()
-        {
-
-        }
+        static Program() { }
     }
 }

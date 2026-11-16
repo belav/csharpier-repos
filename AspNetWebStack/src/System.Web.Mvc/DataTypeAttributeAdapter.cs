@@ -12,7 +12,12 @@ namespace System.Web.Mvc
     /// </summary>
     internal class DataTypeAttributeAdapter : DataAnnotationsModelValidator
     {
-        public DataTypeAttributeAdapter(ModelMetadata metadata, ControllerContext context, DataTypeAttribute attribute, string ruleName)
+        public DataTypeAttributeAdapter(
+            ModelMetadata metadata,
+            ControllerContext context,
+            DataTypeAttribute attribute,
+            string ruleName
+        )
             : base(metadata, context, attribute)
         {
             if (String.IsNullOrEmpty(ruleName))
@@ -29,7 +34,7 @@ namespace System.Web.Mvc
             yield return new ModelClientValidationRule
             {
                 ValidationType = RuleName,
-                ErrorMessage = ErrorMessage
+                ErrorMessage = ErrorMessage,
             };
         }
     }

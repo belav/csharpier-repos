@@ -16,7 +16,11 @@ namespace System.Net
     internal sealed class HttpListenerRequestUriBuilder
     {
         private static readonly UTF8Encoding s_utf8Encoding = new UTF8Encoding(false, true);
-        private static readonly Encoding s_ansiEncoding = Encoding.GetEncoding(0, new EncoderExceptionFallback(), new DecoderExceptionFallback());
+        private static readonly Encoding s_ansiEncoding = Encoding.GetEncoding(
+            0,
+            new EncoderExceptionFallback(),
+            new DecoderExceptionFallback()
+        );
 
         private readonly string _rawUri;
         private readonly string _cookedUriScheme;
@@ -43,8 +47,13 @@ namespace System.Net
         // Holds the final request Uri.
         private Uri? _requestUri;
 
-        private HttpListenerRequestUriBuilder(string rawUri, string cookedUriScheme, string cookedUriHost,
-            string cookedUriPath, string cookedUriQuery)
+        private HttpListenerRequestUriBuilder(
+            string rawUri,
+            string cookedUriScheme,
+            string cookedUriHost,
+            string cookedUriPath,
+            string cookedUriQuery
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(rawUri), "Empty raw URL.");
             Debug.Assert(!string.IsNullOrEmpty(cookedUriScheme), "Empty cooked URL scheme.");
@@ -58,11 +67,21 @@ namespace System.Net
             _cookedUriQuery = cookedUriQuery ?? string.Empty;
         }
 
-        public static Uri GetRequestUri(string rawUri, string cookedUriScheme, string cookedUriHost,
-            string cookedUriPath, string cookedUriQuery)
+        public static Uri GetRequestUri(
+            string rawUri,
+            string cookedUriScheme,
+            string cookedUriHost,
+            string cookedUriPath,
+            string cookedUriQuery
+        )
         {
-            HttpListenerRequestUriBuilder builder = new HttpListenerRequestUriBuilder(rawUri,
-                cookedUriScheme, cookedUriHost, cookedUriPath, cookedUriQuery);
+            HttpListenerRequestUriBuilder builder = new HttpListenerRequestUriBuilder(
+                rawUri,
+                cookedUriScheme,
+                cookedUriHost,
+                cookedUriPath,
+                cookedUriQuery
+            );
 
             return builder.Build();
         }
@@ -81,14 +100,30 @@ namespace System.Net
 
         private void BuildRequestUriUsingCookedPath()
         {
-            bool isValid = Uri.TryCreate(_cookedUriScheme + Uri.SchemeDelimiter + _cookedUriHost + _cookedUriPath +
-                _cookedUriQuery, UriKind.Absolute, out _requestUri);
+            bool isValid = Uri.TryCreate(
+                _cookedUriScheme
+                    + Uri.SchemeDelimiter
+                    + _cookedUriHost
+                    + _cookedUriPath
+                    + _cookedUriQuery,
+                UriKind.Absolute,
+                out _requestUri
+            );
 
             // Creating a Uri from the cooked Uri should really always work: If not, we log at least.
             if (!isValid)
             {
                 if (NetEventSource.Log.IsEnabled())
-                    NetEventSource.Error(this, SR.Format(SR.net_log_listener_cant_create_uri, _cookedUriScheme, _cookedUriHost, _cookedUriPath, _cookedUriQuery));
+                    NetEventSource.Error(
+                        this,
+                        SR.Format(
+                            SR.net_log_listener_cant_create_uri,
+                            _cookedUriScheme,
+                            _cookedUriHost,
+                            _cookedUriPath,
+                            _cookedUriQuery
+                        )
+                    );
             }
         }
 
@@ -113,13 +148,25 @@ namespace System.Net
             if (!isValid)
             {
                 if (NetEventSource.Log.IsEnabled())
-                    NetEventSource.Error(this, SR.Format(SR.net_log_listener_cant_create_uri, _cookedUriScheme, _cookedUriHost, _rawPath, _cookedUriQuery));
+                    NetEventSource.Error(
+                        this,
+                        SR.Format(
+                            SR.net_log_listener_cant_create_uri,
+                            _cookedUriScheme,
+                            _cookedUriHost,
+                            _rawPath,
+                            _cookedUriQuery
+                        )
+                    );
             }
         }
 
         private static Encoding GetEncoding(EncodingType type)
         {
-            Debug.Assert((type == EncodingType.Primary) || (type == EncodingType.Secondary), $"Unknown 'EncodingType' value: {type}");
+            Debug.Assert(
+                (type == EncodingType.Primary) || (type == EncodingType.Secondary),
+                $"Unknown 'EncodingType' value: {type}"
+            );
 
             if (type == EncodingType.Secondary)
             {
@@ -134,7 +181,10 @@ namespace System.Net
         private ParsingResult BuildRequestUriUsingRawPath(Encoding encoding)
         {
             Debug.Assert(encoding != null, "'encoding' must be assigned.");
-            Debug.Assert(!string.IsNullOrEmpty(_rawPath), "'rawPath' must have at least one character.");
+            Debug.Assert(
+                !string.IsNullOrEmpty(_rawPath),
+                "'rawPath' must have at least one character."
+            );
 
             _rawOctets = new List<byte>();
             _requestUriString = new StringBuilder();
@@ -147,8 +197,10 @@ namespace System.Net
             {
                 _requestUriString.Append(_cookedUriQuery);
 
-                Debug.Assert(_rawOctets.Count == 0,
-                    "Still raw octets left. They must be added to the result path.");
+                Debug.Assert(
+                    _rawOctets.Count == 0,
+                    "Still raw octets left. They must be added to the result path."
+                );
 
                 if (!Uri.TryCreate(_requestUriString.ToString(), UriKind.Absolute, out _requestUri))
                 {
@@ -161,7 +213,14 @@ namespace System.Net
             if (result != ParsingResult.Success)
             {
                 if (NetEventSource.Log.IsEnabled())
-                    NetEventSource.Error(this, SR.Format(SR.net_log_listener_cant_convert_raw_path, _rawPath, encoding.EncodingName));
+                    NetEventSource.Error(
+                        this,
+                        SR.Format(
+                            SR.net_log_listener_cant_convert_raw_path,
+                            _rawPath,
+                            encoding.EncodingName
+                        )
+                    );
             }
 
             return result;
@@ -201,7 +260,11 @@ namespace System.Net
                         {
                             return ParsingResult.EncodingError;
                         }
-                        if (!AppendUnicodeCodePointValuePercentEncoded(_rawPath.Substring(index + 1, 4)))
+                        if (
+                            !AppendUnicodeCodePointValuePercentEncoded(
+                                _rawPath.Substring(index + 1, 4)
+                            )
+                        )
                         {
                             return ParsingResult.InvalidString;
                         }
@@ -247,10 +310,20 @@ namespace System.Net
             // http.sys only supports %uXXXX (4 hex-digits), even though unicode code points could have up to
             // 6 hex digits. Therefore we parse always 4 characters after %u and convert them to an int.
             int codePointValue;
-            if (!int.TryParse(codePoint, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out codePointValue))
+            if (
+                !int.TryParse(
+                    codePoint,
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out codePointValue
+                )
+            )
             {
                 if (NetEventSource.Log.IsEnabled())
-                    NetEventSource.Error(this, SR.Format(SR.net_log_listener_cant_convert_percent_value, codePoint));
+                    NetEventSource.Error(
+                        this,
+                        SR.Format(SR.net_log_listener_cant_convert_percent_value, codePoint)
+                    );
                 return false;
             }
 
@@ -258,19 +331,33 @@ namespace System.Net
             try
             {
                 unicodeString = char.ConvertFromUtf32(codePointValue);
-                AppendOctetsPercentEncoded(_requestUriString!, s_utf8Encoding.GetBytes(unicodeString));
+                AppendOctetsPercentEncoded(
+                    _requestUriString!,
+                    s_utf8Encoding.GetBytes(unicodeString)
+                );
 
                 return true;
             }
             catch (ArgumentOutOfRangeException)
             {
                 if (NetEventSource.Log.IsEnabled())
-                    NetEventSource.Error(this, SR.Format(SR.net_log_listener_cant_convert_percent_value, codePoint));
+                    NetEventSource.Error(
+                        this,
+                        SR.Format(SR.net_log_listener_cant_convert_percent_value, codePoint)
+                    );
             }
             catch (EncoderFallbackException e)
             {
                 // If utf8Encoding.GetBytes() fails
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, SR.Format(SR.net_log_listener_cant_convert_to_utf8, unicodeString, e.Message));
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(
+                        this,
+                        SR.Format(
+                            SR.net_log_listener_cant_convert_to_utf8,
+                            unicodeString,
+                            e.Message
+                        )
+                    );
             }
 
             return false;
@@ -279,9 +366,20 @@ namespace System.Net
         private bool AddPercentEncodedOctetToRawOctetsList(string escapedCharacter)
         {
             byte encodedValue;
-            if (!byte.TryParse(escapedCharacter, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out encodedValue))
+            if (
+                !byte.TryParse(
+                    escapedCharacter,
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out encodedValue
+                )
+            )
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, SR.Format(SR.net_log_listener_cant_convert_percent_value, escapedCharacter));
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(
+                        this,
+                        SR.Format(SR.net_log_listener_cant_convert_percent_value, escapedCharacter)
+                    );
                 return false;
             }
 
@@ -311,7 +409,10 @@ namespace System.Net
                 }
                 else
                 {
-                    AppendOctetsPercentEncoded(_requestUriString!, s_utf8Encoding.GetBytes(decodedString));
+                    AppendOctetsPercentEncoded(
+                        _requestUriString!,
+                        s_utf8Encoding.GetBytes(decodedString)
+                    );
                 }
 
                 _rawOctets.Clear();
@@ -320,18 +421,37 @@ namespace System.Net
             }
             catch (DecoderFallbackException e)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, SR.Format(SR.net_log_listener_cant_convert_bytes, GetOctetsAsString(_rawOctets), e.Message));
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(
+                        this,
+                        SR.Format(
+                            SR.net_log_listener_cant_convert_bytes,
+                            GetOctetsAsString(_rawOctets),
+                            e.Message
+                        )
+                    );
             }
             catch (EncoderFallbackException e)
             {
                 // If utf8Encoding.GetBytes() fails
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, SR.Format(SR.net_log_listener_cant_convert_to_utf8, decodedString, e.Message));
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(
+                        this,
+                        SR.Format(
+                            SR.net_log_listener_cant_convert_to_utf8,
+                            decodedString,
+                            e.Message
+                        )
+                    );
             }
 
             return false;
         }
 
-        private static void AppendOctetsPercentEncoded(StringBuilder target, IEnumerable<byte> octets)
+        private static void AppendOctetsPercentEncoded(
+            StringBuilder target,
+            IEnumerable<byte> octets
+        )
         {
             foreach (byte octet in octets)
             {
@@ -405,8 +525,12 @@ namespace System.Net
                     // 'authority' can only be used with CONNECT which is never received by HttpListener.
                     // I.e. if we don't have an absolute path (must start with '/') and we don't have
                     // an absolute Uri (must start with http:// or https://), then 'uriString' must be '*'.
-                    Debug.Assert((uriString.Length == 1) && (uriString[0] == '*'), "Unknown request Uri string format",
-                        "Request Uri string is not an absolute Uri, absolute path, or '*': {0}", uriString);
+                    Debug.Assert(
+                        (uriString.Length == 1) && (uriString[0] == '*'),
+                        "Unknown request Uri string format",
+                        "Request Uri string is not an absolute Uri, absolute path, or '*': {0}",
+                        uriString
+                    );
 
                     // Should we ever get here, be consistent with 2.0/3.5 behavior: just add an initial
                     // slash to the string and treat it as a path:
@@ -426,7 +550,9 @@ namespace System.Net
             }
 
             // will always return a != null string.
-            return AddSlashToAsteriskOnlyPath(uriString.Substring(pathStartIndex, queryIndex - pathStartIndex));
+            return AddSlashToAsteriskOnlyPath(
+                uriString.Substring(pathStartIndex, queryIndex - pathStartIndex)
+            );
         }
 
         private static string AddSlashToAsteriskOnlyPath(string path)
@@ -447,13 +573,13 @@ namespace System.Net
         {
             Success,
             InvalidString,
-            EncodingError
+            EncodingError,
         }
 
         private enum EncodingType
         {
             Primary,
-            Secondary
+            Secondary,
         }
     }
 }

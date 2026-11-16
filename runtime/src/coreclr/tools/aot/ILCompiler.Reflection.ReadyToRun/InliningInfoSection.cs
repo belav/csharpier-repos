@@ -31,7 +31,10 @@ namespace ILCompiler.Reflection.ReadyToRun
                 int inlineeRid = NativeReader.ReadInt32(_r2r.Image, ref iiOffset);
                 int inlinersOffset = NativeReader.ReadInt32(_r2r.Image, ref iiOffset);
                 sb.AppendLine($"Inliners for inlinee {RidToMethodDef(inlineeRid):X8}:");
-                var inlinersReader = new NibbleReader(_r2r.Image, inlineIndexEndOffset + inlinersOffset);
+                var inlinersReader = new NibbleReader(
+                    _r2r.Image,
+                    inlineIndexEndOffset + inlinersOffset
+                );
                 uint sameModuleCount = inlinersReader.ReadUInt();
 
                 int baseRid = 0;
@@ -46,6 +49,7 @@ namespace ILCompiler.Reflection.ReadyToRun
             return sb.ToString();
         }
 
-        static int RidToMethodDef(int rid) => MetadataTokens.GetToken(MetadataTokens.MethodDefinitionHandle(rid));
+        static int RidToMethodDef(int rid) =>
+            MetadataTokens.GetToken(MetadataTokens.MethodDefinitionHandle(rid));
     }
 }

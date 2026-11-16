@@ -109,230 +109,146 @@ namespace System.Xml.CharCheckingReaderTests
     }
 
     [TestCase(Name = "ErrorCondition", Desc = "CharCheckingReader")]
-    public class TCErrorConditionReader : TCErrorCondition
-    {
-    }
+    public class TCErrorConditionReader : TCErrorCondition { }
 
     [TestCase(Name = "Depth", Desc = "CharCheckingReader")]
-    public class TCDepthReader : TCDepth
-    {
-    }
+    public class TCDepthReader : TCDepth { }
 
     [TestCase(Name = "Namespace", Desc = "CharCheckingReader")]
-    public class TCNamespaceReader : TCNamespace
-    {
-    }
+    public class TCNamespaceReader : TCNamespace { }
 
     [TestCase(Name = "LookupNamespace", Desc = "CharCheckingReader")]
-    public class TCLookupNamespaceReader : TCLookupNamespace
-    {
-    }
+    public class TCLookupNamespaceReader : TCLookupNamespace { }
 
     [TestCase(Name = "IsEmptyElement", Desc = "CharCheckingReader")]
-    public class TCIsEmptyElementReader : TCIsEmptyElement
-    {
-    }
+    public class TCIsEmptyElementReader : TCIsEmptyElement { }
 
     [TestCase(Name = "XmlSpace", Desc = "CharCheckingReader")]
-    public class TCXmlSpaceReader : TCXmlSpace
-    {
-    }
+    public class TCXmlSpaceReader : TCXmlSpace { }
 
     [TestCase(Name = "XmlLang", Desc = "CharCheckingReader")]
-    public class TCXmlLangReader : TCXmlLang
-    {
-    }
+    public class TCXmlLangReader : TCXmlLang { }
 
     [TestCase(Name = "Skip", Desc = "CharCheckingReader")]
-    public class TCSkipReader : TCSkip
-    {
-    }
+    public class TCSkipReader : TCSkip { }
 
     [TestCase(Name = "InvalidXML", Desc = "CharCheckingReader")]
-    public class TCInvalidXMLReader : TCInvalidXML
-    {
-    }
+    public class TCInvalidXMLReader : TCInvalidXML { }
 
     [TestCase(Name = "ReadOuterXml", Desc = "CharCheckingReader")]
-    public class TCReadOuterXmlReader : TCReadOuterXml
-    {
-    }
+    public class TCReadOuterXmlReader : TCReadOuterXml { }
 
     [TestCase(Name = "AttributeAccess", Desc = "CharCheckingReader")]
-    public class TCAttributeAccessReader : TCAttributeAccess
-    {
-    }
+    public class TCAttributeAccessReader : TCAttributeAccess { }
 
     [TestCase(Name = "This(Name) and This(Name, Namespace)", Desc = "CharCheckingReader")]
-    public class TCThisNameReader : TCThisName
-    {
-    }
+    public class TCThisNameReader : TCThisName { }
 
-    [TestCase(Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)", Desc = "CharCheckingReader")]
-    public class TCMoveToAttributeReader : TCMoveToAttribute
-    {
-    }
+    [TestCase(
+        Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)",
+        Desc = "CharCheckingReader"
+    )]
+    public class TCMoveToAttributeReader : TCMoveToAttribute { }
 
     [TestCase(Name = "GetAttribute (Ordinal)", Desc = "CharCheckingReader")]
-    public class TCGetAttributeOrdinalReader : TCGetAttributeOrdinal
-    {
-    }
+    public class TCGetAttributeOrdinalReader : TCGetAttributeOrdinal { }
 
-    [TestCase(Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)", Desc = "CharCheckingReader")]
-    public class TCGetAttributeNameReader : TCGetAttributeName
-    {
-    }
+    [TestCase(
+        Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)",
+        Desc = "CharCheckingReader"
+    )]
+    public class TCGetAttributeNameReader : TCGetAttributeName { }
 
     [TestCase(Name = "This [Ordinal]", Desc = "CharCheckingReader")]
-    public class TCThisOrdinalReader : TCThisOrdinal
-    {
-    }
+    public class TCThisOrdinalReader : TCThisOrdinal { }
 
     [TestCase(Name = "MoveToAttribute(Ordinal)", Desc = "CharCheckingReader")]
-    public class TCMoveToAttributeOrdinalReader : TCMoveToAttributeOrdinal
-    {
-    }
+    public class TCMoveToAttributeOrdinalReader : TCMoveToAttributeOrdinal { }
 
     [TestCase(Name = "MoveToFirstAttribute()", Desc = "CharCheckingReader")]
-    public class TCMoveToFirstAttributeReader : TCMoveToFirstAttribute
-    {
-    }
+    public class TCMoveToFirstAttributeReader : TCMoveToFirstAttribute { }
 
     [TestCase(Name = "MoveToNextAttribute()", Desc = "CharCheckingReader")]
-    public class TCMoveToNextAttributeReader : TCMoveToNextAttribute
-    {
-    }
+    public class TCMoveToNextAttributeReader : TCMoveToNextAttribute { }
 
     [TestCase(Name = "Attribute Test when NodeType != Attributes", Desc = "CharCheckingReader")]
-    public class TCAttributeTestReader : TCAttributeTest
-    {
-    }
+    public class TCAttributeTestReader : TCAttributeTest { }
 
     [TestCase(Name = "Attributes test on XmlDeclaration DCR52258", Desc = "CharCheckingReader")]
-    public class TCAttributeXmlDeclarationReader : TCAttributeXmlDeclaration
-    {
-    }
+    public class TCAttributeXmlDeclarationReader : TCAttributeXmlDeclaration { }
 
     [TestCase(Name = "xmlns as local name DCR50345", Desc = "CharCheckingReader")]
-    public class TCXmlnsReader : TCXmlns
-    {
-    }
+    public class TCXmlnsReader : TCXmlns { }
 
     [TestCase(Name = "bounded namespace to xmlns prefix DCR50881", Desc = "CharCheckingReader")]
-    public class TCXmlnsPrefixReader : TCXmlnsPrefix
-    {
-    }
+    public class TCXmlnsPrefixReader : TCXmlnsPrefix { }
 
     [TestCase(Name = "ReadInnerXml", Desc = "CharCheckingReader")]
-    public class TCReadInnerXmlReader : TCReadInnerXml
-    {
-    }
+    public class TCReadInnerXmlReader : TCReadInnerXml { }
 
     [TestCase(Name = "MoveToContent", Desc = "CharCheckingReader")]
-    public class TCMoveToContentReader : TCMoveToContent
-    {
-    }
+    public class TCMoveToContentReader : TCMoveToContent { }
 
     [TestCase(Name = "IsStartElement", Desc = "CharCheckingReader")]
-    public class TCIsStartElementReader : TCIsStartElement
-    {
-    }
+    public class TCIsStartElementReader : TCIsStartElement { }
 
     [TestCase(Name = "ReadStartElement", Desc = "CharCheckingReader")]
-    public class TCReadStartElementReader : TCReadStartElement
-    {
-    }
+    public class TCReadStartElementReader : TCReadStartElement { }
 
     [TestCase(Name = "ReadEndElement", Desc = "CharCheckingReader")]
-    public class TCReadEndElementReader : TCReadEndElement
-    {
-    }
+    public class TCReadEndElementReader : TCReadEndElement { }
 
     [TestCase(Name = "ResolveEntity and ReadAttributeValue", Desc = "CharCheckingReader")]
-    public class TCResolveEntityReader : TCResolveEntity
-    {
-    }
+    public class TCResolveEntityReader : TCResolveEntity { }
 
     [TestCase(Name = "HasValue", Desc = "CharCheckingReader")]
-    public class TCHasValueReader : TCHasValue
-    {
-    }
+    public class TCHasValueReader : TCHasValue { }
 
     [TestCase(Name = "ReadAttributeValue", Desc = "CharCheckingReader")]
-    public class TCReadAttributeValueReader : TCReadAttributeValue
-    {
-    }
+    public class TCReadAttributeValueReader : TCReadAttributeValue { }
 
     [TestCase(Name = "Read", Desc = "CharCheckingReader")]
-    public class TCReadReader : TCRead2
-    {
-    }
+    public class TCReadReader : TCRead2 { }
 
     [TestCase(Name = "MoveToElement", Desc = "CharCheckingReader")]
-    public class TCMoveToElementReader : TCMoveToElement
-    {
-    }
+    public class TCMoveToElementReader : TCMoveToElement { }
 
     [TestCase(Name = "Dispose", Desc = "CharCheckingReader")]
-    public class TCDisposeReader : TCDispose
-    {
-    }
+    public class TCDisposeReader : TCDispose { }
 
     [TestCase(Name = "Buffer Boundaries", Desc = "CharCheckingReader")]
-    public class TCBufferBoundariesReader : TCBufferBoundaries
-    {
-    }
+    public class TCBufferBoundariesReader : TCBufferBoundaries { }
 
     //[TestCase(Name = "BeforeRead", Desc = "BeforeRead")]
     //[TestCase(Name = "AfterReadIsFalse", Desc = "AfterReadIsFalse")]
     //[TestCase(Name = "AfterCloseInTheMiddle", Desc = "AfterCloseInTheMiddle")]
     //[TestCase(Name = "AfterClose", Desc = "AfterClose")]
-    public class TCXmlNodeIntegrityTestFile : TCXMLIntegrityBase
-    {
-    }
+    public class TCXmlNodeIntegrityTestFile : TCXMLIntegrityBase { }
 
     [TestCase(Name = "Read Subtree", Desc = "CharCheckingReader")]
-    public class TCReadSubtreeReader : TCReadSubtree
-    {
-    }
+    public class TCReadSubtreeReader : TCReadSubtree { }
 
     [TestCase(Name = "ReadToDescendant", Desc = "CharCheckingReader")]
-    public class TCReadToDescendantReader : TCReadToDescendant
-    {
-    }
+    public class TCReadToDescendantReader : TCReadToDescendant { }
 
     [TestCase(Name = "ReadToNextSibling", Desc = "CharCheckingReader")]
-    public class TCReadToNextSiblingReader : TCReadToNextSibling
-    {
-    }
+    public class TCReadToNextSiblingReader : TCReadToNextSibling { }
 
     [TestCase(Name = "ReadValue", Desc = "CharCheckingReader")]
-    public class TCReadValueReader : TCReadValue
-    {
-    }
+    public class TCReadValueReader : TCReadValue { }
 
     [TestCase(Name = "ReadContentAsBase64", Desc = "CharCheckingReader")]
-    public class TCReadContentAsBase64Reader : TCReadContentAsBase64
-    {
-    }
+    public class TCReadContentAsBase64Reader : TCReadContentAsBase64 { }
 
     [TestCase(Name = "ReadElementContentAsBase64", Desc = "CharCheckingReader")]
-    public class TCReadElementContentAsBase64Reader : TCReadElementContentAsBase64
-    {
-    }
+    public class TCReadElementContentAsBase64Reader : TCReadElementContentAsBase64 { }
 
     [TestCase(Name = "ReadContentAsBinHex", Desc = "CharCheckingReader")]
-    public class TCReadContentAsBinHexReader : TCReadContentAsBinHex
-    {
-    }
+    public class TCReadContentAsBinHexReader : TCReadContentAsBinHex { }
 
     [TestCase(Name = "ReadElementContentAsBinHex", Desc = "CharCheckingReader")]
-    public class TCReadElementContentAsBinHexReader : TCReadElementContentAsBinHex
-    {
-    }
+    public class TCReadElementContentAsBinHexReader : TCReadElementContentAsBinHex { }
 
     [TestCase(Name = "ReadToFollowing", Desc = "CharCheckingReader")]
-    public class TCReadToFollowingReader : TCReadToFollowing
-    {
-    }
+    public class TCReadToFollowingReader : TCReadToFollowing { }
 }

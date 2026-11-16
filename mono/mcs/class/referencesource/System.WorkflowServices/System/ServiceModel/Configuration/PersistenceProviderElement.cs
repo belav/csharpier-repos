@@ -15,7 +15,9 @@ namespace System.ServiceModel.Configuration
     using System.Workflow.Runtime;
     using System.Xml;
 
-    [Obsolete("The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*")]
+    [Obsolete(
+        "The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*"
+    )]
     public class PersistenceProviderElement : BehaviorExtensionElement
     {
         const string persistenceOperationTimeoutParameter = "persistenceOperationTimeout";
@@ -30,7 +32,7 @@ namespace System.ServiceModel.Configuration
             this.argumentsHash = this.ComputeArgumentsHash();
         }
 
-        // This property is not supposed to be exposed in config. 
+        // This property is not supposed to be exposed in config.
         [SuppressMessage("Configuration", "Configuration102:ConfigurationPropertyAttributeRule")]
         public override Type BehaviorType
         {
@@ -40,12 +42,13 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(
             persistenceOperationTimeoutParameter,
             IsRequired = false,
-            DefaultValue = PersistenceProviderBehavior.DefaultPersistenceOperationTimeoutString)]
+            DefaultValue = PersistenceProviderBehavior.DefaultPersistenceOperationTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [PositiveTimeSpanValidator]
         public TimeSpan PersistenceOperationTimeout
         {
-            get { return (TimeSpan) base[persistenceOperationTimeoutParameter]; }
+            get { return (TimeSpan)base[persistenceOperationTimeoutParameter]; }
             set { base[persistenceOperationTimeoutParameter] = value; }
         }
 
@@ -59,42 +62,55 @@ namespace System.ServiceModel.Configuration
         [StringValidator(MinLength = 0)]
         public string Type
         {
-            get { return (string) base[typeParameter]; }
+            get { return (string)base[typeParameter]; }
             set { base[typeParameter] = value; }
         }
 
         protected internal override object CreateBehavior()
         {
-            Fx.Assert(this.PersistenceOperationTimeout > TimeSpan.Zero,
-                "This should have been guaranteed by the validator on the setter.");
+            Fx.Assert(
+                this.PersistenceOperationTimeout > TimeSpan.Zero,
+                "This should have been guaranteed by the validator on the setter."
+            );
 
             PersistenceProviderFactory providerFactory;
 
-            Type providerType = System.Type.GetType((string) base[typeParameter]);
+            Type providerType = System.Type.GetType((string)base[typeParameter]);
 
             if (providerType == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.PersistenceProviderTypeNotFound)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.PersistenceProviderTypeNotFound)
+                    )
+                );
             }
 
-            ConstructorInfo cInfo = providerType.GetConstructor(new Type[] { typeof(NameValueCollection) });
+            ConstructorInfo cInfo = providerType.GetConstructor(
+                new Type[] { typeof(NameValueCollection) }
+            );
 
             if (cInfo != null)
             {
-                providerFactory = (PersistenceProviderFactory) cInfo.Invoke(new object[] { this.persistenceProviderArguments });
+                providerFactory = (PersistenceProviderFactory)
+                    cInfo.Invoke(new object[] { this.persistenceProviderArguments });
             }
             else
             {
                 cInfo = providerType.GetConstructor(new Type[] { });
 
-                Fx.Assert(cInfo != null,
-                    "The constructor should have been found - this should have been validated elsewhere.");
+                Fx.Assert(
+                    cInfo != null,
+                    "The constructor should have been found - this should have been validated elsewhere."
+                );
 
-                providerFactory = (PersistenceProviderFactory) cInfo.Invoke(null);
+                providerFactory = (PersistenceProviderFactory)cInfo.Invoke(null);
             }
 
-            return new PersistenceProviderBehavior(providerFactory, this.PersistenceOperationTimeout);
+            return new PersistenceProviderBehavior(
+                providerFactory,
+                this.PersistenceOperationTimeout
+            );
         }
 
         protected override bool IsModified()
@@ -138,10 +154,17 @@ namespace System.ServiceModel.Configuration
             return result;
         }
 
-        protected override void Unmerge(ConfigurationElement sourceElement, ConfigurationElement parentElement, ConfigurationSaveMode saveMode)
+        protected override void Unmerge(
+            ConfigurationElement sourceElement,
+            ConfigurationElement parentElement,
+            ConfigurationSaveMode saveMode
+        )
         {
-            PersistenceProviderElement persistenceProviderElement = (PersistenceProviderElement) sourceElement;
-            this.persistenceProviderArguments = new NameValueCollection(persistenceProviderElement.persistenceProviderArguments);
+            PersistenceProviderElement persistenceProviderElement =
+                (PersistenceProviderElement)sourceElement;
+            this.persistenceProviderArguments = new NameValueCollection(
+                persistenceProviderElement.persistenceProviderArguments
+            );
             this.argumentsHash = persistenceProviderElement.argumentsHash;
             base.Unmerge(sourceElement, parentElement, saveMode);
         }

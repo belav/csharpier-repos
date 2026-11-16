@@ -16,9 +16,19 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
         internal const string Style = nameof(Style);
 
         private const string RemoveUnnecessaryImportDiagnosticKey =
-            AnalyzerOptionsExtensions.DotnetDiagnosticPrefix + "." + IDE0005 + "." + AnalyzerOptionsExtensions.SeveritySuffix;
+            AnalyzerOptionsExtensions.DotnetDiagnosticPrefix
+            + "."
+            + IDE0005
+            + "."
+            + AnalyzerOptionsExtensions.SeveritySuffix;
         private const string RemoveUnnecessaryImportCategoryKey =
-            AnalyzerOptionsExtensions.DotnetAnalyzerDiagnosticPrefix + "." + AnalyzerOptionsExtensions.CategoryPrefix + "-" + Style + "." + AnalyzerOptionsExtensions.SeveritySuffix;
+            AnalyzerOptionsExtensions.DotnetAnalyzerDiagnosticPrefix
+            + "."
+            + AnalyzerOptionsExtensions.CategoryPrefix
+            + "-"
+            + Style
+            + "."
+            + AnalyzerOptionsExtensions.SeveritySuffix;
 
         private protected override ICodeFormatter Formatter => AnalyzerFormatter.CodeStyleFormatter;
 
@@ -31,7 +41,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
         public async Task WhenNotFixingCodeSyle_AndHasUnusedImports_NoChange()
         {
             var code =
-@"using System;
+                @"using System;
 
 internal class C
 {
@@ -39,14 +49,19 @@ internal class C
 
             var editorConfig = new Dictionary<string, string>();
 
-            await AssertCodeUnchangedAsync(code, editorConfig, fixCategory: FixCategory.Whitespace, codeStyleSeverity: DiagnosticSeverity.Info);
+            await AssertCodeUnchangedAsync(
+                code,
+                editorConfig,
+                fixCategory: FixCategory.Whitespace,
+                codeStyleSeverity: DiagnosticSeverity.Info
+            );
         }
 
         [Fact]
         public async Task WhenIDE0005NotConfigured_AndHasUnusedImports_NoChange()
         {
             var code =
-@"using System;
+                @"using System;
 
 internal class C
 {
@@ -54,7 +69,12 @@ internal class C
 
             var editorConfig = new Dictionary<string, string>();
 
-            await AssertCodeUnchangedAsync(code, editorConfig, fixCategory: FixCategory.Whitespace | FixCategory.CodeStyle, codeStyleSeverity: DiagnosticSeverity.Info);
+            await AssertCodeUnchangedAsync(
+                code,
+                editorConfig,
+                fixCategory: FixCategory.Whitespace | FixCategory.CodeStyle,
+                codeStyleSeverity: DiagnosticSeverity.Info
+            );
         }
 
         [Theory]
@@ -62,23 +82,31 @@ internal class C
         [InlineData(RemoveUnnecessaryImportDiagnosticKey, Severity.Info)]
         [InlineData(RemoveUnnecessaryImportCategoryKey, Severity.Warning)]
         [InlineData(RemoveUnnecessaryImportCategoryKey, Severity.Info)]
-        [InlineData(AnalyzerOptionsExtensions.DotnetAnalyzerDiagnosticSeverityKey, Severity.Warning)]
+        [InlineData(
+            AnalyzerOptionsExtensions.DotnetAnalyzerDiagnosticSeverityKey,
+            Severity.Warning
+        )]
         [InlineData(AnalyzerOptionsExtensions.DotnetAnalyzerDiagnosticSeverityKey, Severity.Info)]
-        public async Task WhenIDE0005SeverityLowerThanFixSeverity_AndHasUnusedImports_NoChange(string key, string severity)
+        public async Task WhenIDE0005SeverityLowerThanFixSeverity_AndHasUnusedImports_NoChange(
+            string key,
+            string severity
+        )
         {
             var code =
-@"using System;
+                @"using System;
 
 internal class C
 {
 }";
 
-            var editorConfig = new Dictionary<string, string>()
-            {
-                [key] = severity
-            };
+            var editorConfig = new Dictionary<string, string>() { [key] = severity };
 
-            await AssertCodeUnchangedAsync(code, editorConfig, fixCategory: FixCategory.Whitespace | FixCategory.CodeStyle, codeStyleSeverity: DiagnosticSeverity.Error);
+            await AssertCodeUnchangedAsync(
+                code,
+                editorConfig,
+                fixCategory: FixCategory.Whitespace | FixCategory.CodeStyle,
+                codeStyleSeverity: DiagnosticSeverity.Error
+            );
         }
 
         [Theory]
@@ -86,28 +114,37 @@ internal class C
         [InlineData(RemoveUnnecessaryImportDiagnosticKey, Severity.Error)]
         [InlineData(RemoveUnnecessaryImportCategoryKey, Severity.Warning)]
         [InlineData(RemoveUnnecessaryImportCategoryKey, Severity.Error)]
-        [InlineData(AnalyzerOptionsExtensions.DotnetAnalyzerDiagnosticSeverityKey, Severity.Warning)]
+        [InlineData(
+            AnalyzerOptionsExtensions.DotnetAnalyzerDiagnosticSeverityKey,
+            Severity.Warning
+        )]
         [InlineData(AnalyzerOptionsExtensions.DotnetAnalyzerDiagnosticSeverityKey, Severity.Error)]
-        public async Task WhenIDE0005SeverityEqualOrGreaterThanFixSeverity_AndHasUnusedImports_ImportRemoved(string key, string severity)
+        public async Task WhenIDE0005SeverityEqualOrGreaterThanFixSeverity_AndHasUnusedImports_ImportRemoved(
+            string key,
+            string severity
+        )
         {
             var testCode =
-@"using System;
+                @"using System;
 
 internal class C
 {
 }";
 
             var expectedCode =
-@"internal class C
+                @"internal class C
 {
 }";
 
-            var editorConfig = new Dictionary<string, string>()
-            {
-                [key] = severity
-            };
+            var editorConfig = new Dictionary<string, string>() { [key] = severity };
 
-            await AssertCodeChangedAsync(testCode, expectedCode, editorConfig, fixCategory: FixCategory.Whitespace | FixCategory.CodeStyle, codeStyleSeverity: DiagnosticSeverity.Warning);
+            await AssertCodeChangedAsync(
+                testCode,
+                expectedCode,
+                editorConfig,
+                fixCategory: FixCategory.Whitespace | FixCategory.CodeStyle,
+                codeStyleSeverity: DiagnosticSeverity.Warning
+            );
         }
 
         [Theory]
@@ -115,28 +152,38 @@ internal class C
         [InlineData(RemoveUnnecessaryImportDiagnosticKey, Severity.Error)]
         [InlineData(RemoveUnnecessaryImportCategoryKey, Severity.Warning)]
         [InlineData(RemoveUnnecessaryImportCategoryKey, Severity.Error)]
-        [InlineData(AnalyzerOptionsExtensions.DotnetAnalyzerDiagnosticSeverityKey, Severity.Warning)]
+        [InlineData(
+            AnalyzerOptionsExtensions.DotnetAnalyzerDiagnosticSeverityKey,
+            Severity.Warning
+        )]
         [InlineData(AnalyzerOptionsExtensions.DotnetAnalyzerDiagnosticSeverityKey, Severity.Error)]
-        public async Task WhenIDE0005SeverityEqualOrGreaterThanFixSeverity_AndHasUnusedImports_AndIncludedInDiagnosticsList_ImportRemoved(string key, string severity)
+        public async Task WhenIDE0005SeverityEqualOrGreaterThanFixSeverity_AndHasUnusedImports_AndIncludedInDiagnosticsList_ImportRemoved(
+            string key,
+            string severity
+        )
         {
             var testCode =
-@"using System;
+                @"using System;
 
 internal class C
 {
 }";
 
             var expectedCode =
-@"internal class C
+                @"internal class C
 {
 }";
 
-            var editorConfig = new Dictionary<string, string>()
-            {
-                [key] = severity
-            };
+            var editorConfig = new Dictionary<string, string>() { [key] = severity };
 
-            await AssertCodeChangedAsync(testCode, expectedCode, editorConfig, fixCategory: FixCategory.Whitespace | FixCategory.CodeStyle, codeStyleSeverity: DiagnosticSeverity.Warning, diagnostics: new[] { IDE0005 });
+            await AssertCodeChangedAsync(
+                testCode,
+                expectedCode,
+                editorConfig,
+                fixCategory: FixCategory.Whitespace | FixCategory.CodeStyle,
+                codeStyleSeverity: DiagnosticSeverity.Warning,
+                diagnostics: new[] { IDE0005 }
+            );
         }
 
         [Theory]
@@ -144,23 +191,32 @@ internal class C
         [InlineData(RemoveUnnecessaryImportDiagnosticKey, Severity.Error)]
         [InlineData(RemoveUnnecessaryImportCategoryKey, Severity.Warning)]
         [InlineData(RemoveUnnecessaryImportCategoryKey, Severity.Error)]
-        [InlineData(AnalyzerOptionsExtensions.DotnetAnalyzerDiagnosticSeverityKey, Severity.Warning)]
+        [InlineData(
+            AnalyzerOptionsExtensions.DotnetAnalyzerDiagnosticSeverityKey,
+            Severity.Warning
+        )]
         [InlineData(AnalyzerOptionsExtensions.DotnetAnalyzerDiagnosticSeverityKey, Severity.Error)]
-        public async Task WhenIDE0005SeverityEqualOrGreaterThanFixSeverity_AndHasUnusedImports_AndNotIncludedInDiagnosticsList_ImportNotRemoved(string key, string severity)
+        public async Task WhenIDE0005SeverityEqualOrGreaterThanFixSeverity_AndHasUnusedImports_AndNotIncludedInDiagnosticsList_ImportNotRemoved(
+            string key,
+            string severity
+        )
         {
             var testCode =
-@"using System;
+                @"using System;
 
 internal class C
 {
 }";
 
-            var editorConfig = new Dictionary<string, string>()
-            {
-                [key] = severity
-            };
+            var editorConfig = new Dictionary<string, string>() { [key] = severity };
 
-            await AssertCodeUnchangedAsync(testCode, editorConfig, fixCategory: FixCategory.Whitespace | FixCategory.CodeStyle, codeStyleSeverity: DiagnosticSeverity.Warning, diagnostics: new[] { "IDE0073" });
+            await AssertCodeUnchangedAsync(
+                testCode,
+                editorConfig,
+                fixCategory: FixCategory.Whitespace | FixCategory.CodeStyle,
+                codeStyleSeverity: DiagnosticSeverity.Warning,
+                diagnostics: new[] { "IDE0073" }
+            );
         }
     }
 }

@@ -33,10 +33,18 @@ namespace Microsoft.CodeAnalysis
         // top-level signatures today, so we disallow it in source.
         FunctionPointerRefMatchesOutInRefReadonly = 64,
 
-        AllNullableIgnoreOptions = IgnoreNullableModifiersForReferenceTypes | ObliviousNullableModifierMatchesAny,
-        AllIgnoreOptions = IgnoreCustomModifiersAndArraySizesAndLowerBounds | IgnoreDynamic | IgnoreTupleNames | AllNullableIgnoreOptions | IgnoreNativeIntegers,
+        AllNullableIgnoreOptions =
+            IgnoreNullableModifiersForReferenceTypes | ObliviousNullableModifierMatchesAny,
+        AllIgnoreOptions =
+            IgnoreCustomModifiersAndArraySizesAndLowerBounds
+            | IgnoreDynamic
+            | IgnoreTupleNames
+            | AllNullableIgnoreOptions
+            | IgnoreNativeIntegers,
         AllIgnoreOptionsForVB = IgnoreCustomModifiersAndArraySizesAndLowerBounds | IgnoreTupleNames,
 
-        CLRSignatureCompareOptions = TypeCompareKind.AllIgnoreOptions & ~TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds,
+        CLRSignatureCompareOptions =
+            TypeCompareKind.AllIgnoreOptions
+            & ~TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds,
     }
 }

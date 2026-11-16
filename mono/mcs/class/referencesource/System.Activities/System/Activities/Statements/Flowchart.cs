@@ -26,6 +26,7 @@ namespace System.Activities.Statements
         CompletionCallback<bool> onDecisionCompleted;
 
         Variable<int> currentNode;
+
         public Flowchart()
         {
             this.currentNode = new Variable<int>();
@@ -33,11 +34,7 @@ namespace System.Activities.Statements
         }
 
         [DefaultValue(false)]
-        public bool ValidateUnconnectedNodes
-        {
-            get;
-            set;
-        }
+        public bool ValidateUnconnectedNodes { get; set; }
 
         public Collection<Variable> Variables
         {
@@ -54,7 +51,7 @@ namespace System.Activities.Statements
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.variables;
@@ -62,11 +59,7 @@ namespace System.Activities.Statements
         }
 
         [DependsOn("Variables")]
-        public FlowNode StartNode
-        {
-            get;
-            set;
-        }
+        public FlowNode StartNode { get; set; }
 
         [DependsOn("StartNode")]
         public Collection<FlowNode> Nodes
@@ -84,7 +77,7 @@ namespace System.Activities.Statements
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
 
@@ -92,7 +85,10 @@ namespace System.Activities.Statements
             }
         }
 
-        protected override void OnCreateDynamicUpdateMap(NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        protected override void OnCreateDynamicUpdateMap(
+            NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             Flowchart originalFlowchart = (Flowchart)originalActivity;
             Dictionary<Activity, int> originalActivities = new Dictionary<Activity, int>();
@@ -105,14 +101,16 @@ namespace System.Activities.Statements
                 if (metadata.IsReferenceToImportedChild(node.ChildActivity))
                 {
                     // We can't save original values for referenced children. Also, we can't reliably combine
-                    // implementation changes with changes to referenced children. For now, we just disable 
+                    // implementation changes with changes to referenced children. For now, we just disable
                     // this scenario altogether; if we want to support it, we'll need deeper runtime support.
                     metadata.DisallowUpdateInsideThisActivity(SR.FlowchartContainsReferences);
                     return;
                 }
                 if (originalActivities.ContainsKey(node.ChildActivity))
                 {
-                    metadata.DisallowUpdateInsideThisActivity(SR.MultipleFlowNodesSharingSameChildBlockDU);
+                    metadata.DisallowUpdateInsideThisActivity(
+                        SR.MultipleFlowNodesSharingSameChildBlockDU
+                    );
                     return;
                 }
 
@@ -132,7 +130,9 @@ namespace System.Activities.Statements
 
                     if (updatedActivities.Contains(node.ChildActivity))
                     {
-                        metadata.DisallowUpdateInsideThisActivity(SR.MultipleFlowNodesSharingSameChildBlockDU);
+                        metadata.DisallowUpdateInsideThisActivity(
+                            SR.MultipleFlowNodesSharingSameChildBlockDU
+                        );
                         return;
                     }
                     else
@@ -142,11 +142,19 @@ namespace System.Activities.Statements
 
                     Activity originalChild = metadata.GetMatch(node.ChildActivity);
                     int originalIndex;
-                    if (originalChild != null && originalActivities.TryGetValue(originalChild, out originalIndex))
+                    if (
+                        originalChild != null
+                        && originalActivities.TryGetValue(originalChild, out originalIndex)
+                    )
                     {
-                        if (originalFlowchart.reachableNodes[originalIndex].GetType() != node.GetType())
+                        if (
+                            originalFlowchart.reachableNodes[originalIndex].GetType()
+                            != node.GetType()
+                        )
                         {
-                            metadata.DisallowUpdateInsideThisActivity(SR.CannotMoveChildAcrossDifferentFlowNodeTypes);
+                            metadata.DisallowUpdateInsideThisActivity(
+                                SR.CannotMoveChildAcrossDifferentFlowNodeTypes
+                            );
                             return;
                         }
 
@@ -192,7 +200,9 @@ namespace System.Activities.Statements
                 metadata.AddValidationError(SR.FlowchartContainsUnconnectedNodes(this.DisplayName));
             }
             HashSet<Activity> uniqueChildren = new HashSet<Activity>();
-            IEnumerable<FlowNode> childrenNodes = this.ValidateUnconnectedNodes ? this.Nodes.Distinct() : this.reachableNodes;
+            IEnumerable<FlowNode> childrenNodes = this.ValidateUnconnectedNodes
+                ? this.Nodes.Distinct()
+                : this.reachableNodes;
             foreach (FlowNode node in childrenNodes)
             {
                 if (this.ValidateUnconnectedNodes)
@@ -231,7 +241,10 @@ namespace System.Activities.Statements
         {
             if (node.Open(this, metadata))
             {
-                Fx.Assert(node.Index == -1 && !this.reachableNodes.Contains(node), "Corrupt Flowchart.reachableNodes.");
+                Fx.Assert(
+                    node.Index == -1 && !this.reachableNodes.Contains(node),
+                    "Corrupt Flowchart.reachableNodes."
+                );
 
                 node.Index = this.reachableNodes.Count;
                 this.reachableNodes.Add(node);
@@ -244,7 +257,10 @@ namespace System.Activities.Statements
 
         void DepthFirstVisitNodes(Func<FlowNode, bool> visitNodeCallback, FlowNode start)
         {
-            Fx.Assert(visitNodeCallback != null, "This must be supplied since it stops us from infinitely looping.");
+            Fx.Assert(
+                visitNodeCallback != null,
+                "This must be supplied since it stops us from infinitely looping."
+            );
 
             List<FlowNode> connected = new List<FlowNode>();
             Stack<FlowNode> stack = new Stack<FlowNode>();
@@ -275,7 +291,6 @@ namespace System.Activities.Statements
             }
         }
 
-
         protected override void Execute(NativeActivityContext context)
         {
             if (this.StartNode != null)
@@ -295,13 +310,20 @@ namespace System.Activities.Statements
             }
         }
 
-        void ExecuteNodeChain(NativeActivityContext context, FlowNode node, ActivityInstance completedInstance)
+        void ExecuteNodeChain(
+            NativeActivityContext context,
+            FlowNode node,
+            ActivityInstance completedInstance
+        )
         {
             if (node == null)
             {
                 if (context.IsCancellationRequested)
                 {
-                    Fx.Assert(completedInstance != null, "cannot request cancel if we never scheduled any children");
+                    Fx.Assert(
+                        completedInstance != null,
+                        "cannot request cancel if we never scheduled any children"
+                    );
                     // we are done but the last child didn't complete successfully
                     if (completedInstance.State != ActivityInstanceState.Closed)
                     {
@@ -319,7 +341,6 @@ namespace System.Activities.Statements
                 return;
             }
 
-
             Fx.Assert(node != null, "caller should validate");
             FlowNode current = node;
             do
@@ -334,8 +355,7 @@ namespace System.Activities.Statements
                     this.currentNode.Set(context, current.Index);
                     current = null;
                 }
-            }
-            while (current != null);
+            } while (current != null);
         }
 
         bool ExecuteSingleNode(NativeActivityContext context, FlowNode node, out FlowNode nextNode)
@@ -358,7 +378,9 @@ namespace System.Activities.Statements
             {
                 if (this.onDecisionCompleted == null)
                 {
-                    this.onDecisionCompleted = new CompletionCallback<bool>(this.OnDecisionCompleted);
+                    this.onDecisionCompleted = new CompletionCallback<bool>(
+                        this.OnDecisionCompleted
+                    );
                 }
 
                 return decision.Execute(context, this.onDecisionCompleted);
@@ -386,7 +408,11 @@ namespace System.Activities.Statements
             this.ExecuteNodeChain(context, next, completedInstance);
         }
 
-        void OnDecisionCompleted(NativeActivityContext context, ActivityInstance completedInstance, bool result)
+        void OnDecisionCompleted(
+            NativeActivityContext context,
+            ActivityInstance completedInstance,
+            bool result
+        )
         {
             FlowDecision decision = this.GetCurrentNode(context) as FlowDecision;
             Fx.Assert(decision != null, "corrupt internal state");
@@ -394,7 +420,11 @@ namespace System.Activities.Statements
             this.ExecuteNodeChain(context, next, completedInstance);
         }
 
-        internal void OnSwitchCompleted<T>(NativeActivityContext context, ActivityInstance completedInstance, T result)
+        internal void OnSwitchCompleted<T>(
+            NativeActivityContext context,
+            ActivityInstance completedInstance,
+            T result
+        )
         {
             IFlowSwitch switchNode = this.GetCurrentNode(context) as IFlowSwitch;
             Fx.Assert(switchNode != null, "corrupt internal state");

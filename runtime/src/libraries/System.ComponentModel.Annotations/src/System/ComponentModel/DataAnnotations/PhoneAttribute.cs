@@ -3,8 +3,10 @@
 
 namespace System.ComponentModel.DataAnnotations
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public sealed class PhoneAttribute : DataTypeAttribute
     {
         private const string AdditionalPhoneNumberCharacters = "-.()";
@@ -32,7 +34,10 @@ namespace System.ComponentModel.DataAnnotations
                 return false;
             }
 
-            ReadOnlySpan<char> valueSpan = valueAsString.Replace("+", string.Empty).AsSpan().TrimEnd();
+            ReadOnlySpan<char> valueSpan = valueAsString
+                .Replace("+", string.Empty)
+                .AsSpan()
+                .TrimEnd();
             valueSpan = RemoveExtension(valueSpan);
 
             bool digitFound = false;
@@ -52,9 +57,13 @@ namespace System.ComponentModel.DataAnnotations
 
             foreach (char c in valueSpan)
             {
-                if (!(char.IsDigit(c)
-                    || char.IsWhiteSpace(c)
-                    || AdditionalPhoneNumberCharacters.Contains(c)))
+                if (
+                    !(
+                        char.IsDigit(c)
+                        || char.IsWhiteSpace(c)
+                        || AdditionalPhoneNumberCharacters.Contains(c)
+                    )
+                )
                 {
                     return false;
                 }
@@ -65,36 +74,45 @@ namespace System.ComponentModel.DataAnnotations
 
         private static ReadOnlySpan<char> RemoveExtension(ReadOnlySpan<char> potentialPhoneNumber)
         {
-            int lastIndexOfExtension = potentialPhoneNumber
-                .LastIndexOf(ExtensionAbbreviationExtDot, StringComparison.OrdinalIgnoreCase);
+            int lastIndexOfExtension = potentialPhoneNumber.LastIndexOf(
+                ExtensionAbbreviationExtDot,
+                StringComparison.OrdinalIgnoreCase
+            );
             if (lastIndexOfExtension >= 0)
             {
                 ReadOnlySpan<char> extension = potentialPhoneNumber.Slice(
-                    lastIndexOfExtension + ExtensionAbbreviationExtDot.Length);
+                    lastIndexOfExtension + ExtensionAbbreviationExtDot.Length
+                );
                 if (MatchesExtension(extension))
                 {
                     return potentialPhoneNumber.Slice(0, lastIndexOfExtension);
                 }
             }
 
-            lastIndexOfExtension = potentialPhoneNumber
-                .LastIndexOf(ExtensionAbbreviationExt, StringComparison.OrdinalIgnoreCase);
+            lastIndexOfExtension = potentialPhoneNumber.LastIndexOf(
+                ExtensionAbbreviationExt,
+                StringComparison.OrdinalIgnoreCase
+            );
             if (lastIndexOfExtension >= 0)
             {
                 ReadOnlySpan<char> extension = potentialPhoneNumber.Slice(
-                    lastIndexOfExtension + ExtensionAbbreviationExt.Length);
+                    lastIndexOfExtension + ExtensionAbbreviationExt.Length
+                );
                 if (MatchesExtension(extension))
                 {
                     return potentialPhoneNumber.Slice(0, lastIndexOfExtension);
                 }
             }
 
-            lastIndexOfExtension = potentialPhoneNumber
-                .LastIndexOf(ExtensionAbbreviationX, StringComparison.OrdinalIgnoreCase);
+            lastIndexOfExtension = potentialPhoneNumber.LastIndexOf(
+                ExtensionAbbreviationX,
+                StringComparison.OrdinalIgnoreCase
+            );
             if (lastIndexOfExtension >= 0)
             {
                 ReadOnlySpan<char> extension = potentialPhoneNumber.Slice(
-                    lastIndexOfExtension + ExtensionAbbreviationX.Length);
+                    lastIndexOfExtension + ExtensionAbbreviationX.Length
+                );
                 if (MatchesExtension(extension))
                 {
                     return potentialPhoneNumber.Slice(0, lastIndexOfExtension);

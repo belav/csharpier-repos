@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,75 +28,80 @@
 
 using System.IO;
 using System.Runtime.InteropServices;
-namespace System.Web {
-	internal class TempFileStream : FileStream {
-		bool read_mode;
-		bool disposed;
-		long saved_position;
 
-		public TempFileStream (string name)
-			: base (name, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 8192)
-		{
-		}
+namespace System.Web
+{
+    internal class TempFileStream : FileStream
+    {
+        bool read_mode;
+        bool disposed;
+        long saved_position;
 
-		public override bool CanRead {
-			get { return read_mode; }
-		}
+        public TempFileStream(string name)
+            : base(name, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 8192) { }
 
-                public override bool CanWrite {
-                        get { return !read_mode; }
+        public override bool CanRead
+        {
+            get { return read_mode; }
+        }
+
+        public override bool CanWrite
+        {
+            get { return !read_mode; }
+        }
+
+        public void SavePosition()
+        {
+            saved_position = Position;
+            Position = 0;
+        }
+
+        public void RestorePosition()
+        {
+            Position = saved_position;
+            saved_position = -1;
+        }
+
+        public void SetReadOnly()
+        {
+            read_mode = true;
+            Position = 0;
+        }
+
+        public void SetWriteOnly()
+        {
+            read_mode = false;
+            Position = 0;
+        }
+
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+            if (read_mode)
+                throw new InvalidOperationException("mode read");
+
+            base.Write(buffer, offset, count);
+        }
+
+        public override int Read([In, Out] byte[] buffer, int offset, int count)
+        {
+            if (!read_mode)
+                throw new InvalidOperationException("mode write");
+
+            return base.Read(buffer, offset, count);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                disposed = true;
+                base.Dispose(disposing);
+                try
+                {
+                    File.Delete(Name);
                 }
-
-		public void SavePosition ()
-		{
-			saved_position = Position;
-			Position = 0;
-		}
-
-		public void RestorePosition ()
-		{
-			Position = saved_position;
-			saved_position = -1;
-		}
-
-		public void SetReadOnly ()
-		{
-			read_mode = true;
-			Position = 0;
-		}
-
-		public void SetWriteOnly ()
-		{
-			read_mode = false;
-			Position = 0;
-		}
-
-		public override void Write (byte [] buffer, int offset, int count)
-		{
-			if (read_mode)
-				throw new InvalidOperationException ("mode read");
-
-			base.Write (buffer, offset, count);
-		}
-
-		public override int Read ([In,Out] byte [] buffer, int offset, int count)
-		{
-			if (!read_mode)
-				throw new InvalidOperationException ("mode write");
-
-			return base.Read (buffer, offset, count);
-		}
-
-		protected override void Dispose (bool disposing)
-		{
-			if (!disposed) {
-				disposed = true;
-				base.Dispose (disposing);
-				try {
-					File.Delete (Name);
-				} catch {}
-			}
-		}
-	}
+                catch { }
+            }
+        }
+    }
 }
-

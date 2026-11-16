@@ -72,7 +72,8 @@ namespace System.Collections.Generic
         }
 
         // Equals method for the comparer itself.
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is HashSetEqualityComparer<T>;
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is HashSetEqualityComparer<T>;
 
         public override int GetHashCode() => EqualityComparer<T>.Default.GetHashCode();
     }

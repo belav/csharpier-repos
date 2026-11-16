@@ -43,7 +43,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // and returns the result.
         public CType GetNakedType(bool fStripNub)
         {
-            for (CType type = this; ;)
+            for (CType type = this; ; )
             {
                 switch (type.TypeKind)
                 {

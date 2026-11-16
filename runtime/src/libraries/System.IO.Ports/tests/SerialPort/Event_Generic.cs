@@ -24,13 +24,31 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void EventHandlers_CalledSerially()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
-                PinChangedEventHandler pinChangedEventHandler = new PinChangedEventHandler(com1, false, true);
-                ReceivedEventHandler receivedEventHandler = new ReceivedEventHandler(com1, false, true);
+                PinChangedEventHandler pinChangedEventHandler = new PinChangedEventHandler(
+                    com1,
+                    false,
+                    true
+                );
+                ReceivedEventHandler receivedEventHandler = new ReceivedEventHandler(
+                    com1,
+                    false,
+                    true
+                );
                 ErrorEventHandler errorEventHandler = new ErrorEventHandler(com1, false, true);
-                int numPinChangedEvents = 0, numErrorEvents = 0, numReceivedEvents = 0;
+                int numPinChangedEvents = 0,
+                    numErrorEvents = 0,
+                    numReceivedEvents = 0;
                 int iterationWaitTime = 100;
 
                 /***************************************************************
@@ -112,21 +130,35 @@ namespace System.IO.Ports.Tests
 
                     for (int i = 0; i < MAX_TIME_WAIT / iterationWaitTime; ++i)
                     {
-                        Debug.WriteLine("Event counts: PinChange {0}, Rx {1}, error {2}", numPinChangedEvents, numReceivedEvents, numErrorEvents);
+                        Debug.WriteLine(
+                            "Event counts: PinChange {0}, Rx {1}, error {2}",
+                            numPinChangedEvents,
+                            numReceivedEvents,
+                            numErrorEvents
+                        );
 
                         Debug.WriteLine("Waiting for pinchange event {0}ms", iterationWaitTime);
 
-                        if (pinChangedEventHandler.WaitForEvent(iterationWaitTime, numPinChangedEvents + 1))
+                        if (
+                            pinChangedEventHandler.WaitForEvent(
+                                iterationWaitTime,
+                                numPinChangedEvents + 1
+                            )
+                        )
                         {
                             // A thread is in PinChangedEvent: verify that it is not in any other handler at the same time
                             if (receivedEventHandler.NumEventsHandled != numReceivedEvents)
                             {
-                                Fail("Err_191818ahied A thread is in PinChangedEvent and ReceivedEvent");
+                                Fail(
+                                    "Err_191818ahied A thread is in PinChangedEvent and ReceivedEvent"
+                                );
                             }
 
                             if (errorEventHandler.NumEventsHandled != numErrorEvents)
                             {
-                                Fail("Err_198119hjaheid A thread is in PinChangedEvent and ErrorEvent");
+                                Fail(
+                                    "Err_198119hjaheid A thread is in PinChangedEvent and ErrorEvent"
+                                );
                             }
 
                             ++numPinChangedEvents;
@@ -137,12 +169,19 @@ namespace System.IO.Ports.Tests
 
                         Debug.WriteLine("Waiting for rx event {0}ms", iterationWaitTime);
 
-                        if (receivedEventHandler.WaitForEvent(iterationWaitTime, numReceivedEvents + 1))
+                        if (
+                            receivedEventHandler.WaitForEvent(
+                                iterationWaitTime,
+                                numReceivedEvents + 1
+                            )
+                        )
                         {
                             // A thread is in ReceivedEvent: verify that it is not in any other handler at the same time
                             if (pinChangedEventHandler.NumEventsHandled != numPinChangedEvents)
                             {
-                                Fail("Err_2288ajed A thread is in ReceivedEvent and PinChangedEvent");
+                                Fail(
+                                    "Err_2288ajed A thread is in ReceivedEvent and PinChangedEvent"
+                                );
                             }
 
                             if (errorEventHandler.NumEventsHandled != numErrorEvents)
@@ -163,12 +202,16 @@ namespace System.IO.Ports.Tests
                             // A thread is in ErrorEvent: verify that it is not in any other handler at the same time
                             if (pinChangedEventHandler.NumEventsHandled != numPinChangedEvents)
                             {
-                                Fail("Err_01208akiehd A thread is in ErrorEvent and PinChangedEvent");
+                                Fail(
+                                    "Err_01208akiehd A thread is in ErrorEvent and PinChangedEvent"
+                                );
                             }
 
                             if (receivedEventHandler.NumEventsHandled != numReceivedEvents)
                             {
-                                Fail("Err_1254847ajied A thread is in ErrorEvent and ReceivedEvent");
+                                Fail(
+                                    "Err_1254847ajied A thread is in ErrorEvent and ReceivedEvent"
+                                );
                             }
 
                             ++numErrorEvents;
@@ -179,26 +222,41 @@ namespace System.IO.Ports.Tests
                     }
                 }
 
-                Assert.True(pinChangedEventHandler.SuccessfulWait, "pinChangedEventHandler did not receive resume handle event");
-                Assert.True(receivedEventHandler.SuccessfulWait, "receivedEventHandler did not receive resume handle event");
-                Assert.True(errorEventHandler.SuccessfulWait, "errorEventHandler did not receive resume handle event");
+                Assert.True(
+                    pinChangedEventHandler.SuccessfulWait,
+                    "pinChangedEventHandler did not receive resume handle event"
+                );
+                Assert.True(
+                    receivedEventHandler.SuccessfulWait,
+                    "receivedEventHandler did not receive resume handle event"
+                );
+                Assert.True(
+                    errorEventHandler.SuccessfulWait,
+                    "errorEventHandler did not receive resume handle event"
+                );
 
                 if (!pinChangedEventHandler.WaitForEvent(MAX_TIME_WAIT, 3))
                 {
-                    Fail("Err_2288ajied Expected 3 PinChangedEvents to be fired and only {0} occurred",
-                        pinChangedEventHandler.NumEventsHandled);
+                    Fail(
+                        "Err_2288ajied Expected 3 PinChangedEvents to be fired and only {0} occurred",
+                        pinChangedEventHandler.NumEventsHandled
+                    );
                 }
 
                 if (!receivedEventHandler.WaitForEvent(MAX_TIME_WAIT, 2))
                 {
-                    Fail("Err_122808aoeid Expected 2 ReceivedEvents  to be fired and only {0} occurred",
-                        receivedEventHandler.NumEventsHandled);
+                    Fail(
+                        "Err_122808aoeid Expected 2 ReceivedEvents  to be fired and only {0} occurred",
+                        receivedEventHandler.NumEventsHandled
+                    );
                 }
 
                 if (!errorEventHandler.WaitForEvent(MAX_TIME_WAIT, 2))
                 {
-                    Fail("Err_215887ajeid Expected 3 ErrorEvents to be fired and only {0} occurred",
-                        errorEventHandler.NumEventsHandled);
+                    Fail(
+                        "Err_215887ajeid Expected 3 ErrorEvents to be fired and only {0} occurred",
+                        errorEventHandler.NumEventsHandled
+                    );
                 }
 
                 //[] Verify all PinChangedEvents should have occurred
@@ -226,13 +284,26 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void Thread_In_PinChangedEvent()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
-                PinChangedEventHandler pinChangedEventHandler = new PinChangedEventHandler(com1, false, true);
+                PinChangedEventHandler pinChangedEventHandler = new PinChangedEventHandler(
+                    com1,
+                    false,
+                    true
+                );
 
                 Debug.WriteLine(
-                    "Verifying that if a thread is blocked in a PinChangedEvent handler the port can still be closed");
+                    "Verifying that if a thread is blocked in a PinChangedEvent handler the port can still be closed"
+                );
 
                 com1.Open();
                 com2.Open();
@@ -246,8 +317,10 @@ namespace System.IO.Ports.Tests
 
                 if (!pinChangedEventHandler.WaitForEvent(MAX_TIME_WAIT, 1))
                 {
-                    Fail("Err_32688ajoid Expected 1 PinChangedEvents to be fired and only {0} occurred",
-                        pinChangedEventHandler.NumEventsHandled);
+                    Fail(
+                        "Err_32688ajoid Expected 1 PinChangedEvents to be fired and only {0} occurred",
+                        pinChangedEventHandler.NumEventsHandled
+                    );
                 }
 
                 Task task = Task.Run(() => com1.Close());
@@ -255,20 +328,36 @@ namespace System.IO.Ports.Tests
 
                 pinChangedEventHandler.ResumeHandleEvent();
                 TCSupport.WaitForTaskCompletion(task);
-                Assert.True(pinChangedEventHandler.SuccessfulWait, "pinChangedEventHandler did not receive resume handle event");
+                Assert.True(
+                    pinChangedEventHandler.SuccessfulWait,
+                    "pinChangedEventHandler did not receive resume handle event"
+                );
             }
         }
 
         [ConditionalFact(nameof(HasNullModem))]
         public void Thread_In_ReceivedEvent()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
-                ReceivedEventHandler receivedEventHandler = new ReceivedEventHandler(com1, false, true);
+                ReceivedEventHandler receivedEventHandler = new ReceivedEventHandler(
+                    com1,
+                    false,
+                    true
+                );
 
                 Debug.WriteLine(
-                    "Verifying that if a thread is blocked in a RecevedEvent handler the port can still be closed");
+                    "Verifying that if a thread is blocked in a RecevedEvent handler the port can still be closed"
+                );
 
                 com1.Open();
                 com2.Open();
@@ -285,8 +374,10 @@ namespace System.IO.Ports.Tests
 
                 if (!receivedEventHandler.WaitForEvent(MAX_TIME_WAIT, 1))
                 {
-                    Fail("Err_122808aoeid Expected 1 ReceivedEvents  to be fired and only {0} occurred",
-                        receivedEventHandler.NumEventsHandled);
+                    Fail(
+                        "Err_122808aoeid Expected 1 ReceivedEvents  to be fired and only {0} occurred",
+                        receivedEventHandler.NumEventsHandled
+                    );
                 }
 
                 Task task = Task.Run(() => com1.Close());
@@ -294,7 +385,10 @@ namespace System.IO.Ports.Tests
 
                 receivedEventHandler.ResumeHandleEvent();
                 TCSupport.WaitForTaskCompletion(task);
-                Assert.True(receivedEventHandler.SuccessfulWait, "receivedEventHandler did not receive resume handle event");
+                Assert.True(
+                    receivedEventHandler.SuccessfulWait,
+                    "receivedEventHandler did not receive resume handle event"
+                );
             }
         }
 
@@ -302,12 +396,22 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void Thread_In_ErrorEvent()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 ErrorEventHandler errorEventHandler = new ErrorEventHandler(com1, false, true);
 
-                Debug.WriteLine("Verifying that if a thread is blocked in a ErrorEvent handler the port can still be closed");
+                Debug.WriteLine(
+                    "Verifying that if a thread is blocked in a ErrorEvent handler the port can still be closed"
+                );
 
                 com1.Open();
                 com2.Open();
@@ -325,7 +429,10 @@ namespace System.IO.Ports.Tests
 
                 if (!errorEventHandler.WaitForEvent(MAX_TIME_WAIT, 1))
                 {
-                    Fail("Err_215887ajeid Expected 1 ErrorEvents to be fired and only {0} occurred", errorEventHandler.NumEventsHandled);
+                    Fail(
+                        "Err_215887ajeid Expected 1 ErrorEvents to be fired and only {0} occurred",
+                        errorEventHandler.NumEventsHandled
+                    );
                 }
 
                 Task task = Task.Run(() => com1.Close());
@@ -333,7 +440,10 @@ namespace System.IO.Ports.Tests
 
                 errorEventHandler.ResumeHandleEvent();
                 TCSupport.WaitForTaskCompletion(task);
-                Assert.True(errorEventHandler.SuccessfulWait, "errorEventHandler did not receive resume handle event");
+                Assert.True(
+                    errorEventHandler.SuccessfulWait,
+                    "errorEventHandler did not receive resume handle event"
+                );
             }
         }
         #endregion
@@ -342,9 +452,8 @@ namespace System.IO.Ports.Tests
 
         private class PinChangedEventHandler : TestEventHandler<SerialPinChange>
         {
-            public PinChangedEventHandler(SerialPort com, bool shouldThrow, bool shouldWait) : base(com, shouldThrow, shouldWait)
-            {
-            }
+            public PinChangedEventHandler(SerialPort com, bool shouldThrow, bool shouldWait)
+                : base(com, shouldThrow, shouldWait) { }
 
             public void HandleEvent(object source, SerialPinChangedEventArgs e)
             {
@@ -354,9 +463,8 @@ namespace System.IO.Ports.Tests
 
         private class ErrorEventHandler : TestEventHandler<SerialError>
         {
-            public ErrorEventHandler(SerialPort com, bool shouldThrow, bool shouldWait) : base(com, shouldThrow, shouldWait)
-            {
-            }
+            public ErrorEventHandler(SerialPort com, bool shouldThrow, bool shouldWait)
+                : base(com, shouldThrow, shouldWait) { }
 
             public void HandleEvent(object source, SerialErrorReceivedEventArgs e)
             {
@@ -366,9 +474,8 @@ namespace System.IO.Ports.Tests
 
         private class ReceivedEventHandler : TestEventHandler<SerialData>
         {
-            public ReceivedEventHandler(SerialPort com, bool shouldThrow, bool shouldWait) : base(com, shouldThrow, shouldWait)
-            {
-            }
+            public ReceivedEventHandler(SerialPort com, bool shouldThrow, bool shouldWait)
+                : base(com, shouldThrow, shouldWait) { }
 
             public void HandleEvent(object source, SerialDataReceivedEventArgs e)
             {

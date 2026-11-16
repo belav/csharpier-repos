@@ -24,7 +24,10 @@ namespace OLEDB.Test.ModuleCore
 
         public static void Assert(bool condition, string strCondition, string message)
         {
-            Debug.Assert(condition, strCondition + message /*+ new StackTrace()*/);
+            Debug.Assert(
+                condition,
+                strCondition + message /*+ new StackTrace()*/
+            );
         }
 
         public static void Trace(string message)

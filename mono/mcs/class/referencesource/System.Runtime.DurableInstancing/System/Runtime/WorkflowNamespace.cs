@@ -11,7 +11,9 @@ namespace System.Runtime
     {
         const string baseNamespace = "urn:schemas-microsoft-com:System.Activities/4.0/properties";
         static readonly XNamespace workflowNamespace = XNamespace.Get(baseNamespace);
-        static readonly XNamespace variablesNamespace = XNamespace.Get(baseNamespace + "/variables");
+        static readonly XNamespace variablesNamespace = XNamespace.Get(
+            baseNamespace + "/variables"
+        );
         static readonly XNamespace outputNamespace = XNamespace.Get(baseNamespace + "/output");
 
         static XName workflowHostType;
@@ -24,18 +26,12 @@ namespace System.Runtime
 
         public static XNamespace VariablesPath
         {
-            get
-            {
-                return variablesNamespace;
-            }
+            get { return variablesNamespace; }
         }
 
         public static XNamespace OutputPath
         {
-            get
-            {
-                return outputNamespace;
-            }
+            get { return outputNamespace; }
         }
 
         public static XName WorkflowHostType

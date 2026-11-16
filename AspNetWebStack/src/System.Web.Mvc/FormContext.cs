@@ -9,7 +9,8 @@ namespace System.Web.Mvc
 {
     public class FormContext
     {
-        private readonly Dictionary<string, FieldValidationMetadata> _fieldValidators = new Dictionary<string, FieldValidationMetadata>();
+        private readonly Dictionary<string, FieldValidationMetadata> _fieldValidators =
+            new Dictionary<string, FieldValidationMetadata>();
         private readonly Dictionary<string, bool> _renderedFields = new Dictionary<string, bool>();
 
         public IDictionary<string, FieldValidationMetadata> FieldValidators
@@ -23,7 +24,11 @@ namespace System.Web.Mvc
 
         public string ValidationSummaryId { get; set; }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Performs a potentially time-consuming conversion.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "Performs a potentially time-consuming conversion."
+        )]
         public string GetJsonValidationMetadata()
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
@@ -31,7 +36,7 @@ namespace System.Web.Mvc
             SortedDictionary<string, object> dict = new SortedDictionary<string, object>()
             {
                 { "Fields", FieldValidators.Values },
-                { "FormId", FormId }
+                { "FormId", FormId },
             };
             if (!String.IsNullOrEmpty(ValidationSummaryId))
             {
@@ -44,10 +49,16 @@ namespace System.Web.Mvc
 
         public FieldValidationMetadata GetValidationMetadataForField(string fieldName)
         {
-            return GetValidationMetadataForField(fieldName, false /* createIfNotFound */);
+            return GetValidationMetadataForField(
+                fieldName,
+                false /* createIfNotFound */
+            );
         }
 
-        public FieldValidationMetadata GetValidationMetadataForField(string fieldName, bool createIfNotFound)
+        public FieldValidationMetadata GetValidationMetadataForField(
+            string fieldName,
+            bool createIfNotFound
+        )
         {
             if (String.IsNullOrEmpty(fieldName))
             {
@@ -59,10 +70,7 @@ namespace System.Web.Mvc
             {
                 if (createIfNotFound)
                 {
-                    metadata = new FieldValidationMetadata()
-                    {
-                        FieldName = fieldName
-                    };
+                    metadata = new FieldValidationMetadata() { FieldName = fieldName };
                     FieldValidators[fieldName] = metadata;
                 }
             }

@@ -36,7 +36,8 @@ namespace System.Net.Http.HPack
 
         public int Length => GetLength(Name.Length, Value.Length);
 
-        public static int GetLength(int nameLength, int valueLength) => nameLength + valueLength + RfcOverhead;
+        public static int GetLength(int nameLength, int valueLength) =>
+            nameLength + valueLength + RfcOverhead;
 
         public override string ToString()
         {

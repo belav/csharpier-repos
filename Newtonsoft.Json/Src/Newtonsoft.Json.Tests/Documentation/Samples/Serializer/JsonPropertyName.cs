@@ -58,7 +58,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             Videogame starcraft = new Videogame
             {
                 Name = "Starcraft",
-                ReleaseDate = new DateTime(1998, 1, 1)
+                ReleaseDate = new DateTime(1998, 1, 1),
             };
 
             string json = JsonConvert.SerializeObject(starcraft, Formatting.Indented);
@@ -70,10 +70,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""name"": ""Starcraft"",
   ""release_date"": ""1998-01-01T00:00:00""
-}", json);
+}",
+                json
+            );
         }
     }
 }

@@ -10,17 +10,23 @@ namespace System.Runtime.InteropServices
     {
         int GetTypeInfoCount();
 
-        ComTypes.ITypeInfo GetTypeInfo(
-            int iTInfo,
-            int lcid);
+        ComTypes.ITypeInfo GetTypeInfo(int iTInfo, int lcid);
 
         void GetIDsOfNames(
             ref Guid riid,
-            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 2), In]
-            string[] rgszNames,
+            [
+                MarshalAs(
+                    UnmanagedType.LPArray,
+                    ArraySubType = UnmanagedType.LPWStr,
+                    SizeParamIndex = 2
+                ),
+                In
+            ]
+                string[] rgszNames,
             int cNames,
             int lcid,
-            [Out] int[] rgDispId);
+            [Out] int[] rgDispId
+        );
 
         // The last 3 parameters of Invoke() are optional and must be defined
         // as IntPtr in C#, since there is no language feature for optional ref/out.
@@ -30,9 +36,10 @@ namespace System.Runtime.InteropServices
             int lcid,
             InvokeFlags wFlags,
             ref ComTypes.DISPPARAMS pDispParams,
-            /* out/optional */ IntPtr pVarResult,
-            /* out/optional */ IntPtr pExcepInfo,
-            /* out/optional */ IntPtr puArgErr);
+            /* out/optional */IntPtr pVarResult,
+            /* out/optional */IntPtr pExcepInfo,
+            /* out/optional */IntPtr puArgErr
+        );
     }
 
     [Flags]
@@ -41,6 +48,6 @@ namespace System.Runtime.InteropServices
         DISPATCH_METHOD = 1,
         DISPATCH_PROPERTYGET = 2,
         DISPATCH_PROPERTYPUT = 4,
-        DISPATCH_PROPERTYPUTREF = 8
+        DISPATCH_PROPERTYPUTREF = 8,
     }
 }

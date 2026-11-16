@@ -29,14 +29,7 @@ namespace System.Web.Http
         {
             get
             {
-                return new TheoryDataSet<string>
-                {
-                    "Debug",
-                    "Patch",
-                    "Connect",
-                    "Random",
-                    "M-Get",
-                };
+                return new TheoryDataSet<string> { "Debug", "Patch", "Connect", "Random", "M-Get" };
             }
         }
 

@@ -8,7 +8,10 @@ namespace System.Web.Http.Validation
 {
     public sealed class ModelValidatingEventArgs : CancelEventArgs
     {
-        public ModelValidatingEventArgs(HttpActionContext actionContext, ModelValidationNode parentNode)
+        public ModelValidatingEventArgs(
+            HttpActionContext actionContext,
+            ModelValidationNode parentNode
+        )
         {
             if (actionContext == null)
             {

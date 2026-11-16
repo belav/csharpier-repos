@@ -12,9 +12,7 @@ namespace System.ServiceModel.Syndication
     {
         private ServiceDocument _document;
 
-        protected ServiceDocumentFormatter()
-        {
-        }
+        protected ServiceDocumentFormatter() { }
 
         protected ServiceDocumentFormatter(ServiceDocument documentToWrite)
         {
@@ -34,7 +32,11 @@ namespace System.ServiceModel.Syndication
         public abstract void ReadFrom(XmlReader reader);
         public abstract void WriteTo(XmlWriter writer);
 
-        internal static void LoadElementExtensions(XmlBuffer buffer, XmlDictionaryWriter writer, CategoriesDocument categories)
+        internal static void LoadElementExtensions(
+            XmlBuffer buffer,
+            XmlDictionaryWriter writer,
+            CategoriesDocument categories
+        )
         {
             Debug.Assert(categories != null);
 
@@ -42,7 +44,11 @@ namespace System.ServiceModel.Syndication
             categories.LoadElementExtensions(buffer);
         }
 
-        internal static void LoadElementExtensions(XmlBuffer buffer, XmlDictionaryWriter writer, ResourceCollectionInfo collection)
+        internal static void LoadElementExtensions(
+            XmlBuffer buffer,
+            XmlDictionaryWriter writer,
+            ResourceCollectionInfo collection
+        )
         {
             Debug.Assert(collection != null);
 
@@ -50,7 +56,11 @@ namespace System.ServiceModel.Syndication
             collection.LoadElementExtensions(buffer);
         }
 
-        internal static void LoadElementExtensions(XmlBuffer buffer, XmlDictionaryWriter writer, Workspace workspace)
+        internal static void LoadElementExtensions(
+            XmlBuffer buffer,
+            XmlDictionaryWriter writer,
+            Workspace workspace
+        )
         {
             Debug.Assert(workspace != null);
 
@@ -58,7 +68,11 @@ namespace System.ServiceModel.Syndication
             workspace.LoadElementExtensions(buffer);
         }
 
-        internal static void LoadElementExtensions(XmlBuffer buffer, XmlDictionaryWriter writer, ServiceDocument document)
+        internal static void LoadElementExtensions(
+            XmlBuffer buffer,
+            XmlDictionaryWriter writer,
+            ServiceDocument document
+        )
         {
             if (document is null)
             {
@@ -69,7 +83,9 @@ namespace System.ServiceModel.Syndication
             document.LoadElementExtensions(buffer);
         }
 
-        protected static SyndicationCategory CreateCategory(InlineCategoriesDocument inlineCategories)
+        protected static SyndicationCategory CreateCategory(
+            InlineCategoriesDocument inlineCategories
+        )
         {
             if (inlineCategories is null)
             {
@@ -89,12 +105,16 @@ namespace System.ServiceModel.Syndication
             return workspace.CreateResourceCollection();
         }
 
-        protected static InlineCategoriesDocument CreateInlineCategories(ResourceCollectionInfo collection)
+        protected static InlineCategoriesDocument CreateInlineCategories(
+            ResourceCollectionInfo collection
+        )
         {
             return collection.CreateInlineCategoriesDocument();
         }
 
-        protected static ReferencedCategoriesDocument CreateReferencedCategories(ResourceCollectionInfo collection)
+        protected static ReferencedCategoriesDocument CreateReferencedCategories(
+            ResourceCollectionInfo collection
+        )
         {
             return collection.CreateReferencedCategoriesDocument();
         }
@@ -109,7 +129,11 @@ namespace System.ServiceModel.Syndication
             return document.CreateWorkspace();
         }
 
-        protected static void LoadElementExtensions(XmlReader reader, CategoriesDocument categories, int maxExtensionSize)
+        protected static void LoadElementExtensions(
+            XmlReader reader,
+            CategoriesDocument categories,
+            int maxExtensionSize
+        )
         {
             if (categories is null)
             {
@@ -119,7 +143,11 @@ namespace System.ServiceModel.Syndication
             categories.LoadElementExtensions(reader, maxExtensionSize);
         }
 
-        protected static void LoadElementExtensions(XmlReader reader, ResourceCollectionInfo collection, int maxExtensionSize)
+        protected static void LoadElementExtensions(
+            XmlReader reader,
+            ResourceCollectionInfo collection,
+            int maxExtensionSize
+        )
         {
             if (collection is null)
             {
@@ -129,7 +157,11 @@ namespace System.ServiceModel.Syndication
             collection.LoadElementExtensions(reader, maxExtensionSize);
         }
 
-        protected static void LoadElementExtensions(XmlReader reader, Workspace workspace, int maxExtensionSize)
+        protected static void LoadElementExtensions(
+            XmlReader reader,
+            Workspace workspace,
+            int maxExtensionSize
+        )
         {
             if (workspace is null)
             {
@@ -139,7 +171,11 @@ namespace System.ServiceModel.Syndication
             workspace.LoadElementExtensions(reader, maxExtensionSize);
         }
 
-        protected static void LoadElementExtensions(XmlReader reader, ServiceDocument document, int maxExtensionSize)
+        protected static void LoadElementExtensions(
+            XmlReader reader,
+            ServiceDocument document,
+            int maxExtensionSize
+        )
         {
             if (document is null)
             {
@@ -149,7 +185,13 @@ namespace System.ServiceModel.Syndication
             document.LoadElementExtensions(reader, maxExtensionSize);
         }
 
-        protected static bool TryParseAttribute(string name, string ns, string value, ServiceDocument document, string version)
+        protected static bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            ServiceDocument document,
+            string version
+        )
         {
             if (document is null)
             {
@@ -159,7 +201,13 @@ namespace System.ServiceModel.Syndication
             return document.TryParseAttribute(name, ns, value, version);
         }
 
-        protected static bool TryParseAttribute(string name, string ns, string value, ResourceCollectionInfo collection, string version)
+        protected static bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            ResourceCollectionInfo collection,
+            string version
+        )
         {
             if (collection is null)
             {
@@ -169,7 +217,13 @@ namespace System.ServiceModel.Syndication
             return collection.TryParseAttribute(name, ns, value, version);
         }
 
-        protected static bool TryParseAttribute(string name, string ns, string value, CategoriesDocument categories, string version)
+        protected static bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            CategoriesDocument categories,
+            string version
+        )
         {
             if (categories is null)
             {
@@ -179,7 +233,13 @@ namespace System.ServiceModel.Syndication
             return categories.TryParseAttribute(name, ns, value, version);
         }
 
-        protected static bool TryParseAttribute(string name, string ns, string value, Workspace workspace, string version)
+        protected static bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            Workspace workspace,
+            string version
+        )
         {
             if (workspace is null)
             {
@@ -189,7 +249,11 @@ namespace System.ServiceModel.Syndication
             return workspace.TryParseAttribute(name, ns, value, version);
         }
 
-        protected static bool TryParseElement(XmlReader reader, ResourceCollectionInfo collection, string version)
+        protected static bool TryParseElement(
+            XmlReader reader,
+            ResourceCollectionInfo collection,
+            string version
+        )
         {
             if (collection is null)
             {
@@ -199,7 +263,11 @@ namespace System.ServiceModel.Syndication
             return collection.TryParseElement(reader, version);
         }
 
-        protected static bool TryParseElement(XmlReader reader, ServiceDocument document, string version)
+        protected static bool TryParseElement(
+            XmlReader reader,
+            ServiceDocument document,
+            string version
+        )
         {
             if (document is null)
             {
@@ -219,7 +287,11 @@ namespace System.ServiceModel.Syndication
             return workspace.TryParseElement(reader, version);
         }
 
-        protected static bool TryParseElement(XmlReader reader, CategoriesDocument categories, string version)
+        protected static bool TryParseElement(
+            XmlReader reader,
+            CategoriesDocument categories,
+            string version
+        )
         {
             if (categories is null)
             {
@@ -229,7 +301,11 @@ namespace System.ServiceModel.Syndication
             return categories.TryParseElement(reader, version);
         }
 
-        protected static void WriteAttributeExtensions(XmlWriter writer, ServiceDocument document, string version)
+        protected static void WriteAttributeExtensions(
+            XmlWriter writer,
+            ServiceDocument document,
+            string version
+        )
         {
             if (document is null)
             {
@@ -239,7 +315,11 @@ namespace System.ServiceModel.Syndication
             document.WriteAttributeExtensions(writer, version);
         }
 
-        protected static void WriteAttributeExtensions(XmlWriter writer, Workspace workspace, string version)
+        protected static void WriteAttributeExtensions(
+            XmlWriter writer,
+            Workspace workspace,
+            string version
+        )
         {
             if (workspace is null)
             {
@@ -249,7 +329,11 @@ namespace System.ServiceModel.Syndication
             workspace.WriteAttributeExtensions(writer, version);
         }
 
-        protected static void WriteAttributeExtensions(XmlWriter writer, ResourceCollectionInfo collection, string version)
+        protected static void WriteAttributeExtensions(
+            XmlWriter writer,
+            ResourceCollectionInfo collection,
+            string version
+        )
         {
             if (collection is null)
             {
@@ -259,7 +343,11 @@ namespace System.ServiceModel.Syndication
             collection.WriteAttributeExtensions(writer, version);
         }
 
-        protected static void WriteAttributeExtensions(XmlWriter writer, CategoriesDocument categories, string version)
+        protected static void WriteAttributeExtensions(
+            XmlWriter writer,
+            CategoriesDocument categories,
+            string version
+        )
         {
             if (categories is null)
             {
@@ -269,7 +357,11 @@ namespace System.ServiceModel.Syndication
             categories.WriteAttributeExtensions(writer, version);
         }
 
-        protected static void WriteElementExtensions(XmlWriter writer, ServiceDocument document, string version)
+        protected static void WriteElementExtensions(
+            XmlWriter writer,
+            ServiceDocument document,
+            string version
+        )
         {
             if (document is null)
             {
@@ -279,7 +371,11 @@ namespace System.ServiceModel.Syndication
             document.WriteElementExtensions(writer, version);
         }
 
-        protected static void WriteElementExtensions(XmlWriter writer, Workspace workspace, string version)
+        protected static void WriteElementExtensions(
+            XmlWriter writer,
+            Workspace workspace,
+            string version
+        )
         {
             if (workspace is null)
             {
@@ -289,7 +385,11 @@ namespace System.ServiceModel.Syndication
             workspace.WriteElementExtensions(writer, version);
         }
 
-        protected static void WriteElementExtensions(XmlWriter writer, ResourceCollectionInfo collection, string version)
+        protected static void WriteElementExtensions(
+            XmlWriter writer,
+            ResourceCollectionInfo collection,
+            string version
+        )
         {
             if (collection is null)
             {
@@ -299,7 +399,11 @@ namespace System.ServiceModel.Syndication
             collection.WriteElementExtensions(writer, version);
         }
 
-        protected static void WriteElementExtensions(XmlWriter writer, CategoriesDocument categories, string version)
+        protected static void WriteElementExtensions(
+            XmlWriter writer,
+            CategoriesDocument categories,
+            string version
+        )
         {
             if (categories is null)
             {

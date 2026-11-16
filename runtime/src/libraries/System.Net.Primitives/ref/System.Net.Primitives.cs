@@ -17,99 +17,328 @@ namespace System.Net
         Basic = 8,
         Anonymous = 32768,
     }
+
     public sealed partial class Cookie
     {
         public Cookie() { }
+
         public Cookie(string name, string? value) { }
+
         public Cookie(string name, string? value, string? path) { }
+
         public Cookie(string name, string? value, string? path, string? domain) { }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
-        public string Comment { get { throw null; } set { } }
-        public System.Uri? CommentUri { get { throw null; } set { } }
-        public bool Discard { get { throw null; } set { } }
+        public string Comment
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Uri? CommentUri
+        {
+            get { throw null; }
+            set { }
+        }
+        public bool Discard
+        {
+            get { throw null; }
+            set { }
+        }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
-        public string Domain { get { throw null; } set { } }
-        public bool Expired { get { throw null; } set { } }
-        public System.DateTime Expires { get { throw null; } set { } }
-        public bool HttpOnly { get { throw null; } set { } }
-        public string Name { get { throw null; } set { } }
+        public string Domain
+        {
+            get { throw null; }
+            set { }
+        }
+        public bool Expired
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.DateTime Expires
+        {
+            get { throw null; }
+            set { }
+        }
+        public bool HttpOnly
+        {
+            get { throw null; }
+            set { }
+        }
+        public string Name
+        {
+            get { throw null; }
+            set { }
+        }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
-        public string Path { get { throw null; } set { } }
+        public string Path
+        {
+            get { throw null; }
+            set { }
+        }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
-        public string Port { get { throw null; } set { } }
-        public bool Secure { get { throw null; } set { } }
-        public System.DateTime TimeStamp { get { throw null; } }
+        public string Port
+        {
+            get { throw null; }
+            set { }
+        }
+        public bool Secure
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.DateTime TimeStamp
+        {
+            get { throw null; }
+        }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
-        public string Value { get { throw null; } set { } }
-        public int Version { get { throw null; } set { } }
-        public override bool Equals([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand) { throw null; }
-        public override int GetHashCode() { throw null; }
-        public override string ToString() { throw null; }
+        public string Value
+        {
+            get { throw null; }
+            set { }
+        }
+        public int Version
+        {
+            get { throw null; }
+            set { }
+        }
+
+        public override bool Equals(
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand
+        )
+        {
+            throw null;
+        }
+
+        public override int GetHashCode()
+        {
+            throw null;
+        }
+
+        public override string ToString()
+        {
+            throw null;
+        }
     }
-    public partial class CookieCollection : System.Collections.Generic.ICollection<System.Net.Cookie>, System.Collections.Generic.IEnumerable<System.Net.Cookie>, System.Collections.Generic.IReadOnlyCollection<System.Net.Cookie>, System.Collections.ICollection, System.Collections.IEnumerable
+
+    public partial class CookieCollection
+        : System.Collections.Generic.ICollection<System.Net.Cookie>,
+            System.Collections.Generic.IEnumerable<System.Net.Cookie>,
+            System.Collections.Generic.IReadOnlyCollection<System.Net.Cookie>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable
     {
         public CookieCollection() { }
-        public int Count { get { throw null; } }
-        public bool IsReadOnly { get { throw null; } }
-        public bool IsSynchronized { get { throw null; } }
-        public System.Net.Cookie this[int index] { get { throw null; } }
-        public System.Net.Cookie? this[string name] { get { throw null; } }
-        public object SyncRoot { get { throw null; } }
+
+        public int Count
+        {
+            get { throw null; }
+        }
+        public bool IsReadOnly
+        {
+            get { throw null; }
+        }
+        public bool IsSynchronized
+        {
+            get { throw null; }
+        }
+        public System.Net.Cookie this[int index]
+        {
+            get { throw null; }
+        }
+        public System.Net.Cookie? this[string name]
+        {
+            get { throw null; }
+        }
+        public object SyncRoot
+        {
+            get { throw null; }
+        }
+
         public void Add(System.Net.Cookie cookie) { }
+
         public void Add(System.Net.CookieCollection cookies) { }
+
         public void Clear() { }
-        public bool Contains(System.Net.Cookie cookie) { throw null; }
+
+        public bool Contains(System.Net.Cookie cookie)
+        {
+            throw null;
+        }
+
         public void CopyTo(System.Array array, int index) { }
+
         public void CopyTo(System.Net.Cookie[] array, int index) { }
-        public System.Collections.IEnumerator GetEnumerator() { throw null; }
-        public bool Remove(System.Net.Cookie cookie) { throw null; }
-        System.Collections.Generic.IEnumerator<System.Net.Cookie> System.Collections.Generic.IEnumerable<System.Net.Cookie>.GetEnumerator() { throw null; }
+
+        public System.Collections.IEnumerator GetEnumerator()
+        {
+            throw null;
+        }
+
+        public bool Remove(System.Net.Cookie cookie)
+        {
+            throw null;
+        }
+
+        System.Collections.Generic.IEnumerator<System.Net.Cookie> System.Collections.Generic.IEnumerable<System.Net.Cookie>.GetEnumerator()
+        {
+            throw null;
+        }
     }
+
     public partial class CookieContainer
     {
         public const int DefaultCookieLengthLimit = 4096;
         public const int DefaultCookieLimit = 300;
         public const int DefaultPerDomainCookieLimit = 20;
+
         public CookieContainer() { }
+
         public CookieContainer(int capacity) { }
+
         public CookieContainer(int capacity, int perDomainCapacity, int maxCookieSize) { }
-        public int Capacity { get { throw null; } set { } }
-        public int Count { get { throw null; } }
-        public int MaxCookieSize { get { throw null; } set { } }
-        public int PerDomainCapacity { get { throw null; } set { } }
+
+        public int Capacity
+        {
+            get { throw null; }
+            set { }
+        }
+        public int Count
+        {
+            get { throw null; }
+        }
+        public int MaxCookieSize
+        {
+            get { throw null; }
+            set { }
+        }
+        public int PerDomainCapacity
+        {
+            get { throw null; }
+            set { }
+        }
+
         public void Add(System.Net.Cookie cookie) { }
+
         public void Add(System.Net.CookieCollection cookies) { }
+
         public void Add(System.Uri uri, System.Net.Cookie cookie) { }
+
         public void Add(System.Uri uri, System.Net.CookieCollection cookies) { }
-        public System.Net.CookieCollection GetAllCookies() { throw null; }
-        public string GetCookieHeader(System.Uri uri) { throw null; }
-        public System.Net.CookieCollection GetCookies(System.Uri uri) { throw null; }
+
+        public System.Net.CookieCollection GetAllCookies()
+        {
+            throw null;
+        }
+
+        public string GetCookieHeader(System.Uri uri)
+        {
+            throw null;
+        }
+
+        public System.Net.CookieCollection GetCookies(System.Uri uri)
+        {
+            throw null;
+        }
+
         public void SetCookies(System.Uri uri, string cookieHeader) { }
     }
-    public partial class CookieException : System.FormatException, System.Runtime.Serialization.ISerializable
+
+    public partial class CookieException
+        : System.FormatException,
+            System.Runtime.Serialization.ISerializable
     {
         public CookieException() { }
-        [System.ObsoleteAttribute("This API supports obsolete formatter-based serialization. It should not be called or extended by application code.", DiagnosticId = "SYSLIB0051", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        protected CookieException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext) { }
-        [System.ObsoleteAttribute("This API supports obsolete formatter-based serialization. It should not be called or extended by application code.", DiagnosticId = "SYSLIB0051", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        public override void GetObjectData(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext) { }
-        void System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext) { }
+
+        [System.ObsoleteAttribute(
+            "This API supports obsolete formatter-based serialization. It should not be called or extended by application code.",
+            DiagnosticId = "SYSLIB0051",
+            UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+        )]
+        [System.ComponentModel.EditorBrowsableAttribute(
+            System.ComponentModel.EditorBrowsableState.Never
+        )]
+        protected CookieException(
+            System.Runtime.Serialization.SerializationInfo serializationInfo,
+            System.Runtime.Serialization.StreamingContext streamingContext
+        ) { }
+
+        [System.ObsoleteAttribute(
+            "This API supports obsolete formatter-based serialization. It should not be called or extended by application code.",
+            DiagnosticId = "SYSLIB0051",
+            UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+        )]
+        [System.ComponentModel.EditorBrowsableAttribute(
+            System.ComponentModel.EditorBrowsableState.Never
+        )]
+        public override void GetObjectData(
+            System.Runtime.Serialization.SerializationInfo serializationInfo,
+            System.Runtime.Serialization.StreamingContext streamingContext
+        ) { }
+
+        void System.Runtime.Serialization.ISerializable.GetObjectData(
+            System.Runtime.Serialization.SerializationInfo serializationInfo,
+            System.Runtime.Serialization.StreamingContext streamingContext
+        ) { }
     }
-    public partial class CredentialCache : System.Collections.IEnumerable, System.Net.ICredentials, System.Net.ICredentialsByHost
+
+    public partial class CredentialCache
+        : System.Collections.IEnumerable,
+            System.Net.ICredentials,
+            System.Net.ICredentialsByHost
     {
         public CredentialCache() { }
-        public static System.Net.ICredentials DefaultCredentials { get { throw null; } }
-        public static System.Net.NetworkCredential DefaultNetworkCredentials { get { throw null; } }
-        public void Add(string host, int port, string authenticationType, System.Net.NetworkCredential credential) { }
-        public void Add(System.Uri uriPrefix, string authType, System.Net.NetworkCredential cred) { }
-        public System.Net.NetworkCredential? GetCredential(string host, int port, string authenticationType) { throw null; }
-        public System.Net.NetworkCredential? GetCredential(System.Uri uriPrefix, string authType) { throw null; }
-        public System.Collections.IEnumerator GetEnumerator() { throw null; }
+
+        public static System.Net.ICredentials DefaultCredentials
+        {
+            get { throw null; }
+        }
+        public static System.Net.NetworkCredential DefaultNetworkCredentials
+        {
+            get { throw null; }
+        }
+
+        public void Add(
+            string host,
+            int port,
+            string authenticationType,
+            System.Net.NetworkCredential credential
+        ) { }
+
+        public void Add(
+            System.Uri uriPrefix,
+            string authType,
+            System.Net.NetworkCredential cred
+        ) { }
+
+        public System.Net.NetworkCredential? GetCredential(
+            string host,
+            int port,
+            string authenticationType
+        )
+        {
+            throw null;
+        }
+
+        public System.Net.NetworkCredential? GetCredential(System.Uri uriPrefix, string authType)
+        {
+            throw null;
+        }
+
+        public System.Collections.IEnumerator GetEnumerator()
+        {
+            throw null;
+        }
+
         public void Remove(string? host, int port, string? authenticationType) { }
+
         public void Remove(System.Uri? uriPrefix, string? authType) { }
     }
+
     [System.FlagsAttribute]
     public enum DecompressionMethods
     {
@@ -119,24 +348,65 @@ namespace System.Net
         Deflate = 2,
         Brotli = 4,
     }
+
     public partial class DnsEndPoint : System.Net.EndPoint
     {
         public DnsEndPoint(string host, int port) { }
-        public DnsEndPoint(string host, int port, System.Net.Sockets.AddressFamily addressFamily) { }
-        public override System.Net.Sockets.AddressFamily AddressFamily { get { throw null; } }
-        public string Host { get { throw null; } }
-        public int Port { get { throw null; } }
-        public override bool Equals([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand) { throw null; }
-        public override int GetHashCode() { throw null; }
-        public override string ToString() { throw null; }
+
+        public DnsEndPoint(string host, int port, System.Net.Sockets.AddressFamily addressFamily)
+        { }
+
+        public override System.Net.Sockets.AddressFamily AddressFamily
+        {
+            get { throw null; }
+        }
+        public string Host
+        {
+            get { throw null; }
+        }
+        public int Port
+        {
+            get { throw null; }
+        }
+
+        public override bool Equals(
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand
+        )
+        {
+            throw null;
+        }
+
+        public override int GetHashCode()
+        {
+            throw null;
+        }
+
+        public override string ToString()
+        {
+            throw null;
+        }
     }
+
     public abstract partial class EndPoint
     {
         protected EndPoint() { }
-        public virtual System.Net.Sockets.AddressFamily AddressFamily { get { throw null; } }
-        public virtual System.Net.EndPoint Create(System.Net.SocketAddress socketAddress) { throw null; }
-        public virtual System.Net.SocketAddress Serialize() { throw null; }
+
+        public virtual System.Net.Sockets.AddressFamily AddressFamily
+        {
+            get { throw null; }
+        }
+
+        public virtual System.Net.EndPoint Create(System.Net.SocketAddress socketAddress)
+        {
+            throw null;
+        }
+
+        public virtual System.Net.SocketAddress Serialize()
+        {
+            throw null;
+        }
     }
+
     public enum HttpStatusCode
     {
         Continue = 100,
@@ -207,6 +477,7 @@ namespace System.Net
         NotExtended = 510,
         NetworkAuthenticationRequired = 511,
     }
+
     public static partial class HttpVersion
     {
         public static readonly System.Version Unknown;
@@ -215,15 +486,25 @@ namespace System.Net
         public static readonly System.Version Version20;
         public static readonly System.Version Version30;
     }
+
     public partial interface ICredentials
     {
         System.Net.NetworkCredential? GetCredential(System.Uri uri, string authType);
     }
+
     public partial interface ICredentialsByHost
     {
-        System.Net.NetworkCredential? GetCredential(string host, int port, string authenticationType);
+        System.Net.NetworkCredential? GetCredential(
+            string host,
+            int port,
+            string authenticationType
+        );
     }
-    public partial class IPAddress : ISpanFormattable, ISpanParsable<IPAddress>, IUtf8SpanFormattable
+
+    public partial class IPAddress
+        : ISpanFormattable,
+            ISpanParsable<IPAddress>,
+            IUtf8SpanFormattable
     {
         public static readonly System.Net.IPAddress Any;
         public static readonly System.Net.IPAddress Broadcast;
@@ -232,143 +513,592 @@ namespace System.Net
         public static readonly System.Net.IPAddress IPv6None;
         public static readonly System.Net.IPAddress Loopback;
         public static readonly System.Net.IPAddress None;
+
         public IPAddress(byte[] address) { }
+
         public IPAddress(byte[] address, long scopeid) { }
+
         public IPAddress(long newAddress) { }
+
         public IPAddress(System.ReadOnlySpan<byte> address) { }
+
         public IPAddress(System.ReadOnlySpan<byte> address, long scopeid) { }
-        [System.ObsoleteAttribute("IPAddress.Address is address family dependent and has been deprecated. Use IPAddress.Equals to perform comparisons instead.")]
-        public long Address { get { throw null; } set { } }
-        public System.Net.Sockets.AddressFamily AddressFamily { get { throw null; } }
-        public bool IsIPv4MappedToIPv6 { get { throw null; } }
-        public bool IsIPv6LinkLocal { get { throw null; } }
-        public bool IsIPv6Multicast { get { throw null; } }
-        public bool IsIPv6SiteLocal { get { throw null; } }
-        public bool IsIPv6Teredo { get { throw null; } }
-        public bool IsIPv6UniqueLocal { get { throw null; } }
-        public long ScopeId { get { throw null; } set { } }
-        public override bool Equals([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand) { throw null; }
-        public byte[] GetAddressBytes() { throw null; }
-        public override int GetHashCode() { throw null; }
-        public static short HostToNetworkOrder(short host) { throw null; }
-        public static int HostToNetworkOrder(int host) { throw null; }
-        public static long HostToNetworkOrder(long host) { throw null; }
-        public static bool IsLoopback(System.Net.IPAddress address) { throw null; }
-        public System.Net.IPAddress MapToIPv4() { throw null; }
-        public System.Net.IPAddress MapToIPv6() { throw null; }
-        public static short NetworkToHostOrder(short network) { throw null; }
-        public static int NetworkToHostOrder(int network) { throw null; }
-        public static long NetworkToHostOrder(long network) { throw null; }
-        public static System.Net.IPAddress Parse(System.ReadOnlySpan<char> ipSpan) { throw null; }
-        public static System.Net.IPAddress Parse(string ipString) { throw null; }
-        static IPAddress ISpanParsable<IPAddress>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider) { throw null; }
-        static IPAddress IParsable<IPAddress>.Parse(string s, IFormatProvider? provider) { throw null; }
-        public override string ToString() { throw null; }
-        string IFormattable.ToString(string? format, IFormatProvider? formatProvider) { throw null; }
-        public bool TryFormat(System.Span<char> destination, out int charsWritten) { throw null; }
-        public bool TryFormat(System.Span<byte> utf8Destination, out int bytesWritten) { throw null; }
-        bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider) { throw null; }
-        bool System.IUtf8SpanFormattable.TryFormat(System.Span<byte> utf8Destination, out int bytesWritten, System.ReadOnlySpan<char> format, System.IFormatProvider? provider) { throw null; }
-        public static bool TryParse(System.ReadOnlySpan<char> ipSpan, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out System.Net.IPAddress? address) { throw null; }
-        public static bool TryParse([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? ipString, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out System.Net.IPAddress? address) { throw null; }
-        static bool ISpanParsable<IPAddress>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out IPAddress result) { throw null; }
-        static bool IParsable<IPAddress>.TryParse([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s, IFormatProvider? provider, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out IPAddress? result) { throw null; }
-        public bool TryWriteBytes(System.Span<byte> destination, out int bytesWritten) { throw null; }
+
+        [System.ObsoleteAttribute(
+            "IPAddress.Address is address family dependent and has been deprecated. Use IPAddress.Equals to perform comparisons instead."
+        )]
+        public long Address
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Net.Sockets.AddressFamily AddressFamily
+        {
+            get { throw null; }
+        }
+        public bool IsIPv4MappedToIPv6
+        {
+            get { throw null; }
+        }
+        public bool IsIPv6LinkLocal
+        {
+            get { throw null; }
+        }
+        public bool IsIPv6Multicast
+        {
+            get { throw null; }
+        }
+        public bool IsIPv6SiteLocal
+        {
+            get { throw null; }
+        }
+        public bool IsIPv6Teredo
+        {
+            get { throw null; }
+        }
+        public bool IsIPv6UniqueLocal
+        {
+            get { throw null; }
+        }
+        public long ScopeId
+        {
+            get { throw null; }
+            set { }
+        }
+
+        public override bool Equals(
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand
+        )
+        {
+            throw null;
+        }
+
+        public byte[] GetAddressBytes()
+        {
+            throw null;
+        }
+
+        public override int GetHashCode()
+        {
+            throw null;
+        }
+
+        public static short HostToNetworkOrder(short host)
+        {
+            throw null;
+        }
+
+        public static int HostToNetworkOrder(int host)
+        {
+            throw null;
+        }
+
+        public static long HostToNetworkOrder(long host)
+        {
+            throw null;
+        }
+
+        public static bool IsLoopback(System.Net.IPAddress address)
+        {
+            throw null;
+        }
+
+        public System.Net.IPAddress MapToIPv4()
+        {
+            throw null;
+        }
+
+        public System.Net.IPAddress MapToIPv6()
+        {
+            throw null;
+        }
+
+        public static short NetworkToHostOrder(short network)
+        {
+            throw null;
+        }
+
+        public static int NetworkToHostOrder(int network)
+        {
+            throw null;
+        }
+
+        public static long NetworkToHostOrder(long network)
+        {
+            throw null;
+        }
+
+        public static System.Net.IPAddress Parse(System.ReadOnlySpan<char> ipSpan)
+        {
+            throw null;
+        }
+
+        public static System.Net.IPAddress Parse(string ipString)
+        {
+            throw null;
+        }
+
+        static IPAddress ISpanParsable<IPAddress>.Parse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider
+        )
+        {
+            throw null;
+        }
+
+        static IPAddress IParsable<IPAddress>.Parse(string s, IFormatProvider? provider)
+        {
+            throw null;
+        }
+
+        public override string ToString()
+        {
+            throw null;
+        }
+
+        string IFormattable.ToString(string? format, IFormatProvider? formatProvider)
+        {
+            throw null;
+        }
+
+        public bool TryFormat(System.Span<char> destination, out int charsWritten)
+        {
+            throw null;
+        }
+
+        public bool TryFormat(System.Span<byte> utf8Destination, out int bytesWritten)
+        {
+            throw null;
+        }
+
+        bool ISpanFormattable.TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            ReadOnlySpan<char> format,
+            IFormatProvider? provider
+        )
+        {
+            throw null;
+        }
+
+        bool System.IUtf8SpanFormattable.TryFormat(
+            System.Span<byte> utf8Destination,
+            out int bytesWritten,
+            System.ReadOnlySpan<char> format,
+            System.IFormatProvider? provider
+        )
+        {
+            throw null;
+        }
+
+        public static bool TryParse(
+            System.ReadOnlySpan<char> ipSpan,
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Net.IPAddress? address
+        )
+        {
+            throw null;
+        }
+
+        public static bool TryParse(
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? ipString,
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Net.IPAddress? address
+        )
+        {
+            throw null;
+        }
+
+        static bool ISpanParsable<IPAddress>.TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out IPAddress result
+        )
+        {
+            throw null;
+        }
+
+        static bool IParsable<IPAddress>.TryParse(
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
+            IFormatProvider? provider,
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out IPAddress? result
+        )
+        {
+            throw null;
+        }
+
+        public bool TryWriteBytes(System.Span<byte> destination, out int bytesWritten)
+        {
+            throw null;
+        }
     }
+
     public partial class IPEndPoint : System.Net.EndPoint
     {
         public const int MaxPort = 65535;
         public const int MinPort = 0;
+
         public IPEndPoint(long address, int port) { }
+
         public IPEndPoint(System.Net.IPAddress address, int port) { }
-        public System.Net.IPAddress Address { get { throw null; } set { } }
-        public override System.Net.Sockets.AddressFamily AddressFamily { get { throw null; } }
-        public int Port { get { throw null; } set { } }
-        public override System.Net.EndPoint Create(System.Net.SocketAddress socketAddress) { throw null; }
-        public override bool Equals([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand) { throw null; }
-        public override int GetHashCode() { throw null; }
-        public static System.Net.IPEndPoint Parse(System.ReadOnlySpan<char> s) { throw null; }
-        public static System.Net.IPEndPoint Parse(string s) { throw null; }
-        public override System.Net.SocketAddress Serialize() { throw null; }
-        public override string ToString() { throw null; }
-        public static bool TryParse(System.ReadOnlySpan<char> s, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out System.Net.IPEndPoint? result) { throw null; }
-        public static bool TryParse(string s, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out System.Net.IPEndPoint? result) { throw null; }
+
+        public System.Net.IPAddress Address
+        {
+            get { throw null; }
+            set { }
+        }
+        public override System.Net.Sockets.AddressFamily AddressFamily
+        {
+            get { throw null; }
+        }
+        public int Port
+        {
+            get { throw null; }
+            set { }
+        }
+
+        public override System.Net.EndPoint Create(System.Net.SocketAddress socketAddress)
+        {
+            throw null;
+        }
+
+        public override bool Equals(
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand
+        )
+        {
+            throw null;
+        }
+
+        public override int GetHashCode()
+        {
+            throw null;
+        }
+
+        public static System.Net.IPEndPoint Parse(System.ReadOnlySpan<char> s)
+        {
+            throw null;
+        }
+
+        public static System.Net.IPEndPoint Parse(string s)
+        {
+            throw null;
+        }
+
+        public override System.Net.SocketAddress Serialize()
+        {
+            throw null;
+        }
+
+        public override string ToString()
+        {
+            throw null;
+        }
+
+        public static bool TryParse(
+            System.ReadOnlySpan<char> s,
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Net.IPEndPoint? result
+        )
+        {
+            throw null;
+        }
+
+        public static bool TryParse(
+            string s,
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Net.IPEndPoint? result
+        )
+        {
+            throw null;
+        }
     }
-    public readonly partial struct IPNetwork : System.IEquatable<System.Net.IPNetwork>, System.IFormattable, System.IParsable<System.Net.IPNetwork>, System.ISpanFormattable, System.ISpanParsable<System.Net.IPNetwork>, System.IUtf8SpanFormattable
+
+    public readonly partial struct IPNetwork
+        : System.IEquatable<System.Net.IPNetwork>,
+            System.IFormattable,
+            System.IParsable<System.Net.IPNetwork>,
+            System.ISpanFormattable,
+            System.ISpanParsable<System.Net.IPNetwork>,
+            System.IUtf8SpanFormattable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
-        public IPNetwork(System.Net.IPAddress baseAddress, int prefixLength) { throw null; }
-        public System.Net.IPAddress BaseAddress { get { throw null; } }
-        public int PrefixLength { get { throw null; } }
-        public bool Contains(System.Net.IPAddress address) { throw null; }
-        public bool Equals(System.Net.IPNetwork other) { throw null; }
-        public override bool Equals([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj) { throw null; }
-        public override int GetHashCode() { throw null; }
-        public static bool operator ==(System.Net.IPNetwork left, System.Net.IPNetwork right) { throw null; }
-        public static bool operator !=(System.Net.IPNetwork left, System.Net.IPNetwork right) { throw null; }
-        public static System.Net.IPNetwork Parse(System.ReadOnlySpan<char> s) { throw null; }
-        public static System.Net.IPNetwork Parse(string s) { throw null; }
-        string System.IFormattable.ToString(string? format, System.IFormatProvider? provider) { throw null; }
-        static System.Net.IPNetwork System.IParsable<System.Net.IPNetwork>.Parse([System.Diagnostics.CodeAnalysis.NotNullAttribute] string s, System.IFormatProvider? provider) { throw null; }
-        static bool System.IParsable<System.Net.IPNetwork>.TryParse([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s, System.IFormatProvider? provider, out System.Net.IPNetwork result) { throw null; }
-        bool System.ISpanFormattable.TryFormat(System.Span<char> destination, out int charsWritten, System.ReadOnlySpan<char> format, System.IFormatProvider? provider) { throw null; }
-        bool System.IUtf8SpanFormattable.TryFormat(System.Span<byte> utf8Destination, out int bytesWritten, System.ReadOnlySpan<char> format, System.IFormatProvider? provider) { throw null; }
-        static System.Net.IPNetwork System.ISpanParsable<System.Net.IPNetwork>.Parse(System.ReadOnlySpan<char> s, System.IFormatProvider? provider) { throw null; }
-        static bool System.ISpanParsable<System.Net.IPNetwork>.TryParse(System.ReadOnlySpan<char> s, System.IFormatProvider? provider, out System.Net.IPNetwork result) { throw null; }
-        public override string ToString() { throw null; }
-        public bool TryFormat(System.Span<char> destination, out int charsWritten) { throw null; }
-        public bool TryFormat(System.Span<byte> utf8Destination, out int bytesWritten) { throw null; }
-        public static bool TryParse(System.ReadOnlySpan<char> s, out System.Net.IPNetwork result) { throw null; }
-        public static bool TryParse(string? s, out System.Net.IPNetwork result) { throw null; }
+
+        public IPNetwork(System.Net.IPAddress baseAddress, int prefixLength)
+        {
+            throw null;
+        }
+
+        public System.Net.IPAddress BaseAddress
+        {
+            get { throw null; }
+        }
+        public int PrefixLength
+        {
+            get { throw null; }
+        }
+
+        public bool Contains(System.Net.IPAddress address)
+        {
+            throw null;
+        }
+
+        public bool Equals(System.Net.IPNetwork other)
+        {
+            throw null;
+        }
+
+        public override bool Equals(
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
+        )
+        {
+            throw null;
+        }
+
+        public override int GetHashCode()
+        {
+            throw null;
+        }
+
+        public static bool operator ==(System.Net.IPNetwork left, System.Net.IPNetwork right)
+        {
+            throw null;
+        }
+
+        public static bool operator !=(System.Net.IPNetwork left, System.Net.IPNetwork right)
+        {
+            throw null;
+        }
+
+        public static System.Net.IPNetwork Parse(System.ReadOnlySpan<char> s)
+        {
+            throw null;
+        }
+
+        public static System.Net.IPNetwork Parse(string s)
+        {
+            throw null;
+        }
+
+        string System.IFormattable.ToString(string? format, System.IFormatProvider? provider)
+        {
+            throw null;
+        }
+
+        static System.Net.IPNetwork System.IParsable<System.Net.IPNetwork>.Parse(
+            [System.Diagnostics.CodeAnalysis.NotNullAttribute] string s,
+            System.IFormatProvider? provider
+        )
+        {
+            throw null;
+        }
+
+        static bool System.IParsable<System.Net.IPNetwork>.TryParse(
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? s,
+            System.IFormatProvider? provider,
+            out System.Net.IPNetwork result
+        )
+        {
+            throw null;
+        }
+
+        bool System.ISpanFormattable.TryFormat(
+            System.Span<char> destination,
+            out int charsWritten,
+            System.ReadOnlySpan<char> format,
+            System.IFormatProvider? provider
+        )
+        {
+            throw null;
+        }
+
+        bool System.IUtf8SpanFormattable.TryFormat(
+            System.Span<byte> utf8Destination,
+            out int bytesWritten,
+            System.ReadOnlySpan<char> format,
+            System.IFormatProvider? provider
+        )
+        {
+            throw null;
+        }
+
+        static System.Net.IPNetwork System.ISpanParsable<System.Net.IPNetwork>.Parse(
+            System.ReadOnlySpan<char> s,
+            System.IFormatProvider? provider
+        )
+        {
+            throw null;
+        }
+
+        static bool System.ISpanParsable<System.Net.IPNetwork>.TryParse(
+            System.ReadOnlySpan<char> s,
+            System.IFormatProvider? provider,
+            out System.Net.IPNetwork result
+        )
+        {
+            throw null;
+        }
+
+        public override string ToString()
+        {
+            throw null;
+        }
+
+        public bool TryFormat(System.Span<char> destination, out int charsWritten)
+        {
+            throw null;
+        }
+
+        public bool TryFormat(System.Span<byte> utf8Destination, out int bytesWritten)
+        {
+            throw null;
+        }
+
+        public static bool TryParse(System.ReadOnlySpan<char> s, out System.Net.IPNetwork result)
+        {
+            throw null;
+        }
+
+        public static bool TryParse(string? s, out System.Net.IPNetwork result)
+        {
+            throw null;
+        }
     }
+
     public partial interface IWebProxy
     {
         System.Net.ICredentials? Credentials { get; set; }
         System.Uri? GetProxy(System.Uri destination);
         bool IsBypassed(System.Uri host);
     }
+
     public partial class NetworkCredential : System.Net.ICredentials, System.Net.ICredentialsByHost
     {
         public NetworkCredential() { }
+
         [System.CLSCompliantAttribute(false)]
         public NetworkCredential(string? userName, System.Security.SecureString? password) { }
+
         [System.CLSCompliantAttribute(false)]
-        public NetworkCredential(string? userName, System.Security.SecureString? password, string? domain) { }
+        public NetworkCredential(
+            string? userName,
+            System.Security.SecureString? password,
+            string? domain
+        ) { }
+
         public NetworkCredential(string? userName, string? password) { }
+
         public NetworkCredential(string? userName, string? password, string? domain) { }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
-        public string Domain { get { throw null; } set { } }
+        public string Domain
+        {
+            get { throw null; }
+            set { }
+        }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
-        public string Password { get { throw null; } set { } }
+        public string Password
+        {
+            get { throw null; }
+            set { }
+        }
+
         [System.CLSCompliantAttribute(false)]
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
-        public System.Security.SecureString SecurePassword { get { throw null; } set { } }
+        public System.Security.SecureString SecurePassword
+        {
+            get { throw null; }
+            set { }
+        }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
-        public string UserName { get { throw null; } set { } }
-        public System.Net.NetworkCredential GetCredential(string? host, int port, string? authenticationType) { throw null; }
-        public System.Net.NetworkCredential GetCredential(System.Uri? uri, string? authenticationType) { throw null; }
+        public string UserName
+        {
+            get { throw null; }
+            set { }
+        }
+
+        public System.Net.NetworkCredential GetCredential(
+            string? host,
+            int port,
+            string? authenticationType
+        )
+        {
+            throw null;
+        }
+
+        public System.Net.NetworkCredential GetCredential(
+            System.Uri? uri,
+            string? authenticationType
+        )
+        {
+            throw null;
+        }
     }
+
     public partial class SocketAddress : System.IEquatable<System.Net.SocketAddress>
     {
         public SocketAddress(System.Net.Sockets.AddressFamily family) { }
+
         public SocketAddress(System.Net.Sockets.AddressFamily family, int size) { }
-        public System.Net.Sockets.AddressFamily Family { get { throw null; } }
-        public byte this[int offset] { get { throw null; } set { } }
-        public int Size { get { throw null; } set { } }
-        public static int GetMaximumAddressSize(System.Net.Sockets.AddressFamily addressFamily) { throw null; }
-        public System.Memory<byte> Buffer { get { throw null; } }
-        public override bool Equals(object? comparand) { throw null; }
-        public bool Equals(System.Net.SocketAddress? comparand) { throw null; }
-        public override int GetHashCode() { throw null; }
-        public override string ToString() { throw null; }
+
+        public System.Net.Sockets.AddressFamily Family
+        {
+            get { throw null; }
+        }
+        public byte this[int offset]
+        {
+            get { throw null; }
+            set { }
+        }
+        public int Size
+        {
+            get { throw null; }
+            set { }
+        }
+
+        public static int GetMaximumAddressSize(System.Net.Sockets.AddressFamily addressFamily)
+        {
+            throw null;
+        }
+
+        public System.Memory<byte> Buffer
+        {
+            get { throw null; }
+        }
+
+        public override bool Equals(object? comparand)
+        {
+            throw null;
+        }
+
+        public bool Equals(System.Net.SocketAddress? comparand)
+        {
+            throw null;
+        }
+
+        public override int GetHashCode()
+        {
+            throw null;
+        }
+
+        public override string ToString()
+        {
+            throw null;
+        }
     }
+
     public abstract partial class TransportContext
     {
         protected TransportContext() { }
-        public abstract System.Security.Authentication.ExtendedProtection.ChannelBinding? GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind kind);
+
+        public abstract System.Security.Authentication.ExtendedProtection.ChannelBinding? GetChannelBinding(
+            System.Security.Authentication.ExtendedProtection.ChannelBindingKind kind
+        );
     }
 }
+
 namespace System.Net.Cache
 {
     public enum RequestCacheLevel
@@ -381,31 +1111,75 @@ namespace System.Net.Cache
         Reload = 5,
         NoCacheNoStore = 6,
     }
+
     public partial class RequestCachePolicy
     {
         public RequestCachePolicy() { }
+
         public RequestCachePolicy(System.Net.Cache.RequestCacheLevel level) { }
-        public System.Net.Cache.RequestCacheLevel Level { get { throw null; } }
-        public override string ToString() { throw null; }
+
+        public System.Net.Cache.RequestCacheLevel Level
+        {
+            get { throw null; }
+        }
+
+        public override string ToString()
+        {
+            throw null;
+        }
     }
 }
+
 namespace System.Net.NetworkInformation
 {
-    public partial class IPAddressCollection : System.Collections.Generic.ICollection<System.Net.IPAddress>, System.Collections.Generic.IEnumerable<System.Net.IPAddress>, System.Collections.IEnumerable
+    public partial class IPAddressCollection
+        : System.Collections.Generic.ICollection<System.Net.IPAddress>,
+            System.Collections.Generic.IEnumerable<System.Net.IPAddress>,
+            System.Collections.IEnumerable
     {
         protected internal IPAddressCollection() { }
-        public virtual int Count { get { throw null; } }
-        public virtual bool IsReadOnly { get { throw null; } }
-        public virtual System.Net.IPAddress this[int index] { get { throw null; } }
+
+        public virtual int Count
+        {
+            get { throw null; }
+        }
+        public virtual bool IsReadOnly
+        {
+            get { throw null; }
+        }
+        public virtual System.Net.IPAddress this[int index]
+        {
+            get { throw null; }
+        }
+
         public virtual void Add(System.Net.IPAddress address) { }
+
         public virtual void Clear() { }
-        public virtual bool Contains(System.Net.IPAddress address) { throw null; }
+
+        public virtual bool Contains(System.Net.IPAddress address)
+        {
+            throw null;
+        }
+
         public virtual void CopyTo(System.Net.IPAddress[] array, int offset) { }
-        public virtual System.Collections.Generic.IEnumerator<System.Net.IPAddress> GetEnumerator() { throw null; }
-        public virtual bool Remove(System.Net.IPAddress address) { throw null; }
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() { throw null; }
+
+        public virtual System.Collections.Generic.IEnumerator<System.Net.IPAddress> GetEnumerator()
+        {
+            throw null;
+        }
+
+        public virtual bool Remove(System.Net.IPAddress address)
+        {
+            throw null;
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            throw null;
+        }
     }
 }
+
 namespace System.Net.Security
 {
     public enum AuthenticationLevel
@@ -414,6 +1188,7 @@ namespace System.Net.Security
         MutualAuthRequested = 1,
         MutualAuthRequired = 2,
     }
+
     [System.FlagsAttribute]
     public enum SslPolicyErrors
     {
@@ -423,6 +1198,7 @@ namespace System.Net.Security
         RemoteCertificateChainErrors = 4,
     }
 }
+
 namespace System.Net.Sockets
 {
     public enum AddressFamily
@@ -461,6 +1237,7 @@ namespace System.Net.Sockets
         Packet = 65536,
         ControllerAreaNetwork = 65537,
     }
+
     public enum SocketError
     {
         SocketError = -1,
@@ -511,19 +1288,43 @@ namespace System.Net.Sockets
         NoRecovery = 11003,
         NoData = 11004,
     }
+
     public partial class SocketException : System.ComponentModel.Win32Exception
     {
         public SocketException() { }
+
         public SocketException(int errorCode) { }
+
         public SocketException(int errorCode, string? message) { }
-        [System.ObsoleteAttribute("This API supports obsolete formatter-based serialization. It should not be called or extended by application code.", DiagnosticId = "SYSLIB0051", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        protected SocketException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext) { }
-        public override int ErrorCode { get { throw null; } }
-        public override string Message { get { throw null; } }
-        public System.Net.Sockets.SocketError SocketErrorCode { get { throw null; } }
+
+        [System.ObsoleteAttribute(
+            "This API supports obsolete formatter-based serialization. It should not be called or extended by application code.",
+            DiagnosticId = "SYSLIB0051",
+            UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+        )]
+        [System.ComponentModel.EditorBrowsableAttribute(
+            System.ComponentModel.EditorBrowsableState.Never
+        )]
+        protected SocketException(
+            System.Runtime.Serialization.SerializationInfo serializationInfo,
+            System.Runtime.Serialization.StreamingContext streamingContext
+        ) { }
+
+        public override int ErrorCode
+        {
+            get { throw null; }
+        }
+        public override string Message
+        {
+            get { throw null; }
+        }
+        public System.Net.Sockets.SocketError SocketErrorCode
+        {
+            get { throw null; }
+        }
     }
 }
+
 namespace System.Security.Authentication
 {
     public enum CipherAlgorithmType
@@ -539,6 +1340,7 @@ namespace System.Security.Authentication
         Aes = 26129,
         Rc4 = 26625,
     }
+
     public enum ExchangeAlgorithmType
     {
         None = 0,
@@ -546,6 +1348,7 @@ namespace System.Security.Authentication
         RsaKeyX = 41984,
         DiffieHellman = 43522,
     }
+
     public enum HashAlgorithmType
     {
         None = 0,
@@ -555,32 +1358,53 @@ namespace System.Security.Authentication
         Sha384 = 32781,
         Sha512 = 32782,
     }
+
     [System.FlagsAttribute]
     public enum SslProtocols
     {
         None = 0,
+
         [System.ObsoleteAttribute("SslProtocols.Ssl2 has been deprecated and is not supported.")]
         Ssl2 = 12,
+
         [System.ObsoleteAttribute("SslProtocols.Ssl3 has been deprecated and is not supported.")]
         Ssl3 = 48,
-        [System.ObsoleteAttribute("TLS versions 1.0 and 1.1 have known vulnerabilities and are not recommended. Use a newer TLS version instead, or use SslProtocols.None to defer to OS defaults.", DiagnosticId="SYSLIB0039", UrlFormat="https://aka.ms/dotnet-warnings/{0}")]
+
+        [System.ObsoleteAttribute(
+            "TLS versions 1.0 and 1.1 have known vulnerabilities and are not recommended. Use a newer TLS version instead, or use SslProtocols.None to defer to OS defaults.",
+            DiagnosticId = "SYSLIB0039",
+            UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+        )]
         Tls = 192,
+
         [System.ObsoleteAttribute("SslProtocols.Default has been deprecated and is not supported.")]
         Default = 240,
-        [System.ObsoleteAttribute("TLS versions 1.0 and 1.1 have known vulnerabilities and are not recommended. Use a newer TLS version instead, or use SslProtocols.None to defer to OS defaults.", DiagnosticId="SYSLIB0039", UrlFormat="https://aka.ms/dotnet-warnings/{0}")]
+
+        [System.ObsoleteAttribute(
+            "TLS versions 1.0 and 1.1 have known vulnerabilities and are not recommended. Use a newer TLS version instead, or use SslProtocols.None to defer to OS defaults.",
+            DiagnosticId = "SYSLIB0039",
+            UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+        )]
         Tls11 = 768,
         Tls12 = 3072,
         Tls13 = 12288,
     }
 }
+
 namespace System.Security.Authentication.ExtendedProtection
 {
-    public abstract partial class ChannelBinding : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
+    public abstract partial class ChannelBinding
+        : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
-        protected ChannelBinding() : base (default(bool)) { }
-        protected ChannelBinding(bool ownsHandle) : base (default(bool)) { }
+        protected ChannelBinding()
+            : base(default(bool)) { }
+
+        protected ChannelBinding(bool ownsHandle)
+            : base(default(bool)) { }
+
         public abstract int Size { get; }
     }
+
     public enum ChannelBindingKind
     {
         Unknown = 0,

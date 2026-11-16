@@ -22,10 +22,21 @@ namespace Microsoft.CodeAnalysis.Emit
         public SyntaxNode? SyntaxNode => _syntaxNode ?? SyntaxReference?.GetSyntax();
         public Location? Location => _syntaxNode?.Location ?? SyntaxReference?.GetLocation();
 
-        public EmitContext(CommonPEModuleBuilder module, SyntaxNode? syntaxNode, DiagnosticBag diagnostics, bool metadataOnly, bool includePrivateMembers)
-            : this(module, diagnostics, metadataOnly, includePrivateMembers, syntaxNode, rebuildData: null)
-        {
-        }
+        public EmitContext(
+            CommonPEModuleBuilder module,
+            SyntaxNode? syntaxNode,
+            DiagnosticBag diagnostics,
+            bool metadataOnly,
+            bool includePrivateMembers
+        )
+            : this(
+                module,
+                diagnostics,
+                metadataOnly,
+                includePrivateMembers,
+                syntaxNode,
+                rebuildData: null
+            ) { }
 
         public EmitContext(
             CommonPEModuleBuilder module,
@@ -34,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Emit
             bool includePrivateMembers,
             SyntaxNode? syntaxNode = null,
             RebuildData? rebuildData = null,
-            SyntaxReference? syntaxReference = null)
+            SyntaxReference? syntaxReference = null
+        )
         {
             Debug.Assert(rebuildData is null || !metadataOnly);
             RebuildData = rebuildData;

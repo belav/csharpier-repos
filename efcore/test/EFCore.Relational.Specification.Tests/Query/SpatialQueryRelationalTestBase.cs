@@ -7,14 +7,15 @@ public abstract class SpatialQueryRelationalTestBase<TFixture> : SpatialQueryTes
     where TFixture : SpatialQueryFixtureBase, new()
 {
     protected SpatialQueryRelationalTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    protected virtual bool CanExecuteQueryString
-        => false;
+    protected virtual bool CanExecuteQueryString => false;
 
-    protected override QueryAsserter CreateQueryAsserter(TFixture fixture)
-        => new RelationalQueryAsserter(
-            fixture, RewriteExpectedQueryExpression, RewriteServerQueryExpression, canExecuteQueryString: CanExecuteQueryString);
+    protected override QueryAsserter CreateQueryAsserter(TFixture fixture) =>
+        new RelationalQueryAsserter(
+            fixture,
+            RewriteExpectedQueryExpression,
+            RewriteServerQueryExpression,
+            canExecuteQueryString: CanExecuteQueryString
+        );
 }

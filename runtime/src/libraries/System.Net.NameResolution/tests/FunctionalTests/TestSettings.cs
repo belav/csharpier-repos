@@ -17,7 +17,9 @@ namespace System.Net.NameResolution.Tests
 
         // Linux CI servers not configured with IPv6 localhost.
         // Windows CI servers not configured with IPv6 name resolution.
-        public static readonly string IPv6Host = PlatformDetection.IsWindows ? LocalHost : "ipv6.google.com";
+        public static readonly string IPv6Host = PlatformDetection.IsWindows
+            ? LocalHost
+            : "ipv6.google.com";
 
         public const string LocalHost = "localhost";
 
@@ -29,10 +31,10 @@ namespace System.Net.NameResolution.Tests
         public static Task<IPAddress> GetLocalIPAddress() =>
             ResolveHost(TestSettings.LocalHost, TestSettings.AddressFamily);
 
-        public static AddressFamily AddressFamily =>
-            AddressFamily.InterNetwork;
+        public static AddressFamily AddressFamily => AddressFamily.InterNetwork;
 
-        public static Task WhenAllOrAnyFailedWithTimeout(params Task[] tasks) => tasks.WhenAllOrAnyFailed(PassingTestTimeout);
+        public static Task WhenAllOrAnyFailedWithTimeout(params Task[] tasks) =>
+            tasks.WhenAllOrAnyFailed(PassingTestTimeout);
 
         private static async Task<IPAddress> ResolveHost(string host, AddressFamily family)
         {

@@ -24,12 +24,19 @@ namespace Microsoft.CodeAnalysis
         private readonly IEqualityComparer<T> _comparer;
         private readonly string? _name;
 
-        public InputNode(Func<DriverStateTable.Builder, ImmutableArray<T>> getInput, IEqualityComparer<T>? inputComparer = null)
-            : this(getInput, registerOutput: null, inputComparer: inputComparer, comparer: null)
-        {
-        }
+        public InputNode(
+            Func<DriverStateTable.Builder, ImmutableArray<T>> getInput,
+            IEqualityComparer<T>? inputComparer = null
+        )
+            : this(getInput, registerOutput: null, inputComparer: inputComparer, comparer: null) { }
 
-        private InputNode(Func<DriverStateTable.Builder, ImmutableArray<T>> getInput, Action<IIncrementalGeneratorOutputNode>? registerOutput, IEqualityComparer<T>? inputComparer = null, IEqualityComparer<T>? comparer = null, string? name = null)
+        private InputNode(
+            Func<DriverStateTable.Builder, ImmutableArray<T>> getInput,
+            Action<IIncrementalGeneratorOutputNode>? registerOutput,
+            IEqualityComparer<T>? inputComparer = null,
+            IEqualityComparer<T>? comparer = null,
+            string? name = null
+        )
         {
             _getInput = getInput;
             _comparer = comparer ?? EqualityComparer<T>.Default;
@@ -38,7 +45,11 @@ namespace Microsoft.CodeAnalysis
             _name = name;
         }
 
-        public NodeStateTable<T> UpdateStateTable(DriverStateTable.Builder graphState, NodeStateTable<T>? previousTable, CancellationToken cancellationToken)
+        public NodeStateTable<T> UpdateStateTable(
+            DriverStateTable.Builder graphState,
+            NodeStateTable<T>? previousTable,
+            CancellationToken cancellationToken
+        )
         {
             var stopwatch = SharedStopwatch.StartNew();
             var inputItems = _getInput(graphState);
@@ -55,7 +66,9 @@ namespace Microsoft.CodeAnalysis
             var tableBuilder = graphState.CreateTableBuilder(previousTable, _name, _comparer);
 
             // We always have no inputs steps into an InputNode, but we track the difference between "no inputs" (empty collection) and "no step information" (default value)
-            var noInputStepsStepInfo = tableBuilder.TrackIncrementalSteps ? ImmutableArray<(IncrementalGeneratorRunStep, int)>.Empty : default;
+            var noInputStepsStepInfo = tableBuilder.TrackIncrementalSteps
+                ? ImmutableArray<(IncrementalGeneratorRunStep, int)>.Empty
+                : default;
 
             if (previousTable is not null)
             {
@@ -66,7 +79,10 @@ namespace Microsoft.CodeAnalysis
                     if (itemsSet.Remove(oldItem))
                     {
                         // we're iterating the table, so know that it has entries
-                        var usedCache = tableBuilder.TryUseCachedEntries(elapsedTime, noInputStepsStepInfo);
+                        var usedCache = tableBuilder.TryUseCachedEntries(
+                            elapsedTime,
+                            noInputStepsStepInfo
+                        );
                         Debug.Assert(usedCache);
                     }
                     else if (inputItems.Length == previousTable.Count)
@@ -75,13 +91,22 @@ namespace Microsoft.CodeAnalysis
                         // This allows us to correctly 'replace' items even when they aren't actually the same. In the case that the
                         // item really isn't modified, but a new item, we still function correctly as we mostly treat them the same,
                         // but will perform an extra comparison that is omitted in the pure 'added' case.
-                        var modified = tableBuilder.TryModifyEntry(inputItems[itemIndex], _comparer, elapsedTime, noInputStepsStepInfo, EntryState.Modified);
+                        var modified = tableBuilder.TryModifyEntry(
+                            inputItems[itemIndex],
+                            _comparer,
+                            elapsedTime,
+                            noInputStepsStepInfo,
+                            EntryState.Modified
+                        );
                         Debug.Assert(modified);
                         itemsSet.Remove(inputItems[itemIndex]);
                     }
                     else
                     {
-                        var removed = tableBuilder.TryRemoveEntries(elapsedTime, noInputStepsStepInfo);
+                        var removed = tableBuilder.TryRemoveEntries(
+                            elapsedTime,
+                            noInputStepsStepInfo
+                        );
                         Debug.Assert(removed);
                     }
                     itemIndex++;
@@ -91,24 +116,38 @@ namespace Microsoft.CodeAnalysis
             // any remaining new items are added
             foreach (var newItem in itemsSet)
             {
-                tableBuilder.AddEntry(newItem, EntryState.Added, elapsedTime, noInputStepsStepInfo, EntryState.Added);
+                tableBuilder.AddEntry(
+                    newItem,
+                    EntryState.Added,
+                    elapsedTime,
+                    noInputStepsStepInfo,
+                    EntryState.Added
+                );
             }
 
             var newTable = tableBuilder.ToImmutableAndFree();
             this.LogTables(previousTable, newTable, inputItems);
             return newTable;
-
         }
 
-        public IIncrementalGeneratorNode<T> WithComparer(IEqualityComparer<T> comparer) => new InputNode<T>(_getInput, _registerOutput, _inputComparer, comparer, _name);
+        public IIncrementalGeneratorNode<T> WithComparer(IEqualityComparer<T> comparer) =>
+            new InputNode<T>(_getInput, _registerOutput, _inputComparer, comparer, _name);
 
-        public IIncrementalGeneratorNode<T> WithTrackingName(string name) => new InputNode<T>(_getInput, _registerOutput, _inputComparer, _comparer, name);
+        public IIncrementalGeneratorNode<T> WithTrackingName(string name) =>
+            new InputNode<T>(_getInput, _registerOutput, _inputComparer, _comparer, name);
 
-        public InputNode<T> WithRegisterOutput(Action<IIncrementalGeneratorOutputNode> registerOutput) => new InputNode<T>(_getInput, registerOutput, _inputComparer, _comparer, _name);
+        public InputNode<T> WithRegisterOutput(
+            Action<IIncrementalGeneratorOutputNode> registerOutput
+        ) => new InputNode<T>(_getInput, registerOutput, _inputComparer, _comparer, _name);
 
-        public void RegisterOutput(IIncrementalGeneratorOutputNode output) => _registerOutput(output);
+        public void RegisterOutput(IIncrementalGeneratorOutputNode output) =>
+            _registerOutput(output);
 
-        private void LogTables(NodeStateTable<T>? previousTable, NodeStateTable<T> newTable, ImmutableArray<T> inputs)
+        private void LogTables(
+            NodeStateTable<T>? previousTable,
+            NodeStateTable<T> newTable,
+            ImmutableArray<T> inputs
+        )
         {
             if (!CodeAnalysisEventSource.Log.IsEnabled())
             {
@@ -119,7 +158,13 @@ namespace Microsoft.CodeAnalysis
             var tableBuilder = NodeStateTable<T>.Empty.ToBuilder(_name, stepTrackingEnabled: false);
             foreach (var input in inputs)
             {
-                tableBuilder.AddEntry(input, EntryState.Added, TimeSpan.Zero, stepInputs: default, EntryState.Added);
+                tableBuilder.AddEntry(
+                    input,
+                    EntryState.Added,
+                    TimeSpan.Zero,
+                    stepInputs: default,
+                    EntryState.Added
+                );
             }
             var inputTable = tableBuilder.ToImmutableAndFree();
 

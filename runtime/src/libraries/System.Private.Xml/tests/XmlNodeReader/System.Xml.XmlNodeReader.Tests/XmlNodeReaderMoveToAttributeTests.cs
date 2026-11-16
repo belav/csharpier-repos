@@ -70,7 +70,10 @@ namespace System.Xml.XmlNodeReaderTests
             var nodeReader = new XmlNodeReader(xmlDoc);
             Assert.False(nodeReader.MoveToAttribute(string.Empty));
             Assert.False(nodeReader.MoveToAttribute(string.Empty, string.Empty));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { nodeReader.MoveToAttribute(0); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                nodeReader.MoveToAttribute(0);
+            });
         }
 
         [Fact]
@@ -80,7 +83,10 @@ namespace System.Xml.XmlNodeReaderTests
             Assert.True(nodeReader.Read());
             Assert.False(nodeReader.MoveToAttribute(string.Empty));
             Assert.False(nodeReader.MoveToAttribute(string.Empty, null));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { nodeReader.MoveToAttribute(0); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                nodeReader.MoveToAttribute(0);
+            });
         }
 
         [Fact]
@@ -112,7 +118,8 @@ namespace System.Xml.XmlNodeReaderTests
         [Fact]
         public void NodeReaderMoveToElementWithSimpleXml()
         {
-            string xml = "<root attr='cal'><child attr='val'><inner attr='val'></inner></child></root>";
+            string xml =
+                "<root attr='cal'><child attr='val'><inner attr='val'></inner></child></root>";
             XmlNodeReader nodeReader = NodeReaderTestHelper.CreateNodeReader(xml);
             Assert.True(nodeReader.Read());
             nodeReader.MoveToFirstAttribute();

@@ -19,16 +19,19 @@ public class RowIdentityMapFactory : IRowIdentityMapFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IRowIdentityMap Create(IUniqueConstraint key)
-        => (IRowIdentityMap)_createMethod
-            .MakeGenericMethod(key.Columns.Count == 1 ? key.Columns.First().ProviderClrType : typeof(object[]))
-            .Invoke(null, new object[] { key })!;
+    public virtual IRowIdentityMap Create(IUniqueConstraint key) =>
+        (IRowIdentityMap)
+            _createMethod
+                .MakeGenericMethod(
+                    key.Columns.Count == 1 ? key.Columns.First().ProviderClrType : typeof(object[])
+                )
+                .Invoke(null, new object[] { key })!;
 
-    private static readonly MethodInfo _createMethod = typeof(RowIdentityMapFactory).GetTypeInfo()
+    private static readonly MethodInfo _createMethod = typeof(RowIdentityMapFactory)
+        .GetTypeInfo()
         .GetDeclaredMethod(nameof(CreateRowIdentityMap))!;
 
     [UsedImplicitly]
     private static IRowIdentityMap CreateRowIdentityMap<TKey>(IUniqueConstraint key)
-        where TKey : notnull
-        => new RowIdentityMap<TKey>(key);
+        where TKey : notnull => new RowIdentityMap<TKey>(key);
 }

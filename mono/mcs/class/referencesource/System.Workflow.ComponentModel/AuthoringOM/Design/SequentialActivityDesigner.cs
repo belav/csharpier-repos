@@ -2,37 +2,38 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Drawing;
     using System.CodeDom;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.Drawing.Design;
-    using System.Drawing.Imaging;
-    using System.Drawing.Drawing2D;
-    using System.Windows.Forms.Design;
-    using System.ComponentModel.Design;
-    using System.Collections.Specialized;
-    using System.ComponentModel.Design.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel.Serialization;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Imaging;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
-    using System.Workflow.ComponentModel.Design;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
 
     //
-
 
     #region SequentialActivityDesigner Class
     /// <summary>
     /// Base class used for all the designers which have sequential vertical layout.
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class SequentialActivityDesigner : StructuredCompositeActivityDesigner
     {
         #region Constants
@@ -49,9 +50,7 @@ namespace System.Workflow.ComponentModel.Design
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public SequentialActivityDesigner()
-        {
-        }
+        public SequentialActivityDesigner() { }
         #endregion
 
         #region Properties
@@ -66,7 +65,6 @@ namespace System.Workflow.ComponentModel.Design
                 else
                     return base.Expanded;
             }
-
             set
             {
                 if (ParentDesigner is ParallelActivityDesigner)
@@ -74,7 +72,6 @@ namespace System.Workflow.ComponentModel.Design
                 base.Expanded = value;
             }
         }
-
 
         public override bool CanExpandCollapse
         {
@@ -114,7 +111,11 @@ namespace System.Workflow.ComponentModel.Design
                     return null;
 
                 // This assumes there is always atleast one connector in SequenceContainer
-                return new ConnectorHitTestInfo(this, HitTestLocations.Designer, connectors.Length - 1);
+                return new ConnectorHitTestInfo(
+                    this,
+                    HitTestLocations.Designer,
+                    connectors.Length - 1
+                );
             }
         }
 
@@ -135,11 +136,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         protected virtual string HelpText
         {
-            get
-            {
-                return this.helpText;
-            }
-
+            get { return this.helpText; }
             set
             {
                 this.helpText = value;
@@ -155,13 +152,20 @@ namespace System.Workflow.ComponentModel.Design
             get
             {
                 Rectangle[] connectors = GetConnectors();
-                if (this.HelpText.Length == 0 || ContainedDesigners.Count > 0 || !Expanded || connectors.Length == 0)
+                if (
+                    this.HelpText.Length == 0
+                    || ContainedDesigners.Count > 0
+                    || !Expanded
+                    || connectors.Length == 0
+                )
                     return Rectangle.Empty;
 
                 //Get the first connector and align the help text right in the center
                 Rectangle helpTextRectangle = Rectangle.Empty;
-                helpTextRectangle.X = connectors[0].Left + connectors[0].Width / 2 - this.helpTextSize.Width / 2;
-                helpTextRectangle.Y = connectors[0].Top + connectors[0].Height / 2 - this.helpTextSize.Height / 2;
+                helpTextRectangle.X =
+                    connectors[0].Left + connectors[0].Width / 2 - this.helpTextSize.Width / 2;
+                helpTextRectangle.Y =
+                    connectors[0].Top + connectors[0].Height / 2 - this.helpTextSize.Height / 2;
                 helpTextRectangle.Size = this.helpTextSize;
                 return helpTextRectangle;
             }
@@ -184,10 +188,13 @@ namespace System.Workflow.ComponentModel.Design
 
             //Calculate no of connectors for the container; if there is no activityDesigner then we display single connector
             ReadOnlyCollection<ActivityDesigner> containedDesigners = ContainedDesigners;
-            int connectorCount = (containedDesigners.Count > 0) ? (2 + (containedDesigners.Count - 1)) : 1;
+            int connectorCount =
+                (containedDesigners.Count > 0) ? (2 + (containedDesigners.Count - 1)) : 1;
             Rectangle[] connectorBounds = new Rectangle[connectorCount];
 
-            ReadOnlyCollection<Point> containerConnections = GetInnerConnections(DesignerEdges.Top | DesignerEdges.Bottom);
+            ReadOnlyCollection<Point> containerConnections = GetInnerConnections(
+                DesignerEdges.Top | DesignerEdges.Bottom
+            );
             Point containerStartConnection = new Point();
             Point containerEndConnection = new Point();
             if (containerConnections != null && containerConnections.Count > 0)
@@ -200,18 +207,37 @@ namespace System.Workflow.ComponentModel.Design
             {
                 //Add the first connector. This will be from bitmap bottom to activityDesigner start
                 ActivityDesigner startDesigner = containedDesigners[0] as ActivityDesigner;
-                ReadOnlyCollection<Point> startDesignerConnections = startDesigner.GetConnections(DesignerEdges.Top | DesignerEdges.Bottom);
+                ReadOnlyCollection<Point> startDesignerConnections = startDesigner.GetConnections(
+                    DesignerEdges.Top | DesignerEdges.Bottom
+                );
                 if (startDesignerConnections.Count == 0)
                 {
                     Rectangle startDesignerBounds = startDesigner.Bounds;
                     List<Point> connections = new List<Point>();
-                    connections.Add(new Point(startDesignerBounds.Left + startDesignerBounds.Width / 2, startDesignerBounds.Top));
-                    connections.Add(new Point(startDesignerBounds.Left + startDesignerBounds.Width / 2, startDesignerBounds.Bottom));
+                    connections.Add(
+                        new Point(
+                            startDesignerBounds.Left + startDesignerBounds.Width / 2,
+                            startDesignerBounds.Top
+                        )
+                    );
+                    connections.Add(
+                        new Point(
+                            startDesignerBounds.Left + startDesignerBounds.Width / 2,
+                            startDesignerBounds.Bottom
+                        )
+                    );
                     startDesignerConnections = connections.AsReadOnly();
                 }
 
-                connectorBounds[0].Location = new Point(containerStartConnection.X - ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0) / 2, containerStartConnection.Y);
-                connectorBounds[0].Size = new Size(((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0), startDesignerConnections[0].Y - containerStartConnection.Y);
+                connectorBounds[0].Location = new Point(
+                    containerStartConnection.X
+                        - ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0) / 2,
+                    containerStartConnection.Y
+                );
+                connectorBounds[0].Size = new Size(
+                    ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0),
+                    startDesignerConnections[0].Y - containerStartConnection.Y
+                );
 
                 //Add rest of the points
                 for (int i = 0; i < containedDesigners.Count - 1; i++)
@@ -220,34 +246,73 @@ namespace System.Workflow.ComponentModel.Design
                     ActivityDesigner designerTo = containedDesigners[i + 1];
                     if (designerFrom != null && designerTo != null)
                     {
-                        ReadOnlyCollection<Point> designerFromConnections = designerFrom.GetConnections(DesignerEdges.Top | DesignerEdges.Bottom);
+                        ReadOnlyCollection<Point> designerFromConnections =
+                            designerFrom.GetConnections(DesignerEdges.Top | DesignerEdges.Bottom);
                         int designerFromPointCount = designerFromConnections.Count;
-                        ReadOnlyCollection<Point> designerToConnections = designerTo.GetConnections(DesignerEdges.Top | DesignerEdges.Bottom);
-                        connectorBounds[i + 1].Location = new Point(designerFromConnections[designerFromPointCount - 1].X - ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0) / 2, designerFromConnections[designerFromPointCount - 1].Y);
-                        connectorBounds[i + 1].Size = new Size(((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0), designerToConnections[0].Y - designerFromConnections[designerFromPointCount - 1].Y);
+                        ReadOnlyCollection<Point> designerToConnections = designerTo.GetConnections(
+                            DesignerEdges.Top | DesignerEdges.Bottom
+                        );
+                        connectorBounds[i + 1].Location = new Point(
+                            designerFromConnections[designerFromPointCount - 1].X
+                                - ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0)
+                                    / 2,
+                            designerFromConnections[designerFromPointCount - 1].Y
+                        );
+                        connectorBounds[i + 1].Size = new Size(
+                            ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0),
+                            designerToConnections[0].Y
+                                - designerFromConnections[designerFromPointCount - 1].Y
+                        );
                     }
                 }
 
                 //Add the last connector
                 ActivityDesigner endDesigner = containedDesigners[containedDesigners.Count - 1];
-                ReadOnlyCollection<Point> endDesignerConnections = endDesigner.GetConnections(DesignerEdges.Top | DesignerEdges.Bottom);
+                ReadOnlyCollection<Point> endDesignerConnections = endDesigner.GetConnections(
+                    DesignerEdges.Top | DesignerEdges.Bottom
+                );
                 if (endDesignerConnections.Count == 0)
                 {
                     Rectangle endDesignerBounds = endDesigner.Bounds;
                     List<Point> connections = new List<Point>();
-                    connections.Add(new Point(endDesignerBounds.Left + endDesignerBounds.Width / 2, endDesignerBounds.Top));
-                    connections.Add(new Point(endDesignerBounds.Left + endDesignerBounds.Width / 2, endDesignerBounds.Bottom));
+                    connections.Add(
+                        new Point(
+                            endDesignerBounds.Left + endDesignerBounds.Width / 2,
+                            endDesignerBounds.Top
+                        )
+                    );
+                    connections.Add(
+                        new Point(
+                            endDesignerBounds.Left + endDesignerBounds.Width / 2,
+                            endDesignerBounds.Bottom
+                        )
+                    );
                     endDesignerConnections = connections.AsReadOnly();
                 }
 
-                connectorBounds[connectorCount - 1].Location = new Point(endDesignerConnections[endDesignerConnections.Count - 1].X - ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0) / 2, endDesignerConnections[endDesignerConnections.Count - 1].Y);
-                connectorBounds[connectorCount - 1].Size = new Size(((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0), containerEndConnection.Y - endDesignerConnections[endDesignerConnections.Count - 1].Y);
+                connectorBounds[connectorCount - 1].Location = new Point(
+                    endDesignerConnections[endDesignerConnections.Count - 1].X
+                        - ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0) / 2,
+                    endDesignerConnections[endDesignerConnections.Count - 1].Y
+                );
+                connectorBounds[connectorCount - 1].Size = new Size(
+                    ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0),
+                    containerEndConnection.Y
+                        - endDesignerConnections[endDesignerConnections.Count - 1].Y
+                );
             }
             else
             {
                 //If there are no activity designers in the container then we show only one connector
-                connectorBounds[0].Location = new Point(containerStartConnection.X - ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0) / 2, containerStartConnection.Y);
-                connectorBounds[0].Size = new Size(((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0), containerEndConnection.Y - containerStartConnection.Y);
+                connectorBounds[0].Location = new Point(
+                    containerStartConnection.X
+                        - ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0) / 2,
+                    containerStartConnection.Y
+                );
+                connectorBounds[0].Size = new Size(
+                    ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0),
+                    containerEndConnection.Y - containerStartConnection.Y
+                );
             }
 
             //extend the targets a little bit
@@ -261,16 +326,26 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                ActivityDesignerGlyphCollection designerGlyphs = new ActivityDesignerGlyphCollection();
-                ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+                ActivityDesignerGlyphCollection designerGlyphs =
+                    new ActivityDesignerGlyphCollection();
+                ISelectionService selectionService =
+                    GetService(typeof(ISelectionService)) as ISelectionService;
                 if (selectionService != null)
                 {
                     ICollection selectedObjects = selectionService.GetSelectedComponents();
                     foreach (object obj in selectedObjects)
                     {
                         ConnectorHitTestInfo connectorHitTestInfo = obj as ConnectorHitTestInfo;
-                        if (connectorHitTestInfo != null && connectorHitTestInfo.AssociatedDesigner == this)
-                            designerGlyphs.Add(new SequentialConnectorSelectionGlyph(connectorHitTestInfo.MapToIndex(), (selectionService.PrimarySelection == obj)));
+                        if (
+                            connectorHitTestInfo != null
+                            && connectorHitTestInfo.AssociatedDesigner == this
+                        )
+                            designerGlyphs.Add(
+                                new SequentialConnectorSelectionGlyph(
+                                    connectorHitTestInfo.MapToIndex(),
+                                    (selectionService.PrimarySelection == obj)
+                                )
+                            );
                     }
                 }
 
@@ -282,10 +357,7 @@ namespace System.Workflow.ComponentModel.Design
 
         protected Size HelpTextSize
         {
-            get
-            {
-                return this.helpTextSize;
-            }
+            get { return this.helpTextSize; }
         }
         #endregion
 
@@ -331,12 +403,18 @@ namespace System.Workflow.ComponentModel.Design
             return hitInfo;
         }
 
-        public override object GetNextSelectableObject(object obj, DesignerNavigationDirection direction)
+        public override object GetNextSelectableObject(
+            object obj,
+            DesignerNavigationDirection direction
+        )
         {
             if (ActiveDesigner != this)
                 return base.GetNextSelectableObject(obj, direction);
 
-            if (direction != DesignerNavigationDirection.Down && direction != DesignerNavigationDirection.Up)
+            if (
+                direction != DesignerNavigationDirection.Down
+                && direction != DesignerNavigationDirection.Up
+            )
                 return null;
 
             object nextObject = null;
@@ -351,10 +429,19 @@ namespace System.Workflow.ComponentModel.Design
                 }
                 else if (obj is Activity)
                 {
-                    ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(obj as Activity);
-                    int currentIndex = (activityDesigner != null) ? containedDesigners.IndexOf(activityDesigner) : -1;
+                    ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(
+                        obj as Activity
+                    );
+                    int currentIndex =
+                        (activityDesigner != null)
+                            ? containedDesigners.IndexOf(activityDesigner)
+                            : -1;
                     if (currentIndex >= 0 && (currentIndex + 1) < GetConnectors().Length)
-                        nextObject = new ConnectorHitTestInfo(this, HitTestLocations.Designer, currentIndex + 1);
+                        nextObject = new ConnectorHitTestInfo(
+                            this,
+                            HitTestLocations.Designer,
+                            currentIndex + 1
+                        );
                 }
             }
             else if (direction == DesignerNavigationDirection.Up)
@@ -363,14 +450,25 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     int currentIndex = ((ConnectorHitTestInfo)obj).MapToIndex();
                     if (currentIndex > 0 && currentIndex < GetConnectors().Length)
-                        nextObject = ((ActivityDesigner)containedDesigners[currentIndex - 1]).Activity;
+                        nextObject = (
+                            (ActivityDesigner)containedDesigners[currentIndex - 1]
+                        ).Activity;
                 }
                 else if (obj is Activity)
                 {
-                    ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(obj as Activity);
-                    int currentIndex = (activityDesigner != null) ? containedDesigners.IndexOf(activityDesigner) : -1;
+                    ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(
+                        obj as Activity
+                    );
+                    int currentIndex =
+                        (activityDesigner != null)
+                            ? containedDesigners.IndexOf(activityDesigner)
+                            : -1;
                     if (currentIndex >= 0 && currentIndex < GetConnectors().Length)
-                        nextObject = new ConnectorHitTestInfo(this, HitTestLocations.Designer, currentIndex);
+                        nextObject = new ConnectorHitTestInfo(
+                            this,
+                            HitTestLocations.Designer,
+                            currentIndex
+                        );
                 }
             }
 
@@ -398,7 +496,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             base.OnPaint(e);
 
-            CompositeDesignerTheme compositeDesignerTheme = e.DesignerTheme as CompositeDesignerTheme;
+            CompositeDesignerTheme compositeDesignerTheme =
+                e.DesignerTheme as CompositeDesignerTheme;
             if (Expanded && compositeDesignerTheme != null)
             {
                 //Draw the connectors
@@ -408,21 +507,86 @@ namespace System.Workflow.ComponentModel.Design
                     Rectangle[] connectors = GetConnectors();
                     if (connectors.Length > 0)
                     {
-                        DrawConnectors(e.Graphics, compositeDesignerTheme.ForegroundPen, new Point[] { new Point(connectors[0].X + connectors[0].Width / 2, connectors[0].Y + 2), new Point(connectors[0].X + connectors[0].Width / 2, helpTextRectangle.Top - 2) }, compositeDesignerTheme.ConnectorStartCap, LineAnchor.None);
-                        DrawConnectors(e.Graphics, compositeDesignerTheme.ForegroundPen, new Point[] { new Point(connectors[0].X + connectors[0].Width / 2, helpTextRectangle.Bottom + 2), new Point(connectors[0].X + connectors[0].Width / 2, connectors[0].Bottom - 2) }, LineAnchor.None, compositeDesignerTheme.ConnectorEndCap);
+                        DrawConnectors(
+                            e.Graphics,
+                            compositeDesignerTheme.ForegroundPen,
+                            new Point[]
+                            {
+                                new Point(
+                                    connectors[0].X + connectors[0].Width / 2,
+                                    connectors[0].Y + 2
+                                ),
+                                new Point(
+                                    connectors[0].X + connectors[0].Width / 2,
+                                    helpTextRectangle.Top - 2
+                                ),
+                            },
+                            compositeDesignerTheme.ConnectorStartCap,
+                            LineAnchor.None
+                        );
+                        DrawConnectors(
+                            e.Graphics,
+                            compositeDesignerTheme.ForegroundPen,
+                            new Point[]
+                            {
+                                new Point(
+                                    connectors[0].X + connectors[0].Width / 2,
+                                    helpTextRectangle.Bottom + 2
+                                ),
+                                new Point(
+                                    connectors[0].X + connectors[0].Width / 2,
+                                    connectors[0].Bottom - 2
+                                ),
+                            },
+                            LineAnchor.None,
+                            compositeDesignerTheme.ConnectorEndCap
+                        );
                     }
 
-                    ActivityDesignerPaint.DrawText(e.Graphics, compositeDesignerTheme.Font, this.HelpText, helpTextRectangle, StringAlignment.Center, e.AmbientTheme.TextQuality, compositeDesignerTheme.ForegroundBrush);
+                    ActivityDesignerPaint.DrawText(
+                        e.Graphics,
+                        compositeDesignerTheme.Font,
+                        this.HelpText,
+                        helpTextRectangle,
+                        StringAlignment.Center,
+                        e.AmbientTheme.TextQuality,
+                        compositeDesignerTheme.ForegroundBrush
+                    );
                 }
                 else
                 {
                     Rectangle[] connectors = GetConnectors();
                     for (int i = 0; i < connectors.Length; i++)
                     {
-                        Pen pen = (i == CurrentDropTarget) ? e.AmbientTheme.DropIndicatorPen : compositeDesignerTheme.ForegroundPen;
-                        LineAnchor startCap = ((i == 0 && connectors.Length > 2) || i == connectors.Length - 1) ? LineAnchor.None : compositeDesignerTheme.ConnectorStartCap;
-                        LineAnchor endCap = (i == 0 || (i == connectors.Length - 1 && connectors.Length > 2)) ? LineAnchor.None : compositeDesignerTheme.ConnectorEndCap;
-                        DrawConnectors(e.Graphics, pen, new Point[] { new Point(connectors[i].Left + connectors[i].Width / 2, connectors[i].Top + 2), new Point(connectors[i].Left + connectors[i].Width / 2, connectors[i].Bottom - 2) }, startCap, endCap);
+                        Pen pen =
+                            (i == CurrentDropTarget)
+                                ? e.AmbientTheme.DropIndicatorPen
+                                : compositeDesignerTheme.ForegroundPen;
+                        LineAnchor startCap =
+                            ((i == 0 && connectors.Length > 2) || i == connectors.Length - 1)
+                                ? LineAnchor.None
+                                : compositeDesignerTheme.ConnectorStartCap;
+                        LineAnchor endCap =
+                            (i == 0 || (i == connectors.Length - 1 && connectors.Length > 2))
+                                ? LineAnchor.None
+                                : compositeDesignerTheme.ConnectorEndCap;
+                        DrawConnectors(
+                            e.Graphics,
+                            pen,
+                            new Point[]
+                            {
+                                new Point(
+                                    connectors[i].Left + connectors[i].Width / 2,
+                                    connectors[i].Top + 2
+                                ),
+                                new Point(
+                                    connectors[i].Left + connectors[i].Width / 2,
+                                    connectors[i].Bottom - 2
+                                ),
+                            },
+                            startCap,
+                            endCap
+                        );
                     }
                 }
             }
@@ -437,31 +601,53 @@ namespace System.Workflow.ComponentModel.Design
 
             if (Expanded && ActiveDesigner == this)
             {
-                CompositeDesignerTheme compositeDesignerTheme = e.DesignerTheme as CompositeDesignerTheme;
+                CompositeDesignerTheme compositeDesignerTheme =
+                    e.DesignerTheme as CompositeDesignerTheme;
 
                 //This condition is to center align the children
                 int height = 0;
 
-                ReadOnlyCollection<Point> connectionPoints = GetInnerConnections(DesignerEdges.Top | DesignerEdges.Bottom);
+                ReadOnlyCollection<Point> connectionPoints = GetInnerConnections(
+                    DesignerEdges.Top | DesignerEdges.Bottom
+                );
                 Point location = (connectionPoints.Count > 0) ? connectionPoints[0] : Location;
 
                 if (ContainedDesigners.Count == 1)
                 {
                     int heightDelta = 0;
                     if (connectionPoints.Count > 0)
-                        heightDelta = Size.Height - (connectionPoints[connectionPoints.Count - 1].Y - connectionPoints[0].Y);
-                    height += (Size.Height - heightDelta) / 2 - ContainedDesigners[0].Size.Height / 2;
+                        heightDelta =
+                            Size.Height
+                            - (
+                                connectionPoints[connectionPoints.Count - 1].Y
+                                - connectionPoints[0].Y
+                            );
+                    height +=
+                        (Size.Height - heightDelta) / 2 - ContainedDesigners[0].Size.Height / 2;
                 }
                 else
                 {
-                    height += ((compositeDesignerTheme != null) ? compositeDesignerTheme.ConnectorSize.Height : 0);
+                    height += (
+                        (compositeDesignerTheme != null)
+                            ? compositeDesignerTheme.ConnectorSize.Height
+                            : 0
+                    );
                 }
 
                 foreach (ActivityDesigner activityDesigner in ContainedDesigners)
                 {
                     Size designerSize = activityDesigner.Size;
-                    activityDesigner.Location = new Point(location.X - (designerSize.Width / 2), location.Y + height);
-                    height += designerSize.Height + ((compositeDesignerTheme != null) ? compositeDesignerTheme.ConnectorSize.Height : 0);
+                    activityDesigner.Location = new Point(
+                        location.X - (designerSize.Width / 2),
+                        location.Y + height
+                    );
+                    height +=
+                        designerSize.Height
+                        + (
+                            (compositeDesignerTheme != null)
+                                ? compositeDesignerTheme.ConnectorSize.Height
+                                : 0
+                        );
                 }
             }
         }
@@ -470,11 +656,18 @@ namespace System.Workflow.ComponentModel.Design
         {
             Size containerSize = base.OnLayoutSize(e);
 
-            CompositeDesignerTheme compositeDesignerTheme = e.DesignerTheme as CompositeDesignerTheme;
+            CompositeDesignerTheme compositeDesignerTheme =
+                e.DesignerTheme as CompositeDesignerTheme;
             if (Expanded && ActiveDesigner == this && compositeDesignerTheme != null)
             {
                 if (this.HelpText.Length > 0)
-                    this.helpTextSize = ActivityDesignerPaint.MeasureString(e.Graphics, compositeDesignerTheme.Font, this.HelpText, StringAlignment.Center, SequentialActivityDesigner.DefaultHelpTextSize);
+                    this.helpTextSize = ActivityDesignerPaint.MeasureString(
+                        e.Graphics,
+                        compositeDesignerTheme.Font,
+                        this.HelpText,
+                        StringAlignment.Center,
+                        SequentialActivityDesigner.DefaultHelpTextSize
+                    );
 
                 //Calculate the size based on child size
                 containerSize.Height += compositeDesignerTheme.ConnectorSize.Height; //Add the height of first connector
@@ -495,10 +688,16 @@ namespace System.Workflow.ComponentModel.Design
                     containerSize.Height += compositeDesignerTheme.ConnectorSize.Height; //Add the height of last connector
                 }
 
-                containerSize.Width = Math.Max(containerSize.Width, compositeDesignerTheme.Size.Width);
+                containerSize.Width = Math.Max(
+                    containerSize.Width,
+                    compositeDesignerTheme.Size.Width
+                );
                 containerSize.Width += 3 * e.AmbientTheme.Margin.Width;
                 containerSize.Width += 2 * e.AmbientTheme.SelectionSize.Width;
-                containerSize.Height = Math.Max(containerSize.Height, compositeDesignerTheme.Size.Height);
+                containerSize.Height = Math.Max(
+                    containerSize.Height,
+                    compositeDesignerTheme.Size.Height
+                );
             }
 
             return containerSize;
@@ -510,24 +709,44 @@ namespace System.Workflow.ComponentModel.Design
         {
             //see if there's a drag'n'drop operation going on
             WorkflowView parentView = ParentView;
-            DragDropManager dragDropManager = GetService(typeof(DragDropManager)) as DragDropManager;
-            if (parentView == null || dragDropManager == null || !parentView.DragDropInProgress || DrawingState != DrawingStates.Valid)
+            DragDropManager dragDropManager =
+                GetService(typeof(DragDropManager)) as DragDropManager;
+            if (
+                parentView == null
+                || dragDropManager == null
+                || !parentView.DragDropInProgress
+                || DrawingState != DrawingStates.Valid
+            )
                 return new DesignerGlyph[] { };
 
             List<DesignerGlyph> glyphs = new List<DesignerGlyph>();
-            Rectangle logicalViewPort = parentView.ClientRectangleToLogical(new Rectangle(Point.Empty, parentView.ViewPortSize));
+            Rectangle logicalViewPort = parentView.ClientRectangleToLogical(
+                new Rectangle(Point.Empty, parentView.ViewPortSize)
+            );
             AmbientTheme ambientTheme = WorkflowTheme.CurrentTheme.AmbientTheme;
             Rectangle[] connectors = GetConnectors();
             Rectangle helpTextRectangle = HelpTextRectangle;
             for (int i = 0; i < connectors.Length; i++)
             {
-                if (logicalViewPort.IntersectsWith(connectors[i]) && i != CurrentDropTarget && dragDropManager.IsValidDropContext(new ConnectorHitTestInfo(this, HitTestLocations.Designer, i)))
+                if (
+                    logicalViewPort.IntersectsWith(connectors[i])
+                    && i != CurrentDropTarget
+                    && dragDropManager.IsValidDropContext(
+                        new ConnectorHitTestInfo(this, HitTestLocations.Designer, i)
+                    )
+                )
                 {
                     Point glyphLocation = Point.Empty;
                     if (helpTextRectangle.IsEmpty)
-                        glyphLocation = new Point(connectors[i].Location.X + connectors[i].Size.Width / 2 + 1, connectors[i].Location.Y + connectors[i].Size.Height / 2);
+                        glyphLocation = new Point(
+                            connectors[i].Location.X + connectors[i].Size.Width / 2 + 1,
+                            connectors[i].Location.Y + connectors[i].Size.Height / 2
+                        );
                     else
-                        glyphLocation = new Point(helpTextRectangle.Left + helpTextRectangle.Width / 2 + 1, helpTextRectangle.Top - ambientTheme.DropIndicatorSize.Height / 2);
+                        glyphLocation = new Point(
+                            helpTextRectangle.Left + helpTextRectangle.Width / 2 + 1,
+                            helpTextRectangle.Top - ambientTheme.DropIndicatorSize.Height / 2
+                        );
 
                     glyphs.Add(new ConnectorDragDropGlyph(i, glyphLocation));
                 }
@@ -543,10 +762,11 @@ namespace System.Workflow.ComponentModel.Design
         #region Class SequentialConnectorSelectionGlyph
         private sealed class SequentialConnectorSelectionGlyph : ConnectorSelectionGlyph
         {
-            public SequentialConnectorSelectionGlyph(int connectorIndex, bool isPrimarySelectionGlyph)
-                : base(connectorIndex, isPrimarySelectionGlyph)
-            {
-            }
+            public SequentialConnectorSelectionGlyph(
+                int connectorIndex,
+                bool isPrimarySelectionGlyph
+            )
+                : base(connectorIndex, isPrimarySelectionGlyph) { }
 
             public override Rectangle GetBounds(ActivityDesigner designer, bool activated)
             {
@@ -560,27 +780,40 @@ namespace System.Workflow.ComponentModel.Design
                 return bounds;
             }
 
-            protected override void OnPaint(Graphics graphics, bool activated, AmbientTheme ambientTheme, ActivityDesigner designer)
+            protected override void OnPaint(
+                Graphics graphics,
+                bool activated,
+                AmbientTheme ambientTheme,
+                ActivityDesigner designer
+            )
             {
                 Rectangle bounds = GetBounds(designer, activated);
                 Rectangle[] grabHandles = new Rectangle[2];
-                grabHandles[0] = new Rectangle(bounds.X + bounds.Width / 2 - ambientTheme.SelectionSize.Width / 2, bounds.Y, ambientTheme.SelectionSize.Width, ambientTheme.SelectionSize.Height);
-                grabHandles[1] = new Rectangle(bounds.X + bounds.Width / 2 - ambientTheme.SelectionSize.Width / 2, bounds.Bottom - ambientTheme.SelectionSize.Height, ambientTheme.SelectionSize.Width, ambientTheme.SelectionSize.Height);
-                ActivityDesignerPaint.DrawGrabHandles(graphics, grabHandles, this.isPrimarySelectionGlyph);
+                grabHandles[0] = new Rectangle(
+                    bounds.X + bounds.Width / 2 - ambientTheme.SelectionSize.Width / 2,
+                    bounds.Y,
+                    ambientTheme.SelectionSize.Width,
+                    ambientTheme.SelectionSize.Height
+                );
+                grabHandles[1] = new Rectangle(
+                    bounds.X + bounds.Width / 2 - ambientTheme.SelectionSize.Width / 2,
+                    bounds.Bottom - ambientTheme.SelectionSize.Height,
+                    ambientTheme.SelectionSize.Width,
+                    ambientTheme.SelectionSize.Height
+                );
+                ActivityDesignerPaint.DrawGrabHandles(
+                    graphics,
+                    grabHandles,
+                    this.isPrimarySelectionGlyph
+                );
             }
 
             public override bool IsPrimarySelection
             {
-                get
-                {
-                    return this.isPrimarySelectionGlyph;
-                }
+                get { return this.isPrimarySelectionGlyph; }
             }
         }
         #endregion
     }
     #endregion
-
-
-
 }

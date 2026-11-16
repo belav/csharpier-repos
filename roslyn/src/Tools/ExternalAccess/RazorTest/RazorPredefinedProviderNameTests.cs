@@ -16,15 +16,26 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.UnitTests
     public class RazorPredefinedProviderNameTests
     {
         [Theory(Skip = "https://github.com/dotnet/roslyn/issues/58263")]
-        [InlineData(typeof(PredefinedCodeFixProviderNames), typeof(RazorPredefinedCodeFixProviderNames))]
-        [InlineData(typeof(PredefinedCodeRefactoringProviderNames), typeof(RazorPredefinedCodeRefactoringProviderNames))]
-        internal void RoslynNamesExistAndValuesMatchInRazorNamesClass(Type roslynProviderNamesType, Type razorProviderNamesType)
+        [InlineData(
+            typeof(PredefinedCodeFixProviderNames),
+            typeof(RazorPredefinedCodeFixProviderNames)
+        )]
+        [InlineData(
+            typeof(PredefinedCodeRefactoringProviderNames),
+            typeof(RazorPredefinedCodeRefactoringProviderNames)
+        )]
+        internal void RoslynNamesExistAndValuesMatchInRazorNamesClass(
+            Type roslynProviderNamesType,
+            Type razorProviderNamesType
+        )
         {
             var roslynProviderNames = GetPredefinedNamesFromFields(roslynProviderNamesType);
             var razorProviderNames = GetPredefinedNamesFromProperties(razorProviderNamesType);
 
             var failureMessage = new StringBuilder();
-            failureMessage.AppendLine($"The following Names were inconsistent between {roslynProviderNamesType.Name} and {razorProviderNamesType.Name}:");
+            failureMessage.AppendLine(
+                $"The following Names were inconsistent between {roslynProviderNamesType.Name} and {razorProviderNamesType.Name}:"
+            );
             var passLength = failureMessage.Length;
 
             // Validates that all names from Roslyn's PredefinedCode*ProviderNames class exist in the RazorPredefinedCode*ProviderNames class
@@ -46,18 +57,29 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.UnitTests
             Assert.True(failureMessage.Length == passLength, failureMessage.ToString());
         }
 
-        private static ImmutableDictionary<string, string> GetPredefinedNamesFromFields(Type namesType)
+        private static ImmutableDictionary<string, string> GetPredefinedNamesFromFields(
+            Type namesType
+        )
         {
-            return namesType.GetFields(BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public)
+            return namesType
+                .GetFields(BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public)
                 .Where(field => field.FieldType == typeof(string))
                 .ToImmutableDictionary(field => field.Name, field => (string)field.GetValue(null));
         }
 
-        private static ImmutableDictionary<string, string> GetPredefinedNamesFromProperties(Type namesType)
+        private static ImmutableDictionary<string, string> GetPredefinedNamesFromProperties(
+            Type namesType
+        )
         {
-            return namesType.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public)
+            return namesType
+                .GetProperties(
+                    BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public
+                )
                 .Where(property => property.PropertyType == typeof(string))
-                .ToImmutableDictionary(property => property.Name, property => (string)property.GetValue(null));
+                .ToImmutableDictionary(
+                    property => property.Name,
+                    property => (string)property.GetValue(null)
+                );
         }
     }
 }

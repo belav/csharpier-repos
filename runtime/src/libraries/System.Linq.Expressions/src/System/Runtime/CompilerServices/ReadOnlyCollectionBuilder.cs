@@ -223,7 +223,8 @@ namespace System.Runtime.CompilerServices
         /// </summary>
         /// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="ReadOnlyCollectionBuilder{T}"/>.</param>
         /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
-        public void CopyTo(T[] array, int arrayIndex) => Array.Copy(_items, 0, array, arrayIndex, _size);
+        public void CopyTo(T[] array, int arrayIndex) =>
+            Array.Copy(_items, 0, array, arrayIndex, _size);
 
         bool ICollection<T>.IsReadOnly => false;
 
@@ -288,7 +289,8 @@ namespace System.Runtime.CompilerServices
             {
                 return Contains((T)value!);
             }
-            else return false;
+            else
+                return false;
         }
 
         int IList.IndexOf(object? value)
@@ -325,10 +327,7 @@ namespace System.Runtime.CompilerServices
 
         object? IList.this[int index]
         {
-            get
-            {
-                return this[index];
-            }
+            get { return this[index]; }
             set
             {
                 ValidateNullValue(value, nameof(value));
@@ -481,9 +480,7 @@ namespace System.Runtime.CompilerServices
 
             #region IDisposable Members
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             #endregion
 

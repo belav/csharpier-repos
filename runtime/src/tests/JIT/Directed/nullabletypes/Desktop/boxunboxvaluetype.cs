@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
-
 
 internal class NullableTest1
 {
@@ -60,7 +59,8 @@ internal class NullableTest1
         return Helper.Compare((char?)(object)o, Helper.Create(default(char)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -72,7 +72,8 @@ internal class NullableTest1
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((char?)(object)o, Helper.Create(default(char)));
     }
@@ -114,7 +115,6 @@ internal class NullableTest1
         Assert.AreEqual(BoxUnboxToQGenC<char>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest2
 {
@@ -169,7 +169,8 @@ internal class NullableTest2
         return Helper.Compare((bool?)(object)o, Helper.Create(default(bool)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -181,7 +182,8 @@ internal class NullableTest2
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((bool?)(object)o, Helper.Create(default(bool)));
     }
@@ -223,7 +225,6 @@ internal class NullableTest2
         Assert.AreEqual(BoxUnboxToQGenC<bool>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest3
 {
@@ -278,7 +279,8 @@ internal class NullableTest3
         return Helper.Compare((byte?)(object)o, Helper.Create(default(byte)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -290,7 +292,8 @@ internal class NullableTest3
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((byte?)(object)o, Helper.Create(default(byte)));
     }
@@ -332,7 +335,6 @@ internal class NullableTest3
         Assert.AreEqual(BoxUnboxToQGenC<byte>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest4
 {
@@ -387,7 +389,8 @@ internal class NullableTest4
         return Helper.Compare((sbyte?)(object)o, Helper.Create(default(sbyte)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -399,7 +402,8 @@ internal class NullableTest4
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((sbyte?)(object)o, Helper.Create(default(sbyte)));
     }
@@ -441,7 +445,6 @@ internal class NullableTest4
         Assert.AreEqual(BoxUnboxToQGenC<sbyte>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest5
 {
@@ -496,7 +499,8 @@ internal class NullableTest5
         return Helper.Compare((short?)(object)o, Helper.Create(default(short)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -508,7 +512,8 @@ internal class NullableTest5
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((short?)(object)o, Helper.Create(default(short)));
     }
@@ -550,7 +555,6 @@ internal class NullableTest5
         Assert.AreEqual(BoxUnboxToQGenC<short>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest6
 {
@@ -605,7 +609,8 @@ internal class NullableTest6
         return Helper.Compare((ushort?)(object)o, Helper.Create(default(ushort)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -617,7 +622,8 @@ internal class NullableTest6
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((ushort?)(object)o, Helper.Create(default(ushort)));
     }
@@ -659,7 +665,6 @@ internal class NullableTest6
         Assert.AreEqual(BoxUnboxToQGenC<ushort>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest7
 {
@@ -714,7 +719,8 @@ internal class NullableTest7
         return Helper.Compare((int?)(object)o, Helper.Create(default(int)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -726,7 +732,8 @@ internal class NullableTest7
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((int?)(object)o, Helper.Create(default(int)));
     }
@@ -768,7 +775,6 @@ internal class NullableTest7
         Assert.AreEqual(BoxUnboxToQGenC<int>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest8
 {
@@ -823,7 +829,8 @@ internal class NullableTest8
         return Helper.Compare((uint?)(object)o, Helper.Create(default(uint)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -835,7 +842,8 @@ internal class NullableTest8
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((uint?)(object)o, Helper.Create(default(uint)));
     }
@@ -877,7 +885,6 @@ internal class NullableTest8
         Assert.AreEqual(BoxUnboxToQGenC<uint>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest9
 {
@@ -932,7 +939,8 @@ internal class NullableTest9
         return Helper.Compare((long?)(object)o, Helper.Create(default(long)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -944,7 +952,8 @@ internal class NullableTest9
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((long?)(object)o, Helper.Create(default(long)));
     }
@@ -986,7 +995,6 @@ internal class NullableTest9
         Assert.AreEqual(BoxUnboxToQGenC<long>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest10
 {
@@ -1041,7 +1049,8 @@ internal class NullableTest10
         return Helper.Compare((ulong?)(object)o, Helper.Create(default(ulong)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1053,7 +1062,8 @@ internal class NullableTest10
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((ulong?)(object)o, Helper.Create(default(ulong)));
     }
@@ -1095,7 +1105,6 @@ internal class NullableTest10
         Assert.AreEqual(BoxUnboxToQGenC<ulong>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest11
 {
@@ -1150,7 +1159,8 @@ internal class NullableTest11
         return Helper.Compare((float?)(object)o, Helper.Create(default(float)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1162,7 +1172,8 @@ internal class NullableTest11
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((float?)(object)o, Helper.Create(default(float)));
     }
@@ -1204,7 +1215,6 @@ internal class NullableTest11
         Assert.AreEqual(BoxUnboxToQGenC<float>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest12
 {
@@ -1259,7 +1269,8 @@ internal class NullableTest12
         return Helper.Compare((double?)(object)o, Helper.Create(default(double)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1271,7 +1282,8 @@ internal class NullableTest12
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((double?)(object)o, Helper.Create(default(double)));
     }
@@ -1313,7 +1325,6 @@ internal class NullableTest12
         Assert.AreEqual(BoxUnboxToQGenC<double>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest13
 {
@@ -1368,7 +1379,8 @@ internal class NullableTest13
         return Helper.Compare((decimal?)(object)o, Helper.Create(default(decimal)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1380,7 +1392,8 @@ internal class NullableTest13
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((decimal?)(object)o, Helper.Create(default(decimal)));
     }
@@ -1422,7 +1435,6 @@ internal class NullableTest13
         Assert.AreEqual(BoxUnboxToQGenC<decimal>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest14
 {
@@ -1477,7 +1489,8 @@ internal class NullableTest14
         return Helper.Compare((IntPtr?)(object)o, Helper.Create(default(IntPtr)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1489,7 +1502,8 @@ internal class NullableTest14
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((IntPtr?)(object)o, Helper.Create(default(IntPtr)));
     }
@@ -1531,7 +1545,6 @@ internal class NullableTest14
         Assert.AreEqual(BoxUnboxToQGenC<IntPtr>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest15
 {
@@ -1586,7 +1599,8 @@ internal class NullableTest15
         return Helper.Compare((UIntPtr?)(object)o, Helper.Create(default(UIntPtr)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1598,7 +1612,8 @@ internal class NullableTest15
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((UIntPtr?)(object)o, Helper.Create(default(UIntPtr)));
     }
@@ -1640,7 +1655,6 @@ internal class NullableTest15
         Assert.AreEqual(BoxUnboxToQGenC<UIntPtr>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest16
 {
@@ -1695,7 +1709,8 @@ internal class NullableTest16
         return Helper.Compare((Guid?)(object)o, Helper.Create(default(Guid)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1707,7 +1722,8 @@ internal class NullableTest16
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((Guid?)(object)o, Helper.Create(default(Guid)));
     }
@@ -1749,7 +1765,6 @@ internal class NullableTest16
         Assert.AreEqual(BoxUnboxToQGenC<Guid>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest17
 {
@@ -1804,7 +1819,8 @@ internal class NullableTest17
         return Helper.Compare((GCHandle?)(object)o, Helper.Create(default(GCHandle)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1816,7 +1832,8 @@ internal class NullableTest17
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((GCHandle?)(object)o, Helper.Create(default(GCHandle)));
     }
@@ -1858,7 +1875,6 @@ internal class NullableTest17
         Assert.AreEqual(BoxUnboxToQGenC<GCHandle>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest18
 {
@@ -1913,7 +1929,8 @@ internal class NullableTest18
         return Helper.Compare((ByteE?)(object)o, Helper.Create(default(ByteE)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1925,7 +1942,8 @@ internal class NullableTest18
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((ByteE?)(object)o, Helper.Create(default(ByteE)));
     }
@@ -1967,7 +1985,6 @@ internal class NullableTest18
         Assert.AreEqual(BoxUnboxToQGenC<ByteE>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest19
 {
@@ -2022,7 +2039,8 @@ internal class NullableTest19
         return Helper.Compare((IntE?)(object)o, Helper.Create(default(IntE)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -2034,7 +2052,8 @@ internal class NullableTest19
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((IntE?)(object)o, Helper.Create(default(IntE)));
     }
@@ -2076,7 +2095,6 @@ internal class NullableTest19
         Assert.AreEqual(BoxUnboxToQGenC<IntE>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest20
 {
@@ -2131,7 +2149,8 @@ internal class NullableTest20
         return Helper.Compare((LongE?)(object)o, Helper.Create(default(LongE)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -2143,7 +2162,8 @@ internal class NullableTest20
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((LongE?)(object)o, Helper.Create(default(LongE)));
     }
@@ -2185,7 +2205,6 @@ internal class NullableTest20
         Assert.AreEqual(BoxUnboxToQGenC<LongE>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest21
 {
@@ -2240,7 +2259,8 @@ internal class NullableTest21
         return Helper.Compare((EmptyStruct?)(object)o, Helper.Create(default(EmptyStruct)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -2252,7 +2272,8 @@ internal class NullableTest21
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((EmptyStruct?)(object)o, Helper.Create(default(EmptyStruct)));
     }
@@ -2295,7 +2316,6 @@ internal class NullableTest21
     }
 }
 
-
 internal class NullableTest22
 {
     private static bool BoxUnboxToNQ(object o)
@@ -2336,7 +2356,10 @@ internal class NullableTest22
     {
         try
         {
-            return Helper.Compare((NotEmptyStruct)(object)o, Helper.Create(default(NotEmptyStruct)));
+            return Helper.Compare(
+                (NotEmptyStruct)(object)o,
+                Helper.Create(default(NotEmptyStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2349,11 +2372,15 @@ internal class NullableTest22
         return Helper.Compare((NotEmptyStruct?)(object)o, Helper.Create(default(NotEmptyStruct)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((NotEmptyStruct)(object)o, Helper.Create(default(NotEmptyStruct)));
+            return Helper.Compare(
+                (NotEmptyStruct)(object)o,
+                Helper.Create(default(NotEmptyStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2361,7 +2388,8 @@ internal class NullableTest22
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((NotEmptyStruct?)(object)o, Helper.Create(default(NotEmptyStruct)));
     }
@@ -2404,7 +2432,6 @@ internal class NullableTest22
     }
 }
 
-
 internal class NullableTest23
 {
     private static bool BoxUnboxToNQ(object o)
@@ -2445,7 +2472,10 @@ internal class NullableTest23
     {
         try
         {
-            return Helper.Compare((NotEmptyStructQ)(object)o, Helper.Create(default(NotEmptyStructQ)));
+            return Helper.Compare(
+                (NotEmptyStructQ)(object)o,
+                Helper.Create(default(NotEmptyStructQ))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2458,11 +2488,15 @@ internal class NullableTest23
         return Helper.Compare((NotEmptyStructQ?)(object)o, Helper.Create(default(NotEmptyStructQ)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((NotEmptyStructQ)(object)o, Helper.Create(default(NotEmptyStructQ)));
+            return Helper.Compare(
+                (NotEmptyStructQ)(object)o,
+                Helper.Create(default(NotEmptyStructQ))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2470,7 +2504,8 @@ internal class NullableTest23
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((NotEmptyStructQ?)(object)o, Helper.Create(default(NotEmptyStructQ)));
     }
@@ -2513,7 +2548,6 @@ internal class NullableTest23
     }
 }
 
-
 internal class NullableTest24
 {
     private static bool BoxUnboxToNQ(object o)
@@ -2554,7 +2588,10 @@ internal class NullableTest24
     {
         try
         {
-            return Helper.Compare((NotEmptyStructA)(object)o, Helper.Create(default(NotEmptyStructA)));
+            return Helper.Compare(
+                (NotEmptyStructA)(object)o,
+                Helper.Create(default(NotEmptyStructA))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2567,11 +2604,15 @@ internal class NullableTest24
         return Helper.Compare((NotEmptyStructA?)(object)o, Helper.Create(default(NotEmptyStructA)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((NotEmptyStructA)(object)o, Helper.Create(default(NotEmptyStructA)));
+            return Helper.Compare(
+                (NotEmptyStructA)(object)o,
+                Helper.Create(default(NotEmptyStructA))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2579,7 +2620,8 @@ internal class NullableTest24
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((NotEmptyStructA?)(object)o, Helper.Create(default(NotEmptyStructA)));
     }
@@ -2622,7 +2664,6 @@ internal class NullableTest24
     }
 }
 
-
 internal class NullableTest25
 {
     private static bool BoxUnboxToNQ(object o)
@@ -2663,7 +2704,10 @@ internal class NullableTest25
     {
         try
         {
-            return Helper.Compare((NotEmptyStructQA)(object)o, Helper.Create(default(NotEmptyStructQA)));
+            return Helper.Compare(
+                (NotEmptyStructQA)(object)o,
+                Helper.Create(default(NotEmptyStructQA))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2673,14 +2717,21 @@ internal class NullableTest25
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((NotEmptyStructQA?)(object)o, Helper.Create(default(NotEmptyStructQA)));
+        return Helper.Compare(
+            (NotEmptyStructQA?)(object)o,
+            Helper.Create(default(NotEmptyStructQA))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((NotEmptyStructQA)(object)o, Helper.Create(default(NotEmptyStructQA)));
+            return Helper.Compare(
+                (NotEmptyStructQA)(object)o,
+                Helper.Create(default(NotEmptyStructQA))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2688,9 +2739,13 @@ internal class NullableTest25
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((NotEmptyStructQA?)(object)o, Helper.Create(default(NotEmptyStructQA)));
+        return Helper.Compare(
+            (NotEmptyStructQA?)(object)o,
+            Helper.Create(default(NotEmptyStructQA))
+        );
     }
 
     public static void Run()
@@ -2731,14 +2786,16 @@ internal class NullableTest25
     }
 }
 
-
 internal class NullableTest26
 {
     private static bool BoxUnboxToNQ(object o)
     {
         try
         {
-            return Helper.Compare((EmptyStructGen<int>)o, Helper.Create(default(EmptyStructGen<int>)));
+            return Helper.Compare(
+                (EmptyStructGen<int>)o,
+                Helper.Create(default(EmptyStructGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2755,7 +2812,10 @@ internal class NullableTest26
     {
         try
         {
-            return Helper.Compare((EmptyStructGen<int>)o, Helper.Create(default(EmptyStructGen<int>)));
+            return Helper.Compare(
+                (EmptyStructGen<int>)o,
+                Helper.Create(default(EmptyStructGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2772,7 +2832,10 @@ internal class NullableTest26
     {
         try
         {
-            return Helper.Compare((EmptyStructGen<int>)(object)o, Helper.Create(default(EmptyStructGen<int>)));
+            return Helper.Compare(
+                (EmptyStructGen<int>)(object)o,
+                Helper.Create(default(EmptyStructGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2782,14 +2845,21 @@ internal class NullableTest26
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((EmptyStructGen<int>?)(object)o, Helper.Create(default(EmptyStructGen<int>)));
+        return Helper.Compare(
+            (EmptyStructGen<int>?)(object)o,
+            Helper.Create(default(EmptyStructGen<int>))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((EmptyStructGen<int>)(object)o, Helper.Create(default(EmptyStructGen<int>)));
+            return Helper.Compare(
+                (EmptyStructGen<int>)(object)o,
+                Helper.Create(default(EmptyStructGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2797,16 +2867,22 @@ internal class NullableTest26
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((EmptyStructGen<int>?)(object)o, Helper.Create(default(EmptyStructGen<int>)));
+        return Helper.Compare(
+            (EmptyStructGen<int>?)(object)o,
+            Helper.Create(default(EmptyStructGen<int>))
+        );
     }
 
     public static void Run()
     {
         EmptyStructGen<int>? s = Helper.Create(default(EmptyStructGen<int>));
 
-        Console.WriteLine("--- EmptyStructGen<int>? s = Helper.Create(default(EmptyStructGen<int>)) ---");
+        Console.WriteLine(
+            "--- EmptyStructGen<int>? s = Helper.Create(default(EmptyStructGen<int>)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -2827,7 +2903,9 @@ internal class NullableTest26
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- EmptyStructGen<int> u = Helper.Create(default(EmptyStructGen<int>)) ---");
+        Console.WriteLine(
+            "--- EmptyStructGen<int> u = Helper.Create(default(EmptyStructGen<int>)) ---"
+        );
         EmptyStructGen<int> u = Helper.Create(default(EmptyStructGen<int>));
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
@@ -2840,14 +2918,16 @@ internal class NullableTest26
     }
 }
 
-
 internal class NullableTest27
 {
     private static bool BoxUnboxToNQ(object o)
     {
         try
         {
-            return Helper.Compare((NotEmptyStructGen<int>)o, Helper.Create(default(NotEmptyStructGen<int>)));
+            return Helper.Compare(
+                (NotEmptyStructGen<int>)o,
+                Helper.Create(default(NotEmptyStructGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2857,14 +2937,20 @@ internal class NullableTest27
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((NotEmptyStructGen<int>?)o, Helper.Create(default(NotEmptyStructGen<int>)));
+        return Helper.Compare(
+            (NotEmptyStructGen<int>?)o,
+            Helper.Create(default(NotEmptyStructGen<int>))
+        );
     }
 
     private static bool BoxUnboxToNQV(ValueType o)
     {
         try
         {
-            return Helper.Compare((NotEmptyStructGen<int>)o, Helper.Create(default(NotEmptyStructGen<int>)));
+            return Helper.Compare(
+                (NotEmptyStructGen<int>)o,
+                Helper.Create(default(NotEmptyStructGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2874,14 +2960,20 @@ internal class NullableTest27
 
     private static bool BoxUnboxToQV(ValueType o)
     {
-        return Helper.Compare((NotEmptyStructGen<int>?)o, Helper.Create(default(NotEmptyStructGen<int>)));
+        return Helper.Compare(
+            (NotEmptyStructGen<int>?)o,
+            Helper.Create(default(NotEmptyStructGen<int>))
+        );
     }
 
     private static bool BoxUnboxToNQGen<T>(T o)
     {
         try
         {
-            return Helper.Compare((NotEmptyStructGen<int>)(object)o, Helper.Create(default(NotEmptyStructGen<int>)));
+            return Helper.Compare(
+                (NotEmptyStructGen<int>)(object)o,
+                Helper.Create(default(NotEmptyStructGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2891,14 +2983,21 @@ internal class NullableTest27
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((NotEmptyStructGen<int>?)(object)o, Helper.Create(default(NotEmptyStructGen<int>)));
+        return Helper.Compare(
+            (NotEmptyStructGen<int>?)(object)o,
+            Helper.Create(default(NotEmptyStructGen<int>))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((NotEmptyStructGen<int>)(object)o, Helper.Create(default(NotEmptyStructGen<int>)));
+            return Helper.Compare(
+                (NotEmptyStructGen<int>)(object)o,
+                Helper.Create(default(NotEmptyStructGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2906,16 +3005,22 @@ internal class NullableTest27
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((NotEmptyStructGen<int>?)(object)o, Helper.Create(default(NotEmptyStructGen<int>)));
+        return Helper.Compare(
+            (NotEmptyStructGen<int>?)(object)o,
+            Helper.Create(default(NotEmptyStructGen<int>))
+        );
     }
 
     public static void Run()
     {
         NotEmptyStructGen<int>? s = Helper.Create(default(NotEmptyStructGen<int>));
 
-        Console.WriteLine("--- NotEmptyStructGen<int>? s = Helper.Create(default(NotEmptyStructGen<int>)) ---");
+        Console.WriteLine(
+            "--- NotEmptyStructGen<int>? s = Helper.Create(default(NotEmptyStructGen<int>)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -2936,7 +3041,9 @@ internal class NullableTest27
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- NotEmptyStructGen<int> u = Helper.Create(default(NotEmptyStructGen<int>)) ---");
+        Console.WriteLine(
+            "--- NotEmptyStructGen<int> u = Helper.Create(default(NotEmptyStructGen<int>)) ---"
+        );
         NotEmptyStructGen<int> u = Helper.Create(default(NotEmptyStructGen<int>));
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
@@ -2949,14 +3056,16 @@ internal class NullableTest27
     }
 }
 
-
 internal class NullableTest28
 {
     private static bool BoxUnboxToNQ(object o)
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGen<int>)o, Helper.Create(default(NotEmptyStructConstrainedGen<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGen<int>)o,
+                Helper.Create(default(NotEmptyStructConstrainedGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2966,14 +3075,20 @@ internal class NullableTest28
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGen<int>?)o, Helper.Create(default(NotEmptyStructConstrainedGen<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGen<int>?)o,
+            Helper.Create(default(NotEmptyStructConstrainedGen<int>))
+        );
     }
 
     private static bool BoxUnboxToNQV(ValueType o)
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGen<int>)o, Helper.Create(default(NotEmptyStructConstrainedGen<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGen<int>)o,
+                Helper.Create(default(NotEmptyStructConstrainedGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -2983,14 +3098,20 @@ internal class NullableTest28
 
     private static bool BoxUnboxToQV(ValueType o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGen<int>?)o, Helper.Create(default(NotEmptyStructConstrainedGen<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGen<int>?)o,
+            Helper.Create(default(NotEmptyStructConstrainedGen<int>))
+        );
     }
 
     private static bool BoxUnboxToNQGen<T>(T o)
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGen<int>)(object)o, Helper.Create(default(NotEmptyStructConstrainedGen<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGen<int>)(object)o,
+                Helper.Create(default(NotEmptyStructConstrainedGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3000,14 +3121,21 @@ internal class NullableTest28
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGen<int>?)(object)o, Helper.Create(default(NotEmptyStructConstrainedGen<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGen<int>?)(object)o,
+            Helper.Create(default(NotEmptyStructConstrainedGen<int>))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGen<int>)(object)o, Helper.Create(default(NotEmptyStructConstrainedGen<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGen<int>)(object)o,
+                Helper.Create(default(NotEmptyStructConstrainedGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3015,16 +3143,24 @@ internal class NullableTest28
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((NotEmptyStructConstrainedGen<int>?)(object)o, Helper.Create(default(NotEmptyStructConstrainedGen<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGen<int>?)(object)o,
+            Helper.Create(default(NotEmptyStructConstrainedGen<int>))
+        );
     }
 
     public static void Run()
     {
-        NotEmptyStructConstrainedGen<int>? s = Helper.Create(default(NotEmptyStructConstrainedGen<int>));
+        NotEmptyStructConstrainedGen<int>? s = Helper.Create(
+            default(NotEmptyStructConstrainedGen<int>)
+        );
 
-        Console.WriteLine("--- NotEmptyStructConstrainedGen<int>? s = Helper.Create(default(NotEmptyStructConstrainedGen<int>)) ---");
+        Console.WriteLine(
+            "--- NotEmptyStructConstrainedGen<int>? s = Helper.Create(default(NotEmptyStructConstrainedGen<int>)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -3045,19 +3181,30 @@ internal class NullableTest28
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- NotEmptyStructConstrainedGen<int> u = Helper.Create(default(NotEmptyStructConstrainedGen<int>)) ---");
-        NotEmptyStructConstrainedGen<int> u = Helper.Create(default(NotEmptyStructConstrainedGen<int>));
+        Console.WriteLine(
+            "--- NotEmptyStructConstrainedGen<int> u = Helper.Create(default(NotEmptyStructConstrainedGen<int>)) ---"
+        );
+        NotEmptyStructConstrainedGen<int> u = Helper.Create(
+            default(NotEmptyStructConstrainedGen<int>)
+        );
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(u), true, "BoxUnboxToNQV");
         Assert.AreEqual(BoxUnboxToQV(u), true, "BoxUnboxToQV");
         Assert.AreEqual(BoxUnboxToNQGen(u), true, "BoxUnboxToNQGen");
         Assert.AreEqual(BoxUnboxToQGen(u), true, "BoxUnboxToQGen");
-        Assert.AreEqual(BoxUnboxToNQGenC<NotEmptyStructConstrainedGen<int>>(u), true, "BoxUnboxToNQGenC");
-        Assert.AreEqual(BoxUnboxToQGenC<NotEmptyStructConstrainedGen<int>>(u), true, "BoxUnboxToQGenC");
+        Assert.AreEqual(
+            BoxUnboxToNQGenC<NotEmptyStructConstrainedGen<int>>(u),
+            true,
+            "BoxUnboxToNQGenC"
+        );
+        Assert.AreEqual(
+            BoxUnboxToQGenC<NotEmptyStructConstrainedGen<int>>(u),
+            true,
+            "BoxUnboxToQGenC"
+        );
     }
 }
-
 
 internal class NullableTest29
 {
@@ -3065,7 +3212,10 @@ internal class NullableTest29
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGenA<int>)o, Helper.Create(default(NotEmptyStructConstrainedGenA<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGenA<int>)o,
+                Helper.Create(default(NotEmptyStructConstrainedGenA<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3075,14 +3225,20 @@ internal class NullableTest29
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenA<int>?)o, Helper.Create(default(NotEmptyStructConstrainedGenA<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenA<int>?)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenA<int>))
+        );
     }
 
     private static bool BoxUnboxToNQV(ValueType o)
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGenA<int>)o, Helper.Create(default(NotEmptyStructConstrainedGenA<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGenA<int>)o,
+                Helper.Create(default(NotEmptyStructConstrainedGenA<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3092,14 +3248,20 @@ internal class NullableTest29
 
     private static bool BoxUnboxToQV(ValueType o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenA<int>?)o, Helper.Create(default(NotEmptyStructConstrainedGenA<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenA<int>?)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenA<int>))
+        );
     }
 
     private static bool BoxUnboxToNQGen<T>(T o)
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGenA<int>)(object)o, Helper.Create(default(NotEmptyStructConstrainedGenA<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGenA<int>)(object)o,
+                Helper.Create(default(NotEmptyStructConstrainedGenA<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3109,14 +3271,21 @@ internal class NullableTest29
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenA<int>?)(object)o, Helper.Create(default(NotEmptyStructConstrainedGenA<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenA<int>?)(object)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenA<int>))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGenA<int>)(object)o, Helper.Create(default(NotEmptyStructConstrainedGenA<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGenA<int>)(object)o,
+                Helper.Create(default(NotEmptyStructConstrainedGenA<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3124,16 +3293,24 @@ internal class NullableTest29
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenA<int>?)(object)o, Helper.Create(default(NotEmptyStructConstrainedGenA<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenA<int>?)(object)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenA<int>))
+        );
     }
 
     public static void Run()
     {
-        NotEmptyStructConstrainedGenA<int>? s = Helper.Create(default(NotEmptyStructConstrainedGenA<int>));
+        NotEmptyStructConstrainedGenA<int>? s = Helper.Create(
+            default(NotEmptyStructConstrainedGenA<int>)
+        );
 
-        Console.WriteLine("--- NotEmptyStructConstrainedGenA<int>? s = Helper.Create(default(NotEmptyStructConstrainedGenA<int>)) ---");
+        Console.WriteLine(
+            "--- NotEmptyStructConstrainedGenA<int>? s = Helper.Create(default(NotEmptyStructConstrainedGenA<int>)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -3154,19 +3331,30 @@ internal class NullableTest29
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- NotEmptyStructConstrainedGenA<int> u = Helper.Create(default(NotEmptyStructConstrainedGenA<int>)) ---");
-        NotEmptyStructConstrainedGenA<int> u = Helper.Create(default(NotEmptyStructConstrainedGenA<int>));
+        Console.WriteLine(
+            "--- NotEmptyStructConstrainedGenA<int> u = Helper.Create(default(NotEmptyStructConstrainedGenA<int>)) ---"
+        );
+        NotEmptyStructConstrainedGenA<int> u = Helper.Create(
+            default(NotEmptyStructConstrainedGenA<int>)
+        );
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(u), true, "BoxUnboxToNQV");
         Assert.AreEqual(BoxUnboxToQV(u), true, "BoxUnboxToQV");
         Assert.AreEqual(BoxUnboxToNQGen(u), true, "BoxUnboxToNQGen");
         Assert.AreEqual(BoxUnboxToQGen(u), true, "BoxUnboxToQGen");
-        Assert.AreEqual(BoxUnboxToNQGenC<NotEmptyStructConstrainedGenA<int>>(u), true, "BoxUnboxToNQGenC");
-        Assert.AreEqual(BoxUnboxToQGenC<NotEmptyStructConstrainedGenA<int>>(u), true, "BoxUnboxToQGenC");
+        Assert.AreEqual(
+            BoxUnboxToNQGenC<NotEmptyStructConstrainedGenA<int>>(u),
+            true,
+            "BoxUnboxToNQGenC"
+        );
+        Assert.AreEqual(
+            BoxUnboxToQGenC<NotEmptyStructConstrainedGenA<int>>(u),
+            true,
+            "BoxUnboxToQGenC"
+        );
     }
 }
-
 
 internal class NullableTest30
 {
@@ -3174,7 +3362,10 @@ internal class NullableTest30
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGenQ<int>)o, Helper.Create(default(NotEmptyStructConstrainedGenQ<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGenQ<int>)o,
+                Helper.Create(default(NotEmptyStructConstrainedGenQ<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3184,14 +3375,20 @@ internal class NullableTest30
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenQ<int>?)o, Helper.Create(default(NotEmptyStructConstrainedGenQ<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenQ<int>?)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenQ<int>))
+        );
     }
 
     private static bool BoxUnboxToNQV(ValueType o)
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGenQ<int>)o, Helper.Create(default(NotEmptyStructConstrainedGenQ<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGenQ<int>)o,
+                Helper.Create(default(NotEmptyStructConstrainedGenQ<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3201,14 +3398,20 @@ internal class NullableTest30
 
     private static bool BoxUnboxToQV(ValueType o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenQ<int>?)o, Helper.Create(default(NotEmptyStructConstrainedGenQ<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenQ<int>?)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenQ<int>))
+        );
     }
 
     private static bool BoxUnboxToNQGen<T>(T o)
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGenQ<int>)(object)o, Helper.Create(default(NotEmptyStructConstrainedGenQ<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGenQ<int>)(object)o,
+                Helper.Create(default(NotEmptyStructConstrainedGenQ<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3218,14 +3421,21 @@ internal class NullableTest30
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenQ<int>?)(object)o, Helper.Create(default(NotEmptyStructConstrainedGenQ<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenQ<int>?)(object)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenQ<int>))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGenQ<int>)(object)o, Helper.Create(default(NotEmptyStructConstrainedGenQ<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGenQ<int>)(object)o,
+                Helper.Create(default(NotEmptyStructConstrainedGenQ<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3233,16 +3443,24 @@ internal class NullableTest30
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenQ<int>?)(object)o, Helper.Create(default(NotEmptyStructConstrainedGenQ<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenQ<int>?)(object)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenQ<int>))
+        );
     }
 
     public static void Run()
     {
-        NotEmptyStructConstrainedGenQ<int>? s = Helper.Create(default(NotEmptyStructConstrainedGenQ<int>));
+        NotEmptyStructConstrainedGenQ<int>? s = Helper.Create(
+            default(NotEmptyStructConstrainedGenQ<int>)
+        );
 
-        Console.WriteLine("--- NotEmptyStructConstrainedGenQ<int>? s = Helper.Create(default(NotEmptyStructConstrainedGenQ<int>)) ---");
+        Console.WriteLine(
+            "--- NotEmptyStructConstrainedGenQ<int>? s = Helper.Create(default(NotEmptyStructConstrainedGenQ<int>)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -3263,19 +3481,30 @@ internal class NullableTest30
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- NotEmptyStructConstrainedGenQ<int> u = Helper.Create(default(NotEmptyStructConstrainedGenQ<int>)) ---");
-        NotEmptyStructConstrainedGenQ<int> u = Helper.Create(default(NotEmptyStructConstrainedGenQ<int>));
+        Console.WriteLine(
+            "--- NotEmptyStructConstrainedGenQ<int> u = Helper.Create(default(NotEmptyStructConstrainedGenQ<int>)) ---"
+        );
+        NotEmptyStructConstrainedGenQ<int> u = Helper.Create(
+            default(NotEmptyStructConstrainedGenQ<int>)
+        );
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(u), true, "BoxUnboxToNQV");
         Assert.AreEqual(BoxUnboxToQV(u), true, "BoxUnboxToQV");
         Assert.AreEqual(BoxUnboxToNQGen(u), true, "BoxUnboxToNQGen");
         Assert.AreEqual(BoxUnboxToQGen(u), true, "BoxUnboxToQGen");
-        Assert.AreEqual(BoxUnboxToNQGenC<NotEmptyStructConstrainedGenQ<int>>(u), true, "BoxUnboxToNQGenC");
-        Assert.AreEqual(BoxUnboxToQGenC<NotEmptyStructConstrainedGenQ<int>>(u), true, "BoxUnboxToQGenC");
+        Assert.AreEqual(
+            BoxUnboxToNQGenC<NotEmptyStructConstrainedGenQ<int>>(u),
+            true,
+            "BoxUnboxToNQGenC"
+        );
+        Assert.AreEqual(
+            BoxUnboxToQGenC<NotEmptyStructConstrainedGenQ<int>>(u),
+            true,
+            "BoxUnboxToQGenC"
+        );
     }
 }
-
 
 internal class NullableTest31
 {
@@ -3283,7 +3512,10 @@ internal class NullableTest31
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGenQA<int>)o, Helper.Create(default(NotEmptyStructConstrainedGenQA<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGenQA<int>)o,
+                Helper.Create(default(NotEmptyStructConstrainedGenQA<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3293,14 +3525,20 @@ internal class NullableTest31
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenQA<int>?)o, Helper.Create(default(NotEmptyStructConstrainedGenQA<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenQA<int>?)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenQA<int>))
+        );
     }
 
     private static bool BoxUnboxToNQV(ValueType o)
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGenQA<int>)o, Helper.Create(default(NotEmptyStructConstrainedGenQA<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGenQA<int>)o,
+                Helper.Create(default(NotEmptyStructConstrainedGenQA<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3310,14 +3548,20 @@ internal class NullableTest31
 
     private static bool BoxUnboxToQV(ValueType o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenQA<int>?)o, Helper.Create(default(NotEmptyStructConstrainedGenQA<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenQA<int>?)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenQA<int>))
+        );
     }
 
     private static bool BoxUnboxToNQGen<T>(T o)
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGenQA<int>)(object)o, Helper.Create(default(NotEmptyStructConstrainedGenQA<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGenQA<int>)(object)o,
+                Helper.Create(default(NotEmptyStructConstrainedGenQA<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3327,14 +3571,21 @@ internal class NullableTest31
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenQA<int>?)(object)o, Helper.Create(default(NotEmptyStructConstrainedGenQA<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenQA<int>?)(object)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenQA<int>))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((NotEmptyStructConstrainedGenQA<int>)(object)o, Helper.Create(default(NotEmptyStructConstrainedGenQA<int>)));
+            return Helper.Compare(
+                (NotEmptyStructConstrainedGenQA<int>)(object)o,
+                Helper.Create(default(NotEmptyStructConstrainedGenQA<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3342,16 +3593,24 @@ internal class NullableTest31
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenQA<int>?)(object)o, Helper.Create(default(NotEmptyStructConstrainedGenQA<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenQA<int>?)(object)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenQA<int>))
+        );
     }
 
     public static void Run()
     {
-        NotEmptyStructConstrainedGenQA<int>? s = Helper.Create(default(NotEmptyStructConstrainedGenQA<int>));
+        NotEmptyStructConstrainedGenQA<int>? s = Helper.Create(
+            default(NotEmptyStructConstrainedGenQA<int>)
+        );
 
-        Console.WriteLine("--- NotEmptyStructConstrainedGenQA<int>? s = Helper.Create(default(NotEmptyStructConstrainedGenQA<int>)) ---");
+        Console.WriteLine(
+            "--- NotEmptyStructConstrainedGenQA<int>? s = Helper.Create(default(NotEmptyStructConstrainedGenQA<int>)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -3372,19 +3631,30 @@ internal class NullableTest31
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- NotEmptyStructConstrainedGenQA<int> u = Helper.Create(default(NotEmptyStructConstrainedGenQA<int>)) ---");
-        NotEmptyStructConstrainedGenQA<int> u = Helper.Create(default(NotEmptyStructConstrainedGenQA<int>));
+        Console.WriteLine(
+            "--- NotEmptyStructConstrainedGenQA<int> u = Helper.Create(default(NotEmptyStructConstrainedGenQA<int>)) ---"
+        );
+        NotEmptyStructConstrainedGenQA<int> u = Helper.Create(
+            default(NotEmptyStructConstrainedGenQA<int>)
+        );
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(u), true, "BoxUnboxToNQV");
         Assert.AreEqual(BoxUnboxToQV(u), true, "BoxUnboxToQV");
         Assert.AreEqual(BoxUnboxToNQGen(u), true, "BoxUnboxToNQGen");
         Assert.AreEqual(BoxUnboxToQGen(u), true, "BoxUnboxToQGen");
-        Assert.AreEqual(BoxUnboxToNQGenC<NotEmptyStructConstrainedGenQA<int>>(u), true, "BoxUnboxToNQGenC");
-        Assert.AreEqual(BoxUnboxToQGenC<NotEmptyStructConstrainedGenQA<int>>(u), true, "BoxUnboxToQGenC");
+        Assert.AreEqual(
+            BoxUnboxToNQGenC<NotEmptyStructConstrainedGenQA<int>>(u),
+            true,
+            "BoxUnboxToNQGenC"
+        );
+        Assert.AreEqual(
+            BoxUnboxToQGenC<NotEmptyStructConstrainedGenQA<int>>(u),
+            true,
+            "BoxUnboxToQGenC"
+        );
     }
 }
-
 
 internal class NullableTest32
 {
@@ -3439,7 +3709,8 @@ internal class NullableTest32
         return Helper.Compare((NestedStruct?)(object)o, Helper.Create(default(NestedStruct)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -3451,7 +3722,8 @@ internal class NullableTest32
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((NestedStruct?)(object)o, Helper.Create(default(NestedStruct)));
     }
@@ -3494,14 +3766,16 @@ internal class NullableTest32
     }
 }
 
-
 internal class NullableTest33
 {
     private static bool BoxUnboxToNQ(object o)
     {
         try
         {
-            return Helper.Compare((NestedStructGen<int>)o, Helper.Create(default(NestedStructGen<int>)));
+            return Helper.Compare(
+                (NestedStructGen<int>)o,
+                Helper.Create(default(NestedStructGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3511,14 +3785,20 @@ internal class NullableTest33
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((NestedStructGen<int>?)o, Helper.Create(default(NestedStructGen<int>)));
+        return Helper.Compare(
+            (NestedStructGen<int>?)o,
+            Helper.Create(default(NestedStructGen<int>))
+        );
     }
 
     private static bool BoxUnboxToNQV(ValueType o)
     {
         try
         {
-            return Helper.Compare((NestedStructGen<int>)o, Helper.Create(default(NestedStructGen<int>)));
+            return Helper.Compare(
+                (NestedStructGen<int>)o,
+                Helper.Create(default(NestedStructGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3528,14 +3808,20 @@ internal class NullableTest33
 
     private static bool BoxUnboxToQV(ValueType o)
     {
-        return Helper.Compare((NestedStructGen<int>?)o, Helper.Create(default(NestedStructGen<int>)));
+        return Helper.Compare(
+            (NestedStructGen<int>?)o,
+            Helper.Create(default(NestedStructGen<int>))
+        );
     }
 
     private static bool BoxUnboxToNQGen<T>(T o)
     {
         try
         {
-            return Helper.Compare((NestedStructGen<int>)(object)o, Helper.Create(default(NestedStructGen<int>)));
+            return Helper.Compare(
+                (NestedStructGen<int>)(object)o,
+                Helper.Create(default(NestedStructGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3545,14 +3831,21 @@ internal class NullableTest33
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((NestedStructGen<int>?)(object)o, Helper.Create(default(NestedStructGen<int>)));
+        return Helper.Compare(
+            (NestedStructGen<int>?)(object)o,
+            Helper.Create(default(NestedStructGen<int>))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((NestedStructGen<int>)(object)o, Helper.Create(default(NestedStructGen<int>)));
+            return Helper.Compare(
+                (NestedStructGen<int>)(object)o,
+                Helper.Create(default(NestedStructGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3560,16 +3853,22 @@ internal class NullableTest33
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((NestedStructGen<int>?)(object)o, Helper.Create(default(NestedStructGen<int>)));
+        return Helper.Compare(
+            (NestedStructGen<int>?)(object)o,
+            Helper.Create(default(NestedStructGen<int>))
+        );
     }
 
     public static void Run()
     {
         NestedStructGen<int>? s = Helper.Create(default(NestedStructGen<int>));
 
-        Console.WriteLine("--- NestedStructGen<int>? s = Helper.Create(default(NestedStructGen<int>)) ---");
+        Console.WriteLine(
+            "--- NestedStructGen<int>? s = Helper.Create(default(NestedStructGen<int>)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -3590,7 +3889,9 @@ internal class NullableTest33
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- NestedStructGen<int> u = Helper.Create(default(NestedStructGen<int>)) ---");
+        Console.WriteLine(
+            "--- NestedStructGen<int> u = Helper.Create(default(NestedStructGen<int>)) ---"
+        );
         NestedStructGen<int> u = Helper.Create(default(NestedStructGen<int>));
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
@@ -3603,14 +3904,16 @@ internal class NullableTest33
     }
 }
 
-
 internal class NullableTest34
 {
     private static bool BoxUnboxToNQ(object o)
     {
         try
         {
-            return Helper.Compare((ExplicitFieldOffsetStruct)o, Helper.Create(default(ExplicitFieldOffsetStruct)));
+            return Helper.Compare(
+                (ExplicitFieldOffsetStruct)o,
+                Helper.Create(default(ExplicitFieldOffsetStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3620,14 +3923,20 @@ internal class NullableTest34
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((ExplicitFieldOffsetStruct?)o, Helper.Create(default(ExplicitFieldOffsetStruct)));
+        return Helper.Compare(
+            (ExplicitFieldOffsetStruct?)o,
+            Helper.Create(default(ExplicitFieldOffsetStruct))
+        );
     }
 
     private static bool BoxUnboxToNQV(ValueType o)
     {
         try
         {
-            return Helper.Compare((ExplicitFieldOffsetStruct)o, Helper.Create(default(ExplicitFieldOffsetStruct)));
+            return Helper.Compare(
+                (ExplicitFieldOffsetStruct)o,
+                Helper.Create(default(ExplicitFieldOffsetStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3637,14 +3946,20 @@ internal class NullableTest34
 
     private static bool BoxUnboxToQV(ValueType o)
     {
-        return Helper.Compare((ExplicitFieldOffsetStruct?)o, Helper.Create(default(ExplicitFieldOffsetStruct)));
+        return Helper.Compare(
+            (ExplicitFieldOffsetStruct?)o,
+            Helper.Create(default(ExplicitFieldOffsetStruct))
+        );
     }
 
     private static bool BoxUnboxToNQGen<T>(T o)
     {
         try
         {
-            return Helper.Compare((ExplicitFieldOffsetStruct)(object)o, Helper.Create(default(ExplicitFieldOffsetStruct)));
+            return Helper.Compare(
+                (ExplicitFieldOffsetStruct)(object)o,
+                Helper.Create(default(ExplicitFieldOffsetStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3654,14 +3969,21 @@ internal class NullableTest34
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((ExplicitFieldOffsetStruct?)(object)o, Helper.Create(default(ExplicitFieldOffsetStruct)));
+        return Helper.Compare(
+            (ExplicitFieldOffsetStruct?)(object)o,
+            Helper.Create(default(ExplicitFieldOffsetStruct))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((ExplicitFieldOffsetStruct)(object)o, Helper.Create(default(ExplicitFieldOffsetStruct)));
+            return Helper.Compare(
+                (ExplicitFieldOffsetStruct)(object)o,
+                Helper.Create(default(ExplicitFieldOffsetStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3669,16 +3991,22 @@ internal class NullableTest34
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((ExplicitFieldOffsetStruct?)(object)o, Helper.Create(default(ExplicitFieldOffsetStruct)));
+        return Helper.Compare(
+            (ExplicitFieldOffsetStruct?)(object)o,
+            Helper.Create(default(ExplicitFieldOffsetStruct))
+        );
     }
 
     public static void Run()
     {
         ExplicitFieldOffsetStruct? s = Helper.Create(default(ExplicitFieldOffsetStruct));
 
-        Console.WriteLine("--- ExplicitFieldOffsetStruct? s = Helper.Create(default(ExplicitFieldOffsetStruct)) ---");
+        Console.WriteLine(
+            "--- ExplicitFieldOffsetStruct? s = Helper.Create(default(ExplicitFieldOffsetStruct)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -3699,7 +4027,9 @@ internal class NullableTest34
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- ExplicitFieldOffsetStruct u = Helper.Create(default(ExplicitFieldOffsetStruct)) ---");
+        Console.WriteLine(
+            "--- ExplicitFieldOffsetStruct u = Helper.Create(default(ExplicitFieldOffsetStruct)) ---"
+        );
         ExplicitFieldOffsetStruct u = Helper.Create(default(ExplicitFieldOffsetStruct));
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
@@ -3711,7 +4041,6 @@ internal class NullableTest34
         Assert.AreEqual(BoxUnboxToQGenC<ExplicitFieldOffsetStruct>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest37
 {
@@ -3753,7 +4082,10 @@ internal class NullableTest37
     {
         try
         {
-            return Helper.Compare((MarshalAsStruct)(object)o, Helper.Create(default(MarshalAsStruct)));
+            return Helper.Compare(
+                (MarshalAsStruct)(object)o,
+                Helper.Create(default(MarshalAsStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3766,11 +4098,15 @@ internal class NullableTest37
         return Helper.Compare((MarshalAsStruct?)(object)o, Helper.Create(default(MarshalAsStruct)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((MarshalAsStruct)(object)o, Helper.Create(default(MarshalAsStruct)));
+            return Helper.Compare(
+                (MarshalAsStruct)(object)o,
+                Helper.Create(default(MarshalAsStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3778,7 +4114,8 @@ internal class NullableTest37
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((MarshalAsStruct?)(object)o, Helper.Create(default(MarshalAsStruct)));
     }
@@ -3821,14 +4158,16 @@ internal class NullableTest37
     }
 }
 
-
 internal class NullableTest38
 {
     private static bool BoxUnboxToNQ(object o)
     {
         try
         {
-            return Helper.Compare((ImplementOneInterface)o, Helper.Create(default(ImplementOneInterface)));
+            return Helper.Compare(
+                (ImplementOneInterface)o,
+                Helper.Create(default(ImplementOneInterface))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3838,14 +4177,20 @@ internal class NullableTest38
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((ImplementOneInterface?)o, Helper.Create(default(ImplementOneInterface)));
+        return Helper.Compare(
+            (ImplementOneInterface?)o,
+            Helper.Create(default(ImplementOneInterface))
+        );
     }
 
     private static bool BoxUnboxToNQV(ValueType o)
     {
         try
         {
-            return Helper.Compare((ImplementOneInterface)o, Helper.Create(default(ImplementOneInterface)));
+            return Helper.Compare(
+                (ImplementOneInterface)o,
+                Helper.Create(default(ImplementOneInterface))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3855,14 +4200,20 @@ internal class NullableTest38
 
     private static bool BoxUnboxToQV(ValueType o)
     {
-        return Helper.Compare((ImplementOneInterface?)o, Helper.Create(default(ImplementOneInterface)));
+        return Helper.Compare(
+            (ImplementOneInterface?)o,
+            Helper.Create(default(ImplementOneInterface))
+        );
     }
 
     private static bool BoxUnboxToNQGen<T>(T o)
     {
         try
         {
-            return Helper.Compare((ImplementOneInterface)(object)o, Helper.Create(default(ImplementOneInterface)));
+            return Helper.Compare(
+                (ImplementOneInterface)(object)o,
+                Helper.Create(default(ImplementOneInterface))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3872,14 +4223,21 @@ internal class NullableTest38
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((ImplementOneInterface?)(object)o, Helper.Create(default(ImplementOneInterface)));
+        return Helper.Compare(
+            (ImplementOneInterface?)(object)o,
+            Helper.Create(default(ImplementOneInterface))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((ImplementOneInterface)(object)o, Helper.Create(default(ImplementOneInterface)));
+            return Helper.Compare(
+                (ImplementOneInterface)(object)o,
+                Helper.Create(default(ImplementOneInterface))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3887,16 +4245,22 @@ internal class NullableTest38
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((ImplementOneInterface?)(object)o, Helper.Create(default(ImplementOneInterface)));
+        return Helper.Compare(
+            (ImplementOneInterface?)(object)o,
+            Helper.Create(default(ImplementOneInterface))
+        );
     }
 
     public static void Run()
     {
         ImplementOneInterface? s = Helper.Create(default(ImplementOneInterface));
 
-        Console.WriteLine("--- ImplementOneInterface? s = Helper.Create(default(ImplementOneInterface)) ---");
+        Console.WriteLine(
+            "--- ImplementOneInterface? s = Helper.Create(default(ImplementOneInterface)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -3917,7 +4281,9 @@ internal class NullableTest38
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- ImplementOneInterface u = Helper.Create(default(ImplementOneInterface)) ---");
+        Console.WriteLine(
+            "--- ImplementOneInterface u = Helper.Create(default(ImplementOneInterface)) ---"
+        );
         ImplementOneInterface u = Helper.Create(default(ImplementOneInterface));
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
@@ -3930,14 +4296,16 @@ internal class NullableTest38
     }
 }
 
-
 internal class NullableTest39
 {
     private static bool BoxUnboxToNQ(object o)
     {
         try
         {
-            return Helper.Compare((ImplementTwoInterface)o, Helper.Create(default(ImplementTwoInterface)));
+            return Helper.Compare(
+                (ImplementTwoInterface)o,
+                Helper.Create(default(ImplementTwoInterface))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3947,14 +4315,20 @@ internal class NullableTest39
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((ImplementTwoInterface?)o, Helper.Create(default(ImplementTwoInterface)));
+        return Helper.Compare(
+            (ImplementTwoInterface?)o,
+            Helper.Create(default(ImplementTwoInterface))
+        );
     }
 
     private static bool BoxUnboxToNQV(ValueType o)
     {
         try
         {
-            return Helper.Compare((ImplementTwoInterface)o, Helper.Create(default(ImplementTwoInterface)));
+            return Helper.Compare(
+                (ImplementTwoInterface)o,
+                Helper.Create(default(ImplementTwoInterface))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3964,14 +4338,20 @@ internal class NullableTest39
 
     private static bool BoxUnboxToQV(ValueType o)
     {
-        return Helper.Compare((ImplementTwoInterface?)o, Helper.Create(default(ImplementTwoInterface)));
+        return Helper.Compare(
+            (ImplementTwoInterface?)o,
+            Helper.Create(default(ImplementTwoInterface))
+        );
     }
 
     private static bool BoxUnboxToNQGen<T>(T o)
     {
         try
         {
-            return Helper.Compare((ImplementTwoInterface)(object)o, Helper.Create(default(ImplementTwoInterface)));
+            return Helper.Compare(
+                (ImplementTwoInterface)(object)o,
+                Helper.Create(default(ImplementTwoInterface))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3981,14 +4361,21 @@ internal class NullableTest39
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((ImplementTwoInterface?)(object)o, Helper.Create(default(ImplementTwoInterface)));
+        return Helper.Compare(
+            (ImplementTwoInterface?)(object)o,
+            Helper.Create(default(ImplementTwoInterface))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((ImplementTwoInterface)(object)o, Helper.Create(default(ImplementTwoInterface)));
+            return Helper.Compare(
+                (ImplementTwoInterface)(object)o,
+                Helper.Create(default(ImplementTwoInterface))
+            );
         }
         catch (NullReferenceException)
         {
@@ -3996,16 +4383,22 @@ internal class NullableTest39
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((ImplementTwoInterface?)(object)o, Helper.Create(default(ImplementTwoInterface)));
+        return Helper.Compare(
+            (ImplementTwoInterface?)(object)o,
+            Helper.Create(default(ImplementTwoInterface))
+        );
     }
 
     public static void Run()
     {
         ImplementTwoInterface? s = Helper.Create(default(ImplementTwoInterface));
 
-        Console.WriteLine("--- ImplementTwoInterface? s = Helper.Create(default(ImplementTwoInterface)) ---");
+        Console.WriteLine(
+            "--- ImplementTwoInterface? s = Helper.Create(default(ImplementTwoInterface)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -4026,7 +4419,9 @@ internal class NullableTest39
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- ImplementTwoInterface u = Helper.Create(default(ImplementTwoInterface)) ---");
+        Console.WriteLine(
+            "--- ImplementTwoInterface u = Helper.Create(default(ImplementTwoInterface)) ---"
+        );
         ImplementTwoInterface u = Helper.Create(default(ImplementTwoInterface));
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
@@ -4039,14 +4434,16 @@ internal class NullableTest39
     }
 }
 
-
 internal class NullableTest40
 {
     private static bool BoxUnboxToNQ(object o)
     {
         try
         {
-            return Helper.Compare((ImplementOneInterfaceGen<int>)o, Helper.Create(default(ImplementOneInterfaceGen<int>)));
+            return Helper.Compare(
+                (ImplementOneInterfaceGen<int>)o,
+                Helper.Create(default(ImplementOneInterfaceGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4056,14 +4453,20 @@ internal class NullableTest40
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((ImplementOneInterfaceGen<int>?)o, Helper.Create(default(ImplementOneInterfaceGen<int>)));
+        return Helper.Compare(
+            (ImplementOneInterfaceGen<int>?)o,
+            Helper.Create(default(ImplementOneInterfaceGen<int>))
+        );
     }
 
     private static bool BoxUnboxToNQV(ValueType o)
     {
         try
         {
-            return Helper.Compare((ImplementOneInterfaceGen<int>)o, Helper.Create(default(ImplementOneInterfaceGen<int>)));
+            return Helper.Compare(
+                (ImplementOneInterfaceGen<int>)o,
+                Helper.Create(default(ImplementOneInterfaceGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4073,14 +4476,20 @@ internal class NullableTest40
 
     private static bool BoxUnboxToQV(ValueType o)
     {
-        return Helper.Compare((ImplementOneInterfaceGen<int>?)o, Helper.Create(default(ImplementOneInterfaceGen<int>)));
+        return Helper.Compare(
+            (ImplementOneInterfaceGen<int>?)o,
+            Helper.Create(default(ImplementOneInterfaceGen<int>))
+        );
     }
 
     private static bool BoxUnboxToNQGen<T>(T o)
     {
         try
         {
-            return Helper.Compare((ImplementOneInterfaceGen<int>)(object)o, Helper.Create(default(ImplementOneInterfaceGen<int>)));
+            return Helper.Compare(
+                (ImplementOneInterfaceGen<int>)(object)o,
+                Helper.Create(default(ImplementOneInterfaceGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4090,14 +4499,21 @@ internal class NullableTest40
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((ImplementOneInterfaceGen<int>?)(object)o, Helper.Create(default(ImplementOneInterfaceGen<int>)));
+        return Helper.Compare(
+            (ImplementOneInterfaceGen<int>?)(object)o,
+            Helper.Create(default(ImplementOneInterfaceGen<int>))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((ImplementOneInterfaceGen<int>)(object)o, Helper.Create(default(ImplementOneInterfaceGen<int>)));
+            return Helper.Compare(
+                (ImplementOneInterfaceGen<int>)(object)o,
+                Helper.Create(default(ImplementOneInterfaceGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4105,16 +4521,22 @@ internal class NullableTest40
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((ImplementOneInterfaceGen<int>?)(object)o, Helper.Create(default(ImplementOneInterfaceGen<int>)));
+        return Helper.Compare(
+            (ImplementOneInterfaceGen<int>?)(object)o,
+            Helper.Create(default(ImplementOneInterfaceGen<int>))
+        );
     }
 
     public static void Run()
     {
         ImplementOneInterfaceGen<int>? s = Helper.Create(default(ImplementOneInterfaceGen<int>));
 
-        Console.WriteLine("--- ImplementOneInterfaceGen<int>? s = Helper.Create(default(ImplementOneInterfaceGen<int>)) ---");
+        Console.WriteLine(
+            "--- ImplementOneInterfaceGen<int>? s = Helper.Create(default(ImplementOneInterfaceGen<int>)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -4135,7 +4557,9 @@ internal class NullableTest40
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- ImplementOneInterfaceGen<int> u = Helper.Create(default(ImplementOneInterfaceGen<int>)) ---");
+        Console.WriteLine(
+            "--- ImplementOneInterfaceGen<int> u = Helper.Create(default(ImplementOneInterfaceGen<int>)) ---"
+        );
         ImplementOneInterfaceGen<int> u = Helper.Create(default(ImplementOneInterfaceGen<int>));
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
@@ -4143,11 +4567,14 @@ internal class NullableTest40
         Assert.AreEqual(BoxUnboxToQV(u), true, "BoxUnboxToQV");
         Assert.AreEqual(BoxUnboxToNQGen(u), true, "BoxUnboxToNQGen");
         Assert.AreEqual(BoxUnboxToQGen(u), true, "BoxUnboxToQGen");
-        Assert.AreEqual(BoxUnboxToNQGenC<ImplementOneInterfaceGen<int>>(u), true, "BoxUnboxToNQGenC");
+        Assert.AreEqual(
+            BoxUnboxToNQGenC<ImplementOneInterfaceGen<int>>(u),
+            true,
+            "BoxUnboxToNQGenC"
+        );
         Assert.AreEqual(BoxUnboxToQGenC<ImplementOneInterfaceGen<int>>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest41
 {
@@ -4155,7 +4582,10 @@ internal class NullableTest41
     {
         try
         {
-            return Helper.Compare((ImplementTwoInterfaceGen<int>)o, Helper.Create(default(ImplementTwoInterfaceGen<int>)));
+            return Helper.Compare(
+                (ImplementTwoInterfaceGen<int>)o,
+                Helper.Create(default(ImplementTwoInterfaceGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4165,14 +4595,20 @@ internal class NullableTest41
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((ImplementTwoInterfaceGen<int>?)o, Helper.Create(default(ImplementTwoInterfaceGen<int>)));
+        return Helper.Compare(
+            (ImplementTwoInterfaceGen<int>?)o,
+            Helper.Create(default(ImplementTwoInterfaceGen<int>))
+        );
     }
 
     private static bool BoxUnboxToNQV(ValueType o)
     {
         try
         {
-            return Helper.Compare((ImplementTwoInterfaceGen<int>)o, Helper.Create(default(ImplementTwoInterfaceGen<int>)));
+            return Helper.Compare(
+                (ImplementTwoInterfaceGen<int>)o,
+                Helper.Create(default(ImplementTwoInterfaceGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4182,14 +4618,20 @@ internal class NullableTest41
 
     private static bool BoxUnboxToQV(ValueType o)
     {
-        return Helper.Compare((ImplementTwoInterfaceGen<int>?)o, Helper.Create(default(ImplementTwoInterfaceGen<int>)));
+        return Helper.Compare(
+            (ImplementTwoInterfaceGen<int>?)o,
+            Helper.Create(default(ImplementTwoInterfaceGen<int>))
+        );
     }
 
     private static bool BoxUnboxToNQGen<T>(T o)
     {
         try
         {
-            return Helper.Compare((ImplementTwoInterfaceGen<int>)(object)o, Helper.Create(default(ImplementTwoInterfaceGen<int>)));
+            return Helper.Compare(
+                (ImplementTwoInterfaceGen<int>)(object)o,
+                Helper.Create(default(ImplementTwoInterfaceGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4199,14 +4641,21 @@ internal class NullableTest41
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((ImplementTwoInterfaceGen<int>?)(object)o, Helper.Create(default(ImplementTwoInterfaceGen<int>)));
+        return Helper.Compare(
+            (ImplementTwoInterfaceGen<int>?)(object)o,
+            Helper.Create(default(ImplementTwoInterfaceGen<int>))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((ImplementTwoInterfaceGen<int>)(object)o, Helper.Create(default(ImplementTwoInterfaceGen<int>)));
+            return Helper.Compare(
+                (ImplementTwoInterfaceGen<int>)(object)o,
+                Helper.Create(default(ImplementTwoInterfaceGen<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4214,16 +4663,22 @@ internal class NullableTest41
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((ImplementTwoInterfaceGen<int>?)(object)o, Helper.Create(default(ImplementTwoInterfaceGen<int>)));
+        return Helper.Compare(
+            (ImplementTwoInterfaceGen<int>?)(object)o,
+            Helper.Create(default(ImplementTwoInterfaceGen<int>))
+        );
     }
 
     public static void Run()
     {
         ImplementTwoInterfaceGen<int>? s = Helper.Create(default(ImplementTwoInterfaceGen<int>));
 
-        Console.WriteLine("--- ImplementTwoInterfaceGen<int>? s = Helper.Create(default(ImplementTwoInterfaceGen<int>)) ---");
+        Console.WriteLine(
+            "--- ImplementTwoInterfaceGen<int>? s = Helper.Create(default(ImplementTwoInterfaceGen<int>)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -4244,7 +4699,9 @@ internal class NullableTest41
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- ImplementTwoInterfaceGen<int> u = Helper.Create(default(ImplementTwoInterfaceGen<int>)) ---");
+        Console.WriteLine(
+            "--- ImplementTwoInterfaceGen<int> u = Helper.Create(default(ImplementTwoInterfaceGen<int>)) ---"
+        );
         ImplementTwoInterfaceGen<int> u = Helper.Create(default(ImplementTwoInterfaceGen<int>));
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
@@ -4252,11 +4709,14 @@ internal class NullableTest41
         Assert.AreEqual(BoxUnboxToQV(u), true, "BoxUnboxToQV");
         Assert.AreEqual(BoxUnboxToNQGen(u), true, "BoxUnboxToNQGen");
         Assert.AreEqual(BoxUnboxToQGen(u), true, "BoxUnboxToQGen");
-        Assert.AreEqual(BoxUnboxToNQGenC<ImplementTwoInterfaceGen<int>>(u), true, "BoxUnboxToNQGenC");
+        Assert.AreEqual(
+            BoxUnboxToNQGenC<ImplementTwoInterfaceGen<int>>(u),
+            true,
+            "BoxUnboxToNQGenC"
+        );
         Assert.AreEqual(BoxUnboxToQGenC<ImplementTwoInterfaceGen<int>>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest42
 {
@@ -4264,7 +4724,10 @@ internal class NullableTest42
     {
         try
         {
-            return Helper.Compare((ImplementAllInterface<int>)o, Helper.Create(default(ImplementAllInterface<int>)));
+            return Helper.Compare(
+                (ImplementAllInterface<int>)o,
+                Helper.Create(default(ImplementAllInterface<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4274,14 +4737,20 @@ internal class NullableTest42
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((ImplementAllInterface<int>?)o, Helper.Create(default(ImplementAllInterface<int>)));
+        return Helper.Compare(
+            (ImplementAllInterface<int>?)o,
+            Helper.Create(default(ImplementAllInterface<int>))
+        );
     }
 
     private static bool BoxUnboxToNQV(ValueType o)
     {
         try
         {
-            return Helper.Compare((ImplementAllInterface<int>)o, Helper.Create(default(ImplementAllInterface<int>)));
+            return Helper.Compare(
+                (ImplementAllInterface<int>)o,
+                Helper.Create(default(ImplementAllInterface<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4291,14 +4760,20 @@ internal class NullableTest42
 
     private static bool BoxUnboxToQV(ValueType o)
     {
-        return Helper.Compare((ImplementAllInterface<int>?)o, Helper.Create(default(ImplementAllInterface<int>)));
+        return Helper.Compare(
+            (ImplementAllInterface<int>?)o,
+            Helper.Create(default(ImplementAllInterface<int>))
+        );
     }
 
     private static bool BoxUnboxToNQGen<T>(T o)
     {
         try
         {
-            return Helper.Compare((ImplementAllInterface<int>)(object)o, Helper.Create(default(ImplementAllInterface<int>)));
+            return Helper.Compare(
+                (ImplementAllInterface<int>)(object)o,
+                Helper.Create(default(ImplementAllInterface<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4308,14 +4783,21 @@ internal class NullableTest42
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((ImplementAllInterface<int>?)(object)o, Helper.Create(default(ImplementAllInterface<int>)));
+        return Helper.Compare(
+            (ImplementAllInterface<int>?)(object)o,
+            Helper.Create(default(ImplementAllInterface<int>))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((ImplementAllInterface<int>)(object)o, Helper.Create(default(ImplementAllInterface<int>)));
+            return Helper.Compare(
+                (ImplementAllInterface<int>)(object)o,
+                Helper.Create(default(ImplementAllInterface<int>))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4323,16 +4805,22 @@ internal class NullableTest42
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((ImplementAllInterface<int>?)(object)o, Helper.Create(default(ImplementAllInterface<int>)));
+        return Helper.Compare(
+            (ImplementAllInterface<int>?)(object)o,
+            Helper.Create(default(ImplementAllInterface<int>))
+        );
     }
 
     public static void Run()
     {
         ImplementAllInterface<int>? s = Helper.Create(default(ImplementAllInterface<int>));
 
-        Console.WriteLine("--- ImplementAllInterface<int>? s = Helper.Create(default(ImplementAllInterface<int>)) ---");
+        Console.WriteLine(
+            "--- ImplementAllInterface<int>? s = Helper.Create(default(ImplementAllInterface<int>)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -4353,7 +4841,9 @@ internal class NullableTest42
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- ImplementAllInterface<int> u = Helper.Create(default(ImplementAllInterface<int>)) ---");
+        Console.WriteLine(
+            "--- ImplementAllInterface<int> u = Helper.Create(default(ImplementAllInterface<int>)) ---"
+        );
         ImplementAllInterface<int> u = Helper.Create(default(ImplementAllInterface<int>));
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
@@ -4366,14 +4856,16 @@ internal class NullableTest42
     }
 }
 
-
 internal class NullableTest43
 {
     private static bool BoxUnboxToNQ(object o)
     {
         try
         {
-            return Helper.Compare((WithMultipleGCHandleStruct)o, Helper.Create(default(WithMultipleGCHandleStruct)));
+            return Helper.Compare(
+                (WithMultipleGCHandleStruct)o,
+                Helper.Create(default(WithMultipleGCHandleStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4383,14 +4875,20 @@ internal class NullableTest43
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((WithMultipleGCHandleStruct?)o, Helper.Create(default(WithMultipleGCHandleStruct)));
+        return Helper.Compare(
+            (WithMultipleGCHandleStruct?)o,
+            Helper.Create(default(WithMultipleGCHandleStruct))
+        );
     }
 
     private static bool BoxUnboxToNQV(ValueType o)
     {
         try
         {
-            return Helper.Compare((WithMultipleGCHandleStruct)o, Helper.Create(default(WithMultipleGCHandleStruct)));
+            return Helper.Compare(
+                (WithMultipleGCHandleStruct)o,
+                Helper.Create(default(WithMultipleGCHandleStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4400,14 +4898,20 @@ internal class NullableTest43
 
     private static bool BoxUnboxToQV(ValueType o)
     {
-        return Helper.Compare((WithMultipleGCHandleStruct?)o, Helper.Create(default(WithMultipleGCHandleStruct)));
+        return Helper.Compare(
+            (WithMultipleGCHandleStruct?)o,
+            Helper.Create(default(WithMultipleGCHandleStruct))
+        );
     }
 
     private static bool BoxUnboxToNQGen<T>(T o)
     {
         try
         {
-            return Helper.Compare((WithMultipleGCHandleStruct)(object)o, Helper.Create(default(WithMultipleGCHandleStruct)));
+            return Helper.Compare(
+                (WithMultipleGCHandleStruct)(object)o,
+                Helper.Create(default(WithMultipleGCHandleStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4417,14 +4921,21 @@ internal class NullableTest43
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((WithMultipleGCHandleStruct?)(object)o, Helper.Create(default(WithMultipleGCHandleStruct)));
+        return Helper.Compare(
+            (WithMultipleGCHandleStruct?)(object)o,
+            Helper.Create(default(WithMultipleGCHandleStruct))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((WithMultipleGCHandleStruct)(object)o, Helper.Create(default(WithMultipleGCHandleStruct)));
+            return Helper.Compare(
+                (WithMultipleGCHandleStruct)(object)o,
+                Helper.Create(default(WithMultipleGCHandleStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4432,16 +4943,22 @@ internal class NullableTest43
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((WithMultipleGCHandleStruct?)(object)o, Helper.Create(default(WithMultipleGCHandleStruct)));
+        return Helper.Compare(
+            (WithMultipleGCHandleStruct?)(object)o,
+            Helper.Create(default(WithMultipleGCHandleStruct))
+        );
     }
 
     public static void Run()
     {
         WithMultipleGCHandleStruct? s = Helper.Create(default(WithMultipleGCHandleStruct));
 
-        Console.WriteLine("--- WithMultipleGCHandleStruct? s = Helper.Create(default(WithMultipleGCHandleStruct)) ---");
+        Console.WriteLine(
+            "--- WithMultipleGCHandleStruct? s = Helper.Create(default(WithMultipleGCHandleStruct)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -4462,7 +4979,9 @@ internal class NullableTest43
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- WithMultipleGCHandleStruct u = Helper.Create(default(WithMultipleGCHandleStruct)) ---");
+        Console.WriteLine(
+            "--- WithMultipleGCHandleStruct u = Helper.Create(default(WithMultipleGCHandleStruct)) ---"
+        );
         WithMultipleGCHandleStruct u = Helper.Create(default(WithMultipleGCHandleStruct));
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
@@ -4475,14 +4994,16 @@ internal class NullableTest43
     }
 }
 
-
 internal class NullableTest44
 {
     private static bool BoxUnboxToNQ(object o)
     {
         try
         {
-            return Helper.Compare((WithOnlyFXTypeStruct)o, Helper.Create(default(WithOnlyFXTypeStruct)));
+            return Helper.Compare(
+                (WithOnlyFXTypeStruct)o,
+                Helper.Create(default(WithOnlyFXTypeStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4492,14 +5013,20 @@ internal class NullableTest44
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((WithOnlyFXTypeStruct?)o, Helper.Create(default(WithOnlyFXTypeStruct)));
+        return Helper.Compare(
+            (WithOnlyFXTypeStruct?)o,
+            Helper.Create(default(WithOnlyFXTypeStruct))
+        );
     }
 
     private static bool BoxUnboxToNQV(ValueType o)
     {
         try
         {
-            return Helper.Compare((WithOnlyFXTypeStruct)o, Helper.Create(default(WithOnlyFXTypeStruct)));
+            return Helper.Compare(
+                (WithOnlyFXTypeStruct)o,
+                Helper.Create(default(WithOnlyFXTypeStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4509,14 +5036,20 @@ internal class NullableTest44
 
     private static bool BoxUnboxToQV(ValueType o)
     {
-        return Helper.Compare((WithOnlyFXTypeStruct?)o, Helper.Create(default(WithOnlyFXTypeStruct)));
+        return Helper.Compare(
+            (WithOnlyFXTypeStruct?)o,
+            Helper.Create(default(WithOnlyFXTypeStruct))
+        );
     }
 
     private static bool BoxUnboxToNQGen<T>(T o)
     {
         try
         {
-            return Helper.Compare((WithOnlyFXTypeStruct)(object)o, Helper.Create(default(WithOnlyFXTypeStruct)));
+            return Helper.Compare(
+                (WithOnlyFXTypeStruct)(object)o,
+                Helper.Create(default(WithOnlyFXTypeStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4526,14 +5059,21 @@ internal class NullableTest44
 
     private static bool BoxUnboxToQGen<T>(T o)
     {
-        return Helper.Compare((WithOnlyFXTypeStruct?)(object)o, Helper.Create(default(WithOnlyFXTypeStruct)));
+        return Helper.Compare(
+            (WithOnlyFXTypeStruct?)(object)o,
+            Helper.Create(default(WithOnlyFXTypeStruct))
+        );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((WithOnlyFXTypeStruct)(object)o, Helper.Create(default(WithOnlyFXTypeStruct)));
+            return Helper.Compare(
+                (WithOnlyFXTypeStruct)(object)o,
+                Helper.Create(default(WithOnlyFXTypeStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4541,16 +5081,22 @@ internal class NullableTest44
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
-        return Helper.Compare((WithOnlyFXTypeStruct?)(object)o, Helper.Create(default(WithOnlyFXTypeStruct)));
+        return Helper.Compare(
+            (WithOnlyFXTypeStruct?)(object)o,
+            Helper.Create(default(WithOnlyFXTypeStruct))
+        );
     }
 
     public static void Run()
     {
         WithOnlyFXTypeStruct? s = Helper.Create(default(WithOnlyFXTypeStruct));
 
-        Console.WriteLine("--- WithOnlyFXTypeStruct? s = Helper.Create(default(WithOnlyFXTypeStruct)) ---");
+        Console.WriteLine(
+            "--- WithOnlyFXTypeStruct? s = Helper.Create(default(WithOnlyFXTypeStruct)) ---"
+        );
         Assert.AreEqual(BoxUnboxToNQ(s), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(s), true, "BoxUnboxToQ");
         Assert.AreEqual(BoxUnboxToNQV(s), true, "BoxUnboxToNQV");
@@ -4571,7 +5117,9 @@ internal class NullableTest44
         Assert.AreEqual(BoxUnboxToNQGenC(s), true, "BoxUnboxToNQGenC");
         Assert.AreEqual(BoxUnboxToQGenC(s), false, "BoxUnboxToQGenC");
 
-        Console.WriteLine("--- WithOnlyFXTypeStruct u = Helper.Create(default(WithOnlyFXTypeStruct)) ---");
+        Console.WriteLine(
+            "--- WithOnlyFXTypeStruct u = Helper.Create(default(WithOnlyFXTypeStruct)) ---"
+        );
         WithOnlyFXTypeStruct u = Helper.Create(default(WithOnlyFXTypeStruct));
         Assert.AreEqual(BoxUnboxToNQ(u), true, "BoxUnboxToNQ");
         Assert.AreEqual(BoxUnboxToQ(u), true, "BoxUnboxToQ");
@@ -4583,7 +5131,6 @@ internal class NullableTest44
         Assert.AreEqual(BoxUnboxToQGenC<WithOnlyFXTypeStruct>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 internal class NullableTest45
 {
@@ -4625,7 +5172,10 @@ internal class NullableTest45
     {
         try
         {
-            return Helper.Compare((MixedAllStruct)(object)o, Helper.Create(default(MixedAllStruct)));
+            return Helper.Compare(
+                (MixedAllStruct)(object)o,
+                Helper.Create(default(MixedAllStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4638,11 +5188,15 @@ internal class NullableTest45
         return Helper.Compare((MixedAllStruct?)(object)o, Helper.Create(default(MixedAllStruct)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
-            return Helper.Compare((MixedAllStruct)(object)o, Helper.Create(default(MixedAllStruct)));
+            return Helper.Compare(
+                (MixedAllStruct)(object)o,
+                Helper.Create(default(MixedAllStruct))
+            );
         }
         catch (NullReferenceException)
         {
@@ -4650,7 +5204,8 @@ internal class NullableTest45
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((MixedAllStruct?)(object)o, Helper.Create(default(MixedAllStruct)));
     }
@@ -4692,7 +5247,6 @@ internal class NullableTest45
         Assert.AreEqual(BoxUnboxToQGenC<MixedAllStruct>(u), true, "BoxUnboxToQGenC");
     }
 }
-
 
 public class Test_boxunboxvaluetype
 {
@@ -4756,4 +5310,3 @@ public class Test_boxunboxvaluetype
         return 100;
     }
 }
-

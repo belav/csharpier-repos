@@ -11,13 +11,17 @@ namespace System.ServiceModel.Diagnostics
     sealed class MessageDroppedTraceRecord : MessageTraceRecord
     {
         EndpointAddress endpointAddress;
-        internal MessageDroppedTraceRecord(Message message, EndpointAddress endpointAddress) :
-            base(message)
+
+        internal MessageDroppedTraceRecord(Message message, EndpointAddress endpointAddress)
+            : base(message)
         {
             this.endpointAddress = endpointAddress;
         }
 
-        internal override string EventId { get { return BuildEventId("MessageDropped"); } }
+        internal override string EventId
+        {
+            get { return BuildEventId("MessageDropped"); }
+        }
 
         internal override void WriteTo(XmlWriter xml)
         {

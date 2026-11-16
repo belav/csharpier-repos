@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     public enum MembershipPasswordCompatibilityMode
     {
         Framework20 = 0,

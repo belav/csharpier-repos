@@ -1,11 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
-namespace System.Globalization {
-   
+namespace System.Globalization
+{
     using System;
+
     // This class represents a starting/ending time for a period of daylight saving time.
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
@@ -15,36 +16,31 @@ namespace System.Globalization {
         internal DateTime m_end;
         internal TimeSpan m_delta;
 
-        private DaylightTime() {
-        }
+        private DaylightTime() { }
 
-        public DaylightTime(DateTime start, DateTime end, TimeSpan delta) {
+        public DaylightTime(DateTime start, DateTime end, TimeSpan delta)
+        {
             m_start = start;
             m_end = end;
             m_delta = delta;
-        }    
+        }
 
         // The start date of a daylight saving period.
-        public DateTime Start {
-            get {
-                return m_start;
-            }
+        public DateTime Start
+        {
+            get { return m_start; }
         }
 
         // The end date of a daylight saving period.
-        public DateTime End {
-            get {
-                return m_end;
-            }
+        public DateTime End
+        {
+            get { return m_end; }
         }
 
         // Delta to stardard offset in ticks.
-        public TimeSpan Delta {
-            get {
-                return m_delta;
-            }
+        public TimeSpan Delta
+        {
+            get { return m_delta; }
         }
-    
     }
-
 }

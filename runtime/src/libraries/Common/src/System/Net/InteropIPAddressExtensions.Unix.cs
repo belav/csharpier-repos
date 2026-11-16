@@ -12,8 +12,14 @@ namespace System.Net
         {
             var nativeIPAddress = default(Interop.Sys.IPAddress);
 
-            ipAddress.TryWriteBytes(new Span<byte>(nativeIPAddress.Address, Interop.Sys.IPv6AddressBytes), out int bytesWritten);
-            Debug.Assert(bytesWritten == sizeof(uint) || bytesWritten == Interop.Sys.IPv6AddressBytes, $"Unexpected length: {bytesWritten}");
+            ipAddress.TryWriteBytes(
+                new Span<byte>(nativeIPAddress.Address, Interop.Sys.IPv6AddressBytes),
+                out int bytesWritten
+            );
+            Debug.Assert(
+                bytesWritten == sizeof(uint) || bytesWritten == Interop.Sys.IPv6AddressBytes,
+                $"Unexpected length: {bytesWritten}"
+            );
 
             if (ipAddress.AddressFamily == AddressFamily.InterNetworkV6)
             {
@@ -35,7 +41,8 @@ namespace System.Net
             {
                 return new IPAddress(
                     new ReadOnlySpan<byte>(nativeIPAddress.Address, Interop.Sys.IPv6AddressBytes),
-                    (long)nativeIPAddress.ScopeId);
+                    (long)nativeIPAddress.ScopeId
+                );
             }
         }
     }

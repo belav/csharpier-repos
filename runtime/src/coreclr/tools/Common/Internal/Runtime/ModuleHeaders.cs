@@ -18,11 +18,12 @@ namespace Internal.Runtime
         public const ushort CurrentMajorVersion = 9;
         public const ushort CurrentMinorVersion = 1;
     }
+
 #if READYTORUN
 #pragma warning disable 0169
     internal struct ReadyToRunHeader
     {
-        private uint Signature;      // ReadyToRunHeaderConstants.Signature
+        private uint Signature; // ReadyToRunHeaderConstants.Signature
         private ushort MajorVersion;
         private ushort MinorVersion;
 
@@ -57,6 +58,7 @@ namespace Internal.Runtime
         ExceptionInfo = 104,
         DebugInfo = 105,
         DelayLoadMethodCallThunks = 106,
+
         // 107 is deprecated - it was used by an older format of AvailableTypes
         AvailableTypes = 108,
         InstanceMethodEntryPoints = 109,
@@ -81,12 +83,14 @@ namespace Internal.Runtime
         StringTable = 200, // Unused
         GCStaticRegion = 201,
         ThreadStaticRegion = 202,
+
         // Unused = 203,
         TypeManagerIndirection = 204,
         EagerCctor = 205,
         FrozenObjectRegion = 206,
         DehydratedData = 207,
         ThreadStaticOffsetRegion = 208,
+
         // 209 is unused - it was used by ThreadStaticGCDescRegion
         // 210 is unused - it was used by ThreadStaticIndex
         // 211 is unused - it was used by LoopHijackFlag

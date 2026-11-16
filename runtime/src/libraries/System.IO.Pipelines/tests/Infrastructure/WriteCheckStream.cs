@@ -14,7 +14,9 @@ namespace System.IO.Pipelines.Tests.Infrastructure
         private readonly MemoryStream _ms = new MemoryStream();
         private int _writeCnt = 0;
         private int _waitCnt = 0;
-        private TaskCompletionSource<object> _waitSource = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+        private TaskCompletionSource<object> _waitSource = new TaskCompletionSource<object>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         public CancellationTokenSource MidWriteCancellation { get; set; }
         private readonly object _lock = new object();
 
@@ -26,11 +28,19 @@ namespace System.IO.Pipelines.Tests.Infrastructure
 
         public override long Length => _ms.Length;
 
-        public override long Position { get => _ms.Position; set => _ms.Position = value; }
+        public override long Position
+        {
+            get => _ms.Position;
+            set => _ms.Position = value;
+        }
 
         public override void Flush() => _ms.Flush();
-        public override int Read(byte[] buffer, int offset, int count) => _ms.Read(buffer, offset, count);
+
+        public override int Read(byte[] buffer, int offset, int count) =>
+            _ms.Read(buffer, offset, count);
+
         public override long Seek(long offset, SeekOrigin origin) => _ms.Seek(offset, origin);
+
         public override void SetLength(long value) => _ms.SetLength(value);
 
         public override void Write(byte[] buffer, int offset, int count)
@@ -54,7 +64,9 @@ namespace System.IO.Pipelines.Tests.Infrastructure
             {
                 _waitCnt = cnt;
                 _waitSource.TrySetCanceled();
-                _waitSource = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+                _waitSource = new TaskCompletionSource<object>(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
                 CheckWaitCount();
                 return _waitSource.Task;
             }

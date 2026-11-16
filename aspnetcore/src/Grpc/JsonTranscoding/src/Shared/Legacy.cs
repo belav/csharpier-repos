@@ -452,7 +452,8 @@ internal static class Legacy
                         f.GetCustomAttributes<OriginalNameAttribute>()
                             .FirstOrDefault()
                             // If the attribute hasn't been applied, fall back to the name of the field.
-                            ?.Name ?? f.Name
+                            ?.Name
+                        ?? f.Name
                 );
         }
     }

@@ -170,34 +170,30 @@ public class Program
 
                     return forecast;
 #else
-        app.MapGet(
-            "/weatherforecast",
-            (HttpContext httpContext) =>
-            {
+        app.MapGet("/weatherforecast", (HttpContext httpContext) =>
+        {
 #if (OrganizationalAuth || IndividualB2CAuth)
-                    httpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
+                httpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
 
 #endif
-                var forecast = Enumerable
-                    .Range(1, 5)
-                    .Select(index => new WeatherForecast
-                    {
-                        Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                        TemperatureC = Random.Shared.Next(-20, 55),
-                        Summary = summaries[Random.Shared.Next(summaries.Length)],
-                    })
-                    .ToArray();
-                return forecast;
+            var forecast = Enumerable
+                .Range(1, 5)
+                .Select(index => new WeatherForecast
+                {
+                    Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                    TemperatureC = Random.Shared.Next(-20, 55),
+                    Summary = summaries[Random.Shared.Next(summaries.Length)],
+                })
+                .ToArray();
+            return forecast;
 #endif
 #if (EnableOpenAPI && !NoAuth)
-                }
-            )
+            })
             .WithName("GetWeatherForecast")
             .WithOpenApi()
             .RequireAuthorization();
 #elif (EnableOpenAPI && NoAuth)
-                }
-            )
+            })
             .WithName("GetWeatherForecast")
             .WithOpenApi();
 #elif (!EnableOpenAPI && !NoAuth)
@@ -205,8 +201,7 @@ public class Program
             )
             .RequireAuthorization();
 #else
-            }
-        );
+        });
 #endif
 #endif
 #if (UsingControllers)

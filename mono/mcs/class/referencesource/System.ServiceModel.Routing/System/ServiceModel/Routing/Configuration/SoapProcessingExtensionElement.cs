@@ -5,14 +5,18 @@
 namespace System.ServiceModel.Routing.Configuration
 {
     using System;
+    using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.ServiceModel.Configuration;
-    using System.Configuration;
 
     public class SoapProcessingExtensionElement : BehaviorExtensionElement
     {
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationPropertyAttributeRule, Justification = "this is not a configuration property")]
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationPropertyAttributeRule,
+            Justification = "this is not a configuration property"
+        )]
         public override Type BehaviorType
         {
             get { return typeof(SoapProcessingBehavior); }
@@ -25,17 +29,15 @@ namespace System.ServiceModel.Routing.Configuration
             return behavior;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ProcessMessages, DefaultValue = true, Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ProcessMessages,
+            DefaultValue = true,
+            Options = ConfigurationPropertyOptions.None
+        )]
         public bool ProcessMessages
         {
-            get
-            {
-                return (bool)this[ConfigurationStrings.ProcessMessages];
-            }
-            set
-            {
-                this[ConfigurationStrings.ProcessMessages] = value;
-            }
+            get { return (bool)this[ConfigurationStrings.ProcessMessages]; }
+            set { this[ConfigurationStrings.ProcessMessages] = value; }
         }
     }
 }

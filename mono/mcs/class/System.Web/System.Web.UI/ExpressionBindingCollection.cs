@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,123 +29,133 @@
 //
 
 using System;
-using System.ComponentModel;
 using System.Collections;
+using System.ComponentModel;
 
-namespace System.Web.UI {
-    	
-	public sealed class ExpressionBindingCollection : ICollection, IEnumerable
-    	{
-		static readonly object changedEvent = new object ();
-		
-		Hashtable list;
-		ArrayList removed;
+namespace System.Web.UI
+{
+    public sealed class ExpressionBindingCollection : ICollection, IEnumerable
+    {
+        static readonly object changedEvent = new object();
 
-		EventHandlerList events = new EventHandlerList ();
-		
-        	public event EventHandler Changed {
-			add { events.AddHandler (changedEvent, value); }
-			remove { events.RemoveHandler (changedEvent, value); }
-		}
-		
-		public ExpressionBindingCollection ()
-		{
-			list = new Hashtable ();
-			removed = new ArrayList ();
-		}
+        Hashtable list;
+        ArrayList removed;
 
-		public int Count {
-			get { return list.Count; }
-		}
+        EventHandlerList events = new EventHandlerList();
 
-		public bool IsReadOnly {
-			get { return list.IsReadOnly; }
-		}
+        public event EventHandler Changed
+        {
+            add { events.AddHandler(changedEvent, value); }
+            remove { events.RemoveHandler(changedEvent, value); }
+        }
 
-		public bool IsSynchronized {
-			get { return list.IsSynchronized; }
-		}
+        public ExpressionBindingCollection()
+        {
+            list = new Hashtable();
+            removed = new ArrayList();
+        }
 
-		public ExpressionBinding this [string propertyName] {
-            		get { return list [propertyName] as ExpressionBinding; }
-        	}
+        public int Count
+        {
+            get { return list.Count; }
+        }
 
-		public ICollection RemovedBindings {
-			get { return removed; }
-		}
+        public bool IsReadOnly
+        {
+            get { return list.IsReadOnly; }
+        }
 
-		public object SyncRoot {
-			get { return list.SyncRoot; }
-		}
+        public bool IsSynchronized
+        {
+            get { return list.IsSynchronized; }
+        }
 
-		public void Add (ExpressionBinding binding)
-		{
-			list.Add (binding.PropertyName, binding);
-            		OnChanged (new EventArgs ());
-        	}
+        public ExpressionBinding this[string propertyName]
+        {
+            get { return list[propertyName] as ExpressionBinding; }
+        }
 
-		public void Clear ()
-		{
-			list.Clear ();
-            		removed.Clear ();
-            		OnChanged (new EventArgs ());
-        	}
+        public ICollection RemovedBindings
+        {
+            get { return removed; }
+        }
 
-        	public bool Contains (string propName)
-        	{
-            		return list.Contains (propName);
-        	}
+        public object SyncRoot
+        {
+            get { return list.SyncRoot; }
+        }
 
-		public void CopyTo (Array array, int index)
-		{
-			list.CopyTo (array, index);
-		}
+        public void Add(ExpressionBinding binding)
+        {
+            list.Add(binding.PropertyName, binding);
+            OnChanged(new EventArgs());
+        }
 
-        	public void CopyTo (ExpressionBinding [] array, int index)
-        	{
-            		if (index < 0)
-                		throw new ArgumentNullException ("Index cannot be negative");
-            		if (index >= array.Length)
-                		throw new ArgumentException ("Index cannot be greater than or equal to length of array passed");            
-            		if (list.Count > (array.Length - index + 1))
-                		throw new ArgumentException ("Number of elements in source is greater than available space from index to end of destination");
-            
-            		foreach (string key in list.Keys)
-                		array [index++] = (ExpressionBinding) list [key];
-        	}
+        public void Clear()
+        {
+            list.Clear();
+            removed.Clear();
+            OnChanged(new EventArgs());
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			return list.GetEnumerator ();
-		}
+        public bool Contains(string propName)
+        {
+            return list.Contains(propName);
+        }
 
-		public void Remove (ExpressionBinding binding)
-		{
-			Remove(binding.PropertyName, true);
-        	}
+        public void CopyTo(Array array, int index)
+        {
+            list.CopyTo(array, index);
+        }
 
-		public void Remove (string propertyName)
-		{
-			Remove (propertyName, true);            
-        	}
+        public void CopyTo(ExpressionBinding[] array, int index)
+        {
+            if (index < 0)
+                throw new ArgumentNullException("Index cannot be negative");
+            if (index >= array.Length)
+                throw new ArgumentException(
+                    "Index cannot be greater than or equal to length of array passed"
+                );
+            if (list.Count > (array.Length - index + 1))
+                throw new ArgumentException(
+                    "Number of elements in source is greater than available space from index to end of destination"
+                );
 
-		public void Remove (string propertyName, bool addToRemovedList)
-		{
-			if (addToRemovedList)
-				removed.Add (String.Empty); 
-			else
-				removed.Add (propertyName);
+            foreach (string key in list.Keys)
+                array[index++] = (ExpressionBinding)list[key];
+        }
 
-			list.Remove (propertyName);
-            		OnChanged (new EventArgs ());
-        	}
+        public IEnumerator GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
 
-        	void OnChanged (EventArgs e)   
-        	{
-			EventHandler eh = events [changedEvent] as EventHandler;
-            		if (eh != null)
-                		eh (this, e);
-        	}        
+        public void Remove(ExpressionBinding binding)
+        {
+            Remove(binding.PropertyName, true);
+        }
 
-    	}
+        public void Remove(string propertyName)
+        {
+            Remove(propertyName, true);
+        }
+
+        public void Remove(string propertyName, bool addToRemovedList)
+        {
+            if (addToRemovedList)
+                removed.Add(String.Empty);
+            else
+                removed.Add(propertyName);
+
+            list.Remove(propertyName);
+            OnChanged(new EventArgs());
+        }
+
+        void OnChanged(EventArgs e)
+        {
+            EventHandler eh = events[changedEvent] as EventHandler;
+            if (eh != null)
+                eh(this, e);
+        }
+    }
 }

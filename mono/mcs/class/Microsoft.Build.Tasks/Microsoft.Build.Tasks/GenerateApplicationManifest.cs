@@ -25,96 +25,102 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Tasks.Deployment.ManifestUtilities;
 
-namespace Microsoft.Build.Tasks {
-	public sealed class GenerateApplicationManifest : GenerateManifestBase {
-	
-		string		clrVersion;
-		ITaskItem	configFile;
-		ITaskItem[]	dependencies;
-		ITaskItem[]	files;
-		ITaskItem	iconFile;
-		ITaskItem[]	isolatedComReferences;
-		string		manifestType;
-		string		osVersion;
-		ITaskItem	trustInfoFile;
-	
-		public GenerateApplicationManifest ()
-		{
-		}
+namespace Microsoft.Build.Tasks
+{
+    public sealed class GenerateApplicationManifest : GenerateManifestBase
+    {
+        string clrVersion;
+        ITaskItem configFile;
+        ITaskItem[] dependencies;
+        ITaskItem[] files;
+        ITaskItem iconFile;
+        ITaskItem[] isolatedComReferences;
+        string manifestType;
+        string osVersion;
+        ITaskItem trustInfoFile;
 
-		[MonoTODO]
-		protected override Type GetObjectType ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		protected override bool OnManifestLoaded (Manifest manifest)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		protected override bool OnManifestResolved (Manifest manifest)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		protected internal override bool ValidateInputs ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public string ClrVersion {
-			get { return clrVersion; }
-			set { clrVersion = value; }
-		}
-		
-		public ITaskItem ConfigFile {
-			get { return configFile; }
-			set { configFile = value; }
-		}
-		
-		public ITaskItem[] Dependencies {
-			get { return dependencies; }
-			set { dependencies = value; }
-		}
-		
-		public ITaskItem[] Files {
-			get { return files; }
-			set { files = value; }
-		}
-		
-		public ITaskItem IconFile {
-			get { return iconFile; }
-			set { iconFile = value; }
-		}
-		
-		public ITaskItem[] IsolatedComReferences {
-			get { return isolatedComReferences; }
-			set { isolatedComReferences = value; }
-		}
-		
-		public string ManifestType {
-			get { return manifestType; }
-			set { manifestType = value; }
-		}
-		
-		public string OSVersion {
-			get { return osVersion; }
-			set { osVersion = value; }
-		}
-		
-		public ITaskItem TrustInfoFile {
-			get { return trustInfoFile; }
-			set { trustInfoFile = value; }
-		}
-	}
+        public GenerateApplicationManifest() { }
+
+        [MonoTODO]
+        protected override Type GetObjectType()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected override bool OnManifestLoaded(Manifest manifest)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected override bool OnManifestResolved(Manifest manifest)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected internal override bool ValidateInputs()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ClrVersion
+        {
+            get { return clrVersion; }
+            set { clrVersion = value; }
+        }
+
+        public ITaskItem ConfigFile
+        {
+            get { return configFile; }
+            set { configFile = value; }
+        }
+
+        public ITaskItem[] Dependencies
+        {
+            get { return dependencies; }
+            set { dependencies = value; }
+        }
+
+        public ITaskItem[] Files
+        {
+            get { return files; }
+            set { files = value; }
+        }
+
+        public ITaskItem IconFile
+        {
+            get { return iconFile; }
+            set { iconFile = value; }
+        }
+
+        public ITaskItem[] IsolatedComReferences
+        {
+            get { return isolatedComReferences; }
+            set { isolatedComReferences = value; }
+        }
+
+        public string ManifestType
+        {
+            get { return manifestType; }
+            set { manifestType = value; }
+        }
+
+        public string OSVersion
+        {
+            get { return osVersion; }
+            set { osVersion = value; }
+        }
+
+        public ITaskItem TrustInfoFile
+        {
+            get { return trustInfoFile; }
+            set { trustInfoFile = value; }
+        }
+    }
 }
-

@@ -18,13 +18,16 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
 ///     for more information and examples.
 /// </remarks>
-public abstract class ConventionAnnotatable : Annotatable, IConventionAnnotatable, IMutableAnnotatable
+public abstract class ConventionAnnotatable
+    : Annotatable,
+        IConventionAnnotatable,
+        IMutableAnnotatable
 {
     /// <summary>
     ///     Gets all annotations on the current object.
     /// </summary>
-    public new virtual IEnumerable<ConventionAnnotation> GetAnnotations()
-        => base.GetAnnotations().Cast<ConventionAnnotation>();
+    public new virtual IEnumerable<ConventionAnnotation> GetAnnotations() =>
+        base.GetAnnotations().Cast<ConventionAnnotation>();
 
     /// <summary>
     ///     Adds a annotation with given key and value to this object using given configuration source.
@@ -37,8 +40,10 @@ public abstract class ConventionAnnotatable : Annotatable, IConventionAnnotatabl
     public virtual ConventionAnnotation AddAnnotation(
         string name,
         object? value,
-        ConfigurationSource configurationSource)
-        => (ConventionAnnotation)base.AddAnnotation(name, CreateAnnotation(name, value, configurationSource));
+        ConfigurationSource configurationSource
+    ) =>
+        (ConventionAnnotation)
+            base.AddAnnotation(name, CreateAnnotation(name, value, configurationSource));
 
     /// <summary>
     ///     Sets the annotation stored under the given key. Overwrites the existing annotation if an
@@ -46,8 +51,8 @@ public abstract class ConventionAnnotatable : Annotatable, IConventionAnnotatabl
     /// </summary>
     /// <param name="name">The key of the annotation to be added.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
-    public override void SetAnnotation(string name, object? value)
-        => SetAnnotation(name, value, ConfigurationSource.Explicit);
+    public override void SetAnnotation(string name, object? value) =>
+        SetAnnotation(name, value, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     Sets the annotation with given key and value on this object using given configuration source.
@@ -60,7 +65,8 @@ public abstract class ConventionAnnotatable : Annotatable, IConventionAnnotatabl
     public virtual ConventionAnnotation? SetAnnotation(
         string name,
         object? value,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         var oldAnnotation = FindAnnotation(name);
         if (oldAnnotation != null)
@@ -74,7 +80,12 @@ public abstract class ConventionAnnotatable : Annotatable, IConventionAnnotatabl
             configurationSource = configurationSource.Max(oldAnnotation.GetConfigurationSource());
         }
 
-        return (ConventionAnnotation?)base.SetAnnotation(name, CreateAnnotation(name, value, configurationSource), oldAnnotation);
+        return (ConventionAnnotation?)
+            base.SetAnnotation(
+                name,
+                CreateAnnotation(name, value, configurationSource),
+                oldAnnotation
+            );
     }
 
     /// <summary>
@@ -89,7 +100,8 @@ public abstract class ConventionAnnotatable : Annotatable, IConventionAnnotatabl
     public virtual ConventionAnnotation? SetOrRemoveAnnotation(
         string name,
         object? value,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         if (value == null)
         {
@@ -107,8 +119,16 @@ public abstract class ConventionAnnotatable : Annotatable, IConventionAnnotatabl
     /// <param name="annotation">The annotation set.</param>
     /// <param name="oldAnnotation">The old annotation.</param>
     /// <returns>The annotation that was set.</returns>
-    protected override Annotation? OnAnnotationSet(string name, Annotation? annotation, Annotation? oldAnnotation)
-        => (Annotation?)OnAnnotationSet(name, (IConventionAnnotation?)annotation, (IConventionAnnotation?)oldAnnotation);
+    protected override Annotation? OnAnnotationSet(
+        string name,
+        Annotation? annotation,
+        Annotation? oldAnnotation
+    ) =>
+        (Annotation?)OnAnnotationSet(
+            name,
+            (IConventionAnnotation?)annotation,
+            (IConventionAnnotation?)oldAnnotation
+        );
 
     /// <summary>
     ///     Called when an annotation was set or removed.
@@ -120,8 +140,8 @@ public abstract class ConventionAnnotatable : Annotatable, IConventionAnnotatabl
     protected virtual IConventionAnnotation? OnAnnotationSet(
         string name,
         IConventionAnnotation? annotation,
-        IConventionAnnotation? oldAnnotation)
-        => annotation;
+        IConventionAnnotation? oldAnnotation
+    ) => annotation;
 
     /// <summary>
     ///     Gets the annotation with the given name, returning <see langword="null" /> if it does not exist.
@@ -130,41 +150,47 @@ public abstract class ConventionAnnotatable : Annotatable, IConventionAnnotatabl
     /// <returns>
     ///     The existing annotation if an annotation with the specified name already exists. Otherwise, <see langword="null" />.
     /// </returns>
-    public new virtual ConventionAnnotation? FindAnnotation(string name)
-        => (ConventionAnnotation?)base.FindAnnotation(name);
+    public new virtual ConventionAnnotation? FindAnnotation(string name) =>
+        (ConventionAnnotation?)base.FindAnnotation(name);
 
     /// <inheritdoc />
-    protected override Annotation CreateAnnotation(string name, object? value)
-        => CreateAnnotation(name, value, ConfigurationSource.Explicit);
+    protected override Annotation CreateAnnotation(string name, object? value) =>
+        CreateAnnotation(name, value, ConfigurationSource.Explicit);
 
     private static ConventionAnnotation CreateAnnotation(
         string name,
         object? value,
-        ConfigurationSource configurationSource)
-        => new(name, value, configurationSource);
+        ConfigurationSource configurationSource
+    ) => new(name, value, configurationSource);
 
     /// <inheritdoc />
-    IConventionAnnotatableBuilder IConventionAnnotatable.Builder
-        => throw new NotSupportedException();
+    IConventionAnnotatableBuilder IConventionAnnotatable.Builder =>
+        throw new NotSupportedException();
 
     /// <inheritdoc />
-    bool IConventionAnnotatable.IsInModel
-        => throw new NotSupportedException();
-
-    /// <inheritdoc />
-    [DebuggerStepThrough]
-    IEnumerable<IConventionAnnotation> IConventionAnnotatable.GetAnnotations()
-        => GetAnnotations();
+    bool IConventionAnnotatable.IsInModel => throw new NotSupportedException();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionAnnotation? IConventionAnnotatable.SetAnnotation(string name, object? value, bool fromDataAnnotation)
-        => SetAnnotation(name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IEnumerable<IConventionAnnotation> IConventionAnnotatable.GetAnnotations() => GetAnnotations();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    void IMutableAnnotatable.SetAnnotation(string name, object? value)
-        => SetAnnotation(name, value, ConfigurationSource.Explicit);
+    IConventionAnnotation? IConventionAnnotatable.SetAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation
+    ) =>
+        SetAnnotation(
+            name,
+            value,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
+
+    /// <inheritdoc />
+    [DebuggerStepThrough]
+    void IMutableAnnotatable.SetAnnotation(string name, object? value) =>
+        SetAnnotation(name, value, ConfigurationSource.Explicit);
 
     /// <inheritdoc />
     object? IMutableAnnotatable.this[string name]
@@ -187,21 +213,37 @@ public abstract class ConventionAnnotatable : Annotatable, IConventionAnnotatabl
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionAnnotation IConventionAnnotatable.AddAnnotation(string name, object? value, bool fromDataAnnotation)
-        => AddAnnotation(name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionAnnotation IConventionAnnotatable.AddAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation
+    ) =>
+        AddAnnotation(
+            name,
+            value,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionAnnotation? IConventionAnnotatable.FindAnnotation(string name)
-        => FindAnnotation(name);
+    IConventionAnnotation? IConventionAnnotatable.FindAnnotation(string name) =>
+        FindAnnotation(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionAnnotation? IConventionAnnotatable.RemoveAnnotation(string name)
-        => (IConventionAnnotation?)RemoveAnnotation(name);
+    IConventionAnnotation? IConventionAnnotatable.RemoveAnnotation(string name) =>
+        (IConventionAnnotation?)RemoveAnnotation(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionAnnotation? IConventionAnnotatable.SetOrRemoveAnnotation(string name, object? value, bool fromDataAnnotation)
-        => SetOrRemoveAnnotation(name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionAnnotation? IConventionAnnotatable.SetOrRemoveAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation
+    ) =>
+        SetOrRemoveAnnotation(
+            name,
+            value,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 }

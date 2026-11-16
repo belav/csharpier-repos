@@ -12,9 +12,7 @@ namespace Microsoft.Interop.JavaScript
     /// The names of these members map directly to those on the
     /// JSImportAttribute and should not be changed.
     /// </remarks>
-    internal sealed record JSImportData(string FunctionName, string? ModuleName)
-    {
-    }
+    internal sealed record JSImportData(string FunctionName, string? ModuleName) { }
 
     /// <summary>
     /// JSExportAttribute data
@@ -23,7 +21,5 @@ namespace Microsoft.Interop.JavaScript
     /// The names of these members map directly to those on the
     /// JSExportAttribute and should not be changed.
     /// </remarks>
-    internal sealed record JSExportData()
-    {
-    }
+    internal sealed record JSExportData() { }
 }

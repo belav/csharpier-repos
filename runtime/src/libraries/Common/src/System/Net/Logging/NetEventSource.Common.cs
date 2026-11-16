@@ -32,7 +32,8 @@ namespace System.Net
     /// <summary>Provides logging facilities for System.Net libraries.</summary>
     internal sealed partial class NetEventSource : EventSource
     {
-        private const string EventSourceSuppressMessage = "Parameters to this method are primitive and are trimmer safe";
+        private const string EventSourceSuppressMessage =
+            "Parameters to this method are primitive and are trimmer safe";
 
         /// <summary>The single event source instance to use for all logging.</summary>
         public static readonly NetEventSource Log = new NetEventSource();
@@ -51,6 +52,7 @@ namespace System.Net
 
         private const int InfoEventId = 1;
         private const int ErrorEventId = 2;
+
         // private const int AssociateEventId = 3; // Defined in NetEventSource.Common.Associate.cs
         // private const int DumpArrayEventId = 4; // Defined in NetEventSource.Common.DumpBuffer.cs
 
@@ -63,16 +65,27 @@ namespace System.Net
         /// <param name="formattableString">The message to be logged.</param>
         /// <param name="memberName">The calling member.</param>
         [NonEvent]
-        public static void Info(object? thisOrContextObject, FormattableString? formattableString = null, [CallerMemberName] string? memberName = null) =>
-            Log.Info(IdOf(thisOrContextObject), memberName, formattableString != null ? Format(formattableString) : NoParameters);
+        public static void Info(
+            object? thisOrContextObject,
+            FormattableString? formattableString = null,
+            [CallerMemberName] string? memberName = null
+        ) =>
+            Log.Info(
+                IdOf(thisOrContextObject),
+                memberName,
+                formattableString != null ? Format(formattableString) : NoParameters
+            );
 
         /// <summary>Logs an information message.</summary>
         /// <param name="thisOrContextObject">`this`, or another object that serves to provide context for the operation.</param>
         /// <param name="message">The message to be logged.</param>
         /// <param name="memberName">The calling member.</param>
         [NonEvent]
-        public static void Info(object? thisOrContextObject, object? message, [CallerMemberName] string? memberName = null) =>
-            Log.Info(IdOf(thisOrContextObject), memberName, Format(message));
+        public static void Info(
+            object? thisOrContextObject,
+            object? message,
+            [CallerMemberName] string? memberName = null
+        ) => Log.Info(IdOf(thisOrContextObject), memberName, Format(message));
 
         [Event(InfoEventId, Level = EventLevel.Informational, Keywords = Keywords.Default)]
         private void Info(string thisOrContextObject, string? memberName, string? message)
@@ -88,16 +101,22 @@ namespace System.Net
         /// <param name="formattableString">The message to be logged.</param>
         /// <param name="memberName">The calling member.</param>
         [NonEvent]
-        public static void Error(object? thisOrContextObject, FormattableString formattableString, [CallerMemberName] string? memberName = null) =>
-            Log.ErrorMessage(IdOf(thisOrContextObject), memberName, Format(formattableString));
+        public static void Error(
+            object? thisOrContextObject,
+            FormattableString formattableString,
+            [CallerMemberName] string? memberName = null
+        ) => Log.ErrorMessage(IdOf(thisOrContextObject), memberName, Format(formattableString));
 
         /// <summary>Logs an error message.</summary>
         /// <param name="thisOrContextObject">`this`, or another object that serves to provide context for the operation.</param>
         /// <param name="message">The message to be logged.</param>
         /// <param name="memberName">The calling member.</param>
         [NonEvent]
-        public static void Error(object? thisOrContextObject, object message, [CallerMemberName] string? memberName = null) =>
-            Log.ErrorMessage(IdOf(thisOrContextObject), memberName, Format(message));
+        public static void Error(
+            object? thisOrContextObject,
+            object message,
+            [CallerMemberName] string? memberName = null
+        ) => Log.ErrorMessage(IdOf(thisOrContextObject), memberName, Format(message));
 
         [Event(ErrorEventId, Level = EventLevel.Error, Keywords = Keywords.Default)]
         private void ErrorMessage(string thisOrContextObject, string? memberName, string? message)
@@ -109,7 +128,8 @@ namespace System.Net
 
         #region Helpers
         [NonEvent]
-        public static string IdOf(object? value) => value != null ? value.GetType().Name + "#" + GetHashCode(value) : NullInstance;
+        public static string IdOf(object? value) =>
+            value != null ? value.GetType().Name + "#" + GetHashCode(value) : NullInstance;
 
         [NonEvent]
         public static int GetHashCode(object? value) => value?.GetHashCode() ?? 0;
@@ -172,10 +192,23 @@ namespace System.Net
         {
             switch (s.ArgumentCount)
             {
-                case 0: return s.Format;
-                case 1: return string.Format(s.Format, Format(s.GetArgument(0)));
-                case 2: return string.Format(s.Format, Format(s.GetArgument(0)), Format(s.GetArgument(1)));
-                case 3: return string.Format(s.Format, Format(s.GetArgument(0)), Format(s.GetArgument(1)), Format(s.GetArgument(2)));
+                case 0:
+                    return s.Format;
+                case 1:
+                    return string.Format(s.Format, Format(s.GetArgument(0)));
+                case 2:
+                    return string.Format(
+                        s.Format,
+                        Format(s.GetArgument(0)),
+                        Format(s.GetArgument(1))
+                    );
+                case 3:
+                    return string.Format(
+                        s.Format,
+                        Format(s.GetArgument(0)),
+                        Format(s.GetArgument(1)),
+                        Format(s.GetArgument(2))
+                    );
                 default:
                     string?[] formattedArgs = new string?[s.ArgumentCount];
                     for (int i = 0; i < formattedArgs.Length; i++)
@@ -189,8 +222,11 @@ namespace System.Net
         static partial void AdditionalCustomizedToString(object value, ref string? result);
         #endregion
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
         [NonEvent]
         private unsafe void WriteEvent(int eventId, string? arg1, string? arg2, int arg3)
         {
@@ -206,18 +242,14 @@ namespace System.Net
                 descrs[0] = new EventData
                 {
                     DataPointer = (IntPtr)(arg1Ptr),
-                    Size = (arg1.Length + 1) * sizeof(char)
+                    Size = (arg1.Length + 1) * sizeof(char),
                 };
                 descrs[1] = new EventData
                 {
                     DataPointer = (IntPtr)(arg2Ptr),
-                    Size = (arg2.Length + 1) * sizeof(char)
+                    Size = (arg2.Length + 1) * sizeof(char),
                 };
-                descrs[2] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg3),
-                    Size = sizeof(int)
-                };
+                descrs[2] = new EventData { DataPointer = (IntPtr)(&arg3), Size = sizeof(int) };
 
                 WriteEventCore(eventId, NumEventDatas, descrs);
             }

@@ -17,14 +17,10 @@ namespace System.ServiceModel
         bool relay;
         T content;
 
-        public MessageHeader()
-        {
-        }
+        public MessageHeader() { }
 
         public MessageHeader(T content)
-            : this(content, false, "", false)
-        {
-        }
+            : this(content, false, "", false) { }
 
         public MessageHeader(T content, bool mustUnderstand, string actor, bool relay)
         {
@@ -65,7 +61,14 @@ namespace System.ServiceModel
 
         public MessageHeader GetUntypedHeader(string name, string ns)
         {
-            return MessageHeader.CreateHeader(name, ns, this.content, this.mustUnderstand, this.actor, this.relay);
+            return MessageHeader.CreateHeader(
+                name,
+                ns,
+                this.content,
+                this.mustUnderstand,
+                this.actor,
+                this.relay
+            );
         }
     }
 
@@ -78,32 +81,55 @@ namespace System.ServiceModel
     // you'd still have the creation problem...).  the issue with that is you now have a new public interface
     internal abstract class TypedHeaderManager
     {
-        static Dictionary<Type, TypedHeaderManager> cache = new Dictionary<Type, TypedHeaderManager>();
+        static Dictionary<Type, TypedHeaderManager> cache =
+            new Dictionary<Type, TypedHeaderManager>();
         static ReaderWriterLock cacheLock = new ReaderWriterLock();
         static Type GenericAdapterType = typeof(GenericAdapter<>);
 
-        internal static object Create(Type t, object content, bool mustUnderstand, bool relay, string actor)
+        internal static object Create(
+            Type t,
+            object content,
+            bool mustUnderstand,
+            bool relay,
+            string actor
+        )
         {
             return GetTypedHeaderManager(t).Create(content, mustUnderstand, relay, actor);
         }
 
-        internal static object GetContent(Type t, object typedHeaderInstance, out bool mustUnderstand, out bool relay, out string actor)
+        internal static object GetContent(
+            Type t,
+            object typedHeaderInstance,
+            out bool mustUnderstand,
+            out bool relay,
+            out string actor
+        )
         {
-            return GetTypedHeaderManager(t).GetContent(typedHeaderInstance, out mustUnderstand, out relay, out actor);
+            return GetTypedHeaderManager(t)
+                .GetContent(typedHeaderInstance, out mustUnderstand, out relay, out actor);
         }
 
         internal static Type GetMessageHeaderType(Type contentType)
         {
             return GetTypedHeaderManager(contentType).GetMessageHeaderType();
         }
+
         internal static Type GetHeaderType(Type headerParameterType)
         {
-            if (headerParameterType.IsGenericType && headerParameterType.GetGenericTypeDefinition() == typeof(MessageHeader<>))
+            if (
+                headerParameterType.IsGenericType
+                && headerParameterType.GetGenericTypeDefinition() == typeof(MessageHeader<>)
+            )
                 return headerParameterType.GetGenericArguments()[0];
             return headerParameterType;
         }
 
-        [SuppressMessage(FxCop.Category.Usage, "CA2301:EmbeddableTypesInContainersRule", MessageId = "cache", Justification = "No need to support type equivalence here.")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            "CA2301:EmbeddableTypesInContainersRule",
+            MessageId = "cache",
+            Justification = "No need to support type equivalence here."
+        )]
         static TypedHeaderManager GetTypedHeaderManager(Type t)
         {
             TypedHeaderManager result = null;
@@ -122,7 +148,8 @@ namespace System.ServiceModel
                     cacheLock.UpgradeToWriterLock(int.MaxValue);
                     if (!cache.TryGetValue(t, out result))
                     {
-                        result = (TypedHeaderManager)Activator.CreateInstance(GenericAdapterType.MakeGenericType(t));
+                        result = (TypedHeaderManager)
+                            Activator.CreateInstance(GenericAdapterType.MakeGenericType(t));
                         cache.Add(t, result);
                     }
                 }
@@ -138,13 +165,28 @@ namespace System.ServiceModel
             return result;
         }
 
-        protected abstract object Create(object content, bool mustUnderstand, bool relay, string actor);
-        protected abstract object GetContent(object typedHeaderInstance, out bool mustUnderstand, out bool relay, out string actor);
+        protected abstract object Create(
+            object content,
+            bool mustUnderstand,
+            bool relay,
+            string actor
+        );
+        protected abstract object GetContent(
+            object typedHeaderInstance,
+            out bool mustUnderstand,
+            out bool relay,
+            out string actor
+        );
         protected abstract Type GetMessageHeaderType();
 
         class GenericAdapter<T> : TypedHeaderManager
         {
-            protected override object Create(object content, bool mustUnderstand, bool relay, string actor)
+            protected override object Create(
+                object content,
+                bool mustUnderstand,
+                bool relay,
+                string actor
+            )
             {
                 MessageHeader<T> header = new MessageHeader<T>();
                 header.Content = (T)content;
@@ -154,7 +196,12 @@ namespace System.ServiceModel
                 return header;
             }
 
-            protected override object GetContent(object typedHeaderInstance, out bool mustUnderstand, out bool relay, out string actor)
+            protected override object GetContent(
+                object typedHeaderInstance,
+                out bool mustUnderstand,
+                out bool relay,
+                out string actor
+            )
             {
                 mustUnderstand = false;
                 relay = false;
@@ -164,7 +211,9 @@ namespace System.ServiceModel
 
                 MessageHeader<T> header = typedHeaderInstance as MessageHeader<T>;
                 if (header == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException("typedHeaderInstance"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException("typedHeaderInstance")
+                    );
                 mustUnderstand = header.MustUnderstand;
                 relay = header.Relay;
                 actor = header.Actor;

@@ -8,7 +8,13 @@ namespace System.ServiceModel.Channels
 
     interface IStreamUpgradeChannelBindingProvider : IChannelBindingProvider
     {
-        ChannelBinding GetChannelBinding(StreamUpgradeInitiator upgradeInitiator, ChannelBindingKind kind);
-        ChannelBinding GetChannelBinding(StreamUpgradeAcceptor upgradeAcceptor, ChannelBindingKind kind);
+        ChannelBinding GetChannelBinding(
+            StreamUpgradeInitiator upgradeInitiator,
+            ChannelBindingKind kind
+        );
+        ChannelBinding GetChannelBinding(
+            StreamUpgradeAcceptor upgradeAcceptor,
+            ChannelBindingKind kind
+        );
     }
 }

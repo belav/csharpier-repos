@@ -18,10 +18,12 @@ namespace Microsoft.Web.Mvc.Test
         public void GetValueProvider()
         {
             // Arrange
-            Dictionary<string, object> backingStore = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+            Dictionary<string, object> backingStore = new Dictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            )
             {
                 { "foo", "fooValue" },
-                { "bar.baz", "barBazValue" }
+                { "bar.baz", "barBazValue" },
             };
             MockSessionState session = new MockSessionState(backingStore);
 

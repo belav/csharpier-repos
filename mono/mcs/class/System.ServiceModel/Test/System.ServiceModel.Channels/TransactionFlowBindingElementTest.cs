@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,44 +36,42 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-	[TestFixture]
-	public class TransactionFlowBindingElementTest
-	{
-		[Test]
-		//[Ignore ("Mono never supports OleTx, thus it won't work forever.")]
-		public void DefaultValues ()
-		{
-			TransactionFlowBindingElement be =
-				new TransactionFlowBindingElement ();
-			Assert.AreEqual (TransactionProtocol.Default,
-					 be.TransactionProtocol, "#1");
-		}
+    [TestFixture]
+    public class TransactionFlowBindingElementTest
+    {
+        [Test]
+        //[Ignore ("Mono never supports OleTx, thus it won't work forever.")]
+        public void DefaultValues()
+        {
+            TransactionFlowBindingElement be = new TransactionFlowBindingElement();
+            Assert.AreEqual(TransactionProtocol.Default, be.TransactionProtocol, "#1");
+        }
 
-		public void CanBuildChannelFactory ()
-		{
-			TransactionFlowBindingElement be =
-				new TransactionFlowBindingElement ();
-			BindingContext ctx = new BindingContext (
-				new CustomBinding (),
-				new BindingParameterCollection ());
-			Assert.IsTrue (be.CanBuildChannelFactory<IRequestChannel> (ctx), "#1");
-			Assert.IsTrue (be.CanBuildChannelFactory<IOutputChannel> (ctx), "#2");
-			Assert.IsTrue (be.CanBuildChannelFactory<IRequestSessionChannel> (ctx), "#3");
-			Assert.IsTrue (be.CanBuildChannelFactory<IOutputSessionChannel> (ctx), "#4");
-		}
+        public void CanBuildChannelFactory()
+        {
+            TransactionFlowBindingElement be = new TransactionFlowBindingElement();
+            BindingContext ctx = new BindingContext(
+                new CustomBinding(),
+                new BindingParameterCollection()
+            );
+            Assert.IsTrue(be.CanBuildChannelFactory<IRequestChannel>(ctx), "#1");
+            Assert.IsTrue(be.CanBuildChannelFactory<IOutputChannel>(ctx), "#2");
+            Assert.IsTrue(be.CanBuildChannelFactory<IRequestSessionChannel>(ctx), "#3");
+            Assert.IsTrue(be.CanBuildChannelFactory<IOutputSessionChannel>(ctx), "#4");
+        }
 
-		public void CanBuildChannelListener ()
-		{
-			TransactionFlowBindingElement be =
-				new TransactionFlowBindingElement ();
-			BindingContext ctx = new BindingContext (
-				new CustomBinding (),
-				new BindingParameterCollection ());
-			Assert.IsTrue (be.CanBuildChannelListener<IReplyChannel> (ctx), "#1");
-			Assert.IsTrue (be.CanBuildChannelListener<IInputChannel> (ctx), "#2");
-			Assert.IsTrue (be.CanBuildChannelListener<IRequestSessionChannel> (ctx), "#3");
-			Assert.IsTrue (be.CanBuildChannelListener<IOutputSessionChannel> (ctx), "#4");
-		}
-	}
+        public void CanBuildChannelListener()
+        {
+            TransactionFlowBindingElement be = new TransactionFlowBindingElement();
+            BindingContext ctx = new BindingContext(
+                new CustomBinding(),
+                new BindingParameterCollection()
+            );
+            Assert.IsTrue(be.CanBuildChannelListener<IReplyChannel>(ctx), "#1");
+            Assert.IsTrue(be.CanBuildChannelListener<IInputChannel>(ctx), "#2");
+            Assert.IsTrue(be.CanBuildChannelListener<IRequestSessionChannel>(ctx), "#3");
+            Assert.IsTrue(be.CanBuildChannelListener<IOutputSessionChannel>(ctx), "#4");
+        }
+    }
 }
 #endif

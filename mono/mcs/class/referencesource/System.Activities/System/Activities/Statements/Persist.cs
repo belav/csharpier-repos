@@ -12,23 +12,20 @@ namespace System.Activities.Statements
     {
         static BookmarkCallback onPersistCompleteCallback;
 
-        protected override void CacheMetadata(NativeActivityMetadata metadata)
-        {
-        }
+        protected override void CacheMetadata(NativeActivityMetadata metadata) { }
 
         protected override bool CanInduceIdle
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected override void Execute(NativeActivityContext context)
         {
             if (context.IsInNoPersistScope)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CannotPersistInsideNoPersist));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.CannotPersistInsideNoPersist)
+                );
             }
 
             if (onPersistCompleteCallback == null)
@@ -39,7 +36,11 @@ namespace System.Activities.Statements
             context.RequestPersist(onPersistCompleteCallback);
         }
 
-        static void OnPersistComplete(NativeActivityContext context, Bookmark bookmark, object value)
+        static void OnPersistComplete(
+            NativeActivityContext context,
+            Bookmark bookmark,
+            object value
+        )
         {
             // No-op.  This is here to keep the activity from completing.
         }

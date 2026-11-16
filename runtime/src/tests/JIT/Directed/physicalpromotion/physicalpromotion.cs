@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-using System.Runtime.CompilerServices;
 using System;
-using Xunit;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Xunit;
 
 public class PhysicalPromotion
 {
@@ -22,6 +22,7 @@ public class PhysicalPromotion
     }
 
     private static S s_static = new S { A = 0x10101010, B = 0x20202020 };
+
     [Fact]
     public static void CopyFromLocalVar()
     {
@@ -79,8 +80,18 @@ public class PhysicalPromotion
         Assert.Equal(0x20202020U, mutate.B);
     }
 
-    private static VeryOverlapping _overlappy1 = new VeryOverlapping { F0 = 0x12345678, F4 = 0xdeadbeef };
-    private static VeryOverlapping _overlappy2 = new VeryOverlapping { F1 = 0xde, F2 = 0x1357, F5 = 0x17, F7 = 0x42 };
+    private static VeryOverlapping _overlappy1 = new VeryOverlapping
+    {
+        F0 = 0x12345678,
+        F4 = 0xdeadbeef,
+    };
+    private static VeryOverlapping _overlappy2 = new VeryOverlapping
+    {
+        F1 = 0xde,
+        F2 = 0x1357,
+        F5 = 0x17,
+        F7 = 0x42,
+    };
 
     [Fact]
     public static void Overlappy()
@@ -103,17 +114,17 @@ public class PhysicalPromotion
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Consume<T>(T val)
-    {
-    }
+    private static void Consume<T>(T val) { }
 
     [StructLayout(LayoutKind.Explicit)]
     private struct S
     {
         [FieldOffset(0)]
         public uint A;
+
         [FieldOffset(4)]
         public uint B;
+
         [FieldOffset(2)]
         public uint C;
     }
@@ -129,18 +140,25 @@ public class PhysicalPromotion
     {
         [FieldOffset(0)]
         public uint F0;
+
         [FieldOffset(1)]
         public byte F1;
+
         [FieldOffset(2)]
         public ushort F2;
+
         [FieldOffset(3)]
         public byte F3;
+
         [FieldOffset(4)]
         public uint F4;
+
         [FieldOffset(5)]
         public byte F5;
+
         [FieldOffset(6)]
         public ushort F6;
+
         [FieldOffset(7)]
         public byte F7;
     }

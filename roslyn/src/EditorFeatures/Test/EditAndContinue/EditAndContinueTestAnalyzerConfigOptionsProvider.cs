@@ -9,15 +9,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 {
     internal class EditAndContinueTestAnalyzerConfigOptionsProvider : AnalyzerConfigOptionsProvider
     {
-        public EditAndContinueTestAnalyzerConfigOptionsProvider(IEnumerable<(string, string)> options)
-            => GlobalOptions = new EditAndContinueTestAnalyzerConfigOptions(options);
+        public EditAndContinueTestAnalyzerConfigOptionsProvider(
+            IEnumerable<(string, string)> options
+        ) => GlobalOptions = new EditAndContinueTestAnalyzerConfigOptions(options);
 
         public override AnalyzerConfigOptions GlobalOptions { get; }
 
-        public override AnalyzerConfigOptions GetOptions(SyntaxTree tree)
-            => GlobalOptions;
+        public override AnalyzerConfigOptions GetOptions(SyntaxTree tree) => GlobalOptions;
 
-        public override AnalyzerConfigOptions GetOptions(AdditionalText textFile)
-            => GlobalOptions;
+        public override AnalyzerConfigOptions GetOptions(AdditionalText textFile) => GlobalOptions;
     }
 }

@@ -11,20 +11,31 @@ namespace System.ComponentModel.Composition
 {
     internal static class ComposablePartCatalogExtensions
     {
-        public static IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(this ComposablePartCatalog catalog, Expression<Func<ExportDefinition, bool>> constraint)
+        public static IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
+            this ComposablePartCatalog catalog,
+            Expression<Func<ExportDefinition, bool>> constraint
+        )
         {
             var import = ImportDefinitionFactory.Create(constraint);
             return catalog.GetExports(import);
         }
 
-        public static Tuple<ComposablePartDefinition, ExportDefinition>[] GetExports<T>(this ComposablePartCatalog catalog)
+        public static Tuple<ComposablePartDefinition, ExportDefinition>[] GetExports<T>(
+            this ComposablePartCatalog catalog
+        )
         {
-            return catalog.GetExports(ImportDefinitionFactory.Create(typeof(T), ImportCardinality.ZeroOrMore)).ToArray();
+            return catalog
+                .GetExports(ImportDefinitionFactory.Create(typeof(T), ImportCardinality.ZeroOrMore))
+                .ToArray();
         }
 
-        public static Tuple<ComposablePartDefinition, ExportDefinition> GetExport<T>(this ComposablePartCatalog catalog)
+        public static Tuple<ComposablePartDefinition, ExportDefinition> GetExport<T>(
+            this ComposablePartCatalog catalog
+        )
         {
-            return catalog.GetExports(ImportDefinitionFactory.Create(typeof(T), ImportCardinality.ExactlyOne)).Single();
+            return catalog
+                .GetExports(ImportDefinitionFactory.Create(typeof(T), ImportCardinality.ExactlyOne))
+                .Single();
         }
     }
 }

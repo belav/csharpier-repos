@@ -16,13 +16,22 @@ internal static partial class Interop
         internal static partial void X509StoreCtxDestroy(IntPtr v);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509StoreCtxGetChain")]
-        internal static partial SafeX509StackHandle X509StoreCtxGetChain(SafeX509StoreCtxHandle ctx);
+        internal static partial SafeX509StackHandle X509StoreCtxGetChain(
+            SafeX509StoreCtxHandle ctx
+        );
 
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509StoreCtxGetCurrentCert")]
-        internal static partial SafeX509Handle X509StoreCtxGetCurrentCert(SafeX509StoreCtxHandle ctx);
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_X509StoreCtxGetCurrentCert"
+        )]
+        internal static partial SafeX509Handle X509StoreCtxGetCurrentCert(
+            SafeX509StoreCtxHandle ctx
+        );
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial int CryptoNative_X509StoreCtxCommitToChain(SafeX509StoreCtxHandle ctx);
+        private static partial int CryptoNative_X509StoreCtxCommitToChain(
+            SafeX509StoreCtxHandle ctx
+        );
 
         internal static void X509StoreCtxCommitToChain(SafeX509StoreCtxHandle ctx)
         {
@@ -35,11 +44,13 @@ internal static partial class Interop
         [LibraryImport(Libraries.CryptoNative)]
         private static partial int CryptoNative_X509StoreCtxResetForSignatureError(
             SafeX509StoreCtxHandle ctx,
-            out SafeX509StoreHandle newStore);
+            out SafeX509StoreHandle newStore
+        );
 
         internal static void X509StoreCtxResetForSignatureError(
             SafeX509StoreCtxHandle ctx,
-            out SafeX509StoreHandle? newStore)
+            out SafeX509StoreHandle? newStore
+        )
         {
             if (CryptoNative_X509StoreCtxResetForSignatureError(ctx, out newStore) != 1)
             {
@@ -55,14 +66,22 @@ internal static partial class Interop
             }
         }
 
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509StoreCtxGetSharedUntrusted")]
-        private static partial SafeSharedX509StackHandle X509StoreCtxGetSharedUntrusted_private(SafeX509StoreCtxHandle ctx);
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_X509StoreCtxGetSharedUntrusted"
+        )]
+        private static partial SafeSharedX509StackHandle X509StoreCtxGetSharedUntrusted_private(
+            SafeX509StoreCtxHandle ctx
+        );
 
-        internal static SafeSharedX509StackHandle X509StoreCtxGetSharedUntrusted(SafeX509StoreCtxHandle ctx)
+        internal static SafeSharedX509StackHandle X509StoreCtxGetSharedUntrusted(
+            SafeX509StoreCtxHandle ctx
+        )
         {
             return SafeInteriorHandle.OpenInteriorHandle(
                 X509StoreCtxGetSharedUntrusted_private,
-                ctx);
+                ctx
+            );
         }
     }
 }
@@ -71,15 +90,11 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeX509StoreCtxHandle : SafeHandle
     {
-        public SafeX509StoreCtxHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeX509StoreCtxHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
-        internal SafeX509StoreCtxHandle(IntPtr handle, bool ownsHandle) :
-            base(handle, ownsHandle)
-        {
-        }
+        internal SafeX509StoreCtxHandle(IntPtr handle, bool ownsHandle)
+            : base(handle, ownsHandle) { }
 
         protected override bool ReleaseHandle()
         {

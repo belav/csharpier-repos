@@ -7,7 +7,10 @@ namespace System.Threading.Tasks.Tests
 {
     public class RunContinuationsAsynchronouslyTests
     {
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public void Direct(bool useRunContinuationsAsynchronously)
@@ -15,7 +18,10 @@ namespace System.Threading.Tasks.Tests
             Run(useRunContinuationsAsynchronously, t => t);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public void ViaUnwrap(bool useRunContinuationsAsynchronously)
@@ -23,7 +29,10 @@ namespace System.Threading.Tasks.Tests
             Run(useRunContinuationsAsynchronously, t => ((Task<Task>)t).Unwrap());
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public void ViaWhenAll(bool useRunContinuationsAsynchronously)
@@ -31,7 +40,10 @@ namespace System.Threading.Tasks.Tests
             Run(useRunContinuationsAsynchronously, t => Task.WhenAll(t));
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public void ViaWhenAny(bool useRunContinuationsAsynchronously)
@@ -39,19 +51,30 @@ namespace System.Threading.Tasks.Tests
             Run(useRunContinuationsAsynchronously, t => Task.WhenAny(t));
         }
 
-        private static void Run(bool useRunContinuationsAsynchronously, Func<Task,Task> getIntermediateContinuation)
+        private static void Run(
+            bool useRunContinuationsAsynchronously,
+            Func<Task, Task> getIntermediateContinuation
+        )
         {
             Task t = Task.Run(() => // run test off of xunit's thread so as not to be confused by its TaskScheduler or SynchronizationContext
             {
                 int callingThreadId = Environment.CurrentManagedThreadId;
 
-                var tcs = new TaskCompletionSource<Task>(useRunContinuationsAsynchronously ?
-                    TaskCreationOptions.RunContinuationsAsynchronously :
-                    TaskCreationOptions.None);
+                var tcs = new TaskCompletionSource<Task>(
+                    useRunContinuationsAsynchronously
+                        ? TaskCreationOptions.RunContinuationsAsynchronously
+                        : TaskCreationOptions.None
+                );
 
-                Task cont = getIntermediateContinuation(tcs.Task).ContinueWith(
-                    _ => Assert.NotEqual(useRunContinuationsAsynchronously, callingThreadId == Environment.CurrentManagedThreadId),
-                    TaskContinuationOptions.ExecuteSynchronously);
+                Task cont = getIntermediateContinuation(tcs.Task)
+                    .ContinueWith(
+                        _ =>
+                            Assert.NotEqual(
+                                useRunContinuationsAsynchronously,
+                                callingThreadId == Environment.CurrentManagedThreadId
+                            ),
+                        TaskContinuationOptions.ExecuteSynchronously
+                    );
 
                 tcs.SetResult(Task.CompletedTask);
 

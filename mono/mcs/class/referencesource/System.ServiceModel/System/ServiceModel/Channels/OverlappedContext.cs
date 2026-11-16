@@ -29,7 +29,7 @@ namespace System.ServiceModel.Channels
         object pinnedTarget;
         Overlapped overlapped;
         RootedHolder rootedHolder;
-        OverlappedIOCompleteCallback pendingCallback;  // Null when no async I/O is pending.
+        OverlappedIOCompleteCallback pendingCallback; // Null when no async I/O is pending.
         bool deferredFree;
         bool syncOperationPending;
         ManualResetEvent completionEvent;
@@ -42,30 +42,46 @@ namespace System.ServiceModel.Channels
         StackTrace freeStack;
 #endif
 
-
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
         public OverlappedContext()
         {
             if (OverlappedContext.completeCallback == null)
             {
-                OverlappedContext.completeCallback = Fx.ThunkCallback(new IOCompletionCallback(CompleteCallback));
+                OverlappedContext.completeCallback = Fx.ThunkCallback(
+                    new IOCompletionCallback(CompleteCallback)
+                );
             }
             if (OverlappedContext.eventCallback == null)
             {
-                OverlappedContext.eventCallback = Fx.ThunkCallback(new WaitOrTimerCallback(EventCallback));
+                OverlappedContext.eventCallback = Fx.ThunkCallback(
+                    new WaitOrTimerCallback(EventCallback)
+                );
             }
             if (OverlappedContext.cleanupCallback == null)
             {
-                OverlappedContext.cleanupCallback = Fx.ThunkCallback(new WaitOrTimerCallback(CleanupCallback));
+                OverlappedContext.cleanupCallback = Fx.ThunkCallback(
+                    new WaitOrTimerCallback(CleanupCallback)
+                );
             }
 
             this.bufferHolder = new object[] { OverlappedContext.dummyBuffer };
             this.overlapped = new Overlapped();
-            this.nativeOverlapped = this.overlapped.UnsafePack(OverlappedContext.completeCallback, this.bufferHolder);
+            this.nativeOverlapped = this.overlapped.UnsafePack(
+                OverlappedContext.completeCallback,
+                this.bufferHolder
+            );
 
             // When replacing the buffer, we need to provoke the CLR to fix up the handle of the pin.
-            this.pinnedHandle = GCHandle.FromIntPtr(*((IntPtr*)nativeOverlapped +
-                (IntPtr.Size == 4 ? HandleOffsetFromOverlapped32 : HandleOffsetFromOverlapped64)));
+            this.pinnedHandle = GCHandle.FromIntPtr(
+                *(
+                    (IntPtr*)nativeOverlapped
+                    + (
+                        IntPtr.Size == 4
+                            ? HandleOffsetFromOverlapped32
+                            : HandleOffsetFromOverlapped64
+                    )
+                )
+            );
             this.pinnedTarget = this.pinnedHandle.Target;
 
             // Create the permanently rooted holder and put it in the Overlapped.
@@ -76,19 +92,35 @@ namespace System.ServiceModel.Channels
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
         ~OverlappedContext()
         {
-            if (this.nativeOverlapped != null && !AppDomain.CurrentDomain.IsFinalizingForUnload() && !Environment.HasShutdownStarted)
+            if (
+                this.nativeOverlapped != null
+                && !AppDomain.CurrentDomain.IsFinalizingForUnload()
+                && !Environment.HasShutdownStarted
+            )
             {
                 if (this.syncOperationPending)
                 {
                     Fx.Assert(this.rootedHolder != null, "rootedHolder null in Finalize.");
-                    Fx.Assert(this.rootedHolder.EventHolder != null, "rootedHolder.EventHolder null in Finalize.");
-                    Fx.Assert(OverlappedContext.cleanupCallback != null, "cleanupCallback null in Finalize.");
+                    Fx.Assert(
+                        this.rootedHolder.EventHolder != null,
+                        "rootedHolder.EventHolder null in Finalize."
+                    );
+                    Fx.Assert(
+                        OverlappedContext.cleanupCallback != null,
+                        "cleanupCallback null in Finalize."
+                    );
 
                     // Can't free the overlapped.  Register a callback to deal with this.
                     // This will ressurect the OverlappedContext.
                     // The completionEvent will still be alive (not finalized) since it's rooted by the pending Overlapped in the holder.
                     // We own it now and will close it in the callback.
-                    ThreadPool.UnsafeRegisterWaitForSingleObject(this.rootedHolder.EventHolder, OverlappedContext.cleanupCallback, this, Timeout.Infinite, true);
+                    ThreadPool.UnsafeRegisterWaitForSingleObject(
+                        this.rootedHolder.EventHolder,
+                        OverlappedContext.cleanupCallback,
+                        this,
+                        Timeout.Infinite,
+                        true
+                    );
                 }
                 else
                 {
@@ -105,11 +137,15 @@ namespace System.ServiceModel.Channels
         {
             if (this.pendingCallback != null)
             {
-                throw Fx.AssertAndThrow("OverlappedContext.Free called while async operation is pending.");
+                throw Fx.AssertAndThrow(
+                    "OverlappedContext.Free called while async operation is pending."
+                );
             }
             if (this.syncOperationPending)
             {
-                throw Fx.AssertAndThrow("OverlappedContext.Free called while sync operation is pending.");
+                throw Fx.AssertAndThrow(
+                    "OverlappedContext.Free called while sync operation is pending."
+                );
             }
             if (this.nativeOverlapped == null)
             {
@@ -160,7 +196,11 @@ namespace System.ServiceModel.Channels
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        public void StartAsyncOperation(byte[] buffer, OverlappedIOCompleteCallback callback, bool bound)
+        public void StartAsyncOperation(
+            byte[] buffer,
+            OverlappedIOCompleteCallback callback,
+            bool bound
+        )
         {
             if (callback == null)
             {
@@ -172,7 +212,9 @@ namespace System.ServiceModel.Channels
             }
             if (this.syncOperationPending)
             {
-                throw Fx.AssertAndThrow("StartAsyncOperation called while a sync operation was already pending.");
+                throw Fx.AssertAndThrow(
+                    "StartAsyncOperation called while a sync operation was already pending."
+                );
             }
             if (this.nativeOverlapped == null)
             {
@@ -183,7 +225,10 @@ namespace System.ServiceModel.Channels
 
             if (buffer != null)
             {
-                Fx.Assert(object.ReferenceEquals(this.bufferHolder[0], OverlappedContext.dummyBuffer), "StartAsyncOperation: buffer holder corrupted.");
+                Fx.Assert(
+                    object.ReferenceEquals(this.bufferHolder[0], OverlappedContext.dummyBuffer),
+                    "StartAsyncOperation: buffer holder corrupted."
+                );
                 this.bufferHolder[0] = buffer;
                 this.pinnedHandle.Target = this.pinnedTarget;
                 this.bufferPtr = (byte*)Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0);
@@ -207,7 +252,13 @@ namespace System.ServiceModel.Channels
                 this.overlapped.EventHandleIntPtr = EventHandle;
 
                 // For unbound, the back-reference is this registration.
-                this.registration = ThreadPool.UnsafeRegisterWaitForSingleObject(this.completionEvent, OverlappedContext.eventCallback, this, Timeout.Infinite, true);
+                this.registration = ThreadPool.UnsafeRegisterWaitForSingleObject(
+                    this.completionEvent,
+                    OverlappedContext.eventCallback,
+                    this,
+                    Timeout.Infinite,
+                    true
+                );
             }
         }
 
@@ -236,11 +287,15 @@ namespace System.ServiceModel.Channels
         {
             if (this.syncOperationPending)
             {
-                throw Fx.AssertAndThrow("StartSyncOperation called while an operation was already pending.");
+                throw Fx.AssertAndThrow(
+                    "StartSyncOperation called while an operation was already pending."
+                );
             }
             if (this.pendingCallback != null)
             {
-                throw Fx.AssertAndThrow("StartSyncOperation called while an async operation was already pending.");
+                throw Fx.AssertAndThrow(
+                    "StartSyncOperation called while an async operation was already pending."
+                );
             }
             if (this.nativeOverlapped == null)
             {
@@ -256,7 +311,10 @@ namespace System.ServiceModel.Channels
 
             if (buffer != null)
             {
-                Fx.Assert(object.ReferenceEquals(holder, OverlappedContext.dummyBuffer), "StartSyncOperation: buffer holder corrupted.");
+                Fx.Assert(
+                    object.ReferenceEquals(holder, OverlappedContext.dummyBuffer),
+                    "StartSyncOperation: buffer holder corrupted."
+                );
                 holder = buffer;
                 this.pinnedHandle.Target = this.pinnedTarget;
                 this.bufferPtr = (byte*)Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0);
@@ -276,7 +334,9 @@ namespace System.ServiceModel.Channels
         {
             if (!this.syncOperationPending)
             {
-                throw Fx.AssertAndThrow("WaitForSyncOperation called while no operation was pending.");
+                throw Fx.AssertAndThrow(
+                    "WaitForSyncOperation called while no operation was pending."
+                );
             }
 
             if (!UnsafeNativeMethods.HasOverlappedIoCompleted(this.nativeOverlapped))
@@ -286,13 +346,23 @@ namespace System.ServiceModel.Channels
                     // We can't free ourselves until the operation is done.  The only way to do that is register a callback.
                     // This will root the object.  No longer any need for the finalizer.  This instance is unusable after this.
                     GC.SuppressFinalize(this);
-                    ThreadPool.UnsafeRegisterWaitForSingleObject(this.completionEvent, OverlappedContext.cleanupCallback, this, Timeout.Infinite, true);
+                    ThreadPool.UnsafeRegisterWaitForSingleObject(
+                        this.completionEvent,
+                        OverlappedContext.cleanupCallback,
+                        this,
+                        Timeout.Infinite,
+                        true
+                    );
                     return false;
                 }
             }
 
-            Fx.Assert(this.bufferPtr == null || this.bufferPtr == (byte*)Marshal.UnsafeAddrOfPinnedArrayElement((byte[])holder, 0),
-                "The buffer moved during a sync call!");
+            Fx.Assert(
+                this.bufferPtr == null
+                    || this.bufferPtr
+                        == (byte*)Marshal.UnsafeAddrOfPinnedArrayElement((byte[])holder, 0),
+                "The buffer moved during a sync call!"
+            );
 
             CancelSyncOperation(ref holder);
             return true;
@@ -309,7 +379,10 @@ namespace System.ServiceModel.Channels
         {
             this.bufferPtr = null;
             holder = OverlappedContext.dummyBuffer;
-            Fx.Assert(object.ReferenceEquals(this.bufferHolder[0], OverlappedContext.dummyBuffer), "Bad holder passed to CancelSyncOperation.");
+            Fx.Assert(
+                object.ReferenceEquals(this.bufferHolder[0], OverlappedContext.dummyBuffer),
+                "Bad holder passed to CancelSyncOperation."
+            );
 
             this.syncOperationPending = false;
             this.rootedHolder.EventHolder = null;
@@ -319,10 +392,7 @@ namespace System.ServiceModel.Channels
         public object[] Holder
         {
             [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-            get
-            {
-                return this.bufferHolder;
-            }
+            get { return this.bufferHolder; }
         }
 
         public byte* BufferPtr
@@ -334,7 +404,9 @@ namespace System.ServiceModel.Channels
                 if (ptr == null)
                 {
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw Fx.AssertAndThrow("Pointer requested while no operation pending or no buffer provided.");
+                    throw Fx.AssertAndThrow(
+                        "Pointer requested while no operation pending or no buffer provided."
+                    );
                 }
                 return ptr;
             }
@@ -349,7 +421,9 @@ namespace System.ServiceModel.Channels
                 if (ptr == null)
                 {
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw Fx.AssertAndThrow("NativeOverlapped pointer requested after it was freed.");
+                    throw Fx.AssertAndThrow(
+                        "NativeOverlapped pointer requested after it was freed."
+                    );
                 }
                 return ptr;
             }
@@ -362,7 +436,9 @@ namespace System.ServiceModel.Channels
                 if (this.completionEvent == null)
                 {
                     this.completionEvent = new ManualResetEvent(false);
-                    this.eventHandle = (IntPtr)(1 | (long)this.completionEvent.SafeWaitHandle.DangerousGetHandle());
+                    this.eventHandle = (IntPtr)(
+                        1 | (long)this.completionEvent.SafeWaitHandle.DangerousGetHandle()
+                    );
                 }
                 return this.eventHandle;
             }
@@ -374,13 +450,30 @@ namespace System.ServiceModel.Channels
             // Empty out the AsyncResult ASAP to close the leak window.
             Overlapped overlapped = Overlapped.Unpack(nativeOverlapped);
             OverlappedContext pThis = ((RootedHolder)overlapped.AsyncResult).ThisHolder;
-            Fx.Assert(pThis != null, "Overlapped.AsyncResult not set. I/O completed multiple times, or cancelled I/O completed.");
-            Fx.Assert(object.ReferenceEquals(pThis.overlapped, overlapped), "CompleteCallback completed with corrupt OverlappedContext.overlapped.");
-            Fx.Assert(object.ReferenceEquals(pThis.rootedHolder, overlapped.AsyncResult), "CompleteCallback completed with corrupt OverlappedContext.rootedHolder.");
+            Fx.Assert(
+                pThis != null,
+                "Overlapped.AsyncResult not set. I/O completed multiple times, or cancelled I/O completed."
+            );
+            Fx.Assert(
+                object.ReferenceEquals(pThis.overlapped, overlapped),
+                "CompleteCallback completed with corrupt OverlappedContext.overlapped."
+            );
+            Fx.Assert(
+                object.ReferenceEquals(pThis.rootedHolder, overlapped.AsyncResult),
+                "CompleteCallback completed with corrupt OverlappedContext.rootedHolder."
+            );
             pThis.rootedHolder.ThisHolder = null;
 
-            Fx.Assert(pThis.bufferPtr == null || pThis.bufferPtr == (byte*)Marshal.UnsafeAddrOfPinnedArrayElement((byte[])pThis.bufferHolder[0], 0),
-                "Buffer moved during bound async operation!");
+            Fx.Assert(
+                pThis.bufferPtr == null
+                    || pThis.bufferPtr
+                        == (byte*)
+                            Marshal.UnsafeAddrOfPinnedArrayElement(
+                                (byte[])pThis.bufferHolder[0],
+                                0
+                            ),
+                "Buffer moved during bound async operation!"
+            );
 
             // Release the pin.
             pThis.bufferPtr = null;
@@ -388,7 +481,10 @@ namespace System.ServiceModel.Channels
 
             OverlappedIOCompleteCallback callback = pThis.pendingCallback;
             pThis.pendingCallback = null;
-            Fx.Assert(callback != null, "PendingCallback not set. I/O completed multiple times, or cancelled I/O completed.");
+            Fx.Assert(
+                callback != null,
+                "PendingCallback not set. I/O completed multiple times, or cancelled I/O completed."
+            );
 
             callback(true, (int)error, checked((int)numBytes));
         }
@@ -397,7 +493,10 @@ namespace System.ServiceModel.Channels
         static void EventCallback(object state, bool timedOut)
         {
             OverlappedContext pThis = state as OverlappedContext;
-            Fx.Assert(pThis != null, "OverlappedContext.EventCallback registered wait doesn't have an OverlappedContext as state.");
+            Fx.Assert(
+                pThis != null,
+                "OverlappedContext.EventCallback registered wait doesn't have an OverlappedContext as state."
+            );
 
             if (timedOut)
             {
@@ -415,8 +514,16 @@ namespace System.ServiceModel.Channels
 
             pThis.registration = null;
 
-            Fx.Assert(pThis.bufferPtr == null || pThis.bufferPtr == (byte*)Marshal.UnsafeAddrOfPinnedArrayElement((byte[])pThis.bufferHolder[0], 0),
-                "Buffer moved during unbound async operation!");
+            Fx.Assert(
+                pThis.bufferPtr == null
+                    || pThis.bufferPtr
+                        == (byte*)
+                            Marshal.UnsafeAddrOfPinnedArrayElement(
+                                (byte[])pThis.bufferHolder[0],
+                                0
+                            ),
+                "Buffer moved during unbound async operation!"
+            );
 
             // Release the pin.
             pThis.bufferPtr = null;
@@ -424,7 +531,10 @@ namespace System.ServiceModel.Channels
 
             OverlappedIOCompleteCallback callback = pThis.pendingCallback;
             pThis.pendingCallback = null;
-            Fx.Assert(callback != null, "PendingCallback not set. I/O completed multiple times, or cancelled I/O completed.");
+            Fx.Assert(
+                callback != null,
+                "PendingCallback not set. I/O completed multiple times, or cancelled I/O completed."
+            );
 
             callback(false, 0, 0);
         }
@@ -433,7 +543,10 @@ namespace System.ServiceModel.Channels
         static void CleanupCallback(object state, bool timedOut)
         {
             OverlappedContext pThis = state as OverlappedContext;
-            Fx.Assert(pThis != null, "OverlappedContext.CleanupCallback registered wait doesn't have an OverlappedContext as state.");
+            Fx.Assert(
+                pThis != null,
+                "OverlappedContext.CleanupCallback registered wait doesn't have an OverlappedContext as state."
+            );
 
             if (timedOut)
             {
@@ -443,10 +556,21 @@ namespace System.ServiceModel.Channels
                 return;
             }
 
-            Fx.Assert(pThis.bufferPtr == null || pThis.bufferPtr == (byte*)Marshal.UnsafeAddrOfPinnedArrayElement((byte[])pThis.bufferHolder[0], 0),
-                "Buffer moved during synchronous deferred cleanup!");
+            Fx.Assert(
+                pThis.bufferPtr == null
+                    || pThis.bufferPtr
+                        == (byte*)
+                            Marshal.UnsafeAddrOfPinnedArrayElement(
+                                (byte[])pThis.bufferHolder[0],
+                                0
+                            ),
+                "Buffer moved during synchronous deferred cleanup!"
+            );
 
-            Fx.Assert(pThis.syncOperationPending, "OverlappedContext.CleanupCallback called with no sync operation pending.");
+            Fx.Assert(
+                pThis.syncOperationPending,
+                "OverlappedContext.CleanupCallback called with no sync operation pending."
+            );
             pThis.pinnedTarget = null;
             pThis.rootedHolder.EventHolder.Close();
             Overlapped.Free(pThis.nativeOverlapped);
@@ -460,69 +584,45 @@ namespace System.ServiceModel.Channels
             OverlappedContext overlappedBuffer;
             ManualResetEvent eventHolder;
 
-
             public OverlappedContext ThisHolder
             {
-                get
-                {
-                    return this.overlappedBuffer;
-                }
-
-                set
-                {
-                    this.overlappedBuffer = value;
-                }
+                get { return this.overlappedBuffer; }
+                set { this.overlappedBuffer = value; }
             }
 
             public ManualResetEvent EventHolder
             {
-                get
-                {
-                    return this.eventHolder;
-                }
-
-                set
-                {
-                    this.eventHolder = value;
-                }
+                get { return this.eventHolder; }
+                set { this.eventHolder = value; }
             }
-
 
             // Unused IAsyncResult implementation.
             object IAsyncResult.AsyncState
             {
-                get
-                {
+                get {
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw Fx.AssertAndThrow("RootedHolder.AsyncState called.");
-                }
+                    throw Fx.AssertAndThrow("RootedHolder.AsyncState called."); }
             }
 
             WaitHandle IAsyncResult.AsyncWaitHandle
             {
-                get
-                {
+                get {
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw Fx.AssertAndThrow("RootedHolder.AsyncWaitHandle called.");
-                }
+                    throw Fx.AssertAndThrow("RootedHolder.AsyncWaitHandle called."); }
             }
 
             bool IAsyncResult.CompletedSynchronously
             {
-                get
-                {
+                get {
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw Fx.AssertAndThrow("RootedHolder.CompletedSynchronously called.");
-                }
+                    throw Fx.AssertAndThrow("RootedHolder.CompletedSynchronously called."); }
             }
 
             bool IAsyncResult.IsCompleted
             {
-                get
-                {
+                get {
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw Fx.AssertAndThrow("RootedHolder.IsCompleted called.");
-                }
+                    throw Fx.AssertAndThrow("RootedHolder.IsCompleted called."); }
             }
         }
     }

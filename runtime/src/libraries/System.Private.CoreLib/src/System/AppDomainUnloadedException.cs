@@ -8,7 +8,9 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class AppDomainUnloadedException : SystemException
     {
         public AppDomainUnloadedException()
@@ -29,10 +31,13 @@ namespace System
             HResult = HResults.COR_E_APPDOMAINUNLOADED;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected AppDomainUnloadedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected AppDomainUnloadedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

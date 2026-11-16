@@ -24,13 +24,15 @@ internal static partial class Interop
             CreateDisposition CreateDisposition,
             CreateOptions CreateOptions,
             void* EaBuffer,
-            uint EaLength);
+            uint EaLength
+        );
 
         internal static unsafe (uint status, IntPtr handle) CreateFile(
             ReadOnlySpan<char> path,
             IntPtr rootDirectory,
             CreateDisposition createDisposition,
-            DesiredAccess desiredAccess = DesiredAccess.FILE_GENERIC_READ | DesiredAccess.SYNCHRONIZE,
+            DesiredAccess desiredAccess =
+                DesiredAccess.FILE_GENERIC_READ | DesiredAccess.SYNCHRONIZE,
             FileShare shareAccess = FileShare.ReadWrite | FileShare.Delete,
             FileAttributes fileAttributes = 0,
             CreateOptions createOptions = CreateOptions.FILE_SYNCHRONOUS_IO_NONALERT,
@@ -38,7 +40,8 @@ internal static partial class Interop
             void* eaBuffer = null,
             uint eaLength = 0,
             long* preallocationSize = null,
-            SECURITY_QUALITY_OF_SERVICE* securityQualityOfService = null)
+            SECURITY_QUALITY_OF_SERVICE* securityQualityOfService = null
+        )
         {
             fixed (char* c = &MemoryMarshal.GetReference(path))
             {
@@ -46,14 +49,15 @@ internal static partial class Interop
                 {
                     Length = checked((ushort)(path.Length * sizeof(char))),
                     MaximumLength = checked((ushort)(path.Length * sizeof(char))),
-                    Buffer = (IntPtr)c
+                    Buffer = (IntPtr)c,
                 };
 
                 OBJECT_ATTRIBUTES attributes = new OBJECT_ATTRIBUTES(
                     &name,
                     objectAttributes,
                     rootDirectory,
-                    securityQualityOfService);
+                    securityQualityOfService
+                );
 
                 IntPtr handle;
                 IO_STATUS_BLOCK statusBlock;
@@ -68,13 +72,21 @@ internal static partial class Interop
                     createDisposition,
                     createOptions,
                     eaBuffer,
-                    eaLength);
+                    eaLength
+                );
 
                 return (status, handle);
             }
         }
 
-        internal static unsafe (uint status, IntPtr handle) NtCreateFile(ReadOnlySpan<char> path, FileMode mode, FileAccess access, FileShare share, FileOptions options, long preallocationSize)
+        internal static unsafe (uint status, IntPtr handle) NtCreateFile(
+            ReadOnlySpan<char> path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options,
+            long preallocationSize
+        )
         {
             // For mitigating local elevation of privilege attack through named pipes
             // make sure we always call NtCreateFile with SECURITY_ANONYMOUS so that the
@@ -82,7 +94,8 @@ internal static partial class Interop
             SECURITY_QUALITY_OF_SERVICE securityQualityOfService = new SECURITY_QUALITY_OF_SERVICE(
                 ImpersonationLevel.Anonymous, // SECURITY_ANONYMOUS
                 ContextTrackingMode.Static,
-                effectiveOnly: false);
+                effectiveOnly: false
+            );
 
             return CreateFile(
                 path: path,
@@ -94,7 +107,8 @@ internal static partial class Interop
                 createOptions: GetCreateOptions(options),
                 objectAttributes: GetObjectAttributes(share),
                 preallocationSize: &preallocationSize,
-                securityQualityOfService: &securityQualityOfService);
+                securityQualityOfService: &securityQualityOfService
+            );
         }
 
         private static CreateDisposition GetCreateDisposition(FileMode mode)
@@ -116,7 +130,11 @@ internal static partial class Interop
             }
         }
 
-        private static DesiredAccess GetDesiredAccess(FileAccess access, FileMode fileMode, FileOptions options)
+        private static DesiredAccess GetDesiredAccess(
+            FileAccess access,
+            FileMode fileMode,
+            FileOptions options
+        )
         {
             DesiredAccess result = DesiredAccess.FILE_READ_ATTRIBUTES | DesiredAccess.SYNCHRONIZE; // default values used by CreateFileW
 
@@ -140,11 +158,10 @@ internal static partial class Interop
             return result;
         }
 
-        private static FileShare GetShareAccess(FileShare share)
-            => share & ~FileShare.Inheritable; // FileShare.Inheritable is handled in GetObjectAttributes
+        private static FileShare GetShareAccess(FileShare share) => share & ~FileShare.Inheritable; // FileShare.Inheritable is handled in GetObjectAttributes
 
-        private static FileAttributes GetFileAttributes(FileOptions options)
-            => (options & FileOptions.Encrypted) != 0 ? FileAttributes.Encrypted : 0;
+        private static FileAttributes GetFileAttributes(FileOptions options) =>
+            (options & FileOptions.Encrypted) != 0 ? FileAttributes.Encrypted : 0;
 
         // FileOptions.Encrypted is handled in GetFileAttributes
         private static CreateOptions GetCreateOptions(FileOptions options)
@@ -183,9 +200,10 @@ internal static partial class Interop
             return result;
         }
 
-        private static ObjectAttributes GetObjectAttributes(FileShare share)
-            => ObjectAttributes.OBJ_CASE_INSENSITIVE | // default value used by CreateFileW
-                ((share & FileShare.Inheritable) != 0 ? ObjectAttributes.OBJ_INHERIT : 0);
+        private static ObjectAttributes GetObjectAttributes(FileShare share) =>
+            ObjectAttributes.OBJ_CASE_INSENSITIVE
+            | // default value used by CreateFileW
+            ((share & FileShare.Inheritable) != 0 ? ObjectAttributes.OBJ_INHERIT : 0);
 
         /// <summary>
         /// File creation disposition when calling directly to NT APIs.
@@ -234,7 +252,7 @@ internal static partial class Interop
             /// Open and overwrite if exists or create if doesn't exist. Equivalent to
             /// CREATE_ALWAYS or <see cref="FileMode.Create"/>.
             /// </summary>
-            FILE_OVERWRITE_IF = 5
+            FILE_OVERWRITE_IF = 5,
         }
 
         /// <summary>
@@ -420,7 +438,7 @@ internal static partial class Interop
             /// More details can be found in Remote Storage documentation (see Basic Concepts).
             /// https://technet.microsoft.com/en-us/library/cc938459.aspx
             /// </remarks>
-            FILE_OPEN_NO_RECALL = 0x00400000
+            FILE_OPEN_NO_RECALL = 0x00400000,
 
             // Behavior undocumented, defined in headers
             // FILE_OPEN_FOR_FREE_SPACE_QUERY = 0x00800000
@@ -605,7 +623,7 @@ internal static partial class Interop
             /// (For directories, <see cref="FILE_DELETE_CHILD"/> | <see cref="FILE_READ_ATTRIBUTES"/> | <see cref="STANDARD_RIGHTS_EXECUTE"/>
             /// | <see cref="SYNCHRONIZE"/>.)
             /// </summary>
-            FILE_GENERIC_EXECUTE = 0x20000000 // GENERIC_EXECUTE
+            FILE_GENERIC_EXECUTE = 0x20000000, // GENERIC_EXECUTE
         }
     }
 }

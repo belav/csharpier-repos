@@ -27,10 +27,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public string Format
         {
-            get
-            {
-                return _format;
-            }
+            get { return _format; }
         }
 
         public static bool operator ==(CngKeyBlobFormat? left, CngKeyBlobFormat? right)
@@ -149,7 +146,6 @@ namespace System.Security.Cryptography
                 return s_pkcs8Private ??= new CngKeyBlobFormat("PKCS8_PRIVATEKEY"); // NCRYPT_PKCS8_PRIVATE_KEY_BLOB
             }
         }
-
 
         private static CngKeyBlobFormat? s_eccPrivate;
         private static CngKeyBlobFormat? s_eccPublic;

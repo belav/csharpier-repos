@@ -17,7 +17,8 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         public abstract JsonSerializerOptions DefaultOptions { get; }
 
-        public bool IsSourceGeneratedSerializer => DefaultOptions.TypeInfoResolver is JsonSerializerContext;
+        public bool IsSourceGeneratedSerializer =>
+            DefaultOptions.TypeInfoResolver is JsonSerializerContext;
 
         /// <summary>
         /// Do the deserialize methods allow a value of 'null'.
@@ -25,43 +26,68 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         public virtual bool SupportsNullValueOnDeserialize => false;
 
-        public abstract Task<string> SerializeWrapper(object value, Type inputType, JsonSerializerOptions options = null);
+        public abstract Task<string> SerializeWrapper(
+            object value,
+            Type inputType,
+            JsonSerializerOptions options = null
+        );
 
-        public abstract Task<string> SerializeWrapper<T>(T value, JsonSerializerOptions options = null);
+        public abstract Task<string> SerializeWrapper<T>(
+            T value,
+            JsonSerializerOptions options = null
+        );
 
-        public abstract Task<string> SerializeWrapper(object value, Type inputType, JsonSerializerContext context);
+        public abstract Task<string> SerializeWrapper(
+            object value,
+            Type inputType,
+            JsonSerializerContext context
+        );
 
         public abstract Task<string> SerializeWrapper<T>(T value, JsonTypeInfo<T> jsonTypeInfo);
 
         public abstract Task<string> SerializeWrapper(object value, JsonTypeInfo jsonTypeInfo);
 
-        public abstract Task<T> DeserializeWrapper<T>(string json, JsonSerializerOptions options = null);
+        public abstract Task<T> DeserializeWrapper<T>(
+            string json,
+            JsonSerializerOptions options = null
+        );
 
-        public abstract Task<object> DeserializeWrapper(string json, Type type, JsonSerializerOptions options = null);
+        public abstract Task<object> DeserializeWrapper(
+            string json,
+            Type type,
+            JsonSerializerOptions options = null
+        );
 
         public abstract Task<T> DeserializeWrapper<T>(string json, JsonTypeInfo<T> jsonTypeInfo);
 
         public abstract Task<object> DeserializeWrapper(string value, JsonTypeInfo jsonTypeInfo);
 
-        public abstract Task<object> DeserializeWrapper(string json, Type type, JsonSerializerContext context);
-
+        public abstract Task<object> DeserializeWrapper(
+            string json,
+            Type type,
+            JsonSerializerContext context
+        );
 
         public JsonTypeInfo GetTypeInfo(Type type, bool mutable = false)
         {
             JsonSerializerOptions defaultOptions = DefaultOptions;
             // return a fresh mutable instance or the cached readonly metadata
-            return mutable ? defaultOptions.TypeInfoResolver.GetTypeInfo(type, defaultOptions) : defaultOptions.GetTypeInfo(type);
+            return mutable
+                ? defaultOptions.TypeInfoResolver.GetTypeInfo(type, defaultOptions)
+                : defaultOptions.GetTypeInfo(type);
         }
 
-        public JsonTypeInfo<T> GetTypeInfo<T>(bool mutable = false)
-            => (JsonTypeInfo<T>)GetTypeInfo(typeof(T), mutable);
+        public JsonTypeInfo<T> GetTypeInfo<T>(bool mutable = false) =>
+            (JsonTypeInfo<T>)GetTypeInfo(typeof(T), mutable);
 
-        public JsonSerializerOptions GetDefaultOptionsWithMetadataModifier(Action<JsonTypeInfo> modifier)
+        public JsonSerializerOptions GetDefaultOptionsWithMetadataModifier(
+            Action<JsonTypeInfo> modifier
+        )
         {
             JsonSerializerOptions defaultOptions = DefaultOptions;
             return new JsonSerializerOptions(defaultOptions)
             {
-                TypeInfoResolver = defaultOptions.TypeInfoResolver.WithAddedModifier(modifier)
+                TypeInfoResolver = defaultOptions.TypeInfoResolver.WithAddedModifier(modifier),
             };
         }
 
@@ -70,7 +96,8 @@ namespace System.Text.Json.Serialization.Tests
             bool? includeFields = false,
             List<JsonConverter>? customConverters = null,
             Action<JsonTypeInfo>? modifier = null,
-            bool makeReadOnly = true)
+            bool makeReadOnly = true
+        )
         {
             var options = new JsonSerializerOptions(DefaultOptions);
 
@@ -81,7 +108,9 @@ namespace System.Text.Json.Serialization.Tests
 
             if (modifier != null && options.TypeInfoResolver != null)
             {
-                options.TypeInfoResolver = DefaultOptions.TypeInfoResolver.WithAddedModifier(modifier);
+                options.TypeInfoResolver = DefaultOptions.TypeInfoResolver.WithAddedModifier(
+                    modifier
+                );
             }
 
             if (customConverters != null)

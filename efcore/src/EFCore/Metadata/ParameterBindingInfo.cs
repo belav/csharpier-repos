@@ -18,7 +18,8 @@ public readonly struct ParameterBindingInfo
     /// <param name="materializationContextExpression">The expression tree from which the parameter value will come.</param>
     public ParameterBindingInfo(
         ITypeBase structuralType,
-        Expression materializationContextExpression)
+        Expression materializationContextExpression
+    )
     {
         Check.NotNull(structuralType, nameof(structuralType));
         Check.NotNull(structuralType, nameof(materializationContextExpression));
@@ -35,7 +36,8 @@ public readonly struct ParameterBindingInfo
     /// <param name="materializationContextExpression">The expression tree from which the parameter value will come.</param>
     public ParameterBindingInfo(
         EntityMaterializerSourceParameters materializerSourceParameters,
-        Expression materializationContextExpression)
+        Expression materializationContextExpression
+    )
     {
         StructuralType = materializerSourceParameters.StructuralType;
         QueryTrackingBehavior = materializerSourceParameters.QueryTrackingBehavior;
@@ -73,6 +75,5 @@ public readonly struct ParameterBindingInfo
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The index where its value can be found.</returns>
-    public int GetValueBufferIndex(IPropertyBase property)
-        => property.GetIndex();
+    public int GetValueBufferIndex(IPropertyBase property) => property.GetIndex();
 }

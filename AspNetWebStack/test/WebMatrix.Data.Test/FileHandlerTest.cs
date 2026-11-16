@@ -15,7 +15,10 @@ namespace WebMatrix.Data.Test
 
             // Assert
             Assert.NotNull(connectionString);
-            Assert.Equal(@"Data Source=|DataDirectory|\foo.sdf;File Access Retry Timeout=10", connectionString);
+            Assert.Equal(
+                @"Data Source=|DataDirectory|\foo.sdf;File Access Retry Timeout=10",
+                connectionString
+            );
         }
 
         [Fact]
@@ -32,24 +35,35 @@ namespace WebMatrix.Data.Test
         [Fact]
         public void SqlServerFileHandlerReturnsDataDirectoryRelativeConnectionStringIfPathIsNotRooted()
         {
-            // Act           
-            string connectionString = SqlServerDbFileHandler.GetConnectionString("foo.mdf", "datadir");
+            // Act
+            string connectionString = SqlServerDbFileHandler.GetConnectionString(
+                "foo.mdf",
+                "datadir"
+            );
 
             // Assert
             Assert.NotNull(connectionString);
-            Assert.Equal(@"Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\foo.mdf;Initial Catalog=datadir\foo.mdf;Integrated Security=True;User Instance=True;MultipleActiveResultSets=True",
-                         connectionString);
+            Assert.Equal(
+                @"Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\foo.mdf;Initial Catalog=datadir\foo.mdf;Integrated Security=True;User Instance=True;MultipleActiveResultSets=True",
+                connectionString
+            );
         }
 
         [Fact]
         public void SqlServerFileHandlerReturnsFullPathConnectionStringIfPathIsNotRooted()
         {
             // Act
-            string connectionString = SqlServerDbFileHandler.GetConnectionString(@"c:\foo.mdf", "datadir");
+            string connectionString = SqlServerDbFileHandler.GetConnectionString(
+                @"c:\foo.mdf",
+                "datadir"
+            );
 
             // Assert
             Assert.NotNull(connectionString);
-            Assert.Equal(@"Data Source=.\SQLEXPRESS;AttachDbFilename=c:\foo.mdf;Initial Catalog=c:\foo.mdf;Integrated Security=True;User Instance=True;MultipleActiveResultSets=True", connectionString);
+            Assert.Equal(
+                @"Data Source=.\SQLEXPRESS;AttachDbFilename=c:\foo.mdf;Initial Catalog=c:\foo.mdf;Integrated Security=True;User Instance=True;MultipleActiveResultSets=True",
+                connectionString
+            );
         }
     }
 }

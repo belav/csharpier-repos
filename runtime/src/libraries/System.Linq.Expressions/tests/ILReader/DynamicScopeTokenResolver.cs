@@ -3,9 +3,9 @@
 
 // Code adapted from https://blogs.msdn.microsoft.com/haibo_luo/2010/04/19/ilvisualizer-2010-solution
 
+using System.Diagnostics;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Diagnostics;
 
 namespace System.Linq.Expressions.Tests
 {
@@ -15,31 +15,49 @@ namespace System.Linq.Expressions.Tests
         private static readonly FieldInfo s_scopeFi;
 
         private static readonly Type s_genMethodInfoType;
-        private static readonly FieldInfo s_genmethFi1, s_genmethFi2;
+        private static readonly FieldInfo s_genmethFi1,
+            s_genmethFi2;
 
         private static readonly Type s_varArgMethodType;
-        private static readonly FieldInfo s_varargFi1, s_varargFi2;
+        private static readonly FieldInfo s_varargFi1,
+            s_varargFi2;
 
         private static readonly Type s_genFieldInfoType;
-        private static readonly FieldInfo s_genfieldFi1, s_genfieldFi2;
+        private static readonly FieldInfo s_genfieldFi1,
+            s_genfieldFi2;
 
         static DynamicScopeTokenResolver()
         {
-            Type dynamicScope = Type.GetType("System.Reflection.Emit.DynamicScope", throwOnError: true);
-            Type dynamicILGenerator = Type.GetType("System.Reflection.Emit.DynamicILGenerator", throwOnError: true);
+            Type dynamicScope = Type.GetType(
+                "System.Reflection.Emit.DynamicScope",
+                throwOnError: true
+            );
+            Type dynamicILGenerator = Type.GetType(
+                "System.Reflection.Emit.DynamicILGenerator",
+                throwOnError: true
+            );
 
             s_indexer = dynamicScope.GetPropertyAssert("Item");
             s_scopeFi = dynamicILGenerator.GetFieldAssert("m_scope");
 
-            s_varArgMethodType = Type.GetType("System.Reflection.Emit.VarArgMethod", throwOnError: true);
+            s_varArgMethodType = Type.GetType(
+                "System.Reflection.Emit.VarArgMethod",
+                throwOnError: true
+            );
             s_varargFi1 = s_varArgMethodType.GetFieldAssert("m_method");
             s_varargFi2 = s_varArgMethodType.GetFieldAssert("m_signature");
 
-            s_genMethodInfoType = Type.GetType("System.Reflection.Emit.GenericMethodInfo", throwOnError: true);
+            s_genMethodInfoType = Type.GetType(
+                "System.Reflection.Emit.GenericMethodInfo",
+                throwOnError: true
+            );
             s_genmethFi1 = s_genMethodInfoType.GetFieldAssert("m_methodHandle");
             s_genmethFi2 = s_genMethodInfoType.GetFieldAssert("m_context");
 
-            s_genFieldInfoType = Type.GetType("System.Reflection.Emit.GenericFieldInfo", throwOnError: false);
+            s_genFieldInfoType = Type.GetType(
+                "System.Reflection.Emit.GenericFieldInfo",
+                throwOnError: false
+            );
             if (s_genFieldInfoType != null)
             {
                 s_genfieldFi1 = s_genFieldInfoType.GetFieldAssert("m_fieldHandle");
@@ -72,8 +90,9 @@ namespace System.Linq.Expressions.Tests
             if (item.GetType() == s_genFieldInfoType)
             {
                 return FieldInfo.GetFieldFromHandle(
-                        (RuntimeFieldHandle)s_genfieldFi1.GetValue(item),
-                        (RuntimeTypeHandle)s_genfieldFi2.GetValue(item));
+                    (RuntimeFieldHandle)s_genfieldFi1.GetValue(item),
+                    (RuntimeTypeHandle)s_genfieldFi2.GetValue(item)
+                );
             }
 
             Debug.Fail(string.Format("unexpected type: {0}", item.GetType()));
@@ -95,7 +114,8 @@ namespace System.Linq.Expressions.Tests
             if (item.GetType() == s_genMethodInfoType)
                 return MethodBase.GetMethodFromHandle(
                     (RuntimeMethodHandle)s_genmethFi1.GetValue(item),
-                    (RuntimeTypeHandle)s_genmethFi2.GetValue(item));
+                    (RuntimeTypeHandle)s_genmethFi2.GetValue(item)
+                );
 
             if (item.GetType() == s_varArgMethodType)
                 return (MethodInfo)s_varargFi1.GetValue(item);

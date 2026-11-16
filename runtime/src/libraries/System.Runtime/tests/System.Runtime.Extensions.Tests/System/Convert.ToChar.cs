@@ -27,14 +27,22 @@ namespace System.Tests
         public void FromDecimal()
         {
             object[] invalidValues = { 0m, decimal.MinValue, decimal.MaxValue };
-            VerifyFromObjectThrows<InvalidCastException>(Convert.ToChar, Convert.ToChar, invalidValues);
+            VerifyFromObjectThrows<InvalidCastException>(
+                Convert.ToChar,
+                Convert.ToChar,
+                invalidValues
+            );
         }
 
         [Fact]
         public void FromDouble()
         {
             object[] invalidValues = { 0.0, double.MinValue, double.MaxValue };
-            VerifyFromObjectThrows<InvalidCastException>(Convert.ToChar, Convert.ToChar, invalidValues);
+            VerifyFromObjectThrows<InvalidCastException>(
+                Convert.ToChar,
+                Convert.ToChar,
+                invalidValues
+            );
         }
 
         [Fact]
@@ -96,7 +104,11 @@ namespace System.Tests
         public void FromSingle()
         {
             object[] invalidValues = { 0f, float.MinValue, float.MaxValue };
-            VerifyFromObjectThrows<InvalidCastException>(Convert.ToChar, Convert.ToChar, invalidValues);
+            VerifyFromObjectThrows<InvalidCastException>(
+                Convert.ToChar,
+                Convert.ToChar,
+                invalidValues
+            );
         }
 
         [Fact]
@@ -107,8 +119,16 @@ namespace System.Tests
             VerifyFromString(Convert.ToChar, Convert.ToChar, testValues, expectedValues);
 
             string[] formatExceptionValues = { string.Empty, "ab" };
-            VerifyFromStringThrows<FormatException>(Convert.ToChar, Convert.ToChar, formatExceptionValues);
-            VerifyFromStringThrows<ArgumentNullException>(Convert.ToChar, Convert.ToChar, new string[] { null });
+            VerifyFromStringThrows<FormatException>(
+                Convert.ToChar,
+                Convert.ToChar,
+                formatExceptionValues
+            );
+            VerifyFromStringThrows<ArgumentNullException>(
+                Convert.ToChar,
+                Convert.ToChar,
+                new string[] { null }
+            );
         }
 
         [Fact]

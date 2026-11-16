@@ -18,43 +18,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
     [Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
     public partial class IntroduceLocalForExpressionTests : AbstractCSharpCodeActionTest
     {
-        private static readonly CodeStyleOption2<bool> onWithInfo = new(true, NotificationOption2.Suggestion);
-        private static readonly CodeStyleOption2<bool> offWithInfo = new(false, NotificationOption2.Suggestion);
+        private static readonly CodeStyleOption2<bool> onWithInfo = new(
+            true,
+            NotificationOption2.Suggestion
+        );
+        private static readonly CodeStyleOption2<bool> offWithInfo = new(
+            false,
+            NotificationOption2.Suggestion
+        );
 
-        private OptionsCollection ImplicitTypeEverywhere()
-            => new(GetLanguage())
+        private OptionsCollection ImplicitTypeEverywhere() =>
+            new(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, onWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, onWithInfo },
             };
 
-        private OptionsCollection ImplicitTypeForIntrinsics()
-            => new(GetLanguage())
+        private OptionsCollection ImplicitTypeForIntrinsics() =>
+            new(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, offWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, offWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, onWithInfo },
             };
 
-        private OptionsCollection ImplicitTypeForApparent()
-            => new(GetLanguage())
+        private OptionsCollection ImplicitTypeForApparent() =>
+            new(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, offWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, offWithInfo },
             };
 
-        private OptionsCollection ImplicitTypeForApparentAndBuiltIn()
-            => new(GetLanguage())
+        private OptionsCollection ImplicitTypeForApparentAndBuiltIn() =>
+            new(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, offWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, onWithInfo },
             };
 
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpIntroduceLocalForExpressionCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpIntroduceLocalForExpressionCodeRefactoringProvider();
 
         [Fact]
         public async Task IntroduceLocal_NoSemicolon()
@@ -81,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         DateTime {|Rename:dateTime|} = new DateTime();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -111,7 +120,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -139,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         DateTime {|Rename:dateTime|} = new DateTime();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -167,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         TimeSpan {|Rename:timeSpan|} = new TimeSpan() + new TimeSpan();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -195,7 +207,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         DateTime {|Rename:dateTime|} = new DateTime();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -225,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -253,7 +267,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         DateTime {|Rename:dateTime|} = new DateTime();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -281,7 +296,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         DateTime {|Rename:dateTime|} = new DateTime();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -299,7 +315,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         [||]a = 42;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -327,7 +344,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         DateTime {|Rename:dateTime|} = new DateTime(); 
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -357,7 +375,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         DateTime {|Rename:dateTime|} = new DateTime();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -385,11 +404,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         var {|Rename:dateTime|} = new DateTime();
                     }
                 }
-                """, options: new OptionsCollection(GetLanguage())
-    {
-        { CSharpCodeStyleOptions.VarElsewhere, CodeStyleOption2.TrueWithSuggestionEnforcement },
-        { CSharpCodeStyleOptions.VarWhenTypeIsApparent, CodeStyleOption2.TrueWithSuggestionEnforcement },
-    });
+                """,
+                options: new OptionsCollection(GetLanguage())
+                {
+                    {
+                        CSharpCodeStyleOptions.VarElsewhere,
+                        CodeStyleOption2.TrueWithSuggestionEnforcement
+                    },
+                    {
+                        CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                        CodeStyleOption2.TrueWithSuggestionEnforcement
+                    },
+                }
+            );
         }
 
         [Fact]
@@ -406,7 +433,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         Console.WriteLine();[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -423,7 +451,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         var v = new DateTime()[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -451,7 +480,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         int {|Rename:v|} = 1 + 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -483,7 +513,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         (string someString, int someInt) = X();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -515,7 +546,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         (string someString, int someInt) {|Rename:value|} = X();
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -547,7 +580,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         var (someString, someInt) = X();
                     }
                 }
-                """, options: ImplicitTypeEverywhere());
+                """,
+                options: ImplicitTypeEverywhere()
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -579,7 +614,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         (string someString, int someInt) = X();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -611,7 +647,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         (string someString, int someInt) {|Rename:value|} = X();
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -643,7 +681,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         var (someString, someInt) = X();
                     }
                 }
-                """, options: ImplicitTypeEverywhere());
+                """,
+                options: ImplicitTypeEverywhere()
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -679,7 +719,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         string someString;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -715,7 +756,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         string someString;
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -751,7 +794,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         string someString;
                     }
                 }
-                """, options: ImplicitTypeEverywhere());
+                """,
+                options: ImplicitTypeEverywhere()
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -783,7 +828,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         (string item1, int item2) = X();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -815,7 +861,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         (string, int) {|Rename:value|} = X();
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -847,7 +895,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         var (item1, item2) = X();
                     }
                 }
-                """, options: ImplicitTypeEverywhere());
+                """,
+                options: ImplicitTypeEverywhere()
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -879,7 +929,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         (string item1, int item2) = X();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -911,7 +962,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         (string, int) {|Rename:value|} = X();
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -943,7 +996,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         var (item1, item2) = X();
                     }
                 }
-                """, options: ImplicitTypeEverywhere());
+                """,
+                options: ImplicitTypeEverywhere()
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -975,7 +1030,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         var (someString, someInt) = X();
                     }
                 }
-                """, options: ImplicitTypeForIntrinsics());
+                """,
+                options: ImplicitTypeForIntrinsics()
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -1009,7 +1066,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         (var someString, C c) = X();
                     }
                 }
-                """, options: ImplicitTypeForIntrinsics());
+                """,
+                options: ImplicitTypeForIntrinsics()
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -1041,7 +1100,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         (string someString, int someInt) = X();
                     }
                 }
-                """, options: ImplicitTypeForApparent());
+                """,
+                options: ImplicitTypeForApparent()
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -1071,7 +1132,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         (string someString, C someC) = (someString: "", someC: default(C));
                     }
                 }
-                """, options: ImplicitTypeForApparent());
+                """,
+                options: ImplicitTypeForApparent()
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39537")]
@@ -1101,7 +1164,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
                         var (someString, someC) = (someString: "", someC: default(C));
                     }
                 }
-                """, options: ImplicitTypeForApparentAndBuiltIn());
+                """,
+                options: ImplicitTypeForApparentAndBuiltIn()
+            );
         }
     }
 }

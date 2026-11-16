@@ -3,12 +3,14 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
- 
-namespace System.Web.UI {
+
+namespace System.Web.UI
+{
     using System.Security.Permissions;
     using System.Web;
 
-    public enum ScriptMode {
+    public enum ScriptMode
+    {
         Auto = 0,
         Inherit = 1,
         Debug = 2,

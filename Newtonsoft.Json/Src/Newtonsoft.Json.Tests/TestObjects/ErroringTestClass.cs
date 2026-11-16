@@ -26,7 +26,5 @@
 namespace Newtonsoft.Json.Tests.TestObjects
 {
     [JsonConverter(typeof(ErroringJsonConverter))]
-    public class ErroringTestClass
-    {
-    }
+    public class ErroringTestClass { }
 }

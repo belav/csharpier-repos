@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,62 +31,64 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.IO;
-using System.Globalization;
 
-namespace System.Net.NetworkInformation {
-	static class SystemNetworkInterface {
+namespace System.Net.NetworkInformation
+{
+    static class SystemNetworkInterface
+    {
+        static readonly NetworkInterfaceFactory nif = NetworkInterfaceFactory.Create();
 
-		static readonly NetworkInterfaceFactory nif = NetworkInterfaceFactory.Create ();
+        public static NetworkInterface[] GetNetworkInterfaces()
+        {
+            try
+            {
+                return nif.GetAllNetworkInterfaces();
+            }
+            catch
+            {
+                return new NetworkInterface[0];
+            }
+        }
 
-		public static NetworkInterface [] GetNetworkInterfaces ()
-		{
-			try {
-				return nif.GetAllNetworkInterfaces ();
-			} catch {
-				return new NetworkInterface [0];
-			}
-		}
+        public static bool InternalGetIsNetworkAvailable()
+        {
+            // TODO:
+            return true;
+        }
 
-		public static bool InternalGetIsNetworkAvailable ()
-		{
-			// TODO:
-			return true;
-		}
+        public static int InternalLoopbackInterfaceIndex
+        {
+            get { return nif.GetLoopbackInterfaceIndex(); }
+        }
 
-		public static int InternalLoopbackInterfaceIndex {
-			get {
-				return nif.GetLoopbackInterfaceIndex ();
-			}
-		}
+        public static int InternalIPv6LoopbackInterfaceIndex
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public static int InternalIPv6LoopbackInterfaceIndex {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public static IPAddress GetNetMask(IPAddress address)
+        {
+            return nif.GetNetMask(address);
+        }
+    }
 
-		public static IPAddress GetNetMask (IPAddress address)
-		{
-			return nif.GetNetMask (address);
-		}
-	}
+    abstract class NetworkInterfaceFactory
+    {
+        public abstract NetworkInterface[] GetAllNetworkInterfaces();
+        public abstract int GetLoopbackInterfaceIndex();
+        public abstract IPAddress GetNetMask(IPAddress address);
 
-	abstract class NetworkInterfaceFactory
-	{
-		public abstract NetworkInterface [] GetAllNetworkInterfaces ();
-		public abstract int GetLoopbackInterfaceIndex ();
-		public abstract IPAddress GetNetMask (IPAddress address);
-
-		public static NetworkInterfaceFactory Create ()
-		{
-			return NetworkInterfaceFactoryPal.Create ();
-		}
-	}
+        public static NetworkInterfaceFactory Create()
+        {
+            return NetworkInterfaceFactoryPal.Create();
+        }
+    }
 }

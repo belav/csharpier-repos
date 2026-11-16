@@ -6,8 +6,10 @@ namespace System.ComponentModel.DataAnnotations
     /// <summary>
     ///     Validation attribute to indicate that a property, field or parameter is required.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public class RequiredAttribute : ValidationAttribute
     {
         /// <summary>
@@ -18,9 +20,7 @@ namespace System.ComponentModel.DataAnnotations
         ///     <see cref="ValidationAttribute.FormatErrorMessage" />
         /// </remarks>
         public RequiredAttribute()
-            : base(() => SR.RequiredAttribute_ValidationError)
-        {
-        }
+            : base(() => SR.RequiredAttribute_ValidationError) { }
 
         /// <summary>
         ///     Gets or sets a flag indicating whether the attribute should allow empty strings.
@@ -43,7 +43,9 @@ namespace System.ComponentModel.DataAnnotations
             }
 
             // only check string length if empty strings are not allowed
-            return AllowEmptyStrings || value is not string stringValue || !string.IsNullOrWhiteSpace(stringValue);
+            return AllowEmptyStrings
+                || value is not string stringValue
+                || !string.IsNullOrWhiteSpace(stringValue);
         }
     }
 }

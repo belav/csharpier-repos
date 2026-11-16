@@ -16,17 +16,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [ExportCompletionProvider(nameof(InternalsVisibleToCompletionProvider), LanguageNames.CSharp)]
     [ExtensionOrder(After = nameof(DeclarationNameCompletionProvider))]
     [Shared]
-    internal sealed class InternalsVisibleToCompletionProvider : AbstractInternalsVisibleToCompletionProvider
+    internal sealed class InternalsVisibleToCompletionProvider
+        : AbstractInternalsVisibleToCompletionProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InternalsVisibleToCompletionProvider()
-        {
-        }
+        public InternalsVisibleToCompletionProvider() { }
 
         internal override string Language => LanguageNames.CSharp;
 
-        protected override IImmutableList<SyntaxNode> GetAssemblyScopedAttributeSyntaxNodesOfDocument(SyntaxNode documentRoot)
+        protected override IImmutableList<SyntaxNode> GetAssemblyScopedAttributeSyntaxNodesOfDocument(
+            SyntaxNode documentRoot
+        )
         {
             var builder = (ImmutableList<SyntaxNode>.Builder?)null;
             if (documentRoot is CompilationUnitSyntax compilationUnit)
@@ -40,23 +41,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 }
             }
 
-            return builder == null
-                ? ImmutableList<SyntaxNode>.Empty
-                : builder.ToImmutable();
+            return builder == null ? ImmutableList<SyntaxNode>.Empty : builder.ToImmutable();
         }
 
-        protected override SyntaxNode? GetConstructorArgumentOfInternalsVisibleToAttribute(SyntaxNode internalsVisibleToAttribute)
+        protected override SyntaxNode? GetConstructorArgumentOfInternalsVisibleToAttribute(
+            SyntaxNode internalsVisibleToAttribute
+        )
         {
             var arguments = ((AttributeSyntax)internalsVisibleToAttribute).ArgumentList!.Arguments;
-            // InternalsVisibleTo has only one constructor argument. 
+            // InternalsVisibleTo has only one constructor argument.
             // https://msdn.microsoft.com/en-us/library/system.runtime.compilerservices.internalsvisibletoattribute.internalsvisibletoattribute(v=vs.110).aspx
             // We can assume that this is the assemblyName argument.
-            return arguments.Count > 0
-                ? arguments[0].Expression
-                : null;
+            return arguments.Count > 0 ? arguments[0].Expression : null;
         }
 
-        protected override bool ShouldTriggerAfterQuotes(SourceText text, int insertedCharacterPosition)
-            => CompletionUtilities.IsStartingNewWord(text, insertedCharacterPosition);
+        protected override bool ShouldTriggerAfterQuotes(
+            SourceText text,
+            int insertedCharacterPosition
+        ) => CompletionUtilities.IsStartingNewWord(text, insertedCharacterPosition);
     }
 }

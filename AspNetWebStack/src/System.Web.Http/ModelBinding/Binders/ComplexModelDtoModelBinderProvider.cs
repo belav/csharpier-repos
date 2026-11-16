@@ -9,7 +9,8 @@ namespace System.Web.Http.ModelBinding.Binders
     public sealed class ComplexModelDtoModelBinderProvider : ModelBinderProvider
     {
         // This is really just a simple binder.
-        private static readonly SimpleModelBinderProvider _underlyingProvider = GetUnderlyingProvider();
+        private static readonly SimpleModelBinderProvider _underlyingProvider =
+            GetUnderlyingProvider();
 
         public override IModelBinder GetBinder(HttpConfiguration configuration, Type modelType)
         {
@@ -18,9 +19,12 @@ namespace System.Web.Http.ModelBinding.Binders
 
         private static SimpleModelBinderProvider GetUnderlyingProvider()
         {
-            return new SimpleModelBinderProvider(typeof(ComplexModelDto), new ComplexModelDtoModelBinder())
+            return new SimpleModelBinderProvider(
+                typeof(ComplexModelDto),
+                new ComplexModelDtoModelBinder()
+            )
             {
-                SuppressPrefixCheck = true
+                SuppressPrefixCheck = true,
             };
         }
     }

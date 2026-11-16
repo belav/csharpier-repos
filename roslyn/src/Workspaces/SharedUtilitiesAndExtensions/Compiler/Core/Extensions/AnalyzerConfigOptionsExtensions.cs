@@ -15,19 +15,44 @@ namespace Microsoft.CodeAnalysis
 {
     internal static class AnalyzerConfigOptionsExtensions
     {
-        public static T GetEditorConfigOption<T>(this AnalyzerConfigOptions analyzerConfigOptions, IOption2 option, T defaultValue)
-            => TryGetEditorConfigOption<T>(analyzerConfigOptions, option, out var value) ? value! : defaultValue;
+        public static T GetEditorConfigOption<T>(
+            this AnalyzerConfigOptions analyzerConfigOptions,
+            IOption2 option,
+            T defaultValue
+        ) =>
+            TryGetEditorConfigOption<T>(analyzerConfigOptions, option, out var value)
+                ? value!
+                : defaultValue;
 
-        public static T GetEditorConfigOptionValue<T>(this AnalyzerConfigOptions analyzerConfigOptions, IOption2 option, T defaultValue)
-            => TryGetEditorConfigOption<CodeStyleOption2<T>>(analyzerConfigOptions, option, out var style) ? style!.Value : defaultValue;
+        public static T GetEditorConfigOptionValue<T>(
+            this AnalyzerConfigOptions analyzerConfigOptions,
+            IOption2 option,
+            T defaultValue
+        ) =>
+            TryGetEditorConfigOption<CodeStyleOption2<T>>(
+                analyzerConfigOptions,
+                option,
+                out var style
+            )
+                ? style!.Value
+                : defaultValue;
 
-        public static bool TryGetEditorConfigOption<T>(this AnalyzerConfigOptions analyzerConfigOptions, IOption2 option, out T value)
+        public static bool TryGetEditorConfigOption<T>(
+            this AnalyzerConfigOptions analyzerConfigOptions,
+            IOption2 option,
+            out T value
+        )
         {
             Contract.ThrowIfFalse(option.Definition.IsEditorConfigOption);
 
             if (option.Definition.Type == typeof(NamingStylePreferences))
             {
-                if (StructuredAnalyzerConfigOptions.TryGetStructuredOptions(analyzerConfigOptions, out var structuredOptions))
+                if (
+                    StructuredAnalyzerConfigOptions.TryGetStructuredOptions(
+                        analyzerConfigOptions,
+                        out var structuredOptions
+                    )
+                )
                 {
                     var preferences = structuredOptions.GetNamingStylePreferences();
                     value = (T)(object)preferences;
@@ -36,12 +61,20 @@ namespace Microsoft.CodeAnalysis
             }
             else
             {
-                if (analyzerConfigOptions.TryGetValue(option.Definition.ConfigName, out var stringValue))
+                if (
+                    analyzerConfigOptions.TryGetValue(
+                        option.Definition.ConfigName,
+                        out var stringValue
+                    )
+                )
                 {
                     // Avoid boxing when reading typed value:
                     if (typeof(T) != typeof(object))
                     {
-                        return ((OptionDefinition<T>)option.Definition).Serializer.TryParseValue(stringValue, out value!);
+                        return ((OptionDefinition<T>)option.Definition).Serializer.TryParseValue(
+                            stringValue,
+                            out value!
+                        );
                     }
 
                     if (option.Definition.Serializer.TryParse(stringValue, out var objectValue))

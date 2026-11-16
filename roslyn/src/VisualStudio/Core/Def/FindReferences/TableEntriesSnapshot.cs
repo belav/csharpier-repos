@@ -40,7 +40,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
             public override bool TryGetValue(int index, string keyName, out object? content)
             {
-                // TableControlEventProcessor.PreprocessNavigate needs to get an entry 
+                // TableControlEventProcessor.PreprocessNavigate needs to get an entry
                 // to call TryNavigateTo on it.
                 if (keyName == SelfKeyName)
                 {
@@ -52,7 +52,11 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             }
 
             public override bool TryCreateColumnContent(
-                int index, string columnName, bool singleColumnView, [NotNullWhen(true)] out FrameworkElement? content)
+                int index,
+                string columnName,
+                bool singleColumnView,
+                [NotNullWhen(true)] out FrameworkElement? content
+            )
             {
                 return _entries[index].TryCreateColumnContent(columnName, out content);
             }

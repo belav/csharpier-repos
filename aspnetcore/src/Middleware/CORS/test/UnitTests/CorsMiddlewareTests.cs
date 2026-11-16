@@ -503,13 +503,10 @@ public class CorsMiddlewareTests
                                     .WithExposedHeaders("AllowedHeader")
                                     .Build();
                             });
-                            options.AddPolicy(
-                                "policy2",
-                                policyBuilder =>
-                                {
-                                    policyBuilder.WithOrigins("http://test.example.com").Build();
-                                }
-                            );
+                            options.AddPolicy("policy2", policyBuilder =>
+                            {
+                                policyBuilder.WithOrigins("http://test.example.com").Build();
+                            });
                         });
                     });
             })
@@ -1155,9 +1152,8 @@ public class CorsMiddlewareTests
         await middleware.Invoke(httpContext, mockProvider);
 
         // Assert
-        Assert.Contains(
-            httpContext.Items,
-            item => string.Equals(item.Key as string, "__CorsMiddlewareWithEndpointInvoked")
+        Assert.Contains(httpContext.Items, item =>
+            string.Equals(item.Key as string, "__CorsMiddlewareWithEndpointInvoked")
         );
     }
 
@@ -1192,9 +1188,8 @@ public class CorsMiddlewareTests
         await middleware.Invoke(httpContext, mockProvider);
 
         // Assert
-        Assert.Contains(
-            httpContext.Items,
-            item => string.Equals(item.Key as string, "__CorsMiddlewareWithEndpointInvoked")
+        Assert.Contains(httpContext.Items, item =>
+            string.Equals(item.Key as string, "__CorsMiddlewareWithEndpointInvoked")
         );
     }
 
@@ -1220,9 +1215,8 @@ public class CorsMiddlewareTests
         await middleware.Invoke(httpContext, mockProvider);
 
         // Assert
-        Assert.DoesNotContain(
-            httpContext.Items,
-            item => string.Equals(item.Key as string, "__CorsMiddlewareWithEndpointInvoked")
+        Assert.DoesNotContain(httpContext.Items, item =>
+            string.Equals(item.Key as string, "__CorsMiddlewareWithEndpointInvoked")
         );
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,42 +33,39 @@ using System.ServiceModel.Configuration;
 
 namespace System.ServiceModel.Description
 {
-	public class MetadataConversionError
-	{
-		string msg;
-		bool warning;
+    public class MetadataConversionError
+    {
+        string msg;
+        bool warning;
 
-		public MetadataConversionError (string message)
-			: this (message, false)
-		{
-		}
+        public MetadataConversionError(string message)
+            : this(message, false) { }
 
-		public MetadataConversionError (string message, bool isWarning)
-		{
-			msg = message;
-			warning = isWarning;
-		}
+        public MetadataConversionError(string message, bool isWarning)
+        {
+            msg = message;
+            warning = isWarning;
+        }
 
-		public bool IsWarning {
-			get { return warning; }
-		}
+        public bool IsWarning
+        {
+            get { return warning; }
+        }
 
-		public string Message {
-			get { return msg; }
-		}
+        public string Message
+        {
+            get { return msg; }
+        }
 
-		public override bool Equals (object obj)
-		{
-			MetadataConversionError e = obj as MetadataConversionError;
-			return e != null &&
-				e.warning == warning &&
-				e.msg == msg;
-		}
+        public override bool Equals(object obj)
+        {
+            MetadataConversionError e = obj as MetadataConversionError;
+            return e != null && e.warning == warning && e.msg == msg;
+        }
 
-		public override int GetHashCode ()
-		{
-			return warning ?
-				msg.GetHashCode () : - msg.GetHashCode ();
-		}
-	}
+        public override int GetHashCode()
+        {
+            return warning ? msg.GetHashCode() : -msg.GetHashCode();
+        }
+    }
 }

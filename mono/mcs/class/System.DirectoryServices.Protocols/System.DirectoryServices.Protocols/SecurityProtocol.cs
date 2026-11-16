@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,15 +30,15 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public enum SecurityProtocol
-	{
-		Pct1Server,
-		Pct1Client,
-		Ssl2Server,
-		Ssl2Client,
-		Ssl3Server,
-		Ssl3Client,
-		Tls1Server,
-		Tls1Client,
-	}
+    public enum SecurityProtocol
+    {
+        Pct1Server,
+        Pct1Client,
+        Ssl2Server,
+        Ssl2Client,
+        Ssl3Server,
+        Ssl3Client,
+        Tls1Server,
+        Tls1Client,
+    }
 }

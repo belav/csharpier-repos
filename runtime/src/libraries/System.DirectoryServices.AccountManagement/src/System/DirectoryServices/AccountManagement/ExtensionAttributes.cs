@@ -12,28 +12,21 @@ namespace System.DirectoryServices.AccountManagement
     {
         private readonly string _schemaAttributeName;
         private Nullable<ContextType> _context;
+
         public DirectoryPropertyAttribute(string schemaAttributeName)
         {
             _schemaAttributeName = schemaAttributeName;
             _context = null;
         }
+
         public string SchemaAttributeName
         {
-            get
-            {
-                return _schemaAttributeName;
-            }
+            get { return _schemaAttributeName; }
         }
         public Nullable<ContextType> Context
         {
-            get
-            {
-                return _context;
-            }
-            set
-            {
-                _context = value;
-            }
+            get { return _context; }
+            set { _context = value; }
         }
     }
 
@@ -48,19 +41,14 @@ namespace System.DirectoryServices.AccountManagement
             _rdnPrefix = rdnPrefix;
             _context = null;
         }
+
         public string RdnPrefix
         {
-            get
-            {
-                return _rdnPrefix;
-            }
+            get { return _rdnPrefix; }
         }
         public Nullable<ContextType> Context
         {
-            get
-            {
-                return _context;
-            }
+            get { return _context; }
         }
     }
 
@@ -75,19 +63,14 @@ namespace System.DirectoryServices.AccountManagement
             _objectClass = objectClass;
             _context = null;
         }
+
         public string ObjectClass
         {
-            get
-            {
-                return _objectClass;
-            }
+            get { return _objectClass; }
         }
         public Nullable<ContextType> Context
         {
-            get
-            {
-                return _context;
-            }
+            get { return _context; }
         }
     }
 }

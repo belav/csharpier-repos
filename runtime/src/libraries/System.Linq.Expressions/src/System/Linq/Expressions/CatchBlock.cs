@@ -13,7 +13,12 @@ namespace System.Linq.Expressions
     [DebuggerTypeProxy(typeof(Expression.CatchBlockProxy))]
     public sealed class CatchBlock
     {
-        internal CatchBlock(Type test, ParameterExpression? variable, Expression body, Expression? filter)
+        internal CatchBlock(
+            Type test,
+            ParameterExpression? variable,
+            Expression body,
+            Expression? filter
+        )
         {
             Test = test;
             Variable = variable;
@@ -117,7 +122,11 @@ namespace System.Linq.Expressions
         /// <param name="body">The body of the catch statement.</param>
         /// <param name="filter">The body of the <see cref="Exception"/> filter.</param>
         /// <returns>The created <see cref="CatchBlock"/>.</returns>
-        public static CatchBlock Catch(ParameterExpression variable, Expression body, Expression? filter)
+        public static CatchBlock Catch(
+            ParameterExpression variable,
+            Expression body,
+            Expression? filter
+        )
         {
             ArgumentNullException.ThrowIfNull(variable);
             return MakeCatchBlock(variable.Type, variable, body, filter);
@@ -132,10 +141,18 @@ namespace System.Linq.Expressions
         /// <param name="filter">The body of the <see cref="Exception"/> filter.</param>
         /// <returns>The created <see cref="CatchBlock"/>.</returns>
         /// <remarks><paramref name="type"/> must be non-null and match the type of <paramref name="variable"/> (if it is supplied).</remarks>
-        public static CatchBlock MakeCatchBlock(Type type, ParameterExpression? variable, Expression body, Expression? filter)
+        public static CatchBlock MakeCatchBlock(
+            Type type,
+            ParameterExpression? variable,
+            Expression body,
+            Expression? filter
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
-            ContractUtils.Requires(variable == null || TypeUtils.AreEquivalent(variable.Type, type), nameof(variable));
+            ContractUtils.Requires(
+                variable == null || TypeUtils.AreEquivalent(variable.Type, type),
+                nameof(variable)
+            );
             if (variable == null)
             {
                 TypeUtils.ValidateType(type, nameof(type));
@@ -148,7 +165,8 @@ namespace System.Linq.Expressions
             if (filter != null)
             {
                 ExpressionUtils.RequiresCanRead(filter, nameof(filter));
-                if (filter.Type != typeof(bool)) throw Error.ArgumentMustBeBoolean(nameof(filter));
+                if (filter.Type != typeof(bool))
+                    throw Error.ArgumentMustBeBoolean(nameof(filter));
             }
 
             return new CatchBlock(type, variable, body, filter);

@@ -14,49 +14,41 @@ namespace System.ServiceModel.Description
         Dictionary<string, ContractDescription> contracts;
         IList<Type> reflectedContracts;
         ServiceDescription serviceDescription;
-        Dictionary<KeyValuePair<Type, string>, WorkflowOperationBehavior> workflowOperationBehaviors;
+        Dictionary<
+            KeyValuePair<Type, string>,
+            WorkflowOperationBehavior
+        > workflowOperationBehaviors;
 
         internal ServiceDescriptionContext()
         {
             this.contracts = new Dictionary<string, ContractDescription>();
             this.reflectedContracts = new List<Type>();
-            this.workflowOperationBehaviors = new Dictionary<KeyValuePair<Type, string>, WorkflowOperationBehavior>();
+            this.workflowOperationBehaviors =
+                new Dictionary<KeyValuePair<Type, string>, WorkflowOperationBehavior>();
         }
 
         public IDictionary<string, ContractDescription> Contracts
         {
-            get
-            {
-                return this.contracts;
-            }
+            get { return this.contracts; }
         }
 
         public IList<Type> ReflectedContracts
         {
-            get
-            {
-                return this.reflectedContracts;
-            }
+            get { return this.reflectedContracts; }
         }
 
         public ServiceDescription ServiceDescription
         {
-            get
-            {
-                return this.serviceDescription;
-            }
-            set
-            {
-                this.serviceDescription = value;
-            }
+            get { return this.serviceDescription; }
+            set { this.serviceDescription = value; }
         }
 
-        internal IDictionary<KeyValuePair<Type, string>, WorkflowOperationBehavior> WorkflowOperationBehaviors
+        internal IDictionary<
+            KeyValuePair<Type, string>,
+            WorkflowOperationBehavior
+        > WorkflowOperationBehaviors
         {
-            get
-            {
-                return this.workflowOperationBehaviors;
-            }
+            get { return this.workflowOperationBehaviors; }
         }
     }
 }

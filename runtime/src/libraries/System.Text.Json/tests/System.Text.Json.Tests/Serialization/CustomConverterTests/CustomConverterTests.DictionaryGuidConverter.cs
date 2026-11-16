@@ -35,17 +35,22 @@ namespace System.Text.Json.Serialization.Tests
             {
                 Type valueType = type.GetGenericArguments()[1];
 
-                JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                    typeof(DictionaryGuidConverterInner<>).MakeGenericType(new Type[] { valueType }),
-                    BindingFlags.Instance | BindingFlags.Public,
-                    binder: null,
-                    args: new object[] { options },
-                    culture: null);
+                JsonConverter converter = (JsonConverter)
+                    Activator.CreateInstance(
+                        typeof(DictionaryGuidConverterInner<>).MakeGenericType(
+                            new Type[] { valueType }
+                        ),
+                        BindingFlags.Instance | BindingFlags.Public,
+                        binder: null,
+                        args: new object[] { options },
+                        culture: null
+                    );
 
                 return converter;
             }
 
-            private class DictionaryGuidConverterInner<TValue> : JsonConverter<Dictionary<Guid, TValue>>
+            private class DictionaryGuidConverterInner<TValue>
+                : JsonConverter<Dictionary<Guid, TValue>>
             {
                 private readonly JsonConverter<TValue> _valueConverter;
 
@@ -55,7 +60,11 @@ namespace System.Text.Json.Serialization.Tests
                     _valueConverter = (JsonConverter<TValue>)options.GetConverter(typeof(TValue));
                 }
 
-                public override Dictionary<Guid, TValue> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+                public override Dictionary<Guid, TValue> Read(
+                    ref Utf8JsonReader reader,
+                    Type typeToConvert,
+                    JsonSerializerOptions options
+                )
                 {
                     if (reader.TokenType != JsonTokenType.StartObject)
                     {
@@ -80,9 +89,11 @@ namespace System.Text.Json.Serialization.Tests
                         string propertyName = reader.GetString();
 
                         // Parse guid in "D" format: 00000000-0000-0000-0000-00000000000
-                        if (!Guid.TryParseExact(propertyName, format:"D", out Guid result))
+                        if (!Guid.TryParseExact(propertyName, format: "D", out Guid result))
                         {
-                            throw new JsonException($"Unable to convert \"{propertyName}\" to a Guid.");
+                            throw new JsonException(
+                                $"Unable to convert \"{propertyName}\" to a Guid."
+                            );
                         }
 
                         // Get the value.
@@ -104,7 +115,11 @@ namespace System.Text.Json.Serialization.Tests
                     throw new JsonException();
                 }
 
-                public override void Write(Utf8JsonWriter writer, Dictionary<Guid, TValue> value, JsonSerializerOptions options)
+                public override void Write(
+                    Utf8JsonWriter writer,
+                    Dictionary<Guid, TValue> value,
+                    JsonSerializerOptions options
+                )
                 {
                     writer.WriteStartObject();
 
@@ -138,7 +153,9 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.Converters.Add(new DictionaryGuidConverter());
 
-            Dictionary<Guid, string> dictionary = JsonSerializer.Deserialize<Dictionary<Guid, string>>(json, options);
+            Dictionary<Guid, string> dictionary = JsonSerializer.Deserialize<
+                Dictionary<Guid, string>
+            >(json, options);
             Assert.Equal("One", dictionary[guid1]);
             Assert.Equal("Two", dictionary[guid2]);
 
@@ -158,11 +175,7 @@ namespace System.Text.Json.Serialization.Tests
             Entity entity2 = new Entity();
             entity2.Value = "entity2";
 
-            var dictionary = new Dictionary<Guid, Entity>
-            {
-                [guid1] = entity1,
-                [guid2] = entity2,
-            };
+            var dictionary = new Dictionary<Guid, Entity> { [guid1] = entity1, [guid2] = entity2 };
 
             void Verify()
             {

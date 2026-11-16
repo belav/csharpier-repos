@@ -2,23 +2,23 @@
 // <copyright file="IXmlSchemaInfo.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">priyal</owner> 
+// <owner current="true" primary="true">priyal</owner>
 //------------------------------------------------------------------------------
 
-using System.Xml;
 using System.Collections;
+using System.Xml;
 
-namespace System.Xml.Schema {
-
+namespace System.Xml.Schema
+{
     /// <include file='doc\IXmlSchemaInfo.uex' path='docs/doc[@for="IXmlSchemaInfo"]/*' />
-    public interface IXmlSchemaInfo {
-        
+    public interface IXmlSchemaInfo
+    {
         /// <include file='doc\IXmlSchemaInfo.uex' path='docs/doc[@for="IXmlSchemaInfo.Validity"]/*' />
         XmlSchemaValidity Validity { get; }
 
         /// <include file='doc\IXmlSchemaInfo.uex' path='docs/doc[@for="IXmlSchemaInfo.IsDefault"]/*' />
         bool IsDefault { get; }
-        
+
         /// <include file='doc\IXmlSchemaInfo.uex' path='docs/doc[@for="IXmlSchemaInfo.IsNil"]/*' />
         bool IsNil { get; }
 

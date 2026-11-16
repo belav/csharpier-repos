@@ -8,13 +8,16 @@
 #pragma warning disable 0649
 using System;
 
-
 interface BaseInter { }
+
 interface GenInter<T> { }
 
 struct Struct { }
+
 struct ImplStruct : BaseInter { }
+
 struct OpenGenImplStruct<T> : GenInter<T> { }
+
 struct CloseGenImplStruct : GenInter<int> { }
 
 class Foo { }
@@ -24,16 +27,20 @@ class NullableTest1
     static int? i = new int?(1);
     static Struct? s = new Struct?(new Struct());
     static ImplStruct? imps = new ImplStruct?(new ImplStruct());
-    static OpenGenImplStruct<Foo>? genfoo = new OpenGenImplStruct<Foo>?(new OpenGenImplStruct<Foo>());
+    static OpenGenImplStruct<Foo>? genfoo = new OpenGenImplStruct<Foo>?(
+        new OpenGenImplStruct<Foo>()
+    );
     static CloseGenImplStruct? genint = new CloseGenImplStruct?(new CloseGenImplStruct());
-
 
     public static void Run()
     {
         Test_nullabletypes.Eval(i.GetHashCode(), 1.GetHashCode());
         Test_nullabletypes.Eval(s.GetHashCode(), default(Struct).GetHashCode());
         Test_nullabletypes.Eval(imps.GetHashCode(), default(ImplStruct).GetHashCode());
-        Test_nullabletypes.Eval(genfoo.GetHashCode(), default(OpenGenImplStruct<Foo>).GetHashCode());
+        Test_nullabletypes.Eval(
+            genfoo.GetHashCode(),
+            default(OpenGenImplStruct<Foo>).GetHashCode()
+        );
         Test_nullabletypes.Eval(genint.GetHashCode(), default(CloseGenImplStruct).GetHashCode());
     }
 }
@@ -45,7 +52,6 @@ class NullableTest2
     static ImplStruct? imps;
     static OpenGenImplStruct<Foo>? genfoo;
     static CloseGenImplStruct? genint;
-
 
     public static void Run()
     {

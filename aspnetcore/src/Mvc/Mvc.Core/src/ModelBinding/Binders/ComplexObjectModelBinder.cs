@@ -719,8 +719,8 @@ public sealed partial class ComplexObjectModelBinder : IModelBinder
                 }
 
                 // Otherwise, check whether the (perhaps filtered) value providers have a match.
-                var fieldName =
-                    parameterMetadata.BinderModelName ?? parameterMetadata.ParameterName!;
+                var fieldName = parameterMetadata.BinderModelName
+                    ?? parameterMetadata.ParameterName!;
                 var modelName = ModelNames.CreatePropertyModelName(
                     bindingContext.ModelName,
                     fieldName

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,54 +32,52 @@ using System;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
-using NUnit.Framework;
-
 using MonoTests.System.Xml.TestClasses;
+using NUnit.Framework;
 
 namespace MonoTests.System.XmlSerialization
 {
-	[TestFixture]
-	public class XmlSchemasTests
-	{
-		[Test]
-		public void Bug360541 ()
-		{
-			XmlSchemaComplexType stype = GetStype ();
-			
-			XmlSchemaElement selem1 = new XmlSchemaElement ();
-			selem1.Name = "schema";
-			selem1.SchemaType = stype;
+    [TestFixture]
+    public class XmlSchemasTests
+    {
+        [Test]
+        public void Bug360541()
+        {
+            XmlSchemaComplexType stype = GetStype();
 
-			XmlSchema schema = new XmlSchema ();
-			schema.Items.Add (selem1);
+            XmlSchemaElement selem1 = new XmlSchemaElement();
+            selem1.Name = "schema";
+            selem1.SchemaType = stype;
 
-			XmlSchemas xs = new XmlSchemas ();
-			xs.Add (schema);
+            XmlSchema schema = new XmlSchema();
+            schema.Items.Add(selem1);
 
-			xs.Find (XmlQualifiedName.Empty, typeof (XmlSchemaElement));
+            XmlSchemas xs = new XmlSchemas();
+            xs.Add(schema);
 
-			selem1 = new XmlSchemaElement ();
-			selem1.Name = "schema1";
-			selem1.SchemaType = stype;
+            xs.Find(XmlQualifiedName.Empty, typeof(XmlSchemaElement));
 
-			schema = new XmlSchema ();
-			schema.Items.Add (selem1);
+            selem1 = new XmlSchemaElement();
+            selem1.Name = "schema1";
+            selem1.SchemaType = stype;
 
-			xs = new XmlSchemas ();
-			xs.Add (schema);
-			xs.Find (XmlQualifiedName.Empty, typeof (XmlSchemaElement));
-		}
+            schema = new XmlSchema();
+            schema.Items.Add(selem1);
 
-		XmlSchemaComplexType GetStype ()
-		{
-			XmlSchemaSequence seq = new XmlSchemaSequence ();
-			seq.Items.Add (new XmlSchemaAny ());
-		
-			XmlSchemaComplexType stype = new XmlSchemaComplexType ();
-			stype.Particle = seq;
-			
-			return stype;
-		}
-	}
+            xs = new XmlSchemas();
+            xs.Add(schema);
+            xs.Find(XmlQualifiedName.Empty, typeof(XmlSchemaElement));
+        }
+
+        XmlSchemaComplexType GetStype()
+        {
+            XmlSchemaSequence seq = new XmlSchemaSequence();
+            seq.Items.Add(new XmlSchemaAny());
+
+            XmlSchemaComplexType stype = new XmlSchemaComplexType();
+            stype.Particle = seq;
+
+            return stype;
+        }
+    }
 }

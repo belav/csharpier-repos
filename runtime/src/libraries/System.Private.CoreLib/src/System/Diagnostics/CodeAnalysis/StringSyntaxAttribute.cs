@@ -4,7 +4,11 @@
 namespace System.Diagnostics.CodeAnalysis
 {
     /// <summary>Specifies the syntax used in a string.</summary>
-    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property,
+        AllowMultiple = false,
+        Inherited = false
+    )]
 #if SYSTEM_PRIVATE_CORELIB
     public
 #else

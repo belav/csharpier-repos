@@ -31,6 +31,9 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports
         /// <summary>
         /// The name of the metadata item to use as the key of the dictionary.
         /// </summary>
-        public string OrderMetadataName { get { return _metadataKey; } }
+        public string OrderMetadataName
+        {
+            get { return _metadataKey; }
+        }
     }
 }

@@ -18,13 +18,19 @@ namespace System.IO.Pipes
     /// </summary>
     public sealed partial class NamedPipeClientStream : PipeStream
     {
-        private bool TryConnect(int _ /* timeout */)
+        private bool TryConnect(
+            int _ /* timeout */
+        )
         {
             // timeout isn't used as Connect will be very fast,
             // either succeeding immediately if the server is listening or failing
             // immediately if it isn't.  The only delay will be between the time the server
             // has called Bind and Listen, with the latter immediately following the former.
-            var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
+            var socket = new Socket(
+                AddressFamily.Unix,
+                SocketType.Stream,
+                ProtocolType.Unspecified
+            );
             SafePipeHandle? clientHandle = null;
             try
             {
@@ -62,7 +68,11 @@ namespace System.IO.Pipes
                 throw;
             }
 
-            InitializeHandle(clientHandle, isExposed: false, isAsync: (_pipeOptions & PipeOptions.Asynchronous) != 0);
+            InitializeHandle(
+                clientHandle,
+                isExposed: false,
+                isAsync: (_pipeOptions & PipeOptions.Asynchronous) != 0
+            );
             State = PipeState.Connected;
             return true;
         }
@@ -82,7 +92,8 @@ namespace System.IO.Pipes
             get
             {
                 CheckPipePropertyOperations();
-                if (!CanRead) throw new NotSupportedException(SR.NotSupported_UnreadableStream);
+                if (!CanRead)
+                    throw new NotSupportedException(SR.NotSupported_UnreadableStream);
                 return InternalHandle?.PipeSocket.ReceiveBufferSize ?? 0;
             }
         }
@@ -92,7 +103,8 @@ namespace System.IO.Pipes
             get
             {
                 CheckPipePropertyOperations();
-                if (!CanWrite) throw new NotSupportedException(SR.NotSupported_UnwritableStream);
+                if (!CanWrite)
+                    throw new NotSupportedException(SR.NotSupported_UnwritableStream);
                 return InternalHandle?.PipeSocket.SendBufferSize ?? 0;
             }
         }

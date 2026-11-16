@@ -40,16 +40,14 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         }
 
         protected ManagedToolTask(ResourceManager resourceManager)
-            : base(resourceManager)
-        {
-        }
+            : base(resourceManager) { }
 
         /// <summary>
         /// Generate the arguments to pass directly to the managed tool. These do not include
         /// arguments in the response file.
         /// </summary>
         /// <remarks>
-        /// This will be the same value whether the build occurs on .NET Core or .NET Framework. 
+        /// This will be the same value whether the build occurs on .NET Core or .NET Framework.
         /// </remarks>
         internal string GenerateToolArguments()
         {
@@ -66,7 +64,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             var commandLineArguments = GenerateToolArguments();
             if (IsManagedTool)
             {
-                (_, commandLineArguments, _) = RuntimeHostInfo.GetProcessInfo(PathToManagedToolWithoutExtension, commandLineArguments);
+                (_, commandLineArguments, _) = RuntimeHostInfo.GetProcessInfo(
+                    PathToManagedToolWithoutExtension,
+                    commandLineArguments
+                );
             }
 
             return commandLineArguments;
@@ -92,10 +93,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         internal string GenerateCommandLineContents() => GenerateCommandLineCommands();
 
         /// <summary>
-        /// Generate the arguments to pass via a response file. 
+        /// Generate the arguments to pass via a response file.
         /// </summary>
         /// <remarks>
-        /// This will be the same value whether the build occurs on .NET Core or .NET Framework. 
+        /// This will be the same value whether the build occurs on .NET Core or .NET Framework.
         /// </remarks>
         internal string GenerateResponseFileContents() => GenerateResponseFileCommands();
 
@@ -106,7 +107,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// </summary>
         protected sealed override string GenerateFullPathToTool() =>
             IsManagedTool
-                ? RuntimeHostInfo.GetProcessInfo(PathToManagedToolWithoutExtension, string.Empty).processFilePath
+                ? RuntimeHostInfo
+                    .GetProcessInfo(PathToManagedToolWithoutExtension, string.Empty)
+                    .processFilePath
                 : Path.Combine(ToolPath ?? "", ToolExe);
 
         protected abstract string ToolNameWithoutExtension { get; }
@@ -125,9 +128,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// as the implementation of IsManagedTool calls this property. See the comment in
         /// <see cref="ManagedToolTask.IsManagedTool"/>.
         /// </remarks>
-        protected sealed override string ToolName => RuntimeHostInfo.IsCoreClrRuntime
-            ? $"{ToolNameWithoutExtension}.dll"
-            : $"{ToolNameWithoutExtension}.exe";
+        protected sealed override string ToolName =>
+            RuntimeHostInfo.IsCoreClrRuntime
+                ? $"{ToolNameWithoutExtension}.dll"
+                : $"{ToolNameWithoutExtension}.exe";
 
         /// <summary>
         /// This generates the command line arguments passed to the tool.
@@ -139,8 +143,20 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         {
             var argumentList = new List<string>();
             var builder = new StringBuilder();
-            CommandLineUtilities.SplitCommandLineIntoArguments(GenerateToolArguments().AsSpan(), removeHashComments: true, builder, argumentList, out _);
-            CommandLineUtilities.SplitCommandLineIntoArguments(responseFileCommands.AsSpan(), removeHashComments: true, builder, argumentList, out _);
+            CommandLineUtilities.SplitCommandLineIntoArguments(
+                GenerateToolArguments().AsSpan(),
+                removeHashComments: true,
+                builder,
+                argumentList,
+                out _
+            );
+            CommandLineUtilities.SplitCommandLineIntoArguments(
+                responseFileCommands.AsSpan(),
+                removeHashComments: true,
+                builder,
+                argumentList,
+                out _
+            );
             return argumentList;
         }
 
@@ -151,8 +167,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// <remarks>
         /// This does not include any runtime specific arguments like 'dotnet' or 'exec'.
         /// </remarks>
-        protected internal ITaskItem[] GenerateCommandLineArgsTaskItems(string responseFileCommands) =>
-            GenerateCommandLineArgsTaskItems(GenerateCommandLineArgsList(responseFileCommands));
+        protected internal ITaskItem[] GenerateCommandLineArgsTaskItems(
+            string responseFileCommands
+        ) => GenerateCommandLineArgsTaskItems(GenerateCommandLineArgsList(responseFileCommands));
 
         protected static ITaskItem[] GenerateCommandLineArgsTaskItems(List<string> commandLineArgs)
         {

@@ -14,19 +14,25 @@ namespace System.Web.Razor.Test.Parser.VB
         [Fact]
         public void ParseBlockCorrectlyHandlesCodeBlockInBodyOfExplicitExpressionDueToUnclosedExpression()
         {
-            ParseBlockTest(@"(
+            ParseBlockTest(
+                @"(
 @Code
     Dim foo = bar
 End Code",
                 new ExpressionBlock(
                     Factory.MetaCode("(").Accepts(AcceptedCharacters.None),
-                    Factory.EmptyVB().AsExpression()),
+                    Factory.EmptyVB().AsExpression()
+                ),
                 new RazorError(
                     String.Format(
                         RazorResources.ParseError_Expected_EndOfBlock_Before_EOF,
                         RazorResources.BlockName_ExplicitExpression,
-                        ")", "("),
-                     SourceLocation.Zero));
+                        ")",
+                        "("
+                    ),
+                    SourceLocation.Zero
+                )
+            );
         }
 
         [Fact]
@@ -45,7 +51,8 @@ End Code",
 End If",
                 BlockType.Statement,
                 SpanKind.Code,
-                acceptedCharacters: AcceptedCharacters.None);
+                acceptedCharacters: AcceptedCharacters.None
+            );
         }
 
         [Fact]
@@ -58,7 +65,8 @@ End If",
 End If",
                 BlockType.Statement,
                 SpanKind.Code,
-                acceptedCharacters: AcceptedCharacters.None);
+                acceptedCharacters: AcceptedCharacters.None
+            );
         }
 
         [Fact]
@@ -88,7 +96,9 @@ End If",
         [Fact]
         public void ParseBlockSupportsImplicitExpressionWithCommentInParens()
         {
-            ImplicitExpressionTest("Foo().Bar(sdfkhj sdfksdfjs \")\" '))))))))\r\nsjdfkjsdf).Baz()");
+            ImplicitExpressionTest(
+                "Foo().Bar(sdfkhj sdfksdfjs \")\" '))))))))\r\nsjdfkjsdf).Baz()"
+            );
         }
 
         [Theory]
@@ -101,11 +111,14 @@ End If",
         [InlineData("Foo.Bar. _\r\n' )\r\nBaz()\r\n")]
         public void ValidExplicitExpressions(string body)
         {
-            ParseBlockTest("(" + body + ")",
+            ParseBlockTest(
+                "(" + body + ")",
                 new ExpressionBlock(
                     Factory.MetaCode("(").Accepts(AcceptedCharacters.None),
                     Factory.Code(body).AsExpression(),
-                    Factory.MetaCode(")").Accepts(AcceptedCharacters.None)));
+                    Factory.MetaCode(")").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
     }
 }

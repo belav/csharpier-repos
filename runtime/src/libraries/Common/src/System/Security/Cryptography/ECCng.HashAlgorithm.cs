@@ -12,7 +12,9 @@ namespace System.Security.Cryptography
         /// <summary>
         /// Get the ALG_ID from the given HashAlgorithmName
         /// </summary>
-        internal static Interop.BCrypt.ECC_CURVE_ALG_ID_ENUM GetHashAlgorithmId(HashAlgorithmName? name)
+        internal static Interop.BCrypt.ECC_CURVE_ALG_ID_ENUM GetHashAlgorithmId(
+            HashAlgorithmName? name
+        )
         {
             if (name is null || string.IsNullOrEmpty(name.Value.Name))
             {
@@ -23,11 +25,15 @@ namespace System.Security.Cryptography
                 CryptOidInfoKeyType.CRYPT_OID_INFO_NAME_KEY,
                 name.Value.Name,
                 OidGroup.HashAlgorithm,
-                false);
+                false
+            );
 
             if (oid.AlgId == -1)
             {
-                throw new CryptographicException(SR.Cryptography_UnknownHashAlgorithm, name.Value.Name);
+                throw new CryptographicException(
+                    SR.Cryptography_UnknownHashAlgorithm,
+                    name.Value.Name
+                );
             }
 
             return (Interop.BCrypt.ECC_CURVE_ALG_ID_ENUM)oid.AlgId;
@@ -36,7 +42,9 @@ namespace System.Security.Cryptography
         /// <summary>
         /// Get the HashAlgorithmName from the given ALG_ID
         /// </summary>
-        internal static HashAlgorithmName? GetHashAlgorithmName(Interop.BCrypt.ECC_CURVE_ALG_ID_ENUM hashId)
+        internal static HashAlgorithmName? GetHashAlgorithmName(
+            Interop.BCrypt.ECC_CURVE_ALG_ID_ENUM hashId
+        )
         {
             CRYPT_OID_INFO oid = Interop.Crypt32.FindAlgIdOidInfo(hashId);
             if (oid.AlgId == -1)
@@ -53,14 +61,19 @@ namespace System.Security.Cryptography
         /// </summary>
         internal static bool IsECNamedCurve(string? algorithm)
         {
-            return (algorithm == BCryptNative.AlgorithmName.ECDH ||
-                    algorithm == BCryptNative.AlgorithmName.ECDsa);
+            return (
+                algorithm == BCryptNative.AlgorithmName.ECDH
+                || algorithm == BCryptNative.AlgorithmName.ECDsa
+            );
         }
 
         /// <summary>
         /// Maps algorithm to curve name accounting for the special nist curves
         /// </summary>
-        internal static string SpecialNistAlgorithmToCurveName(string? algorithm, out string oidValue)
+        internal static string SpecialNistAlgorithmToCurveName(
+            string? algorithm,
+            out string oidValue
+        )
         {
             switch (algorithm)
             {
@@ -79,7 +92,9 @@ namespace System.Security.Cryptography
             }
 
             Debug.Fail($"Unknown curve {algorithm}");
-            throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CurveNotSupported, algorithm));
+            throw new PlatformNotSupportedException(
+                SR.Format(SR.Cryptography_CurveNotSupported, algorithm)
+            );
         }
     }
 }

@@ -20,11 +20,11 @@ namespace System.Xml
 
     internal sealed class DataSetMapper
     {
-        private Hashtable _tableSchemaMap;   // maps an string (currently this is localName:nsURI) to a DataTable. Used to quickly find if a bound-elem matches any data-table metadata..
-        private Hashtable _columnSchemaMap;  // maps a string (table localName:nsURI) to a Hashtable. The 2nd hastable (the one that is stored as data in columnSchemaMap, maps a string to a DataColumn.
+        private Hashtable _tableSchemaMap; // maps an string (currently this is localName:nsURI) to a DataTable. Used to quickly find if a bound-elem matches any data-table metadata..
+        private Hashtable _columnSchemaMap; // maps a string (table localName:nsURI) to a Hashtable. The 2nd hastable (the one that is stored as data in columnSchemaMap, maps a string to a DataColumn.
 
-        private XmlDataDocument? _doc;        // The document this mapper is related to
-        private DataSet? _dataSet;          // The dataset this mapper is related to
+        private XmlDataDocument? _doc; // The document this mapper is related to
+        private DataSet? _dataSet; // The dataset this mapper is related to
         internal const string strReservedXmlns = "http://www.w3.org/2000/xmlns/";
 
         internal DataSetMapper()
@@ -84,7 +84,10 @@ namespace System.Xml
         //                  a column from the parent region table, then the node is NOT associated w/ a DataTable (it is a potential DataColumn in the parent region)
         //              3.3.2 Else the node is a row-element (and associated w/ a DataTable / DataRow )
         //
-        internal DataTable? SearchMatchingTableSchema(XmlBoundElement? rowElem, XmlBoundElement elem)
+        internal DataTable? SearchMatchingTableSchema(
+            XmlBoundElement? rowElem,
+            XmlBoundElement elem
+        )
         {
             Debug.Assert(elem != null);
 
@@ -181,6 +184,7 @@ namespace System.Xml
             }
             return null;
         }
+
         internal static DataTable? GetTableSchemaForElement(XmlElement elem)
         {
             XmlBoundElement? be = elem as XmlBoundElement;
@@ -209,7 +213,10 @@ namespace System.Xml
         // Get the row-elem associatd w/ the region node is in.
         // If node is in a region not mapped (like document element node) the function returns false and sets elem to null)
         // This function does not work if the region is not associated w/ a DataRow (it uses DataRow association to know what is the row element associated w/ the region)
-        internal static bool GetRegion(XmlNode? node, [NotNullWhen(true)] out XmlBoundElement? rowElem)
+        internal static bool GetRegion(
+            XmlNode? node,
+            [NotNullWhen(true)] out XmlBoundElement? rowElem
+        )
         {
             while (node != null)
             {
@@ -352,6 +359,7 @@ namespace System.Xml
             object idTable = GetIdentity(table.EncodedTableName, table.Namespace);
             _tableSchemaMap[idTable] = table;
         }
+
         private void AddColumnSchema(DataColumn col)
         {
             DataTable table = col.Table!;
@@ -366,13 +374,18 @@ namespace System.Xml
             }
             columns[idColumn] = col;
         }
+
         private static object GetIdentity(string localName, string namespaceURI)
         {
             // we need access to XmlName to make this faster
             return localName + ":" + namespaceURI;
         }
 
-        private static bool IsNextColumn(DataColumnCollection columns, ref int iColumn, DataColumn col)
+        private static bool IsNextColumn(
+            DataColumnCollection columns,
+            ref int iColumn,
+            DataColumn col
+        )
         {
             for (; iColumn < columns.Count; iColumn++)
             {

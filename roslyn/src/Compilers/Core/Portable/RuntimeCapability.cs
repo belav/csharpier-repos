@@ -43,6 +43,6 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Indicates that this version of runtime supports inline array types.
         /// </summary>
-        InlineArrayTypes = 7
+        InlineArrayTypes = 7,
     }
 }

@@ -7,15 +7,15 @@
 namespace System.Net.Configuration
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
     using System.Net;
     using System.Reflection;
-    using System.Threading;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
-    using System.ComponentModel;
+    using System.Threading;
 
 #if !MONO
     public sealed class DefaultProxySection : ConfigurationSection
@@ -36,16 +36,22 @@ namespace System.Net.Configuration
             if (EvaluationContext.IsMachineLevel)
                 return;
 
-            try {
+            try
+            {
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
-            } catch (Exception exception) {
+            }
+            catch (Exception exception)
+            {
                 throw new ConfigurationErrorsException(
-                              SR.GetString(SR.net_config_section_permission, 
-                                           ConfigurationStrings.DefaultProxySectionName),
-                              exception);
+                    SR.GetString(
+                        SR.net_config_section_permission,
+                        ConfigurationStrings.DefaultProxySectionName
+                    ),
+                    exception
+                );
             }
         }
-         
+
         [ConfigurationProperty(ConfigurationStrings.BypassList)]
         public BypassElementCollection BypassList
         {
@@ -62,7 +68,7 @@ namespace System.Net.Configuration
         {
             get { return this.properties; }
         }
-        
+
         [ConfigurationProperty(ConfigurationStrings.Proxy)]
         public ProxyElement Proxy
         {
@@ -72,49 +78,53 @@ namespace System.Net.Configuration
         [ConfigurationProperty(ConfigurationStrings.Enabled, DefaultValue = true)]
         public bool Enabled
         {
-            get { return (bool) this[this.enabled]; }
+            get { return (bool)this[this.enabled]; }
             set { this[this.enabled] = value; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.UseDefaultCredentials, DefaultValue = false)]
         public bool UseDefaultCredentials
         {
-            get { return (bool) this[this.useDefaultCredentials]; }
+            get { return (bool)this[this.useDefaultCredentials]; }
             set { this[this.useDefaultCredentials] = value; }
         }
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty bypasslist =
-            new ConfigurationProperty(ConfigurationStrings.BypassList, 
-                                      typeof(BypassElementCollection), 
-                                      null,
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty bypasslist = new ConfigurationProperty(
+            ConfigurationStrings.BypassList,
+            typeof(BypassElementCollection),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty module =
-            new ConfigurationProperty(ConfigurationStrings.Module, 
-                                      typeof(ModuleElement), 
-                                      null,
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty module = new ConfigurationProperty(
+            ConfigurationStrings.Module,
+            typeof(ModuleElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty proxy =
-            new ConfigurationProperty(ConfigurationStrings.Proxy, 
-                                      typeof(ProxyElement), 
-                                      null,
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty proxy = new ConfigurationProperty(
+            ConfigurationStrings.Proxy,
+            typeof(ProxyElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty enabled =
-            new ConfigurationProperty(ConfigurationStrings.Enabled, 
-                                      typeof(bool), 
-                                      true, 
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty enabled = new ConfigurationProperty(
+            ConfigurationStrings.Enabled,
+            typeof(bool),
+            true,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty useDefaultCredentials =
-            new ConfigurationProperty(ConfigurationStrings.UseDefaultCredentials, 
-                                      typeof(bool), 
-                                      false,
-                                      ConfigurationPropertyOptions.None);
-
+        readonly ConfigurationProperty useDefaultCredentials = new ConfigurationProperty(
+            ConfigurationStrings.UseDefaultCredentials,
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
 
         // This allows us to prevent parent settings (machine.config) from propegating to higher config (app.config), unless
         // the higher config doesn't contain the section at all.  That is, overriding defaultProxy is all-or-nothing.
@@ -126,19 +136,20 @@ namespace System.Net.Configuration
 
             // Initialize the parentElement to the right set of defaults (not needed now,
             // but this will avoid errors in the future if SetDefaults is ever overridden in this class.
-            // ConfigurationElement::InitializeDefault is a no-op, so you aren’t hurting perf by anything
-            // measurable. 
+            // ConfigurationElement::InitializeDefault is a no-op, so you arenï¿½t hurting perf by anything
+            // measurable.
             defaultElement.InitializeDefault();
 
-            // Finally, pass it to the base class to do the “right things”
+            // Finally, pass it to the base class to do the ï¿½right thingsï¿½
             base.Reset(defaultElement);
         }
     }
 #endif
+
     internal sealed class DefaultProxySectionInternal
     {
 #if !MONO
-        [SecurityPermission(SecurityAction.Assert, Flags=SecurityPermissionFlag.ControlPrincipal)]
+        [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.ControlPrincipal)]
         internal DefaultProxySectionInternal(DefaultProxySection section)
         {
             // If enabled is false, skip everything.
@@ -148,13 +159,15 @@ namespace System.Net.Configuration
             }
 
             // If nothing else is set, use the system default.
-            if (section.Proxy.AutoDetect == ProxyElement.AutoDetectValues.Unspecified &&
-                section.Proxy.ScriptLocation == null &&
-                String.IsNullOrEmpty(section.Module.Type) &&
-                section.Proxy.UseSystemDefault != ProxyElement.UseSystemDefaultValues.True &&
-                section.Proxy.ProxyAddress == null &&
-                section.Proxy.BypassOnLocal == ProxyElement.BypassOnLocalValues.Unspecified &&
-                section.BypassList.Count == 0)
+            if (
+                section.Proxy.AutoDetect == ProxyElement.AutoDetectValues.Unspecified
+                && section.Proxy.ScriptLocation == null
+                && String.IsNullOrEmpty(section.Module.Type)
+                && section.Proxy.UseSystemDefault != ProxyElement.UseSystemDefaultValues.True
+                && section.Proxy.ProxyAddress == null
+                && section.Proxy.BypassOnLocal == ProxyElement.BypassOnLocalValues.Unspecified
+                && section.BypassList.Count == 0
+            )
             {
                 // Old-style indication to turn off the proxy.
                 if (section.Proxy.UseSystemDefault == ProxyElement.UseSystemDefaultValues.False)
@@ -166,16 +179,22 @@ namespace System.Net.Configuration
                 }
 
                 // Suspend impersonation.
-                try {
-                    new SecurityPermission(SecurityPermissionFlag.ControlPrincipal | SecurityPermissionFlag.UnmanagedCode).Assert();
+                try
+                {
+                    new SecurityPermission(
+                        SecurityPermissionFlag.ControlPrincipal
+                            | SecurityPermissionFlag.UnmanagedCode
+                    ).Assert();
 #if !FEATURE_PAL
-                    using(WindowsIdentity.Impersonate(IntPtr.Zero))
+                    using (WindowsIdentity.Impersonate(IntPtr.Zero))
 #endif // !FEATURE_PAL
                     {
                         CodeAccessPermission.RevertAssert();
                         this.webProxy = new WebRequest.WebProxyWrapper(new WebProxy(true));
                     }
-                } catch {
+                }
+                catch
+                {
                     throw;
                 }
             }
@@ -185,43 +204,57 @@ namespace System.Net.Configuration
                 if (!String.IsNullOrEmpty(section.Module.Type))
                 {
                     Type theType = Type.GetType(section.Module.Type, true, true);
-                    
-                    if ((theType.Attributes & TypeAttributes.VisibilityMask) != TypeAttributes.Public)
-                        throw new ConfigurationErrorsException(SR.GetString(SR.net_config_proxy_module_not_public));
-                    
+
+                    if (
+                        (theType.Attributes & TypeAttributes.VisibilityMask)
+                        != TypeAttributes.Public
+                    )
+                        throw new ConfigurationErrorsException(
+                            SR.GetString(SR.net_config_proxy_module_not_public)
+                        );
+
                     // verify that its of the proper type of IWebProxy
                     if (!typeof(IWebProxy).IsAssignableFrom(theType))
                     {
-                        throw new InvalidCastException(SR.GetString(SR.net_invalid_cast,
-                                                                    theType.FullName,
-                                                                    "IWebProxy"));
+                        throw new InvalidCastException(
+                            SR.GetString(SR.net_invalid_cast, theType.FullName, "IWebProxy")
+                        );
                     }
-                    this.webProxy = (IWebProxy)Activator.CreateInstance(
-                                    theType,
-                                    BindingFlags.CreateInstance
-                                    | BindingFlags.Instance
-                                    | BindingFlags.NonPublic
-                                    | BindingFlags.Public,
-                                    null,          // Binder
-                                    new object[0], // no arguments
-                                    CultureInfo.InvariantCulture
-                                    );
+                    this.webProxy = (IWebProxy)
+                        Activator.CreateInstance(
+                            theType,
+                            BindingFlags.CreateInstance
+                                | BindingFlags.Instance
+                                | BindingFlags.NonPublic
+                                | BindingFlags.Public,
+                            null, // Binder
+                            new object[0], // no arguments
+                            CultureInfo.InvariantCulture
+                        );
                 }
-                else if (section.Proxy.UseSystemDefault == ProxyElement.UseSystemDefaultValues.True &&
-                         section.Proxy.AutoDetect == ProxyElement.AutoDetectValues.Unspecified &&
-                         section.Proxy.ScriptLocation == null)
+                else if (
+                    section.Proxy.UseSystemDefault == ProxyElement.UseSystemDefaultValues.True
+                    && section.Proxy.AutoDetect == ProxyElement.AutoDetectValues.Unspecified
+                    && section.Proxy.ScriptLocation == null
+                )
                 {
                     // Suspend impersonation.  This setting is deprecated but required for Everett compat.
-                    try {
-                        new SecurityPermission(SecurityPermissionFlag.ControlPrincipal | SecurityPermissionFlag.UnmanagedCode).Assert();
+                    try
+                    {
+                        new SecurityPermission(
+                            SecurityPermissionFlag.ControlPrincipal
+                                | SecurityPermissionFlag.UnmanagedCode
+                        ).Assert();
 #if !FEATURE_PAL
-                        using(WindowsIdentity.Impersonate(IntPtr.Zero))
+                        using (WindowsIdentity.Impersonate(IntPtr.Zero))
 #endif // !FEATURE_PAL
                         {
                             CodeAccessPermission.RevertAssert();
                             this.webProxy = new WebProxy(false);
                         }
-                    } catch {
+                    }
+                    catch
+                    {
                         throw;
                     }
                 }
@@ -236,7 +269,8 @@ namespace System.Net.Configuration
                 {
                     if (section.Proxy.AutoDetect != ProxyElement.AutoDetectValues.Unspecified)
                     {
-                        tempProxy.AutoDetect = section.Proxy.AutoDetect == ProxyElement.AutoDetectValues.True;
+                        tempProxy.AutoDetect =
+                            section.Proxy.AutoDetect == ProxyElement.AutoDetectValues.True;
                     }
                     if (section.Proxy.ScriptLocation != null)
                     {
@@ -244,7 +278,8 @@ namespace System.Net.Configuration
                     }
                     if (section.Proxy.BypassOnLocal != ProxyElement.BypassOnLocalValues.Unspecified)
                     {
-                        tempProxy.BypassProxyOnLocal = section.Proxy.BypassOnLocal == ProxyElement.BypassOnLocalValues.True;
+                        tempProxy.BypassProxyOnLocal =
+                            section.Proxy.BypassOnLocal == ProxyElement.BypassOnLocalValues.True;
                     }
                     if (section.Proxy.ProxyAddress != null)
                     {
@@ -280,44 +315,49 @@ namespace System.Net.Configuration
         static IWebProxy GetDefaultProxy_UsingOldMonoCode()
         {
 #if CONFIGURATION_DEP
-            DefaultProxySection sec = ConfigurationManager.GetSection ("system.net/defaultProxy") as DefaultProxySection;
+            DefaultProxySection sec =
+                ConfigurationManager.GetSection("system.net/defaultProxy") as DefaultProxySection;
             WebProxy p;
-            
+
             if (sec == null)
-                return GetSystemWebProxy ();
-            
+                return GetSystemWebProxy();
+
             ProxyElement pe = sec.Proxy;
-            
-            if ((pe.UseSystemDefault != ProxyElement.UseSystemDefaultValues.False) && (pe.ProxyAddress == null)) {
-                IWebProxy proxy = GetSystemWebProxy ();
-                
+
+            if (
+                (pe.UseSystemDefault != ProxyElement.UseSystemDefaultValues.False)
+                && (pe.ProxyAddress == null)
+            )
+            {
+                IWebProxy proxy = GetSystemWebProxy();
+
                 if (!(proxy is WebProxy))
                     return proxy;
-                
-                p = (WebProxy) proxy;
-            } else
-                p = new WebProxy ();
-            
+
+                p = (WebProxy)proxy;
+            }
+            else
+                p = new WebProxy();
+
             if (pe.ProxyAddress != null)
                 p.Address = pe.ProxyAddress;
-            
+
             if (pe.BypassOnLocal != ProxyElement.BypassOnLocalValues.Unspecified)
                 p.BypassProxyOnLocal = (pe.BypassOnLocal == ProxyElement.BypassOnLocalValues.True);
-                
-            foreach(BypassElement elem in sec.BypassList)
+
+            foreach (BypassElement elem in sec.BypassList)
                 p.BypassArrayList.Add(elem.Address);
-            
+
             return p;
 #else
-            return GetSystemWebProxy ();
+            return GetSystemWebProxy();
 #endif
         }
 
         static IWebProxy GetSystemWebProxy()
         {
-            return System.Net.WebProxy.CreateDefaultProxy ();
+            return System.Net.WebProxy.CreateDefaultProxy();
         }
-
 #endif
 
         internal static object ClassSyncObject
@@ -333,16 +373,19 @@ namespace System.Net.Configuration
             }
         }
 
-        static internal DefaultProxySectionInternal GetSection()
+        internal static DefaultProxySectionInternal GetSection()
         {
             lock (DefaultProxySectionInternal.ClassSyncObject)
             {
 #if MONO
                 var res = new DefaultProxySectionInternal();
-                res.webProxy = GetDefaultProxy_UsingOldMonoCode ();
+                res.webProxy = GetDefaultProxy_UsingOldMonoCode();
                 return res;
 #else
-                DefaultProxySection section = PrivilegedConfigurationManager.GetSection(ConfigurationStrings.DefaultProxySectionPath) as DefaultProxySection;
+                DefaultProxySection section =
+                    PrivilegedConfigurationManager.GetSection(
+                        ConfigurationStrings.DefaultProxySectionPath
+                    ) as DefaultProxySection;
                 if (section == null)
                     return null;
 
@@ -352,9 +395,13 @@ namespace System.Net.Configuration
                 }
                 catch (Exception exception)
                 {
-                    if (NclUtilities.IsFatal(exception)) throw;
+                    if (NclUtilities.IsFatal(exception))
+                        throw;
 
-                    throw new ConfigurationErrorsException(SR.GetString(SR.net_config_proxy), exception);
+                    throw new ConfigurationErrorsException(
+                        SR.GetString(SR.net_config_proxy),
+                        exception
+                    );
                 }
 #endif
             }

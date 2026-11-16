@@ -11,65 +11,103 @@ namespace System
         public static bool EnableUnsafeUTF7Encoding
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("System.Text.Encoding.EnableUnsafeUTF7Encoding", ref s_enableUnsafeUTF7Encoding);
+            get =>
+                GetCachedSwitchValue(
+                    "System.Text.Encoding.EnableUnsafeUTF7Encoding",
+                    ref s_enableUnsafeUTF7Encoding
+                );
         }
 
         private static int s_enforceJapaneseEraYearRanges;
         public static bool EnforceJapaneseEraYearRanges
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Globalization.EnforceJapaneseEraYearRanges", ref s_enforceJapaneseEraYearRanges);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Globalization.EnforceJapaneseEraYearRanges",
+                    ref s_enforceJapaneseEraYearRanges
+                );
         }
 
         private static int s_formatJapaneseFirstYearAsANumber;
         public static bool FormatJapaneseFirstYearAsANumber
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Globalization.FormatJapaneseFirstYearAsANumber", ref s_formatJapaneseFirstYearAsANumber);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Globalization.FormatJapaneseFirstYearAsANumber",
+                    ref s_formatJapaneseFirstYearAsANumber
+                );
         }
         private static int s_enforceLegacyJapaneseDateParsing;
         public static bool EnforceLegacyJapaneseDateParsing
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Globalization.EnforceLegacyJapaneseDateParsing", ref s_enforceLegacyJapaneseDateParsing);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Globalization.EnforceLegacyJapaneseDateParsing",
+                    ref s_enforceLegacyJapaneseDateParsing
+                );
         }
 
         private static int s_preserveEventListenerObjectIdentity;
         public static bool PreserveEventListenerObjectIdentity
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Diagnostics.EventSource.PreserveEventListenerObjectIdentity", ref s_preserveEventListenerObjectIdentity);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Diagnostics.EventSource.PreserveEventListenerObjectIdentity",
+                    ref s_preserveEventListenerObjectIdentity
+                );
         }
 
         private static int s_forceEmitInvoke;
         public static bool ForceEmitInvoke
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Reflection.ForceEmitInvoke", ref s_forceEmitInvoke);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Reflection.ForceEmitInvoke",
+                    ref s_forceEmitInvoke
+                );
         }
 
         private static int s_forceInterpretedInvoke;
         public static bool ForceInterpretedInvoke
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Reflection.ForceInterpretedInvoke", ref s_forceInterpretedInvoke);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Reflection.ForceInterpretedInvoke",
+                    ref s_forceInterpretedInvoke
+                );
         }
 
         private static int s_serializationGuard;
         public static bool SerializationGuard
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Runtime.Serialization.SerializationGuard", ref s_serializationGuard);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Runtime.Serialization.SerializationGuard",
+                    ref s_serializationGuard
+                );
         }
 
         private static int s_showILOffset;
+
         private static bool GetDefaultShowILOffsetSetting()
         {
-            if (s_showILOffset < 0) return false;
-            if (s_showILOffset > 0) return true;
+            if (s_showILOffset < 0)
+                return false;
+            if (s_showILOffset > 0)
+                return true;
 
             // Disabled by default.
-            bool isSwitchEnabled = AppContextConfigHelper.GetBooleanConfig("Switch.System.Diagnostics.StackTrace.ShowILOffsets", false);
+            bool isSwitchEnabled = AppContextConfigHelper.GetBooleanConfig(
+                "Switch.System.Diagnostics.StackTrace.ShowILOffsets",
+                false
+            );
             s_showILOffset = isSwitchEnabled ? 1 : -1;
 
             return isSwitchEnabled;

@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis
     /// <remarks>
     /// The lifetime of a generator is controlled by the compiler.
     /// State should not be stored directly on the generator, as there
-    /// is no guarantee that the same instance will be used on a 
+    /// is no guarantee that the same instance will be used on a
     /// subsequent generation pass.
     /// </remarks>
     public interface IIncrementalGenerator

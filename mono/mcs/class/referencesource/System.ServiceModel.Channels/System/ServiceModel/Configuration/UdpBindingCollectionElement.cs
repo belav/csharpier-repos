@@ -4,11 +4,15 @@
 
 namespace System.ServiceModel.Configuration
 {
-    public class UdpBindingCollectionElement : StandardBindingCollectionElement<UdpBinding, UdpBindingElement>
+    public class UdpBindingCollectionElement
+        : StandardBindingCollectionElement<UdpBinding, UdpBindingElement>
     {
         internal static UdpBindingCollectionElement GetBindingCollectionElement()
         {
-            return (UdpBindingCollectionElement)ConfigurationHelpers.GetBindingCollectionElement(UdpTransportConfigurationStrings.UdpBindingElementName);
+            return (UdpBindingCollectionElement)
+                ConfigurationHelpers.GetBindingCollectionElement(
+                    UdpTransportConfigurationStrings.UdpBindingElementName
+                );
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 {
     public sealed record PropertySpec : MemberSpec
     {
-        public PropertySpec(IPropertySymbol property, TypeRef typeRef) : base(property, typeRef)
+        public PropertySpec(IPropertySymbol property, TypeRef typeRef)
+            : base(property, typeRef)
         {
             IMethodSymbol? setMethod = property.SetMethod;
             bool setterIsPublic = setMethod?.DeclaredAccessibility is Accessibility.Public;

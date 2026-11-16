@@ -7,7 +7,12 @@ namespace System.CodeDom
     {
         public CodeIterationStatement() { }
 
-        public CodeIterationStatement(CodeStatement initStatement, CodeExpression testExpression, CodeStatement incrementStatement, params CodeStatement[] statements)
+        public CodeIterationStatement(
+            CodeStatement initStatement,
+            CodeExpression testExpression,
+            CodeStatement incrementStatement,
+            params CodeStatement[] statements
+        )
         {
             InitStatement = initStatement;
             TestExpression = testExpression;

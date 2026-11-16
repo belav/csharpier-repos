@@ -35,17 +35,28 @@ namespace System.Web.Mvc.Test
             Encoding contentEncoding = Encoding.UTF8;
 
             // Arrange expectations
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.SetupGet(c => c.HttpContext.Request.HttpMethod).Returns("POST").Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = "application/json").Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentEncoding = contentEncoding).Verifiable();
-            mockControllerContext.Setup(c => c.HttpContext.Response.Write(_jsonSerializedData)).Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext
+                .SetupGet(c => c.HttpContext.Request.HttpMethod)
+                .Returns("POST")
+                .Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentType = "application/json")
+                .Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentEncoding = contentEncoding)
+                .Verifiable();
+            mockControllerContext
+                .Setup(c => c.HttpContext.Response.Write(_jsonSerializedData))
+                .Verifiable();
 
             JsonResult result = new JsonResult
             {
                 Data = data,
                 ContentType = String.Empty,
-                ContentEncoding = contentEncoding
+                ContentEncoding = contentEncoding,
             };
 
             // Act
@@ -64,17 +75,28 @@ namespace System.Web.Mvc.Test
             Encoding contentEncoding = Encoding.UTF8;
 
             // Arrange expectations
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.SetupGet(c => c.HttpContext.Request.HttpMethod).Returns("POST").Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = contentType).Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentEncoding = contentEncoding).Verifiable();
-            mockControllerContext.Setup(c => c.HttpContext.Response.Write(_jsonSerializedData)).Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext
+                .SetupGet(c => c.HttpContext.Request.HttpMethod)
+                .Returns("POST")
+                .Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentType = contentType)
+                .Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentEncoding = contentEncoding)
+                .Verifiable();
+            mockControllerContext
+                .Setup(c => c.HttpContext.Response.Write(_jsonSerializedData))
+                .Verifiable();
 
             JsonResult result = new JsonResult
             {
                 Data = data,
                 ContentType = contentType,
-                ContentEncoding = contentEncoding
+                ContentEncoding = contentEncoding,
             };
 
             // Act
@@ -88,7 +110,14 @@ namespace System.Web.Mvc.Test
         public void ExecuteResultWithNullContextThrows()
         {
             Assert.ThrowsArgumentNull(
-                delegate { new JsonResult().ExecuteResult(null /* context */); }, "context");
+                delegate
+                {
+                    new JsonResult().ExecuteResult(
+                        null /* context */
+                    );
+                },
+                "context"
+            );
         }
 
         [Fact]
@@ -99,8 +128,13 @@ namespace System.Web.Mvc.Test
             Encoding contentEncoding = Encoding.UTF8;
 
             // Arrange expectations
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.SetupGet(c => c.HttpContext.Request.HttpMethod).Returns("POST").Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext
+                .SetupGet(c => c.HttpContext.Request.HttpMethod)
+                .Returns("POST")
+                .Verifiable();
 
             // Though most other tests run fine with SetupSet(c => c.HttpContext.Response.ContentType = ...), this
             // one does not. Explicitly ensure Response property is not null.
@@ -112,7 +146,7 @@ namespace System.Web.Mvc.Test
             JsonResult result = new JsonResult
             {
                 ContentType = contentType,
-                ContentEncoding = contentEncoding
+                ContentEncoding = contentEncoding,
             };
 
             // Act
@@ -131,16 +165,21 @@ namespace System.Web.Mvc.Test
             string contentType = "Some content type.";
 
             // Arrange expectations
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.SetupGet(c => c.HttpContext.Request.HttpMethod).Returns("POST").Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = contentType).Verifiable();
-            mockControllerContext.Setup(c => c.HttpContext.Response.Write(_jsonSerializedData)).Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext
+                .SetupGet(c => c.HttpContext.Request.HttpMethod)
+                .Returns("POST")
+                .Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentType = contentType)
+                .Verifiable();
+            mockControllerContext
+                .Setup(c => c.HttpContext.Response.Write(_jsonSerializedData))
+                .Verifiable();
 
-            JsonResult result = new JsonResult
-            {
-                Data = data,
-                ContentType = contentType,
-            };
+            JsonResult result = new JsonResult { Data = data, ContentType = contentType };
 
             // Act
             result.ExecuteResult(mockControllerContext.Object);
@@ -157,17 +196,24 @@ namespace System.Web.Mvc.Test
             Encoding contentEncoding = Encoding.UTF8;
 
             // Arrange expectations
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.SetupGet(c => c.HttpContext.Request.HttpMethod).Returns("POST").Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = "application/json").Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentEncoding = contentEncoding).Verifiable();
-            mockControllerContext.Setup(c => c.HttpContext.Response.Write(_jsonSerializedData)).Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext
+                .SetupGet(c => c.HttpContext.Request.HttpMethod)
+                .Returns("POST")
+                .Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentType = "application/json")
+                .Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentEncoding = contentEncoding)
+                .Verifiable();
+            mockControllerContext
+                .Setup(c => c.HttpContext.Response.Write(_jsonSerializedData))
+                .Verifiable();
 
-            JsonResult result = new JsonResult
-            {
-                Data = data,
-                ContentEncoding = contentEncoding
-            };
+            JsonResult result = new JsonResult { Data = data, ContentEncoding = contentEncoding };
 
             // Act
             result.ExecuteResult(mockControllerContext.Object);
@@ -182,7 +228,9 @@ namespace System.Web.Mvc.Test
             // Arrange
             string data = new String('1', 2100000);
 
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
             mockControllerContext.SetupGet(c => c.HttpContext.Request.HttpMethod).Returns("POST");
 
             // Though most other tests run fine with SetupSet(c => c.HttpContext.Response.ContentType = ...), this
@@ -191,15 +239,13 @@ namespace System.Web.Mvc.Test
             response.SetupSet(r => r.ContentType = "application/json");
             mockControllerContext.SetupGet(c => c.HttpContext.Response).Returns(response.Object);
 
-            JsonResult result = new JsonResult
-            {
-                Data = data
-            };
+            JsonResult result = new JsonResult { Data = data };
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => result.ExecuteResult(mockControllerContext.Object),
-                "Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.");
+                "Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property."
+            );
         }
 
         [Fact]
@@ -210,15 +256,16 @@ namespace System.Web.Mvc.Test
             string jsonData = "\"" + data + "\"";
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupGet(c => c.HttpContext.Request.HttpMethod).Returns("POST").Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = "application/json").Verifiable();
+            mockControllerContext
+                .SetupGet(c => c.HttpContext.Request.HttpMethod)
+                .Returns("POST")
+                .Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentType = "application/json")
+                .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(jsonData)).Verifiable();
 
-            JsonResult result = new JsonResult
-            {
-                Data = data,
-                MaxJsonLength = 2200000
-            };
+            JsonResult result = new JsonResult { Data = data, MaxJsonLength = 2200000 };
 
             // Act
             result.ExecuteResult(mockControllerContext.Object);
@@ -231,52 +278,66 @@ namespace System.Web.Mvc.Test
         public void RecursionLimitIsPassedToSerilizer()
         {
             // Arrange
-            Tuple<string, Tuple<string, Tuple<string, string>>> data =
-                new Tuple<string, Tuple<string, Tuple<string, string>>>("key1",
-                                                                        new Tuple<string, Tuple<string, string>>("key2",
-                                                                                                                 new Tuple<string, string>("key3", "value")
-                                                                            )
-                    );
-            string jsonData = "{\"Item1\":\"key1\",\"Item2\":{\"Item1\":\"key2\",\"Item2\":{\"Item1\":\"key3\",\"Item2\":\"value\"}}}";
+            Tuple<string, Tuple<string, Tuple<string, string>>> data = new Tuple<
+                string,
+                Tuple<string, Tuple<string, string>>
+            >(
+                "key1",
+                new Tuple<string, Tuple<string, string>>(
+                    "key2",
+                    new Tuple<string, string>("key3", "value")
+                )
+            );
+            string jsonData =
+                "{\"Item1\":\"key1\",\"Item2\":{\"Item1\":\"key2\",\"Item2\":{\"Item1\":\"key3\",\"Item2\":\"value\"}}}";
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupGet(c => c.HttpContext.Request.HttpMethod).Returns("POST").Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = "application/json").Verifiable();
+            mockControllerContext
+                .SetupGet(c => c.HttpContext.Request.HttpMethod)
+                .Returns("POST")
+                .Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentType = "application/json")
+                .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(jsonData)).Verifiable();
 
-            JsonResult result = new JsonResult
-            {
-                Data = data,
-                RecursionLimit = 2
-            };
+            JsonResult result = new JsonResult { Data = data, RecursionLimit = 2 };
 
             // Act & Assert
             Assert.Throws<ArgumentException>(
                 () => result.ExecuteResult(mockControllerContext.Object),
-                "RecursionLimit exceeded.");
+                "RecursionLimit exceeded."
+            );
         }
 
         [Fact]
         public void NullRecursionLimitDefaultIsUsed()
         {
             // Arrange
-            Tuple<string, Tuple<string, Tuple<string, string>>> data =
-                new Tuple<string, Tuple<string, Tuple<string, string>>>("key1",
-                                                                        new Tuple<string, Tuple<string, string>>("key2",
-                                                                                                                 new Tuple<string, string>("key3", "value")
-                                                                            )
-                    );
-            string jsonData = "{\"Item1\":\"key1\",\"Item2\":{\"Item1\":\"key2\",\"Item2\":{\"Item1\":\"key3\",\"Item2\":\"value\"}}}";
+            Tuple<string, Tuple<string, Tuple<string, string>>> data = new Tuple<
+                string,
+                Tuple<string, Tuple<string, string>>
+            >(
+                "key1",
+                new Tuple<string, Tuple<string, string>>(
+                    "key2",
+                    new Tuple<string, string>("key3", "value")
+                )
+            );
+            string jsonData =
+                "{\"Item1\":\"key1\",\"Item2\":{\"Item1\":\"key2\",\"Item2\":{\"Item1\":\"key3\",\"Item2\":\"value\"}}}";
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupGet(c => c.HttpContext.Request.HttpMethod).Returns("POST").Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = "application/json").Verifiable();
+            mockControllerContext
+                .SetupGet(c => c.HttpContext.Request.HttpMethod)
+                .Returns("POST")
+                .Verifiable();
+            mockControllerContext
+                .SetupSet(c => c.HttpContext.Response.ContentType = "application/json")
+                .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(jsonData)).Verifiable();
 
-            JsonResult result = new JsonResult
-            {
-                Data = data
-            };
+            JsonResult result = new JsonResult { Data = data };
 
             // Act
             result.ExecuteResult(mockControllerContext.Object);
@@ -289,15 +350,21 @@ namespace System.Web.Mvc.Test
         public void GetRequestBlocked()
         {
             // Arrange expectations
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.SetupGet(c => c.HttpContext.Request.HttpMethod).Returns("GET").Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext
+                .SetupGet(c => c.HttpContext.Request.HttpMethod)
+                .Returns("GET")
+                .Verifiable();
 
             JsonResult result = new JsonResult();
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => result.ExecuteResult(mockControllerContext.Object),
-                "This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.");
+                "This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet."
+            );
 
             mockControllerContext.Verify();
         }

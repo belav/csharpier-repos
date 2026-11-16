@@ -13,7 +13,11 @@ namespace System.Web.Razor.Text
             self.Position += characters;
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The consumer is expected to dispose this object")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The consumer is expected to dispose this object"
+        )]
         public static ITextDocument ToDocument(this ITextBuffer self)
         {
             ITextDocument ret = self as ITextDocument;

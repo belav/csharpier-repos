@@ -28,7 +28,10 @@ namespace System.Text.Json
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static TValue? Deserialize<TValue>(ReadOnlySpan<byte> utf8Json, JsonSerializerOptions? options = null)
+        public static TValue? Deserialize<TValue>(
+            ReadOnlySpan<byte> utf8Json,
+            JsonSerializerOptions? options = null
+        )
         {
             JsonTypeInfo<TValue> jsonTypeInfo = GetTypeInfo<TValue>(options);
             return ReadFromSpan(utf8Json, jsonTypeInfo);
@@ -55,7 +58,11 @@ namespace System.Text.Json
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static object? Deserialize(ReadOnlySpan<byte> utf8Json, Type returnType, JsonSerializerOptions? options = null)
+        public static object? Deserialize(
+            ReadOnlySpan<byte> utf8Json,
+            Type returnType,
+            JsonSerializerOptions? options = null
+        )
         {
             if (returnType is null)
             {
@@ -78,7 +85,10 @@ namespace System.Text.Json
         /// <typeparamref name="TValue"/> is not compatible with the JSON,
         /// or when there is remaining data in the buffer.
         /// </exception>
-        public static TValue? Deserialize<TValue>(ReadOnlySpan<byte> utf8Json, JsonTypeInfo<TValue> jsonTypeInfo)
+        public static TValue? Deserialize<TValue>(
+            ReadOnlySpan<byte> utf8Json,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (jsonTypeInfo is null)
             {
@@ -133,7 +143,11 @@ namespace System.Text.Json
         /// The <see cref="JsonSerializerContext.GetTypeInfo(Type)"/> method on the provided <paramref name="context"/>
         /// did not return a compatible <see cref="JsonTypeInfo"/> for <paramref name="returnType"/>.
         /// </exception>
-        public static object? Deserialize(ReadOnlySpan<byte> utf8Json, Type returnType, JsonSerializerContext context)
+        public static object? Deserialize(
+            ReadOnlySpan<byte> utf8Json,
+            Type returnType,
+            JsonSerializerContext context
+        )
         {
             if (returnType is null)
             {
@@ -147,7 +161,11 @@ namespace System.Text.Json
             return ReadFromSpanAsObject(utf8Json, GetTypeInfo(context, returnType));
         }
 
-        private static TValue? ReadFromSpan<TValue>(ReadOnlySpan<byte> utf8Json, JsonTypeInfo<TValue> jsonTypeInfo, int? actualByteCount = null)
+        private static TValue? ReadFromSpan<TValue>(
+            ReadOnlySpan<byte> utf8Json,
+            JsonTypeInfo<TValue> jsonTypeInfo,
+            int? actualByteCount = null
+        )
         {
             Debug.Assert(jsonTypeInfo.IsConfigured);
 
@@ -164,7 +182,11 @@ namespace System.Text.Json
             return value;
         }
 
-        private static object? ReadFromSpanAsObject(ReadOnlySpan<byte> utf8Json, JsonTypeInfo jsonTypeInfo, int? actualByteCount = null)
+        private static object? ReadFromSpanAsObject(
+            ReadOnlySpan<byte> utf8Json,
+            JsonTypeInfo jsonTypeInfo,
+            int? actualByteCount = null
+        )
         {
             Debug.Assert(jsonTypeInfo.IsConfigured);
 

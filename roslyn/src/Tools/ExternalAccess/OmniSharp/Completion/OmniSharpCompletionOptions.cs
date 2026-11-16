@@ -8,10 +8,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Completion
 {
     internal readonly record struct OmniSharpCompletionOptions(
         bool ShowItemsFromUnimportedNamespaces,
-        bool ForceExpandedCompletionIndexCreation)
+        bool ForceExpandedCompletionIndexCreation
+    )
     {
-        internal CompletionOptions ToCompletionOptions()
-            => CompletionOptions.Default with
+        internal CompletionOptions ToCompletionOptions() =>
+            CompletionOptions.Default with
             {
                 ShowItemsFromUnimportedNamespaces = ShowItemsFromUnimportedNamespaces,
                 ForceExpandedCompletionIndexCreation = ForceExpandedCompletionIndexCreation,

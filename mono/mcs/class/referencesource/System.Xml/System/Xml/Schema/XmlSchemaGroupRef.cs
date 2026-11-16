@@ -2,28 +2,30 @@
 // <copyright file="XmlSchemaGroupRef.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                 
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Schema {
-
+namespace System.Xml.Schema
+{
     using System.Xml.Serialization;
 
     /// <include file='doc\XmlSchemaGroupRef.uex' path='docs/doc[@for="XmlSchemaGroupRef"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class XmlSchemaGroupRef : XmlSchemaParticle {
-        XmlQualifiedName refName = XmlQualifiedName.Empty; 
+    public class XmlSchemaGroupRef : XmlSchemaParticle
+    {
+        XmlQualifiedName refName = XmlQualifiedName.Empty;
         XmlSchemaGroupBase particle;
         XmlSchemaGroup refined;
-        
+
         /// <include file='doc\XmlSchemaGroupRef.uex' path='docs/doc[@for="XmlSchemaGroupRef.RefName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("ref")]
-        public XmlQualifiedName RefName { 
+        public XmlQualifiedName RefName
+        {
             get { return refName; }
             set { refName = (value == null ? XmlQualifiedName.Empty : value); }
         }
@@ -33,16 +35,19 @@ namespace System.Xml.Schema {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public XmlSchemaGroupBase Particle {
+        public XmlSchemaGroupBase Particle
+        {
             get { return particle; }
         }
 
-        internal void SetParticle(XmlSchemaGroupBase value) {
-             particle = value; 
+        internal void SetParticle(XmlSchemaGroupBase value)
+        {
+            particle = value;
         }
 
         [XmlIgnore]
-        internal XmlSchemaGroup Redefined {
+        internal XmlSchemaGroup Redefined
+        {
             get { return refined; }
             set { refined = value; }
         }

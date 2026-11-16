@@ -17,11 +17,8 @@ public class CosmosConventionSetBuilder : ProviderConventionSetBuilder
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public CosmosConventionSetBuilder(
-        ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    public CosmosConventionSetBuilder(ProviderConventionSetBuilderDependencies dependencies)
+        : base(dependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -37,13 +34,27 @@ public class CosmosConventionSetBuilder : ProviderConventionSetBuilder
         conventionSet.Add(new ETagPropertyConvention());
         conventionSet.Add(new StoreKeyConvention(Dependencies));
 
-        conventionSet.Replace<ValueGenerationConvention>(new CosmosValueGenerationConvention(Dependencies));
-        conventionSet.Replace<KeyDiscoveryConvention>(new CosmosKeyDiscoveryConvention(Dependencies));
-        conventionSet.Replace<InversePropertyAttributeConvention>(new CosmosInversePropertyAttributeConvention(Dependencies));
-        conventionSet.Replace<RelationshipDiscoveryConvention>(new CosmosRelationshipDiscoveryConvention(Dependencies));
-        conventionSet.Replace<DiscriminatorConvention>(new CosmosDiscriminatorConvention(Dependencies));
-        conventionSet.Replace<ManyToManyJoinEntityTypeConvention>(new CosmosManyToManyJoinEntityTypeConvention(Dependencies));
-        conventionSet.Replace<RuntimeModelConvention>(new CosmosRuntimeModelConvention(Dependencies));
+        conventionSet.Replace<ValueGenerationConvention>(
+            new CosmosValueGenerationConvention(Dependencies)
+        );
+        conventionSet.Replace<KeyDiscoveryConvention>(
+            new CosmosKeyDiscoveryConvention(Dependencies)
+        );
+        conventionSet.Replace<InversePropertyAttributeConvention>(
+            new CosmosInversePropertyAttributeConvention(Dependencies)
+        );
+        conventionSet.Replace<RelationshipDiscoveryConvention>(
+            new CosmosRelationshipDiscoveryConvention(Dependencies)
+        );
+        conventionSet.Replace<DiscriminatorConvention>(
+            new CosmosDiscriminatorConvention(Dependencies)
+        );
+        conventionSet.Replace<ManyToManyJoinEntityTypeConvention>(
+            new CosmosManyToManyJoinEntityTypeConvention(Dependencies)
+        );
+        conventionSet.Replace<RuntimeModelConvention>(
+            new CosmosRuntimeModelConvention(Dependencies)
+        );
 
         return conventionSet;
     }
@@ -59,7 +70,10 @@ public class CosmosConventionSetBuilder : ProviderConventionSetBuilder
     {
         using var serviceScope = CreateServiceScope();
         using var context = serviceScope.ServiceProvider.GetRequiredService<DbContext>();
-        return new ModelBuilder(ConventionSet.CreateConventionSet(context), context.GetService<ModelDependencies>());
+        return new ModelBuilder(
+            ConventionSet.CreateConventionSet(context),
+            context.GetService<ModelDependencies>()
+        );
     }
 
     private static IServiceScope CreateServiceScope()
@@ -67,9 +81,8 @@ public class CosmosConventionSetBuilder : ProviderConventionSetBuilder
         var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkCosmos()
             .AddDbContext<DbContext>(
-                (p, o) =>
-                    o.UseCosmos("localhost", "_", "_")
-                        .UseInternalServiceProvider(p))
+                (p, o) => o.UseCosmos("localhost", "_", "_").UseInternalServiceProvider(p)
+            )
             .BuildServiceProvider();
 
         return serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();

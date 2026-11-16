@@ -7,10 +7,10 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Xml;
+using System.Data;
 using System.Data.Common;
 using System.Globalization;
-using System.Data;
+using System.Xml;
 
 namespace System.Data.Entity.Design.SsdlGenerator
 {
@@ -18,34 +18,49 @@ namespace System.Data.Entity.Design.SsdlGenerator
     /// Strongly typed DataTable for TableDetails
     /// </summary>
     [Serializable]
-    internal sealed class TableDetailsCollection : System.Data.DataTable, System.Collections.IEnumerable
+    internal sealed class TableDetailsCollection
+        : System.Data.DataTable,
+            System.Collections.IEnumerable
     {
         [NonSerialized]
         private System.Data.DataColumn _columnCatalog;
+
         [NonSerialized]
         private System.Data.DataColumn _columnSchema;
+
         [NonSerialized]
         private System.Data.DataColumn _columnTable;
+
         [NonSerialized]
         private System.Data.DataColumn _columnFieldOrdinal;
+
         [NonSerialized]
         private System.Data.DataColumn _columnFieldColumn;
+
         [NonSerialized]
         private System.Data.DataColumn _columnIsNullable;
+
         [NonSerialized]
         private System.Data.DataColumn _columnDataType;
+
         [NonSerialized]
         private System.Data.DataColumn _columnMaximumLength;
+
         [NonSerialized]
         private System.Data.DataColumn _columnDateTimePrecision;
+
         [NonSerialized]
         private System.Data.DataColumn _columnPrecision;
+
         [NonSerialized]
         private System.Data.DataColumn _columnScale;
+
         [NonSerialized]
         private System.Data.DataColumn _columnIsIdentity;
+
         [NonSerialized]
         private System.Data.DataColumn _columnIsServerGenerated;
+
         [NonSerialized]
         private System.Data.DataColumn _columnIsPrimaryKey;
 
@@ -66,8 +81,10 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         /// <param name="serializationInfo"></param>
         /// <param name="streamingContext"></param>
-        internal TableDetailsCollection(System.Runtime.Serialization.SerializationInfo serializationInfo,
-            System.Runtime.Serialization.StreamingContext streamingContext)
+        internal TableDetailsCollection(
+            System.Runtime.Serialization.SerializationInfo serializationInfo,
+            System.Runtime.Serialization.StreamingContext streamingContext
+        )
             : base(serializationInfo, streamingContext)
         {
             UpdateMemberFieldsAfterDeserialization();
@@ -78,10 +95,7 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public System.Data.DataColumn CatalogColumn
         {
-            get
-            {
-                return this._columnCatalog;
-            }
+            get { return this._columnCatalog; }
         }
 
         /// <summary>
@@ -89,10 +103,7 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public System.Data.DataColumn SchemaColumn
         {
-            get
-            {
-                return this._columnSchema;
-            }
+            get { return this._columnSchema; }
         }
 
         /// <summary>
@@ -100,10 +111,7 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public System.Data.DataColumn TableNameColumn
         {
-            get
-            {
-                return this._columnTable;
-            }
+            get { return this._columnTable; }
         }
 
         /// <summary>
@@ -111,10 +119,7 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public System.Data.DataColumn ColumnNameColumn
         {
-            get
-            {
-                return this._columnFieldColumn;
-            }
+            get { return this._columnFieldColumn; }
         }
 
         /// <summary>
@@ -122,10 +127,7 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public System.Data.DataColumn IsNullableColumn
         {
-            get
-            {
-                return this._columnIsNullable;
-            }
+            get { return this._columnIsNullable; }
         }
 
         /// <summary>
@@ -133,10 +135,7 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public System.Data.DataColumn DataTypeColumn
         {
-            get
-            {
-                return this._columnDataType;
-            }
+            get { return this._columnDataType; }
         }
 
         /// <summary>
@@ -144,10 +143,7 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public System.Data.DataColumn MaximumLengthColumn
         {
-            get
-            {
-                return this._columnMaximumLength;
-            }
+            get { return this._columnMaximumLength; }
         }
 
         /// <summary>
@@ -155,10 +151,7 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public System.Data.DataColumn PrecisionColumn
         {
-            get
-            {
-                return this._columnPrecision;
-            }
+            get { return this._columnPrecision; }
         }
 
         /// <summary>
@@ -166,10 +159,7 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public System.Data.DataColumn DateTimePrecisionColumn
         {
-            get
-            {
-                return this._columnDateTimePrecision;
-            }
+            get { return this._columnDateTimePrecision; }
         }
 
         /// <summary>
@@ -177,10 +167,7 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public System.Data.DataColumn ScaleColumn
         {
-            get
-            {
-                return this._columnScale;
-            }
+            get { return this._columnScale; }
         }
 
         /// <summary>
@@ -188,32 +175,23 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public System.Data.DataColumn IsIdentityColumn
         {
-            get
-            {
-                return this._columnIsIdentity;
-            }
+            get { return this._columnIsIdentity; }
         }
 
-         /// <summary>
+        /// <summary>
         /// Gets the IsIdentityColumn column
         /// </summary>
         public System.Data.DataColumn IsServerGeneratedColumn
         {
-            get
-            {
-                return this._columnIsServerGenerated;
-            }
+            get { return this._columnIsServerGenerated; }
         }
 
-       /// <summary>
+        /// <summary>
         /// Gets the IsPrimaryKey column
         /// </summary>
         public System.Data.DataColumn IsPrimaryKeyColumn
         {
-            get
-            {
-                return this._columnIsPrimaryKey;
-            }
+            get { return this._columnIsPrimaryKey; }
         }
 
         /// <summary>
@@ -251,33 +229,103 @@ namespace System.Data.Entity.Design.SsdlGenerator
 
         private void InitClass()
         {
-            this._columnCatalog = new System.Data.DataColumn(CATALOG, typeof(string), null, System.Data.MappingType.Element);
+            this._columnCatalog = new System.Data.DataColumn(
+                CATALOG,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnCatalog);
-            this._columnSchema = new System.Data.DataColumn(SCHEMA, typeof(string), null, System.Data.MappingType.Element);
+            this._columnSchema = new System.Data.DataColumn(
+                SCHEMA,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnSchema);
-            this._columnTable = new System.Data.DataColumn(TABLE, typeof(string), null, System.Data.MappingType.Element);
+            this._columnTable = new System.Data.DataColumn(
+                TABLE,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnTable);
-            this._columnFieldColumn = new System.Data.DataColumn(COLUMN, typeof(string), null, System.Data.MappingType.Element);
+            this._columnFieldColumn = new System.Data.DataColumn(
+                COLUMN,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnFieldColumn);
-            this._columnFieldOrdinal = new System.Data.DataColumn(ORDINAL, typeof(int), null, System.Data.MappingType.Element);
+            this._columnFieldOrdinal = new System.Data.DataColumn(
+                ORDINAL,
+                typeof(int),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnFieldOrdinal);
-            this._columnIsNullable = new System.Data.DataColumn(IS_NULLABLE, typeof(bool), null, System.Data.MappingType.Element);
+            this._columnIsNullable = new System.Data.DataColumn(
+                IS_NULLABLE,
+                typeof(bool),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnIsNullable);
-            this._columnDataType = new System.Data.DataColumn(DATA_TYPE, typeof(string), null, System.Data.MappingType.Element);
+            this._columnDataType = new System.Data.DataColumn(
+                DATA_TYPE,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnDataType);
-            this._columnMaximumLength = new System.Data.DataColumn(MAX_LENGTH, typeof(int), null, System.Data.MappingType.Element);
+            this._columnMaximumLength = new System.Data.DataColumn(
+                MAX_LENGTH,
+                typeof(int),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnMaximumLength);
-            this._columnPrecision = new System.Data.DataColumn(PRECISION, typeof(int), null, System.Data.MappingType.Element);
+            this._columnPrecision = new System.Data.DataColumn(
+                PRECISION,
+                typeof(int),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnPrecision);
-            this._columnDateTimePrecision = new System.Data.DataColumn(DATETIMEPRECISION, typeof(int), null, System.Data.MappingType.Element);
+            this._columnDateTimePrecision = new System.Data.DataColumn(
+                DATETIMEPRECISION,
+                typeof(int),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnDateTimePrecision);
-            this._columnScale = new System.Data.DataColumn(SCALE, typeof(int), null, System.Data.MappingType.Element);
+            this._columnScale = new System.Data.DataColumn(
+                SCALE,
+                typeof(int),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnScale);
-            this._columnIsIdentity = new System.Data.DataColumn(IS_IDENTITY, typeof(bool), null, System.Data.MappingType.Element);
+            this._columnIsIdentity = new System.Data.DataColumn(
+                IS_IDENTITY,
+                typeof(bool),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnIsIdentity);
-            this._columnIsServerGenerated = new System.Data.DataColumn(IS_SERVERGENERATED, typeof(bool), null, System.Data.MappingType.Element);
+            this._columnIsServerGenerated = new System.Data.DataColumn(
+                IS_SERVERGENERATED,
+                typeof(bool),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnIsServerGenerated);
-            this._columnIsPrimaryKey = new System.Data.DataColumn(IS_PRIMARYKEY, typeof(bool), null, System.Data.MappingType.Element);
+            this._columnIsPrimaryKey = new System.Data.DataColumn(
+                IS_PRIMARYKEY,
+                typeof(bool),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnIsPrimaryKey);
         }
 
@@ -317,6 +365,5 @@ namespace System.Data.Entity.Design.SsdlGenerator
         {
             return typeof(TableDetailsRow);
         }
-
-  }
+    }
 }

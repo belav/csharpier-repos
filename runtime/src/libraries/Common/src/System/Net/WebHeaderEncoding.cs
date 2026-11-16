@@ -20,7 +20,11 @@ namespace System.Net
                 return string.Empty;
             }
 
-            Debug.Assert(bytes != null && (uint)byteIndex <= (uint)bytes.Length && (uint)(byteIndex + byteCount) <= (uint)bytes.Length);
+            Debug.Assert(
+                bytes != null
+                    && (uint)byteIndex <= (uint)bytes.Length
+                    && (uint)(byteIndex + byteCount) <= (uint)bytes.Length
+            );
 
             return string.Create(byteCount, (bytes, byteIndex), (buffer, state) =>
             {
@@ -55,7 +59,13 @@ namespace System.Net
 
         internal static int GetByteCount(string myString) => myString.Length;
 
-        internal static unsafe void GetBytes(string myString, int charIndex, int charCount, byte[] bytes, int byteIndex)
+        internal static unsafe void GetBytes(
+            string myString,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        )
         {
             if (myString.Length == 0)
             {
@@ -72,6 +82,7 @@ namespace System.Net
                 }
             }
         }
+
         internal static byte[] GetBytes(string myString)
         {
             byte[] bytes = new byte[myString.Length];

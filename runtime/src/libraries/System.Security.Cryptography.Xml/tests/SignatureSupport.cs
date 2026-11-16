@@ -20,7 +20,11 @@ namespace System.Security.Cryptography.Xml.Tests
                     try
                     {
                         using var rsa = RSA.Create();
-                        rsa.SignData(Array.Empty<byte>(), HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+                        rsa.SignData(
+                            Array.Empty<byte>(),
+                            HashAlgorithmName.SHA1,
+                            RSASignaturePadding.Pkcs1
+                        );
                         supported = true;
                     }
                     catch (CryptographicException)

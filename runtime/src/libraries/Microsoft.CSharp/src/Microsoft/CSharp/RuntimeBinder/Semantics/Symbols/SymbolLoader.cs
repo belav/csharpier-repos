@@ -10,12 +10,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     internal static class SymbolLoader
     {
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public static AggregateSymbol GetPredefAgg(PredefinedType pt) => TypeManager.GetPredefAgg(pt);
+        public static AggregateSymbol GetPredefAgg(PredefinedType pt) =>
+            TypeManager.GetPredefAgg(pt);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public static AggregateType GetPredefindType(PredefinedType pt) => GetPredefAgg(pt).getThisType();
+        public static AggregateType GetPredefindType(PredefinedType pt) =>
+            GetPredefAgg(pt).getThisType();
 
-        public static Symbol LookupAggMember(Name name, AggregateSymbol agg, symbmask_t mask) => SymbolStore.LookupSym(name, agg, mask);
+        public static Symbol LookupAggMember(Name name, AggregateSymbol agg, symbmask_t mask) =>
+            SymbolStore.LookupSym(name, agg, mask);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private static bool IsBaseInterface(AggregateType atsDer, AggregateType pBase)
@@ -98,8 +101,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // * S and T differ only in element type. In other words, S and T have the same number of dimensions.
             // * Both SE and TE are reference types.
             // * An implicit reference conversion exists from SE to TE.
-            return pSource.Rank == pDest.Rank && pSource.IsSZArray == pDest.IsSZArray &&
-                HasImplicitReferenceConversion(pSource.ElementType, pDest.ElementType);
+            return pSource.Rank == pDest.Rank
+                && pSource.IsSZArray == pDest.IsSZArray
+                && HasImplicitReferenceConversion(pSource.ElementType, pDest.ElementType);
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -115,7 +119,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             return HasImplicitReferenceConversion(pSource, pDest);
         }
 
-        private static bool AreTypesEqualForConversion(CType pType1, CType pType2) => pType1.Equals(pType2);
+        private static bool AreTypesEqualForConversion(CType pType1, CType pType2) =>
+            pType1.Equals(pType2);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private static bool HasArrayConversionToInterface(ArrayType pSource, CType pDest)
@@ -145,18 +150,23 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             AggregateType atsDest = (AggregateType)pDest;
             AggregateSymbol aggDest = atsDest.OwningAggregate;
-            if (!aggDest.isPredefAgg(PredefinedType.PT_G_ILIST) &&
-                !aggDest.isPredefAgg(PredefinedType.PT_G_ICOLLECTION) &&
-                !aggDest.isPredefAgg(PredefinedType.PT_G_IENUMERABLE) &&
-                !aggDest.isPredefAgg(PredefinedType.PT_G_IREADONLYCOLLECTION) &&
-                !aggDest.isPredefAgg(PredefinedType.PT_G_IREADONLYLIST))
+            if (
+                !aggDest.isPredefAgg(PredefinedType.PT_G_ILIST)
+                && !aggDest.isPredefAgg(PredefinedType.PT_G_ICOLLECTION)
+                && !aggDest.isPredefAgg(PredefinedType.PT_G_IENUMERABLE)
+                && !aggDest.isPredefAgg(PredefinedType.PT_G_IREADONLYCOLLECTION)
+                && !aggDest.isPredefAgg(PredefinedType.PT_G_IREADONLYLIST)
+            )
             {
                 return false;
             }
 
             Debug.Assert(atsDest.TypeArgsAll.Count == 1);
 
-            return HasIdentityOrImplicitReferenceConversion(pSource.ElementType, atsDest.TypeArgsAll[0]);
+            return HasIdentityOrImplicitReferenceConversion(
+                pSource.ElementType,
+                atsDest.TypeArgsAll[0]
+            );
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -215,7 +225,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         case AggKindEnum.Interface:
                             if (aggDest.IsInterfaceType)
                             {
-                                return HasAnyBaseInterfaceConversion(aggSource, aggDest) || HasInterfaceConversion(aggSource, aggDest);
+                                return HasAnyBaseInterfaceConversion(aggSource, aggDest)
+                                    || HasInterfaceConversion(aggSource, aggDest);
                             }
 
                             break;
@@ -230,9 +241,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             // * From any delegate type to System.Delegate
                             // * From any delegate type to System.MulticastDelegate
                             // * From any delegate type to any interface implemented by System.MulticastDelegate
-                            if (aggDest.IsPredefType(PredefinedType.PT_MULTIDEL)
-                                || aggDest.IsPredefType(PredefinedType.PT_DELEGATE) || IsBaseInterface(
-                                    GetPredefindType(PredefinedType.PT_MULTIDEL), aggDest))
+                            if (
+                                aggDest.IsPredefType(PredefinedType.PT_MULTIDEL)
+                                || aggDest.IsPredefType(PredefinedType.PT_DELEGATE)
+                                || IsBaseInterface(
+                                    GetPredefindType(PredefinedType.PT_MULTIDEL),
+                                    aggDest
+                                )
+                            )
                             {
                                 return true;
                             }
@@ -240,7 +256,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             // VARIANCE EXTENSION:
                             // * From any delegate type S to a delegate type T provided S is not T and
                             //   S is a delegate convertible to T
-                            return pDest.IsDelegateType && HasDelegateConversion(aggSource, aggDest);
+                            return pDest.IsDelegateType
+                                && HasDelegateConversion(aggSource, aggDest);
                     }
                 }
             }
@@ -259,8 +276,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (pDest is AggregateType aggDest)
                 {
                     // * From any array type to System.Array or any interface implemented by System.Array.
-                    if (aggDest.IsPredefType(PredefinedType.PT_ARRAY)
-                        || IsBaseInterface(GetPredefindType(PredefinedType.PT_ARRAY), aggDest))
+                    if (
+                        aggDest.IsPredefType(PredefinedType.PT_ARRAY)
+                        || IsBaseInterface(GetPredefindType(PredefinedType.PT_ARRAY), aggDest)
+                    )
                     {
                         return true;
                     }
@@ -425,7 +444,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 return false;
             }
 
-
             // A boxing conversion exists from any non-nullable value type to object,
             // to System.ValueType, and to any interface type implemented by the
             // non-nullable value type.  Furthermore, an enum type can be converted
@@ -478,7 +496,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 return true;
             }
 
-            return HasIdentityOrImplicitReferenceConversion(pSource, pDest) || HasImplicitBoxingConversion(pSource, pDest);
+            return HasIdentityOrImplicitReferenceConversion(pSource, pDest)
+                || HasImplicitBoxingConversion(pSource, pDest);
         }
 
         public static bool IsBaseAggregate(AggregateSymbol derived, AggregateSymbol @base)
@@ -486,7 +505,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Debug.Assert(!derived.IsEnum() && !@base.IsEnum());
 
             if (derived == @base)
-                return true;      // identity.
+                return true; // identity.
 
             // refactoring error tolerance:  structs and delegates can be base classes in error scenarios so
             // we cannot filter on whether or not the base is marked as sealed.

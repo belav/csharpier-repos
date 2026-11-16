@@ -12,21 +12,25 @@ using System.Diagnostics;
 
 namespace System.Web.UI.Design.WebControls
 {
-    internal class EntityDataSourceContainerNameItem : IComparable<EntityDataSourceContainerNameItem>
+    internal class EntityDataSourceContainerNameItem
+        : IComparable<EntityDataSourceContainerNameItem>
     {
         // Only one of the following should be set. This is enforced through the constructors and the fact that these fields are readonly.
         private readonly EntityContainer _entityContainer; // used when we have a real EntityContainer backing this item
         private readonly string _unknownContainerName; // used when we have an unknown DefaultContainerName that we still want to include in the list
-        
+
         internal EntityDataSourceContainerNameItem(EntityContainer entityContainer)
         {
             Debug.Assert(entityContainer != null, "null entityContainer");
-            _entityContainer = entityContainer;            
+            _entityContainer = entityContainer;
         }
 
         internal EntityDataSourceContainerNameItem(string unknownContainerName)
         {
-            Debug.Assert(!String.IsNullOrEmpty(unknownContainerName), "null or empty unknownContainerName");
+            Debug.Assert(
+                !String.IsNullOrEmpty(unknownContainerName),
+                "null or empty unknownContainerName"
+            );
             _unknownContainerName = unknownContainerName;
         }
 
@@ -58,10 +62,18 @@ namespace System.Web.UI.Design.WebControls
         {
             return this.EntityContainerName;
         }
-        
-        int IComparable<EntityDataSourceContainerNameItem>.CompareTo(EntityDataSourceContainerNameItem other)
+
+        int IComparable<EntityDataSourceContainerNameItem>.CompareTo(
+            EntityDataSourceContainerNameItem other
+        )
         {
-            return (String.Compare(this.EntityContainerName, other.EntityContainerName, StringComparison.OrdinalIgnoreCase));
+            return (
+                String.Compare(
+                    this.EntityContainerName,
+                    other.EntityContainerName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
         }
     }
 }

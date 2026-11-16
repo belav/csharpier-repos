@@ -24,7 +24,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
 {
-    internal class InlineDiagnosticsAdornmentManager : AbstractAdornmentManager<InlineDiagnosticsTag>
+    internal class InlineDiagnosticsAdornmentManager
+        : AbstractAdornmentManager<InlineDiagnosticsTag>
     {
         private readonly IClassificationTypeRegistryService _classificationRegistryService;
         private readonly IClassificationFormatMap _formatMap;
@@ -38,8 +39,15 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             string adornmentLayerName,
             IClassificationFormatMapService classificationFormatMapService,
             IClassificationTypeRegistryService classificationTypeRegistryService,
-            IGlobalOptionService globalOptions)
-            : base(threadingContext, textView, tagAggregatorFactoryService, asyncListener, adornmentLayerName)
+            IGlobalOptionService globalOptions
+        )
+            : base(
+                threadingContext,
+                textView,
+                tagAggregatorFactoryService,
+                asyncListener,
+                adornmentLayerName
+            )
         {
             _classificationRegistryService = classificationTypeRegistryService;
             _formatMap = classificationFormatMapService.GetClassificationFormatMap(textView);
@@ -69,10 +77,15 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                 return;
             }
 
-            var option = _globalOptions.GetOption(InlineDiagnosticsOptionsStorage.Location, document.Project.Language);
+            var option = _globalOptions.GetOption(
+                InlineDiagnosticsOptionsStorage.Location,
+                document.Project.Language
+            );
             if (option == InlineDiagnosticsLocations.PlacedAtEndOfEditor)
             {
-                var normalizedCollectionSpan = new NormalizedSnapshotSpanCollection(TextView.TextViewLines.FormattedSpan);
+                var normalizedCollectionSpan = new NormalizedSnapshotSpanCollection(
+                    TextView.TextViewLines.FormattedSpan
+                );
                 UpdateSpans_CallOnlyOnUIThread(normalizedCollectionSpan, removeOldTags: true);
             }
         }
@@ -87,7 +100,9 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                 foreach (var element in AdornmentLayer.Elements)
                 {
                     var tag = (InlineDiagnosticsTag)element.Tag;
-                    var classificationType = _classificationRegistryService.GetClassificationType(InlineDiagnosticsTag.GetClassificationId(tag.ErrorType));
+                    var classificationType = _classificationRegistryService.GetClassificationType(
+                        InlineDiagnosticsTag.GetClassificationId(tag.ErrorType)
+                    );
                     var format = GetFormat(classificationType);
                     InlineDiagnosticsTag.UpdateColor(format, element.Adornment);
                 }
@@ -103,7 +118,9 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
         /// Iterates through the mapping of line number to span and draws the diagnostic in the appropriate position on the screen,
         /// as well as adding the tag to the adornment layer.
         /// </summary>
-        protected override void AddAdornmentsToAdornmentLayer_CallOnlyOnUIThread(NormalizedSnapshotSpanCollection changedSpanCollection)
+        protected override void AddAdornmentsToAdornmentLayer_CallOnlyOnUIThread(
+            NormalizedSnapshotSpanCollection changedSpanCollection
+        )
         {
             // this method should only run on UI thread as we do WPF here.
             Contract.ThrowIfFalse(TextView.VisualElement.Dispatcher.CheckAccess());
@@ -113,7 +130,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             }
 
             var viewLines = TextView.TextViewLines;
-            using var _ = PooledDictionary<IWpfTextViewLine, IMappingTagSpan<InlineDiagnosticsTag>>.GetInstance(out var map);
+            using var _ = PooledDictionary<
+                IWpfTextViewLine,
+                IMappingTagSpan<InlineDiagnosticsTag>
+            >.GetInstance(out var map);
 
             // First loop iterates through the snap collection and determines if an inline diagnostic can be drawn.
             // Creates a mapping of the view line to the IMappingTagSpan with getting the first error that appears
@@ -142,7 +162,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                     {
                         map.Add(viewLine, tagMappingSpan);
                     }
-                    else if (value.Tag.ErrorType is not PredefinedErrorTypeNames.SyntaxError && tagMappingSpan.Tag.ErrorType is PredefinedErrorTypeNames.SyntaxError)
+                    else if (
+                        value.Tag.ErrorType is not PredefinedErrorTypeNames.SyntaxError
+                        && tagMappingSpan.Tag.ErrorType is PredefinedErrorTypeNames.SyntaxError
+                    )
                     {
                         // Draw the first instance of an error, if what is stored in the map at a specific line is
                         // not an error, then replace it. Otherwise, just get the first warning on the line.
@@ -156,10 +179,16 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             foreach (var (lineView, tagMappingSpan) in map)
             {
                 var tag = tagMappingSpan.Tag;
-                var classificationType = _classificationRegistryService.GetClassificationType(InlineDiagnosticsTag.GetClassificationId(tag.ErrorType));
+                var classificationType = _classificationRegistryService.GetClassificationType(
+                    InlineDiagnosticsTag.GetClassificationId(tag.ErrorType)
+                );
 
                 // Pass in null! because the geometry is unused for drawing anything for Inline Diagnostics
-                var graphicsResult = tag.GetGraphics(TextView, unused: null!, GetFormat(classificationType));
+                var graphicsResult = tag.GetGraphics(
+                    TextView,
+                    unused: null!,
+                    GetFormat(classificationType)
+                );
 
                 var visualElement = graphicsResult.VisualElement;
 
@@ -171,11 +200,14 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                 }
 
                 // This is what places the diagnostic UI at the end of the line of code or at the end of the TextView window.
-                Canvas.SetLeft(visualElement,
+                Canvas.SetLeft(
+                    visualElement,
                     tag.Location == InlineDiagnosticsLocations.PlacedAtEndOfCode
-                        ? Math.Max(lineView.Right, lineView.LineTransform.Right)
-                        : tag.Location == InlineDiagnosticsLocations.PlacedAtEndOfEditor ? TextView.ViewportRight - visualElement.DesiredSize.Width
-                        : throw ExceptionUtilities.UnexpectedValue(tag.Location));
+                            ? Math.Max(lineView.Right, lineView.LineTransform.Right)
+                        : tag.Location == InlineDiagnosticsLocations.PlacedAtEndOfEditor
+                            ? TextView.ViewportRight - visualElement.DesiredSize.Width
+                        : throw ExceptionUtilities.UnexpectedValue(tag.Location)
+                );
 
                 // This is what places the diagnostic UI at the correct line in the window.
                 Canvas.SetTop(visualElement, lineView.Bottom - visualElement.DesiredSize.Height);
@@ -186,13 +218,22 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                     visualSpan: lineView.Extent,
                     tag: tag,
                     adornment: visualElement,
-                    removedCallback: delegate { graphicsResult.Dispose(); });
+                    removedCallback: delegate
+                    {
+                        graphicsResult.Dispose();
+                    }
+                );
             }
         }
 
-        protected override void RemoveAdornmentFromAdornmentLayer_CallOnlyOnUIThread(SnapshotSpan span)
+        protected override void RemoveAdornmentFromAdornmentLayer_CallOnlyOnUIThread(
+            SnapshotSpan span
+        )
         {
-            var lineSpan = new SnapshotSpan(span.Start.GetContainingLine().Start, span.End.GetContainingLine().End);
+            var lineSpan = new SnapshotSpan(
+                span.Start.GetContainingLine().Start,
+                span.End.GetContainingLine().End
+            );
             // No longer call RemoveAdornmentsByVisualSpan since it has its own intersection logic that interferes
             // with multiple blank lines.
             AdornmentLayer.RemoveMatchingAdornments(e =>

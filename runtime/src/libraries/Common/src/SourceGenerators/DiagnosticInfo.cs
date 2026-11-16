@@ -18,7 +18,11 @@ internal readonly struct DiagnosticInfo : IEquatable<DiagnosticInfo>
     public object?[] MessageArgs { get; private init; }
     public Location? Location { get; private init; }
 
-    public static DiagnosticInfo Create(DiagnosticDescriptor descriptor, Location? location, object?[]? messageArgs)
+    public static DiagnosticInfo Create(
+        DiagnosticDescriptor descriptor,
+        Location? location,
+        object?[]? messageArgs
+    )
     {
         Location? trimmedLocation = location is null ? null : GetTrimmedLocation(location);
 
@@ -26,24 +30,27 @@ internal readonly struct DiagnosticInfo : IEquatable<DiagnosticInfo>
         {
             Descriptor = descriptor,
             Location = trimmedLocation,
-            MessageArgs = messageArgs ?? Array.Empty<object?>()
+            MessageArgs = messageArgs ?? Array.Empty<object?>(),
         };
 
         // Creates a copy of the Location instance that does not capture a reference to Compilation.
-        static Location GetTrimmedLocation(Location location)
-            => Location.Create(location.SourceTree?.FilePath ?? "", location.SourceSpan, location.GetLineSpan().Span);
+        static Location GetTrimmedLocation(Location location) =>
+            Location.Create(
+                location.SourceTree?.FilePath ?? "",
+                location.SourceSpan,
+                location.GetLineSpan().Span
+            );
     }
 
-    public Diagnostic CreateDiagnostic()
-        => Diagnostic.Create(Descriptor, Location, MessageArgs);
+    public Diagnostic CreateDiagnostic() => Diagnostic.Create(Descriptor, Location, MessageArgs);
 
     public override readonly bool Equals(object? obj) => obj is DiagnosticInfo info && Equals(info);
 
     public readonly bool Equals(DiagnosticInfo other)
     {
-        return Descriptor.Equals(other.Descriptor) &&
-            MessageArgs.SequenceEqual(other.MessageArgs) &&
-            Location == other.Location;
+        return Descriptor.Equals(other.Descriptor)
+            && MessageArgs.SequenceEqual(other.MessageArgs)
+            && Location == other.Location;
     }
 
     public override readonly int GetHashCode()

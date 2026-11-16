@@ -144,9 +144,8 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
         });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/challenge");
-        Assert.Contains(
-            transaction.SetCookie,
-            cookie => cookie.StartsWith(".AspNetCore.Correlation.", StringComparison.Ordinal)
+        Assert.Contains(transaction.SetCookie, cookie =>
+            cookie.StartsWith(".AspNetCore.Correlation.", StringComparison.Ordinal)
         );
     }
 
@@ -417,8 +416,8 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
             o.ClientSecret = "Test Secret";
         });
         using var server = host.GetTestServer();
-        var error = await Assert.ThrowsAnyAsync<Exception>(
-            () => server.SendAsync("https://example.com/signin-google?code=TestCode")
+        var error = await Assert.ThrowsAnyAsync<Exception>(() =>
+            server.SendAsync("https://example.com/signin-google?code=TestCode")
         );
         Assert.Equal("The oauth state was missing or invalid.", error.GetBaseException().Message);
     }
@@ -1006,8 +1005,8 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
 
         //Post a message to the Google middleware
         using var server = host.GetTestServer();
-        var error = await Assert.ThrowsAnyAsync<Exception>(
-            () => server.SendAsync("https://example.com/signin-google?code=TestCode")
+        var error = await Assert.ThrowsAnyAsync<Exception>(() =>
+            server.SendAsync("https://example.com/signin-google?code=TestCode")
         );
         Assert.Equal("The oauth state was missing or invalid.", error.GetBaseException().Message);
     }
@@ -1474,20 +1473,20 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                                 }
                                 else if (req.Path == new PathString("/signIn"))
                                 {
-                                    await Assert.ThrowsAsync<InvalidOperationException>(
-                                        () => context.SignInAsync("Google", new ClaimsPrincipal())
+                                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                        context.SignInAsync("Google", new ClaimsPrincipal())
                                     );
                                 }
                                 else if (req.Path == new PathString("/signOut"))
                                 {
-                                    await Assert.ThrowsAsync<InvalidOperationException>(
-                                        () => context.SignOutAsync("Google")
+                                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                        context.SignOutAsync("Google")
                                     );
                                 }
                                 else if (req.Path == new PathString("/forbid"))
                                 {
-                                    await Assert.ThrowsAsync<InvalidOperationException>(
-                                        () => context.ForbidAsync("Google")
+                                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                        context.ForbidAsync("Google")
                                     );
                                 }
                                 else if (testpath != null)
@@ -1506,9 +1505,8 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                         services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
                         services
                             .AddAuthentication(TestExtensions.CookieAuthenticationScheme)
-                            .AddCookie(
-                                TestExtensions.CookieAuthenticationScheme,
-                                o => o.ForwardChallenge = GoogleDefaults.AuthenticationScheme
+                            .AddCookie(TestExtensions.CookieAuthenticationScheme, o =>
+                                o.ForwardChallenge = GoogleDefaults.AuthenticationScheme
                             )
                             .AddGoogle(configureOptions)
                             .AddFacebook(o =>

@@ -12,13 +12,20 @@ namespace System.ComponentModel.DataAnnotations
     ///     <see cref="ResourceType" />
     /// </summary>
     [AttributeUsage(
-        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Method | AttributeTargets.Class,
-        AllowMultiple = false)]
+        AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Parameter
+            | AttributeTargets.Method
+            | AttributeTargets.Class,
+        AllowMultiple = false
+    )]
     public sealed class DisplayAttribute : Attribute
     {
         #region Member Fields
 
-        private readonly LocalizableString _description = new LocalizableString(nameof(Description));
+        private readonly LocalizableString _description = new LocalizableString(
+            nameof(Description)
+        );
         private readonly LocalizableString _groupName = new LocalizableString(nameof(GroupName));
         private readonly LocalizableString _name = new LocalizableString(nameof(Name));
         private readonly LocalizableString _prompt = new LocalizableString(nameof(Prompt));
@@ -207,9 +214,13 @@ namespace System.ComponentModel.DataAnnotations
             {
                 if (!_autoGenerateField.HasValue)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.DisplayAttribute_PropertyNotSet,
-                                                        nameof(AutoGenerateField),
-                                                        nameof(GetAutoGenerateField)));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.DisplayAttribute_PropertyNotSet,
+                            nameof(AutoGenerateField),
+                            nameof(GetAutoGenerateField)
+                        )
+                    );
                 }
 
                 return _autoGenerateField.GetValueOrDefault();
@@ -236,9 +247,13 @@ namespace System.ComponentModel.DataAnnotations
             {
                 if (!_autoGenerateFilter.HasValue)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.DisplayAttribute_PropertyNotSet,
-                                                        nameof(AutoGenerateFilter),
-                                                        nameof(GetAutoGenerateFilter)));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.DisplayAttribute_PropertyNotSet,
+                            nameof(AutoGenerateFilter),
+                            nameof(GetAutoGenerateFilter)
+                        )
+                    );
                 }
 
                 return _autoGenerateFilter.GetValueOrDefault();
@@ -264,9 +279,13 @@ namespace System.ComponentModel.DataAnnotations
             {
                 if (!_order.HasValue)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.DisplayAttribute_PropertyNotSet,
-                                                        nameof(Order),
-                                                        nameof(GetOrder)));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.DisplayAttribute_PropertyNotSet,
+                            nameof(Order),
+                            nameof(GetOrder)
+                        )
+                    );
                 }
 
                 return _order.GetValueOrDefault();

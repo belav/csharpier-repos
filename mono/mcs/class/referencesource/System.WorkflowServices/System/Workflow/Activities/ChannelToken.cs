@@ -22,35 +22,49 @@ namespace System.Workflow.Activities
 
     [DesignerSerializer(typeof(DependencyObjectCodeDomSerializer), typeof(CodeDomSerializer))]
     [TypeConverter(typeof(ChannelTokenTypeConverter))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ChannelToken : DependencyObject, IPropertyValueProvider
     {
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         internal static readonly DependencyProperty EndpointNameProperty =
-            DependencyProperty.Register("EndpointName",
-            typeof(string),
-            typeof(ChannelToken),
-            new PropertyMetadata(null));
+            DependencyProperty.Register(
+                "EndpointName",
+                typeof(string),
+                typeof(ChannelToken),
+                new PropertyMetadata(null)
+            );
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
-        internal static readonly DependencyProperty NameProperty =
-            DependencyProperty.Register("Name",
+        internal static readonly DependencyProperty NameProperty = DependencyProperty.Register(
+            "Name",
             typeof(string),
             typeof(ChannelToken),
-            new PropertyMetadata(null, DependencyPropertyOptions.Metadata,
-            new Attribute[] { new BrowsableAttribute(false) }));
+            new PropertyMetadata(
+                null,
+                DependencyPropertyOptions.Metadata,
+                new Attribute[] { new BrowsableAttribute(false) }
+            )
+        );
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         internal static readonly DependencyProperty OwnerActivityNameProperty =
-            DependencyProperty.Register("OwnerActivityName",
-            typeof(string),
-            typeof(ChannelToken),
-            new PropertyMetadata(null, DependencyPropertyOptions.Metadata,
-            new Attribute[] { new TypeConverterAttribute(typeof(PropertyValueProviderTypeConverter)) }));
+            DependencyProperty.Register(
+                "OwnerActivityName",
+                typeof(string),
+                typeof(ChannelToken),
+                new PropertyMetadata(
+                    null,
+                    DependencyPropertyOptions.Metadata,
+                    new Attribute[]
+                    {
+                        new TypeConverterAttribute(typeof(PropertyValueProviderTypeConverter)),
+                    }
+                )
+            );
 
-        public ChannelToken()
-        {
-        }
+        public ChannelToken() { }
 
         internal ChannelToken(string name)
         {
@@ -61,15 +75,8 @@ namespace System.Workflow.Activities
         [SR2Description(SR2DescriptionAttribute.ChannelToken_EndpointName_Description)]
         public string EndpointName
         {
-            get
-            {
-                return (string) GetValue(EndpointNameProperty);
-            }
-
-            set
-            {
-                SetValue(EndpointNameProperty, value);
-            }
+            get { return (string)GetValue(EndpointNameProperty); }
+            set { SetValue(EndpointNameProperty, value); }
         }
 
         [Browsable(false)]
@@ -77,14 +84,8 @@ namespace System.Workflow.Activities
         [SR2Description(SR2DescriptionAttribute.ChannelToken_Name_Description)]
         public string Name
         {
-            get
-            {
-                return (string) GetValue(NameProperty);
-            }
-            set
-            {
-                SetValue(NameProperty, value);
-            }
+            get { return (string)GetValue(NameProperty); }
+            set { SetValue(NameProperty, value); }
         }
 
         [DefaultValue(null)]
@@ -92,25 +93,29 @@ namespace System.Workflow.Activities
         [SR2Description(SR2DescriptionAttribute.ChannelToken_OwnerActivityName_Description)]
         public string OwnerActivityName
         {
-            get
-            {
-                return (string) GetValue(OwnerActivityNameProperty);
-            }
-
-            set
-            {
-                SetValue(OwnerActivityNameProperty, value);
-            }
+            get { return (string)GetValue(OwnerActivityNameProperty); }
+            set { SetValue(OwnerActivityNameProperty, value); }
         }
 
         ICollection IPropertyValueProvider.GetPropertyValues(ITypeDescriptorContext context)
         {
             StringCollection names = new StringCollection();
 
-            if (string.Equals(context.PropertyDescriptor.Name, "OwnerActivityName", StringComparison.Ordinal))
+            if (
+                string.Equals(
+                    context.PropertyDescriptor.Name,
+                    "OwnerActivityName",
+                    StringComparison.Ordinal
+                )
+            )
             {
-                ISelectionService selectionService = context.GetService(typeof(ISelectionService)) as ISelectionService;
-                if (selectionService != null && selectionService.SelectionCount == 1 && selectionService.PrimarySelection is Activity)
+                ISelectionService selectionService =
+                    context.GetService(typeof(ISelectionService)) as ISelectionService;
+                if (
+                    selectionService != null
+                    && selectionService.SelectionCount == 1
+                    && selectionService.PrimarySelection is Activity
+                )
                 {
                     // add empty string as an option
                     //
@@ -131,9 +136,11 @@ namespace System.Workflow.Activities
             return names;
         }
 
-        internal static LogicalChannel GetLogicalChannel(Activity activity,
+        internal static LogicalChannel GetLogicalChannel(
+            Activity activity,
             ChannelToken endpoint,
-            Type contractType)
+            Type contractType
+        )
         {
             if (activity == null)
             {
@@ -148,13 +155,20 @@ namespace System.Workflow.Activities
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contractType");
             }
 
-            return GetLogicalChannel(activity, endpoint.Name, endpoint.OwnerActivityName, contractType);
+            return GetLogicalChannel(
+                activity,
+                endpoint.Name,
+                endpoint.OwnerActivityName,
+                contractType
+            );
         }
 
-        internal static LogicalChannel GetLogicalChannel(Activity activity,
+        internal static LogicalChannel GetLogicalChannel(
+            Activity activity,
             string name,
             string ownerActivityName,
-            Type contractType)
+            Type contractType
+        )
         {
             if (activity == null)
             {
@@ -162,8 +176,10 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(name))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("name",
-                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "name",
+                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                );
             }
             if (contractType == null)
             {
@@ -176,7 +192,10 @@ namespace System.Workflow.Activities
             if (contextActivity == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_ContextOwnerActivityMissing)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             if (string.IsNullOrEmpty(ownerActivityName))
@@ -209,17 +228,24 @@ namespace System.Workflow.Activities
             if (owner == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_ContextOwnerActivityMissing)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             LogicalChannel logicalChannel = null;
 
             LogicalChannelCollection collection =
-                owner.GetValue(LogicalChannelCollection.LogicalChannelCollectionProperty) as LogicalChannelCollection;
+                owner.GetValue(LogicalChannelCollection.LogicalChannelCollectionProperty)
+                as LogicalChannelCollection;
             if (collection == null)
             {
                 collection = new LogicalChannelCollection();
-                owner.SetValue(LogicalChannelCollection.LogicalChannelCollectionProperty, collection);
+                owner.SetValue(
+                    LogicalChannelCollection.LogicalChannelCollectionProperty,
+                    collection
+                );
 
                 logicalChannel = new LogicalChannel(name, contractType);
                 collection.Add(logicalChannel);
@@ -242,9 +268,11 @@ namespace System.Workflow.Activities
             return logicalChannel;
         }
 
-        internal static LogicalChannel Register(Activity activity,
+        internal static LogicalChannel Register(
+            Activity activity,
             ChannelToken endpoint,
-            Type contractType)
+            Type contractType
+        )
         {
             if (activity == null)
             {
@@ -263,7 +291,10 @@ namespace System.Workflow.Activities
             if (logicalChannel == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_FailedToRegisterChannel, endpoint.Name)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_FailedToRegisterChannel, endpoint.Name)
+                    )
+                );
             }
 
             return logicalChannel;

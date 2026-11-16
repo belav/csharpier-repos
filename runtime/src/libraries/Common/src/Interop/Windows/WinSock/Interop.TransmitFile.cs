@@ -19,7 +19,8 @@ internal static partial class Interop
             int numberOfBytesPerSend,
             NativeOverlapped* overlapped,
             TransmitFileBuffers* buffers,
-            TransmitFileOptions flags);
+            TransmitFileOptions flags
+        );
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct TransmitFileBuffers

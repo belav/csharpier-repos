@@ -17,7 +17,11 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
 {
     public class DkmClrObjectFavoritesInfo
     {
-        public DkmClrObjectFavoritesInfo(IList<string> favorites, string displayString = null, string simpleDisplayString = null)
+        public DkmClrObjectFavoritesInfo(
+            IList<string> favorites,
+            string displayString = null,
+            string simpleDisplayString = null
+        )
         {
             Favorites = new ReadOnlyCollection<string>(favorites);
             DisplayString = displayString;

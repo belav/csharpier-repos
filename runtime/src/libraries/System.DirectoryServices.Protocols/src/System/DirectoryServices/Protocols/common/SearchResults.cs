@@ -44,14 +44,16 @@ namespace System.DirectoryServices.Protocols
 
         public int IndexOf(SearchResultReference value) => InnerList.IndexOf(value);
 
-        public void CopyTo(SearchResultReference[] values, int index) => InnerList.CopyTo(values, index);
+        public void CopyTo(SearchResultReference[] values, int index) =>
+            InnerList.CopyTo(values, index);
 
         internal void Clear() => InnerList.Clear();
     }
 
     public class SearchResultEntry
     {
-        internal SearchResultEntry(string dn) : this(dn, new SearchResultAttributeCollection()) { }
+        internal SearchResultEntry(string dn)
+            : this(dn, new SearchResultAttributeCollection()) { }
 
         internal SearchResultEntry(string dn, SearchResultAttributeCollection attrs)
         {
@@ -78,7 +80,8 @@ namespace System.DirectoryServices.Protocols
 
         public int IndexOf(SearchResultEntry value) => InnerList.IndexOf(value);
 
-        public void CopyTo(SearchResultEntry[] values, int index) => InnerList.CopyTo(values, index);
+        public void CopyTo(SearchResultEntry[] values, int index) =>
+            InnerList.CopyTo(values, index);
 
         internal void Clear() => InnerList.Clear();
     }

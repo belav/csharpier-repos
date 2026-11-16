@@ -10,7 +10,8 @@ namespace System.IdentityModel
     // that is logically a list, but contains just one item in all but
     // the rarest of scenarios.  When this class must be passed around
     // in internal APIs, use it as a ref parameter.
-    struct MostlySingletonList<T> where T : class
+    struct MostlySingletonList<T>
+        where T : class
     {
         int count;
         T singleton;
@@ -67,16 +68,19 @@ namespace System.IdentityModel
 
         void EnsureValidSingletonIndex(int index)
         {
-            if (this.count != 1 )
+            if (this.count != 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("count", SR.GetString(SR.ValueMustBeOne)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("count", SR.GetString(SR.ValueMustBeOne))
+                );
             }
 
             if (index != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index", SR.GetString(SR.ValueMustBeZero)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("index", SR.GetString(SR.ValueMustBeZero))
+                );
             }
-
         }
 
         bool MatchesSingleton(T item)

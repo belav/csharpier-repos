@@ -16,11 +16,23 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void AddRange(EnumerableType enumerableType, int listLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void AddRange(
+            EnumerableType enumerableType,
+            int listLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             List<T> list = GenericListFactory(listLength);
             List<T> listBeforeAdd = list.ToList();
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, list, enumerableLength, numberOfMatchingElements, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                list,
+                enumerableLength,
+                numberOfMatchingElements,
+                numberOfDuplicateElements
+            );
             list.AddRange(enumerable);
 
             // Check that the first section of the List is unchanged
@@ -38,11 +50,24 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ListTestData))]
-        public void AddRange_Span(EnumerableType enumerableType, int listLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void AddRange_Span(
+            EnumerableType enumerableType,
+            int listLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             List<T> list = GenericListFactory(listLength);
             List<T> listBeforeAdd = list.ToList();
-            Span<T> span = CreateEnumerable(enumerableType, list, enumerableLength, numberOfMatchingElements, numberOfDuplicateElements).ToArray();
+            Span<T> span = CreateEnumerable(
+                    enumerableType,
+                    list,
+                    enumerableLength,
+                    numberOfMatchingElements,
+                    numberOfDuplicateElements
+                )
+                .ToArray();
             list.AddRange(span);
 
             // Check that the first section of the List is unchanged
@@ -55,14 +80,19 @@ namespace System.Collections.Tests
             for (int i = 0; i < enumerableLength; i++)
             {
                 Assert.Equal(span[i], list[i + listLength]);
-            };
+            }
+            ;
         }
 
         [Fact]
         public void AddRange_NullList_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("list", () => CollectionExtensions.AddRange<int>(null, default));
-            AssertExtensions.Throws<ArgumentNullException>("list", () => CollectionExtensions.AddRange<int>(null, new int[1]));
+            AssertExtensions.Throws<ArgumentNullException>("list", () =>
+                CollectionExtensions.AddRange<int>(null, default)
+            );
+            AssertExtensions.Throws<ArgumentNullException>("list", () =>
+                CollectionExtensions.AddRange<int>(null, new int[1])
+            );
         }
 
         [Theory]
@@ -113,12 +143,19 @@ namespace System.Collections.Tests
             public int Count => int.MaxValue;
 
             public bool IsReadOnly => throw new NotImplementedException();
+
             public void Add(T item) => throw new NotImplementedException();
+
             public void Clear() => throw new NotImplementedException();
+
             public bool Contains(T item) => throw new NotImplementedException();
+
             public void CopyTo(T[] array, int arrayIndex) => throw new NotImplementedException();
+
             public IEnumerator<T> GetEnumerator() => throw new NotImplementedException();
+
             public bool Remove(T item) => throw new NotImplementedException();
+
             IEnumerator IEnumerable.GetEnumerator() => throw new NotImplementedException();
         }
     }

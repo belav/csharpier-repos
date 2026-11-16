@@ -12,30 +12,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders;
 
 internal sealed class DelegateKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
 {
-    private static readonly ISet<SyntaxKind> s_validModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-        {
-            SyntaxKind.InternalKeyword,
-            SyntaxKind.PublicKeyword,
-            SyntaxKind.PrivateKeyword,
-            SyntaxKind.ProtectedKeyword,
-            SyntaxKind.UnsafeKeyword
-        };
+    private static readonly ISet<SyntaxKind> s_validModifiers = new HashSet<SyntaxKind>(
+        SyntaxFacts.EqualityComparer
+    )
+    {
+        SyntaxKind.InternalKeyword,
+        SyntaxKind.PublicKeyword,
+        SyntaxKind.PrivateKeyword,
+        SyntaxKind.ProtectedKeyword,
+        SyntaxKind.UnsafeKeyword,
+    };
 
     public DelegateKeywordRecommender()
-        : base(SyntaxKind.DelegateKeyword)
-    {
-    }
+        : base(SyntaxKind.DelegateKeyword) { }
 
-    protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+    protected override bool IsValidContext(
+        int position,
+        CSharpSyntaxContext context,
+        CancellationToken cancellationToken
+    )
     {
-        if (context.IsGlobalStatementContext ||
-            context.IsUsingAliasTypeContext ||
-            IsAfterAsyncKeywordInExpressionContext(context, cancellationToken) ||
-            context.IsTypeDeclarationContext(
+        if (
+            context.IsGlobalStatementContext
+            || context.IsUsingAliasTypeContext
+            || IsAfterAsyncKeywordInExpressionContext(context, cancellationToken)
+            || context.IsTypeDeclarationContext(
                 validModifiers: s_validModifiers,
                 validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
                 canBePartial: false,
-                cancellationToken: cancellationToken))
+                cancellationToken: cancellationToken
+            )
+        )
         {
             return true;
         }
@@ -58,15 +65,18 @@ internal sealed class DelegateKeywordRecommender : AbstractSyntacticSingleKeywor
         return false;
     }
 
-    private static bool IsAfterAsyncKeywordInExpressionContext(CSharpSyntaxContext context, CancellationToken cancellationToken)
+    private static bool IsAfterAsyncKeywordInExpressionContext(
+        CSharpSyntaxContext context,
+        CancellationToken cancellationToken
+    )
     {
-        return
-            context.TargetToken.IsKindOrHasMatchingText(SyntaxKind.AsyncKeyword) &&
-            context.SyntaxTree.IsExpressionContext(
+        return context.TargetToken.IsKindOrHasMatchingText(SyntaxKind.AsyncKeyword)
+            && context.SyntaxTree.IsExpressionContext(
                 context.TargetToken.SpanStart,
                 context.TargetToken,
                 attributes: false,
                 cancellationToken: cancellationToken,
-                semanticModel: context.SemanticModel);
+                semanticModel: context.SemanticModel
+            );
     }
 }

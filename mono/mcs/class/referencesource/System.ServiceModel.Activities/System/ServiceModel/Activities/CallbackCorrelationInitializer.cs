@@ -4,13 +4,10 @@
 
 namespace System.ServiceModel.Activities
 {
-
     public sealed class CallbackCorrelationInitializer : CorrelationInitializer
     {
         public CallbackCorrelationInitializer()
-            : base()
-        {
-        }
+            : base() { }
 
         internal override CorrelationInitializer CloneCore()
         {

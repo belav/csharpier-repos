@@ -2,17 +2,23 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public unsafe class Runtime_64657
 {
     [DllImport("kernel32")]
-    public static extern byte* VirtualAlloc(IntPtr lpAddress, nuint dwSize, uint flAllocationType, uint flProtect);
+    public static extern byte* VirtualAlloc(
+        IntPtr lpAddress,
+        nuint dwSize,
+        uint flAllocationType,
+        uint flProtect
+    );
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Validate<T>(T* c, int x) where T : unmanaged
+    static void Validate<T>(T* c, int x)
+        where T : unmanaged
     {
         // this nullcheck should not read more than requested
         T implicitNullcheck = c[x];
@@ -25,7 +31,14 @@ public unsafe class Runtime_64657
             return; // VirtualAlloc is only for Windows
 
         uint length = (uint)Environment.SystemPageSize;
-        byte* ptr = VirtualAlloc(IntPtr.Zero, length, 0x1000 | 0x2000 /* reserve commit */, 0x04 /*readonly guard*/);
+        byte* ptr = VirtualAlloc(
+            IntPtr.Zero,
+            length,
+            0x1000
+                | 0x2000 /* reserve commit */
+            ,
+            0x04 /*readonly guard*/
+        );
 
         Validate((byte*)(ptr + length - sizeof(byte)), 0);
         Validate((sbyte*)(ptr + length - sizeof(sbyte)), 0);
@@ -70,16 +83,65 @@ public unsafe class Runtime_64657
         TestS5_2(ref s5);
     }
 
-    [MethodImpl(MethodImplOptions.NoInlining)] static void TestS1_1(ref S1 s) { var _ = s.a1; }
-    [MethodImpl(MethodImplOptions.NoInlining)] static void TestS1_2(ref S1 s) { var _ = s.a2; }
-    [MethodImpl(MethodImplOptions.NoInlining)] static void TestS2_1(ref S2 s) { var _ = s.a1; }
-    [MethodImpl(MethodImplOptions.NoInlining)] static void TestS2_2(ref S2 s) { var _ = s.a2; }
-    [MethodImpl(MethodImplOptions.NoInlining)] static void TestS3_1(ref S3 s) { var _ = s.a1; }
-    [MethodImpl(MethodImplOptions.NoInlining)] static void TestS3_2(ref S3 s) { var _ = s.a2; }
-    [MethodImpl(MethodImplOptions.NoInlining)] static void TestS4_1(ref S4 s) { var _ = s.a1; }
-    [MethodImpl(MethodImplOptions.NoInlining)] static void TestS4_2(ref S4 s) { var _ = s.a2; }
-    [MethodImpl(MethodImplOptions.NoInlining)] static void TestS5_1(ref S5 s) { var _ = s.a1; }
-    [MethodImpl(MethodImplOptions.NoInlining)] static void TestS5_2(ref S5 s) { var _ = s.a2; }
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static void TestS1_1(ref S1 s)
+    {
+        var _ = s.a1;
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static void TestS1_2(ref S1 s)
+    {
+        var _ = s.a2;
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static void TestS2_1(ref S2 s)
+    {
+        var _ = s.a1;
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static void TestS2_2(ref S2 s)
+    {
+        var _ = s.a2;
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static void TestS3_1(ref S3 s)
+    {
+        var _ = s.a1;
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static void TestS3_2(ref S3 s)
+    {
+        var _ = s.a2;
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static void TestS4_1(ref S4 s)
+    {
+        var _ = s.a1;
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static void TestS4_2(ref S4 s)
+    {
+        var _ = s.a2;
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static void TestS5_1(ref S5 s)
+    {
+        var _ = s.a1;
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static void TestS5_2(ref S5 s)
+    {
+        var _ = s.a2;
+    }
 
     public struct S1
     {

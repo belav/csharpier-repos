@@ -18,6 +18,11 @@ namespace Microsoft.CodeAnalysis.Highlighting
         /// <para/>
         /// Highlights will be unique and will be in sorted order. All highlights will be non-empty.
         /// </summary>
-        void AddHighlights(SyntaxNode root, int position, List<TextSpan> highlights, CancellationToken cancellationToken);
+        void AddHighlights(
+            SyntaxNode root,
+            int position,
+            List<TextSpan> highlights,
+            CancellationToken cancellationToken
+        );
     }
 }

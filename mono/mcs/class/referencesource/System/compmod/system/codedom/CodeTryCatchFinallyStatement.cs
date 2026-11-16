@@ -1,29 +1,26 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeTryCatchFinallyStatement.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///     Represents a try block, with any number of catch clauses and an
     ///     optionally finally block.
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeTryCatchFinallyStatement : CodeStatement {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeTryCatchFinallyStatement : CodeStatement
+    {
         private CodeStatementCollection tryStatments = new CodeStatementCollection();
         private CodeStatementCollection finallyStatments = new CodeStatementCollection();
         private CodeCatchClauseCollection catchClauses = new CodeCatchClauseCollection();
@@ -33,8 +30,7 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeTryCatchFinallyStatement'/>.
         ///    </para>
         /// </devdoc>
-        public CodeTryCatchFinallyStatement() {
-        }
+        public CodeTryCatchFinallyStatement() { }
 
         /// <devdoc>
         ///    <para>
@@ -42,7 +38,11 @@ namespace System.CodeDom {
         ///       clauses.
         ///    </para>
         /// </devdoc>
-        public CodeTryCatchFinallyStatement(CodeStatement[] tryStatements, CodeCatchClause[] catchClauses) {
+        public CodeTryCatchFinallyStatement(
+            CodeStatement[] tryStatements,
+            CodeCatchClause[] catchClauses
+        )
+        {
             TryStatements.AddRange(tryStatements);
             CatchClauses.AddRange(catchClauses);
         }
@@ -53,7 +53,12 @@ namespace System.CodeDom {
         ///       try, catch clauses, and finally statements.
         ///    </para>
         /// </devdoc>
-        public CodeTryCatchFinallyStatement(CodeStatement[] tryStatements, CodeCatchClause[] catchClauses, CodeStatement[] finallyStatements) {
+        public CodeTryCatchFinallyStatement(
+            CodeStatement[] tryStatements,
+            CodeCatchClause[] catchClauses,
+            CodeStatement[] finallyStatements
+        )
+        {
             TryStatements.AddRange(tryStatements);
             CatchClauses.AddRange(catchClauses);
             FinallyStatements.AddRange(finallyStatements);
@@ -65,10 +70,9 @@ namespace System.CodeDom {
         ///       the try statements to try.
         ///    </para>
         /// </devdoc>
-        public CodeStatementCollection TryStatements {
-            get {
-                return tryStatments;
-            }
+        public CodeStatementCollection TryStatements
+        {
+            get { return tryStatments; }
         }
 
         /// <devdoc>
@@ -76,10 +80,9 @@ namespace System.CodeDom {
         ///       Gets or sets the catch clauses to use.
         ///    </para>
         /// </devdoc>
-        public CodeCatchClauseCollection CatchClauses {
-            get {
-                return catchClauses;
-            }
+        public CodeCatchClauseCollection CatchClauses
+        {
+            get { return catchClauses; }
         }
 
         /// <devdoc>
@@ -88,10 +91,9 @@ namespace System.CodeDom {
         ///       the finally statements to use.
         ///    </para>
         /// </devdoc>
-        public CodeStatementCollection FinallyStatements {
-            get {
-                return finallyStatments;
-            }
+        public CodeStatementCollection FinallyStatements
+        {
+            get { return finallyStatments; }
         }
     }
 }

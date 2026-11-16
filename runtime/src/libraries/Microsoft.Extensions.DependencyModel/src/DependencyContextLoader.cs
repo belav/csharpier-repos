@@ -19,19 +19,20 @@ namespace Microsoft.Extensions.DependencyModel
         private readonly IFileSystem _fileSystem;
         private readonly Func<IDependencyContextReader> _jsonReaderFactory;
 
-        public DependencyContextLoader() : this(
-            DependencyContextPaths.Current.Application,
-            DependencyContextPaths.Current.NonApplicationPaths,
-            FileSystemWrapper.Default,
-            () => new DependencyContextJsonReader())
-        {
-        }
+        public DependencyContextLoader()
+            : this(
+                DependencyContextPaths.Current.Application,
+                DependencyContextPaths.Current.NonApplicationPaths,
+                FileSystemWrapper.Default,
+                () => new DependencyContextJsonReader()
+            ) { }
 
         internal DependencyContextLoader(
             string? entryPointDepsLocation,
             IEnumerable<string> nonEntryPointDepsPaths,
             IFileSystem fileSystem,
-            Func<IDependencyContextReader> jsonReaderFactory)
+            Func<IDependencyContextReader> jsonReaderFactory
+        )
         {
             _entryPointDepsLocation = entryPointDepsLocation;
             _nonEntryPointDepsPaths = nonEntryPointDepsPaths;
@@ -51,7 +52,9 @@ namespace Microsoft.Extensions.DependencyModel
             return assembly.GetManifestResourceStream(name);
         }
 
-        [RequiresAssemblyFiles("DependencyContext for an assembly from a application published as single-file is not supported. The method will return null. Make sure the calling code can handle this case.")]
+        [RequiresAssemblyFiles(
+            "DependencyContext for an assembly from a application published as single-file is not supported. The method will return null. Make sure the calling code can handle this case."
+        )]
         public DependencyContext? Load(Assembly assembly)
         {
             ThrowHelper.ThrowIfNull(assembly);
@@ -99,10 +102,20 @@ namespace Microsoft.Extensions.DependencyModel
             return null;
         }
 
-        [RequiresAssemblyFiles("DependencyContext for an assembly from a application published as single-file is not supported. The method will return null. Make sure the calling code can handle this case.")]
-        private DependencyContext? LoadAssemblyContext(Assembly assembly, IDependencyContextReader reader)
+        [RequiresAssemblyFiles(
+            "DependencyContext for an assembly from a application published as single-file is not supported. The method will return null. Make sure the calling code can handle this case."
+        )]
+        private DependencyContext? LoadAssemblyContext(
+            Assembly assembly,
+            IDependencyContextReader reader
+        )
         {
-            using (Stream? stream = GetResourceStream(assembly, assembly.GetName().Name + DepsJsonExtension))
+            using (
+                Stream? stream = GetResourceStream(
+                    assembly,
+                    assembly.GetName().Name + DepsJsonExtension
+                )
+            )
             {
                 if (stream != null)
                 {
@@ -122,7 +135,9 @@ namespace Microsoft.Extensions.DependencyModel
             return null;
         }
 
-        [RequiresAssemblyFiles("The use of DependencyContextLoader is not supported when publishing as single-file")]
+        [RequiresAssemblyFiles(
+            "The use of DependencyContextLoader is not supported when publishing as single-file"
+        )]
         private string? GetDepsJsonPath(Assembly assembly)
         {
             // Assemblies loaded in memory (e.g. single file) return empty string from Location.
@@ -141,26 +156,25 @@ namespace Microsoft.Extensions.DependencyModel
                 // in some cases (like .NET Framework shadow copy) the Assembly Location
                 // and CodeBase will be different, so also try the CodeBase
                 string? assemblyCodeBase = GetNormalizedCodeBasePath(assembly);
-                if (!string.IsNullOrEmpty(assemblyCodeBase) &&
-                    assemblyLocation != assemblyCodeBase)
+                if (!string.IsNullOrEmpty(assemblyCodeBase) && assemblyLocation != assemblyCodeBase)
                 {
                     depsJsonFile = Path.ChangeExtension(assemblyCodeBase, DepsJsonExtension);
                     depsJsonFileExists = _fileSystem.File.Exists(depsJsonFile);
                 }
             }
 
-            return depsJsonFileExists ?
-                depsJsonFile :
-                null;
+            return depsJsonFileExists ? depsJsonFile : null;
         }
 
         [RequiresAssemblyFiles]
         private static string? GetNormalizedCodeBasePath(Assembly assembly)
         {
 #pragma warning disable SYSLIB0012 // CodeBase is obsolete
-            if (Uri.TryCreate(assembly.CodeBase, UriKind.Absolute, out Uri? codeBase)
+            if (
+                Uri.TryCreate(assembly.CodeBase, UriKind.Absolute, out Uri? codeBase)
 #pragma warning restore SYSLIB0012 // CodeBase is obsolete
-                && codeBase.IsFile)
+                && codeBase.IsFile
+            )
             {
                 return codeBase.LocalPath;
             }

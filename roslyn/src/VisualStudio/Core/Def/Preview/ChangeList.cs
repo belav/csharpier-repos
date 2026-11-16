@@ -15,12 +15,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
         internal AbstractChange[] Changes { get; }
 
-        public ChangeList(AbstractChange[] changes)
-            => this.Changes = changes;
+        public ChangeList(AbstractChange[] changes) => this.Changes = changes;
 
         public int GetDisplayData(uint index, VSTREEDISPLAYDATA[] pData)
         {
-            pData[0].Mask = (uint)_VSTREEDISPLAYMASK.TDM_STATE | (uint)_VSTREEDISPLAYMASK.TDM_IMAGE | (uint)_VSTREEDISPLAYMASK.TDM_SELECTEDIMAGE;
+            pData[0].Mask =
+                (uint)_VSTREEDISPLAYMASK.TDM_STATE
+                | (uint)_VSTREEDISPLAYMASK.TDM_IMAGE
+                | (uint)_VSTREEDISPLAYMASK.TDM_SELECTEDIMAGE;
 
             // Set TDS_SELECTED and TDS_GRAYTEXT
             pData[0].State = Changes[index].GetDisplayState();
@@ -57,14 +59,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             return VSConstants.S_OK;
         }
 
-        public int GetListChanges(ref uint pcChanges, VSTREELISTITEMCHANGE[] prgListChanges)
-            => VSConstants.E_FAIL;
+        public int GetListChanges(ref uint pcChanges, VSTREELISTITEMCHANGE[] prgListChanges) =>
+            VSConstants.E_FAIL;
 
-        public int GetText(uint index, VSTREETEXTOPTIONS tto, out string ppszText)
-            => Changes[index].GetText(out _, out ppszText);
+        public int GetText(uint index, VSTREETEXTOPTIONS tto, out string ppszText) =>
+            Changes[index].GetText(out _, out ppszText);
 
-        public int GetTipText(uint index, VSTREETOOLTIPTYPE eTipType, out string ppszText)
-            => Changes[index].GetTipText(out _, out ppszText);
+        public int GetTipText(uint index, VSTREETOOLTIPTYPE eTipType, out string ppszText) =>
+            Changes[index].GetTipText(out _, out ppszText);
 
         public int LocateExpandedList(IVsLiteTreeList child, out uint iIndex)
         {
@@ -81,11 +83,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             return VSConstants.S_FALSE;
         }
 
-        public int OnClose(VSTREECLOSEACTIONS[] ptca)
-            => VSConstants.S_OK;
+        public int OnClose(VSTREECLOSEACTIONS[] ptca) => VSConstants.S_OK;
 
-        public int OnRequestSource(uint index, object pIUnknownTextView)
-            => Changes[index].OnRequestSource(pIUnknownTextView);
+        public int OnRequestSource(uint index, object pIUnknownTextView) =>
+            Changes[index].OnRequestSource(pIUnknownTextView);
 
         public int ToggleState(uint index, out uint ptscr)
         {

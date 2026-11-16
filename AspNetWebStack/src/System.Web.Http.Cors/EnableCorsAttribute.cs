@@ -17,7 +17,11 @@ namespace System.Web.Http.Cors
     /// By default, it allows all origins, methods and headers.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
-    [SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments", Justification = "Attribute arguments are accessible as collections.")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1019:DefineAccessorsForAttributeArguments",
+        Justification = "Attribute arguments are accessible as collections."
+    )]
     public sealed class EnableCorsAttribute : Attribute, ICorsPolicyProvider
     {
         private CorsPolicy _corsPolicy;
@@ -36,9 +40,7 @@ namespace System.Web.Http.Cors
         /// var cors = new EnableCorsAttribute("http://localhost:1234", "*", "GET,PUT,POST,DELETE");
         /// </param>
         public EnableCorsAttribute(string origins, string headers, string methods)
-            : this(origins, headers, methods, null)
-        {
-        }
+            : this(origins, headers, methods, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EnableCorsAttribute" /> class.
@@ -53,13 +55,16 @@ namespace System.Web.Http.Cors
         /// var cors = new EnableCorsAttribute("http://localhost:1234", "*", "GET,PUT,POST,DELETE");
         /// </param>
         /// <param name="exposedHeaders">Comma-separated list of headers that the resource might use and can be exposed. Use null or empty string to expose none.</param>
-        public EnableCorsAttribute(string origins, string headers, string methods, string exposedHeaders)
+        public EnableCorsAttribute(
+            string origins,
+            string headers,
+            string methods,
+            string exposedHeaders
+        )
         {
             if (String.IsNullOrEmpty(origins))
             {
-                throw new ArgumentException(
-                    SRResources.ArgumentCannotBeNullOrEmpty,
-                    "origins");
+                throw new ArgumentException(SRResources.ArgumentCannotBeNullOrEmpty, "origins");
             }
 
             _corsPolicy = new CorsPolicy();
@@ -107,10 +112,7 @@ namespace System.Web.Http.Cors
         /// </summary>
         public IList<string> ExposedHeaders
         {
-            get
-            {
-                return _corsPolicy.ExposedHeaders;
-            }
+            get { return _corsPolicy.ExposedHeaders; }
         }
 
         /// <summary>
@@ -118,10 +120,7 @@ namespace System.Web.Http.Cors
         /// </summary>
         public IList<string> Headers
         {
-            get
-            {
-                return _corsPolicy.Headers;
-            }
+            get { return _corsPolicy.Headers; }
         }
 
         /// <summary>
@@ -129,10 +128,7 @@ namespace System.Web.Http.Cors
         /// </summary>
         public IList<string> Methods
         {
-            get
-            {
-                return _corsPolicy.Methods;
-            }
+            get { return _corsPolicy.Methods; }
         }
 
         /// <summary>
@@ -140,10 +136,7 @@ namespace System.Web.Http.Cors
         /// </summary>
         public IList<string> Origins
         {
-            get
-            {
-                return _corsPolicy.Origins;
-            }
+            get { return _corsPolicy.Origins; }
         }
 
         /// <summary>
@@ -151,14 +144,8 @@ namespace System.Web.Http.Cors
         /// </summary>
         public long PreflightMaxAge
         {
-            get
-            {
-                return _corsPolicy.PreflightMaxAge ?? -1;
-            }
-            set
-            {
-                _corsPolicy.PreflightMaxAge = value;
-            }
+            get { return _corsPolicy.PreflightMaxAge ?? -1; }
+            set { _corsPolicy.PreflightMaxAge = value; }
         }
 
         /// <summary>
@@ -166,18 +153,15 @@ namespace System.Web.Http.Cors
         /// </summary>
         public bool SupportsCredentials
         {
-            get
-            {
-                return _corsPolicy.SupportsCredentials;
-            }
-            set
-            {
-                _corsPolicy.SupportsCredentials = value;
-            }
+            get { return _corsPolicy.SupportsCredentials; }
+            set { _corsPolicy.SupportsCredentials = value; }
         }
 
         /// <inheritdoc />
-        public Task<CorsPolicy> GetCorsPolicyAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        public Task<CorsPolicy> GetCorsPolicyAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             if (!_originsValidated)
             {
@@ -203,7 +187,9 @@ namespace System.Web.Http.Cors
                         String.Format(
                             CultureInfo.CurrentCulture,
                             SRResources.OriginCannotEndWithSlash,
-                            origin));
+                            origin
+                        )
+                    );
                 }
 
                 if (!Uri.IsWellFormedUriString(origin, UriKind.Absolute))
@@ -212,24 +198,36 @@ namespace System.Web.Http.Cors
                         String.Format(
                             CultureInfo.CurrentCulture,
                             SRResources.OriginNotWellFormed,
-                            origin));
+                            origin
+                        )
+                    );
                 }
 
                 Uri originUri = new Uri(origin);
-                if ((!String.IsNullOrEmpty(originUri.AbsolutePath) && !String.Equals(originUri.AbsolutePath, "/", StringComparison.Ordinal)) ||
-                    !String.IsNullOrEmpty(originUri.Query) ||
-                    !String.IsNullOrEmpty(originUri.Fragment))
+                if (
+                    (
+                        !String.IsNullOrEmpty(originUri.AbsolutePath)
+                        && !String.Equals(originUri.AbsolutePath, "/", StringComparison.Ordinal)
+                    )
+                    || !String.IsNullOrEmpty(originUri.Query)
+                    || !String.IsNullOrEmpty(originUri.Fragment)
+                )
                 {
                     throw new InvalidOperationException(
                         String.Format(
                             CultureInfo.CurrentCulture,
                             SRResources.OriginMustNotContainPathQueryOrFragment,
-                            origin));
+                            origin
+                        )
+                    );
                 }
             }
         }
 
-        private static void AddCommaSeparatedValuesToCollection(string commaSeparatedValues, IList<string> collection)
+        private static void AddCommaSeparatedValuesToCollection(
+            string commaSeparatedValues,
+            IList<string> collection
+        )
         {
             string[] values = commaSeparatedValues.Split(',');
             for (int i = 0; i < values.Length; i++)

@@ -45,10 +45,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsModuleType
         {
-            get
-            {
-                return Module.GetGlobalModuleType() == this;
-            }
+            get { return Module.GetGlobalModuleType() == this; }
         }
 
         /// <summary>
@@ -99,7 +96,10 @@ namespace Internal.TypeSystem
         {
             get
             {
-                return (GetTypeFlags(TypeFlags.IsInlineArray | TypeFlags.AttributeCacheComputed) & TypeFlags.IsInlineArray) != 0;
+                return (
+                        GetTypeFlags(TypeFlags.IsInlineArray | TypeFlags.AttributeCacheComputed)
+                        & TypeFlags.IsInlineArray
+                    ) != 0;
             }
         }
 

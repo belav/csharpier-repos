@@ -260,8 +260,8 @@ internal sealed class ObjectMethodExecutor
         //     (object)((CustomAwaitableType)awaitable).GetAwaiter();
         var customAwaitableParam = Expression.Parameter(typeof(object), "awaitable");
         var awaitableInfo = coercedAwaitableInfo.AwaitableInfo;
-        var postCoercionMethodReturnType =
-            coercedAwaitableInfo.CoercerResultType ?? methodInfo.ReturnType;
+        var postCoercionMethodReturnType = coercedAwaitableInfo.CoercerResultType
+            ?? methodInfo.ReturnType;
         var getAwaiterFunc = Expression
             .Lambda<Func<object, object>>(
                 Expression.Convert(

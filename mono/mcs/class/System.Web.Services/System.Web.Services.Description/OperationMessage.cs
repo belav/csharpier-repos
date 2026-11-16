@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.OperationMessage.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,49 +34,49 @@ using System.Xml.Serialization;
 
 namespace System.Web.Services.Description
 {
-	public abstract class OperationMessage :
-		NamedItem
-	{
-		#region Fields
+    public abstract class OperationMessage : NamedItem
+    {
+        #region Fields
 
-		XmlQualifiedName message;
-		Operation operation;
+        XmlQualifiedName message;
+        Operation operation;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-		
-		protected OperationMessage ()
-		{
-			message = XmlQualifiedName.Empty;
-			operation = null;
-		}
-		
-		#endregion // Constructors
+        #region Constructors
 
-		#region Properties
+        protected OperationMessage()
+        {
+            message = XmlQualifiedName.Empty;
+            operation = null;
+        }
 
-		[XmlAttribute ("message")]
-		public XmlQualifiedName Message {
-			get { return message; }
-			set { message = value; }
-		}
+        #endregion // Constructors
 
+        #region Properties
 
-//		[XmlIgnore]
-		public Operation Operation {
-			get { return operation; }
-		}
+        [XmlAttribute("message")]
+        public XmlQualifiedName Message
+        {
+            get { return message; }
+            set { message = value; }
+        }
 
-		#endregion // Properties
+        //		[XmlIgnore]
+        public Operation Operation
+        {
+            get { return operation; }
+        }
 
-		#region Methods
+        #endregion // Properties
 
-		internal void SetParent (Operation operation)
-		{
-			this.operation = operation;
-		}
+        #region Methods
 
-		#endregion // Methods
-	}
+        internal void SetParent(Operation operation)
+        {
+            this.operation = operation;
+        }
+
+        #endregion // Methods
+    }
 }

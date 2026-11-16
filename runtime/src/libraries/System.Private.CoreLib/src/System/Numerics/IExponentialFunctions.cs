@@ -5,8 +5,7 @@ namespace System.Numerics
 {
     /// <summary>Defines support for exponential functions.</summary>
     /// <typeparam name="TSelf">The type that implements this interface.</typeparam>
-    public interface IExponentialFunctions<TSelf>
-        : IFloatingPointConstants<TSelf>
+    public interface IExponentialFunctions<TSelf> : IFloatingPointConstants<TSelf>
         where TSelf : IExponentialFunctions<TSelf>?
     {
         /// <summary>Computes <c>E</c> raised to a given power.</summary>

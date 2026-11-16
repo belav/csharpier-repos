@@ -29,14 +29,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Organizing
         public async Task TestFieldsWithoutInitializers1(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int A;
     int B;
     int C;
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int A;
     int B;
     int C;
@@ -53,14 +53,14 @@ $@"{typeKind} C {{
         public async Task TestNestedTypes(string typeKind)
         {
             var initial =
-$@"class C {{
+                $@"class C {{
     {typeKind} Nested1 {{ }}
     {typeKind} Nested2 {{ }}
     int A;
 }}";
 
             var final =
-$@"class C {{
+                $@"class C {{
     int A;
     {typeKind} Nested1 {{ }}
     {typeKind} Nested2 {{ }}
@@ -74,14 +74,14 @@ $@"class C {{
         public async Task TestFieldsWithoutInitializers2(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int C;
     int B;
     int A;
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int A;
     int B;
     int C;
@@ -96,14 +96,14 @@ $@"{typeKind} C {{
         public async Task TestFieldsWithInitializers1(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int C = 0;
     int B;
     int A;
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int A;
     int B;
     int C = 0;
@@ -117,14 +117,14 @@ $@"{typeKind} C {{
         public async Task TestFieldsWithInitializers2(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int C = 0;
     int B = 0;
     int A;
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int A;
     int C = 0;
     int B = 0;
@@ -138,13 +138,13 @@ $@"{typeKind} C {{
         public async Task TestEventFieldDeclaration(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     public void Goo() {{}}
     public event EventHandler MyEvent;
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     public event EventHandler MyEvent;
     public void Goo() {{}}
 }}";
@@ -157,7 +157,7 @@ $@"{typeKind} C {{
         public async Task TestEventDeclaration(string typeKind)
         {
             var initial =
-$@"{typeKind} C  {{
+                $@"{typeKind} C  {{
     public void Goo() {{}}
     public event EventHandler Event
     {{
@@ -169,7 +169,7 @@ $@"{typeKind} C  {{
 }}";
 
             var final =
-$@"{typeKind} C  {{
+                $@"{typeKind} C  {{
     public static int Property {{ get; set; }}
     public event EventHandler Event
     {{
@@ -188,7 +188,7 @@ $@"{typeKind} C  {{
         public async Task TestOperator(string typeKind)
         {
             var initial =
-$@"{typeKind} C  {{
+                $@"{typeKind} C  {{
     public void Goo() {{}}
     public static int operator +(Goo<T> a, int b)
     {{
@@ -197,7 +197,7 @@ $@"{typeKind} C  {{
 }}";
 
             var final =
-$@"{typeKind} C  {{
+                $@"{typeKind} C  {{
     public static int operator +(Goo<T> a, int b)
     {{
         return 1;
@@ -213,7 +213,7 @@ $@"{typeKind} C  {{
         public async Task TestIndexer(string typeKind)
         {
             var initial =
-$@"{typeKind} C  {{
+                $@"{typeKind} C  {{
     public void Goo() {{}}
     public T this[int i]
     {{
@@ -227,7 +227,7 @@ $@"{typeKind} C  {{
 }}";
 
             var final =
-$@"{typeKind} C  {{
+                $@"{typeKind} C  {{
     C() {{}}
     public T this[int i]
     {{
@@ -248,14 +248,14 @@ $@"{typeKind} C  {{
         public async Task TestConstructorAndDestructors(string typeKind)
         {
             var initial =
-$@"{typeKind} C  {{
+                $@"{typeKind} C  {{
     public ~Goo() {{}}
     enum Days {{Sat, Sun}};
     public Goo() {{}}
 }}";
 
             var final =
-$@"{typeKind} C  {{
+                $@"{typeKind} C  {{
     public Goo() {{}}
     public ~Goo() {{}}
     enum Days {{Sat, Sun}};
@@ -269,7 +269,7 @@ $@"{typeKind} C  {{
         public async Task TestInterface(string typeKind)
         {
             var initial =
-$@"{typeKind} C  {{}}
+                $@"{typeKind} C  {{}}
 interface I
 {{
    void Goo();
@@ -278,7 +278,7 @@ interface I
 }}";
 
             var final =
-$@"{typeKind} C  {{}}
+                $@"{typeKind} C  {{}}
 interface I
 {{
    event EventHandler Event;
@@ -294,7 +294,7 @@ interface I
         public async Task TestStaticInstance(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int A;
     static int B;
     int C;
@@ -302,7 +302,7 @@ $@"{typeKind} C {{
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     static int B;
     static int D;
     int A;
@@ -318,7 +318,7 @@ $@"{typeKind} C {{
         public async Task TestAccessibility(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int A;
     private int B;
     internal int C;
@@ -328,7 +328,7 @@ $@"{typeKind} C {{
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     public int E;
     protected int D;
     protected internal int F;
@@ -345,7 +345,7 @@ $@"{typeKind} C {{
         public async Task TestStaticAccessibility(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int A1;
     private int B1;
     internal int C1;
@@ -359,7 +359,7 @@ $@"{typeKind} C {{
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     public static int E2;
     protected static int D2;
     internal static int C2;
@@ -380,7 +380,7 @@ $@"{typeKind} C {{
         public async Task TestGenerics(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     void B<X,Y>();
     void B<Z>();
     void B();
@@ -390,7 +390,7 @@ $@"{typeKind} C {{
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     void A();
     void A<Z>();
     void A<X,Y>();
@@ -407,7 +407,7 @@ $@"{typeKind} C {{
         public async Task TestInsidePPRegion(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
 #if true
     int c;
     int b;
@@ -416,7 +416,7 @@ $@"{typeKind} C {{
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
 #if true
     int a;
     int b;
@@ -432,7 +432,7 @@ $@"{typeKind} C {{
         public async Task TestInsidePPRegion2(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
 #if true
     int z;
     int y;
@@ -446,7 +446,7 @@ $@"{typeKind} C {{
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
 #if true
     int x;
     int y;
@@ -467,7 +467,7 @@ $@"{typeKind} C {{
         public async Task TestInsidePPRegion3(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int z;
     int y;
 #if true
@@ -479,7 +479,7 @@ $@"{typeKind} C {{
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int y;
     int z;
 #if true
@@ -498,7 +498,7 @@ $@"{typeKind} C {{
         public async Task TestInsidePPRegion4(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int c() {{
     }}
     int b {{
@@ -510,7 +510,7 @@ $@"{typeKind} C {{
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int a {{
 #if true
 #endif
@@ -529,7 +529,7 @@ $@"{typeKind} C {{
         public async Task TestInsidePPRegion5(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int c() {{
     }}
     int b {{
@@ -542,7 +542,7 @@ $@"{typeKind} C {{
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int a {{
 #if true
 #else
@@ -562,7 +562,7 @@ $@"{typeKind} C {{
         public async Task TestInsidePPRegion6(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
 #region
     int e() {{
     }}
@@ -580,7 +580,7 @@ $@"{typeKind} C {{
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
 #region
     int d() {{
     }}
@@ -605,7 +605,7 @@ $@"{typeKind} C {{
         public async Task TestPinned(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int z() {{
     }}
     int y() {{
@@ -625,7 +625,7 @@ $@"{typeKind} C {{
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int y() {{
     }}
     int z() {{
@@ -652,7 +652,7 @@ $@"{typeKind} C {{
         public async Task TestSensitivity(string typeKind)
         {
             var initial =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int Bb;
     int B;
     int bB;
@@ -695,7 +695,7 @@ $@"{typeKind} C {{
 }}";
 
             var final =
-$@"{typeKind} C {{
+                $@"{typeKind} C {{
     int a;
     int A;
     int aa;
@@ -746,7 +746,7 @@ $@"{typeKind} C {{
         public async Task TestWhitespaceBetweenMethods1(string typeKind)
         {
             var initial =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     void B()
     {{
@@ -758,7 +758,7 @@ $@"{typeKind} Program
 }}";
 
             var final =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     void A()
     {{
@@ -777,7 +777,7 @@ $@"{typeKind} Program
         public async Task TestWhitespaceBetweenMethods2(string typeKind)
         {
             var initial =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     void B()
     {{
@@ -790,7 +790,7 @@ $@"{typeKind} Program
 }}";
 
             var final =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     void A()
     {{
@@ -810,7 +810,7 @@ $@"{typeKind} Program
         public async Task TestWhitespaceBetweenMethods3(string typeKind)
         {
             var initial =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
 
     void B()
@@ -823,7 +823,7 @@ $@"{typeKind} Program
 }}";
 
             var final =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
 
     void A()
@@ -843,7 +843,7 @@ $@"{typeKind} Program
         public async Task TestWhitespaceBetweenMethods4(string typeKind)
         {
             var initial =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
 
 
@@ -857,7 +857,7 @@ $@"{typeKind} Program
 }}";
 
             var final =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
 
 
@@ -878,7 +878,7 @@ $@"{typeKind} Program
         public async Task TestWhitespaceBetweenMethods5(string typeKind)
         {
             var initial =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
 
 
@@ -893,7 +893,7 @@ $@"{typeKind} Program
 }}";
 
             var final =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
 
 
@@ -915,7 +915,7 @@ $@"{typeKind} Program
         public async Task TestWhitespaceBetweenMethods6(string typeKind)
         {
             var initial =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
 
 
@@ -931,7 +931,7 @@ $@"{typeKind} Program
 }}";
 
             var final =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
 
 
@@ -954,7 +954,7 @@ $@"{typeKind} Program
         public async Task TestMoveComments1(string typeKind)
         {
             var initial =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     // B
     void B()
@@ -967,7 +967,7 @@ $@"{typeKind} Program
 }}";
 
             var final =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     void A()
     {{
@@ -987,7 +987,7 @@ $@"{typeKind} Program
         public async Task TestMoveComments2(string typeKind)
         {
             var initial =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     // B
     void B()
@@ -1001,7 +1001,7 @@ $@"{typeKind} Program
 }}";
 
             var final =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     // A
     void A()
@@ -1022,7 +1022,7 @@ $@"{typeKind} Program
         public async Task TestMoveDocComments1(string typeKind)
         {
             var initial =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     /// B
     void B()
@@ -1035,7 +1035,7 @@ $@"{typeKind} Program
 }}";
 
             var final =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     void A()
     {{
@@ -1055,7 +1055,7 @@ $@"{typeKind} Program
         public async Task TestMoveDocComments2(string typeKind)
         {
             var initial =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     /// B
 
@@ -1069,7 +1069,7 @@ $@"{typeKind} Program
 }}";
 
             var final =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     void A()
     {{
@@ -1090,7 +1090,7 @@ $@"{typeKind} Program
         public async Task TestDoNotMoveBanner(string typeKind)
         {
             var initial =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     // Banner
 
@@ -1104,7 +1104,7 @@ $@"{typeKind} Program
 }}";
 
             var final =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     // Banner
 
@@ -1125,7 +1125,7 @@ $@"{typeKind} Program
         public async Task TestDoNotMoveBanner2(string typeKind)
         {
             var initial =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     // Banner
 
@@ -1142,7 +1142,7 @@ $@"{typeKind} Program
 }}";
 
             var final =
-$@"{typeKind} Program
+                $@"{typeKind} Program
 {{
     // Banner
 
@@ -1165,32 +1165,44 @@ $@"{typeKind} Program
         [Trait(Traits.Feature, Traits.Features.Interactive)]
         public void OrganizingCommandsDisabledInSubmission()
         {
-            using var workspace = TestWorkspace.Create(XElement.Parse("""
-                <Workspace>
-                    <Submission Language="C#" CommonReferences="true">
-                        class C
-                        {
-                            object $$goo;
-                        }
-                    </Submission>
-                </Workspace>
-                """),
+            using var workspace = TestWorkspace.Create(
+                XElement.Parse(
+                    """
+                    <Workspace>
+                        <Submission Language="C#" CommonReferences="true">
+                            class C
+                            {
+                                object $$goo;
+                            }
+                        </Submission>
+                    </Workspace>
+                    """
+                ),
                 workspaceKind: WorkspaceKind.Interactive,
-                composition: EditorTestCompositions.EditorFeaturesWpf);
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             // Force initialization.
-            workspace.GetOpenDocumentIds().Select(id => workspace.GetTestDocument(id).GetTextView()).ToList();
+            workspace
+                .GetOpenDocumentIds()
+                .Select(id => workspace.GetTestDocument(id).GetTextView())
+                .ToList();
 
             var textView = workspace.Documents.Single().GetTextView();
 
             var handler = new OrganizeDocumentCommandHandler(
                 workspace.GetService<IThreadingContext>(),
                 workspace.GlobalOptions,
-                workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>());
+                workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>()
+            );
 
-            var state = handler.GetCommandState(new SortAndRemoveUnnecessaryImportsCommandArgs(textView, textView.TextBuffer));
+            var state = handler.GetCommandState(
+                new SortAndRemoveUnnecessaryImportsCommandArgs(textView, textView.TextBuffer)
+            );
             Assert.True(state.IsUnspecified);
 
-            state = handler.GetCommandState(new OrganizeDocumentCommandArgs(textView, textView.TextBuffer));
+            state = handler.GetCommandState(
+                new OrganizeDocumentCommandArgs(textView, textView.TextBuffer)
+            );
             Assert.True(state.IsUnspecified);
         }
     }

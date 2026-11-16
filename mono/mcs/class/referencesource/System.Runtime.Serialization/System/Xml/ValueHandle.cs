@@ -61,7 +61,7 @@ namespace System.Xml
         Char,
         Unicode,
         QName,
-        ConstString
+        ConstString,
     }
 
     class ValueHandle
@@ -72,15 +72,7 @@ namespace System.Xml
         int length;
         static Base64Encoding base64Encoding;
 
-
-        static string[] constStrings = {
-                                        "string",
-                                        "number",
-                                        "array",
-                                        "object",
-                                        "boolean",
-                                        "null",
-                                       };
+        static string[] constStrings = { "string", "number", "array", "object", "boolean", "null" };
 
         public ValueHandle(XmlBufferReader bufferReader)
         {
@@ -212,7 +204,9 @@ namespace System.Xml
                 case ValueHandleType.TimeSpan:
                     return typeof(TimeSpan);
                 default:
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException());
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException()
+                    );
             }
         }
 
@@ -328,7 +322,11 @@ namespace System.Xml
             if (type == ValueHandleType.Double)
             {
                 double value = GetDouble();
-                if ((value >= Single.MinValue && value <= Single.MaxValue) || double.IsInfinity(value) || double.IsNaN(value))
+                if (
+                    (value >= Single.MinValue && value <= Single.MaxValue)
+                    || double.IsInfinity(value)
+                    || double.IsNaN(value)
+                )
                     return (Single)value;
             }
             if (type == ValueHandleType.Zero)
@@ -452,7 +450,13 @@ namespace System.Xml
                         }
                     }
                     byte[] buffer = new byte[expectedLength];
-                    int actualLength = Base64Encoding.GetBytes(bufferReader.Buffer, this.offset, this.length, buffer, 0);
+                    int actualLength = Base64Encoding.GetBytes(
+                        bufferReader.Buffer,
+                        this.offset,
+                        this.length,
+                        buffer,
+                        0
+                    );
                     if (actualLength != buffer.Length)
                     {
                         byte[] newBuffer = new byte[actualLength];
@@ -472,7 +476,9 @@ namespace System.Xml
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(exception.Message, exception.InnerException));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(exception.Message, exception.InnerException)
+                );
             }
         }
 
@@ -535,7 +541,9 @@ namespace System.Xml
                 case ValueHandleType.ConstString:
                     return constStrings[offset];
                 default:
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException());
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException()
+                    );
             }
         }
 
@@ -598,7 +606,13 @@ namespace System.Xml
                     writer.WriteEscapedText(bufferReader.Buffer, offset, length);
                     break;
                 case ValueHandleType.Base64:
-                    writer.WriteBase64Text(bufferReader.Buffer, 0, bufferReader.Buffer, offset, length);
+                    writer.WriteBase64Text(
+                        bufferReader.Buffer,
+                        0,
+                        bufferReader.Buffer,
+                        offset,
+                        length
+                    );
                     break;
                 case ValueHandleType.UniqueId:
                     writer.WriteUniqueIdText(ToUniqueId());
@@ -664,7 +678,9 @@ namespace System.Xml
                 case ValueHandleType.TimeSpan:
                     return ToTimeSpan();
                 default:
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException());
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException()
+                    );
             }
         }
 
@@ -683,7 +699,13 @@ namespace System.Xml
                 try
                 {
                     int charCount = Math.Min(count / 3 * 4, this.length);
-                    actual = Base64Encoding.GetBytes(bufferReader.Buffer, this.offset, charCount, buffer, offset);
+                    actual = Base64Encoding.GetBytes(
+                        bufferReader.Buffer,
+                        this.offset,
+                        charCount,
+                        buffer,
+                        offset
+                    );
                     this.offset += charCount;
                     this.length -= charCount;
                     return true;
@@ -699,7 +721,15 @@ namespace System.Xml
 
         public bool TryReadChars(char[] chars, int offset, int count, out int actual)
         {
-            Fx.Assert(offset + count <= chars.Length, string.Format("offset '{0}' + count '{1}' MUST BE <= chars.Length '{2}'", offset, count, chars.Length)); 
+            Fx.Assert(
+                offset + count <= chars.Length,
+                string.Format(
+                    "offset '{0}' + count '{1}' MUST BE <= chars.Length '{2}'",
+                    offset,
+                    count,
+                    chars.Length
+                )
+            );
 
             if (type == ValueHandleType.Unicode)
                 return TryReadUnicodeChars(chars, offset, count, out actual);
@@ -715,7 +745,7 @@ namespace System.Xml
             byte[] bytes = bufferReader.Buffer;
             int byteOffset = this.offset;
             int byteCount = this.length;
-            bool insufficientSpaceInCharsArray = false; 
+            bool insufficientSpaceInCharsArray = false;
 
             while (true)
             {
@@ -742,9 +772,18 @@ namespace System.Xml
                 try
                 {
                     // If we're asking for more than are possibly available, or more than are truly available then we can return the entire thing
-                    if (charCount >= encoding.GetMaxCharCount(byteCount) || charCount >= encoding.GetCharCount(bytes, byteOffset, byteCount))
+                    if (
+                        charCount >= encoding.GetMaxCharCount(byteCount)
+                        || charCount >= encoding.GetCharCount(bytes, byteOffset, byteCount)
+                    )
                     {
-                        actualCharCount = encoding.GetChars(bytes, byteOffset, byteCount, chars, charOffset);
+                        actualCharCount = encoding.GetChars(
+                            bytes,
+                            byteOffset,
+                            byteCount,
+                            chars,
+                            charOffset
+                        );
                         actualByteCount = byteCount;
                     }
                     else
@@ -755,38 +794,57 @@ namespace System.Xml
                         actualByteCount = Math.Min(charCount, byteCount);
 
                         // We use a decoder so we don't error if we fall across a character boundary
-                        actualCharCount = decoder.GetChars(bytes, byteOffset, actualByteCount, chars, charOffset);
+                        actualCharCount = decoder.GetChars(
+                            bytes,
+                            byteOffset,
+                            actualByteCount,
+                            chars,
+                            charOffset
+                        );
 
                         // We might've gotten zero characters though if < 4 bytes were requested because
                         // codepoints from U+0000 - U+FFFF can be up to 3 bytes in UTF-8, and represented as ONE char
-                        // codepoints from U+10000 - U+10FFFF (last Unicode codepoint representable in UTF-8) are represented by up to 4 bytes in UTF-8 
+                        // codepoints from U+10000 - U+10FFFF (last Unicode codepoint representable in UTF-8) are represented by up to 4 bytes in UTF-8
                         //                                    and represented as TWO chars (high+low surrogate)
                         // (e.g. 1 char requested, 1 char in the buffer represented in 3 bytes)
                         while (actualCharCount == 0)
                         {
                             // Note the by the time we arrive here, if actualByteCount == 3, the next decoder.GetChars() call will read the 4th byte
-                            // if we don't bail out since the while loop will advance actualByteCount only after reading the byte. 
+                            // if we don't bail out since the while loop will advance actualByteCount only after reading the byte.
                             if (actualByteCount >= 3 && charCount < 2)
                             {
-                                // If we reach here, it means that we're: 
-                                // - trying to decode more than 3 bytes and, 
-                                // - there is only one char left of charCount where we're stuffing decoded characters. 
-                                // In this case, we need to back off since decoding > 3 bytes in UTF-8 means that we will get 2 16-bit chars 
-                                // (a high surrogate and a low surrogate) - the Decoder will attempt to provide both at once 
-                                // and an ArgumentException will be thrown complaining that there's not enough space in the output char array.  
+                                // If we reach here, it means that we're:
+                                // - trying to decode more than 3 bytes and,
+                                // - there is only one char left of charCount where we're stuffing decoded characters.
+                                // In this case, we need to back off since decoding > 3 bytes in UTF-8 means that we will get 2 16-bit chars
+                                // (a high surrogate and a low surrogate) - the Decoder will attempt to provide both at once
+                                // and an ArgumentException will be thrown complaining that there's not enough space in the output char array.
 
                                 // actualByteCount = 0 when the while loop is broken out of; decoder goes out of scope so its state no longer matters
 
-                                insufficientSpaceInCharsArray = true; 
-                                break; 
+                                insufficientSpaceInCharsArray = true;
+                                break;
                             }
                             else
                             {
-                                Fx.Assert(byteOffset + actualByteCount < bytes.Length, 
-                                    string.Format("byteOffset {0} + actualByteCount {1} MUST BE < bytes.Length {2}", byteOffset, actualByteCount, bytes.Length));
-                                
+                                Fx.Assert(
+                                    byteOffset + actualByteCount < bytes.Length,
+                                    string.Format(
+                                        "byteOffset {0} + actualByteCount {1} MUST BE < bytes.Length {2}",
+                                        byteOffset,
+                                        actualByteCount,
+                                        bytes.Length
+                                    )
+                                );
+
                                 // Request a few more bytes to get at least one character
-                                actualCharCount = decoder.GetChars(bytes, byteOffset + actualByteCount, 1, chars, charOffset);
+                                actualCharCount = decoder.GetChars(
+                                    bytes,
+                                    byteOffset + actualByteCount,
+                                    1,
+                                    chars,
+                                    charOffset
+                                );
                                 actualByteCount++;
                             }
                         }
@@ -797,7 +855,14 @@ namespace System.Xml
                 }
                 catch (FormatException exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateEncodingException(bytes, byteOffset, byteCount, exception));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlExceptionHelper.CreateEncodingException(
+                            bytes,
+                            byteOffset,
+                            byteCount,
+                            exception
+                        )
+                    );
                 }
 
                 // Advance
@@ -916,7 +981,12 @@ namespace System.Xml
 
         long GetInt64()
         {
-            Fx.Assert(type == ValueHandleType.Int64 || type == ValueHandleType.TimeSpan || type == ValueHandleType.DateTime, "");
+            Fx.Assert(
+                type == ValueHandleType.Int64
+                    || type == ValueHandleType.TimeSpan
+                    || type == ValueHandleType.DateTime,
+                ""
+            );
             return bufferReader.GetInt64(offset);
         }
 
@@ -971,7 +1041,11 @@ namespace System.Xml
         string GetQNameDictionaryText()
         {
             Fx.Assert(type == ValueHandleType.QName, "");
-            return string.Concat(PrefixHandle.GetString(PrefixHandle.GetAlphaPrefix(length)), ":", bufferReader.GetDictionaryString(offset));
+            return string.Concat(
+                PrefixHandle.GetString(PrefixHandle.GetAlphaPrefix(length)),
+                ":",
+                bufferReader.GetDictionaryString(offset)
+            );
         }
     }
 }

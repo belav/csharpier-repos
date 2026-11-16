@@ -12,20 +12,30 @@ namespace System.Security.Authentication
     /// remote party willingness of accepting that.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class AuthenticationException : SystemException
     {
         public AuthenticationException() { }
 
-        public AuthenticationException(string? message) : base(message) { }
+        public AuthenticationException(string? message)
+            : base(message) { }
 
-        public AuthenticationException(string? message, Exception? innerException) : base(message, innerException) { }
+        public AuthenticationException(string? message, Exception? innerException)
+            : base(message, innerException) { }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected AuthenticationException(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
-        {
-        }
+        protected AuthenticationException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+            : base(serializationInfo, streamingContext) { }
     }
 
     /// <summary>
@@ -36,19 +46,29 @@ namespace System.Security.Authentication
     /// </para>
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class InvalidCredentialException : AuthenticationException
     {
         public InvalidCredentialException() { }
 
-        public InvalidCredentialException(string? message) : base(message) { }
+        public InvalidCredentialException(string? message)
+            : base(message) { }
 
-        public InvalidCredentialException(string? message, Exception? innerException) : base(message, innerException) { }
+        public InvalidCredentialException(string? message, Exception? innerException)
+            : base(message, innerException) { }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected InvalidCredentialException(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
-        {
-        }
+        protected InvalidCredentialException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+            : base(serializationInfo, streamingContext) { }
     }
 }

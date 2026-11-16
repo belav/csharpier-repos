@@ -22,13 +22,9 @@ namespace RandomMembers
             throw new NotSupportedException();
         }
 
-        public class Nested
-        {
-        }
+        public class Nested { }
     }
 
     [OptionsValidator]
-    public partial class FirstValidator : IValidateOptions<FirstModel>
-    {
-    }
+    public partial class FirstValidator : IValidateOptions<FirstModel> { }
 }

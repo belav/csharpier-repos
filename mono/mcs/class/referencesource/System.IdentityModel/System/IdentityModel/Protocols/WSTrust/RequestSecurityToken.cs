@@ -6,11 +6,11 @@
 
 namespace System.IdentityModel.Protocols.WSTrust
 {
-    using System.IdentityModel.Tokens;
     using System.IdentityModel.Configuration;
+    using System.IdentityModel.Tokens;
 
     /// <summary>
-    /// The class defines the wst:RequestSecurityToken element which 
+    /// The class defines the wst:RequestSecurityToken element which
     /// is used to request a security token.
     /// </summary>
     public class RequestSecurityToken : WSTrustMessage
@@ -37,18 +37,14 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// This constructor is usually used on the receiving end.
         /// </summary>
         public RequestSecurityToken()
-            : this(null, null)
-        {
-        }
+            : this(null, null) { }
 
         /// <summary>
         /// This constructor is usually used on the sending side to instantiate a
         /// instance of RST based on the request type and its string value.
         /// </summary>
         public RequestSecurityToken(string requestType)
-            : this(requestType, null)
-        {
-        }
+            : this(requestType, null) { }
 
         /// <summary>
         /// This constructor is usually used on the sending side to instantiate a
@@ -61,7 +57,9 @@ namespace System.IdentityModel.Protocols.WSTrust
 
             if (keyType == KeyTypes.Symmetric)
             {
-                Entropy = new Entropy(SecurityTokenServiceConfiguration.DefaultKeySizeInBitsConstant);
+                Entropy = new Entropy(
+                    SecurityTokenServiceConfiguration.DefaultKeySizeInBitsConstant
+                );
                 KeySizeInBits = SecurityTokenServiceConfiguration.DefaultKeySizeInBitsConstant;
             }
             else if (keyType == KeyTypes.Bearer)
@@ -97,15 +95,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public SecurityTokenElement Encryption
         {
-            get
-            {
-                return _encryption;
-            }
-
-            set
-            {
-                _encryption = value;
-            }
+            get { return _encryption; }
+            set { _encryption = value; }
         }
 
         /// <summary>
@@ -120,15 +111,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </devdocs>
         public string ComputedKeyAlgorithm
         {
-            get
-            {
-                return _computedKeyAlgorithm;
-            }
-
-            set
-            {
-                _computedKeyAlgorithm = value;
-            }
+            get { return _computedKeyAlgorithm; }
+            set { _computedKeyAlgorithm = value; }
         }
 
         /// <summary>
@@ -137,15 +121,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public bool? Delegatable
         {
-            get
-            {
-                return _delegatable;
-            }
-
-            set
-            {
-                _delegatable = value;
-            }
+            get { return _delegatable; }
+            set { _delegatable = value; }
         }
 
         /// <summary>
@@ -153,15 +130,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public SecurityTokenElement DelegateTo
         {
-            get
-            {
-                return _delegateTo;
-            }
-
-            set
-            {
-                _delegateTo = value;
-            }
+            get { return _delegateTo; }
+            set { _delegateTo = value; }
         }
 
         /// <summary>
@@ -170,32 +140,18 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public bool? Forwardable
         {
-            get
-            {
-                return _forwardable;
-            }
-
-            set
-            {
-                _forwardable = value;
-            }
+            get { return _forwardable; }
+            set { _forwardable = value; }
         }
 
         /// <summary>
-        /// This optional element indicates that the requestor is making the request 
+        /// This optional element indicates that the requestor is making the request
         /// on behalf of another.
         /// </summary>
         public SecurityTokenElement OnBehalfOf
         {
-            get
-            {
-                return _onBehalfOf;
-            }
-
-            set
-            {
-                _onBehalfOf = value;
-            }
+            get { return _onBehalfOf; }
+            set { _onBehalfOf = value; }
         }
 
         /// <summary>
@@ -204,15 +160,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public Participants Participants
         {
-            get
-            {
-                return _participants;
-            }
-
-            set
-            {
-                _participants = value;
-            }
+            get { return _participants; }
+            set { _participants = value; }
         }
 
         /// <summary>
@@ -220,15 +169,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public EndpointReference Issuer
         {
-            get
-            {
-                return _onBehalfOfIssuer;
-            }
-
-            set
-            {
-                _onBehalfOfIssuer = value;
-            }
+            get { return _onBehalfOfIssuer; }
+            set { _onBehalfOfIssuer = value; }
         }
 
         /// <summary>
@@ -237,32 +179,18 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public AdditionalContext AdditionalContext
         {
-            get
-            {
-                return _additionalContext;
-            }
-
-            set
-            {
-                _additionalContext = value;
-            }
+            get { return _additionalContext; }
+            set { _additionalContext = value; }
         }
 
         /// <summary>
-        /// This optional element indicates that the requestor is making the request 
+        /// This optional element indicates that the requestor is making the request
         /// on to act as another.
         /// </summary>
         public SecurityTokenElement ActAs
         {
-            get
-            {
-                return _actAs;
-            }
-
-            set
-            {
-                _actAs = value;
-            }
+            get { return _actAs; }
+            set { _actAs = value; }
         }
 
         /// <summary>
@@ -270,15 +198,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public SecurityTokenElement CancelTarget
         {
-            get
-            {
-                return _cancelTarget;
-            }
-
-            set
-            {
-                _cancelTarget = value;
-            }
+            get { return _cancelTarget; }
+            set { _cancelTarget = value; }
         }
 
         /// <summary>
@@ -286,15 +207,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public SecurityTokenElement ProofEncryption
         {
-            get
-            {
-                return _proofEncryption;
-            }
-
-            set
-            {
-                _proofEncryption = value;
-            }
+            get { return _proofEncryption; }
+            set { _proofEncryption = value; }
         }
 
         /// <summary>
@@ -302,15 +216,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public Renewing Renewing
         {
-            get
-            {
-                return _renewing;
-            }
-
-            set
-            {
-                _renewing = value;
-            }
+            get { return _renewing; }
+            set { _renewing = value; }
         }
 
         /// <summary>
@@ -318,15 +225,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public SecurityTokenElement RenewTarget
         {
-            get
-            {
-                return _renewTarget;
-            }
-
-            set
-            {
-                _renewTarget = value;
-            }
+            get { return _renewTarget; }
+            set { _renewTarget = value; }
         }
 
         /// <summary>
@@ -335,15 +235,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public RequestSecurityToken SecondaryParameters
         {
-            get
-            {
-                return _secondaryParameters;
-            }
-
-            set
-            {
-                _secondaryParameters = value;
-            }
+            get { return _secondaryParameters; }
+            set { _secondaryParameters = value; }
         }
 
         /// <summary>
@@ -351,15 +244,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public SecurityTokenElement ValidateTarget
         {
-            get
-            {
-                return _validateTarget;
-            }
-
-            set
-            {
-                _validateTarget = value;
-            }
+            get { return _validateTarget; }
+            set { _validateTarget = value; }
         }
     }
 }

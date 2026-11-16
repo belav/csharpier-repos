@@ -15,17 +15,29 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Classification
 {
-    internal abstract partial class AbstractSyntaxClassificationService : ISyntaxClassificationService
+    internal abstract partial class AbstractSyntaxClassificationService
+        : ISyntaxClassificationService
     {
-        protected AbstractSyntaxClassificationService()
-        {
-        }
+        protected AbstractSyntaxClassificationService() { }
 
-        public abstract void AddLexicalClassifications(SourceText text, TextSpan textSpan, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken);
-        public abstract void AddSyntacticClassifications(SyntaxNode root, ImmutableArray<TextSpan> textSpans, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken);
+        public abstract void AddLexicalClassifications(
+            SourceText text,
+            TextSpan textSpan,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
+        public abstract void AddSyntacticClassifications(
+            SyntaxNode root,
+            ImmutableArray<TextSpan> textSpans,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
 
         public abstract ImmutableArray<ISyntaxClassifier> GetDefaultSyntaxClassifiers();
-        public abstract ClassifiedSpan FixClassification(SourceText text, ClassifiedSpan classifiedSpan);
+        public abstract ClassifiedSpan FixClassification(
+            SourceText text,
+            ClassifiedSpan classifiedSpan
+        );
         public abstract string? GetSyntacticClassificationForIdentifier(SyntaxToken identifier);
 
         public async Task AddSemanticClassificationsAsync(
@@ -35,14 +47,26 @@ namespace Microsoft.CodeAnalysis.Classification
             Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> getNodeClassifiers,
             Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
             SegmentedList<ClassifiedSpan> result,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                AddSemanticClassifications(semanticModel, textSpans, getNodeClassifiers, getTokenClassifiers, result, options, cancellationToken);
+                var semanticModel = await document
+                    .GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                AddSemanticClassifications(
+                    semanticModel,
+                    textSpans,
+                    getNodeClassifiers,
+                    getTokenClassifiers,
+                    result,
+                    options,
+                    cancellationToken
+                );
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable();
             }
@@ -55,12 +79,31 @@ namespace Microsoft.CodeAnalysis.Classification
             Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
             SegmentedList<ClassifiedSpan> result,
             ClassificationOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            Worker.Classify(semanticModel, textSpans, result, getNodeClassifiers, getTokenClassifiers, options, cancellationToken);
+            Worker.Classify(
+                semanticModel,
+                textSpans,
+                result,
+                getNodeClassifiers,
+                getTokenClassifiers,
+                options,
+                cancellationToken
+            );
         }
 
-        public TextChangeRange? ComputeSyntacticChangeRange(SyntaxNode oldRoot, SyntaxNode newRoot, TimeSpan timeout, CancellationToken cancellationToken)
-            => SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(oldRoot, newRoot, timeout, cancellationToken);
+        public TextChangeRange? ComputeSyntacticChangeRange(
+            SyntaxNode oldRoot,
+            SyntaxNode newRoot,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        ) =>
+            SyntacticChangeRangeComputer.ComputeSyntacticChangeRange(
+                oldRoot,
+                newRoot,
+                timeout,
+                cancellationToken
+            );
     }
 }

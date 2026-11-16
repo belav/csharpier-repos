@@ -16,8 +16,7 @@ public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTe
 {
     protected JsonInputFormatterTestBase(MvcTestFixture<TStartup> fixture)
     {
-        var factory =
-            fixture.Factories.FirstOrDefault()
+        var factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }

@@ -18,9 +18,7 @@ namespace System.Threading
             _semaphore = WaitSubsystem.WaitableObject.NewSemaphore(0, maximumSignalCount);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         private bool WaitCore(int timeoutMs)
         {

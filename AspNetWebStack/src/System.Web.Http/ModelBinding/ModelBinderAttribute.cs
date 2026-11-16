@@ -14,19 +14,29 @@ using System.Web.Http.ValueProviders;
 namespace System.Web.Http.ModelBinding
 {
     /// <summary>
-    /// Specify this parameter uses a model binder. This can optionally specify the specific model binder and 
-    /// value providers that drive that model binder. 
-    /// Derived attributes may provide convenience settings for the model binder or value provider. 
+    /// Specify this parameter uses a model binder. This can optionally specify the specific model binder and
+    /// value providers that drive that model binder.
+    /// Derived attributes may provide convenience settings for the model binder or value provider.
     /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments", Justification = "want constructor argument shortcut")]
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "part of a class hierarchy")]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Parameter, Inherited = true, AllowMultiple = false)]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1019:DefineAccessorsForAttributeArguments",
+        Justification = "want constructor argument shortcut"
+    )]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "part of a class hierarchy"
+    )]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Parameter,
+        Inherited = true,
+        AllowMultiple = false
+    )]
     public class ModelBinderAttribute : ParameterBindingAttribute
     {
         public ModelBinderAttribute()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         public ModelBinderAttribute(Type binderType)
         {
@@ -34,10 +44,10 @@ namespace System.Web.Http.ModelBinding
         }
 
         /// <summary>
-        /// Sets the type of the model binder. 
-        /// This type must be a subclass of <see cref="ModelBinderProvider"/>  or <see cref="IModelBinder"/>      
-        /// If null, uses the default from the configuration. 
-        /// </summary>   
+        /// Sets the type of the model binder.
+        /// This type must be a subclass of <see cref="ModelBinderProvider"/>  or <see cref="IModelBinder"/>
+        /// If null, uses the default from the configuration.
+        /// </summary>
         public Type BinderType { get; set; }
 
         /// <summary>
@@ -51,12 +61,14 @@ namespace System.Web.Http.ModelBinding
         {
             HttpConfiguration config = parameter.Configuration;
             IModelBinder binder = GetModelBinder(config, parameter.ParameterType);
-            IEnumerable<ValueProviderFactory> valueProviderFactories = GetValueProviderFactories(config);
+            IEnumerable<ValueProviderFactory> valueProviderFactories = GetValueProviderFactories(
+                config
+            );
 
             return new ModelBinderParameterBinding(parameter, binder, valueProviderFactories);
         }
 
-        // This will get called by a parameter binding, which will cache the results. 
+        // This will get called by a parameter binding, which will cache the results.
         public ModelBinderProvider GetModelBinderProvider(HttpConfiguration configuration)
         {
             if (BinderType != null)
@@ -72,7 +84,8 @@ namespace System.Web.Http.ModelBinding
             }
 
             // Create default over config
-            IEnumerable<ModelBinderProvider> providers = configuration.Services.GetModelBinderProviders();
+            IEnumerable<ModelBinderProvider> providers =
+                configuration.Services.GetModelBinderProviders();
 
             if (providers.Count() == 1)
             {
@@ -118,13 +131,20 @@ namespace System.Web.Http.ModelBinding
             }
 
             Type required = typeof(IModelBinder);
-            throw Error.InvalidOperation(SRResources.ValueProviderFactory_Cannot_Create, required.Name, value.GetType().Name, required.Name);
+            throw Error.InvalidOperation(
+                SRResources.ValueProviderFactory_Cannot_Create,
+                required.Name,
+                value.GetType().Name,
+                required.Name
+            );
         }
 
         /// <summary>
         /// Value providers that will be fed to the model binder.
         /// </summary>
-        public virtual IEnumerable<ValueProviderFactory> GetValueProviderFactories(HttpConfiguration configuration)
+        public virtual IEnumerable<ValueProviderFactory> GetValueProviderFactories(
+            HttpConfiguration configuration
+        )
         {
             // By default, just get all registered value provider factories
             return configuration.Services.GetValueProviderFactories();
@@ -135,7 +155,12 @@ namespace System.Web.Http.ModelBinding
             Type required = typeof(ModelBinderProvider);
             if (!required.IsAssignableFrom(attemptedType))
             {
-                throw Error.InvalidOperation(SRResources.ValueProviderFactory_Cannot_Create, required.Name, attemptedType.Name, required.Name);
+                throw Error.InvalidOperation(
+                    SRResources.ValueProviderFactory_Cannot_Create,
+                    required.Name,
+                    attemptedType.Name,
+                    required.Name
+                );
             }
         }
 

@@ -13,24 +13,37 @@ namespace Microsoft.CodeAnalysis.LanguageService
 
         public StructuralTypeDisplayInfo(
             IDictionary<INamedTypeSymbol, string> structuralTypeToName,
-            IList<SymbolDisplayPart> typesParts)
+            IList<SymbolDisplayPart> typesParts
+        )
             : this()
         {
             StructuralTypeToName = structuralTypeToName;
             TypesParts = typesParts;
         }
 
-        public IList<SymbolDisplayPart> ReplaceStructuralTypes(IList<SymbolDisplayPart> parts, SemanticModel semanticModel, int position)
-            => ReplaceStructuralTypes(parts, StructuralTypeToName, semanticModel, position);
+        public IList<SymbolDisplayPart> ReplaceStructuralTypes(
+            IList<SymbolDisplayPart> parts,
+            SemanticModel semanticModel,
+            int position
+        ) => ReplaceStructuralTypes(parts, StructuralTypeToName, semanticModel, position);
 
         public static IList<SymbolDisplayPart> ReplaceStructuralTypes(
             IList<SymbolDisplayPart> parts,
             IDictionary<INamedTypeSymbol, string> structuralTypeToName,
             SemanticModel semanticModel,
-            int position)
+            int position
+        )
         {
-            // Keep replacing parts until no more changes happen. 
-            while (ReplaceStructuralTypes(parts, structuralTypeToName, semanticModel, position, out var newParts))
+            // Keep replacing parts until no more changes happen.
+            while (
+                ReplaceStructuralTypes(
+                    parts,
+                    structuralTypeToName,
+                    semanticModel,
+                    position,
+                    out var newParts
+                )
+            )
                 parts = newParts;
 
             return parts;
@@ -41,7 +54,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
             IDictionary<INamedTypeSymbol, string> structuralTypeToName,
             SemanticModel semanticModel,
             int position,
-            out List<SymbolDisplayPart> newParts)
+            out List<SymbolDisplayPart> newParts
+        )
         {
             var changed = false;
             newParts = new List<SymbolDisplayPart>();
@@ -50,8 +64,10 @@ namespace Microsoft.CodeAnalysis.LanguageService
             {
                 if (part.Symbol is INamedTypeSymbol type)
                 {
-                    if (structuralTypeToName.TryGetValue(type, out var name) &&
-                        part.ToString() != name)
+                    if (
+                        structuralTypeToName.TryGetValue(type, out var name)
+                        && part.ToString() != name
+                    )
                     {
                         newParts.Add(new SymbolDisplayPart(part.Kind, part.Symbol, name));
                         changed = true;

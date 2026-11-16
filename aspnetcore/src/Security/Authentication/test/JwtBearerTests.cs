@@ -597,15 +597,10 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
             options.UseSecurityTokenValidators = true;
 #pragma warning disable CS0618 // Type or member is obsolete
             options.SecurityTokenValidators.Clear();
-            options.SecurityTokenValidators.Add(
-                new BlobTokenValidator(
-                    "JWT",
-                    token =>
-                    {
-                        Assert.Equal("CustomToken", token);
-                    }
-                )
-            );
+            options.SecurityTokenValidators.Add(new BlobTokenValidator("JWT", token =>
+                {
+                    Assert.Equal("CustomToken", token);
+                }));
 #pragma warning restore CS0618 // Type or member is obsolete
         });
 
@@ -985,22 +980,16 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                     {
                         services
                             .AddAuthentication()
-                            .AddJwtBearer(
-                                "JwtAuthSchemaOne",
-                                o =>
-                                {
-                                    o.Events = jwtBearerEvents;
-                                    o.UseSecurityTokenValidators = true;
-                                }
-                            )
-                            .AddJwtBearer(
-                                "JwtAuthSchemaTwo",
-                                o =>
-                                {
-                                    o.Events = jwtBearerEvents;
-                                    o.UseSecurityTokenValidators = true;
-                                }
-                            );
+                            .AddJwtBearer("JwtAuthSchemaOne", o =>
+                            {
+                                o.Events = jwtBearerEvents;
+                                o.UseSecurityTokenValidators = true;
+                            })
+                            .AddJwtBearer("JwtAuthSchemaTwo", o =>
+                            {
+                                o.Events = jwtBearerEvents;
+                                o.UseSecurityTokenValidators = true;
+                            });
                     })
             )
             .Build();
@@ -1503,21 +1492,17 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                                 }
                                 else if (context.Request.Path == new PathString("/signIn"))
                                 {
-                                    await Assert.ThrowsAsync<InvalidOperationException>(
-                                        () =>
-                                            context.SignInAsync(
-                                                JwtBearerDefaults.AuthenticationScheme,
-                                                new ClaimsPrincipal()
-                                            )
+                                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                        context.SignInAsync(
+                                            JwtBearerDefaults.AuthenticationScheme,
+                                            new ClaimsPrincipal()
+                                        )
                                     );
                                 }
                                 else if (context.Request.Path == new PathString("/signOut"))
                                 {
-                                    await Assert.ThrowsAsync<InvalidOperationException>(
-                                        () =>
-                                            context.SignOutAsync(
-                                                JwtBearerDefaults.AuthenticationScheme
-                                            )
+                                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                        context.SignOutAsync(JwtBearerDefaults.AuthenticationScheme)
                                     );
                                 }
                                 else if (context.Request.Path == new PathString("/expiration"))

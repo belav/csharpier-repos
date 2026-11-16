@@ -4,18 +4,19 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
-    using System.IO;
-    using System.Text;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.Globalization;
-    using System.Web.Util;
-    using System.Web.Configuration;
+    using System.IO;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Configuration;
+    using System.Web.Util;
+    using System.Xml;
 
     /* From Machine.Config
     <!--
@@ -31,44 +32,54 @@ namespace System.Web.Configuration {
         -->
         <customErrors mode="RemoteOnly" />
     */
-    public sealed class CustomErrorsSection : ConfigurationSection {
+    public sealed class CustomErrorsSection : ConfigurationSection
+    {
         private static ConfigurationPropertyCollection _properties;
 
         private static readonly ConfigurationProperty _propAllowNestedErrors =
-            new ConfigurationProperty("allowNestedErrors",
-                                        typeof(bool),
-                                        false /* defaultValue */,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "allowNestedErrors",
+                typeof(bool),
+                false /* defaultValue */
+                ,
+                ConfigurationPropertyOptions.None
+            );
 
         private static readonly ConfigurationProperty _propDefaultRedirect =
-            new ConfigurationProperty("defaultRedirect",
-                                        typeof(string), 
-                                        null, 
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "defaultRedirect",
+                typeof(string),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-        private static readonly ConfigurationProperty _propRedirectMode =
-            new ConfigurationProperty("redirectMode",
-                                        typeof(CustomErrorsRedirectMode),
-                                        CustomErrorsRedirectMode.ResponseRedirect,
-                                        ConfigurationPropertyOptions.None);
-        
-        private static readonly ConfigurationProperty _propMode =
-            new ConfigurationProperty("mode", 
-                                        typeof(CustomErrorsMode), 
-                                        CustomErrorsMode.RemoteOnly, 
-                                        ConfigurationPropertyOptions.None);
-        
-        private static readonly ConfigurationProperty _propErrors =
-            new ConfigurationProperty(null, 
-                                        typeof(CustomErrorCollection), 
-                                        null, 
-                                        ConfigurationPropertyOptions.IsDefaultCollection);
+        private static readonly ConfigurationProperty _propRedirectMode = new ConfigurationProperty(
+            "redirectMode",
+            typeof(CustomErrorsRedirectMode),
+            CustomErrorsRedirectMode.ResponseRedirect,
+            ConfigurationPropertyOptions.None
+        );
+
+        private static readonly ConfigurationProperty _propMode = new ConfigurationProperty(
+            "mode",
+            typeof(CustomErrorsMode),
+            CustomErrorsMode.RemoteOnly,
+            ConfigurationPropertyOptions.None
+        );
+
+        private static readonly ConfigurationProperty _propErrors = new ConfigurationProperty(
+            null,
+            typeof(CustomErrorCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
 
         private string basepath = null;
         private string _DefaultAbsolutePath = null;
         private static CustomErrorsSection _default = null;
 
-        static CustomErrorsSection() {
+        static CustomErrorsSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propAllowNestedErrors);
@@ -78,65 +89,56 @@ namespace System.Web.Configuration {
             _properties.Add(_propErrors);
         }
 
-        public CustomErrorsSection() {
-        }
+        public CustomErrorsSection() { }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("allowNestedErrors", DefaultValue = false)]
-        public bool AllowNestedErrors {
-            get {
-                return (bool)base[_propAllowNestedErrors];
-            }
-            set {
-                base[_propAllowNestedErrors] = value;
-            }
+        public bool AllowNestedErrors
+        {
+            get { return (bool)base[_propAllowNestedErrors]; }
+            set { base[_propAllowNestedErrors] = value; }
         }
 
         [ConfigurationProperty("defaultRedirect")]
-        public string DefaultRedirect {
-            get {
-                return (string)base[_propDefaultRedirect];
-            }
-            set {
-                base[_propDefaultRedirect] = value;
-            }
+        public string DefaultRedirect
+        {
+            get { return (string)base[_propDefaultRedirect]; }
+            set { base[_propDefaultRedirect] = value; }
         }
 
-        [ConfigurationProperty("redirectMode", DefaultValue = CustomErrorsRedirectMode.ResponseRedirect)]
-        public CustomErrorsRedirectMode RedirectMode {
-            get {
-                return (CustomErrorsRedirectMode)base[_propRedirectMode];
-            }
-            set {
-                base[_propRedirectMode] = value;
-            }
+        [ConfigurationProperty(
+            "redirectMode",
+            DefaultValue = CustomErrorsRedirectMode.ResponseRedirect
+        )]
+        public CustomErrorsRedirectMode RedirectMode
+        {
+            get { return (CustomErrorsRedirectMode)base[_propRedirectMode]; }
+            set { base[_propRedirectMode] = value; }
         }
 
         [ConfigurationProperty("mode", DefaultValue = CustomErrorsMode.RemoteOnly)]
-        public CustomErrorsMode Mode {
-            get {
-                return (CustomErrorsMode)base[_propMode];
-            }
-            set {
-                base[_propMode] = value;
-            }
+        public CustomErrorsMode Mode
+        {
+            get { return (CustomErrorsMode)base[_propMode]; }
+            set { base[_propMode] = value; }
         }
 
         [ConfigurationProperty("", IsDefaultCollection = true)]
-        public CustomErrorCollection Errors {
-            get {
-                return (CustomErrorCollection)base[_propErrors];
-            }
+        public CustomErrorCollection Errors
+        {
+            get { return (CustomErrorCollection)base[_propErrors]; }
         }
 
-        internal String DefaultAbsolutePath {
-            get {
-                if (_DefaultAbsolutePath == null) {
+        internal String DefaultAbsolutePath
+        {
+            get
+            {
+                if (_DefaultAbsolutePath == null)
+                {
                     _DefaultAbsolutePath = GetAbsoluteRedirect(DefaultRedirect, basepath);
                 }
 
@@ -144,31 +146,37 @@ namespace System.Web.Configuration {
             }
         }
 
-        internal String GetRedirectString(int code) {
+        internal String GetRedirectString(int code)
+        {
             String r = null;
 
-            if (Errors != null) {
+            if (Errors != null)
+            {
                 CustomError ce = Errors[(string)code.ToString(CultureInfo.InvariantCulture)];
                 if (ce != null)
                     r = GetAbsoluteRedirect(ce.Redirect, basepath);
             }
 
-            if (r == null) {
+            if (r == null)
+            {
                 r = DefaultAbsolutePath;
             }
 
             return r;
         }
 
-        protected override void Reset(ConfigurationElement parentElement) {
+        protected override void Reset(ConfigurationElement parentElement)
+        {
             base.Reset(parentElement);
             CustomErrorsSection parent = parentElement as CustomErrorsSection;
-            if (parent != null) {
+            if (parent != null)
+            {
                 basepath = parent.basepath;
             }
         }
 
-        protected override void DeserializeSection(XmlReader reader) {
+        protected override void DeserializeSection(XmlReader reader)
+        {
             WebContext context;
 
             base.DeserializeSection(reader);
@@ -176,15 +184,19 @@ namespace System.Web.Configuration {
             // Determine Web Context
             context = EvaluationContext.HostingContext as WebContext;
 
-            if (context != null) {
+            if (context != null)
+            {
                 basepath = UrlPath.AppendSlashToPathIfNeeded(context.Path);
             }
         }
+
         //
         // helper to create absolute redirect
         //
-        internal static String GetAbsoluteRedirect(String path, String basePath) {
-            if (path != null && UrlPath.IsRelativeUrl(path)) {
+        internal static String GetAbsoluteRedirect(String path, String basePath)
+        {
+            if (path != null && UrlPath.IsRelativeUrl(path))
+            {
                 if (String.IsNullOrEmpty(basePath))
                     basePath = "/";
 
@@ -194,26 +206,34 @@ namespace System.Web.Configuration {
             return path;
         }
 
-        internal static CustomErrorsSection GetSettings(HttpContext context) {
+        internal static CustomErrorsSection GetSettings(HttpContext context)
+        {
             return GetSettings(context, false);
         }
 
-        internal static CustomErrorsSection GetSettings(HttpContext context, bool canThrow) {
+        internal static CustomErrorsSection GetSettings(HttpContext context, bool canThrow)
+        {
             CustomErrorsSection ce = null;
             RuntimeConfig runtimeConfig = null;
-            if (canThrow) {
+            if (canThrow)
+            {
                 runtimeConfig = RuntimeConfig.GetConfig(context);
-                if (runtimeConfig != null) {
+                if (runtimeConfig != null)
+                {
                     ce = runtimeConfig.CustomErrors;
                 }
             }
-            else {
+            else
+            {
                 runtimeConfig = RuntimeConfig.GetLKGConfig(context);
-                if (runtimeConfig != null) {
+                if (runtimeConfig != null)
+                {
                     ce = runtimeConfig.CustomErrors;
                 }
-                if (ce == null) {
-                    if (_default == null) {
+                if (ce == null)
+                {
+                    if (_default == null)
+                    {
                         _default = new CustomErrorsSection();
                     }
 
@@ -224,17 +244,20 @@ namespace System.Web.Configuration {
             return ce;
         }
 
-        internal bool CustomErrorsEnabled(HttpRequest request) {
+        internal bool CustomErrorsEnabled(HttpRequest request)
+        {
             // This could throw if the config file is malformed, but we don't want
             // to throw from here, as it would mess up error handling
-            try {
+            try
+            {
                 // Always turn of custom errors in retail deployment mode (DevDiv 36396)
                 if (DeploymentSection.RetailInternal)
                     return true;
             }
             catch { }
 
-            switch (Mode) {
+            switch (Mode)
+            {
                 case CustomErrorsMode.Off:
                     return false;
 

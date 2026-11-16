@@ -15,28 +15,73 @@ internal interface IWorkspaceProject : IDisposable
 {
     Task SetDisplayNameAsync(string displayName, CancellationToken cancellationToken);
 
-    Task SetCommandLineArgumentsAsync(IReadOnlyList<string> arguments, CancellationToken cancellationToken);
-    Task SetBuildSystemPropertiesAsync(IReadOnlyDictionary<string, string> properties, CancellationToken cancellationToken);
+    Task SetCommandLineArgumentsAsync(
+        IReadOnlyList<string> arguments,
+        CancellationToken cancellationToken
+    );
+    Task SetBuildSystemPropertiesAsync(
+        IReadOnlyDictionary<string, string> properties,
+        CancellationToken cancellationToken
+    );
 
-    Task AddSourceFilesAsync(IReadOnlyList<SourceFileInfo> sourceFiles, CancellationToken cancellationToken);
-    Task RemoveSourceFilesAsync(IReadOnlyList<string> sourceFiles, CancellationToken cancellationToken);
+    Task AddSourceFilesAsync(
+        IReadOnlyList<SourceFileInfo> sourceFiles,
+        CancellationToken cancellationToken
+    );
+    Task RemoveSourceFilesAsync(
+        IReadOnlyList<string> sourceFiles,
+        CancellationToken cancellationToken
+    );
 
-    Task AddMetadataReferencesAsync(IReadOnlyList<MetadataReferenceInfo> metadataReferences, CancellationToken cancellationToken);
-    Task RemoveMetadataReferencesAsync(IReadOnlyList<MetadataReferenceInfo> metadataReferences, CancellationToken cancellationToken);
+    Task AddMetadataReferencesAsync(
+        IReadOnlyList<MetadataReferenceInfo> metadataReferences,
+        CancellationToken cancellationToken
+    );
+    Task RemoveMetadataReferencesAsync(
+        IReadOnlyList<MetadataReferenceInfo> metadataReferences,
+        CancellationToken cancellationToken
+    );
 
-    Task AddAdditionalFilesAsync(IReadOnlyList<string> additionalFilePaths, CancellationToken cancellationToken);
-    Task RemoveAdditionalFilesAsync(IReadOnlyList<string> additionalFilePaths, CancellationToken cancellationToken);
+    Task AddAdditionalFilesAsync(
+        IReadOnlyList<string> additionalFilePaths,
+        CancellationToken cancellationToken
+    );
+    Task RemoveAdditionalFilesAsync(
+        IReadOnlyList<string> additionalFilePaths,
+        CancellationToken cancellationToken
+    );
 
-    Task AddAnalyzerReferencesAsync(IReadOnlyList<string> analyzerPaths, CancellationToken cancellationToken);
-    Task RemoveAnalyzerReferencesAsync(IReadOnlyList<string> analyzerPaths, CancellationToken cancellationToken);
+    Task AddAnalyzerReferencesAsync(
+        IReadOnlyList<string> analyzerPaths,
+        CancellationToken cancellationToken
+    );
+    Task RemoveAnalyzerReferencesAsync(
+        IReadOnlyList<string> analyzerPaths,
+        CancellationToken cancellationToken
+    );
 
-    Task AddAnalyzerConfigFilesAsync(IReadOnlyList<string> analyzerConfigPaths, CancellationToken cancellationToken);
-    Task RemoveAnalyzerConfigFilesAsync(IReadOnlyList<string> analyzerConfigPaths, CancellationToken cancellationToken);
+    Task AddAnalyzerConfigFilesAsync(
+        IReadOnlyList<string> analyzerConfigPaths,
+        CancellationToken cancellationToken
+    );
+    Task RemoveAnalyzerConfigFilesAsync(
+        IReadOnlyList<string> analyzerConfigPaths,
+        CancellationToken cancellationToken
+    );
 
-    Task AddDynamicFilesAsync(IReadOnlyList<string> dynamicFilePaths, CancellationToken cancellationToken);
-    Task RemoveDynamicFilesAsync(IReadOnlyList<string> dynamicFilePaths, CancellationToken cancellationToken);
+    Task AddDynamicFilesAsync(
+        IReadOnlyList<string> dynamicFilePaths,
+        CancellationToken cancellationToken
+    );
+    Task RemoveDynamicFilesAsync(
+        IReadOnlyList<string> dynamicFilePaths,
+        CancellationToken cancellationToken
+    );
 
-    Task SetProjectHasAllInformationAsync(bool hasAllInformation, CancellationToken cancellationToken);
+    Task SetProjectHasAllInformationAsync(
+        bool hasAllInformation,
+        CancellationToken cancellationToken
+    );
 
     Task<IWorkspaceProjectBatch> StartBatchAsync(CancellationToken cancellationToken);
 }

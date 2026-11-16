@@ -13,10 +13,14 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
     {
         public readonly ReadOnlyCollection<string> NamespaceNames;
 
-        protected RQTypeOrNamespace(IList<string> namespaceNames)
-            => NamespaceNames = new ReadOnlyCollection<string>(namespaceNames);
+        protected RQTypeOrNamespace(IList<string> namespaceNames) =>
+            NamespaceNames = new ReadOnlyCollection<string>(namespaceNames);
 
-        protected override void AppendChildren(List<SimpleTreeNode> childList)
-            => childList.AddRange(NamespaceNames.Select(name => (SimpleTreeNode)new SimpleGroupNode(RQNameStrings.NsName, name)));
+        protected override void AppendChildren(List<SimpleTreeNode> childList) =>
+            childList.AddRange(
+                NamespaceNames.Select(name =>
+                    (SimpleTreeNode)new SimpleGroupNode(RQNameStrings.NsName, name)
+                )
+            );
     }
 }

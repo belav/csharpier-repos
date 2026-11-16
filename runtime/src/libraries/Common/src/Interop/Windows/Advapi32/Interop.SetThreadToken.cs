@@ -11,8 +11,6 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SetThreadToken(
-            IntPtr ThreadHandle,
-            SafeTokenHandle? hToken);
+        internal static partial bool SetThreadToken(IntPtr ThreadHandle, SafeTokenHandle? hToken);
     }
 }

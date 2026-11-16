@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-
 using Internal.Text;
 using Internal.TypeSystem;
 
@@ -22,11 +21,15 @@ namespace ILCompiler.DependencyAnalysis
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             sb.Append(nameMangler.CompilationUnitPrefix)
-              .Append("__RuntimeFieldHandle_")
-              .Append(nameMangler.GetMangledFieldName(_targetField));
+                .Append("__RuntimeFieldHandle_")
+                .Append(nameMangler.GetMangledFieldName(_targetField));
         }
+
         public int Offset => 0;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
+
         public override bool IsShareable => false;
         public override bool StaticDependenciesAreComputed => true;
 
@@ -47,15 +50,25 @@ namespace ILCompiler.DependencyAnalysis
             return result;
         }
 
-        protected override ObjectData GetDehydratableData(NodeFactory factory, bool relocsOnly = false)
+        protected override ObjectData GetDehydratableData(
+            NodeFactory factory,
+            bool relocsOnly = false
+        )
         {
             ObjectDataBuilder objData = new ObjectDataBuilder(factory, relocsOnly);
 
             objData.RequireInitialPointerAlignment();
             objData.AddSymbol(this);
 
-            NativeLayoutFieldLdTokenVertexNode ldtokenSigNode = factory.NativeLayout.FieldLdTokenVertex(_targetField);
-            objData.EmitPointerReloc(factory.NativeLayout.NativeLayoutSignature(ldtokenSigNode, s_NativeLayoutSignaturePrefix, _targetField));
+            NativeLayoutFieldLdTokenVertexNode ldtokenSigNode =
+                factory.NativeLayout.FieldLdTokenVertex(_targetField);
+            objData.EmitPointerReloc(
+                factory.NativeLayout.NativeLayoutSignature(
+                    ldtokenSigNode,
+                    s_NativeLayoutSignaturePrefix,
+                    _targetField
+                )
+            );
 
             return objData.ToObjectData();
         }

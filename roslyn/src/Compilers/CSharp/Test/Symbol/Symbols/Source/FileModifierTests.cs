@@ -36,7 +36,10 @@ public class FileModifierTests : CSharpTestBase
         comp.VerifyDiagnostics(
             // (1,12): error CS8936: Feature 'file types' is not available in C# 10.0. Please use language version 11.0 or greater.
             // file class C { }
-            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "C").WithArguments("file types", "11.0").WithLocation(1, 12));
+            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "C")
+                .WithArguments("file types", "11.0")
+                .WithLocation(1, 12)
+        );
 
         comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
@@ -56,16 +59,24 @@ public class FileModifierTests : CSharpTestBase
         comp.VerifyDiagnostics(
             // (3,16): error CS8936: Feature 'file types' is not available in C# 10.0. Please use language version 11.0 or greater.
             //     file class C { }
-            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "C").WithArguments("file types", "11.0").WithLocation(3, 16),
+            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "C")
+                .WithArguments("file types", "11.0")
+                .WithLocation(3, 16),
             // (3,16): error CS9054: File-local type 'Outer.C' must be defined in a top level type; 'Outer.C' is a nested type.
             //     file class C { }
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "C").WithArguments("Outer.C").WithLocation(3, 16));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "C")
+                .WithArguments("Outer.C")
+                .WithLocation(3, 16)
+        );
 
         comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
             // (3,16): error CS9054: File-local type 'Outer.C' must be defined in a top level type; 'Outer.C' is a nested type.
             //     file class C { }
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "C").WithArguments("Outer.C").WithLocation(3, 16));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "C")
+                .WithArguments("Outer.C")
+                .WithLocation(3, 16)
+        );
     }
 
     [Fact]
@@ -82,7 +93,10 @@ public class FileModifierTests : CSharpTestBase
         comp.VerifyDiagnostics(
             // (1,12): error CS8936: Feature 'file types' is not available in C# 10.0. Please use language version 11.0 or greater.
             // file class Outer
-            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "Outer").WithArguments("file types", "11.0").WithLocation(1, 12));
+            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "Outer")
+                .WithArguments("file types", "11.0")
+                .WithLocation(1, 12)
+        );
         verify();
 
         comp = CreateCompilation(source);
@@ -115,19 +129,29 @@ public class FileModifierTests : CSharpTestBase
         comp.VerifyDiagnostics(
             // (1,12): error CS8936: Feature 'file types' is not available in C# 10.0. Please use language version 11.0 or greater.
             // file class Outer
-            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "Outer").WithArguments("file types", "11.0").WithLocation(1, 12),
+            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "Outer")
+                .WithArguments("file types", "11.0")
+                .WithLocation(1, 12),
             // (3,16): error CS8936: Feature 'file types' is not available in C# 10.0. Please use language version 11.0 or greater.
             //     file class C { }
-            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "C").WithArguments("file types", "11.0").WithLocation(3, 16),
+            Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "C")
+                .WithArguments("file types", "11.0")
+                .WithLocation(3, 16),
             // (3,16): error CS9054: File-local type 'Outer.C' must be defined in a top level type; 'Outer.C' is a nested type.
             //     file class C { }
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "C").WithArguments("Outer.C").WithLocation(3, 16));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "C")
+                .WithArguments("Outer.C")
+                .WithLocation(3, 16)
+        );
 
         comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
             // (3,16): error CS9054: File-local type 'Outer.C' must be defined in a top level type; 'Outer.C' is a nested type.
             //     file class C { }
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "C").WithArguments("Outer.C").WithLocation(3, 16));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "C")
+                .WithArguments("Outer.C")
+                .WithLocation(3, 16)
+        );
     }
 
     [Fact]
@@ -149,7 +173,10 @@ public class FileModifierTests : CSharpTestBase
         comp.VerifyDiagnostics(
             // (8,10): error CS9051: File-local type 'Outer.C' cannot be used in a member signature in non-file-local type 'D'.
             //     void M(Outer.C c) { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M").WithArguments("Outer.C", "D").WithLocation(8, 10));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M")
+                .WithArguments("Outer.C", "D")
+                .WithLocation(8, 10)
+        );
     }
 
     [Fact]
@@ -213,28 +240,41 @@ public class FileModifierTests : CSharpTestBase
             }
             """;
 
-        var verifier = CompileAndVerify(source, expectedOutput: "1", symbolValidator: symbolValidator);
+        var verifier = CompileAndVerify(
+            source,
+            expectedOutput: "1",
+            symbolValidator: symbolValidator
+        );
         verifier.VerifyDiagnostics();
 
         var comp = (CSharpCompilation)verifier.Compilation;
         var symbol = comp.GetMember<NamedTypeSymbol>("C");
-        AssertEx.Equal("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C", symbol.MetadataName);
+        AssertEx.Equal(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C",
+            symbol.MetadataName
+        );
 
         // The qualified name here is based on `SymbolDisplayCompilerInternalOptions.IncludeContainingFileForFileTypes`.
         // We don't actually look up based on the file-encoded name of the type.
         // This is similar to how generic types work (lookup based on 'C<T>' instead of 'C`1').
-        verifier.VerifyIL("C@<tree 0>.M", @"
+        verifier.VerifyIL(
+            "C@<tree 0>.M",
+            @"
 {
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldc.i4.1
   IL_0001:  call       ""void System.Console.Write(int)""
   IL_0006:  ret
-}");
+}"
+        );
 
         void symbolValidator(ModuleSymbol symbol)
         {
-            Assert.Equal(new[] { "<Module>", "C", "Program", "Microsoft", "System" }, symbol.GlobalNamespace.GetMembers().Select(m => m.Name));
+            Assert.Equal(
+                new[] { "<Module>", "C", "Program", "Microsoft", "System" },
+                symbol.GlobalNamespace.GetMembers().Select(m => m.Name)
+            );
             var classC = symbol.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(new[] { "M", ".ctor" }, classC.MemberNames);
         }
@@ -263,28 +303,41 @@ public class FileModifierTests : CSharpTestBase
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { ("", "file1.cs"), (source, "file2.cs") }, expectedOutput: "1", symbolValidator: symbolValidator);
+        var verifier = CompileAndVerify(
+            new[] { ("", "file1.cs"), (source, "file2.cs") },
+            expectedOutput: "1",
+            symbolValidator: symbolValidator
+        );
         verifier.VerifyDiagnostics();
 
         var comp = (CSharpCompilation)verifier.Compilation;
         var symbol = comp.GetMember<NamedTypeSymbol>("C");
-        AssertEx.Equal("<file2>F66382B88D8E28FDD21CEADA0DE847F8B00DA1324042DD28F8FFC58C454BD6188__C", symbol.MetadataName);
+        AssertEx.Equal(
+            "<file2>F66382B88D8E28FDD21CEADA0DE847F8B00DA1324042DD28F8FFC58C454BD6188__C",
+            symbol.MetadataName
+        );
 
         // The qualified name here is based on `SymbolDisplayCompilerInternalOptions.IncludeContainingFileForFileTypes`.
         // We don't actually look up based on the file-encoded name of the type.
         // This is similar to how generic types work (lookup based on 'C<T>' instead of 'C`1').
-        verifier.VerifyIL("C@file2.M", @"
+        verifier.VerifyIL(
+            "C@file2.M",
+            @"
 {
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldc.i4.1
   IL_0001:  call       ""void System.Console.Write(int)""
   IL_0006:  ret
-}");
+}"
+        );
 
         void symbolValidator(ModuleSymbol symbol)
         {
-            Assert.Equal(new[] { "<Module>", "C", "Program", "Microsoft", "System" }, symbol.GlobalNamespace.GetMembers().Select(m => m.Name));
+            Assert.Equal(
+                new[] { "<Module>", "C", "Program", "Microsoft", "System" },
+                symbol.GlobalNamespace.GetMembers().Select(m => m.Name)
+            );
             var classC = symbol.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(new[] { "M", ".ctor" }, classC.MemberNames);
         }
@@ -310,14 +363,23 @@ public class FileModifierTests : CSharpTestBase
             }
             """;
 
-        var verifier = CompileAndVerify(source, expectedOutput: "E2", symbolValidator: symbolValidator);
+        var verifier = CompileAndVerify(
+            source,
+            expectedOutput: "E2",
+            symbolValidator: symbolValidator
+        );
         verifier.VerifyDiagnostics();
 
         var comp = (CSharpCompilation)verifier.Compilation;
         var symbol = comp.GetMember<NamedTypeSymbol>("E");
-        Assert.Equal("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__E", symbol.MetadataName);
+        Assert.Equal(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__E",
+            symbol.MetadataName
+        );
 
-        verifier.VerifyIL("Program.Main", @"
+        verifier.VerifyIL(
+            "Program.Main",
+            @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -325,11 +387,15 @@ public class FileModifierTests : CSharpTestBase
   IL_0001:  box        ""E""
   IL_0006:  call       ""void System.Console.Write(object)""
   IL_000b:  ret
-}");
+}"
+        );
 
         void symbolValidator(ModuleSymbol symbol)
         {
-            Assert.Equal(new[] { "<Module>", "E", "Program", "Microsoft", "System" }, symbol.GlobalNamespace.GetMembers().Select(m => m.Name));
+            Assert.Equal(
+                new[] { "<Module>", "E", "Program", "Microsoft", "System" },
+                symbol.GlobalNamespace.GetMembers().Select(m => m.Name)
+            );
             var classC = symbol.GlobalNamespace.GetMember<NamedTypeSymbol>("E");
             Assert.Equal(new[] { "value__", "E1", "E2", ".ctor" }, classC.MemberNames);
         }
@@ -362,16 +428,26 @@ public class FileModifierTests : CSharpTestBase
             }
             """;
 
-        var verifier = CompileAndVerify(source, expectedOutput: "(<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__E)1", symbolValidator: symbolValidator);
+        var verifier = CompileAndVerify(
+            source,
+            expectedOutput: "(<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__E)1",
+            symbolValidator: symbolValidator
+        );
         verifier.VerifyDiagnostics();
 
         var comp = (CSharpCompilation)verifier.Compilation;
         var symbol = comp.GetMember<NamedTypeSymbol>("E");
-        Assert.Equal("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__E", symbol.MetadataName);
+        Assert.Equal(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__E",
+            symbol.MetadataName
+        );
 
         void symbolValidator(ModuleSymbol symbol)
         {
-            Assert.Equal(new[] { "<Module>", "E", "Attr", "Program", "Microsoft", "System" }, symbol.GlobalNamespace.GetMembers().Select(m => m.Name));
+            Assert.Equal(
+                new[] { "<Module>", "E", "Attr", "Program", "Microsoft", "System" },
+                symbol.GlobalNamespace.GetMembers().Select(m => m.Name)
+            );
             var classC = symbol.GlobalNamespace.GetMember<NamedTypeSymbol>("E");
             Assert.Equal(new[] { "value__", "E1", "E2", ".ctor" }, classC.MemberNames);
         }
@@ -408,7 +484,10 @@ public class FileModifierTests : CSharpTestBase
         comp.VerifyDiagnostics(
             // (10,12): error CS9051: File-local type 'E' cannot be used in a member signature in non-file-local type 'Attr'.
             //     public Attr(E e) { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "Attr").WithArguments("E", "Attr").WithLocation(10, 12));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "Attr")
+                .WithArguments("E", "Attr")
+                .WithLocation(10, 12)
+        );
     }
 
     [Fact]
@@ -438,16 +517,26 @@ public class FileModifierTests : CSharpTestBase
             }
             """;
 
-        var verifier = CompileAndVerify(source, expectedOutput: "(<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__E)1", symbolValidator: symbolValidator);
+        var verifier = CompileAndVerify(
+            source,
+            expectedOutput: "(<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__E)1",
+            symbolValidator: symbolValidator
+        );
         verifier.VerifyDiagnostics();
 
         var comp = (CSharpCompilation)verifier.Compilation;
         var symbol = comp.GetMember<NamedTypeSymbol>("E");
-        Assert.Equal("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__E", symbol.MetadataName);
+        Assert.Equal(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__E",
+            symbol.MetadataName
+        );
 
         void symbolValidator(ModuleSymbol symbol)
         {
-            Assert.Equal(new[] { "<Module>", "E", "Attr", "Program", "Microsoft", "System" }, symbol.GlobalNamespace.GetMembers().Select(m => m.Name));
+            Assert.Equal(
+                new[] { "<Module>", "E", "Attr", "Program", "Microsoft", "System" },
+                symbol.GlobalNamespace.GetMembers().Select(m => m.Name)
+            );
             var classC = symbol.GlobalNamespace.GetMember<NamedTypeSymbol>("E");
             Assert.Equal(new[] { "value__", "E1", "E2", ".ctor" }, classC.MemberNames);
         }
@@ -456,7 +545,8 @@ public class FileModifierTests : CSharpTestBase
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67258")]
     public void NonFileLocalClass_Duplicate()
     {
-        var source = @"
+        var source =
+            @"
 public class D { }
 
 public partial class C
@@ -468,16 +558,22 @@ public partial class C
         comp.VerifyEmitDiagnostics(
             // 1.cs(2,14): error CS0101: The namespace '<global namespace>' already contains a definition for 'D'
             // public class D { }
-            Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "D").WithArguments("D", "<global namespace>").WithLocation(2, 14),
+            Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "D")
+                .WithArguments("D", "<global namespace>")
+                .WithLocation(2, 14),
             // 1.cs(6,18): error CS0102: The type 'C' already contains a definition for 'D'
             //     public class D { }
-            Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "D").WithArguments("C", "D").WithLocation(6, 18));
+            Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "D")
+                .WithArguments("C", "D")
+                .WithLocation(6, 18)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67258")]
     public void FileLocalClass_Duplicate()
     {
-        var source = @"
+        var source =
+            @"
 file class D { }
 
 public partial class C
@@ -487,18 +583,22 @@ public partial class C
 ";
         var comp = CreateCompilation(new[] { source, source });
         comp.VerifyEmitDiagnostics(
-                    // 1.cs(6,16): error CS9054: File-local type 'C.D' must be defined in a top level type; 'C.D' is a nested type.
-                    //     file class D { } // 1
-                    Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 16),
-                    // 0.cs(6,16): error CS9054: File-local type 'C.D' must be defined in a top level type; 'C.D' is a nested type.
-                    //     file class D { } // 1
-                    Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 16));
+            // 1.cs(6,16): error CS9054: File-local type 'C.D' must be defined in a top level type; 'C.D' is a nested type.
+            //     file class D { } // 1
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "D")
+                .WithArguments("C.D")
+                .WithLocation(6, 16),
+            // 0.cs(6,16): error CS9054: File-local type 'C.D' must be defined in a top level type; 'C.D' is a nested type.
+            //     file class D { } // 1
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 16)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67258")]
     public void NonFileLocalEnum_Duplicate()
     {
-        var source = @"
+        var source =
+            @"
 public enum E { }
 
 public partial class C
@@ -510,16 +610,22 @@ public partial class C
         comp.VerifyEmitDiagnostics(
             // 1.cs(2,13): error CS0101: The namespace '<global namespace>' already contains a definition for 'E'
             // public enum E { }
-            Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "E").WithArguments("E", "<global namespace>").WithLocation(2, 13),
+            Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "E")
+                .WithArguments("E", "<global namespace>")
+                .WithLocation(2, 13),
             // 1.cs(6,17): error CS0102: The type 'C' already contains a definition for 'E'
             //     public enum E { }
-            Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "E").WithArguments("C", "E").WithLocation(6, 17));
+            Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "E")
+                .WithArguments("C", "E")
+                .WithLocation(6, 17)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67258")]
     public void MixedFileLocalClass_Duplicate()
     {
-        var source1 = @"
+        var source1 =
+            @"
 file class D { }
 
 public partial class C
@@ -528,7 +634,8 @@ public partial class C
 }
 ";
 
-        var source2 = @"
+        var source2 =
+            @"
 public class D { }
 
 public partial class C
@@ -541,19 +648,22 @@ public partial class C
         comp.VerifyEmitDiagnostics(
             // 0.cs(6,16): error CS9054: File-local type 'C.D' must be defined in a top level type; 'C.D' is a nested type.
             //     file class D { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 16));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 16)
+        );
 
         comp = CreateCompilation(new[] { source2, source1 });
         comp.VerifyEmitDiagnostics(
             // 0.cs(6,16): error CS9054: File-local type 'C.D' must be defined in a top level type; 'C.D' is a nested type.
             //     file class D { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 16));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 16)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67258")]
     public void FileLocalEnum_Duplicate()
     {
-        var source = @"
+        var source =
+            @"
 file enum E { }
 
 public partial class C
@@ -565,16 +675,20 @@ public partial class C
         comp.VerifyEmitDiagnostics(
             // 1.cs(6,15): error CS9054: File-local type 'C.E' must be defined in a top level type; 'C.E' is a nested type.
             //     file enum E { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "E").WithArguments("C.E").WithLocation(6, 15),
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "E")
+                .WithArguments("C.E")
+                .WithLocation(6, 15),
             // 0.cs(6,15): error CS9054: File-local type 'C.E' must be defined in a top level type; 'C.E' is a nested type.
             //     file enum E { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "E").WithArguments("C.E").WithLocation(6, 15));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "E").WithArguments("C.E").WithLocation(6, 15)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67258")]
     public void MixedFileLocalEnum_Duplicate()
     {
-        var source1 = @"
+        var source1 =
+            @"
 file enum E { }
 
 public partial class C
@@ -583,7 +697,8 @@ public partial class C
 }
 ";
 
-        var source2 = @"
+        var source2 =
+            @"
 public enum E { }
 
 public partial class C
@@ -596,19 +711,22 @@ public partial class C
         comp.VerifyEmitDiagnostics(
             // 0.cs(6,15): error CS9054: File-local type 'C.E' must be defined in a top level type; 'C.E' is a nested type.
             //     file enum E { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "E").WithArguments("C.E").WithLocation(6, 15));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "E").WithArguments("C.E").WithLocation(6, 15)
+        );
 
         comp = CreateCompilation(new[] { source2, source1 });
         comp.VerifyEmitDiagnostics(
             // 0.cs(6,15): error CS9054: File-local type 'C.E' must be defined in a top level type; 'C.E' is a nested type.
             //     file enum E { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "E").WithArguments("C.E").WithLocation(6, 15));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "E").WithArguments("C.E").WithLocation(6, 15)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67258")]
     public void NonFileLocalDelegate_Duplicate()
     {
-        var source = @"
+        var source =
+            @"
 public delegate void D();
 
 public partial class C
@@ -620,16 +738,22 @@ public partial class C
         comp.VerifyEmitDiagnostics(
             // 1.cs(2,22): error CS0101: The namespace '<global namespace>' already contains a definition for 'D'
             // public delegate void D();
-            Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "D").WithArguments("D", "<global namespace>").WithLocation(2, 22),
+            Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "D")
+                .WithArguments("D", "<global namespace>")
+                .WithLocation(2, 22),
             // 1.cs(6,26): error CS0102: The type 'C' already contains a definition for 'D'
             //     public delegate void D();
-            Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "D").WithArguments("C", "D").WithLocation(6, 26));
+            Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "D")
+                .WithArguments("C", "D")
+                .WithLocation(6, 26)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67258")]
     public void MixedFileLocalDelegate_Duplicate()
     {
-        var source1 = @"
+        var source1 =
+            @"
 file delegate void D();
 
 public partial class C
@@ -638,7 +762,8 @@ public partial class C
 }
 ";
 
-        var source2 = @"
+        var source2 =
+            @"
 public delegate void D();
 
 public partial class C
@@ -651,19 +776,22 @@ public partial class C
         comp.VerifyEmitDiagnostics(
             // 0.cs(6,24): error CS9054: File-local type 'C.D' must be defined in a top level type; 'C.D' is a nested type.
             //     file delegate void D(); // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 24));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 24)
+        );
 
         comp = CreateCompilation(new[] { source2, source1 });
         comp.VerifyEmitDiagnostics(
             // 0.cs(6,24): error CS9054: File-local type 'C.D' must be defined in a top level type; 'C.D' is a nested type.
             //     file delegate void D(); // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 24));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 24)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67258")]
     public void FileLocalDelegate_Duplicate()
     {
-        var source = @"
+        var source =
+            @"
 file delegate void D();
 
 public partial class C
@@ -675,10 +803,13 @@ public partial class C
         comp.VerifyEmitDiagnostics(
             // 1.cs(6,24): error CS9054: File-local type 'C.D' must be defined in a top level type; 'C.D' is a nested type.
             //     file delegate void D(); // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 24),
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "D")
+                .WithArguments("C.D")
+                .WithLocation(6, 24),
             // 0.cs(6,24): error CS9054: File-local type 'C.D' must be defined in a top level type; 'C.D' is a nested type.
             //     file delegate void D(); // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 24));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "D").WithArguments("C.D").WithLocation(6, 24)
+        );
     }
 
     [Fact]
@@ -710,27 +841,39 @@ public partial class C
         comp.VerifyDiagnostics(
             // (5,9): error CS0103: The name 'C' does not exist in the current context
             //         C.M(); // 1
-            Diagnostic(ErrorCode.ERR_NameNotInContext, "C").WithArguments("C").WithLocation(5, 9));
+            Diagnostic(ErrorCode.ERR_NameNotInContext, "C").WithArguments("C").WithLocation(5, 9)
+        );
     }
 
     [Fact]
     public void Generic_01()
     {
         var source = """
-        using System;
+            using System;
 
-        C<int>.M(1);
+            C<int>.M(1);
 
-        file class C<T>
-        {
-            public static void M(T t) { Console.Write(t); }
-        }
-        """;
+            file class C<T>
+            {
+                public static void M(T t) { Console.Write(t); }
+            }
+            """;
 
-        var verifier = CompileAndVerify(SyntaxFactory.ParseSyntaxTree(source, options: TestOptions.RegularPreview, path: "path/to/MyFile.cs", encoding: Encoding.Default), expectedOutput: "1", symbolValidator: symbolValidator);
+        var verifier = CompileAndVerify(
+            SyntaxFactory.ParseSyntaxTree(
+                source,
+                options: TestOptions.RegularPreview,
+                path: "path/to/MyFile.cs",
+                encoding: Encoding.Default
+            ),
+            expectedOutput: "1",
+            symbolValidator: symbolValidator
+        );
         verifier.VerifyDiagnostics();
 
-        verifier.VerifyIL("C<T>@MyFile.M(T)", @"
+        verifier.VerifyIL(
+            "C<T>@MyFile.M(T)",
+            @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -739,18 +882,28 @@ public partial class C
   IL_0006:  call       ""void System.Console.Write(object)""
   IL_000b:  ret
 }
-");
+"
+        );
 
         var comp = (CSharpCompilation)verifier.Compilation;
         var c = comp.GetMember("C");
-        AssertEx.Equal("<MyFile>F5E7157F91336401EED4848664C7CEB8A5E156C0D713F4211A61BDB8932B19EF2__C`1", c.MetadataName);
+        AssertEx.Equal(
+            "<MyFile>F5E7157F91336401EED4848664C7CEB8A5E156C0D713F4211A61BDB8932B19EF2__C`1",
+            c.MetadataName
+        );
 
         void symbolValidator(ModuleSymbol module)
         {
-            Assert.Equal(new[] { "<Module>", "Program", "C", "Microsoft", "System" }, module.GlobalNamespace.GetMembers().Select(m => m.Name));
+            Assert.Equal(
+                new[] { "<Module>", "Program", "C", "Microsoft", "System" },
+                module.GlobalNamespace.GetMembers().Select(m => m.Name)
+            );
 
             var classC = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-            AssertEx.Equal("<MyFile>F5E7157F91336401EED4848664C7CEB8A5E156C0D713F4211A61BDB8932B19EF2__C`1", classC.MetadataName);
+            AssertEx.Equal(
+                "<MyFile>F5E7157F91336401EED4848664C7CEB8A5E156C0D713F4211A61BDB8932B19EF2__C`1",
+                classC.MetadataName
+            );
             Assert.Equal(new[] { "M", ".ctor" }, classC.MemberNames);
         }
     }
@@ -759,18 +912,28 @@ public partial class C
     public void BadFileNames_01()
     {
         var source = """
-        using System;
+            using System;
 
-        C.M();
+            C.M();
 
-        file class C
-        {
-            public static void M() { Console.Write(1); }
-        }
-        """;
+            file class C
+            {
+                public static void M() { Console.Write(1); }
+            }
+            """;
 
-        const string expectedMetadataName = "<My__File>FCE8825365B7010B8DE2ACFBE270B3B795D1AB2633451F8A6C1A94FB1933D5E4E__C";
-        var verifier = CompileAndVerify(SyntaxFactory.ParseSyntaxTree(source, options: TestOptions.RegularPreview, path: "path/to/My<>File.cs", encoding: Encoding.Default), expectedOutput: "1", symbolValidator: symbolValidator);
+        const string expectedMetadataName =
+            "<My__File>FCE8825365B7010B8DE2ACFBE270B3B795D1AB2633451F8A6C1A94FB1933D5E4E__C";
+        var verifier = CompileAndVerify(
+            SyntaxFactory.ParseSyntaxTree(
+                source,
+                options: TestOptions.RegularPreview,
+                path: "path/to/My<>File.cs",
+                encoding: Encoding.Default
+            ),
+            expectedOutput: "1",
+            symbolValidator: symbolValidator
+        );
         verifier.VerifyDiagnostics();
 
         var comp = (CSharpCompilation)verifier.Compilation;
@@ -780,7 +943,10 @@ public partial class C
 
         void symbolValidator(ModuleSymbol module)
         {
-            Assert.Equal(new[] { "<Module>", "Program", "C", "Microsoft", "System" }, module.GlobalNamespace.GetMembers().Select(m => m.Name));
+            Assert.Equal(
+                new[] { "<Module>", "Program", "C", "Microsoft", "System" },
+                module.GlobalNamespace.GetMembers().Select(m => m.Name)
+            );
             var expectedSymbol = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
             AssertEx.Equal(expectedMetadataName, expectedSymbol.MetadataName);
             Assert.Equal(new[] { "M", ".ctor" }, expectedSymbol.MemberNames);
@@ -791,44 +957,70 @@ public partial class C
     public void BadFileNames_02()
     {
         var source = """
-        using System;
+            using System;
 
-        C.M();
+            C.M();
 
-        file class C
-        {
-            public static void M() { Console.Write(1); }
-        }
-        """;
+            file class C
+            {
+                public static void M() { Console.Write(1); }
+            }
+            """;
 
-        var verifier = CompileAndVerify(SyntaxFactory.ParseSyntaxTree(source, options: TestOptions.RegularPreview, path: "path/to/MyGeneratedFile.g.cs", encoding: Encoding.Default), expectedOutput: "1", symbolValidator: symbolValidator);
+        var verifier = CompileAndVerify(
+            SyntaxFactory.ParseSyntaxTree(
+                source,
+                options: TestOptions.RegularPreview,
+                path: "path/to/MyGeneratedFile.g.cs",
+                encoding: Encoding.Default
+            ),
+            expectedOutput: "1",
+            symbolValidator: symbolValidator
+        );
         verifier.VerifyDiagnostics();
 
         var comp = (CSharpCompilation)verifier.Compilation;
         var c = comp.GetMember("C");
         Assert.Equal("C@MyGeneratedFile_g", c.ToTestDisplayString());
-        AssertEx.Equal("<MyGeneratedFile_g>F18307E6C553D2E6465CEA162655C06E2BB2896889519559EB1EE5FA53513F0E8__C", c.MetadataName);
+        AssertEx.Equal(
+            "<MyGeneratedFile_g>F18307E6C553D2E6465CEA162655C06E2BB2896889519559EB1EE5FA53513F0E8__C",
+            c.MetadataName
+        );
 
         void symbolValidator(ModuleSymbol module)
         {
-            Assert.Equal(new[] { "<Module>", "Program", "C", "Microsoft", "System" }, module.GlobalNamespace.GetMembers().Select(m => m.Name));
+            Assert.Equal(
+                new[] { "<Module>", "Program", "C", "Microsoft", "System" },
+                module.GlobalNamespace.GetMembers().Select(m => m.Name)
+            );
             var expectedSymbol = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-            AssertEx.Equal("<MyGeneratedFile_g>F18307E6C553D2E6465CEA162655C06E2BB2896889519559EB1EE5FA53513F0E8__C", expectedSymbol.MetadataName);
+            AssertEx.Equal(
+                "<MyGeneratedFile_g>F18307E6C553D2E6465CEA162655C06E2BB2896889519559EB1EE5FA53513F0E8__C",
+                expectedSymbol.MetadataName
+            );
             Assert.Equal(new[] { "M", ".ctor" }, expectedSymbol.MemberNames);
         }
     }
 
     [Theory]
-    [InlineData("""
+    [InlineData(
+        """
             file class Outer1 { }
             file class Outer2 { }
-            """, "Outer2")]
-    [InlineData("""
+            """,
+        "Outer2"
+    )]
+    [InlineData(
+        """
             file class Outer { }
-            """, "Outer")]
+            """,
+        "Outer"
+    )]
     public void Determinism(string source, string fileTypeName)
     {
-        var (root1, root2) = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? (@"q:\", @"j:\") : ("/q", "/j");
+        var (root1, root2) = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            ? (@"q:\", @"j:\")
+            : ("/q", "/j");
         var testSource1 = CSharpTestSource.Parse(source, Path.Combine(root1, "code.cs"));
         var testSource2 = CSharpTestSource.Parse(source, Path.Combine(root2, "code.cs"));
         var options = TestOptions.DebugDll.WithDeterministic(true);
@@ -838,8 +1030,13 @@ public partial class C
         var resolver = new SourceFileResolver(
             ImmutableArray<string>.Empty,
             baseDirectory: null,
-            ImmutableArray.Create(new KeyValuePair<string, string>(root2, root1)));
-        var comp3 = CreateCompilation(testSource2, options: options.WithSourceReferenceResolver(resolver), assemblyName: "filetypes");
+            ImmutableArray.Create(new KeyValuePair<string, string>(root2, root1))
+        );
+        var comp3 = CreateCompilation(
+            testSource2,
+            options: options.WithSourceReferenceResolver(resolver),
+            assemblyName: "filetypes"
+        );
 
         var outer1 = comp1.GetMember<NamedTypeSymbol>(fileTypeName).AssociatedFileIdentifier;
         var outer2 = comp2.GetMember<NamedTypeSymbol>(fileTypeName).AssociatedFileIdentifier;
@@ -850,7 +1047,9 @@ public partial class C
         Assert.False(outer1.FilePathChecksumOpt.SequenceEqual(outer2.FilePathChecksumOpt));
         Assert.True(outer1.FilePathChecksumOpt.SequenceEqual(outer3.FilePathChecksumOpt));
 
-        var emitOptions = EmitOptions.Default.WithDebugInformationFormat(DebugInformationFormat.Embedded);
+        var emitOptions = EmitOptions.Default.WithDebugInformationFormat(
+            DebugInformationFormat.Embedded
+        );
         var bytes1 = comp1.EmitToArray(emitOptions);
         var bytes2 = comp2.EmitToArray(emitOptions);
         var bytes3 = comp3.EmitToArray(emitOptions);
@@ -862,7 +1061,8 @@ public partial class C
     public void DuplicateFileNames_01()
     {
         var path = "path/to/file.cs";
-        var source1 = SyntaxFactory.ParseSyntaxTree("""
+        var source1 = SyntaxFactory.ParseSyntaxTree(
+            """
             using System;
 
             C.M();
@@ -871,8 +1071,17 @@ public partial class C
             {
                 public static void M() { Console.Write(1); }
             }
-            """, options: TestOptions.RegularPreview, path: path, encoding: Encoding.Default);
-        var source2 = SyntaxFactory.ParseSyntaxTree("", options: TestOptions.RegularPreview, path: path, encoding: Encoding.Default);
+            """,
+            options: TestOptions.RegularPreview,
+            path: path,
+            encoding: Encoding.Default
+        );
+        var source2 = SyntaxFactory.ParseSyntaxTree(
+            "",
+            options: TestOptions.RegularPreview,
+            path: path,
+            encoding: Encoding.Default
+        );
 
         var comp = CreateCompilation(new[] { source1, source2 }, assemblyName: "comp");
         verify();
@@ -886,10 +1095,16 @@ public partial class C
             comp.VerifyEmitDiagnostics(
                 // path/to/file.cs(5,12): error CS9067: File-local type 'C' must be declared in a file with a unique path. Path 'path/to/file.cs' is used in multiple files.
                 // file class C
-                Diagnostic(ErrorCode.ERR_FileTypeNonUniquePath, "C").WithArguments("C", "path/to/file.cs").WithLocation(5, 12));
+                Diagnostic(ErrorCode.ERR_FileTypeNonUniquePath, "C")
+                    .WithArguments("C", "path/to/file.cs")
+                    .WithLocation(5, 12)
+            );
             var classC = comp.GetMember("C");
             Assert.Equal(source1, classC.Locations[0].SourceTree);
-            AssertEx.Equal("<file>F620949CDCC480533E3607E5DD92F88E866EC1D65C225D70509A32F831433D9A4__C", classC.MetadataName);
+            AssertEx.Equal(
+                "<file>F620949CDCC480533E3607E5DD92F88E866EC1D65C225D70509A32F831433D9A4__C",
+                classC.MetadataName
+            );
         }
     }
 
@@ -897,7 +1112,8 @@ public partial class C
     public void DuplicateFileNames_02()
     {
         var path = "path/to/file.cs";
-        var source1 = SyntaxFactory.ParseSyntaxTree("""
+        var source1 = SyntaxFactory.ParseSyntaxTree(
+            """
             using System;
 
             C.M();
@@ -906,8 +1122,13 @@ public partial class C
             {
                 public static void M() { Console.Write(1); }
             }
-            """, options: TestOptions.RegularPreview, path: path, encoding: Encoding.Default);
-        var source2 = SyntaxFactory.ParseSyntaxTree("""
+            """,
+            options: TestOptions.RegularPreview,
+            path: path,
+            encoding: Encoding.Default
+        );
+        var source2 = SyntaxFactory.ParseSyntaxTree(
+            """
             using System;
 
             namespace NS;
@@ -916,7 +1137,11 @@ public partial class C
             {
                 public static void M() { Console.Write(2); }
             }
-            """, options: TestOptions.RegularPreview, path: path, encoding: Encoding.Default);
+            """,
+            options: TestOptions.RegularPreview,
+            path: path,
+            encoding: Encoding.Default
+        );
 
         var comp = CreateCompilation(new[] { source1, source2 }, assemblyName: "comp");
         verify();
@@ -930,13 +1155,21 @@ public partial class C
             comp.VerifyEmitDiagnostics(
                 // path/to/file.cs(5,12): error CS9067: File-local type 'C' must be declared in a file with a unique path. Path 'path/to/file.cs' is used in multiple files.
                 // file class C
-                Diagnostic(ErrorCode.ERR_FileTypeNonUniquePath, "C").WithArguments("NS.C", "path/to/file.cs").WithLocation(5, 12),
+                Diagnostic(ErrorCode.ERR_FileTypeNonUniquePath, "C")
+                    .WithArguments("NS.C", "path/to/file.cs")
+                    .WithLocation(5, 12),
                 // path/to/file.cs(5,12): error CS9067: File-local type 'C' must be declared in a file with a unique path. Path 'path/to/file.cs' is used in multiple files.
                 // file class C
-                Diagnostic(ErrorCode.ERR_FileTypeNonUniquePath, "C").WithArguments("C", "path/to/file.cs").WithLocation(5, 12));
+                Diagnostic(ErrorCode.ERR_FileTypeNonUniquePath, "C")
+                    .WithArguments("C", "path/to/file.cs")
+                    .WithLocation(5, 12)
+            );
             var member = comp.GetMember("C");
             Assert.Equal(source1, member.Locations[0].SourceTree);
-            AssertEx.Equal("<file>F620949CDCC480533E3607E5DD92F88E866EC1D65C225D70509A32F831433D9A4__C", member.MetadataName);
+            AssertEx.Equal(
+                "<file>F620949CDCC480533E3607E5DD92F88E866EC1D65C225D70509A32F831433D9A4__C",
+                member.MetadataName
+            );
         }
     }
 
@@ -944,7 +1177,8 @@ public partial class C
     public void DuplicateFileNames_03()
     {
         var path = "path/to/file.cs";
-        var source1 = SyntaxFactory.ParseSyntaxTree("""
+        var source1 = SyntaxFactory.ParseSyntaxTree(
+            """
             using System;
 
             namespace NS1.NS2;
@@ -953,8 +1187,17 @@ public partial class C
             {
                 public static void M() { Console.Write(1); }
             }
-            """, options: TestOptions.RegularPreview, path: path, encoding: Encoding.Default);
-        var source2 = SyntaxFactory.ParseSyntaxTree("", options: TestOptions.RegularPreview, path: path, encoding: Encoding.Default);
+            """,
+            options: TestOptions.RegularPreview,
+            path: path,
+            encoding: Encoding.Default
+        );
+        var source2 = SyntaxFactory.ParseSyntaxTree(
+            "",
+            options: TestOptions.RegularPreview,
+            path: path,
+            encoding: Encoding.Default
+        );
 
         var comp = CreateCompilation(new[] { source1, source2 }, assemblyName: "comp");
         verify();
@@ -968,17 +1211,24 @@ public partial class C
             comp.VerifyEmitDiagnostics(
                 // path/to/file.cs(5,12): error CS9067: File-local type 'C<T>' must be declared in a file with a unique path. Path 'path/to/file.cs' is used in multiple files.
                 // file class C<T>
-                Diagnostic(ErrorCode.ERR_FileTypeNonUniquePath, "C").WithArguments("NS1.NS2.C<T>", "path/to/file.cs").WithLocation(5, 12));
+                Diagnostic(ErrorCode.ERR_FileTypeNonUniquePath, "C")
+                    .WithArguments("NS1.NS2.C<T>", "path/to/file.cs")
+                    .WithLocation(5, 12)
+            );
             var classC = comp.GetMember("NS1.NS2.C");
             Assert.Equal(source1, classC.Locations[0].SourceTree);
-            AssertEx.Equal("<file>F620949CDCC480533E3607E5DD92F88E866EC1D65C225D70509A32F831433D9A4__C`1", classC.MetadataName);
+            AssertEx.Equal(
+                "<file>F620949CDCC480533E3607E5DD92F88E866EC1D65C225D70509A32F831433D9A4__C`1",
+                classC.MetadataName
+            );
         }
     }
 
     [Fact]
     public void DuplicateFileNames_04()
     {
-        var source1 = SyntaxFactory.ParseSyntaxTree("""
+        var source1 = SyntaxFactory.ParseSyntaxTree(
+            """
             using System;
 
             C.M();
@@ -987,8 +1237,17 @@ public partial class C
             {
                 public static void M() { Console.Write(1); }
             }
-            """, options: TestOptions.RegularPreview, path: "path/to/file.cs", encoding: Encoding.Default);
-        var source2 = SyntaxFactory.ParseSyntaxTree("", options: TestOptions.RegularPreview, path: "path/to/File.cs", encoding: Encoding.Default);
+            """,
+            options: TestOptions.RegularPreview,
+            path: "path/to/file.cs",
+            encoding: Encoding.Default
+        );
+        var source2 = SyntaxFactory.ParseSyntaxTree(
+            "",
+            options: TestOptions.RegularPreview,
+            path: "path/to/File.cs",
+            encoding: Encoding.Default
+        );
 
         var comp = CreateCompilation(new[] { source1, source2 }, assemblyName: "comp");
         verify();
@@ -1001,7 +1260,10 @@ public partial class C
             comp.VerifyEmitDiagnostics();
             var classC = comp.GetMember("C");
             Assert.Equal(source1, classC.Locations[0].SourceTree);
-            AssertEx.Equal("<file>F620949CDCC480533E3607E5DD92F88E866EC1D65C225D70509A32F831433D9A4__C", classC.MetadataName);
+            AssertEx.Equal(
+                "<file>F620949CDCC480533E3607E5DD92F88E866EC1D65C225D70509A32F831433D9A4__C",
+                classC.MetadataName
+            );
         }
     }
 
@@ -1035,7 +1297,10 @@ public partial class C
         comp.VerifyEmitDiagnostics(
             // file1.cs(3,12): error CS9067: File-local type 'C' must be declared in a file with a unique path. Path 'file1.cs' is used in multiple files.
             // file class C // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNonUniquePath, "C").WithArguments("C", "file1.cs").WithLocation(3, 12));
+            Diagnostic(ErrorCode.ERR_FileTypeNonUniquePath, "C")
+                .WithArguments("C", "file1.cs")
+                .WithLocation(3, 12)
+        );
     }
 
     // Data based on Lexer.ScanIdentifier_FastPath, excluding '/', '\', and ':' because those are path separators.
@@ -1073,28 +1338,45 @@ public partial class C
     public void BadFileNames_03(char badChar)
     {
         var source = """
-        using System;
+            using System;
 
-        C.M();
+            C.M();
 
-        file class C
-        {
-            public static void M() { Console.Write(1); }
-        }
-        """;
+            file class C
+            {
+                public static void M() { Console.Write(1); }
+            }
+            """;
 
-        var comp = CreateCompilation(SyntaxFactory.ParseSyntaxTree(source, options: TestOptions.RegularPreview, path: $"path/to/My{badChar}File.cs", encoding: Encoding.Default));
+        var comp = CreateCompilation(
+            SyntaxFactory.ParseSyntaxTree(
+                source,
+                options: TestOptions.RegularPreview,
+                path: $"path/to/My{badChar}File.cs",
+                encoding: Encoding.Default
+            )
+        );
         var sourceFileTypeSymbol = comp.GetMember("C");
 
-        var verifier = CompileAndVerify(comp, expectedOutput: "1", symbolValidator: symbolValidator);
+        var verifier = CompileAndVerify(
+            comp,
+            expectedOutput: "1",
+            symbolValidator: symbolValidator
+        );
         verifier.VerifyDiagnostics();
 
         Assert.Equal("C@My_File", sourceFileTypeSymbol.ToTestDisplayString());
-        Assert.Matches(expectedRegexPattern: @"<My_File>F[\w\d]{64}__C", sourceFileTypeSymbol.MetadataName);
+        Assert.Matches(
+            expectedRegexPattern: @"<My_File>F[\w\d]{64}__C",
+            sourceFileTypeSymbol.MetadataName
+        );
 
         void symbolValidator(ModuleSymbol module)
         {
-            Assert.Equal(new[] { "<Module>", "Program", "C", "Microsoft", "System" }, module.GlobalNamespace.GetMembers().Select(m => m.Name));
+            Assert.Equal(
+                new[] { "<Module>", "Program", "C", "Microsoft", "System" },
+                module.GlobalNamespace.GetMembers().Select(m => m.Name)
+            );
             var expectedSymbol = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(sourceFileTypeSymbol.MetadataName, expectedSymbol.MetadataName);
             Assert.Equal(new[] { "M", ".ctor" }, expectedSymbol.MemberNames);
@@ -1110,21 +1392,30 @@ public partial class C
             file class C { } // 2
             """;
 
-        var comp = CreateCompilation(SyntaxFactory.ParseSyntaxTree(source1, options: TestOptions.RegularPreview, path: "\uD800.cs"));
+        var comp = CreateCompilation(
+            SyntaxFactory.ParseSyntaxTree(
+                source1,
+                options: TestOptions.RegularPreview,
+                path: "\uD800.cs"
+            )
+        );
         comp.VerifyDiagnostics(
             // ?.cs(1,5): error CS0246: The type or namespace name 'C' could not be found (are you missing a using directive or an assembly reference?)
             // new C(); // 1
-            Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "C").WithArguments("C").WithLocation(1, 5),
-            // ?.cs(3,12): error CS9068: File-local type 'C' cannot be used because the containing file path cannot be converted into the equivalent UTF-8 byte representation. Unable to translate Unicode character \\uD800 at index 0 to specified code page.      
+            Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "C")
+                .WithArguments("C")
+                .WithLocation(1, 5),
+            // ?.cs(3,12): error CS9068: File-local type 'C' cannot be used because the containing file path cannot be converted into the equivalent UTF-8 byte representation. Unable to translate Unicode character \\uD800 at index 0 to specified code page.
             // file class C { } // 2
             Diagnostic(ErrorCode.ERR_FilePathCannotBeConvertedToUtf8, "C")
                 .WithArguments(
                     "C",
                     ExecutionConditionUtil.IsCoreClr
                         ? @"Unable to translate Unicode character \\uD800 at index 0 to specified code page."
-                        : @"Unable to translate Unicode character \uD800 at index 0 to specified code page.")
+                        : @"Unable to translate Unicode character \uD800 at index 0 to specified code page."
+                )
                 .WithLocation(3, 12)
-            );
+        );
 
         var classC = comp.GetMember("C");
         Assert.Equal("<_>F<no checksum>__C", classC.MetadataName);
@@ -1135,23 +1426,35 @@ public partial class C
     public void Pdb_01()
     {
         var source = """
-        using System;
+            using System;
 
-        C.M();
+            C.M();
 
-        file class C
-        {
-            public static void M() { Console.Write(1); }
-        }
-        """;
+            file class C
+            {
+                public static void M() { Console.Write(1); }
+            }
+            """;
 
-        var verifier = CompileAndVerify(SyntaxFactory.ParseSyntaxTree(source, options: TestOptions.RegularPreview, path: "path/to/My+File.cs", encoding: Encoding.Default), expectedOutput: "1", symbolValidator: validateSymbols);
+        var verifier = CompileAndVerify(
+            SyntaxFactory.ParseSyntaxTree(
+                source,
+                options: TestOptions.RegularPreview,
+                path: "path/to/My+File.cs",
+                encoding: Encoding.Default
+            ),
+            expectedOutput: "1",
+            symbolValidator: validateSymbols
+        );
         verifier.VerifyDiagnostics();
 
         var comp = (CSharpCompilation)verifier.Compilation;
         var c = comp.GetMember("C");
         Assert.Equal("C@My_File", c.ToTestDisplayString());
-        AssertEx.Equal("<My_File>FA818559F9E8E4AF40425A1819866C71357DE9017B4B7EFE1D34D9F48C0539B6E__C", c.MetadataName);
+        AssertEx.Equal(
+            "<My_File>FA818559F9E8E4AF40425A1819866C71357DE9017B4B7EFE1D34D9F48C0539B6E__C",
+            c.MetadataName
+        );
 
         void validateSymbols(ModuleSymbol module)
         {
@@ -1163,11 +1466,31 @@ public partial class C
 
 #pragma warning disable format
     [Theory]
-    [InlineData("file", "file", "<file1>F96B1D9CB33A43D51528FE81EDAFE5AE31358FE749929AC76B76C64B60DEF129D__C", "<file2>F66382B88D8E28FDD21CEADA0DE847F8B00DA1324042DD28F8FFC58C454BD6188__C")]
-    [InlineData("file", "",     "<file1>F96B1D9CB33A43D51528FE81EDAFE5AE31358FE749929AC76B76C64B60DEF129D__C", "C")]
-    [InlineData("",     "file", "C",                                                                           "<file2>F66382B88D8E28FDD21CEADA0DE847F8B00DA1324042DD28F8FFC58C454BD6188__C")]
+    [InlineData(
+        "file",
+        "file",
+        "<file1>F96B1D9CB33A43D51528FE81EDAFE5AE31358FE749929AC76B76C64B60DEF129D__C",
+        "<file2>F66382B88D8E28FDD21CEADA0DE847F8B00DA1324042DD28F8FFC58C454BD6188__C"
+    )]
+    [InlineData(
+        "file",
+        "",
+        "<file1>F96B1D9CB33A43D51528FE81EDAFE5AE31358FE749929AC76B76C64B60DEF129D__C",
+        "C"
+    )]
+    [InlineData(
+        "",
+        "file",
+        "C",
+        "<file2>F66382B88D8E28FDD21CEADA0DE847F8B00DA1324042DD28F8FFC58C454BD6188__C"
+    )]
 #pragma warning restore format
-    public void Duplication_01(string firstFileModifier, string secondFileModifier, string firstMetadataName, string secondMetadataName)
+    public void Duplication_01(
+        string firstFileModifier,
+        string secondFileModifier,
+        string firstMetadataName,
+        string secondMetadataName
+    )
     {
         // A file-local type is allowed to have the same name as a non-file-local type from a different file.
         // When both a file-local type and non-file-local type with the same name are in scope, the file-local type is preferred, since it's "more local".
@@ -1206,7 +1529,10 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (source1 + main, "file1.cs"), (source2, "file2.cs") }, expectedOutput: "1");
+        var verifier = CompileAndVerify(
+            new[] { (source1 + main, "file1.cs"), (source2, "file2.cs") },
+            expectedOutput: "1"
+        );
         var comp = (CSharpCompilation)verifier.Compilation;
         var cs = comp.GetMembers("C");
         var tree = comp.SyntaxTrees[0];
@@ -1214,7 +1540,10 @@ public partial class C
         AssertEx.Equal(firstMetadataName, expectedSymbol.MetadataName);
         verify();
 
-        verifier = CompileAndVerify(new[] { (source1, "file1.cs"), (source2 + main, "file2.cs") }, expectedOutput: "2");
+        verifier = CompileAndVerify(
+            new[] { (source1, "file1.cs"), (source2 + main, "file2.cs") },
+            expectedOutput: "2"
+        );
         comp = (CSharpCompilation)verifier.Compilation;
         cs = comp.GetMembers("C");
         tree = comp.SyntaxTrees[1];
@@ -1230,7 +1559,11 @@ public partial class C
             Assert.Equal(comp.SyntaxTrees[1], cs[1].DeclaringSyntaxReferences.Single().SyntaxTree);
 
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: true);
-            var cReference = tree.GetRoot().DescendantNodes().OfType<MemberAccessExpressionSyntax>().Last().Expression;
+            var cReference = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MemberAccessExpressionSyntax>()
+                .Last()
+                .Expression;
             var info = model.GetTypeInfo(cReference);
             Assert.Equal(expectedSymbol.GetPublicSymbol(), info.Type);
         }
@@ -1286,13 +1619,20 @@ public partial class C
             comp.VerifyDiagnostics(
                 // (3,7): error CS0101: The namespace '<global namespace>' already contains a definition for 'C'
                 // class C
-                Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "C").WithArguments("C", "<global namespace>").WithLocation(3, 7),
+                Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "C")
+                    .WithArguments("C", "<global namespace>")
+                    .WithLocation(3, 7),
                 // (5,24): error CS0111: Type 'C' already defines a member called 'M' with the same parameter types
                 //     public static void M()
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "M").WithArguments("M", "C").WithLocation(5, 24),
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "M")
+                    .WithArguments("M", "C")
+                    .WithLocation(5, 24),
                 // (14,11): error CS0121: The call is ambiguous between the following methods or properties: 'C.M()' and 'C.M()'
                 //         C.M();
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("C.M()", "C.M()").WithLocation(14, 11));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                    .WithArguments("C.M()", "C.M()")
+                    .WithLocation(14, 11)
+            );
 
             var cs = comp.GetMember("C");
             var syntaxReferences = cs.DeclaringSyntaxReferences;
@@ -1343,7 +1683,10 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (source1, "file1.cs"), (source2, "file2.cs"), (main, "file3.cs") }, expectedOutput: "2");
+        var verifier = CompileAndVerify(
+            new[] { (source1, "file1.cs"), (source2, "file2.cs"), (main, "file3.cs") },
+            expectedOutput: "2"
+        );
         var comp = (CSharpCompilation)verifier.Compilation;
         comp.VerifyDiagnostics();
 
@@ -1364,7 +1707,11 @@ public partial class C
 
         var tree = comp.SyntaxTrees[2];
         var model = comp.GetSemanticModel(tree, ignoreAccessibility: true);
-        var cReference = tree.GetRoot().DescendantNodes().OfType<MemberAccessExpressionSyntax>().Last().Expression;
+        var cReference = tree.GetRoot()
+            .DescendantNodes()
+            .OfType<MemberAccessExpressionSyntax>()
+            .Last()
+            .Expression;
         var info = model.GetTypeInfo(cReference);
         Assert.Equal(c1.GetPublicSymbol(), info.Type);
     }
@@ -1409,7 +1756,10 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (source1, "file1.cs"), (main, "file2.cs") }, expectedOutput: "2");
+        var verifier = CompileAndVerify(
+            new[] { (source1, "file1.cs"), (main, "file2.cs") },
+            expectedOutput: "2"
+        );
         var comp = (CSharpCompilation)verifier.Compilation;
         comp.VerifyDiagnostics();
 
@@ -1430,7 +1780,11 @@ public partial class C
 
         var tree = comp.SyntaxTrees[1];
         var model = comp.GetSemanticModel(tree, ignoreAccessibility: true);
-        var cReference = tree.GetRoot().DescendantNodes().OfType<MemberAccessExpressionSyntax>().Last().Expression;
+        var cReference = tree.GetRoot()
+            .DescendantNodes()
+            .OfType<MemberAccessExpressionSyntax>()
+            .Last()
+            .Expression;
         var info = model.GetTypeInfo(cReference);
         Assert.Equal(c1.GetPublicSymbol(), info.Type);
     }
@@ -1471,7 +1825,10 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (source1, "file1.cs"), (main, "file2.cs") }, expectedOutput: "2");
+        var verifier = CompileAndVerify(
+            new[] { (source1, "file1.cs"), (main, "file2.cs") },
+            expectedOutput: "2"
+        );
         var comp = (CSharpCompilation)verifier.Compilation;
         comp.VerifyDiagnostics();
 
@@ -1488,7 +1845,11 @@ public partial class C
 
         var tree = comp.SyntaxTrees[1];
         var model = comp.GetSemanticModel(tree, ignoreAccessibility: true);
-        var cReference = tree.GetRoot().DescendantNodes().OfType<MemberAccessExpressionSyntax>().Last().Expression;
+        var cReference = tree.GetRoot()
+            .DescendantNodes()
+            .OfType<MemberAccessExpressionSyntax>()
+            .Last()
+            .Expression;
         var info = model.GetTypeInfo(cReference);
         Assert.Equal(c1.GetPublicSymbol(), info.Type);
     }
@@ -1530,8 +1891,10 @@ public partial class C
         comp.VerifyDiagnostics(
             // file2.cs(8,12): error CS9070: The namespace 'NS' already contains a definition for 'C' in this file.
             // file class C
-            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C").WithArguments("C", "NS").WithLocation(8, 12)
-            );
+            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C")
+                .WithArguments("C", "NS")
+                .WithLocation(8, 12)
+        );
 
         var cs = comp.GetMembers("NS.C");
         Assert.Equal(2, cs.Length);
@@ -1551,14 +1914,18 @@ public partial class C
         comp.VerifyDiagnostics(
             // file1.cs(5,24): error CS0111: Type 'C' already defines a member called 'M' with the same parameter types
             //     public static void M()
-            Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "M").WithArguments("M", "NS.C").WithLocation(5, 24),
+            Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "M")
+                .WithArguments("M", "NS.C")
+                .WithLocation(5, 24),
             // file1.cs(7,30): error CS0103: The name 'Number' does not exist in the current context
             //         System.Console.Write(Number);
-            Diagnostic(ErrorCode.ERR_NameNotInContext, "Number").WithArguments("Number").WithLocation(7, 30),
+            Diagnostic(ErrorCode.ERR_NameNotInContext, "Number")
+                .WithArguments("Number")
+                .WithLocation(7, 30),
             // file2.cs(8,12): error CS0260: Missing partial modifier on declaration of type 'C'; another partial declaration of this type exists
             // file class C
             Diagnostic(ErrorCode.ERR_MissingPartial, "C").WithArguments("C").WithLocation(8, 12)
-            );
+        );
 
         var c = comp.GetMember("NS.C");
         Assert.True(c is SourceMemberContainerTypeSymbol { IsFileLocal: true });
@@ -1605,7 +1972,8 @@ public partial class C
         comp.VerifyDiagnostics(
             // (11,12): error CS0260: Missing partial modifier on declaration of type 'C'; another partial declaration of this type exists
             // file class C
-            Diagnostic(ErrorCode.ERR_MissingPartial, "C").WithArguments("C").WithLocation(11, 12));
+            Diagnostic(ErrorCode.ERR_MissingPartial, "C").WithArguments("C").WithLocation(11, 12)
+        );
 
         var cs = comp.GetMembers("C");
         Assert.Equal(2, cs.Length);
@@ -1625,7 +1993,8 @@ public partial class C
         comp.VerifyDiagnostics(
             // (11,12): error CS0260: Missing partial modifier on declaration of type 'C'; another partial declaration of this type exists
             // file class C
-            Diagnostic(ErrorCode.ERR_MissingPartial, "C").WithArguments("C").WithLocation(11, 12));
+            Diagnostic(ErrorCode.ERR_MissingPartial, "C").WithArguments("C").WithLocation(11, 12)
+        );
 
         cs = comp.GetMembers("C");
         Assert.Equal(2, cs.Length);
@@ -1675,14 +2044,21 @@ public partial class C
             }
             """;
 
-        var compilation = CreateCompilation(new[] { (source1, "file1.cs"), (source2, "file2.cs"), (source3, "file3.cs") });
+        var compilation = CreateCompilation(
+            new[] { (source1, "file1.cs"), (source2, "file2.cs"), (source3, "file3.cs") }
+        );
         compilation.VerifyDiagnostics(
             // (3,16): error CS9054: File-local type 'Outer.C' must be defined in a top level type; 'Outer.C' is a nested type.
             //     file class C
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "C").WithArguments("Outer.C").WithLocation(3, 16),
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "C")
+                .WithArguments("Outer.C")
+                .WithLocation(3, 16),
             // (3,16): error CS9054: File-local type 'Outer.C' must be defined in a top level type; 'Outer.C' is a nested type.
             //     file class C
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "C").WithArguments("Outer.C").WithLocation(3, 16));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "C")
+                .WithArguments("Outer.C")
+                .WithLocation(3, 16)
+        );
 
         var classOuter = compilation.GetMember<NamedTypeSymbol>("Outer");
         var cs = classOuter.GetMembers("C");
@@ -1725,7 +2101,9 @@ public partial class C
             }
             """;
 
-        var compilation = CreateCompilation(new[] { (source1, "file1.cs"), (source2, "file2.cs"), (source3, "file3.cs") });
+        var compilation = CreateCompilation(
+            new[] { (source1, "file1.cs"), (source2, "file2.cs"), (source3, "file3.cs") }
+        );
         compilation.VerifyDiagnostics();
 
         var namespaceNS = compilation.GetMember<NamespaceSymbol>("NS");
@@ -1796,13 +2174,18 @@ public partial class C
 
         void verify()
         {
-            comp.GetDiagnostics().Where(d => d.Code is not (int)ErrorCode.ERR_FileTypeNested).Verify();
+            comp.GetDiagnostics()
+                .Where(d => d.Code is not (int)ErrorCode.ERR_FileTypeNested)
+                .Verify();
             Assert.Equal(2, cs.Length);
             Assert.Equal(comp.SyntaxTrees[0], cs[0].DeclaringSyntaxReferences.Single().SyntaxTree);
             Assert.Equal(comp.SyntaxTrees[1], cs[1].DeclaringSyntaxReferences.Single().SyntaxTree);
 
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: true);
-            var cReference = tree.GetRoot().DescendantNodes().OfType<MemberAccessExpressionSyntax>().Last();
+            var cReference = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MemberAccessExpressionSyntax>()
+                .Last();
             var info = model.GetTypeInfo(cReference);
             Assert.Equal(expectedSymbol.GetPublicSymbol(), info.Type);
         }
@@ -1854,7 +2237,10 @@ public partial class C
             }
             """;
 
-        var comp = CreateCompilation(new[] { (source1 + main, "file1.cs"), (source2, "file2.cs") }, options: TestOptions.DebugExe);
+        var comp = CreateCompilation(
+            new[] { (source1 + main, "file1.cs"), (source2, "file2.cs") },
+            options: TestOptions.DebugExe
+        );
         comp.GetDiagnostics().Where(d => d.Code is not (int)ErrorCode.ERR_FileTypeNested).Verify();
         var outers = comp.GetMembers("Outer");
         var cs = outers.Select(o => ((NamedTypeSymbol)o).GetMember("C")).ToArray();
@@ -1862,7 +2248,10 @@ public partial class C
         var expectedSymbol = cs[0];
         verify();
 
-        comp = CreateCompilation(new[] { (source1, "file1.cs"), (source2 + main, "file2.cs") }, options: TestOptions.DebugExe);
+        comp = CreateCompilation(
+            new[] { (source1, "file1.cs"), (source2 + main, "file2.cs") },
+            options: TestOptions.DebugExe
+        );
         comp.GetDiagnostics().Where(d => d.Code is not (int)ErrorCode.ERR_FileTypeNested).Verify();
         outers = comp.GetMembers("Outer");
         cs = outers.Select(o => ((NamedTypeSymbol)o).GetMember("C")).ToArray();
@@ -1877,7 +2266,10 @@ public partial class C
             Assert.Equal(comp.SyntaxTrees[1], cs[1].DeclaringSyntaxReferences.Single().SyntaxTree);
 
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: true);
-            var cReference = tree.GetRoot().DescendantNodes().OfType<MemberAccessExpressionSyntax>().Last();
+            var cReference = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MemberAccessExpressionSyntax>()
+                .Last();
             var info = model.GetTypeInfo(cReference);
             Assert.Equal(expectedSymbol.GetPublicSymbol(), info.Type);
         }
@@ -1924,7 +2316,10 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (userCode, "file1.cs"), (generatedCode, "file2.cs") }, expectedOutput: "OtherFile.csProgram.cs");
+        var verifier = CompileAndVerify(
+            new[] { (userCode, "file1.cs"), (generatedCode, "file2.cs") },
+            expectedOutput: "OtherFile.csProgram.cs"
+        );
         verifier.VerifyDiagnostics();
     }
 
@@ -1971,7 +2366,10 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (userCode, "file1.cs"), (generatedCode, "file2.cs") }, expectedOutput: "OtherFile.csProgram.cs");
+        var verifier = CompileAndVerify(
+            new[] { (userCode, "file1.cs"), (generatedCode, "file2.cs") },
+            expectedOutput: "OtherFile.csProgram.cs"
+        );
         verifier.VerifyDiagnostics();
     }
 
@@ -2015,7 +2413,10 @@ public partial class C
 
             """;
 
-        var verifier = CompileAndVerify(new[] { (userCode, "file1.cs"), (generatedCode, "file2.cs") }, expectedOutput: "OtherFile.cs");
+        var verifier = CompileAndVerify(
+            new[] { (userCode, "file1.cs"), (generatedCode, "file2.cs") },
+            expectedOutput: "OtherFile.cs"
+        );
         verifier.VerifyDiagnostics();
     }
 
@@ -2033,7 +2434,10 @@ public partial class C
         comp.VerifyDiagnostics(
             // (4,7): error CS9070: The namespace 'NS' already contains a definition for 'C' in this file.
             // class C { }
-            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C").WithArguments("C", "NS").WithLocation(4, 7));
+            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C")
+                .WithArguments("C", "NS")
+                .WithLocation(4, 7)
+        );
     }
 
     [Fact]
@@ -2050,7 +2454,10 @@ public partial class C
         comp.VerifyDiagnostics(
             // (4,12): error CS9070: The namespace 'NS' already contains a definition for 'C' in this file.
             // file class C { }
-            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C").WithArguments("C", "NS").WithLocation(4, 12));
+            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C")
+                .WithArguments("C", "NS")
+                .WithLocation(4, 12)
+        );
     }
 
     [Fact]
@@ -2068,10 +2475,15 @@ public partial class C
         comp.VerifyDiagnostics(
             // file1.cs(4,7): error CS9070: The namespace 'NS' already contains a definition for 'C' in this file.
             // class C { }
-            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C").WithArguments("C", "NS").WithLocation(4, 7),
+            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C")
+                .WithArguments("C", "NS")
+                .WithLocation(4, 7),
             // file1.cs(5,7): error CS9070: The namespace 'NS' already contains a definition for 'C' in this file.
             // class C { }
-            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C").WithArguments("C", "NS").WithLocation(5, 7));
+            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C")
+                .WithArguments("C", "NS")
+                .WithLocation(5, 7)
+        );
     }
 
     [Fact]
@@ -2089,10 +2501,15 @@ public partial class C
         comp.VerifyDiagnostics(
             // (4,12): error CS9070: The namespace 'NS' already contains a definition for 'C' in this file.
             // file class C { }
-            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C").WithArguments("C", "NS").WithLocation(4, 12),
+            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C")
+                .WithArguments("C", "NS")
+                .WithLocation(4, 12),
             // (5,7): error CS9070: The namespace 'NS' already contains a definition for 'C' in this file.
             // class C { }
-            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C").WithArguments("C", "NS").WithLocation(5, 7));
+            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C")
+                .WithArguments("C", "NS")
+                .WithLocation(5, 7)
+        );
     }
 
     [Fact]
@@ -2114,10 +2531,15 @@ public partial class C
         comp.VerifyDiagnostics(
             // (7,17): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'D'.
             //     public void M1(C c) { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M1").WithArguments("C", "D").WithLocation(7, 17),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M1")
+                .WithArguments("C", "D")
+                .WithLocation(7, 17),
             // (8,18): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'D'.
             //     private void M2(C c) { } // 2
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M2").WithArguments("C", "D").WithLocation(8, 18));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M2")
+                .WithArguments("C", "D")
+                .WithLocation(8, 18)
+        );
     }
 
     [Fact]
@@ -2139,10 +2561,15 @@ public partial class C
         comp.VerifyDiagnostics(
             // (7,14): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'D'.
             //     public C M1() => new C(); // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M1").WithArguments("C", "D").WithLocation(7, 14),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M1")
+                .WithArguments("C", "D")
+                .WithLocation(7, 14),
             // (8,15): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'D'.
             //     private C M2() => new C(); // 2
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M2").WithArguments("C", "D").WithLocation(8, 15));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M2")
+                .WithArguments("C", "D")
+                .WithLocation(8, 15)
+        );
     }
 
     [Fact]
@@ -2167,22 +2594,35 @@ public partial class C
         comp.VerifyDiagnostics(
             // (8,7): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'E'.
             //     C field; // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "field").WithArguments("C", "E").WithLocation(8, 7),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "field")
+                .WithArguments("C", "E")
+                .WithLocation(8, 7),
             // (8,7): warning CS0169: The field 'E.field' is never used
             //     C field; // 1
-            Diagnostic(ErrorCode.WRN_UnreferencedField, "field").WithArguments("E.field").WithLocation(8, 7),
+            Diagnostic(ErrorCode.WRN_UnreferencedField, "field")
+                .WithArguments("E.field")
+                .WithLocation(8, 7),
             // (9,7): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'E'.
             //     C property { get; set; } // 2
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "property").WithArguments("C", "E").WithLocation(9, 7),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "property")
+                .WithArguments("C", "E")
+                .WithLocation(9, 7),
             // (10,12): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'E'.
             //     object this[C c] { get => c; set { } } // 3
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "this").WithArguments("C", "E").WithLocation(10, 12),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "this")
+                .WithArguments("C", "E")
+                .WithLocation(10, 12),
             // (11,13): error CS9051: File-local type 'D' cannot be used in a member signature in non-file-local type 'E'.
             //     event D @event; // 4
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "@event").WithArguments("D", "E").WithLocation(11, 13),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "@event")
+                .WithArguments("D", "E")
+                .WithLocation(11, 13),
             // (11,13): warning CS0067: The event 'E.event' is never used
             //     event D @event; // 4
-            Diagnostic(ErrorCode.WRN_UnreferencedEvent, "@event").WithArguments("E.event").WithLocation(11, 13));
+            Diagnostic(ErrorCode.WRN_UnreferencedEvent, "@event")
+                .WithArguments("E.event")
+                .WithLocation(11, 13)
+        );
     }
 
     [Fact]
@@ -2208,22 +2648,35 @@ public partial class C
         comp.VerifyDiagnostics(
             // (9,13): error CS9051: File-local type 'C.Inner' cannot be used in a member signature in non-file-local type 'E'.
             //     C.Inner field; // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "field").WithArguments("C.Inner", "E").WithLocation(9, 13),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "field")
+                .WithArguments("C.Inner", "E")
+                .WithLocation(9, 13),
             // (9,13): warning CS0169: The field 'E.field' is never used
             //     C.Inner field; // 1
-            Diagnostic(ErrorCode.WRN_UnreferencedField, "field").WithArguments("E.field").WithLocation(9, 13),
+            Diagnostic(ErrorCode.WRN_UnreferencedField, "field")
+                .WithArguments("E.field")
+                .WithLocation(9, 13),
             // (10,13): error CS9051: File-local type 'C.Inner' cannot be used in a member signature in non-file-local type 'E'.
             //     C.Inner property { get; set; } // 2
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "property").WithArguments("C.Inner", "E").WithLocation(10, 13),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "property")
+                .WithArguments("C.Inner", "E")
+                .WithLocation(10, 13),
             // (11,12): error CS9051: File-local type 'C.Inner' cannot be used in a member signature in non-file-local type 'E'.
             //     object this[C.Inner inner] { get => inner; set { } } // 3
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "this").WithArguments("C.Inner", "E").WithLocation(11, 12),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "this")
+                .WithArguments("C.Inner", "E")
+                .WithLocation(11, 12),
             // (12,27): error CS9051: File-local type 'C.InnerDelegate' cannot be used in a member signature in non-file-local type 'E'.
             //     event C.InnerDelegate @event; // 4
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "@event").WithArguments("C.InnerDelegate", "E").WithLocation(12, 27),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "@event")
+                .WithArguments("C.InnerDelegate", "E")
+                .WithLocation(12, 27),
             // (12,27): warning CS0067: The event 'E.event' is never used
             //     event C.InnerDelegate @event; // 4
-            Diagnostic(ErrorCode.WRN_UnreferencedEvent, "@event").WithArguments("E.event").WithLocation(12, 27));
+            Diagnostic(ErrorCode.WRN_UnreferencedEvent, "@event")
+                .WithArguments("E.event")
+                .WithLocation(12, 27)
+        );
     }
 
     [Fact]
@@ -2265,16 +2718,25 @@ public partial class C
         comp.VerifyDiagnostics(
             // (24,17): error CS9051: File-local type 'C.Inner' cannot be used in a member signature in non-file-local type 'E.Inner'.
             //         C.Inner field; // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "field").WithArguments("C.Inner", "E.Inner").WithLocation(24, 17),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "field")
+                .WithArguments("C.Inner", "E.Inner")
+                .WithLocation(24, 17),
             // (25,17): error CS9051: File-local type 'C.Inner' cannot be used in a member signature in non-file-local type 'E.Inner'.
             //         C.Inner property { get; set; } // 2
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "property").WithArguments("C.Inner", "E.Inner").WithLocation(25, 17),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "property")
+                .WithArguments("C.Inner", "E.Inner")
+                .WithLocation(25, 17),
             // (26,16): error CS9051: File-local type 'C.Inner' cannot be used in a member signature in non-file-local type 'E.Inner'.
             //         object this[C.Inner inner] { get => inner; set { } } // 3
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "this").WithArguments("C.Inner", "E.Inner").WithLocation(26, 16),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "this")
+                .WithArguments("C.Inner", "E.Inner")
+                .WithLocation(26, 16),
             // (27,31): error CS9051: File-local type 'C.InnerDelegate' cannot be used in a member signature in non-file-local type 'E.Inner'.
             //         event C.InnerDelegate @event; // 4
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "@event").WithArguments("C.InnerDelegate", "E.Inner").WithLocation(27, 31));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "@event")
+                .WithArguments("C.InnerDelegate", "E.Inner")
+                .WithLocation(27, 31)
+        );
     }
 
     [Fact]
@@ -2293,10 +2755,15 @@ public partial class C
         comp.VerifyDiagnostics(
             // (5,15): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'Del1'.
             // delegate void Del1(C c); // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "Del1").WithArguments("C", "Del1").WithLocation(5, 15),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "Del1")
+                .WithArguments("C", "Del1")
+                .WithLocation(5, 15),
             // (6,12): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'Del2'.
             // delegate C Del2(); // 2
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "Del2").WithArguments("C", "Del2").WithLocation(6, 12));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "Del2")
+                .WithArguments("C", "Del2")
+                .WithLocation(6, 12)
+        );
     }
 
     [Fact]
@@ -2318,10 +2785,15 @@ public partial class C
         comp.VerifyDiagnostics(
             // (5,15): error CS9051: File-local type 'C<int>' cannot be used in a member signature in non-file-local type 'Del1'.
             // delegate void Del1(C<int> c); // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "Del1").WithArguments("C<int>", "Del1").WithLocation(5, 15),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "Del1")
+                .WithArguments("C<int>", "Del1")
+                .WithLocation(5, 15),
             // (6,17): error CS9051: File-local type 'C<int>' cannot be used in a member signature in non-file-local type 'Del2'.
             // delegate C<int> Del2(); // 2
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "Del2").WithArguments("C<int>", "Del2").WithLocation(6, 17));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "Del2")
+                .WithArguments("C<int>", "Del2")
+                .WithLocation(6, 17)
+        );
 
         var del1 = comp.GetMember<NamedTypeSymbol>("Del1");
         var cInt = (ConstructedNamedTypeSymbol)del1.DelegateInvokeMethod.Parameters[0].Type;
@@ -2347,10 +2819,15 @@ public partial class C
         comp.VerifyDiagnostics(
             // (7,30): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'D'.
             //     public static D operator +(D d, C c) => d; // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "+").WithArguments("C", "D").WithLocation(7, 30),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "+")
+                .WithArguments("C", "D")
+                .WithLocation(7, 30),
             // (8,30): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'D'.
             //     public static C operator -(D d1, D d2) => new C(); // 2
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "-").WithArguments("C", "D").WithLocation(8, 30));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "-")
+                .WithArguments("C", "D")
+                .WithLocation(8, 30)
+        );
     }
 
     [Fact]
@@ -2371,7 +2848,10 @@ public partial class C
         comp.VerifyDiagnostics(
             // (7,12): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'D'.
             //     public D(C c) { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "D").WithArguments("C", "D").WithLocation(7, 12));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "D")
+                .WithArguments("C", "D")
+                .WithLocation(7, 12)
+        );
     }
 
     [Fact]
@@ -2392,13 +2872,20 @@ public partial class C
         comp.VerifyDiagnostics(
             // (7,14): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'D'.
             //     public C M(C c1, C c2) => c1; // 1, 2, 3
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M").WithArguments("C", "D").WithLocation(7, 14),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M")
+                .WithArguments("C", "D")
+                .WithLocation(7, 14),
             // (7,14): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'D'.
             //     public C M(C c1, C c2) => c1; // 1, 2, 3
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M").WithArguments("C", "D").WithLocation(7, 14),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M")
+                .WithArguments("C", "D")
+                .WithLocation(7, 14),
             // (7,14): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'D'.
             //     public C M(C c1, C c2) => c1; // 1, 2, 3
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M").WithArguments("C", "D").WithLocation(7, 14));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M")
+                .WithArguments("C", "D")
+                .WithLocation(7, 14)
+        );
     }
 
     [Fact]
@@ -2437,22 +2924,35 @@ public partial class C
         comp.VerifyDiagnostics(
             // (8,20): error CS9051: File-local type 'C<int>' cannot be used in a member signature in non-file-local type 'C1'.
             //     private C<int> F; // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "F").WithArguments("C<int>", "C1").WithLocation(8, 20),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "F")
+                .WithArguments("C<int>", "C1")
+                .WithLocation(8, 20),
             // (9,28): error CS9051: File-local type 'Del<int>' cannot be used in a member signature in non-file-local type 'C1'.
             //     private event Del<int> E; // 2
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "E").WithArguments("Del<int>", "C1").WithLocation(9, 28),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "E")
+                .WithArguments("Del<int>", "C1")
+                .WithLocation(9, 28),
             // (10,18): error CS9051: File-local type 'C<int>' cannot be used in a member signature in non-file-local type 'C1'.
             //     private void M1(C<int> input) { } // 3
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M1").WithArguments("C<int>", "C1").WithLocation(10, 18),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M1")
+                .WithArguments("C<int>", "C1")
+                .WithLocation(10, 18),
             // (11,20): error CS9051: File-local type 'C<int>' cannot be used in a member signature in non-file-local type 'C1'.
             //     private C<int> M2() => throw null!; // 4
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M2").WithArguments("C<int>", "C1").WithLocation(11, 20),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M2")
+                .WithArguments("C<int>", "C1")
+                .WithLocation(11, 20),
             // (13,20): error CS9051: File-local type 'C<int>' cannot be used in a member signature in non-file-local type 'C1'.
             //     private C<int> P { get; set; } // 5
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "P").WithArguments("C<int>", "C1").WithLocation(13, 20),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "P")
+                .WithArguments("C<int>", "C1")
+                .WithLocation(13, 20),
             // (14,20): error CS9051: File-local type 'C<int>' cannot be used in a member signature in non-file-local type 'C1'.
             //     private C<int> this[int i] => throw null!; // 6
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "this").WithArguments("C<int>", "C1").WithLocation(14, 20));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "this")
+                .WithArguments("C<int>", "C1")
+                .WithLocation(14, 20)
+        );
 
         verifyConstructedFileType(comp.GetMember<FieldSymbol>("C1.F").Type);
         verifyConstructedFileType(comp.GetMember<EventSymbol>("C1.E").Type);
@@ -2482,16 +2982,23 @@ public partial class C
         comp.VerifyDiagnostics(
             // (1,19): error CS9052: File-local type 'C' cannot use accessibility modifiers.
             // public file class C { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNoExplicitAccessibility, "C").WithArguments("C").WithLocation(1, 19),
+            Diagnostic(ErrorCode.ERR_FileTypeNoExplicitAccessibility, "C")
+                .WithArguments("C")
+                .WithLocation(1, 19),
             // (2,21): error CS9052: File-local type 'D' cannot use accessibility modifiers.
             // file internal class D { } // 2
-            Diagnostic(ErrorCode.ERR_FileTypeNoExplicitAccessibility, "D").WithArguments("D").WithLocation(2, 21),
+            Diagnostic(ErrorCode.ERR_FileTypeNoExplicitAccessibility, "D")
+                .WithArguments("D")
+                .WithLocation(2, 21),
             // (3,20): error CS9052: File-local type 'E' cannot use accessibility modifiers.
             // private file class E { } // 3, 4
-            Diagnostic(ErrorCode.ERR_FileTypeNoExplicitAccessibility, "E").WithArguments("E").WithLocation(3, 20),
+            Diagnostic(ErrorCode.ERR_FileTypeNoExplicitAccessibility, "E")
+                .WithArguments("E")
+                .WithLocation(3, 20),
             // (3,20): error CS1527: Elements defined in a namespace cannot be explicitly declared as private, protected, protected internal, or private protected
             // private file class E { } // 3, 4
-            Diagnostic(ErrorCode.ERR_NoNamespacePrivate, "E").WithLocation(3, 20));
+            Diagnostic(ErrorCode.ERR_NoNamespacePrivate, "E").WithLocation(3, 20)
+        );
     }
 
     [Fact]
@@ -2506,10 +3013,15 @@ public partial class C
         comp.VerifyDiagnostics(
             // (1,6): error CS1004: Duplicate 'file' modifier
             // file file class C { } // 1
-            Diagnostic(ErrorCode.ERR_DuplicateModifier, "file").WithArguments("file").WithLocation(1, 6),
+            Diagnostic(ErrorCode.ERR_DuplicateModifier, "file")
+                .WithArguments("file")
+                .WithLocation(1, 6),
             // (2,15): error CS1004: Duplicate 'file' modifier
             // file readonly file struct D { } // 2
-            Diagnostic(ErrorCode.ERR_DuplicateModifier, "file").WithArguments("file").WithLocation(2, 15));
+            Diagnostic(ErrorCode.ERR_DuplicateModifier, "file")
+                .WithArguments("file")
+                .WithLocation(2, 15)
+        );
     }
 
     [Fact]
@@ -2526,13 +3038,20 @@ public partial class C
         comp.VerifyDiagnostics(
             // (2,7): error CS9053: File-local type 'Base' cannot be used as a base type of non-file-local type 'Derived1'.
             // class Derived1 : Base { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeBase, "Derived1").WithArguments("Base", "Derived1").WithLocation(2, 7),
+            Diagnostic(ErrorCode.ERR_FileTypeBase, "Derived1")
+                .WithArguments("Base", "Derived1")
+                .WithLocation(2, 7),
             // (3,14): error CS0060: Inconsistent accessibility: base class 'Base' is less accessible than class 'Derived2'
             // public class Derived2 : Base { } // 2, 3
-            Diagnostic(ErrorCode.ERR_BadVisBaseClass, "Derived2").WithArguments("Derived2", "Base").WithLocation(3, 14),
+            Diagnostic(ErrorCode.ERR_BadVisBaseClass, "Derived2")
+                .WithArguments("Derived2", "Base")
+                .WithLocation(3, 14),
             // (3,14): error CS9053: File-local type 'Base' cannot be used as a base type of non-file-local type 'Derived2'.
             // public class Derived2 : Base { } // 2, 3
-            Diagnostic(ErrorCode.ERR_FileTypeBase, "Derived2").WithArguments("Base", "Derived2").WithLocation(3, 14));
+            Diagnostic(ErrorCode.ERR_FileTypeBase, "Derived2")
+                .WithArguments("Base", "Derived2")
+                .WithLocation(3, 14)
+        );
     }
 
     [Fact]
@@ -2552,7 +3071,10 @@ public partial class C
         comp.VerifyDiagnostics(
             // (6,11): error CS9053: File-local type 'Interface' cannot be used as a base type of non-file-local type 'Derived3'.
             // interface Derived3 : Interface { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeBase, "Derived3").WithArguments("Interface", "Derived3").WithLocation(6, 11));
+            Diagnostic(ErrorCode.ERR_FileTypeBase, "Derived3")
+                .WithArguments("Interface", "Derived3")
+                .WithLocation(6, 11)
+        );
     }
 
     [Fact]
@@ -2587,7 +3109,10 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (source1, "file1.cs"), (source2, "file2.cs") }, expectedOutput: "2");
+        var verifier = CompileAndVerify(
+            new[] { (source1, "file1.cs"), (source2, "file2.cs") },
+            expectedOutput: "2"
+        );
         verifier.VerifyDiagnostics();
         var comp = (CSharpCompilation)verifier.Compilation;
 
@@ -2627,7 +3152,10 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (source1, "file1.cs"), (source2, "file2.cs") }, expectedOutput: "1");
+        var verifier = CompileAndVerify(
+            new[] { (source1, "file1.cs"), (source2, "file2.cs") },
+            expectedOutput: "1"
+        );
         verifier.VerifyDiagnostics();
         var comp = (CSharpCompilation)verifier.Compilation;
 
@@ -2657,43 +3185,54 @@ public partial class C
         comp.VerifyDiagnostics(
             // (3,19): error CS9053: File-local type 'I1' cannot be used as a base type of non-file-local type 'Derived'.
             // partial interface Derived : I1 { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeBase, "Derived").WithArguments("I1", "Derived").WithLocation(3, 19));
+            Diagnostic(ErrorCode.ERR_FileTypeBase, "Derived")
+                .WithArguments("I1", "Derived")
+                .WithLocation(3, 19)
+        );
     }
 
     [Fact]
     public void BaseClause_06()
     {
         var source = """
-        file class C<T> { }
+            file class C<T> { }
 
-        class D : C<int> { } // 1
-        file class E : C<int> { }
+            class D : C<int> { } // 1
+            file class E : C<int> { }
 
-        file interface I<T> { }
+            file interface I<T> { }
 
-        class F : I<int> { } // ok
-        file class G : I<int> { }
+            class F : I<int> { } // ok
+            file class G : I<int> { }
 
-        interface J : I<int> { } // 2
-        file interface K : I<int> { }
-        """;
+            interface J : I<int> { } // 2
+            file interface K : I<int> { }
+            """;
 
         var comp = CreateCompilation((source, "Program.cs"));
         comp.VerifyEmitDiagnostics(
             // Program.cs(3,7): error CS9053: File-local type 'C<int>' cannot be used as a base type of non-file-local type 'D'.
             // class D : C<int>, I<int> { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeBase, "D").WithArguments("C<int>", "D").WithLocation(3, 7),
+            Diagnostic(ErrorCode.ERR_FileTypeBase, "D")
+                .WithArguments("C<int>", "D")
+                .WithLocation(3, 7),
             // Program.cs(11,11): error CS9053: File-local type 'I<int>' cannot be used as a base type of non-file-local type 'J'.
             // interface J : I<int> { } // 2
-            Diagnostic(ErrorCode.ERR_FileTypeBase, "J").WithArguments("I<int>", "J").WithLocation(11, 11));
+            Diagnostic(ErrorCode.ERR_FileTypeBase, "J")
+                .WithArguments("I<int>", "J")
+                .WithLocation(11, 11)
+        );
 
-        var cInt = (ConstructedNamedTypeSymbol)comp.GetMember<NamedTypeSymbol>("D").BaseTypeNoUseSiteDiagnostics;
+        var cInt = (ConstructedNamedTypeSymbol)
+            comp.GetMember<NamedTypeSymbol>("D").BaseTypeNoUseSiteDiagnostics;
         Assert.True(cInt.IsFileLocal);
 
-        var iInt = (ConstructedNamedTypeSymbol)comp.GetMember<NamedTypeSymbol>("F").InterfacesNoUseSiteDiagnostics()[0];
+        var iInt = (ConstructedNamedTypeSymbol)
+            comp.GetMember<NamedTypeSymbol>("F").InterfacesNoUseSiteDiagnostics()[0];
         Assert.True(iInt.IsFileLocal);
 
-        iInt = (ConstructedNamedTypeSymbol)comp.GetMember<NamedTypeSymbol>("J").InterfacesNoUseSiteDiagnostics()[0];
+        iInt = (ConstructedNamedTypeSymbol)
+            comp.GetMember<NamedTypeSymbol>("J").InterfacesNoUseSiteDiagnostics()[0];
         Assert.True(iInt.IsFileLocal);
     }
 
@@ -2733,7 +3272,10 @@ public partial class C
         comp.VerifyDiagnostics(
             // (7,17): error CS9051: File-local type 'I' cannot be used in a member signature in non-file-local type 'C'.
             //     public void F(I i) { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "F").WithArguments("I", "C").WithLocation(7, 17));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "F")
+                .WithArguments("I", "C")
+                .WithLocation(7, 17)
+        );
     }
 
     [Fact]
@@ -2754,7 +3296,10 @@ public partial class C
         comp.VerifyDiagnostics(
             // (7,12): error CS9051: File-local type 'I' cannot be used in a member signature in non-file-local type 'C'.
             //     void I.F(I i) { }
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "F").WithArguments("I", "C").WithLocation(7, 12));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "F")
+                .WithArguments("I", "C")
+                .WithLocation(7, 12)
+        );
     }
 
     [Fact]
@@ -2807,13 +3352,20 @@ public partial class C
         comp.VerifyDiagnostics(
             // (3,10): error CS0246: The type or namespace name 'I' could not be found (are you missing a using directive or an assembly reference?)
             //     void I.F() { } // 2, 3
-            Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "I").WithArguments("I").WithLocation(3, 10),
+            Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "I")
+                .WithArguments("I")
+                .WithLocation(3, 10),
             // (3,10): error CS0538: 'I' in explicit interface declaration is not an interface
             //     void I.F() { } // 2, 3
-            Diagnostic(ErrorCode.ERR_ExplicitInterfaceImplementationNotInterface, "I").WithArguments("I").WithLocation(3, 10),
+            Diagnostic(ErrorCode.ERR_ExplicitInterfaceImplementationNotInterface, "I")
+                .WithArguments("I")
+                .WithLocation(3, 10),
             // (5,19): error CS0535: 'C' does not implement interface member 'I.F()'
             // partial class C : I // 1
-            Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "I").WithArguments("C", "I.F()").WithLocation(5, 19));
+            Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "I")
+                .WithArguments("C", "I.F()")
+                .WithLocation(5, 19)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68219")]
@@ -2833,15 +3385,22 @@ public partial class C
             }
             """;
 
-        var comp = CreateCompilation(new[] { (source1, "F1.cs") }, targetFramework: TargetFramework.Net70);
+        var comp = CreateCompilation(
+            new[] { (source1, "F1.cs") },
+            targetFramework: TargetFramework.Net70
+        );
         comp.VerifyDiagnostics(
             // F1.cs(6,16): error CS8646: 'FI<object>.Prop' is explicitly implemented more than once.
             // internal class C : FI<object>
-            Diagnostic(ErrorCode.ERR_DuplicateExplicitImpl, "C").WithArguments("FI<object>.Prop").WithLocation(6, 16),
+            Diagnostic(ErrorCode.ERR_DuplicateExplicitImpl, "C")
+                .WithArguments("FI<object>.Prop")
+                .WithLocation(6, 16),
             // F1.cs(9,13): error CS0540: 'C.FI<dynamic>.Prop': containing type does not implement interface 'FI<dynamic>'
             //     dynamic FI<dynamic>.Prop { get; }
-            Diagnostic(ErrorCode.ERR_ClassDoesntImplementInterface, "FI<dynamic>").WithArguments("C.FI<dynamic>.Prop", "FI<dynamic>").WithLocation(9, 13)
-            );
+            Diagnostic(ErrorCode.ERR_ClassDoesntImplementInterface, "FI<dynamic>")
+                .WithArguments("C.FI<dynamic>.Prop", "FI<dynamic>")
+                .WithLocation(9, 13)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68219")]
@@ -2863,18 +3422,30 @@ public partial class C
             }
             """;
 
-        var comp = CreateCompilation(new[] { (source1, "F1.cs") }, targetFramework: TargetFramework.Net70);
+        var comp = CreateCompilation(
+            new[] { (source1, "F1.cs") },
+            targetFramework: TargetFramework.Net70
+        );
         comp.VerifyDiagnostics(
             // F1.cs(8,16): error CS8646: 'FI<nint>.Prop' is explicitly implemented more than once.
             // internal class C : FI<nint>, FI<IntPtr>
-            Diagnostic(ErrorCode.ERR_DuplicateExplicitImpl, "C").WithArguments("FI<nint>.Prop").WithLocation(8, 16),
+            Diagnostic(ErrorCode.ERR_DuplicateExplicitImpl, "C")
+                .WithArguments("FI<nint>.Prop")
+                .WithLocation(8, 16),
             // F1.cs(8,30): error CS0528: 'FI<nint>' is already listed in interface list
             // internal class C : FI<nint>, FI<IntPtr>
-            Diagnostic(ErrorCode.ERR_DuplicateInterfaceInBaseList, "FI<IntPtr>").WithArguments("FI<nint>").WithLocation(8, 30),
+            Diagnostic(ErrorCode.ERR_DuplicateInterfaceInBaseList, "FI<IntPtr>")
+                .WithArguments("FI<nint>")
+                .WithLocation(8, 30),
             // F1.cs(11,23): error CS0102: The type 'C' already contains a definition for '<F1>F2A62B10769F2595F65CAD631A41E2B54F5D1B3601B00884A41306FA9AD9BACDB__FI<nint>.Prop'
             //     IntPtr FI<IntPtr>.Prop { get; }
-            Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "Prop").WithArguments("C", "<F1>F2A62B10769F2595F65CAD631A41E2B54F5D1B3601B00884A41306FA9AD9BACDB__FI<nint>.Prop").WithLocation(11, 23)
-            );
+            Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "Prop")
+                .WithArguments(
+                    "C",
+                    "<F1>F2A62B10769F2595F65CAD631A41E2B54F5D1B3601B00884A41306FA9AD9BACDB__FI<nint>.Prop"
+                )
+                .WithLocation(11, 23)
+        );
     }
 
     [Fact]
@@ -2895,24 +3466,37 @@ public partial class C
 
         var comp = CreateCompilation(source, options: TestOptions.UnsafeDebugDll);
         comp.VerifyDiagnostics(
-                // (1,28): warning CS0649: Field 'S.X' is never assigned to, and will always have its default value 0
-                // file struct S { public int X; }
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "X").WithArguments("S.X", "0").WithLocation(1, 28),
-                // (5,18): error CS9051: File-local type 'Container<S>' cannot be used in a member signature in non-file-local type 'Program'.
-                //     Container<S> M1() => new Container<S>(); // 1
-                Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M1").WithArguments("Container<S>", "Program").WithLocation(5, 18),
-                // (6,9): error CS9051: File-local type 'S[]' cannot be used in a member signature in non-file-local type 'Program'.
-                //     S[] M2() => new S[0]; // 2
-                Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M2").WithArguments("S[]", "Program").WithLocation(6, 9),
-                // (7,12): error CS9051: File-local type '(S, S)' cannot be used in a member signature in non-file-local type 'Program'.
-                //     (S, S) M3() => (new S(), new S()); // 3
-                Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M3").WithArguments("(S, S)", "Program").WithLocation(7, 12),
-                // (8,8): error CS9051: File-local type 'S*' cannot be used in a member signature in non-file-local type 'Program'.
-                //     S* M4() => null; // 4
-                Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M4").WithArguments("S*", "Program").WithLocation(8, 8),
-                // (9,24): error CS9051: File-local type 'delegate*<S, void>' cannot be used in a member signature in non-file-local type 'Program'.
-                //     delegate*<S, void> M5() => null; // 5
-                Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M5").WithArguments("delegate*<S, void>", "Program").WithLocation(9, 24));
+            // (1,28): warning CS0649: Field 'S.X' is never assigned to, and will always have its default value 0
+            // file struct S { public int X; }
+            Diagnostic(ErrorCode.WRN_UnassignedInternalField, "X")
+                .WithArguments("S.X", "0")
+                .WithLocation(1, 28),
+            // (5,18): error CS9051: File-local type 'Container<S>' cannot be used in a member signature in non-file-local type 'Program'.
+            //     Container<S> M1() => new Container<S>(); // 1
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M1")
+                .WithArguments("Container<S>", "Program")
+                .WithLocation(5, 18),
+            // (6,9): error CS9051: File-local type 'S[]' cannot be used in a member signature in non-file-local type 'Program'.
+            //     S[] M2() => new S[0]; // 2
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M2")
+                .WithArguments("S[]", "Program")
+                .WithLocation(6, 9),
+            // (7,12): error CS9051: File-local type '(S, S)' cannot be used in a member signature in non-file-local type 'Program'.
+            //     (S, S) M3() => (new S(), new S()); // 3
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M3")
+                .WithArguments("(S, S)", "Program")
+                .WithLocation(7, 12),
+            // (8,8): error CS9051: File-local type 'S*' cannot be used in a member signature in non-file-local type 'Program'.
+            //     S* M4() => null; // 4
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M4")
+                .WithArguments("S*", "Program")
+                .WithLocation(8, 8),
+            // (9,24): error CS9051: File-local type 'delegate*<S, void>' cannot be used in a member signature in non-file-local type 'Program'.
+            //     delegate*<S, void> M5() => null; // 5
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "M5")
+                .WithArguments("delegate*<S, void>", "Program")
+                .WithLocation(9, 24)
+        );
     }
 
     [Fact]
@@ -2936,7 +3520,10 @@ public partial class C
         comp.VerifyDiagnostics(
             // (10,30): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'E.M<T>(T)'.
             //     void M<T>(T t) where T : C { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "C").WithArguments("C", "E.M<T>(T)").WithLocation(10, 30));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "C")
+                .WithArguments("C", "E.M<T>(T)")
+                .WithLocation(10, 30)
+        );
     }
 
     [Theory, WorkItem(62435, "https://github.com/dotnet/roslyn/issues/62435")]
@@ -2963,7 +3550,10 @@ public partial class C
         comp.VerifyDiagnostics(
             // (7,{{17 + typeKind.Length}}): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'E<T>'.
             // {{typeKind}} E<T> where T : C // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "C").WithArguments("C", "E<T>").WithLocation(7, 17 + typeKind.Length));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "C")
+                .WithArguments("C", "E<T>")
+                .WithLocation(7, 17 + typeKind.Length)
+        );
     }
 
     [Fact]
@@ -3011,7 +3601,10 @@ public partial class C
         comp.VerifyDiagnostics(
             // (5,36): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'D2<T>'.
             // delegate void D2<T>(T t) where T : C; // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "C").WithArguments("C", "D2<T>").WithLocation(5, 36));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "C")
+                .WithArguments("C", "D2<T>")
+                .WithLocation(5, 36)
+        );
     }
 
     [Fact]
@@ -3035,9 +3628,16 @@ public partial class C
         comp.VerifyDiagnostics(
             // (5,38): error CS9051: File-local type 'C<int>' cannot be used in a member signature in non-file-local type 'D.M<T>(T)'.
             //     private void M<T>(T t) where T : C<int> { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "C<int>").WithArguments("C<int>", "D.M<T>(T)").WithLocation(5, 38));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "C<int>")
+                .WithArguments("C<int>", "D.M<T>(T)")
+                .WithLocation(5, 38)
+        );
 
-        var cInt = (ConstructedNamedTypeSymbol)comp.GetMember<MethodSymbol>("D.M").TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0].Type;
+        var cInt = (ConstructedNamedTypeSymbol)
+            comp.GetMember<MethodSymbol>("D.M")
+                .TypeParameters[0]
+                .ConstraintTypesNoUseSiteDiagnostics[0]
+                .Type;
         Assert.True(cInt.IsFileLocal);
     }
 
@@ -3056,9 +3656,16 @@ public partial class C
         comp.VerifyDiagnostics(
             // (3,22): error CS9051: File-local type 'C<int>' cannot be used in a member signature in non-file-local type 'D<T>'.
             // class D<T> where T : C<int> { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "C<int>").WithArguments("C<int>", "D<T>").WithLocation(3, 22));
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "C<int>")
+                .WithArguments("C<int>", "D<T>")
+                .WithLocation(3, 22)
+        );
 
-        var cInt = (ConstructedNamedTypeSymbol)comp.GetMember<NamedTypeSymbol>("D").TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0].Type;
+        var cInt = (ConstructedNamedTypeSymbol)
+            comp.GetMember<NamedTypeSymbol>("D")
+                .TypeParameters[0]
+                .ConstraintTypesNoUseSiteDiagnostics[0]
+                .Type;
         Assert.True(cInt.IsFileLocal);
     }
 
@@ -3075,21 +3682,31 @@ public partial class C
             file record struct R4(C c);
             """;
 
-        var comp = CreateCompilation(new[] { (source, "file1.cs"), (IsExternalInitTypeDefinition, "file2.cs") });
+        var comp = CreateCompilation(
+            new[] { (source, "file1.cs"), (IsExternalInitTypeDefinition, "file2.cs") }
+        );
         comp.VerifyDiagnostics(
             // (3,8): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'R1'.
             // record R1(C c); // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "R1").WithArguments("C", "R1").WithLocation(3, 8),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "R1")
+                .WithArguments("C", "R1")
+                .WithLocation(3, 8),
             // (3,8): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'R1'.
             // record R1(C c); // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "R1").WithArguments("C", "R1").WithLocation(3, 8),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "R1")
+                .WithArguments("C", "R1")
+                .WithLocation(3, 8),
             // (4,15): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'R2'.
             // record struct R2(C c); // 2
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "R2").WithArguments("C", "R2").WithLocation(4, 15),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "R2")
+                .WithArguments("C", "R2")
+                .WithLocation(4, 15),
             // (4,15): error CS9051: File-local type 'C' cannot be used in a member signature in non-file-local type 'R2'.
             // record struct R2(C c); // 2
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "R2").WithArguments("C", "R2").WithLocation(4, 15)
-            );
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "R2")
+                .WithArguments("C", "R2")
+                .WithLocation(4, 15)
+        );
     }
 
     [Fact]
@@ -3190,7 +3807,10 @@ public partial class C
         comp.VerifyDiagnostics(
             // (5,9): error CS0234: The type or namespace name 'C' does not exist in the namespace 'NS' (are you missing an assembly reference?)
             //         NS.C.M(); // 1
-            Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "NS.C").WithArguments("C", "NS").WithLocation(5, 9));
+            Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "NS.C")
+                .WithArguments("C", "NS")
+                .WithLocation(5, 9)
+        );
     }
 
     [Fact]
@@ -3220,10 +3840,13 @@ public partial class C
         comp.VerifyDiagnostics(
             // (5,16): error CS9054: File-local type 'Outer.C' must be defined in a top level type; 'Outer.C' is a nested type.
             //     file class C // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "C").WithArguments("Outer.C").WithLocation(5, 16),
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "C")
+                .WithArguments("Outer.C")
+                .WithLocation(5, 16),
             // (15,15): error CS0122: 'Outer.C' is inaccessible due to its protection level
             //         Outer.C.M(); // 2
-            Diagnostic(ErrorCode.ERR_BadAccess, "C").WithArguments("Outer.C").WithLocation(15, 15));
+            Diagnostic(ErrorCode.ERR_BadAccess, "C").WithArguments("Outer.C").WithLocation(15, 15)
+        );
     }
 
     [Fact]
@@ -3258,10 +3881,15 @@ public partial class C
         comp.VerifyDiagnostics(
             // (5,15): error CS0117: 'Outer' does not contain a definition for 'C'
             //         Outer.C.M(); // 1
-            Diagnostic(ErrorCode.ERR_NoSuchMember, "C").WithArguments("Outer", "C").WithLocation(5, 15),
+            Diagnostic(ErrorCode.ERR_NoSuchMember, "C")
+                .WithArguments("Outer", "C")
+                .WithLocation(5, 15),
             // (5,16): error CS9054: File-local type 'Outer.C' must be defined in a top level type; 'Outer.C' is a nested type.
             //     file class C
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "C").WithArguments("Outer.C").WithLocation(5, 16));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "C")
+                .WithArguments("Outer.C")
+                .WithLocation(5, 16)
+        );
     }
 
     [Fact]
@@ -3291,7 +3919,15 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (usings, "file1.cs"), (source, "file2.cs"), (IsExternalInitTypeDefinition, "file3.cs") }, expectedOutput: "1");
+        var verifier = CompileAndVerify(
+            new[]
+            {
+                (usings, "file1.cs"),
+                (source, "file2.cs"),
+                (IsExternalInitTypeDefinition, "file3.cs"),
+            },
+            expectedOutput: "1"
+        );
         verifier.VerifyDiagnostics();
     }
 
@@ -3322,11 +3958,15 @@ public partial class C
 
         // note: 'Usings' is a legacy setting which only works in scripts.
         // https://github.com/dotnet/roslyn/issues/61502
-        var compilation = CreateCompilation(new[] { (source, "file1.cs"), (IsExternalInitTypeDefinition, "file2.cs") }, options: TestOptions.DebugExe.WithUsings("NS"));
+        var compilation = CreateCompilation(
+            new[] { (source, "file1.cs"), (IsExternalInitTypeDefinition, "file2.cs") },
+            options: TestOptions.DebugExe.WithUsings("NS")
+        );
         compilation.VerifyDiagnostics(
             // (15,9): error CS0103: The name 'C' does not exist in the current context
             //         C.M(); // 1
-            Diagnostic(ErrorCode.ERR_NameNotInContext, "C").WithArguments("C").WithLocation(15, 9));
+            Diagnostic(ErrorCode.ERR_NameNotInContext, "C").WithArguments("C").WithLocation(15, 9)
+        );
     }
 
     [Fact]
@@ -3353,15 +3993,19 @@ public partial class C
 
         var compilation = CreateCompilation(new[] { (source, "file1.cs"), (main, "file2.cs") });
         compilation.VerifyDiagnostics(
-                // (1,1): hidden CS8019: Unnecessary using directive.
-                // global using static C;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using static C;").WithLocation(1, 1),
-                // (1,21): error CS9055: File-local type 'C' cannot be used in a 'global using static' directive.
-                // global using static C;
-                Diagnostic(ErrorCode.ERR_GlobalUsingStaticFileType, "C").WithArguments("C").WithLocation(1, 21),
-                // (5,9): error CS0103: The name 'M' does not exist in the current context
-                //         M();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "M").WithArguments("M").WithLocation(5, 9));
+            // (1,1): hidden CS8019: Unnecessary using directive.
+            // global using static C;
+            Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using static C;")
+                .WithLocation(1, 1),
+            // (1,21): error CS9055: File-local type 'C' cannot be used in a 'global using static' directive.
+            // global using static C;
+            Diagnostic(ErrorCode.ERR_GlobalUsingStaticFileType, "C")
+                .WithArguments("C")
+                .WithLocation(1, 21),
+            // (5,9): error CS0103: The name 'M' does not exist in the current context
+            //         M();
+            Diagnostic(ErrorCode.ERR_NameNotInContext, "M").WithArguments("M").WithLocation(5, 9)
+        );
     }
 
     [Fact]
@@ -3392,15 +4036,19 @@ public partial class C
 
         var compilation = CreateCompilation(new[] { (source, "file1.cs"), (main, "file2.cs") });
         compilation.VerifyDiagnostics(
-                // (1,1): hidden CS8019: Unnecessary using directive.
-                // global using static Container<C>;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using static Container<C>;").WithLocation(1, 1),
-                // (1,21): error CS9055: File-local type 'Container<C>' cannot be used in a 'global using static' directive.
-                // global using static Container<C>;
-                Diagnostic(ErrorCode.ERR_GlobalUsingStaticFileType, "Container<C>").WithArguments("Container<C>").WithLocation(1, 21),
-                // (5,9): error CS0103: The name 'M' does not exist in the current context
-                //         M();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "M").WithArguments("M").WithLocation(5, 9));
+            // (1,1): hidden CS8019: Unnecessary using directive.
+            // global using static Container<C>;
+            Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using static Container<C>;")
+                .WithLocation(1, 1),
+            // (1,21): error CS9055: File-local type 'Container<C>' cannot be used in a 'global using static' directive.
+            // global using static Container<C>;
+            Diagnostic(ErrorCode.ERR_GlobalUsingStaticFileType, "Container<C>")
+                .WithArguments("Container<C>")
+                .WithLocation(1, 21),
+            // (5,9): error CS0103: The name 'M' does not exist in the current context
+            //         M();
+            Diagnostic(ErrorCode.ERR_NameNotInContext, "M").WithArguments("M").WithLocation(5, 9)
+        );
     }
 
     [Fact]
@@ -3429,13 +4077,17 @@ public partial class C
         compilation.VerifyDiagnostics(
             // file1.cs(1,1): hidden CS8019: Unnecessary using directive.
             // global using static C<int>;
-            Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using static C<int>;").WithLocation(1, 1),
+            Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "global using static C<int>;")
+                .WithLocation(1, 1),
             // file1.cs(1,21): error CS9055: File-local type 'C<int>' cannot be used in a 'global using static' directive.
             // global using static C<int>;
-            Diagnostic(ErrorCode.ERR_GlobalUsingStaticFileType, "C<int>").WithArguments("C<int>").WithLocation(1, 21),
+            Diagnostic(ErrorCode.ERR_GlobalUsingStaticFileType, "C<int>")
+                .WithArguments("C<int>")
+                .WithLocation(1, 21),
             // file2.cs(5,9): error CS0103: The name 'M' does not exist in the current context
             //         M();
-            Diagnostic(ErrorCode.ERR_NameNotInContext, "M").WithArguments("M").WithLocation(5, 9));
+            Diagnostic(ErrorCode.ERR_NameNotInContext, "M").WithArguments("M").WithLocation(5, 9)
+        );
     }
 
     [Fact]
@@ -3496,7 +4148,10 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (source1, "file1.cs"), (source2, "file2.cs") }, expectedOutput: "1");
+        var verifier = CompileAndVerify(
+            new[] { (source1, "file1.cs"), (source2, "file2.cs") },
+            expectedOutput: "1"
+        );
         verifier.VerifyDiagnostics();
         var comp = (CSharpCompilation)verifier.Compilation;
 
@@ -3507,7 +4162,10 @@ public partial class C
         Assert.Equal(2, members.Length);
         var expectedMember = ((NamedTypeSymbol)members[0]).GetMember<MethodSymbol>("D.M");
 
-        var invocation = tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().First();
+        var invocation = tree.GetRoot()
+            .DescendantNodes()
+            .OfType<InvocationExpressionSyntax>()
+            .First();
         var symbolInfo = model.GetSymbolInfo(invocation.Expression);
         Assert.Equal(expectedMember.GetPublicSymbol(), symbolInfo.Symbol);
         Assert.Equal(0, symbolInfo.CandidateSymbols.Length);
@@ -3544,11 +4202,15 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (source1, "file1.cs"), (source2, "file2.cs") }, expectedOutput: "2");
+        var verifier = CompileAndVerify(
+            new[] { (source1, "file1.cs"), (source2, "file2.cs") },
+            expectedOutput: "2"
+        );
         verifier.VerifyDiagnostics(
             // (2,1): hidden CS8019: Unnecessary using directive.
             // using static C;
-            Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C;").WithLocation(2, 1));
+            Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C;").WithLocation(2, 1)
+        );
         var comp = (CSharpCompilation)verifier.Compilation;
 
         var tree = comp.SyntaxTrees[0];
@@ -3556,7 +4218,10 @@ public partial class C
 
         var expectedMember = comp.GetMember("D.M");
 
-        var invocation = tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().First();
+        var invocation = tree.GetRoot()
+            .DescendantNodes()
+            .OfType<InvocationExpressionSyntax>()
+            .First();
         var symbolInfo = model.GetSymbolInfo(invocation.Expression);
         Assert.Equal(expectedMember.GetPublicSymbol(), symbolInfo.Symbol);
         Assert.Equal(0, symbolInfo.CandidateSymbols.Length);
@@ -3603,13 +4268,20 @@ public partial class C
         compilation.VerifyDiagnostics(
             // (16,20): error CS9054: File-local type 'Derived.C' must be defined in a top level type; 'Derived.C' is a nested type.
             //     new file class C
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "C").WithArguments("Derived.C").WithLocation(16, 20));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "C")
+                .WithArguments("Derived.C")
+                .WithLocation(16, 20)
+        );
 
         var expected = compilation.GetMember<MethodSymbol>("Base.C.M");
 
         var tree = compilation.SyntaxTrees[1];
         var model = compilation.GetSemanticModel(tree);
-        var invoked = tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().Single().Expression;
+        var invoked = tree.GetRoot()
+            .DescendantNodes()
+            .OfType<InvocationExpressionSyntax>()
+            .Single()
+            .Expression;
         var symbolInfo = model.GetSymbolInfo(invoked);
         Assert.Equal(expected, symbolInfo.Symbol.GetSymbol());
     }
@@ -3642,7 +4314,9 @@ public partial class C
 
         var model = compilation.GetSemanticModel(tree, ignoreAccessibility: false);
 
-        var info = model.GetSymbolInfo(((ExpressionStatementSyntax)body.Statements.First()).Expression);
+        var info = model.GetSymbolInfo(
+            ((ExpressionStatementSyntax)body.Statements.First()).Expression
+        );
         Assert.Equal("void NS.C@<tree 0>.M()", info.Symbol.ToTestDisplayString());
 
         var classC = compilation.GetMember("NS.C").GetPublicSymbol();
@@ -3659,7 +4333,11 @@ public partial class C
         var nsSymbol = compilation.GetMember<NamespaceSymbol>("NS").GetPublicSymbol();
         Assert.Equal("NS", nsSymbol.ToTestDisplayString());
 
-        symbols = model.LookupSymbols(body.OpenBraceToken.EndPosition, container: nsSymbol, name: "C");
+        symbols = model.LookupSymbols(
+            body.OpenBraceToken.EndPosition,
+            container: nsSymbol,
+            name: "C"
+        );
         Assert.Equal(new[] { classC }, symbols);
 
         symbols = model.LookupSymbols(body.OpenBraceToken.EndPosition, container: nsSymbol);
@@ -3669,7 +4347,11 @@ public partial class C
         nsSymbol = compilation.GetMember<NamespaceSymbol>("System").GetPublicSymbol();
         Assert.Equal("System", nsSymbol.ToTestDisplayString());
 
-        symbols = model.LookupSymbols(body.OpenBraceToken.EndPosition, container: nsSymbol, name: "C");
+        symbols = model.LookupSymbols(
+            body.OpenBraceToken.EndPosition,
+            container: nsSymbol,
+            name: "C"
+        );
         Assert.Empty(symbols);
 
         symbols = model.LookupSymbols(body.OpenBraceToken.EndPosition, container: nsSymbol);
@@ -3705,14 +4387,16 @@ public partial class C
             // (7,9): error CS0103: The name 'C' does not exist in the current context
             //         C.M(); // 1
             Diagnostic(ErrorCode.ERR_NameNotInContext, "C").WithArguments("C").WithLocation(7, 9)
-            );
+        );
 
         var tree = compilation.SyntaxTrees[1];
         var body = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Last().Body!;
 
         var model = compilation.GetSemanticModel(tree, ignoreAccessibility: false);
 
-        var info = model.GetSymbolInfo(((ExpressionStatementSyntax)body.Statements.First()).Expression);
+        var info = model.GetSymbolInfo(
+            ((ExpressionStatementSyntax)body.Statements.First()).Expression
+        );
         Assert.Null(info.Symbol);
         Assert.Empty(info.CandidateSymbols);
         Assert.Equal(CandidateReason.None, info.CandidateReason);
@@ -3731,7 +4415,11 @@ public partial class C
         var nsSymbol = compilation.GetMember<NamespaceSymbol>("NS").GetPublicSymbol();
         Assert.Equal("NS", nsSymbol.ToTestDisplayString());
 
-        symbols = model.LookupSymbols(body.OpenBraceToken.EndPosition, container: nsSymbol, name: "C");
+        symbols = model.LookupSymbols(
+            body.OpenBraceToken.EndPosition,
+            container: nsSymbol,
+            name: "C"
+        );
         Assert.Empty(symbols);
 
         symbols = model.LookupSymbols(body.OpenBraceToken.EndPosition, container: nsSymbol);
@@ -3741,7 +4429,11 @@ public partial class C
         nsSymbol = compilation.GetMember<NamespaceSymbol>("System").GetPublicSymbol();
         Assert.Equal("System", nsSymbol.ToTestDisplayString());
 
-        symbols = model.LookupSymbols(body.OpenBraceToken.EndPosition, container: nsSymbol, name: "C");
+        symbols = model.LookupSymbols(
+            body.OpenBraceToken.EndPosition,
+            container: nsSymbol,
+            name: "C"
+        );
         Assert.Empty(symbols);
 
         symbols = model.LookupSymbols(body.OpenBraceToken.EndPosition, container: nsSymbol);
@@ -3775,8 +4467,16 @@ public partial class C
         var model = compilation.GetSemanticModel(tree, ignoreAccessibility: false);
 
         var newBody = body.AddStatements(SyntaxFactory.ParseStatement("C.M();"));
-        Assert.True(model.TryGetSpeculativeSemanticModel(position: body.OpenBraceToken.EndPosition, newBody, out var speculativeModel));
-        var info = speculativeModel!.GetSymbolInfo(((ExpressionStatementSyntax)newBody.Statements.First()).Expression);
+        Assert.True(
+            model.TryGetSpeculativeSemanticModel(
+                position: body.OpenBraceToken.EndPosition,
+                newBody,
+                out var speculativeModel
+            )
+        );
+        var info = speculativeModel!.GetSymbolInfo(
+            ((ExpressionStatementSyntax)newBody.Statements.First()).Expression
+        );
         Assert.Equal(compilation.GetMember("C.M").GetPublicSymbol(), info.Symbol);
 
         var classC = compilation.GetMember("C").GetPublicSymbol();
@@ -3816,8 +4516,16 @@ public partial class C
         var model = compilation.GetSemanticModel(tree, ignoreAccessibility: false);
 
         var newBody = body.AddStatements(SyntaxFactory.ParseStatement("C.M();"));
-        Assert.True(model.TryGetSpeculativeSemanticModel(position: body.OpenBraceToken.EndPosition, newBody, out var speculativeModel));
-        var info = speculativeModel!.GetSymbolInfo(((ExpressionStatementSyntax)newBody.Statements.First()).Expression);
+        Assert.True(
+            model.TryGetSpeculativeSemanticModel(
+                position: body.OpenBraceToken.EndPosition,
+                newBody,
+                out var speculativeModel
+            )
+        );
+        var info = speculativeModel!.GetSymbolInfo(
+            ((ExpressionStatementSyntax)newBody.Statements.First()).Expression
+        );
         Assert.Null(info.Symbol);
         Assert.Empty(info.CandidateSymbols);
         Assert.Equal(CandidateReason.None, info.CandidateReason);
@@ -3850,7 +4558,12 @@ public partial class C
             }
             """;
 
-        var compilation = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDocumentationMode(DocumentationMode.Diagnose));
+        var compilation = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
+                DocumentationMode.Diagnose
+            )
+        );
         compilation.VerifyDiagnostics();
     }
 
@@ -3877,12 +4590,17 @@ public partial class C
             }
             """;
 
-        var compilation = CreateCompilation(new[] { (source, "file1.cs"), (main, "file2.cs") }, parseOptions: TestOptions.RegularPreview.WithDocumentationMode(DocumentationMode.Diagnose));
+        var compilation = CreateCompilation(
+            new[] { (source, "file1.cs"), (main, "file2.cs") },
+            parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
+                DocumentationMode.Diagnose
+            )
+        );
         compilation.VerifyDiagnostics(
             // (4,45): warning CS1574: XML comment has cref attribute 'C' that could not be resolved
             //     /// In a different file than <see cref="C"/>.
             Diagnostic(ErrorCode.WRN_BadXMLRef, "C").WithArguments("C").WithLocation(4, 45)
-            );
+        );
     }
 
     [Fact]
@@ -3971,10 +4689,16 @@ public partial class C
         comp.VerifyDiagnostics(
             // (1,5): error CS1061: 'string' does not contain a definition for 'M' and no accessible extension method 'M' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
             // "a".M(); // 1
-            Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M").WithArguments("string", "M").WithLocation(1, 5));
+            Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M")
+                .WithArguments("string", "M")
+                .WithLocation(1, 5)
+        );
 
         var tree = comp.SyntaxTrees[0];
-        var methodNameSyntax = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Single();
+        var methodNameSyntax = tree.GetRoot()
+            .DescendantNodes()
+            .OfType<IdentifierNameSyntax>()
+            .Single();
         var model = comp.GetSemanticModel(tree);
 
         var symbolInfo = model.GetSymbolInfo(methodNameSyntax);
@@ -4012,10 +4736,15 @@ public partial class C
         comp.VerifyDiagnostics(
             // (1,5): error CS1061: 'string' does not contain a definition for 'M' and no accessible extension method 'M' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
             // "a".M(); // 1
-            Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M").WithArguments("string", "M").WithLocation(1, 5),
+            Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M")
+                .WithArguments("string", "M")
+                .WithLocation(1, 5),
             // (7,28): error CS1109: Extension methods must be defined in a top level static class; D is a nested class
             //         public static void M(this string s) // 2
-            Diagnostic(ErrorCode.ERR_ExtensionMethodsDecl, "M").WithArguments("D").WithLocation(7, 28));
+            Diagnostic(ErrorCode.ERR_ExtensionMethodsDecl, "M")
+                .WithArguments("D")
+                .WithLocation(7, 28)
+        );
     }
 
     [Fact]
@@ -4036,7 +4765,10 @@ public partial class C
         comp.VerifyDiagnostics(
             // (8,7): error CS9053: File-local type 'C' cannot be used as a base type of non-file-local type 'D'.
             // class D : C1 { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeBase, "D").WithArguments("NS.C", "NS.D").WithLocation(8, 7));
+            Diagnostic(ErrorCode.ERR_FileTypeBase, "D")
+                .WithArguments("NS.C", "NS.D")
+                .WithLocation(8, 7)
+        );
     }
 
     [Fact]
@@ -4056,11 +4788,17 @@ public partial class C
             }
             """;
 
-        var comp = CreateCompilation(new[]
-        {
-            SyntaxFactory.ParseSyntaxTree(source1, TestOptions.RegularPreview),
-            SyntaxFactory.ParseSyntaxTree(source2, TestOptions.RegularPreview, path: "path/to/FileB.cs")
-        });
+        var comp = CreateCompilation(
+            new[]
+            {
+                SyntaxFactory.ParseSyntaxTree(source1, TestOptions.RegularPreview),
+                SyntaxFactory.ParseSyntaxTree(
+                    source2,
+                    TestOptions.RegularPreview,
+                    path: "path/to/FileB.cs"
+                ),
+            }
+        );
         comp.VerifyDiagnostics();
 
         var c1 = comp.GetMember<NamedTypeSymbol>("C1");
@@ -4086,14 +4824,22 @@ public partial class C
             }
             """;
 
-        var comp = CreateSubmission(source1, parseOptions: TestOptions.Script.WithLanguageVersion(LanguageVersion.Preview));
+        var comp = CreateSubmission(
+            source1,
+            parseOptions: TestOptions.Script.WithLanguageVersion(LanguageVersion.Preview)
+        );
         comp.VerifyDiagnostics(
             // (5,19): error CS9054: File-local type 'C1' must be defined in a top level type; 'C1' is a nested type.
             // static file class C1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "C1").WithArguments("C1").WithLocation(5, 19),
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "C1")
+                .WithArguments("C1")
+                .WithLocation(5, 19),
             // (7,24): error CS1109: Extension methods must be defined in a top level static class; C1 is a nested class
             //     public static void M(this string s) { }
-            Diagnostic(ErrorCode.ERR_ExtensionMethodsDecl, "M").WithArguments("C1").WithLocation(7, 24));
+            Diagnostic(ErrorCode.ERR_ExtensionMethodsDecl, "M")
+                .WithArguments("C1")
+                .WithLocation(7, 24)
+        );
     }
 
     [Fact]
@@ -4114,16 +4860,30 @@ public partial class C
         // Ideally we would give an error about use of System.Void here.
         var comp = CreateCompilation(source1);
         comp.VerifyDiagnostics(
-                // (3,6): warning CS8321: The local function 'M' is declared but never used
-                // void M(Void v) { }
-                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M").WithArguments("M").WithLocation(3, 6));
+            // (3,6): warning CS8321: The local function 'M' is declared but never used
+            // void M(Void v) { }
+            Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M")
+                .WithArguments("M")
+                .WithLocation(3, 6)
+        );
 
         var tree = comp.SyntaxTrees[0];
         var model = comp.GetSemanticModel(tree);
 
-        var voidTypeSyntax = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Single().Type!;
+        var voidTypeSyntax = tree.GetRoot()
+            .DescendantNodes()
+            .OfType<ParameterSyntax>()
+            .Single()
+            .Type!;
         var typeInfo = model.GetTypeInfo(voidTypeSyntax);
-        Assert.Equal("System.Void@<tree 0>", typeInfo.Type!.ToDisplayString(SymbolDisplayFormat.TestFormat.WithCompilerInternalOptions(SymbolDisplayCompilerInternalOptions.IncludeContainingFileForFileTypes)));
+        Assert.Equal(
+            "System.Void@<tree 0>",
+            typeInfo.Type!.ToDisplayString(
+                SymbolDisplayFormat.TestFormat.WithCompilerInternalOptions(
+                    SymbolDisplayCompilerInternalOptions.IncludeContainingFileForFileTypes
+                )
+            )
+        );
     }
 
     [Fact]
@@ -4137,12 +4897,21 @@ public partial class C
         var comp = CreateCompilation(source1);
         comp.VerifyDiagnostics();
         var sourceMember = comp.GetMember<NamedTypeSymbol>("C");
-        Assert.Equal("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C", sourceMember.MetadataName);
+        Assert.Equal(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C",
+            sourceMember.MetadataName
+        );
 
-        var sourceType = comp.GetTypeByMetadataName("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C");
+        var sourceType = comp.GetTypeByMetadataName(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C"
+        );
         Assert.Equal(sourceMember, sourceType);
 
-        Assert.Null(comp.GetTypeByMetadataName("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__D"));
+        Assert.Null(
+            comp.GetTypeByMetadataName(
+                "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__D"
+            )
+        );
         Assert.Null(comp.GetTypeByMetadataName("<>F1__C"));
         Assert.Null(comp.GetTypeByMetadataName("F0__C"));
         Assert.Null(comp.GetTypeByMetadataName("<file>F0__C"));
@@ -4153,9 +4922,14 @@ public partial class C
         var comp2 = CreateCompilation("", references: new[] { comp.EmitToImageReference() });
         comp2.VerifyDiagnostics();
         var metadataMember = comp2.GetMember<NamedTypeSymbol>("C");
-        Assert.Equal("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C", metadataMember.MetadataName);
+        Assert.Equal(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C",
+            metadataMember.MetadataName
+        );
 
-        var metadataType = comp2.GetTypeByMetadataName("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C");
+        var metadataType = comp2.GetTypeByMetadataName(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C"
+        );
         Assert.Equal(metadataMember, metadataType);
 
         Assert.Null(comp2.GetTypeByMetadataName("C"));
@@ -4172,11 +4946,20 @@ public partial class C
         var comp = CreateCompilation(source1);
         comp.VerifyDiagnostics();
         var sourceMember = comp.GetMember<NamedTypeSymbol>("C");
-        Assert.Equal("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C`1", sourceMember.MetadataName);
+        Assert.Equal(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C`1",
+            sourceMember.MetadataName
+        );
 
-        var sourceType = comp.GetTypeByMetadataName("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C`1");
+        var sourceType = comp.GetTypeByMetadataName(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C`1"
+        );
         Assert.Equal(sourceMember, sourceType);
-        Assert.Null(comp.GetTypeByMetadataName("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C"));
+        Assert.Null(
+            comp.GetTypeByMetadataName(
+                "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C"
+            )
+        );
         Assert.Null(comp.GetTypeByMetadataName("C"));
         Assert.Null(comp.GetTypeByMetadataName("C`1"));
 
@@ -4185,9 +4968,14 @@ public partial class C
         comp2.VerifyDiagnostics();
 
         var metadataMember = comp2.GetMember<NamedTypeSymbol>("C");
-        Assert.Equal("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C`1", metadataMember.MetadataName);
+        Assert.Equal(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C`1",
+            metadataMember.MetadataName
+        );
 
-        var metadataType = comp2.GetTypeByMetadataName("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C`1");
+        var metadataType = comp2.GetTypeByMetadataName(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C`1"
+        );
         Assert.Equal(metadataMember, metadataType);
 
         Assert.Null(comp2.GetTypeByMetadataName("C`1"));
@@ -4208,11 +4996,19 @@ public partial class C
         comp.VerifyDiagnostics(
             // (3,16): error CS9054: File-local type 'Outer.C' must be defined in a top level type; 'Outer.C' is a nested type.
             //     file class C { } // 1
-            Diagnostic(ErrorCode.ERR_FileTypeNested, "C").WithArguments("Outer.C").WithLocation(3, 16));
+            Diagnostic(ErrorCode.ERR_FileTypeNested, "C")
+                .WithArguments("Outer.C")
+                .WithLocation(3, 16)
+        );
         var sourceMember = comp.GetMember<NamedTypeSymbol>("Outer.C");
-        Assert.Equal("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C", sourceMember.MetadataName);
+        Assert.Equal(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C",
+            sourceMember.MetadataName
+        );
 
-        var sourceType = comp.GetTypeByMetadataName("Outer.<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C");
+        var sourceType = comp.GetTypeByMetadataName(
+            "Outer.<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C"
+        );
         // Note: strictly speaking, it would be reasonable to return the (invalid) nested file-local type symbol here.
         // However, since we don't actually support nested file types, we don't think we need the API to do the additional lookup
         // when the requested type is nested, and so we end up giving a null here.
@@ -4235,24 +5031,36 @@ public partial class C
         var comp = CreateCompilation(new[] { (source1, "file1.cs"), (source2, "file2.cs") });
         comp.VerifyDiagnostics();
         var sourceMember = comp.GetMembers("C")[0];
-        AssertEx.Equal("<file1>F96B1D9CB33A43D51528FE81EDAFE5AE31358FE749929AC76B76C64B60DEF129D__C", sourceMember.MetadataName);
+        AssertEx.Equal(
+            "<file1>F96B1D9CB33A43D51528FE81EDAFE5AE31358FE749929AC76B76C64B60DEF129D__C",
+            sourceMember.MetadataName
+        );
 
-        var sourceType = comp.GetTypeByMetadataName("<file1>F96B1D9CB33A43D51528FE81EDAFE5AE31358FE749929AC76B76C64B60DEF129D__C");
+        var sourceType = comp.GetTypeByMetadataName(
+            "<file1>F96B1D9CB33A43D51528FE81EDAFE5AE31358FE749929AC76B76C64B60DEF129D__C"
+        );
         Assert.Equal(sourceMember, sourceType);
 
         var sourceTypeCByMetadataName = comp.GetTypeByMetadataName("C");
         Assert.NotNull(sourceTypeCByMetadataName);
         Assert.Equal("C", sourceTypeCByMetadataName.MetadataName);
-        Assert.False(sourceTypeCByMetadataName is SourceMemberContainerTypeSymbol { IsFileLocal: true });
+        Assert.False(
+            sourceTypeCByMetadataName is SourceMemberContainerTypeSymbol { IsFileLocal: true }
+        );
 
         // from metadata
         var comp2 = CreateCompilation("", references: new[] { comp.EmitToImageReference() });
         comp2.VerifyDiagnostics();
 
         var metadataMember = comp2.GetMembers("C")[0];
-        Assert.Equal("<file1>F96B1D9CB33A43D51528FE81EDAFE5AE31358FE749929AC76B76C64B60DEF129D__C", metadataMember.MetadataName);
+        Assert.Equal(
+            "<file1>F96B1D9CB33A43D51528FE81EDAFE5AE31358FE749929AC76B76C64B60DEF129D__C",
+            metadataMember.MetadataName
+        );
 
-        var metadataType = comp2.GetTypeByMetadataName("<file1>F96B1D9CB33A43D51528FE81EDAFE5AE31358FE749929AC76B76C64B60DEF129D__C");
+        var metadataType = comp2.GetTypeByMetadataName(
+            "<file1>F96B1D9CB33A43D51528FE81EDAFE5AE31358FE749929AC76B76C64B60DEF129D__C"
+        );
         Assert.Equal(metadataMember, metadataType);
 
         var metadataTypeCByMetadataName = comp2.GetTypeByMetadataName("C");
@@ -4262,7 +5070,10 @@ public partial class C
 
     [CombinatorialData]
     [Theory]
-    public void GetTypeByMetadataName_05(bool firstIsMetadataReference, bool secondIsMetadataReference)
+    public void GetTypeByMetadataName_05(
+        bool firstIsMetadataReference,
+        bool secondIsMetadataReference
+    )
     {
         var source1 = """
             file class C { }
@@ -4272,22 +5083,34 @@ public partial class C
         var ref1 = CreateCompilation(source1, assemblyName: "ref1");
         var ref2 = CreateCompilation(source1, assemblyName: "ref2");
 
-        var comp = CreateCompilation("", references: new[]
-        {
-            firstIsMetadataReference ? ref1.ToMetadataReference() : ref1.EmitToImageReference(),
-            secondIsMetadataReference ? ref2.ToMetadataReference() : ref2.EmitToImageReference()
-        });
+        var comp = CreateCompilation(
+            "",
+            references: new[]
+            {
+                firstIsMetadataReference ? ref1.ToMetadataReference() : ref1.EmitToImageReference(),
+                secondIsMetadataReference
+                    ? ref2.ToMetadataReference()
+                    : ref2.EmitToImageReference(),
+            }
+        );
         comp.VerifyDiagnostics();
 
-        const string metadataName = "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C";
+        const string metadataName =
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C";
         var sourceType = comp.GetTypeByMetadataName(metadataName);
         Assert.Null(sourceType);
         Assert.Null(comp.GetTypeByMetadataName("C"));
 
         var types = comp.GetTypesByMetadataName(metadataName);
         Assert.Equal(2, types.Length);
-        Assert.Equal(firstIsMetadataReference ? "C@<tree 0>" : "C@<unknown>", types[0].ToTestDisplayString());
-        Assert.Equal(secondIsMetadataReference ? "C@<tree 0>" : "C@<unknown>", types[1].ToTestDisplayString());
+        Assert.Equal(
+            firstIsMetadataReference ? "C@<tree 0>" : "C@<unknown>",
+            types[0].ToTestDisplayString()
+        );
+        Assert.Equal(
+            secondIsMetadataReference ? "C@<tree 0>" : "C@<unknown>",
+            types[1].ToTestDisplayString()
+        );
         Assert.NotEqual(types[0], types[1]);
 
         Assert.Empty(comp.GetTypesByMetadataName("C"));
@@ -4305,9 +5128,13 @@ public partial class C
         comp.VerifyDiagnostics(
             // (2,12): error CS9070: The namespace '<global namespace>' already contains a definition for 'C' in this file.
             // file class C { }
-            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C").WithArguments("C", "<global namespace>").WithLocation(2, 12));
+            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "C")
+                .WithArguments("C", "<global namespace>")
+                .WithLocation(2, 12)
+        );
 
-        const string metadataName = "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C";
+        const string metadataName =
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C";
         var sourceType = ((Compilation)comp).GetTypeByMetadataName(metadataName);
         Assert.Equal("C@<tree 0>", sourceType.ToTestDisplayString());
 
@@ -4327,7 +5154,13 @@ public partial class C
             file class C { }
             """;
 
-        var comp = CreateCompilation(SyntaxFactory.ParseSyntaxTree(source1, options: TestOptions.RegularPreview, path: "path/to/SomeFile.cs"));
+        var comp = CreateCompilation(
+            SyntaxFactory.ParseSyntaxTree(
+                source1,
+                options: TestOptions.RegularPreview,
+                path: "path/to/SomeFile.cs"
+            )
+        );
         comp.VerifyDiagnostics();
 
         const string checksum = "0146C6A4DC0D382DC3D534F34EF202BE3FAF72EE35E08C8382B730D5270B6585";
@@ -4355,7 +5188,8 @@ public partial class C
         var comp = CreateCompilation(source1, targetFramework: TargetFramework.Mscorlib40);
         comp.VerifyDiagnostics();
 
-        const string metadataName = "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C";
+        const string metadataName =
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C";
 
         var member = comp.GetMember<NamedTypeSymbol>("C");
         Assert.Equal(metadataName, member.MetadataName);
@@ -4373,11 +5207,15 @@ public partial class C
             }
             """;
 
-        var comp2 = CreateCompilation(source2, references: new[] { comp.ToMetadataReference() }, targetFramework: TargetFramework.Mscorlib45);
+        var comp2 = CreateCompilation(
+            source2,
+            references: new[] { comp.ToMetadataReference() },
+            targetFramework: TargetFramework.Mscorlib45
+        );
         comp2.VerifyDiagnostics(
-        // (5,9): error CS0103: The name 'C' does not exist in the current context
-        //         C.M();
-        Diagnostic(ErrorCode.ERR_NameNotInContext, "C").WithArguments("C").WithLocation(5, 9)
+            // (5,9): error CS0103: The name 'C' does not exist in the current context
+            //         C.M();
+            Diagnostic(ErrorCode.ERR_NameNotInContext, "C").WithArguments("C").WithLocation(5, 9)
         );
 
         Assert.NotEqual(comp.Assembly.CorLibrary, comp2.Assembly.CorLibrary);
@@ -4404,7 +5242,41 @@ public partial class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
 
-        var expectedChecksum = new byte[] { 0xE3, 0xB0, 0xC4, 0x42, 0x98, 0xFC, 0x1C, 0x14, 0x9A, 0xFB, 0xF4, 0xC8, 0x99, 0x6F, 0xB9, 0x24, 0x27, 0xAE, 0x41, 0xE4, 0x64, 0x9B, 0x93, 0x4C, 0xA4, 0x95, 0x99, 0x1B, 0x78, 0x52, 0xB8, 0x55 };
+        var expectedChecksum = new byte[]
+        {
+            0xE3,
+            0xB0,
+            0xC4,
+            0x42,
+            0x98,
+            0xFC,
+            0x1C,
+            0x14,
+            0x9A,
+            0xFB,
+            0xF4,
+            0xC8,
+            0x99,
+            0x6F,
+            0xB9,
+            0x24,
+            0x27,
+            0xAE,
+            0x41,
+            0xE4,
+            0x64,
+            0x9B,
+            0x93,
+            0x4C,
+            0xA4,
+            0x95,
+            0x99,
+            0x1B,
+            0x78,
+            0x52,
+            0xB8,
+            0x55,
+        };
         var tree = comp.SyntaxTrees[0];
         var model = comp.GetSemanticModel(tree);
         var node = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Single();
@@ -4417,7 +5289,9 @@ public partial class C
         Assert.True(type.IsFileLocal);
 
         var referencingMetadataComp = CreateCompilation("", new[] { comp.ToMetadataReference() });
-        type = ((Compilation)referencingMetadataComp).GetTypeByMetadataName("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C")!;
+        type = ((Compilation)referencingMetadataComp).GetTypeByMetadataName(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C"
+        )!;
         Assert.Equal("C@<tree 0>", type.ToTestDisplayString());
         identifier = type.GetSymbol()!.AssociatedFileIdentifier;
         Assert.NotNull(identifier);
@@ -4426,7 +5300,9 @@ public partial class C
         Assert.True(type.IsFileLocal);
 
         var referencingImageComp = CreateCompilation("", new[] { comp.EmitToImageReference() });
-        type = ((Compilation)referencingImageComp).GetTypeByMetadataName("<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C")!;
+        type = ((Compilation)referencingImageComp).GetTypeByMetadataName(
+            "<>FE3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855__C"
+        )!;
         Assert.Equal("C@<unknown>", type.ToTestDisplayString());
         identifier = type.GetSymbol()!.AssociatedFileIdentifier;
         Assert.NotNull(identifier);
@@ -4480,8 +5356,43 @@ public partial class C
         var identifier = type.GetSymbol()!.AssociatedFileIdentifier;
         Assert.NotNull(identifier);
         AssertEx.Equal(
-            new byte[] { 0xE3, 0xB0, 0xC4, 0x42, 0x98, 0xFC, 0x1C, 0x14, 0x9A, 0xFB, 0xF4, 0xC8, 0x99, 0x6F, 0xB9, 0x24, 0x27, 0xAE, 0x41, 0xE4, 0x64, 0x9B, 0x93, 0x4C, 0xA4, 0x95, 0x99, 0x1B, 0x78, 0x52, 0xB8, 0x55 },
-            identifier.FilePathChecksumOpt);
+            new byte[]
+            {
+                0xE3,
+                0xB0,
+                0xC4,
+                0x42,
+                0x98,
+                0xFC,
+                0x1C,
+                0x14,
+                0x9A,
+                0xFB,
+                0xF4,
+                0xC8,
+                0x99,
+                0x6F,
+                0xB9,
+                0x24,
+                0x27,
+                0xAE,
+                0x41,
+                0xE4,
+                0x64,
+                0x9B,
+                0x93,
+                0x4C,
+                0xA4,
+                0x95,
+                0x99,
+                0x1B,
+                0x78,
+                0x52,
+                0xB8,
+                0x55,
+            },
+            identifier.FilePathChecksumOpt
+        );
         Assert.Empty(identifier.DisplayFilePath);
         Assert.True(type.IsFileLocal);
     }
@@ -4499,10 +5410,15 @@ public partial class C
         // reused across all compilations to try and trick the binder into thinking it's binding from the same file as 'file class C'.
         var filePath = "file1.cs";
 
-        var comp0 = CreateCompilation((fileTypeSource, filePath), options: TestOptions.SigningReleaseDll);
+        var comp0 = CreateCompilation(
+            (fileTypeSource, filePath),
+            options: TestOptions.SigningReleaseDll
+        );
         comp0.VerifyDiagnostics();
 
-        var reference = useMetadataReference ? comp0.ToMetadataReference() : comp0.EmitToImageReference();
+        var reference = useMetadataReference
+            ? comp0.ToMetadataReference()
+            : comp0.EmitToImageReference();
 
         var useFileTypeSource = """
             class C2
@@ -4523,11 +5439,15 @@ public partial class C
                 (useFileTypeSource, filePath),
                 references: new[] { reference },
                 assemblyName: assemblyName,
-                options: TestOptions.SigningReleaseDll);
+                options: TestOptions.SigningReleaseDll
+            );
             comp1.VerifyDiagnostics(
                 // file1.cs(5,9): error CS0103: The name 'C1' does not exist in the current context
                 //         C1.M1();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "C1").WithArguments("C1").WithLocation(5, 9));
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "C1")
+                    .WithArguments("C1")
+                    .WithLocation(5, 9)
+            );
         }
     }
 
@@ -4541,7 +5461,10 @@ public partial class C
         // reused across all compilations to try and trick the binder into thinking it's binding from the same file
         var filePath = "file1.cs";
 
-        var comp0 = CreateCompilation((fileTypeSource, filePath), options: TestOptions.SigningReleaseDll);
+        var comp0 = CreateCompilation(
+            (fileTypeSource, filePath),
+            options: TestOptions.SigningReleaseDll
+        );
         comp0.VerifyDiagnostics();
         var classC1 = comp0.GetMember<NamedTypeSymbol>("C1");
         Assert.True(classC1.GetPublicSymbol().IsFileLocal);
@@ -4562,30 +5485,45 @@ public partial class C
             (useFileTypeSource, filePath),
             references: new[] { reference },
             targetFramework: TargetFramework.Mscorlib461,
-            options: TestOptions.SigningReleaseDll);
+            options: TestOptions.SigningReleaseDll
+        );
         comp1.VerifyDiagnostics(
             // file1.cs(5,9): error CS0103: The name 'C1' does not exist in the current context
             //         C1.M1();
-            Diagnostic(ErrorCode.ERR_NameNotInContext, "C1").WithArguments("C1").WithLocation(5, 9));
+            Diagnostic(ErrorCode.ERR_NameNotInContext, "C1")
+                .WithArguments("C1")
+                .WithLocation(5, 9)
+        );
         var retargeted = comp1.GetMember<NamedTypeSymbol>("C1");
         Assert.IsType<RetargetingNamedTypeSymbol>(retargeted);
         Assert.False(retargeted.GetPublicSymbol().IsFileLocal);
 
         var originalFileIdentifier = classC1.AssociatedFileIdentifier!;
         var retargetedFileIdentifier = retargeted.AssociatedFileIdentifier!;
-        Assert.Equal(originalFileIdentifier.DisplayFilePath, retargetedFileIdentifier.DisplayFilePath);
-        Assert.Equal((IEnumerable<byte>)originalFileIdentifier.FilePathChecksumOpt, (IEnumerable<byte>)retargetedFileIdentifier.FilePathChecksumOpt);
-        Assert.Equal(originalFileIdentifier.EncoderFallbackErrorMessage, retargetedFileIdentifier.EncoderFallbackErrorMessage);
+        Assert.Equal(
+            originalFileIdentifier.DisplayFilePath,
+            retargetedFileIdentifier.DisplayFilePath
+        );
+        Assert.Equal(
+            (IEnumerable<byte>)originalFileIdentifier.FilePathChecksumOpt,
+            (IEnumerable<byte>)retargetedFileIdentifier.FilePathChecksumOpt
+        );
+        Assert.Equal(
+            originalFileIdentifier.EncoderFallbackErrorMessage,
+            retargetedFileIdentifier.EncoderFallbackErrorMessage
+        );
     }
 
     [Fact]
     public void SyntaxTreeAlreadyPresent()
     {
-        var tree = SyntaxFactory.ParseSyntaxTree("""
+        var tree = SyntaxFactory.ParseSyntaxTree(
+            """
             partial file class C { }
             """,
             path: "file1.cs",
-            encoding: Encoding.Default);
+            encoding: Encoding.Default
+        );
 
         var ex = Assert.Throws<ArgumentException>(() => CreateCompilation(new[] { tree, tree }));
         Assert.Equal("trees[1]", ex.ParamName);
@@ -4632,7 +5570,10 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") }, expectedOutput: "12");
+        var verifier = CompileAndVerify(
+            new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") },
+            expectedOutput: "12"
+        );
         verifier.VerifyDiagnostics();
     }
 
@@ -4667,7 +5608,10 @@ public partial class C
         comp.VerifyDiagnostics(
             // F2.cs(6,19): error CS0535: 'C' does not implement interface member 'FI.M()'
             // partial class C : FI
-            Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "FI").WithArguments("C", "FI.M()").WithLocation(6, 19));
+            Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "FI")
+                .WithArguments("C", "FI.M()")
+                .WithLocation(6, 19)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68219")]
@@ -4737,13 +5681,23 @@ public partial class C
         comp.VerifyDiagnostics(
             // F1.cs(6,24): error CS8646: 'I.P' is explicitly implemented more than once.
             // internal partial class C : I
-            Diagnostic(ErrorCode.ERR_DuplicateExplicitImpl, "C").WithArguments("I.P").WithLocation(6, 24),
+            Diagnostic(ErrorCode.ERR_DuplicateExplicitImpl, "C")
+                .WithArguments("I.P")
+                .WithLocation(6, 24),
             // F1.cs(6,28): error CS0535: 'C' does not implement interface member 'I.P'
             // internal partial class C : I
-            Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "I").WithArguments("C", "I.P").WithLocation(6, 28),
+            Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "I")
+                .WithArguments("C", "I.P")
+                .WithLocation(6, 28),
             // F2.cs(9,11): error CS0102: The type 'C' already contains a definition for '<F2>F141A34209AF0D3C8CA844A7D9A360C895EB14E557F17D27626C519D9BE96AF4A__I.P'
             //     int I.P => 2;
-            Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "P").WithArguments("C", "<F2>F141A34209AF0D3C8CA844A7D9A360C895EB14E557F17D27626C519D9BE96AF4A__I.P").WithLocation(9, 11));
+            Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "P")
+                .WithArguments(
+                    "C",
+                    "<F2>F141A34209AF0D3C8CA844A7D9A360C895EB14E557F17D27626C519D9BE96AF4A__I.P"
+                )
+                .WithLocation(9, 11)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68219")]
@@ -4785,7 +5739,10 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") }, expectedOutput: "12");
+        var verifier = CompileAndVerify(
+            new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") },
+            expectedOutput: "12"
+        );
         verifier.VerifyDiagnostics();
     }
 
@@ -4828,7 +5785,10 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") }, expectedOutput: "12");
+        var verifier = CompileAndVerify(
+            new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") },
+            expectedOutput: "12"
+        );
         verifier.VerifyDiagnostics();
     }
 
@@ -4871,7 +5831,10 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") }, expectedOutput: "12");
+        var verifier = CompileAndVerify(
+            new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") },
+            expectedOutput: "12"
+        );
         verifier.VerifyDiagnostics();
     }
 
@@ -4905,15 +5868,22 @@ public partial class C
             }
             """;
 
-        var comp = CreateCompilation(new[] { (source1, "F1.cs"), (source2, "F2.cs") }, targetFramework: TargetFramework.Net70);
+        var comp = CreateCompilation(
+            new[] { (source1, "F1.cs"), (source2, "F2.cs") },
+            targetFramework: TargetFramework.Net70
+        );
         comp.VerifyDiagnostics(
             // F2.cs(8,28): error CS9051: File-local type 'FI' cannot be used in a member signature in non-file-local type 'C'.
             //     static int FI.operator +(FI fi, int i) => throw null!; // 2
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "+").WithArguments("FI", "C").WithLocation(8, 28),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "+")
+                .WithArguments("FI", "C")
+                .WithLocation(8, 28),
             // F1.cs(8,28): error CS9051: File-local type 'FI' cannot be used in a member signature in non-file-local type 'C'.
             //     static int FI.operator +(FI fi, int i) => throw null!; // 1
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "+").WithArguments("FI", "C").WithLocation(8, 28)
-            );
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "+")
+                .WithArguments("FI", "C")
+                .WithLocation(8, 28)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68219")]
@@ -4944,24 +5914,40 @@ public partial class C
             }
             """;
 
-        var comp = CreateCompilation(new[] { (source1, "F1.cs"), (source2, "F2.cs") }, targetFramework: TargetFramework.Net70);
+        var comp = CreateCompilation(
+            new[] { (source1, "F1.cs"), (source2, "F2.cs") },
+            targetFramework: TargetFramework.Net70
+        );
         comp.VerifyDiagnostics(
             // F1.cs(6,24): error CS8646: 'FI.operator +(FI, int)' is explicitly implemented more than once.
             // internal partial class C : FI // 1, 2
-            Diagnostic(ErrorCode.ERR_DuplicateExplicitImpl, "C").WithArguments("FI.operator +(FI, int)").WithLocation(6, 24),
+            Diagnostic(ErrorCode.ERR_DuplicateExplicitImpl, "C")
+                .WithArguments("FI.operator +(FI, int)")
+                .WithLocation(6, 24),
             // F1.cs(6,28): error CS0535: 'C' does not implement interface member 'FI.operator +(FI, int)'
             // internal partial class C : FI // 1, 2
-            Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "FI").WithArguments("C", "FI.operator +(FI, int)").WithLocation(6, 28),
+            Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "FI")
+                .WithArguments("C", "FI.operator +(FI, int)")
+                .WithLocation(6, 28),
             // F2.cs(8,28): error CS9051: File-local type 'FI' cannot be used in a member signature in non-file-local type 'C'.
             //     static int FI.operator +(FI fi, int i) => throw null!; // 3
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "+").WithArguments("FI", "C").WithLocation(8, 28),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "+")
+                .WithArguments("FI", "C")
+                .WithLocation(8, 28),
             // F2.cs(9,28): error CS9051: File-local type 'FI' cannot be used in a member signature in non-file-local type 'C'.
             //     static int FI.operator +(FI fi, int i) => throw null!; // 4, 5
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "+").WithArguments("FI", "C").WithLocation(9, 28),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "+")
+                .WithArguments("FI", "C")
+                .WithLocation(9, 28),
             // F2.cs(9,28): error CS0111: Type 'C' already defines a member called '<F2>F141A34209AF0D3C8CA844A7D9A360C895EB14E557F17D27626C519D9BE96AF4A__FI.op_Addition' with the same parameter types
             //     static int FI.operator +(FI fi, int i) => throw null!; // 4, 5
-            Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "+").WithArguments("<F2>F141A34209AF0D3C8CA844A7D9A360C895EB14E557F17D27626C519D9BE96AF4A__FI.op_Addition", "C").WithLocation(9, 28)
-            );
+            Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "+")
+                .WithArguments(
+                    "<F2>F141A34209AF0D3C8CA844A7D9A360C895EB14E557F17D27626C519D9BE96AF4A__FI.op_Addition",
+                    "C"
+                )
+                .WithLocation(9, 28)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68219")]
@@ -4995,15 +5981,22 @@ public partial class C
             }
             """;
 
-        var comp = CreateCompilation(new[] { (source1, "F1.cs"), (source2, "F2.cs") }, targetFramework: TargetFramework.Net70);
+        var comp = CreateCompilation(
+            new[] { (source1, "F1.cs"), (source2, "F2.cs") },
+            targetFramework: TargetFramework.Net70
+        );
         comp.VerifyDiagnostics(
             // F2.cs(8,19): error CS9051: File-local type 'FI' cannot be used in a member signature in non-file-local type 'C'.
             //     static int FI.op_Addition(FI fi, int i) => throw null!;
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "op_Addition").WithArguments("FI", "C").WithLocation(8, 19),
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "op_Addition")
+                .WithArguments("FI", "C")
+                .WithLocation(8, 19),
             // F1.cs(8,28): error CS9051: File-local type 'FI' cannot be used in a member signature in non-file-local type 'C'.
             //     static int FI.operator +(FI fi, int i) => throw null!;
-            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "+").WithArguments("FI", "C").WithLocation(8, 28)
-            );
+            Diagnostic(ErrorCode.ERR_FileTypeDisallowedInSignature, "+")
+                .WithArguments("FI", "C")
+                .WithLocation(8, 28)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68219")]
@@ -5046,7 +6039,10 @@ public partial class C
             }
             """;
 
-        var verifier = CompileAndVerify(new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") }, expectedOutput: "12");
+        var verifier = CompileAndVerify(
+            new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") },
+            expectedOutput: "12"
+        );
         verifier.VerifyDiagnostics();
     }
 
@@ -5076,13 +6072,19 @@ public partial class C
         comp.VerifyDiagnostics(
             // (7,16): error CS9071: The namespace 'App' already contains a definition for 'Widget' in this file.
             //     file class Widget { }
-            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "Widget").WithArguments("Widget", "App").WithLocation(7, 16));
+            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "Widget")
+                .WithArguments("Widget", "App")
+                .WithLocation(7, 16)
+        );
 
         comp = CreateCompilation(source2 + source1);
         comp.VerifyDiagnostics(
             // (3,16): error CS9071: The namespace 'App' already contains a definition for 'Widget' in this file.
             //     file class Widget { }
-            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "Widget").WithArguments("Widget", "App").WithLocation(3, 16));
+            Diagnostic(ErrorCode.ERR_FileLocalDuplicateNameInNS, "Widget")
+                .WithArguments("Widget", "App")
+                .WithLocation(3, 16)
+        );
     }
 
     [Theory, CombinatorialData]
@@ -5107,13 +6109,25 @@ public partial class C
         var comp1 = CreateCompilation(new[] { (source1, "File1.cs") });
         comp1.VerifyEmitDiagnostics();
 
-        var comp2 = CreateCompilation(new[] { (source2, "File2.cs") }, references: new[] { useMetadataReference ? comp1.ToMetadataReference() : comp1.EmitToImageReference() });
+        var comp2 = CreateCompilation(
+            new[] { (source2, "File2.cs") },
+            references: new[]
+            {
+                useMetadataReference ? comp1.ToMetadataReference() : comp1.EmitToImageReference(),
+            }
+        );
         comp2.VerifyEmitDiagnostics();
 
         comp2 = CreateCompilation(new[] { (source2, "File2.cs") });
         comp2.VerifyEmitDiagnostics();
 
-        comp1 = CreateCompilation(new[] { (source1, "File1.cs") }, references: new[] { useMetadataReference ? comp2.ToMetadataReference() : comp2.EmitToImageReference() });
+        comp1 = CreateCompilation(
+            new[] { (source1, "File1.cs") },
+            references: new[]
+            {
+                useMetadataReference ? comp2.ToMetadataReference() : comp2.EmitToImageReference(),
+            }
+        );
         comp1.VerifyEmitDiagnostics();
     }
 
@@ -5156,9 +6170,14 @@ public partial class C
         comp.VerifyDiagnostics(
             // File1.cs(10,13): error CS0118: 'App.Widget' is a namespace but is used like a type
             //         new App.Widget(); // 1
-            Diagnostic(ErrorCode.ERR_BadSKknown, "App.Widget").WithArguments("App.Widget", "namespace", "type").WithLocation(10, 13),
+            Diagnostic(ErrorCode.ERR_BadSKknown, "App.Widget")
+                .WithArguments("App.Widget", "namespace", "type")
+                .WithLocation(10, 13),
             // File2.cs(11,24): error CS0426: The type name 'Inner' does not exist in the type 'Widget'
             //         new App.Widget.Inner(); // 2
-            Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInAgg, "Inner").WithArguments("Inner", "App.Widget").WithLocation(11, 24));
+            Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInAgg, "Inner")
+                .WithArguments("Inner", "App.Widget")
+                .WithLocation(11, 24)
+        );
     }
 }

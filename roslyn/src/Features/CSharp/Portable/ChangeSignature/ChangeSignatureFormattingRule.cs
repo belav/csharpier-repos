@@ -21,9 +21,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             SyntaxKind.ArgumentList,
             SyntaxKind.BracketedParameterList,
             SyntaxKind.BracketedArgumentList,
-            SyntaxKind.AttributeArgumentList);
+            SyntaxKind.AttributeArgumentList
+        );
 
-        public override void AddIndentBlockOperations(List<IndentBlockOperation> list, SyntaxNode node, in NextIndentBlockOperationAction nextOperation)
+        public override void AddIndentBlockOperations(
+            List<IndentBlockOperation> list,
+            SyntaxNode node,
+            in NextIndentBlockOperationAction nextOperation
+        )
         {
             nextOperation.Invoke();
 
@@ -33,28 +38,58 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             }
         }
 
-        private static void AddChangeSignatureIndentOperation(List<IndentBlockOperation> list, SyntaxNode node)
+        private static void AddChangeSignatureIndentOperation(
+            List<IndentBlockOperation> list,
+            SyntaxNode node
+        )
         {
             if (node.Parent != null)
             {
                 var baseToken = node.Parent.GetFirstToken();
                 var startToken = node.GetFirstToken();
                 var endToken = node.GetLastToken();
-                var span = CommonFormattingHelpers.GetSpanIncludingTrailingAndLeadingTriviaOfAdjacentTokens(startToken, endToken);
+                var span =
+                    CommonFormattingHelpers.GetSpanIncludingTrailingAndLeadingTriviaOfAdjacentTokens(
+                        startToken,
+                        endToken
+                    );
                 span = TextSpan.FromBounds(Math.Max(baseToken.Span.End, span.Start), span.End);
 
-                list.Add(FormattingOperations.CreateRelativeIndentBlockOperation(baseToken, startToken, endToken, span, indentationDelta: 1, option: IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine));
+                list.Add(
+                    FormattingOperations.CreateRelativeIndentBlockOperation(
+                        baseToken,
+                        startToken,
+                        endToken,
+                        span,
+                        indentationDelta: 1,
+                        option: IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine
+                    )
+                );
             }
         }
 
-        public override AdjustNewLinesOperation GetAdjustNewLinesOperation(in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustNewLinesOperation nextOperation)
+        public override AdjustNewLinesOperation GetAdjustNewLinesOperation(
+            in SyntaxToken previousToken,
+            in SyntaxToken currentToken,
+            in NextGetAdjustNewLinesOperation nextOperation
+        )
         {
-            if (previousToken.Kind() == SyntaxKind.CommaToken && s_allowableKinds.Contains(previousToken.Parent.Kind()))
+            if (
+                previousToken.Kind() == SyntaxKind.CommaToken
+                && s_allowableKinds.Contains(previousToken.Parent.Kind())
+            )
             {
-                return FormattingOperations.CreateAdjustNewLinesOperation(0, AdjustNewLinesOption.PreserveLines);
+                return FormattingOperations.CreateAdjustNewLinesOperation(
+                    0,
+                    AdjustNewLinesOption.PreserveLines
+                );
             }
 
-            return base.GetAdjustNewLinesOperation(in previousToken, in currentToken, in nextOperation);
+            return base.GetAdjustNewLinesOperation(
+                in previousToken,
+                in currentToken,
+                in nextOperation
+            );
         }
     }
 }

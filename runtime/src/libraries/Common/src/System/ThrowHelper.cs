@@ -19,7 +19,8 @@ namespace System
             [NotNull]
 #endif
             object? argument,
-            [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+            [CallerArgumentExpression(nameof(argument))] string? paramName = null
+        )
         {
             if (argument is null)
             {
@@ -48,7 +49,8 @@ namespace System
             [NotNull]
 #endif
             string? argument,
-            [CallerArgumentExpression(nameof(argument))] string paramName = "")
+            [CallerArgumentExpression(nameof(argument))] string paramName = ""
+        )
         {
 #if !NETCOREAPP3_1_OR_GREATER
             if (argument == null)

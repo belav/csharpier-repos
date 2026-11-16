@@ -50,7 +50,8 @@ public sealed record TypeMappingSourceDependencies
     public TypeMappingSourceDependencies(
         IValueConverterSelector valueConverterSelector,
         IJsonValueReaderWriterSource jsonValueReaderWriterSource,
-        IEnumerable<ITypeMappingSourcePlugin> plugins)
+        IEnumerable<ITypeMappingSourcePlugin> plugins
+    )
     {
         ValueConverterSelector = valueConverterSelector;
         JsonValueReaderWriterSource = jsonValueReaderWriterSource;

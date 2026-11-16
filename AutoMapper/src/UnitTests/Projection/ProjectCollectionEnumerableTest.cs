@@ -18,7 +18,10 @@ public class ProjectCollectionEnumerableTest
     [Fact]
     public void ProjectWithAssignedCollectionSourceProperty()
     {
-        var customer = new Customer { Addresses = new List<Address> { new Address(Street1), new Address(Street2) } };
+        var customer = new Customer
+        {
+            Addresses = new List<Address> { new Address(Street1), new Address(Street2) },
+        };
         var customers = new[] { customer }.AsQueryable();
 
         var mapped = customers.ProjectTo<CustomerDto>(_config).SingleOrDefault();

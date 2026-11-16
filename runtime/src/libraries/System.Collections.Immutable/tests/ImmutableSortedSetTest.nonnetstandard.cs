@@ -13,17 +13,26 @@ namespace System.Collections.Immutable.Tests
     public partial class ImmutableSortedSetTest : ImmutableSetTest
     {
         [Fact]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Sporadic failure, needs a port of https://github.com/dotnet/coreclr/pull/4340")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Sporadic failure, needs a port of https://github.com/dotnet/coreclr/pull/4340"
+        )]
         public void EmptyTest()
         {
             this.EmptyTestHelper(Empty<int>(), 5, null);
-            this.EmptyTestHelper(Empty<string>().ToImmutableSortedSet(StringComparer.OrdinalIgnoreCase), "a", StringComparer.OrdinalIgnoreCase);
+            this.EmptyTestHelper(
+                Empty<string>().ToImmutableSortedSet(StringComparer.OrdinalIgnoreCase),
+                "a",
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         [Fact]
         public void TryGetValueTest()
         {
-            this.TryGetValueTestHelper(ImmutableSortedSet<string>.Empty.WithComparer(StringComparer.OrdinalIgnoreCase));
+            this.TryGetValueTestHelper(
+                ImmutableSortedSet<string>.Empty.WithComparer(StringComparer.OrdinalIgnoreCase)
+            );
         }
 
         internal override IBinaryTree GetRootNode<T>(IImmutableSet<T> set)
@@ -44,7 +53,10 @@ namespace System.Collections.Immutable.Tests
 
             this.EmptyTestHelper(emptySet);
             Assert.Same(emptySet, emptySet.ToImmutableSortedSet(comparer));
-            Assert.Same(comparer ?? Comparer<T>.Default, ((ISortKeyCollection<T>)emptySet).KeyComparer);
+            Assert.Same(
+                comparer ?? Comparer<T>.Default,
+                ((ISortKeyCollection<T>)emptySet).KeyComparer
+            );
 
             IImmutableSet<T> reemptied = emptySet.Add(value).Clear();
             Assert.Same(reemptied, reemptied.ToImmutableSortedSet(comparer)); //, "Getting the empty set from a non-empty instance did not preserve the comparer.");

@@ -9,7 +9,7 @@ namespace System.IdentityModel
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
     using System.Xml;
-    
+
     /// <summary>
     /// This class implements a deserialization for: EncryptedType as defined in section 3.5.1 of http://www.w3.org/TR/2002/REC-xmlenc-core-2002120
     /// </summary>
@@ -21,8 +21,8 @@ namespace System.IdentityModel
         List<string> _keyReferences;
         List<string> _dataReferences;
 
-        public EncryptedKeyElement( SecurityTokenSerializer keyInfoSerializer )
-            : base( keyInfoSerializer )
+        public EncryptedKeyElement(SecurityTokenSerializer keyInfoSerializer)
+            : base(keyInfoSerializer)
         {
             _keyReferences = new List<string>();
             _dataReferences = new List<string>();
@@ -43,65 +43,110 @@ namespace System.IdentityModel
             get { return _keyReferences; }
         }
 
-        public override void ReadExtensions( XmlDictionaryReader reader )
+        public override void ReadExtensions(XmlDictionaryReader reader)
         {
             reader.MoveToContent();
-            if ( reader.IsStartElement( XmlEncryptionConstants.Elements.ReferenceList, XmlEncryptionConstants.Namespace ) )
+            if (
+                reader.IsStartElement(
+                    XmlEncryptionConstants.Elements.ReferenceList,
+                    XmlEncryptionConstants.Namespace
+                )
+            )
             {
                 reader.ReadStartElement();
 
                 // could have data or key references.  these are the only two possible elements sec 3.6 xml enc.
                 // 3.6 The ReferenceList Element specifies there is a choice. Once one is chosen, it is fixed.
-                if ( reader.IsStartElement( XmlEncryptionConstants.Elements.DataReference, XmlEncryptionConstants.Namespace ) )
+                if (
+                    reader.IsStartElement(
+                        XmlEncryptionConstants.Elements.DataReference,
+                        XmlEncryptionConstants.Namespace
+                    )
+                )
                 {
-                    while ( reader.IsStartElement() )
+                    while (reader.IsStartElement())
                     {
-                        if ( reader.IsStartElement( XmlEncryptionConstants.Elements.DataReference, XmlEncryptionConstants.Namespace ) )
+                        if (
+                            reader.IsStartElement(
+                                XmlEncryptionConstants.Elements.DataReference,
+                                XmlEncryptionConstants.Namespace
+                            )
+                        )
                         {
-                            string dataRef = reader.GetAttribute( XmlEncryptionConstants.Attributes.Uri );
-                            if ( !string.IsNullOrEmpty( dataRef ) )
+                            string dataRef = reader.GetAttribute(
+                                XmlEncryptionConstants.Attributes.Uri
+                            );
+                            if (!string.IsNullOrEmpty(dataRef))
                             {
-                                _dataReferences.Add( dataRef );
+                                _dataReferences.Add(dataRef);
                             }
                             reader.Skip();
                         }
-                        else if ( reader.IsStartElement( XmlEncryptionConstants.Elements.KeyReference, XmlEncryptionConstants.Namespace ) )
+                        else if (
+                            reader.IsStartElement(
+                                XmlEncryptionConstants.Elements.KeyReference,
+                                XmlEncryptionConstants.Namespace
+                            )
+                        )
                         {
-                            throw DiagnosticUtility.ThrowHelperXml( reader, SR.GetString( SR.ID4189 ) );
+                            throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4189));
                         }
                         else
                         {
                             string xml = reader.ReadOuterXml();
-                            if ( DiagnosticUtility.ShouldTraceWarning )
+                            if (DiagnosticUtility.ShouldTraceWarning)
                             {
-                                TraceUtility.TraceString( System.Diagnostics.TraceEventType.Warning, SR.GetString( SR.ID8024, reader.Name, reader.NamespaceURI, xml ) );
+                                TraceUtility.TraceString(
+                                    System.Diagnostics.TraceEventType.Warning,
+                                    SR.GetString(SR.ID8024, reader.Name, reader.NamespaceURI, xml)
+                                );
                             }
                         }
                     }
                 }
-                else if ( reader.IsStartElement( XmlEncryptionConstants.Elements.KeyReference, XmlEncryptionConstants.Namespace ) )
+                else if (
+                    reader.IsStartElement(
+                        XmlEncryptionConstants.Elements.KeyReference,
+                        XmlEncryptionConstants.Namespace
+                    )
+                )
                 {
-                    while ( reader.IsStartElement() )
+                    while (reader.IsStartElement())
                     {
-                        if ( reader.IsStartElement( XmlEncryptionConstants.Elements.KeyReference, XmlEncryptionConstants.Namespace ) )
+                        if (
+                            reader.IsStartElement(
+                                XmlEncryptionConstants.Elements.KeyReference,
+                                XmlEncryptionConstants.Namespace
+                            )
+                        )
                         {
-                            string keyRef = reader.GetAttribute( XmlEncryptionConstants.Attributes.Uri );
-                            if ( !string.IsNullOrEmpty( keyRef ) )
+                            string keyRef = reader.GetAttribute(
+                                XmlEncryptionConstants.Attributes.Uri
+                            );
+                            if (!string.IsNullOrEmpty(keyRef))
                             {
-                                _keyReferences.Add( keyRef );
+                                _keyReferences.Add(keyRef);
                             }
                             reader.Skip();
                         }
-                        else if ( reader.IsStartElement( XmlEncryptionConstants.Elements.DataReference, XmlEncryptionConstants.Namespace ) )
+                        else if (
+                            reader.IsStartElement(
+                                XmlEncryptionConstants.Elements.DataReference,
+                                XmlEncryptionConstants.Namespace
+                            )
+                        )
                         {
-                            throw DiagnosticUtility.ThrowHelperXml( reader, SR.GetString( SR.ID4190 ) );
+                            throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4190));
                         }
                         else
                         {
                             string xml = reader.ReadOuterXml();
-                            if ( DiagnosticUtility.ShouldTraceWarning )
+                            if (DiagnosticUtility.ShouldTraceWarning)
                             {
-                                TraceUtility.TraceString( System.Diagnostics.TraceEventType.Warning, SR.GetString( SR.ID8024, reader.Name, reader.NamespaceURI, xml ) );
+                                TraceUtility.TraceString(
+                                    System.Diagnostics.TraceEventType.Warning,
+                                    SR.GetString(SR.ID8024, reader.Name, reader.NamespaceURI, xml)
+                                );
                             }
                         }
                     }
@@ -109,11 +154,16 @@ namespace System.IdentityModel
                 else
                 {
                     // there must be at least one reference.
-                    throw DiagnosticUtility.ThrowHelperXml( reader, SR.GetString( SR.ID4191 ) );
+                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4191));
                 }
 
                 reader.MoveToContent();
-                if ( reader.IsStartElement( XmlEncryptionConstants.Elements.CarriedKeyName, XmlEncryptionConstants.Namespace ) )
+                if (
+                    reader.IsStartElement(
+                        XmlEncryptionConstants.Elements.CarriedKeyName,
+                        XmlEncryptionConstants.Namespace
+                    )
+                )
                 {
                     reader.ReadStartElement();
                     _carriedName = reader.ReadString();
@@ -125,30 +175,38 @@ namespace System.IdentityModel
             }
         }
 
-        public override void ReadXml( XmlDictionaryReader reader )
+        public override void ReadXml(XmlDictionaryReader reader)
         {
-            if ( reader == null )
+            if (reader == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "reader" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
             reader.MoveToContent();
-            if ( !reader.IsStartElement( XmlEncryptionConstants.Elements.EncryptedKey, XmlEncryptionConstants.Namespace ) )
+            if (
+                !reader.IsStartElement(
+                    XmlEncryptionConstants.Elements.EncryptedKey,
+                    XmlEncryptionConstants.Namespace
+                )
+            )
             {
-                throw DiagnosticUtility.ThrowHelperXml( reader, SR.GetString( SR.ID4187 ) );
+                throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4187));
             }
 
-            _recipient = reader.GetAttribute( XmlEncryptionConstants.Attributes.Recipient, null );
+            _recipient = reader.GetAttribute(XmlEncryptionConstants.Attributes.Recipient, null);
 
             //<EncryptedKey> extends <EncryptedType>
             // base will read the start element and end elements
-            base.ReadXml( reader );
+            base.ReadXml(reader);
         }
 
         public EncryptedKeyIdentifierClause GetClause()
         {
-            return new EncryptedKeyIdentifierClause( CipherData.CipherValue, Algorithm, KeyIdentifier );
+            return new EncryptedKeyIdentifierClause(
+                CipherData.CipherValue,
+                Algorithm,
+                KeyIdentifier
+            );
         }
-
     }
 }

@@ -27,7 +27,8 @@ namespace System.Runtime.CompilerServices
         /// <typeparam name="TStateMachine">The type of the state machine.</typeparam>
         /// <param name="stateMachine">The state machine instance, passed by reference.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void MoveNext<TStateMachine>(ref TStateMachine stateMachine) where TStateMachine : IAsyncStateMachine =>
+        public void MoveNext<TStateMachine>(ref TStateMachine stateMachine)
+            where TStateMachine : IAsyncStateMachine =>
             AsyncMethodBuilderCore.Start(ref stateMachine);
 
         /// <summary>Schedules the state machine to proceed to the next action when the specified awaiter completes.</summary>
@@ -35,20 +36,34 @@ namespace System.Runtime.CompilerServices
         /// <typeparam name="TStateMachine">The type of the state machine.</typeparam>
         /// <param name="awaiter">The awaiter.</param>
         /// <param name="stateMachine">The state machine.</param>
-        public void AwaitOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter awaiter, ref TStateMachine stateMachine)
+        public void AwaitOnCompleted<TAwaiter, TStateMachine>(
+            ref TAwaiter awaiter,
+            ref TStateMachine stateMachine
+        )
             where TAwaiter : INotifyCompletion
             where TStateMachine : IAsyncStateMachine =>
-            AsyncTaskMethodBuilder<VoidTaskResult>.AwaitOnCompleted(ref awaiter, ref stateMachine, ref m_task);
+            AsyncTaskMethodBuilder<VoidTaskResult>.AwaitOnCompleted(
+                ref awaiter,
+                ref stateMachine,
+                ref m_task
+            );
 
         /// <summary>Schedules the state machine to proceed to the next action when the specified awaiter completes.</summary>
         /// <typeparam name="TAwaiter">The type of the awaiter.</typeparam>
         /// <typeparam name="TStateMachine">The type of the state machine.</typeparam>
         /// <param name="awaiter">The awaiter.</param>
         /// <param name="stateMachine">The state machine.</param>
-        public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter awaiter, ref TStateMachine stateMachine)
+        public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
+            ref TAwaiter awaiter,
+            ref TStateMachine stateMachine
+        )
             where TAwaiter : ICriticalNotifyCompletion
             where TStateMachine : IAsyncStateMachine =>
-            AsyncTaskMethodBuilder<VoidTaskResult>.AwaitUnsafeOnCompleted(ref awaiter, ref stateMachine, ref m_task);
+            AsyncTaskMethodBuilder<VoidTaskResult>.AwaitUnsafeOnCompleted(
+                ref awaiter,
+                ref stateMachine,
+                ref m_task
+            );
 
         /// <summary>Marks iteration as being completed, whether successfully or otherwise.</summary>
         public void Complete()
@@ -83,6 +98,7 @@ namespace System.Runtime.CompilerServices
         }
 
         /// <summary>Gets an object that may be used to uniquely identify this builder to the debugger.</summary>
-        internal object ObjectIdForDebugger => m_task ??= AsyncTaskMethodBuilder<VoidTaskResult>.CreateWeaklyTypedStateMachineBox();
+        internal object ObjectIdForDebugger =>
+            m_task ??= AsyncTaskMethodBuilder<VoidTaskResult>.CreateWeaklyTypedStateMachineBox();
     }
 }

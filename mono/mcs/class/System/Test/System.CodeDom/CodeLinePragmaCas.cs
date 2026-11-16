@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,55 +27,58 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.CodeDom {
+namespace MonoCasTests.System.CodeDom
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class CodeLinePragmaCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeLinePragmaCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted()
+        {
+            CodeLinePragma clp = new CodeLinePragma();
+            Assert.AreEqual(String.Empty, clp.FileName, "FileName");
+            clp.FileName = "filename";
+            Assert.AreEqual(0, clp.LineNumber, "LineNumber");
+            clp.LineNumber = Int32.MinValue;
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeLinePragma clp = new CodeLinePragma ();
-			Assert.AreEqual (String.Empty, clp.FileName, "FileName");
-			clp.FileName = "filename";
-			Assert.AreEqual (0, clp.LineNumber, "LineNumber");
-			clp.LineNumber = Int32.MinValue;
-		}
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeLinePragma clp = new CodeLinePragma ("filename", Int32.MaxValue);
-			Assert.AreEqual ("filename", clp.FileName, "FileName");
-			clp.FileName = String.Empty;
-			Assert.AreEqual (Int32.MaxValue, clp.LineNumber, "LineNumber");
-			clp.LineNumber = 0;
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted()
+        {
+            CodeLinePragma clp = new CodeLinePragma("filename", Int32.MaxValue);
+            Assert.AreEqual("filename", clp.FileName, "FileName");
+            clp.FileName = String.Empty;
+            Assert.AreEqual(Int32.MaxValue, clp.LineNumber, "LineNumber");
+            clp.LineNumber = 0;
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			// the default .ctor was added in 2.0
-			ConstructorInfo ci = typeof (CodeLinePragma).GetConstructor (new Type[2] { typeof (string), typeof (int) });
-			Assert.IsNotNull (ci, ".ctor(string,int)");
-			Assert.IsNotNull (ci.Invoke (new object[2] { "mono", -1 }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            // the default .ctor was added in 2.0
+            ConstructorInfo ci = typeof(CodeLinePragma).GetConstructor(
+                new Type[2] { typeof(string), typeof(int) }
+            );
+            Assert.IsNotNull(ci, ".ctor(string,int)");
+            Assert.IsNotNull(ci.Invoke(new object[2] { "mono", -1 }), "invoke");
+        }
+    }
 }

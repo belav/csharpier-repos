@@ -156,7 +156,8 @@ namespace Microsoft.CodeAnalysis
                 AddArity(arity);
             }
 
-            private bool HasUniqueSymbol => _uniqueSymbolOrArities != null && !(_uniqueSymbolOrArities is HashSet<int>);
+            private bool HasUniqueSymbol =>
+                _uniqueSymbolOrArities != null && !(_uniqueSymbolOrArities is HashSet<int>);
 
             private void AddArity(int arity)
             {
@@ -184,7 +185,10 @@ namespace Microsoft.CodeAnalysis
                 hashSet.Add(arity);
             }
 
-            public void GetUniqueSymbolOrArities(out IArityEnumerable? arities, out TSymbol? uniqueSymbol)
+            public void GetUniqueSymbolOrArities(
+                out IArityEnumerable? arities,
+                out TSymbol? uniqueSymbol
+            )
             {
                 if (this.HasUniqueSymbol)
                 {
@@ -195,7 +199,10 @@ namespace Microsoft.CodeAnalysis
                 }
                 else
                 {
-                    arities = (_uniqueSymbolOrArities == null && _arityBitVectorOrUniqueArity == 0) ? null : (IArityEnumerable)this;
+                    arities =
+                        (_uniqueSymbolOrArities == null && _arityBitVectorOrUniqueArity == 0)
+                            ? null
+                            : (IArityEnumerable)this;
                     uniqueSymbol = null;
                 }
             }
@@ -203,7 +210,10 @@ namespace Microsoft.CodeAnalysis
             public ArityEnumerator GetEnumerator()
             {
                 Debug.Assert(!this.HasUniqueSymbol);
-                return new ArityEnumerator(_arityBitVectorOrUniqueArity, (HashSet<int>?)_uniqueSymbolOrArities);
+                return new ArityEnumerator(
+                    _arityBitVectorOrUniqueArity,
+                    (HashSet<int>?)_uniqueSymbolOrArities
+                );
             }
 
             public int Count
@@ -237,7 +247,8 @@ namespace Microsoft.CodeAnalysis
             _nameMap = new Dictionary<string, UniqueSymbolOrArities>(comparer);
         }
 
-        public bool CanBeAdded(string name) => FilterName == null || _comparer.Equals(name, FilterName);
+        public bool CanBeAdded(string name) =>
+            FilterName == null || _comparer.Equals(name, FilterName);
 
         public void AddSymbol(TSymbol symbol, string name, int arity)
         {
@@ -272,7 +283,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// If <paramref name="uniqueSymbol"/> is set, then <paramref name="arities"/> will be null.
-        /// The only arity in that case will be encoded in the symbol. 
+        /// The only arity in that case will be encoded in the symbol.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="arities"></param>
@@ -281,7 +292,8 @@ namespace Microsoft.CodeAnalysis
         public bool TryGetAritiesAndUniqueSymbol(
             string name,
             out IArityEnumerable? arities,
-            out TSymbol? uniqueSymbol)
+            out TSymbol? uniqueSymbol
+        )
         {
             Debug.Assert(CanBeAdded(name));
 

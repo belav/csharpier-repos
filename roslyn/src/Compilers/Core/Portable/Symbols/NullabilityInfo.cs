@@ -31,16 +31,15 @@ namespace Microsoft.CodeAnalysis
             FlowState = flowState;
         }
 
-        private string GetDebuggerDisplay() => $"{{Annotation: {Annotation}, Flow State: {FlowState}}}";
+        private string GetDebuggerDisplay() =>
+            $"{{Annotation: {Annotation}, Flow State: {FlowState}}}";
 
-        public override bool Equals(object? other) =>
-            other is NullabilityInfo info && Equals(info);
+        public override bool Equals(object? other) => other is NullabilityInfo info && Equals(info);
 
         public override int GetHashCode() =>
             Hash.Combine(((int)Annotation).GetHashCode(), ((int)FlowState).GetHashCode());
 
         public bool Equals(NullabilityInfo other) =>
-            Annotation == other.Annotation &&
-            FlowState == other.FlowState;
+            Annotation == other.Annotation && FlowState == other.FlowState;
     }
 }

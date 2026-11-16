@@ -6,12 +6,15 @@ namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
 
-    [ConfigurationCollection(typeof(BaseAddressElement), CollectionType = ConfigurationElementCollectionType.BasicMap)]
-    public sealed partial class BaseAddressElementCollection : ServiceModelConfigurationElementCollection<BaseAddressElement>
+    [ConfigurationCollection(
+        typeof(BaseAddressElement),
+        CollectionType = ConfigurationElementCollectionType.BasicMap
+    )]
+    public sealed partial class BaseAddressElementCollection
+        : ServiceModelConfigurationElementCollection<BaseAddressElement>
     {
         public BaseAddressElementCollection()
-            : base(ConfigurationElementCollectionType.BasicMap, ConfigurationStrings.Add)
-        { }
+            : base(ConfigurationElementCollectionType.BasicMap, ConfigurationStrings.Add) { }
 
         protected override ConfigurationElement CreateNewElement()
         {

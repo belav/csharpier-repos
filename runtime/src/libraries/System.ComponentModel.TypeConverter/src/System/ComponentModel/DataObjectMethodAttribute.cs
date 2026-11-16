@@ -8,9 +8,8 @@ namespace System.ComponentModel
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class DataObjectMethodAttribute : Attribute
     {
-        public DataObjectMethodAttribute(DataObjectMethodType methodType) : this(methodType, false)
-        {
-        }
+        public DataObjectMethodAttribute(DataObjectMethodType methodType)
+            : this(methodType, false) { }
 
         public DataObjectMethodAttribute(DataObjectMethodType methodType, bool isDefault)
         {
@@ -29,10 +28,13 @@ namespace System.ComponentModel
                 return true;
             }
 
-            return (obj is DataObjectMethodAttribute other) && (other.MethodType == MethodType) && (other.IsDefault == IsDefault);
+            return (obj is DataObjectMethodAttribute other)
+                && (other.MethodType == MethodType)
+                && (other.IsDefault == IsDefault);
         }
 
-        public override int GetHashCode() => ((int)MethodType).GetHashCode() ^ IsDefault.GetHashCode();
+        public override int GetHashCode() =>
+            ((int)MethodType).GetHashCode() ^ IsDefault.GetHashCode();
 
         public override bool Match([NotNullWhen(true)] object? obj)
         {

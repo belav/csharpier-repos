@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -17,9 +17,9 @@
 
 using System.Runtime.InteropServices;
 
-namespace System {
+namespace System
+{
     [Serializable]
-
     public enum ConsoleSpecialKey
     {
         // We realize this is incomplete, and may add values in the future.

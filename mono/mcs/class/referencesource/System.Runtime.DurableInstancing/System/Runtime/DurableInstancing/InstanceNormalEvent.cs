@@ -14,26 +14,18 @@ namespace System.Runtime.DurableInstancing
         HashSet<InstanceHandle> pendingHandles = new HashSet<InstanceHandle>();
 
         internal InstanceNormalEvent(InstancePersistenceEvent persistenceEvent)
-            : base(persistenceEvent.Name)
-        {
-        }
+            : base(persistenceEvent.Name) { }
 
         internal bool IsSignaled { get; set; }
 
         internal HashSet<InstanceHandle> BoundHandles
         {
-            get
-            {
-                return this.boundHandles;
-            }
+            get { return this.boundHandles; }
         }
 
         internal HashSet<InstanceHandle> PendingHandles
         {
-            get
-            {
-                return this.pendingHandles;
-            }
+            get { return this.pendingHandles; }
         }
     }
 }

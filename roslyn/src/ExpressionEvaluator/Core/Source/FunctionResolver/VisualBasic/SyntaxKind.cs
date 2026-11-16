@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
             DateKeyword,
         }
 
-        private static ImmutableDictionary<string, SyntaxKind> GetKeywordKinds(StringComparer comparer)
+        private static ImmutableDictionary<string, SyntaxKind> GetKeywordKinds(
+            StringComparer comparer
+        )
         {
             var builder = ImmutableDictionary.CreateBuilder<string, SyntaxKind>(comparer);
             builder.Add("of", SyntaxKind.OfKeyword);

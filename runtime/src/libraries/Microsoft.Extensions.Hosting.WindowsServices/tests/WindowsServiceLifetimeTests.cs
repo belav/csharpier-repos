@@ -20,19 +20,23 @@ namespace Microsoft.Extensions.Hosting
 {
     public class WindowsServiceLifetimeTests
     {
-        private static bool IsRemoteExecutorSupportedAndPrivilegedProcess => RemoteExecutor.IsSupported && PlatformDetection.IsPrivilegedProcess;
+        private static bool IsRemoteExecutorSupportedAndPrivilegedProcess =>
+            RemoteExecutor.IsSupported && PlatformDetection.IsPrivilegedProcess;
 
         [ConditionalFact(nameof(IsRemoteExecutorSupportedAndPrivilegedProcess))]
         public void ServiceStops()
         {
             using var serviceTester = WindowsServiceTester.Create(async () =>
             {
-                var applicationLifetime = new ApplicationLifetime(NullLogger<ApplicationLifetime>.Instance);
+                var applicationLifetime = new ApplicationLifetime(
+                    NullLogger<ApplicationLifetime>.Instance
+                );
                 using var lifetime = new WindowsServiceLifetime(
                     new HostingEnvironment(),
                     applicationLifetime,
                     NullLoggerFactory.Instance,
-                    new OptionsWrapper<HostOptions>(new HostOptions()));
+                    new OptionsWrapper<HostOptions>(new HostOptions())
+                );
 
                 await lifetime.WaitForStartAsync(CancellationToken.None);
 
@@ -64,16 +68,26 @@ namespace Microsoft.Extensions.Hosting
         }
 
         [ConditionalFact(nameof(IsRemoteExecutorSupportedAndPrivilegedProcess))]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, ".NET Framework is missing the fix from https://github.com/dotnet/corefx/commit/3e68d791066ad0fdc6e0b81828afbd9df00dd7f8")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            ".NET Framework is missing the fix from https://github.com/dotnet/corefx/commit/3e68d791066ad0fdc6e0b81828afbd9df00dd7f8"
+        )]
         public void ExceptionOnStartIsPropagated()
         {
             using var serviceTester = WindowsServiceTester.Create(async () =>
             {
-                using (var lifetime = ThrowingWindowsServiceLifetime.Create(throwOnStart: new Exception("Should be thrown")))
+                using (
+                    var lifetime = ThrowingWindowsServiceLifetime.Create(
+                        throwOnStart: new Exception("Should be thrown")
+                    )
+                )
                 {
-                    Assert.Equal(lifetime.ThrowOnStart,
-                            await Assert.ThrowsAsync<Exception>(async () =>
-                                await lifetime.WaitForStartAsync(CancellationToken.None)));
+                    Assert.Equal(
+                        lifetime.ThrowOnStart,
+                        await Assert.ThrowsAsync<Exception>(async () =>
+                            await lifetime.WaitForStartAsync(CancellationToken.None)
+                        )
+                    );
                 }
             });
 
@@ -89,13 +103,20 @@ namespace Microsoft.Extensions.Hosting
         {
             using var serviceTester = WindowsServiceTester.Create(async () =>
             {
-                using (var lifetime = ThrowingWindowsServiceLifetime.Create(throwOnStop: new Exception("Should be thrown")))
+                using (
+                    var lifetime = ThrowingWindowsServiceLifetime.Create(
+                        throwOnStop: new Exception("Should be thrown")
+                    )
+                )
                 {
                     await lifetime.WaitForStartAsync(CancellationToken.None);
                     lifetime.ApplicationLifetime.NotifyStopped();
-                    Assert.Equal(lifetime.ThrowOnStop,
-                            await Assert.ThrowsAsync<Exception>(async () =>
-                                await lifetime.StopAsync(CancellationToken.None)));
+                    Assert.Equal(
+                        lifetime.ThrowOnStop,
+                        await Assert.ThrowsAsync<Exception>(async () =>
+                            await lifetime.StopAsync(CancellationToken.None)
+                        )
+                    );
                 }
             });
 
@@ -111,15 +132,20 @@ namespace Microsoft.Extensions.Hosting
         {
             using var serviceTester = WindowsServiceTester.Create(async () =>
             {
-                var applicationLifetime = new ApplicationLifetime(NullLogger<ApplicationLifetime>.Instance);
+                var applicationLifetime = new ApplicationLifetime(
+                    NullLogger<ApplicationLifetime>.Instance
+                );
                 using var lifetime = new WindowsServiceLifetime(
                     new HostingEnvironment(),
                     applicationLifetime,
                     NullLoggerFactory.Instance,
-                    new OptionsWrapper<HostOptions>(new HostOptions()));
+                    new OptionsWrapper<HostOptions>(new HostOptions())
+                );
                 await lifetime.WaitForStartAsync(CancellationToken.None);
 
-                await Assert.ThrowsAsync<OperationCanceledException>(async () => await lifetime.StopAsync(new CancellationToken(true)));
+                await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+                    await lifetime.StopAsync(new CancellationToken(true))
+                );
             });
 
             serviceTester.Start();
@@ -132,38 +158,53 @@ namespace Microsoft.Extensions.Hosting
         [ConditionalFact(nameof(IsRemoteExecutorSupportedAndPrivilegedProcess))]
         public void ServiceCanStopItself()
         {
-            using (var serviceTester = WindowsServiceTester.Create(async () =>
-            {
-                FileLogger.InitializeForTestCase(nameof(ServiceCanStopItself));
-                using IHost host = new HostBuilder()
-                    .ConfigureServices(services =>
-                    {
-                        services.AddHostedService<LoggingBackgroundService>();
-                        services.AddSingleton<IHostLifetime, LoggingWindowsServiceLifetime>();
-                    })
-                    .Build();
-
-                var applicationLifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
-                applicationLifetime.ApplicationStarted.Register(() => FileLogger.Log($"lifetime started"));
-                applicationLifetime.ApplicationStopping.Register(() => FileLogger.Log($"lifetime stopping"));
-                applicationLifetime.ApplicationStopped.Register(() => FileLogger.Log($"lifetime stopped"));
-
-                FileLogger.Log("host.Start()");
-                host.Start();
-
-                using (ServiceController selfController = new(nameof(ServiceCanStopItself)))
+            using (
+                var serviceTester = WindowsServiceTester.Create(async () =>
                 {
-                    selfController.WaitForStatus(ServiceControllerStatus.Running, WindowsServiceTester.WaitForStatusTimeout);
-                    Assert.Equal(ServiceControllerStatus.Running, selfController.Status);
+                    FileLogger.InitializeForTestCase(nameof(ServiceCanStopItself));
+                    using IHost host = new HostBuilder()
+                        .ConfigureServices(services =>
+                        {
+                            services.AddHostedService<LoggingBackgroundService>();
+                            services.AddSingleton<IHostLifetime, LoggingWindowsServiceLifetime>();
+                        })
+                        .Build();
 
-                    FileLogger.Log("host.Stop()");
-                    await host.StopAsync();
-                    FileLogger.Log("host.Stop() complete");
+                    var applicationLifetime =
+                        host.Services.GetRequiredService<IHostApplicationLifetime>();
+                    applicationLifetime.ApplicationStarted.Register(() =>
+                        FileLogger.Log($"lifetime started")
+                    );
+                    applicationLifetime.ApplicationStopping.Register(() =>
+                        FileLogger.Log($"lifetime stopping")
+                    );
+                    applicationLifetime.ApplicationStopped.Register(() =>
+                        FileLogger.Log($"lifetime stopped")
+                    );
 
-                    selfController.WaitForStatus(ServiceControllerStatus.Stopped, WindowsServiceTester.WaitForStatusTimeout);
-                    Assert.Equal(ServiceControllerStatus.Stopped, selfController.Status);
-                }
-            }))
+                    FileLogger.Log("host.Start()");
+                    host.Start();
+
+                    using (ServiceController selfController = new(nameof(ServiceCanStopItself)))
+                    {
+                        selfController.WaitForStatus(
+                            ServiceControllerStatus.Running,
+                            WindowsServiceTester.WaitForStatusTimeout
+                        );
+                        Assert.Equal(ServiceControllerStatus.Running, selfController.Status);
+
+                        FileLogger.Log("host.Stop()");
+                        await host.StopAsync();
+                        FileLogger.Log("host.Stop() complete");
+
+                        selfController.WaitForStatus(
+                            ServiceControllerStatus.Stopped,
+                            WindowsServiceTester.WaitForStatusTimeout
+                        );
+                        Assert.Equal(ServiceControllerStatus.Stopped, selfController.Status);
+                    }
+                })
+            )
             {
                 FileLogger.DeleteLog(nameof(ServiceCanStopItself));
 
@@ -175,11 +216,11 @@ namespace Microsoft.Extensions.Hosting
 
                 var status = serviceTester.QueryServiceStatus();
                 Assert.Equal(0, status.win32ExitCode);
-
             }
 
             var logText = FileLogger.ReadLog(nameof(ServiceCanStopItself));
-            Assert.Equal("""
+            Assert.Equal(
+                """
                 host.Start()
                 WindowsServiceLifetime.OnStart
                 BackgroundService.StartAsync
@@ -191,34 +232,44 @@ namespace Microsoft.Extensions.Hosting
                 WindowsServiceLifetime.OnStop
                 host.Stop() complete
 
-                """, logText);
+                """,
+                logText
+            );
         }
 
         [ConditionalFact(nameof(IsRemoteExecutorSupportedAndPrivilegedProcess))]
         public void ServiceSequenceIsCorrect()
         {
-            using (var serviceTester = WindowsServiceTester.Create(() =>
+            using (
+                var serviceTester = WindowsServiceTester.Create(() =>
+                {
+                    FileLogger.InitializeForTestCase(nameof(ServiceSequenceIsCorrect));
+                    using IHost host = new HostBuilder()
+                        .ConfigureServices(services =>
+                        {
+                            services.AddHostedService<LoggingBackgroundService>();
+                            services.AddSingleton<IHostLifetime, LoggingWindowsServiceLifetime>();
+                        })
+                        .Build();
+
+                    var applicationLifetime =
+                        host.Services.GetRequiredService<IHostApplicationLifetime>();
+                    applicationLifetime.ApplicationStarted.Register(() =>
+                        FileLogger.Log($"lifetime started")
+                    );
+                    applicationLifetime.ApplicationStopping.Register(() =>
+                        FileLogger.Log($"lifetime stopping")
+                    );
+                    applicationLifetime.ApplicationStopped.Register(() =>
+                        FileLogger.Log($"lifetime stopped")
+                    );
+
+                    FileLogger.Log("host.Run()");
+                    host.Run();
+                    FileLogger.Log("host.Run() complete");
+                })
+            )
             {
-                FileLogger.InitializeForTestCase(nameof(ServiceSequenceIsCorrect));
-                using IHost host = new HostBuilder()
-                    .ConfigureServices(services =>
-                    {
-                        services.AddHostedService<LoggingBackgroundService>();
-                        services.AddSingleton<IHostLifetime, LoggingWindowsServiceLifetime>();
-                    })
-                    .Build();
-
-                var applicationLifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
-                applicationLifetime.ApplicationStarted.Register(() => FileLogger.Log($"lifetime started"));
-                applicationLifetime.ApplicationStopping.Register(() => FileLogger.Log($"lifetime stopping"));
-                applicationLifetime.ApplicationStopped.Register(() => FileLogger.Log($"lifetime stopped"));
-
-                FileLogger.Log("host.Run()");
-                host.Run();
-                FileLogger.Log("host.Run() complete");
-            }))
-            {
-
                 FileLogger.DeleteLog(nameof(ServiceSequenceIsCorrect));
 
                 serviceTester.Start();
@@ -227,7 +278,7 @@ namespace Microsoft.Extensions.Hosting
                 var statusEx = serviceTester.QueryServiceStatusEx();
                 var serviceProcess = Process.GetProcessById(statusEx.dwProcessId);
 
-                // Give a chance for all asynchronous "started" events to be raised, these happen after the service status changes to started 
+                // Give a chance for all asynchronous "started" events to be raised, these happen after the service status changes to started
                 Thread.Sleep(1000);
 
                 serviceTester.Stop();
@@ -235,11 +286,11 @@ namespace Microsoft.Extensions.Hosting
 
                 var status = serviceTester.QueryServiceStatus();
                 Assert.Equal(0, status.win32ExitCode);
-
             }
 
             var logText = FileLogger.ReadLog(nameof(ServiceSequenceIsCorrect));
-            Assert.Equal("""
+            Assert.Equal(
+                """
                 host.Run()
                 WindowsServiceLifetime.OnStart
                 BackgroundService.StartAsync
@@ -250,15 +301,20 @@ namespace Microsoft.Extensions.Hosting
                 lifetime stopped
                 host.Run() complete
 
-                """, logText);
-
+                """,
+                logText
+            );
         }
 
         public class LoggingWindowsServiceLifetime : WindowsServiceLifetime
         {
-            public LoggingWindowsServiceLifetime(IHostEnvironment environment, IHostApplicationLifetime applicationLifetime, ILoggerFactory loggerFactory, IOptions<HostOptions> optionsAccessor) :
-                base(environment, applicationLifetime, loggerFactory, optionsAccessor)
-            { }
+            public LoggingWindowsServiceLifetime(
+                IHostEnvironment environment,
+                IHostApplicationLifetime applicationLifetime,
+                ILoggerFactory loggerFactory,
+                IOptions<HostOptions> optionsAccessor
+            )
+                : base(environment, applicationLifetime, loggerFactory, optionsAccessor) { }
 
             protected override void OnStart(string[] args)
             {
@@ -275,19 +331,28 @@ namespace Microsoft.Extensions.Hosting
 
         public class ThrowingWindowsServiceLifetime : WindowsServiceLifetime
         {
-            public static ThrowingWindowsServiceLifetime Create(Exception throwOnStart = null, Exception throwOnStop = null) =>
-                    new ThrowingWindowsServiceLifetime(
-                        new HostingEnvironment(),
-                        new ApplicationLifetime(NullLogger<ApplicationLifetime>.Instance),
-                        NullLoggerFactory.Instance,
-                        new OptionsWrapper<HostOptions>(new HostOptions()))
-                    {
-                        ThrowOnStart = throwOnStart,
-                        ThrowOnStop = throwOnStop
-                    };
+            public static ThrowingWindowsServiceLifetime Create(
+                Exception throwOnStart = null,
+                Exception throwOnStop = null
+            ) =>
+                new ThrowingWindowsServiceLifetime(
+                    new HostingEnvironment(),
+                    new ApplicationLifetime(NullLogger<ApplicationLifetime>.Instance),
+                    NullLoggerFactory.Instance,
+                    new OptionsWrapper<HostOptions>(new HostOptions())
+                )
+                {
+                    ThrowOnStart = throwOnStart,
+                    ThrowOnStop = throwOnStop,
+                };
 
-            public ThrowingWindowsServiceLifetime(IHostEnvironment environment, ApplicationLifetime applicationLifetime, ILoggerFactory loggerFactory, IOptions<HostOptions> optionsAccessor) :
-                base(environment, applicationLifetime, loggerFactory, optionsAccessor)
+            public ThrowingWindowsServiceLifetime(
+                IHostEnvironment environment,
+                ApplicationLifetime applicationLifetime,
+                ILoggerFactory loggerFactory,
+                IOptions<HostOptions> optionsAccessor
+            )
+                : base(environment, applicationLifetime, loggerFactory, optionsAccessor)
             {
                 ApplicationLifetime = applicationLifetime;
             }
@@ -295,6 +360,7 @@ namespace Microsoft.Extensions.Hosting
             public ApplicationLifetime ApplicationLifetime { get; }
 
             public Exception ThrowOnStart { get; set; }
+
             protected override void OnStart(string[] args)
             {
                 if (ThrowOnStart != null)
@@ -305,6 +371,7 @@ namespace Microsoft.Extensions.Hosting
             }
 
             public Exception ThrowOnStop { get; set; }
+
             protected override void OnStop()
             {
                 if (ThrowOnStop != null)
@@ -318,9 +385,14 @@ namespace Microsoft.Extensions.Hosting
         public class LoggingBackgroundService : BackgroundService
         {
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-            protected override async Task ExecuteAsync(CancellationToken stoppingToken) => FileLogger.Log("BackgroundService.ExecuteAsync");
-            public override async Task StartAsync(CancellationToken stoppingToken) => FileLogger.Log("BackgroundService.StartAsync");
-            public override async Task StopAsync(CancellationToken stoppingToken) => FileLogger.Log("BackgroundService.StopAsync");
+            protected override async Task ExecuteAsync(CancellationToken stoppingToken) =>
+                FileLogger.Log("BackgroundService.ExecuteAsync");
+
+            public override async Task StartAsync(CancellationToken stoppingToken) =>
+                FileLogger.Log("BackgroundService.StartAsync");
+
+            public override async Task StopAsync(CancellationToken stoppingToken) =>
+                FileLogger.Log("BackgroundService.StopAsync");
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         }
 
@@ -334,9 +406,15 @@ namespace Microsoft.Extensions.Hosting
                 _fileName = GetLogForTestCase(testCaseName);
             }
 
-            private static string GetLogForTestCase(string testCaseName) => Path.Combine(AppContext.BaseDirectory, $"{testCaseName}.log");
-            public static void DeleteLog(string testCaseName) => File.Delete(GetLogForTestCase(testCaseName));
-            public static string ReadLog(string testCaseName) => File.ReadAllText(GetLogForTestCase(testCaseName));
+            private static string GetLogForTestCase(string testCaseName) =>
+                Path.Combine(AppContext.BaseDirectory, $"{testCaseName}.log");
+
+            public static void DeleteLog(string testCaseName) =>
+                File.Delete(GetLogForTestCase(testCaseName));
+
+            public static string ReadLog(string testCaseName) =>
+                File.ReadAllText(GetLogForTestCase(testCaseName));
+
             public static void Log(string message)
             {
                 Assert.NotNull(_fileName);

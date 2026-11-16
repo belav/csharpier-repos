@@ -1,11 +1,11 @@
 ﻿/* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -13,39 +13,43 @@
  *
  * ***************************************************************************/
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Dynamic.Utils;
+using System.Runtime.CompilerServices;
 #if CLR2
 using Microsoft.Scripting.Ast;
 #else
 using System.Linq.Expressions;
 #endif
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Dynamic.Utils;
-using System.Runtime.CompilerServices;
-
-namespace System.Dynamic {
-
+namespace System.Dynamic
+{
     /// <summary>
     /// Represents a set of binding restrictions on the <see cref="DynamicMetaObject"/>under which the dynamic binding is valid.
     /// </summary>
 #if !SILVERLIGHT
     [DebuggerTypeProxy(typeof(BindingRestrictionsProxy)), DebuggerDisplay("{DebugView}")]
 #endif
-    public abstract class BindingRestrictions {
+    public abstract class BindingRestrictions
+    {
         /// <summary>
         /// Represents an empty set of binding restrictions. This field is read only.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
-        public static readonly BindingRestrictions Empty = new CustomRestriction(Expression.Constant(true));
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes"
+        )]
+        public static readonly BindingRestrictions Empty = new CustomRestriction(
+            Expression.Constant(true)
+        );
 
         private const int TypeRestrictionHash = 0x10000000;
         private const int InstanceRestrictionHash = 0x20000000;
         private const int CustomRestrictionHash = 0x40000000;
-        
-        private BindingRestrictions() {
-        }
+
+        private BindingRestrictions() { }
 
         // Overridden by specialized subclasses
         internal abstract Expression GetExpression();
@@ -55,12 +59,15 @@ namespace System.Dynamic {
         /// </summary>
         /// <param name="restrictions">The set of restrictions with which to merge the current binding restrictions.</param>
         /// <returns>The new set of binding restrictions.</returns>
-        public BindingRestrictions Merge(BindingRestrictions restrictions) {
+        public BindingRestrictions Merge(BindingRestrictions restrictions)
+        {
             ContractUtils.RequiresNotNull(restrictions, "restrictions");
-            if (this == Empty) {
+            if (this == Empty)
+            {
                 return restrictions;
             }
-            if (restrictions == Empty) {
+            if (restrictions == Empty)
+            {
                 return this;
             }
             return new MergedRestriction(this, restrictions);
@@ -72,7 +79,8 @@ namespace System.Dynamic {
         /// <param name="expression">The expression to test.</param>
         /// <param name="type">The exact type to test.</param>
         /// <returns>The new binding restrictions.</returns>
-        public static BindingRestrictions GetTypeRestriction(Expression expression, Type type) {
+        public static BindingRestrictions GetTypeRestriction(Expression expression, Type type)
+        {
             ContractUtils.RequiresNotNull(expression, "expression");
             ContractUtils.RequiresNotNull(type, "type");
 
@@ -83,10 +91,14 @@ namespace System.Dynamic {
         /// The method takes a DynamicMetaObject, and returns an instance restriction for testing null if the object
         /// holds a null value, otherwise returns a type restriction.
         /// </summary>
-        internal static BindingRestrictions GetTypeRestriction(DynamicMetaObject obj) {
-            if (obj.Value == null && obj.HasValue) {
+        internal static BindingRestrictions GetTypeRestriction(DynamicMetaObject obj)
+        {
+            if (obj.Value == null && obj.HasValue)
+            {
                 return BindingRestrictions.GetInstanceRestriction(obj.Expression, null);
-            } else {
+            }
+            else
+            {
                 return BindingRestrictions.GetTypeRestriction(obj.Expression, obj.LimitType);
             }
         }
@@ -97,7 +109,11 @@ namespace System.Dynamic {
         /// <param name="expression">The expression to test.</param>
         /// <param name="instance">The exact object instance to test.</param>
         /// <returns>The new binding restrictions.</returns>
-        public static BindingRestrictions GetInstanceRestriction(Expression expression, object instance) {
+        public static BindingRestrictions GetInstanceRestriction(
+            Expression expression,
+            object instance
+        )
+        {
             ContractUtils.RequiresNotNull(expression, "expression");
 
             return new InstanceRestriction(expression, instance);
@@ -112,7 +128,8 @@ namespace System.Dynamic {
         /// By convention, the general restrictions created by this method must only test
         /// immutable object properties.
         /// </remarks>
-        public static BindingRestrictions GetExpressionRestriction(Expression expression) {
+        public static BindingRestrictions GetExpressionRestriction(Expression expression)
+        {
             ContractUtils.RequiresNotNull(expression, "expression");
             ContractUtils.Requires(expression.Type == typeof(bool), "expression");
             return new CustomRestriction(expression);
@@ -123,11 +140,15 @@ namespace System.Dynamic {
         /// </summary>
         /// <param name="contributingObjects">The list of <see cref="DynamicMetaObject"/> instances from which to combine restrictions.</param>
         /// <returns>The new set of binding restrictions.</returns>
-        public static BindingRestrictions Combine(IList<DynamicMetaObject> contributingObjects) {
+        public static BindingRestrictions Combine(IList<DynamicMetaObject> contributingObjects)
+        {
             BindingRestrictions res = BindingRestrictions.Empty;
-            if (contributingObjects != null) {
-                foreach (DynamicMetaObject mo in contributingObjects) {
-                    if (mo != null) {
+            if (contributingObjects != null)
+            {
+                foreach (DynamicMetaObject mo in contributingObjects)
+                {
+                    if (mo != null)
+                    {
                         res = res.Merge(mo.Restrictions);
                     }
                 }
@@ -140,17 +161,21 @@ namespace System.Dynamic {
         /// We do this so the compiler won't stack overflow if we have many
         /// restrictions.
         /// </summary>
-        private sealed class TestBuilder {
+        private sealed class TestBuilder
+        {
             private readonly Set<BindingRestrictions> _unique = new Set<BindingRestrictions>();
             private readonly Stack<AndNode> _tests = new Stack<AndNode>();
 
-            private struct AndNode {
+            private struct AndNode
+            {
                 internal int Depth;
                 internal Expression Node;
             }
 
-            internal void Append(BindingRestrictions restrictions) {
-                if (_unique.Contains(restrictions)) {
+            internal void Append(BindingRestrictions restrictions)
+            {
+                if (_unique.Contains(restrictions))
+                {
                     return;
                 }
                 _unique.Add(restrictions);
@@ -158,16 +183,20 @@ namespace System.Dynamic {
                 Push(restrictions.GetExpression(), 0);
             }
 
-            internal Expression ToExpression() {
+            internal Expression ToExpression()
+            {
                 Expression result = _tests.Pop().Node;
-                while (_tests.Count > 0) {
+                while (_tests.Count > 0)
+                {
                     result = Expression.AndAlso(_tests.Pop().Node, result);
                 }
                 return result;
             }
 
-            private void Push(Expression node, int depth) {
-                while (_tests.Count > 0 && _tests.Peek().Depth == depth) {
+            private void Push(Expression node, int depth)
+            {
+                while (_tests.Count > 0 && _tests.Peek().Depth == depth)
+                {
                     node = Expression.AndAlso(_tests.Pop().Node, node);
                     depth++;
                 }
@@ -179,11 +208,13 @@ namespace System.Dynamic {
         /// Creates the <see cref="Expression"/> representing the binding restrictions.
         /// </summary>
         /// <returns>The expression tree representing the restrictions.</returns>
-        public Expression ToExpression() {
+        public Expression ToExpression()
+        {
             // We could optimize this better, e.g. common subexpression elimination
             // But for now, it's good enough.
 
-            if (this == Empty) {
+            if (this == Empty)
+            {
                 return Expression.Constant(true);
             }
 
@@ -196,13 +227,17 @@ namespace System.Dynamic {
             // left most node each iteration.
             var stack = new Stack<BindingRestrictions>();
             stack.Push(this);
-            do {
+            do
+            {
                 var top = stack.Pop();
                 var m = top as MergedRestriction;
-                if (m != null) {
+                if (m != null)
+                {
                     stack.Push(m.Right);
                     stack.Push(m.Left);
-                } else {
+                }
+                else
+                {
                     testBuilder.Append(top);
                 }
             } while (stack.Count > 0);
@@ -210,83 +245,109 @@ namespace System.Dynamic {
             return testBuilder.ToExpression();
         }
 
-        private sealed class MergedRestriction : BindingRestrictions {
+        private sealed class MergedRestriction : BindingRestrictions
+        {
             internal readonly BindingRestrictions Left;
             internal readonly BindingRestrictions Right;
 
-            internal MergedRestriction(BindingRestrictions left, BindingRestrictions right) {
+            internal MergedRestriction(BindingRestrictions left, BindingRestrictions right)
+            {
                 Left = left;
                 Right = right;
             }
-            internal override Expression GetExpression() {
+
+            internal override Expression GetExpression()
+            {
                 throw ContractUtils.Unreachable;
             }
         }
 
-        private sealed class CustomRestriction : BindingRestrictions {
+        private sealed class CustomRestriction : BindingRestrictions
+        {
             private readonly Expression _expression;
 
-            internal CustomRestriction(Expression expression) {
+            internal CustomRestriction(Expression expression)
+            {
                 _expression = expression;
             }
 
-            public override bool Equals(object obj) {
+            public override bool Equals(object obj)
+            {
                 var other = obj as CustomRestriction;
                 return other != null && other._expression == _expression;
             }
 
-            public override int GetHashCode() {
+            public override int GetHashCode()
+            {
                 return CustomRestrictionHash ^ _expression.GetHashCode();
             }
 
-            internal override Expression GetExpression() {
+            internal override Expression GetExpression()
+            {
                 return _expression;
             }
         }
 
-        private sealed class TypeRestriction : BindingRestrictions {
+        private sealed class TypeRestriction : BindingRestrictions
+        {
             private readonly Expression _expression;
             private readonly Type _type;
 
-            internal TypeRestriction(Expression parameter, Type type) {
+            internal TypeRestriction(Expression parameter, Type type)
+            {
                 _expression = parameter;
                 _type = type;
             }
 
-            public override bool Equals(object obj) {
+            public override bool Equals(object obj)
+            {
                 var other = obj as TypeRestriction;
-                return other != null && TypeUtils.AreEquivalent(other._type, _type) && other._expression == _expression;
+                return other != null
+                    && TypeUtils.AreEquivalent(other._type, _type)
+                    && other._expression == _expression;
             }
 
-            public override int GetHashCode() {
+            public override int GetHashCode()
+            {
                 return TypeRestrictionHash ^ _expression.GetHashCode() ^ _type.GetHashCode();
             }
 
-            internal override Expression GetExpression() {
+            internal override Expression GetExpression()
+            {
                 return Expression.TypeEqual(_expression, _type);
             }
         }
 
-        private sealed class InstanceRestriction : BindingRestrictions {
+        private sealed class InstanceRestriction : BindingRestrictions
+        {
             private readonly Expression _expression;
             private readonly object _instance;
 
-            internal InstanceRestriction(Expression parameter, object instance) {
+            internal InstanceRestriction(Expression parameter, object instance)
+            {
                 _expression = parameter;
                 _instance = instance;
             }
 
-            public override bool Equals(object obj) {
+            public override bool Equals(object obj)
+            {
                 var other = obj as InstanceRestriction;
-                return other != null && other._instance == _instance && other._expression == _expression;
+                return other != null
+                    && other._instance == _instance
+                    && other._expression == _expression;
             }
 
-            public override int GetHashCode() {
-                return InstanceRestrictionHash ^ RuntimeHelpers.GetHashCode(_instance) ^ _expression.GetHashCode();
+            public override int GetHashCode()
+            {
+                return InstanceRestrictionHash
+                    ^ RuntimeHelpers.GetHashCode(_instance)
+                    ^ _expression.GetHashCode();
             }
 
-            internal override Expression GetExpression() {
-                if (_instance == null) {
+            internal override Expression GetExpression()
+            {
+                if (_instance == null)
+                {
                     return Expression.Equal(
                         Expression.Convert(_expression, typeof(object)),
                         Expression.Constant(null)
@@ -304,38 +365,42 @@ namespace System.Dynamic {
                         )
                     ),
                     Expression.AndAlso(
-                    //check that WeekReference was not collected.
+                        //check that WeekReference was not collected.
                         Expression.NotEqual(temp, Expression.Constant(null)),
-                        Expression.Equal(
-                            Expression.Convert(_expression, typeof(object)),
-                            temp
-                        )
+                        Expression.Equal(Expression.Convert(_expression, typeof(object)), temp)
                     )
                 );
             }
         }
 
-        private string DebugView {
+        private string DebugView
+        {
             get { return ToExpression().ToString(); }
         }
 
-        private sealed class BindingRestrictionsProxy {
+        private sealed class BindingRestrictionsProxy
+        {
             private readonly BindingRestrictions _node;
 
-            public BindingRestrictionsProxy(BindingRestrictions node) {
+            public BindingRestrictionsProxy(BindingRestrictions node)
+            {
                 _node = node;
             }
 
-            public bool IsEmpty {
+            public bool IsEmpty
+            {
                 get { return _node == Empty; }
             }
 
-            public Expression Test {
+            public Expression Test
+            {
                 get { return _node.ToExpression(); }
             }
 
-            public BindingRestrictions[] Restrictions {
-                get {
+            public BindingRestrictions[] Restrictions
+            {
+                get
+                {
                     var restrictions = new List<BindingRestrictions>();
 
                     // Visit the tree, left to right
@@ -344,13 +409,17 @@ namespace System.Dynamic {
                     // left most node each iteration.
                     var stack = new Stack<BindingRestrictions>();
                     stack.Push(_node);
-                    do {
+                    do
+                    {
                         var top = stack.Pop();
                         var m = top as MergedRestriction;
-                        if (m != null) {
+                        if (m != null)
+                        {
                             stack.Push(m.Right);
                             stack.Push(m.Left);
-                        } else {
+                        }
+                        else
+                        {
                             restrictions.Add(top);
                         }
                     } while (stack.Count > 0);
@@ -359,7 +428,8 @@ namespace System.Dynamic {
                 }
             }
 
-            public override string ToString() {
+            public override string ToString()
+            {
                 // To prevent fxcop warning about this field
                 return _node.DebugView;
             }

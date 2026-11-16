@@ -7,8 +7,10 @@ namespace System.Web.Mvc
     /// Actions and controllers with the AllowAnonymous attribute are skipped by the Authorize attribute
     /// on authorization. See AccountController.cs in the project template for an example.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public sealed class AllowAnonymousAttribute : Attribute
-    {
-    }
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        AllowMultiple = false,
+        Inherited = true
+    )]
+    public sealed class AllowAnonymousAttribute : Attribute { }
 }

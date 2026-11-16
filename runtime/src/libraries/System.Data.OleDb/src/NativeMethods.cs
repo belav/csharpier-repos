@@ -7,7 +7,11 @@ namespace System.Data.Common
 {
     internal static partial class NativeMethods
     {
-        [Guid("0c733a1e-2a1c-11ce-ade5-00aa0044773d"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport]
+        [
+            Guid("0c733a1e-2a1c-11ce-ade5-00aa0044773d"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport
+        ]
         internal interface ISourcesRowset
         {
             [PreserveSig]
@@ -16,10 +20,15 @@ namespace System.Data.Common
                 [In, MarshalAs(UnmanagedType.LPStruct)] Guid riid,
                 [In] int cPropertySets,
                 [In] IntPtr rgProperties,
-                [Out, MarshalAs(UnmanagedType.Interface)] out object ppRowset);
+                [Out, MarshalAs(UnmanagedType.Interface)] out object ppRowset
+            );
         }
 
-        [Guid("0C733A5E-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport]
+        [
+            Guid("0C733A5E-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport
+        ]
         internal interface ITransactionJoin
         {
             [Obsolete("not used", true)]
@@ -30,7 +39,8 @@ namespace System.Data.Common
                 [In, MarshalAs(UnmanagedType.Interface)] object? punkTransactionCoord,
                 [In] int isoLevel,
                 [In] int isoFlags,
-                [In] IntPtr pOtherOptions);
+                [In] IntPtr pOtherOptions
+            );
         }
     }
 }

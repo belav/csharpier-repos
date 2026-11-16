@@ -10,7 +10,11 @@ using System.Linq;
 
 namespace System.Web.Helpers
 {
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "This class isn't meant to be used directly")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "This class isn't meant to be used directly"
+    )]
     public class DynamicJsonArray : DynamicObject, IEnumerable<object>
     {
         private readonly object[] _arrayValues;
@@ -66,13 +70,21 @@ namespace System.Web.Helpers
             return GetEnumerable().GetEnumerator();
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "This class isn't meant to be used directly")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2225:OperatorOverloadsHaveNamedAlternates",
+            Justification = "This class isn't meant to be used directly"
+        )]
         public static implicit operator object[](DynamicJsonArray obj)
         {
             return obj._arrayValues;
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "This class isn't meant to be used directly")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2225:OperatorOverloadsHaveNamedAlternates",
+            Justification = "This class isn't meant to be used directly"
+        )]
         public static implicit operator Array(DynamicJsonArray obj)
         {
             return obj._arrayValues;

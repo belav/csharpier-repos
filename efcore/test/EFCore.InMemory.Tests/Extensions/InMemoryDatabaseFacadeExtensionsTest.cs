@@ -14,8 +14,8 @@ public class InMemoryDatabaseFacadeExtensionsTest
 
     private class ProviderContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase("Maltesers");
     }

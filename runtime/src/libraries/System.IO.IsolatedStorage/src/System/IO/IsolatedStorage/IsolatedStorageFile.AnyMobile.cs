@@ -52,7 +52,9 @@ namespace System.IO.IsolatedStorage
 
         private bool IsMatchingScopeDirectory(string _)
         {
-            return (Helper.IsApplication(Scope)) || (Helper.IsAssembly(Scope)) || (Helper.IsDomain(Scope));
+            return (Helper.IsApplication(Scope))
+                || (Helper.IsAssembly(Scope))
+                || (Helper.IsDomain(Scope));
         }
 
         private string? GetParentDirectory()

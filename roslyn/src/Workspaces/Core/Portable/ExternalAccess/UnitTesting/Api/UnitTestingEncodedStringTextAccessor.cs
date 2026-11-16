@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 {
     internal static class UnitTestingEncodedStringTextAccessor
     {
-        public static SourceText Create(Stream stream, Encoding defaultEncoding)
-            => EncodedStringText.Create(stream, defaultEncoding);
+        public static SourceText Create(Stream stream, Encoding defaultEncoding) =>
+            EncodedStringText.Create(stream, defaultEncoding);
     }
 }

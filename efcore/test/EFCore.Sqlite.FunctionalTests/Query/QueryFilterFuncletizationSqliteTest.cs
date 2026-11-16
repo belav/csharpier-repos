@@ -3,12 +3,13 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class QueryFilterFuncletizationSqliteTest : QueryFilterFuncletizationTestBase<
-    QueryFilterFuncletizationSqliteTest.QueryFilterFuncletizationSqliteFixture>
+public class QueryFilterFuncletizationSqliteTest
+    : QueryFilterFuncletizationTestBase<QueryFilterFuncletizationSqliteTest.QueryFilterFuncletizationSqliteFixture>
 {
     public QueryFilterFuncletizationSqliteTest(
         QueryFilterFuncletizationSqliteFixture fixture,
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
@@ -37,15 +38,15 @@ LEFT JOIN (
 ) AS "t0" ON "d"."Id" = "t0"."DeDupeFilter1Id"
 WHERE "d"."Tenant" = @__ef_filter__Tenant_0
 ORDER BY "d"."Id", "t"."Id"
-""");
+"""
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
     public class QueryFilterFuncletizationSqliteFixture : QueryFilterFuncletizationRelationalFixture
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
     }
 }

@@ -23,20 +23,19 @@ public readonly struct MaterializationContext
     /// <summary>
     ///     The <see cref="MethodInfo" /> for the <see cref="ValueBuffer" /> get method.
     /// </summary>
-    public static readonly MethodInfo GetValueBufferMethod
-        = typeof(MaterializationContext).GetProperty(nameof(ValueBuffer))!.GetMethod!;
+    public static readonly MethodInfo GetValueBufferMethod = typeof(MaterializationContext)
+        .GetProperty(nameof(ValueBuffer))!
+        .GetMethod!;
 
-    internal static readonly PropertyInfo ContextProperty
-        = typeof(MaterializationContext).GetProperty(nameof(Context))!;
+    internal static readonly PropertyInfo ContextProperty =
+        typeof(MaterializationContext).GetProperty(nameof(Context))!;
 
     /// <summary>
     ///     Creates a new <see cref="MaterializationContext" /> instance.
     /// </summary>
     /// <param name="valueBuffer">The <see cref="ValueBuffer" /> to use to materialize an entity.</param>
     /// <param name="context">The current <see cref="DbContext" /> instance being used.</param>
-    public MaterializationContext(
-        in ValueBuffer valueBuffer,
-        DbContext context)
+    public MaterializationContext(in ValueBuffer valueBuffer, DbContext context)
     {
         Check.DebugAssert(context != null, "context is null"); // Hot path
 

@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.ComponentModel;
     using System.Runtime;
     using System.ServiceModel.Channels;
-    using System.ComponentModel;
 
     public sealed class WSHttpSecurity
     {
@@ -16,15 +16,23 @@ namespace System.ServiceModel
         NonDualMessageSecurityOverHttp messageSecurity;
 
         public WSHttpSecurity()
-            : this(DefaultMode, GetDefaultHttpTransportSecurity(), new NonDualMessageSecurityOverHttp())
-        {
-        }
+            : this(
+                DefaultMode,
+                GetDefaultHttpTransportSecurity(),
+                new NonDualMessageSecurityOverHttp()
+            ) { }
 
-        internal WSHttpSecurity(SecurityMode mode, HttpTransportSecurity transportSecurity, NonDualMessageSecurityOverHttp messageSecurity)
+        internal WSHttpSecurity(
+            SecurityMode mode,
+            HttpTransportSecurity transportSecurity,
+            NonDualMessageSecurityOverHttp messageSecurity
+        )
         {
             this.mode = mode;
-            this.transportSecurity = transportSecurity == null ? GetDefaultHttpTransportSecurity() : transportSecurity;
-            this.messageSecurity = messageSecurity == null ? new NonDualMessageSecurityOverHttp() : messageSecurity;
+            this.transportSecurity =
+                transportSecurity == null ? GetDefaultHttpTransportSecurity() : transportSecurity;
+            this.messageSecurity =
+                messageSecurity == null ? new NonDualMessageSecurityOverHttp() : messageSecurity;
         }
 
         internal static HttpTransportSecurity GetDefaultHttpTransportSecurity()
@@ -41,7 +49,9 @@ namespace System.ServiceModel
             {
                 if (!SecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.mode = value;
             }
@@ -54,7 +64,9 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 }
                 this.transportSecurity = value;
             }
@@ -67,7 +79,9 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 }
                 this.messageSecurity = value;
             }
@@ -85,16 +99,32 @@ namespace System.ServiceModel
             }
         }
 
-        internal static void ApplyTransportSecurity(HttpsTransportBindingElement transport, HttpTransportSecurity transportSecurity)
+        internal static void ApplyTransportSecurity(
+            HttpsTransportBindingElement transport,
+            HttpTransportSecurity transportSecurity
+        )
         {
-            HttpTransportSecurity.ConfigureTransportProtectionAndAuthentication(transport, transportSecurity);
+            HttpTransportSecurity.ConfigureTransportProtectionAndAuthentication(
+                transport,
+                transportSecurity
+            );
         }
 
-        internal SecurityBindingElement CreateMessageSecurity(bool isReliableSessionEnabled, MessageSecurityVersion version)
+        internal SecurityBindingElement CreateMessageSecurity(
+            bool isReliableSessionEnabled,
+            MessageSecurityVersion version
+        )
         {
-            if (this.mode == SecurityMode.Message || this.mode == SecurityMode.TransportWithMessageCredential)
+            if (
+                this.mode == SecurityMode.Message
+                || this.mode == SecurityMode.TransportWithMessageCredential
+            )
             {
-                return this.messageSecurity.CreateSecurityBindingElement(this.Mode == SecurityMode.TransportWithMessageCredential, isReliableSessionEnabled, version);
+                return this.messageSecurity.CreateSecurityBindingElement(
+                    this.Mode == SecurityMode.TransportWithMessageCredential,
+                    isReliableSessionEnabled,
+                    version
+                );
             }
             else
             {
@@ -102,27 +132,50 @@ namespace System.ServiceModel
             }
         }
 
-        internal static bool TryCreate(SecurityBindingElement sbe, UnifiedSecurityMode mode, HttpTransportSecurity transportSecurity, bool isReliableSessionEnabled, out WSHttpSecurity security)
+        internal static bool TryCreate(
+            SecurityBindingElement sbe,
+            UnifiedSecurityMode mode,
+            HttpTransportSecurity transportSecurity,
+            bool isReliableSessionEnabled,
+            out WSHttpSecurity security
+        )
         {
             security = null;
             NonDualMessageSecurityOverHttp messageSecurity = null;
             SecurityMode securityMode = SecurityMode.None;
             if (sbe != null)
             {
-                mode &= UnifiedSecurityMode.Message | UnifiedSecurityMode.TransportWithMessageCredential;
+                mode &=
+                    UnifiedSecurityMode.Message
+                    | UnifiedSecurityMode.TransportWithMessageCredential;
                 securityMode = SecurityModeHelper.ToSecurityMode(mode);
-                Fx.Assert(SecurityModeHelper.IsDefined(securityMode), string.Format("Invalid SecurityMode value: {0}.", mode.ToString()));
-                if (!MessageSecurityOverHttp.TryCreate(sbe, securityMode == SecurityMode.TransportWithMessageCredential, isReliableSessionEnabled, out messageSecurity))
+                Fx.Assert(
+                    SecurityModeHelper.IsDefined(securityMode),
+                    string.Format("Invalid SecurityMode value: {0}.", mode.ToString())
+                );
+                if (
+                    !MessageSecurityOverHttp.TryCreate(
+                        sbe,
+                        securityMode == SecurityMode.TransportWithMessageCredential,
+                        isReliableSessionEnabled,
+                        out messageSecurity
+                    )
+                )
                 {
                     return false;
                 }
             }
             else
             {
-                mode &= ~(UnifiedSecurityMode.Message | UnifiedSecurityMode.TransportWithMessageCredential);
+                mode &= ~(
+                    UnifiedSecurityMode.Message | UnifiedSecurityMode.TransportWithMessageCredential
+                );
                 securityMode = SecurityModeHelper.ToSecurityMode(mode);
             }
-            Fx.Assert(SecurityModeHelper.IsDefined(securityMode), string.Format("Invalid SecurityMode value: {0}.", securityMode.ToString()));
+            Fx.Assert(
+                SecurityModeHelper.IsDefined(securityMode),
+                string.Format("Invalid SecurityMode value: {0}.", securityMode.ToString())
+            );
             security = new WSHttpSecurity(securityMode, transportSecurity, messageSecurity);
             return true;
         }
@@ -153,6 +206,5 @@ namespace System.ServiceModel
                 || this.Transport.ShouldSerializeProxyCredentialType()
                 || this.Transport.ShouldSerializeRealm();
         }
-
     }
 }

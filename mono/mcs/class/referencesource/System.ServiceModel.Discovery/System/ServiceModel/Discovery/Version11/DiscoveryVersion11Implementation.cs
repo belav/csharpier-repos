@@ -4,17 +4,21 @@
 
 namespace System.ServiceModel.Discovery.Version11
 {
+    using System.Globalization;
+    using System.Runtime;
     using System.Runtime.Serialization;
     using System.ServiceModel.Channels;
-    using System.Runtime;
     using System.ServiceModel.Description;
-    using System.Globalization;
 
     class DiscoveryVersion11Implementation : IDiscoveryVersionImplementation
     {
-        static readonly Uri ScopeMatchByExact = new Uri(ProtocolStrings.Version11.ScopeMatchByExact);
+        static readonly Uri ScopeMatchByExact = new Uri(
+            ProtocolStrings.Version11.ScopeMatchByExact
+        );
         static readonly Uri ScopeMatchByLdap = new Uri(ProtocolStrings.Version11.ScopeMatchByLdap);
-        static readonly Uri ScopeMatchByPrefix = new Uri(ProtocolStrings.Version11.ScopeMatchByPrefix);
+        static readonly Uri ScopeMatchByPrefix = new Uri(
+            ProtocolStrings.Version11.ScopeMatchByPrefix
+        );
         static readonly Uri ScopeMatchByUuid = new Uri(ProtocolStrings.Version11.ScopeMatchByUuid);
         static readonly Uri ScopeMatchByNone = new Uri(ProtocolStrings.Version11.ScopeMatchByNone);
 
@@ -36,10 +40,7 @@ namespace System.ServiceModel.Discovery.Version11
 
         public string WsaNamespace
         {
-            get
-            {
-                return ProtocolStrings.WsaNamespace10;
-            }
+            get { return ProtocolStrings.WsaNamespace10; }
         }
 
         public Uri DiscoveryAddress
@@ -56,10 +57,7 @@ namespace System.ServiceModel.Discovery.Version11
 
         public MessageVersion MessageVersion
         {
-            get
-            {
-                return MessageVersion.Soap12WSAddressing10;
-            }
+            get { return MessageVersion.Soap12WSAddressing10; }
         }
 
         public DiscoveryVersion.SchemaQualifiedNames QualifiedNames
@@ -68,7 +66,10 @@ namespace System.ServiceModel.Discovery.Version11
             {
                 if (this.qualifiedNames == null)
                 {
-                    this.qualifiedNames = new DiscoveryVersion.SchemaQualifiedNames(ProtocolStrings.Version11.Namespace, this.WsaNamespace);
+                    this.qualifiedNames = new DiscoveryVersion.SchemaQualifiedNames(
+                        ProtocolStrings.Version11.Namespace,
+                        this.WsaNamespace
+                    );
                 }
                 return this.qualifiedNames;
             }
@@ -96,7 +97,9 @@ namespace System.ServiceModel.Discovery.Version11
                     {
                         if (this.adhocDiscoveryContract == null)
                         {
-                            this.adhocDiscoveryContract = DiscoveryUtility.GetContract(typeof(IDiscoveryContractAdhoc11));
+                            this.adhocDiscoveryContract = DiscoveryUtility.GetContract(
+                                typeof(IDiscoveryContractAdhoc11)
+                            );
                         }
                     }
                 }
@@ -110,7 +113,9 @@ namespace System.ServiceModel.Discovery.Version11
                     {
                         if (this.managedDiscoveryContract == null)
                         {
-                            this.managedDiscoveryContract = DiscoveryUtility.GetContract(typeof(IDiscoveryContractManaged11));
+                            this.managedDiscoveryContract = DiscoveryUtility.GetContract(
+                                typeof(IDiscoveryContractManaged11)
+                            );
                         }
                     }
                 }
@@ -118,7 +123,9 @@ namespace System.ServiceModel.Discovery.Version11
             }
             else
             {
-                throw FxTrace.Exception.AsError(new ArgumentException(SR.DiscoveryIncorrectMode(discoveryMode)));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentException(SR.DiscoveryIncorrectMode(discoveryMode))
+                );
             }
         }
 
@@ -130,14 +137,19 @@ namespace System.ServiceModel.Discovery.Version11
                 {
                     if (this.announcementContract == null)
                     {
-                        this.announcementContract = DiscoveryUtility.GetContract(typeof(IAnnouncementContract11));
+                        this.announcementContract = DiscoveryUtility.GetContract(
+                            typeof(IAnnouncementContract11)
+                        );
                     }
                 }
             }
             return this.announcementContract;
         }
 
-        public IDiscoveryInnerClient CreateDiscoveryInnerClient(DiscoveryEndpoint discoveryEndpoint, IDiscoveryInnerClientResponse responseReceiver)
+        public IDiscoveryInnerClient CreateDiscoveryInnerClient(
+            DiscoveryEndpoint discoveryEndpoint,
+            IDiscoveryInnerClientResponse responseReceiver
+        )
         {
             if (discoveryEndpoint.DiscoveryMode == ServiceDiscoveryMode.Adhoc)
             {
@@ -149,11 +161,17 @@ namespace System.ServiceModel.Discovery.Version11
             }
             else
             {
-                throw FxTrace.Exception.AsError(new ArgumentException(SR.DiscoveryIncorrectMode(discoveryEndpoint.DiscoveryMode)));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentException(
+                        SR.DiscoveryIncorrectMode(discoveryEndpoint.DiscoveryMode)
+                    )
+                );
             }
         }
 
-        public IAnnouncementInnerClient CreateAnnouncementInnerClient(AnnouncementEndpoint announcementEndpoint)
+        public IAnnouncementInnerClient CreateAnnouncementInnerClient(
+            AnnouncementEndpoint announcementEndpoint
+        )
         {
             return new AnnouncementInnerClient11(announcementEndpoint);
         }
@@ -166,19 +184,27 @@ namespace System.ServiceModel.Discovery.Version11
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByExact;
             }
-            else if (versionDependentScopeMatchBy == DiscoveryVersion11Implementation.ScopeMatchByPrefix)
+            else if (
+                versionDependentScopeMatchBy == DiscoveryVersion11Implementation.ScopeMatchByPrefix
+            )
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByPrefix;
             }
-            else if (versionDependentScopeMatchBy == DiscoveryVersion11Implementation.ScopeMatchByLdap)
+            else if (
+                versionDependentScopeMatchBy == DiscoveryVersion11Implementation.ScopeMatchByLdap
+            )
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByLdap;
             }
-            else if (versionDependentScopeMatchBy == DiscoveryVersion11Implementation.ScopeMatchByUuid)
+            else if (
+                versionDependentScopeMatchBy == DiscoveryVersion11Implementation.ScopeMatchByUuid
+            )
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByUuid;
             }
-            else if (versionDependentScopeMatchBy == DiscoveryVersion11Implementation.ScopeMatchByNone)
+            else if (
+                versionDependentScopeMatchBy == DiscoveryVersion11Implementation.ScopeMatchByNone
+            )
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByNone;
             }

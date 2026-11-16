@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest.Avx1
@@ -29,7 +29,10 @@ namespace IntelHardwareIntrinsicTest.Avx1
 
                     for (var i = 0; i < 8; i++)
                     {
-                        if (BitConverter.SingleToInt32Bits(inArray[i]) != BitConverter.SingleToInt32Bits(outArray[i]))
+                        if (
+                            BitConverter.SingleToInt32Bits(inArray[i])
+                            != BitConverter.SingleToInt32Bits(outArray[i])
+                        )
                         {
                             Console.WriteLine("AVX LoadAlignedVector256 failed on float:");
                             for (var n = 0; n < 8; n++)
@@ -53,7 +56,10 @@ namespace IntelHardwareIntrinsicTest.Avx1
 
                     for (var i = 0; i < 4; i++)
                     {
-                        if (BitConverter.DoubleToInt64Bits(inArray[i]) != BitConverter.DoubleToInt64Bits(outArray[i]))
+                        if (
+                            BitConverter.DoubleToInt64Bits(inArray[i])
+                            != BitConverter.DoubleToInt64Bits(outArray[i])
+                        )
                         {
                             Console.WriteLine("AVX LoadAlignedVector256 failed on double:");
                             for (var n = 0; n < 4; n++)

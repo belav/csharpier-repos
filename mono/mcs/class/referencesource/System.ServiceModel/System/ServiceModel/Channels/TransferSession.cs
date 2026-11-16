@@ -9,7 +9,6 @@ namespace System.ServiceModel.Channels
     {
         None,
         Ordered,
-        Unordered
+        Unordered,
     }
 }
-

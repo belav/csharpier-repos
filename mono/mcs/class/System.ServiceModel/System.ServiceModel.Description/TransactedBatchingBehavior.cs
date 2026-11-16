@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,42 +33,49 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	[MonoTODO]
-	public class TransactedBatchingBehavior : IEndpointBehavior
-	{
-		int max_batch_size;
+    [MonoTODO]
+    public class TransactedBatchingBehavior : IEndpointBehavior
+    {
+        int max_batch_size;
 
-		public TransactedBatchingBehavior (int maxBatchSize)
-		{
-			max_batch_size = maxBatchSize;
-		}
+        public TransactedBatchingBehavior(int maxBatchSize)
+        {
+            max_batch_size = maxBatchSize;
+        }
 
-		public int MaxBatchSize {
-			get { return max_batch_size; }
-			set { max_batch_size = value; }
-		}
+        public int MaxBatchSize
+        {
+            get { return max_batch_size; }
+            set { max_batch_size = value; }
+        }
 
-		void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint,
-			BindingParameterCollection parameters)
-		{
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection parameters
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint serviceEndpoint,
-			EndpointDispatcher dispatcher)
-		{
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint serviceEndpoint,
+            EndpointDispatcher dispatcher
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint serviceEndpoint,
-			ClientRuntime behavior)
-		{
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint serviceEndpoint,
+            ClientRuntime behavior
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		void IEndpointBehavior.Validate (ServiceEndpoint serviceEndpoint)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

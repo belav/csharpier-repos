@@ -6,15 +6,15 @@ namespace System.Activities.Core.Presentation
 {
     using System.Activities.Presentation;
     using System.Activities.Presentation.Metadata;
-    using System.Activities.Statements;
-    using System.ComponentModel;
     using System.Activities.Presentation.Model;
-    using System.Runtime;
-    using Microsoft.VisualBasic.Activities;
-    using System.Reflection;
     using System.Activities.Presentation.PropertyEditing;
     using System.Activities.Presentation.View;
+    using System.Activities.Statements;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Reflection;
+    using System.Runtime;
+    using Microsoft.VisualBasic.Activities;
 
     partial class AssignDesigner
     {
@@ -34,7 +34,9 @@ namespace System.Activities.Core.Presentation
             {
                 if (this.modelItemPropertyChangedHandler == null)
                 {
-                    this.modelItemPropertyChangedHandler = new PropertyChangedEventHandler(modelItem_PropertyChanged);
+                    this.modelItemPropertyChangedHandler = new PropertyChangedEventHandler(
+                        modelItem_PropertyChanged
+                    );
                 }
 
                 return this.modelItemPropertyChangedHandler;
@@ -52,14 +54,17 @@ namespace System.Activities.Core.Presentation
                 {
                     designer.ModelItem.PropertyChanged -= designer.ModelItemPropertyChangedHandler;
                 }
-            };            
+            };
         }
 
         internal static void RegisterMetadata(AttributeTableBuilder builder)
         {
             Type assignType = typeof(Assign);
             builder.AddCustomAttributes(assignType, new DesignerAttribute(typeof(AssignDesigner)));
-            builder.AddCustomAttributes(assignType, new ActivityDesignerOptionsAttribute { AllowDrillIn = false });
+            builder.AddCustomAttributes(
+                assignType,
+                new ActivityDesignerOptionsAttribute { AllowDrillIn = false }
+            );
 
             Func<Activity, IEnumerable<ArgumentAccessor>> argumentAccessorGenerator = (activity) =>
             {
@@ -68,16 +73,21 @@ namespace System.Activities.Core.Presentation
                     new ArgumentAccessor
                     {
                         Getter = (ownerActivity) => ((Assign)ownerActivity).To,
-                        Setter = (ownerActivity, arg) => ((Assign)ownerActivity).To = arg as OutArgument,
+                        Setter = (ownerActivity, arg) =>
+                            ((Assign)ownerActivity).To = arg as OutArgument,
                     },
                     new ArgumentAccessor
                     {
                         Getter = (ownerActivity) => ((Assign)ownerActivity).Value,
-                        Setter = (ownerActivity, arg) => ((Assign)ownerActivity).Value = arg as InArgument,
+                        Setter = (ownerActivity, arg) =>
+                            ((Assign)ownerActivity).Value = arg as InArgument,
                     },
                 };
             };
-            ActivityArgumentHelper.RegisterAccessorsGenerator(assignType, argumentAccessorGenerator);
+            ActivityArgumentHelper.RegisterAccessorsGenerator(
+                assignType,
+                argumentAccessorGenerator
+            );
         }
 
         protected override void OnModelItemChanged(object newItem)
@@ -95,7 +105,10 @@ namespace System.Activities.Core.Presentation
             //if the To argument has changed, we may need to update the Value argument's type
             if (e.PropertyName == ToPropertyName)
             {
-                Fx.Assert(this.ModelItem != null, "modelItem could not be null if we recent property changed event from it");
+                Fx.Assert(
+                    this.ModelItem != null,
+                    "modelItem could not be null if we recent property changed event from it"
+                );
 
                 ModelProperty valueProperty = this.ModelItem.Properties[ValuePropertyName];
                 ModelProperty toProperty = this.ModelItem.Properties[ToPropertyName];
@@ -111,7 +124,9 @@ namespace System.Activities.Core.Presentation
                     Type targetType = to == null ? typeof(object) : to.ArgumentType;
                     if (value.ArgumentType != targetType)
                     {
-                        valueProperty.SetValue(MorphHelpers.MorphArgument(valueProperty.Value, targetType));
+                        valueProperty.SetValue(
+                            MorphHelpers.MorphArgument(valueProperty.Value, targetType)
+                        );
                     }
                 }
             }

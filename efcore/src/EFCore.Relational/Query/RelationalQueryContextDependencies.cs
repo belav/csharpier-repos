@@ -47,7 +47,8 @@ public sealed record RelationalQueryContextDependencies
     [EntityFrameworkInternal]
     public RelationalQueryContextDependencies(
         IRelationalConnection relationalConnection,
-        IRelationalQueryStringFactory relationalQueryStringFactory)
+        IRelationalQueryStringFactory relationalQueryStringFactory
+    )
     {
         RelationalConnection = relationalConnection;
         RelationalQueryStringFactory = relationalQueryStringFactory;

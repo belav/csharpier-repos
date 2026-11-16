@@ -2,25 +2,17 @@ using System;
 
 class B : A
 {
-	protected class BNested : ANested
-	{
-	}
+    protected class BNested : ANested { }
 }
 
-class A : AA
-{
-}
+class A : AA { }
 
 class AA
 {
-	protected class ANested
-	{
-	}
+    protected class ANested { }
 }
 
 class M
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

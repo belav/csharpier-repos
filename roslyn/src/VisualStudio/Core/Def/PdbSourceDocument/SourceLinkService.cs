@@ -28,14 +28,20 @@ namespace Microsoft.VisualStudio.LanguageServices.PdbSourceDocument
         public SourceLinkService(
             IDebuggerSymbolLocatorService debuggerSymbolLocatorService,
             IDebuggerSourceLinkService debuggerSourceLinkService,
-            [Import(AllowDefault = true)] IPdbSourceDocumentLogger? logger)
+            [Import(AllowDefault = true)] IPdbSourceDocumentLogger? logger
+        )
         {
             _debuggerSymbolLocatorService = debuggerSymbolLocatorService;
             _debuggerSourceLinkService = debuggerSourceLinkService;
             _logger = logger;
         }
 
-        public async Task<PdbFilePathResult?> GetPdbFilePathAsync(string dllPath, PEReader peReader, bool useDefaultSymbolServers, CancellationToken cancellationToken)
+        public async Task<PdbFilePathResult?> GetPdbFilePathAsync(
+            string dllPath,
+            PEReader peReader,
+            bool useDefaultSymbolServers,
+            CancellationToken cancellationToken
+        )
         {
             var hasCodeViewEntry = false;
             uint timeStamp = 0;
@@ -66,12 +72,16 @@ namespace Microsoft.VisualStudio.LanguageServices.PdbSourceDocument
                 timeStamp,
                 checksums.ToImmutable(),
                 dllPath,
-                codeViewEntry.Path);
+                codeViewEntry.Path
+            );
 
             var flags = useDefaultSymbolServers
-                ? SymbolLocatorSearchFlags.ForceNuGetSymbolServer | SymbolLocatorSearchFlags.ForceMsftSymbolServer
+                ? SymbolLocatorSearchFlags.ForceNuGetSymbolServer
+                    | SymbolLocatorSearchFlags.ForceMsftSymbolServer
                 : SymbolLocatorSearchFlags.None;
-            var result = await _debuggerSymbolLocatorService.LocateSymbolFileAsync(pdbInfo, flags, progress: null, cancellationToken).ConfigureAwait(false);
+            var result = await _debuggerSymbolLocatorService
+                .LocateSymbolFileAsync(pdbInfo, flags, progress: null, cancellationToken)
+                .ConfigureAwait(false);
 
             if (result.Found && result.SymbolFilePath is not null)
             {
@@ -88,9 +98,20 @@ namespace Microsoft.VisualStudio.LanguageServices.PdbSourceDocument
             return null;
         }
 
-        public async Task<SourceFilePathResult?> GetSourceFilePathAsync(string url, string relativePath, CancellationToken cancellationToken)
+        public async Task<SourceFilePathResult?> GetSourceFilePathAsync(
+            string url,
+            string relativePath,
+            CancellationToken cancellationToken
+        )
         {
-            var result = await _debuggerSourceLinkService.GetSourceLinkAsync(url, relativePath, allowInteractiveLogin: false, cancellationToken).ConfigureAwait(false);
+            var result = await _debuggerSourceLinkService
+                .GetSourceLinkAsync(
+                    url,
+                    relativePath,
+                    allowInteractiveLogin: false,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (result.Status == SourceLinkResultStatus.Succeeded && result.Path is not null)
             {

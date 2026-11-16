@@ -24,9 +24,10 @@ namespace System.IdentityModel.Tokens
         /// Initializes an instance of <see cref="X509CertificateStoreTokenResolver"/>
         /// </summary>
         public X509CertificateStoreTokenResolver()
-            : this(System.Security.Cryptography.X509Certificates.StoreName.My, StoreLocation.LocalMachine)
-        {
-        }
+            : this(
+                System.Security.Cryptography.X509Certificates.StoreName.My,
+                StoreLocation.LocalMachine
+            ) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="X509CertificateStoreTokenResolver"/>
@@ -34,9 +35,13 @@ namespace System.IdentityModel.Tokens
         /// <param name="storeName">StoreName of the X.509 Certificate Store.</param>
         /// <param name="storeLocation">StoreLocation of the X.509 Certificate store.</param>
         public X509CertificateStoreTokenResolver(StoreName storeName, StoreLocation storeLocation)
-            : this(Enum.GetName(typeof(System.Security.Cryptography.X509Certificates.StoreName), storeName), storeLocation)
-        {
-        }
+            : this(
+                Enum.GetName(
+                    typeof(System.Security.Cryptography.X509Certificates.StoreName),
+                    storeName
+                ),
+                storeLocation
+            ) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="X509CertificateStoreTokenResolver"/>
@@ -77,18 +82,25 @@ namespace System.IdentityModel.Tokens
         /// <param name="key">The resolved SecurityKey.</param>
         /// <returns>True if successfully resolved.</returns>
         /// <exception cref="ArgumentNullException">The input argument 'keyIdentifierClause' is null.</exception>
-        protected override bool TryResolveSecurityKeyCore(SecurityKeyIdentifierClause keyIdentifierClause, out SecurityKey key)
+        protected override bool TryResolveSecurityKeyCore(
+            SecurityKeyIdentifierClause keyIdentifierClause,
+            out SecurityKey key
+        )
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifierClause");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
 
             key = null;
-            EncryptedKeyIdentifierClause encryptedKeyIdentifierClause = keyIdentifierClause as EncryptedKeyIdentifierClause;
+            EncryptedKeyIdentifierClause encryptedKeyIdentifierClause =
+                keyIdentifierClause as EncryptedKeyIdentifierClause;
             if (encryptedKeyIdentifierClause != null)
             {
-                SecurityKeyIdentifier keyIdentifier = encryptedKeyIdentifierClause.EncryptingKeyIdentifier;
+                SecurityKeyIdentifier keyIdentifier =
+                    encryptedKeyIdentifierClause.EncryptingKeyIdentifier;
                 if (keyIdentifier != null && keyIdentifier.Count > 0)
                 {
                     for (int i = 0; i < keyIdentifier.Count; i++)
@@ -97,8 +109,12 @@ namespace System.IdentityModel.Tokens
                         if (TryResolveSecurityKey(keyIdentifier[i], out unwrappingSecurityKey))
                         {
                             byte[] wrappedKey = encryptedKeyIdentifierClause.GetEncryptedKey();
-                            string wrappingAlgorithm = encryptedKeyIdentifierClause.EncryptionMethod;
-                            byte[] unwrappedKey = unwrappingSecurityKey.DecryptKey(wrappingAlgorithm, wrappedKey);
+                            string wrappingAlgorithm =
+                                encryptedKeyIdentifierClause.EncryptionMethod;
+                            byte[] unwrappedKey = unwrappingSecurityKey.DecryptKey(
+                                wrappingAlgorithm,
+                                wrappedKey
+                            );
                             key = new InMemorySymmetricSecurityKey(unwrappedKey, false);
                             return true;
                         }
@@ -128,7 +144,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="token">The resolved SecurityToken.</param>
         /// <returns>True if successfully resolved.</returns>
         /// <exception cref="ArgumentNullException">The input argument 'keyIdentifier' is null.</exception>
-        protected override bool TryResolveTokenCore(SecurityKeyIdentifier keyIdentifier, out SecurityToken token)
+        protected override bool TryResolveTokenCore(
+            SecurityKeyIdentifier keyIdentifier,
+            out SecurityToken token
+        )
         {
             if (keyIdentifier == null)
             {
@@ -154,11 +173,16 @@ namespace System.IdentityModel.Tokens
         /// <param name="token">The resolved SecurityToken.</param>
         /// <returns>True if successfully resolved.</returns>
         /// <exception cref="ArgumentNullException">The input argument 'keyIdentifierClause' is null.</exception>
-        protected override bool TryResolveTokenCore(SecurityKeyIdentifierClause keyIdentifierClause, out SecurityToken token)
+        protected override bool TryResolveTokenCore(
+            SecurityKeyIdentifierClause keyIdentifierClause,
+            out SecurityToken token
+        )
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifierClause");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
 
             token = null;
@@ -171,29 +195,45 @@ namespace System.IdentityModel.Tokens
                 certs = store.Certificates;
                 foreach (X509Certificate2 cert in certs)
                 {
-                    X509ThumbprintKeyIdentifierClause thumbprintKeyIdentifierClause = keyIdentifierClause as X509ThumbprintKeyIdentifierClause;
-                    if (thumbprintKeyIdentifierClause != null && thumbprintKeyIdentifierClause.Matches(cert))
+                    X509ThumbprintKeyIdentifierClause thumbprintKeyIdentifierClause =
+                        keyIdentifierClause as X509ThumbprintKeyIdentifierClause;
+                    if (
+                        thumbprintKeyIdentifierClause != null
+                        && thumbprintKeyIdentifierClause.Matches(cert)
+                    )
                     {
                         token = new X509SecurityToken(cert);
                         return true;
                     }
 
-                    X509IssuerSerialKeyIdentifierClause issuerSerialKeyIdentifierClause = keyIdentifierClause as X509IssuerSerialKeyIdentifierClause;
-                    if (issuerSerialKeyIdentifierClause != null && issuerSerialKeyIdentifierClause.Matches(cert))
+                    X509IssuerSerialKeyIdentifierClause issuerSerialKeyIdentifierClause =
+                        keyIdentifierClause as X509IssuerSerialKeyIdentifierClause;
+                    if (
+                        issuerSerialKeyIdentifierClause != null
+                        && issuerSerialKeyIdentifierClause.Matches(cert)
+                    )
                     {
                         token = new X509SecurityToken(cert);
                         return true;
                     }
 
-                    X509SubjectKeyIdentifierClause subjectKeyIdentifierClause = keyIdentifierClause as X509SubjectKeyIdentifierClause;
-                    if (subjectKeyIdentifierClause != null && subjectKeyIdentifierClause.Matches(cert))
+                    X509SubjectKeyIdentifierClause subjectKeyIdentifierClause =
+                        keyIdentifierClause as X509SubjectKeyIdentifierClause;
+                    if (
+                        subjectKeyIdentifierClause != null
+                        && subjectKeyIdentifierClause.Matches(cert)
+                    )
                     {
                         token = new X509SecurityToken(cert);
                         return true;
                     }
 
-                    X509RawDataKeyIdentifierClause rawDataKeyIdentifierClause = keyIdentifierClause as X509RawDataKeyIdentifierClause;
-                    if (rawDataKeyIdentifierClause != null && rawDataKeyIdentifierClause.Matches(cert))
+                    X509RawDataKeyIdentifierClause rawDataKeyIdentifierClause =
+                        keyIdentifierClause as X509RawDataKeyIdentifierClause;
+                    if (
+                        rawDataKeyIdentifierClause != null
+                        && rawDataKeyIdentifierClause.Matches(cert)
+                    )
                     {
                         token = new X509SecurityToken(cert);
                         return true;

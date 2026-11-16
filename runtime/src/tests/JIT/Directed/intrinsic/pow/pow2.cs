@@ -15,11 +15,13 @@ internal struct vt
 internal class cl
 {
     public double[,,] x;
+
     public cl()
     {
         x = new double[6, 5, 4];
     }
 }
+
 public class pow2
 {
     private static double CalculateSinh(double x)
@@ -76,7 +78,9 @@ public class pow2
     {
         bool pass = true;
 
-        double x, y, z;
+        double x,
+            y,
+            z;
 
         //Instead of using 10 * Double.Epsilon as the maximum allowed Delta
         //we can use a small value based on the precision of double (15-16 digits)

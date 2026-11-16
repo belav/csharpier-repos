@@ -10,7 +10,12 @@ namespace System.ServiceModel.Routing
 
     interface IRoutingClient
     {
-        IAsyncResult BeginOperation(Message message, Transaction transaction, AsyncCallback callback, object state);
+        IAsyncResult BeginOperation(
+            Message message,
+            Transaction transaction,
+            AsyncCallback callback,
+            object state
+        );
         Message EndOperation(IAsyncResult result);
         event EventHandler Faulted;
         RoutingEndpointTrait Key { get; }

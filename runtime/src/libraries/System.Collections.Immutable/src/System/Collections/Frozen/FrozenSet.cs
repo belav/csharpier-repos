@@ -19,12 +19,19 @@ namespace System.Collections.Frozen
         /// <param name="comparer">The comparer implementation to use to compare values for equality. If null, <see cref="EqualityComparer{T}.Default"/> is used.</param>
         /// <typeparam name="T">The type of the values in the set.</typeparam>
         /// <returns>A frozen set.</returns>
-        public static FrozenSet<T> ToFrozenSet<T>(this IEnumerable<T> source, IEqualityComparer<T>? comparer = null) =>
-            GetExistingFrozenOrNewSet(source, comparer, out HashSet<T>? newSet) ??
-            CreateFromSet(newSet!);
+        public static FrozenSet<T> ToFrozenSet<T>(
+            this IEnumerable<T> source,
+            IEqualityComparer<T>? comparer = null
+        ) =>
+            GetExistingFrozenOrNewSet(source, comparer, out HashSet<T>? newSet)
+            ?? CreateFromSet(newSet!);
 
         /// <summary>Extracts from the source either an existing <see cref="FrozenSet{T}"/> instance or a <see cref="HashSet{T}"/> containing the values and the specified <paramref name="comparer"/>.</summary>
-        private static FrozenSet<T>? GetExistingFrozenOrNewSet<T>(IEnumerable<T> source, IEqualityComparer<T>? comparer, out HashSet<T>? newSet)
+        private static FrozenSet<T>? GetExistingFrozenOrNewSet<T>(
+            IEnumerable<T> source,
+            IEqualityComparer<T>? comparer,
+            out HashSet<T>? newSet
+        )
         {
             ThrowHelper.ThrowIfNull(source);
             comparer ??= EqualityComparer<T>.Default;
@@ -39,17 +46,16 @@ namespace System.Collections.Frozen
             // Ensure we have a HashSet<> using the specified comparer such that all items
             // are non-null and unique according to that comparer.
             newSet = source as HashSet<T>;
-            if (newSet is null ||
-                (newSet.Count != 0 && !newSet.Comparer.Equals(comparer)))
+            if (newSet is null || (newSet.Count != 0 && !newSet.Comparer.Equals(comparer)))
             {
                 newSet = new HashSet<T>(source, comparer);
             }
 
             if (newSet.Count == 0)
             {
-                return ReferenceEquals(comparer, FrozenSet<T>.Empty.Comparer) ?
-                    FrozenSet<T>.Empty :
-                    new EmptyFrozenSet<T>(comparer);
+                return ReferenceEquals(comparer, FrozenSet<T>.Empty.Comparer)
+                    ? FrozenSet<T>.Empty
+                    : new EmptyFrozenSet<T>(comparer);
             }
 
             Debug.Assert(newSet is not null);
@@ -74,11 +80,13 @@ namespace System.Collections.Frozen
                     // that will enable quickly ruling out values outside of the range of keys stored.
                     if (Constants.IsKnownComparable<T>())
                     {
-                        return (FrozenSet<T>)(object)new SmallValueTypeComparableFrozenSet<T>(source);
+                        return (FrozenSet<T>)
+                            (object)new SmallValueTypeComparableFrozenSet<T>(source);
                     }
 
                     // Otherwise, use an implementation optimized for a small number of value types using the default comparer.
-                    return (FrozenSet<T>)(object)new SmallValueTypeDefaultComparerFrozenSet<T>(source);
+                    return (FrozenSet<T>)
+                        (object)new SmallValueTypeDefaultComparerFrozenSet<T>(source);
                 }
 
                 // Use a hash-based implementation.
@@ -96,11 +104,18 @@ namespace System.Collections.Frozen
             // Optimize for strings when the default, Ordinal, or OrdinalIgnoreCase comparer is being used.
             // Null is rare as a value in the set and we don't optimize for it.  This enables the ordinal string
             // implementation to fast-path out on null inputs rather than having to accommodate null inputs.
-            if (typeof(T) == typeof(string) &&
-                !source.Contains(default!) &&
-                (ReferenceEquals(comparer, EqualityComparer<T>.Default) || ReferenceEquals(comparer, StringComparer.Ordinal) || ReferenceEquals(comparer, StringComparer.OrdinalIgnoreCase)))
+            if (
+                typeof(T) == typeof(string)
+                && !source.Contains(default!)
+                && (
+                    ReferenceEquals(comparer, EqualityComparer<T>.Default)
+                    || ReferenceEquals(comparer, StringComparer.Ordinal)
+                    || ReferenceEquals(comparer, StringComparer.OrdinalIgnoreCase)
+                )
+            )
             {
-                IEqualityComparer<string> stringComparer = (IEqualityComparer<string>)(object)comparer;
+                IEqualityComparer<string> stringComparer =
+                    (IEqualityComparer<string>)(object)comparer;
 
                 // Entries are needed for every strategy
                 HashSet<string> stringValues = (HashSet<string>)(object)source;
@@ -108,23 +123,37 @@ namespace System.Collections.Frozen
                 stringValues.CopyTo(entries);
 
                 // Calculate the minimum and maximum lengths of the strings in the set. Several of the analyses need this.
-                int minLength = int.MaxValue, maxLength = 0;
+                int minLength = int.MaxValue,
+                    maxLength = 0;
                 foreach (string s in entries)
                 {
-                    if (s.Length < minLength) minLength = s.Length;
-                    if (s.Length > maxLength) maxLength = s.Length;
+                    if (s.Length < minLength)
+                        minLength = s.Length;
+                    if (s.Length > maxLength)
+                        maxLength = s.Length;
                 }
                 Debug.Assert(minLength >= 0 && maxLength >= minLength);
 
                 // Try to create an implementation that uses length buckets, where each bucket contains up to only a few strings of the same length.
-                FrozenSet<string>? frozenSet = LengthBucketsFrozenSet.CreateLengthBucketsFrozenSetIfAppropriate(entries, stringComparer, minLength, maxLength);
+                FrozenSet<string>? frozenSet =
+                    LengthBucketsFrozenSet.CreateLengthBucketsFrozenSetIfAppropriate(
+                        entries,
+                        stringComparer,
+                        minLength,
+                        maxLength
+                    );
                 if (frozenSet is not null)
                 {
                     return (FrozenSet<T>)(object)frozenSet;
                 }
 
                 // Analyze the values for unique substrings and create an implementation that minimizes the cost of hashing keys.
-                KeyAnalyzer.AnalysisResults analysis = KeyAnalyzer.Analyze(entries, ReferenceEquals(stringComparer, StringComparer.OrdinalIgnoreCase), minLength, maxLength);
+                KeyAnalyzer.AnalysisResults analysis = KeyAnalyzer.Analyze(
+                    entries,
+                    ReferenceEquals(stringComparer, StringComparer.OrdinalIgnoreCase),
+                    minLength,
+                    maxLength
+                );
                 if (analysis.SubstringHashing)
                 {
                     if (analysis.RightJustifiedSubstring)
@@ -132,14 +161,42 @@ namespace System.Collections.Frozen
                         if (analysis.IgnoreCase)
                         {
                             frozenSet = analysis.AllAsciiIfIgnoreCase
-                                ? new OrdinalStringFrozenSet_RightJustifiedCaseInsensitiveAsciiSubstring(entries, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex, analysis.HashCount)
-                                : new OrdinalStringFrozenSet_RightJustifiedCaseInsensitiveSubstring(entries, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex, analysis.HashCount);
+                                ? new OrdinalStringFrozenSet_RightJustifiedCaseInsensitiveAsciiSubstring(
+                                    entries,
+                                    stringComparer,
+                                    analysis.MinimumLength,
+                                    analysis.MaximumLengthDiff,
+                                    analysis.HashIndex,
+                                    analysis.HashCount
+                                )
+                                : new OrdinalStringFrozenSet_RightJustifiedCaseInsensitiveSubstring(
+                                    entries,
+                                    stringComparer,
+                                    analysis.MinimumLength,
+                                    analysis.MaximumLengthDiff,
+                                    analysis.HashIndex,
+                                    analysis.HashCount
+                                );
                         }
                         else
                         {
-                            frozenSet = analysis.HashCount == 1
-                                ? new OrdinalStringFrozenSet_RightJustifiedSingleChar(entries, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex)
-                                : new OrdinalStringFrozenSet_RightJustifiedSubstring(entries, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex, analysis.HashCount);
+                            frozenSet =
+                                analysis.HashCount == 1
+                                    ? new OrdinalStringFrozenSet_RightJustifiedSingleChar(
+                                        entries,
+                                        stringComparer,
+                                        analysis.MinimumLength,
+                                        analysis.MaximumLengthDiff,
+                                        analysis.HashIndex
+                                    )
+                                    : new OrdinalStringFrozenSet_RightJustifiedSubstring(
+                                        entries,
+                                        stringComparer,
+                                        analysis.MinimumLength,
+                                        analysis.MaximumLengthDiff,
+                                        analysis.HashIndex,
+                                        analysis.HashCount
+                                    );
                         }
                     }
                     else
@@ -147,14 +204,42 @@ namespace System.Collections.Frozen
                         if (analysis.IgnoreCase)
                         {
                             frozenSet = analysis.AllAsciiIfIgnoreCase
-                                ? new OrdinalStringFrozenSet_LeftJustifiedCaseInsensitiveAsciiSubstring(entries, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex, analysis.HashCount)
-                                : new OrdinalStringFrozenSet_LeftJustifiedCaseInsensitiveSubstring(entries, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex, analysis.HashCount);
+                                ? new OrdinalStringFrozenSet_LeftJustifiedCaseInsensitiveAsciiSubstring(
+                                    entries,
+                                    stringComparer,
+                                    analysis.MinimumLength,
+                                    analysis.MaximumLengthDiff,
+                                    analysis.HashIndex,
+                                    analysis.HashCount
+                                )
+                                : new OrdinalStringFrozenSet_LeftJustifiedCaseInsensitiveSubstring(
+                                    entries,
+                                    stringComparer,
+                                    analysis.MinimumLength,
+                                    analysis.MaximumLengthDiff,
+                                    analysis.HashIndex,
+                                    analysis.HashCount
+                                );
                         }
                         else
                         {
-                            frozenSet = analysis.HashCount == 1
-                                ? new OrdinalStringFrozenSet_LeftJustifiedSingleChar(entries, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex)
-                                : new OrdinalStringFrozenSet_LeftJustifiedSubstring(entries, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex, analysis.HashCount);
+                            frozenSet =
+                                analysis.HashCount == 1
+                                    ? new OrdinalStringFrozenSet_LeftJustifiedSingleChar(
+                                        entries,
+                                        stringComparer,
+                                        analysis.MinimumLength,
+                                        analysis.MaximumLengthDiff,
+                                        analysis.HashIndex
+                                    )
+                                    : new OrdinalStringFrozenSet_LeftJustifiedSubstring(
+                                        entries,
+                                        stringComparer,
+                                        analysis.MinimumLength,
+                                        analysis.MaximumLengthDiff,
+                                        analysis.HashIndex,
+                                        analysis.HashCount
+                                    );
                         }
                     }
                 }
@@ -163,12 +248,27 @@ namespace System.Collections.Frozen
                     if (analysis.IgnoreCase)
                     {
                         frozenSet = analysis.AllAsciiIfIgnoreCase
-                            ? new OrdinalStringFrozenSet_FullCaseInsensitiveAscii(entries, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff)
-                            : new OrdinalStringFrozenSet_FullCaseInsensitive(entries, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff);
+                            ? new OrdinalStringFrozenSet_FullCaseInsensitiveAscii(
+                                entries,
+                                stringComparer,
+                                analysis.MinimumLength,
+                                analysis.MaximumLengthDiff
+                            )
+                            : new OrdinalStringFrozenSet_FullCaseInsensitive(
+                                entries,
+                                stringComparer,
+                                analysis.MinimumLength,
+                                analysis.MaximumLengthDiff
+                            );
                     }
                     else
                     {
-                        frozenSet = new OrdinalStringFrozenSet_Full(entries, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff);
+                        frozenSet = new OrdinalStringFrozenSet_Full(
+                            entries,
+                            stringComparer,
+                            analysis.MinimumLength,
+                            analysis.MaximumLengthDiff
+                        );
                     }
                 }
 
@@ -199,18 +299,21 @@ namespace System.Collections.Frozen
     /// </remarks>
     [DebuggerTypeProxy(typeof(ImmutableEnumerableDebuggerProxy<>))]
     [DebuggerDisplay("Count = {Count}")]
-    public abstract class FrozenSet<T> : ISet<T>,
+    public abstract class FrozenSet<T>
+        : ISet<T>,
 #if NET5_0_OR_GREATER
-        IReadOnlySet<T>,
+            IReadOnlySet<T>,
 #endif
-        IReadOnlyCollection<T>, ICollection
+            IReadOnlyCollection<T>,
+            ICollection
     {
         /// <summary>Initialize the set.</summary>
         /// <param name="comparer">The comparer to use and to expose from <see cref="Comparer"/>.</param>
         private protected FrozenSet(IEqualityComparer<T> comparer) => Comparer = comparer;
 
         /// <summary>Gets an empty <see cref="FrozenSet{T}"/>.</summary>
-        public static FrozenSet<T> Empty { get; } = new EmptyFrozenSet<T>(EqualityComparer<T>.Default);
+        public static FrozenSet<T> Empty { get; } =
+            new EmptyFrozenSet<T>(EqualityComparer<T>.Default);
 
         /// <summary>Gets the comparer used by this set.</summary>
         public IEqualityComparer<T> Comparer { get; }
@@ -239,8 +342,7 @@ namespace System.Collections.Frozen
 
         /// <summary>Copies the values in the set to a span.</summary>
         /// <param name="destination">The span that is the destination of the values copied from the set.</param>
-        public void CopyTo(Span<T> destination) =>
-            Items.AsSpan().CopyTo(destination);
+        public void CopyTo(Span<T> destination) => Items.AsSpan().CopyTo(destination);
 
         /// <inheritdoc />
         void ICollection.CopyTo(Array array, int index)
@@ -266,8 +368,7 @@ namespace System.Collections.Frozen
         /// <summary>Determines whether the set contains the specified element.</summary>
         /// <param name="item">The element to locate.</param>
         /// <returns><see langword="true"/> if the set contains the specified element; otherwise, <see langword="false"/>.</returns>
-        public bool Contains(T item) =>
-            FindItemIndex(item) >= 0;
+        public bool Contains(T item) => FindItemIndex(item) >= 0;
 
         /// <summary>Searches the set for a given value and returns the equal value it finds, if any.</summary>
         /// <param name="equalValue">The value to search for.</param>
@@ -300,13 +401,11 @@ namespace System.Collections.Frozen
 
         /// <inheritdoc />
         IEnumerator<T> IEnumerable<T>.GetEnumerator() =>
-            Count == 0 ? ((IList<T>)Array.Empty<T>()).GetEnumerator() :
-            GetEnumerator();
+            Count == 0 ? ((IList<T>)Array.Empty<T>()).GetEnumerator() : GetEnumerator();
 
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() =>
-            Count == 0 ? Array.Empty<T>().GetEnumerator() :
-            GetEnumerator();
+            Count == 0 ? Array.Empty<T>().GetEnumerator() : GetEnumerator();
 
         /// <inheritdoc />
         bool ISet<T>.Add(T item) => throw new NotSupportedException();

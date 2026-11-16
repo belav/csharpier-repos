@@ -10,15 +10,15 @@ namespace System.ServiceModel
     public enum BasicHttpsSecurityMode
     {
         Transport,
-        TransportWithMessageCredential
+        TransportWithMessageCredential,
     }
 
     static class BasicHttpsSecurityModeHelper
     {
         internal static bool IsDefined(BasicHttpsSecurityMode value)
         {
-            return value == BasicHttpsSecurityMode.Transport ||
-                value == BasicHttpsSecurityMode.TransportWithMessageCredential;
+            return value == BasicHttpsSecurityMode.Transport
+                || value == BasicHttpsSecurityMode.TransportWithMessageCredential;
         }
 
         internal static BasicHttpsSecurityMode ToSecurityMode(UnifiedSecurityMode value)
@@ -36,8 +36,19 @@ namespace System.ServiceModel
 
         internal static BasicHttpsSecurityMode ToBasicHttpsSecurityMode(BasicHttpSecurityMode mode)
         {
-            Fx.Assert(mode == BasicHttpSecurityMode.Transport || mode == BasicHttpSecurityMode.TransportWithMessageCredential, string.Format(CultureInfo.InvariantCulture, "Invalid BasicHttpSecurityMode value: {0}.", mode.ToString()));
-            BasicHttpsSecurityMode basicHttpsSecurityMode = (mode == BasicHttpSecurityMode.Transport) ? BasicHttpsSecurityMode.Transport : BasicHttpsSecurityMode.TransportWithMessageCredential;
+            Fx.Assert(
+                mode == BasicHttpSecurityMode.Transport
+                    || mode == BasicHttpSecurityMode.TransportWithMessageCredential,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Invalid BasicHttpSecurityMode value: {0}.",
+                    mode.ToString()
+                )
+            );
+            BasicHttpsSecurityMode basicHttpsSecurityMode =
+                (mode == BasicHttpSecurityMode.Transport)
+                    ? BasicHttpsSecurityMode.Transport
+                    : BasicHttpsSecurityMode.TransportWithMessageCredential;
 
             return basicHttpsSecurityMode;
         }
@@ -46,10 +57,15 @@ namespace System.ServiceModel
         {
             if (!BasicHttpsSecurityModeHelper.IsDefined(mode))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("mode"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("mode")
+                );
             }
 
-            BasicHttpSecurityMode basicHttpSecurityMode = (mode == BasicHttpsSecurityMode.Transport) ? BasicHttpSecurityMode.Transport : BasicHttpSecurityMode.TransportWithMessageCredential;
+            BasicHttpSecurityMode basicHttpSecurityMode =
+                (mode == BasicHttpsSecurityMode.Transport)
+                    ? BasicHttpSecurityMode.Transport
+                    : BasicHttpSecurityMode.TransportWithMessageCredential;
 
             return basicHttpSecurityMode;
         }

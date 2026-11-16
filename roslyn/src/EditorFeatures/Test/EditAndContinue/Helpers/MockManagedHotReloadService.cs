@@ -18,19 +18,20 @@ internal class MockManagedHotReloadService : IManagedHotReloadService
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public MockManagedHotReloadService()
-    {
-    }
+    public MockManagedHotReloadService() { }
 
-    public ValueTask<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(CancellationToken cancellation)
-        => throw new NotImplementedException();
+    public ValueTask<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(
+        CancellationToken cancellation
+    ) => throw new NotImplementedException();
 
-    public ValueTask<ManagedHotReloadAvailability> GetAvailabilityAsync(Guid module, CancellationToken cancellation)
-        => throw new NotImplementedException();
+    public ValueTask<ManagedHotReloadAvailability> GetAvailabilityAsync(
+        Guid module,
+        CancellationToken cancellation
+    ) => throw new NotImplementedException();
 
-    public ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(CancellationToken cancellation)
-        => throw new NotImplementedException();
+    public ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(CancellationToken cancellation) =>
+        throw new NotImplementedException();
 
-    public ValueTask PrepareModuleForUpdateAsync(Guid module, CancellationToken cancellation)
-        => throw new NotImplementedException();
+    public ValueTask PrepareModuleForUpdateAsync(Guid module, CancellationToken cancellation) =>
+        throw new NotImplementedException();
 }

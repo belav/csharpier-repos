@@ -20,9 +20,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="certificate">The x509 certificate.</param>
         public X509EncryptingCredentials(X509Certificate2 certificate)
-            : this(new X509SecurityToken(certificate))
-        {
-        }
+            : this(new X509SecurityToken(certificate)) { }
 
         /// <summary>
         /// Constructs an encrypting credential based on the x509 certificate and key wrapping algorithm.
@@ -30,9 +28,7 @@ namespace System.IdentityModel.Tokens
         /// <param name="certificate">The x509 certificate.</param>
         /// <param name="keyWrappingAlgorithm">The key wrapping al----htm.</param>
         public X509EncryptingCredentials(X509Certificate2 certificate, string keyWrappingAlgorithm)
-            : this(new X509SecurityToken(certificate), keyWrappingAlgorithm)
-        {
-        }
+            : this(new X509SecurityToken(certificate), keyWrappingAlgorithm) { }
 
         /// <summary>
         /// Constructs an encrypting credential based on the x509 certificate and security key identifier.
@@ -40,9 +36,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="certificate">The x509 certificate.</param>
         /// /// <param name="ski">The security key identifier to be used.</param>
         public X509EncryptingCredentials(X509Certificate2 certificate, SecurityKeyIdentifier ski)
-            : this(new X509SecurityToken(certificate), ski, SecurityAlgorithms.DefaultAsymmetricKeyWrapAlgorithm)
-        {
-        }
+            : this(
+                new X509SecurityToken(certificate),
+                ski,
+                SecurityAlgorithms.DefaultAsymmetricKeyWrapAlgorithm
+            ) { }
 
         /// <summary>
         /// Constructs an encrypting credential based on the x509 certificate, key wrapping algorithm, and security key identifier.
@@ -50,10 +48,12 @@ namespace System.IdentityModel.Tokens
         /// <param name="certificate">The x509 certificate.</param>
         /// <param name="ski">The security key identifier to be used.</param>
         /// <param name="keyWrappingAlgorithm">The key wrapping al----htm.</param>
-        public X509EncryptingCredentials(X509Certificate2 certificate, SecurityKeyIdentifier ski, string keyWrappingAlgorithm)
-            : this(new X509SecurityToken(certificate), ski, keyWrappingAlgorithm)
-        {
-        }
+        public X509EncryptingCredentials(
+            X509Certificate2 certificate,
+            SecurityKeyIdentifier ski,
+            string keyWrappingAlgorithm
+        )
+            : this(new X509SecurityToken(certificate), ski, keyWrappingAlgorithm) { }
 
         /// <summary>
         /// Constructs an encrypting credential based on the x509 token.
@@ -61,11 +61,12 @@ namespace System.IdentityModel.Tokens
         /// <param name="token">The x509 security token.</param>
         internal X509EncryptingCredentials(X509SecurityToken token)
             : this(
-            token,
-            new SecurityKeyIdentifier(token.CreateKeyIdentifierClause<X509IssuerSerialKeyIdentifierClause>()),
-            SecurityAlgorithms.DefaultAsymmetricKeyWrapAlgorithm)
-        {
-        }
+                token,
+                new SecurityKeyIdentifier(
+                    token.CreateKeyIdentifierClause<X509IssuerSerialKeyIdentifierClause>()
+                ),
+                SecurityAlgorithms.DefaultAsymmetricKeyWrapAlgorithm
+            ) { }
 
         /// <summary>
         /// Constructs an encrypting credential based on the x509 token and key wrapping algorithm.
@@ -73,9 +74,13 @@ namespace System.IdentityModel.Tokens
         /// <param name="token">The x509 security token.</param>
         /// <param name="keyWrappingAlgorithm">The key wrapping al----htm.</param>
         internal X509EncryptingCredentials(X509SecurityToken token, string keyWrappingAlgorithm)
-            : this(token, new SecurityKeyIdentifier(token.CreateKeyIdentifierClause<X509IssuerSerialKeyIdentifierClause>()), keyWrappingAlgorithm)
-        {
-        }
+            : this(
+                token,
+                new SecurityKeyIdentifier(
+                    token.CreateKeyIdentifierClause<X509IssuerSerialKeyIdentifierClause>()
+                ),
+                keyWrappingAlgorithm
+            ) { }
 
         /// <summary>
         /// Constructs an encrypting credential based on the x509 token, key wrapping algorithm, and security key identifier.
@@ -83,7 +88,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="token">The x509 security token.</param>
         /// <param name="ski">The security key identifier to be used.</param>
         /// <param name="keyWrappingAlgorithm">The key wrapping al----htm.</param>
-        internal X509EncryptingCredentials(X509SecurityToken token, SecurityKeyIdentifier ski, string keyWrappingAlgorithm)
+        internal X509EncryptingCredentials(
+            X509SecurityToken token,
+            SecurityKeyIdentifier ski,
+            string keyWrappingAlgorithm
+        )
             : base(token.SecurityKeys[0], ski, keyWrappingAlgorithm)
         {
             this.certificate = token.Certificate;
@@ -94,10 +103,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public X509Certificate2 Certificate
         {
-            get
-            {
-                return this.certificate;
-            }
+            get { return this.certificate; }
         }
     }
 }

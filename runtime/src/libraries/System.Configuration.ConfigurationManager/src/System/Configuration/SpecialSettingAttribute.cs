@@ -23,10 +23,7 @@ namespace System.Configuration
         /// </summary>
         public SpecialSetting SpecialSetting
         {
-            get
-            {
-                return _specialSetting;
-            }
+            get { return _specialSetting; }
         }
     }
 }

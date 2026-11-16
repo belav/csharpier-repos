@@ -18,8 +18,10 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.libobjc, StringMarshalling = StringMarshalling.Utf8)]
         private static partial IntPtr objc_getClass(string className);
+
         [LibraryImport(Libraries.libobjc, StringMarshalling = StringMarshalling.Utf8)]
         private static partial IntPtr sel_getUid(string selector);
+
         [LibraryImport(Libraries.libobjc, EntryPoint = "objc_msgSend")]
         private static partial IntPtr intptr_objc_msgSend(IntPtr basePtr, IntPtr selector);
 
@@ -29,14 +31,24 @@ internal static partial class Interop
             int minor = 0;
             int patch = 0;
 
-            IntPtr processInfo = intptr_objc_msgSend(objc_getClass("NSProcessInfo"), sel_getUid("processInfo"));
+            IntPtr processInfo = intptr_objc_msgSend(
+                objc_getClass("NSProcessInfo"),
+                sel_getUid("processInfo")
+            );
 
             if (processInfo != IntPtr.Zero)
             {
 #if TARGET_ARM64
-                NSOperatingSystemVersion osVersion = NSOperatingSystemVersion_objc_msgSend(processInfo, sel_getUid("operatingSystemVersion"));
+                NSOperatingSystemVersion osVersion = NSOperatingSystemVersion_objc_msgSend(
+                    processInfo,
+                    sel_getUid("operatingSystemVersion")
+                );
 #else
-                NSOperatingSystemVersion_objc_msgSend_stret(out NSOperatingSystemVersion osVersion, processInfo, sel_getUid("operatingSystemVersion"));
+                NSOperatingSystemVersion_objc_msgSend_stret(
+                    out NSOperatingSystemVersion osVersion,
+                    processInfo,
+                    sel_getUid("operatingSystemVersion")
+                );
 #endif
                 checked
                 {
@@ -59,9 +71,16 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.libobjc, EntryPoint = "objc_msgSend")]
-        private static partial NSOperatingSystemVersion NSOperatingSystemVersion_objc_msgSend(IntPtr basePtr, IntPtr selector);
+        private static partial NSOperatingSystemVersion NSOperatingSystemVersion_objc_msgSend(
+            IntPtr basePtr,
+            IntPtr selector
+        );
 
         [LibraryImport(Libraries.libobjc, EntryPoint = "objc_msgSend_stret")]
-        private static partial void NSOperatingSystemVersion_objc_msgSend_stret(out NSOperatingSystemVersion osVersion, IntPtr basePtr, IntPtr selector);
+        private static partial void NSOperatingSystemVersion_objc_msgSend_stret(
+            out NSOperatingSystemVersion osVersion,
+            IntPtr basePtr,
+            IntPtr selector
+        );
     }
 }

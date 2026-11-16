@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -13,14 +13,16 @@
 **
 =============================================================================*/
 
-namespace System.Runtime.InteropServices {
-
+namespace System.Runtime.InteropServices
+{
     using System;
 
-    [Obsolete("Use System.Runtime.InteropServices.ComTypes.BIND_OPTS instead. http://go.microsoft.com/fwlink/?linkid=14202", false)]
+    [Obsolete(
+        "Use System.Runtime.InteropServices.ComTypes.BIND_OPTS instead. http://go.microsoft.com/fwlink/?linkid=14202",
+        false
+    )]
     [StructLayout(LayoutKind.Sequential)]
-
-    public struct BIND_OPTS 
+    public struct BIND_OPTS
     {
         public int cbStruct;
         public int grfFlags;
@@ -28,11 +30,14 @@ namespace System.Runtime.InteropServices {
         public int dwTickCountDeadline;
     }
 
-    [Obsolete("Use System.Runtime.InteropServices.ComTypes.IBindCtx instead. http://go.microsoft.com/fwlink/?linkid=14202", false)]
+    [Obsolete(
+        "Use System.Runtime.InteropServices.ComTypes.IBindCtx instead. http://go.microsoft.com/fwlink/?linkid=14202",
+        false
+    )]
     [Guid("0000000e-0000-0000-C000-000000000046")]
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [ComImport]
-    public interface UCOMIBindCtx 
+    public interface UCOMIBindCtx
     {
         void RegisterObjectBound([MarshalAs(UnmanagedType.Interface)] Object punk);
         void RevokeObjectBound([MarshalAs(UnmanagedType.Interface)] Object punk);
@@ -40,8 +45,14 @@ namespace System.Runtime.InteropServices {
         void SetBindOptions([In()] ref BIND_OPTS pbindopts);
         void GetBindOptions(ref BIND_OPTS pbindopts);
         void GetRunningObjectTable(out UCOMIRunningObjectTable pprot);
-        void RegisterObjectParam([MarshalAs(UnmanagedType.LPWStr)] String pszKey, [MarshalAs(UnmanagedType.Interface)] Object punk);
-        void GetObjectParam([MarshalAs(UnmanagedType.LPWStr)] String pszKey, [MarshalAs(UnmanagedType.Interface)] out Object ppunk);
+        void RegisterObjectParam(
+            [MarshalAs(UnmanagedType.LPWStr)] String pszKey,
+            [MarshalAs(UnmanagedType.Interface)] Object punk
+        );
+        void GetObjectParam(
+            [MarshalAs(UnmanagedType.LPWStr)] String pszKey,
+            [MarshalAs(UnmanagedType.Interface)] out Object ppunk
+        );
         void EnumObjectParam(out UCOMIEnumString ppenum);
         void RevokeObjectParam([MarshalAs(UnmanagedType.LPWStr)] String pszKey);
     }

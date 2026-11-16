@@ -14,9 +14,7 @@ namespace Roslyn.Utilities
                 where TUnderlying : IEnumerable<T>
             {
                 public Enumerable(TUnderlying underlying)
-                    : base(underlying)
-                {
-                }
+                    : base(underlying) { }
 
                 public new IEnumerator<T> GetEnumerator()
                 {

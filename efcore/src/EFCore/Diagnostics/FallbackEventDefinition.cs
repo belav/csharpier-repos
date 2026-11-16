@@ -28,7 +28,8 @@ public class FallbackEventDefinition : EventDefinitionBase
         EventId eventId,
         LogLevel level,
         string eventIdCode,
-        string messageFormat)
+        string messageFormat
+    )
         : base(loggingOptions, eventId, level, eventIdCode)
     {
         MessageFormat = messageFormat;
@@ -55,7 +56,8 @@ public class FallbackEventDefinition : EventDefinitionBase
     /// <param name="logAction">A delegate that will log the message to an <see cref="ILogger" />.</param>
     public virtual void Log<TLoggerCategory>(
         IDiagnosticsLogger<TLoggerCategory> logger,
-        Action<ILogger> logAction)
+        Action<ILogger> logAction
+    )
         where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
     {
         switch (WarningBehavior)

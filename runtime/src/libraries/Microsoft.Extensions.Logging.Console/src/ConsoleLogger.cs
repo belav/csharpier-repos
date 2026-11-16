@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.Logging.Console
             ConsoleLoggerProcessor loggerProcessor,
             ConsoleFormatter formatter,
             IExternalScopeProvider? scopeProvider,
-            ConsoleLoggerOptions options)
+            ConsoleLoggerOptions options
+        )
         {
             ThrowHelper.ThrowIfNull(name);
 
@@ -42,7 +43,13 @@ namespace Microsoft.Extensions.Logging.Console
         private static StringWriter? t_stringWriter;
 
         /// <inheritdoc />
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception? exception,
+            Func<TState, Exception?, string> formatter
+        )
         {
             if (!IsEnabled(logLevel))
             {
@@ -52,7 +59,14 @@ namespace Microsoft.Extensions.Logging.Console
             ThrowHelper.ThrowIfNull(formatter);
 
             t_stringWriter ??= new StringWriter();
-            LogEntry<TState> logEntry = new LogEntry<TState>(logLevel, _name, eventId, state, exception, formatter);
+            LogEntry<TState> logEntry = new LogEntry<TState>(
+                logLevel,
+                _name,
+                eventId,
+                state,
+                exception,
+                formatter
+            );
             Formatter.Write(in logEntry, ScopeProvider, t_stringWriter);
 
             var sb = t_stringWriter.GetStringBuilder();
@@ -66,7 +80,12 @@ namespace Microsoft.Extensions.Logging.Console
             {
                 sb.Capacity = 1024;
             }
-            _queueProcessor.EnqueueMessage(new LogMessageEntry(computedAnsiString, logAsError: logLevel >= Options.LogToStandardErrorThreshold));
+            _queueProcessor.EnqueueMessage(
+                new LogMessageEntry(
+                    computedAnsiString,
+                    logAsError: logLevel >= Options.LogToStandardErrorThreshold
+                )
+            );
         }
 
         /// <inheritdoc />
@@ -76,6 +95,7 @@ namespace Microsoft.Extensions.Logging.Console
         }
 
         /// <inheritdoc />
-        public IDisposable BeginScope<TState>(TState state) where TState : notnull => ScopeProvider?.Push(state) ?? NullScope.Instance;
+        public IDisposable BeginScope<TState>(TState state)
+            where TState : notnull => ScopeProvider?.Push(state) ?? NullScope.Instance;
     }
 }

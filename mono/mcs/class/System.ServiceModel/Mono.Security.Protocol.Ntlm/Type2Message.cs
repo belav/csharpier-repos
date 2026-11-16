@@ -21,10 +21,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,178 +38,194 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Mono.Security.Protocol.Ntlm {
+namespace Mono.Security.Protocol.Ntlm
+{
+    public class Type2Message : MessageBase
+    {
+        private byte[] _nonce;
+        private byte[] _context;
+        private NtlmTargetInformation _target;
+        private string _target_name;
 
-	public class Type2Message : MessageBase {
+        public Type2Message()
+            : this(NtlmVersion.Version1) { }
 
-		private byte[] _nonce;
-		private byte[] _context;
-		private NtlmTargetInformation _target;
-		private string _target_name;
+        public Type2Message(NtlmVersion version)
+            : base(2, version)
+        {
+            _nonce = new byte[8];
+            RandomNumberGenerator rng = RandomNumberGenerator.Create();
+            rng.GetBytes(_nonce);
+            // default values
+            Flags = (NtlmFlags)0x8201;
+            if (Version != NtlmVersion.Version1)
+            {
+                _context = new byte[8];
+                _target = new NtlmTargetInformation();
+            }
+        }
 
-		public Type2Message () : this (NtlmVersion.Version1)
-		{
-		}
+        public Type2Message(byte[] message)
+            : this(message, NtlmVersion.Version1) { }
 
-		public Type2Message (NtlmVersion version) : base (2, version)
-		{
-			_nonce = new byte [8];
-			RandomNumberGenerator rng = RandomNumberGenerator.Create ();
-			rng.GetBytes (_nonce);
-			// default values
-			Flags = (NtlmFlags) 0x8201;
-			if (Version != NtlmVersion.Version1) {
-				_context = new byte [8];
-				_target = new NtlmTargetInformation ();
-			}
-		}
+        public Type2Message(byte[] message, NtlmVersion version)
+            : base(2, version)
+        {
+            _nonce = new byte[8];
+            Decode(message);
+        }
 
-		public Type2Message (byte[] message) : this (message, NtlmVersion.Version1)
-		{
-		}
+        ~Type2Message()
+        {
+            if (_nonce != null)
+                Array.Clear(_nonce, 0, _nonce.Length);
+        }
 
-		public Type2Message (byte[] message, NtlmVersion version) : base (2, version)
-		{
-			_nonce = new byte [8];
-			Decode (message);
-		}
+        // properties
 
-		~Type2Message () 
-		{
-			if (_nonce != null)
-				Array.Clear (_nonce, 0, _nonce.Length);
-		}
+        public byte[] Context
+        {
+            get { return (byte[])_context.Clone(); }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("Nonce");
+                if (value.Length != 8)
+                {
+                    string msg = Locale.GetText("Invalid Nonce Length (should be 8 bytes).");
+                    throw new ArgumentException(msg, "Nonce");
+                }
+                _context = (byte[])value.Clone();
+            }
+        }
 
-		// properties
+        public byte[] Nonce
+        {
+            get { return (byte[])_nonce.Clone(); }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("Nonce");
+                if (value.Length != 8)
+                {
+                    string msg = Locale.GetText("Invalid Nonce Length (should be 8 bytes).");
+                    throw new ArgumentException(msg, "Nonce");
+                }
+                _nonce = (byte[])value.Clone();
+            }
+        }
 
-		public byte[] Context {
-			get { return (byte[]) _context.Clone (); }
-			set { 
-				if (value == null)
-					throw new ArgumentNullException ("Nonce");
-				if (value.Length != 8) {
-					string msg = Locale.GetText ("Invalid Nonce Length (should be 8 bytes).");
-					throw new ArgumentException (msg, "Nonce");
-				}
-				_context = (byte[]) value.Clone (); 
-			}
-		}
+        public NtlmTargetInformation Target
+        {
+            get { return _target; }
+        }
 
-		public byte[] Nonce {
-			get { return (byte[]) _nonce.Clone (); }
-			set { 
-				if (value == null)
-					throw new ArgumentNullException ("Nonce");
-				if (value.Length != 8) {
-					string msg = Locale.GetText ("Invalid Nonce Length (should be 8 bytes).");
-					throw new ArgumentException (msg, "Nonce");
-				}
-				_nonce = (byte[]) value.Clone (); 
-			}
-		}
+        public string TargetName
+        {
+            get { return _target_name; }
+            set { _target_name = value; }
+        }
 
-		public NtlmTargetInformation Target {
-			get { return _target; }
-		}
+        // methods
 
-		public string TargetName {
-			get { return _target_name; }
-			set { _target_name = value; }
-		}
+        protected override void Decode(byte[] message)
+        {
+            base.Decode(message);
 
-		// methods
+            short targetNameSize = BitConverterLE.ToInt16(message, 12);
+            int targetNameOffset = BitConverterLE.ToInt32(message, 16);
 
-		protected override void Decode (byte[] message) 
-		{
-			base.Decode (message);
+            Flags = (NtlmFlags)BitConverterLE.ToUInt32(message, 20);
 
-			short targetNameSize = BitConverterLE.ToInt16 (message, 12);
-			int targetNameOffset = BitConverterLE.ToInt32 (message, 16);
+            Buffer.BlockCopy(message, 24, _nonce, 0, 8);
 
-			Flags = (NtlmFlags) BitConverterLE.ToUInt32 (message, 20);
+            if (Version == NtlmVersion.Version1)
+                return;
 
-			Buffer.BlockCopy (message, 24, _nonce, 0, 8);
+            Buffer.BlockCopy(message, 32, _context, 0, 8);
+            short targetInfoSize = BitConverterLE.ToInt16(message, 40);
+            int targetInfoOffset = BitConverterLE.ToInt32(message, 44);
 
-			if (Version == NtlmVersion.Version1)
-				return;
+            if (Version == NtlmVersion.Version3)
+                Buffer.BlockCopy(OSVersion, 0, message, 48, OSVersion.Length);
 
-			Buffer.BlockCopy (message, 32, _context, 0, 8);
-			short targetInfoSize = BitConverterLE.ToInt16 (message, 40);
-			int targetInfoOffset = BitConverterLE.ToInt32 (message, 44);
+            Encoding enc =
+                (Flags & NtlmFlags.NegotiateUnicode) != 0 ? Encoding.Unicode : Encoding.UTF8;
+            if (targetNameSize > 0)
+                TargetName = enc.GetString(message, targetNameOffset, targetNameSize);
 
-			if (Version == NtlmVersion.Version3)
-				Buffer.BlockCopy (OSVersion, 0, message, 48, OSVersion.Length);
+            _target.Decode(message, targetInfoOffset, targetInfoSize);
+        }
 
-			Encoding enc = (Flags & NtlmFlags.NegotiateUnicode) != 0 ? Encoding.Unicode : Encoding.UTF8;
-			if (targetNameSize > 0)
-				TargetName = enc.GetString (message, targetNameOffset, targetNameSize);
+        public override byte[] GetBytes()
+        {
+            byte[] name_bytes = null,
+                target = null;
+            short name_len = 0,
+                target_len = 0;
+            if (TargetName != null)
+            {
+                Encoding enc =
+                    (Flags & NtlmFlags.NegotiateUnicode) != 0 ? Encoding.Unicode : Encoding.UTF8;
+                name_bytes = enc.GetBytes(TargetName);
+                name_len = (short)name_bytes.Length;
+            }
+            if (Version != NtlmVersion.Version1)
+            {
+                target = _target.ToBytes();
+                target_len = (short)target.Length;
+            }
 
-			_target.Decode (message, targetInfoOffset, targetInfoSize);
-		}
+            uint name_offset = (uint)(Version == NtlmVersion.Version3 ? 56 : 40);
 
-		public override byte[] GetBytes ()
-		{
-			byte [] name_bytes = null, target = null;
-			short name_len = 0, target_len = 0;
-			if (TargetName != null) {
-				Encoding enc = (Flags & NtlmFlags.NegotiateUnicode) != 0 ? Encoding.Unicode : Encoding.UTF8;
-				name_bytes = enc.GetBytes (TargetName);
-				name_len = (short) name_bytes.Length;
-			}
-			if (Version != NtlmVersion.Version1) {
-				target = _target.ToBytes ();
-				target_len = (short) target.Length;
-			}
+            int size =
+                (int)name_offset
+                + (name_len > 0 ? name_len + 8 : 0)
+                + (target_len > 0 ? target_len + 8 : 0);
+            byte[] data = PrepareMessage(size);
 
-			uint name_offset = (uint) (Version == NtlmVersion.Version3 ? 56 : 40);
+            // target name
+            data[12] = (byte)name_len;
+            data[13] = (byte)(name_len >> 8);
+            data[14] = data[12];
+            data[15] = data[13];
+            data[16] = (byte)name_offset;
+            data[17] = (byte)(name_offset >> 8);
+            data[18] = (byte)(name_offset >> 16);
+            data[19] = (byte)(name_offset >> 24);
 
-			int size = (int) name_offset +
-				   (name_len > 0 ? name_len + 8 : 0) +
-				   (target_len > 0 ? target_len + 8 : 0);
-			byte[] data = PrepareMessage (size);
+            // flags
+            data[20] = (byte)Flags;
+            data[21] = (byte)((uint)Flags >> 8);
+            data[22] = (byte)((uint)Flags >> 16);
+            data[23] = (byte)((uint)Flags >> 24);
 
-			// target name
-			data [12] = (byte) name_len;
-			data [13] = (byte) (name_len >> 8);
-			data [14] = data [12];
-			data [15] = data [13];
-			data [16] = (byte) name_offset;
-			data [17] = (byte) (name_offset >> 8);
-			data [18] = (byte) (name_offset >> 16);
-			data [19] = (byte) (name_offset >> 24);
+            Buffer.BlockCopy(_nonce, 0, data, 24, _nonce.Length);
 
-			// flags
-			data [20] = (byte) Flags;
-			data [21] = (byte)((uint)Flags >> 8);
-			data [22] = (byte)((uint)Flags >> 16);
-			data [23] = (byte)((uint)Flags >> 24);
+            if (Version == NtlmVersion.Version1)
+                return data;
 
-			Buffer.BlockCopy (_nonce, 0, data, 24, _nonce.Length);
+            // context
+            Buffer.BlockCopy(_context, 0, data, 32, 8);
 
-			if (Version == NtlmVersion.Version1)
-				return data;
+            // target information
+            data[40] = (byte)target_len;
+            data[41] = (byte)(target_len >> 8);
+            data[42] = data[40];
+            data[43] = data[41];
+            uint info_offset = (uint)(name_offset + name_bytes.Length);
+            data[44] = (byte)info_offset;
+            data[45] = (byte)(info_offset >> 8);
+            data[46] = (byte)(info_offset >> 16);
+            data[47] = (byte)(info_offset >> 24);
 
-			// context
-			Buffer.BlockCopy (_context, 0, data, 32, 8);
+            if (Version == NtlmVersion.Version3)
+                Buffer.BlockCopy(OSVersion, 0, data, 48, OSVersion.Length);
 
-			// target information
-			data [40] = (byte) target_len;
-			data [41] = (byte) (target_len >> 8);
-			data [42] = data [40];
-			data [43] = data [41];
-			uint info_offset = (uint) (name_offset + name_bytes.Length);
-			data [44] = (byte) info_offset;
-			data [45] = (byte) (info_offset >> 8);
-			data [46] = (byte) (info_offset >> 16);
-			data [47] = (byte) (info_offset >> 24);
+            Buffer.BlockCopy(name_bytes, 0, data, (int)name_offset, name_len);
+            Buffer.BlockCopy(target, 0, data, (int)info_offset, target.Length);
 
-			if (Version == NtlmVersion.Version3)
-				Buffer.BlockCopy (OSVersion, 0, data, 48, OSVersion.Length);
-
-			Buffer.BlockCopy (name_bytes, 0, data, (int) name_offset, name_len);
-			Buffer.BlockCopy (target, 0, data, (int) info_offset, target.Length);
-
-			return data;
-		}
-	}
+            return data;
+        }
+    }
 }

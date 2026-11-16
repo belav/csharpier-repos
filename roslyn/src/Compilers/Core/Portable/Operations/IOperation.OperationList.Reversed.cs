@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis
                     return new EnumeratorImpl(new Enumerator(_operation));
                 }
 
-                IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<IOperation>)this).GetEnumerator();
+                IEnumerator IEnumerable.GetEnumerator() =>
+                    ((IEnumerable<IOperation>)this).GetEnumerator();
 
                 /// <summary>
                 /// Implements a reverse-order struct-based enumerator for <see cref="Operation"/> nodes. This type is not hardened
@@ -102,15 +103,24 @@ namespace Microsoft.CodeAnalysis
                     {
                         get
                         {
-                            Debug.Assert(_operation != null && _currentSlot is >= 0 and not int.MaxValue && _currentIndex is >= 0 and not int.MaxValue);
+                            Debug.Assert(
+                                _operation != null
+                                    && _currentSlot is >= 0 and not int.MaxValue
+                                    && _currentIndex is >= 0 and not int.MaxValue
+                            );
                             return _operation.GetCurrent(_currentSlot, _currentIndex);
                         }
                     }
 
                     public bool MoveNext()
                     {
-                        Debug.Assert((_currentSlot == int.MaxValue) == (_currentIndex == int.MaxValue));
-                        (var result, _currentSlot, _currentIndex) = _operation.MoveNextReversed(_currentSlot, _currentIndex);
+                        Debug.Assert(
+                            (_currentSlot == int.MaxValue) == (_currentIndex == int.MaxValue)
+                        );
+                        (var result, _currentSlot, _currentIndex) = _operation.MoveNextReversed(
+                            _currentSlot,
+                            _currentIndex
+                        );
                         return result;
                     }
 
@@ -132,8 +142,11 @@ namespace Microsoft.CodeAnalysis
 
                     public IOperation Current => _enumerator.Current;
                     object? IEnumerator.Current => _enumerator.Current;
+
                     public void Dispose() { }
+
                     public bool MoveNext() => _enumerator.MoveNext();
+
                     public void Reset() => _enumerator.Reset();
                 }
             }

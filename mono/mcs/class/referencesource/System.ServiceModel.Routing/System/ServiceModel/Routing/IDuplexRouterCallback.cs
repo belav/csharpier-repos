@@ -8,7 +8,10 @@ namespace System.ServiceModel.Routing
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    [ServiceContract(Namespace = RoutingUtilities.RoutingNamespace, SessionMode = SessionMode.Allowed)]
+    [ServiceContract(
+        Namespace = RoutingUtilities.RoutingNamespace,
+        SessionMode = SessionMode.Allowed
+    )]
     interface IDuplexRouterCallback
     {
         [OperationContract(AsyncPattern = true, IsOneWay = true, Action = "*")]

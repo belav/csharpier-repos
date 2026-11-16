@@ -17,8 +17,14 @@ namespace System.Reflection.Emit
         #endregion
 
         #region Constructor
-        internal RuntimeFieldBuilder(RuntimeTypeBuilder typeBuilder, string fieldName, Type type,
-            Type[]? requiredCustomModifiers, Type[]? optionalCustomModifiers, FieldAttributes attributes)
+        internal RuntimeFieldBuilder(
+            RuntimeTypeBuilder typeBuilder,
+            string fieldName,
+            Type type,
+            Type[]? requiredCustomModifiers,
+            Type[]? optionalCustomModifiers,
+            FieldAttributes attributes
+        )
         {
             if (fieldName[0] == '\0')
                 throw new ArgumentException(SR.Argument_IllegalName, nameof(fieldName));
@@ -37,8 +43,14 @@ namespace System.Reflection.Emit
             byte[] signature = sigHelp.InternalGetSignature(out int sigLength);
 
             RuntimeModuleBuilder module = m_typeBuilder.GetModuleBuilder();
-            m_fieldTok = RuntimeTypeBuilder.DefineField(new QCallModule(ref module),
-                typeBuilder.TypeToken, fieldName, signature, sigLength, m_Attributes);
+            m_fieldTok = RuntimeTypeBuilder.DefineField(
+                new QCallModule(ref module),
+                typeBuilder.TypeToken,
+                fieldName,
+                signature,
+                sigLength,
+                m_Attributes
+            );
         }
 
         #endregion
@@ -47,7 +59,12 @@ namespace System.Reflection.Emit
         internal void SetData(byte[]? data, int size)
         {
             RuntimeModuleBuilder module = m_typeBuilder.GetModuleBuilder();
-            RuntimeModuleBuilder.SetFieldRVAContent(new QCallModule(ref module), m_fieldTok, data, size);
+            RuntimeModuleBuilder.SetFieldRVAContent(
+                new QCallModule(ref module),
+                m_fieldTok,
+                data,
+                size
+            );
         }
         #endregion
 
@@ -94,7 +111,13 @@ namespace System.Reflection.Emit
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
-        public override void SetValue(object? obj, object? val, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture)
+        public override void SetValue(
+            object? obj,
+            object? val,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            CultureInfo? culture
+        )
         {
             // NOTE!!  If this is implemented, make sure that this throws
             // a NotSupportedException for Save-only dynamic assemblies.
@@ -103,7 +126,8 @@ namespace System.Reflection.Emit
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
-        public override RuntimeFieldHandle FieldHandle => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+        public override RuntimeFieldHandle FieldHandle =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
 
         public override FieldAttributes Attributes => m_Attributes;
 
@@ -133,7 +157,11 @@ namespace System.Reflection.Emit
             m_typeBuilder.ThrowIfCreated();
 
             RuntimeModuleBuilder module = m_typeBuilder.GetModuleBuilder();
-            RuntimeTypeBuilder.SetFieldLayoutOffset(new QCallModule(ref module), m_fieldTok, iOffset);
+            RuntimeTypeBuilder.SetFieldLayoutOffset(
+                new QCallModule(ref module),
+                m_fieldTok,
+                iOffset
+            );
         }
 
         protected override void SetConstantCore(object? defaultValue)
@@ -143,21 +171,38 @@ namespace System.Reflection.Emit
             if (defaultValue == null && m_fieldType.IsValueType)
             {
                 // nullable types can hold null value.
-                if (!(m_fieldType.IsGenericType && m_fieldType.GetGenericTypeDefinition() == typeof(Nullable<>)))
+                if (
+                    !(
+                        m_fieldType.IsGenericType
+                        && m_fieldType.GetGenericTypeDefinition() == typeof(Nullable<>)
+                    )
+                )
                     throw new ArgumentException(SR.Argument_ConstantNull);
             }
 
-            RuntimeTypeBuilder.SetConstantValue(m_typeBuilder.GetModuleBuilder(), m_fieldTok, m_fieldType, defaultValue);
+            RuntimeTypeBuilder.SetConstantValue(
+                m_typeBuilder.GetModuleBuilder(),
+                m_fieldTok,
+                m_fieldType,
+                defaultValue
+            );
         }
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             RuntimeModuleBuilder moduleBuilder = (RuntimeModuleBuilder)m_typeBuilder.Module;
 
             m_typeBuilder.ThrowIfCreated();
 
-            RuntimeTypeBuilder.DefineCustomAttribute(moduleBuilder,
-                m_fieldTok, moduleBuilder.GetMethodMetadataToken(con), binaryAttribute);
+            RuntimeTypeBuilder.DefineCustomAttribute(
+                moduleBuilder,
+                m_fieldTok,
+                moduleBuilder.GetMethodMetadataToken(con),
+                binaryAttribute
+            );
         }
 
         #endregion

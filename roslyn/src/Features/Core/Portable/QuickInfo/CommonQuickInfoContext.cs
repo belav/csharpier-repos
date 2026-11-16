@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
         SemanticModel semanticModel,
         int position,
         SymbolDescriptionOptions options,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         public readonly SolutionServices Services = services;
         public readonly SemanticModel SemanticModel = semanticModel;

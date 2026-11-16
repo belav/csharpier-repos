@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             public InitialContextFinder(
                 TokenStream tokenStream,
                 ChainedFormattingRules formattingRules,
-                SyntaxNode rootNode)
+                SyntaxNode rootNode
+            )
             {
                 Contract.ThrowIfNull(tokenStream);
                 Contract.ThrowIfNull(formattingRules);
@@ -38,31 +39,50 @@ namespace Microsoft.CodeAnalysis.Formatting
                 _rootNode = rootNode;
             }
 
-            public (List<IndentBlockOperation> indentOperations, List<SuppressOperation>? suppressOperations) Do(SyntaxToken startToken, SyntaxToken endToken)
+            public (
+                List<IndentBlockOperation> indentOperations,
+                List<SuppressOperation>? suppressOperations
+            ) Do(SyntaxToken startToken, SyntaxToken endToken)
             {
                 // we are formatting part of document, try to find initial context that formatting will be based on such as
                 // initial indentation and etc.
-                using (Logger.LogBlock(FunctionId.Formatting_ContextInitialization, CancellationToken.None))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Formatting_ContextInitialization,
+                        CancellationToken.None
+                    )
+                )
                 {
                     // first try to set initial indentation information
-                    var initialIndentationOperations = this.GetInitialIndentBlockOperations(startToken, endToken);
+                    var initialIndentationOperations = this.GetInitialIndentBlockOperations(
+                        startToken,
+                        endToken
+                    );
 
                     // second try to set suppress wrapping regions
-                    var initialSuppressOperations = GetInitialSuppressOperations(startToken, endToken);
+                    var initialSuppressOperations = GetInitialSuppressOperations(
+                        startToken,
+                        endToken
+                    );
                     if (initialSuppressOperations != null)
                     {
                         Debug.Assert(
-                            initialSuppressOperations.IsEmpty() ||
-                            initialSuppressOperations.All(
-                                o => o.TextSpan.Contains(startToken.SpanStart) ||
-                                     o.TextSpan.Contains(endToken.SpanStart)));
+                            initialSuppressOperations.IsEmpty()
+                                || initialSuppressOperations.All(o =>
+                                    o.TextSpan.Contains(startToken.SpanStart)
+                                    || o.TextSpan.Contains(endToken.SpanStart)
+                                )
+                        );
                     }
 
                     return (initialIndentationOperations, initialSuppressOperations);
                 }
             }
 
-            private List<IndentBlockOperation> GetInitialIndentBlockOperations(SyntaxToken startToken, SyntaxToken endToken)
+            private List<IndentBlockOperation> GetInitialIndentBlockOperations(
+                SyntaxToken startToken,
+                SyntaxToken endToken
+            )
             {
                 var span = TextSpan.FromBounds(startToken.SpanStart, endToken.Span.End);
                 var node = startToken.GetCommonRoot(endToken)!.GetParentWithBiggerSpan();
@@ -74,20 +94,22 @@ namespace Microsoft.CodeAnalysis.Formatting
                 while (node != null)
                 {
                     // get all operations for the nodes that contains the formatting span, but not ones contained by the span
-                    node.DescendantNodesAndSelf(n => n != previous && n.Span.IntersectsWith(span) && !span.Contains(n.Span))
+                    node.DescendantNodesAndSelf(n =>
+                            n != previous && n.Span.IntersectsWith(span) && !span.Contains(n.Span)
+                        )
                         .Do(n =>
+                        {
+                            _formattingRules.AddIndentBlockOperations(list, n);
+                            foreach (var element in list)
                             {
-                                _formattingRules.AddIndentBlockOperations(list, n);
-                                foreach (var element in list)
+                                if (element != null)
                                 {
-                                    if (element != null)
-                                    {
-                                        operations.Add(element);
-                                    }
+                                    operations.Add(element);
                                 }
+                            }
 
-                                list.Clear();
-                            });
+                            list.Clear();
+                        });
 
                     // found some. use these as initial indentation
                     if (operations.Any(o => o.TextSpan.Contains(span)))
@@ -106,12 +128,15 @@ namespace Microsoft.CodeAnalysis.Formatting
                 // return initial location so that we can get base indentation correctly
                 if (operations.Count == 0)
                 {
-                    operations.Add(new IndentBlockOperation(
-                        startToken: _rootNode.GetFirstToken(includeZeroWidth: true),
-                        endToken: _rootNode.GetLastToken(includeZeroWidth: true),
-                        textSpan: _rootNode.FullSpan,
-                        indentationDelta: 0,
-                        option: IndentBlockOption.AbsolutePosition));
+                    operations.Add(
+                        new IndentBlockOperation(
+                            startToken: _rootNode.GetFirstToken(includeZeroWidth: true),
+                            endToken: _rootNode.GetLastToken(includeZeroWidth: true),
+                            textSpan: _rootNode.FullSpan,
+                            indentationDelta: 0,
+                            option: IndentBlockOption.AbsolutePosition
+                        )
+                    );
 
                     return operations;
                 }
@@ -120,10 +145,21 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return operations;
             }
 
-            private List<SuppressOperation>? GetInitialSuppressOperations(SyntaxToken startToken, SyntaxToken endToken)
+            private List<SuppressOperation>? GetInitialSuppressOperations(
+                SyntaxToken startToken,
+                SyntaxToken endToken
+            )
             {
-                var noWrapList = this.GetInitialSuppressOperations(startToken, endToken, SuppressOption.NoWrapping);
-                var noSpaceList = this.GetInitialSuppressOperations(startToken, endToken, SuppressOption.NoSpacing);
+                var noWrapList = this.GetInitialSuppressOperations(
+                    startToken,
+                    endToken,
+                    SuppressOption.NoWrapping
+                );
+                var noSpaceList = this.GetInitialSuppressOperations(
+                    startToken,
+                    endToken,
+                    SuppressOption.NoSpacing
+                );
 
                 var list = noWrapList.Combine(noSpaceList);
                 if (list == null)
@@ -135,7 +171,11 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return list;
             }
 
-            private List<SuppressOperation>? GetInitialSuppressOperations(SyntaxToken startToken, SyntaxToken endToken, SuppressOption mask)
+            private List<SuppressOperation>? GetInitialSuppressOperations(
+                SyntaxToken startToken,
+                SyntaxToken endToken,
+                SuppressOption mask
+            )
             {
                 var startList = this.GetInitialSuppressOperations(startToken, mask);
                 var endList = this.GetInitialSuppressOperations(endToken, mask);
@@ -143,7 +183,10 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return startList.Combine(endList);
             }
 
-            private List<SuppressOperation>? GetInitialSuppressOperations(SyntaxToken token, SuppressOption mask)
+            private List<SuppressOperation>? GetInitialSuppressOperations(
+                SyntaxToken token,
+                SuppressOption mask
+            )
             {
                 var startNode = token.Parent;
                 var startPosition = token.SpanStart;
@@ -164,7 +207,10 @@ namespace Microsoft.CodeAnalysis.Formatting
                         return true;
                     }
 
-                    if (o.ContainsElasticTrivia(_tokenStream) && !o.Option.IsOn(SuppressOption.IgnoreElasticWrapping))
+                    if (
+                        o.ContainsElasticTrivia(_tokenStream)
+                        && !o.Option.IsOn(SuppressOption.IgnoreElasticWrapping)
+                    )
                     {
                         return true;
                     }

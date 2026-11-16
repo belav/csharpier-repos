@@ -4,39 +4,40 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
 
     [AttributeUsage(AttributeTargets.Property)]
-    public class WebDescriptionAttribute : Attribute {
+    public class WebDescriptionAttribute : Attribute
+    {
         public static readonly WebDescriptionAttribute Default = new WebDescriptionAttribute();
 
         private string _description;
 
-        public WebDescriptionAttribute() : this(String.Empty) {
-        }
+        public WebDescriptionAttribute()
+            : this(String.Empty) { }
 
-        public WebDescriptionAttribute(string description) {
+        public WebDescriptionAttribute(string description)
+        {
             _description = description;
         }
 
-        public virtual string Description {
-            get {
-                return DescriptionValue;
-            }
+        public virtual string Description
+        {
+            get { return DescriptionValue; }
         }
 
-        protected string DescriptionValue {
-            get {
-                return _description;
-            }
-            set {
-                _description = value;
-            }
+        protected string DescriptionValue
+        {
+            get { return _description; }
+            set { _description = value; }
         }
 
-        public override bool Equals(object obj) {
-            if (obj == this) {
+        public override bool Equals(object obj)
+        {
+            if (obj == this)
+            {
                 return true;
             }
 
@@ -44,15 +45,15 @@ namespace System.Web.UI.WebControls.WebParts {
             return (other != null) && other.Description == Description;
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return Description.GetHashCode();
         }
 
         /// <internalonly/>
-        public override bool IsDefaultAttribute() {
+        public override bool IsDefaultAttribute()
+        {
             return (this.Equals(Default));
         }
     }
 }
-
-

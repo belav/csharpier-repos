@@ -34,7 +34,11 @@ namespace System.Net.Http.Headers
             }
             if (from.HasValue && to.HasValue)
             {
-                ArgumentOutOfRangeException.ThrowIfGreaterThan(from.GetValueOrDefault(), to.GetValueOrDefault(), nameof(from));
+                ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                    from.GetValueOrDefault(),
+                    to.GetValueOrDefault(),
+                    nameof(from)
+                );
             }
 
             _from = from ?? -1;
@@ -60,24 +64,25 @@ namespace System.Net.Http.Headers
 
             if (_to < 0)
             {
-                return string.Create(CultureInfo.InvariantCulture, stackBuffer, $"{_from}-"); ;
+                return string.Create(CultureInfo.InvariantCulture, stackBuffer, $"{_from}-");
+                ;
             }
 
             return string.Create(CultureInfo.InvariantCulture, stackBuffer, $"{_from}-{_to}");
         }
 
         public override bool Equals([NotNullWhen(true)] object? obj) =>
-            obj is RangeItemHeaderValue other &&
-            _from == other._from &&
-            _to == other._to;
+            obj is RangeItemHeaderValue other && _from == other._from && _to == other._to;
 
-        public override int GetHashCode() =>
-            HashCode.Combine(_from, _to);
+        public override int GetHashCode() => HashCode.Combine(_from, _to);
 
         // Returns the length of a range list. E.g. "1-2, 3-4, 5-6" adds 3 ranges to 'rangeCollection'. Note that empty
         // list segments are allowed, e.g. ",1-2, , 3-4,,".
-        internal static int GetRangeItemListLength(string? input, int startIndex,
-            ICollection<RangeItemHeaderValue> rangeCollection)
+        internal static int GetRangeItemListLength(
+            string? input,
+            int startIndex,
+            ICollection<RangeItemHeaderValue> rangeCollection
+        )
         {
             Debug.Assert(rangeCollection != null);
             Debug.Assert(startIndex >= 0);
@@ -88,7 +93,12 @@ namespace System.Net.Http.Headers
             }
 
             // Empty segments are allowed, so skip all delimiter-only segments (e.g. ", ,").
-            int current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(input, startIndex, true, out _);
+            int current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+                input,
+                startIndex,
+                true,
+                out _
+            );
             // It's OK if we didn't find leading separator characters. Ignore 'separatorFound'.
 
             if (current == input.Length)
@@ -98,7 +108,11 @@ namespace System.Net.Http.Headers
 
             while (true)
             {
-                int rangeLength = GetRangeItemLength(input, current, out RangeItemHeaderValue? range);
+                int rangeLength = GetRangeItemLength(
+                    input,
+                    current,
+                    out RangeItemHeaderValue? range
+                );
 
                 if (rangeLength == 0)
                 {
@@ -108,7 +122,12 @@ namespace System.Net.Http.Headers
                 rangeCollection.Add(range!);
 
                 current += rangeLength;
-                current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(input, current, true, out bool separatorFound);
+                current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+                    input,
+                    current,
+                    true,
+                    out bool separatorFound
+                );
 
                 // If the string is not consumed, we must have a delimiter, otherwise the string is not a valid
                 // range list.
@@ -124,7 +143,11 @@ namespace System.Net.Http.Headers
             }
         }
 
-        internal static int GetRangeItemLength(string? input, int startIndex, out RangeItemHeaderValue? parsedValue)
+        internal static int GetRangeItemLength(
+            string? input,
+            int startIndex,
+            out RangeItemHeaderValue? parsedValue
+        )
         {
             Debug.Assert(startIndex >= 0);
 
@@ -186,14 +209,20 @@ namespace System.Net.Http.Headers
 
             // Try convert first value to int64
             long from = 0;
-            if ((fromLength > 0) && !HeaderUtilities.TryParseInt64(input, fromStartIndex, fromLength, out from))
+            if (
+                (fromLength > 0)
+                && !HeaderUtilities.TryParseInt64(input, fromStartIndex, fromLength, out from)
+            )
             {
                 return 0;
             }
 
             // Try convert second value to int64
             long to = 0;
-            if ((toLength > 0) && !HeaderUtilities.TryParseInt64(input, toStartIndex, toLength, out to))
+            if (
+                (toLength > 0)
+                && !HeaderUtilities.TryParseInt64(input, toStartIndex, toLength, out to)
+            )
             {
                 return 0;
             }
@@ -204,7 +233,10 @@ namespace System.Net.Http.Headers
                 return 0;
             }
 
-            parsedValue = new RangeItemHeaderValue((fromLength == 0 ? null : from), (toLength == 0 ? null : to));
+            parsedValue = new RangeItemHeaderValue(
+                (fromLength == 0 ? null : from),
+                (toLength == 0 ? null : to)
+            );
             return current - startIndex;
         }
 

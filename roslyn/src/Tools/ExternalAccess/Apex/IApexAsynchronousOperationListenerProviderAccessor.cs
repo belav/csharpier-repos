@@ -11,6 +11,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Apex
 {
     internal interface IApexAsynchronousOperationListenerProviderAccessor
     {
-        Task WaitAllAsync(string[] featureNames = null, Action eventProcessingAction = null, TimeSpan? timeout = null);
+        Task WaitAllAsync(
+            string[] featureNames = null,
+            Action eventProcessingAction = null,
+            TimeSpan? timeout = null
+        );
     }
 }

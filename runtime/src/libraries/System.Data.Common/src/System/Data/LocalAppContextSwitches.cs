@@ -13,13 +13,21 @@ namespace System
         public static bool AllowArbitraryTypeInstantiation
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Data.AllowArbitraryDataSetTypeInstantiation", ref s_allowArbitraryTypeInstantiation);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Data.AllowArbitraryDataSetTypeInstantiation",
+                    ref s_allowArbitraryTypeInstantiation
+                );
         }
 
         public static bool AllowUnsafeSerializationFormatBinary
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Data.AllowUnsafeSerializationFormatBinary", ref s_allowUnsafeSerializationFormatBinary);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Data.AllowUnsafeSerializationFormatBinary",
+                    ref s_allowUnsafeSerializationFormatBinary
+                );
         }
     }
 }

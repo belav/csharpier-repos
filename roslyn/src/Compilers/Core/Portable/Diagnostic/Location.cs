@@ -16,9 +16,7 @@ namespace Microsoft.CodeAnalysis
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
     public abstract class Location
     {
-        internal Location()
-        {
-        }
+        internal Location() { }
 
         /// <summary>
         /// Location kind (None/SourceFile/MetadataFile).
@@ -29,28 +27,43 @@ namespace Microsoft.CodeAnalysis
         /// Returns true if the location represents a specific location in a source code file.
         /// </summary>
         [MemberNotNullWhen(true, nameof(SourceTree))]
-        public bool IsInSource { get { return SourceTree != null; } }
+        public bool IsInSource
+        {
+            get { return SourceTree != null; }
+        }
 
         /// <summary>
         /// Returns true if the location is in metadata.
         /// </summary>
-        public bool IsInMetadata { get { return MetadataModuleInternal != null; } }
+        public bool IsInMetadata
+        {
+            get { return MetadataModuleInternal != null; }
+        }
 
         /// <summary>
         /// The syntax tree this location is located in or <c>null</c> if not in a syntax tree.
         /// </summary>
-        public virtual SyntaxTree? SourceTree { get { return null; } }
+        public virtual SyntaxTree? SourceTree
+        {
+            get { return null; }
+        }
 
         /// <summary>
         /// Returns the metadata module the location is associated with or <c>null</c> if the module is not available.
         /// </summary>
         /// <remarks>
-        /// Might return null even if <see cref="IsInMetadata"/> returns true. The module symbol might not be available anymore, 
+        /// Might return null even if <see cref="IsInMetadata"/> returns true. The module symbol might not be available anymore,
         /// for example, if the location is serialized and deserialized.
         /// </remarks>
-        public IModuleSymbol? MetadataModule { get { return (IModuleSymbol?)MetadataModuleInternal?.GetISymbol(); } }
+        public IModuleSymbol? MetadataModule
+        {
+            get { return (IModuleSymbol?)MetadataModuleInternal?.GetISymbol(); }
+        }
 
-        internal virtual IModuleSymbolInternal? MetadataModuleInternal { get { return null; } }
+        internal virtual IModuleSymbolInternal? MetadataModuleInternal
+        {
+            get { return null; }
+        }
 
         /// <summary>
         /// The location within the syntax tree that this location is associated with.
@@ -58,16 +71,19 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// If <see cref="IsInSource"/> returns False this method returns an empty <see cref="TextSpan"/> which starts at position 0.
         /// </remarks>
-        public virtual TextSpan SourceSpan { get { return default(TextSpan); } }
+        public virtual TextSpan SourceSpan
+        {
+            get { return default(TextSpan); }
+        }
 
         /// <summary>
         /// Gets the location in terms of path, line and column.
         /// </summary>
         /// <returns>
         /// <see cref="FileLinePositionSpan"/> that contains path, line and column information.
-        /// 
+        ///
         /// Returns an invalid span (see <see cref="FileLinePositionSpan.IsValid"/>) if the information is not available.
-        /// 
+        ///
         /// The values are not affected by line mapping directives (#line in C# or #ExternalSource in VB).
         /// </returns>
         public virtual FileLinePositionSpan GetLineSpan()
@@ -112,7 +128,14 @@ namespace Microsoft.CodeAnalysis
                 if (pos.Path != null)
                 {
                     // user-visible line and column counts are 1-based, but internally are 0-based.
-                    result += "(" + pos.Path + "@" + (pos.StartLinePosition.Line + 1) + ":" + (pos.StartLinePosition.Character + 1) + ")";
+                    result +=
+                        "("
+                        + pos.Path
+                        + "@"
+                        + (pos.StartLinePosition.Line + 1)
+                        + ":"
+                        + (pos.StartLinePosition.Character + 1)
+                        + ")";
                 }
             }
 
@@ -141,16 +164,26 @@ namespace Microsoft.CodeAnalysis
             if (pos.Path != null)
             {
                 // user-visible line and column counts are 1-based, but internally are 0-based.
-                result += "(" + pos.Path + "@" + (pos.StartLinePosition.Line + 1) + ":" + (pos.StartLinePosition.Character + 1) + ")";
+                result +=
+                    "("
+                    + pos.Path
+                    + "@"
+                    + (pos.StartLinePosition.Line + 1)
+                    + ":"
+                    + (pos.StartLinePosition.Character + 1)
+                    + ")";
             }
 
             return result;
         }
 
         /// <summary>
-        /// A location of kind LocationKind.None. 
+        /// A location of kind LocationKind.None.
         /// </summary>
-        public static Location None { get { return NoLocation.Singleton; } }
+        public static Location None
+        {
+            get { return NoLocation.Singleton; }
+        }
 
         /// <summary>
         /// Creates an instance of a <see cref="Location"/> for a span in a <see cref="SyntaxTree"/>.
@@ -181,7 +214,13 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Creates an instance of a <see cref="Location"/> for a span in a file with a mapped file and span.
         /// </summary>
-        public static Location Create(string filePath, TextSpan textSpan, LinePositionSpan lineSpan, string mappedFilePath, LinePositionSpan mappedLineSpan)
+        public static Location Create(
+            string filePath,
+            TextSpan textSpan,
+            LinePositionSpan lineSpan,
+            string mappedFilePath,
+            LinePositionSpan mappedLineSpan
+        )
         {
             if (filePath == null)
             {
@@ -193,7 +232,13 @@ namespace Microsoft.CodeAnalysis
                 throw new ArgumentNullException(nameof(mappedFilePath));
             }
 
-            return new ExternalFileLocation(filePath, textSpan, lineSpan, mappedFilePath, mappedLineSpan);
+            return new ExternalFileLocation(
+                filePath,
+                textSpan,
+                lineSpan,
+                mappedFilePath,
+                mappedLineSpan
+            );
         }
     }
 }

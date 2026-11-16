@@ -21,7 +21,12 @@ namespace Roslyn.Utilities
         /// <param name="valueProvider">The function to execute to obtain the value to insert into the dictionary if the key is not found. Returns null if the value can't be obtained.</param>
         /// <param name="factoryArgument">The argument to pass to the value factory.</param>
         /// <returns>The value obtained from the dictionary or <paramref name="valueProvider" /> if it was not present.</returns>
-        public static TValue? GetOrAdd<TKey, TValue, TArg>(ref ImmutableHashMap<TKey, TValue> location, TKey key, Func<TKey, TArg, TValue?> valueProvider, TArg factoryArgument)
+        public static TValue? GetOrAdd<TKey, TValue, TArg>(
+            ref ImmutableHashMap<TKey, TValue> location,
+            TKey key,
+            Func<TKey, TArg, TValue?> valueProvider,
+            TArg factoryArgument
+        )
             where TKey : notnull
             where TValue : class
         {
@@ -50,8 +55,7 @@ namespace Roslyn.Utilities
                 }
 
                 map = replacedMap;
-            }
-            while (!map.TryGetValue(key, out existingValue));
+            } while (!map.TryGetValue(key, out existingValue));
 
             return existingValue;
         }

@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -31,7 +31,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using DbLinq.Data.Linq.Sugar;
 using DbLinq.Util;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else
@@ -52,11 +51,13 @@ namespace DbLinq.Data.Linq.Implementation
         /// </summary>
         /// <value>The expression chain.</value>
         public ExpressionChain ExpressionChain { get; set; }
+
         /// <summary>
         /// Gets or sets the type of the table.
         /// </summary>
         /// <value>The type of the table.</value>
         public Type TableType { get; set; }
+
         /// <summary>
         /// Gets the query.
         /// </summary>
@@ -69,7 +70,11 @@ namespace DbLinq.Data.Linq.Implementation
     /// QueryProvider, generic version
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal class QueryProvider<T> : QueryProvider, IQueryProvider, IQueryable<T>, IOrderedQueryable<T>
+    internal class QueryProvider<T>
+        : QueryProvider,
+            IQueryProvider,
+            IQueryable<T>,
+            IOrderedQueryable<T>
     {
         /// <summary>
         /// Holder current datancontext
@@ -94,7 +99,12 @@ namespace DbLinq.Data.Linq.Implementation
         /// <param name="dataContext">The data context.</param>
         /// <param name="expressionChain">The expression chain.</param>
         /// <param name="expression">The expression.</param>
-        public QueryProvider(Type tableType, DataContext dataContext, ExpressionChain expressionChain, Expression expression)
+        public QueryProvider(
+            Type tableType,
+            DataContext dataContext,
+            ExpressionChain expressionChain,
+            Expression expression
+        )
         {
             _dataContext = dataContext;
             TableType = tableType;
@@ -111,12 +121,24 @@ namespace DbLinq.Data.Linq.Implementation
         /// <param name="expressionChain">The expression chain.</param>
         /// <param name="expression">The expression.</param>
         /// <returns></returns>
-        protected S CreateQuery<S>(Type t, Type tableType, DataContext dataContext, ExpressionChain expressionChain, Expression expression)
+        protected S CreateQuery<S>(
+            Type t,
+            Type tableType,
+            DataContext dataContext,
+            ExpressionChain expressionChain,
+            Expression expression
+        )
         {
             // no way to work differently
             var typedQueryProviderType = typeof(QueryProvider<>).MakeGenericType(t);
-            var queryProvider = (S)Activator.CreateInstance(typedQueryProviderType, tableType, dataContext,
-                                                             expressionChain, expression);
+            var queryProvider = (S)
+                Activator.CreateInstance(
+                    typedQueryProviderType,
+                    tableType,
+                    dataContext,
+                    expressionChain,
+                    expression
+                );
             return queryProvider;
         }
 
@@ -129,13 +151,22 @@ namespace DbLinq.Data.Linq.Implementation
         {
             var type = expression.Type;
             if (!type.IsGenericType)
-                throw Error.BadArgument("S0066: Don't know how to handle non-generic type '{0}'", type);
+                throw Error.BadArgument(
+                    "S0066: Don't know how to handle non-generic type '{0}'",
+                    type
+                );
             var genericType = type.GetGenericTypeDefinition();
             if (genericType == typeof(IQueryable<>) || genericType == typeof(IOrderedQueryable<>))
                 type = type.GetGenericArguments()[0];
             else
                 Error.BadArgument("S0068: Don't know how to handle type '{0}'", type);
-            return CreateQuery<IQueryable>(type, TableType, _dataContext, ExpressionChain, expression);
+            return CreateQuery<IQueryable>(
+                type,
+                TableType,
+                _dataContext,
+                ExpressionChain,
+                expression
+            );
         }
 
         /// <summary>
@@ -146,8 +177,17 @@ namespace DbLinq.Data.Linq.Implementation
         /// <returns></returns>
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
-            Profiler.At("START QueryProvider.CreateQuery<{0}>({1})", typeof(TElement).Name, expression.ToString());
-            var query = new QueryProvider<TElement>(TableType, _dataContext, ExpressionChain, expression);
+            Profiler.At(
+                "START QueryProvider.CreateQuery<{0}>({1})",
+                typeof(TElement).Name,
+                expression.ToString()
+            );
+            var query = new QueryProvider<TElement>(
+                TableType,
+                _dataContext,
+                ExpressionChain,
+                expression
+            );
             Profiler.At("END QueryProvider.CreateQuery<{0}>(...)", typeof(TElement).Name);
             return query;
         }
@@ -162,7 +202,10 @@ namespace DbLinq.Data.Linq.Implementation
             var expressionChain = ExpressionChain;
             if (expression != null)
                 expressionChain = new ExpressionChain(expressionChain, expression);
-            return _dataContext.QueryBuilder.GetSelectQuery(expressionChain, new QueryContext(_dataContext));
+            return _dataContext.QueryBuilder.GetSelectQuery(
+                expressionChain,
+                new QueryContext(_dataContext)
+            );
         }
 
         /// <summary>
@@ -188,10 +231,16 @@ namespace DbLinq.Data.Linq.Implementation
         /// <returns></returns>
         public TResult Execute<TResult>(Expression expression)
         {
-            Profiler.At("START QueryProvider.Execute<{0}>(): Executing expression...", typeof(TResult).Name);
+            Profiler.At(
+                "START QueryProvider.Execute<{0}>(): Executing expression...",
+                typeof(TResult).Name
+            );
             var query = GetQuery(expression);
             var result = _dataContext.QueryRunner.SelectScalar<TResult>(query);
-            Profiler.At("END QueryProvider.Execute<{0}>(): Executing expression...", typeof(TResult).Name);
+            Profiler.At(
+                "END QueryProvider.Execute<{0}>(): Executing expression...",
+                typeof(TResult).Name
+            );
             return result;
         }
 
@@ -211,10 +260,16 @@ namespace DbLinq.Data.Linq.Implementation
         /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
-            Profiler.At("START QueryProvider.GetEnumerator<{0}>(): Executing expression...", typeof(T).Name);
+            Profiler.At(
+                "START QueryProvider.GetEnumerator<{0}>(): Executing expression...",
+                typeof(T).Name
+            );
             var query = GetQuery(null);
             var enumerator = _dataContext.QueryRunner.Select<T>(query).GetEnumerator();
-            Profiler.At("END QueryProvider.GetEnumerator<{0}>(): Executing expression...", typeof(T).Name);
+            Profiler.At(
+                "END QueryProvider.GetEnumerator<{0}>(): Executing expression...",
+                typeof(T).Name
+            );
             return enumerator;
         }
 

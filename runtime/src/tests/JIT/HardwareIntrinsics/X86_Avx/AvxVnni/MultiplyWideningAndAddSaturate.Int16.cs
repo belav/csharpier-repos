@@ -32,14 +32,13 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
                     // Validates basic functionality works, using LoadAligned
                     test.RunBasicScenario_LoadAligned();
                 }
-
                 else
                 {
                     Console.WriteLine("Avx Is Not Supported");
                 }
 
                 // Validates calling via reflection works, using Unsafe.Read
-                test.RunReflectionScenario_UnsafeRead();  //TODO: this one does not work. Fix it.
+                test.RunReflectionScenario_UnsafeRead(); //TODO: this one does not work. Fix it.
 
                 if (Avx.IsSupported)
                 {
@@ -107,14 +106,26 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
 
             private ulong alignment;
 
-            public DataTable(Int32[] inArray0, Int16[] inArray1, Int16[] inArray2, Int32[] outArray, int alignment)
+            public DataTable(
+                Int32[] inArray0,
+                Int16[] inArray1,
+                Int16[] inArray2,
+                Int32[] outArray,
+                int alignment
+            )
             {
                 int sizeOfinArray0 = inArray0.Length * Unsafe.SizeOf<Int32>();
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<Int16>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<Int16>();
                 int sizeOfoutArray = outArray.Length * Unsafe.SizeOf<Int32>();
 
-                if((alignment != 32 && alignment != 16) || (alignment *2) < sizeOfinArray0 || (alignment * 2) < sizeOfinArray1 || (alignment * 2) < sizeOfinArray2 || (alignment * 2) < sizeOfoutArray)        
+                if (
+                    (alignment != 32 && alignment != 16)
+                    || (alignment * 2) < sizeOfinArray0
+                    || (alignment * 2) < sizeOfinArray1
+                    || (alignment * 2) < sizeOfinArray2
+                    || (alignment * 2) < sizeOfoutArray
+                )
                 {
                     throw new ArgumentException("Invalid value of alignment");
                 }
@@ -131,15 +142,31 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
 
                 this.alignment = (ulong)alignment;
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray0Ptr), ref Unsafe.As<Int32, byte>(ref inArray0[0]), (uint)sizeOfinArray0);
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray1Ptr), ref Unsafe.As<Int16, byte>(ref inArray1[0]), (uint)sizeOfinArray1);
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray2Ptr), ref Unsafe.As<Int16, byte>(ref inArray2[0]), (uint)sizeOfinArray2);
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray0Ptr),
+                    ref Unsafe.As<Int32, byte>(ref inArray0[0]),
+                    (uint)sizeOfinArray0
+                );
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray1Ptr),
+                    ref Unsafe.As<Int16, byte>(ref inArray1[0]),
+                    (uint)sizeOfinArray1
+                );
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray2Ptr),
+                    ref Unsafe.As<Int16, byte>(ref inArray2[0]),
+                    (uint)sizeOfinArray2
+                );
             }
 
-            public void* inArray0Ptr => Align((byte*)(inHandle0.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* inArray1Ptr => Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* inArray2Ptr => Align((byte*)(inHandle2.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* outArrayPtr => Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray0Ptr =>
+                Align((byte*)(inHandle0.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray1Ptr =>
+                Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray2Ptr =>
+                Align((byte*)(inHandle2.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* outArrayPtr =>
+                Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
             public void Dispose()
             {
@@ -151,9 +178,10 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
 
             private static unsafe void* Align(byte* buffer, ulong expectedAlighment)
             {
-                return (void*)(((ulong)buffer + expectedAlighment -1) & ~(expectedAlighment - 1));
+                return (void*)(((ulong)buffer + expectedAlighment - 1) & ~(expectedAlighment - 1));
             }
         }
+
         private struct TestStruct
         {
             public Vector256<Int32> _fld0;
@@ -164,17 +192,40 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op0ElementCount; i++) { _data0[i] = TestLibrary.Generator.GetInt16(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Int32>, byte>(ref testStruct._fld0), ref Unsafe.As<Int32, byte>(ref _data0[0]), (uint)Unsafe.SizeOf<Vector256<Int32>>());
-                for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetByte(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Int16>, byte>(ref testStruct._fld1), ref Unsafe.As<Int16, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector256<Int16>>());
-                for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = (sbyte)TestLibrary.Generator.GetInt16(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Int16>, byte>(ref testStruct._fld2), ref Unsafe.As<Int16, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector256<Int16>>());
+                for (var i = 0; i < Op0ElementCount; i++)
+                {
+                    _data0[i] = TestLibrary.Generator.GetInt16();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector256<Int32>, byte>(ref testStruct._fld0),
+                    ref Unsafe.As<Int32, byte>(ref _data0[0]),
+                    (uint)Unsafe.SizeOf<Vector256<Int32>>()
+                );
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data1[i] = TestLibrary.Generator.GetByte();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector256<Int16>, byte>(ref testStruct._fld1),
+                    ref Unsafe.As<Int16, byte>(ref _data1[0]),
+                    (uint)Unsafe.SizeOf<Vector256<Int16>>()
+                );
+                for (var i = 0; i < Op2ElementCount; i++)
+                {
+                    _data2[i] = (sbyte)TestLibrary.Generator.GetInt16();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector256<Int16>, byte>(ref testStruct._fld2),
+                    ref Unsafe.As<Int16, byte>(ref _data2[0]),
+                    (uint)Unsafe.SizeOf<Vector256<Int16>>()
+                );
 
                 return testStruct;
             }
 
-            public void RunStructFldScenario(SimpleTernaryOpTest__MultiplyWideningAndAddSaturateInt16 testClass)
+            public void RunStructFldScenario(
+                SimpleTernaryOpTest__MultiplyWideningAndAddSaturateInt16 testClass
+            )
             {
                 var result = AvxVnni.MultiplyWideningAndAddSaturate(_fld0, _fld1, _fld2);
 
@@ -185,10 +236,14 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
 
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int Op0ElementCount = Unsafe.SizeOf<Vector256<Int32>>() / sizeof(Int32);
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector256<Int16>>() / sizeof(Int16);
-        private static readonly int Op2ElementCount = Unsafe.SizeOf<Vector256<Int16>>() / sizeof(Int16);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector256<Int32>>() / sizeof(Int32);
+        private static readonly int Op0ElementCount =
+            Unsafe.SizeOf<Vector256<Int32>>() / sizeof(Int32);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector256<Int16>>() / sizeof(Int16);
+        private static readonly int Op2ElementCount =
+            Unsafe.SizeOf<Vector256<Int16>>() / sizeof(Int16);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector256<Int32>>() / sizeof(Int32);
 
         private static Int32[] _data0 = new Int32[Op0ElementCount];
         private static Int16[] _data1 = new Int16[Op1ElementCount];
@@ -206,29 +261,86 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
 
         static SimpleTernaryOpTest__MultiplyWideningAndAddSaturateInt16()
         {
-            for (var i = 0; i < Op0ElementCount; i++) { _data0[i] = TestLibrary.Generator.GetInt32(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Int32>, byte>(ref _clsVar0), ref Unsafe.As<Int32, byte>(ref _data0[0]), (uint)Unsafe.SizeOf<Vector256<Int32>>());
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetInt16(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Int16>, byte>(ref _clsVar1), ref Unsafe.As<Int16, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector256<Int16>>());
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = (sbyte)TestLibrary.Generator.GetInt16(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Int16>, byte>(ref _clsVar2), ref Unsafe.As<Int16, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector256<Int16>>());
+            for (var i = 0; i < Op0ElementCount; i++)
+            {
+                _data0[i] = TestLibrary.Generator.GetInt32();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Int32>, byte>(ref _clsVar0),
+                ref Unsafe.As<Int32, byte>(ref _data0[0]),
+                (uint)Unsafe.SizeOf<Vector256<Int32>>()
+            );
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetInt16();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Int16>, byte>(ref _clsVar1),
+                ref Unsafe.As<Int16, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector256<Int16>>()
+            );
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = (sbyte)TestLibrary.Generator.GetInt16();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Int16>, byte>(ref _clsVar2),
+                ref Unsafe.As<Int16, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector256<Int16>>()
+            );
         }
 
         public SimpleTernaryOpTest__MultiplyWideningAndAddSaturateInt16()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op0ElementCount; i++) { _data0[i] = TestLibrary.Generator.GetInt32(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Int32>, byte>(ref _fld0), ref Unsafe.As<Int32, byte>(ref _data0[0]), (uint)Unsafe.SizeOf<Vector256<Int32>>());
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetInt16(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Int16>, byte>(ref _fld1), ref Unsafe.As<Int16, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector256<Int16>>());
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = (sbyte)TestLibrary.Generator.GetInt16(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Int16>, byte>(ref _fld2), ref Unsafe.As<Int16, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector256<Int16>>());
+            for (var i = 0; i < Op0ElementCount; i++)
+            {
+                _data0[i] = TestLibrary.Generator.GetInt32();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Int32>, byte>(ref _fld0),
+                ref Unsafe.As<Int32, byte>(ref _data0[0]),
+                (uint)Unsafe.SizeOf<Vector256<Int32>>()
+            );
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetInt16();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Int16>, byte>(ref _fld1),
+                ref Unsafe.As<Int16, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector256<Int16>>()
+            );
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = (sbyte)TestLibrary.Generator.GetInt16();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Int16>, byte>(ref _fld2),
+                ref Unsafe.As<Int16, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector256<Int16>>()
+            );
 
-            for (var i = 0; i < Op0ElementCount; i++) { _data0[i] = TestLibrary.Generator.GetInt32(); }
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetInt16(); }
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetInt16(); }
-            _dataTable = new DataTable(_data0, _data1, _data2, new Int32[RetElementCount], LargestVectorSize);
+            for (var i = 0; i < Op0ElementCount; i++)
+            {
+                _data0[i] = TestLibrary.Generator.GetInt32();
+            }
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetInt16();
+            }
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = TestLibrary.Generator.GetInt16();
+            }
+            _dataTable = new DataTable(
+                _data0,
+                _data1,
+                _data2,
+                new Int32[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => AvxVnni.IsSupported;
@@ -246,7 +358,12 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
             );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
-            ValidateResult(_dataTable.inArray0Ptr, _dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray0Ptr,
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunBasicScenario_Load()
@@ -256,11 +373,16 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
             var result = AvxVnni.MultiplyWideningAndAddSaturate(
                 Avx.LoadVector256((Int32*)(_dataTable.inArray0Ptr)),
                 Avx.LoadVector256((Int16*)(_dataTable.inArray1Ptr)),
-                Avx.LoadVector256((Int16*)(_dataTable.inArray2Ptr)));
+                Avx.LoadVector256((Int16*)(_dataTable.inArray2Ptr))
+            );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
-            ValidateResult(_dataTable.inArray0Ptr, _dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
-            
+            ValidateResult(
+                _dataTable.inArray0Ptr,
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunBasicScenario_LoadAligned()
@@ -274,63 +396,118 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
             );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
-            ValidateResult(_dataTable.inArray0Ptr, _dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray0Ptr,
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunReflectionScenario_UnsafeRead()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AvxVnni).GetMethod(nameof(AvxVnni.MultiplyWideningAndAddSaturate), new Type[] { typeof(Vector256<Int32>), typeof(Vector256<Int16>), typeof(Vector256<Int16>) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector256<Int32>>(_dataTable.inArray0Ptr),
-                                        Unsafe.Read<Vector256<Int16>>(_dataTable.inArray1Ptr),
-                                        Unsafe.Read<Vector256<Int16>>(_dataTable.inArray2Ptr)
-                                     });
+            var result = typeof(AvxVnni)
+                .GetMethod(
+                    nameof(AvxVnni.MultiplyWideningAndAddSaturate),
+                    new Type[]
+                    {
+                        typeof(Vector256<Int32>),
+                        typeof(Vector256<Int16>),
+                        typeof(Vector256<Int16>),
+                    }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.Read<Vector256<Int32>>(_dataTable.inArray0Ptr),
+                        Unsafe.Read<Vector256<Int16>>(_dataTable.inArray1Ptr),
+                        Unsafe.Read<Vector256<Int16>>(_dataTable.inArray2Ptr),
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector256<Int32>)(result));
-            ValidateResult(_dataTable.inArray0Ptr, _dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray0Ptr,
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunReflectionScenario_Load()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AvxVnni).GetMethod(nameof(AvxVnni.MultiplyWideningAndAddSaturate), new Type[] { typeof(Vector256<Int32>), typeof(Vector256<Int16>), typeof(Vector256<Int16>) })
-                                     .Invoke(null, new object[] {
-                                        Avx.LoadVector256((Int32*)(_dataTable.inArray0Ptr)),
-                                        Avx.LoadVector256((Int16*)(_dataTable.inArray1Ptr)),
-                                        Avx.LoadVector256((Int16*)(_dataTable.inArray2Ptr))
-                                     });
+            var result = typeof(AvxVnni)
+                .GetMethod(
+                    nameof(AvxVnni.MultiplyWideningAndAddSaturate),
+                    new Type[]
+                    {
+                        typeof(Vector256<Int32>),
+                        typeof(Vector256<Int16>),
+                        typeof(Vector256<Int16>),
+                    }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Avx.LoadVector256((Int32*)(_dataTable.inArray0Ptr)),
+                        Avx.LoadVector256((Int16*)(_dataTable.inArray1Ptr)),
+                        Avx.LoadVector256((Int16*)(_dataTable.inArray2Ptr)),
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector256<Int32>)(result));
-            ValidateResult(_dataTable.inArray0Ptr, _dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray0Ptr,
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunReflectionScenario_LoadAligned()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(AvxVnni).GetMethod(nameof(AvxVnni.MultiplyWideningAndAddSaturate), new Type[] { typeof(Vector256<Int32>), typeof(Vector256<Int16>), typeof(Vector256<Int16>) })
-                                     .Invoke(null, new object[] {
-                                        Avx.LoadAlignedVector256((Int32*)(_dataTable.inArray0Ptr)),
-                                        Avx.LoadAlignedVector256((Int16*)(_dataTable.inArray1Ptr)),
-                                        Avx.LoadAlignedVector256((Int16*)(_dataTable.inArray2Ptr))
-                                     });
+            var result = typeof(AvxVnni)
+                .GetMethod(
+                    nameof(AvxVnni.MultiplyWideningAndAddSaturate),
+                    new Type[]
+                    {
+                        typeof(Vector256<Int32>),
+                        typeof(Vector256<Int16>),
+                        typeof(Vector256<Int16>),
+                    }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Avx.LoadAlignedVector256((Int32*)(_dataTable.inArray0Ptr)),
+                        Avx.LoadAlignedVector256((Int16*)(_dataTable.inArray1Ptr)),
+                        Avx.LoadAlignedVector256((Int16*)(_dataTable.inArray2Ptr)),
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector256<Int32>)(result));
-            ValidateResult(_dataTable.inArray0Ptr, _dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray0Ptr,
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunClsVarScenario()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = AvxVnni.MultiplyWideningAndAddSaturate(
-                _clsVar0,
-                _clsVar1,
-                _clsVar2
-            );
+            var result = AvxVnni.MultiplyWideningAndAddSaturate(_clsVar0, _clsVar1, _clsVar2);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_clsVar0, _clsVar1, _clsVar2, _dataTable.outArrayPtr);
@@ -353,7 +530,7 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunLclVarScenario_Load));
 
-            var first= Avx.LoadVector256((Int32*)(_dataTable.inArray0Ptr));
+            var first = Avx.LoadVector256((Int32*)(_dataTable.inArray0Ptr));
             var second = Avx.LoadVector256((Int16*)(_dataTable.inArray1Ptr));
             var third = Avx.LoadVector256((Int16*)(_dataTable.inArray2Ptr));
             var result = AvxVnni.MultiplyWideningAndAddSaturate(first, second, third);
@@ -436,7 +613,13 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
             }
         }
 
-        private void ValidateResult(Vector256<Int32> addend, Vector256<Int16> left, Vector256<Int16> right, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector256<Int32> addend,
+            Vector256<Int16> left,
+            Vector256<Int16> right,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Int32[] inArray0 = new Int32[Op0ElementCount];
             Int16[] inArray1 = new Int16[Op1ElementCount];
@@ -446,27 +629,59 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
             Unsafe.WriteUnaligned(ref Unsafe.As<Int32, byte>(ref inArray0[0]), addend);
             Unsafe.WriteUnaligned(ref Unsafe.As<Int16, byte>(ref inArray1[0]), left);
             Unsafe.WriteUnaligned(ref Unsafe.As<Int16, byte>(ref inArray2[0]), right);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int32, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector256<Int32>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int32, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector256<Int32>>()
+            );
 
             ValidateResult(inArray0, inArray1, inArray2, outArray, method);
         }
 
-        private void ValidateResult(void* addend, void* left, void* right, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            void* addend,
+            void* left,
+            void* right,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Int32[] inArray0 = new Int32[Op0ElementCount];
             Int16[] inArray1 = new Int16[Op1ElementCount];
             Int16[] inArray2 = new Int16[Op2ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int32, byte>(ref inArray0[0]), ref Unsafe.AsRef<byte>(addend), (uint)Unsafe.SizeOf<Vector256<Int32>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int16, byte>(ref inArray1[0]), ref Unsafe.AsRef<byte>(left), (uint)Unsafe.SizeOf<Vector256<Int16>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int16, byte>(ref inArray2[0]), ref Unsafe.AsRef<byte>(right), (uint)Unsafe.SizeOf<Vector256<Int16>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int32, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector256<Int32>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int32, byte>(ref inArray0[0]),
+                ref Unsafe.AsRef<byte>(addend),
+                (uint)Unsafe.SizeOf<Vector256<Int32>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int16, byte>(ref inArray1[0]),
+                ref Unsafe.AsRef<byte>(left),
+                (uint)Unsafe.SizeOf<Vector256<Int16>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int16, byte>(ref inArray2[0]),
+                ref Unsafe.AsRef<byte>(right),
+                (uint)Unsafe.SizeOf<Vector256<Int16>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int32, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector256<Int32>>()
+            );
 
             ValidateResult(inArray0, inArray1, inArray2, outArray, method);
         }
 
-        private void ValidateResult(Int32[] addend, Int16[] left, Int16[] right, Int32[] result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Int32[] addend,
+            Int16[] left,
+            Int16[] right,
+            Int32[] result,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -477,7 +692,7 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
                 int addend2 = right[i * 2 + 1] * left[i * 2 + 1] + right[i * 2] * left[i * 2];
                 int value = addend[i] + addend2;
                 int tmp = (value & ~(addend2 | addend[i])) < 0 ? int.MaxValue : value;
-                int c = (~value & (addend2 & addend[i])) < 0 ? int.MinValue: tmp;
+                int c = (~value & (addend2 & addend[i])) < 0 ? int.MinValue : tmp;
                 outArray[i] = c;
             }
 
@@ -492,12 +707,20 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(AvxVnni)}.{nameof(AvxVnni.MultiplyWideningAndAddSaturate)}<Int32>(Vector256<Int32>, Vector256<Int32>): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  addend: ({string.Join(", ", addend)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(AvxVnni)}.{nameof(AvxVnni.MultiplyWideningAndAddSaturate)}<Int32>(Vector256<Int32>, Vector256<Int32>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  addend: ({string.Join(", ", addend)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"  right: ({string.Join(", ", right)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
-                TestLibrary.TestFramework.LogInformation($"  valid: ({string.Join(", ", outArray)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  valid: ({string.Join(", ", outArray)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

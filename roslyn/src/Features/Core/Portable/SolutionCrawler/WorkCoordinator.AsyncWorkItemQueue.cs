@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     {
         internal partial class WorkCoordinator
         {
-            private abstract class AsyncWorkItemQueue<TKey>(SolutionCrawlerProgressReporter progressReporter, Workspace workspace) : IDisposable
+            private abstract class AsyncWorkItemQueue<TKey>(
+                SolutionCrawlerProgressReporter progressReporter,
+                Workspace workspace
+            ) : IDisposable
                 where TKey : class
             {
                 private readonly object _gate = new();
@@ -25,10 +28,12 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 private bool _disposed;
 
                 private readonly Workspace _workspace = workspace;
-                private readonly SolutionCrawlerProgressReporter _progressReporter = progressReporter;
+                private readonly SolutionCrawlerProgressReporter _progressReporter =
+                    progressReporter;
 
                 // map containing cancellation source for the item given out.
-                private readonly Dictionary<object, CancellationTokenSource> _cancellationMap = new();
+                private readonly Dictionary<object, CancellationTokenSource> _cancellationMap =
+                    new();
 
                 protected abstract int WorkItemCount_NoLock { get; }
 
@@ -38,7 +43,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                 protected abstract bool TryTake_NoLock(TKey key, out WorkItem workInfo);
 
-                protected abstract bool TryTakeAnyWork_NoLock(ProjectId? preferableProjectId, ProjectDependencyGraph dependencyGraph, out WorkItem workItem);
+                protected abstract bool TryTakeAnyWork_NoLock(
+                    ProjectId? preferableProjectId,
+                    ProjectDependencyGraph dependencyGraph,
+                    out WorkItem workItem
+                );
 
                 public int WorkItemCount
                 {
@@ -62,8 +71,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     }
                 }
 
-                public virtual Task WaitAsync(CancellationToken cancellationToken)
-                    => _semaphore.WaitAsync(cancellationToken);
+                public virtual Task WaitAsync(CancellationToken cancellationToken) =>
+                    _semaphore.WaitAsync(cancellationToken);
 
                 public bool AddOrReplace(WorkItem item)
                 {
@@ -82,19 +91,19 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             // the item is new item that got added to the queue.
                             // let solution crawler progress report to know about new item enqueued.
                             // progress reporter will take care of nested/overlapped works by itself
-                            // 
+                            //
                             // order of events is as follow
                             // 1. first item added by AddOrReplace which is the point where progress start.
                             // 2. bunch of other items added or replaced (workitem in the queue > 0)
                             // 3. items start dequeued to be processed by TryTake or TryTakeAnyWork
                             // 4. once item is done processed, it is marked as done by MarkWorkItemDoneFor
-                            // 5. all items in the queue are dequeued (workitem in the queue == 0) 
+                            // 5. all items in the queue are dequeued (workitem in the queue == 0)
                             //    but there can be still work in progress
                             // 6. all works are considered done when last item is marked done by MarkWorkItemDoneFor
                             //    and at the point, we will set progress to stop.
                             _progressReporter.Start();
 
-                            // increase count 
+                            // increase count
                             _semaphore.Release();
                             return true;
                         }
@@ -151,7 +160,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                 protected Workspace Workspace => _workspace;
 
-                private static void RaiseCancellation_NoLock(List<CancellationTokenSource>? cancellations)
+                private static void RaiseCancellation_NoLock(
+                    List<CancellationTokenSource>? cancellations
+                )
                 {
                     if (cancellations == null)
                     {
@@ -188,7 +199,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     }
                 }
 
-                public bool TryTake(TKey key, out WorkItem workInfo, out CancellationToken cancellationToken)
+                public bool TryTake(
+                    TKey key,
+                    out WorkItem workInfo,
+                    out CancellationToken cancellationToken
+                )
                 {
                     lock (_gate)
                     {
@@ -210,12 +225,19 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     ProjectId? preferableProjectId,
                     ProjectDependencyGraph dependencyGraph,
                     out WorkItem workItem,
-                    out CancellationToken cancellationToken)
+                    out CancellationToken cancellationToken
+                )
                 {
                     lock (_gate)
                     {
                         // there must be at least one item in the map when this is called unless host is shutting down.
-                        if (TryTakeAnyWork_NoLock(preferableProjectId, dependencyGraph, out workItem))
+                        if (
+                            TryTakeAnyWork_NoLock(
+                                preferableProjectId,
+                                dependencyGraph,
+                                out workItem
+                            )
+                        )
                         {
                             cancellationToken = GetNewCancellationToken_NoLock(workItem.Key);
                             workItem.AsyncToken.Dispose();
@@ -240,8 +262,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 }
 
                 protected static ProjectId GetBestProjectId_NoLock<T>(
-                    Dictionary<ProjectId, T> workQueue, ProjectId? projectId,
-                    ProjectDependencyGraph dependencyGraph)
+                    Dictionary<ProjectId, T> workQueue,
+                    ProjectId? projectId,
+                    ProjectDependencyGraph dependencyGraph
+                )
                 {
                     if (projectId != null)
                     {
@@ -252,7 +276,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                         // prefer project that directly depends on the given project as next project to
                         // process
-                        foreach (var dependingProjectId in dependencyGraph.GetProjectsThatDirectlyDependOnThisProject(projectId))
+                        foreach (
+                            var dependingProjectId in dependencyGraph.GetProjectsThatDirectlyDependOnThisProject(
+                                projectId
+                            )
+                        )
                         {
                             if (workQueue.ContainsKey(dependingProjectId))
                             {

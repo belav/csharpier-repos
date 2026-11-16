@@ -79,7 +79,14 @@ namespace System
         //
 
         //Remark: MUST NOT be used unless all input indexes are verified and trusted.
-        internal static unsafe bool IsValid(char* name, int start, ref int end, bool allowIPv6, bool notImplicitFile, bool unknownScheme)
+        internal static unsafe bool IsValid(
+            char* name,
+            int start,
+            ref int end,
+            bool allowIPv6,
+            bool notImplicitFile,
+            bool unknownScheme
+        )
         {
             // IPv6 can only have canonical IPv4 embedded. Unknown schemes will not attempt parsing of non-canonical IPv4 addresses.
             if (allowIPv6 || unknownScheme)
@@ -105,7 +112,13 @@ namespace System
         //                 / "2" %x30-34 DIGIT     ; 200-249
         //                 / "25" %x30-35          ; 250-255
         //
-        internal static unsafe bool IsValidCanonical(char* name, int start, ref int end, bool allowIPv6, bool notImplicitFile)
+        internal static unsafe bool IsValidCanonical(
+            char* name,
+            int start,
+            ref int end,
+            bool allowIPv6,
+            bool notImplicitFile
+        )
         {
             int dots = 0;
             int number = 0;
@@ -121,7 +134,11 @@ namespace System
                     if (ch == ']' || ch == '/' || ch == '%')
                         break;
                 }
-                else if (ch == '/' || ch == '\\' || (notImplicitFile && (ch == ':' || ch == '?' || ch == '#')))
+                else if (
+                    ch == '/'
+                    || ch == '\\'
+                    || (notImplicitFile && (ch == ':' || ch == '?' || ch == '#'))
+                )
                 {
                     break;
                 }
@@ -176,7 +193,12 @@ namespace System
         // Return Invalid (-1) for failures.
         // If the address has less than three dots, only the rightmost section is assumed to contain the combined value for
         // the missing sections: 0xFF00FFFF == 0xFF.0x00.0xFF.0xFF == 0xFF.0xFFFF
-        internal static unsafe long ParseNonCanonical(char* name, int start, ref int end, bool notImplicitFile)
+        internal static unsafe long ParseNonCanonical(
+            char* name,
+            int start,
+            ref int end,
+            bool notImplicitFile
+        )
         {
             int numberBase = Decimal;
             char ch;
@@ -250,10 +272,12 @@ namespace System
 
                 if (current < end && name[current] == '.')
                 {
-                    if (dotCount >= 3 // Max of 3 dots and 4 segments
+                    if (
+                        dotCount >= 3 // Max of 3 dots and 4 segments
                         || !atLeastOneChar // No empty segmets: 1...1
-                                           // Only the last segment can be more than 255 (if there are less than 3 dots)
-                        || currentValue > 0xFF)
+                        // Only the last segment can be more than 255 (if there are less than 3 dots)
+                        || currentValue > 0xFF
+                    )
                     {
                         return Invalid;
                     }
@@ -269,13 +293,17 @@ namespace System
             // Terminators
             if (!atLeastOneChar)
             {
-                return Invalid;  // Empty trailing segment: 1.1.1.
+                return Invalid; // Empty trailing segment: 1.1.1.
             }
             else if (current >= end)
             {
                 // end of string, allowed
             }
-            else if ((ch = name[current]) == '/' || ch == '\\' || (notImplicitFile && (ch == ':' || ch == '?' || ch == '#')))
+            else if (
+                (ch = name[current]) == '/'
+                || ch == '\\'
+                || (notImplicitFile && (ch == ':' || ch == '?' || ch == '#'))
+            )
             {
                 end = current;
             }
@@ -313,7 +341,10 @@ namespace System
                     {
                         return Invalid;
                     }
-                    return (parts[0] << 24) | ((parts[1] & 0xff) << 16) | ((parts[2] & 0xff) << 8) | (parts[3] & 0xff);
+                    return (parts[0] << 24)
+                        | ((parts[1] & 0xff) << 16)
+                        | ((parts[2] & 0xff) << 8)
+                        | (parts[3] & 0xff);
                 default:
                     return Invalid;
             }

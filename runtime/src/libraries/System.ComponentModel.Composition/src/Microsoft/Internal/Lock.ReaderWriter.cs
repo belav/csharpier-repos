@@ -8,8 +8,11 @@ namespace Microsoft.Internal
 {
     internal sealed class ReadWriteLock : IDisposable
     {
-        private readonly ReaderWriterLockSlim _thisLock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
+        private readonly ReaderWriterLockSlim _thisLock = new ReaderWriterLockSlim(
+            LockRecursionPolicy.NoRecursion
+        );
         private int _isDisposed;
+
         public void EnterReadLock()
         {
             _thisLock.EnterReadLock();

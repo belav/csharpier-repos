@@ -14,35 +14,28 @@ namespace System.CommandLine.Tests.Invocation
         [Fact]
         public async Task When_option_is_mistyped_it_is_suggested()
         {
-            CliRootCommand rootCommand = new () 
-            {
-                new CliOption<string>("info")
-            };
+            CliRootCommand rootCommand = new() { new CliOption<string>("info") };
 
-            CliConfiguration config = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration config = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse("niof", config);
 
             await result.InvokeAsync();
 
-            config.Output.ToString().Should().Contain($"'niof' was not matched. Did you mean one of the following?{NewLine}info");
+            config
+                .Output.ToString()
+                .Should()
+                .Contain(
+                    $"'niof' was not matched. Did you mean one of the following?{NewLine}info"
+                );
         }
 
         [Fact]
         public async Task Typo_corrections_can_be_disabled()
         {
-            CliRootCommand rootCommand = new()
-            {
-                new CliOption<string>("info")
-            };
+            CliRootCommand rootCommand = new() { new CliOption<string>("info") };
 
-            CliConfiguration config = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration config = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse("niof", config);
 
@@ -62,10 +55,7 @@ namespace System.CommandLine.Tests.Invocation
             var option = new CliOption<bool>("info");
             CliRootCommand rootCommand = new() { option };
 
-            CliConfiguration configuration = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse("zzzzzzz", configuration);
 
@@ -80,16 +70,18 @@ namespace System.CommandLine.Tests.Invocation
             var command = new CliCommand("restore");
             CliRootCommand rootCommand = new() { command };
 
-            CliConfiguration configuration = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse("sertor", configuration);
 
             await result.InvokeAsync();
 
-            configuration.Output.ToString().Should().Contain($"'sertor' was not matched. Did you mean one of the following?{NewLine}restore");
+            configuration
+                .Output.ToString()
+                .Should()
+                .Contain(
+                    $"'sertor' was not matched. Did you mean one of the following?{NewLine}restore"
+                );
         }
 
         [Fact]
@@ -99,23 +91,19 @@ namespace System.CommandLine.Tests.Invocation
             var seenCommand = new CliCommand("seen");
             var aOption = new CliOption<bool>("a");
             var beenOption = new CliOption<bool>("been");
-            CliRootCommand rootCommand = new ()
-            {
-                fromCommand,
-                seenCommand,
-                aOption,
-                beenOption
-            };
-            CliConfiguration configuration = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliRootCommand rootCommand = new() { fromCommand, seenCommand, aOption, beenOption };
+            CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse("een", configuration);
 
             await result.InvokeAsync();
 
-            configuration.Output.ToString().Should().Contain($"'een' was not matched. Did you mean one of the following?{NewLine}seen{NewLine}been");
+            configuration
+                .Output.ToString()
+                .Should()
+                .Contain(
+                    $"'een' was not matched. Did you mean one of the following?{NewLine}seen{NewLine}been"
+                );
         }
 
         [Fact]
@@ -128,19 +116,19 @@ namespace System.CommandLine.Tests.Invocation
             {
                 fromCommand,
                 seenCommand,
-                beenCommand
+                beenCommand,
             };
 
-            CliConfiguration configuration = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse("een", configuration);
 
             await result.InvokeAsync();
 
-            configuration.Output.ToString().Should().Contain($"'een' was not matched. Did you mean one of the following?{NewLine}been");
+            configuration
+                .Output.ToString()
+                .Should()
+                .Contain($"'een' was not matched. Did you mean one of the following?{NewLine}been");
         }
 
         [Fact]
@@ -148,23 +136,16 @@ namespace System.CommandLine.Tests.Invocation
         {
             var argument = new CliArgument<string>("the-argument");
             var command = new CliCommand("been");
-            var rootCommand = new CliRootCommand
-            {
-                argument,
-                command
-            };
+            var rootCommand = new CliRootCommand { argument, command };
 
-            CliConfiguration configuration = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse("een", configuration);
 
             var parseErrorAction = (ParseErrorAction)result.Action;
             parseErrorAction.ShowHelp = false;
             parseErrorAction.ShowTypoCorrections = true;
-            
+
             await result.InvokeAsync();
 
             configuration.Output.ToString().Should().NotContain("the-argument");
@@ -176,22 +157,17 @@ namespace System.CommandLine.Tests.Invocation
             var fromOption = new CliOption<string>("from");
             var seenOption = new CliOption<string>("seen") { Hidden = true };
             var beenOption = new CliOption<string>("been");
-            var rootCommand = new CliRootCommand
-            {
-                fromOption,
-                seenOption,
-                beenOption
-            };
-            CliConfiguration config = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            var rootCommand = new CliRootCommand { fromOption, seenOption, beenOption };
+            CliConfiguration config = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse("een", config);
 
             await result.InvokeAsync();
 
-            config.Output.ToString().Should().Contain($"'een' was not matched. Did you mean one of the following?{NewLine}been");
+            config
+                .Output.ToString()
+                .Should()
+                .Contain($"'een' was not matched. Did you mean one of the following?{NewLine}been");
         }
 
         [Fact]
@@ -200,17 +176,19 @@ namespace System.CommandLine.Tests.Invocation
             var rootCommand = new CliRootCommand
             {
                 new CliOption<string>("/call", "-call", "--call"),
-                new CliOption<string>("/email", "-email", "--email")
+                new CliOption<string>("/email", "-email", "--email"),
             };
-            CliConfiguration config = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration config = new(rootCommand) { Output = new StringWriter() };
             var result = rootCommand.Parse("-all", config);
 
             await result.InvokeAsync();
 
-            config.Output.ToString().Should().Contain($"'-all' was not matched. Did you mean one of the following?{NewLine}-call");
+            config
+                .Output.ToString()
+                .Should()
+                .Contain(
+                    $"'-all' was not matched. Did you mean one of the following?{NewLine}-call"
+                );
         }
     }
 }

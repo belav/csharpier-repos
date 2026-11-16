@@ -58,7 +58,8 @@ namespace System.Formats.Asn1
             out int contentOffset,
             out int contentLength,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = default)
+            Asn1Tag? expectedTag = default
+        )
         {
             Asn1Tag tag = ReadTagAndLength(source, ruleSet, out int? length, out int headerLength);
             CheckExpectedTag(tag, expectedTag ?? Asn1Tag.Sequence, UniversalTagNumber.Sequence);
@@ -70,7 +71,9 @@ namespace System.Formats.Asn1
                 throw new AsnContentException(
                     SR.Format(
                         SR.ContentException_ConstructedEncodingRequired,
-                        UniversalTagNumber.Sequence));
+                        UniversalTagNumber.Sequence
+                    )
+                );
             }
 
             if (length.HasValue)
@@ -138,7 +141,8 @@ namespace System.Formats.Asn1
                 out int contentStart,
                 out int contentLength,
                 out int bytesConsumed,
-                expectedTag);
+                expectedTag
+            );
 
             AsnReader ret = CloneAtSlice(contentStart, contentLength);
             _data = _data.Slice(bytesConsumed);

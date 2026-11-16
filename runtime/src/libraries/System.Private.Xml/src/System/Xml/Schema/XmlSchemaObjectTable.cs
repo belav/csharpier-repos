@@ -9,16 +9,18 @@ namespace System.Xml.Schema
 {
     public class XmlSchemaObjectTable
     {
-        private readonly Dictionary<XmlQualifiedName, XmlSchemaObject> _table = new Dictionary<XmlQualifiedName, XmlSchemaObject>();
+        private readonly Dictionary<XmlQualifiedName, XmlSchemaObject> _table =
+            new Dictionary<XmlQualifiedName, XmlSchemaObject>();
         private readonly List<XmlSchemaObjectEntry> _entries = new List<XmlSchemaObjectEntry>();
 
-        internal XmlSchemaObjectTable()
-        {
-        }
+        internal XmlSchemaObjectTable() { }
 
         internal void Add(XmlQualifiedName name, XmlSchemaObject value)
         {
-            Debug.Assert(!_table.ContainsKey(name), "XmlSchemaObjectTable.Add: entry already exists");
+            Debug.Assert(
+                !_table.ContainsKey(name),
+                "XmlSchemaObjectTable.Add: entry already exists"
+            );
             _table.Add(name, value);
             _entries.Add(new XmlSchemaObjectEntry(name, value));
         }
@@ -116,23 +118,21 @@ namespace System.Xml.Schema
 
         public ICollection Names
         {
-            get
-            {
-                return new NamesCollection(_entries, _table.Count);
-            }
+            get { return new NamesCollection(_entries, _table.Count); }
         }
 
         public ICollection Values
         {
-            get
-            {
-                return new ValuesCollection(_entries, _table.Count);
-            }
+            get { return new ValuesCollection(_entries, _table.Count); }
         }
 
         public IDictionaryEnumerator GetEnumerator()
         {
-            return new XSODictionaryEnumerator(_entries, _table.Count, EnumeratorType.DictionaryEntry);
+            return new XSODictionaryEnumerator(
+                _entries,
+                _table.Count,
+                EnumeratorType.DictionaryEntry
+            );
         }
 
         internal enum EnumeratorType
@@ -172,18 +172,12 @@ namespace System.Xml.Schema
 
             public object SyncRoot
             {
-                get
-                {
-                    return ((ICollection)_entries).SyncRoot;
-                }
+                get { return ((ICollection)_entries).SyncRoot; }
             }
 
             public bool IsSynchronized
             {
-                get
-                {
-                    return ((ICollection)_entries).IsSynchronized;
-                }
+                get { return ((ICollection)_entries).IsSynchronized; }
             }
 
             public void CopyTo(Array array, int arrayIndex)
@@ -192,7 +186,10 @@ namespace System.Xml.Schema
 
                 ArgumentOutOfRangeException.ThrowIfNegative(arrayIndex);
 
-                Debug.Assert(array.Length >= _size, "array is not big enough to hold all the items in the ICollection");
+                Debug.Assert(
+                    array.Length >= _size,
+                    "array is not big enough to hold all the items in the ICollection"
+                );
 
                 for (int i = 0; i < _size; i++)
                 {
@@ -225,18 +222,12 @@ namespace System.Xml.Schema
 
             public object SyncRoot
             {
-                get
-                {
-                    return ((ICollection)_entries).SyncRoot;
-                }
+                get { return ((ICollection)_entries).SyncRoot; }
             }
 
             public bool IsSynchronized
             {
-                get
-                {
-                    return ((ICollection)_entries).IsSynchronized;
-                }
+                get { return ((ICollection)_entries).IsSynchronized; }
             }
 
             public void CopyTo(Array array, int arrayIndex)
@@ -245,7 +236,10 @@ namespace System.Xml.Schema
 
                 ArgumentOutOfRangeException.ThrowIfNegative(arrayIndex);
 
-                Debug.Assert(array.Length >= _size, "array is not big enough to hold all the items in the ICollection");
+                Debug.Assert(
+                    array.Length >= _size,
+                    "array is not big enough to hold all the items in the ICollection"
+                );
 
                 for (int i = 0; i < _size; i++)
                 {
@@ -269,8 +263,11 @@ namespace System.Xml.Schema
             protected XmlQualifiedName? currentKey;
             protected XmlSchemaObject? currentValue;
 
-
-            internal XSOEnumerator(List<XmlSchemaObjectEntry> entries, int size, EnumeratorType enumType)
+            internal XSOEnumerator(
+                List<XmlSchemaObjectEntry> entries,
+                int size,
+                EnumeratorType enumType
+            )
             {
                 _entries = entries;
                 this.size = size;
@@ -284,11 +281,15 @@ namespace System.Xml.Schema
                 {
                     if (currentIndex == -1)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.Sch_EnumNotStarted, string.Empty));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.Sch_EnumNotStarted, string.Empty)
+                        );
                     }
                     if (currentIndex >= size)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.Sch_EnumFinished, string.Empty));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.Sch_EnumFinished, string.Empty)
+                        );
                     }
                     switch (_enumType)
                     {
@@ -332,9 +333,12 @@ namespace System.Xml.Schema
 
         internal sealed class XSODictionaryEnumerator : XSOEnumerator, IDictionaryEnumerator
         {
-            internal XSODictionaryEnumerator(List<XmlSchemaObjectEntry> entries, int size, EnumeratorType enumType) : base(entries, size, enumType)
-            {
-            }
+            internal XSODictionaryEnumerator(
+                List<XmlSchemaObjectEntry> entries,
+                int size,
+                EnumeratorType enumType
+            )
+                : base(entries, size, enumType) { }
 
             //IDictionaryEnumerator members
             public DictionaryEntry Entry
@@ -343,11 +347,15 @@ namespace System.Xml.Schema
                 {
                     if (currentIndex == -1)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.Sch_EnumNotStarted, string.Empty));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.Sch_EnumNotStarted, string.Empty)
+                        );
                     }
                     if (currentIndex >= size)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.Sch_EnumFinished, string.Empty));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.Sch_EnumFinished, string.Empty)
+                        );
                     }
                     return new DictionaryEntry(currentKey!, currentValue);
                 }
@@ -359,11 +367,15 @@ namespace System.Xml.Schema
                 {
                     if (currentIndex == -1)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.Sch_EnumNotStarted, string.Empty));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.Sch_EnumNotStarted, string.Empty)
+                        );
                     }
                     if (currentIndex >= size)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.Sch_EnumFinished, string.Empty));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.Sch_EnumFinished, string.Empty)
+                        );
                     }
                     return currentKey!;
                 }
@@ -375,11 +387,15 @@ namespace System.Xml.Schema
                 {
                     if (currentIndex == -1)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.Sch_EnumNotStarted, string.Empty));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.Sch_EnumNotStarted, string.Empty)
+                        );
                     }
                     if (currentIndex >= size)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.Sch_EnumFinished, string.Empty));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.Sch_EnumFinished, string.Empty)
+                        );
                     }
                     return currentValue;
                 }

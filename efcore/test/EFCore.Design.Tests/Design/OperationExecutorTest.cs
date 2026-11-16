@@ -11,7 +11,9 @@ public class OperationExecutorTest
         var ex = Assert.Throws<ArgumentNullException>(() => new OperationExecutor(null, null));
         Assert.Equal("reportHandler", ex.ParamName);
 
-        ex = Assert.Throws<ArgumentNullException>(() => new OperationExecutor(new OperationReportHandler(), null));
+        ex = Assert.Throws<ArgumentNullException>(() =>
+            new OperationExecutor(new OperationReportHandler(), null)
+        );
         Assert.Equal("args", ex.ParamName);
     }
 

@@ -66,7 +66,8 @@ namespace System.Reflection.PortableExecutable
         public ImmutableArray<byte> GetContent(int start, int length)
         {
             BlobUtilities.ValidateRange(Length, start, length, nameof(length));
-            return _block?.GetContentUnchecked(_offset + start, length) ?? ImmutableArray<byte>.Empty;
+            return _block?.GetContentUnchecked(_offset + start, length)
+                ?? ImmutableArray<byte>.Empty;
         }
     }
 }

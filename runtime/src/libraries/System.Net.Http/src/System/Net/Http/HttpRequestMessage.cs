@@ -13,7 +13,8 @@ namespace System.Net.Http
     public class HttpRequestMessage : IDisposable
     {
         internal static Version DefaultRequestVersion => HttpVersion.Version11;
-        internal static HttpVersionPolicy DefaultVersionPolicy => HttpVersionPolicy.RequestVersionOrLower;
+        internal static HttpVersionPolicy DefaultVersionPolicy =>
+            HttpVersionPolicy.RequestVersionOrLower;
 
         private const int MessageNotYetSent = 0;
         private const int MessageAlreadySent = 1;
@@ -117,9 +118,7 @@ namespace System.Net.Http
         public HttpRequestOptions Options => _options ??= new HttpRequestOptions();
 
         public HttpRequestMessage()
-            : this(HttpMethod.Get, (Uri?)null)
-        {
-        }
+            : this(HttpMethod.Get, (Uri?)null) { }
 
         public HttpRequestMessage(HttpMethod method, Uri? requestUri)
         {
@@ -134,10 +133,16 @@ namespace System.Net.Http
             _versionPolicy = DefaultVersionPolicy;
         }
 
-        public HttpRequestMessage(HttpMethod method, [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri)
-            : this(method, string.IsNullOrEmpty(requestUri) ? null : new Uri(requestUri, UriKind.RelativeOrAbsolute))
-        {
-        }
+        public HttpRequestMessage(
+            HttpMethod method,
+            [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri
+        )
+            : this(
+                method,
+                string.IsNullOrEmpty(requestUri)
+                    ? null
+                    : new Uri(requestUri, UriKind.RelativeOrAbsolute)
+            ) { }
 
         public override string ToString()
         {
@@ -168,7 +173,9 @@ namespace System.Net.Http
             return sb.ToString();
         }
 
-        internal bool MarkAsSent() => Interlocked.CompareExchange(ref _sendStatus, MessageAlreadySent, MessageNotYetSent) == MessageNotYetSent;
+        internal bool MarkAsSent() =>
+            Interlocked.CompareExchange(ref _sendStatus, MessageAlreadySent, MessageNotYetSent)
+            == MessageNotYetSent;
 
         internal bool WasSentByHttpClient() => (_sendStatus & MessageAlreadySent) != 0;
 
@@ -186,7 +193,8 @@ namespace System.Net.Http
             }
         }
 
-        internal bool IsExtendedConnectRequest => Method == HttpMethod.Connect && _headers?.Protocol != null;
+        internal bool IsExtendedConnectRequest =>
+            Method == HttpMethod.Connect && _headers?.Protocol != null;
 
         #region IDisposable Members
 

@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,24 +34,26 @@ using System.Threading;
 
 namespace System.Runtime.Remoting.Messaging
 {
-	[Serializable]
-	internal class EnvoyTerminatorSink: IMessageSink
-	{
-		public static EnvoyTerminatorSink Instance = new EnvoyTerminatorSink();
+    [Serializable]
+    internal class EnvoyTerminatorSink : IMessageSink
+    {
+        public static EnvoyTerminatorSink Instance = new EnvoyTerminatorSink();
 
-		public IMessage SyncProcessMessage (IMessage msg)
-		{
-			return Thread.CurrentContext.GetClientContextSinkChain ().SyncProcessMessage (msg);
-		}
+        public IMessage SyncProcessMessage(IMessage msg)
+        {
+            return Thread.CurrentContext.GetClientContextSinkChain().SyncProcessMessage(msg);
+        }
 
-		public IMessageCtrl AsyncProcessMessage (IMessage msg, IMessageSink replySink)
-		{
-			return Thread.CurrentContext.GetClientContextSinkChain ().AsyncProcessMessage (msg, replySink);
-		}
+        public IMessageCtrl AsyncProcessMessage(IMessage msg, IMessageSink replySink)
+        {
+            return Thread
+                .CurrentContext.GetClientContextSinkChain()
+                .AsyncProcessMessage(msg, replySink);
+        }
 
-		public IMessageSink NextSink 
-		{ 
-			get { return null; }
-		}
-	}
+        public IMessageSink NextSink
+        {
+            get { return null; }
+        }
+    }
 }

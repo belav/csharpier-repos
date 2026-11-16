@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,33 +31,33 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel
 {
-	public sealed class HttpTransportSecurity
-	{
-		HttpClientCredentialType client;
-		HttpProxyCredentialType proxy;
-		string realm = String.Empty;
+    public sealed class HttpTransportSecurity
+    {
+        HttpClientCredentialType client;
+        HttpProxyCredentialType proxy;
+        string realm = String.Empty;
 
-		public
-		HttpTransportSecurity ()
-		{
-		}
+        public HttpTransportSecurity() { }
 
-		public HttpClientCredentialType ClientCredentialType {
-			get { return client; }
-			set { client = value; }
-		}
+        public HttpClientCredentialType ClientCredentialType
+        {
+            get { return client; }
+            set { client = value; }
+        }
 
-		public HttpProxyCredentialType ProxyCredentialType {
-			get { return proxy; }
-			set { proxy = value; }
-		}
+        public HttpProxyCredentialType ProxyCredentialType
+        {
+            get { return proxy; }
+            set { proxy = value; }
+        }
 
-		public string Realm {
-			get { return realm; }
-			set { realm = value; }
-		}
+        public string Realm
+        {
+            get { return realm; }
+            set { realm = value; }
+        }
 
-		[MonoTODO]
-		public ExtendedProtectionPolicy ExtendedProtectionPolicy { get; set; }
-	}
+        [MonoTODO]
+        public ExtendedProtectionPolicy ExtendedProtectionPolicy { get; set; }
+    }
 }

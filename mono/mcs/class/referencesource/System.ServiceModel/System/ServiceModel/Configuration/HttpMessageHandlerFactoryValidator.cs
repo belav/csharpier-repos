@@ -16,10 +16,24 @@ namespace System.ServiceModel.Configuration
 
         public override void Validate(object value)
         {
-            HttpMessageHandlerFactoryElement configElement = (HttpMessageHandlerFactoryElement)value;
-            if (!string.IsNullOrWhiteSpace(configElement.Type) && configElement.Handlers != null && configElement.Handlers.Count > 0)
+            HttpMessageHandlerFactoryElement configElement =
+                (HttpMessageHandlerFactoryElement)value;
+            if (
+                !string.IsNullOrWhiteSpace(configElement.Type)
+                && configElement.Handlers != null
+                && configElement.Handlers.Count > 0
+            )
             {
-                throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR.GetString(SR.HttpMessageHandlerFactoryConfigInvalid_WithBothTypeAndHandlerList, ConfigurationStrings.MessageHandlerFactory, ConfigurationStrings.Type, ConfigurationStrings.Handlers)));
+                throw FxTrace.Exception.AsError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.HttpMessageHandlerFactoryConfigInvalid_WithBothTypeAndHandlerList,
+                            ConfigurationStrings.MessageHandlerFactory,
+                            ConfigurationStrings.Type,
+                            ConfigurationStrings.Handlers
+                        )
+                    )
+                );
             }
         }
     }

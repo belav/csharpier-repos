@@ -48,7 +48,8 @@ public sealed record RelationalDatabaseDependencies
     public RelationalDatabaseDependencies(
         ICommandBatchPreparer batchPreparer,
         IBatchExecutor batchExecutor,
-        IRelationalConnection connection)
+        IRelationalConnection connection
+    )
     {
         BatchPreparer = batchPreparer;
         BatchExecutor = batchExecutor;

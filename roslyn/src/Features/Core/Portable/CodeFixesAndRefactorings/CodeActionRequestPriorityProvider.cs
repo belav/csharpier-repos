@@ -38,7 +38,10 @@ namespace Microsoft.CodeAnalysis.CodeActions
         /// optimization for lightbulb diagnostic computation, wherein we can reduce the set of analyzers to be executed
         /// when computing fixes for a specific <see cref="ICodeActionRequestPriorityProvider.Priority"/>.
         /// </summary>
-        public static bool MatchesPriority(this ICodeActionRequestPriorityProvider provider, DiagnosticAnalyzer analyzer)
+        public static bool MatchesPriority(
+            this ICodeActionRequestPriorityProvider provider,
+            DiagnosticAnalyzer analyzer
+        )
         {
             var priority = provider.Priority;
 
@@ -58,8 +61,10 @@ namespace Microsoft.CodeAnalysis.CodeActions
 
             // Check if we are computing diagnostics for 'CodeActionRequestPriority.Low' and
             // this analyzer was de-prioritized to low priority bucket.
-            if (priority == CodeActionRequestPriority.Low &&
-                provider.IsDeprioritizedAnalyzerWithLowPriority(analyzer))
+            if (
+                priority == CodeActionRequestPriority.Low
+                && provider.IsDeprioritizedAnalyzerWithLowPriority(analyzer)
+            )
             {
                 return true;
             }
@@ -78,7 +83,10 @@ namespace Microsoft.CodeAnalysis.CodeActions
         /// Returns true if the given <paramref name="codeFixProvider"/> should be considered a candidate when computing
         /// fixes for the given <see cref="ICodeActionRequestPriorityProvider.Priority"/>.
         /// </summary>
-        public static bool MatchesPriority(this ICodeActionRequestPriorityProvider provider, CodeFixProvider codeFixProvider)
+        public static bool MatchesPriority(
+            this ICodeActionRequestPriorityProvider provider,
+            CodeFixProvider codeFixProvider
+        )
         {
             if (provider.Priority == null)
             {
@@ -101,7 +109,9 @@ namespace Microsoft.CodeAnalysis.CodeActions
         }
     }
 
-    internal sealed class DefaultCodeActionRequestPriorityProvider(CodeActionRequestPriority? priority = null) : ICodeActionRequestPriorityProvider
+    internal sealed class DefaultCodeActionRequestPriorityProvider(
+        CodeActionRequestPriority? priority = null
+    ) : ICodeActionRequestPriorityProvider
     {
         private readonly object _gate = new();
         private HashSet<DiagnosticAnalyzer>? _lowPriorityAnalyzers;

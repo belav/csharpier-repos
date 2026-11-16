@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="StylesEditorDialog.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -12,62 +12,61 @@ namespace System.Web.UI.Design.MobileControls
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using System.Globalization;
     using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Design;
+    using System.Globalization;
     using System.Reflection;
-    using System.Windows.Forms;
-    using System.Windows.Forms.Design;
     using System.Web.UI;
-    using System.Web.UI.MobileControls;
     using System.Web.UI.Design.MobileControls.Adapters;
     using System.Web.UI.Design.MobileControls.Util;
-
+    using System.Web.UI.MobileControls;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
     using AttributeCollection = System.ComponentModel.AttributeCollection;
-    using Control   = System.Windows.Forms.Control;
+    using Button = System.Windows.Forms.Button;
+    using Control = System.Windows.Forms.Control;
+    using FontSize = System.Web.UI.MobileControls.FontSize;
+    using Label = System.Windows.Forms.Label;
+    using ListBox = System.Windows.Forms.ListBox;
+    using ListView = System.Windows.Forms.ListView;
+    using Style = System.Web.UI.MobileControls.Style;
+    using TextBox = System.Windows.Forms.TextBox;
 
-    using Button    = System.Windows.Forms.Button;
-    using Label     = System.Windows.Forms.Label;
-    using TextBox   = System.Windows.Forms.TextBox;
-    using ListView  = System.Windows.Forms.ListView;
-    using ListBox   = System.Windows.Forms.ListBox;
-
-    using FontSize  = System.Web.UI.MobileControls.FontSize;
-    using Style     = System.Web.UI.MobileControls.Style;
-
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal sealed class StylesEditorDialog : DesignerForm
     {
-        private StyleSheet         _styleSheet;
-        private StyleSheet         _tempStyleSheet;
+        private StyleSheet _styleSheet;
+        private StyleSheet _tempStyleSheet;
         private StyleSheetDesigner _styleSheetDesigner;
-        private Style              _previewStyle;
-        private Type               _currentNewStyleType;
-        private bool               _firstActivate = true;
+        private Style _previewStyle;
+        private Type _currentNewStyleType;
+        private bool _firstActivate = true;
 
-        private Button             _btnOK;
-        private Button             _btnCancel;
-        private Button             _btnUp;
-        private Button             _btnDown;
-        private Button             _btnAdd;
-        private Button             _btnRemove;
-        private TextBox            _txtType;
-        private TreeView           _tvDefinedStyles;
-        private ListView           _lvAvailableStyles;
-        private PropertyGrid       _propertyBrowser;
-        private MSHTMLHost         _samplePreview;
-        private ContextMenu        _cntxtMenu;
-        private MenuItem           _cntxtMenuItem;
-        private TreeNode           _editCandidateNode = null;
+        private Button _btnOK;
+        private Button _btnCancel;
+        private Button _btnUp;
+        private Button _btnDown;
+        private Button _btnAdd;
+        private Button _btnRemove;
+        private TextBox _txtType;
+        private TreeView _tvDefinedStyles;
+        private ListView _lvAvailableStyles;
+        private PropertyGrid _propertyBrowser;
+        private MSHTMLHost _samplePreview;
+        private ContextMenu _cntxtMenu;
+        private MenuItem _cntxtMenuItem;
+        private TreeNode _editCandidateNode = null;
 
         private StyleNode SelectedStyle
         {
-            get 
+            get
             {
                 Debug.Assert(_tvDefinedStyles != null);
                 return _tvDefinedStyles.SelectedNode as StyleNode;
@@ -79,7 +78,8 @@ namespace System.Web.UI.Design.MobileControls
             }
         }
 
-        protected override string HelpTopic {
+        protected override string HelpTopic
+        {
             get { return "net.Mobile.StylesEditorDialog"; }
         }
 
@@ -87,11 +87,14 @@ namespace System.Web.UI.Design.MobileControls
         ///    Create a new StylesEditorDialog instance
         /// </summary>
         /// <internalonly/>
-        internal StylesEditorDialog(StyleSheet stylesheet, 
+        internal StylesEditorDialog(
+            StyleSheet stylesheet,
             StyleSheetDesigner styleSheetDesigner,
-            String initialStyleName) : base (stylesheet.Site)
+            String initialStyleName
+        )
+            : base(stylesheet.Site)
         {
-            if(stylesheet.DuplicateStyles.Count > 0)
+            if (stylesheet.DuplicateStyles.Count > 0)
             {
                 GenericUI.ShowErrorMessage(
                     SR.GetString(SR.StylesEditorDialog_Title),
@@ -101,11 +104,11 @@ namespace System.Web.UI.Design.MobileControls
                     SR.GetString(SR.StylesEditorDialog_DuplicateStyleException)
                 );
             }
-        
-            _tempStyleSheet = new StyleSheet();
-            _previewStyle   = new Style();
 
-            _styleSheet         = stylesheet;
+            _tempStyleSheet = new StyleSheet();
+            _previewStyle = new Style();
+
+            _styleSheet = stylesheet;
             _styleSheetDesigner = styleSheetDesigner;
 
             _tempStyleSheet.Site = _styleSheet.Site;
@@ -134,7 +137,7 @@ namespace System.Web.UI.Design.MobileControls
 
         protected override void Dispose(bool disposing)
         {
-            if(disposing)
+            if (disposing)
             {
                 if (_tvDefinedStyles != null)
                 {
@@ -150,20 +153,20 @@ namespace System.Web.UI.Design.MobileControls
 
         private void InitializeComponent()
         {
-            _btnOK             = new Button();
-            _btnCancel         = new Button();
-            _btnUp             = new Button();
-            _btnDown           = new Button();
-            _btnAdd            = new Button();
-            _btnRemove         = new Button();
+            _btnOK = new Button();
+            _btnCancel = new Button();
+            _btnUp = new Button();
+            _btnDown = new Button();
+            _btnAdd = new Button();
+            _btnRemove = new Button();
 
-            _txtType           = new TextBox();
-            _tvDefinedStyles   = new TreeView();
+            _txtType = new TextBox();
+            _tvDefinedStyles = new TreeView();
             _lvAvailableStyles = new ListView();
-            _samplePreview     = new MSHTMLHost();
-            _propertyBrowser   = new PropertyGrid();
-            _cntxtMenuItem     = new MenuItem();
-            _cntxtMenu         = new ContextMenu();
+            _samplePreview = new MSHTMLHost();
+            _propertyBrowser = new PropertyGrid();
+            _cntxtMenuItem = new MenuItem();
+            _cntxtMenu = new ContextMenu();
 
             GroupLabel grplblStyleList = new GroupLabel();
             grplblStyleList.SetBounds(6, 5, 432, 16);
@@ -191,7 +194,9 @@ namespace System.Web.UI.Design.MobileControls
             _lvAvailableStyles.HideSelection = false;
             _lvAvailableStyles.FullRowSelect = true;
             _lvAvailableStyles.View = System.Windows.Forms.View.Details;
-            _lvAvailableStyles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[2] {chStyleType, chStyleNamespace});
+            _lvAvailableStyles.Columns.AddRange(
+                new System.Windows.Forms.ColumnHeader[2] { chStyleType, chStyleNamespace }
+            );
             _lvAvailableStyles.SelectedIndexChanged += new EventHandler(this.OnNewStyleTypeChanged);
             _lvAvailableStyles.DoubleClick += new EventHandler(this.OnDoubleClick);
             _lvAvailableStyles.Sorting = SortOrder.Ascending;
@@ -211,7 +216,8 @@ namespace System.Web.UI.Design.MobileControls
             lblDefinedStyles.SetBounds(234, 25, 166, 16);
             lblDefinedStyles.Text = SR.GetString(SR.StylesEditorDialog_DefinedStylesCaption);
             lblDefinedStyles.TabStop = false;
-            lblDefinedStyles.TabIndex = 4;;
+            lblDefinedStyles.TabIndex = 4;
+            ;
 
             _tvDefinedStyles.SetBounds(234, 41, 166, 95);
             _tvDefinedStyles.AfterSelect += new TreeViewEventHandler(OnStylesSelected);
@@ -234,7 +240,7 @@ namespace System.Web.UI.Design.MobileControls
             _btnUp.Name = SR.GetString(SR.EditableTreeList_MoveUpName);
             _btnUp.SetBounds(404, 41, 28, 27);
             _btnUp.Click += new EventHandler(this.OnClickUpButton);
-            _btnUp.Image = GenericUI.SortUpIcon; 
+            _btnUp.Image = GenericUI.SortUpIcon;
             _btnUp.TabIndex = 6;
             _btnUp.TabStop = true;
 
@@ -258,7 +264,9 @@ namespace System.Web.UI.Design.MobileControls
 
             GroupLabel grplblStyleProperties = new GroupLabel();
             grplblStyleProperties.SetBounds(6, 145, 432, 16);
-            grplblStyleProperties.Text = SR.GetString(SR.StylesEditorDialog_StylePropertiesGroupLabel);
+            grplblStyleProperties.Text = SR.GetString(
+                SR.StylesEditorDialog_StylePropertiesGroupLabel
+            );
             grplblStyleProperties.TabStop = false;
             grplblStyleProperties.TabIndex = 9;
 
@@ -290,13 +298,16 @@ namespace System.Web.UI.Design.MobileControls
             lblProperties.TabStop = false;
 
             _propertyBrowser.SetBounds(234, 181, 198, 178);
-            _propertyBrowser.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right;
+            _propertyBrowser.Anchor =
+                AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right;
             _propertyBrowser.ToolbarVisible = false;
             _propertyBrowser.HelpVisible = false;
             _propertyBrowser.TabIndex = 15;
             _propertyBrowser.TabStop = true;
             _propertyBrowser.PropertySort = PropertySort.Alphabetical;
-            _propertyBrowser.PropertyValueChanged += new PropertyValueChangedEventHandler(this.OnPropertyValueChanged);
+            _propertyBrowser.PropertyValueChanged += new PropertyValueChangedEventHandler(
+                this.OnPropertyValueChanged
+            );
 
             _btnOK.DialogResult = DialogResult.OK;
             _btnOK.Location = new System.Drawing.Point(282, 370);
@@ -323,30 +334,32 @@ namespace System.Web.UI.Design.MobileControls
             this.AcceptButton = _btnOK;
             this.CancelButton = _btnCancel;
             this.Activated += new System.EventHandler(StylesEditorDialog_Activated);
-            this.Controls.AddRange(new Control[]
-                           {
-                               grplblStyleList,
-                               lblAvailableStyles,
-                               _lvAvailableStyles,
-                               _btnAdd,
-                               lblDefinedStyles,
-                               _tvDefinedStyles,
-                               _btnUp,
-                               _btnDown,
-                               _btnRemove,
-                               grplblStyleProperties,
-                               lblType,
-                               _txtType,
-                               lblSample,
-                               _samplePreview,
-                               lblProperties,
-                               _propertyBrowser,
-                               _btnOK,
-                               _btnCancel,
-                           });
+            this.Controls.AddRange(
+                new Control[]
+                {
+                    grplblStyleList,
+                    lblAvailableStyles,
+                    _lvAvailableStyles,
+                    _btnAdd,
+                    lblDefinedStyles,
+                    _tvDefinedStyles,
+                    _btnUp,
+                    _btnDown,
+                    _btnRemove,
+                    grplblStyleProperties,
+                    lblType,
+                    _txtType,
+                    lblSample,
+                    _samplePreview,
+                    lblProperties,
+                    _propertyBrowser,
+                    _btnOK,
+                    _btnCancel,
+                }
+            );
         }
 
-        private void InitAvailableStyles() 
+        private void InitAvailableStyles()
         {
             //int[] colMaxWidth = { _lvAvailableStyles.Columns[0].Width, _lvAvailableStyles.Columns[1].Width };
             int[] colMaxWidth = { 68, 202 };
@@ -356,13 +369,17 @@ namespace System.Web.UI.Design.MobileControls
             // own styles.  They'll need to specify complete name with tagprefix included.
             StringCollection mobileStyles = new StringCollection();
             mobileStyles.AddRange(
-                new String[2]{"System.Web.UI.MobileControls.PagerStyle",
-                                 "System.Web.UI.MobileControls.Style"});
+                new String[2]
+                {
+                    "System.Web.UI.MobileControls.PagerStyle",
+                    "System.Web.UI.MobileControls.Style",
+                }
+            );
 
             foreach (String mobileStyle in mobileStyles)
             {
                 Type type = Type.GetType(mobileStyle, true);
-                String[] subItems = {type.Name, type.Namespace};
+                String[] subItems = { type.Name, type.Namespace };
                 ListViewItem item = new ListViewItem(subItems);
                 _lvAvailableStyles.Items.Add(item);
             }
@@ -370,11 +387,11 @@ namespace System.Web.UI.Design.MobileControls
             ICollection styles = _styleSheet.Styles;
             foreach (String key in styles)
             {
-                Style style = (Style) _styleSheet[key];
+                Style style = (Style)_styleSheet[key];
                 Type type = style.GetType();
                 if (!mobileStyles.Contains(type.FullName))
                 {
-                    String[] subItems = {type.Name, type.Namespace};
+                    String[] subItems = { type.Name, type.Namespace };
                     ListViewItem item = new ListViewItem(subItems);
                     _lvAvailableStyles.Items.Add(item);
 
@@ -399,8 +416,12 @@ namespace System.Web.UI.Design.MobileControls
             Debug.Assert(_lvAvailableStyles.Items.Count > 0);
             _lvAvailableStyles.Sort();
             _lvAvailableStyles.Items[0].Selected = true;
-            _currentNewStyleType = Type.GetType((String) _lvAvailableStyles.Items[0].SubItems[1].Text + "." + 
-                _lvAvailableStyles.Items[0].Text, true);
+            _currentNewStyleType = Type.GetType(
+                (String)_lvAvailableStyles.Items[0].SubItems[1].Text
+                    + "."
+                    + _lvAvailableStyles.Items[0].Text,
+                true
+            );
         }
 
         private void SaveComponent()
@@ -415,8 +436,10 @@ namespace System.Web.UI.Design.MobileControls
             }
 
             // Delete CurrentStyle if it does not exist any more.
-            if (_styleSheetDesigner.CurrentStyle != null && 
-                null == _styleSheet[_styleSheetDesigner.CurrentStyle.Name])
+            if (
+                _styleSheetDesigner.CurrentStyle != null
+                && null == _styleSheet[_styleSheetDesigner.CurrentStyle.Name]
+            )
             {
                 _styleSheetDesigner.CurrentStyle = null;
                 _styleSheetDesigner.CurrentChoice = null;
@@ -425,22 +448,24 @@ namespace System.Web.UI.Design.MobileControls
             _styleSheetDesigner.OnStylesChanged();
         }
 
-        private void LoadStyleItems() 
+        private void LoadStyleItems()
         {
             ICollection styles = _styleSheet.Styles;
 
             foreach (String key in styles)
             {
-                Style style = (Style) _styleSheet[key];
-                Style newStyle = (Style) Activator.CreateInstance(style.GetType());
-                
+                Style style = (Style)_styleSheet[key];
+                Style newStyle = (Style)Activator.CreateInstance(style.GetType());
+
                 PropertyDescriptorCollection propDescs = TypeDescriptor.GetProperties(style);
 
-                for (int i = 0; i < propDescs.Count; i++) 
+                for (int i = 0; i < propDescs.Count; i++)
                 {
                     if (propDescs[i].Name.Equals("Font"))
                     {
-                        foreach (PropertyDescriptor desc in TypeDescriptor.GetProperties(style.Font))
+                        foreach (
+                            PropertyDescriptor desc in TypeDescriptor.GetProperties(style.Font)
+                        )
                         {
                             desc.SetValue(newStyle.Font, desc.GetValue(style.Font));
                         }
@@ -477,8 +502,7 @@ namespace System.Web.UI.Design.MobileControls
 
         private void UpdateFieldsEnabling()
         {
-            _propertyBrowser.Enabled = 
-                _tvDefinedStyles.Enabled = (SelectedStyle != null);
+            _propertyBrowser.Enabled = _tvDefinedStyles.Enabled = (SelectedStyle != null);
         }
 
         private String AutoIDStyle()
@@ -498,7 +522,13 @@ namespace System.Web.UI.Design.MobileControls
             int index = 0;
             foreach (StyleNode styleNode in _tvDefinedStyles.Nodes)
             {
-                if (String.Compare(name, styleNode.RuntimeStyle.Name, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    String.Compare(
+                        name,
+                        styleNode.RuntimeStyle.Name,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return index;
                 }
@@ -509,8 +539,8 @@ namespace System.Web.UI.Design.MobileControls
 
         private void UpdatePropertyGrid()
         {
-            _propertyBrowser.SelectedObject = (SelectedStyle == null) ? 
-                null : ((StyleNode)SelectedStyle).RuntimeStyle;
+            _propertyBrowser.SelectedObject =
+                (SelectedStyle == null) ? null : ((StyleNode)SelectedStyle).RuntimeStyle;
         }
 
         private void UpdateTypeText()
@@ -540,7 +570,7 @@ namespace System.Web.UI.Design.MobileControls
             NativeMethods.IHTMLElement documentElement = tridentDocument.GetBody();
             NativeMethods.IHTMLBodyElement bodyElement;
 
-            bodyElement = (NativeMethods.IHTMLBodyElement) documentElement;
+            bodyElement = (NativeMethods.IHTMLBodyElement)documentElement;
             bodyElement.SetScroll("no");
 
             if (SelectedStyle == null)
@@ -593,10 +623,10 @@ namespace System.Web.UI.Design.MobileControls
             // Font Size
             switch (_previewStyle.Font.Size)
             {
-                case FontSize.Large :
+                case FontSize.Large:
                     tw.AddStyleAttribute("font-size", "Medium");
                     break;
-                case FontSize.Small :
+                case FontSize.Small:
                     tw.AddStyleAttribute("font-size", "X-Small");
                     break;
                 default:
@@ -619,8 +649,10 @@ namespace System.Web.UI.Design.MobileControls
             tw.RenderEndTag();
 
             // and show it!
-            String finalHTML = "<div align='center'><table width='100%' height='100%'><tr><td><p align='center'>" +
-                tw.ToString() + "</p></td></tr></table></div>";
+            String finalHTML =
+                "<div align='center'><table width='100%' height='100%'><tr><td><p align='center'>"
+                + tw.ToString()
+                + "</p></td></tr></table></div>";
             documentElement.SetInnerHTML(finalHTML);
         }
 
@@ -628,6 +660,7 @@ namespace System.Web.UI.Design.MobileControls
          *  BEGIN EVENT HANDLING
          */
         Timer _delayTimer;
+
         private void StylesEditorDialog_Activated(Object sender, System.EventArgs e)
         {
             if (!_firstActivate)
@@ -651,18 +684,17 @@ namespace System.Web.UI.Design.MobileControls
         {
             _delayTimer.Stop();
             _delayTimer.Tick -= new EventHandler(this.OnActivateDefinedStyles);
-            
+
             _lvAvailableStyles.Focus();
         }
 
-        internal delegate void StyleRenamedEventHandler(
-            Object source, StyleRenamedEventArgs e);
-        
+        internal delegate void StyleRenamedEventHandler(Object source, StyleRenamedEventArgs e);
+
         internal event StyleRenamedEventHandler StyleRenamed;
 
         private void OnStyleRenamed(StyleRenamedEventArgs e)
         {
-            if(StyleRenamed != null)
+            if (StyleRenamed != null)
             {
                 StyleRenamed(this, e);
             }
@@ -686,13 +718,17 @@ namespace System.Web.UI.Design.MobileControls
             String messageTitle = SR.GetString(SR.Style_ErrorMessageTitle);
 
             // can't accept a style name that already exists
-            if (String.Compare(oldValue, newValue , StringComparison.OrdinalIgnoreCase) != 0 && StyleIndex(newValue) >= 0)
+            if (
+                String.Compare(oldValue, newValue, StringComparison.OrdinalIgnoreCase) != 0
+                && StyleIndex(newValue) >= 0
+            )
             {
                 MessageBox.Show(
                     SR.GetString(SR.Style_DuplicateName),
                     messageTitle,
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
+                    MessageBoxIcon.Exclamation
+                );
                 e.CancelEdit = true;
                 return;
             }
@@ -701,10 +737,11 @@ namespace System.Web.UI.Design.MobileControls
             if (newValue.Length == 0)
             {
                 MessageBox.Show(
-                    SR.GetString(SR.StylesEditorDialog_EmptyName), 
+                    SR.GetString(SR.StylesEditorDialog_EmptyName),
                     messageTitle,
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
+                    MessageBoxIcon.Exclamation
+                );
                 e.CancelEdit = true;
                 return;
             }
@@ -715,7 +752,7 @@ namespace System.Web.UI.Design.MobileControls
             {
                 MessageBox.Show(
                     SR.GetString(SR.Style_InvalidName, newValue),
-                    messageTitle, 
+                    messageTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
                 e.CancelEdit = true;
@@ -736,9 +773,10 @@ namespace System.Web.UI.Design.MobileControls
 
                 MessageBox.Show(
                     SR.GetString(SR.Style_NameChangeCauseCircularLoop),
-                    messageTitle, 
+                    messageTitle,
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
+                    MessageBoxIcon.Exclamation
+                );
 
                 e.CancelEdit = true;
                 return;
@@ -746,12 +784,7 @@ namespace System.Web.UI.Design.MobileControls
 
             // Raise StyleRenamed event for any styles which vere
             // renamed.
-            OnStyleRenamed(
-                new StyleRenamedEventArgs(
-                    oldValue,
-                    newValue
-                )
-            );
+            OnStyleRenamed(new StyleRenamedEventArgs(oldValue, newValue));
         }
 
         private void OnCreateNewStyle()
@@ -797,8 +830,12 @@ namespace System.Web.UI.Design.MobileControls
         {
             if (_lvAvailableStyles.SelectedItems.Count != 0)
             {
-                _currentNewStyleType = Type.GetType((String) _lvAvailableStyles.SelectedItems[0].SubItems[1].Text + "." + 
-                                                _lvAvailableStyles.SelectedItems[0].Text, true);
+                _currentNewStyleType = Type.GetType(
+                    (String)_lvAvailableStyles.SelectedItems[0].SubItems[1].Text
+                        + "."
+                        + _lvAvailableStyles.SelectedItems[0].Text,
+                    true
+                );
                 //Debug.Assert(typeof(Style).IsAssignableFrom(_currentNewStyleType), "Non style object passed in.");
             }
         }
@@ -806,7 +843,7 @@ namespace System.Web.UI.Design.MobileControls
         private void MoveSelectedNode(int direction)
         {
             Debug.Assert(direction == 1 || direction == -1);
-            
+
             StyleNode node = SelectedStyle;
             Debug.Assert(node != null);
 
@@ -826,21 +863,20 @@ namespace System.Web.UI.Design.MobileControls
         {
             MoveSelectedNode(1);
             UpdateButtonsEnabling();
-         }
+        }
 
         private void OnClickAddButton(Object sender, EventArgs e)
         {
             OnCreateNewStyle();
         }
 
-        internal delegate void StyleDeletedEventHandler(
-            Object source, StyleDeletedEventArgs e);
-        
+        internal delegate void StyleDeletedEventHandler(Object source, StyleDeletedEventArgs e);
+
         internal event StyleDeletedEventHandler StyleDeleted;
 
         private void OnStyleDeleted(StyleDeletedEventArgs e)
         {
-            if(StyleDeleted != null)
+            if (StyleDeleted != null)
             {
                 StyleDeleted(this, e);
             }
@@ -853,8 +889,14 @@ namespace System.Web.UI.Design.MobileControls
             String message = SR.GetString(SR.StylesEditorDialog_DeleteStyleMessage);
             String caption = SR.GetString(SR.StylesEditorDialog_DeleteStyleCaption);
 
-            if (System.Windows.Forms.MessageBox.Show(message,
-                caption, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+            if (
+                System.Windows.Forms.MessageBox.Show(
+                    message,
+                    caption,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Exclamation
+                ) == DialogResult.No
+            )
             {
                 return;
             }
@@ -871,13 +913,13 @@ namespace System.Web.UI.Design.MobileControls
             _tvDefinedStyles.Nodes.RemoveAt(selectedIndex);
             OnStyleDeleted(new StyleDeletedEventArgs(deletedStyle));
 
-            if (selectedIndex < stylesCount-1)
+            if (selectedIndex < stylesCount - 1)
             {
-                SelectedStyle = (StyleNode) _tvDefinedStyles.Nodes[selectedIndex];
+                SelectedStyle = (StyleNode)_tvDefinedStyles.Nodes[selectedIndex];
             }
             else if (selectedIndex >= 1)
             {
-                SelectedStyle = (StyleNode) _tvDefinedStyles.Nodes[selectedIndex-1];
+                SelectedStyle = (StyleNode)_tvDefinedStyles.Nodes[selectedIndex - 1];
             }
             else if (stylesCount == 1)
             {
@@ -887,7 +929,7 @@ namespace System.Web.UI.Design.MobileControls
                 UpdateSamplePreview();
                 UpdateButtonsEnabling();
                 UpdateFieldsEnabling();
-            }        
+            }
         }
 
         private void OnDoubleClick(Object sender, EventArgs e)
@@ -897,11 +939,11 @@ namespace System.Web.UI.Design.MobileControls
 
         private void OnKeyDown(Object sender, KeyEventArgs e)
         {
-            switch(e.KeyData)
+            switch (e.KeyData)
             {
                 case Keys.F2:
                 {
-                    if(SelectedStyle != null)
+                    if (SelectedStyle != null)
                     {
                         SelectedStyle.BeginEdit();
                     }
@@ -909,7 +951,7 @@ namespace System.Web.UI.Design.MobileControls
                 }
                 case (Keys.Control | Keys.Home):
                 {
-                    if(_tvDefinedStyles.Nodes.Count > 0)
+                    if (_tvDefinedStyles.Nodes.Count > 0)
                     {
                         SelectedStyle = (StyleNode)_tvDefinedStyles.Nodes[0];
                     }
@@ -918,7 +960,7 @@ namespace System.Web.UI.Design.MobileControls
                 case (Keys.Control | Keys.End):
                 {
                     int numNodes = _tvDefinedStyles.Nodes.Count;
-                    if(numNodes > 0)
+                    if (numNodes > 0)
                     {
                         SelectedStyle = (StyleNode)_tvDefinedStyles.Nodes[numNodes - 1];
                     }
@@ -929,10 +971,10 @@ namespace System.Web.UI.Design.MobileControls
 
         private void OnListMouseUp(Object sender, MouseEventArgs e)
         {
-            _editCandidateNode= null;
+            _editCandidateNode = null;
             if (e.Button == MouseButtons.Right)
             {
-                _editCandidateNode = (TreeNode)_tvDefinedStyles.GetNodeAt (e.X, e.Y);
+                _editCandidateNode = (TreeNode)_tvDefinedStyles.GetNodeAt(e.X, e.Y);
             }
         }
 
@@ -941,19 +983,20 @@ namespace System.Web.UI.Design.MobileControls
             _editCandidateNode = null;
             if (e.Button == MouseButtons.Right)
             {
-                _editCandidateNode = (TreeNode)_tvDefinedStyles.GetNodeAt (e.X, e.Y);
+                _editCandidateNode = (TreeNode)_tvDefinedStyles.GetNodeAt(e.X, e.Y);
             }
         }
-        
+
         private void OnPopup(Object sender, EventArgs e)
         {
-            _cntxtMenuItem.Enabled = (_editCandidateNode != null ||
-                                                    _tvDefinedStyles.SelectedNode != null);
+            _cntxtMenuItem.Enabled = (
+                _editCandidateNode != null || _tvDefinedStyles.SelectedNode != null
+            );
         }
 
         private void OnContextMenuItemClick(Object sender, EventArgs e)
         {
-            if(_editCandidateNode == null)
+            if (_editCandidateNode == null)
             {
                 // context menu key pressed
                 if (_tvDefinedStyles.SelectedNode != null)
@@ -1006,7 +1049,10 @@ namespace System.Web.UI.Design.MobileControls
                 foreach (StyleNode styleNode in _tvDefinedStyles.Nodes)
                 {
                     Style style = styleNode.RuntimeStyle;
-                    if (0 == String.Compare(style.Name, reference, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        0
+                        == String.Compare(style.Name, reference, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         reference = style.StyleReference;
                         found = true;
@@ -1022,32 +1068,32 @@ namespace System.Web.UI.Design.MobileControls
                     }
                 }
 
-                // keep on looking. 
+                // keep on looking.
                 // It depends on whether a style defined in web.config can have a reference or not.
 
-/*              if we do need to keep on looking we need to store the Referenced flag
-                // for those styles as well.
-                // If not found, check default styles
-                if (!found)
-                {
-                    if (null != StyleSheet.Default[reference])
-                    {
-                        Style style = StyleSheet.Default[reference];
-                        reference = style.Reference;
-                        found = true;
-                        // get styleNode from other list
-                        if (styleNode.Referenced)
-                        {
-                            cycle = true;
-                        }
-                        else
-                        {
-                            styleNode.Referenced = true;
-                        }
-                        break;
-                    }
-                }
-*/
+                /*              if we do need to keep on looking we need to store the Referenced flag
+                                // for those styles as well.
+                                // If not found, check default styles
+                                if (!found)
+                                {
+                                    if (null != StyleSheet.Default[reference])
+                                    {
+                                        Style style = StyleSheet.Default[reference];
+                                        reference = style.Reference;
+                                        found = true;
+                                        // get styleNode from other list
+                                        if (styleNode.Referenced)
+                                        {
+                                            cycle = true;
+                                        }
+                                        else
+                                        {
+                                            styleNode.Referenced = true;
+                                        }
+                                        break;
+                                    }
+                                }
+                */
             }
 
             return cycle;
@@ -1060,16 +1106,16 @@ namespace System.Web.UI.Design.MobileControls
         /// </summary>
         private void ApplyStyle()
         {
-            StyleNode     currentStyleItem = (StyleNode)SelectedStyle;
-            Style         currentStyle     = currentStyleItem.RuntimeStyle;
+            StyleNode currentStyleItem = (StyleNode)SelectedStyle;
+            Style currentStyle = currentStyleItem.RuntimeStyle;
 
-            Color         foreColor        = currentStyle.ForeColor;
-            Color         backColor        = currentStyle.BackColor;
-            BooleanOption fontBold         = currentStyle.Font.Bold;
-            BooleanOption fontItalic       = currentStyle.Font.Italic;
-            FontSize      fontSize         = currentStyle.Font.Size;
-            String        fontName         = currentStyle.Font.Name;
-            String        reference        = currentStyle.StyleReference;
+            Color foreColor = currentStyle.ForeColor;
+            Color backColor = currentStyle.BackColor;
+            BooleanOption fontBold = currentStyle.Font.Bold;
+            BooleanOption fontItalic = currentStyle.Font.Italic;
+            FontSize fontSize = currentStyle.Font.Size;
+            String fontName = currentStyle.Font.Name;
+            String reference = currentStyle.StyleReference;
 
             bool found = true;
 
@@ -1079,7 +1125,10 @@ namespace System.Web.UI.Design.MobileControls
                 foreach (StyleNode styleNode in _tvDefinedStyles.Nodes)
                 {
                     Style style = styleNode.RuntimeStyle;
-                    if (0 == String.Compare(style.Name, reference, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        0
+                        == String.Compare(style.Name, reference, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         if (foreColor == Color.Empty)
                         {
@@ -1150,8 +1199,8 @@ namespace System.Web.UI.Design.MobileControls
 
             _previewStyle.ForeColor = foreColor;
             _previewStyle.BackColor = backColor;
-            _previewStyle.Font.Name  = fontName;
-            _previewStyle.Font.Size  = fontSize;
+            _previewStyle.Font.Name = fontName;
+            _previewStyle.Font.Size = fontSize;
             _previewStyle.Font.Bold = fontBold;
             _previewStyle.Font.Italic = fontItalic;
         }
@@ -1160,18 +1209,18 @@ namespace System.Web.UI.Design.MobileControls
          *   BEGIN INTERNAL CLASS
          */
 
-        [
-            System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-            Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-        ]
+        [System.Security.Permissions.SecurityPermission(
+            System.Security.Permissions.SecurityAction.Demand,
+            Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+        )]
         private class StyleNode : TreeNode
         {
-            private String          _fullName;
-            private bool            _referenced;
-            private Style           _runtimeStyle;
-            private EventHandler    _styleReferenceChanged;
-            private String          _styleReference;
-   
+            private String _fullName;
+            private bool _referenced;
+            private Style _runtimeStyle;
+            private EventHandler _styleReferenceChanged;
+            private String _styleReference;
+
             internal StyleNode(Style style)
             {
                 _runtimeStyle = style;
@@ -1179,7 +1228,6 @@ namespace System.Web.UI.Design.MobileControls
                 _styleReference = RuntimeStyle.StyleReference;
                 _styleReferenceChanged = new EventHandler(this.OnStyleReferenceChanged);
                 base.Text = RuntimeStyle.Name;
-
 
                 PropertyDescriptor property;
                 property = TypeDescriptor.GetProperties(typeof(Style))["StyleReference"];
@@ -1189,31 +1237,18 @@ namespace System.Web.UI.Design.MobileControls
 
             internal Style RuntimeStyle
             {
-                get
-                {
-                    return _runtimeStyle;
-                }
+                get { return _runtimeStyle; }
             }
 
             internal bool Referenced
             {
-                get
-                {
-                    return _referenced;
-                }
-
-                set
-                {
-                    _referenced = value;
-                }
+                get { return _referenced; }
+                set { _referenced = value; }
             }
 
             internal String FullName
             {
-                get
-                {
-                    return _fullName;
-                }
+                get { return _fullName; }
             }
 
             internal void Dispose()
@@ -1236,7 +1271,14 @@ namespace System.Web.UI.Design.MobileControls
 
                 while ((reference != null && reference.Length > 0) && count > 0)
                 {
-                    if (0 == String.Compare(RuntimeStyle.Name, reference, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        0
+                        == String.Compare(
+                            RuntimeStyle.Name,
+                            reference,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         return true;
                     }
@@ -1246,7 +1288,7 @@ namespace System.Web.UI.Design.MobileControls
                         if (null != style)
                         {
                             reference = style.StyleReference;
-                            count --;
+                            count--;
                         }
                         else
                         {
@@ -1282,19 +1324,19 @@ namespace System.Web.UI.Design.MobileControls
         }
     }
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal sealed class StyleRenamedEventArgs : EventArgs
     {
         private String _oldName;
         private String _newName;
-        
-        internal StyleRenamedEventArgs(
-            String oldName,
-            String newName)
+
+        internal StyleRenamedEventArgs(String oldName, String newName)
         {
             _oldName = oldName;
             _newName = newName;
@@ -1302,31 +1344,26 @@ namespace System.Web.UI.Design.MobileControls
 
         internal String OldName
         {
-            get
-            {
-                return _oldName;
-            }
+            get { return _oldName; }
         }
 
         internal String NewName
         {
-            get
-            {
-                return _newName;
-            }
+            get { return _newName; }
         }
-
     }
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal sealed class StyleDeletedEventArgs : EventArgs
     {
         private String _name;
-        
+
         internal StyleDeletedEventArgs(String name)
         {
             _name = name;
@@ -1334,10 +1371,7 @@ namespace System.Web.UI.Design.MobileControls
 
         internal String Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
     }
 }

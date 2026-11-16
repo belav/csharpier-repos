@@ -24,7 +24,8 @@ public class LazyLoadingEventData : DbContextEventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         DbContext? context,
         object entity,
-        string navigationPropertyName)
+        string navigationPropertyName
+    )
         : base(eventDefinition, messageGenerator, context)
     {
         Entity = entity;

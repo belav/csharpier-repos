@@ -19,7 +19,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData(float.NegativeInfinity, "faff800000")]
         [InlineData(float.NaN, "fa7fc00000")]
         [InlineData(float.NaN, "faffc00000")]
-        public static void ReadSingle_SingleValue_HappyPath(float expectedResult, string hexEncoding)
+        public static void ReadSingle_SingleValue_HappyPath(
+            float expectedResult,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -38,7 +41,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData(double.NegativeInfinity, "fbfff0000000000000")]
         [InlineData(double.NaN, "fb7ff8000000000000")]
         [InlineData(double.NaN, "fbfff8000000000000")]
-        public static void ReadDouble_SingleValue_HappyPath(double expectedResult, string hexEncoding)
+        public static void ReadDouble_SingleValue_HappyPath(
+            double expectedResult,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -55,7 +61,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData(double.NegativeInfinity, "faff800000")]
         [InlineData(double.NaN, "fa7fc00000")]
         [InlineData(double.NaN, "faffc00000")]
-        public static void ReadDouble_SinglePrecisionValue_ShouldCoerceToDouble(double expectedResult, string hexEncoding)
+        public static void ReadDouble_SinglePrecisionValue_ShouldCoerceToDouble(
+            double expectedResult,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -78,7 +87,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData(double.NaN, "f97e00")]
         [InlineData(double.NaN, "f9fe00")]
         [InlineData(double.NegativeInfinity, "f9fc00")]
-        public static void ReadDouble_HalfPrecisionValue_ShouldCoerceToDouble(double expectedResult, string hexEncoding)
+        public static void ReadDouble_HalfPrecisionValue_ShouldCoerceToDouble(
+            double expectedResult,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -101,7 +113,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData(float.NaN, "f97e00")]
         [InlineData(float.NaN, "f9fe00")]
         [InlineData(float.NegativeInfinity, "f9fc00")]
-        public static void ReadSingle_HalfPrecisionValue_ShouldCoerceToSingle(float expectedResult, string hexEncoding)
+        public static void ReadSingle_HalfPrecisionValue_ShouldCoerceToSingle(
+            float expectedResult,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -124,7 +139,10 @@ namespace System.Formats.Cbor.Tests
         [Theory]
         [InlineData(false, "f4")]
         [InlineData(true, "f5")]
-        public static void ReadBoolean_SingleValue_HappyPath(bool expectedResult, string hexEncoding)
+        public static void ReadBoolean_SingleValue_HappyPath(
+            bool expectedResult,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -142,7 +160,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborSimpleValue.Undefined, "f7")]
         [InlineData((CborSimpleValue)32, "f820")]
         [InlineData((CborSimpleValue)255, "f8ff")]
-        public static void ReadSimpleValue_SingleValue_HappyPath(CborSimpleValue expectedResult, string hexEncoding)
+        public static void ReadSimpleValue_SingleValue_HappyPath(
+            CborSimpleValue expectedResult,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -156,7 +177,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData((CborSimpleValue)23, "f817")]
         [InlineData((CborSimpleValue)24, "f818")]
         [InlineData((CborSimpleValue)31, "f81f")]
-        public static void ReadSimpleValue_UnsupportedRanges_LaxConformance_ShouldSucceed(CborSimpleValue expectedResult, string hexEncoding)
+        public static void ReadSimpleValue_UnsupportedRanges_LaxConformance_ShouldSucceed(
+            CborSimpleValue expectedResult,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, CborConformanceMode.Lax);
@@ -172,7 +196,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Strict, "f81f")]
         [InlineData(CborConformanceMode.Canonical, "f801")]
         [InlineData(CborConformanceMode.Ctap2Canonical, "f800")]
-        public static void ReadSimpleValue_UnsupportedRanges_UnsupportedConformance_ShouldThrowCborContentException(CborConformanceMode conformanceMode, string hexEncoding)
+        public static void ReadSimpleValue_UnsupportedRanges_UnsupportedConformance_ShouldThrowCborContentException(
+            CborConformanceMode conformanceMode,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, conformanceMode);
@@ -186,7 +213,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData("80")] // []
         [InlineData("a0")] // {}
         [InlineData("c202")] // tagged value
-        public static void ReadSimpleValue_InvalidTypes_ShouldThrowInvalidOperationException(string hexEncoding)
+        public static void ReadSimpleValue_InvalidTypes_ShouldThrowInvalidOperationException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -205,7 +234,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData("f6")] // null
         [InlineData("fb3ff199999999999a")] // 1.1
         [InlineData("c202")] // tagged value
-        public static void ReadBoolean_InvalidTypes_ShouldThrowInvalidOperationException(string hexEncoding)
+        public static void ReadBoolean_InvalidTypes_ShouldThrowInvalidOperationException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -223,7 +254,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData("f97e00")] // NaN
         [InlineData("fb3ff199999999999a")] // 1.1
         [InlineData("c202")] // tagged value
-        public static void ReadNull_InvalidTypes_ShouldThrowInvalidOperationException(string hexEncoding)
+        public static void ReadNull_InvalidTypes_ShouldThrowInvalidOperationException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -241,7 +274,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData("f4")] // false
         [InlineData("c202")] // tagged value
         [InlineData("fb7ff0000000000000")] // double-precision float encoding
-        public static void ReadSingle_InvalidTypes_ShouldThrowInvalidOperationException(string hexEncoding)
+        public static void ReadSingle_InvalidTypes_ShouldThrowInvalidOperationException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -258,7 +293,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData("f6")] // null
         [InlineData("f4")] // false
         [InlineData("c202")] // tagged value
-        public static void ReadDouble_InvalidTypes_ShouldThrowInvalidOperationException(string hexEncoding)
+        public static void ReadDouble_InvalidTypes_ShouldThrowInvalidOperationException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);

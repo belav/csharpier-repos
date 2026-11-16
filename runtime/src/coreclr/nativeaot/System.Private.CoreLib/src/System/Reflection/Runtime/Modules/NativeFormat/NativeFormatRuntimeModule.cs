@@ -7,7 +7,6 @@ using System.Reflection.Runtime.Assemblies.NativeFormat;
 using System.Reflection.Runtime.CustomAttributes;
 using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.TypeInfos;
-
 using Internal.Metadata.NativeFormat;
 using Internal.Reflection.Core;
 
@@ -28,16 +27,16 @@ namespace System.Reflection.Runtime.Modules.NativeFormat
             get
             {
                 QScopeDefinition scope = _assembly.Scope;
-                return RuntimeCustomAttributeData.GetCustomAttributes(scope.Reader, scope.ScopeDefinition.ModuleCustomAttributes);
+                return RuntimeCustomAttributeData.GetCustomAttributes(
+                    scope.Reader,
+                    scope.ScopeDefinition.ModuleCustomAttributes
+                );
             }
         }
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                throw new InvalidOperationException(SR.NoMetadataTokenAvailable);
-            }
+            get { throw new InvalidOperationException(SR.NoMetadataTokenAvailable); }
         }
 
         public sealed override Guid ModuleVersionId
@@ -61,20 +60,36 @@ namespace System.Reflection.Runtime.Modules.NativeFormat
         }
 
         [RequiresUnreferencedCode("Fields might be removed")]
-        public sealed override FieldInfo GetField(string name, BindingFlags bindingAttr)
-            => GetGlobalModuleRuntimeType().GetField(name, bindingAttr);
+        public sealed override FieldInfo GetField(string name, BindingFlags bindingAttr) =>
+            GetGlobalModuleRuntimeType().GetField(name, bindingAttr);
 
         [RequiresUnreferencedCode("Fields might be removed")]
-        public sealed override FieldInfo[] GetFields(BindingFlags bindingFlags)
-            => GetGlobalModuleRuntimeType().GetFields(bindingFlags);
+        public sealed override FieldInfo[] GetFields(BindingFlags bindingFlags) =>
+            GetGlobalModuleRuntimeType().GetFields(bindingFlags);
 
         [RequiresUnreferencedCode("Methods might be removed")]
-        protected sealed override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
-            => GetGlobalModuleRuntimeType().GetMethodImpl(name, RuntimeTypeInfo.GenericParameterCountAny, bindingAttr, binder, callConvention, types, modifiers);
+        protected sealed override MethodInfo GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        ) =>
+            GetGlobalModuleRuntimeType()
+                .GetMethodImpl(
+                    name,
+                    RuntimeTypeInfo.GenericParameterCountAny,
+                    bindingAttr,
+                    binder,
+                    callConvention,
+                    types,
+                    modifiers
+                );
 
         [RequiresUnreferencedCode("Methods might be removed")]
-        public sealed override MethodInfo[] GetMethods(BindingFlags bindingFlags)
-            => GetGlobalModuleRuntimeType().GetMethods(bindingFlags);
+        public sealed override MethodInfo[] GetMethods(BindingFlags bindingFlags) =>
+            GetGlobalModuleRuntimeType().GetMethods(bindingFlags);
 
         private TypeInfos.RuntimeTypeDefinitionTypeInfo GetGlobalModuleRuntimeType()
         {

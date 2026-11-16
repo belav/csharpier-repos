@@ -11,7 +11,12 @@ namespace SharedTypes.ComInterfaces
     [Guid("00000100-0000-0000-C000-000000000046")]
     internal partial interface IEnumUnknown
     {
-        void Next(uint celt, [Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.Interface)] object[] rgelt, out uint pceltFetched);
+        void Next(
+            uint celt,
+            [Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.Interface)]
+                object[] rgelt,
+            out uint pceltFetched
+        );
         void Skip(uint celt);
         void Reset();
         void Clone(out IEnumUnknown ppenum);

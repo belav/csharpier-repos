@@ -27,23 +27,53 @@ namespace System.Tests
         [Fact]
         public void ToMethods_DestinationSpanNotLargeEnough()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => { BitConverter.ToChar(Span<byte>.Empty); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { BitConverter.ToInt16(Span<byte>.Empty); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { BitConverter.ToInt32(Span<byte>.Empty); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { BitConverter.ToInt64(Span<byte>.Empty); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { BitConverter.ToUInt16(Span<byte>.Empty); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { BitConverter.ToUInt32(Span<byte>.Empty); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { BitConverter.ToUInt64(Span<byte>.Empty); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { BitConverter.ToSingle(Span<byte>.Empty); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { BitConverter.ToDouble(Span<byte>.Empty); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { BitConverter.ToBoolean(Span<byte>.Empty); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                BitConverter.ToChar(Span<byte>.Empty);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                BitConverter.ToInt16(Span<byte>.Empty);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                BitConverter.ToInt32(Span<byte>.Empty);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                BitConverter.ToInt64(Span<byte>.Empty);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                BitConverter.ToUInt16(Span<byte>.Empty);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                BitConverter.ToUInt32(Span<byte>.Empty);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                BitConverter.ToUInt64(Span<byte>.Empty);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                BitConverter.ToSingle(Span<byte>.Empty);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                BitConverter.ToDouble(Span<byte>.Empty);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                BitConverter.ToBoolean(Span<byte>.Empty);
+            });
         }
 
         private byte[] RangeToLittleEndian(byte[] array, int index, int length)
         {
             if (!BitConverter.IsLittleEndian)
             {
-                array = (byte[]) array.Clone();
+                array = (byte[])array.Clone();
                 Array.Reverse(array, index, length);
             }
             return array;

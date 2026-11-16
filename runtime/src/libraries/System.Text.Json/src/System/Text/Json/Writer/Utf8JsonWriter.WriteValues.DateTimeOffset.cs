@@ -5,7 +5,6 @@ using System.Buffers;
 using System.Buffers.Text;
 using System.Diagnostics;
 
-
 namespace System.Text.Json
 {
     public sealed partial class Utf8JsonWriter
@@ -58,7 +57,11 @@ namespace System.Text.Json
 
             output[BytesPending++] = JsonConstants.Quote;
 
-            JsonWriterHelper.WriteDateTimeOffsetTrimmed(output.Slice(BytesPending), value, out int bytesWritten);
+            JsonWriterHelper.WriteDateTimeOffsetTrimmed(
+                output.Slice(BytesPending),
+                value,
+                out int bytesWritten
+            );
             BytesPending += bytesWritten;
 
             output[BytesPending++] = JsonConstants.Quote;
@@ -70,7 +73,8 @@ namespace System.Text.Json
             Debug.Assert(indent <= 2 * _options.MaxDepth);
 
             // 2 quotes, and optionally, 1 list separator and 1-2 bytes for new line
-            int maxRequired = indent + JsonConstants.MaximumFormatDateTimeOffsetLength + 3 + s_newLineLength;
+            int maxRequired =
+                indent + JsonConstants.MaximumFormatDateTimeOffsetLength + 3 + s_newLineLength;
 
             if (_memory.Length - BytesPending < maxRequired)
             {
@@ -96,7 +100,11 @@ namespace System.Text.Json
 
             output[BytesPending++] = JsonConstants.Quote;
 
-            JsonWriterHelper.WriteDateTimeOffsetTrimmed(output.Slice(BytesPending), value, out int bytesWritten);
+            JsonWriterHelper.WriteDateTimeOffsetTrimmed(
+                output.Slice(BytesPending),
+                value,
+                out int bytesWritten
+            );
             BytesPending += bytesWritten;
 
             output[BytesPending++] = JsonConstants.Quote;

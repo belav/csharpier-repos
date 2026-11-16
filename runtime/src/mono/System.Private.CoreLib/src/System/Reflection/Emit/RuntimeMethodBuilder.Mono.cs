@@ -44,7 +44,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal sealed partial class RuntimeMethodBuilder : MethodBuilder
     {
-#region Sync with MonoReflectionMethodBuilder in object-internals.h
+        #region Sync with MonoReflectionMethodBuilder in object-internals.h
         private RuntimeMethodHandle mhandle;
         private Type? rtype;
         internal Type[]? parameters;
@@ -71,12 +71,23 @@ namespace System.Reflection.Emit
         private Type[]? returnModOpt;
         private Type[][]? paramModReq;
         private Type[][]? paramModOpt;
-#endregion
+        #endregion
 
         private RuntimeMethodInfo? created;
 
-        [DynamicDependency(nameof(paramModOpt))]  // Automatically keeps all previous fields too due to StructLayout
-        internal RuntimeMethodBuilder(RuntimeTypeBuilder tb, string name, MethodAttributes attributes, CallingConventions callingConvention, Type? returnType, Type[]? returnModReq, Type[]? returnModOpt, Type[]? parameterTypes, Type[][]? paramModReq, Type[][]? paramModOpt)
+        [DynamicDependency(nameof(paramModOpt))] // Automatically keeps all previous fields too due to StructLayout
+        internal RuntimeMethodBuilder(
+            RuntimeTypeBuilder tb,
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? returnModReq,
+            Type[]? returnModOpt,
+            Type[]? parameterTypes,
+            Type[][]? paramModReq,
+            Type[][]? paramModOpt
+        )
         {
             this.name = name;
             this.attrs = attributes;
@@ -106,10 +117,34 @@ namespace System.Reflection.Emit
             ((RuntimeModuleBuilder)tb.Module).RegisterToken(this, MetadataToken);
         }
 
-        internal RuntimeMethodBuilder(RuntimeTypeBuilder tb, string name, MethodAttributes attributes,
-                                CallingConventions callingConvention, Type? returnType, Type[]? returnModReq, Type[]? returnModOpt, Type[]? parameterTypes, Type[][]? paramModReq, Type[][]? paramModOpt,
-            string dllName, string entryName, CallingConvention nativeCConv, CharSet nativeCharset)
-            : this(tb, name, attributes, callingConvention, returnType, returnModReq, returnModOpt, parameterTypes, paramModReq, paramModOpt)
+        internal RuntimeMethodBuilder(
+            RuntimeTypeBuilder tb,
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? returnModReq,
+            Type[]? returnModOpt,
+            Type[]? parameterTypes,
+            Type[][]? paramModReq,
+            Type[][]? paramModOpt,
+            string dllName,
+            string entryName,
+            CallingConvention nativeCConv,
+            CharSet nativeCharset
+        )
+            : this(
+                tb,
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                returnModReq,
+                returnModOpt,
+                parameterTypes,
+                paramModReq,
+                paramModOpt
+            )
         {
             pi_dll = dllName;
             pi_entry = entryName;
@@ -137,18 +172,12 @@ namespace System.Reflection.Emit
 
         public override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                throw NotSupported();
-            }
+            get { throw NotSupported(); }
         }
 
         internal RuntimeMethodHandle MethodHandleInternal
         {
-            get
-            {
-                return mhandle;
-            }
+            get { return mhandle; }
         }
 
         public override Type ReturnType
@@ -194,37 +223,25 @@ namespace System.Reflection.Emit
         /* Used by mcs */
         internal bool BestFitMapping
         {
-            set
-            {
-                extra_flags = (uint)((extra_flags & ~0x30) | (uint)(value ? 0x10 : 0x20));
-            }
+            set { extra_flags = (uint)((extra_flags & ~0x30) | (uint)(value ? 0x10 : 0x20)); }
         }
 
         /* Used by mcs */
         internal bool ThrowOnUnmappableChar
         {
-            set
-            {
-                extra_flags = (uint)((extra_flags & ~0x3000) | (uint)(value ? 0x1000 : 0x2000));
-            }
+            set { extra_flags = (uint)((extra_flags & ~0x3000) | (uint)(value ? 0x1000 : 0x2000)); }
         }
 
         /* Used by mcs */
         internal bool ExactSpelling
         {
-            set
-            {
-                extra_flags = (uint)((extra_flags & ~0x01) | (uint)(value ? 0x01 : 0x00));
-            }
+            set { extra_flags = (uint)((extra_flags & ~0x01) | (uint)(value ? 0x01 : 0x00)); }
         }
 
         /* Used by mcs */
         internal bool SetLastError
         {
-            set
-            {
-                extra_flags = (uint)((extra_flags & ~0x40) | (uint)(value ? 0x40 : 0x00));
-            }
+            set { extra_flags = (uint)((extra_flags & ~0x40) | (uint)(value ? 0x40 : 0x00)); }
         }
 
         public override MethodInfo GetBaseDefinition()
@@ -281,7 +298,13 @@ namespace System.Reflection.Emit
             return type.Module;
         }
 
-        public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw NotSupported();
         }
@@ -314,18 +337,26 @@ namespace System.Reflection.Emit
 
         protected override ILGenerator GetILGeneratorCore(int size)
         {
-            if (((iattrs & MethodImplAttributes.CodeTypeMask) !=
-                 MethodImplAttributes.IL) ||
-                ((iattrs & MethodImplAttributes.ManagedMask) !=
-                 MethodImplAttributes.Managed))
+            if (
+                ((iattrs & MethodImplAttributes.CodeTypeMask) != MethodImplAttributes.IL)
+                || ((iattrs & MethodImplAttributes.ManagedMask) != MethodImplAttributes.Managed)
+            )
                 throw new InvalidOperationException(SR.InvalidOperation_ShouldNotHaveMethodBody);
             if (ilgen != null)
                 return ilgen;
-            ilgen = new RuntimeILGenerator(type.Module, ((RuntimeModuleBuilder)type.Module).GetTokenGenerator(), size);
+            ilgen = new RuntimeILGenerator(
+                type.Module,
+                ((RuntimeModuleBuilder)type.Module).GetTokenGenerator(),
+                size
+            );
             return ilgen;
         }
 
-        protected override ParameterBuilder DefineParameterCore(int position, ParameterAttributes attributes, string? strParamName)
+        protected override ParameterBuilder DefineParameterCore(
+            int position,
+            ParameterAttributes attributes,
+            string? strParamName
+        )
         {
             RejectIfCreated();
 
@@ -335,7 +366,12 @@ namespace System.Reflection.Emit
             if ((position < 0) || parameters == null || (position > parameters.Length))
                 throw new ArgumentOutOfRangeException(nameof(position));
 
-            ParameterBuilder pb = new RuntimeParameterBuilder(this, position, attributes, strParamName);
+            ParameterBuilder pb = new RuntimeParameterBuilder(
+                this,
+                position,
+                attributes,
+                strParamName
+            );
             pinfo ??= new ParameterBuilder[parameters.Length + 1];
             pinfo[position] = pb;
             return pb;
@@ -348,18 +384,30 @@ namespace System.Reflection.Emit
                 foreach (MethodInfo m in override_methods)
                 {
                     if (m.IsVirtual && !IsVirtual)
-                        throw new TypeLoadException(SR.Format(SR.TypeLoad_MethodOverrideNotVirtual, name, m));
+                        throw new TypeLoadException(
+                            SR.Format(SR.TypeLoad_MethodOverrideNotVirtual, name, m)
+                        );
                 }
             }
         }
 
         internal void fixup()
         {
-            if (((attrs & (MethodAttributes.Abstract | MethodAttributes.PinvokeImpl)) == 0) && ((iattrs & (MethodImplAttributes.Runtime | MethodImplAttributes.InternalCall)) == 0))
+            if (
+                ((attrs & (MethodAttributes.Abstract | MethodAttributes.PinvokeImpl)) == 0)
+                && (
+                    (iattrs & (MethodImplAttributes.Runtime | MethodImplAttributes.InternalCall))
+                    == 0
+                )
+            )
             {
                 // do not allow zero length method body on MS.NET 2.0 (and higher)
-                if (((ilgen == null) || (ilgen.ILOffset == 0)) && (code == null || code.Length == 0))
-                    throw new InvalidOperationException(SR.Format(SR.InvalidOperation_BadEmptyMethodBody, Name));
+                if (
+                    ((ilgen == null) || (ilgen.ILOffset == 0)) && (code == null || code.Length == 0)
+                )
+                    throw new InvalidOperationException(
+                        SR.Format(SR.InvalidOperation_BadEmptyMethodBody, Name)
+                    );
             }
             ilgen?.label_fixup(this);
         }
@@ -382,7 +430,10 @@ namespace System.Reflection.Emit
             }
         }
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             switch (con.ReflectedType!.FullName)
             {
@@ -392,7 +443,8 @@ namespace System.Reflection.Emit
                     return;
 
                 case "System.Runtime.InteropServices.DllImportAttribute":
-                    CustomAttributeBuilder.CustomAttributeInfo attr = CustomAttributeBuilder.decode_cattr(con, binaryAttribute);
+                    CustomAttributeBuilder.CustomAttributeInfo attr =
+                        CustomAttributeBuilder.decode_cattr(con, binaryAttribute);
                     bool preserveSig = true;
 
                     /*
@@ -524,8 +576,12 @@ namespace System.Reflection.Emit
             return new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
-        [RequiresDynamicCode("The native code for this instantiation might not be available at runtime.")]
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresDynamicCode(
+            "The native code for this instantiation might not be available at runtime."
+        )]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public override MethodInfo MakeGenericMethod(params Type[] typeArguments)
         {
             if (!IsGenericMethodDefinition)
@@ -541,18 +597,12 @@ namespace System.Reflection.Emit
 
         public override bool IsGenericMethodDefinition
         {
-            get
-            {
-                return generic_params != null;
-            }
+            get { return generic_params != null; }
         }
 
         public override bool IsGenericMethod
         {
-            get
-            {
-                return generic_params != null;
-            }
+            get { return generic_params != null; }
         }
 
         public override MethodInfo GetGenericMethodDefinition()
@@ -575,7 +625,9 @@ namespace System.Reflection.Emit
             return result;
         }
 
-        protected override GenericTypeParameterBuilder[] DefineGenericParametersCore(params string[] names)
+        protected override GenericTypeParameterBuilder[] DefineGenericParametersCore(
+            params string[] names
+        )
         {
             type.check_not_created();
             generic_params = new RuntimeGenericTypeParameterBuilder[names.Length];
@@ -590,7 +642,14 @@ namespace System.Reflection.Emit
             return generic_params;
         }
 
-        protected override void SetSignatureCore(Type? returnType, Type[]? returnTypeRequiredCustomModifiers, Type[]? returnTypeOptionalCustomModifiers, Type[]? parameterTypes, Type[][]? parameterTypeRequiredCustomModifiers, Type[][]? parameterTypeOptionalCustomModifiers)
+        protected override void SetSignatureCore(
+            Type? returnType,
+            Type[]? returnTypeRequiredCustomModifiers,
+            Type[]? returnTypeOptionalCustomModifiers,
+            Type[]? parameterTypes,
+            Type[][]? parameterTypeRequiredCustomModifiers,
+            Type[][]? parameterTypeOptionalCustomModifiers
+        )
         {
             if (parameterTypes != null)
             {
@@ -612,10 +671,7 @@ namespace System.Reflection.Emit
 
         public override Module Module
         {
-            get
-            {
-                return GetModule();
-            }
+            get { return GetModule(); }
         }
 
         public override ParameterInfo ReturnParameter
@@ -676,8 +732,15 @@ namespace System.Reflection.Emit
             get { return m_kind; }
         }
 
-        internal ExceptionHandler(int tryStartOffset, int tryEndOffset, int filterOffset, int handlerStartOffset, int handlerEndOffset,
-            int kind, int exceptionTypeToken)
+        internal ExceptionHandler(
+            int tryStartOffset,
+            int tryEndOffset,
+            int filterOffset,
+            int handlerStartOffset,
+            int handlerEndOffset,
+            int kind,
+            int exceptionTypeToken
+        )
         {
             m_tryStartOffset = tryStartOffset;
             m_tryEndOffset = tryEndOffset;
@@ -705,7 +768,13 @@ namespace System.Reflection.Emit
 
         public override int GetHashCode()
         {
-            return m_exceptionClass ^ m_tryStartOffset ^ m_tryEndOffset ^ m_filterOffset ^ m_handlerStartOffset ^ m_handlerEndOffset ^ (int)m_kind;
+            return m_exceptionClass
+                ^ m_tryStartOffset
+                ^ m_tryEndOffset
+                ^ m_filterOffset
+                ^ m_handlerStartOffset
+                ^ m_handlerEndOffset
+                ^ (int)m_kind;
         }
 
         public override bool Equals(object? obj)
@@ -715,14 +784,13 @@ namespace System.Reflection.Emit
 
         public bool Equals(ExceptionHandler other)
         {
-            return
-                other.m_exceptionClass == m_exceptionClass &&
-                other.m_tryStartOffset == m_tryStartOffset &&
-                other.m_tryEndOffset == m_tryEndOffset &&
-                other.m_filterOffset == m_filterOffset &&
-                other.m_handlerStartOffset == m_handlerStartOffset &&
-                other.m_handlerEndOffset == m_handlerEndOffset &&
-                other.m_kind == m_kind;
+            return other.m_exceptionClass == m_exceptionClass
+                && other.m_tryStartOffset == m_tryStartOffset
+                && other.m_tryEndOffset == m_tryEndOffset
+                && other.m_filterOffset == m_filterOffset
+                && other.m_handlerStartOffset == m_handlerStartOffset
+                && other.m_handlerEndOffset == m_handlerEndOffset
+                && other.m_kind == m_kind;
         }
 
         public static bool operator ==(ExceptionHandler left, ExceptionHandler right)

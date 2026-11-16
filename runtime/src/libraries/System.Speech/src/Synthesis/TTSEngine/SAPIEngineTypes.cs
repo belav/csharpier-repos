@@ -7,13 +7,29 @@ namespace System.Speech.Synthesis.TtsEngine
 {
     #region Public Enums
 
-    [ComImport, Guid("A74D7C8E-4CC5-4F2F-A6EB-804DEE18500E"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [
+        ComImport,
+        Guid("A74D7C8E-4CC5-4F2F-A6EB-804DEE18500E"),
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+    ]
     internal interface ITtsEngine
     {
         [PreserveSig]
-        void Speak(SPEAKFLAGS dwSpeakFlags, ref Guid rguidFormatId, IntPtr pWaveFormatEx, IntPtr pTextFragList, IntPtr pOutputSite);
+        void Speak(
+            SPEAKFLAGS dwSpeakFlags,
+            ref Guid rguidFormatId,
+            IntPtr pWaveFormatEx,
+            IntPtr pTextFragList,
+            IntPtr pOutputSite
+        );
+
         [PreserveSig]
-        void GetOutputFormat(ref Guid pTargetFmtId, IntPtr pTargetWaveFormatEx, out Guid pOutputFormatId, out IntPtr ppCoMemOutputWaveFormatEx);
+        void GetOutputFormat(
+            ref Guid pTargetFmtId,
+            IntPtr pTargetWaveFormatEx,
+            out Guid pOutputFormatId,
+            out IntPtr ppCoMemOutputWaveFormatEx
+        );
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -70,22 +86,24 @@ namespace System.Speech.Synthesis.TtsEngine
 
     internal static class SAPIGuids
     {
-        internal static readonly Guid SPDFID_WaveFormatEx = new("C31ADBAE-527F-4ff5-A230-F62BB61FF70C");
+        internal static readonly Guid SPDFID_WaveFormatEx = new(
+            "C31ADBAE-527F-4ff5-A230-F62BB61FF70C"
+        );
     }
 
     [Flags]
     internal enum SPEAKFLAGS : int
     {
-        SPF_DEFAULT = 0x0000,   // Synchronous, no purge, xml auto detect
-        SPF_ASYNC = 0x0001,   // Asynchronous call
-        SPF_PURGEBEFORESPEAK = 0x0002,   // Purge current data prior to speaking this
-        SPF_IS_FILENAME = 0x0004,   // The string passed to Speak() is a file name
-        SPF_IS_XML = 0x0008,   // The input text will be parsed for XML markup
-        SPF_IS_NOT_XML = 0x0010,   // The input text will not be parsed for XML markup
-        SPF_PERSIST_XML = 0x0020,   // Persists XML global state changes
-        SPF_NLP_SPEAK_PUNC = 0x0040,   // The normalization processor should speak the punctuation
-        SPF_PARSE_SAPI = 0x0080,   // Force XML parsing as MS SAPI
-        SPF_PARSE_SSML = 0x0100    // Force XML parsing as W3C SSML
+        SPF_DEFAULT = 0x0000, // Synchronous, no purge, xml auto detect
+        SPF_ASYNC = 0x0001, // Asynchronous call
+        SPF_PURGEBEFORESPEAK = 0x0002, // Purge current data prior to speaking this
+        SPF_IS_FILENAME = 0x0004, // The string passed to Speak() is a file name
+        SPF_IS_XML = 0x0008, // The input text will be parsed for XML markup
+        SPF_IS_NOT_XML = 0x0010, // The input text will not be parsed for XML markup
+        SPF_PERSIST_XML = 0x0020, // Persists XML global state changes
+        SPF_NLP_SPEAK_PUNC = 0x0040, // The normalization processor should speak the punctuation
+        SPF_PARSE_SAPI = 0x0080, // Force XML parsing as MS SAPI
+        SPF_PARSE_SSML = 0x0100, // Force XML parsing as W3C SSML
     }
 
     [Flags]
@@ -95,7 +113,7 @@ namespace System.Speech.Synthesis.TtsEngine
         SPVES_ABORT = 1,
         SPVES_SKIP = 2,
         SPVES_RATE = 4,
-        SPVES_VOLUME = 8
+        SPVES_VOLUME = 8,
     }
 
     [System.Runtime.InteropServices.TypeLibTypeAttribute(16)]
@@ -121,7 +139,7 @@ namespace System.Speech.Synthesis.TtsEngine
         SPPS_Modifier = 0x3000,
         SPPS_Function = 0x4000,
         SPPS_Interjection = 0x5000,
-        SPPS_SuppressWord = 0xF000,    // Special flag to indicate this word should not be recognized
+        SPPS_SuppressWord = 0xF000, // Special flag to indicate this word should not be recognized
     }
 
     #endregion

@@ -15,18 +15,27 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Activation;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security;
     using System.Threading;
     using System.Xml;
-    using System.ServiceModel.Diagnostics.Application;
 
-    delegate void ServerSingletonPreambleCallback(ServerSingletonPreambleConnectionReader serverSingletonPreambleReader);
-    delegate ISingletonChannelListener SingletonPreambleDemuxCallback(ServerSingletonPreambleConnectionReader serverSingletonPreambleReader);
+    delegate void ServerSingletonPreambleCallback(
+        ServerSingletonPreambleConnectionReader serverSingletonPreambleReader
+    );
+    delegate ISingletonChannelListener SingletonPreambleDemuxCallback(
+        ServerSingletonPreambleConnectionReader serverSingletonPreambleReader
+    );
+
     interface ISingletonChannelListener
     {
         TimeSpan ReceiveTimeout { get; }
-        void ReceiveRequest(RequestContext requestContext, Action callback, bool canDispatchOnThisThread);
+        void ReceiveRequest(
+            RequestContext requestContext,
+            Action callback,
+            bool canDispatchOnThisThread
+        );
     }
 
     class ServerSingletonPreambleConnectionReader : InitialServerConnectionReader
@@ -48,27 +57,34 @@ namespace System.ServiceModel.Channels
         ChannelBinding channelBindingToken;
         static AsyncCallback onValidate;
 
-        public ServerSingletonPreambleConnectionReader(IConnection connection, Action connectionDequeuedCallback,
-            long streamPosition, int offset, int size, TransportSettingsCallback transportSettingsCallback,
-            ConnectionClosedCallback closedCallback, ServerSingletonPreambleCallback callback)
+        public ServerSingletonPreambleConnectionReader(
+            IConnection connection,
+            Action connectionDequeuedCallback,
+            long streamPosition,
+            int offset,
+            int size,
+            TransportSettingsCallback transportSettingsCallback,
+            ConnectionClosedCallback closedCallback,
+            ServerSingletonPreambleCallback callback
+        )
             : base(connection, closedCallback)
         {
-            this.decoder = new ServerSingletonDecoder(streamPosition, MaxViaSize, MaxContentTypeSize);
+            this.decoder = new ServerSingletonDecoder(
+                streamPosition,
+                MaxViaSize,
+                MaxContentTypeSize
+            );
             this.offset = offset;
             this.size = size;
             this.callback = callback;
             this.transportSettingsCallback = transportSettingsCallback;
             this.rawConnection = connection;
             this.ConnectionDequeuedCallback = connectionDequeuedCallback;
-
         }
 
         public ChannelBinding ChannelBinding
         {
-            get
-            {
-                return this.channelBindingToken;
-            }
+            get { return this.channelBindingToken; }
         }
 
         public int BufferOffset
@@ -126,8 +142,15 @@ namespace System.ServiceModel.Channels
                             onAsyncReadComplete = new WaitCallback(OnAsyncReadComplete);
                         }
 
-                        if (Connection.BeginRead(0, connectionBuffer.Length, GetRemainingTimeout(),
-                            onAsyncReadComplete, null) == AsyncCompletionResult.Queued)
+                        if (
+                            Connection.BeginRead(
+                                0,
+                                connectionBuffer.Length,
+                                GetRemainingTimeout(),
+                                onAsyncReadComplete,
+                                null
+                            ) == AsyncCompletionResult.Queued
+                        )
                         {
                             break;
                         }
@@ -149,7 +172,11 @@ namespace System.ServiceModel.Channels
                         }
 
                         this.via = decoder.Via;
-                        IAsyncResult result = this.Connection.BeginValidate(this.via, onValidate, this);
+                        IAsyncResult result = this.Connection.BeginValidate(
+                            this.via,
+                            onValidate,
+                            this
+                        );
 
                         if (result.CompletedSynchronously)
                         {
@@ -207,7 +234,8 @@ namespace System.ServiceModel.Channels
         static void OnValidate(IAsyncResult result)
         {
             bool success = false;
-            ServerSingletonPreambleConnectionReader thisPtr = (ServerSingletonPreambleConnectionReader)result.AsyncState;
+            ServerSingletonPreambleConnectionReader thisPtr =
+                (ServerSingletonPreambleConnectionReader)result.AsyncState;
             try
             {
                 if (!result.CompletedSynchronously)
@@ -229,7 +257,7 @@ namespace System.ServiceModel.Channels
                 if (TD.ReceiveTimeoutIsEnabled())
                 {
                     TD.ReceiveTimeout(exception.Message);
-                }          
+                }
                 DiagnosticUtility.TraceHandledException(exception, TraceEventType.Information);
             }
             catch (Exception e)
@@ -268,12 +296,13 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-
             this.transportSettings = transportSettingsCallback(via);
 
             if (transportSettings == null)
             {
-                EndpointNotFoundException e = new EndpointNotFoundException(SR.GetString(SR.EndpointNotFound, decoder.Via));
+                EndpointNotFoundException e = new EndpointNotFoundException(
+                    SR.GetString(SR.EndpointNotFound, decoder.Via)
+                );
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                 // return fault and close connection
                 SendFault(FramingEncodingString.EndpointNotFoundFault);
@@ -292,11 +321,20 @@ namespace System.ServiceModel.Channels
 
         void SendFault(string faultString, ref TimeoutHelper timeoutHelper)
         {
-            InitialServerConnectionReader.SendFault(Connection, faultString,
-                connectionBuffer, timeoutHelper.RemainingTime(), TransportDefaults.MaxDrainSize);
+            InitialServerConnectionReader.SendFault(
+                Connection,
+                faultString,
+                connectionBuffer,
+                timeoutHelper.RemainingTime(),
+                TransportDefaults.MaxDrainSize
+            );
         }
 
-        public IAsyncResult BeginCompletePreamble(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginCompletePreamble(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletePreambleAsyncResult(timeout, this, callback, state);
         }
@@ -318,8 +356,13 @@ namespace System.ServiceModel.Channels
             IStreamUpgradeChannelBindingProvider channelBindingProvider;
             IConnection currentConnection;
             UpgradeState upgradeState = UpgradeState.None;
-            
-            public CompletePreambleAsyncResult(TimeSpan timeout, ServerSingletonPreambleConnectionReader parent, AsyncCallback callback, object state)
+
+            public CompletePreambleAsyncResult(
+                TimeSpan timeout,
+                ServerSingletonPreambleConnectionReader parent,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.timeoutHelper = new TimeoutHelper(timeout);
@@ -335,38 +378,20 @@ namespace System.ServiceModel.Channels
 
             byte[] ConnectionBuffer
             {
-                get
-                {
-                    return this.parent.connectionBuffer;
-                }
-                set
-                {
-                    this.parent.connectionBuffer = value;
-                }
+                get { return this.parent.connectionBuffer; }
+                set { this.parent.connectionBuffer = value; }
             }
 
             int Offset
             {
-                get
-                {
-                    return this.parent.offset;
-                }
-                set
-                {
-                    this.parent.offset = value;
-                }
+                get { return this.parent.offset; }
+                set { this.parent.offset = value; }
             }
 
             int Size
             {
-                get
-                {
-                    return this.parent.size;
-                }
-                set
-                {
-                    this.parent.size = value;
-                }
+                get { return this.parent.size; }
+                set { this.parent.size = value; }
             }
 
             bool CanReadAndDecode
@@ -382,25 +407,34 @@ namespace System.ServiceModel.Channels
 
             ServerSingletonDecoder Decoder
             {
-                get
-                {
-                    return this.parent.decoder;
-                }
+                get { return this.parent.decoder; }
             }
 
             void Initialize()
             {
-                if (!this.parent.transportSettings.MessageEncoderFactory.Encoder.IsContentTypeSupported(Decoder.ContentType))
+                if (
+                    !this.parent.transportSettings.MessageEncoderFactory.Encoder.IsContentTypeSupported(
+                        Decoder.ContentType
+                    )
+                )
                 {
                     SendFault(FramingEncodingString.ContentTypeInvalidFault, ref timeoutHelper);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ProtocolException(SR.GetString(
-                        SR.ContentTypeMismatch, Decoder.ContentType, parent.transportSettings.MessageEncoderFactory.Encoder.ContentType)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(
+                                SR.ContentTypeMismatch,
+                                Decoder.ContentType,
+                                parent.transportSettings.MessageEncoderFactory.Encoder.ContentType
+                            )
+                        )
+                    );
                 }
 
-                upgrade = this.parent.transportSettings.Upgrade;                
+                upgrade = this.parent.transportSettings.Upgrade;
                 if (upgrade != null)
                 {
-                    channelBindingProvider = upgrade.GetProperty<IStreamUpgradeChannelBindingProvider>();
+                    channelBindingProvider =
+                        upgrade.GetProperty<IStreamUpgradeChannelBindingProvider>();
                     upgradeAcceptor = upgrade.CreateUpgradeAcceptor();
                 }
 
@@ -415,7 +449,13 @@ namespace System.ServiceModel.Channels
             bool BeginRead()
             {
                 this.Offset = 0;
-                return this.currentConnection.BeginRead(0, this.ConnectionBuffer.Length, timeoutHelper.RemainingTime(), onReadCompleted, this) == AsyncCompletionResult.Completed;
+                return this.currentConnection.BeginRead(
+                        0,
+                        this.ConnectionBuffer.Length,
+                        timeoutHelper.RemainingTime(),
+                        onReadCompleted,
+                        this
+                    ) == AsyncCompletionResult.Completed;
             }
 
             void EndRead()
@@ -423,7 +463,9 @@ namespace System.ServiceModel.Channels
                 this.Size = currentConnection.EndRead();
                 if (this.Size == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(this.Decoder.CreatePrematureEOFException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        this.Decoder.CreatePrematureEOFException()
+                    );
                 }
             }
 
@@ -431,10 +473,13 @@ namespace System.ServiceModel.Channels
             {
                 if (upgradeAsyncResult != null)
                 {
-                    Fx.AssertAndThrow(this.upgradeState == UpgradeState.EndUpgrade, "upgradeAsyncResult should only be passed in from OnUpgradeComplete callback");
+                    Fx.AssertAndThrow(
+                        this.upgradeState == UpgradeState.EndUpgrade,
+                        "upgradeAsyncResult should only be passed in from OnUpgradeComplete callback"
+                    );
                 }
 
-                for (;;)
+                for (; ; )
                 {
                     if (Size == 0 && this.CanReadAndDecode)
                     {
@@ -446,10 +491,10 @@ namespace System.ServiceModel.Channels
                         {
                             //when read completes, we will re-enter this loop.
                             break;
-                        }                        
+                        }
                     }
 
-                    for (;;)
+                    for (; ; )
                     {
                         if (this.CanReadAndDecode)
                         {
@@ -473,24 +518,52 @@ namespace System.ServiceModel.Channels
                                     case UpgradeState.VerifyingUpgradeRequest:
                                         if (this.upgradeAcceptor == null)
                                         {
-                                            SendFault(FramingEncodingString.UpgradeInvalidFault, ref timeoutHelper);
+                                            SendFault(
+                                                FramingEncodingString.UpgradeInvalidFault,
+                                                ref timeoutHelper
+                                            );
                                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                                new ProtocolException(SR.GetString(SR.UpgradeRequestToNonupgradableService, Decoder.Upgrade)));
+                                                new ProtocolException(
+                                                    SR.GetString(
+                                                        SR.UpgradeRequestToNonupgradableService,
+                                                        Decoder.Upgrade
+                                                    )
+                                                )
+                                            );
                                         }
 
                                         if (!this.upgradeAcceptor.CanUpgrade(Decoder.Upgrade))
                                         {
-                                            SendFault(FramingEncodingString.UpgradeInvalidFault, ref timeoutHelper);
-                                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ProtocolException(SR.GetString(SR.UpgradeProtocolNotSupported, Decoder.Upgrade)));
+                                            SendFault(
+                                                FramingEncodingString.UpgradeInvalidFault,
+                                                ref timeoutHelper
+                                            );
+                                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                                new ProtocolException(
+                                                    SR.GetString(
+                                                        SR.UpgradeProtocolNotSupported,
+                                                        Decoder.Upgrade
+                                                    )
+                                                )
+                                            );
                                         }
 
                                         ChangeUpgradeState(UpgradeState.WritingUpgradeAck);
                                         // accept upgrade
-                                        if (this.currentConnection.BeginWrite(ServerSingletonEncoder.UpgradeResponseBytes, 0, ServerSingletonEncoder.UpgradeResponseBytes.Length,
-                                            true, timeoutHelper.RemainingTime(), onWriteCompleted, this) == AsyncCompletionResult.Queued)
+                                        if (
+                                            this.currentConnection.BeginWrite(
+                                                ServerSingletonEncoder.UpgradeResponseBytes,
+                                                0,
+                                                ServerSingletonEncoder.UpgradeResponseBytes.Length,
+                                                true,
+                                                timeoutHelper.RemainingTime(),
+                                                onWriteCompleted,
+                                                this
+                                            ) == AsyncCompletionResult.Queued
+                                        )
                                         {
                                             //OnWriteCompleted will:
-                                            //  1) set upgradeState to UpgradeAckSent 
+                                            //  1) set upgradeState to UpgradeAckSent
                                             //  2) call EndWrite
                                             return false;
                                         }
@@ -505,7 +578,12 @@ namespace System.ServiceModel.Channels
                                         IConnection connectionToUpgrade = this.currentConnection;
                                         if (Size > 0)
                                         {
-                                            connectionToUpgrade = new PreReadConnection(connectionToUpgrade, ConnectionBuffer, Offset, Size);
+                                            connectionToUpgrade = new PreReadConnection(
+                                                connectionToUpgrade,
+                                                ConnectionBuffer,
+                                                Offset,
+                                                Size
+                                            );
                                         }
                                         ChangeUpgradeState(UpgradeState.BeginUpgrade);
                                         break;
@@ -524,12 +602,15 @@ namespace System.ServiceModel.Channels
                                         {
                                             if (Fx.IsFatal(exception))
                                                 throw;
-                                            
-                                            this.parent.WriteAuditFailure(upgradeAcceptor as StreamSecurityUpgradeAcceptor, exception);
+
+                                            this.parent.WriteAuditFailure(
+                                                upgradeAcceptor as StreamSecurityUpgradeAcceptor,
+                                                exception
+                                            );
                                             throw;
                                         }
                                         break;
-                                    case UpgradeState.EndUpgrade://Must be a different state here than UpgradeComplete so that we don't try to read from the connection
+                                    case UpgradeState.EndUpgrade: //Must be a different state here than UpgradeComplete so that we don't try to read from the connection
                                         try
                                         {
                                             EndUpgrade(upgradeAsyncResult);
@@ -540,7 +621,10 @@ namespace System.ServiceModel.Channels
                                             if (Fx.IsFatal(exception))
                                                 throw;
 
-                                            this.parent.WriteAuditFailure(upgradeAcceptor as StreamSecurityUpgradeAcceptor, exception);
+                                            this.parent.WriteAuditFailure(
+                                                upgradeAcceptor as StreamSecurityUpgradeAcceptor,
+                                                exception
+                                            );
                                             throw;
                                         }
                                         break;
@@ -553,16 +637,27 @@ namespace System.ServiceModel.Channels
                             case ServerSingletonDecoder.State.Start:
                                 this.parent.SetupSecurityIfNecessary(upgradeAcceptor);
 
-                                if (this.upgradeState == UpgradeState.UpgradeComplete //We have done at least one upgrade, but we are now done.
-                                    || this.upgradeState == UpgradeState.None)//no upgrade, just send the preample end bytes
+                                if (
+                                    this.upgradeState == UpgradeState.UpgradeComplete //We have done at least one upgrade, but we are now done.
+                                    || this.upgradeState == UpgradeState.None
+                                ) //no upgrade, just send the preample end bytes
                                 {
                                     ChangeUpgradeState(UpgradeState.WritingPreambleEnd);
                                     // we've finished the preamble. Ack and return.
-                                    if (this.currentConnection.BeginWrite(ServerSessionEncoder.AckResponseBytes, 0, ServerSessionEncoder.AckResponseBytes.Length,
-                                                true, timeoutHelper.RemainingTime(), onWriteCompleted, this) == AsyncCompletionResult.Queued)
+                                    if (
+                                        this.currentConnection.BeginWrite(
+                                            ServerSessionEncoder.AckResponseBytes,
+                                            0,
+                                            ServerSessionEncoder.AckResponseBytes.Length,
+                                            true,
+                                            timeoutHelper.RemainingTime(),
+                                            onWriteCompleted,
+                                            this
+                                        ) == AsyncCompletionResult.Queued
+                                    )
                                     {
                                         //OnWriteCompleted will:
-                                        //  1) set upgradeState to PreambleEndSent 
+                                        //  1) set upgradeState to PreambleEndSent
                                         //  2) call EndWrite
                                         return false;
                                     }
@@ -570,12 +665,12 @@ namespace System.ServiceModel.Channels
                                     {
                                         this.currentConnection.EndWrite();
                                     }
-                                    
+
                                     //terminal state
                                     ChangeUpgradeState(UpgradeState.PreambleEndSent);
                                 }
-                                                                
-                                //we are done, this.currentConnection is the upgraded connection                                
+
+                                //we are done, this.currentConnection is the upgraded connection
                                 return true;
                         }
 
@@ -591,7 +686,13 @@ namespace System.ServiceModel.Channels
 
             bool BeginUpgrade(out IAsyncResult upgradeAsyncResult)
             {
-                upgradeAsyncResult = InitialServerConnectionReader.BeginUpgradeConnection(this.currentConnection, upgradeAcceptor, this.parent.transportSettings, onUpgradeComplete, this);
+                upgradeAsyncResult = InitialServerConnectionReader.BeginUpgradeConnection(
+                    this.currentConnection,
+                    upgradeAcceptor,
+                    this.parent.transportSettings,
+                    onUpgradeComplete,
+                    this
+                );
 
                 if (!upgradeAsyncResult.CompletedSynchronously)
                 {
@@ -604,15 +705,22 @@ namespace System.ServiceModel.Channels
 
             void EndUpgrade(IAsyncResult upgradeAsyncResult)
             {
-                this.currentConnection = InitialServerConnectionReader.EndUpgradeConnection(upgradeAsyncResult);
+                this.currentConnection = InitialServerConnectionReader.EndUpgradeConnection(
+                    upgradeAsyncResult
+                );
 
                 this.ConnectionBuffer = this.currentConnection.AsyncReadBuffer;
 
-                if (this.channelBindingProvider != null 
-                    && this.channelBindingProvider.IsChannelBindingSupportEnabled 
-                    && this.parent.channelBindingToken == null)//first one wins in the case of multiple upgrades.
+                if (
+                    this.channelBindingProvider != null
+                    && this.channelBindingProvider.IsChannelBindingSupportEnabled
+                    && this.parent.channelBindingToken == null
+                ) //first one wins in the case of multiple upgrades.
                 {
-                    this.parent.channelBindingToken = channelBindingProvider.GetChannelBinding(this.upgradeAcceptor, ChannelBindingKind.Endpoint);
+                    this.parent.channelBindingToken = channelBindingProvider.GetChannelBinding(
+                        this.upgradeAcceptor,
+                        ChannelBindingKind.Endpoint
+                    );
                 }
             }
 
@@ -621,55 +729,104 @@ namespace System.ServiceModel.Channels
                 switch (newState)
                 {
                     case UpgradeState.None:
-                        throw Fx.AssertAndThrow("Invalid State Transition: currentState=" + this.upgradeState + ", newState=" + newState);
+                        throw Fx.AssertAndThrow(
+                            "Invalid State Transition: currentState="
+                                + this.upgradeState
+                                + ", newState="
+                                + newState
+                        );
                     case UpgradeState.VerifyingUpgradeRequest:
-                        if (this.upgradeState != UpgradeState.None //starting first upgrade
-                            && this.upgradeState != UpgradeState.UpgradeComplete)//completing one upgrade and starting another
+                        if (
+                            this.upgradeState != UpgradeState.None //starting first upgrade
+                            && this.upgradeState != UpgradeState.UpgradeComplete
+                        ) //completing one upgrade and starting another
                         {
-                            throw Fx.AssertAndThrow("Invalid State Transition: currentState=" + this.upgradeState + ", newState=" + newState);
+                            throw Fx.AssertAndThrow(
+                                "Invalid State Transition: currentState="
+                                    + this.upgradeState
+                                    + ", newState="
+                                    + newState
+                            );
                         }
                         break;
                     case UpgradeState.WritingUpgradeAck:
                         if (this.upgradeState != UpgradeState.VerifyingUpgradeRequest)
                         {
-                            throw Fx.AssertAndThrow("Invalid State Transition: currentState=" + this.upgradeState + ", newState=" + newState);
+                            throw Fx.AssertAndThrow(
+                                "Invalid State Transition: currentState="
+                                    + this.upgradeState
+                                    + ", newState="
+                                    + newState
+                            );
                         }
                         break;
                     case UpgradeState.UpgradeAckSent:
                         if (this.upgradeState != UpgradeState.WritingUpgradeAck)
                         {
-                            throw Fx.AssertAndThrow("Invalid State Transition: currentState=" + this.upgradeState + ", newState=" + newState);
+                            throw Fx.AssertAndThrow(
+                                "Invalid State Transition: currentState="
+                                    + this.upgradeState
+                                    + ", newState="
+                                    + newState
+                            );
                         }
                         break;
                     case UpgradeState.BeginUpgrade:
                         if (this.upgradeState != UpgradeState.UpgradeAckSent)
                         {
-                            throw Fx.AssertAndThrow("Invalid State Transition: currentState=" + this.upgradeState + ", newState=" + newState);
+                            throw Fx.AssertAndThrow(
+                                "Invalid State Transition: currentState="
+                                    + this.upgradeState
+                                    + ", newState="
+                                    + newState
+                            );
                         }
                         break;
                     case UpgradeState.EndUpgrade:
                         if (this.upgradeState != UpgradeState.BeginUpgrade)
                         {
-                            throw Fx.AssertAndThrow("Invalid State Transition: currentState=" + this.upgradeState + ", newState=" + newState);
+                            throw Fx.AssertAndThrow(
+                                "Invalid State Transition: currentState="
+                                    + this.upgradeState
+                                    + ", newState="
+                                    + newState
+                            );
                         }
                         break;
                     case UpgradeState.UpgradeComplete:
                         if (this.upgradeState != UpgradeState.EndUpgrade)
                         {
-                            throw Fx.AssertAndThrow("Invalid State Transition: currentState=" + this.upgradeState + ", newState=" + newState);
+                            throw Fx.AssertAndThrow(
+                                "Invalid State Transition: currentState="
+                                    + this.upgradeState
+                                    + ", newState="
+                                    + newState
+                            );
                         }
                         break;
                     case UpgradeState.WritingPreambleEnd:
-                        if (this.upgradeState != UpgradeState.None //no upgrade being used
-                            && this.upgradeState != UpgradeState.UpgradeComplete)//upgrades are now complete, end the preamble handshake.
+                        if (
+                            this.upgradeState != UpgradeState.None //no upgrade being used
+                            && this.upgradeState != UpgradeState.UpgradeComplete
+                        ) //upgrades are now complete, end the preamble handshake.
                         {
-                            throw Fx.AssertAndThrow("Invalid State Transition: currentState=" + this.upgradeState + ", newState=" + newState);
+                            throw Fx.AssertAndThrow(
+                                "Invalid State Transition: currentState="
+                                    + this.upgradeState
+                                    + ", newState="
+                                    + newState
+                            );
                         }
                         break;
                     case UpgradeState.PreambleEndSent:
                         if (this.upgradeState != UpgradeState.WritingPreambleEnd)
                         {
-                            throw Fx.AssertAndThrow("Invalid State Transition: currentState=" + this.upgradeState + ", newState=" + newState);
+                            throw Fx.AssertAndThrow(
+                                "Invalid State Transition: currentState="
+                                    + this.upgradeState
+                                    + ", newState="
+                                    + newState
+                            );
                         }
                         break;
                     default:
@@ -755,7 +912,7 @@ namespace System.ServiceModel.Channels
                     }
                 }
             }
-            
+
             static void OnUpgradeComplete(IAsyncResult result)
             {
                 if (result.CompletedSynchronously)
@@ -763,10 +920,11 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                CompletePreambleAsyncResult thisPtr = (CompletePreambleAsyncResult)result.AsyncState;                
+                CompletePreambleAsyncResult thisPtr = (CompletePreambleAsyncResult)
+                    result.AsyncState;
                 Exception completionException = null;
                 bool completeSelf = false;
-                
+
                 try
                 {
                     thisPtr.ChangeUpgradeState(UpgradeState.EndUpgrade);
@@ -797,8 +955,8 @@ namespace System.ServiceModel.Channels
 
             enum UpgradeState
             {
-                None, 
-                VerifyingUpgradeRequest, 
+                None,
+                VerifyingUpgradeRequest,
                 WritingUpgradeAck,
                 UpgradeAckSent,
                 BeginUpgrade,
@@ -807,19 +965,23 @@ namespace System.ServiceModel.Channels
                 WritingPreambleEnd,
                 PreambleEndSent,
             }
-        }        
+        }
 
         void SetupSecurityIfNecessary(StreamUpgradeAcceptor upgradeAcceptor)
         {
-            StreamSecurityUpgradeAcceptor securityUpgradeAcceptor = upgradeAcceptor as StreamSecurityUpgradeAcceptor;
+            StreamSecurityUpgradeAcceptor securityUpgradeAcceptor =
+                upgradeAcceptor as StreamSecurityUpgradeAcceptor;
             if (securityUpgradeAcceptor != null)
             {
                 this.security = securityUpgradeAcceptor.GetRemoteSecurity();
                 if (this.security == null)
                 {
                     Exception securityFailedException = new ProtocolException(
-                    SR.GetString(SR.RemoteSecurityNotNegotiatedOnStreamUpgrade, this.Via));
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(securityFailedException);
+                        SR.GetString(SR.RemoteSecurityNotNegotiatedOnStreamUpgrade, this.Via)
+                    );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        securityFailedException
+                    );
                 }
                 // Audit Authentication Success
                 WriteAuditEvent(securityUpgradeAcceptor, AuditLevel.Success, null);
@@ -827,7 +989,10 @@ namespace System.ServiceModel.Channels
         }
 
         #region Transport Security Auditing
-        void WriteAuditFailure(StreamSecurityUpgradeAcceptor securityUpgradeAcceptor, Exception exception)
+        void WriteAuditFailure(
+            StreamSecurityUpgradeAcceptor securityUpgradeAcceptor,
+            Exception exception
+        )
         {
             try
             {
@@ -845,9 +1010,16 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        void WriteAuditEvent(StreamSecurityUpgradeAcceptor securityUpgradeAcceptor, AuditLevel auditLevel, Exception exception)
+        void WriteAuditEvent(
+            StreamSecurityUpgradeAcceptor securityUpgradeAcceptor,
+            AuditLevel auditLevel,
+            Exception exception
+        )
         {
-            if ((this.transportSettings.AuditBehavior.MessageAuthenticationAuditLevel & auditLevel) != auditLevel)
+            if (
+                (this.transportSettings.AuditBehavior.MessageAuthenticationAuditLevel & auditLevel)
+                != auditLevel
+            )
             {
                 return;
             }
@@ -867,13 +1039,24 @@ namespace System.ServiceModel.Channels
 
             if (auditLevel == AuditLevel.Success)
             {
-                SecurityAuditHelper.WriteTransportAuthenticationSuccessEvent(auditBehavior.AuditLogLocation,
-                    auditBehavior.SuppressAuditFailure, null, this.Via, primaryIdentity);
+                SecurityAuditHelper.WriteTransportAuthenticationSuccessEvent(
+                    auditBehavior.AuditLogLocation,
+                    auditBehavior.SuppressAuditFailure,
+                    null,
+                    this.Via,
+                    primaryIdentity
+                );
             }
             else
             {
-                SecurityAuditHelper.WriteTransportAuthenticationFailureEvent(auditBehavior.AuditLogLocation,
-                    auditBehavior.SuppressAuditFailure, null, this.Via, primaryIdentity, exception);
+                SecurityAuditHelper.WriteTransportAuthenticationFailureEvent(
+                    auditBehavior.AuditLogLocation,
+                    auditBehavior.SuppressAuditFailure,
+                    null,
+                    this.Via,
+                    primaryIdentity,
+                    exception
+                );
             }
         }
 
@@ -881,7 +1064,8 @@ namespace System.ServiceModel.Channels
         static string GetIdentityNameFromContext(SecurityMessageProperty clientSecurity)
         {
             return SecurityUtils.GetIdentityNamesFromContext(
-                clientSecurity.ServiceSecurityContext.AuthorizationContext);
+                clientSecurity.ServiceSecurityContext.AuthorizationContext
+            );
         }
         #endregion
 
@@ -892,7 +1076,9 @@ namespace System.ServiceModel.Channels
             isReadPending = false;
             if (size == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(decoder.CreatePrematureEOFException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    decoder.CreatePrematureEOFException()
+                );
             }
         }
 
@@ -956,10 +1142,19 @@ namespace System.ServiceModel.Channels
         string contentType;
         ChannelBinding channelBindingToken;
 
-        public ServerSingletonConnectionReader(ServerSingletonPreambleConnectionReader preambleReader,
-            IConnection upgradedConnection, ConnectionDemuxer connectionDemuxer)
-            : base(upgradedConnection, preambleReader.BufferOffset, preambleReader.BufferSize,
-            preambleReader.Security, preambleReader.TransportSettings, preambleReader.Via)
+        public ServerSingletonConnectionReader(
+            ServerSingletonPreambleConnectionReader preambleReader,
+            IConnection upgradedConnection,
+            ConnectionDemuxer connectionDemuxer
+        )
+            : base(
+                upgradedConnection,
+                preambleReader.BufferOffset,
+                preambleReader.BufferSize,
+                preambleReader.Security,
+                preambleReader.TransportSettings,
+                preambleReader.Via
+            )
         {
             this.decoder = preambleReader.Decoder;
             this.contentType = this.decoder.ContentType;
@@ -978,7 +1173,12 @@ namespace System.ServiceModel.Channels
             get { return this.decoder.StreamPosition; }
         }
 
-        protected override bool DecodeBytes(byte[] buffer, ref int offset, ref int size, ref bool isAtEof)
+        protected override bool DecodeBytes(
+            byte[] buffer,
+            ref int offset,
+            ref int size,
+            ref bool isAtEof
+        )
         {
             while (size > 0)
             {
@@ -1008,8 +1208,17 @@ namespace System.ServiceModel.Channels
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             // send back EOF and then recycle the connection
-            this.Connection.Write(SingletonEncoder.EndBytes, 0, SingletonEncoder.EndBytes.Length, true, timeoutHelper.RemainingTime());
-            this.connectionDemuxer.ReuseConnection(this.rawConnection, timeoutHelper.RemainingTime());
+            this.Connection.Write(
+                SingletonEncoder.EndBytes,
+                0,
+                SingletonEncoder.EndBytes.Length,
+                true,
+                timeoutHelper.RemainingTime()
+            );
+            this.connectionDemuxer.ReuseConnection(
+                this.rawConnection,
+                timeoutHelper.RemainingTime()
+            );
 
             ChannelBindingUtility.Dispose(ref this.channelBindingToken);
         }
@@ -1022,13 +1231,17 @@ namespace System.ServiceModel.Channels
             // pipes will return null
             if (remoteEndPoint != null)
             {
-                RemoteEndpointMessageProperty remoteEndpointProperty = new RemoteEndpointMessageProperty(remoteEndPoint);
+                RemoteEndpointMessageProperty remoteEndpointProperty =
+                    new RemoteEndpointMessageProperty(remoteEndPoint);
                 message.Properties.Add(RemoteEndpointMessageProperty.Name, remoteEndpointProperty);
             }
 
             if (this.channelBindingToken != null)
             {
-                ChannelBindingMessageProperty property = new ChannelBindingMessageProperty(this.channelBindingToken, false);
+                ChannelBindingMessageProperty property = new ChannelBindingMessageProperty(
+                    this.channelBindingToken,
+                    false
+                );
                 property.AddTo(message);
                 property.Dispose(); //message.Properties.Add() creates a copy...
             }
@@ -1050,8 +1263,14 @@ namespace System.ServiceModel.Channels
         Uri via;
         Stream inputStream;
 
-        protected SingletonConnectionReader(IConnection connection, int offset, int size, SecurityMessageProperty security,
-            IConnectionOrientedTransportFactorySettings transportSettings, Uri via)
+        protected SingletonConnectionReader(
+            IConnection connection,
+            int offset,
+            int size,
+            SecurityMessageProperty security,
+            IConnectionOrientedTransportFactorySettings transportSettings,
+            Uri via
+        )
         {
             this.connection = connection;
             this.offset = offset;
@@ -1063,18 +1282,12 @@ namespace System.ServiceModel.Channels
 
         protected IConnection Connection
         {
-            get
-            {
-                return this.connection;
-            }
+            get { return this.connection; }
         }
 
         protected object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
 
         protected virtual string ContentType
@@ -1127,10 +1340,14 @@ namespace System.ServiceModel.Channels
                 // first drain our stream if necessary
                 if (this.inputStream != null)
                 {
-                    byte[] dummy = DiagnosticUtility.Utility.AllocateByteArray(transportSettings.ConnectionBufferSize);
+                    byte[] dummy = DiagnosticUtility.Utility.AllocateByteArray(
+                        transportSettings.ConnectionBufferSize
+                    );
                     while (!this.isAtEof)
                     {
-                        this.inputStream.ReadTimeout = TimeoutHelper.ToMilliseconds(timeoutHelper.RemainingTime());
+                        this.inputStream.ReadTimeout = TimeoutHelper.ToMilliseconds(
+                            timeoutHelper.RemainingTime()
+                        );
                         int bytesRead = this.inputStream.Read(dummy, 0, dummy.Length);
                         if (bytesRead == 0)
                         {
@@ -1161,12 +1378,20 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected abstract bool DecodeBytes(byte[] buffer, ref int offset, ref int size, ref bool isAtEof);
+        protected abstract bool DecodeBytes(
+            byte[] buffer,
+            ref int offset,
+            ref int size,
+            ref bool isAtEof
+        );
 
         protected virtual void PrepareMessage(Message message)
         {
             message.Properties.Via = this.via;
-            message.Properties.Security = (this.security != null) ? (SecurityMessageProperty)this.security.CreateCopy() : null;
+            message.Properties.Security =
+                (this.security != null)
+                    ? (SecurityMessageProperty)this.security.CreateCopy()
+                    : null;
         }
 
         public RequestContext ReceiveRequest(TimeSpan timeout)
@@ -1187,7 +1412,9 @@ namespace System.ServiceModel.Channels
 
         public Message Receive(TimeSpan timeout)
         {
-            byte[] buffer = DiagnosticUtility.Utility.AllocateByteArray(connection.AsyncReadBufferSize);
+            byte[] buffer = DiagnosticUtility.Utility.AllocateByteArray(
+                connection.AsyncReadBufferSize
+            );
 
             if (size > 0)
             {
@@ -1195,7 +1422,7 @@ namespace System.ServiceModel.Channels
             }
 
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-            for (;;)
+            for (; ; )
             {
                 if (DecodeBytes(buffer, ref offset, ref size, ref isAtEof))
                 {
@@ -1229,25 +1456,50 @@ namespace System.ServiceModel.Channels
                 singletonConnection = new PreReadConnection(singletonConnection, initialData);
             }
 
-            Stream connectionStream = new SingletonInputConnectionStream(this, singletonConnection, this.transportSettings);
-            this.inputStream = new MaxMessageSizeStream(connectionStream, transportSettings.MaxReceivedMessageSize);
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity(true) : null)
+            Stream connectionStream = new SingletonInputConnectionStream(
+                this,
+                singletonConnection,
+                this.transportSettings
+            );
+            this.inputStream = new MaxMessageSizeStream(
+                connectionStream,
+                transportSettings.MaxReceivedMessageSize
+            );
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivity(true)
+                    : null
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityProcessingMessage, TraceUtility.RetrieveMessageNumber()), ActivityType.ProcessMessage);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(
+                            SR.ActivityProcessingMessage,
+                            TraceUtility.RetrieveMessageNumber()
+                        ),
+                        ActivityType.ProcessMessage
+                    );
                 }
 
                 Message message = null;
                 try
                 {
                     message = transportSettings.MessageEncoderFactory.Encoder.ReadMessage(
-                        this.inputStream, transportSettings.MaxBufferSize, this.ContentType);
+                        this.inputStream,
+                        transportSettings.MaxBufferSize,
+                        this.ContentType
+                    );
                 }
                 catch (XmlException xmlException)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ProtocolException(SR.GetString(SR.MessageXmlProtocolError), xmlException));
+                        new ProtocolException(
+                            SR.GetString(SR.MessageXmlProtocolError),
+                            xmlException
+                        )
+                    );
                 }
 
                 if (DiagnosticUtility.ShouldUseActivity)
@@ -1269,14 +1521,18 @@ namespace System.ServiceModel.Channels
             SingletonConnectionReader parent;
             TimeSpan timeout;
 
-            public ReceiveAsyncResult(SingletonConnectionReader parent, TimeSpan timeout, AsyncCallback callback,
-                object state)
+            public ReceiveAsyncResult(
+                SingletonConnectionReader parent,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.parent = parent;
                 this.timeout = timeout;
 
-                // 
+                //
                 ActionItem.Schedule(onReceiveScheduled, this);
             }
 
@@ -1315,8 +1571,15 @@ namespace System.ServiceModel.Channels
             IConnectionOrientedTransportFactorySettings settings;
             TimeoutHelper timeoutHelper;
 
-            public StreamedFramingRequestContext(SingletonConnectionReader parent, Message requestMessage)
-                : base(requestMessage, parent.transportSettings.CloseTimeout, parent.transportSettings.SendTimeout)
+            public StreamedFramingRequestContext(
+                SingletonConnectionReader parent,
+                Message requestMessage
+            )
+                : base(
+                    requestMessage,
+                    parent.transportSettings.CloseTimeout,
+                    parent.transportSettings.SendTimeout
+                )
             {
                 this.parent = parent;
                 this.connection = parent.connection;
@@ -1335,28 +1598,54 @@ namespace System.ServiceModel.Channels
 
             protected override void OnReply(Message message, TimeSpan timeout)
             {
-                ICompressedMessageEncoder compressedMessageEncoder = this.settings.MessageEncoderFactory.Encoder as ICompressedMessageEncoder;
+                ICompressedMessageEncoder compressedMessageEncoder =
+                    this.settings.MessageEncoderFactory.Encoder as ICompressedMessageEncoder;
                 if (compressedMessageEncoder != null && compressedMessageEncoder.CompressionEnabled)
                 {
-                    compressedMessageEncoder.AddCompressedMessageProperties(message, this.parent.ContentType);
+                    compressedMessageEncoder.AddCompressedMessageProperties(
+                        message,
+                        this.parent.ContentType
+                    );
                 }
 
                 timeoutHelper = new TimeoutHelper(timeout);
-                StreamingConnectionHelper.WriteMessage(message, this.connection, false, this.settings, ref timeoutHelper);
+                StreamingConnectionHelper.WriteMessage(
+                    message,
+                    this.connection,
+                    false,
+                    this.settings,
+                    ref timeoutHelper
+                );
                 parent.DoneSending(timeoutHelper.RemainingTime());
             }
 
-            protected override IAsyncResult OnBeginReply(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginReply(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                ICompressedMessageEncoder compressedMessageEncoder = this.settings.MessageEncoderFactory.Encoder as ICompressedMessageEncoder;
+                ICompressedMessageEncoder compressedMessageEncoder =
+                    this.settings.MessageEncoderFactory.Encoder as ICompressedMessageEncoder;
                 if (compressedMessageEncoder != null && compressedMessageEncoder.CompressionEnabled)
                 {
-                    compressedMessageEncoder.AddCompressedMessageProperties(message, this.parent.ContentType);
+                    compressedMessageEncoder.AddCompressedMessageProperties(
+                        message,
+                        this.parent.ContentType
+                    );
                 }
 
                 timeoutHelper = new TimeoutHelper(timeout);
-                return StreamingConnectionHelper.BeginWriteMessage(message, this.connection, false, this.settings,
-                    ref timeoutHelper, callback, state);
+                return StreamingConnectionHelper.BeginWriteMessage(
+                    message,
+                    this.connection,
+                    false,
+                    this.settings,
+                    ref timeoutHelper,
+                    callback,
+                    state
+                );
             }
 
             protected override void OnEndReply(IAsyncResult result)
@@ -1377,8 +1666,11 @@ namespace System.ServiceModel.Channels
             int chunkBufferSize;
             int chunkBytesRemaining;
 
-            public SingletonInputConnectionStream(SingletonConnectionReader reader, IConnection connection,
-                IDefaultCommunicationTimeouts defaultTimeouts)
+            public SingletonInputConnectionStream(
+                SingletonConnectionReader reader,
+                IConnection connection,
+                IDefaultCommunicationTimeouts defaultTimeouts
+            )
                 : base(connection, defaultTimeouts)
             {
                 this.reader = reader;
@@ -1405,7 +1697,11 @@ namespace System.ServiceModel.Channels
                     int bytesRead = decoder.Decode(buffer, offset, size);
                     offset += bytesRead;
                     size -= bytesRead;
-                    Fx.Assert(decoder.CurrentState == SingletonMessageDecoder.State.ReadingEnvelopeBytes || decoder.CurrentState == SingletonMessageDecoder.State.ChunkEnd, "");
+                    Fx.Assert(
+                        decoder.CurrentState == SingletonMessageDecoder.State.ReadingEnvelopeBytes
+                            || decoder.CurrentState == SingletonMessageDecoder.State.ChunkEnd,
+                        ""
+                    );
                 }
             }
 
@@ -1457,7 +1753,7 @@ namespace System.ServiceModel.Channels
                 }
                 finally
                 {
-                    if (bytesRead == -1)  // there was an exception
+                    if (bytesRead == -1) // there was an exception
                     {
                         AbortReader();
                     }
@@ -1484,10 +1780,18 @@ namespace System.ServiceModel.Channels
                     // first deal with any residual carryover
                     if (this.chunkBufferSize > 0)
                     {
-                        int bytesToCopy = Math.Min(chunkBytesRemaining,
-                            Math.Min(this.chunkBufferSize, count));
+                        int bytesToCopy = Math.Min(
+                            chunkBytesRemaining,
+                            Math.Min(this.chunkBufferSize, count)
+                        );
 
-                        Buffer.BlockCopy(this.chunkBuffer, this.chunkBufferOffset, buffer, offset, bytesToCopy);
+                        Buffer.BlockCopy(
+                            this.chunkBuffer,
+                            this.chunkBufferOffset,
+                            buffer,
+                            offset,
+                            bytesToCopy
+                        );
                         // keep decoder up to date
                         DecodeData(this.chunkBuffer, this.chunkBufferOffset, bytesToCopy);
 
@@ -1496,7 +1800,11 @@ namespace System.ServiceModel.Channels
                         this.chunkBytesRemaining -= bytesToCopy;
                         if (this.chunkBytesRemaining == 0 && this.chunkBufferSize > 0)
                         {
-                            DecodeSize(this.chunkBuffer, ref this.chunkBufferOffset, ref this.chunkBufferSize);
+                            DecodeSize(
+                                this.chunkBuffer,
+                                ref this.chunkBufferOffset,
+                                ref this.chunkBufferSize
+                            );
                         }
 
                         result += bytesToCopy;
@@ -1510,7 +1818,10 @@ namespace System.ServiceModel.Channels
                         int bytesToRead = count;
                         if (int.MaxValue - chunkBytesRemaining >= IntEncoder.MaxEncodedSize)
                         {
-                            bytesToRead = Math.Min(count, chunkBytesRemaining + IntEncoder.MaxEncodedSize);
+                            bytesToRead = Math.Min(
+                                count,
+                                chunkBytesRemaining + IntEncoder.MaxEncodedSize
+                            );
                         }
 
                         int bytesRead = ReadCore(buffer, offset, bytesToRead);
@@ -1542,8 +1853,16 @@ namespace System.ServiceModel.Channels
                         {
                             // we don't have space for MaxEncodedSize, so it's worth the copy cost to read into a temp buffer
                             this.chunkBufferOffset = 0;
-                            this.chunkBufferSize = ReadCore(this.chunkBuffer, 0, this.chunkBuffer.Length);
-                            DecodeSize(this.chunkBuffer, ref this.chunkBufferOffset, ref this.chunkBufferSize);
+                            this.chunkBufferSize = ReadCore(
+                                this.chunkBuffer,
+                                0,
+                                this.chunkBuffer.Length
+                            );
+                            DecodeSize(
+                                this.chunkBuffer,
+                                ref this.chunkBufferOffset,
+                                ref this.chunkBufferSize
+                            );
                         }
                         else
                         {
@@ -1560,17 +1879,28 @@ namespace System.ServiceModel.Channels
                 if (!this.atEof)
                 {
                     this.atEof = true;
-                    if (this.chunkBufferSize > 0 || this.chunkBytesRemaining > 0
-                        || decoder.CurrentState != SingletonMessageDecoder.State.End)
+                    if (
+                        this.chunkBufferSize > 0
+                        || this.chunkBytesRemaining > 0
+                        || decoder.CurrentState != SingletonMessageDecoder.State.End
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(decoder.CreatePrematureEOFException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            decoder.CreatePrematureEOFException()
+                        );
                     }
 
                     this.reader.DoneReceiving(true);
                 }
             }
 
-            public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+            public override IAsyncResult BeginRead(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new ReadAsyncResult(this, buffer, offset, count, callback, state);
             }
@@ -1585,13 +1915,19 @@ namespace System.ServiceModel.Channels
                 SingletonInputConnectionStream parent;
                 int result;
 
-                public ReadAsyncResult(SingletonInputConnectionStream parent,
-                    byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+                public ReadAsyncResult(
+                    SingletonInputConnectionStream parent,
+                    byte[] buffer,
+                    int offset,
+                    int count,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.parent = parent;
 
-                    // 
+                    //
                     this.result = this.parent.Read(buffer, offset, count);
                     base.Complete(true);
                 }
@@ -1607,8 +1943,13 @@ namespace System.ServiceModel.Channels
 
     static class StreamingConnectionHelper
     {
-        public static void WriteMessage(Message message, IConnection connection, bool isRequest,
-            IConnectionOrientedTransportFactorySettings settings, ref TimeoutHelper timeoutHelper)
+        public static void WriteMessage(
+            Message message,
+            IConnection connection,
+            bool isRequest,
+            IConnectionOrientedTransportFactorySettings settings,
+            ref TimeoutHelper timeoutHelper
+        )
         {
             byte[] endBytes = null;
             if (message != null)
@@ -1630,20 +1971,47 @@ namespace System.ServiceModel.Channels
 
                 if (writeStreamed)
                 {
-                    connection.Write(envelopeStartBytes, 0, envelopeStartBytes.Length, false, timeoutHelper.RemainingTime());
-                    Stream connectionStream = new StreamingOutputConnectionStream(connection, settings);
-                    Stream writeTimeoutStream = new TimeoutStream(connectionStream, ref timeoutHelper);
+                    connection.Write(
+                        envelopeStartBytes,
+                        0,
+                        envelopeStartBytes.Length,
+                        false,
+                        timeoutHelper.RemainingTime()
+                    );
+                    Stream connectionStream = new StreamingOutputConnectionStream(
+                        connection,
+                        settings
+                    );
+                    Stream writeTimeoutStream = new TimeoutStream(
+                        connectionStream,
+                        ref timeoutHelper
+                    );
                     messageEncoder.WriteMessage(message, writeTimeoutStream);
                 }
                 else
                 {
-                    ArraySegment<byte> messageData = messageEncoder.WriteMessage(message,
-                        int.MaxValue, settings.BufferManager, envelopeStartBytes.Length + IntEncoder.MaxEncodedSize);
+                    ArraySegment<byte> messageData = messageEncoder.WriteMessage(
+                        message,
+                        int.MaxValue,
+                        settings.BufferManager,
+                        envelopeStartBytes.Length + IntEncoder.MaxEncodedSize
+                    );
                     messageData = SingletonEncoder.EncodeMessageFrame(messageData);
-                    Buffer.BlockCopy(envelopeStartBytes, 0, messageData.Array, messageData.Offset - envelopeStartBytes.Length,
-                        envelopeStartBytes.Length);
-                    connection.Write(messageData.Array, messageData.Offset - envelopeStartBytes.Length,
-                        messageData.Count + envelopeStartBytes.Length, true, timeoutHelper.RemainingTime(), settings.BufferManager);
+                    Buffer.BlockCopy(
+                        envelopeStartBytes,
+                        0,
+                        messageData.Array,
+                        messageData.Offset - envelopeStartBytes.Length,
+                        envelopeStartBytes.Length
+                    );
+                    connection.Write(
+                        messageData.Array,
+                        messageData.Offset - envelopeStartBytes.Length,
+                        messageData.Count + envelopeStartBytes.Length,
+                        true,
+                        timeoutHelper.RemainingTime(),
+                        settings.BufferManager
+                    );
                 }
             }
             else if (isRequest) // context handles response end bytes
@@ -1653,16 +2021,29 @@ namespace System.ServiceModel.Channels
 
             if (endBytes != null)
             {
-                connection.Write(endBytes, 0, endBytes.Length,
-                    true, timeoutHelper.RemainingTime());
+                connection.Write(endBytes, 0, endBytes.Length, true, timeoutHelper.RemainingTime());
             }
         }
 
-        public static IAsyncResult BeginWriteMessage(Message message, IConnection connection, bool isRequest,
-            IConnectionOrientedTransportFactorySettings settings, ref TimeoutHelper timeoutHelper,
-            AsyncCallback callback, object state)
+        public static IAsyncResult BeginWriteMessage(
+            Message message,
+            IConnection connection,
+            bool isRequest,
+            IConnectionOrientedTransportFactorySettings settings,
+            ref TimeoutHelper timeoutHelper,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new WriteMessageAsyncResult(message, connection, isRequest, settings, ref timeoutHelper, callback, state);
+            return new WriteMessageAsyncResult(
+                message,
+                connection,
+                isRequest,
+                settings,
+                ref timeoutHelper,
+                callback,
+                state
+            );
         }
 
         public static void EndWriteMessage(IAsyncResult result)
@@ -1675,21 +2056,37 @@ namespace System.ServiceModel.Channels
         {
             byte[] encodedSize;
 
-            public StreamingOutputConnectionStream(IConnection connection, IDefaultCommunicationTimeouts timeouts)
+            public StreamingOutputConnectionStream(
+                IConnection connection,
+                IDefaultCommunicationTimeouts timeouts
+            )
                 : base(connection, timeouts)
             {
                 this.encodedSize = new byte[IntEncoder.MaxEncodedSize];
             }
+
             void WriteChunkSize(int size)
             {
                 if (size > 0)
                 {
                     int bytesEncoded = IntEncoder.Encode(size, encodedSize, 0);
-                    base.Connection.Write(encodedSize, 0, bytesEncoded, false, TimeSpan.FromMilliseconds(this.WriteTimeout));
+                    base.Connection.Write(
+                        encodedSize,
+                        0,
+                        bytesEncoded,
+                        false,
+                        TimeSpan.FromMilliseconds(this.WriteTimeout)
+                    );
                 }
             }
 
-            public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+            public override IAsyncResult BeginWrite(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback callback,
+                object state
+            )
             {
                 WriteChunkSize(count);
                 return base.BeginWrite(buffer, offset, count, callback, state);
@@ -1717,16 +2114,23 @@ namespace System.ServiceModel.Channels
             static WaitCallback onWriteBufferedMessage;
             static WaitCallback onWriteStartBytes;
             static Action<object> onWriteStartBytesScheduled;
-            static WaitCallback onWriteEndBytes =
-                Fx.ThunkCallback(new WaitCallback(OnWriteEndBytes));
+            static WaitCallback onWriteEndBytes = Fx.ThunkCallback(
+                new WaitCallback(OnWriteEndBytes)
+            );
             byte[] bufferToFree;
             IConnectionOrientedTransportFactorySettings settings;
             TimeoutHelper timeoutHelper;
             byte[] endBytes;
 
-            public WriteMessageAsyncResult(Message message, IConnection connection, bool isRequest,
-                IConnectionOrientedTransportFactorySettings settings, ref TimeoutHelper timeoutHelper,
-                AsyncCallback callback, object state)
+            public WriteMessageAsyncResult(
+                Message message,
+                IConnection connection,
+                bool isRequest,
+                IConnectionOrientedTransportFactorySettings settings,
+                ref TimeoutHelper timeoutHelper,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.connection = connection;
@@ -1755,50 +2159,82 @@ namespace System.ServiceModel.Channels
                         if (isRequest)
                         {
                             this.endBytes = SingletonEncoder.EnvelopeEndFramingEndBytes;
-                            writeStreamed = TransferModeHelper.IsRequestStreamed(settings.TransferMode);
+                            writeStreamed = TransferModeHelper.IsRequestStreamed(
+                                settings.TransferMode
+                            );
                         }
                         else
                         {
                             this.endBytes = SingletonEncoder.EnvelopeEndBytes;
-                            writeStreamed = TransferModeHelper.IsResponseStreamed(settings.TransferMode);
+                            writeStreamed = TransferModeHelper.IsResponseStreamed(
+                                settings.TransferMode
+                            );
                         }
 
                         if (writeStreamed)
                         {
                             if (onWriteStartBytes == null)
                             {
-                                onWriteStartBytes = Fx.ThunkCallback(new WaitCallback(OnWriteStartBytes));
+                                onWriteStartBytes = Fx.ThunkCallback(
+                                    new WaitCallback(OnWriteStartBytes)
+                                );
                             }
 
-                            AsyncCompletionResult writeStartBytesResult = connection.BeginWrite(envelopeStartBytes, 0, envelopeStartBytes.Length, true,
-                                timeoutHelper.RemainingTime(), onWriteStartBytes, this);
+                            AsyncCompletionResult writeStartBytesResult = connection.BeginWrite(
+                                envelopeStartBytes,
+                                0,
+                                envelopeStartBytes.Length,
+                                true,
+                                timeoutHelper.RemainingTime(),
+                                onWriteStartBytes,
+                                this
+                            );
 
                             if (writeStartBytesResult == AsyncCompletionResult.Completed)
                             {
                                 if (onWriteStartBytesScheduled == null)
                                 {
-                                    onWriteStartBytesScheduled = new Action<object>(OnWriteStartBytes);
+                                    onWriteStartBytesScheduled = new Action<object>(
+                                        OnWriteStartBytes
+                                    );
                                 }
                                 ActionItem.Schedule(onWriteStartBytesScheduled, this);
                             }
                         }
                         else
                         {
-                            ArraySegment<byte> messageData = settings.MessageEncoderFactory.Encoder.WriteMessage(message,
-                                int.MaxValue, this.bufferManager, envelopeStartBytes.Length + IntEncoder.MaxEncodedSize);
+                            ArraySegment<byte> messageData =
+                                settings.MessageEncoderFactory.Encoder.WriteMessage(
+                                    message,
+                                    int.MaxValue,
+                                    this.bufferManager,
+                                    envelopeStartBytes.Length + IntEncoder.MaxEncodedSize
+                                );
                             messageData = SingletonEncoder.EncodeMessageFrame(messageData);
                             this.bufferToFree = messageData.Array;
-                            Buffer.BlockCopy(envelopeStartBytes, 0, messageData.Array, messageData.Offset - envelopeStartBytes.Length,
-                                envelopeStartBytes.Length);
+                            Buffer.BlockCopy(
+                                envelopeStartBytes,
+                                0,
+                                messageData.Array,
+                                messageData.Offset - envelopeStartBytes.Length,
+                                envelopeStartBytes.Length
+                            );
 
                             if (onWriteBufferedMessage == null)
                             {
-                                onWriteBufferedMessage = Fx.ThunkCallback(new WaitCallback(OnWriteBufferedMessage));
+                                onWriteBufferedMessage = Fx.ThunkCallback(
+                                    new WaitCallback(OnWriteBufferedMessage)
+                                );
                             }
-                            AsyncCompletionResult writeBufferedResult =
-                                connection.BeginWrite(messageData.Array, messageData.Offset - envelopeStartBytes.Length,
-                                messageData.Count + envelopeStartBytes.Length, true, timeoutHelper.RemainingTime(),
-                                onWriteBufferedMessage, this);
+                            AsyncCompletionResult writeBufferedResult = connection.BeginWrite(
+                                messageData.Array,
+                                messageData.Offset - envelopeStartBytes.Length,
+                                messageData.Count + envelopeStartBytes.Length,
+                                true,
+                                timeoutHelper.RemainingTime(),
+                                onWriteBufferedMessage,
+                                this
+                            );
 
                             if (writeBufferedResult == AsyncCompletionResult.Completed)
                             {
@@ -1858,8 +2294,15 @@ namespace System.ServiceModel.Channels
                     return true;
                 }
 
-                AsyncCompletionResult result = connection.BeginWrite(endBytes, 0,
-                    endBytes.Length, true, timeoutHelper.RemainingTime(), onWriteEndBytes, this);
+                AsyncCompletionResult result = connection.BeginWrite(
+                    endBytes,
+                    0,
+                    endBytes.Length,
+                    true,
+                    timeoutHelper.RemainingTime(),
+                    onWriteEndBytes,
+                    this
+                );
 
                 if (result == AsyncCompletionResult.Queued)
                 {

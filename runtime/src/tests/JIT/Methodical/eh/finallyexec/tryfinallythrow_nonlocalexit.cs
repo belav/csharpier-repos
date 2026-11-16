@@ -3,11 +3,11 @@
 
 /*
 A test to make sure that calls to finally for nonlocal exits are
-done outside of trybody 
+done outside of trybody
     try {
         goto nonlocal_exit;
     } finally {
-        throw; // if the finally is being called from trybody, the finally will be executed 
+        throw; // if the finally is being called from trybody, the finally will be executed
            // multiple times
     }
 */
@@ -18,7 +18,6 @@ namespace hello_tryfinallythrow_nonlocalexit_finallyexec_cs
 {
     public class Class1
     {
-
         private static TestUtil.TestLog testLog;
 
         static Class1()
@@ -36,26 +35,27 @@ namespace hello_tryfinallythrow_nonlocalexit_finallyexec_cs
             testLog = new TestUtil.TestLog(expectedOut);
         }
 
-        static public void Middle(int i)
+        public static void Middle(int i)
         {
             try
             {
-                if (i == 0) goto done;
+                if (i == 0)
+                    goto done;
                 Console.WriteLine("in try");
             }
             finally
             {
                 Console.WriteLine("in finally");
-                if (i == 0) throw new Exception();
+                if (i == 0)
+                    throw new Exception();
             }
             Console.WriteLine("after finally");
             done:
             Console.WriteLine("done");
-
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();
@@ -77,4 +77,3 @@ namespace hello_tryfinallythrow_nonlocalexit_finallyexec_cs
         }
     }
 }
-

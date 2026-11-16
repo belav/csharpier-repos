@@ -20,13 +20,13 @@ namespace System.Workflow.Activities
     {
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty ReceiveContextCollectionProperty =
-            DependencyProperty.RegisterAttached("ReceiveContextCollection",
-            typeof(ReceiveContextCollection),
-            typeof(ReceiveContextCollection));
+            DependencyProperty.RegisterAttached(
+                "ReceiveContextCollection",
+                typeof(ReceiveContextCollection),
+                typeof(ReceiveContextCollection)
+            );
 
-        public ReceiveContextCollection()
-        {
-        }
+        public ReceiveContextCollection() { }
 
         public ReceiveContext GetItem(string key)
         {

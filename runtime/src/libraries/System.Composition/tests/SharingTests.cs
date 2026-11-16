@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Composition;
 using System.Composition.Hosting;
 using System.Composition.Hosting.Providers;
 using System.Linq;
+using System.Text;
 using Xunit;
 
 namespace System.Composition.UnitTests
@@ -21,26 +21,19 @@ namespace System.Composition.UnitTests
     public class NonSharedClass : ISharedTestingClass
     {
         [ImportingConstructor]
-        public NonSharedClass()
-        {
-        }
+        public NonSharedClass() { }
 
         public void Method() { }
     }
-
 
     [Export(typeof(ISharedTestingClass))]
     [Shared]
     public class SharedClass : ISharedTestingClass
     {
         [ImportingConstructor]
-        public SharedClass()
-        {
-        }
+        public SharedClass() { }
 
-        public void Method()
-        {
-        }
+        public void Method() { }
     }
 
     [Export]
@@ -48,6 +41,7 @@ namespace System.Composition.UnitTests
     public class ClassWithExportFactoryShared
     {
         private readonly ExportFactory<ISharedTestingClass> _fact;
+
         [ImportingConstructor]
         public ClassWithExportFactoryShared(ExportFactory<ISharedTestingClass> factory)
         {
@@ -67,6 +61,7 @@ namespace System.Composition.UnitTests
     public class ClassWithExportFactoryNonShared
     {
         private readonly ExportFactory<ISharedTestingClass> _fact;
+
         [ImportingConstructor]
         public ClassWithExportFactoryNonShared(ExportFactory<ISharedTestingClass> factory)
         {
@@ -82,15 +77,13 @@ namespace System.Composition.UnitTests
         }
     }
 
-
     [Export]
     public class ClassWithExportFactoryAsAProperty
     {
         [Import]
         public ExportFactory<ISharedTestingClass> _fact { get; set; }
-        public ClassWithExportFactoryAsAProperty()
-        {
-        }
+
+        public ClassWithExportFactoryAsAProperty() { }
 
         public ISharedTestingClass Method()
         {
@@ -102,10 +95,10 @@ namespace System.Composition.UnitTests
     }
 
     internal interface IX { }
+
     internal interface IY { }
 
     [Export]
-
     [Shared("Boundary")]
     public class A
     {
@@ -117,6 +110,7 @@ namespace System.Composition.UnitTests
     {
         public A InstanceA { get; set; }
         public D InstanceD { get; set; }
+
         [ImportingConstructor]
         public B(A a, D d)
         {
@@ -129,6 +123,7 @@ namespace System.Composition.UnitTests
     public class D
     {
         public A InstanceA;
+
         [ImportingConstructor]
         public D(A a)
         {
@@ -136,13 +131,13 @@ namespace System.Composition.UnitTests
         }
     }
 
-
     [Export]
     public class C
     {
         private readonly ExportFactory<B> _fact;
+
         [ImportingConstructor]
-        public C([SharingBoundary("Boundary")]ExportFactory<B> fact)
+        public C([SharingBoundary("Boundary")] ExportFactory<B> fact)
         {
             _fact = fact;
         }
@@ -160,6 +155,7 @@ namespace System.Composition.UnitTests
     public class CPrime
     {
         private readonly ExportFactory<B> _fact;
+
         [ImportingConstructor]
         public CPrime(ExportFactory<B> fact)
         {
@@ -180,6 +176,7 @@ namespace System.Composition.UnitTests
     public class CirC
     {
         public CirA DepA { get; private set; }
+
         [ImportingConstructor]
         public CirC(CirA a)
         {
@@ -187,15 +184,15 @@ namespace System.Composition.UnitTests
         }
     }
 
-
     [Export]
     [Shared]
     public class CirA
     {
         public int SharedState;
         private readonly ExportFactory<CirB> _fact;
+
         [ImportingConstructor]
-        public CirA([SharingBoundary("Boundary")]ExportFactory<CirB> b)
+        public CirA([SharingBoundary("Boundary")] ExportFactory<CirB> b)
         {
             _fact = b;
         }
@@ -213,6 +210,7 @@ namespace System.Composition.UnitTests
     public class CirB
     {
         public CirC DepC { get; private set; }
+
         [ImportingConstructor]
         public CirB(CirC c)
         {
@@ -222,14 +220,14 @@ namespace System.Composition.UnitTests
 
     public interface IProj { }
 
-
     [Export]
     public class SolA
     {
         private readonly IEnumerable<ExportFactory<IProj>> _fact;
         public List<IProj> Projects { get; private set; }
+
         [ImportingConstructor]
-        public SolA([ImportMany][SharingBoundary("B1", "B2")] IEnumerable<ExportFactory<IProj>> c)
+        public SolA([ImportMany] [SharingBoundary("B1", "B2")] IEnumerable<ExportFactory<IProj>> c)
         {
             Projects = new List<IProj>();
             _fact = c;
@@ -247,68 +245,53 @@ namespace System.Composition.UnitTests
         }
     }
 
-
     [Export(typeof(IProj))]
     public class ProjA : IProj
     {
         [ImportingConstructor]
-        public ProjA(DocA docA, ColA colA)
-        {
-        }
+        public ProjA(DocA docA, ColA colA) { }
     }
 
     [Export(typeof(IProj))]
     public class ProjB : IProj
     {
         [ImportingConstructor]
-        public ProjB(DocB docA, ColB colA)
-        {
-        }
+        public ProjB(DocB docA, ColB colA) { }
     }
 
     [Export]
     public class DocA
     {
         [ImportingConstructor]
-        public DocA(ColA colA)
-        {
-        }
+        public DocA(ColA colA) { }
     }
-
-
 
     [Export]
     public class DocB
     {
         [ImportingConstructor]
-        public DocB(ColB colB)
-        {
-        }
+        public DocB(ColB colB) { }
     }
 
     [Export]
     [Shared("B1")]
-
     public class ColA
     {
-        public ColA()
-        { }
+        public ColA() { }
     }
 
     [Export]
     [Shared("B2")]
     public class ColB
     {
-        public ColB()
-        { }
+        public ColB() { }
     }
-
 
     public interface ICol { }
 
-
     [Export(typeof(IX)), Export(typeof(IY)), Shared]
     public class XY : IX, IY { }
+
     public class SharingTest : ContainerTests
     {
         /// <summary>
@@ -328,7 +311,10 @@ namespace System.Composition.UnitTests
             }
             catch (Exception ex)
             {
-                Assert.Contains("The component (unknown) cannot be created outside the Boundary sharing boundary", ex.Message);
+                Assert.Contains(
+                    "The component (unknown) cannot be created outside the Boundary sharing boundary",
+                    ex.Message
+                );
             }
         }
 
@@ -353,7 +339,6 @@ namespace System.Composition.UnitTests
             Assert.True(val2.SharedState == 5);
         }
 
-
         /// <summary>
         /// CirA root of the composition has to be shared explicitly.
         /// </summary>
@@ -376,11 +361,18 @@ namespace System.Composition.UnitTests
         [Fact]
         public void MultipleBoundarySpecified()
         {
-            var cc = CreateContainer(typeof(ProjA), typeof(ProjB), typeof(SolA), typeof(DocA), typeof(DocB), typeof(ColA), typeof(ColB));
+            var cc = CreateContainer(
+                typeof(ProjA),
+                typeof(ProjB),
+                typeof(SolA),
+                typeof(DocA),
+                typeof(DocB),
+                typeof(ColA),
+                typeof(ColB)
+            );
             var solInstance = cc.GetExport<SolA>();
             solInstance.SetupProject();
         }
-
 
         [Fact]
         public void SharedPartExportingMultipleContractsSharesAnInstance()
@@ -432,7 +424,10 @@ namespace System.Composition.UnitTests
         [Fact]
         public void ClassWithExportFactoryAsAProperty()
         {
-            var cc = CreateContainer(typeof(ClassWithExportFactoryAsAProperty), typeof(NonSharedClass));
+            var cc = CreateContainer(
+                typeof(ClassWithExportFactoryAsAProperty),
+                typeof(NonSharedClass)
+            );
             var b1 = cc.GetExport<ClassWithExportFactoryAsAProperty>();
             var inst1 = b1.Method();
             var inst2 = b1.Method();

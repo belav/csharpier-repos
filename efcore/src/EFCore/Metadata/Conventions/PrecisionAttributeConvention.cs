@@ -19,16 +19,15 @@ public class PrecisionAttributeConvention : PropertyAttributeConventionBase<Prec
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public PrecisionAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <inheritdoc />
     protected override void ProcessPropertyAdded(
         IConventionPropertyBuilder propertyBuilder,
         PrecisionAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
+        IConventionContext context
+    )
     {
         propertyBuilder.HasPrecision(attribute.Precision, fromDataAnnotation: true);
 
@@ -43,16 +42,23 @@ public class PrecisionAttributeConvention : PropertyAttributeConventionBase<Prec
         IConventionComplexPropertyBuilder propertyBuilder,
         PrecisionAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
+        IConventionContext context
+    )
     {
         var property = propertyBuilder.Metadata;
         var member = property.GetIdentifyingMemberInfo();
-        if (member != null
-            && Attribute.IsDefined(member, typeof(ForeignKeyAttribute), inherit: true))
+        if (
+            member != null
+            && Attribute.IsDefined(member, typeof(ForeignKeyAttribute), inherit: true)
+        )
         {
             throw new InvalidOperationException(
                 CoreStrings.AttributeNotOnEntityTypeProperty(
-                    "Precision", property.DeclaringType.DisplayName(), property.Name));
+                    "Precision",
+                    property.DeclaringType.DisplayName(),
+                    property.Name
+                )
+            );
         }
     }
 }

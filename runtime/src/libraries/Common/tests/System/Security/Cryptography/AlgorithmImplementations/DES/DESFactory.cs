@@ -12,6 +12,7 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
     public static partial class DESFactory
     {
         public static DES Create() => s_provider.Create();
+
         public static bool OneShotSupported => s_provider.OneShotSupported;
     }
 }

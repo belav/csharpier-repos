@@ -15,27 +15,26 @@ namespace System.ServiceModel.Discovery.Configuration
     {
         ConfigurationPropertyCollection properties;
 
-        public ServiceDiscoveryElement()
-        {
-        }
+        public ServiceDiscoveryElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.AnnouncementEndpoints)]
         public AnnouncementChannelEndpointElementCollection AnnouncementEndpoints
         {
             get
             {
-                return (AnnouncementChannelEndpointElementCollection)base[ConfigurationStrings.AnnouncementEndpoints];
+                return (AnnouncementChannelEndpointElementCollection)
+                    base[ConfigurationStrings.AnnouncementEndpoints];
             }
         }
 
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationPropertyAttributeRule,
-            Justification = "This property is defined by the base class to determine the type of the behavior.")]
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationPropertyAttributeRule,
+            Justification = "This property is defined by the base class to determine the type of the behavior."
+        )]
         public override Type BehaviorType
         {
-            get
-            {
-                return typeof(ServiceDiscoveryBehavior);
-            }
+            get { return typeof(ServiceDiscoveryBehavior); }
         }
 
         protected override ConfigurationPropertyCollection Properties
@@ -44,16 +43,19 @@ namespace System.ServiceModel.Discovery.Configuration
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.AnnouncementEndpoints,
-                        typeof(AnnouncementChannelEndpointElementCollection), 
-                        null, 
-                        null, 
-                        null, 
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.AnnouncementEndpoints,
+                            typeof(AnnouncementChannelEndpointElementCollection),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     this.properties = properties;
                 }
@@ -72,17 +74,26 @@ namespace System.ServiceModel.Discovery.Configuration
                 {
                     throw FxTrace.Exception.AsError(
                         new ConfigurationErrorsException(
-                        SR2.DiscoveryConfigAnnouncementEndpointMissingKind(
-                        typeof(AnnouncementEndpoint).FullName)));
+                            SR2.DiscoveryConfigAnnouncementEndpointMissingKind(
+                                typeof(AnnouncementEndpoint).FullName
+                            )
+                        )
+                    );
                 }
 
-                ServiceEndpoint serviceEndpoint = ConfigLoader.LookupEndpoint(channelEndpointElement, null);
+                ServiceEndpoint serviceEndpoint = ConfigLoader.LookupEndpoint(
+                    channelEndpointElement,
+                    null
+                );
                 if (serviceEndpoint == null)
                 {
                     throw FxTrace.Exception.AsError(
                         new ConfigurationErrorsException(
-                        SR2.DiscoveryConfigInvalidEndpointConfiguration(
-                        channelEndpointElement.Kind)));
+                            SR2.DiscoveryConfigInvalidEndpointConfiguration(
+                                channelEndpointElement.Kind
+                            )
+                        )
+                    );
                 }
 
                 announcementEndpoint = serviceEndpoint as AnnouncementEndpoint;
@@ -90,10 +101,13 @@ namespace System.ServiceModel.Discovery.Configuration
                 {
                     throw FxTrace.Exception.AsError(
                         new InvalidOperationException(
-                        SR2.DiscoveryConfigInvalidAnnouncementEndpoint(
-                        channelEndpointElement.Kind,
-                        serviceEndpoint.GetType().FullName,
-                        typeof(AnnouncementEndpoint).FullName)));
+                            SR2.DiscoveryConfigInvalidAnnouncementEndpoint(
+                                channelEndpointElement.Kind,
+                                serviceEndpoint.GetType().FullName,
+                                typeof(AnnouncementEndpoint).FullName
+                            )
+                        )
+                    );
                 }
 
                 serviceDiscoveryBehavior.AnnouncementEndpoints.Add(announcementEndpoint);

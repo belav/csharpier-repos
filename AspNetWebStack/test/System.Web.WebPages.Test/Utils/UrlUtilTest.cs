@@ -15,8 +15,10 @@ namespace System.Web.WebPages.Test
         {
             AppDomainUtils.RunInSeparateAppDomain(() =>
             {
-                using (IDisposable _ = Utils.CreateHttpContext("default.aspx", "http://localhost/"),
-                                   __ = Utils.CreateHttpRuntime("/"))
+                using (
+                    IDisposable _ = Utils.CreateHttpContext("default.aspx", "http://localhost/"),
+                        __ = Utils.CreateHttpRuntime("/")
+                )
                 {
                     // Arrange
                     var vpath = "~/";
@@ -41,8 +43,13 @@ namespace System.Web.WebPages.Test
         {
             AppDomainUtils.RunInSeparateAppDomain(() =>
             {
-                using (IDisposable _ = Utils.CreateHttpContext("default.aspx", "http://localhost/WebSite1/subfolder1/default.aspx"),
-                                   __ = Utils.CreateHttpRuntime("/WebSite1/"))
+                using (
+                    IDisposable _ = Utils.CreateHttpContext(
+                            "default.aspx",
+                            "http://localhost/WebSite1/subfolder1/default.aspx"
+                        ),
+                        __ = Utils.CreateHttpRuntime("/WebSite1/")
+                )
                 {
                     // Arrange
                     var vpath = "~/subfolder1/default.aspx";
@@ -67,8 +74,13 @@ namespace System.Web.WebPages.Test
         {
             AppDomainUtils.RunInSeparateAppDomain(() =>
             {
-                using (IDisposable _ = Utils.CreateHttpContext("default.aspx", "http://localhost/WebSite1/default.aspx"),
-                                   __ = Utils.CreateHttpRuntime("/WebSite1/"))
+                using (
+                    IDisposable _ = Utils.CreateHttpContext(
+                            "default.aspx",
+                            "http://localhost/WebSite1/default.aspx"
+                        ),
+                        __ = Utils.CreateHttpRuntime("/WebSite1/")
+                )
                 {
                     // Arrange
                     var vpath = "~/default.aspx";
@@ -93,8 +105,13 @@ namespace System.Web.WebPages.Test
         {
             AppDomainUtils.RunInSeparateAppDomain(() =>
             {
-                using (IDisposable _ = Utils.CreateHttpContext("default.aspx", "http://localhost/WebSite1/subfolder1/default.aspx"),
-                                   __ = Utils.CreateHttpRuntime("/WebSite1/"))
+                using (
+                    IDisposable _ = Utils.CreateHttpContext(
+                            "default.aspx",
+                            "http://localhost/WebSite1/subfolder1/default.aspx"
+                        ),
+                        __ = Utils.CreateHttpRuntime("/WebSite1/")
+                )
                 {
                     // Arrange
                     var vpath = "~/subfolder1/default.aspx";
@@ -126,7 +143,7 @@ namespace System.Web.WebPages.Test
                 var contextMock = GetMockHttpContext(true);
                 contextMock.Setup(c => c.Request.RawUrl).Returns("/subfolder1/default.aspx");
                 contextMock.Setup(c => c.Request.Path).Returns("/myapp/subfolder1/default.aspx");
-                    
+
                 // Act
                 var actual1 = UrlUtil.GenerateClientUrl(contextMock.Object, vpath, href);
 
@@ -234,7 +251,14 @@ namespace System.Web.WebPages.Test
 
             // Act
             string query;
-            var path = UrlUtil.BuildUrl(page, out query, "products", new { cat = 37 }, "furniture", new { sort = "name", dir = "desc" });
+            var path = UrlUtil.BuildUrl(
+                page,
+                out query,
+                "products",
+                new { cat = 37 },
+                "furniture",
+                new { sort = "name", dir = "desc" }
+            );
 
             // Assert
             Assert.Equal(path + query, page + "/products/furniture?cat=37&sort=name&dir=desc");
@@ -245,13 +269,29 @@ namespace System.Web.WebPages.Test
         {
             AppDomainUtils.RunInSeparateAppDomain(() =>
             {
-                using (IDisposable _ = Utils.CreateHttpContext("default.aspx", "http://localhost/"),
-                                   __ = Utils.CreateHttpRuntime("/"))
+                using (
+                    IDisposable _ = Utils.CreateHttpContext("default.aspx", "http://localhost/"),
+                        __ = Utils.CreateHttpRuntime("/")
+                )
                 {
-                    Assert.Equal("/world/test.cshtml?Prop1=value1",
-                                 UrlUtil.GenerateClientUrl(new HttpContextWrapper(HttpContext.Current), "~/world/page.cshtml", "test.cshtml", new { Prop1 = "value1" }));
-                    Assert.Equal("/world/test.cshtml?Prop1=value1&Prop2=value2",
-                                 UrlUtil.GenerateClientUrl(new HttpContextWrapper(HttpContext.Current), "~/world/page.cshtml", "test.cshtml", new { Prop1 = "value1", Prop2 = "value2" }));
+                    Assert.Equal(
+                        "/world/test.cshtml?Prop1=value1",
+                        UrlUtil.GenerateClientUrl(
+                            new HttpContextWrapper(HttpContext.Current),
+                            "~/world/page.cshtml",
+                            "test.cshtml",
+                            new { Prop1 = "value1" }
+                        )
+                    );
+                    Assert.Equal(
+                        "/world/test.cshtml?Prop1=value1&Prop2=value2",
+                        UrlUtil.GenerateClientUrl(
+                            new HttpContextWrapper(HttpContext.Current),
+                            "~/world/page.cshtml",
+                            "test.cshtml",
+                            new { Prop1 = "value1", Prop2 = "value2" }
+                        )
+                    );
                 }
             });
         }
@@ -263,7 +303,10 @@ namespace System.Web.WebPages.Test
             Mock<HttpContextBase> mockHttpContext = GetMockHttpContext(isUrlRewriteOn: false);
 
             // Act
-            string returnedUrl = UrlUtil.GenerateClientUrl(mockHttpContext.Object, "should remain unchanged");
+            string returnedUrl = UrlUtil.GenerateClientUrl(
+                mockHttpContext.Object,
+                "should remain unchanged"
+            );
 
             // Assert
             Assert.Equal("should remain unchanged", returnedUrl);
@@ -280,7 +323,10 @@ namespace System.Web.WebPages.Test
             mockHttpContext.Setup(c => c.Request.Path).Returns("/myapp/foo/bar/baz");
 
             // Act
-            string returnedUrl = UrlUtil.GenerateClientUrl(mockHttpContext.Object, "/myapp/some/absolute/path?alpha=bravo");
+            string returnedUrl = UrlUtil.GenerateClientUrl(
+                mockHttpContext.Object,
+                "/myapp/some/absolute/path?alpha=bravo"
+            );
 
             // Assert
             Assert.Equal("/quux/some/absolute/path?alpha=bravo", returnedUrl);
@@ -293,7 +339,10 @@ namespace System.Web.WebPages.Test
             Mock<HttpContextBase> mockHttpContext = GetMockHttpContext(isUrlRewriteOn: false);
 
             // Act
-            string returnedUrl = UrlUtil.GenerateClientUrl(mockHttpContext.Object, "~/foo/bar?alpha=bravo");
+            string returnedUrl = UrlUtil.GenerateClientUrl(
+                mockHttpContext.Object,
+                "~/foo/bar?alpha=bravo"
+            );
 
             // Assert
             Assert.Equal("/myapp/foo/bar?alpha=bravo", returnedUrl);
@@ -310,7 +359,10 @@ namespace System.Web.WebPages.Test
             mockHttpContext.Setup(c => c.Request.Path).Returns("/myapp/foo/baz");
 
             // Act
-            string returnedUrl = UrlUtil.GenerateClientUrl(mockHttpContext.Object, "~/foo/bar?alpha=bravo");
+            string returnedUrl = UrlUtil.GenerateClientUrl(
+                mockHttpContext.Object,
+                "~/foo/bar?alpha=bravo"
+            );
 
             // Assert
             Assert.Equal("/quux/foo/bar?alpha=bravo", returnedUrl);
@@ -440,7 +492,10 @@ namespace System.Web.WebPages.Test
         public void MakeRelativeFromFileWithQueryToFileWithQuery()
         {
             // Act
-            string returnedUrl = UrlUtil.MakeRelative("/foo/bar?charlie=delta", "/baz/quux?alpha=bravo");
+            string returnedUrl = UrlUtil.MakeRelative(
+                "/foo/bar?charlie=delta",
+                "/baz/quux?alpha=bravo"
+            );
 
             // Assert
             Assert.Equal("../baz/quux?alpha=bravo", returnedUrl);
@@ -471,11 +526,18 @@ namespace System.Web.WebPages.Test
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
 
             Mock<HttpWorkerRequest> mockWorkerRequest = new Mock<HttpWorkerRequest>();
-            mockContext.As<IServiceProvider>().Setup(sp => sp.GetService(typeof(HttpWorkerRequest))).Returns(mockWorkerRequest.Object);
-            mockWorkerRequest.Setup(wr => wr.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar)).Returns("On!");
+            mockContext
+                .As<IServiceProvider>()
+                .Setup(sp => sp.GetService(typeof(HttpWorkerRequest)))
+                .Returns(mockWorkerRequest.Object);
+            mockWorkerRequest
+                .Setup(wr => wr.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar))
+                .Returns("On!");
             if (isUrlRewriteOn)
             {
-                mockWorkerRequest.Setup(wr => wr.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar)).Returns("Yup!");
+                mockWorkerRequest
+                    .Setup(wr => wr.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar))
+                    .Returns("Yup!");
             }
 
             NameValueCollection serverVars = new NameValueCollection();

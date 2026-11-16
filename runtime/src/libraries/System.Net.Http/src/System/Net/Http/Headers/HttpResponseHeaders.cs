@@ -30,7 +30,13 @@ namespace System.Net.Http.Headers
         }
 
         public HttpHeaderValueCollection<string> AcceptRanges =>
-            GetSpecializedCollection(AcceptRangesSlot, static thisRef => new HttpHeaderValueCollection<string>(KnownHeaders.AcceptRanges.Descriptor, thisRef));
+            GetSpecializedCollection(
+                AcceptRangesSlot,
+                static thisRef => new HttpHeaderValueCollection<string>(
+                    KnownHeaders.AcceptRanges.Descriptor,
+                    thisRef
+                )
+            );
 
         public TimeSpan? Age
         {
@@ -40,7 +46,10 @@ namespace System.Net.Http.Headers
 
         public EntityTagHeaderValue? ETag
         {
-            get { return (EntityTagHeaderValue?)GetSingleParsedValue(KnownHeaders.ETag.Descriptor); }
+            get
+            {
+                return (EntityTagHeaderValue?)GetSingleParsedValue(KnownHeaders.ETag.Descriptor);
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.ETag.Descriptor, value); }
         }
 
@@ -51,22 +60,51 @@ namespace System.Net.Http.Headers
         }
 
         public HttpHeaderValueCollection<AuthenticationHeaderValue> ProxyAuthenticate =>
-            GetSpecializedCollection(ProxyAuthenticateSlot, static thisRef => new HttpHeaderValueCollection<AuthenticationHeaderValue>(KnownHeaders.ProxyAuthenticate.Descriptor, thisRef));
+            GetSpecializedCollection(
+                ProxyAuthenticateSlot,
+                static thisRef => new HttpHeaderValueCollection<AuthenticationHeaderValue>(
+                    KnownHeaders.ProxyAuthenticate.Descriptor,
+                    thisRef
+                )
+            );
 
         public RetryConditionHeaderValue? RetryAfter
         {
-            get { return (RetryConditionHeaderValue?)GetSingleParsedValue(KnownHeaders.RetryAfter.Descriptor); }
+            get
+            {
+                return (RetryConditionHeaderValue?)GetSingleParsedValue(
+                    KnownHeaders.RetryAfter.Descriptor
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.RetryAfter.Descriptor, value); }
         }
 
         public HttpHeaderValueCollection<ProductInfoHeaderValue> Server =>
-            GetSpecializedCollection(ServerSlot, static thisRef => new HttpHeaderValueCollection<ProductInfoHeaderValue>(KnownHeaders.Server.Descriptor, thisRef));
+            GetSpecializedCollection(
+                ServerSlot,
+                static thisRef => new HttpHeaderValueCollection<ProductInfoHeaderValue>(
+                    KnownHeaders.Server.Descriptor,
+                    thisRef
+                )
+            );
 
         public HttpHeaderValueCollection<string> Vary =>
-            GetSpecializedCollection(VarySlot, static thisRef => new HttpHeaderValueCollection<string>(KnownHeaders.Vary.Descriptor, thisRef));
+            GetSpecializedCollection(
+                VarySlot,
+                static thisRef => new HttpHeaderValueCollection<string>(
+                    KnownHeaders.Vary.Descriptor,
+                    thisRef
+                )
+            );
 
         public HttpHeaderValueCollection<AuthenticationHeaderValue> WwwAuthenticate =>
-            GetSpecializedCollection(WwwAuthenticateSlot, static thisRef => new HttpHeaderValueCollection<AuthenticationHeaderValue>(KnownHeaders.WWWAuthenticate.Descriptor, thisRef));
+            GetSpecializedCollection(
+                WwwAuthenticateSlot,
+                static thisRef => new HttpHeaderValueCollection<AuthenticationHeaderValue>(
+                    KnownHeaders.WWWAuthenticate.Descriptor,
+                    thisRef
+                )
+            );
 
         #endregion
 
@@ -134,8 +172,12 @@ namespace System.Net.Http.Headers
         #endregion
 
         internal HttpResponseHeaders(bool containsTrailingHeaders = false)
-            : base(containsTrailingHeaders ? HttpHeaderType.All ^ HttpHeaderType.Request : HttpHeaderType.General | HttpHeaderType.Response | HttpHeaderType.Custom,
-                  HttpHeaderType.Request)
+            : base(
+                containsTrailingHeaders
+                    ? HttpHeaderType.All ^ HttpHeaderType.Request
+                    : HttpHeaderType.General | HttpHeaderType.Response | HttpHeaderType.Custom,
+                HttpHeaderType.Request
+            )
         {
             _containsTrailingHeaders = containsTrailingHeaders;
         }
@@ -167,6 +209,7 @@ namespace System.Net.Http.Headers
             return (knownHeader.HeaderType & HttpHeaderType.NonTrailing) == 0;
         }
 
-        private HttpGeneralHeaders GeneralHeaders => _generalHeaders ??= new HttpGeneralHeaders(this);
+        private HttpGeneralHeaders GeneralHeaders =>
+            _generalHeaders ??= new HttpGeneralHeaders(this);
     }
 }

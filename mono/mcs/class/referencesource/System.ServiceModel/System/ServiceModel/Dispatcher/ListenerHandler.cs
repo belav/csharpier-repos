@@ -16,9 +16,15 @@ namespace System.ServiceModel.Dispatcher
 
     class ListenerHandler : CommunicationObject, ISessionThrottleNotification
     {
-        static AsyncCallback acceptCallback = Fx.ThunkCallback(new AsyncCallback(ListenerHandler.AcceptCallback));
-        static Action<object> initiateChannelPump = new Action<object>(ListenerHandler.InitiateChannelPump);
-        static AsyncCallback waitCallback = Fx.ThunkCallback(new AsyncCallback(ListenerHandler.WaitCallback));
+        static AsyncCallback acceptCallback = Fx.ThunkCallback(
+            new AsyncCallback(ListenerHandler.AcceptCallback)
+        );
+        static Action<object> initiateChannelPump = new Action<object>(
+            ListenerHandler.InitiateChannelPump
+        );
+        static AsyncCallback waitCallback = Fx.ThunkCallback(
+            new AsyncCallback(ListenerHandler.WaitCallback)
+        );
 
         readonly ErrorHandlingAcceptor acceptor;
         readonly ChannelDispatcher channelDispatcher;
@@ -33,7 +39,13 @@ namespace System.ServiceModel.Dispatcher
         IDefaultCommunicationTimeouts timeouts;
         WrappedTransaction wrappedTransaction;
 
-        internal ListenerHandler(IListenerBinder listenerBinder, ChannelDispatcher channelDispatcher, ServiceHostBase host, ServiceThrottle throttle, IDefaultCommunicationTimeouts timeouts)
+        internal ListenerHandler(
+            IListenerBinder listenerBinder,
+            ChannelDispatcher channelDispatcher,
+            ServiceHostBase host,
+            ServiceThrottle throttle,
+            IDefaultCommunicationTimeouts timeouts
+        )
         {
             this.listenerBinder = listenerBinder;
             if (!((this.listenerBinder != null)))
@@ -46,7 +58,9 @@ namespace System.ServiceModel.Dispatcher
             if (!((this.channelDispatcher != null)))
             {
                 Fx.Assert("ListenerHandler.ctor: (this.channelDispatcher != null)");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("channelDispatcher");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "channelDispatcher"
+                );
             }
 
             this.host = host;
@@ -100,16 +114,18 @@ namespace System.ServiceModel.Dispatcher
             get { return this.host; }
         }
 
-        new internal object ThisLock
+        internal new object ThisLock
         {
             get { return base.ThisLock; }
         }
 
-        protected override void OnOpen(TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -123,9 +139,15 @@ namespace System.ServiceModel.Dispatcher
         {
             base.OnOpened();
             this.channelDispatcher.Channels.IncrementActivityCount();
-            if (this.channelDispatcher.IsTransactedReceive && this.channelDispatcher.ReceiveContextEnabled && this.channelDispatcher.MaxTransactedBatchSize > 0)
+            if (
+                this.channelDispatcher.IsTransactedReceive
+                && this.channelDispatcher.ReceiveContextEnabled
+                && this.channelDispatcher.MaxTransactedBatchSize > 0
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.IncompatibleBehaviors)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.IncompatibleBehaviors))
+                );
             }
             NewChannelPump();
         }
@@ -160,7 +182,7 @@ namespace System.ServiceModel.Dispatcher
         {
             IChannelListener listener = this.listenerBinder.Listener;
 
-            for (;;)
+            for (; ; )
             {
                 if (this.acceptedNull || (listener.State == CommunicationState.Faulted))
                 {
@@ -182,7 +204,7 @@ namespace System.ServiceModel.Dispatcher
         {
             IChannelListener listener = this.listenerBinder.Listener;
 
-            for (;;)
+            for (; ; )
             {
                 if (this.acceptedNull || (listener.State == CommunicationState.Faulted))
                 {
@@ -212,7 +234,7 @@ namespace System.ServiceModel.Dispatcher
         {
             IChannelListener listener = this.listenerBinder.Listener;
 
-            for (;;)
+            for (; ; )
             {
                 if (this.acceptedNull || (listener.State == CommunicationState.Faulted))
                 {
@@ -220,7 +242,10 @@ namespace System.ServiceModel.Dispatcher
                     break;
                 }
 
-                IAsyncResult result = this.acceptor.BeginWaitForChannel(ListenerHandler.waitCallback, this);
+                IAsyncResult result = this.acceptor.BeginWaitForChannel(
+                    ListenerHandler.waitCallback,
+                    this
+                );
 
                 if (!result.CompletedSynchronously)
                 {
@@ -240,7 +265,8 @@ namespace System.ServiceModel.Dispatcher
             if (result.CompletedSynchronously)
             {
                 return;
-            };
+            }
+            ;
 
             ListenerHandler listenerHandler = (ListenerHandler)result.AsyncState;
             IChannelListener listener = listenerHandler.listenerBinder.Listener;
@@ -285,7 +311,11 @@ namespace System.ServiceModel.Dispatcher
 
         bool AcceptAndAcquireThrottle()
         {
-            IAsyncResult result = this.acceptor.BeginTryAccept(TimeSpan.MaxValue, ListenerHandler.acceptCallback, this);
+            IAsyncResult result = this.acceptor.BeginTryAccept(
+                TimeSpan.MaxValue,
+                ListenerHandler.acceptCallback,
+                this
+            );
             if (result.CompletedSynchronously)
             {
                 return HandleEndAccept(result);
@@ -299,13 +329,24 @@ namespace System.ServiceModel.Dispatcher
 
             try
             {
-                tx = TransactionBehavior.CreateTransaction(this.ChannelDispatcher.TransactionIsolationLevel, this.ChannelDispatcher.TransactionTimeout);
+                tx = TransactionBehavior.CreateTransaction(
+                    this.ChannelDispatcher.TransactionIsolationLevel,
+                    this.ChannelDispatcher.TransactionTimeout
+                );
 
                 IChannelBinder binder = null;
                 using (TransactionScope scope = new TransactionScope(tx))
                 {
-                    TimeSpan acceptTimeout = TimeoutHelper.Min(this.ChannelDispatcher.TransactionTimeout, this.ChannelDispatcher.DefaultCommunicationTimeouts.ReceiveTimeout);
-                    if (!this.acceptor.TryAccept(TransactionBehavior.NormalizeTimeout(acceptTimeout), out binder))
+                    TimeSpan acceptTimeout = TimeoutHelper.Min(
+                        this.ChannelDispatcher.TransactionTimeout,
+                        this.ChannelDispatcher.DefaultCommunicationTimeouts.ReceiveTimeout
+                    );
+                    if (
+                        !this.acceptor.TryAccept(
+                            TransactionBehavior.NormalizeTimeout(acceptTimeout),
+                            out binder
+                        )
+                    )
                     {
                         return false;
                     }
@@ -314,7 +355,10 @@ namespace System.ServiceModel.Dispatcher
                 if (null != binder)
                 {
                     this.channel = new ListenerChannel(binder);
-                    this.idleManager = SessionIdleManager.CreateIfNeeded(this.channel.Binder, this.channelDispatcher.DefaultCommunicationTimeouts.ReceiveTimeout);
+                    this.idleManager = SessionIdleManager.CreateIfNeeded(
+                        this.channel.Binder,
+                        this.channelDispatcher.DefaultCommunicationTimeouts.ReceiveTimeout
+                    );
                     return true;
                 }
                 else
@@ -383,7 +427,10 @@ namespace System.ServiceModel.Dispatcher
             if (this.channel != null)
             {
                 Fx.Assert(this.idleManager == null, "There cannot be an existing idle manager");
-                this.idleManager = SessionIdleManager.CreateIfNeeded(this.channel.Binder, this.channelDispatcher.DefaultCommunicationTimeouts.ReceiveTimeout);
+                this.idleManager = SessionIdleManager.CreateIfNeeded(
+                    this.channel.Binder,
+                    this.channelDispatcher.DefaultCommunicationTimeouts.ReceiveTimeout
+                );
             }
             else
             {
@@ -412,7 +459,11 @@ namespace System.ServiceModel.Dispatcher
 
         bool AcquireThrottle()
         {
-            if ((this.channel != null) && (this.throttle != null) && (this.channelDispatcher.Session))
+            if (
+                (this.channel != null)
+                && (this.throttle != null)
+                && (this.channelDispatcher.Session)
+            )
             {
                 return this.throttle.AcquireSession(this);
             }
@@ -431,19 +482,32 @@ namespace System.ServiceModel.Dispatcher
         {
             try
             {
-                if (channel.State != CommunicationState.Closing && channel.State != CommunicationState.Closed)
+                if (
+                    channel.State != CommunicationState.Closing
+                    && channel.State != CommunicationState.Closed
+                )
                 {
                     CloseChannelState state = new CloseChannelState(this, channel);
                     if (channel is ISessionChannel<IDuplexSession>)
                     {
-                        IDuplexSession duplexSession = ((ISessionChannel<IDuplexSession>)channel).Session;
-                        IAsyncResult result = duplexSession.BeginCloseOutputSession(timeout, Fx.ThunkCallback(new AsyncCallback(CloseOutputSessionCallback)), state);
+                        IDuplexSession duplexSession = (
+                            (ISessionChannel<IDuplexSession>)channel
+                        ).Session;
+                        IAsyncResult result = duplexSession.BeginCloseOutputSession(
+                            timeout,
+                            Fx.ThunkCallback(new AsyncCallback(CloseOutputSessionCallback)),
+                            state
+                        );
                         if (result.CompletedSynchronously)
                             duplexSession.EndCloseOutputSession(result);
                     }
                     else
                     {
-                        IAsyncResult result = channel.BeginClose(timeout, Fx.ThunkCallback(new AsyncCallback(CloseChannelCallback)), state);
+                        IAsyncResult result = channel.BeginClose(
+                            timeout,
+                            Fx.ThunkCallback(new AsyncCallback(CloseChannelCallback)),
+                            state
+                        );
                         if (result.CompletedSynchronously)
                             channel.EndClose(result);
                     }
@@ -522,7 +586,9 @@ namespace System.ServiceModel.Dispatcher
             CloseChannelState state = (CloseChannelState)result.AsyncState;
             try
             {
-                ((ISessionChannel<IDuplexSession>)state.Channel).Session.EndCloseOutputSession(result);
+                ((ISessionChannel<IDuplexSession>)state.Channel).Session.EndCloseOutputSession(
+                    result
+                );
             }
             catch (Exception e)
             {
@@ -554,7 +620,15 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (channel != null)
                 {
-                    ChannelHandler handler = new ChannelHandler(listenerBinder.MessageVersion, channel.Binder, this.throttle, this, (channel.Throttle != null), this.wrappedTransaction, idleManager);
+                    ChannelHandler handler = new ChannelHandler(
+                        listenerBinder.MessageVersion,
+                        channel.Binder,
+                        this.throttle,
+                        this,
+                        (channel.Throttle != null),
+                        this.wrappedTransaction,
+                        idleManager
+                    );
 
                     if (!channel.Binder.HasSession)
                     {
@@ -563,7 +637,8 @@ namespace System.ServiceModel.Dispatcher
 
                     if (channel.Binder is DuplexChannelBinder)
                     {
-                        DuplexChannelBinder duplexChannelBinder = channel.Binder as DuplexChannelBinder;
+                        DuplexChannelBinder duplexChannelBinder =
+                            channel.Binder as DuplexChannelBinder;
                         duplexChannelBinder.ChannelHandler = handler;
                         duplexChannelBinder.DefaultCloseTimeout = this.DefaultCloseTimeout;
 
@@ -622,9 +697,11 @@ namespace System.ServiceModel.Dispatcher
 
         bool IsSessionChannel(IChannel channel)
         {
-            return (channel is ISessionChannel<IDuplexSession> ||
-                    channel is ISessionChannel<IInputSession> ||
-                    channel is ISessionChannel<IOutputSession>);
+            return (
+                channel is ISessionChannel<IDuplexSession>
+                || channel is ISessionChannel<IInputSession>
+                || channel is ISessionChannel<IOutputSession>
+            );
         }
 
         void CancelPendingIdleManager()
@@ -649,10 +726,13 @@ namespace System.ServiceModel.Dispatcher
 
             // Wait for channels to finish aborting
             this.channelDispatcher.Channels.Abort();
-
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
 
@@ -666,7 +746,11 @@ namespace System.ServiceModel.Dispatcher
             this.CloseChannels(timeoutHelper.RemainingTime());
 
             // Wait for channels to finish closing
-            return this.channelDispatcher.Channels.BeginClose(timeoutHelper.RemainingTime(), callback, state);
+            return this.channelDispatcher.Channels.BeginClose(
+                timeoutHelper.RemainingTime(),
+                callback,
+                state
+            );
         }
 
         protected override void OnClose(TimeSpan timeout)

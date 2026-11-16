@@ -21,7 +21,10 @@ namespace Microsoft.CodeAnalysis.CSharp.DecompiledSource
 {
     internal class AssemblyResolver : IAssemblyResolver
     {
-        private static readonly Dictionary<MetadataReference, (string fileName, ImmutableArray<byte> image)> _inMemoryImagesForTesting = new();
+        private static readonly Dictionary<
+            MetadataReference,
+            (string fileName, ImmutableArray<byte> image)
+        > _inMemoryImagesForTesting = new();
 
         private readonly Compilation _parentCompilation;
         private readonly Dictionary<string, List<IAssemblySymbol>> _cache = new();
@@ -59,12 +62,20 @@ namespace Microsoft.CodeAnalysis.CSharp.DecompiledSource
             return Task.FromResult(ResolveModule(mainModule, moduleName));
         }
 
-        [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Could be non-static if instance data is accessed")]
+        [SuppressMessage(
+            "Performance",
+            "CA1822:Mark members as static",
+            Justification = "Could be non-static if instance data is accessed"
+        )]
         public PEFile TryResolve(MetadataReference metadataReference, PEStreamOptions streamOptions)
         {
             if (_inMemoryImagesForTesting.TryGetValue(metadataReference, out var pair))
             {
-                return new PEFile(pair.fileName, new MemoryStream(pair.image.ToArray()), streamOptions);
+                return new PEFile(
+                    pair.fileName,
+                    new MemoryStream(pair.image.ToArray()),
+                    streamOptions
+                );
             }
 
             return null;
@@ -90,7 +101,11 @@ namespace Microsoft.CodeAnalysis.CSharp.DecompiledSource
                 Log(FeaturesResources.Found_single_assembly_0, assemblies[0]);
                 if (assemblies[0].Identity.Version != name.Version)
                 {
-                    Log(FeaturesResources.WARN_Version_mismatch_Expected_0_Got_1, name.Version, assemblies[0].Identity.Version);
+                    Log(
+                        FeaturesResources.WARN_Version_mismatch_Expected_0_Got_1,
+                        name.Version,
+                        assemblies[0].Identity.Version
+                    );
                 }
 
                 return MakePEFile(assemblies[0]);
@@ -166,12 +181,16 @@ namespace Microsoft.CodeAnalysis.CSharp.DecompiledSource
             return new PEFile(moduleFileName, PEStreamOptions.PrefetchMetadata);
         }
 
-        private void Log(string format, params object[] args)
-            => _logger.AppendFormat(format + Environment.NewLine, args);
+        private void Log(string format, params object[] args) =>
+            _logger.AppendFormat(format + Environment.NewLine, args);
 
         internal static class TestAccessor
         {
-            public static void AddInMemoryImage(MetadataReference reference, string fileName, ImmutableArray<byte> image)
+            public static void AddInMemoryImage(
+                MetadataReference reference,
+                string fileName,
+                ImmutableArray<byte> image
+            )
             {
                 Contract.ThrowIfNull(fileName);
                 _inMemoryImagesForTesting.Add(reference, (fileName, image));

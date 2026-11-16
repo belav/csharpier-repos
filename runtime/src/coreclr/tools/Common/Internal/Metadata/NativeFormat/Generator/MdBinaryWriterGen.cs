@@ -3,16 +3,14 @@
 
 //
 // Generates the C# MdBinaryWriter class. This classes is responsible for correctly decoding
-// data members in the .metadata file. See NativeFormatWriterGen.cs for how the MetadataWriter 
+// data members in the .metadata file. See NativeFormatWriterGen.cs for how the MetadataWriter
 // use this class.
 //
 
 class MdBinaryWriterGen : CsWriter
 {
     public MdBinaryWriterGen(string fileName)
-        : base(fileName)
-    {
-    }
+        : base(fileName) { }
 
     public void EmitSource()
     {

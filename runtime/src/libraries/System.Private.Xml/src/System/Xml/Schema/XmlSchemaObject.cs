@@ -53,37 +53,42 @@ namespace System.Xml.Schema
         }
 
         internal virtual void OnAdd(XmlSchemaObjectCollection container, object? item) { }
+
         internal virtual void OnRemove(XmlSchemaObjectCollection container, object? item) { }
+
         internal virtual void OnClear(XmlSchemaObjectCollection container) { }
 
         [XmlIgnore]
         internal virtual string? IdAttribute
         {
-            get { Debug.Fail("Should not use base property"); return null; }
+            get
+            {
+                Debug.Fail("Should not use base property");
+                return null;
+            }
             set { Debug.Fail("Should not use base property"); }
         }
 
         internal virtual void SetUnhandledAttributes(XmlAttribute[] moreAttributes) { }
+
         internal virtual void AddAnnotation(XmlSchemaAnnotation annotation) { }
 
         [XmlIgnore]
         internal virtual string? NameAttribute
         {
-            get { Debug.Fail("Should not use base property"); return null; }
+            get
+            {
+                Debug.Fail("Should not use base property");
+                return null;
+            }
             set { Debug.Fail("Should not use base property"); }
         }
 
         [XmlIgnore]
         internal bool IsProcessing
         {
-            get
-            {
-                return _isProcessing;
-            }
-            set
-            {
-                _isProcessing = value;
-            }
+            get { return _isProcessing; }
+            set { _isProcessing = value; }
         }
 
         internal virtual XmlSchemaObject Clone()

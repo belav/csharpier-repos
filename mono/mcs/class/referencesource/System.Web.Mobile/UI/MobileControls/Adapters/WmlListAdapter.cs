@@ -1,23 +1,23 @@
 //------------------------------------------------------------------------------
 // <copyright file="WmlListAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.MobileControls;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
     /*
@@ -26,29 +26,32 @@ namespace System.Web.UI.MobileControls.Adapters
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\WmlListAdapter.uex' path='docs/doc[@for="WmlListAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class WmlListAdapter : WmlControlAdapter
     {
         /// <include file='doc\WmlListAdapter.uex' path='docs/doc[@for="WmlListAdapter.Control"]/*' />
         protected new List Control
         {
-            get
-            {
-                return (List)base.Control;
-            }
+            get { return (List)base.Control; }
         }
 
         /// <include file='doc\WmlListAdapter.uex' path='docs/doc[@for="WmlListAdapter.OnInit"]/*' />
-        public override void OnInit(EventArgs e)
-        {
-        }
+        public override void OnInit(EventArgs e) { }
 
         /// <include file='doc\WmlListAdapter.uex' path='docs/doc[@for="WmlListAdapter.Render"]/*' />
         public override void Render(WmlMobileTextWriter writer)
         {
-            if(Control.HasControls())
+            if (Control.HasControls())
             {
                 writer.BeginCustomMarkup();
                 RenderChildren(writer);
@@ -74,7 +77,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
             writer.EnterStyle(Style);
             for (int i = 0; i < pageSize; i++)
-            {                        
+            {
                 MobileListItem item = items[pageStart + i];
 
                 if (itemsAsLinks)
@@ -83,7 +86,14 @@ namespace System.Web.UI.MobileControls.Adapters
                 }
                 else if (hasCmdHandler)
                 {
-                    RenderPostBackEvent(writer, item.Index.ToString(CultureInfo.InvariantCulture), null, true, item.Text, true); 
+                    RenderPostBackEvent(
+                        writer,
+                        item.Index.ToString(CultureInfo.InvariantCulture),
+                        null,
+                        true,
+                        item.Text,
+                        true
+                    );
                 }
                 else
                 {
@@ -94,13 +104,3 @@ namespace System.Web.UI.MobileControls.Adapters
         }
     }
 }
-
-
-
-
-
-
-
-
-
-

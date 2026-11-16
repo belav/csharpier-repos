@@ -4,8 +4,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Sockets;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
 
 namespace System.Net.Test.Common
 {
@@ -13,9 +13,17 @@ namespace System.Net.Test.Common
     {
         public static partial class Sockets
         {
-            public static Uri SocketServer => GetUriValue("DOTNET_TEST_NET_SOCKETS_SERVERURI", new Uri("http://" + DefaultAzureServer));
+            public static Uri SocketServer =>
+                GetUriValue(
+                    "DOTNET_TEST_NET_SOCKETS_SERVERURI",
+                    new Uri("http://" + DefaultAzureServer)
+                );
 
-            public static string InvalidHost => GetValue("DOTNET_TEST_NET_SOCKETS_INVALIDSERVER", "notahostname.invalid.corp.microsoft.com");
+            public static string InvalidHost =>
+                GetValue(
+                    "DOTNET_TEST_NET_SOCKETS_INVALIDSERVER",
+                    "notahostname.invalid.corp.microsoft.com"
+                );
 
             public static IPAddress? LinkLocalAddress => GetIPv6LinkLocalAddress();
 
@@ -38,10 +46,10 @@ namespace System.Net.Test.Common
             private static IPAddress GetIPv6LinkLocalAddress() =>
                 NetworkInterface
                     .GetAllNetworkInterfaces()
-                    .Where(i => !i.Description.StartsWith("PANGP Virtual Ethernet"))    // This is a VPN adapter, but is reported as a regular Ethernet interface with
-                                                                                        // a valid link-local address, but the link-local address doesn't actually work.
-                                                                                        // So just manually filter it out.
-                    .Where(i => !i.Name.Contains("Tailscale"))                          // Same as PANGP above.
+                    .Where(i => !i.Description.StartsWith("PANGP Virtual Ethernet")) // This is a VPN adapter, but is reported as a regular Ethernet interface with
+                    // a valid link-local address, but the link-local address doesn't actually work.
+                    // So just manually filter it out.
+                    .Where(i => !i.Name.Contains("Tailscale")) // Same as PANGP above.
                     .SelectMany(i => i.GetIPProperties().UnicastAddresses)
                     .Select(a => a.Address)
                     .Where(a => a.IsIPv6LinkLocal)

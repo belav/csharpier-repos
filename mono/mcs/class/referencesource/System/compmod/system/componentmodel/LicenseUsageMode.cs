@@ -1,20 +1,19 @@
 //------------------------------------------------------------------------------
 // <copyright file="LicenseUsageMode.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-    
-
-    using System.Diagnostics;
+namespace System.ComponentModel
+{
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Specifies when the license can be used.</para>
     /// </devdoc>
-    public enum LicenseUsageMode {
-
+    public enum LicenseUsageMode
+    {
         /// <devdoc>
         ///    <para>
         ///       Used during runtime.

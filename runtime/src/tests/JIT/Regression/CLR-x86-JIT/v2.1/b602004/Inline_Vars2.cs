@@ -7,8 +7,8 @@
 // The JIT32 only supports up to 32767 variables
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Xunit;
 
 //Disable the warning about having variables that are not used
@@ -22,6 +22,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a0);
         return 100;
     }
+
     public int RunTest1_Inline()
     {
         long a1 = 1;
@@ -29,6 +30,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a1);
         return 100;
     }
+
     public int RunTest2_Inline()
     {
         long a2 = 2;
@@ -36,6 +38,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a2);
         return 100;
     }
+
     public int RunTest3_Inline()
     {
         long a3 = 3;
@@ -43,6 +46,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a3);
         return 100;
     }
+
     public int RunTest4_Inline()
     {
         long a4 = 4;
@@ -50,6 +54,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a4);
         return 100;
     }
+
     public int RunTest5_Inline()
     {
         long a5 = 5;
@@ -57,6 +62,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a5);
         return 100;
     }
+
     public int RunTest6_Inline()
     {
         long a6 = 6;
@@ -64,6 +70,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a6);
         return 100;
     }
+
     public int RunTest7_Inline()
     {
         long a7 = 7;
@@ -71,6 +78,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a7);
         return 100;
     }
+
     public int RunTest8_Inline()
     {
         long a8 = 8;
@@ -78,6 +86,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a8);
         return 100;
     }
+
     public int RunTest9_Inline()
     {
         long a9 = 9;
@@ -85,6 +94,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a9);
         return 100;
     }
+
     public int RunTest10_Inline()
     {
         long a10 = 10;
@@ -92,6 +102,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a10);
         return 100;
     }
+
     public int RunTest11_Inline()
     {
         long a11 = 11;
@@ -99,6 +110,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a11);
         return 100;
     }
+
     public int RunTest12_Inline()
     {
         long a12 = 12;
@@ -106,6 +118,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a12);
         return 100;
     }
+
     public int RunTest13_Inline()
     {
         long a13 = 13;
@@ -113,6 +126,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a13);
         return 100;
     }
+
     public int RunTest14_Inline()
     {
         long a14 = 14;
@@ -120,6 +134,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a14);
         return 100;
     }
+
     public int RunTest15_Inline()
     {
         long a15 = 15;
@@ -127,6 +142,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a15);
         return 100;
     }
+
     public int RunTest16_Inline()
     {
         long a16 = 16;
@@ -134,6 +150,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a16);
         return 100;
     }
+
     public int RunTest17_Inline()
     {
         long a17 = 17;
@@ -141,6 +158,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a17);
         return 100;
     }
+
     public int RunTest18_Inline()
     {
         long a18 = 18;
@@ -148,6 +166,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a18);
         return 100;
     }
+
     public int RunTest19_Inline()
     {
         long a19 = 19;
@@ -155,6 +174,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a19);
         return 100;
     }
+
     public int RunTest20_Inline()
     {
         long a20 = 20;
@@ -162,6 +182,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a20);
         return 100;
     }
+
     public int RunTest21_Inline()
     {
         long a21 = 21;
@@ -169,6 +190,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a21);
         return 100;
     }
+
     public int RunTest22_Inline()
     {
         long a22 = 22;
@@ -176,6 +198,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a22);
         return 100;
     }
+
     public int RunTest23_Inline()
     {
         long a23 = 23;
@@ -183,6 +206,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a23);
         return 100;
     }
+
     public int RunTest24_Inline()
     {
         long a24 = 24;
@@ -190,6 +214,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a24);
         return 100;
     }
+
     public int RunTest25_Inline()
     {
         long a25 = 25;
@@ -197,6 +222,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a25);
         return 100;
     }
+
     public int RunTest26_Inline()
     {
         long a26 = 26;
@@ -204,6 +230,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a26);
         return 100;
     }
+
     public int RunTest27_Inline()
     {
         long a27 = 27;
@@ -211,6 +238,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a27);
         return 100;
     }
+
     public int RunTest28_Inline()
     {
         long a28 = 28;
@@ -218,6 +246,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a28);
         return 100;
     }
+
     public int RunTest29_Inline()
     {
         long a29 = 29;
@@ -225,6 +254,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a29);
         return 100;
     }
+
     public int RunTest30_Inline()
     {
         long a30 = 30;
@@ -232,6 +262,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a30);
         return 100;
     }
+
     public int RunTest31_Inline()
     {
         long a31 = 31;
@@ -239,6 +270,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a31);
         return 100;
     }
+
     public int RunTest32_Inline()
     {
         long a32 = 32;
@@ -246,6 +278,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a32);
         return 100;
     }
+
     public int RunTest33_Inline()
     {
         long a33 = 33;
@@ -253,6 +286,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a33);
         return 100;
     }
+
     public int RunTest34_Inline()
     {
         long a34 = 34;
@@ -260,6 +294,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a34);
         return 100;
     }
+
     public int RunTest35_Inline()
     {
         long a35 = 35;
@@ -267,6 +302,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a35);
         return 100;
     }
+
     public int RunTest36_Inline()
     {
         long a36 = 36;
@@ -274,6 +310,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a36);
         return 100;
     }
+
     public int RunTest37_Inline()
     {
         long a37 = 37;
@@ -281,6 +318,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a37);
         return 100;
     }
+
     public int RunTest38_Inline()
     {
         long a38 = 38;
@@ -288,6 +326,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a38);
         return 100;
     }
+
     public int RunTest39_Inline()
     {
         long a39 = 39;
@@ -295,6 +334,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a39);
         return 100;
     }
+
     public int RunTest40_Inline()
     {
         long a40 = 40;
@@ -302,6 +342,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a40);
         return 100;
     }
+
     public int RunTest41_Inline()
     {
         long a41 = 41;
@@ -309,6 +350,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a41);
         return 100;
     }
+
     public int RunTest42_Inline()
     {
         long a42 = 42;
@@ -316,6 +358,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a42);
         return 100;
     }
+
     public int RunTest43_Inline()
     {
         long a43 = 43;
@@ -323,6 +366,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a43);
         return 100;
     }
+
     public int RunTest44_Inline()
     {
         long a44 = 44;
@@ -330,6 +374,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a44);
         return 100;
     }
+
     public int RunTest45_Inline()
     {
         long a45 = 45;
@@ -337,6 +382,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a45);
         return 100;
     }
+
     public int RunTest46_Inline()
     {
         long a46 = 46;
@@ -344,6 +390,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a46);
         return 100;
     }
+
     public int RunTest47_Inline()
     {
         long a47 = 47;
@@ -351,6 +398,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a47);
         return 100;
     }
+
     public int RunTest48_Inline()
     {
         long a48 = 48;
@@ -358,6 +406,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a48);
         return 100;
     }
+
     public int RunTest49_Inline()
     {
         long a49 = 49;
@@ -365,6 +414,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a49);
         return 100;
     }
+
     public int RunTest50_Inline()
     {
         long a50 = 50;
@@ -372,6 +422,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a50);
         return 100;
     }
+
     public int RunTest51_Inline()
     {
         long a51 = 51;
@@ -379,6 +430,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a51);
         return 100;
     }
+
     public int RunTest52_Inline()
     {
         long a52 = 52;
@@ -386,6 +438,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a52);
         return 100;
     }
+
     public int RunTest53_Inline()
     {
         long a53 = 53;
@@ -393,6 +446,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a53);
         return 100;
     }
+
     public int RunTest54_Inline()
     {
         long a54 = 54;
@@ -400,6 +454,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a54);
         return 100;
     }
+
     public int RunTest55_Inline()
     {
         long a55 = 55;
@@ -407,6 +462,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a55);
         return 100;
     }
+
     public int RunTest56_Inline()
     {
         long a56 = 56;
@@ -414,6 +470,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a56);
         return 100;
     }
+
     public int RunTest57_Inline()
     {
         long a57 = 57;
@@ -421,6 +478,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a57);
         return 100;
     }
+
     public int RunTest58_Inline()
     {
         long a58 = 58;
@@ -428,6 +486,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a58);
         return 100;
     }
+
     public int RunTest59_Inline()
     {
         long a59 = 59;
@@ -435,6 +494,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a59);
         return 100;
     }
+
     public int RunTest60_Inline()
     {
         long a60 = 60;
@@ -442,6 +502,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a60);
         return 100;
     }
+
     public int RunTest61_Inline()
     {
         long a61 = 61;
@@ -449,6 +510,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a61);
         return 100;
     }
+
     public int RunTest62_Inline()
     {
         long a62 = 62;
@@ -456,6 +518,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a62);
         return 100;
     }
+
     public int RunTest63_Inline()
     {
         long a63 = 63;
@@ -463,6 +526,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a63);
         return 100;
     }
+
     public int RunTest64_Inline()
     {
         long a64 = 64;
@@ -470,6 +534,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a64);
         return 100;
     }
+
     public int RunTest65_Inline()
     {
         long a65 = 65;
@@ -477,6 +542,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a65);
         return 100;
     }
+
     public int RunTest66_Inline()
     {
         long a66 = 66;
@@ -484,6 +550,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a66);
         return 100;
     }
+
     public int RunTest67_Inline()
     {
         long a67 = 67;
@@ -491,6 +558,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a67);
         return 100;
     }
+
     public int RunTest68_Inline()
     {
         long a68 = 68;
@@ -498,6 +566,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a68);
         return 100;
     }
+
     public int RunTest69_Inline()
     {
         long a69 = 69;
@@ -505,6 +574,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a69);
         return 100;
     }
+
     public int RunTest70_Inline()
     {
         long a70 = 70;
@@ -512,6 +582,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a70);
         return 100;
     }
+
     public int RunTest71_Inline()
     {
         long a71 = 71;
@@ -519,6 +590,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a71);
         return 100;
     }
+
     public int RunTest72_Inline()
     {
         long a72 = 72;
@@ -526,6 +598,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a72);
         return 100;
     }
+
     public int RunTest73_Inline()
     {
         long a73 = 73;
@@ -533,6 +606,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a73);
         return 100;
     }
+
     public int RunTest74_Inline()
     {
         long a74 = 74;
@@ -540,6 +614,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a74);
         return 100;
     }
+
     public int RunTest75_Inline()
     {
         long a75 = 75;
@@ -547,6 +622,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a75);
         return 100;
     }
+
     public int RunTest76_Inline()
     {
         long a76 = 76;
@@ -554,6 +630,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a76);
         return 100;
     }
+
     public int RunTest77_Inline()
     {
         long a77 = 77;
@@ -561,6 +638,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a77);
         return 100;
     }
+
     public int RunTest78_Inline()
     {
         long a78 = 78;
@@ -568,6 +646,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a78);
         return 100;
     }
+
     public int RunTest79_Inline()
     {
         long a79 = 79;
@@ -575,6 +654,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a79);
         return 100;
     }
+
     public int RunTest80_Inline()
     {
         long a80 = 80;
@@ -582,6 +662,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a80);
         return 100;
     }
+
     public int RunTest81_Inline()
     {
         long a81 = 81;
@@ -589,6 +670,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a81);
         return 100;
     }
+
     public int RunTest82_Inline()
     {
         long a82 = 82;
@@ -596,6 +678,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a82);
         return 100;
     }
+
     public int RunTest83_Inline()
     {
         long a83 = 83;
@@ -603,6 +686,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a83);
         return 100;
     }
+
     public int RunTest84_Inline()
     {
         long a84 = 84;
@@ -610,6 +694,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a84);
         return 100;
     }
+
     public int RunTest85_Inline()
     {
         long a85 = 85;
@@ -617,6 +702,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a85);
         return 100;
     }
+
     public int RunTest86_Inline()
     {
         long a86 = 86;
@@ -624,6 +710,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a86);
         return 100;
     }
+
     public int RunTest87_Inline()
     {
         long a87 = 87;
@@ -631,6 +718,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a87);
         return 100;
     }
+
     public int RunTest88_Inline()
     {
         long a88 = 88;
@@ -638,6 +726,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a88);
         return 100;
     }
+
     public int RunTest89_Inline()
     {
         long a89 = 89;
@@ -645,6 +734,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a89);
         return 100;
     }
+
     public int RunTest90_Inline()
     {
         long a90 = 90;
@@ -652,6 +742,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a90);
         return 100;
     }
+
     public int RunTest91_Inline()
     {
         long a91 = 91;
@@ -659,6 +750,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a91);
         return 100;
     }
+
     public int RunTest92_Inline()
     {
         long a92 = 92;
@@ -666,6 +758,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a92);
         return 100;
     }
+
     public int RunTest93_Inline()
     {
         long a93 = 93;
@@ -673,6 +766,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a93);
         return 100;
     }
+
     public int RunTest94_Inline()
     {
         long a94 = 94;
@@ -680,6 +774,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a94);
         return 100;
     }
+
     public int RunTest95_Inline()
     {
         long a95 = 95;
@@ -687,6 +782,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a95);
         return 100;
     }
+
     public int RunTest96_Inline()
     {
         long a96 = 96;
@@ -694,6 +790,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a96);
         return 100;
     }
+
     public int RunTest97_Inline()
     {
         long a97 = 97;
@@ -701,6 +798,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a97);
         return 100;
     }
+
     public int RunTest98_Inline()
     {
         long a98 = 98;
@@ -708,6 +806,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a98);
         return 100;
     }
+
     public int RunTest99_Inline()
     {
         long a99 = 99;
@@ -715,6 +814,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a99);
         return 100;
     }
+
     public int RunTest100_Inline()
     {
         long a100 = 100;
@@ -722,6 +822,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a100);
         return 100;
     }
+
     public int RunTest101_Inline()
     {
         long a101 = 101;
@@ -729,6 +830,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a101);
         return 100;
     }
+
     public int RunTest102_Inline()
     {
         long a102 = 102;
@@ -736,6 +838,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a102);
         return 100;
     }
+
     public int RunTest103_Inline()
     {
         long a103 = 103;
@@ -743,6 +846,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a103);
         return 100;
     }
+
     public int RunTest104_Inline()
     {
         long a104 = 104;
@@ -750,6 +854,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a104);
         return 100;
     }
+
     public int RunTest105_Inline()
     {
         long a105 = 105;
@@ -757,6 +862,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a105);
         return 100;
     }
+
     public int RunTest106_Inline()
     {
         long a106 = 106;
@@ -764,6 +870,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a106);
         return 100;
     }
+
     public int RunTest107_Inline()
     {
         long a107 = 107;
@@ -771,6 +878,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a107);
         return 100;
     }
+
     public int RunTest108_Inline()
     {
         long a108 = 108;
@@ -778,6 +886,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a108);
         return 100;
     }
+
     public int RunTest109_Inline()
     {
         long a109 = 109;
@@ -785,6 +894,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a109);
         return 100;
     }
+
     public int RunTest110_Inline()
     {
         long a110 = 110;
@@ -792,6 +902,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a110);
         return 100;
     }
+
     public int RunTest111_Inline()
     {
         long a111 = 111;
@@ -799,6 +910,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a111);
         return 100;
     }
+
     public int RunTest112_Inline()
     {
         long a112 = 112;
@@ -806,6 +918,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a112);
         return 100;
     }
+
     public int RunTest113_Inline()
     {
         long a113 = 113;
@@ -813,6 +926,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a113);
         return 100;
     }
+
     public int RunTest114_Inline()
     {
         long a114 = 114;
@@ -820,6 +934,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a114);
         return 100;
     }
+
     public int RunTest115_Inline()
     {
         long a115 = 115;
@@ -827,6 +942,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a115);
         return 100;
     }
+
     public int RunTest116_Inline()
     {
         long a116 = 116;
@@ -834,6 +950,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a116);
         return 100;
     }
+
     public int RunTest117_Inline()
     {
         long a117 = 117;
@@ -841,6 +958,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a117);
         return 100;
     }
+
     public int RunTest118_Inline()
     {
         long a118 = 118;
@@ -848,6 +966,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a118);
         return 100;
     }
+
     public int RunTest119_Inline()
     {
         long a119 = 119;
@@ -855,6 +974,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a119);
         return 100;
     }
+
     public int RunTest120_Inline()
     {
         long a120 = 120;
@@ -862,6 +982,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a120);
         return 100;
     }
+
     public int RunTest121_Inline()
     {
         long a121 = 121;
@@ -869,6 +990,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a121);
         return 100;
     }
+
     public int RunTest122_Inline()
     {
         long a122 = 122;
@@ -876,6 +998,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a122);
         return 100;
     }
+
     public int RunTest123_Inline()
     {
         long a123 = 123;
@@ -883,6 +1006,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a123);
         return 100;
     }
+
     public int RunTest124_Inline()
     {
         long a124 = 124;
@@ -890,6 +1014,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a124);
         return 100;
     }
+
     public int RunTest125_Inline()
     {
         long a125 = 125;
@@ -897,6 +1022,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a125);
         return 100;
     }
+
     public int RunTest126_Inline()
     {
         long a126 = 126;
@@ -904,6 +1030,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a126);
         return 100;
     }
+
     public int RunTest127_Inline()
     {
         long a127 = 127;
@@ -911,6 +1038,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a127);
         return 100;
     }
+
     public int RunTest128_Inline()
     {
         long a128 = 128;
@@ -918,6 +1046,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a128);
         return 100;
     }
+
     public int RunTest129_Inline()
     {
         long a129 = 129;
@@ -925,6 +1054,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a129);
         return 100;
     }
+
     public int RunTest130_Inline()
     {
         long a130 = 130;
@@ -932,6 +1062,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a130);
         return 100;
     }
+
     public int RunTest131_Inline()
     {
         long a131 = 131;
@@ -939,6 +1070,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a131);
         return 100;
     }
+
     public int RunTest132_Inline()
     {
         long a132 = 132;
@@ -946,6 +1078,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a132);
         return 100;
     }
+
     public int RunTest133_Inline()
     {
         long a133 = 133;
@@ -953,6 +1086,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a133);
         return 100;
     }
+
     public int RunTest134_Inline()
     {
         long a134 = 134;
@@ -960,6 +1094,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a134);
         return 100;
     }
+
     public int RunTest135_Inline()
     {
         long a135 = 135;
@@ -967,6 +1102,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a135);
         return 100;
     }
+
     public int RunTest136_Inline()
     {
         long a136 = 136;
@@ -974,6 +1110,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a136);
         return 100;
     }
+
     public int RunTest137_Inline()
     {
         long a137 = 137;
@@ -981,6 +1118,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a137);
         return 100;
     }
+
     public int RunTest138_Inline()
     {
         long a138 = 138;
@@ -988,6 +1126,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a138);
         return 100;
     }
+
     public int RunTest139_Inline()
     {
         long a139 = 139;
@@ -995,6 +1134,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a139);
         return 100;
     }
+
     public int RunTest140_Inline()
     {
         long a140 = 140;
@@ -1002,6 +1142,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a140);
         return 100;
     }
+
     public int RunTest141_Inline()
     {
         long a141 = 141;
@@ -1009,6 +1150,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a141);
         return 100;
     }
+
     public int RunTest142_Inline()
     {
         long a142 = 142;
@@ -1016,6 +1158,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a142);
         return 100;
     }
+
     public int RunTest143_Inline()
     {
         long a143 = 143;
@@ -1023,6 +1166,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a143);
         return 100;
     }
+
     public int RunTest144_Inline()
     {
         long a144 = 144;
@@ -1030,6 +1174,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a144);
         return 100;
     }
+
     public int RunTest145_Inline()
     {
         long a145 = 145;
@@ -1037,6 +1182,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a145);
         return 100;
     }
+
     public int RunTest146_Inline()
     {
         long a146 = 146;
@@ -1044,6 +1190,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a146);
         return 100;
     }
+
     public int RunTest147_Inline()
     {
         long a147 = 147;
@@ -1051,6 +1198,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a147);
         return 100;
     }
+
     public int RunTest148_Inline()
     {
         long a148 = 148;
@@ -1058,6 +1206,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a148);
         return 100;
     }
+
     public int RunTest149_Inline()
     {
         long a149 = 149;
@@ -1065,6 +1214,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a149);
         return 100;
     }
+
     public int RunTest150_Inline()
     {
         long a150 = 150;
@@ -1072,6 +1222,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a150);
         return 100;
     }
+
     public int RunTest151_Inline()
     {
         long a151 = 151;
@@ -1079,6 +1230,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a151);
         return 100;
     }
+
     public int RunTest152_Inline()
     {
         long a152 = 152;
@@ -1086,6 +1238,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a152);
         return 100;
     }
+
     public int RunTest153_Inline()
     {
         long a153 = 153;
@@ -1093,6 +1246,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a153);
         return 100;
     }
+
     public int RunTest154_Inline()
     {
         long a154 = 154;
@@ -1100,6 +1254,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a154);
         return 100;
     }
+
     public int RunTest155_Inline()
     {
         long a155 = 155;
@@ -1107,6 +1262,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a155);
         return 100;
     }
+
     public int RunTest156_Inline()
     {
         long a156 = 156;
@@ -1114,6 +1270,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a156);
         return 100;
     }
+
     public int RunTest157_Inline()
     {
         long a157 = 157;
@@ -1121,6 +1278,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a157);
         return 100;
     }
+
     public int RunTest158_Inline()
     {
         long a158 = 158;
@@ -1128,6 +1286,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a158);
         return 100;
     }
+
     public int RunTest159_Inline()
     {
         long a159 = 159;
@@ -1135,6 +1294,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a159);
         return 100;
     }
+
     public int RunTest160_Inline()
     {
         long a160 = 160;
@@ -1142,6 +1302,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a160);
         return 100;
     }
+
     public int RunTest161_Inline()
     {
         long a161 = 161;
@@ -1149,6 +1310,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a161);
         return 100;
     }
+
     public int RunTest162_Inline()
     {
         long a162 = 162;
@@ -1156,6 +1318,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a162);
         return 100;
     }
+
     public int RunTest163_Inline()
     {
         long a163 = 163;
@@ -1163,6 +1326,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a163);
         return 100;
     }
+
     public int RunTest164_Inline()
     {
         long a164 = 164;
@@ -1170,6 +1334,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a164);
         return 100;
     }
+
     public int RunTest165_Inline()
     {
         long a165 = 165;
@@ -1177,6 +1342,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a165);
         return 100;
     }
+
     public int RunTest166_Inline()
     {
         long a166 = 166;
@@ -1184,6 +1350,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a166);
         return 100;
     }
+
     public int RunTest167_Inline()
     {
         long a167 = 167;
@@ -1191,6 +1358,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a167);
         return 100;
     }
+
     public int RunTest168_Inline()
     {
         long a168 = 168;
@@ -1198,6 +1366,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a168);
         return 100;
     }
+
     public int RunTest169_Inline()
     {
         long a169 = 169;
@@ -1205,6 +1374,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a169);
         return 100;
     }
+
     public int RunTest170_Inline()
     {
         long a170 = 170;
@@ -1212,6 +1382,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a170);
         return 100;
     }
+
     public int RunTest171_Inline()
     {
         long a171 = 171;
@@ -1219,6 +1390,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a171);
         return 100;
     }
+
     public int RunTest172_Inline()
     {
         long a172 = 172;
@@ -1226,6 +1398,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a172);
         return 100;
     }
+
     public int RunTest173_Inline()
     {
         long a173 = 173;
@@ -1233,6 +1406,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a173);
         return 100;
     }
+
     public int RunTest174_Inline()
     {
         long a174 = 174;
@@ -1240,6 +1414,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a174);
         return 100;
     }
+
     public int RunTest175_Inline()
     {
         long a175 = 175;
@@ -1247,6 +1422,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a175);
         return 100;
     }
+
     public int RunTest176_Inline()
     {
         long a176 = 176;
@@ -1254,6 +1430,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a176);
         return 100;
     }
+
     public int RunTest177_Inline()
     {
         long a177 = 177;
@@ -1261,6 +1438,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a177);
         return 100;
     }
+
     public int RunTest178_Inline()
     {
         long a178 = 178;
@@ -1268,6 +1446,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a178);
         return 100;
     }
+
     public int RunTest179_Inline()
     {
         long a179 = 179;
@@ -1275,6 +1454,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a179);
         return 100;
     }
+
     public int RunTest180_Inline()
     {
         long a180 = 180;
@@ -1282,6 +1462,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a180);
         return 100;
     }
+
     public int RunTest181_Inline()
     {
         long a181 = 181;
@@ -1289,6 +1470,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a181);
         return 100;
     }
+
     public int RunTest182_Inline()
     {
         long a182 = 182;
@@ -1296,6 +1478,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a182);
         return 100;
     }
+
     public int RunTest183_Inline()
     {
         long a183 = 183;
@@ -1303,6 +1486,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a183);
         return 100;
     }
+
     public int RunTest184_Inline()
     {
         long a184 = 184;
@@ -1310,6 +1494,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a184);
         return 100;
     }
+
     public int RunTest185_Inline()
     {
         long a185 = 185;
@@ -1317,6 +1502,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a185);
         return 100;
     }
+
     public int RunTest186_Inline()
     {
         long a186 = 186;
@@ -1324,6 +1510,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a186);
         return 100;
     }
+
     public int RunTest187_Inline()
     {
         long a187 = 187;
@@ -1331,6 +1518,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a187);
         return 100;
     }
+
     public int RunTest188_Inline()
     {
         long a188 = 188;
@@ -1338,6 +1526,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a188);
         return 100;
     }
+
     public int RunTest189_Inline()
     {
         long a189 = 189;
@@ -1345,6 +1534,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a189);
         return 100;
     }
+
     public int RunTest190_Inline()
     {
         long a190 = 190;
@@ -1352,6 +1542,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a190);
         return 100;
     }
+
     public int RunTest191_Inline()
     {
         long a191 = 191;
@@ -1359,6 +1550,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a191);
         return 100;
     }
+
     public int RunTest192_Inline()
     {
         long a192 = 192;
@@ -1366,6 +1558,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a192);
         return 100;
     }
+
     public int RunTest193_Inline()
     {
         long a193 = 193;
@@ -1373,6 +1566,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a193);
         return 100;
     }
+
     public int RunTest194_Inline()
     {
         long a194 = 194;
@@ -1380,6 +1574,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a194);
         return 100;
     }
+
     public int RunTest195_Inline()
     {
         long a195 = 195;
@@ -1387,6 +1582,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a195);
         return 100;
     }
+
     public int RunTest196_Inline()
     {
         long a196 = 196;
@@ -1394,6 +1590,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a196);
         return 100;
     }
+
     public int RunTest197_Inline()
     {
         long a197 = 197;
@@ -1401,6 +1598,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a197);
         return 100;
     }
+
     public int RunTest198_Inline()
     {
         long a198 = 198;
@@ -1408,6 +1606,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a198);
         return 100;
     }
+
     public int RunTest199_Inline()
     {
         long a199 = 199;
@@ -1415,6 +1614,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a199);
         return 100;
     }
+
     public int RunTest200_Inline()
     {
         long a200 = 200;
@@ -1422,6 +1622,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a200);
         return 100;
     }
+
     public int RunTest201_Inline()
     {
         long a201 = 201;
@@ -1429,6 +1630,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a201);
         return 100;
     }
+
     public int RunTest202_Inline()
     {
         long a202 = 202;
@@ -1436,6 +1638,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a202);
         return 100;
     }
+
     public int RunTest203_Inline()
     {
         long a203 = 203;
@@ -1443,6 +1646,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a203);
         return 100;
     }
+
     public int RunTest204_Inline()
     {
         long a204 = 204;
@@ -1450,6 +1654,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a204);
         return 100;
     }
+
     public int RunTest205_Inline()
     {
         long a205 = 205;
@@ -1457,6 +1662,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a205);
         return 100;
     }
+
     public int RunTest206_Inline()
     {
         long a206 = 206;
@@ -1464,6 +1670,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a206);
         return 100;
     }
+
     public int RunTest207_Inline()
     {
         long a207 = 207;
@@ -1471,6 +1678,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a207);
         return 100;
     }
+
     public int RunTest208_Inline()
     {
         long a208 = 208;
@@ -1478,6 +1686,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a208);
         return 100;
     }
+
     public int RunTest209_Inline()
     {
         long a209 = 209;
@@ -1485,6 +1694,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a209);
         return 100;
     }
+
     public int RunTest210_Inline()
     {
         long a210 = 210;
@@ -1492,6 +1702,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a210);
         return 100;
     }
+
     public int RunTest211_Inline()
     {
         long a211 = 211;
@@ -1499,6 +1710,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a211);
         return 100;
     }
+
     public int RunTest212_Inline()
     {
         long a212 = 212;
@@ -1506,6 +1718,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a212);
         return 100;
     }
+
     public int RunTest213_Inline()
     {
         long a213 = 213;
@@ -1513,6 +1726,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a213);
         return 100;
     }
+
     public int RunTest214_Inline()
     {
         long a214 = 214;
@@ -1520,6 +1734,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a214);
         return 100;
     }
+
     public int RunTest215_Inline()
     {
         long a215 = 215;
@@ -1527,6 +1742,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a215);
         return 100;
     }
+
     public int RunTest216_Inline()
     {
         long a216 = 216;
@@ -1534,6 +1750,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a216);
         return 100;
     }
+
     public int RunTest217_Inline()
     {
         long a217 = 217;
@@ -1541,6 +1758,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a217);
         return 100;
     }
+
     public int RunTest218_Inline()
     {
         long a218 = 218;
@@ -1548,6 +1766,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a218);
         return 100;
     }
+
     public int RunTest219_Inline()
     {
         long a219 = 219;
@@ -1555,6 +1774,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a219);
         return 100;
     }
+
     public int RunTest220_Inline()
     {
         long a220 = 220;
@@ -1562,6 +1782,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a220);
         return 100;
     }
+
     public int RunTest221_Inline()
     {
         long a221 = 221;
@@ -1569,6 +1790,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a221);
         return 100;
     }
+
     public int RunTest222_Inline()
     {
         long a222 = 222;
@@ -1576,6 +1798,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a222);
         return 100;
     }
+
     public int RunTest223_Inline()
     {
         long a223 = 223;
@@ -1583,6 +1806,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a223);
         return 100;
     }
+
     public int RunTest224_Inline()
     {
         long a224 = 224;
@@ -1590,6 +1814,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a224);
         return 100;
     }
+
     public int RunTest225_Inline()
     {
         long a225 = 225;
@@ -1597,6 +1822,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a225);
         return 100;
     }
+
     public int RunTest226_Inline()
     {
         long a226 = 226;
@@ -1604,6 +1830,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a226);
         return 100;
     }
+
     public int RunTest227_Inline()
     {
         long a227 = 227;
@@ -1611,6 +1838,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a227);
         return 100;
     }
+
     public int RunTest228_Inline()
     {
         long a228 = 228;
@@ -1618,6 +1846,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a228);
         return 100;
     }
+
     public int RunTest229_Inline()
     {
         long a229 = 229;
@@ -1625,6 +1854,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a229);
         return 100;
     }
+
     public int RunTest230_Inline()
     {
         long a230 = 230;
@@ -1632,6 +1862,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a230);
         return 100;
     }
+
     public int RunTest231_Inline()
     {
         long a231 = 231;
@@ -1639,6 +1870,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a231);
         return 100;
     }
+
     public int RunTest232_Inline()
     {
         long a232 = 232;
@@ -1646,6 +1878,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a232);
         return 100;
     }
+
     public int RunTest233_Inline()
     {
         long a233 = 233;
@@ -1653,6 +1886,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a233);
         return 100;
     }
+
     public int RunTest234_Inline()
     {
         long a234 = 234;
@@ -1660,6 +1894,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a234);
         return 100;
     }
+
     public int RunTest235_Inline()
     {
         long a235 = 235;
@@ -1667,6 +1902,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a235);
         return 100;
     }
+
     public int RunTest236_Inline()
     {
         long a236 = 236;
@@ -1674,6 +1910,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a236);
         return 100;
     }
+
     public int RunTest237_Inline()
     {
         long a237 = 237;
@@ -1681,6 +1918,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a237);
         return 100;
     }
+
     public int RunTest238_Inline()
     {
         long a238 = 238;
@@ -1688,6 +1926,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a238);
         return 100;
     }
+
     public int RunTest239_Inline()
     {
         long a239 = 239;
@@ -1695,6 +1934,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a239);
         return 100;
     }
+
     public int RunTest240_Inline()
     {
         long a240 = 240;
@@ -1702,6 +1942,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a240);
         return 100;
     }
+
     public int RunTest241_Inline()
     {
         long a241 = 241;
@@ -1709,6 +1950,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a241);
         return 100;
     }
+
     public int RunTest242_Inline()
     {
         long a242 = 242;
@@ -1716,6 +1958,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a242);
         return 100;
     }
+
     public int RunTest243_Inline()
     {
         long a243 = 243;
@@ -1723,6 +1966,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a243);
         return 100;
     }
+
     public int RunTest244_Inline()
     {
         long a244 = 244;
@@ -1730,6 +1974,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a244);
         return 100;
     }
+
     public int RunTest245_Inline()
     {
         long a245 = 245;
@@ -1737,6 +1982,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a245);
         return 100;
     }
+
     public int RunTest246_Inline()
     {
         long a246 = 246;
@@ -1744,6 +1990,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a246);
         return 100;
     }
+
     public int RunTest247_Inline()
     {
         long a247 = 247;
@@ -1751,6 +1998,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a247);
         return 100;
     }
+
     public int RunTest248_Inline()
     {
         long a248 = 248;
@@ -1758,6 +2006,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a248);
         return 100;
     }
+
     public int RunTest249_Inline()
     {
         long a249 = 249;
@@ -1765,6 +2014,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a249);
         return 100;
     }
+
     public int RunTest250_Inline()
     {
         long a250 = 250;
@@ -1772,6 +2022,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a250);
         return 100;
     }
+
     public int RunTest251_Inline()
     {
         long a251 = 251;
@@ -1779,6 +2030,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a251);
         return 100;
     }
+
     public int RunTest252_Inline()
     {
         long a252 = 252;
@@ -1786,6 +2038,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a252);
         return 100;
     }
+
     public int RunTest253_Inline()
     {
         long a253 = 253;
@@ -1793,6 +2046,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a253);
         return 100;
     }
+
     public int RunTest254_Inline()
     {
         long a254 = 254;
@@ -1800,6 +2054,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a254);
         return 100;
     }
+
     public int RunTest255_Inline()
     {
         long a255 = 255;
@@ -1807,6 +2062,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a255);
         return 100;
     }
+
     public int RunTest256_Inline()
     {
         long a256 = 256;
@@ -1814,6 +2070,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a256);
         return 100;
     }
+
     public int RunTest257_Inline()
     {
         long a257 = 257;
@@ -1821,6 +2078,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a257);
         return 100;
     }
+
     public int RunTest258_Inline()
     {
         long a258 = 258;
@@ -1828,6 +2086,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a258);
         return 100;
     }
+
     public int RunTest259_Inline()
     {
         long a259 = 259;
@@ -1835,6 +2094,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a259);
         return 100;
     }
+
     public int RunTest260_Inline()
     {
         long a260 = 260;
@@ -1842,6 +2102,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a260);
         return 100;
     }
+
     public int RunTest261_Inline()
     {
         long a261 = 261;
@@ -1849,6 +2110,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a261);
         return 100;
     }
+
     public int RunTest262_Inline()
     {
         long a262 = 262;
@@ -1856,6 +2118,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a262);
         return 100;
     }
+
     public int RunTest263_Inline()
     {
         long a263 = 263;
@@ -1863,6 +2126,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a263);
         return 100;
     }
+
     public int RunTest264_Inline()
     {
         long a264 = 264;
@@ -1870,6 +2134,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a264);
         return 100;
     }
+
     public int RunTest265_Inline()
     {
         long a265 = 265;
@@ -1877,6 +2142,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a265);
         return 100;
     }
+
     public int RunTest266_Inline()
     {
         long a266 = 266;
@@ -1884,6 +2150,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a266);
         return 100;
     }
+
     public int RunTest267_Inline()
     {
         long a267 = 267;
@@ -1891,6 +2158,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a267);
         return 100;
     }
+
     public int RunTest268_Inline()
     {
         long a268 = 268;
@@ -1898,6 +2166,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a268);
         return 100;
     }
+
     public int RunTest269_Inline()
     {
         long a269 = 269;
@@ -1905,6 +2174,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a269);
         return 100;
     }
+
     public int RunTest270_Inline()
     {
         long a270 = 270;
@@ -1912,6 +2182,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a270);
         return 100;
     }
+
     public int RunTest271_Inline()
     {
         long a271 = 271;
@@ -1919,6 +2190,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a271);
         return 100;
     }
+
     public int RunTest272_Inline()
     {
         long a272 = 272;
@@ -1926,6 +2198,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a272);
         return 100;
     }
+
     public int RunTest273_Inline()
     {
         long a273 = 273;
@@ -1933,6 +2206,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a273);
         return 100;
     }
+
     public int RunTest274_Inline()
     {
         long a274 = 274;
@@ -1940,6 +2214,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a274);
         return 100;
     }
+
     public int RunTest275_Inline()
     {
         long a275 = 275;
@@ -1947,6 +2222,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a275);
         return 100;
     }
+
     public int RunTest276_Inline()
     {
         long a276 = 276;
@@ -1954,6 +2230,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a276);
         return 100;
     }
+
     public int RunTest277_Inline()
     {
         long a277 = 277;
@@ -1961,6 +2238,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a277);
         return 100;
     }
+
     public int RunTest278_Inline()
     {
         long a278 = 278;
@@ -1968,6 +2246,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a278);
         return 100;
     }
+
     public int RunTest279_Inline()
     {
         long a279 = 279;
@@ -1975,6 +2254,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a279);
         return 100;
     }
+
     public int RunTest280_Inline()
     {
         long a280 = 280;
@@ -1982,6 +2262,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a280);
         return 100;
     }
+
     public int RunTest281_Inline()
     {
         long a281 = 281;
@@ -1989,6 +2270,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a281);
         return 100;
     }
+
     public int RunTest282_Inline()
     {
         long a282 = 282;
@@ -1996,6 +2278,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a282);
         return 100;
     }
+
     public int RunTest283_Inline()
     {
         long a283 = 283;
@@ -2003,6 +2286,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a283);
         return 100;
     }
+
     public int RunTest284_Inline()
     {
         long a284 = 284;
@@ -2010,6 +2294,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a284);
         return 100;
     }
+
     public int RunTest285_Inline()
     {
         long a285 = 285;
@@ -2017,6 +2302,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a285);
         return 100;
     }
+
     public int RunTest286_Inline()
     {
         long a286 = 286;
@@ -2024,6 +2310,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a286);
         return 100;
     }
+
     public int RunTest287_Inline()
     {
         long a287 = 287;
@@ -2031,6 +2318,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a287);
         return 100;
     }
+
     public int RunTest288_Inline()
     {
         long a288 = 288;
@@ -2038,6 +2326,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a288);
         return 100;
     }
+
     public int RunTest289_Inline()
     {
         long a289 = 289;
@@ -2045,6 +2334,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a289);
         return 100;
     }
+
     public int RunTest290_Inline()
     {
         long a290 = 290;
@@ -2052,6 +2342,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a290);
         return 100;
     }
+
     public int RunTest291_Inline()
     {
         long a291 = 291;
@@ -2059,6 +2350,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a291);
         return 100;
     }
+
     public int RunTest292_Inline()
     {
         long a292 = 292;
@@ -2066,6 +2358,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a292);
         return 100;
     }
+
     public int RunTest293_Inline()
     {
         long a293 = 293;
@@ -2073,6 +2366,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a293);
         return 100;
     }
+
     public int RunTest294_Inline()
     {
         long a294 = 294;
@@ -2080,6 +2374,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a294);
         return 100;
     }
+
     public int RunTest295_Inline()
     {
         long a295 = 295;
@@ -2087,6 +2382,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a295);
         return 100;
     }
+
     public int RunTest296_Inline()
     {
         long a296 = 296;
@@ -2094,6 +2390,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a296);
         return 100;
     }
+
     public int RunTest297_Inline()
     {
         long a297 = 297;
@@ -2101,6 +2398,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a297);
         return 100;
     }
+
     public int RunTest298_Inline()
     {
         long a298 = 298;
@@ -2108,6 +2406,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a298);
         return 100;
     }
+
     public int RunTest299_Inline()
     {
         long a299 = 299;
@@ -2115,6 +2414,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a299);
         return 100;
     }
+
     public int RunTest300_Inline()
     {
         long a300 = 300;
@@ -2122,6 +2422,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a300);
         return 100;
     }
+
     public int RunTest301_Inline()
     {
         long a301 = 301;
@@ -2129,6 +2430,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a301);
         return 100;
     }
+
     public int RunTest302_Inline()
     {
         long a302 = 302;
@@ -2136,6 +2438,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a302);
         return 100;
     }
+
     public int RunTest303_Inline()
     {
         long a303 = 303;
@@ -2143,6 +2446,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a303);
         return 100;
     }
+
     public int RunTest304_Inline()
     {
         long a304 = 304;
@@ -2150,6 +2454,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a304);
         return 100;
     }
+
     public int RunTest305_Inline()
     {
         long a305 = 305;
@@ -2157,6 +2462,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a305);
         return 100;
     }
+
     public int RunTest306_Inline()
     {
         long a306 = 306;
@@ -2164,6 +2470,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a306);
         return 100;
     }
+
     public int RunTest307_Inline()
     {
         long a307 = 307;
@@ -2171,6 +2478,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a307);
         return 100;
     }
+
     public int RunTest308_Inline()
     {
         long a308 = 308;
@@ -2178,6 +2486,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a308);
         return 100;
     }
+
     public int RunTest309_Inline()
     {
         long a309 = 309;
@@ -2185,6 +2494,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a309);
         return 100;
     }
+
     public int RunTest310_Inline()
     {
         long a310 = 310;
@@ -2192,6 +2502,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a310);
         return 100;
     }
+
     public int RunTest311_Inline()
     {
         long a311 = 311;
@@ -2199,6 +2510,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a311);
         return 100;
     }
+
     public int RunTest312_Inline()
     {
         long a312 = 312;
@@ -2206,6 +2518,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a312);
         return 100;
     }
+
     public int RunTest313_Inline()
     {
         long a313 = 313;
@@ -2213,6 +2526,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a313);
         return 100;
     }
+
     public int RunTest314_Inline()
     {
         long a314 = 314;
@@ -2220,6 +2534,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a314);
         return 100;
     }
+
     public int RunTest315_Inline()
     {
         long a315 = 315;
@@ -2227,6 +2542,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a315);
         return 100;
     }
+
     public int RunTest316_Inline()
     {
         long a316 = 316;
@@ -2234,6 +2550,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a316);
         return 100;
     }
+
     public int RunTest317_Inline()
     {
         long a317 = 317;
@@ -2241,6 +2558,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a317);
         return 100;
     }
+
     public int RunTest318_Inline()
     {
         long a318 = 318;
@@ -2248,6 +2566,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a318);
         return 100;
     }
+
     public int RunTest319_Inline()
     {
         long a319 = 319;
@@ -2255,6 +2574,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a319);
         return 100;
     }
+
     public int RunTest320_Inline()
     {
         long a320 = 320;
@@ -2262,6 +2582,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a320);
         return 100;
     }
+
     public int RunTest321_Inline()
     {
         long a321 = 321;
@@ -2269,6 +2590,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a321);
         return 100;
     }
+
     public int RunTest322_Inline()
     {
         long a322 = 322;
@@ -2276,6 +2598,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a322);
         return 100;
     }
+
     public int RunTest323_Inline()
     {
         long a323 = 323;
@@ -2283,6 +2606,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a323);
         return 100;
     }
+
     public int RunTest324_Inline()
     {
         long a324 = 324;
@@ -2290,6 +2614,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a324);
         return 100;
     }
+
     public int RunTest325_Inline()
     {
         long a325 = 325;
@@ -2297,6 +2622,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a325);
         return 100;
     }
+
     public int RunTest326_Inline()
     {
         long a326 = 326;
@@ -2304,6 +2630,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a326);
         return 100;
     }
+
     public int RunTest327_Inline()
     {
         long a327 = 327;
@@ -2311,6 +2638,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a327);
         return 100;
     }
+
     public int RunTest328_Inline()
     {
         long a328 = 328;
@@ -2318,6 +2646,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a328);
         return 100;
     }
+
     public int RunTest329_Inline()
     {
         long a329 = 329;
@@ -2325,6 +2654,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a329);
         return 100;
     }
+
     public int RunTest330_Inline()
     {
         long a330 = 330;
@@ -2332,6 +2662,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a330);
         return 100;
     }
+
     public int RunTest331_Inline()
     {
         long a331 = 331;
@@ -2339,6 +2670,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a331);
         return 100;
     }
+
     public int RunTest332_Inline()
     {
         long a332 = 332;
@@ -2346,6 +2678,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a332);
         return 100;
     }
+
     public int RunTest333_Inline()
     {
         long a333 = 333;
@@ -2353,6 +2686,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a333);
         return 100;
     }
+
     public int RunTest334_Inline()
     {
         long a334 = 334;
@@ -2360,6 +2694,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a334);
         return 100;
     }
+
     public int RunTest335_Inline()
     {
         long a335 = 335;
@@ -2367,6 +2702,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a335);
         return 100;
     }
+
     public int RunTest336_Inline()
     {
         long a336 = 336;
@@ -2374,6 +2710,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a336);
         return 100;
     }
+
     public int RunTest337_Inline()
     {
         long a337 = 337;
@@ -2381,6 +2718,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a337);
         return 100;
     }
+
     public int RunTest338_Inline()
     {
         long a338 = 338;
@@ -2388,6 +2726,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a338);
         return 100;
     }
+
     public int RunTest339_Inline()
     {
         long a339 = 339;
@@ -2395,6 +2734,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a339);
         return 100;
     }
+
     public int RunTest340_Inline()
     {
         long a340 = 340;
@@ -2402,6 +2742,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a340);
         return 100;
     }
+
     public int RunTest341_Inline()
     {
         long a341 = 341;
@@ -2409,6 +2750,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a341);
         return 100;
     }
+
     public int RunTest342_Inline()
     {
         long a342 = 342;
@@ -2416,6 +2758,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a342);
         return 100;
     }
+
     public int RunTest343_Inline()
     {
         long a343 = 343;
@@ -2423,6 +2766,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a343);
         return 100;
     }
+
     public int RunTest344_Inline()
     {
         long a344 = 344;
@@ -2430,6 +2774,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a344);
         return 100;
     }
+
     public int RunTest345_Inline()
     {
         long a345 = 345;
@@ -2437,6 +2782,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a345);
         return 100;
     }
+
     public int RunTest346_Inline()
     {
         long a346 = 346;
@@ -2444,6 +2790,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a346);
         return 100;
     }
+
     public int RunTest347_Inline()
     {
         long a347 = 347;
@@ -2451,6 +2798,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a347);
         return 100;
     }
+
     public int RunTest348_Inline()
     {
         long a348 = 348;
@@ -2458,6 +2806,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a348);
         return 100;
     }
+
     public int RunTest349_Inline()
     {
         long a349 = 349;
@@ -2465,6 +2814,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a349);
         return 100;
     }
+
     public int RunTest350_Inline()
     {
         long a350 = 350;
@@ -2472,6 +2822,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a350);
         return 100;
     }
+
     public int RunTest351_Inline()
     {
         long a351 = 351;
@@ -2479,6 +2830,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a351);
         return 100;
     }
+
     public int RunTest352_Inline()
     {
         long a352 = 352;
@@ -2486,6 +2838,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a352);
         return 100;
     }
+
     public int RunTest353_Inline()
     {
         long a353 = 353;
@@ -2493,6 +2846,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a353);
         return 100;
     }
+
     public int RunTest354_Inline()
     {
         long a354 = 354;
@@ -2500,6 +2854,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a354);
         return 100;
     }
+
     public int RunTest355_Inline()
     {
         long a355 = 355;
@@ -2507,6 +2862,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a355);
         return 100;
     }
+
     public int RunTest356_Inline()
     {
         long a356 = 356;
@@ -2514,6 +2870,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a356);
         return 100;
     }
+
     public int RunTest357_Inline()
     {
         long a357 = 357;
@@ -2521,6 +2878,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a357);
         return 100;
     }
+
     public int RunTest358_Inline()
     {
         long a358 = 358;
@@ -2528,6 +2886,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a358);
         return 100;
     }
+
     public int RunTest359_Inline()
     {
         long a359 = 359;
@@ -2535,6 +2894,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a359);
         return 100;
     }
+
     public int RunTest360_Inline()
     {
         long a360 = 360;
@@ -2542,6 +2902,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a360);
         return 100;
     }
+
     public int RunTest361_Inline()
     {
         long a361 = 361;
@@ -2549,6 +2910,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a361);
         return 100;
     }
+
     public int RunTest362_Inline()
     {
         long a362 = 362;
@@ -2556,6 +2918,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a362);
         return 100;
     }
+
     public int RunTest363_Inline()
     {
         long a363 = 363;
@@ -2563,6 +2926,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a363);
         return 100;
     }
+
     public int RunTest364_Inline()
     {
         long a364 = 364;
@@ -2570,6 +2934,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a364);
         return 100;
     }
+
     public int RunTest365_Inline()
     {
         long a365 = 365;
@@ -2577,6 +2942,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a365);
         return 100;
     }
+
     public int RunTest366_Inline()
     {
         long a366 = 366;
@@ -2584,6 +2950,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a366);
         return 100;
     }
+
     public int RunTest367_Inline()
     {
         long a367 = 367;
@@ -2591,6 +2958,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a367);
         return 100;
     }
+
     public int RunTest368_Inline()
     {
         long a368 = 368;
@@ -2598,6 +2966,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a368);
         return 100;
     }
+
     public int RunTest369_Inline()
     {
         long a369 = 369;
@@ -2605,6 +2974,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a369);
         return 100;
     }
+
     public int RunTest370_Inline()
     {
         long a370 = 370;
@@ -2612,6 +2982,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a370);
         return 100;
     }
+
     public int RunTest371_Inline()
     {
         long a371 = 371;
@@ -2619,6 +2990,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a371);
         return 100;
     }
+
     public int RunTest372_Inline()
     {
         long a372 = 372;
@@ -2626,6 +2998,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a372);
         return 100;
     }
+
     public int RunTest373_Inline()
     {
         long a373 = 373;
@@ -2633,6 +3006,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a373);
         return 100;
     }
+
     public int RunTest374_Inline()
     {
         long a374 = 374;
@@ -2640,6 +3014,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a374);
         return 100;
     }
+
     public int RunTest375_Inline()
     {
         long a375 = 375;
@@ -2647,6 +3022,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a375);
         return 100;
     }
+
     public int RunTest376_Inline()
     {
         long a376 = 376;
@@ -2654,6 +3030,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a376);
         return 100;
     }
+
     public int RunTest377_Inline()
     {
         long a377 = 377;
@@ -2661,6 +3038,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a377);
         return 100;
     }
+
     public int RunTest378_Inline()
     {
         long a378 = 378;
@@ -2668,6 +3046,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a378);
         return 100;
     }
+
     public int RunTest379_Inline()
     {
         long a379 = 379;
@@ -2675,6 +3054,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a379);
         return 100;
     }
+
     public int RunTest380_Inline()
     {
         long a380 = 380;
@@ -2682,6 +3062,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a380);
         return 100;
     }
+
     public int RunTest381_Inline()
     {
         long a381 = 381;
@@ -2689,6 +3070,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a381);
         return 100;
     }
+
     public int RunTest382_Inline()
     {
         long a382 = 382;
@@ -2696,6 +3078,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a382);
         return 100;
     }
+
     public int RunTest383_Inline()
     {
         long a383 = 383;
@@ -2703,6 +3086,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a383);
         return 100;
     }
+
     public int RunTest384_Inline()
     {
         long a384 = 384;
@@ -2710,6 +3094,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a384);
         return 100;
     }
+
     public int RunTest385_Inline()
     {
         long a385 = 385;
@@ -2717,6 +3102,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a385);
         return 100;
     }
+
     public int RunTest386_Inline()
     {
         long a386 = 386;
@@ -2724,6 +3110,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a386);
         return 100;
     }
+
     public int RunTest387_Inline()
     {
         long a387 = 387;
@@ -2731,6 +3118,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a387);
         return 100;
     }
+
     public int RunTest388_Inline()
     {
         long a388 = 388;
@@ -2738,6 +3126,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a388);
         return 100;
     }
+
     public int RunTest389_Inline()
     {
         long a389 = 389;
@@ -2745,6 +3134,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a389);
         return 100;
     }
+
     public int RunTest390_Inline()
     {
         long a390 = 390;
@@ -2752,6 +3142,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a390);
         return 100;
     }
+
     public int RunTest391_Inline()
     {
         long a391 = 391;
@@ -2759,6 +3150,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a391);
         return 100;
     }
+
     public int RunTest392_Inline()
     {
         long a392 = 392;
@@ -2766,6 +3158,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a392);
         return 100;
     }
+
     public int RunTest393_Inline()
     {
         long a393 = 393;
@@ -2773,6 +3166,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a393);
         return 100;
     }
+
     public int RunTest394_Inline()
     {
         long a394 = 394;
@@ -2780,6 +3174,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a394);
         return 100;
     }
+
     public int RunTest395_Inline()
     {
         long a395 = 395;
@@ -2787,6 +3182,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a395);
         return 100;
     }
+
     public int RunTest396_Inline()
     {
         long a396 = 396;
@@ -2794,6 +3190,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a396);
         return 100;
     }
+
     public int RunTest397_Inline()
     {
         long a397 = 397;
@@ -2801,6 +3198,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a397);
         return 100;
     }
+
     public int RunTest398_Inline()
     {
         long a398 = 398;
@@ -2808,6 +3206,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a398);
         return 100;
     }
+
     public int RunTest399_Inline()
     {
         long a399 = 399;
@@ -2815,6 +3214,7 @@ public class Test_Inline_Vars2
         Console.WriteLine(a399);
         return 100;
     }
+
     public int RunTest400_Inline()
     {
         long a400 = 400;
@@ -2822,10 +3222,10 @@ public class Test_Inline_Vars2
         Console.WriteLine(a400);
         return 100;
     }
+
     [Fact]
     public static void TestEntryPoint()
     {
-
         (new Test_Inline_Vars2()).RunTest0_Inline();
 
         (new Test_Inline_Vars2()).RunTest1_Inline();
@@ -3627,11 +4027,5 @@ public class Test_Inline_Vars2
         (new Test_Inline_Vars2()).RunTest399_Inline();
 
         (new Test_Inline_Vars2()).RunTest400_Inline();
-
     }
-
-
-
 }
-
-

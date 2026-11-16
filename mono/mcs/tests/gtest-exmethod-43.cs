@@ -1,28 +1,21 @@
 public class AdapterType
 {
-	protected virtual void DoSomething ()
-	{
-	}
+    protected virtual void DoSomething() { }
 }
 
 public static class Extensions
 {
-	public static void DoSomething (this AdapterType obj)
-	{
-	}
+    public static void DoSomething(this AdapterType obj) { }
 }
 
 public abstract class Dummy : AdapterType
 {
-	public virtual bool Refresh ()
-	{
-		AdapterType someObj = null;
-		someObj.DoSomething ();
-		return true;
-	}
+    public virtual bool Refresh()
+    {
+        AdapterType someObj = null;
+        someObj.DoSomething();
+        return true;
+    }
 
-	public static void Main ()
-	{
-
-	}
+    public static void Main() { }
 }

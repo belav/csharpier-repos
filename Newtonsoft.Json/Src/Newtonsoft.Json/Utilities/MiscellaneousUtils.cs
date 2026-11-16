@@ -27,12 +27,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Reflection;
-using System.Text;
-using System.Globalization;
-using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Newtonsoft.Json.Utilities
 {
@@ -63,11 +63,19 @@ namespace Newtonsoft.Json.Utilities
             {
                 if (ConvertUtils.IsInteger(objA) && ConvertUtils.IsInteger(objB))
                 {
-                    return Convert.ToDecimal(objA, CultureInfo.CurrentCulture).Equals(Convert.ToDecimal(objB, CultureInfo.CurrentCulture));
+                    return Convert
+                        .ToDecimal(objA, CultureInfo.CurrentCulture)
+                        .Equals(Convert.ToDecimal(objB, CultureInfo.CurrentCulture));
                 }
-                else if ((objA is double || objA is float || objA is decimal) && (objB is double || objB is float || objB is decimal))
+                else if (
+                    (objA is double || objA is float || objA is decimal)
+                    && (objB is double || objB is float || objB is decimal)
+                )
                 {
-                    return MathUtils.ApproxEquals(Convert.ToDouble(objA, CultureInfo.CurrentCulture), Convert.ToDouble(objB, CultureInfo.CurrentCulture));
+                    return MathUtils.ApproxEquals(
+                        Convert.ToDouble(objA, CultureInfo.CurrentCulture),
+                        Convert.ToDouble(objB, CultureInfo.CurrentCulture)
+                    );
                 }
                 else
                 {
@@ -78,9 +86,16 @@ namespace Newtonsoft.Json.Utilities
             return objA.Equals(objB);
         }
 
-        public static ArgumentOutOfRangeException CreateArgumentOutOfRangeException(string paramName, object actualValue, string message)
+        public static ArgumentOutOfRangeException CreateArgumentOutOfRangeException(
+            string paramName,
+            object actualValue,
+            string message
+        )
         {
-            string newMessage = message + Environment.NewLine + @"Actual value was {0}.".FormatWith(CultureInfo.InvariantCulture, actualValue);
+            string newMessage =
+                message
+                + Environment.NewLine
+                + @"Actual value was {0}.".FormatWith(CultureInfo.InvariantCulture, actualValue);
 
             return new ArgumentOutOfRangeException(paramName, newMessage);
         }
@@ -129,11 +144,18 @@ namespace Newtonsoft.Json.Utilities
             return localName;
         }
 
-        public static void GetQualifiedNameParts(string qualifiedName, out string? prefix, out string localName)
+        public static void GetQualifiedNameParts(
+            string qualifiedName,
+            out string? prefix,
+            out string localName
+        )
         {
             int colonPosition = StringUtils.IndexOf(qualifiedName, ':');
 
-            if ((colonPosition == -1 || colonPosition == 0) || (qualifiedName.Length - 1) == colonPosition)
+            if (
+                (colonPosition == -1 || colonPosition == 0)
+                || (qualifiedName.Length - 1) == colonPosition
+            )
             {
                 prefix = null;
                 localName = qualifiedName;

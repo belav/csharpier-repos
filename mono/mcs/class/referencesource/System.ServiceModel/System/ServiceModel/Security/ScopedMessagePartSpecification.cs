@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.Xml;
 
@@ -26,33 +26,26 @@ namespace System.ServiceModel.Security
 
         public ICollection<string> Actions
         {
-            get
-            {
-                return this.actionParts.Keys;
-            }
+            get { return this.actionParts.Keys; }
         }
 
         public MessagePartSpecification ChannelParts
         {
-            get
-            {
-                return this.channelParts;
-            }
+            get { return this.channelParts; }
         }
 
         public bool IsReadOnly
         {
-            get
-            {
-                return this.isReadOnly;
-            }
+            get { return this.isReadOnly; }
         }
 
         public ScopedMessagePartSpecification(ScopedMessagePartSpecification other)
             : this()
         {
             if (other == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("other"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("other")
+                );
 
             this.channelParts.Union(other.channelParts);
             if (other.actionParts != null)
@@ -66,7 +59,10 @@ namespace System.ServiceModel.Security
             }
         }
 
-        internal ScopedMessagePartSpecification(ScopedMessagePartSpecification other, bool newIncludeBody)
+        internal ScopedMessagePartSpecification(
+            ScopedMessagePartSpecification other,
+            bool newIncludeBody
+        )
             : this(other)
         {
             this.channelParts.IsBodyIncluded = newIncludeBody;
@@ -77,7 +73,9 @@ namespace System.ServiceModel.Security
         public void AddParts(MessagePartSpecification parts)
         {
             if (parts == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("parts"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("parts")
+                );
 
             ThrowIfReadOnly();
 
@@ -87,9 +85,13 @@ namespace System.ServiceModel.Security
         public void AddParts(MessagePartSpecification parts, string action)
         {
             if (action == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("action"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("action")
+                );
             if (parts == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("parts"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("parts")
+                );
 
             ThrowIfReadOnly();
 
@@ -101,7 +103,9 @@ namespace System.ServiceModel.Security
         internal void AddParts(MessagePartSpecification parts, XmlDictionaryString action)
         {
             if (action == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("action"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("action")
+                );
             AddParts(parts, action.Value);
         }
 
@@ -129,10 +133,14 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            return result;   
+            return result;
         }
 
-        public bool TryGetParts(string action, bool excludeChannelScope, out MessagePartSpecification parts)
+        public bool TryGetParts(
+            string action,
+            bool excludeChannelScope,
+            out MessagePartSpecification parts
+        )
         {
             if (action == null)
                 action = MessageHeaders.WildcardAction;
@@ -187,7 +195,8 @@ namespace System.ServiceModel.Security
         {
             if (!this.isReadOnly)
             {
-                this.readOnlyNormalizedActionParts = new Dictionary<string, MessagePartSpecification>();
+                this.readOnlyNormalizedActionParts =
+                    new Dictionary<string, MessagePartSpecification>();
                 foreach (string action in this.actionParts.Keys)
                 {
                     MessagePartSpecification p = new MessagePartSpecification();
@@ -203,7 +212,9 @@ namespace System.ServiceModel.Security
         void ThrowIfReadOnly()
         {
             if (this.isReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
         }
     }
 }

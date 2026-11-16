@@ -13,10 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
 {
     public class SuppressNullableWarningExpressionParsingTests : ParsingTests
     {
-        public SuppressNullableWarningExpressionParsingTests(ITestOutputHelper output) :
-            base(output)
-        {
-        }
+        public SuppressNullableWarningExpressionParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override CSharpSyntaxNode ParseNode(string text, CSharpParseOptions options)
         {
@@ -27,7 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         public void Null()
         {
             var source =
-@"class C
+                @"class C
 {
     object F = null!;
 }";
@@ -74,9 +72,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact]
         public void Expression()
         {
-            UsingNode(
-                "o = o!",
-                TestOptions.Regular8);
+            UsingNode("o = o!", TestOptions.Regular8);
             N(SyntaxKind.SimpleAssignmentExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -94,9 +90,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
                 }
             }
 
-            UsingNode(
-                "o = o!!",
-                TestOptions.Regular8);
+            UsingNode("o = o!!", TestOptions.Regular8);
             N(SyntaxKind.SimpleAssignmentExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -118,9 +112,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
                 }
             }
 
-            UsingNode(
-                "o = !o!",
-                TestOptions.Regular8);
+            UsingNode("o = !o!", TestOptions.Regular8);
             N(SyntaxKind.SimpleAssignmentExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -146,9 +138,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact]
         public void NotEquals()
         {
-            UsingNode(
-                "o = o!!=null",
-                TestOptions.Regular8);
+            UsingNode("o = o!!=null", TestOptions.Regular8);
             N(SyntaxKind.SimpleAssignmentExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -188,7 +178,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
                 TestOptions.Regular8,
                 // (1,8): error CS1525: Invalid expression term '='
                 // o = o!==null
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=").WithArguments("=").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=")
+                    .WithArguments("=")
+                    .WithLocation(1, 8)
+            );
             N(SyntaxKind.SimpleAssignmentExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -223,9 +216,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact]
         public void ConditionalAccess_01()
         {
-            UsingNode(
-                "o!?.ToString()",
-                TestOptions.Regular8);
+            UsingNode("o!?.ToString()", TestOptions.Regular8);
             N(SyntaxKind.ConditionalAccessExpression);
             {
                 N(SyntaxKind.SuppressNullableWarningExpression);
@@ -367,16 +358,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact, WorkItem(47712, "https://github.com/dotnet/roslyn/pull/47712")]
         public void ConditionalAccess_04()
         {
-            UsingNode("x?.y?!.z.ToString()", options: null,
+            UsingNode(
+                "x?.y?!.z.ToString()",
+                options: null,
                 // (1,7): error CS1525: Invalid expression term '.'
                 // x?.y?!.z.ToString()
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ".", isSuppressed: false).WithArguments(".").WithLocation(1, 7),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ".", isSuppressed: false)
+                    .WithArguments(".")
+                    .WithLocation(1, 7),
                 // (1,20): error CS1003: Syntax error, ':' expected
                 // x?.y?!.z.ToString()
-                Diagnostic(ErrorCode.ERR_SyntaxError, "", isSuppressed: false).WithArguments(":").WithLocation(1, 20),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "", isSuppressed: false)
+                    .WithArguments(":")
+                    .WithLocation(1, 20),
                 // (1,20): error CS1733: Expected expression
                 // x?.y?!.z.ToString()
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "", isSuppressed: false).WithLocation(1, 20));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "", isSuppressed: false)
+                    .WithLocation(1, 20)
+            );
 
             N(SyntaxKind.ConditionalExpression);
             {
@@ -441,13 +440,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact, WorkItem(47712, "https://github.com/dotnet/roslyn/pull/47712")]
         public void ConditionalAccess_05()
         {
-            UsingNode("x?.y?![0].ToString()", options: null,
+            UsingNode(
+                "x?.y?![0].ToString()",
+                options: null,
                 // (1,21): error CS1003: Syntax error, ':' expected
                 // x?.y?![0].ToString()
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 21),
                 // (1,21): error CS1733: Expected expression
                 // x?.y?![0].ToString()
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 21));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 21)
+            );
 
             N(SyntaxKind.ConditionalExpression);
             {
@@ -512,16 +514,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact, WorkItem(47712, "https://github.com/dotnet/roslyn/pull/47712")]
         public void ConditionalAccess_06()
         {
-            UsingNode("x?.y?!().ToString()", options: null,
+            UsingNode(
+                "x?.y?!().ToString()",
+                options: null,
                 // (1,8): error CS1525: Invalid expression term ')'
                 // x?.y?!().ToString()
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")", isSuppressed: false).WithArguments(")").WithLocation(1, 8),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")", isSuppressed: false)
+                    .WithArguments(")")
+                    .WithLocation(1, 8),
                 // (1,20): error CS1003: Syntax error, ':' expected
                 // x?.y?!().ToString()
-                Diagnostic(ErrorCode.ERR_SyntaxError, "", isSuppressed: false).WithArguments(":").WithLocation(1, 20),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "", isSuppressed: false)
+                    .WithArguments(":")
+                    .WithLocation(1, 20),
                 // (1,20): error CS1733: Expected expression
                 // x?.y?!().ToString()
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "", isSuppressed: false).WithLocation(1, 20));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "", isSuppressed: false)
+                    .WithLocation(1, 20)
+            );
 
             N(SyntaxKind.ConditionalExpression);
             {
@@ -583,16 +593,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact, WorkItem(47712, "https://github.com/dotnet/roslyn/pull/47712")]
         public void ConditionalAccess_07()
         {
-            UsingNode("x?.y!?!.ToString()", options: null,
+            UsingNode(
+                "x?.y!?!.ToString()",
+                options: null,
                 // (1,8): error CS1525: Invalid expression term '.'
                 // x?.y!?!.ToString()
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ".", isSuppressed: false).WithArguments(".").WithLocation(1, 8),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ".", isSuppressed: false)
+                    .WithArguments(".")
+                    .WithLocation(1, 8),
                 // (1,19): error CS1003: Syntax error, ':' expected
                 // x?.y!?!.ToString()
-                Diagnostic(ErrorCode.ERR_SyntaxError, "", isSuppressed: false).WithArguments(":").WithLocation(1, 19),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "", isSuppressed: false)
+                    .WithArguments(":")
+                    .WithLocation(1, 19),
                 // (1,19): error CS1733: Expected expression
                 // x?.y!?!.ToString()
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "", isSuppressed: false).WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "", isSuppressed: false)
+                    .WithLocation(1, 19)
+            );
 
             N(SyntaxKind.ConditionalExpression);
             {
@@ -790,29 +808,43 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         {
             var text = "x?.y!.z";
 
-            CreateCompilation(text, parseOptions: TestOptions.Regular7_3).VerifyDiagnostics(
-                // (1,1): error CS8370: Feature 'top-level statements' is not available in C# 7.3. Please use language version 9.0 or greater.
-                // x?.y!.z
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "x?.y!.z").WithArguments("top-level statements", "9.0").WithLocation(1, 1),
-                // (1,1): error CS0103: The name 'x' does not exist in the current context
-                // x?.y!.z
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x").WithArguments("x").WithLocation(1, 1),
-                // (1,5): error CS8370: Feature 'nullable reference types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                // x?.y!.z
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "!").WithArguments("nullable reference types", "8.0").WithLocation(1, 5),
-                // (1,8): error CS1002: ; expected
-                // x?.y!.z
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 8));
-            CreateCompilation(text, parseOptions: TestOptions.Regular8).VerifyDiagnostics(
-                // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
-                // x?.y!.z
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "x?.y!.z").WithArguments("top-level statements", "9.0").WithLocation(1, 1),
-                // (1,1): error CS0103: The name 'x' does not exist in the current context
-                // x?.y!.z
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x").WithArguments("x").WithLocation(1, 1),
-                // (1,8): error CS1002: ; expected
-                // x?.y!.z
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 8));
+            CreateCompilation(text, parseOptions: TestOptions.Regular7_3)
+                .VerifyDiagnostics(
+                    // (1,1): error CS8370: Feature 'top-level statements' is not available in C# 7.3. Please use language version 9.0 or greater.
+                    // x?.y!.z
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "x?.y!.z")
+                        .WithArguments("top-level statements", "9.0")
+                        .WithLocation(1, 1),
+                    // (1,1): error CS0103: The name 'x' does not exist in the current context
+                    // x?.y!.z
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
+                        .WithArguments("x")
+                        .WithLocation(1, 1),
+                    // (1,5): error CS8370: Feature 'nullable reference types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // x?.y!.z
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "!")
+                        .WithArguments("nullable reference types", "8.0")
+                        .WithLocation(1, 5),
+                    // (1,8): error CS1002: ; expected
+                    // x?.y!.z
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 8)
+                );
+            CreateCompilation(text, parseOptions: TestOptions.Regular8)
+                .VerifyDiagnostics(
+                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // x?.y!.z
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "x?.y!.z")
+                        .WithArguments("top-level statements", "9.0")
+                        .WithLocation(1, 1),
+                    // (1,1): error CS0103: The name 'x' does not exist in the current context
+                    // x?.y!.z
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
+                        .WithArguments("x")
+                        .WithLocation(1, 1),
+                    // (1,8): error CS1002: ; expected
+                    // x?.y!.z
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 8)
+                );
 
             UsingNode(text, options: TestOptions.Regular7_3);
             verify();

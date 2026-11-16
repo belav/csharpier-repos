@@ -4,35 +4,32 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
-    using  System.Collections.Specialized;
-    using  System.Runtime.Serialization;
-    using  System.Configuration.Provider;
-    using  System.Collections;
+namespace System.Configuration
+{
+    using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration.Provider;
+    using System.Runtime.Serialization;
 
-   ////////////////////////////////////////////////////////////
-   ////////////////////////////////////////////////////////////
-   ////////////////////////////////////////////////////////////
-   ////////////////////////////////////////////////////////////
-   [Serializable]
-   public class SettingsPropertyNotFoundException : Exception
-   {
-       public SettingsPropertyNotFoundException(String message)
-           : base(message)
-       {
-       }
+    ////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////
+    [Serializable]
+    public class SettingsPropertyNotFoundException : Exception
+    {
+        public SettingsPropertyNotFoundException(String message)
+            : base(message) { }
 
-       public SettingsPropertyNotFoundException(String message, Exception innerException)
-           : base(message, innerException)
-       {
-       }
+        public SettingsPropertyNotFoundException(String message, Exception innerException)
+            : base(message, innerException) { }
 
-       protected SettingsPropertyNotFoundException(SerializationInfo info, StreamingContext context)
-           : base(info, context)
-        {
-        }
+        protected SettingsPropertyNotFoundException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
 
-       public SettingsPropertyNotFoundException()
-       { }
-   }
+        public SettingsPropertyNotFoundException() { }
+    }
 }

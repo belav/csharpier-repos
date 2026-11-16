@@ -25,23 +25,16 @@ namespace Microsoft.CodeAnalysis.Shared
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultDocumentSupportsFeatureService()
-        {
-        }
+        public DefaultDocumentSupportsFeatureService() { }
 
-        public bool SupportsCodeFixes(Document document)
-            => true;
+        public bool SupportsCodeFixes(Document document) => true;
 
-        public bool SupportsNavigationToAnyPosition(Document document)
-            => true;
+        public bool SupportsNavigationToAnyPosition(Document document) => true;
 
-        public bool SupportsRefactorings(Document document)
-            => true;
+        public bool SupportsRefactorings(Document document) => true;
 
-        public bool SupportsRename(Document document)
-            => true;
+        public bool SupportsRename(Document document) => true;
 
-        public bool SupportsSemanticSnippets(Document document)
-            => true;
+        public bool SupportsSemanticSnippets(Document document) => true;
     }
 }

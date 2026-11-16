@@ -17,33 +17,46 @@ namespace System.ServiceModel.Configuration
     public abstract partial class HttpBindingBaseElement : StandardBindingElement
     {
         protected HttpBindingBaseElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
-        [ConfigurationProperty(ConfigurationStrings.AllowCookies, DefaultValue = HttpTransportDefaults.AllowCookies)]
+        [ConfigurationProperty(
+            ConfigurationStrings.AllowCookies,
+            DefaultValue = HttpTransportDefaults.AllowCookies
+        )]
         public bool AllowCookies
         {
             get { return (bool)base[ConfigurationStrings.AllowCookies]; }
             set { base[ConfigurationStrings.AllowCookies] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.BypassProxyOnLocal, DefaultValue = HttpTransportDefaults.BypassProxyOnLocal)]
+        [ConfigurationProperty(
+            ConfigurationStrings.BypassProxyOnLocal,
+            DefaultValue = HttpTransportDefaults.BypassProxyOnLocal
+        )]
         public bool BypassProxyOnLocal
         {
             get { return (bool)base[ConfigurationStrings.BypassProxyOnLocal]; }
             set { base[ConfigurationStrings.BypassProxyOnLocal] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.HostNameComparisonMode, DefaultValue = HttpTransportDefaults.HostNameComparisonMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.HostNameComparisonMode,
+            DefaultValue = HttpTransportDefaults.HostNameComparisonMode
+        )]
         [ServiceModelEnumValidator(typeof(HostNameComparisonModeHelper))]
         public HostNameComparisonMode HostNameComparisonMode
         {
-            get { return (HostNameComparisonMode)base[ConfigurationStrings.HostNameComparisonMode]; }
+            get
+            {
+                return (HostNameComparisonMode)base[ConfigurationStrings.HostNameComparisonMode];
+            }
             set { base[ConfigurationStrings.HostNameComparisonMode] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxBufferPoolSize, DefaultValue = TransportDefaults.MaxBufferPoolSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxBufferPoolSize,
+            DefaultValue = TransportDefaults.MaxBufferPoolSize
+        )]
         [LongValidator(MinValue = 0)]
         public long MaxBufferPoolSize
         {
@@ -51,7 +64,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxBufferPoolSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxBufferSize, DefaultValue = TransportDefaults.MaxBufferSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxBufferSize,
+            DefaultValue = TransportDefaults.MaxBufferSize
+        )]
         [IntegerValidator(MinValue = 1)]
         public int MaxBufferSize
         {
@@ -59,7 +75,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxBufferSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxReceivedMessageSize, DefaultValue = TransportDefaults.MaxReceivedMessageSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxReceivedMessageSize,
+            DefaultValue = TransportDefaults.MaxReceivedMessageSize
+        )]
         [LongValidator(MinValue = 1)]
         public long MaxReceivedMessageSize
         {
@@ -67,9 +86,15 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxReceivedMessageSize] = value; }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.Configuration, "Configuration104",
-                            Justification = "This attribute comes from previous releases.")]
-        [ConfigurationProperty(ConfigurationStrings.ProxyAddress, DefaultValue = HttpTransportDefaults.ProxyAddress)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            FxCop.Category.Configuration,
+            "Configuration104",
+            Justification = "This attribute comes from previous releases."
+        )]
+        [ConfigurationProperty(
+            ConfigurationStrings.ProxyAddress,
+            DefaultValue = HttpTransportDefaults.ProxyAddress
+        )]
         public Uri ProxyAddress
         {
             get { return (Uri)base[ConfigurationStrings.ProxyAddress]; }
@@ -79,12 +104,21 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.ReaderQuotas)]
         public XmlDictionaryReaderQuotasElement ReaderQuotas
         {
-            get { return (XmlDictionaryReaderQuotasElement)base[ConfigurationStrings.ReaderQuotas]; }
+            get
+            {
+                return (XmlDictionaryReaderQuotasElement)base[ConfigurationStrings.ReaderQuotas];
+            }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.Configuration, "Configuration104",
-                            Justification = "This attribute comes from previous releases.")]
-        [ConfigurationProperty(ConfigurationStrings.TextEncoding, DefaultValue = TextEncoderDefaults.EncodingString)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            FxCop.Category.Configuration,
+            "Configuration104",
+            Justification = "This attribute comes from previous releases."
+        )]
+        [ConfigurationProperty(
+            ConfigurationStrings.TextEncoding,
+            DefaultValue = TextEncoderDefaults.EncodingString
+        )]
         [TypeConverter(typeof(EncodingConverter))]
         public Encoding TextEncoding
         {
@@ -92,7 +126,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.TextEncoding] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.TransferMode, DefaultValue = HttpTransportDefaults.TransferMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TransferMode,
+            DefaultValue = HttpTransportDefaults.TransferMode
+        )]
         [ServiceModelEnumValidator(typeof(TransferModeHelper))]
         public TransferMode TransferMode
         {
@@ -100,7 +137,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.TransferMode] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.UseDefaultWebProxy, DefaultValue = HttpTransportDefaults.UseDefaultWebProxy)]
+        [ConfigurationProperty(
+            ConfigurationStrings.UseDefaultWebProxy,
+            DefaultValue = HttpTransportDefaults.UseDefaultWebProxy
+        )]
         public bool UseDefaultWebProxy
         {
             get { return (bool)base[ConfigurationStrings.UseDefaultWebProxy]; }
@@ -110,7 +150,10 @@ namespace System.ServiceModel.Configuration
         // BasicHttpContextBinding uses this hook to not emit AllowCookies
         internal virtual void InitializeAllowCookies(HttpBindingBase binding)
         {
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.AllowCookies, binding.AllowCookies);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.AllowCookies,
+                binding.AllowCookies
+            );
         }
 
         protected internal override void InitializeFrom(Binding binding)
@@ -118,17 +161,44 @@ namespace System.ServiceModel.Configuration
             base.InitializeFrom(binding);
             HttpBindingBase httpBindingBase = (HttpBindingBase)binding;
             this.InitializeAllowCookies(httpBindingBase);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.BypassProxyOnLocal, httpBindingBase.BypassProxyOnLocal);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.HostNameComparisonMode, httpBindingBase.HostNameComparisonMode);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxBufferSize, httpBindingBase.MaxBufferSize);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxBufferPoolSize, httpBindingBase.MaxBufferPoolSize);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxReceivedMessageSize, httpBindingBase.MaxReceivedMessageSize);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ProxyAddress, httpBindingBase.ProxyAddress);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TextEncoding, httpBindingBase.TextEncoding);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TransferMode, httpBindingBase.TransferMode);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.UseDefaultWebProxy, httpBindingBase.UseDefaultWebProxy);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.BypassProxyOnLocal,
+                httpBindingBase.BypassProxyOnLocal
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.HostNameComparisonMode,
+                httpBindingBase.HostNameComparisonMode
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxBufferSize,
+                httpBindingBase.MaxBufferSize
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxBufferPoolSize,
+                httpBindingBase.MaxBufferPoolSize
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxReceivedMessageSize,
+                httpBindingBase.MaxReceivedMessageSize
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ProxyAddress,
+                httpBindingBase.ProxyAddress
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.TextEncoding,
+                httpBindingBase.TextEncoding
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.TransferMode,
+                httpBindingBase.TransferMode
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.UseDefaultWebProxy,
+                httpBindingBase.UseDefaultWebProxy
+            );
 
-            this.ReaderQuotas.InitializeFrom(httpBindingBase.ReaderQuotas);            
+            this.ReaderQuotas.InitializeFrom(httpBindingBase.ReaderQuotas);
         }
 
         protected override void OnApplyConfiguration(Binding binding)
@@ -149,7 +219,10 @@ namespace System.ServiceModel.Configuration
             }
 
             PropertyInformationCollection propertyInfo = this.ElementInformation.Properties;
-            if (propertyInfo[ConfigurationStrings.MaxBufferSize].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.MaxBufferSize].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 httpBindingBase.MaxBufferSize = this.MaxBufferSize;
             }

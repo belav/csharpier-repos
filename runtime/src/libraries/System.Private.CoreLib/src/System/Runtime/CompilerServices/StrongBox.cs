@@ -15,14 +15,13 @@ namespace System.Runtime.CompilerServices
         /// Gets the strongly typed value associated with the <see cref = "StrongBox{T}"></see>
         /// <remarks>This is explicitly exposed as a field instead of a property to enable loading the address of the field.</remarks>
         /// </summary>
-        [MaybeNull] public T Value = default!;
+        [MaybeNull]
+        public T Value = default!;
 
         /// <summary>
         /// Initializes a new StrongBox which can receive a value when used in a reference call.
         /// </summary>
-        public StrongBox()
-        {
-        }
+        public StrongBox() { }
 
         /// <summary>
         /// Initializes a new <see cref = "StrongBox{T}"></see> with the specified value.

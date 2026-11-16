@@ -30,13 +30,13 @@ public class RelationalScaffoldingModelFactoryTest
         {
             Table = Table,
             Name = "Id",
-            StoreType = "int"
+            StoreType = "int",
         };
         IdPrimaryKey = new DatabasePrimaryKey
         {
             Table = Table,
             Name = "IdPrimaryKey",
-            Columns = { IdColumn }
+            Columns = { IdColumn },
         };
     }
 
@@ -73,29 +73,31 @@ public class RelationalScaffoldingModelFactoryTest
                             Table = Table,
                             Name = "occupation",
                             StoreType = "nvarchar(max)",
-                            DefaultValueSql = "\"dev\""
+                            DefaultValueSql = "\"dev\"",
                         },
                         new DatabaseColumn
                         {
                             Table = Table,
                             Name = "salary",
                             StoreType = "int",
-                            IsNullable = true
+                            IsNullable = true,
                         },
                         new DatabaseColumn
                         {
                             Table = Table,
                             Name = "hierarchy",
-                            StoreType = "HierarchyId"
-                        }
+                            StoreType = "HierarchyId",
+                        },
                     },
-                    PrimaryKey = IdPrimaryKey
-                }
-            }
+                    PrimaryKey = IdPrimaryKey,
+                },
+            },
         };
 
-        var entityType =
-            (EntityType)_factory.Create(info, new ModelReverseEngineerOptions { NoPluralize = true }).FindEntityType("Jobs");
+        var entityType = (EntityType)
+            _factory
+                .Create(info, new ModelReverseEngineerOptions { NoPluralize = true })
+                .FindEntityType("Jobs");
 
         Assert.Collection(
             entityType.GetProperties(),
@@ -118,6 +120,7 @@ public class RelationalScaffoldingModelFactoryTest
             {
                 Assert.Equal("salary", column.GetColumnName());
                 Assert.Equal(typeof(int?), column.ClrType);
-            });
+            }
+        );
     }
 }

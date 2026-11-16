@@ -12,6 +12,6 @@ using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion (Consts.FxVersion)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
 
-[assembly: AssemblyDelaySign (true)]
+[assembly: AssemblyDelaySign(true)]

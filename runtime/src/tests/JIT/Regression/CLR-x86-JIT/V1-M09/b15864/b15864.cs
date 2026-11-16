@@ -3,12 +3,13 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     //@BEGINRENAME; Verify this renames
-    using System.Security;
     //@ENDRENAME; Verify this renames
     using System;
+    using System.Security;
 
     public class TestClass
     {
@@ -23,31 +24,26 @@ namespace DefaultNamespace
             {
                 throw new ArgumentException();
             }
-            catch (ArgumentException /*e1*/)
+            catch (ArgumentException /*e1*/
+            )
             {
                 caught++;
                 try
                 {
                     throw new SecurityException();
                 }
-                catch (SecurityException /*e2*/)
-                {
-                }
+                catch (SecurityException /*e2*/
+                ) { }
                 finally
                 {
                     try
                     {
                         throw new NullReferenceException();
                     }
-                    catch (Exception /*e3*/)
-                    {
-                    }
-
+                    catch (Exception /*e3*/
+                    ) { }
                 }
-
             }
-
-
         }
 
         [Fact]
@@ -56,7 +52,5 @@ namespace DefaultNamespace
             (new TestClass()).TestMain();
             Console.WriteLine("Passed.");
         }
-
     };
 };
-

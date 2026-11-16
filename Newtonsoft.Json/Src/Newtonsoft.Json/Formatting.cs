@@ -38,6 +38,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Causes child objects to be indented according to the <see cref="JsonTextWriter.Indentation"/> and <see cref="JsonTextWriter.IndentChar"/> settings.
         /// </summary>
-        Indented = 1
+        Indented = 1,
     }
 }

@@ -59,7 +59,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             {
                 FullName = "Joe User",
                 EmailAddress = "joe@example.com",
-                PasswordHash = "VHdlZXQgJ1F1aWNrc2lsdmVyJyB0byBASmFtZXNOSw=="
+                PasswordHash = "VHdlZXQgJ1F1aWNrc2lsdmVyJyB0byBASmFtZXNOSw==",
             };
 
             string json = JsonConvert.SerializeObject(account);
@@ -68,7 +68,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // {"FullName":"Joe User","EmailAddress":"joe@example.com"}
             #endregion
 
-            Assert.AreEqual(@"{""FullName"":""Joe User"",""EmailAddress"":""joe@example.com""}", json);
+            Assert.AreEqual(
+                @"{""FullName"":""Joe User"",""EmailAddress"":""joe@example.com""}",
+                json
+            );
         }
     }
 }

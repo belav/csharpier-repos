@@ -6,11 +6,12 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.OleDb {
-
+namespace System.Data.OleDb
+{
     using System;
 
-    public enum OleDbLiteral : int { // MDAC 61846
+    public enum OleDbLiteral : int
+    { // MDAC 61846
         Invalid = 0,
         Binary_Literal = 1,
         Catalog_Name = 2,

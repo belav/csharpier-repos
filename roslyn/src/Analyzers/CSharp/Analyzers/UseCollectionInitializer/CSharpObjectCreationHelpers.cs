@@ -12,7 +12,8 @@ internal static class CSharpObjectCreationHelpers
     public static bool IsInitializerOfLocalDeclarationStatement(
         LocalDeclarationStatementSyntax localDeclarationStatement,
         BaseObjectCreationExpressionSyntax rootExpression,
-        [NotNullWhen(true)] out VariableDeclaratorSyntax? variableDeclarator)
+        [NotNullWhen(true)] out VariableDeclaratorSyntax? variableDeclarator
+    )
     {
         foreach (var declarator in localDeclarationStatement.Declaration.Variables)
         {

@@ -12,13 +12,22 @@ internal static partial class Interop
         /// <summary>
         /// WARNING: This method does not implicitly handle long paths. Use CreateDirectory.
         /// </summary>
-        [LibraryImport(Libraries.Kernel32, EntryPoint = "CreateDirectoryW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Kernel32,
+            EntryPoint = "CreateDirectoryW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static unsafe partial bool CreateDirectoryPrivate(
             string path,
-            SECURITY_ATTRIBUTES* lpSecurityAttributes);
+            SECURITY_ATTRIBUTES* lpSecurityAttributes
+        );
 
-        internal static unsafe bool CreateDirectory(string path, SECURITY_ATTRIBUTES* lpSecurityAttributes)
+        internal static unsafe bool CreateDirectory(
+            string path,
+            SECURITY_ATTRIBUTES* lpSecurityAttributes
+        )
         {
             // We always want to add for CreateDirectory to get around the legacy 248 character limitation
             path = PathInternal.EnsureExtendedPrefix(path);

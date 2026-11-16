@@ -10,8 +10,7 @@ namespace ILCompiler.DependencyAnalysisFramework
         private object _mark;
 
         // Only DependencyNodeCore<T> is allowed to derive from this
-        internal DependencyNode()
-        { }
+        internal DependencyNode() { }
 
         internal void SetMark(object mark)
         {
@@ -27,10 +26,7 @@ namespace ILCompiler.DependencyAnalysisFramework
 
         public bool Marked
         {
-            get
-            {
-                return _mark != null;
-            }
+            get { return _mark != null; }
         }
 
         public sealed override bool Equals(object obj)

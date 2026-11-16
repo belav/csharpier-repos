@@ -2,14 +2,21 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 internal class MCell<T>
 {
     private T _t;
-    public MCell(T t) { _t = t; }
+
+    public MCell(T t)
+    {
+        _t = t;
+    }
+
     public MPair<T, R> GetMPair<R>(R r)
     {
         return new MPair<T, R>(_t, r);
     }
+
     public void Gather<A, B>(A a, B b)
     {
         MPair<A, B> p1 = new MPair<A, B>(a, b);
@@ -18,6 +25,7 @@ internal class MCell<T>
         MPair<T, A> p4 = GetMPair<A>(a);
         MCell<A> c1 = new MCell<A>(a);
     }
+
     public MPair<T, T> GetDuplicate()
     {
         return GetMPair<T>(_t);
@@ -27,7 +35,12 @@ internal class MCell<T>
 internal class MPair<R, S> : MCell<R>
 {
     private S _s;
-    public MPair(R r, S s) : base(r) { _s = s; }
+
+    public MPair(R r, S s)
+        : base(r)
+    {
+        _s = s;
+    }
 }
 
 public class M

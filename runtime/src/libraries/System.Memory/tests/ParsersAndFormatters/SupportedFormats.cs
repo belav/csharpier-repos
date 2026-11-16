@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace System.Buffers.Text.Tests
 {
@@ -25,7 +25,8 @@ namespace System.Buffers.Text.Tests
 
     internal static partial class TestData
     {
-        public static bool IsParsingImplemented<T>(this SupportedFormat f) => f.IsParsingImplemented(typeof(T));
+        public static bool IsParsingImplemented<T>(this SupportedFormat f) =>
+            f.IsParsingImplemented(typeof(T));
 
         //
         // Used to disable automatic generation of ParserTestData from FormatterTestData. Useful for bringing up new
@@ -40,16 +41,41 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                yield return new SupportedFormat('G', supportsPrecision: false) { IsDefault = true };
-                yield return new SupportedFormat('g', supportsPrecision: false) { FormatSynonymFor = 'G', ParseSynonymFor = 'G' };
-                yield return new SupportedFormat('R', supportsPrecision: false) { IsDefault = true };
-                yield return new SupportedFormat('r', supportsPrecision: false) { FormatSynonymFor = 'R', ParseSynonymFor = 'R' };
+                yield return new SupportedFormat('G', supportsPrecision: false)
+                {
+                    IsDefault = true,
+                };
+                yield return new SupportedFormat('g', supportsPrecision: false)
+                {
+                    FormatSynonymFor = 'G',
+                    ParseSynonymFor = 'G',
+                };
+                yield return new SupportedFormat('R', supportsPrecision: false)
+                {
+                    IsDefault = true,
+                };
+                yield return new SupportedFormat('r', supportsPrecision: false)
+                {
+                    FormatSynonymFor = 'R',
+                    ParseSynonymFor = 'R',
+                };
                 yield return new SupportedFormat('D', supportsPrecision: true);
-                yield return new SupportedFormat('d', supportsPrecision: true) { FormatSynonymFor = 'D', ParseSynonymFor = 'd' };
+                yield return new SupportedFormat('d', supportsPrecision: true)
+                {
+                    FormatSynonymFor = 'D',
+                    ParseSynonymFor = 'd',
+                };
                 yield return new SupportedFormat('N', supportsPrecision: true);
-                yield return new SupportedFormat('n', supportsPrecision: true) { FormatSynonymFor = 'N', ParseSynonymFor = 'N' };
+                yield return new SupportedFormat('n', supportsPrecision: true)
+                {
+                    FormatSynonymFor = 'N',
+                    ParseSynonymFor = 'N',
+                };
                 yield return new SupportedFormat('X', supportsPrecision: true);
-                yield return new SupportedFormat('x', supportsPrecision: true) { ParseSynonymFor = 'X' };
+                yield return new SupportedFormat('x', supportsPrecision: true)
+                {
+                    ParseSynonymFor = 'X',
+                };
             }
         }
 
@@ -57,12 +83,26 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                yield return new SupportedFormat('G', supportsPrecision: false) { IsDefault = true };
-                yield return new SupportedFormat('g', supportsPrecision: false) { FormatSynonymFor = 'G', ParseSynonymFor = 'G' };
+                yield return new SupportedFormat('G', supportsPrecision: false)
+                {
+                    IsDefault = true,
+                };
+                yield return new SupportedFormat('g', supportsPrecision: false)
+                {
+                    FormatSynonymFor = 'G',
+                    ParseSynonymFor = 'G',
+                };
                 yield return new SupportedFormat('E', supportsPrecision: true);
-                yield return new SupportedFormat('e', supportsPrecision: true) { ParseSynonymFor = 'E' };
+                yield return new SupportedFormat('e', supportsPrecision: true)
+                {
+                    ParseSynonymFor = 'E',
+                };
                 yield return new SupportedFormat('F', supportsPrecision: true);
-                yield return new SupportedFormat('f', supportsPrecision: true) { FormatSynonymFor = 'F', ParseSynonymFor = 'F' };
+                yield return new SupportedFormat('f', supportsPrecision: true)
+                {
+                    FormatSynonymFor = 'F',
+                    ParseSynonymFor = 'F',
+                };
             }
         }
 
@@ -70,12 +110,26 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                yield return new SupportedFormat('G', supportsPrecision: false) { IsDefault = true };
-                yield return new SupportedFormat('g', supportsPrecision: false) { FormatSynonymFor = 'G', ParseSynonymFor = 'G' };
+                yield return new SupportedFormat('G', supportsPrecision: false)
+                {
+                    IsDefault = true,
+                };
+                yield return new SupportedFormat('g', supportsPrecision: false)
+                {
+                    FormatSynonymFor = 'G',
+                    ParseSynonymFor = 'G',
+                };
                 yield return new SupportedFormat('E', supportsPrecision: true);
-                yield return new SupportedFormat('e', supportsPrecision: true) { ParseSynonymFor = 'E' };
+                yield return new SupportedFormat('e', supportsPrecision: true)
+                {
+                    ParseSynonymFor = 'E',
+                };
                 yield return new SupportedFormat('F', supportsPrecision: true);
-                yield return new SupportedFormat('f', supportsPrecision: true) { FormatSynonymFor = 'F', ParseSynonymFor = 'F' };
+                yield return new SupportedFormat('f', supportsPrecision: true)
+                {
+                    FormatSynonymFor = 'F',
+                    ParseSynonymFor = 'F',
+                };
             }
         }
 
@@ -83,8 +137,14 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                yield return new SupportedFormat('G', supportsPrecision: false) { IsDefault = true };
-                yield return new SupportedFormat('l', supportsPrecision: false) { ParseSynonymFor = 'l' };
+                yield return new SupportedFormat('G', supportsPrecision: false)
+                {
+                    IsDefault = true,
+                };
+                yield return new SupportedFormat('l', supportsPrecision: false)
+                {
+                    ParseSynonymFor = 'l',
+                };
             }
         }
 
@@ -92,7 +152,10 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                yield return new SupportedFormat('D', supportsPrecision: false) { IsDefault = true };
+                yield return new SupportedFormat('D', supportsPrecision: false)
+                {
+                    IsDefault = true,
+                };
                 yield return new SupportedFormat('N', supportsPrecision: false);
                 yield return new SupportedFormat('P', supportsPrecision: false);
                 yield return new SupportedFormat('B', supportsPrecision: false);
@@ -103,7 +166,10 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                yield return new SupportedFormat('G', supportsPrecision: false) { IsDefault = true };
+                yield return new SupportedFormat('G', supportsPrecision: false)
+                {
+                    IsDefault = true,
+                };
                 yield return new SupportedFormat('R', supportsPrecision: false);
                 yield return new SupportedFormat('l', supportsPrecision: false);
                 yield return new SupportedFormat('O', supportsPrecision: false);
@@ -115,7 +181,11 @@ namespace System.Buffers.Text.Tests
             get
             {
                 // The "default" format for DateTimeOffset is weird - it's like "G" but also suffixes an offset so it doesn't exactly match any of the explicit offsets.
-                yield return new SupportedFormat(default, supportsPrecision: false) { IsDefault = true, NoRepresentation = true };
+                yield return new SupportedFormat(default, supportsPrecision: false)
+                {
+                    IsDefault = true,
+                    NoRepresentation = true,
+                };
                 yield return new SupportedFormat('G', supportsPrecision: false);
                 yield return new SupportedFormat('R', supportsPrecision: false);
                 yield return new SupportedFormat('l', supportsPrecision: false);
@@ -129,9 +199,20 @@ namespace System.Buffers.Text.Tests
             {
                 yield return new SupportedFormat('G', supportsPrecision: false);
                 yield return new SupportedFormat('g', supportsPrecision: false);
-                yield return new SupportedFormat('c', supportsPrecision: false) { IsDefault = true };
-                yield return new SupportedFormat('t', supportsPrecision: false) { ParseSynonymFor = 'c', FormatSynonymFor = 'c' };
-                yield return new SupportedFormat('T', supportsPrecision: false) { ParseSynonymFor = 'c', FormatSynonymFor = 'c' };
+                yield return new SupportedFormat('c', supportsPrecision: false)
+                {
+                    IsDefault = true,
+                };
+                yield return new SupportedFormat('t', supportsPrecision: false)
+                {
+                    ParseSynonymFor = 'c',
+                    FormatSynonymFor = 'c',
+                };
+                yield return new SupportedFormat('T', supportsPrecision: false)
+                {
+                    ParseSynonymFor = 'c',
+                    FormatSynonymFor = 'c',
+                };
             }
         }
     }

@@ -4,21 +4,22 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
 
-    public class WebPartEventArgs : EventArgs {
+    public class WebPartEventArgs : EventArgs
+    {
         private WebPart _webPart;
 
-        public WebPartEventArgs(WebPart webPart) {
+        public WebPartEventArgs(WebPart webPart)
+        {
             _webPart = webPart;
         }
 
-        public WebPart WebPart {
-            get {
-                return _webPart;
-            }
+        public WebPart WebPart
+        {
+            get { return _webPart; }
         }
     }
 }

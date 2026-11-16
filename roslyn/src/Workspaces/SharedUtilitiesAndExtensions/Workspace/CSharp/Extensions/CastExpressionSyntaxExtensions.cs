@@ -14,8 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     {
         public static ExpressionSyntax Uncast(this CastExpressionSyntax node)
         {
-            var leadingTrivia = node.OpenParenToken.LeadingTrivia
-                .Concat(node.OpenParenToken.TrailingTrivia)
+            var leadingTrivia = node
+                .OpenParenToken.LeadingTrivia.Concat(node.OpenParenToken.TrailingTrivia)
                 .Concat(node.Type.GetLeadingTrivia())
                 .Concat(node.Type.GetTrailingTrivia())
                 .Concat(node.CloseParenToken.LeadingTrivia)
@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             var trailingTrivia = node.GetTrailingTrivia().Where(t => !t.IsElastic());
 
-            var resultNode = node.Expression
-                .WithLeadingTrivia(leadingTrivia)
+            var resultNode = node
+                .Expression.WithLeadingTrivia(leadingTrivia)
                 .WithTrailingTrivia(trailingTrivia)
                 .WithAdditionalAnnotations(Simplifier.Annotation);
 

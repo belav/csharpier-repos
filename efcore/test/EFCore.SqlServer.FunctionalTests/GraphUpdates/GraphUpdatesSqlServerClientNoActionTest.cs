@@ -3,32 +3,32 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class GraphUpdatesSqlServerClientNoActionTest : GraphUpdatesSqlServerTestBase<
-    GraphUpdatesSqlServerClientNoActionTest.SqlServerFixture>
+public class GraphUpdatesSqlServerClientNoActionTest
+    : GraphUpdatesSqlServerTestBase<GraphUpdatesSqlServerClientNoActionTest.SqlServerFixture>
 {
     public GraphUpdatesSqlServerClientNoActionTest(SqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
     public class SqlServerFixture : GraphUpdatesSqlServerFixtureBase
     {
-        public override bool ForceClientNoAction
-            => true;
+        public override bool ForceClientNoAction => true;
 
-        protected override string StoreName
-            => "GraphClientNoActionUpdatesTest";
+        protected override string StoreName => "GraphClientNoActionUpdatesTest";
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
             base.OnModelCreating(modelBuilder, context);
 
-            foreach (var foreignKey in modelBuilder.Model
-                         .GetEntityTypes()
-                         .SelectMany(e => e.GetDeclaredForeignKeys()))
+            foreach (
+                var foreignKey in modelBuilder
+                    .Model.GetEntityTypes()
+                    .SelectMany(e => e.GetDeclaredForeignKeys())
+            )
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.ClientNoAction;
             }

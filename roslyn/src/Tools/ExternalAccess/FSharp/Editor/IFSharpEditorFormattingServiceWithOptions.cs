@@ -10,6 +10,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
         /// True if this service would like to format the document based on the user typing the
         /// provided character.
         /// </summary>
-        bool SupportsFormattingOnTypedCharacter(Document document, AutoFormattingOptionsWrapper options, char ch);
+        bool SupportsFormattingOnTypedCharacter(
+            Document document,
+            AutoFormattingOptionsWrapper options,
+            char ch
+        );
     }
 }

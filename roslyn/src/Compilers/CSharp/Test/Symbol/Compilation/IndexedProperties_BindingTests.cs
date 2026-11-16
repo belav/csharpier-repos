@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var reference = GetReference();
             var source =
-@"
+                @"
 using System;
 class B
 {
@@ -47,7 +47,7 @@ class B
         {
             var reference = GetReference();
             var source =
-@"
+                @"
 using System;
 class B
 {
@@ -68,7 +68,7 @@ class B
         {
             var reference = GetReference();
             var source =
-@"
+                @"
 using System;
 class B
 {
@@ -89,7 +89,7 @@ class B
         {
             var reference = GetReference();
             var source =
-@"
+                @"
 using System;
 class B
 {
@@ -108,7 +108,8 @@ class B
         public void IndexedProperties_LINQ()
         {
             var reference = GetReference();
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 
@@ -130,7 +131,12 @@ class B
             IndexedPropertiesBindingChecks(source, reference, SymbolKind.Property, "P1");
         }
 
-        private void IndexedPropertiesBindingChecks(string source, MetadataReference reference, SymbolKind symbolKind, string name)
+        private void IndexedPropertiesBindingChecks(
+            string source,
+            MetadataReference reference,
+            SymbolKind symbolKind,
+            string name
+        )
         {
             var tree = Parse(source);
             var comp = CreateCompilation(tree, new[] { reference });
@@ -159,7 +165,10 @@ class B
             var actual_lookupNames = model.LookupNames(position);
 
             Assert.NotEmpty(actual_lookupNames);
-            Assert.True(actual_lookupNames.Contains("System"), "LookupNames does not contain System");
+            Assert.True(
+                actual_lookupNames.Contains("System"),
+                "LookupNames does not contain System"
+            );
             Assert.True(actual_lookupNames.Contains("Main"), "LookupNames does not contain Main");
             Assert.True(actual_lookupNames.Contains("IA"), "LookupNames does not contain IA");
             Assert.True(actual_lookupNames.Contains("A"), "LookupNames does not contain A");
@@ -167,18 +176,33 @@ class B
 
             // Get the list of LookupSymbols at the location at the end of the tag
             var actual_lookupSymbols = model.LookupSymbols(position);
-            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e => e.ToTestDisplayString());
+            var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
+                e.ToTestDisplayString()
+            );
 
             Assert.NotEmpty(actual_lookupSymbols_as_string);
-            Assert.True(actual_lookupSymbols_as_string.Contains("void B.Main(System.String[] args)"), "LookupSymbols does not contain Main");
-            Assert.True(actual_lookupSymbols_as_string.Contains("System"), "LookupSymbols does not contain System");
-            Assert.True(actual_lookupSymbols_as_string.Contains("IA"), "LookupSymbols does not contain IA");
-            Assert.True(actual_lookupSymbols_as_string.Contains("A"), "LookupSymbols does not contain A");
+            Assert.True(
+                actual_lookupSymbols_as_string.Contains("void B.Main(System.String[] args)"),
+                "LookupSymbols does not contain Main"
+            );
+            Assert.True(
+                actual_lookupSymbols_as_string.Contains("System"),
+                "LookupSymbols does not contain System"
+            );
+            Assert.True(
+                actual_lookupSymbols_as_string.Contains("IA"),
+                "LookupSymbols does not contain IA"
+            );
+            Assert.True(
+                actual_lookupSymbols_as_string.Contains("A"),
+                "LookupSymbols does not contain A"
+            );
         }
 
         private static MetadataReference GetReference()
         {
-            var COMSource = @"
+            var COMSource =
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Runtime.InteropServices
@@ -202,7 +226,10 @@ Public Class A
 End Class
 ";
 
-            var reference = BasicCompilationUtils.CompileToMetadata(COMSource, verify: Verification.Passes);
+            var reference = BasicCompilationUtils.CompileToMetadata(
+                COMSource,
+                verify: Verification.Passes
+            );
             return reference;
         }
     }

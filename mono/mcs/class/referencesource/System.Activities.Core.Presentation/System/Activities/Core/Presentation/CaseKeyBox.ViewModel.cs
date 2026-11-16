@@ -5,14 +5,14 @@
 namespace System.Activities.Core.Presentation
 {
     using System;
+    using System.Activities.Presentation.Model;
     using System.Collections.ObjectModel;
-    using System.Windows;
-    using System.Linq;
     using System.ComponentModel;
-    using System.Runtime;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using System.Activities.Presentation.Model;
+    using System.Linq;
+    using System.Runtime;
+    using System.Windows;
 
     class CaseKeyBoxViewModel : DependencyObject
     {
@@ -20,22 +20,50 @@ namespace System.Activities.Core.Presentation
         static readonly string Empty = "(empty)";
 
         public static readonly DependencyProperty ComboBoxIsEditableProperty =
-            DependencyProperty.Register("ComboBoxIsEditable", typeof(bool), typeof(CaseKeyBoxViewModel), new UIPropertyMetadata(false));
+            DependencyProperty.Register(
+                "ComboBoxIsEditable",
+                typeof(bool),
+                typeof(CaseKeyBoxViewModel),
+                new UIPropertyMetadata(false)
+            );
 
         public static readonly DependencyProperty ComboBoxVisibilityProperty =
-            DependencyProperty.Register("ComboBoxVisibility", typeof(Visibility), typeof(CaseKeyBoxViewModel), new UIPropertyMetadata(Visibility.Collapsed));
+            DependencyProperty.Register(
+                "ComboBoxVisibility",
+                typeof(Visibility),
+                typeof(CaseKeyBoxViewModel),
+                new UIPropertyMetadata(Visibility.Collapsed)
+            );
 
         public static readonly DependencyProperty ComboBoxItemsProperty =
-            DependencyProperty.Register("ComboBoxItems", typeof(ObservableCollection<string>), typeof(CaseKeyBoxViewModel));
+            DependencyProperty.Register(
+                "ComboBoxItems",
+                typeof(ObservableCollection<string>),
+                typeof(CaseKeyBoxViewModel)
+            );
 
         public static readonly DependencyProperty DataTemplateNameProperty =
-            DependencyProperty.Register("DataTemplateName", typeof(string), typeof(CaseKeyBoxViewModel), new UIPropertyMetadata("Label"));
+            DependencyProperty.Register(
+                "DataTemplateName",
+                typeof(string),
+                typeof(CaseKeyBoxViewModel),
+                new UIPropertyMetadata("Label")
+            );
 
-        public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(CaseKeyBoxViewModel), new UIPropertyMetadata(String.Empty));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+            "Text",
+            typeof(string),
+            typeof(CaseKeyBoxViewModel),
+            new UIPropertyMetadata(String.Empty)
+        );
 
         public static readonly DependencyProperty TextBoxVisibilityProperty =
-            DependencyProperty.Register("TextBoxVisibility", typeof(Visibility), typeof(CaseKeyBoxViewModel), new UIPropertyMetadata(Visibility.Visible));
+            DependencyProperty.Register(
+                "TextBoxVisibility",
+                typeof(Visibility),
+                typeof(CaseKeyBoxViewModel),
+                new UIPropertyMetadata(Visibility.Visible)
+            );
 
         public const string BoxesTemplate = "Boxes";
         public const string LabelTemplate = "Label";
@@ -83,11 +111,7 @@ namespace System.Activities.Core.Presentation
             set { SetValue(TextBoxVisibilityProperty, value); }
         }
 
-        public bool IsBoxOnly
-        {
-            get;
-            set;
-        }
+        public bool IsBoxOnly { get; set; }
 
         public bool OnEnterPressed()
         {
@@ -186,7 +210,9 @@ namespace System.Activities.Core.Presentation
                 }
                 else
                 {
-                    this.ComboBoxItems = new ObservableCollection<string>(Enum.GetNames(this.ValueType).ToList());
+                    this.ComboBoxItems = new ObservableCollection<string>(
+                        Enum.GetNames(this.ValueType).ToList()
+                    );
                 }
             }
             else if (this.ValueType.IsValueType)
@@ -214,10 +240,16 @@ namespace System.Activities.Core.Presentation
             this.oldText = this.Text;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "If conversion fails, the exception type is System.Exception.So we must catch all types of exceptions here.")]
-        [SuppressMessage("Reliability", "Reliability108:IsFatalRule",
-            Justification = "Catch all exceptions to prevent crash.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "If conversion fails, the exception type is System.Exception.So we must catch all types of exceptions here."
+        )]
+        [SuppressMessage(
+            "Reliability",
+            "Reliability108:IsFatalRule",
+            Justification = "Catch all exceptions to prevent crash."
+        )]
         bool CommitChanges()
         {
             object result = null;
@@ -229,7 +261,10 @@ namespace System.Activities.Core.Presentation
             catch
             {
                 // ---- all
-                Fx.Assert(false, "Result should have been valid. Preview event handler should have handled the validation.");
+                Fx.Assert(
+                    false,
+                    "Result should have been valid. Preview event handler should have handled the validation."
+                );
                 return false;
             }
 
@@ -273,9 +308,14 @@ namespace System.Activities.Core.Presentation
                 TypeConverter converter = XamlUtilities.GetConverter(this.ValueType);
                 Fx.Assert(converter != null, "TypeConverter is not available");
 
-                if (!converter.CanConvertFrom(typeof(string)) || !converter.CanConvertTo(typeof(string)))
+                if (
+                    !converter.CanConvertFrom(typeof(string))
+                    || !converter.CanConvertTo(typeof(string))
+                )
                 {
-                    throw FxTrace.Exception.AsError(new NotSupportedException(SR.NotSupportedCaseKeyStringConversion));
+                    throw FxTrace.Exception.AsError(
+                        new NotSupportedException(SR.NotSupportedCaseKeyStringConversion)
+                    );
                 }
 
                 result = converter.ConvertFromString(this.Text);
@@ -288,7 +328,10 @@ namespace System.Activities.Core.Presentation
             }
 
             string reason;
-            if (this.CaseKeyValidationCallback != null && !this.CaseKeyValidationCallback(result, out reason))
+            if (
+                this.CaseKeyValidationCallback != null
+                && !this.CaseKeyValidationCallback(result, out reason)
+            )
             {
                 throw FxTrace.Exception.AsError(new ArgumentException(reason));
             }
@@ -296,10 +339,16 @@ namespace System.Activities.Core.Presentation
             return result;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "If conversion fails, the exception type is System.Exception.So we must catch all types of exceptions here.")]
-        [SuppressMessage("Reliability", "Reliability108:IsFatalRule",
-            Justification = "Catch all exceptions to prevent crash.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "If conversion fails, the exception type is System.Exception.So we must catch all types of exceptions here."
+        )]
+        [SuppressMessage(
+            "Reliability",
+            "Reliability108:IsFatalRule",
+            Justification = "Catch all exceptions to prevent crash."
+        )]
         public bool CanResolveInputText(out string reason)
         {
             reason = string.Empty;
@@ -319,7 +368,7 @@ namespace System.Activities.Core.Presentation
         {
             string normalizedOldText = this.oldText;
             string normalizedNewText = this.Text;
-            
+
             // Tricky: this.DisplayHintText = false => This CaseKeyBox is in CaseDesigner
             // Here, when changing value of string value type from "(empty)" to "", we must
             // consider the text hasn't been changed, such that we don't do commit-change.
@@ -339,7 +388,7 @@ namespace System.Activities.Core.Presentation
         {
             get { return this.View.DisplayHintText; }
         }
-        
+
         object Value
         {
             get { return this.View.Value; }
@@ -353,7 +402,7 @@ namespace System.Activities.Core.Presentation
 
         CaseKeyValidationCallbackDelegate CaseKeyValidationCallback
         {
-            get { return this.View.CaseKeyValidationCallback;  }
+            get { return this.View.CaseKeyValidationCallback; }
         }
 
         public void ResetText()

@@ -2,15 +2,17 @@
 
 public class B : A
 {
-	public override int Prop {
-		get { return 3; }
-	}
+    public override int Prop
+    {
+        get { return 3; }
+    }
 }
 
 public class A
 {
-	public virtual int Prop {
-		get { return 1; }
-		set {}
-	}
+    public virtual int Prop
+    {
+        get { return 1; }
+        set { }
+    }
 }

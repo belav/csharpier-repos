@@ -10,8 +10,10 @@ namespace System.Web.Http.Controllers
 {
     public class ValueResultConverterTest
     {
-        private readonly ValueResultConverter<object> _objectValueConverter = new ValueResultConverter<object>();
-        private readonly ValueResultConverter<Animal> _animalValueConverter = new ValueResultConverter<Animal>();
+        private readonly ValueResultConverter<object> _objectValueConverter =
+            new ValueResultConverter<object>();
+        private readonly ValueResultConverter<Animal> _animalValueConverter =
+            new ValueResultConverter<Animal>();
         private readonly HttpControllerContext _context = new HttpControllerContext();
         private readonly HttpRequestMessage _request = new HttpRequestMessage();
 
@@ -24,14 +26,23 @@ namespace System.Web.Http.Controllers
         [Fact]
         public void Convert_WhenContextIsNull_Throws()
         {
-            Assert.ThrowsArgumentNull(() => _objectValueConverter.Convert(controllerContext: null, actionResult: new object()), "controllerContext");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    _objectValueConverter.Convert(
+                        controllerContext: null,
+                        actionResult: new object()
+                    ),
+                "controllerContext"
+            );
         }
 
         [Fact]
         public void Convert_WhenValueTypeIsNotCompatible_Throws()
         {
-            Assert.Throws<InvalidCastException>(() => _animalValueConverter.Convert(_context, new object()),
-                "Unable to cast object of type 'System.Object' to type 'Animal'.");
+            Assert.Throws<InvalidCastException>(
+                () => _animalValueConverter.Convert(_context, new object()),
+                "Unable to cast object of type 'System.Object' to type 'Animal'."
+            );
         }
 
         [Fact]
@@ -63,6 +74,7 @@ namespace System.Web.Http.Controllers
         }
 
         public class Animal { }
+
         public class Dog : Animal { }
     }
 }

@@ -27,7 +27,12 @@ namespace System.Xml
             return writer.WriteEndDocumentAsync();
         }
 
-        public override Task WriteDocTypeAsync(string name, string? pubid, string? sysid, string? subset)
+        public override Task WriteDocTypeAsync(
+            string name,
+            string? pubid,
+            string? sysid,
+            string? subset
+        )
         {
             return writer.WriteDocTypeAsync(name, pubid, sysid, subset);
         }
@@ -47,7 +52,11 @@ namespace System.Xml
             return writer.WriteFullEndElementAsync();
         }
 
-        protected internal override Task WriteStartAttributeAsync(string? prefix, string localName, string? ns)
+        protected internal override Task WriteStartAttributeAsync(
+            string? prefix,
+            string localName,
+            string? ns
+        )
         {
             return writer.WriteStartAttributeAsync(prefix, localName, ns);
         }

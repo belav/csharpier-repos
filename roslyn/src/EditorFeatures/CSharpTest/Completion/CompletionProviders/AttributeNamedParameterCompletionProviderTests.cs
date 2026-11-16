@@ -16,10 +16,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSetSources
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class AttributeNamedParameterCompletionProviderTests : AbstractCSharpCompletionProviderTests
+    public class AttributeNamedParameterCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(AttributeNamedParameterCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(AttributeNamedParameterCompletionProvider);
 
         [Fact]
         public async Task SendEnterThroughToEditorTest()
@@ -40,9 +41,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
                 }
                 """;
 
-            await VerifySendEnterThroughToEnterAsync(markup, "Color =", sendThroughEnterOption: EnterKeyRule.Never, expected: false);
-            await VerifySendEnterThroughToEnterAsync(markup, "Color =", sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord, expected: true);
-            await VerifySendEnterThroughToEnterAsync(markup, "Color =", sendThroughEnterOption: EnterKeyRule.Always, expected: true);
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "Color =",
+                sendThroughEnterOption: EnterKeyRule.Never,
+                expected: false
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "Color =",
+                sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord,
+                expected: true
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "Color =",
+                sendThroughEnterOption: EnterKeyRule.Always,
+                expected: true
+            );
         }
 
         [Fact]

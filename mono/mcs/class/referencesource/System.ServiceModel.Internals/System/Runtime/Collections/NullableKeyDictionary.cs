@@ -34,10 +34,7 @@ namespace System.Runtime.Collections
 
         public ICollection<TKey> Keys
         {
-            get
-            {
-                return new NullKeyDictionaryKeyCollection<TKey, TValue>(this);
-            }
+            get { return new NullKeyDictionaryKeyCollection<TKey, TValue>(this); }
         }
 
         public ICollection<TValue> Values
@@ -155,7 +152,9 @@ namespace System.Runtime.Collections
             {
                 if (this.isNullKeyPresent)
                 {
-                    return item.Value == null ? this.nullKeyValue == null : item.Value.Equals(this.nullKeyValue);
+                    return item.Value == null
+                        ? this.nullKeyValue == null
+                        : item.Value.Equals(this.nullKeyValue);
                 }
                 else
                 {
@@ -173,7 +172,10 @@ namespace System.Runtime.Collections
             this.innerDictionary.CopyTo(array, arrayIndex);
             if (this.isNullKeyPresent)
             {
-                array[arrayIndex + this.innerDictionary.Count] = new KeyValuePair<TKey, TValue>(default(TKey), this.nullKeyValue);
+                array[arrayIndex + this.innerDictionary.Count] = new KeyValuePair<TKey, TValue>(
+                    default(TKey),
+                    this.nullKeyValue
+                );
             }
         }
 
@@ -200,7 +202,8 @@ namespace System.Runtime.Collections
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-            IEnumerator<KeyValuePair<TKey, TValue>> innerEnumerator = this.innerDictionary.GetEnumerator() as IEnumerator<KeyValuePair<TKey, TValue>>;
+            IEnumerator<KeyValuePair<TKey, TValue>> innerEnumerator =
+                this.innerDictionary.GetEnumerator() as IEnumerator<KeyValuePair<TKey, TValue>>;
 
             while (innerEnumerator.MoveNext())
             {
@@ -222,7 +225,9 @@ namespace System.Runtime.Collections
         {
             NullableKeyDictionary<TypeKey, TypeValue> nullKeyDictionary;
 
-            public NullKeyDictionaryKeyCollection(NullableKeyDictionary<TypeKey, TypeValue> nullKeyDictionary)
+            public NullKeyDictionaryKeyCollection(
+                NullableKeyDictionary<TypeKey, TypeValue> nullKeyDictionary
+            )
             {
                 this.nullKeyDictionary = nullKeyDictionary;
             }
@@ -247,17 +252,23 @@ namespace System.Runtime.Collections
 
             public void Add(TypeKey item)
             {
-                throw Fx.Exception.AsError(new NotSupportedException(InternalSR.KeyCollectionUpdatesNotAllowed));
+                throw Fx.Exception.AsError(
+                    new NotSupportedException(InternalSR.KeyCollectionUpdatesNotAllowed)
+                );
             }
 
             public void Clear()
             {
-                throw Fx.Exception.AsError(new NotSupportedException(InternalSR.KeyCollectionUpdatesNotAllowed));
+                throw Fx.Exception.AsError(
+                    new NotSupportedException(InternalSR.KeyCollectionUpdatesNotAllowed)
+                );
             }
 
             public bool Contains(TypeKey item)
             {
-                return item == null ? this.nullKeyDictionary.isNullKeyPresent : this.nullKeyDictionary.innerDictionary.Keys.Contains(item);
+                return item == null
+                    ? this.nullKeyDictionary.isNullKeyPresent
+                    : this.nullKeyDictionary.innerDictionary.Keys.Contains(item);
             }
 
             public void CopyTo(TypeKey[] array, int arrayIndex)
@@ -265,13 +276,16 @@ namespace System.Runtime.Collections
                 this.nullKeyDictionary.innerDictionary.Keys.CopyTo(array, arrayIndex);
                 if (this.nullKeyDictionary.isNullKeyPresent)
                 {
-                    array[arrayIndex + this.nullKeyDictionary.innerDictionary.Keys.Count] = default(TypeKey);
+                    array[arrayIndex + this.nullKeyDictionary.innerDictionary.Keys.Count] =
+                        default(TypeKey);
                 }
             }
 
             public bool Remove(TypeKey item)
             {
-                throw Fx.Exception.AsError(new NotSupportedException(InternalSR.KeyCollectionUpdatesNotAllowed));
+                throw Fx.Exception.AsError(
+                    new NotSupportedException(InternalSR.KeyCollectionUpdatesNotAllowed)
+                );
             }
 
             public IEnumerator<TypeKey> GetEnumerator()
@@ -297,7 +311,9 @@ namespace System.Runtime.Collections
         {
             NullableKeyDictionary<TypeKey, TypeValue> nullKeyDictionary;
 
-            public NullKeyDictionaryValueCollection(NullableKeyDictionary<TypeKey, TypeValue> nullKeyDictionary)
+            public NullKeyDictionaryValueCollection(
+                NullableKeyDictionary<TypeKey, TypeValue> nullKeyDictionary
+            )
             {
                 this.nullKeyDictionary = nullKeyDictionary;
             }
@@ -322,18 +338,25 @@ namespace System.Runtime.Collections
 
             public void Add(TypeValue item)
             {
-                throw Fx.Exception.AsError(new NotSupportedException(InternalSR.ValueCollectionUpdatesNotAllowed));
+                throw Fx.Exception.AsError(
+                    new NotSupportedException(InternalSR.ValueCollectionUpdatesNotAllowed)
+                );
             }
 
             public void Clear()
             {
-                throw Fx.Exception.AsError(new NotSupportedException(InternalSR.ValueCollectionUpdatesNotAllowed));
+                throw Fx.Exception.AsError(
+                    new NotSupportedException(InternalSR.ValueCollectionUpdatesNotAllowed)
+                );
             }
 
             public bool Contains(TypeValue item)
             {
-                return this.nullKeyDictionary.innerDictionary.Values.Contains(item) ||
-                    (this.nullKeyDictionary.isNullKeyPresent && this.nullKeyDictionary.nullKeyValue.Equals(item));
+                return this.nullKeyDictionary.innerDictionary.Values.Contains(item)
+                    || (
+                        this.nullKeyDictionary.isNullKeyPresent
+                        && this.nullKeyDictionary.nullKeyValue.Equals(item)
+                    );
             }
 
             public void CopyTo(TypeValue[] array, int arrayIndex)
@@ -341,13 +364,16 @@ namespace System.Runtime.Collections
                 this.nullKeyDictionary.innerDictionary.Values.CopyTo(array, arrayIndex);
                 if (this.nullKeyDictionary.isNullKeyPresent)
                 {
-                    array[arrayIndex + this.nullKeyDictionary.innerDictionary.Values.Count] = this.nullKeyDictionary.nullKeyValue;
+                    array[arrayIndex + this.nullKeyDictionary.innerDictionary.Values.Count] =
+                        this.nullKeyDictionary.nullKeyValue;
                 }
             }
 
             public bool Remove(TypeValue item)
             {
-                throw Fx.Exception.AsError(new NotSupportedException(InternalSR.ValueCollectionUpdatesNotAllowed));
+                throw Fx.Exception.AsError(
+                    new NotSupportedException(InternalSR.ValueCollectionUpdatesNotAllowed)
+                );
             }
 
             public IEnumerator<TypeValue> GetEnumerator()

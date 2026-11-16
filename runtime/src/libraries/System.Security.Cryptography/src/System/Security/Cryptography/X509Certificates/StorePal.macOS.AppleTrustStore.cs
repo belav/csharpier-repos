@@ -34,14 +34,20 @@ namespace System.Security.Cryptography.X509Certificates
 
                 if (_storeName == StoreName.Root)
                 {
-                    using (SafeCFArrayHandle certs = Interop.AppleCrypto.StoreEnumerateRoot(_location))
+                    using (
+                        SafeCFArrayHandle certs = Interop.AppleCrypto.StoreEnumerateRoot(_location)
+                    )
                     {
                         ReadCollection(certs, dedupedCerts);
                     }
                 }
                 else if (_storeName == StoreName.Disallowed)
                 {
-                    using (SafeCFArrayHandle certs = Interop.AppleCrypto.StoreEnumerateDisallowed(_location))
+                    using (
+                        SafeCFArrayHandle certs = Interop.AppleCrypto.StoreEnumerateDisallowed(
+                            _location
+                        )
+                    )
                     {
                         ReadCollection(certs, dedupedCerts);
                     }
@@ -69,7 +75,11 @@ namespace System.Security.Cryptography.X509Certificates
 
             public SafeHandle? SafeHandle => null;
 
-            internal static AppleTrustStore OpenStore(StoreName storeName, StoreLocation location, OpenFlags openFlags)
+            internal static AppleTrustStore OpenStore(
+                StoreName storeName,
+                StoreLocation location,
+                OpenFlags openFlags
+            )
             {
                 if ((openFlags & OpenFlags.ReadWrite) == OpenFlags.ReadWrite)
                     throw new CryptographicException(SR.Security_AccessDenied);

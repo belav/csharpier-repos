@@ -3,19 +3,18 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public class TPCFiltersInheritanceBulkUpdatesSqliteTest : TPCFiltersInheritanceBulkUpdatesTestBase<
-    TPCFiltersInheritanceBulkUpdatesSqliteFixture>
+public class TPCFiltersInheritanceBulkUpdatesSqliteTest
+    : TPCFiltersInheritanceBulkUpdatesTestBase<TPCFiltersInheritanceBulkUpdatesSqliteFixture>
 {
     public TPCFiltersInheritanceBulkUpdatesSqliteTest(
         TPCFiltersInheritanceBulkUpdatesSqliteFixture fixture,
-        ITestOutputHelper testOutputHelper)
-        : base(fixture, testOutputHelper)
-    {
-    }
+        ITestOutputHelper testOutputHelper
+    )
+        : base(fixture, testOutputHelper) { }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Delete_where_hierarchy(bool async)
     {
@@ -32,7 +31,8 @@ public class TPCFiltersInheritanceBulkUpdatesSqliteTest : TPCFiltersInheritanceB
             """
 DELETE FROM "Kiwi" AS "k"
 WHERE "k"."CountryId" = 1 AND "k"."Name" = 'Great spotted kiwi'
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_using_hierarchy(bool async)
@@ -52,7 +52,8 @@ WHERE (
         FROM "Kiwi" AS "k"
     ) AS "t"
     WHERE "t"."CountryId" = 1 AND "c"."Id" = "t"."CountryId" AND "t"."CountryId" > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_using_hierarchy_derived(bool async)
@@ -69,7 +70,8 @@ WHERE (
         FROM "Kiwi" AS "k"
     ) AS "t"
     WHERE "t"."CountryId" = 1 AND "c"."Id" = "t"."CountryId" AND "t"."CountryId" > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -137,7 +139,8 @@ WHERE (
 UPDATE "Kiwi" AS "k"
 SET "Name" = 'SomeOtherKiwi'
 WHERE "k"."CountryId" = 1
-""");
+"""
+        );
     }
 
     public override async Task Update_derived_property_on_derived_type(bool async)
@@ -149,7 +152,8 @@ WHERE "k"."CountryId" = 1
 UPDATE "Kiwi" AS "k"
 SET "FoundOn" = 0
 WHERE "k"."CountryId" = 1
-""");
+"""
+        );
     }
 
     public override async Task Update_where_using_hierarchy(bool async)
@@ -170,7 +174,8 @@ WHERE (
         FROM "Kiwi" AS "k"
     ) AS "t"
     WHERE "t"."CountryId" = 1 AND "c"."Id" = "t"."CountryId" AND "t"."CountryId" > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Update_base_and_derived_types(bool async)
@@ -183,7 +188,8 @@ UPDATE "Kiwi" AS "k"
 SET "FoundOn" = 0,
     "Name" = 'Kiwi'
 WHERE "k"."CountryId" = 1
-""");
+"""
+        );
     }
 
     public override async Task Update_where_using_hierarchy_derived(bool async)
@@ -201,7 +207,8 @@ WHERE (
         FROM "Kiwi" AS "k"
     ) AS "t"
     WHERE "t"."CountryId" = 1 AND "c"."Id" = "t"."CountryId" AND "t"."CountryId" > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Update_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -211,12 +218,11 @@ WHERE (
         AssertExecuteUpdateSql();
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    private void AssertExecuteUpdateSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
+    private void AssertExecuteUpdateSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
 }

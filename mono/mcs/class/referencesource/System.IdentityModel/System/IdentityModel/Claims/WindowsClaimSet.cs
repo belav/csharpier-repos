@@ -4,10 +4,10 @@
 
 namespace System.IdentityModel.Claims
 {
-    using System.IdentityModel.Policy;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.IdentityModel.Policy;
     using System.Runtime;
     using System.Runtime.InteropServices;
     using System.Security;
@@ -26,50 +26,71 @@ namespace System.IdentityModel.Claims
         string authenticationType;
 
         public WindowsClaimSet(WindowsIdentity windowsIdentity)
-            : this(windowsIdentity, DefaultIncludeWindowsGroups)
-        {
-        }
+            : this(windowsIdentity, DefaultIncludeWindowsGroups) { }
 
         public WindowsClaimSet(WindowsIdentity windowsIdentity, bool includeWindowsGroups)
-            : this(windowsIdentity, includeWindowsGroups, DateTime.UtcNow.AddHours(10))
-        {
-        }
+            : this(windowsIdentity, includeWindowsGroups, DateTime.UtcNow.AddHours(10)) { }
 
         public WindowsClaimSet(WindowsIdentity windowsIdentity, DateTime expirationTime)
-            : this(windowsIdentity, DefaultIncludeWindowsGroups, expirationTime)
-        {
-        }
+            : this(windowsIdentity, DefaultIncludeWindowsGroups, expirationTime) { }
 
-        public WindowsClaimSet(WindowsIdentity windowsIdentity, bool includeWindowsGroups, DateTime expirationTime)
-            : this(windowsIdentity, null, includeWindowsGroups, expirationTime, true)
-        {
-        }
+        public WindowsClaimSet(
+            WindowsIdentity windowsIdentity,
+            bool includeWindowsGroups,
+            DateTime expirationTime
+        )
+            : this(windowsIdentity, null, includeWindowsGroups, expirationTime, true) { }
 
-        public WindowsClaimSet(WindowsIdentity windowsIdentity, string authenticationType, bool includeWindowsGroups, DateTime expirationTime)
-            : this( windowsIdentity, authenticationType, includeWindowsGroups, expirationTime, true )
-        {
-        }
+        public WindowsClaimSet(
+            WindowsIdentity windowsIdentity,
+            string authenticationType,
+            bool includeWindowsGroups,
+            DateTime expirationTime
+        )
+            : this(windowsIdentity, authenticationType, includeWindowsGroups, expirationTime, true)
+        { }
 
-        internal WindowsClaimSet(WindowsIdentity windowsIdentity, string authenticationType, bool includeWindowsGroups, bool clone)
-            : this( windowsIdentity, authenticationType, includeWindowsGroups, DateTime.UtcNow.AddHours( 10 ), clone )
-        {
-        }
+        internal WindowsClaimSet(
+            WindowsIdentity windowsIdentity,
+            string authenticationType,
+            bool includeWindowsGroups,
+            bool clone
+        )
+            : this(
+                windowsIdentity,
+                authenticationType,
+                includeWindowsGroups,
+                DateTime.UtcNow.AddHours(10),
+                clone
+            ) { }
 
-        internal WindowsClaimSet(WindowsIdentity windowsIdentity, string authenticationType, bool includeWindowsGroups, DateTime expirationTime, bool clone)
+        internal WindowsClaimSet(
+            WindowsIdentity windowsIdentity,
+            string authenticationType,
+            bool includeWindowsGroups,
+            DateTime expirationTime,
+            bool clone
+        )
         {
             if (windowsIdentity == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("windowsIdentity");
 
-            this.windowsIdentity = clone ? SecurityUtils.CloneWindowsIdentityIfNecessary(windowsIdentity,  authenticationType) : windowsIdentity;
+            this.windowsIdentity = clone
+                ? SecurityUtils.CloneWindowsIdentityIfNecessary(windowsIdentity, authenticationType)
+                : windowsIdentity;
             this.includeWindowsGroups = includeWindowsGroups;
             this.expirationTime = expirationTime;
             this.authenticationType = authenticationType;
         }
 
         WindowsClaimSet(WindowsClaimSet from)
-            : this(from.WindowsIdentity, from.authenticationType, from.includeWindowsGroups, from.expirationTime, true)
-        {
-        }
+            : this(
+                from.WindowsIdentity,
+                from.authenticationType,
+                from.includeWindowsGroups,
+                from.expirationTime,
+                true
+            ) { }
 
         public override Claim this[int index]
         {
@@ -108,7 +129,7 @@ namespace System.IdentityModel.Claims
                 return this.windowsIdentity;
             }
         }
-       
+
         public override ClaimSet Issuer
         {
             get { return ClaimSet.Windows; }
@@ -178,16 +199,18 @@ namespace System.IdentityModel.Claims
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().FullName)
+                );
             }
         }
 
         static bool SupportedClaimType(string claimType)
         {
-            return claimType == null ||
-                ClaimTypes.Sid == claimType ||
-                ClaimTypes.DenyOnlySid == claimType ||
-                ClaimTypes.Name == claimType;
+            return claimType == null
+                || ClaimTypes.Sid == claimType
+                || ClaimTypes.DenyOnlySid == claimType
+                || ClaimTypes.Name == claimType;
         }
 
         // Note: null string represents any.
@@ -198,13 +221,20 @@ namespace System.IdentityModel.Claims
             {
                 yield break;
             }
-            else if (this.claims == null && (ClaimTypes.Sid == claimType || ClaimTypes.DenyOnlySid == claimType))
+            else if (
+                this.claims == null
+                && (ClaimTypes.Sid == claimType || ClaimTypes.DenyOnlySid == claimType)
+            )
             {
                 if (ClaimTypes.Sid == claimType)
                 {
                     if (right == null || Rights.Identity == right)
                     {
-                        yield return new Claim(ClaimTypes.Sid, this.windowsIdentity.User, Rights.Identity);
+                        yield return new Claim(
+                            ClaimTypes.Sid,
+                            this.windowsIdentity.User,
+                            Rights.Identity
+                        );
                     }
                 }
 
@@ -242,9 +272,11 @@ namespace System.IdentityModel.Claims
                 for (int i = 0; i < this.claims.Count; ++i)
                 {
                     Claim claim = this.claims[i];
-                    if ((claim != null) &&
-                        (anyClaimType || claimType == claim.ClaimType) &&
-                        (anyRight || right == claim.Right))
+                    if (
+                        (claim != null)
+                        && (anyClaimType || claimType == claim.ClaimType)
+                        && (anyRight || right == claim.Right)
+                    )
                     {
                         yield return claim;
                     }
@@ -267,8 +299,10 @@ namespace System.IdentityModel.Claims
         class GroupSidClaimCollection : Collection<Claim>
         {
             // Copy from System\Security\Principal\WindowsIdentity.cs
-            [Fx.Tag.SecurityNote(Critical = "Uses critical type SafeHGlobalHandle.",
-                Safe = "Performs a Demand for full trust.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Uses critical type SafeHGlobalHandle.",
+                Safe = "Performs a Demand for full trust."
+            )]
             [SecuritySafeCritical]
             [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
             public GroupSidClaimCollection(WindowsIdentity windowsIdentity)
@@ -279,22 +313,47 @@ namespace System.IdentityModel.Claims
                     try
                     {
                         uint dwLength;
-                        safeAllocHandle = GetTokenInformation(windowsIdentity.Token, TokenInformationClass.TokenGroups, out dwLength);
+                        safeAllocHandle = GetTokenInformation(
+                            windowsIdentity.Token,
+                            TokenInformationClass.TokenGroups,
+                            out dwLength
+                        );
                         int count = Marshal.ReadInt32(safeAllocHandle.DangerousGetHandle());
-                        IntPtr pSidAndAttributes = new IntPtr((long)safeAllocHandle.DangerousGetHandle() + (long)Marshal.OffsetOf(typeof(TOKEN_GROUPS), "Groups"));
+                        IntPtr pSidAndAttributes = new IntPtr(
+                            (long)safeAllocHandle.DangerousGetHandle()
+                                + (long)Marshal.OffsetOf(typeof(TOKEN_GROUPS), "Groups")
+                        );
                         for (int i = 0; i < count; ++i)
                         {
-                            SID_AND_ATTRIBUTES group = (SID_AND_ATTRIBUTES)Marshal.PtrToStructure(pSidAndAttributes, typeof(SID_AND_ATTRIBUTES));
-                            uint mask = NativeMethods.SE_GROUP_ENABLED | NativeMethods.SE_GROUP_LOGON_ID | NativeMethods.SE_GROUP_USE_FOR_DENY_ONLY;
+                            SID_AND_ATTRIBUTES group = (SID_AND_ATTRIBUTES)
+                                Marshal.PtrToStructure(
+                                    pSidAndAttributes,
+                                    typeof(SID_AND_ATTRIBUTES)
+                                );
+                            uint mask =
+                                NativeMethods.SE_GROUP_ENABLED
+                                | NativeMethods.SE_GROUP_LOGON_ID
+                                | NativeMethods.SE_GROUP_USE_FOR_DENY_ONLY;
                             if ((group.Attributes & mask) == NativeMethods.SE_GROUP_ENABLED)
                             {
-                                base.Add(Claim.CreateWindowsSidClaim(new SecurityIdentifier(group.Sid)));
+                                base.Add(
+                                    Claim.CreateWindowsSidClaim(new SecurityIdentifier(group.Sid))
+                                );
                             }
-                            else if ((group.Attributes & mask) == NativeMethods.SE_GROUP_USE_FOR_DENY_ONLY)
+                            else if (
+                                (group.Attributes & mask)
+                                == NativeMethods.SE_GROUP_USE_FOR_DENY_ONLY
+                            )
                             {
-                                base.Add(Claim.CreateDenyOnlyWindowsSidClaim(new SecurityIdentifier(group.Sid)));
+                                base.Add(
+                                    Claim.CreateDenyOnlyWindowsSidClaim(
+                                        new SecurityIdentifier(group.Sid)
+                                    )
+                                );
                             }
-                            pSidAndAttributes = new IntPtr((long)pSidAndAttributes + SID_AND_ATTRIBUTES.SizeOf);
+                            pSidAndAttributes = new IntPtr(
+                                (long)pSidAndAttributes + SID_AND_ATTRIBUTES.SizeOf
+                            );
                         }
                     }
                     finally
@@ -306,19 +365,27 @@ namespace System.IdentityModel.Claims
         }
 
         // Copy from System\Security\Principal\WindowsIdentity.cs
-        [Fx.Tag.SecurityNote(Critical = "Uses critical type SafeHGlobalHandle.",
-            Safe = "Performs a Demand for full trust.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses critical type SafeHGlobalHandle.",
+            Safe = "Performs a Demand for full trust."
+        )]
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
-        static SafeHGlobalHandle GetTokenInformation(IntPtr tokenHandle, TokenInformationClass tokenInformationClass, out uint dwLength)
+        static SafeHGlobalHandle GetTokenInformation(
+            IntPtr tokenHandle,
+            TokenInformationClass tokenInformationClass,
+            out uint dwLength
+        )
         {
             SafeHGlobalHandle safeAllocHandle = SafeHGlobalHandle.InvalidHandle;
             dwLength = (uint)Marshal.SizeOf(typeof(uint));
-            bool result = NativeMethods.GetTokenInformation(tokenHandle,
-                                                          (uint)tokenInformationClass,
-                                                          safeAllocHandle,
-                                                          0,
-                                                          out dwLength);
+            bool result = NativeMethods.GetTokenInformation(
+                tokenHandle,
+                (uint)tokenInformationClass,
+                safeAllocHandle,
+                0,
+                out dwLength
+            );
             int dwErrorCode = Marshal.GetLastWin32Error();
             switch (dwErrorCode)
             {
@@ -326,26 +393,34 @@ namespace System.IdentityModel.Claims
                 // special case for TokenSessionId. Falling through
                 case NativeMethods.ERROR_INSUFFICIENT_BUFFER:
                     safeAllocHandle = SafeHGlobalHandle.AllocHGlobal(dwLength);
-                    result = NativeMethods.GetTokenInformation(tokenHandle,
-                                                             (uint)tokenInformationClass,
-                                                             safeAllocHandle,
-                                                             dwLength,
-                                                             out dwLength);
+                    result = NativeMethods.GetTokenInformation(
+                        tokenHandle,
+                        (uint)tokenInformationClass,
+                        safeAllocHandle,
+                        dwLength,
+                        out dwLength
+                    );
                     dwErrorCode = Marshal.GetLastWin32Error();
                     if (!result)
                     {
                         safeAllocHandle.Close();
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(dwErrorCode));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new Win32Exception(dwErrorCode)
+                        );
                     }
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(dwErrorCode));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(dwErrorCode)
+                    );
             }
             return safeAllocHandle;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses critical type SafeHGlobalHandle.",
-            Safe = "Performs a Demand for full trust.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses critical type SafeHGlobalHandle.",
+            Safe = "Performs a Demand for full trust."
+        )]
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
         static bool TryCreateWindowsSidClaim(WindowsIdentity windowsIdentity, out Claim claim)
@@ -354,8 +429,16 @@ namespace System.IdentityModel.Claims
             try
             {
                 uint dwLength;
-                safeAllocHandle = GetTokenInformation(windowsIdentity.Token, TokenInformationClass.TokenUser, out dwLength);
-                SID_AND_ATTRIBUTES user = (SID_AND_ATTRIBUTES)Marshal.PtrToStructure(safeAllocHandle.DangerousGetHandle(), typeof(SID_AND_ATTRIBUTES));
+                safeAllocHandle = GetTokenInformation(
+                    windowsIdentity.Token,
+                    TokenInformationClass.TokenUser,
+                    out dwLength
+                );
+                SID_AND_ATTRIBUTES user = (SID_AND_ATTRIBUTES)
+                    Marshal.PtrToStructure(
+                        safeAllocHandle.DangerousGetHandle(),
+                        typeof(SID_AND_ATTRIBUTES)
+                    );
                 uint mask = NativeMethods.SE_GROUP_USE_FOR_DENY_ONLY;
                 if (user.Attributes == 0)
                 {

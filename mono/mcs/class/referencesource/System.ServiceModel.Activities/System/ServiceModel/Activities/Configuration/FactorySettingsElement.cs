@@ -4,22 +4,23 @@
 
 namespace System.ServiceModel.Activities.Configuration
 {
-    using System.Runtime;
-    using System.Configuration;
     using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
-    using System.ServiceModel.Configuration;
+    using System.Runtime;
     using System.ServiceModel.Activities.Description;
+    using System.ServiceModel.Configuration;
 
     public sealed class FactorySettingsElement : ConfigurationElement
     {
         ConfigurationPropertyCollection properties;
-       
-        public FactorySettingsElement()
-        {
-        }
 
-        [ConfigurationProperty(ConfigurationStrings.IdleTimeout, DefaultValue = ChannelCacheDefaults.DefaultIdleTimeoutString)]
+        public FactorySettingsElement() { }
+
+        [ConfigurationProperty(
+            ConfigurationStrings.IdleTimeout,
+            DefaultValue = ChannelCacheDefaults.DefaultIdleTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan IdleTimeout
@@ -28,7 +29,10 @@ namespace System.ServiceModel.Activities.Configuration
             set { base[ConfigurationStrings.IdleTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.LeaseTimeout, DefaultValue = ChannelCacheDefaults.DefaultFactoryLeaseTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.LeaseTimeout,
+            DefaultValue = ChannelCacheDefaults.DefaultFactoryLeaseTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan LeaseTimeout
@@ -37,7 +41,10 @@ namespace System.ServiceModel.Activities.Configuration
             set { base[ConfigurationStrings.LeaseTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxItemsInCache, DefaultValue = ChannelCacheDefaults.DefaultMaxItemsPerCacheString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxItemsInCache,
+            DefaultValue = ChannelCacheDefaults.DefaultMaxItemsPerCacheString
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxItemsInCache
         {
@@ -51,10 +58,50 @@ namespace System.ServiceModel.Activities.Configuration
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-                    properties.Add(new ConfigurationProperty(ConfigurationStrings.MaxItemsInCache, typeof(System.Int32), ChannelCacheDefaults.DefaultMaxItemsPerCache, null, new System.Configuration.IntegerValidator(1, 2147483647, false), System.Configuration.ConfigurationPropertyOptions.None));
-                    properties.Add(new ConfigurationProperty(ConfigurationStrings.IdleTimeout, typeof(System.TimeSpan), ChannelCacheDefaults.DefaultIdleTimeout, new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(), new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture), System.TimeSpan.Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)), System.Configuration.ConfigurationPropertyOptions.None));
-                    properties.Add(new ConfigurationProperty(ConfigurationStrings.LeaseTimeout, typeof(System.TimeSpan), ChannelCacheDefaults.DefaultChannelLeaseTimeoutString, new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(), new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture), System.TimeSpan.Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)), System.Configuration.ConfigurationPropertyOptions.None));
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
+                    properties.Add(
+                        new ConfigurationProperty(
+                            ConfigurationStrings.MaxItemsInCache,
+                            typeof(System.Int32),
+                            ChannelCacheDefaults.DefaultMaxItemsPerCache,
+                            null,
+                            new System.Configuration.IntegerValidator(1, 2147483647, false),
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
+                    properties.Add(
+                        new ConfigurationProperty(
+                            ConfigurationStrings.IdleTimeout,
+                            typeof(System.TimeSpan),
+                            ChannelCacheDefaults.DefaultIdleTimeout,
+                            new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
+                            new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
+                                System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
+                                System.TimeSpan.Parse(
+                                    "24.20:31:23.6470000",
+                                    CultureInfo.InvariantCulture
+                                )
+                            ),
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
+                    properties.Add(
+                        new ConfigurationProperty(
+                            ConfigurationStrings.LeaseTimeout,
+                            typeof(System.TimeSpan),
+                            ChannelCacheDefaults.DefaultChannelLeaseTimeoutString,
+                            new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
+                            new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
+                                System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
+                                System.TimeSpan.Parse(
+                                    "24.20:31:23.6470000",
+                                    CultureInfo.InvariantCulture
+                                )
+                            ),
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
                     this.properties = properties;
                 }
                 return this.properties;
@@ -62,7 +109,3 @@ namespace System.ServiceModel.Activities.Configuration
         }
     }
 }
-
-
-
-

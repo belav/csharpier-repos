@@ -29,7 +29,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         public void AbbreviatedSyntaxTest125(Utils.NavigatorKind kind)
         {
             var xml = "XQL_Orders_j1.xml";
-            var testExpression = @"OrderIDs/CustomerIDs/EmployeeIDs/OrderDates/OrderDate[.='11/16/94']";
+            var testExpression =
+                @"OrderIDs/CustomerIDs/EmployeeIDs/OrderDates/OrderDate[.='11/16/94']";
             var expected = new XPathResult(0);
 
             Utils.XPathNodesetTest(kind, xml, testExpression, expected);
@@ -46,7 +47,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         {
             var xml = "Russian_problem_chars.xml";
             var testExpression = "//root[contains(text(), \"?? \u00A4 ?? ?? \u00A9 ? \u00AE ??\")]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -54,8 +56,9 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "root",
                     Name = "root",
                     HasNameTable = true,
-                    Value = "\n?? \u00A4 ?? ?? \u00A9 ? \u00AE ?? \n"
-                });
+                    Value = "\n?? \u00A4 ?? ?? \u00A9 ? \u00AE ?? \n",
+                }
+            );
 
             Utils.XPathNodesetTest(kind, xml, testExpression, expected);
         }
@@ -72,10 +75,17 @@ namespace XPathTests.FunctionalTests.Location.Paths
         {
             var xml = "XQL_Orders_j3.xml";
             var startingNodePath = "//EmployeeIDs[1]";
-            var testExpression = @"OrderIDs/CustomerIDs[CustomerID]/EmployeeIDs[EmployeeID][OrderDates/Freight=12.75]";
+            var testExpression =
+                @"OrderIDs/CustomerIDs[CustomerID]/EmployeeIDs[EmployeeID][OrderDates/Freight=12.75]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -94,7 +104,13 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 @"OrderIDs/CustomerIDs[9999999999999999999999999999999999999999999999999999999999999999999999999999999999999]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -109,10 +125,17 @@ namespace XPathTests.FunctionalTests.Location.Paths
         {
             var xml = "xql_orders-flat-200a.xml";
             var startingNodePath = "/ROOT/OrderIDs[22]/OrderID/@CollatingOrder";
-            var testExpression = @"/ROOT/OrderIDs[OrderID/@CollatingOrder>=1033]/OrderID/@CollatingOrder";
+            var testExpression =
+                @"/ROOT/OrderIDs[OrderID/@CollatingOrder>=1033]/OrderID/@CollatingOrder";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -127,10 +150,17 @@ namespace XPathTests.FunctionalTests.Location.Paths
         {
             var xml = "XQL_Orders_j3.xml";
             var startingNodePath = "/ROOT";
-            var testExpression = @".//OrderIDs[CustomerIDs[EmployeeIDs][//EmployeeID='3']][//OrderDate>='11/16/94']";
+            var testExpression =
+                @".//OrderIDs[CustomerIDs[EmployeeIDs][//EmployeeID='3']][//OrderDate>='11/16/94']";
             var expected = new XPathResult(0);
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -145,8 +175,10 @@ namespace XPathTests.FunctionalTests.Location.Paths
         {
             var xml = "XQL_Orders_j3.xml";
             var startingNodePath = "/ROOT";
-            var testExpression = @"OrderIDs/CustomerIDs[CustomerID]/EmployeeIDs[EmployeeID][OrderDates/Freight=12.75]";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"OrderIDs/CustomerIDs[CustomerID]/EmployeeIDs[EmployeeID][OrderDates/Freight=12.75]";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -155,10 +187,17 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "EmployeeIDs",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\t\t3\n\t\t\t\t\n\t\t\t\t\t11/16/94\n\t\t\t\t\t12/14/94\n\t\t\t\t\t11/28/94\n\t\t\t\t\t1\n\t\t\t\t\t12.75\n\t\t\t\t\tLILA-Supermercado\n\t\t\t\t\tCarrera 52 con Ave. Bol\u00EDvar #65-98 Llano Largo\n\t\t\t\t\tBarquisimeto\n\t\t\t\t\tLara\n\t\t\t\t\t3508\n\t\t\t\t\tVenezuela\n\t\t\t\t\n\t\t\t"
-                });
+                        "\n\t\t\t\t3\n\t\t\t\t\n\t\t\t\t\t11/16/94\n\t\t\t\t\t12/14/94\n\t\t\t\t\t11/28/94\n\t\t\t\t\t1\n\t\t\t\t\t12.75\n\t\t\t\t\tLILA-Supermercado\n\t\t\t\t\tCarrera 52 con Ave. Bol\u00EDvar #65-98 Llano Largo\n\t\t\t\t\tBarquisimeto\n\t\t\t\t\tLara\n\t\t\t\t\t3508\n\t\t\t\t\tVenezuela\n\t\t\t\t\n\t\t\t",
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -177,7 +216,13 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 @"OrderIDs/CustomerIDs[9999999999999999999999999999999999999999999999999999999999999999999999999999999999999]";
             var expected = new XPathResult(0);
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -191,15 +236,17 @@ namespace XPathTests.FunctionalTests.Location.Paths
         public void PredicatesTest1041(Utils.NavigatorKind kind)
         {
             var xml = "xql_orders-flat-200a.xml";
-            var testExpression = @"/ROOT/OrderIDs[OrderID/@CollatingOrder>=1033]/OrderID/@CollatingOrder";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"/ROOT/OrderIDs[OrderID/@CollatingOrder>=1033]/OrderID/@CollatingOrder";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Attribute,
                     LocalName = "CollatingOrder",
                     Name = "CollatingOrder",
                     HasNameTable = true,
-                    Value = "1033"
+                    Value = "1033",
                 },
                 new XPathResultToken
                 {
@@ -207,7 +254,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "CollatingOrder",
                     Name = "CollatingOrder",
                     HasNameTable = true,
-                    Value = "1033"
+                    Value = "1033",
                 },
                 new XPathResultToken
                 {
@@ -215,7 +262,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "CollatingOrder",
                     Name = "CollatingOrder",
                     HasNameTable = true,
-                    Value = "1034"
+                    Value = "1034",
                 },
                 new XPathResultToken
                 {
@@ -223,7 +270,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "CollatingOrder",
                     Name = "CollatingOrder",
                     HasNameTable = true,
-                    Value = "1033"
+                    Value = "1033",
                 },
                 new XPathResultToken
                 {
@@ -231,7 +278,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "CollatingOrder",
                     Name = "CollatingOrder",
                     HasNameTable = true,
-                    Value = "1034"
+                    Value = "1034",
                 },
                 new XPathResultToken
                 {
@@ -239,7 +286,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "CollatingOrder",
                     Name = "CollatingOrder",
                     HasNameTable = true,
-                    Value = "1034"
+                    Value = "1034",
                 },
                 new XPathResultToken
                 {
@@ -247,7 +294,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "CollatingOrder",
                     Name = "CollatingOrder",
                     HasNameTable = true,
-                    Value = "1033"
+                    Value = "1033",
                 },
                 new XPathResultToken
                 {
@@ -255,7 +302,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "CollatingOrder",
                     Name = "CollatingOrder",
                     HasNameTable = true,
-                    Value = "1033"
+                    Value = "1033",
                 },
                 new XPathResultToken
                 {
@@ -263,7 +310,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "CollatingOrder",
                     Name = "CollatingOrder",
                     HasNameTable = true,
-                    Value = "1033"
+                    Value = "1033",
                 },
                 new XPathResultToken
                 {
@@ -271,8 +318,9 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "CollatingOrder",
                     Name = "CollatingOrder",
                     HasNameTable = true,
-                    Value = "1033"
-                });
+                    Value = "1033",
+                }
+            );
 
             Utils.XPathNodesetTest(kind, xml, testExpression, expected);
         }

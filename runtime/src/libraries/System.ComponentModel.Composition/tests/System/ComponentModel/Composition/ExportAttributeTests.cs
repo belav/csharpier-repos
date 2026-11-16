@@ -73,7 +73,12 @@ namespace System.ComponentModel.Composition
         public void ExportIndexers_ShouldThrowSomething()
         {
             var con = new CompositionContainer(
-                new TypeCatalog(typeof(WorkingType), typeof(Constants), typeof(ExportImplementer), typeof(ExportOnIndexer))
+                new TypeCatalog(
+                    typeof(WorkingType),
+                    typeof(Constants),
+                    typeof(ExportImplementer),
+                    typeof(ExportOnIndexer)
+                )
             );
 
             var v1 = con.GetExportedValue<WorkingType>();
@@ -84,6 +89,5 @@ namespace System.ComponentModel.Composition
                 Console.WriteLine(v2.ToString());
             });
         }
-
     }
 }

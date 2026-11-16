@@ -39,9 +39,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     internal class ObservedNamespaceManager : XmlNamespaceManager
     {
         public ObservedNamespaceManager(XmlNameTable nt)
-            : base(nt)
-        {
-        }
+            : base(nt) { }
 
         public bool IsLookupNamespaceCalled = false;
 
@@ -70,9 +68,9 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
     public enum ResolverEvent
     {
-        SetCredentials,         // Set Credentials
-        CalledResolveUri,       // Called ResolveUri
-        CalledGetEntity,        // Called GetEntity
+        SetCredentials, // Set Credentials
+        CalledResolveUri, // Called ResolveUri
+        CalledGetEntity, // Called GetEntity
     };
 
     // -----------------
@@ -101,7 +99,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
     internal class CDummyLineInfo : IXmlLineInfo
     {
-        private int m_Number, m_Position;
+        private int m_Number,
+            m_Position;
 
         public CDummyLineInfo(int lineNumber, int linePosition)
         {

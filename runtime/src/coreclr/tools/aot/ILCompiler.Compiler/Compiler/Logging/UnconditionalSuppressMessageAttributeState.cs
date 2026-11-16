@@ -6,13 +6,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
-
+using ILCompiler.Dataflow;
+using ILLink.Shared;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using ILCompiler.Dataflow;
-
-using ILLink.Shared;
 
 #nullable enable
 
@@ -24,8 +21,10 @@ namespace ILCompiler.Logging
         internal const string TargetProperty = "Target";
         internal const string MessageIdProperty = "MessageId";
 
-        internal const string UnconditionalSuppressMessageAttributeNamespace = "System.Diagnostics.CodeAnalysis";
-        internal const string UnconditionalSuppressMessageAttributeName = "UnconditionalSuppressMessageAttribute";
+        internal const string UnconditionalSuppressMessageAttributeNamespace =
+            "System.Diagnostics.CodeAnalysis";
+        internal const string UnconditionalSuppressMessageAttributeName =
+            "UnconditionalSuppressMessageAttribute";
 
         public class Suppression
         {
@@ -34,7 +33,11 @@ namespace ILCompiler.Logging
             public CustomAttributeValue<TypeDesc> OriginAttribute { get; }
             public TypeSystemEntity Provider { get; }
 
-            public Suppression(SuppressMessageInfo suppressMessageInfo, CustomAttributeValue<TypeDesc> originAttribute, TypeSystemEntity provider)
+            public Suppression(
+                SuppressMessageInfo suppressMessageInfo,
+                CustomAttributeValue<TypeDesc> originAttribute,
+                TypeSystemEntity provider
+            )
             {
                 SuppressMessageInfo = suppressMessageInfo;
                 OriginAttribute = originAttribute;
@@ -42,12 +45,20 @@ namespace ILCompiler.Logging
             }
         }
 
-        private sealed class AssemblyWarningsReportedHashtable : LockFreeReaderHashtable<EcmaAssembly, EcmaAssembly>
+        private sealed class AssemblyWarningsReportedHashtable
+            : LockFreeReaderHashtable<EcmaAssembly, EcmaAssembly>
         {
-            protected override bool CompareKeyToValue(EcmaAssembly key, EcmaAssembly value) => key == value;
-            protected override bool CompareValueToValue(EcmaAssembly value1, EcmaAssembly value2) => value1 == value2;
-            protected override EcmaAssembly CreateValueFromKey(EcmaAssembly key) => throw new NotImplementedException();
+            protected override bool CompareKeyToValue(EcmaAssembly key, EcmaAssembly value) =>
+                key == value;
+
+            protected override bool CompareValueToValue(EcmaAssembly value1, EcmaAssembly value2) =>
+                value1 == value2;
+
+            protected override EcmaAssembly CreateValueFromKey(EcmaAssembly key) =>
+                throw new NotImplementedException();
+
             protected override int GetKeyHashCode(EcmaAssembly key) => key.GetHashCode();
+
             protected override int GetValueHashCode(EcmaAssembly value) => value.GetHashCode();
         }
 
@@ -55,7 +66,10 @@ namespace ILCompiler.Logging
         private readonly Logger _logger;
         private readonly AssemblyWarningsReportedHashtable _assemblyWarningsReportedHashtable;
 
-        public UnconditionalSuppressMessageAttributeState(CompilerGeneratedState? compilerGeneratedState, Logger logger)
+        public UnconditionalSuppressMessageAttributeState(
+            CompilerGeneratedState? compilerGeneratedState,
+            Logger logger
+        )
         {
             _compilerGeneratedState = compilerGeneratedState;
             _logger = logger;
@@ -78,7 +92,12 @@ namespace ILCompiler.Logging
 
             if (_compilerGeneratedState != null)
             {
-                while (_compilerGeneratedState.TryGetOwningMethodForCompilerGeneratedMember(provider, out MethodDesc? owningMethod))
+                while (
+                    _compilerGeneratedState.TryGetOwningMethodForCompilerGeneratedMember(
+                        provider,
+                        out MethodDesc? owningMethod
+                    )
+                )
                 {
                     Debug.Assert(owningMethod != provider);
                     if (IsSuppressed(id, owningMethod))
@@ -104,7 +123,10 @@ namespace ILCompiler.Logging
             if (_assemblyWarningsReportedHashtable.TryAdd(ecmaAssembly))
                 generatedWarnings = new();
 
-            IEnumerable<Suppression>? moduleSuppressions = DecodeAssemblyAndModuleSuppressions(ecmaAssembly, generatedWarnings);
+            IEnumerable<Suppression>? moduleSuppressions = DecodeAssemblyAndModuleSuppressions(
+                ecmaAssembly,
+                generatedWarnings
+            );
 
             if (generatedWarnings is not null)
             {
@@ -147,7 +169,11 @@ namespace ILCompiler.Logging
             return false;
         }
 
-        private static bool IsSuppressedOnElement(int id, TypeSystemEntity provider, IEnumerable<Suppression>? moduleSuppressions)
+        private static bool IsSuppressedOnElement(
+            int id,
+            TypeSystemEntity provider,
+            IEnumerable<Suppression>? moduleSuppressions
+        )
         {
             if (provider is not ModuleDesc)
             {
@@ -162,7 +188,10 @@ namespace ILCompiler.Logging
             {
                 foreach (var suppression in moduleSuppressions)
                 {
-                    if (suppression.Provider == provider && suppression.SuppressMessageInfo.Id == id)
+                    if (
+                        suppression.Provider == provider
+                        && suppression.SuppressMessageInfo.Id == id
+                    )
                         return true;
                 }
             }
@@ -170,7 +199,10 @@ namespace ILCompiler.Logging
             return false;
         }
 
-        private static bool TryDecodeSuppressMessageAttributeData(CustomAttributeValue<TypeDesc> attribute, out SuppressMessageInfo info)
+        private static bool TryDecodeSuppressMessageAttributeData(
+            CustomAttributeValue<TypeDesc> attribute,
+            out SuppressMessageInfo info
+        )
         {
             info = default;
 
@@ -184,10 +216,12 @@ namespace ILCompiler.Logging
             // Ignore the category parameter because it does not identify the warning
             // and category information can be obtained from warnings themselves.
             // We only support warnings with code pattern IL####.
-            if (!(attribute.FixedArguments[1].Value is string warningId) ||
-                warningId.Length < 6 ||
-                !warningId.StartsWith("IL", StringComparison.Ordinal) ||
-                !int.TryParse(warningId.AsSpan(2, 4), out info.Id))
+            if (
+                !(attribute.FixedArguments[1].Value is string warningId)
+                || warningId.Length < 6
+                || !warningId.StartsWith("IL", StringComparison.Ordinal)
+                || !int.TryParse(warningId.AsSpan(2, 4), out info.Id)
+            )
             {
                 return false;
             }
@@ -231,7 +265,13 @@ namespace ILCompiler.Logging
         {
             Debug.Assert(provider is not ModuleDesc);
 
-            foreach (CustomAttributeValue<TypeDesc> ca in GetDecodedCustomAttributes(provider, UnconditionalSuppressMessageAttributeNamespace, UnconditionalSuppressMessageAttributeName))
+            foreach (
+                CustomAttributeValue<TypeDesc> ca in GetDecodedCustomAttributes(
+                    provider,
+                    UnconditionalSuppressMessageAttributeNamespace,
+                    UnconditionalSuppressMessageAttributeName
+                )
+            )
             {
                 if (!TryDecodeSuppressMessageAttributeData(ca, out var info))
                     continue;
@@ -240,20 +280,31 @@ namespace ILCompiler.Logging
             }
         }
 
-        private static List<Suppression>? DecodeAssemblyAndModuleSuppressions(EcmaAssembly ecmaAssembly, List<(DiagnosticId, string?[])>? warnings)
+        private static List<Suppression>? DecodeAssemblyAndModuleSuppressions(
+            EcmaAssembly ecmaAssembly,
+            List<(DiagnosticId, string?[])>? warnings
+        )
         {
             List<Suppression>? suppressions = null;
             DecodeGlobalSuppressions(
                 ecmaAssembly,
-                ecmaAssembly.GetDecodedCustomAttributes(UnconditionalSuppressMessageAttributeNamespace, UnconditionalSuppressMessageAttributeName),
+                ecmaAssembly.GetDecodedCustomAttributes(
+                    UnconditionalSuppressMessageAttributeNamespace,
+                    UnconditionalSuppressMessageAttributeName
+                ),
                 ref suppressions,
-                warnings);
+                warnings
+            );
 
             DecodeGlobalSuppressions(
                 ecmaAssembly,
-                ecmaAssembly.GetDecodedCustomAttributesForModule(UnconditionalSuppressMessageAttributeNamespace, UnconditionalSuppressMessageAttributeName),
+                ecmaAssembly.GetDecodedCustomAttributesForModule(
+                    UnconditionalSuppressMessageAttributeNamespace,
+                    UnconditionalSuppressMessageAttributeName
+                ),
                 ref suppressions,
-                warnings);
+                warnings
+            );
 
             return suppressions;
         }
@@ -262,7 +313,8 @@ namespace ILCompiler.Logging
             EcmaAssembly module,
             IEnumerable<CustomAttributeValue<TypeDesc>> attributes,
             ref List<Suppression>? suppressions,
-            List<(DiagnosticId, string?[])>? warnings)
+            List<(DiagnosticId, string?[])>? warnings
+        )
         {
             foreach (CustomAttributeValue<TypeDesc> instance in attributes)
             {
@@ -289,21 +341,42 @@ namespace ILCompiler.Logging
                         if (info.Target == null)
                             break;
 
-                        foreach (var result in DocumentationSignatureParser.GetMembersForDocumentationSignature(info.Target, module))
+                        foreach (
+                            var result in DocumentationSignatureParser.GetMembersForDocumentationSignature(
+                                info.Target,
+                                module
+                            )
+                        )
                         {
                             suppressions ??= new();
-                            suppressions.Add(new Suppression(info, originAttribute: instance, result));
+                            suppressions.Add(
+                                new Suppression(info, originAttribute: instance, result)
+                            );
                         }
 
                         break;
                     default:
-                        warnings?.Add((DiagnosticId.InvalidScopeInUnconditionalSuppressMessage, new string?[] { info.Scope ?? "", module.GetName().Name, info.Target ?? "" }));
+                        warnings?.Add(
+                            (
+                                DiagnosticId.InvalidScopeInUnconditionalSuppressMessage,
+                                new string?[]
+                                {
+                                    info.Scope ?? "",
+                                    module.GetName().Name,
+                                    info.Target ?? "",
+                                }
+                            )
+                        );
                         break;
                 }
             }
         }
 
-        private static IEnumerable<CustomAttributeValue<TypeDesc>> GetDecodedCustomAttributes(TypeSystemEntity entity, string attributeNamespace, string attributeName)
+        private static IEnumerable<CustomAttributeValue<TypeDesc>> GetDecodedCustomAttributes(
+            TypeSystemEntity entity,
+            string attributeNamespace,
+            string attributeName
+        )
         {
             switch (entity)
             {
@@ -324,7 +397,10 @@ namespace ILCompiler.Logging
                 case EventPseudoDesc @event:
                     return @event.GetDecodedCustomAttributes(attributeNamespace, attributeName);
                 default:
-                    Debug.Fail("Trying to operate with unsupported TypeSystemEntity " + entity.GetType().ToString());
+                    Debug.Fail(
+                        "Trying to operate with unsupported TypeSystemEntity "
+                            + entity.GetType().ToString()
+                    );
                     return Enumerable.Empty<CustomAttributeValue<TypeDesc>>();
             }
         }

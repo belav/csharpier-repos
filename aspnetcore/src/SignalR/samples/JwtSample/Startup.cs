@@ -21,14 +21,11 @@ public class Startup
         services.AddSignalR();
         services.AddAuthorization(options =>
         {
-            options.AddPolicy(
-                JwtBearerDefaults.AuthenticationScheme,
-                policy =>
-                {
-                    policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
-                    policy.RequireClaim(ClaimTypes.NameIdentifier);
-                }
-            );
+            options.AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
+            {
+                policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+                policy.RequireClaim(ClaimTypes.NameIdentifier);
+            });
         });
 
         services
@@ -78,13 +75,10 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapHub<Broadcaster>("/broadcast");
-            endpoints.MapGet(
-                "/generatetoken",
-                context =>
-                {
-                    return context.Response.WriteAsync(GenerateToken(context));
-                }
-            );
+            endpoints.MapGet("/generatetoken", context =>
+            {
+                return context.Response.WriteAsync(GenerateToken(context));
+            });
         });
     }
 

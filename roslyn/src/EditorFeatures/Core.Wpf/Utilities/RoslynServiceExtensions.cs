@@ -13,7 +13,9 @@ namespace Microsoft.VisualStudio.Shell
     internal static class RoslynServiceExtensions
     {
         /// <inheritdoc cref="RoslynServiceExtensions.GetService{TService, TInterface}(IServiceProvider, JoinableTaskFactory, bool)"/>
-        public static TInterface GetServiceOnMainThread<TService, TInterface>(this IServiceProvider serviceProvider)
+        public static TInterface GetServiceOnMainThread<TService, TInterface>(
+            this IServiceProvider serviceProvider
+        )
         {
             var service = serviceProvider.GetService(typeof(TService));
             if (service is null)
@@ -28,8 +30,11 @@ namespace Microsoft.VisualStudio.Shell
         /// <summary>
         /// Returns the specified service type from the service.
         /// </summary>
-        public static TServiceType GetServiceOnMainThread<TServiceType>(this IServiceProvider serviceProvider) where TServiceType : class
-            => serviceProvider.GetServiceOnMainThread<TServiceType, TServiceType>();
+        public static TServiceType GetServiceOnMainThread<TServiceType>(
+            this IServiceProvider serviceProvider
+        )
+            where TServiceType : class =>
+            serviceProvider.GetServiceOnMainThread<TServiceType, TServiceType>();
 
         /// <summary>
         /// Gets a service interface from a service provider.
@@ -44,10 +49,15 @@ namespace Microsoft.VisualStudio.Shell
         /// </exception>
         public static TInterface GetService<TService, TInterface>(
             this IServiceProvider serviceProvider,
-            JoinableTaskFactory joinableTaskFactory)
+            JoinableTaskFactory joinableTaskFactory
+        )
             where TInterface : class
         {
-            return GetService<TService, TInterface>(serviceProvider, joinableTaskFactory, throwOnFailure: true)!;
+            return GetService<TService, TInterface>(
+                serviceProvider,
+                joinableTaskFactory,
+                throwOnFailure: true
+            )!;
         }
 
         /// <summary>
@@ -66,11 +76,16 @@ namespace Microsoft.VisualStudio.Shell
         /// Either the service could not be acquired, or the service does not support
         /// the requested interface.
         /// </exception>
-        [SuppressMessage("Usage", "VSTHRD102:Implement internal logic asynchronously", Justification = "Intentional to match required semantics for IServiceProvider.GetService")]
+        [SuppressMessage(
+            "Usage",
+            "VSTHRD102:Implement internal logic asynchronously",
+            Justification = "Intentional to match required semantics for IServiceProvider.GetService"
+        )]
         public static TInterface? GetService<TService, TInterface>(
             this IServiceProvider serviceProvider,
             JoinableTaskFactory joinableTaskFactory,
-            bool throwOnFailure)
+            bool throwOnFailure
+        )
             where TInterface : class
         {
             Requires.NotNull(serviceProvider, nameof(serviceProvider));
@@ -113,10 +128,15 @@ namespace Microsoft.VisualStudio.Shell
         /// </exception>
         public static Task<TInterface> GetServiceAsync<TService, TInterface>(
             this IAsyncServiceProvider asyncServiceProvider,
-            JoinableTaskFactory joinableTaskFactory)
+            JoinableTaskFactory joinableTaskFactory
+        )
             where TInterface : class
         {
-            return GetServiceAsync<TService, TInterface>(asyncServiceProvider, joinableTaskFactory, throwOnFailure: true)!;
+            return GetServiceAsync<TService, TInterface>(
+                asyncServiceProvider,
+                joinableTaskFactory,
+                throwOnFailure: true
+            )!;
         }
 
         /// <summary>
@@ -138,7 +158,8 @@ namespace Microsoft.VisualStudio.Shell
         public static async Task<TInterface?> GetServiceAsync<TService, TInterface>(
             this IAsyncServiceProvider asyncServiceProvider,
             JoinableTaskFactory joinableTaskFactory,
-            bool throwOnFailure)
+            bool throwOnFailure
+        )
             where TInterface : class
         {
             Requires.NotNull(asyncServiceProvider, nameof(asyncServiceProvider));
@@ -146,11 +167,16 @@ namespace Microsoft.VisualStudio.Shell
 
             // Prefer IAsyncServiceProvider2 so that any original exceptions can be captured and included as an inner
             // exception to the one that we throw.
-            if (throwOnFailure && asyncServiceProvider is IAsyncServiceProvider2 asyncServiceProvider2)
+            if (
+                throwOnFailure
+                && asyncServiceProvider is IAsyncServiceProvider2 asyncServiceProvider2
+            )
             {
                 try
                 {
-                    service = await asyncServiceProvider2.GetServiceAsync(typeof(TService), swallowExceptions: false).ConfigureAwait(true);
+                    service = await asyncServiceProvider2
+                        .GetServiceAsync(typeof(TService), swallowExceptions: false)
+                        .ConfigureAwait(true);
                 }
                 catch (Exception ex)
                 {
@@ -159,7 +185,9 @@ namespace Microsoft.VisualStudio.Shell
             }
             else
             {
-                service = await asyncServiceProvider.GetServiceAsync(typeof(TService)).ConfigureAwait(true);
+                service = await asyncServiceProvider
+                    .GetServiceAsync(typeof(TService))
+                    .ConfigureAwait(true);
             }
 
             if (service == null)

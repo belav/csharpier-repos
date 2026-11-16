@@ -45,9 +45,7 @@ public class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Escape<T>(ref T t)
-    {
-    }
+    static void Escape<T>(ref T t) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Test(S p)

@@ -6,23 +6,29 @@
 
 #if WMLSUPPORT
 
-namespace System.Web.UI.WebControls.Adapters {
+namespace System.Web.UI.WebControls.Adapters
+{
     using System.Web.UI.Adapters;
     using System.Web.UI.WebControls;
 
-    public class WmlHiddenFieldAdapter : HiddenFieldAdapter {
+    public class WmlHiddenFieldAdapter : HiddenFieldAdapter
+    {
+        protected internal override void BeginRender(HtmlTextWriter writer) { }
 
-        protected internal override void BeginRender(HtmlTextWriter writer) {
-        }
+        protected internal override void EndRender(HtmlTextWriter writer) { }
 
-        protected internal override void EndRender(HtmlTextWriter writer) {
-        }
-
-        protected internal override void Render(HtmlTextWriter markupWriter) {
+        protected internal override void Render(HtmlTextWriter markupWriter)
+        {
             WmlTextWriter writer = (WmlTextWriter)markupWriter;
-            ((WmlPageAdapter)PageAdapter).RegisterPostField(writer, Control.UniqueID, Control.Value, false, false);
+            ((WmlPageAdapter)PageAdapter).RegisterPostField(
+                writer,
+                Control.UniqueID,
+                Control.Value,
+                false,
+                false
+            );
         }
     }
 }
 
-#endif 
+#endif

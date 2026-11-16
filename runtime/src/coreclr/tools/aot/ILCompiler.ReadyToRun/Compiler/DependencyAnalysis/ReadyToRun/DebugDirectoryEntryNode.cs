@@ -1,17 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
-using System.Text;
+using System.Collections.Immutable;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection.PortableExecutable;
-
+using System.Text;
 using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-using System.IO;
-using System.Collections.Immutable;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -24,7 +22,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _module = module;
         }
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.TextSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.TextSection;
 
         public override bool IsShareable => false;
 
@@ -36,7 +35,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public abstract void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb);
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
@@ -48,7 +48,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     {
         internal static void EmitHeader(ref ObjectDataBuilder builder)
         {
-            builder.EmitUInt(0 /* Characteristics */);
+            builder.EmitUInt(
+                0 /* Characteristics */
+            );
             builder.EmitUInt(0);
             builder.EmitUShort(0);
             builder.EmitUShort(0);
@@ -62,12 +64,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     public class PerfMapDebugDirectoryEntryNode : DebugDirectoryEntryNode
     {
         const int PerfMapEntrySize =
-            sizeof(uint) +   // Magic
-            SignatureSize + // Signature
-            sizeof(uint) +   // Age
-            260;            // FileName
+            sizeof(uint)
+            + // Magic
+            SignatureSize
+            + // Signature
+            sizeof(uint)
+            + // Age
+            260; // FileName
 
-        public const uint PerfMapMagic = 0x4D523252;// R2RM
+        public const uint PerfMapMagic = 0x4D523252; // R2RM
 
         public const int PerfMapEntryType = 21; // DebugDirectoryEntryType for this entry.
 
@@ -88,7 +93,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             sb.Append(nameMangler.CompilationUnitPrefix);
-            sb.Append($"__PerfMapDebugDirectoryEntryNode_{_entryName.Replace('.','_')}");
+            sb.Append($"__PerfMapDebugDirectoryEntryNode_{_entryName.Replace('.', '_')}");
         }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
@@ -125,10 +130,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         internal void EmitHeader(ref ObjectDataBuilder builder)
         {
-            builder.EmitUInt(0);        /* Characteristics */
-            builder.EmitUInt(0);        /* Stamp */
-            builder.EmitUShort(1);      /* Major */
-            builder.EmitUShort(0);      /* Minor */
+            builder.EmitUInt(0); /* Characteristics */
+            builder.EmitUInt(0); /* Stamp */
+            builder.EmitUShort(1); /* Major */
+            builder.EmitUShort(0); /* Minor */
             builder.EmitInt((int)PerfMapEntryType);
             builder.EmitInt(Size);
             builder.EmitReloc(this, RelocType.IMAGE_REL_BASED_ADDR32NB);
@@ -144,16 +149,19 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     public class NativeDebugDirectoryEntryNode : DebugDirectoryEntryNode
     {
         const int RSDSSize =
-            sizeof(int) +   // Magic
-            16 +            // Signature (guid)
-            sizeof(int) +   // Age
-            260;            // FileName
+            sizeof(int)
+            + // Magic
+            16
+            + // Signature (guid)
+            sizeof(int)
+            + // Age
+            260; // FileName
 
         public override int ClassCode => 119958401;
 
         public unsafe int Size => RSDSSize;
 
-        public const uint RsdsMagic = 0x53445352;// R2RM
+        public const uint RsdsMagic = 0x53445352; // R2RM
 
         public NativeDebugDirectoryEntryNode(string pdbName)
             : base(null)
@@ -166,7 +174,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             sb.Append(nameMangler.CompilationUnitPrefix);
-            sb.Append($"__NativeDebugDirectory_{_pdbName.Replace('.','_')}");
+            sb.Append($"__NativeDebugDirectory_{_pdbName.Replace('.', '_')}");
         }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
@@ -212,12 +220,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         internal void EmitHeader(ref ObjectDataBuilder builder, uint stamp, ushort majorVersion)
         {
-            builder.EmitUInt(0);        /* Characteristics */
+            builder.EmitUInt(0); /* Characteristics */
             builder.EmitUInt(stamp);
             builder.EmitUShort(majorVersion);
             // Make sure the "is portable pdb" indicator (MinorVersion == 0x504d) is clear.
             // The NI PDB generated currently is a full PDB.
-            builder.EmitUShort(0 /* MinorVersion */);
+            builder.EmitUShort(
+                0 /* MinorVersion */
+            );
             builder.EmitInt((int)DebugDirectoryEntryType.CodeView);
             builder.EmitInt(Size);
             builder.EmitReloc(this, RelocType.IMAGE_REL_BASED_ADDR32NB);
@@ -241,14 +251,21 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             sb.Append(nameMangler.CompilationUnitPrefix);
-            sb.Append($"__CopiedDebugEntryNode_{_debugEntryIndex}_{_module.Assembly.GetName().Name}");
+            sb.Append(
+                $"__CopiedDebugEntryNode_{_debugEntryIndex}_{_module.Assembly.GetName().Name}"
+            );
         }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             if (relocsOnly)
             {
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
             }
 
             ImmutableArray<DebugDirectoryEntry> entries = _module.PEReader.SafeReadDebugDirectory();
@@ -256,11 +273,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             DebugDirectoryEntry sourceDebugEntry = entries[_debugEntryIndex];
 
-            PEMemoryBlock block = _module.PEReader.GetSectionData(sourceDebugEntry.DataRelativeVirtualAddress);
+            PEMemoryBlock block = _module.PEReader.GetSectionData(
+                sourceDebugEntry.DataRelativeVirtualAddress
+            );
             byte[] result = new byte[sourceDebugEntry.DataSize];
             block.GetContent(0, sourceDebugEntry.DataSize).CopyTo(result);
 
-            return new ObjectData(result, Array.Empty<Relocation>(), _module.Context.Target.PointerSize, new ISymbolDefinitionNode[] { this });
+            return new ObjectData(
+                result,
+                Array.Empty<Relocation>(),
+                _module.Context.Target.PointerSize,
+                new ISymbolDefinitionNode[] { this }
+            );
         }
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)

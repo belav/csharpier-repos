@@ -9,8 +9,9 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
     // what we are/aren't using.
     internal enum Result
     {
-        OK = 0,                /* Successful result */
-        ERROR = 1,             /* SQL error or missing database */
+        OK = 0, /* Successful result */
+        ERROR = 1, /* SQL error or missing database */
+
         // INTERNAL = 2,       /* Internal logic error in SQLite */
         // PERM = 3,           /* Access permission denied */
         // ABORT = 4,          /* Callback routine requested an abort */
@@ -28,7 +29,8 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
         // EMPTY = 16,         /* Database is empty */
         // SCHEMA = 17,        /* The database schema changed */
         // TOOBIG = 18,        /* String or BLOB exceeds size limit */
-        CONSTRAINT = 19,       /* Abort due to constraint violation */
+        CONSTRAINT = 19, /* Abort due to constraint violation */
+
         // MISMATCH = 20,      /* Data type mismatch */
         // MISUSE = 21,        /* Library used incorrectly */
         // NOLFS = 22,         /* Uses OS features not supported on host */
@@ -38,7 +40,7 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
         // NOTADB = 26,        /* File opened that is not a database file */
         // NOTICE = 27,        /* Notifications from sqlite3_log() */
         // WARNING = 28,       /* Warnings from sqlite3_log() */
-        ROW = 100,             /* sqlite3_step() has another row ready */
-        DONE = 101             /* sqlite3_step() has finished executing */
+        ROW = 100, /* sqlite3_step() has another row ready */
+        DONE = 101, /* sqlite3_step() has finished executing */
     }
 }

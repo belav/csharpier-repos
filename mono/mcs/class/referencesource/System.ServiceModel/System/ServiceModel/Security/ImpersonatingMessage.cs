@@ -22,10 +22,7 @@ namespace System.ServiceModel.Security
 
         public override bool IsEmpty
         {
-            get
-            {
-                return this.innerMessage.IsEmpty;
-            }
+            get { return this.innerMessage.IsEmpty; }
         }
 
         public override bool IsFault
@@ -50,10 +47,7 @@ namespace System.ServiceModel.Security
 
         internal override RecycledMessageState RecycledMessageState
         {
-            get
-            {
-                return this.innerMessage.RecycledMessageState;
-            }
+            get { return this.innerMessage.RecycledMessageState; }
         }
 
         protected override void OnClose()
@@ -63,28 +57,49 @@ namespace System.ServiceModel.Security
         }
 
         //Runs impersonated.
-        protected override IAsyncResult OnBeginWriteMessage(XmlDictionaryWriter writer, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWriteMessage(
+            XmlDictionaryWriter writer,
+            AsyncCallback callback,
+            object state
+        )
         {
             ImpersonateOnSerializingReplyMessageProperty impersonationProperty = null;
             IDisposable impersonationContext = null;
             IPrincipal originalPrincipal = null;
             bool isThreadPrincipalSet = false;
 
-            if (!ImpersonateOnSerializingReplyMessageProperty.TryGet(this.innerMessage, out impersonationProperty))
+            if (
+                !ImpersonateOnSerializingReplyMessageProperty.TryGet(
+                    this.innerMessage,
+                    out impersonationProperty
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)
+                    )
+                );
             }
 
             try
             {
-                impersonationProperty.StartImpersonation(out impersonationContext, out originalPrincipal, out isThreadPrincipalSet);
+                impersonationProperty.StartImpersonation(
+                    out impersonationContext,
+                    out originalPrincipal,
+                    out isThreadPrincipalSet
+                );
                 return this.innerMessage.BeginWriteMessage(writer, callback, state);
             }
             finally
             {
                 try
                 {
-                    impersonationProperty.StopImpersonation(impersonationContext, originalPrincipal, isThreadPrincipalSet);
+                    impersonationProperty.StopImpersonation(
+                        impersonationContext,
+                        originalPrincipal,
+                        isThreadPrincipalSet
+                    );
                 }
 #pragma warning suppress 56500 // covered by FxCOP
                 catch
@@ -107,7 +122,7 @@ namespace System.ServiceModel.Security
         {
             this.ImpersonateCall(() => this.innerMessage.WriteMessage(writer));
         }
-     
+
         protected override void OnEndWriteMessage(IAsyncResult result)
         {
             this.innerMessage.EndWriteMessage(result);
@@ -137,29 +152,50 @@ namespace System.ServiceModel.Security
         {
             return this.innerMessage.CreateBufferedCopy(maxBufferSize);
         }
-      
-        protected override IAsyncResult OnBeginWriteBodyContents(XmlDictionaryWriter writer, AsyncCallback callback, object state)
+
+        protected override IAsyncResult OnBeginWriteBodyContents(
+            XmlDictionaryWriter writer,
+            AsyncCallback callback,
+            object state
+        )
         {
             ImpersonateOnSerializingReplyMessageProperty impersonationProperty = null;
             IDisposable impersonationContext = null;
             IPrincipal originalPrincipal = null;
             bool isThreadPrincipalSet = false;
 
-            if (!ImpersonateOnSerializingReplyMessageProperty.TryGet(this.innerMessage, out impersonationProperty))
+            if (
+                !ImpersonateOnSerializingReplyMessageProperty.TryGet(
+                    this.innerMessage,
+                    out impersonationProperty
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)
+                    )
+                );
             }
 
             try
             {
-                impersonationProperty.StartImpersonation(out impersonationContext, out originalPrincipal, out isThreadPrincipalSet);
+                impersonationProperty.StartImpersonation(
+                    out impersonationContext,
+                    out originalPrincipal,
+                    out isThreadPrincipalSet
+                );
                 return this.innerMessage.BeginWriteBodyContents(writer, callback, state);
             }
             finally
             {
                 try
                 {
-                    impersonationProperty.StopImpersonation(impersonationContext, originalPrincipal, isThreadPrincipalSet);
+                    impersonationProperty.StopImpersonation(
+                        impersonationContext,
+                        originalPrincipal,
+                        isThreadPrincipalSet
+                    );
                 }
 #pragma warning suppress 56500 // covered by FxCOP
                 catch
@@ -175,13 +211,11 @@ namespace System.ServiceModel.Security
                     }
                 }
             }
-            
-           
         }
 
         protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
         {
-          this.ImpersonateCall( () => this.innerMessage.WriteBodyContents(writer));
+            this.ImpersonateCall(() => this.innerMessage.WriteBodyContents(writer));
         }
 
         protected override void OnEndWriteBodyContents(IAsyncResult result)
@@ -202,21 +236,38 @@ namespace System.ServiceModel.Security
             IPrincipal originalPrincipal = null;
             bool isThreadPrincipalSet = false;
 
-            if (!ImpersonateOnSerializingReplyMessageProperty.TryGet(this.innerMessage, out impersonationProperty))
+            if (
+                !ImpersonateOnSerializingReplyMessageProperty.TryGet(
+                    this.innerMessage,
+                    out impersonationProperty
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)
+                    )
+                );
             }
 
             try
             {
-                impersonationProperty.StartImpersonation(out impersonationContext, out originalPrincipal, out isThreadPrincipalSet);
+                impersonationProperty.StartImpersonation(
+                    out impersonationContext,
+                    out originalPrincipal,
+                    out isThreadPrincipalSet
+                );
                 callToImpersonate();
             }
             finally
             {
                 try
                 {
-                    impersonationProperty.StopImpersonation(impersonationContext, originalPrincipal, isThreadPrincipalSet);
+                    impersonationProperty.StopImpersonation(
+                        impersonationContext,
+                        originalPrincipal,
+                        isThreadPrincipalSet
+                    );
                 }
 #pragma warning suppress 56500 // covered by FxCOP
                 catch

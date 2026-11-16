@@ -25,14 +25,20 @@ internal static partial class Interop
 
                 if (protocolLength == 0 || protocolLength > byte.MaxValue)
                 {
-                    throw new ArgumentException(SR.net_ssl_app_protocols_invalid, nameof(applicationProtocols));
+                    throw new ArgumentException(
+                        SR.net_ssl_app_protocols_invalid,
+                        nameof(applicationProtocols)
+                    );
                 }
 
                 protocolListSize += protocolLength + 1;
 
                 if (protocolListSize > short.MaxValue)
                 {
-                    throw new ArgumentException(SR.net_ssl_app_protocols_invalid, nameof(applicationProtocols));
+                    throw new ArgumentException(
+                        SR.net_ssl_app_protocols_invalid,
+                        nameof(applicationProtocols)
+                    );
                 }
             }
 
@@ -45,7 +51,10 @@ internal static partial class Interop
 
             Sec_Application_Protocols protocols = default;
 
-            int protocolListConstSize = sizeof(Sec_Application_Protocols) - sizeof(uint) /* offsetof(Sec_Application_Protocols, ProtocolExtensionType) */;
+            int protocolListConstSize =
+                sizeof(Sec_Application_Protocols)
+                - sizeof(uint) /* offsetof(Sec_Application_Protocols, ProtocolExtensionType) */
+            ;
             protocols.ProtocolListsSize = (uint)(protocolListConstSize + protocolListSize);
 
             protocols.ProtocolExtensionType = ApplicationProtocolNegotiationExt.ALPN;
@@ -68,10 +77,19 @@ internal static partial class Interop
             return buffer;
         }
 
-        public static unsafe void SetProtocols(Span<byte> buffer, List<SslApplicationProtocol> applicationProtocols, int protocolLength)
+        public static unsafe void SetProtocols(
+            Span<byte> buffer,
+            List<SslApplicationProtocol> applicationProtocols,
+            int protocolLength
+        )
         {
-            Span<Sec_Application_Protocols> alpn = MemoryMarshal.Cast<byte, Sec_Application_Protocols>(buffer);
-            alpn[0].ProtocolListsSize = (uint)(sizeof(Sec_Application_Protocols) - sizeof(uint) + protocolLength);
+            Span<Sec_Application_Protocols> alpn = MemoryMarshal.Cast<
+                byte,
+                Sec_Application_Protocols
+            >(buffer);
+            alpn[0].ProtocolListsSize = (uint)(
+                sizeof(Sec_Application_Protocols) - sizeof(uint) + protocolLength
+            );
             alpn[0].ProtocolExtensionType = ApplicationProtocolNegotiationExt.ALPN;
             alpn[0].ProtocolListSize = (short)protocolLength;
 

@@ -30,18 +30,25 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
         /// File watching tokens from <see cref="_fileReferenceChangeContext"/> that are watching metadata references. These are only created once we are actually applying a batch because
         /// we don't determine until the batch is applied if the file reference will actually be a file reference or it'll be a converted project reference.
         /// </summary>
-        private readonly Dictionary<PortableExecutableReference, IWatchedFile> _metadataReferenceFileWatchingTokens = new();
+        private readonly Dictionary<
+            PortableExecutableReference,
+            IWatchedFile
+        > _metadataReferenceFileWatchingTokens = new();
 
         /// <summary>
         /// <see cref="CancellationTokenSource"/>s for in-flight refreshing of metadata references. When we see a file change, we wait a bit before trying to actually
         /// update the workspace. We need cancellation tokens for those so we can cancel them either when a flurry of events come in (so we only do the delay after the last
         /// modification), or when we know the project is going away entirely.
         /// </summary>
-        private readonly Dictionary<string, CancellationTokenSource> _metadataReferenceRefreshCancellationTokenSources = new();
+        private readonly Dictionary<
+            string,
+            CancellationTokenSource
+        > _metadataReferenceRefreshCancellationTokenSources = new();
 
         public FileWatchedPortableExecutableReferenceFactory(
             SolutionServices solutionServices,
-            IFileChangeWatcher fileChangeWatcher)
+            IFileChangeWatcher fileChangeWatcher
+        )
         {
             _solutionServices = solutionServices;
 
@@ -55,15 +62,31 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
                 // We'll collect this from two places: constructing it from known environment variables, and also for the defaults where those environment
                 // variables would usually point, as a fallback.
 
-                if (Environment.GetEnvironmentVariable("DOTNET_ROOT") is string dotnetRoot && !string.IsNullOrEmpty(dotnetRoot))
+                if (
+                    Environment.GetEnvironmentVariable("DOTNET_ROOT") is string dotnetRoot
+                    && !string.IsNullOrEmpty(dotnetRoot)
+                )
                 {
                     referenceDirectories.Add(Path.Combine(dotnetRoot, "packs"));
                 }
 
                 if (PlatformInformation.IsWindows)
                 {
-                    referenceDirectories.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Reference Assemblies", "Microsoft", "Framework"));
-                    referenceDirectories.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "dotnet", "packs"));
+                    referenceDirectories.Add(
+                        Path.Combine(
+                            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                            "Reference Assemblies",
+                            "Microsoft",
+                            "Framework"
+                        )
+                    );
+                    referenceDirectories.Add(
+                        Path.Combine(
+                            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
+                            "dotnet",
+                            "packs"
+                        )
+                    );
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
@@ -80,11 +103,21 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
                 // TODO: remove this condition
                 if (!PlatformInformation.IsWindows)
                 {
-                    referenceDirectories.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".nuget", "packages"));
+                    referenceDirectories.Add(
+                        Path.Combine(
+                            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                            ".nuget",
+                            "packages"
+                        )
+                    );
                 }
 
-                var directoriesToWatch = referenceDirectories.Select(static d => new WatchedDirectory(d, ".dll")).ToArray();
-                var fileReferenceChangeContext = fileChangeWatcher.CreateContext(directoriesToWatch);
+                var directoriesToWatch = referenceDirectories
+                    .Select(static d => new WatchedDirectory(d, ".dll"))
+                    .ToArray();
+                var fileReferenceChangeContext = fileChangeWatcher.CreateContext(
+                    directoriesToWatch
+                );
                 fileReferenceChangeContext.FileChanged += FileReferenceChangeContext_FileChanged;
                 return fileReferenceChangeContext;
             });
@@ -92,12 +125,19 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
 
         public event EventHandler<string>? ReferenceChanged;
 
-        public PortableExecutableReference CreateReferenceAndStartWatchingFile(string fullFilePath, MetadataReferenceProperties properties)
+        public PortableExecutableReference CreateReferenceAndStartWatchingFile(
+            string fullFilePath,
+            MetadataReferenceProperties properties
+        )
         {
             lock (_gate)
             {
-                var reference = _solutionServices.GetRequiredService<IMetadataService>().GetReference(fullFilePath, properties);
-                var fileWatchingToken = _fileReferenceChangeContext.Value.EnqueueWatchingFile(fullFilePath);
+                var reference = _solutionServices
+                    .GetRequiredService<IMetadataService>()
+                    .GetReference(fullFilePath, properties);
+                var fileWatchingToken = _fileReferenceChangeContext.Value.EnqueueWatchingFile(
+                    fullFilePath
+                );
 
                 _metadataReferenceFileWatchingTokens.Add(reference, fileWatchingToken);
 
@@ -109,7 +149,12 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
         {
             lock (_gate)
             {
-                if (!_metadataReferenceFileWatchingTokens.TryGetValue(reference, out var watchedFile))
+                if (
+                    !_metadataReferenceFileWatchingTokens.TryGetValue(
+                        reference,
+                        out var watchedFile
+                    )
+                )
                 {
                     throw new ArgumentException("The reference was already not being watched.");
                 }
@@ -137,34 +182,50 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
         {
             lock (_gate)
             {
-                if (_metadataReferenceRefreshCancellationTokenSources.TryGetValue(fullFilePath, out var cancellationTokenSource))
+                if (
+                    _metadataReferenceRefreshCancellationTokenSources.TryGetValue(
+                        fullFilePath,
+                        out var cancellationTokenSource
+                    )
+                )
                 {
                     cancellationTokenSource.Cancel();
                     _metadataReferenceRefreshCancellationTokenSources.Remove(fullFilePath);
                 }
 
                 cancellationTokenSource = new CancellationTokenSource();
-                _metadataReferenceRefreshCancellationTokenSources.Add(fullFilePath, cancellationTokenSource);
+                _metadataReferenceRefreshCancellationTokenSources.Add(
+                    fullFilePath,
+                    cancellationTokenSource
+                );
 
-                Task.Delay(TimeSpan.FromSeconds(5), cancellationTokenSource.Token).ContinueWith(_ =>
-                {
-                    var needsNotification = false;
+                Task.Delay(TimeSpan.FromSeconds(5), cancellationTokenSource.Token)
+                    .ContinueWith(
+                        _ =>
+                        {
+                            var needsNotification = false;
 
-                    lock (_gate)
-                    {
-                        // We need to re-check the cancellation token source under the lock, since it might have been cancelled and restarted
-                        // due to another event
-                        cancellationTokenSource.Token.ThrowIfCancellationRequested();
-                        needsNotification = true;
+                            lock (_gate)
+                            {
+                                // We need to re-check the cancellation token source under the lock, since it might have been cancelled and restarted
+                                // due to another event
+                                cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                                needsNotification = true;
 
-                        _metadataReferenceRefreshCancellationTokenSources.Remove(fullFilePath);
-                    }
+                                _metadataReferenceRefreshCancellationTokenSources.Remove(
+                                    fullFilePath
+                                );
+                            }
 
-                    if (needsNotification)
-                    {
-                        ReferenceChanged?.Invoke(this, fullFilePath);
-                    }
-                }, cancellationTokenSource.Token, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.Default);
+                            if (needsNotification)
+                            {
+                                ReferenceChanged?.Invoke(this, fullFilePath);
+                            }
+                        },
+                        cancellationTokenSource.Token,
+                        TaskContinuationOptions.OnlyOnRanToCompletion,
+                        TaskScheduler.Default
+                    );
             }
         }
     }

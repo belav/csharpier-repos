@@ -106,11 +106,20 @@ namespace System.Configuration
             _indices.Clear();
         }
 
-        public int Count { get { return _values.Count; } }
+        public int Count
+        {
+            get { return _values.Count; }
+        }
 
-        public bool IsSynchronized { get { return false; } }
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
 
-        public object SyncRoot { get { return this; } }
+        public object SyncRoot
+        {
+            get { return this; }
+        }
 
         public void CopyTo(Array array, int index)
         {
@@ -123,5 +132,4 @@ namespace System.Configuration
             _values = (ArrayList)values.Clone();
         }
     }
-
 }

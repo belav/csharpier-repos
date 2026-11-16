@@ -17,13 +17,16 @@ namespace System.ComponentModel
         /// Sets the System.ComponentModel.Design.PasswordPropertyText
         /// attribute by default to true.
         /// </summary>
-        public static readonly PasswordPropertyTextAttribute Yes = new PasswordPropertyTextAttribute(true);
+        public static readonly PasswordPropertyTextAttribute Yes =
+            new PasswordPropertyTextAttribute(true);
 
         /// <summary>
         /// Sets the System.ComponentModel.Design.PasswordPropertyText
         /// attribute by default to false.
         /// </summary>
-        public static readonly PasswordPropertyTextAttribute No = new PasswordPropertyTextAttribute(false);
+        public static readonly PasswordPropertyTextAttribute No = new PasswordPropertyTextAttribute(
+            false
+        );
 
         /// <summary>
         /// Sets the System.ComponentModel.Design.PasswordPropertyText
@@ -34,9 +37,8 @@ namespace System.ComponentModel
         /// <summary>
         /// Creates a default PasswordPropertyTextAttribute.
         /// </summary>
-        public PasswordPropertyTextAttribute() : this(false)
-        {
-        }
+        public PasswordPropertyTextAttribute()
+            : this(false) { }
 
         /// <summary>
         /// Creates a PasswordPropertyTextAttribute with the given password value.

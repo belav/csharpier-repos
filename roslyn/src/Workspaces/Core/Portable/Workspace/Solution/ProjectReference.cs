@@ -20,7 +20,11 @@ namespace Microsoft.CodeAnalysis
         private readonly ImmutableArray<string> _aliases;
         private readonly bool _embedInteropTypes;
 
-        public ProjectReference(ProjectId projectId, ImmutableArray<string> aliases = default, bool embedInteropTypes = false)
+        public ProjectReference(
+            ProjectId projectId,
+            ImmutableArray<string> aliases = default,
+            bool embedInteropTypes = false
+        )
         {
             Contract.ThrowIfNull(projectId);
 
@@ -41,8 +45,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool EmbedInteropTypes => _embedInteropTypes;
 
-        public override bool Equals(object obj)
-            => this.Equals(obj as ProjectReference);
+        public override bool Equals(object obj) => this.Equals(obj as ProjectReference);
 
         public bool Equals(ProjectReference reference)
         {
@@ -51,22 +54,24 @@ namespace Microsoft.CodeAnalysis
                 return true;
             }
 
-            return reference is object &&
-                   _projectId == reference._projectId &&
-                   _aliases.SequenceEqual(reference._aliases) &&
-                   _embedInteropTypes == reference._embedInteropTypes;
+            return reference is object
+                && _projectId == reference._projectId
+                && _aliases.SequenceEqual(reference._aliases)
+                && _embedInteropTypes == reference._embedInteropTypes;
         }
 
-        public static bool operator ==(ProjectReference left, ProjectReference right)
-            => EqualityComparer<ProjectReference>.Default.Equals(left, right);
+        public static bool operator ==(ProjectReference left, ProjectReference right) =>
+            EqualityComparer<ProjectReference>.Default.Equals(left, right);
 
-        public static bool operator !=(ProjectReference left, ProjectReference right)
-            => !(left == right);
+        public static bool operator !=(ProjectReference left, ProjectReference right) =>
+            !(left == right);
 
-        public override int GetHashCode()
-            => Hash.CombineValues(_aliases, Hash.Combine(_projectId, _embedInteropTypes.GetHashCode()));
+        public override int GetHashCode() =>
+            Hash.CombineValues(
+                _aliases,
+                Hash.Combine(_projectId, _embedInteropTypes.GetHashCode())
+            );
 
-        private string GetDebuggerDisplay()
-            => _projectId.ToString();
+        private string GetDebuggerDisplay() => _projectId.ToString();
     }
 }

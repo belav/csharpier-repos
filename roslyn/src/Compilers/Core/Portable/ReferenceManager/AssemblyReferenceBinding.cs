@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis
     internal partial class CommonReferenceManager<TCompilation, TAssemblySymbol>
     {
         /// <summary>
-        /// Result of binding an AssemblyRef to an AssemblyDef. 
+        /// Result of binding an AssemblyRef to an AssemblyDef.
         /// </summary>
         [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
         internal readonly struct AssemblyReferenceBinding
@@ -34,7 +34,11 @@ namespace Microsoft.CodeAnalysis
             /// <summary>
             /// Successful binding.
             /// </summary>
-            public AssemblyReferenceBinding(AssemblyIdentity referenceIdentity, int definitionIndex, int versionDifference = 0)
+            public AssemblyReferenceBinding(
+                AssemblyIdentity referenceIdentity,
+                int definitionIndex,
+                int versionDifference = 0
+            )
             {
                 Debug.Assert(referenceIdentity != null);
                 Debug.Assert(definitionIndex >= 0);
@@ -58,17 +62,14 @@ namespace Microsoft.CodeAnalysis
             /// </summary>
             internal bool IsBound
             {
-                get
-                {
-                    return _definitionIndex >= 0;
-                }
+                get { return _definitionIndex >= 0; }
             }
 
             /// <summary>
             ///  0 if the reference is equivalent to the definition.
             /// -1 if version of the matched definition is lower than version of the reference, but the reference otherwise matches the definition.
             /// +1 if version of the matched definition is higher than version of the reference, but the reference otherwise matches the definition.
-            ///   
+            ///
             /// Undefined unless <see cref="IsBound"/> is true.
             /// </summary>
             internal int VersionDifference
@@ -95,16 +96,18 @@ namespace Microsoft.CodeAnalysis
 
             internal AssemblyIdentity? ReferenceIdentity
             {
-                get
-                {
-                    return _referenceIdentity;
-                }
+                get { return _referenceIdentity; }
             }
 
             private string GetDebuggerDisplay()
             {
                 var displayName = ReferenceIdentity?.GetDisplayName() ?? "";
-                return IsBound ? displayName + " -> #" + DefinitionIndex + (VersionDifference != 0 ? " VersionDiff=" + VersionDifference : "") : "unbound";
+                return IsBound
+                    ? displayName
+                        + " -> #"
+                        + DefinitionIndex
+                        + (VersionDifference != 0 ? " VersionDiff=" + VersionDifference : "")
+                    : "unbound";
             }
         }
     }

@@ -29,12 +29,18 @@ public class T
         Console.WriteLine(mvc.i5);
         Console.WriteLine(mvc.i6);
 
-        if (mvc.S1 != "Hello") return -1;
-        if (mvc.S3 != "this") return -1;
-        if (mvc.S4 != "works!") return -1;
-        if (mvc.i2 != 7) return -1;
-        if (mvc.i5 != 13) return -1;
-        if (mvc.i6 != 27) return -1;
+        if (mvc.S1 != "Hello")
+            return -1;
+        if (mvc.S3 != "this")
+            return -1;
+        if (mvc.S4 != "works!")
+            return -1;
+        if (mvc.i2 != 7)
+            return -1;
+        if (mvc.i5 != 13)
+            return -1;
+        if (mvc.i6 != 27)
+            return -1;
 
         return 100;
     }

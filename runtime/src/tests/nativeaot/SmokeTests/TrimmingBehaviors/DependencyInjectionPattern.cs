@@ -24,10 +24,17 @@ public class DependencyInjectionPattern
         var created = customFactory.Create();
         Assert.Equal(42, created.GetValue());
 
-        services.RegisterService(typeof(ICustomFactoryWithConstraint<>), typeof(CustomFactoryWithConstraintImpl<>));
-        services.RegisterService(typeof(ICustomFactoryWithConstraintWrapper), typeof(CustomFactoryWithConstraintWrapperImpl));
+        services.RegisterService(
+            typeof(ICustomFactoryWithConstraint<>),
+            typeof(CustomFactoryWithConstraintImpl<>)
+        );
+        services.RegisterService(
+            typeof(ICustomFactoryWithConstraintWrapper),
+            typeof(CustomFactoryWithConstraintWrapperImpl)
+        );
 
-        var customFactoryWithConstraintWrapper = services.GetService<ICustomFactoryWithConstraintWrapper>();
+        var customFactoryWithConstraintWrapper =
+            services.GetService<ICustomFactoryWithConstraintWrapper>();
         var createdWithConstraint = customFactoryWithConstraintWrapper.Create();
         Assert.Equal(42, createdWithConstraint.GetValue());
 
@@ -45,7 +52,11 @@ class Services
 {
     private Dictionary<Type, Type> _services = new Dictionary<Type, Type>();
 
-    public void RegisterService(Type interfaceType, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type implementationType)
+    public void RegisterService(
+        Type interfaceType,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            Type implementationType
+    )
     {
         _services.Add(interfaceType, implementationType);
     }
@@ -57,7 +68,9 @@ class Services
 
     public object GetService(Type interfaceType)
     {
-        Type typeDef = interfaceType.IsGenericType ? interfaceType.GetGenericTypeDefinition() : interfaceType;
+        Type typeDef = interfaceType.IsGenericType
+            ? interfaceType.GetGenericTypeDefinition()
+            : interfaceType;
         Type implementationType = GetImplementationType(typeDef);
 
         if (implementationType.IsGenericTypeDefinition)
@@ -75,7 +88,10 @@ class Services
                     throw new InvalidOperationException();
             }
 
-            implementationType = InstantiateServiceType(implementationType, interfaceType.GetGenericArguments());
+            implementationType = InstantiateServiceType(
+                implementationType,
+                interfaceType.GetGenericArguments()
+            );
         }
 
         ConstructorInfo constructor = implementationType.GetConstructors()[0]; // Simplification
@@ -94,7 +110,11 @@ class Services
             return Activator.CreateInstance(implementationType)!;
         }
 
-        [UnconditionalSuppressMessage("", "IL2068", Justification = "We only add types with the right annotation to the dictionary")]
+        [UnconditionalSuppressMessage(
+            "",
+            "IL2068",
+            Justification = "We only add types with the right annotation to the dictionary"
+        )]
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         Type GetImplementationType(Type interfaceType)
         {
@@ -104,10 +124,22 @@ class Services
             return implementationType;
         }
 
-        [UnconditionalSuppressMessage("", "IL2055", Justification = "We validated that the type parameters match - THIS IS WRONG")]
-        [UnconditionalSuppressMessage("", "IL3050", Justification = "We validated there are no value types")]
+        [UnconditionalSuppressMessage(
+            "",
+            "IL2055",
+            Justification = "We validated that the type parameters match - THIS IS WRONG"
+        )]
+        [UnconditionalSuppressMessage(
+            "",
+            "IL3050",
+            Justification = "We validated there are no value types"
+        )]
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-        Type InstantiateServiceType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type typeDef, Type[] typeParameters)
+        Type InstantiateServiceType(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type typeDef,
+            Type[] typeParameters
+        )
         {
             return typeDef.MakeGenericType(typeParameters);
         }
@@ -120,13 +152,16 @@ class Services
     }
 }
 
-interface INameProvider<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>
+interface INameProvider<
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
+>
 {
     string? GetName(T instance);
 }
 
-class NameProviderService<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>
-    : INameProvider<T>
+class NameProviderService<
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
+> : INameProvider<T>
 {
     public string? GetName(T instance)
     {
@@ -158,12 +193,16 @@ class DataObjectPrinterService : IDataObjectPrinter
     }
 }
 
-interface ICustomFactory<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>
+interface ICustomFactory<
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
+>
 {
     T Create();
 }
 
-class CustomFactoryImpl<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T> : ICustomFactory<T>
+class CustomFactoryImpl<
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
+> : ICustomFactory<T>
 {
     public T Create()
     {
@@ -192,7 +231,9 @@ class CustomFactoryWithConstraintWrapperImpl : ICustomFactoryWithConstraintWrapp
 {
     private FactoryWithConstraintCreated _value;
 
-    public CustomFactoryWithConstraintWrapperImpl(ICustomFactoryWithConstraint<FactoryWithConstraintCreated> factory)
+    public CustomFactoryWithConstraintWrapperImpl(
+        ICustomFactoryWithConstraint<FactoryWithConstraintCreated> factory
+    )
     {
         _value = factory.Create();
     }
@@ -200,12 +241,14 @@ class CustomFactoryWithConstraintWrapperImpl : ICustomFactoryWithConstraintWrapp
     public FactoryWithConstraintCreated Create() => _value;
 }
 
-interface ICustomFactoryWithConstraint<T> where T : new()
+interface ICustomFactoryWithConstraint<T>
+    where T : new()
 {
     T Create();
 }
 
-class CustomFactoryWithConstraintImpl<T> : ICustomFactoryWithConstraint<T> where T : new()
+class CustomFactoryWithConstraintImpl<T> : ICustomFactoryWithConstraint<T>
+    where T : new()
 {
     public T Create()
     {

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,9 +27,9 @@
 //
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Net.Security;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
+using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
@@ -39,90 +39,100 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Channels.Security
 {
-	internal class SecurityReplyChannel : InternalReplyChannelBase
-	{
-		IReplyChannel inner;
+    internal class SecurityReplyChannel : InternalReplyChannelBase
+    {
+        IReplyChannel inner;
 
-		public SecurityReplyChannel (
-			SecurityChannelListener<IReplyChannel> source,
-			IReplyChannel innerChannel)
-			: base (source)
-		{
-			this.inner = innerChannel;
-		}
+        public SecurityReplyChannel(
+            SecurityChannelListener<IReplyChannel> source,
+            IReplyChannel innerChannel
+        )
+            : base(source)
+        {
+            this.inner = innerChannel;
+        }
 
-		public SecurityChannelListener<IReplyChannel> Source {
-			get { return (SecurityChannelListener<IReplyChannel>) Listener; }
-		}
+        public SecurityChannelListener<IReplyChannel> Source
+        {
+            get { return (SecurityChannelListener<IReplyChannel>)Listener; }
+        }
 
-		// IReplyChannel
+        // IReplyChannel
 
-		protected override void OnOpen (TimeSpan timeout)
-		{
-			inner.Open (timeout);
-		}
+        protected override void OnOpen(TimeSpan timeout)
+        {
+            inner.Open(timeout);
+        }
 
-		protected override void OnClose (TimeSpan timeout)
-		{
-			inner.Close (timeout);
-		}
+        protected override void OnClose(TimeSpan timeout)
+        {
+            inner.Close(timeout);
+        }
 
-		public override RequestContext ReceiveRequest (TimeSpan timeout)
-		{
-			RequestContext ctx;
-			if (TryReceiveRequest (timeout, out ctx))
-				return ctx;
-			throw new TimeoutException ("Failed to receive request context");
-		}
+        public override RequestContext ReceiveRequest(TimeSpan timeout)
+        {
+            RequestContext ctx;
+            if (TryReceiveRequest(timeout, out ctx))
+                return ctx;
+            throw new TimeoutException("Failed to receive request context");
+        }
 
-		public override bool TryReceiveRequest (TimeSpan timeout, out RequestContext context)
-		{
-			DateTime start = DateTime.UtcNow;
+        public override bool TryReceiveRequest(TimeSpan timeout, out RequestContext context)
+        {
+            DateTime start = DateTime.UtcNow;
 
-			if (!inner.TryReceiveRequest (timeout, out context))
-				return false;
-			if (context == null)
-				return true;
+            if (!inner.TryReceiveRequest(timeout, out context))
+                return false;
+            if (context == null)
+                return true;
 
-			Message req, res;
-			req = context.RequestMessage;
-			switch (req.Headers.Action) {
-			case Constants.WstIssueAction:
-			case Constants.WstIssueReplyAction:
-			case Constants.WstRenewAction:
-			case Constants.WstCancelAction:
-			case Constants.WstValidateAction:
-				var support = Source.SecuritySupport;
-				var commAuth = support.TokenAuthenticator as CommunicationSecurityTokenAuthenticator;
-				if (commAuth != null)
-					res = commAuth.Communication.ProcessNegotiation (req, timeout - (DateTime.UtcNow - start));
-				else
-					throw new MessageSecurityException ("This reply channel does not expect incoming WS-Trust requests");
+            Message req,
+                res;
+            req = context.RequestMessage;
+            switch (req.Headers.Action)
+            {
+                case Constants.WstIssueAction:
+                case Constants.WstIssueReplyAction:
+                case Constants.WstRenewAction:
+                case Constants.WstCancelAction:
+                case Constants.WstValidateAction:
+                    var support = Source.SecuritySupport;
+                    var commAuth =
+                        support.TokenAuthenticator as CommunicationSecurityTokenAuthenticator;
+                    if (commAuth != null)
+                        res = commAuth.Communication.ProcessNegotiation(
+                            req,
+                            timeout - (DateTime.UtcNow - start)
+                        );
+                    else
+                        throw new MessageSecurityException(
+                            "This reply channel does not expect incoming WS-Trust requests"
+                        );
 
-				context.Reply (res, timeout - (DateTime.UtcNow - start));
-				context.Close (timeout - (DateTime.UtcNow - start));
-				// wait for another incoming message
-				return TryReceiveRequest (timeout - (DateTime.UtcNow - start), out context);
+                    context.Reply(res, timeout - (DateTime.UtcNow - start));
+                    context.Close(timeout - (DateTime.UtcNow - start));
+                    // wait for another incoming message
+                    return TryReceiveRequest(timeout - (DateTime.UtcNow - start), out context);
 
-				break;
-			}
+                    break;
+            }
 
-			context = new SecurityRequestContext (this, context);
-			return true;
-		}
+            context = new SecurityRequestContext(this, context);
+            return true;
+        }
 
-		[MonoTODO]
-		public override bool WaitForRequest (TimeSpan timeout)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool WaitForRequest(TimeSpan timeout)
+        {
+            throw new NotImplementedException();
+        }
 
-		// IChannel
+        // IChannel
 
-		public override T GetProperty<T> ()
-		{
-			// FIXME: implement
-			return inner.GetProperty<T> ();
-		}
-	}
+        public override T GetProperty<T>()
+        {
+            // FIXME: implement
+            return inner.GetProperty<T>();
+        }
+    }
 }

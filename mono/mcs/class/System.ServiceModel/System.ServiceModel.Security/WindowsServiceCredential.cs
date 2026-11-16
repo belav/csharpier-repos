@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,27 +31,28 @@ using System.Security.Principal;
 
 namespace System.ServiceModel.Security
 {
-	public sealed class WindowsServiceCredential
-	{
-		internal WindowsServiceCredential ()
-		{
-		}
+    public sealed class WindowsServiceCredential
+    {
+        internal WindowsServiceCredential() { }
 
-		bool allow_anon, inc_win_groups;
+        bool allow_anon,
+            inc_win_groups;
 
-		internal WindowsServiceCredential Clone ()
-		{
-			return (WindowsServiceCredential) MemberwiseClone ();
-		}
+        internal WindowsServiceCredential Clone()
+        {
+            return (WindowsServiceCredential)MemberwiseClone();
+        }
 
-		public bool AllowAnonymousLogons {
-			get { return allow_anon; }
-			set { allow_anon = value; }
-		}
+        public bool AllowAnonymousLogons
+        {
+            get { return allow_anon; }
+            set { allow_anon = value; }
+        }
 
-		public bool IncludeWindowsGroups {
-			get { return inc_win_groups; }
-			set { inc_win_groups = value; }
-		}
-	}
+        public bool IncludeWindowsGroups
+        {
+            get { return inc_win_groups; }
+            set { inc_win_groups = value; }
+        }
+    }
 }

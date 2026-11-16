@@ -6,17 +6,22 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Roslyn.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Roslyn.Test.Utilities;
 using static Microsoft.CodeAnalysis.CodeGen.CompilationTestData;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public static class BasicCompilationUtils
     {
-        public static MetadataReference CompileToMetadata(string source, string assemblyName = null, IEnumerable<MetadataReference> references = null, Verification verify = default)
+        public static MetadataReference CompileToMetadata(
+            string source,
+            string assemblyName = null,
+            IEnumerable<MetadataReference> references = null,
+            Verification verify = default
+        )
         {
             if (references == null)
             {
@@ -27,14 +32,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return MetadataReference.CreateFromImage(verifier.EmittedAssemblyData);
         }
 
-        private static VisualBasicCompilation CreateCompilationWithMscorlib(string source, string assemblyName, IEnumerable<MetadataReference> references)
+        private static VisualBasicCompilation CreateCompilationWithMscorlib(
+            string source,
+            string assemblyName,
+            IEnumerable<MetadataReference> references
+        )
         {
             if (assemblyName == null)
             {
                 assemblyName = TestBase.GetUniqueName();
             }
-            var tree = VisualBasicSyntaxTree.ParseText(SourceText.From(source, encoding: null, SourceHashAlgorithms.Default));
-            var options = new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optimizationLevel: OptimizationLevel.Release);
+            var tree = VisualBasicSyntaxTree.ParseText(
+                SourceText.From(source, encoding: null, SourceHashAlgorithms.Default)
+            );
+            var options = new VisualBasicCompilationOptions(
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel: OptimizationLevel.Release
+            );
             return VisualBasicCompilation.Create(assemblyName, new[] { tree }, references, options);
         }
 
@@ -44,7 +58,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         private sealed class BasicTestBase : CommonTestBase
         {
-            internal override string VisualizeRealIL(IModuleSymbol peModule, MethodData methodData, IReadOnlyDictionary<int, string> markers, bool areLocalsZeroed)
+            internal override string VisualizeRealIL(
+                IModuleSymbol peModule,
+                MethodData methodData,
+                IReadOnlyDictionary<int, string> markers,
+                bool areLocalsZeroed
+            )
             {
                 throw new NotImplementedException();
             }

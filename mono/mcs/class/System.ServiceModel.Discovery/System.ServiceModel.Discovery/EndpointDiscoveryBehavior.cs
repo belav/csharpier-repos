@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,38 +34,39 @@ using System.Xml.Linq;
 
 namespace System.ServiceModel.Discovery
 {
-	public class EndpointDiscoveryBehavior : IEndpointBehavior
-	{
-		public EndpointDiscoveryBehavior ()
-		{
-			Enabled = true;
-			ContractTypeNames = new Collection<XmlQualifiedName> ();
-			Extensions = new Collection<XElement> ();
-			Scopes = new Collection<Uri> ();
-		}
+    public class EndpointDiscoveryBehavior : IEndpointBehavior
+    {
+        public EndpointDiscoveryBehavior()
+        {
+            Enabled = true;
+            ContractTypeNames = new Collection<XmlQualifiedName>();
+            Extensions = new Collection<XElement>();
+            Scopes = new Collection<Uri>();
+        }
 
-		public Collection<XmlQualifiedName> ContractTypeNames { get; private set; }
+        public Collection<XmlQualifiedName> ContractTypeNames { get; private set; }
 
-		public bool Enabled { get; set; }
+        public bool Enabled { get; set; }
 
-		public Collection<XElement> Extensions { get; private set; }
+        public Collection<XElement> Extensions { get; private set; }
 
-		public Collection<Uri> Scopes { get; private set; }
+        public Collection<Uri> Scopes { get; private set; }
 
-		void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
-		{
-		}
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-		void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint endpoint, ClientRuntime clientRuntime)
-		{
-		}
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint endpoint,
+            ClientRuntime clientRuntime
+        ) { }
 
-		void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
-		{
-		}
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher endpointDispatcher
+        ) { }
 
-		void IEndpointBehavior.Validate (ServiceEndpoint endpoint)
-		{
-		}
-	}
+        void IEndpointBehavior.Validate(ServiceEndpoint endpoint) { }
+    }
 }

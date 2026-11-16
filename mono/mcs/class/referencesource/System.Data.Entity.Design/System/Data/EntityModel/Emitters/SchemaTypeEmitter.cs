@@ -9,20 +9,19 @@
 
 using System;
 using System.CodeDom;
-using System.Data.EntityModel.SchemaObjectModel;
-using Som = System.Data.EntityModel.SchemaObjectModel;
-using System.Data.Metadata.Edm;
-using System.Reflection;
-using System.Diagnostics;
 using System.Collections.Generic;
 using System.Data.Entity.Design;
 using System.Data.Entity.Design.SsdlGenerator;
-
+using System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Reflection;
+using Som = System.Data.EntityModel.SchemaObjectModel;
 
 namespace System.Data.EntityModel.Emitters
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal abstract class SchemaTypeEmitter : MetadataItemEmitter
     {
@@ -32,22 +31,20 @@ namespace System.Data.EntityModel.Emitters
 
         #region Protected Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="generator"></param>
         /// <param name="schemaType"></param>
         protected SchemaTypeEmitter(ClientApiGenerator generator, MetadataItem item)
-        : base(generator, item)
-        {
-        }
+            : base(generator, item) { }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="typeDecl"></param>
-        protected virtual void EmitTypeAttributes( CodeTypeDeclaration typeDecl )
+        protected virtual void EmitTypeAttributes(CodeTypeDeclaration typeDecl)
         {
-            Generator.AttributeEmitter.EmitTypeAttributes( this, typeDecl );
+            Generator.AttributeEmitter.EmitTypeAttributes(this, typeDecl);
         }
 
         /// <summary>
@@ -66,8 +63,11 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="itemName">The name of the type</param>
         /// <param name="typeDecl">The type to annotate</param>
         /// <param name="additionalAttributes">The additional attributes</param>
-        protected void EmitTypeAttributes(string itemName, CodeTypeDeclaration typeDecl,
-                                          List<CodeAttributeDeclaration> additionalAttributes)
+        protected void EmitTypeAttributes(
+            string itemName,
+            CodeTypeDeclaration typeDecl,
+            List<CodeAttributeDeclaration> additionalAttributes
+        )
         {
             if (additionalAttributes != null && additionalAttributes.Count > 0)
             {
@@ -77,10 +77,12 @@ namespace System.Data.EntityModel.Emitters
                 }
                 catch (ArgumentNullException e)
                 {
-                    Generator.AddError(Strings.InvalidAttributeSuppliedForType(itemName),
-                                       ModelBuilderErrorCode.InvalidAttributeSuppliedForType,
-                                       EdmSchemaErrorSeverity.Error,
-                                       e);
+                    Generator.AddError(
+                        Strings.InvalidAttributeSuppliedForType(itemName),
+                        ModelBuilderErrorCode.InvalidAttributeSuppliedForType,
+                        EdmSchemaErrorSeverity.Error,
+                        e
+                    );
                 }
             }
 
@@ -93,9 +95,11 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="itemName">The name of the type</param>
         /// <param name="typeDecl">The type whose list of base types needs to be extended</param>
         /// <param name="additionalInterfaces">The interfaces to add to the list of base types</param>
-        protected void AddInterfaces(string itemName, 
-                                     CodeTypeDeclaration typeDecl, 
-                                     List<Type> additionalInterfaces)
+        protected void AddInterfaces(
+            string itemName,
+            CodeTypeDeclaration typeDecl,
+            List<Type> additionalInterfaces
+        )
         {
             if (additionalInterfaces != null)
             {
@@ -108,10 +112,12 @@ namespace System.Data.EntityModel.Emitters
                 }
                 catch (ArgumentNullException e)
                 {
-                    Generator.AddError(Strings.InvalidInterfaceSuppliedForType(itemName),
-                                      ModelBuilderErrorCode.InvalidInterfaceSuppliedForType,
-                                      EdmSchemaErrorSeverity.Error,
-                                      e);
+                    Generator.AddError(
+                        Strings.InvalidInterfaceSuppliedForType(itemName),
+                        ModelBuilderErrorCode.InvalidInterfaceSuppliedForType,
+                        EdmSchemaErrorSeverity.Error,
+                        e
+                    );
                 }
             }
         }
@@ -122,8 +128,11 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="itemName">The name of the type</param>
         /// <param name="typeDecl">The type to which members need to be added</param>
         /// <param name="additionalMembers">The members to add</param>
-        protected void AddMembers(string itemName, CodeTypeDeclaration typeDecl, 
-                                  List<CodeTypeMember> additionalMembers)
+        protected void AddMembers(
+            string itemName,
+            CodeTypeDeclaration typeDecl,
+            List<CodeTypeMember> additionalMembers
+        )
         {
             if (additionalMembers != null && additionalMembers.Count > 0)
             {
@@ -133,10 +142,12 @@ namespace System.Data.EntityModel.Emitters
                 }
                 catch (ArgumentNullException e)
                 {
-                    Generator.AddError(Strings.InvalidMemberSuppliedForType(itemName),
-                                       ModelBuilderErrorCode.InvalidMemberSuppliedForType,
-                                       EdmSchemaErrorSeverity.Error,
-                                       e);
+                    Generator.AddError(
+                        Strings.InvalidMemberSuppliedForType(itemName),
+                        ModelBuilderErrorCode.InvalidMemberSuppliedForType,
+                        EdmSchemaErrorSeverity.Error,
+                        e
+                    );
                 }
             }
         }
@@ -150,10 +161,7 @@ namespace System.Data.EntityModel.Emitters
         /// </summary>
         internal new GlobalItem Item
         {
-            get
-            {
-                return base.Item as GlobalItem;
-            }
+            get { return base.Item as GlobalItem; }
         }
 
         internal void SetTypeVisibility(CodeTypeDeclaration typeDecl)
@@ -161,7 +169,6 @@ namespace System.Data.EntityModel.Emitters
             typeDecl.TypeAttributes &= ~System.Reflection.TypeAttributes.VisibilityMask;
             typeDecl.TypeAttributes |= GetTypeAccessibilityValue(Item);
         }
-
 
         #endregion
     }

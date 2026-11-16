@@ -1,6 +1,7 @@
 ﻿namespace AutoMapper.IntegrationTests.Inheritance;
 
-public class OverrideDestinationMappingsTest : IntegrationTest<OverrideDestinationMappingsTest.DatabaseInitializer>
+public class OverrideDestinationMappingsTest
+    : IntegrationTest<OverrideDestinationMappingsTest.DatabaseInitializer>
 {
     public class Context : LocalDbContext
     {
@@ -11,12 +12,14 @@ public class OverrideDestinationMappingsTest : IntegrationTest<OverrideDestinati
     {
         protected override void Seed(Context context)
         {
-            context.Entity.AddRange(new[]
-            {
-                new Entity { Child = new ChildEntity { SomeValue = "Alain Brito"} },
-                new Entity { Child = new ChildEntity { SomeValue = "Jimmy Bogard"} },
-                new Entity { Child = new ChildEntity { SomeValue = "Bill Gates"} }
-            });
+            context.Entity.AddRange(
+                new[]
+                {
+                    new Entity { Child = new ChildEntity { SomeValue = "Alain Brito" } },
+                    new Entity { Child = new ChildEntity { SomeValue = "Jimmy Bogard" } },
+                    new Entity { Child = new ChildEntity { SomeValue = "Bill Gates" } },
+                }
+            );
             base.Seed(context);
         }
     }
@@ -33,23 +36,24 @@ public class OverrideDestinationMappingsTest : IntegrationTest<OverrideDestinati
 
     private static Entity LoadEntity()
     {
-        using(var context = new Context())
+        using (var context = new Context())
         {
             return context.Entity.Include(e => e.Child).First();
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Entity, Model>();
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Entity, Model>();
 
-        cfg.CreateMap<ChildEntity, ChildModelBase>()
-            .Include<ChildEntity, ChildModel>()
-            .ForMember(x => x.SomeValue, x => x.Ignore())
-            .As<ChildModel>();
+            cfg.CreateMap<ChildEntity, ChildModelBase>()
+                .Include<ChildEntity, ChildModel>()
+                .ForMember(x => x.SomeValue, x => x.Ignore())
+                .As<ChildModel>();
 
-        cfg.CreateMap<ChildEntity, ChildModel>();
-    });
+            cfg.CreateMap<ChildEntity, ChildModel>();
+        });
 
     public class Entity
     {
@@ -73,7 +77,5 @@ public class OverrideDestinationMappingsTest : IntegrationTest<OverrideDestinati
         public string SomeValue { get; set; }
     }
 
-    public class ChildModel : ChildModelBase
-    {
-    }
+    public class ChildModel : ChildModelBase { }
 }

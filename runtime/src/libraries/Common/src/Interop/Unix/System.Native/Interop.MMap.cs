@@ -7,7 +7,6 @@ using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
 {
-
     internal static partial class Sys
     {
         [Flags]
@@ -16,7 +15,7 @@ internal static partial class Interop
             PROT_NONE = 0x0,
             PROT_READ = 0x1,
             PROT_WRITE = 0x2,
-            PROT_EXEC = 0x4
+            PROT_EXEC = 0x4,
         }
 
         [Flags]
@@ -28,17 +27,33 @@ internal static partial class Interop
         }
 
         // NOTE: Shim returns null pointer on failure, not non-null MAP_FAILED sentinel.
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_MMap", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_MMap",
+            SetLastError = true
+        )]
         internal static partial IntPtr MMap(
-            IntPtr addr, ulong len,
-            MemoryMappedProtections prot, MemoryMappedFlags flags,
-            SafeFileHandle fd, long offset);
+            IntPtr addr,
+            ulong len,
+            MemoryMappedProtections prot,
+            MemoryMappedFlags flags,
+            SafeFileHandle fd,
+            long offset
+        );
 
         // NOTE: Shim returns null pointer on failure, not non-null MAP_FAILED sentinel.
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_MMap", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_MMap",
+            SetLastError = true
+        )]
         internal static partial IntPtr MMap(
-            IntPtr addr, ulong len,
-            MemoryMappedProtections prot, MemoryMappedFlags flags,
-            IntPtr fd, long offset);
+            IntPtr addr,
+            ulong len,
+            MemoryMappedProtections prot,
+            MemoryMappedFlags flags,
+            IntPtr fd,
+            long offset
+        );
     }
 }

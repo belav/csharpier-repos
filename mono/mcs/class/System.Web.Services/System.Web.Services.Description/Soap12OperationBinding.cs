@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.Soap12OperationBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,23 +28,26 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description 
+namespace System.Web.Services.Description
 {
-	[XmlFormatExtension ("operation", "http://schemas.xmlsoap.org/wsdl/soap12/", typeof (OperationBinding))]
-	public sealed class Soap12OperationBinding : SoapOperationBinding 
-	{
-		bool soapActionRequired;
-		
-		[System.ComponentModel.DefaultValue (false)]
-		[XmlAttribute ("soapActionRequired")]
-		public bool SoapActionRequired {
-			get { return soapActionRequired; }
-			set { soapActionRequired = value; }
-		}
-	}
-}
+    [XmlFormatExtension(
+        "operation",
+        "http://schemas.xmlsoap.org/wsdl/soap12/",
+        typeof(OperationBinding)
+    )]
+    public sealed class Soap12OperationBinding : SoapOperationBinding
+    {
+        bool soapActionRequired;
 
+        [System.ComponentModel.DefaultValue(false)]
+        [XmlAttribute("soapActionRequired")]
+        public bool SoapActionRequired
+        {
+            get { return soapActionRequired; }
+            set { soapActionRequired = value; }
+        }
+    }
+}

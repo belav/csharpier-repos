@@ -22,8 +22,7 @@ public class SqliteNetTopologySuiteOptionsExtension : IDbContextOptionsExtension
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DbContextOptionsExtensionInfo Info
-        => _info ??= new ExtensionInfo(this);
+    public virtual DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -31,8 +30,8 @@ public class SqliteNetTopologySuiteOptionsExtension : IDbContextOptionsExtension
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void ApplyServices(IServiceCollection services)
-        => services.AddEntityFrameworkSqliteNetTopologySuite();
+    public virtual void ApplyServices(IServiceCollection services) =>
+        services.AddEntityFrameworkSqliteNetTopologySuite();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -42,11 +41,15 @@ public class SqliteNetTopologySuiteOptionsExtension : IDbContextOptionsExtension
     /// </summary>
     public virtual void Validate(IDbContextOptions options)
     {
-        var internalServiceProvider = options.FindExtension<CoreOptionsExtension>()?.InternalServiceProvider;
+        var internalServiceProvider = options
+            .FindExtension<CoreOptionsExtension>()
+            ?.InternalServiceProvider;
         if (internalServiceProvider != null)
         {
             using var scope = internalServiceProvider.CreateScope();
-            var plugins = scope.ServiceProvider.GetService<IEnumerable<IRelationalTypeMappingSourcePlugin>>();
+            var plugins = scope.ServiceProvider.GetService<
+                IEnumerable<IRelationalTypeMappingSourcePlugin>
+            >();
             if (plugins?.Any(s => s is SqliteNetTopologySuiteTypeMappingSourcePlugin) != true)
             {
                 throw new InvalidOperationException(SqliteNTSStrings.NTSServicesMissing);
@@ -57,26 +60,21 @@ public class SqliteNetTopologySuiteOptionsExtension : IDbContextOptionsExtension
     private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
     {
         public ExtensionInfo(IDbContextOptionsExtension extension)
-            : base(extension)
-        {
-        }
+            : base(extension) { }
 
-        private new SqliteNetTopologySuiteOptionsExtension Extension
-            => (SqliteNetTopologySuiteOptionsExtension)base.Extension;
+        private new SqliteNetTopologySuiteOptionsExtension Extension =>
+            (SqliteNetTopologySuiteOptionsExtension)base.Extension;
 
-        public override bool IsDatabaseProvider
-            => false;
+        public override bool IsDatabaseProvider => false;
 
-        public override string LogFragment
-            => "using NetTopologySuite ";
+        public override string LogFragment => "using NetTopologySuite ";
 
-        public override int GetServiceProviderHashCode()
-            => 0;
+        public override int GetServiceProviderHashCode() => 0;
 
-        public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
-            => other is ExtensionInfo;
+        public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other) =>
+            other is ExtensionInfo;
 
-        public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
-            => debugInfo["NetTopologySuite"] = "1";
+        public override void PopulateDebugInfo(IDictionary<string, string> debugInfo) =>
+            debugInfo["NetTopologySuite"] = "1";
     }
 }

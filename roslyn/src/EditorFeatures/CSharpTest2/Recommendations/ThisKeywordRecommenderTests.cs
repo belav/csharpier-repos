@@ -16,108 +16,103 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotAfterAngle()
         {
-            await VerifyAbsenceAsync(
-@"interface IGoo<$$");
+            await VerifyAbsenceAsync(@"interface IGoo<$$");
         }
 
         [Fact]
         public async Task TestInterfaceTypeVarianceNotAfterIn()
         {
-            await VerifyAbsenceAsync(
-@"interface IGoo<in $$");
+            await VerifyAbsenceAsync(@"interface IGoo<in $$");
         }
 
         [Fact]
         public async Task TestInterfaceTypeVarianceNotAfterComma()
         {
-            await VerifyAbsenceAsync(
-@"interface IGoo<Goo, $$");
+            await VerifyAbsenceAsync(@"interface IGoo<Goo, $$");
         }
 
         [Fact]
         public async Task TestInterfaceTypeVarianceNotAfterAttribute()
         {
-            await VerifyAbsenceAsync(
-@"interface IGoo<[Goo]$$");
+            await VerifyAbsenceAsync(@"interface IGoo<[Goo]$$");
         }
 
         [Fact]
         public async Task TestDelegateTypeVarianceNotAfterAngle()
         {
-            await VerifyAbsenceAsync(
-@"delegate void D<$$");
+            await VerifyAbsenceAsync(@"delegate void D<$$");
         }
 
         [Fact]
         public async Task TestDelegateTypeVarianceNotAfterComma()
         {
-            await VerifyAbsenceAsync(
-@"delegate void D<Goo, $$");
+            await VerifyAbsenceAsync(@"delegate void D<Goo, $$");
         }
 
         [Fact]
         public async Task TestDelegateTypeVarianceNotAfterAttribute()
         {
-            await VerifyAbsenceAsync(
-@"delegate void D<[Goo]$$");
+            await VerifyAbsenceAsync(@"delegate void D<[Goo]$$");
         }
 
         [Fact]
         public async Task TestNotThisBaseListAfterAngle()
         {
-            await VerifyAbsenceAsync(
-@"interface IGoo : Bar<$$");
+            await VerifyAbsenceAsync(@"interface IGoo : Bar<$$");
         }
 
         [Fact]
@@ -127,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface IGoo {
                     void Goo<$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -137,16 +133,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void Goo(ref $$
-                """);
+                """
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestNotAfterIn([CombinatorialValues("in", "ref readonly")] string modifier)
+        public async Task TestNotAfterIn(
+            [CombinatorialValues("in", "ref readonly")] string modifier
+        )
         {
-            await VerifyAbsenceAsync($$"""
+            await VerifyAbsenceAsync(
+                $$"""
                 class C {
                     void Goo({{modifier}} $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void Goo(this $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -166,7 +168,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void Goo(out $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -176,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void Goo($$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -186,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void Goo(int i, $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -196,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void Goo(int i, [Goo]$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -206,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     public C($$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -216,7 +223,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     public C(int i, $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -226,28 +234,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     public C(int i, [Goo]$$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterDelegateOpenParen()
         {
-            await VerifyAbsenceAsync(
-@"delegate void D($$");
+            await VerifyAbsenceAsync(@"delegate void D($$");
         }
 
         [Fact]
         public async Task TestNotAfterDelegateComma()
         {
-            await VerifyAbsenceAsync(
-@"delegate void D(int i, $$");
+            await VerifyAbsenceAsync(@"delegate void D(int i, $$");
         }
 
         [Fact]
         public async Task TestNotAfterDelegateAttribute()
         {
-            await VerifyAbsenceAsync(
-@"delegate void D(int i, [Goo]$$");
+            await VerifyAbsenceAsync(@"delegate void D(int i, [Goo]$$");
         }
 
         [Fact]
@@ -257,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     static int operator +($$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -267,7 +274,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     ~C($$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -277,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     int this[$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -287,7 +296,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     int Goo($$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -297,7 +307,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     static int Goo($$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -307,7 +318,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 static class C {
                     int Goo($$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -317,7 +329,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 static class C {
                     static int Goo($$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27028")]
@@ -335,7 +348,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27028")]
@@ -356,7 +370,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27028")]
@@ -373,7 +388,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27028")]
@@ -394,7 +410,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35644")]
@@ -411,7 +428,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35644")]
@@ -432,7 +450,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -450,7 +469,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -471,7 +491,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -489,7 +510,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -510,7 +532,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -528,7 +551,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -549,7 +573,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -567,7 +592,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -588,7 +614,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -609,7 +636,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -630,7 +658,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -651,7 +680,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -672,7 +702,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -687,7 +718,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         get { return delegate { $$ } }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -699,7 +731,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     Action B { get; } = delegate { $$ }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -711,7 +744,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     Action A => delegate { $$ }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -723,7 +757,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     Action A = delegate { $$ }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -738,7 +773,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         get { return delegate { $$ } }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -750,7 +786,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     static Action B { get; } = delegate { $$ }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -762,7 +799,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     static Action A => delegate { $$ }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27923")]
@@ -774,8 +812,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     static Action A = delegate { $$ }
                 }
-                """);
+                """
+            );
         }
+
         [Fact]
         public async Task TestAfterAttribute()
         {
@@ -783,7 +823,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 static class C {
                     static int Goo([Bar]$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -793,7 +834,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 static class C {
                     static int Goo(this int i, [Bar]$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -803,7 +845,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 static class C {
                     static int Goo(this $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -813,7 +856,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 static class C {
                     static int Goo(this int a, $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -823,7 +867,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     public C() : $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -833,7 +878,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     static C() : $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -843,42 +889,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 struct C {
                     public C() : $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestInEmptyStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"$$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestAfterCast()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"stack.Push(((IEnumerable<Segment>)((TreeSegment)$$"));
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"stack.Push(((IEnumerable<Segment>)((TreeSegment)$$")
+            );
         }
 
         [Fact]
         public async Task TestAfterReturn()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"return $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"return $$"));
         }
 
         [Fact]
         public async Task TestAfterIndexer()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"return this.items[$$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"return this.items[$$"));
         }
 
         [Fact]
         public async Task TestAfterSimpleCast()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"return ((IEnumerable<T>)$$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"return ((IEnumerable<T>)$$"));
         }
 
         [Fact]
@@ -888,7 +932,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -898,7 +943,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542636")]
@@ -908,7 +954,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     int $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542636")]
@@ -918,7 +965,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     internal byte[] $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542636")]
@@ -928,7 +976,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     internal byte[] $$[int i] { get; }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542636")]
@@ -938,7 +987,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     internal byte $$[int i] { get; }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -953,7 +1003,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         // ^ requires rowId <= this.NumberOfRows;
                       {
                         int rowOffset = (int)(rowId - 1) * $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538264")]
@@ -964,7 +1015,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     static void Goo() { int i = $$ }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538264")]
@@ -975,7 +1027,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     static int Goo { get { int i = $$ }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538264")]
@@ -986,7 +1039,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     int Goo { get { int i = $$ }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538264")]
@@ -997,7 +1051,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     static C() { int i = $$ }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538264")]
@@ -1008,7 +1063,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     public C() { int i = $$ }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538264")]
@@ -1019,7 +1075,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 enum E {
                     a = $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539334")]
@@ -1031,7 +1088,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     partial $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540476")]
@@ -1043,7 +1101,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     Goo.$$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541712")]
@@ -1058,89 +1117,103 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544219")]
         public async Task TestNotInObjectInitializerMemberContext()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C
                 {
                     public int x, y;
                     void M()
                     {
                         var c = new C { x = 2, y = 3, $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1107414")]
         [WorkItem("https://github.com/dotnet/roslyn/issues/725")]
         public async Task TestInExpressionBodiedMembersProperty()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class C
                 {
                     int x;
                     int M => $$
                     int p;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1107414")]
         [WorkItem("https://github.com/dotnet/roslyn/issues/725")]
         public async Task TestInExpressionBodiedMembersMethod()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class C
                 {
                     int x;
                     int give() => $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1107414")]
         [WorkItem("https://github.com/dotnet/roslyn/issues/725")]
         public async Task TestInExpressionBodiedMembersIndexer()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class C
                 {
                     int x;
                     public object this[int i] => $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1107414")]
         [WorkItem("https://github.com/dotnet/roslyn/issues/725")]
         public async Task TestNotInExpressionBodiedMembers_Static()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C
                 {
                     int x;
                     static int M => $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1107414")]
         [WorkItem("https://github.com/dotnet/roslyn/issues/725")]
         public async Task TestNotInExpressionBodiedMembersOperator()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C
                 {
                     int x;
                     public static C operator - (C c1) => $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1107414")]
         [WorkItem("https://github.com/dotnet/roslyn/issues/725")]
         public async Task TestNotInExpressionBodiedMembersConversionOperator()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class F
                 {
                 }
@@ -1149,27 +1222,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     int x;
                     public static explicit operator F(C c1) => $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1107414")]
         [WorkItem("https://github.com/dotnet/roslyn/issues/725")]
         public async Task TestOutsideExpressionBodiedMember()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C
                 {
                     int x;
                     int M => this.x;$$
                     int p;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task Preselection()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class Program
                 {
                     void Main(string[] args)
@@ -1178,109 +1255,138 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                     }
                     void Helper(Program x) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestExtensionMethods_FirstParameter_AfterRefKeyword_InClass()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 public static class Extensions
                 {
                     public static void Extension(ref $$
-                """);
+                """
+            );
 
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 public static class Extensions
                 {
                     public static void Extension(ref $$ object obj, int x) { }
                 }
-                """);
+                """
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestExtensionMethods_FirstParameter_AfterInKeyword_InClass([CombinatorialValues("in", "ref readonly")] string modifier)
+        public async Task TestExtensionMethods_FirstParameter_AfterInKeyword_InClass(
+            [CombinatorialValues("in", "ref readonly")] string modifier
+        )
         {
-            await VerifyKeywordAsync($$"""
+            await VerifyKeywordAsync(
+                $$"""
                 public static class Extensions
                 {
                     public static void Extension({{modifier}} $$
-                """);
+                """
+            );
 
-            await VerifyKeywordAsync($$"""
+            await VerifyKeywordAsync(
+                $$"""
                 public static class Extensions
                 {
                     public static void Extension({{modifier}} $$ object obj, int x) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestExtensionMethods_FirstParameter_AfterOutKeyword_InClass()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 public static class Extensions
                 {
                     public static void Extension(out $$
-                """);
+                """
+            );
 
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 public static class Extensions
                 {
                     public static void Extension(out $$ object obj, int x) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestExtensionMethods_SecondParameter_AfterRefKeyword_InClass()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 public static class Extensions
                 {
                     public static void Extension(int x, ref $$
-                """);
+                """
+            );
 
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 public static class Extensions
                 {
                     public static void Extension(int x, ref $$ object obj) { }
                 }
-                """);
+                """
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestExtensionMethods_SecondParameter_AfterInKeyword_InClass([CombinatorialValues("in", "ref readonly")] string modifier)
+        public async Task TestExtensionMethods_SecondParameter_AfterInKeyword_InClass(
+            [CombinatorialValues("in", "ref readonly")] string modifier
+        )
         {
-            await VerifyAbsenceAsync($$"""
+            await VerifyAbsenceAsync(
+                $$"""
                 public static class Extensions
                 {
                     public static void Extension(int x, {{modifier}} $$
-                """);
+                """
+            );
 
-            await VerifyAbsenceAsync($$"""
+            await VerifyAbsenceAsync(
+                $$"""
                 public static class Extensions
                 {
                     public static void Extension(int x, {{modifier}} $$ object obj) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestExtensionMethods_SecondParameter_AfterOutKeyword_InClass()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 public static class Extensions
                 {
                     public static void Extension(int x, out $$
-                """);
+                """
+            );
 
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 public static class Extensions
                 {
                     public static void Extension(int x, out $$ object obj) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1292,11 +1398,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         }
 
         [Theory, CombinatorialData]
-        public async Task TestExtensionMethods_FirstParameter_AfterInKeyword_OutsideClass([CombinatorialValues("in", "ref readonly")] string modifier)
+        public async Task TestExtensionMethods_FirstParameter_AfterInKeyword_OutsideClass(
+            [CombinatorialValues("in", "ref readonly")] string modifier
+        )
         {
             await VerifyAbsenceAsync($"public static void Extension({modifier} $$");
 
-            await VerifyAbsenceAsync($"public static void Extension({modifier} $$ object obj, int x) {{ }}");
+            await VerifyAbsenceAsync(
+                $"public static void Extension({modifier} $$ object obj, int x) {{ }}"
+            );
         }
 
         [Fact]
@@ -1310,110 +1420,137 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestExtensionMethods_FirstParameter_AfterRefKeyword_NonStaticClass()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 public class Extensions
                 {
                     public static void Extension(ref $$
-                """);
+                """
+            );
 
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 public class Extensions
                 {
                     public static void Extension(ref $$ object obj, int x) { }
                 }
-                """);
+                """
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestExtensionMethods_FirstParameter_AfterInKeyword_NonStaticClass([CombinatorialValues("in", "ref readonly")] string modifier)
+        public async Task TestExtensionMethods_FirstParameter_AfterInKeyword_NonStaticClass(
+            [CombinatorialValues("in", "ref readonly")] string modifier
+        )
         {
-            await VerifyAbsenceAsync($$"""
+            await VerifyAbsenceAsync(
+                $$"""
                 public class Extensions
                 {
                     public static void Extension({{modifier}} $$
-                """);
+                """
+            );
 
-            await VerifyAbsenceAsync($$"""
+            await VerifyAbsenceAsync(
+                $$"""
                 public class Extensions
                 {
                     public static void Extension({{modifier}} $$ object obj, int x) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestExtensionMethods_FirstParameter_AfterOutKeyword_NonStaticClass()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 public class Extensions
                 {
                     public static void Extension(out $$
-                """);
+                """
+            );
 
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 public class Extensions
                 {
                     public static void Extension(out $$ object obj, int x) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestExtensionMethods_FirstParameter_AfterRefKeyword_NonStaticMethod()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 public static class Extensions
                 {
                     public void Extension(ref $$
-                """);
+                """
+            );
 
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 public static class Extensions
                 {
                     public void Extension(ref $$ object obj, int x) { }
                 }
-                """);
+                """
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestExtensionMethods_FirstParameter_AfterInKeyword_NonStaticMethod([CombinatorialValues("in", "ref readonly")] string modifier)
+        public async Task TestExtensionMethods_FirstParameter_AfterInKeyword_NonStaticMethod(
+            [CombinatorialValues("in", "ref readonly")] string modifier
+        )
         {
-            await VerifyAbsenceAsync($$"""
+            await VerifyAbsenceAsync(
+                $$"""
                 public static class Extensions
                 {
                     public void Extension({{modifier}} $$
-                """);
+                """
+            );
 
-            await VerifyAbsenceAsync($$"""
+            await VerifyAbsenceAsync(
+                $$"""
                 public static class Extensions
                 {
                     public void Extension({{modifier}} $$ object obj, int x) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestExtensionMethods_FirstParameter_AfterOutKeyword_NonStaticMethod()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 public static class Extensions
                 {
                     public void Extension(out $$
-                """);
+                """
+            );
 
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 public static class Extensions
                 {
                     public void Extension(out $$ object obj, int x) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterRefExpression()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"ref int x = ref $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"ref int x = ref $$"));
         }
 
         #region Collection expressions
@@ -1421,10 +1558,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
         public async Task TestInCollectionExpressions_BeforeFirstElementToVar()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                var x = [$$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    var x = [$$
+                    """
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -1436,16 +1576,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     IEnumerable<string> M() => [$$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
         public async Task TestInCollectionExpressions_AfterFirstElementToVar()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                var x = [new object(), $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    var x = [new object(), $$
+                    """
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -1457,7 +1601,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     IEnumerable<string> M() => [string.Empty, $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -1469,7 +1614,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     IEnumerable<string> M() => [.. $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -1481,7 +1627,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     IEnumerable<string> M() => [string.Empty, .. $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -1493,7 +1640,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     IEnumerable<string> M() => [($$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -1505,7 +1653,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     IEnumerable<string> M() => [string.Empty, ($$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -1517,7 +1666,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     IEnumerable<string> M() => [.. ($$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70677")]
@@ -1529,7 +1679,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     IEnumerable<string> M() => [string.Empty, .. ($$
                 }
-                """);
+                """
+            );
         }
 
         #endregion

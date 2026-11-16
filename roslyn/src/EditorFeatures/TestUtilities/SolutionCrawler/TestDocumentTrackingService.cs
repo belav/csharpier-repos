@@ -9,16 +9,18 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Editor.Test
 {
-    [ExportWorkspaceService(typeof(IDocumentTrackingService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceService(typeof(IDocumentTrackingService), ServiceLayer.Test),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal sealed class TestDocumentTrackingService : IDocumentTrackingService
     {
         private DocumentId? _activeDocumentId;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestDocumentTrackingService()
-        {
-        }
+        public TestDocumentTrackingService() { }
 
         public bool SupportsDocumentTracking => true;
 
@@ -36,10 +38,11 @@ namespace Microsoft.CodeAnalysis.Editor.Test
             ActiveDocumentChanged?.Invoke(this, newActiveDocumentId);
         }
 
-        public DocumentId? TryGetActiveDocument()
-            => _activeDocumentId;
+        public DocumentId? TryGetActiveDocument() => _activeDocumentId;
 
-        public ImmutableArray<DocumentId> GetVisibleDocuments()
-            => _activeDocumentId != null ? ImmutableArray.Create(_activeDocumentId) : ImmutableArray<DocumentId>.Empty;
+        public ImmutableArray<DocumentId> GetVisibleDocuments() =>
+            _activeDocumentId != null
+                ? ImmutableArray.Create(_activeDocumentId)
+                : ImmutableArray<DocumentId>.Empty;
     }
 }

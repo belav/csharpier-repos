@@ -22,6 +22,6 @@ internal static partial class Interop
             IntPtr phCertStore,
             IntPtr phMsg,
             out IntPtr ppvContext
-            );
+        );
     }
 }

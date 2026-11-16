@@ -11,7 +11,11 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Structure
 {
     [NonCopyable]
-    internal readonly struct BlockStructureContext(SyntaxTree syntaxTree, BlockStructureOptions options, CancellationToken cancellationToken) : IDisposable
+    internal readonly struct BlockStructureContext(
+        SyntaxTree syntaxTree,
+        BlockStructureOptions options,
+        CancellationToken cancellationToken
+    ) : IDisposable
     {
         public readonly ArrayBuilder<BlockSpan> Spans = ArrayBuilder<BlockSpan>.GetInstance();
 
@@ -19,7 +23,6 @@ namespace Microsoft.CodeAnalysis.Structure
         public readonly BlockStructureOptions Options = options;
         public readonly CancellationToken CancellationToken = cancellationToken;
 
-        public void Dispose()
-            => Spans.Free();
+        public void Dispose() => Spans.Free();
     }
 }

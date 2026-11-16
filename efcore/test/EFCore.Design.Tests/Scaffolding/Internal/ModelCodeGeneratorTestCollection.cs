@@ -4,6 +4,5 @@
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
 [CollectionDefinition(nameof(ModelCodeGeneratorTestCollection))]
-public class ModelCodeGeneratorTestCollection : ICollectionFixture<ModelCodeGeneratorTestFixture>
-{
-}
+public class ModelCodeGeneratorTestCollection
+    : ICollectionFixture<ModelCodeGeneratorTestFixture> { }

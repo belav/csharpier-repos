@@ -19,11 +19,18 @@ namespace System.Text.Json.Serialization.Converters
         private static JsonValueConverter? s_valueConverter;
 
         public static JsonNodeConverter Instance => s_nodeConverter ??= new JsonNodeConverter();
-        public static JsonArrayConverter ArrayConverter => s_arrayConverter ??= new JsonArrayConverter();
-        public static JsonObjectConverter ObjectConverter => s_objectConverter ??= new JsonObjectConverter();
-        public static JsonValueConverter ValueConverter => s_valueConverter ??= new JsonValueConverter();
+        public static JsonArrayConverter ArrayConverter =>
+            s_arrayConverter ??= new JsonArrayConverter();
+        public static JsonObjectConverter ObjectConverter =>
+            s_objectConverter ??= new JsonObjectConverter();
+        public static JsonValueConverter ValueConverter =>
+            s_valueConverter ??= new JsonValueConverter();
 
-        public override void Write(Utf8JsonWriter writer, JsonNode? value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            JsonNode? value,
+            JsonSerializerOptions options
+        )
         {
             if (value is null)
             {
@@ -35,7 +42,11 @@ namespace System.Text.Json.Serialization.Converters
             }
         }
 
-        public override JsonNode? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override JsonNode? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             switch (reader.TokenType)
             {
@@ -72,7 +83,11 @@ namespace System.Text.Json.Serialization.Converters
                     node = new JsonArray(element, options);
                     break;
                 default:
-                    node = new JsonValuePrimitive<JsonElement>(element, JsonMetadataServices.JsonElementConverter, options);
+                    node = new JsonValuePrimitive<JsonElement>(
+                        element,
+                        JsonMetadataServices.JsonElementConverter,
+                        options
+                    );
                     break;
             }
 

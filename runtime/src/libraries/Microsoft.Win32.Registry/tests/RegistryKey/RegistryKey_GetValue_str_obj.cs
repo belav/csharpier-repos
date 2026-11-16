@@ -24,8 +24,14 @@ namespace Microsoft.Win32.RegistryTests
         {
             if (!TestRegistryKey.IsDefaultValueSet())
             {
-                Assert.Equal(TestData.DefaultValue, TestRegistryKey.GetValue(null, TestData.DefaultValue));
-                Assert.Equal(TestData.DefaultValue, TestRegistryKey.GetValue(string.Empty, TestData.DefaultValue));
+                Assert.Equal(
+                    TestData.DefaultValue,
+                    TestRegistryKey.GetValue(null, TestData.DefaultValue)
+                );
+                Assert.Equal(
+                    TestData.DefaultValue,
+                    TestRegistryKey.GetValue(string.Empty, TestData.DefaultValue)
+                );
             }
 
             Assert.True(TestRegistryKey.SetDefaultValue(TestData.DefaultValue));
@@ -39,14 +45,20 @@ namespace Microsoft.Win32.RegistryTests
             Assert.Null(TestRegistryKey.GetValue("tt", defaultValue: null));
         }
 
-        public static IEnumerable<object[]> TestValueTypes { get { return TestData.TestValueTypes; } }
+        public static IEnumerable<object[]> TestValueTypes
+        {
+            get { return TestData.TestValueTypes; }
+        }
 
         [Theory]
         [MemberData(nameof(TestValueTypes))]
         public void TestGetValueWithValueTypes(string valueName, object testValue)
         {
             TestRegistryKey.SetValue(valueName, testValue);
-            Assert.Equal(testValue.ToString(), TestRegistryKey.GetValue(valueName, null).ToString());
+            Assert.Equal(
+                testValue.ToString(),
+                TestRegistryKey.GetValue(valueName, null).ToString()
+            );
             TestRegistryKey.DeleteValue(valueName);
         }
     }

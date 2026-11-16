@@ -5,7 +5,13 @@ using System.Diagnostics;
 
 namespace System.Runtime.Versioning
 {
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Constructor, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Constructor,
+        Inherited = false
+    )]
     [Conditional("RESOURCE_ANNOTATION_WORK")]
     public sealed class ResourceExposureAttribute : Attribute
     {

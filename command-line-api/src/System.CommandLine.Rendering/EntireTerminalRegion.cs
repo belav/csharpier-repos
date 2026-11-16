@@ -5,9 +5,8 @@ namespace System.CommandLine.Rendering
 {
     internal class EntireTerminalRegion : Region
     {
-        public EntireTerminalRegion() : base(0, 0, isOverwrittenOnRender: false)
-        {
-        }
+        public EntireTerminalRegion()
+            : base(0, 0, isOverwrittenOnRender: false) { }
 
         public override int Height => Console.WindowHeight;
 

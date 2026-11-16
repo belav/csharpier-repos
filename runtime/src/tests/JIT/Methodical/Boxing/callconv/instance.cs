@@ -1,10 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
 using Xunit;
-
 
 namespace BoxTest_instance_cs
 {
@@ -19,8 +17,7 @@ namespace BoxTest_instance_cs
 
         protected object Fibonacci(object num, object flag)
         {
-            if (num.GetType() != typeof(float) ||
-                flag.GetType() != typeof(bool))
+            if (num.GetType() != typeof(float) || flag.GetType() != typeof(bool))
                 throw new Exception();
 
             return Fibonacci2(num, flag);
@@ -32,7 +29,9 @@ namespace BoxTest_instance_cs
             if ((float)num < 1.1)
                 N = num;
             else
-                N = (float)Fibonacci((float)num - 2.0f, false) + (float)Fibonacci((float)num - 1.0f, flag);
+                N =
+                    (float)Fibonacci((float)num - 2.0f, false)
+                    + (float)Fibonacci((float)num - 1.0f, flag);
             if ((bool)flag)
                 Console.Write(N.ToString() + " ");
             return N;

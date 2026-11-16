@@ -12,21 +12,23 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.BracePairs
 {
-    internal readonly record struct BracePairData(
-        TextSpan Start,
-        TextSpan End);
+    internal readonly record struct BracePairData(TextSpan Start, TextSpan End);
 
     internal interface IBracePairsService : ILanguageService
     {
-        Task AddBracePairsAsync(Document document, TextSpan textSpan, ArrayBuilder<BracePairData> bracePairs, CancellationToken cancellationToken);
+        Task AddBracePairsAsync(
+            Document document,
+            TextSpan textSpan,
+            ArrayBuilder<BracePairData> bracePairs,
+            CancellationToken cancellationToken
+        );
     }
 
     internal abstract class AbstractBracePairsService : IBracePairsService
     {
         private readonly Dictionary<int, int> _bracePairKinds = new();
 
-        protected AbstractBracePairsService(
-            ISyntaxKinds syntaxKinds)
+        protected AbstractBracePairsService(ISyntaxKinds syntaxKinds)
         {
             Add(syntaxKinds.OpenBraceToken, syntaxKinds.CloseBraceToken);
             Add(syntaxKinds.OpenBracketToken, syntaxKinds.CloseBracketToken);
@@ -43,7 +45,11 @@ namespace Microsoft.CodeAnalysis.BracePairs
         }
 
         public async Task AddBracePairsAsync(
-            Document document, TextSpan span, ArrayBuilder<BracePairData> bracePairs, CancellationToken cancellationToken)
+            Document document,
+            TextSpan span,
+            ArrayBuilder<BracePairData> bracePairs,
+            CancellationToken cancellationToken
+        )
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             using var _ = ArrayBuilder<SyntaxNodeOrToken>.GetInstance(out var stack);

@@ -17,8 +17,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
     [Trait(Traits.Feature, Traits.Features.CodeActionsMoveDeclarationNearReference)]
     public class MoveDeclarationNearReferenceTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpMoveDeclarationNearReferenceCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpMoveDeclarationNearReferenceCodeRefactoringProvider();
 
         [Fact]
         public async Task TestMove1()
@@ -47,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -66,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                     Console.WriteLine(x);
                 }
                 """,
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
@@ -94,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         Console.WriteLine(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -111,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 int x;
                 Console.WriteLine(x);
                 """,
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
@@ -149,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                             Console.WriteLine(x);
                         }
                     }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -178,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                     Console.WriteLine(x);
                 }
                 """,
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
@@ -208,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                             Console.WriteLine(x);
                         }
                     }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -229,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                     Console.WriteLine(x);
                 }
                 """,
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
@@ -260,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -291,7 +302,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -323,7 +335,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -339,7 +352,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         Console.WriteLine(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -349,7 +363,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 int [||]x;
                 Console.WriteLine(x);
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538424")]
@@ -367,7 +382,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         x.ToString();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -384,7 +400,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         Console.WriteLine(i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -395,7 +412,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 int [||]i = 5;
                 int j = 10;
                 Console.WriteLine(i);
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541475")]
@@ -412,7 +430,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                             [|object|] }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -438,7 +457,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         int i = 5; Console.Write(i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -453,7 +473,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 Console.WriteLine();
                 int i = 5; Console.Write(i);
                 """,
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
@@ -473,7 +494,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                     }
                 #line default
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -494,7 +516,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         Bar(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -510,7 +533,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 Goo();
                 #line default
                 Bar(x);
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -544,7 +568,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                     }
                 #line default
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -582,7 +607,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         Bar(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -613,7 +639,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 int x = 0;
                 Bar(x);
                 """,
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545435")]
@@ -652,7 +679,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         });
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545435")]
@@ -681,7 +709,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                     }
                 });
                 """,
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545435")]
@@ -721,7 +750,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545435")]
@@ -751,7 +781,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                     i++;
                 }
                 """,
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/pull/44664")]
@@ -791,7 +822,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/pull/44664")]
@@ -821,7 +853,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                     i++;
                 }
                 """,
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545840")]
@@ -849,7 +882,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                     }
                 }
                 """,
-
                 """
                 using System;
 
@@ -870,7 +902,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545835")]
@@ -896,7 +929,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                     }
                 }
                 """,
-
                 """
                 using System;
 
@@ -915,7 +947,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546267")]
@@ -943,7 +976,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         Console.WriteLine(goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -973,7 +1007,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1003,7 +1038,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1035,7 +1071,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         Console.Write(i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1071,7 +1108,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1105,7 +1143,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         Console.Write(i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1143,7 +1182,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1184,7 +1224,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         Console.Write(i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1229,7 +1270,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1272,7 +1314,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         Console.Write(i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1319,7 +1362,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1352,7 +1396,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         Console.Write(i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1389,7 +1434,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1424,7 +1470,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         Console.Write(i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1463,7 +1510,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1504,7 +1552,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         Console.Write(i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1549,7 +1598,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1592,7 +1642,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         Console.Write(i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1624,7 +1675,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 int i = 0;
                 Console.Write(i);
                 """,
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
@@ -1671,7 +1723,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1707,7 +1760,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                     Console.Write(i);
                 }
                 """,
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21907")]
@@ -1737,7 +1791,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                   public static void Out<T>(out T t) => t = default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21907")]
@@ -1770,7 +1825,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                   public static void Out<T>(out T t) => t = default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21907")]
@@ -1802,7 +1858,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                     public static void Out<T>(out T t) => t = default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21907")]
@@ -1836,7 +1893,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                     public static void Out<T>(out T t) => t = default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1874,7 +1932,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1909,7 +1968,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1933,7 +1993,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         break;
                 }
                 """,
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
@@ -1977,7 +2038,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2010,7 +2072,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         break;
                 }
                 """,
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
@@ -2034,7 +2097,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2052,7 +2116,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                         x = 0;
                         break;
                 }
-                """);
+                """
+            );
         }
     }
 }

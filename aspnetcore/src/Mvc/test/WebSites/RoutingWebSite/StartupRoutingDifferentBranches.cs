@@ -26,13 +26,10 @@ public class StartupRoutingDifferentBranches
                     "/PageRouteTransformer/PageWithConfiguredRoute",
                     "/PageRouteTransformer/NewConventionRoute/{id?}"
                 );
-                options.Conventions.AddFolderRouteModelConvention(
-                    "/PageRouteTransformer",
-                    model =>
-                    {
-                        pageRouteTransformerConvention.Apply(model);
-                    }
-                );
+                options.Conventions.AddFolderRouteModelConvention("/PageRouteTransformer", model =>
+                {
+                    pageRouteTransformerConvention.Apply(model);
+                });
             });
 
         ConfigureRoutingServices(services);
@@ -45,38 +42,32 @@ public class StartupRoutingDifferentBranches
 
     public virtual void Configure(IApplicationBuilder app)
     {
-        app.Map(
-            "/subdir",
-            branch =>
+        app.Map("/subdir", branch =>
+        {
+            branch.UseRouting();
+
+            branch.UseEndpoints(endpoints =>
             {
-                branch.UseRouting();
+                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(null, "literal/{controller}/{action}/{subdir}");
+                endpoints.MapDynamicControllerRoute<BranchesTransformer>(
+                    "literal/dynamic/controller/{**slug}"
+                );
+            });
+        });
 
-                branch.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapRazorPages();
-                    endpoints.MapControllerRoute(null, "literal/{controller}/{action}/{subdir}");
-                    endpoints.MapDynamicControllerRoute<BranchesTransformer>(
-                        "literal/dynamic/controller/{**slug}"
-                    );
-                });
-            }
-        );
+        app.Map("/common", branch =>
+        {
+            branch.UseRouting();
 
-        app.Map(
-            "/common",
-            branch =>
+            branch.UseEndpoints(endpoints =>
             {
-                branch.UseRouting();
-
-                branch.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllerRoute(null, "{controller}/{action}/{common}/literal");
-                    endpoints.MapDynamicControllerRoute<BranchesTransformer>(
-                        "dynamic/controller/literal/{**slug}"
-                    );
-                });
-            }
-        );
+                endpoints.MapControllerRoute(null, "{controller}/{action}/{common}/literal");
+                endpoints.MapDynamicControllerRoute<BranchesTransformer>(
+                    "dynamic/controller/literal/{**slug}"
+                );
+            });
+        });
 
         app.UseRouting();
         app.UseEndpoints(endpoints =>

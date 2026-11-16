@@ -24,12 +24,23 @@ namespace System.Net
 
         public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(string? subProtocol)
         {
-            return AcceptWebSocketAsync(subProtocol, HttpWebSocket.DefaultReceiveBufferSize, WebSocket.DefaultKeepAliveInterval);
+            return AcceptWebSocketAsync(
+                subProtocol,
+                HttpWebSocket.DefaultReceiveBufferSize,
+                WebSocket.DefaultKeepAliveInterval
+            );
         }
 
-        public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(string? subProtocol, TimeSpan keepAliveInterval)
+        public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(
+            string? subProtocol,
+            TimeSpan keepAliveInterval
+        )
         {
-            return AcceptWebSocketAsync(subProtocol, HttpWebSocket.DefaultReceiveBufferSize, keepAliveInterval);
+            return AcceptWebSocketAsync(
+                subProtocol,
+                HttpWebSocket.DefaultReceiveBufferSize,
+                keepAliveInterval
+            );
         }
     }
 }

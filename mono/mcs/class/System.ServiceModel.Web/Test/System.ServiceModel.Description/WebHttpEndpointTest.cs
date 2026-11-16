@@ -12,24 +12,30 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Description
 {
-	[TestFixture]
-	public class WebHttpEndpointTest
-	{
-		[Test]
-		public void ReplaceBinding1 ()
-		{
-			var se = new WebHttpEndpoint (ContractDescription.GetContract (typeof (IMetadataExchange)), null);
-			se.Binding = new NetTcpBinding (); // this does not throw exception yet.
-		}
+    [TestFixture]
+    public class WebHttpEndpointTest
+    {
+        [Test]
+        public void ReplaceBinding1()
+        {
+            var se = new WebHttpEndpoint(
+                ContractDescription.GetContract(typeof(IMetadataExchange)),
+                null
+            );
+            se.Binding = new NetTcpBinding(); // this does not throw exception yet.
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void ReplaceBinding2 ()
-		{
-			var se = new WebHttpEndpoint (ContractDescription.GetContract (typeof (IMetadataExchange)), null);
-			se.Binding = new NetTcpBinding ();
-			se.WriteEncoding = Encoding.UTF8;
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ReplaceBinding2()
+        {
+            var se = new WebHttpEndpoint(
+                ContractDescription.GetContract(typeof(IMetadataExchange)),
+                null
+            );
+            se.Binding = new NetTcpBinding();
+            se.WriteEncoding = Encoding.UTF8;
+        }
+    }
 }
 #endif

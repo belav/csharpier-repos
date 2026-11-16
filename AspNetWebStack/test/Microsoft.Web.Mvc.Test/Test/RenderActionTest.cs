@@ -67,7 +67,9 @@ namespace Microsoft.Web.Mvc.Test
             HtmlHelper html = GetHtmlHelper(out requestContextAccessor);
 
             // Act
-            html.RenderRoute(new RouteValueDictionary(new { action = "Index", controller = "Test" }));
+            html.RenderRoute(
+                new RouteValueDictionary(new { action = "Index", controller = "Test" })
+            );
             RequestContext requestContext = requestContextAccessor();
 
             // Assert
@@ -84,12 +86,26 @@ namespace Microsoft.Web.Mvc.Test
 
             html.RouteCollection.MapRoute(null, "{*dummy}");
             Mock.Get(html.ViewContext.HttpContext)
-                .Setup(o => o.Server.Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), It.IsAny<bool>()))
-                .Callback<IHttpHandler, TextWriter, bool>((_h, _w, _pf) =>
-                {
-                    MvcHandler mvcHandler = _h.GetType().GetProperty("InnerHandler", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(_h, null) as MvcHandler;
-                    requestContext = mvcHandler.RequestContext;
-                });
+                .Setup(o =>
+                    o.Server.Execute(
+                        It.IsAny<IHttpHandler>(),
+                        It.IsAny<TextWriter>(),
+                        It.IsAny<bool>()
+                    )
+                )
+                .Callback<IHttpHandler, TextWriter, bool>(
+                    (_h, _w, _pf) =>
+                    {
+                        MvcHandler mvcHandler =
+                            _h.GetType()
+                                .GetProperty(
+                                    "InnerHandler",
+                                    BindingFlags.Instance | BindingFlags.NonPublic
+                                )
+                                .GetValue(_h, null) as MvcHandler;
+                        requestContext = mvcHandler.RequestContext;
+                    }
+                );
 
             requestContextAccessor = () => requestContext;
             return html;

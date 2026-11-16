@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="CommandDesigner.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -12,8 +12,8 @@ namespace System.Web.UI.Design.MobileControls
     using System.IO;
     using System.Web.UI;
     using System.Web.UI.Design;
-    using System.Web.UI.MobileControls.Adapters;
     using System.Web.UI.Design.MobileControls.Adapters;
+    using System.Web.UI.MobileControls.Adapters;
 
     /// <summary>
     ///    <para>
@@ -22,11 +22,13 @@ namespace System.Web.UI.Design.MobileControls
     ///    </para>
     /// </summary>
     /// <seealso cref='System.Web.UI.MobileControls.Command'/>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class CommandDesigner : MobileControlDesigner
     {
         private System.Web.UI.MobileControls.Command _command;
@@ -48,9 +50,11 @@ namespace System.Web.UI.Design.MobileControls
         /// <seealso cref='System.ComponentModel.Design.IDesigner'/>
         public override void Initialize(IComponent component)
         {
-            Debug.Assert(component is System.Web.UI.MobileControls.Command,
-                         "CommandDesigner.Initialize - Invalid Command Control");
-            _command = (System.Web.UI.MobileControls.Command) component;
+            Debug.Assert(
+                component is System.Web.UI.MobileControls.Command,
+                "CommandDesigner.Initialize - Invalid Command Control"
+            );
+            _command = (System.Web.UI.MobileControls.Command)component;
             base.Initialize(component);
         }
 
@@ -79,7 +83,7 @@ namespace System.Web.UI.Design.MobileControls
 
             if (blankText)
             {
-                if (hasControls) 
+                if (hasControls)
                 {
                     children = new Control[_command.Controls.Count];
                     _command.Controls.CopyTo(children, 0);
@@ -96,9 +100,9 @@ namespace System.Web.UI.Design.MobileControls
                 if (blankText)
                 {
                     _command.Text = originalText;
-                    if (hasControls) 
+                    if (hasControls)
                     {
-                        foreach (Control c in children) 
+                        foreach (Control c in children)
                         {
                             _command.Controls.Add(c);
                         }

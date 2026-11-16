@@ -6,12 +6,12 @@ using Xunit;
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.extensionmethod004.extensionmethod004
 {
     static // <Title>Extension method that extends dynamic</Title>
-           // <Description>
-           // </Description>
-           // <RelatedBugs></RelatedBugs>
-           //<Expects Status=success></Expects>
-           // <Code>
-public class MyClass
+    // <Description>
+    // </Description>
+    // <RelatedBugs></RelatedBugs>
+    //<Expects Status=success></Expects>
+    // <Code>
+    public class MyClass
     {
         public static dynamic Foo(this int x)
         {
@@ -37,7 +37,14 @@ public class MyClass
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "int", "AnotherFoo"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NoSuchMember,
+                        e.Message,
+                        "int",
+                        "AnotherFoo"
+                    )
+                )
                     return 0;
             }
 
@@ -47,17 +54,15 @@ public class MyClass
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.extensionmethod005.extensionmethod005
 {
     static // <Title>Extension method that extends dynamic</Title>
-           // <Description>
-           // </Description>
-           // <RelatedBugs></RelatedBugs>
-           //<Expects Status=success></Expects>
-           // <Code>
-public class MyClass
+    // <Description>
+    // </Description>
+    // <RelatedBugs></RelatedBugs>
+    //<Expects Status=success></Expects>
+    // <Code>
+    public class MyClass
     {
         public static dynamic Foo(this int x, dynamic d)
         {
@@ -94,17 +99,15 @@ public class MyClass
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.extensionmethod006.extensionmethod006
 {
     static // <Title>Extension method that extends dynamic</Title>
-           // <Description>
-           // </Description>
-           // <RelatedBugs></RelatedBugs>
-           //<Expects Status=success></Expects>
-           // <Code>
-public class MyClass
+    // <Description>
+    // </Description>
+    // <RelatedBugs></RelatedBugs>
+    //<Expects Status=success></Expects>
+    // <Code>
+    public class MyClass
     {
         public static string Foo(this object x, dynamic d)
         {
@@ -115,7 +118,10 @@ public class MyClass
     public class Test
     {
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55117", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55117",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -142,8 +148,6 @@ public class MyClass
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.extensionmethod008.extensionmethod008
 {
@@ -186,13 +190,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method001.method001
 {
     public class Test
     {
         private static bool s_ok = false;
+
         private class MyClass
         {
             public void Foo(dynamic d)
@@ -204,7 +207,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55117", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55117",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -222,13 +228,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method002.method002
 {
     public class Test
     {
         private static bool s_ok = false;
+
         private class MyClass
         {
             public void Foo(out object d)
@@ -258,13 +263,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method003.method003
 {
     public class Test
     {
         private static bool s_ok = false;
+
         private class MyClass
         {
             public void Foo(dynamic d)
@@ -275,7 +279,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55117", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55117",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -293,13 +300,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method004.method004
 {
     public class Test
     {
         private static bool s_ok = false;
+
         private class MyClass
         {
             public void Foo(ref dynamic d)
@@ -309,7 +315,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55117", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55117",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -330,13 +339,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method005.method005
 {
     public class Test
     {
         private static bool s_ok = false;
+
         public class MyClass
         {
             public void Foo(params dynamic[] d)
@@ -349,7 +357,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55117", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55117",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -368,13 +379,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method007.method007
 {
     public class Test
     {
         private static bool s_ok = false;
+
         public class MyClass
         {
             public void Foo(dynamic d, dynamic d2)
@@ -385,7 +395,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55117", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55117",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -405,13 +418,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method008.method008
 {
     public class Test
     {
         private static bool s_ok = false;
+
         public class MyClass
         {
             public void Foo(dynamic d, int d2)
@@ -422,7 +434,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55117", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55117",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -441,24 +456,30 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method009.method009
 {
     public class Test
     {
         private static bool s_ok = false;
+
         public class MyClass
         {
             public void Foo(dynamic d, dynamic d2, dynamic d3)
             {
-                if ((string)d.ToString() == "3" && (string)d2.ToString() == "3" && (string)d3.ToString() == "3")
+                if (
+                    (string)d.ToString() == "3"
+                    && (string)d2.ToString() == "3"
+                    && (string)d3.ToString() == "3"
+                )
                     Test.s_ok = true;
             }
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55117", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55117",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -477,13 +498,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method010.method010
 {
     public class Test
     {
         private static bool s_ok = false;
+
         public class MyClass
         {
             public MyClass(params dynamic[] d)
@@ -496,7 +516,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55117", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55117",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -514,13 +537,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method011.method011
 {
     public class Test
     {
         private static bool s_ok = false;
+
         private class MyClass
         {
             public static void Foo(dynamic d)
@@ -532,7 +554,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55117", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55117",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -549,13 +574,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method012.method012
 {
     public class Test
     {
         private static bool s_ok = false;
+
         private class MyClass
         {
             public void Foo<T>(ref dynamic d)
@@ -565,7 +589,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55117", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55117",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -586,13 +613,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method013.method013
 {
     public class Test
     {
         private static bool s_ok = false;
+
         public class MyClass
         {
             public void Foo<T>(T d)
@@ -602,7 +628,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55117", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55117",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -623,8 +652,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method015.method015
 {
     // <Title> Having dynamic as a parameter</Title>
@@ -637,6 +664,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Program
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -664,8 +692,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method016.method016
 {
     // <Title> Having more than 10 parameters but less than 32 should not crash the binder </Title>
@@ -677,12 +703,25 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
 
     public class Program
     {
-        public void Foo(int param1, int param2, int param3, int param4, int param5, int param6, int param7, int param8, int param9, int param10, int param11)
+        public void Foo(
+            int param1,
+            int param2,
+            int param3,
+            int param4,
+            int param5,
+            int param6,
+            int param7,
+            int param8,
+            int param9,
+            int param10,
+            int param11
+        )
         {
             Program.Status = 1;
         }
 
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -702,8 +741,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method017.method017
 {
     // <Title> Having more than 10 parameters but less than 32 should not crash the binder </Title>
@@ -715,13 +752,44 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
 
     public class Program
     {
-        public void Foo(int param1, int param2, int param3, int param4, int param5, int param6, int param7, int param8, int param9, int param10, int param11, int param12, int param13, int param14, int param15, int param16, int param17, int param18, int param19, int param20, int param21, int param22, int param23, int param24, int param25, int param26, int param27, int param28, int param29, int param30, int param31)
+        public void Foo(
+            int param1,
+            int param2,
+            int param3,
+            int param4,
+            int param5,
+            int param6,
+            int param7,
+            int param8,
+            int param9,
+            int param10,
+            int param11,
+            int param12,
+            int param13,
+            int param14,
+            int param15,
+            int param16,
+            int param17,
+            int param18,
+            int param19,
+            int param20,
+            int param21,
+            int param22,
+            int param23,
+            int param24,
+            int param25,
+            int param26,
+            int param27,
+            int param28,
+            int param29,
+            int param30,
+            int param31
+        )
         {
             Program.Status = 1;
         }
 
         public static int Status;
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -732,7 +800,39 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         {
             dynamic d = new Program();
             int x = 1;
-            d.Foo(x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x);
+            d.Foo(
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x
+            );
             if (Program.Status == 1)
                 return 0;
             return 1;
@@ -740,8 +840,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method018.method018
 {
@@ -754,13 +852,45 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
 
     public class Program
     {
-        public void Foo(int param1, int param2, int param3, int param4, int param5, int param6, int param7, int param8, int param9, int param10, int param11, int param12, int param13, int param14, int param15, int param16, int param17, int param18, int param19, int param20, int param21, int param22, int param23, int param24, int param25, int param26, int param27, int param28, int param29, int param30, int param31, int param32)
+        public void Foo(
+            int param1,
+            int param2,
+            int param3,
+            int param4,
+            int param5,
+            int param6,
+            int param7,
+            int param8,
+            int param9,
+            int param10,
+            int param11,
+            int param12,
+            int param13,
+            int param14,
+            int param15,
+            int param16,
+            int param17,
+            int param18,
+            int param19,
+            int param20,
+            int param21,
+            int param22,
+            int param23,
+            int param24,
+            int param25,
+            int param26,
+            int param27,
+            int param28,
+            int param29,
+            int param30,
+            int param31,
+            int param32
+        )
         {
             Program.Status = 1;
         }
 
         public static int Status;
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -771,20 +901,52 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         {
             dynamic d = new Program();
             int x = 1;
-            d.Foo(x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x);
+            d.Foo(
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x,
+                x
+            );
             return 0;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.method019.method019
 {
     public class Test
     {
         private static bool s_ok = false;
+
         public void Bar()
         {
             Test.s_ok = false;
@@ -813,8 +975,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.genericbaseclass001.genericbaseclass001
 {
     // <Title> Having dynamic as a type parameter in base class</Title>
@@ -830,9 +990,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         }
     }
 
-    public class Derived<V> : Base<dynamic>
-    {
-    }
+    public class Derived<V> : Base<dynamic> { }
 
     public class Base2<U, V>
     {
@@ -846,10 +1004,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     {
         internal int P
         {
-            get
-            {
-                return 111;
-            }
+            get { return 111; }
         }
 
         internal override int M()
@@ -880,8 +1035,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.genericbaseclass002.genericbaseclass002
 {
     // <Title> Having dynamic as a type parameter in base class</Title>
@@ -892,28 +1045,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
 
     namespace NS
     {
-        public class MyClass1<T>
-        {
-        }
+        public class MyClass1<T> { }
 
         public class MyClass2<U> : MyClass1<U>
         {
             public int this[int n]
             {
-                get
-                {
-                    return ++n;
-                }
+                get { return ++n; }
             }
         }
 
-        public class MyClass3<T> : MyClass2<dynamic>
-        {
-        }
+        public class MyClass3<T> : MyClass2<dynamic> { }
 
-        public class MyClass4<V> : MyClass3<V>
-        {
-        }
+        public class MyClass4<V> : MyClass3<V> { }
 
         public class Test
         {
@@ -936,8 +1080,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.genericbaseclass003.genericbaseclass003
 {
     // <Title> Having dynamic as a type parameter in base class</Title>
@@ -948,9 +1090,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
 
     namespace NS
     {
-        public class MyClass1<T>
-        {
-        }
+        public class MyClass1<T> { }
 
         public class MyClass11<U, V> : MyClass1<dynamic>
         {
@@ -989,8 +1129,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.genericbaseclass004.genericbaseclass004
 {
     // <Title> Having dynamic as a type parameter in base class</Title>
@@ -1001,41 +1139,27 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
 
     namespace NS
     {
-        public interface I1
-        {
-        }
+        public interface I1 { }
 
-        public interface I2<T> : I1
-        {
-        }
+        public interface I2<T> : I1 { }
 
-        public interface I3<U, V>
-        {
-        }
+        public interface I3<U, V> { }
 
         public class MyClass1<T> : I1, I2<T>
         {
             internal virtual int P
             {
-                get
-                {
-                    return 123;
-                }
+                get { return 123; }
             }
         }
 
-        public class MyClass2<U, V> : MyClass1<dynamic>, I1, I2<V>
-        {
-        }
+        public class MyClass2<U, V> : MyClass1<dynamic>, I1, I2<V> { }
 
         public class MyClass3<X, Y, Z> : MyClass2<X, dynamic>, I3<X, Z>
         {
             internal new int P
             {
-                get
-                {
-                    return base.P;
-                }
+                get { return base.P; }
             }
         }
 
@@ -1043,10 +1167,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         {
             internal override int P
             {
-                get
-                {
-                    return 456;
-                }
+                get { return 456; }
             }
         }
 
@@ -1071,8 +1192,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalParameter.Methods.genericbaseclass005.genericbaseclass005
 {
     // <Title> Having dynamic as a type parameter in base class</Title>
@@ -1083,52 +1202,39 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
 
     namespace NS
     {
-        public interface I1
-        {
-        }
+        public interface I1 { }
 
-        public interface I2
-        {
-        }
+        public interface I2 { }
 
-        public interface I3<T> : I1, I2
-        {
-        }
+        public interface I3<T> : I1, I2 { }
 
-        public interface I4<U, V> : I3<U>
-        {
-        }
+        public interface I4<U, V> : I3<U> { }
 
         public class MyClass1<T> : I1, I2 // where T : new()
         {
-            public MyClass1()
-            {
-            }
+            public MyClass1() { }
         }
 
-        public class MyClass2<U, @dynamic> : I1, I3<U> where U : class
-        {
-        }
+        public class MyClass2<U, @dynamic> : I1, I3<U>
+            where U : class { }
 
-        public class MyClass3<X, Y, Z> : MyClass2<X, dynamic>, I4<X, Z> where X : MyClass1<int> where Z : struct
-        {
-            internal int P
-            {
-                get
-                {
-                    return 123;
-                }
-            }
-        }
-
-        public class MyClass4<U, V> : MyClass1<dynamic>, I3<V> where U : new() where V : new()
+        public class MyClass3<X, Y, Z> : MyClass2<X, dynamic>, I4<X, Z>
+            where X : MyClass1<int>
+            where Z : struct
         {
             internal int P
             {
-                get
-                {
-                    return 456;
-                }
+                get { return 123; }
+            }
+        }
+
+        public class MyClass4<U, V> : MyClass1<dynamic>, I3<V>
+            where U : new()
+            where V : new()
+        {
+            internal int P
+            {
+                get { return 456; }
             }
         }
 

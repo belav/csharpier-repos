@@ -20,7 +20,8 @@ namespace IdeCoreBenchmarks
         private Microsoft.CodeAnalysis.Collections.SegmentedList<int> _segmentedValues = null!;
         private SegmentedArray<int> _segmentedInsertValues;
 
-        private Microsoft.CodeAnalysis.Collections.SegmentedList<object?> _segmentedValuesObject = null!;
+        private Microsoft.CodeAnalysis.Collections.SegmentedList<object?> _segmentedValuesObject =
+            null!;
         private SegmentedArray<object?> _segmentedInsertValuesObject;
 
         [Params(100000)]
@@ -32,7 +33,9 @@ namespace IdeCoreBenchmarks
             _values = new List<int>(Count);
             _valuesObject = new List<object?>(Count);
             _segmentedValues = new Microsoft.CodeAnalysis.Collections.SegmentedList<int>(Count);
-            _segmentedValuesObject = new Microsoft.CodeAnalysis.Collections.SegmentedList<object?>(Count);
+            _segmentedValuesObject = new Microsoft.CodeAnalysis.Collections.SegmentedList<object?>(
+                Count
+            );
 
             _insertValues = new int[100];
             _insertValuesObject = new object?[100];

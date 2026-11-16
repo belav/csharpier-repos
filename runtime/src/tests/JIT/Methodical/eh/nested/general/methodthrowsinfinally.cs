@@ -11,7 +11,6 @@ namespace Test_methodthrowsinfinally_cs
 {
     public class Class1
     {
-
         private static TestUtil.TestLog testLog;
 
         static Class1()
@@ -34,7 +33,7 @@ namespace Test_methodthrowsinfinally_cs
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();
@@ -50,9 +49,7 @@ namespace Test_methodthrowsinfinally_cs
                     test();
                 }
             }
-            catch
-            {
-            }
+            catch { }
 
             // stop recoding
             testLog.StopRecording();
@@ -80,7 +77,5 @@ namespace Test_methodthrowsinfinally_cs
                 Console.WriteLine("finally 1");
             }
         }
-
     }
-
 }

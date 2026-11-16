@@ -27,14 +27,13 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpReferenceHighlighting()
-            : base(nameof(CSharpReferenceHighlighting))
-        {
-        }
+            : base(nameof(CSharpReferenceHighlighting)) { }
 
         [IdeFact]
         public async Task Highlighting()
         {
-            var markup = @"
+            var markup =
+                @"
 class {|definition:C|}
 {
     void M<T>({|reference:C|} c) where T : {|reference:C|}
@@ -42,7 +41,11 @@ class {|definition:C|}
         {|reference:C|} c = new {|reference:C|}();
     }
 }";
-            MarkupTestFile.GetSpans(markup, out var text, out IDictionary<string, ImmutableArray<TextSpan>> spans);
+            MarkupTestFile.GetSpans(
+                markup,
+                out var text,
+                out IDictionary<string, ImmutableArray<TextSpan>> spans
+            );
             await TestServices.Editor.SetTextAsync(text, HangMitigatingCancellationToken);
             await VerifyAsync("C", spans, HangMitigatingCancellationToken);
 
@@ -53,7 +56,8 @@ class {|definition:C|}
         [IdeFact]
         public async Task WrittenReference()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -62,7 +66,11 @@ class C
         {|writtenreference:x|} = 3;
     }
 }";
-            MarkupTestFile.GetSpans(markup, out var text, out IDictionary<string, ImmutableArray<TextSpan>> spans);
+            MarkupTestFile.GetSpans(
+                markup,
+                out var text,
+                out IDictionary<string, ImmutableArray<TextSpan>> spans
+            );
             await TestServices.Editor.SetTextAsync(text, HangMitigatingCancellationToken);
             await VerifyAsync("x", spans, HangMitigatingCancellationToken);
 
@@ -73,7 +81,8 @@ class C
         [IdeFact]
         public async Task Navigation()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
    void M()
@@ -83,17 +92,32 @@ class C
     }
 }";
             await TestServices.Editor.SetTextAsync(text, HangMitigatingCancellationToken);
-            await TestServices.Editor.PlaceCaretAsync("x", charsOffset: 0, HangMitigatingCancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.ReferenceHighlighting, HangMitigatingCancellationToken);
-            await TestServices.Shell.ExecuteCommandAsync(WellKnownCommands.Edit.NextHighlightedReference, HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync("        x$$ = 3;", assertCaretPosition: true, HangMitigatingCancellationToken);
+            await TestServices.Editor.PlaceCaretAsync(
+                "x",
+                charsOffset: 0,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.ReferenceHighlighting,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.NextHighlightedReference,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.CurrentLineTextAsync(
+                "        x$$ = 3;",
+                assertCaretPosition: true,
+                HangMitigatingCancellationToken
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/pull/52041")]
         [IdeFact]
         public async Task HighlightBasedOnSelection()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
    void M()
@@ -104,18 +128,46 @@ class C
     }
 }";
             await TestServices.Editor.SetTextAsync(text, HangMitigatingCancellationToken);
-            await TestServices.Editor.PlaceCaretAsync("x", charsOffset: 0, HangMitigatingCancellationToken);
+            await TestServices.Editor.PlaceCaretAsync(
+                "x",
+                charsOffset: 0,
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.ReferenceHighlighting, HangMitigatingCancellationToken);
-            await TestServices.Shell.ExecuteCommandAsync(WellKnownCommands.Edit.NextHighlightedReference, HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync("        x$$++;", assertCaretPosition: true, HangMitigatingCancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.ReferenceHighlighting,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.NextHighlightedReference,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.CurrentLineTextAsync(
+                "        x$$++;",
+                assertCaretPosition: true,
+                HangMitigatingCancellationToken
+            );
 
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.ReferenceHighlighting, HangMitigatingCancellationToken);
-            await TestServices.Shell.ExecuteCommandAsync(WellKnownCommands.Edit.NextHighlightedReference, HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync("        x$$ = 3;", assertCaretPosition: true, HangMitigatingCancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.ReferenceHighlighting,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.NextHighlightedReference,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.CurrentLineTextAsync(
+                "        x$$ = 3;",
+                assertCaretPosition: true,
+                HangMitigatingCancellationToken
+            );
         }
 
-        private async Task VerifyAsync(string marker, IDictionary<string, ImmutableArray<TextSpan>> spans, CancellationToken cancellationToken)
+        private async Task VerifyAsync(
+            string marker,
+            IDictionary<string, ImmutableArray<TextSpan>> spans,
+            CancellationToken cancellationToken
+        )
         {
             await TestServices.Editor.PlaceCaretAsync(marker, charsOffset: -1, cancellationToken);
             await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
@@ -126,22 +178,44 @@ class C
                     FeatureAttribute.Classification,
                     FeatureAttribute.ReferenceHighlighting,
                 ],
-                cancellationToken);
+                cancellationToken
+            );
 
             var tags = await TestServices.Editor.GetTagsAsync<ITextMarkerTag>(cancellationToken);
-            var definitionTagSpans = tags.SelectAsArray(tag => tag.Tag.Type == DefinitionHighlightTag.TagId, tag => tag.Span.Span.ToTextSpan());
-            AssertEx.SetEqual(spans["definition"], definitionTagSpans, message: "Testing 'definition'\r\n");
+            var definitionTagSpans = tags.SelectAsArray(
+                tag => tag.Tag.Type == DefinitionHighlightTag.TagId,
+                tag => tag.Span.Span.ToTextSpan()
+            );
+            AssertEx.SetEqual(
+                spans["definition"],
+                definitionTagSpans,
+                message: "Testing 'definition'\r\n"
+            );
 
             if (spans.TryGetValue("reference", out var referenceSpans))
             {
-                var referenceTagSpans = tags.SelectAsArray(tag => tag.Tag.Type == ReferenceHighlightTag.TagId, tag => tag.Span.Span.ToTextSpan());
-                AssertEx.SetEqual(referenceSpans, referenceTagSpans, message: "Testing 'reference'\r\n");
+                var referenceTagSpans = tags.SelectAsArray(
+                    tag => tag.Tag.Type == ReferenceHighlightTag.TagId,
+                    tag => tag.Span.Span.ToTextSpan()
+                );
+                AssertEx.SetEqual(
+                    referenceSpans,
+                    referenceTagSpans,
+                    message: "Testing 'reference'\r\n"
+                );
             }
 
             if (spans.TryGetValue("writtenreference", out var writtenReferenceSpans))
             {
-                var writtenReferenceTagSpans = tags.SelectAsArray(tag => tag.Tag.Type == WrittenReferenceHighlightTag.TagId, tag => tag.Span.Span.ToTextSpan());
-                AssertEx.SetEqual(writtenReferenceSpans, writtenReferenceSpans, message: "Testing 'writtenreference'\r\n");
+                var writtenReferenceTagSpans = tags.SelectAsArray(
+                    tag => tag.Tag.Type == WrittenReferenceHighlightTag.TagId,
+                    tag => tag.Span.Span.ToTextSpan()
+                );
+                AssertEx.SetEqual(
+                    writtenReferenceSpans,
+                    writtenReferenceSpans,
+                    message: "Testing 'writtenreference'\r\n"
+                );
             }
         }
 
@@ -156,7 +230,8 @@ class C
                     FeatureAttribute.Classification,
                     FeatureAttribute.ReferenceHighlighting,
                 ],
-                cancellationToken);
+                cancellationToken
+            );
 
             var tags = await TestServices.Editor.GetTagsAsync<ITextMarkerTag>(cancellationToken);
             Assert.Empty(tags.Where(tag => tag.Tag.Type == ReferenceHighlightTag.TagId));

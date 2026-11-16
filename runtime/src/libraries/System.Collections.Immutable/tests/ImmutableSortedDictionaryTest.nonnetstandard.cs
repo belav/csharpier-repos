@@ -13,7 +13,9 @@ namespace System.Collections.Immutable.Tests
 {
     public partial class ImmutableSortedDictionaryTest : ImmutableDictionaryTestBase
     {
-        internal override IBinaryTree GetRootNode<TKey, TValue>(IImmutableDictionary<TKey, TValue> dictionary)
+        internal override IBinaryTree GetRootNode<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> dictionary
+        )
         {
             return ((ImmutableSortedDictionary<TKey, TValue>)dictionary).Root;
         }

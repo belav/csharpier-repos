@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,57 +29,61 @@
 //
 
 using System.Collections;
-using System.Runtime.Serialization.Formatters;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Channels;
+using System.Runtime.Serialization.Formatters;
 
 namespace Mono.Remoting.Channels.Unix
 {
-	internal class UnixBinaryServerFormatterSinkProvider: IServerFormatterSinkProvider, IServerChannelSinkProvider
-	{
-		IServerChannelSinkProvider next = null;
-		UnixBinaryCore _binaryCore;
-		
-		internal static string[] AllowedProperties = new string [] { "includeVersions", "strictBinding" };
+    internal class UnixBinaryServerFormatterSinkProvider
+        : IServerFormatterSinkProvider,
+            IServerChannelSinkProvider
+    {
+        IServerChannelSinkProvider next = null;
+        UnixBinaryCore _binaryCore;
 
-		public UnixBinaryServerFormatterSinkProvider ()
-		{
-			_binaryCore = UnixBinaryCore.DefaultInstance;
-		}
+        internal static string[] AllowedProperties = new string[]
+        {
+            "includeVersions",
+            "strictBinding",
+        };
 
-		public UnixBinaryServerFormatterSinkProvider (IDictionary properties, ICollection providerData)
-		{
-			_binaryCore = new UnixBinaryCore (this, properties, AllowedProperties);
-		}
+        public UnixBinaryServerFormatterSinkProvider()
+        {
+            _binaryCore = UnixBinaryCore.DefaultInstance;
+        }
 
-		public IServerChannelSinkProvider Next
-		{
-			get {
-				return next;
-			}
+        public UnixBinaryServerFormatterSinkProvider(
+            IDictionary properties,
+            ICollection providerData
+        )
+        {
+            _binaryCore = new UnixBinaryCore(this, properties, AllowedProperties);
+        }
 
-			set {
-				next = value;
-			}
-		}
+        public IServerChannelSinkProvider Next
+        {
+            get { return next; }
+            set { next = value; }
+        }
 
-		public IServerChannelSink CreateSink (IChannelReceiver channel)
-		{
-			IServerChannelSink next_sink = null;
-			UnixBinaryServerFormatterSink result;
-			
-			if (next != null)
-				next_sink = next.CreateSink (channel);
-			
-			result = new UnixBinaryServerFormatterSink (next_sink, channel);
+        public IServerChannelSink CreateSink(IChannelReceiver channel)
+        {
+            IServerChannelSink next_sink = null;
+            UnixBinaryServerFormatterSink result;
 
-			result.BinaryCore = _binaryCore;
-			return result;
-		}
+            if (next != null)
+                next_sink = next.CreateSink(channel);
 
-		public void GetChannelData (IChannelDataStore channelData)
-		{
-			// Nothing to add here
-		}
-	}
+            result = new UnixBinaryServerFormatterSink(next_sink, channel);
+
+            result.BinaryCore = _binaryCore;
+            return result;
+        }
+
+        public void GetChannelData(IChannelDataStore channelData)
+        {
+            // Nothing to add here
+        }
+    }
 }

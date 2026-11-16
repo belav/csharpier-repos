@@ -35,8 +35,10 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
 
         public Func<CancellationToken, IEnumerable<TaggedText>> DocumentationFactory { get; }
 
-        private static readonly Func<CancellationToken, IEnumerable<TaggedText>> s_emptyDocumentationFactory =
-            _ => SpecializedCollections.EmptyEnumerable<TaggedText>();
+        private static readonly Func<
+            CancellationToken,
+            IEnumerable<TaggedText>
+        > s_emptyDocumentationFactory = _ => SpecializedCollections.EmptyEnumerable<TaggedText>();
 
         public SignatureHelpItem(
             bool isVariadic,
@@ -45,11 +47,14 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IEnumerable<TaggedText> separatorParts,
             IEnumerable<TaggedText> suffixParts,
             IEnumerable<SignatureHelpParameter> parameters,
-            IEnumerable<TaggedText>? descriptionParts)
+            IEnumerable<TaggedText>? descriptionParts
+        )
         {
             if (isVariadic && !parameters.Any())
             {
-                throw new ArgumentException(FeaturesResources.Variadic_SignatureHelpItem_must_have_at_least_one_parameter);
+                throw new ArgumentException(
+                    FeaturesResources.Variadic_SignatureHelpItem_must_have_at_least_one_parameter
+                );
             }
 
             IsVariadic = isVariadic;
@@ -69,27 +74,29 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IEnumerable<SymbolDisplayPart> separatorParts,
             IEnumerable<SymbolDisplayPart> suffixParts,
             IEnumerable<SignatureHelpParameter> parameters,
-            IEnumerable<SymbolDisplayPart> descriptionParts)
-            : this(isVariadic,
-                  documentationFactory != null
+            IEnumerable<SymbolDisplayPart> descriptionParts
+        )
+            : this(
+                isVariadic,
+                documentationFactory != null
                     ? c => documentationFactory(c).ToTaggedText()
                     : s_emptyDocumentationFactory,
-                  prefixParts.ToTaggedText(),
-                  separatorParts.ToTaggedText(),
-                  suffixParts.ToTaggedText(),
-                  parameters,
-                  descriptionParts.ToTaggedText())
-        {
-        }
+                prefixParts.ToTaggedText(),
+                separatorParts.ToTaggedText(),
+                suffixParts.ToTaggedText(),
+                parameters,
+                descriptionParts.ToTaggedText()
+            ) { }
 
         internal IEnumerable<TaggedText> GetAllParts()
         {
-            return
-                PrefixDisplayParts.Concat(
+            return PrefixDisplayParts.Concat(
                 SeparatorDisplayParts.Concat(
-                SuffixDisplayParts.Concat(
-                Parameters.SelectMany(p => p.GetAllParts())).Concat(
-                DescriptionParts)));
+                    SuffixDisplayParts
+                        .Concat(Parameters.SelectMany(p => p.GetAllParts()))
+                        .Concat(DescriptionParts)
+                )
+            );
         }
 
         public override string ToString()

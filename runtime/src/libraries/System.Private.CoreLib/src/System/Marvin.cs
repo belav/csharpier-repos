@@ -14,7 +14,13 @@ namespace System
         /// Compute a Marvin hash and collapse it into a 32-bit hash.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int ComputeHash32(ReadOnlySpan<byte> data, ulong seed) => ComputeHash32(ref MemoryMarshal.GetReference(data), (uint)data.Length, (uint)seed, (uint)(seed >> 32));
+        public static int ComputeHash32(ReadOnlySpan<byte> data, ulong seed) =>
+            ComputeHash32(
+                ref MemoryMarshal.GetReference(data),
+                (uint)data.Length,
+                (uint)seed,
+                (uint)(seed >> 32)
+            );
 
         /// <summary>
         /// Compute a Marvin hash and collapse it into a 32-bit hash.
@@ -84,7 +90,7 @@ namespace System
                 goto DoFinalPartialRead;
             }
 
-        Between4And7BytesRemain:
+            Between4And7BytesRemain:
 
             // If after finishing the main loop we still have 4 or more leftover bytes, or if we had
             // 4 .. 7 bytes to begin with and couldn't enter the loop in the first place, we need to
@@ -95,7 +101,7 @@ namespace System
             p0 += Unsafe.ReadUnaligned<uint>(ref data);
             Block(ref p0, ref p1);
 
-        DoFinalPartialRead:
+            DoFinalPartialRead:
 
             // Finally, we have 0 .. 3 bytes leftover. Since we know the original data length was at
             // least 4 bytes (smaller lengths are handled at the end of this routine), we can safely
@@ -107,7 +113,9 @@ namespace System
 
             // Read the last 4 bytes of the buffer.
 
-            uint partialResult = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref Unsafe.AddByteOffset(ref data, (nuint)count & 7), -4));
+            uint partialResult = Unsafe.ReadUnaligned<uint>(
+                ref Unsafe.Add(ref Unsafe.AddByteOffset(ref data, (nuint)count & 7), -4)
+            );
 
             // The 'partialResult' local above contains any data we have yet to read, plus some number
             // of bytes which we've already read from the buffer. An example of this is given below
@@ -136,7 +144,7 @@ namespace System
                 partialResult <<= (int)count & 0x1F; // shift out all previously consumed bytes
             }
 
-        DoFinalRoundsAndReturn:
+            DoFinalRoundsAndReturn:
 
             // Now that we've computed the final partial result, merge it in and run two rounds of
             // the block function to finish out the Marvin algorithm.
@@ -147,7 +155,7 @@ namespace System
 
             return (int)(p1 ^ p0);
 
-        InputTooSmallToEnterMainLoop:
+            InputTooSmallToEnterMainLoop:
 
             // We had only 0 .. 3 bytes to begin with, so we can't perform any 32-bit reads.
             // This means that we're going to be building up the final result right away and

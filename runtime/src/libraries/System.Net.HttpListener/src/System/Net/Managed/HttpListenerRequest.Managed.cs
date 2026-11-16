@@ -50,7 +50,9 @@ namespace System.Net
             {
                 if (kind != ChannelBindingKind.Endpoint)
                 {
-                    throw new NotSupportedException(SR.Format(SR.net_listener_invalid_cbt_type, kind.ToString()));
+                    throw new NotSupportedException(
+                        SR.Format(SR.net_listener_invalid_cbt_type, kind.ToString())
+                    );
                 }
 
                 return null;
@@ -64,7 +66,9 @@ namespace System.Net
         private Stream? _inputStream;
         private readonly HttpListenerContext _context;
         private bool _isChunked;
-        private static readonly SearchValues<char> s_validMethodChars = SearchValues.Create("!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz|~");
+        private static readonly SearchValues<char> s_validMethodChars = SearchValues.Create(
+            "!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz|~"
+        );
         private static readonly byte[] s_100continue = "HTTP/1.1 100 Continue\r\n\r\n"u8.ToArray();
 
         internal HttpListenerRequest(HttpListenerContext context)
@@ -117,7 +121,9 @@ namespace System.Net
             if (_version.Major > 1)
             {
                 _context.ErrorStatus = (int)HttpStatusCode.HttpVersionNotSupported;
-                _context.ErrorMessage = HttpStatusDescription.Get(HttpStatusCode.HttpVersionNotSupported);
+                _context.ErrorMessage = HttpStatusDescription.Get(
+                    HttpStatusCode.HttpVersionNotSupported
+                );
                 return;
             }
         }
@@ -125,17 +131,18 @@ namespace System.Net
         private static bool MaybeUri(string s)
         {
             int p = s.IndexOf(':');
-            return (uint)p < 10 && s.AsSpan(0, p) is
-                UriScheme.Http or
-                UriScheme.Https or
-                UriScheme.File or
-                UriScheme.Ftp or
-                UriScheme.News or
-                UriScheme.NetPipe or
-                UriScheme.NetTcp or
-                UriScheme.Nntp or
-                UriScheme.Gopher or
-                UriScheme.Mailto;
+            return (uint)p < 10
+                && s.AsSpan(0, p)
+                    is UriScheme.Http
+                        or UriScheme.Https
+                        or UriScheme.File
+                        or UriScheme.Ftp
+                        or UriScheme.News
+                        or UriScheme.NetPipe
+                        or UriScheme.NetTcp
+                        or UriScheme.Nntp
+                        or UriScheme.Gopher
+                        or UriScheme.Mailto;
         }
 
         internal void FinishInitialization()
@@ -150,7 +157,10 @@ namespace System.Net
             string path;
             Uri? raw_uri = null;
             Debug.Assert(_rawUrl != null);
-            if (MaybeUri(_rawUrl!.ToLowerInvariant()) && Uri.TryCreate(_rawUrl, UriKind.Absolute, out raw_uri))
+            if (
+                MaybeUri(_rawUrl!.ToLowerInvariant())
+                && Uri.TryCreate(_rawUrl, UriKind.Absolute, out raw_uri)
+            )
                 path = raw_uri.PathAndQuery;
             else
                 path = _rawUrl;
@@ -173,13 +183,21 @@ namespace System.Net
                 return;
             }
 
-            _requestUri = HttpListenerRequestUriBuilder.GetRequestUri(_rawUrl, _requestUri.Scheme,
-                                _requestUri.Authority, _requestUri.LocalPath, _requestUri.Query);
+            _requestUri = HttpListenerRequestUriBuilder.GetRequestUri(
+                _rawUrl,
+                _requestUri.Scheme,
+                _requestUri.Authority,
+                _requestUri.LocalPath,
+                _requestUri.Query
+            );
 
             if (_version >= HttpVersion.Version11)
             {
                 string? t_encoding = Headers[HttpKnownHeaderNames.TransferEncoding];
-                _isChunked = (t_encoding != null && string.Equals(t_encoding, "chunked", StringComparison.OrdinalIgnoreCase));
+                _isChunked = (
+                    t_encoding != null
+                    && string.Equals(t_encoding, "chunked", StringComparison.OrdinalIgnoreCase)
+                );
                 // 'identity' is not valid!
                 if (t_encoding != null && !_isChunked)
                 {
@@ -190,15 +208,23 @@ namespace System.Net
 
             if (!_isChunked && !_clSet)
             {
-                if (string.Equals(_method, "POST", StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(_method, "PUT", StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(_method, "POST", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(_method, "PUT", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     _context.Connection.SendError(null, 411);
                     return;
                 }
             }
 
-            if (string.Equals(Headers[HttpKnownHeaderNames.Expect], "100-continue", StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    Headers[HttpKnownHeaderNames.Expect],
+                    "100-continue",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 HttpResponseStream output = _context.Connection.GetResponseStream();
                 output.InternalWrite(s_100continue, 0, s_100continue.Length);
@@ -224,9 +250,13 @@ namespace System.Net
                 // Content lengths > long.MaxValue and <= ulong.MaxValue are treated as 0.
                 // Content lengths < 0 cause the requests to fail.
                 // Other input is a failure, too.
-                long parsedContentLength =
-                    ulong.TryParse(val, out ulong parsedUlongContentLength) ? (parsedUlongContentLength <= long.MaxValue ? (long)parsedUlongContentLength : 0) :
-                    long.Parse(val);
+                long parsedContentLength = ulong.TryParse(val, out ulong parsedUlongContentLength)
+                    ? (
+                        parsedUlongContentLength <= long.MaxValue
+                            ? (long)parsedUlongContentLength
+                            : 0
+                    )
+                    : long.Parse(val);
                 if (parsedContentLength < 0 || (_clSet && parsedContentLength != _contentLength))
                 {
                     _context.ErrorMessage = "Invalid Content-Length.";
@@ -242,7 +272,9 @@ namespace System.Net
                 if (Headers[HttpKnownHeaderNames.TransferEncoding] != null)
                 {
                     _context.ErrorStatus = (int)HttpStatusCode.NotImplemented;
-                    _context.ErrorMessage = HttpStatusDescription.Get(HttpStatusCode.NotImplemented);
+                    _context.ErrorMessage = HttpStatusDescription.Get(
+                        HttpStatusCode.NotImplemented
+                    );
                 }
             }
 
@@ -285,7 +317,8 @@ namespace System.Net
             }
         }
 
-        private X509Certificate2? GetClientCertificateCore() => ClientCertificate = _context.Connection.ClientCertificate;
+        private X509Certificate2? GetClientCertificateCore() =>
+            ClientCertificate = _context.Connection.ClientCertificate;
 
         private int GetClientCertificateErrorCore()
         {
@@ -322,7 +355,10 @@ namespace System.Net
                 if (_inputStream == null)
                 {
                     if (_isChunked || _contentLength > 0)
-                        _inputStream = _context.Connection.GetRequestStream(_isChunked, _contentLength);
+                        _inputStream = _context.Connection.GetRequestStream(
+                            _isChunked,
+                            _contentLength
+                        );
                     else
                         _inputStream = Stream.Null;
                 }
@@ -341,7 +377,10 @@ namespace System.Net
 
         public Guid RequestTraceIdentifier { get; } = Guid.NewGuid();
 
-        private GetClientCertificateAsyncResult BeginGetClientCertificateCore(AsyncCallback? requestCallback, object? state)
+        private GetClientCertificateAsyncResult BeginGetClientCertificateCore(
+            AsyncCallback? requestCallback,
+            object? state
+        )
         {
             var asyncResult = new GetClientCertificateAsyncResult(this, state, requestCallback);
 
@@ -357,14 +396,17 @@ namespace System.Net
         {
             ArgumentNullException.ThrowIfNull(asyncResult);
 
-            GetClientCertificateAsyncResult? clientCertAsyncResult = asyncResult as GetClientCertificateAsyncResult;
+            GetClientCertificateAsyncResult? clientCertAsyncResult =
+                asyncResult as GetClientCertificateAsyncResult;
             if (clientCertAsyncResult == null || clientCertAsyncResult.AsyncObject != this)
             {
                 throw new ArgumentException(SR.net_io_invalidasyncresult, nameof(asyncResult));
             }
             if (clientCertAsyncResult.EndCalled)
             {
-                throw new InvalidOperationException(SR.Format(SR.net_io_invalidendcall, nameof(EndGetClientCertificate)));
+                throw new InvalidOperationException(
+                    SR.Format(SR.net_io_invalidendcall, nameof(EndGetClientCertificate))
+                );
             }
             clientCertAsyncResult.EndCalled = true;
 
@@ -380,7 +422,12 @@ namespace System.Net
 
         private sealed class GetClientCertificateAsyncResult : LazyAsyncResult
         {
-            public GetClientCertificateAsyncResult(object myObject, object? myState, AsyncCallback? myCallBack) : base(myObject, myState, myCallBack) { }
+            public GetClientCertificateAsyncResult(
+                object myObject,
+                object? myState,
+                AsyncCallback? myCallBack
+            )
+                : base(myObject, myState, myCallBack) { }
         }
     }
 }

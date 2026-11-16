@@ -18,23 +18,28 @@ namespace Microsoft.Extensions.Configuration
             AssertConfig(BuildConfigRoot(LoadThroughProvider(TestSection.DuplicatesTestConfig)));
         }
 
-        protected override (IConfigurationProvider Provider, Action Initializer) LoadThroughProvider(TestSection testConfig)
+        protected override (
+            IConfigurationProvider Provider,
+            Action Initializer
+        ) LoadThroughProvider(TestSection testConfig)
         {
             var jsonBuilder = new StringBuilder();
             SectionToJson(jsonBuilder, testConfig, includeComma: false);
 
             var provider = new JsonConfigurationProvider(
-                new JsonConfigurationSource
-                {
-                    Optional = true
-                });
+                new JsonConfigurationSource { Optional = true }
+            );
 
             var json = jsonBuilder.ToString();
             json = JObject.Parse(json).ToString(); // standardize the json (removing trailing commas)
             return (provider, () => provider.Load(TestStreamHelpers.StringToStream(json)));
         }
 
-        private void SectionToJson(StringBuilder jsonBuilder, TestSection section, bool includeComma = true)
+        private void SectionToJson(
+            StringBuilder jsonBuilder,
+            TestSection section,
+            bool includeComma = true
+        )
         {
             string ValueToJson(object value) => value == null ? "null" : $"\"{value}\"";
 
@@ -42,9 +47,11 @@ namespace Microsoft.Extensions.Configuration
 
             foreach (var tuple in section.Values)
             {
-                jsonBuilder.AppendLine(tuple.Value.AsArray != null
-                    ? $"\"{tuple.Key}\": [{string.Join(", ", tuple.Value.AsArray.Select(ValueToJson))}],"
-                    : $"\"{tuple.Key}\": {ValueToJson(tuple.Value.AsString)},");
+                jsonBuilder.AppendLine(
+                    tuple.Value.AsArray != null
+                        ? $"\"{tuple.Key}\": [{string.Join(", ", tuple.Value.AsArray.Select(ValueToJson))}],"
+                        : $"\"{tuple.Key}\": {ValueToJson(tuple.Value.AsString)},"
+                );
             }
 
             foreach (var tuple in section.Sections)

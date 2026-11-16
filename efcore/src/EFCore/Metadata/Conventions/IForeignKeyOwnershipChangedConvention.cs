@@ -18,5 +18,6 @@ public interface IForeignKeyOwnershipChangedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessForeignKeyOwnershipChanged(
         IConventionForeignKeyBuilder relationshipBuilder,
-        IConventionContext<bool?> context);
+        IConventionContext<bool?> context
+    );
 }

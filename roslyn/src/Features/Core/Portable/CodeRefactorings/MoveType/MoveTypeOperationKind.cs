@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 
         /// <summary>
         /// Functionally doesn't change the type symbol, but moves it to it's own
-        /// namespace declaration scope. 
+        /// namespace declaration scope.
         /// </summary>
         MoveTypeNamespaceScope,
 
@@ -27,6 +27,6 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
         /// <summary>
         /// Renames the file containing the target type
         /// </summary>
-        RenameFile
+        RenameFile,
     }
 }

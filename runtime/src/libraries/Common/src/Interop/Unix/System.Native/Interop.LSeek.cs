@@ -12,10 +12,14 @@ internal static partial class Interop
         {
             SEEK_SET = 0,
             SEEK_CUR = 1,
-            SEEK_END = 2
+            SEEK_END = 2,
         }
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_LSeek", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_LSeek",
+            SetLastError = true
+        )]
         internal static partial long LSeek(SafeFileHandle fd, long offset, SeekWhence whence);
     }
 }

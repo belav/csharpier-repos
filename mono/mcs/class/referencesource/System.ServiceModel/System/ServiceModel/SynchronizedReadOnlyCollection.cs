@@ -23,7 +23,9 @@ namespace System.Collections.Generic
         public SynchronizedReadOnlyCollection(object syncRoot)
         {
             if (syncRoot == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("syncRoot"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("syncRoot")
+                );
 
             this.items = new List<T>();
             this.sync = syncRoot;
@@ -32,9 +34,13 @@ namespace System.Collections.Generic
         public SynchronizedReadOnlyCollection(object syncRoot, IEnumerable<T> list)
         {
             if (syncRoot == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("syncRoot"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("syncRoot")
+                );
             if (list == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("list"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("list")
+                );
 
             this.items = new List<T>(list);
             this.sync = syncRoot;
@@ -43,9 +49,13 @@ namespace System.Collections.Generic
         public SynchronizedReadOnlyCollection(object syncRoot, params T[] list)
         {
             if (syncRoot == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("syncRoot"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("syncRoot")
+                );
             if (list == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("list"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("list")
+                );
 
             this.items = new List<T>(list.Length);
             for (int i = 0; i < list.Length; i++)
@@ -57,9 +67,13 @@ namespace System.Collections.Generic
         internal SynchronizedReadOnlyCollection(object syncRoot, List<T> list, bool makeCopy)
         {
             if (syncRoot == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("syncRoot"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("syncRoot")
+                );
             if (list == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("list"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("list")
+                );
 
             if (makeCopy)
                 this.items = new List<T>(list);
@@ -71,20 +85,29 @@ namespace System.Collections.Generic
 
         public int Count
         {
-            get { lock (this.sync) { return this.items.Count; } }
+            get
+            {
+                lock (this.sync)
+                {
+                    return this.items.Count;
+                }
+            }
         }
 
         protected IList<T> Items
         {
-            get
-            {
-                return this.items;
-            }
+            get { return this.items; }
         }
 
         public T this[int index]
         {
-            get { lock (this.sync) { return this.items[index]; } }
+            get
+            {
+                lock (this.sync)
+                {
+                    return this.items[index];
+                }
+            }
         }
 
         public bool Contains(T value)
@@ -121,7 +144,9 @@ namespace System.Collections.Generic
 
         void ThrowReadOnly()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SFxCollectionReadOnly)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.SFxCollectionReadOnly))
+            );
         }
 
         bool ICollection<T>.IsReadOnly
@@ -131,14 +156,8 @@ namespace System.Collections.Generic
 
         T IList<T>.this[int index]
         {
-            get
-            {
-                return this[index];
-            }
-            set
-            {
-                this.ThrowReadOnly();
-            }
+            get { return this[index]; }
+            set { this.ThrowReadOnly(); }
         }
 
         void ICollection<T>.Add(T value)
@@ -181,7 +200,9 @@ namespace System.Collections.Generic
         {
             ICollection asCollection = this.items as ICollection;
             if (asCollection == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SFxCopyToRequiresICollection)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.SFxCopyToRequiresICollection))
+                );
 
             lock (this.sync)
             {
@@ -213,14 +234,8 @@ namespace System.Collections.Generic
 
         object IList.this[int index]
         {
-            get
-            {
-                return this[index];
-            }
-            set
-            {
-                this.ThrowReadOnly();
-            }
+            get { return this[index]; }
+            set { this.ThrowReadOnly(); }
         }
 
         int IList.Add(object value)
@@ -267,8 +282,14 @@ namespace System.Collections.Generic
                 return;
 
             Type type = (value == null) ? typeof(Object) : value.GetType();
-            string message = SR.GetString(SR.SFxCollectionWrongType2, type.ToString(), typeof(T).ToString());
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(message));
+            string message = SR.GetString(
+                SR.SFxCollectionWrongType2,
+                type.ToString(),
+                typeof(T).ToString()
+            );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new ArgumentException(message)
+            );
         }
 
         sealed class EnumeratorAdapter : IEnumerator, IDisposable

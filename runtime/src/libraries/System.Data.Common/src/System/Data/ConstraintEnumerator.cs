@@ -43,7 +43,10 @@ namespace System.Data
                     continue;
                 }
 
-                Debug.Assert(_constraints.Current is Constraint, "ConstraintEnumerator, contains object which is not constraint");
+                Debug.Assert(
+                    _constraints.Current is Constraint,
+                    "ConstraintEnumerator, contains object which is not constraint"
+                );
                 candidate = (Constraint)_constraints.Current;
                 if (IsValidCandidate(candidate))
                 {
@@ -57,7 +60,10 @@ namespace System.Data
         public Constraint GetConstraint()
         {
             // If currentObject is null we are before first GetNext or after last GetNext--consumer is bad
-            Debug.Assert(_currentObject != null, "GetObject should never be called w/ null currentObject.");
+            Debug.Assert(
+                _currentObject != null,
+                "GetObject should never be called w/ null currentObject."
+            );
             return _currentObject;
         }
 
@@ -68,14 +74,19 @@ namespace System.Data
 
     internal class ForeignKeyConstraintEnumerator : ConstraintEnumerator
     {
-        public ForeignKeyConstraintEnumerator(DataSet? dataSet) : base(dataSet) { }
+        public ForeignKeyConstraintEnumerator(DataSet? dataSet)
+            : base(dataSet) { }
 
-        protected override bool IsValidCandidate(Constraint constraint) => constraint is ForeignKeyConstraint;
+        protected override bool IsValidCandidate(Constraint constraint) =>
+            constraint is ForeignKeyConstraint;
 
         public ForeignKeyConstraint GetForeignKeyConstraint()
         {
             // If CurrentObject is null we are before first GetNext or after last GetNext--consumer is bad
-            Debug.Assert(CurrentObject != null, "GetObject should never be called w/ null currentObject.");
+            Debug.Assert(
+                CurrentObject != null,
+                "GetObject should never be called w/ null currentObject."
+            );
             return (ForeignKeyConstraint)CurrentObject;
         }
     }
@@ -85,13 +96,17 @@ namespace System.Data
         // this is the table to do comparisons against
         private readonly DataTable _table;
 
-        public ChildForeignKeyConstraintEnumerator(DataSet dataSet, DataTable inTable) : base(dataSet)
+        public ChildForeignKeyConstraintEnumerator(DataSet dataSet, DataTable inTable)
+            : base(dataSet)
         {
             _table = inTable;
         }
 
         protected override bool IsValidCandidate(Constraint constraint) =>
-            ((constraint is ForeignKeyConstraint) && (((ForeignKeyConstraint)constraint).Table == _table));
+            (
+                (constraint is ForeignKeyConstraint)
+                && (((ForeignKeyConstraint)constraint).Table == _table)
+            );
     }
 
     internal sealed class ParentForeignKeyConstraintEnumerator : ForeignKeyConstraintEnumerator
@@ -99,12 +114,16 @@ namespace System.Data
         // this is the table to do comparisons against
         private readonly DataTable _table;
 
-        public ParentForeignKeyConstraintEnumerator(DataSet? dataSet, DataTable inTable) : base(dataSet)
+        public ParentForeignKeyConstraintEnumerator(DataSet? dataSet, DataTable inTable)
+            : base(dataSet)
         {
             _table = inTable;
         }
 
         protected override bool IsValidCandidate(Constraint constraint) =>
-            ((constraint is ForeignKeyConstraint) && (((ForeignKeyConstraint)constraint).RelatedTable == _table));
+            (
+                (constraint is ForeignKeyConstraint)
+                && (((ForeignKeyConstraint)constraint).RelatedTable == _table)
+            );
     }
 }

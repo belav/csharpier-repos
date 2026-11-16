@@ -10,7 +10,8 @@ namespace System.Data
 {
     internal sealed class DataColumnPropertyDescriptor : PropertyDescriptor
     {
-        internal DataColumnPropertyDescriptor(DataColumn dataColumn) : base(dataColumn.ColumnName, null)
+        internal DataColumnPropertyDescriptor(DataColumn dataColumn)
+            : base(dataColumn.ColumnName, null)
         {
             Column = dataColumn;
         }
@@ -44,8 +45,7 @@ namespace System.Data
         public override Type PropertyType => Column.DataType;
 
         public override bool Equals([NotNullWhen(true)] object? other) =>
-            other is DataColumnPropertyDescriptor descriptor &&
-            descriptor.Column == Column;
+            other is DataColumnPropertyDescriptor descriptor && descriptor.Column == Column;
 
         public override int GetHashCode() => Column.GetHashCode();
 
@@ -81,6 +81,7 @@ namespace System.Data
 
         public override bool ShouldSerializeValue(object component) => false;
 
-        public override bool IsBrowsable => Column.ColumnMapping == MappingType.Hidden ? false : base.IsBrowsable;
+        public override bool IsBrowsable =>
+            Column.ColumnMapping == MappingType.Hidden ? false : base.IsBrowsable;
     }
 }

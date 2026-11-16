@@ -39,14 +39,18 @@ public class QueryFilterRewritingConvention : IModelFinalizingConvention
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
         {
             var queryFilter = entityType.GetQueryFilter();
             if (queryFilter != null)
             {
-                entityType.SetQueryFilter((LambdaExpression)DbSetAccessRewriter.Rewrite(modelBuilder.Metadata, queryFilter));
+                entityType.SetQueryFilter(
+                    (LambdaExpression)
+                        DbSetAccessRewriter.Rewrite(modelBuilder.Metadata, queryFilter)
+                );
             }
         }
     }
@@ -85,12 +89,16 @@ public class QueryFilterRewritingConvention : IModelFinalizingConvention
         {
             Check.NotNull(memberExpression, nameof(memberExpression));
 
-            if (memberExpression.Expression != null
-                && (memberExpression.Expression.Type.IsAssignableFrom(_contextType)
-                    || _contextType.IsAssignableFrom(memberExpression.Expression.Type))
+            if (
+                memberExpression.Expression != null
+                && (
+                    memberExpression.Expression.Type.IsAssignableFrom(_contextType)
+                    || _contextType.IsAssignableFrom(memberExpression.Expression.Type)
+                )
                 && memberExpression.Type.IsGenericType
                 && memberExpression.Type.GetGenericTypeDefinition() == typeof(DbSet<>)
-                && _model != null)
+                && _model != null
+            )
             {
                 var entityClrType = memberExpression.Type.GetGenericArguments()[0];
                 return new EntityQueryRootExpression(FindEntityType(entityClrType)!);
@@ -104,19 +112,23 @@ public class QueryFilterRewritingConvention : IModelFinalizingConvention
         {
             Check.NotNull(methodCallExpression, nameof(methodCallExpression));
 
-            if (methodCallExpression.Method.Name == nameof(DbContext.Set)
+            if (
+                methodCallExpression.Method.Name == nameof(DbContext.Set)
                 && methodCallExpression.Object != null
                 && typeof(DbContext).IsAssignableFrom(methodCallExpression.Object.Type)
                 && methodCallExpression.Type.IsGenericType
                 && methodCallExpression.Type.GetGenericTypeDefinition() == typeof(DbSet<>)
-                && _model != null)
+                && _model != null
+            )
             {
                 IEntityType? entityType;
                 var entityClrType = methodCallExpression.Type.GetGenericArguments()[0];
                 if (methodCallExpression.Arguments.Count == 1)
                 {
                     // STET Set method
-                    var entityTypeName = methodCallExpression.Arguments[0].GetConstantValue<string>();
+                    var entityTypeName = methodCallExpression
+                        .Arguments[0]
+                        .GetConstantValue<string>();
                     entityType = (IEntityType?)_model.FindEntityType(entityTypeName);
                 }
                 else
@@ -128,24 +140,36 @@ public class QueryFilterRewritingConvention : IModelFinalizingConvention
                 {
                     if (_model.IsShared(entityClrType))
                     {
-                        throw new InvalidOperationException(CoreStrings.InvalidSetSharedType(entityClrType.ShortDisplayName()));
+                        throw new InvalidOperationException(
+                            CoreStrings.InvalidSetSharedType(entityClrType.ShortDisplayName())
+                        );
                     }
 
-                    var findSameTypeName = ((IModel)_model).FindSameTypeNameWithDifferentNamespace(entityClrType);
+                    var findSameTypeName = ((IModel)_model).FindSameTypeNameWithDifferentNamespace(
+                        entityClrType
+                    );
                     //if the same name exists in your entity types we will show you the full namespace of the type
                     if (!string.IsNullOrEmpty(findSameTypeName))
                     {
                         throw new InvalidOperationException(
-                            CoreStrings.InvalidSetSameTypeWithDifferentNamespace(entityClrType.DisplayName(), findSameTypeName));
+                            CoreStrings.InvalidSetSameTypeWithDifferentNamespace(
+                                entityClrType.DisplayName(),
+                                findSameTypeName
+                            )
+                        );
                     }
 
-                    throw new InvalidOperationException(CoreStrings.InvalidSetType(entityClrType.ShortDisplayName()));
+                    throw new InvalidOperationException(
+                        CoreStrings.InvalidSetType(entityClrType.ShortDisplayName())
+                    );
                 }
 
                 if (entityType.IsOwned())
                 {
                     var message = CoreStrings.InvalidSetTypeOwned(
-                        entityType.DisplayName(), entityType.FindOwnership()!.PrincipalEntityType.DisplayName());
+                        entityType.DisplayName(),
+                        entityType.FindOwnership()!.PrincipalEntityType.DisplayName()
+                    );
 
                     throw new InvalidOperationException(message);
                 }
@@ -153,7 +177,10 @@ public class QueryFilterRewritingConvention : IModelFinalizingConvention
                 if (entityType.ClrType != entityClrType)
                 {
                     var message = CoreStrings.DbSetIncorrectGenericType(
-                        entityType.ShortName(), entityType.ClrType.ShortDisplayName(), entityClrType.ShortDisplayName());
+                        entityType.ShortName(),
+                        entityType.ClrType.ShortDisplayName(),
+                        entityClrType.ShortDisplayName()
+                    );
 
                     throw new InvalidOperationException(message);
                 }
@@ -164,7 +191,7 @@ public class QueryFilterRewritingConvention : IModelFinalizingConvention
             return base.VisitMethodCall(methodCallExpression);
         }
 
-        private IEntityType? FindEntityType(Type entityClrType)
-            => ((IModel)_model!).FindRuntimeEntityType(entityClrType);
+        private IEntityType? FindEntityType(Type entityClrType) =>
+            ((IModel)_model!).FindRuntimeEntityType(entityClrType);
     }
 }

@@ -1,27 +1,21 @@
 #if true
-	partial
+partial
 #endif
-class T
-{
-}
+class T { }
 
-public partial class partial
-{
-}
+public partial class partial { }
 
 public partial class A : partial
 {
-	public void partial (partial partial)
-	{  
-		partial partial_ = partial;
-	}
+    public void partial(partial partial)
+    {
+        partial partial_ = partial;
+    }
 }
 
 public class B
 {
-	int partial;
-	
-	public static void Main ()
-	{
-	}
+    int partial;
+
+    public static void Main() { }
 }

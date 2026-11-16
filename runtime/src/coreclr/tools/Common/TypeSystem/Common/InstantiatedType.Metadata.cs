@@ -26,26 +26,17 @@ namespace Internal.TypeSystem
 
         public override bool IsExplicitLayout
         {
-            get
-            {
-                return _typeDef.IsExplicitLayout;
-            }
+            get { return _typeDef.IsExplicitLayout; }
         }
 
         public override bool IsSequentialLayout
         {
-            get
-            {
-                return _typeDef.IsSequentialLayout;
-            }
+            get { return _typeDef.IsSequentialLayout; }
         }
 
         public override bool IsBeforeFieldInit
         {
-            get
-            {
-                return _typeDef.IsBeforeFieldInit;
-            }
+            get { return _typeDef.IsBeforeFieldInit; }
         }
 
         public override bool IsModuleType
@@ -59,26 +50,17 @@ namespace Internal.TypeSystem
 
         public override bool IsSealed
         {
-            get
-            {
-                return _typeDef.IsSealed;
-            }
+            get { return _typeDef.IsSealed; }
         }
 
         public override bool IsAbstract
         {
-            get
-            {
-                return _typeDef.IsAbstract;
-            }
+            get { return _typeDef.IsAbstract; }
         }
 
         public override ModuleDesc Module
         {
-            get
-            {
-                return _typeDef.Module;
-            }
+            get { return _typeDef.Module; }
         }
 
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName)

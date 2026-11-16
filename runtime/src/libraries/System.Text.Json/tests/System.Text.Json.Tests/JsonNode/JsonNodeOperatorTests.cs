@@ -8,26 +8,27 @@ namespace System.Text.Json.Nodes.Tests
     public static class OperatorTests
     {
         private const string ExpectedPrimitiveJson =
-                @"{" +
-                @"""MyInt16"":1," +
-                @"""MyInt32"":2," +
-                @"""MyInt64"":3," +
-                @"""MyUInt16"":4," +
-                @"""MyUInt32"":5," +
-                @"""MyUInt64"":6," +
-                @"""MyByte"":7," +
-                @"""MySByte"":8," +
-                @"""MyChar"":""a""," +
-                @"""MyString"":""Hello""," +
-                @"""MyBooleanTrue"":true," +
-                @"""MyBooleanFalse"":false," +
-                @"""MySingle"":1.1," +
-                @"""MyDouble"":2.2," +
-                @"""MyDecimal"":3.3," +
-                @"""MyDateTime"":""2019-01-30T12:01:02Z""," +
-                @"""MyDateTimeOffset"":""2019-01-30T12:01:02+01:00""," +
-                @"""MyGuid"":""1b33498a-7b7d-4dda-9c13-f6aa4ab449a6""" + // note lowercase
-                @"}";
+            @"{"
+            + @"""MyInt16"":1,"
+            + @"""MyInt32"":2,"
+            + @"""MyInt64"":3,"
+            + @"""MyUInt16"":4,"
+            + @"""MyUInt32"":5,"
+            + @"""MyUInt64"":6,"
+            + @"""MyByte"":7,"
+            + @"""MySByte"":8,"
+            + @"""MyChar"":""a"","
+            + @"""MyString"":""Hello"","
+            + @"""MyBooleanTrue"":true,"
+            + @"""MyBooleanFalse"":false,"
+            + @"""MySingle"":1.1,"
+            + @"""MyDouble"":2.2,"
+            + @"""MyDecimal"":3.3,"
+            + @"""MyDateTime"":""2019-01-30T12:01:02Z"","
+            + @"""MyDateTimeOffset"":""2019-01-30T12:01:02+01:00"","
+            + @"""MyGuid"":""1b33498a-7b7d-4dda-9c13-f6aa4ab449a6"""
+            + // note lowercase
+            @"}";
 
         [Fact]
         public static void ImplicitOperators_FromProperties()
@@ -49,7 +50,15 @@ namespace System.Text.Json.Nodes.Tests
             jObject["MyDouble"] = 2.2d;
             jObject["MyDecimal"] = 3.3m;
             jObject["MyDateTime"] = new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc);
-            jObject["MyDateTimeOffset"] = new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0));
+            jObject["MyDateTimeOffset"] = new DateTimeOffset(
+                2019,
+                1,
+                30,
+                12,
+                1,
+                2,
+                new TimeSpan(1, 0, 0)
+            );
             jObject["MyGuid"] = new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6");
 
             string expected = ExpectedPrimitiveJson;
@@ -81,8 +90,14 @@ namespace System.Text.Json.Nodes.Tests
             Assert.Equal(1.1f, (float)jObject["MySingle"]);
             Assert.Equal(2.2d, (double)jObject["MyDouble"]);
             Assert.Equal(3.3m, (decimal)jObject["MyDecimal"]);
-            Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc), (DateTime)jObject["MyDateTime"]);
-            Assert.Equal(new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)), (DateTimeOffset)jObject["MyDateTimeOffset"]);
+            Assert.Equal(
+                new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc),
+                (DateTime)jObject["MyDateTime"]
+            );
+            Assert.Equal(
+                new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)),
+                (DateTimeOffset)jObject["MyDateTimeOffset"]
+            );
             Assert.Equal(new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"), (Guid)jObject["MyGuid"]);
         }
 
@@ -104,12 +119,19 @@ namespace System.Text.Json.Nodes.Tests
             Assert.Equal(1.1f, (float)(JsonNode)1.1f);
             Assert.Equal(2.2d, (double)(JsonNode)2.2d);
             Assert.Equal(3.3m, (decimal)(JsonNode)3.3m);
-            Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc),
-                (DateTime)(JsonNode)new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc));
-            Assert.Equal(new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)),
-                (DateTimeOffset)(JsonNode)new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)));
-            Assert.Equal(new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"),
-                (Guid)(JsonNode)new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"));
+            Assert.Equal(
+                new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc),
+                (DateTime)(JsonNode)new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc)
+            );
+            Assert.Equal(
+                new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)),
+                (DateTimeOffset)
+                    (JsonNode)new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0))
+            );
+            Assert.Equal(
+                new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"),
+                (Guid)(JsonNode)new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6")
+            );
         }
 
         [Fact]
@@ -151,8 +173,13 @@ namespace System.Text.Json.Nodes.Tests
             Assert.NotNull((float?)(JsonValue)(float)42);
             Assert.NotNull((double?)(JsonValue)(double)42);
             Assert.NotNull((decimal?)(JsonValue)(decimal)42);
-            Assert.NotNull((DateTime?)(JsonValue)new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc));
-            Assert.NotNull((DateTimeOffset?)(JsonValue)new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)));
+            Assert.NotNull(
+                (DateTime?)(JsonValue)new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc)
+            );
+            Assert.NotNull(
+                (DateTimeOffset?)
+                    (JsonValue)new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0))
+            );
             Assert.NotNull((Guid?)(JsonValue)new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"));
         }
 
@@ -181,7 +208,7 @@ namespace System.Text.Json.Nodes.Tests
         [Fact]
         public static void ImplicitOperators_FromNullableValues()
         {
-            #pragma warning disable xUnit2002
+#pragma warning disable xUnit2002
             Assert.NotNull((JsonValue?)(byte?)42);
             Assert.NotNull((JsonValue?)(short?)42);
             Assert.NotNull((JsonValue?)(int?)42);
@@ -195,9 +222,15 @@ namespace System.Text.Json.Nodes.Tests
             Assert.NotNull((JsonValue?)(float?)42);
             Assert.NotNull((JsonValue?)(double?)42);
             Assert.NotNull((JsonValue?)(decimal?)42);
-            #pragma warning restore xUnit2002
-            Assert.NotNull((JsonValue?)(DateTime?)new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc));
-            Assert.NotNull((JsonValue?)(DateTimeOffset?)new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)));
+#pragma warning restore xUnit2002
+            Assert.NotNull(
+                (JsonValue?)(DateTime?)new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc)
+            );
+            Assert.NotNull(
+                (JsonValue?)
+                    (DateTimeOffset?)
+                        new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0))
+            );
             Assert.NotNull((JsonValue?)(Guid?)new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"));
         }
 
@@ -205,7 +238,9 @@ namespace System.Text.Json.Nodes.Tests
         public static void CastsNotSupported()
         {
             // Since generics and boxing do not support casts, we get InvalidCastExceptions here.
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => (byte)(JsonNode)(long)3); // narrowing
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                (byte)(JsonNode)(long)3
+            ); // narrowing
             // "A value of type 'System.Int64' cannot be converted to a 'System.Byte'."
             Assert.Contains(typeof(long).ToString(), ex.Message);
             Assert.Contains(typeof(byte).ToString(), ex.Message);

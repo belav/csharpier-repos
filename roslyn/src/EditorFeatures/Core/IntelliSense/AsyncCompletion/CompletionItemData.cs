@@ -8,12 +8,17 @@ using RoslynCompletionItem = Microsoft.CodeAnalysis.Completion.CompletionItem;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncCompletion
 {
-    internal sealed record class CompletionItemData(RoslynCompletionItem RoslynItem, SnapshotPoint? TriggerLocation)
+    internal sealed record class CompletionItemData(
+        RoslynCompletionItem RoslynItem,
+        SnapshotPoint? TriggerLocation
+    )
     {
         private const string RoslynCompletionItemData = nameof(RoslynCompletionItemData);
 
-        public static bool TryGetData(CompletionItem vsCompletionItem, out CompletionItemData data)
-            => vsCompletionItem.Properties.TryGetProperty(RoslynCompletionItemData, out data);
+        public static bool TryGetData(
+            CompletionItem vsCompletionItem,
+            out CompletionItemData data
+        ) => vsCompletionItem.Properties.TryGetProperty(RoslynCompletionItemData, out data);
 
         public static RoslynCompletionItem GetOrAddDummyRoslynItem(CompletionItem vsItem)
         {
@@ -27,14 +32,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             return roslynItem;
         }
 
-        public static void AddData(CompletionItem vsCompletionItem, RoslynCompletionItem roslynItem, SnapshotPoint? triggerLocation)
-            => vsCompletionItem.Properties[RoslynCompletionItemData] = new CompletionItemData(roslynItem, triggerLocation);
+        public static void AddData(
+            CompletionItem vsCompletionItem,
+            RoslynCompletionItem roslynItem,
+            SnapshotPoint? triggerLocation
+        ) =>
+            vsCompletionItem.Properties[RoslynCompletionItemData] = new CompletionItemData(
+                roslynItem,
+                triggerLocation
+            );
 
-        private static RoslynCompletionItem CreateDummyRoslynItem(CompletionItem vsItem)
-            => RoslynCompletionItem.Create(
+        private static RoslynCompletionItem CreateDummyRoslynItem(CompletionItem vsItem) =>
+            RoslynCompletionItem.Create(
                 displayText: vsItem.DisplayText,
                 filterText: vsItem.FilterText,
                 sortText: vsItem.SortText,
-                displayTextSuffix: vsItem.Suffix);
+                displayTextSuffix: vsItem.Suffix
+            );
     }
 }

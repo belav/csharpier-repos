@@ -34,11 +34,10 @@ public class ArrayPropertyValues : PropertyValues
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override object ToObject()
-        => EntityType.GetOrCreateMaterializer(MaterializerSource)(
-            new MaterializationContext(
-                new ValueBuffer(_values),
-                InternalEntry.Context));
+    public override object ToObject() =>
+        EntityType.GetOrCreateMaterializer(MaterializerSource)(
+            new MaterializationContext(new ValueBuffer(_values), InternalEntry.Context)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -109,8 +108,8 @@ public class ArrayPropertyValues : PropertyValues
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override IReadOnlyList<IProperty> Properties
-        => _properties ??= EntityType.GetProperties().ToList();
+    public override IReadOnlyList<IProperty> Properties =>
+        _properties ??= EntityType.GetProperties().ToList();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -142,8 +141,7 @@ public class ArrayPropertyValues : PropertyValues
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override TValue GetValue<TValue>(string propertyName)
-        => (TValue)this[propertyName]!;
+    public override TValue GetValue<TValue>(string propertyName) => (TValue)this[propertyName]!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -151,8 +149,7 @@ public class ArrayPropertyValues : PropertyValues
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override TValue GetValue<TValue>(IProperty property)
-        => (TValue)this[property]!;
+    public override TValue GetValue<TValue>(IProperty property) => (TValue)this[property]!;
 
     private void SetValue(int index, object? value)
     {
@@ -167,7 +164,9 @@ public class ArrayPropertyValues : PropertyValues
                         property.Name,
                         property.DeclaringType.DisplayName(),
                         value.GetType().DisplayName(),
-                        property.ClrType.DisplayName()));
+                        property.ClrType.DisplayName()
+                    )
+                );
             }
         }
         else
@@ -178,13 +177,15 @@ public class ArrayPropertyValues : PropertyValues
                     CoreStrings.ValueCannotBeNull(
                         property.Name,
                         property.DeclaringType.DisplayName(),
-                        property.ClrType.DisplayName()));
+                        property.ClrType.DisplayName()
+                    )
+                );
             }
         }
 
         _values[index] = value;
     }
 
-    private IEntityMaterializerSource MaterializerSource
-        => InternalEntry.StateManager.EntityMaterializerSource;
+    private IEntityMaterializerSource MaterializerSource =>
+        InternalEntry.StateManager.EntityMaterializerSource;
 }

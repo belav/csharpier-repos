@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         Boxing,
         ImplicitPointerToVoid,
         ImplicitNullToPointer,
+
         // Any explicit conversions involving pointers not covered by PointerToVoid or NullToPointer.
         // Currently, this is just implicit function pointer conversions.
         ImplicitPointer,
@@ -31,6 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ImplicitUserDefined,
         AnonymousFunction,
         MethodGroup,
+
         // Function type conversions are conversions from an inferred "function type" of
         // a method group or lambda expression:
         // - to another inferred "function type", or
@@ -46,13 +48,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         ExplicitPointerToPointer,
         ExplicitIntegerToPointer,
         ExplicitPointerToInteger,
+
         // The IntPtr conversions are not described by the specification but we must
         // implement them for compatibility with the native compiler.
         IntPtr,
         InterpolatedString, // a conversion from an interpolated string to IFormattable or FormattableString
         SwitchExpression, // a conversion from a switch expression to a type which each arm can convert to
         ConditionalExpression, // a conversion from a conditional expression to a type which each side can convert to
-        Deconstruction, // The Deconstruction conversion is not part of the language, it is an implementation detail 
+        Deconstruction, // The Deconstruction conversion is not part of the language, it is an implementation detail
         StackAllocToPointerType,
         StackAllocToSpanType,
 

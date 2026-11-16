@@ -13,16 +13,20 @@ namespace System.ServiceModel.Activities.Diagnostics
     sealed class WorkflowServiceHostPerformanceCounters : PerformanceCountersBase
     {
         static object syncRoot = new object();
-        static Guid workflowServiceHostProviderId = new Guid("{f6c5ad57-a5be-4259-9060-b2c4ebfccd96}");
-        static Guid workflowServiceHostCounterSetId = new Guid("{1f7207c2-0b8c-48de-9dcd-64ff98cc24e1}");
+        static Guid workflowServiceHostProviderId = new Guid(
+            "{f6c5ad57-a5be-4259-9060-b2c4ebfccd96}"
+        );
+        static Guid workflowServiceHostCounterSetId = new Guid(
+            "{1f7207c2-0b8c-48de-9dcd-64ff98cc24e1}"
+        );
 
         // Double-checked locking pattern requires volatile for read/write synchronization
-        static volatile CounterSet workflowServiceHostCounterSet;         // Defines the counter set
+        static volatile CounterSet workflowServiceHostCounterSet; // Defines the counter set
 
         // The strings defined here are not used in the counter set and defined only to implement CounterNames property.
-        // CounterNames is not used currently and hence these strings need not be localized. 
+        // CounterNames is not used currently and hence these strings need not be localized.
         // The Counter Names and description are defined in the manifest which will be localized and installed by the setup.
-        static readonly string[] perfCounterNames = 
+        static readonly string[] perfCounterNames =
         {
             "Workflows Created",
             "Workflows Created Per Second",
@@ -63,49 +67,34 @@ namespace System.ServiceModel.Activities.Diagnostics
 
         internal override string InstanceName
         {
-            get
-            {
-                return this.instanceName;
-            }
+            get { return this.instanceName; }
         }
 
         internal override string[] CounterNames
         {
-            get
-            {
-                return perfCounterNames;
-            }
+            get { return perfCounterNames; }
         }
 
         internal override int PerfCounterStart
         {
-            get 
-            { 
-                return (int)PerfCounters.WorkflowsCreated;
-            }
+            get { return (int)PerfCounters.WorkflowsCreated; }
         }
 
         internal override int PerfCounterEnd
         {
-            get 
-            { 
-                return (int)PerfCounters.TotalCounters; 
-            }
+            get { return (int)PerfCounters.TotalCounters; }
         }
 
         internal bool PerformanceCountersEnabled
         {
-            get 
-            { 
-                return this.isPerformanceCounterEnabled;
-            }
+            get { return this.isPerformanceCounterEnabled; }
         }
 
         internal override bool Initialized
         {
             get { return this.initialized; }
         }
-                
+
         internal WorkflowServiceHostPerformanceCounters(WorkflowServiceHost serviceHost)
         {
             this.serviceHost = serviceHost;
@@ -122,29 +111,99 @@ namespace System.ServiceModel.Activities.Diagnostics
                         CounterSet localCounterSet = CreateCounterSet();
 
                         // Add the counters to the counter set definition.
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsCreated, CounterType.RawData32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsCreatedPerSecond, CounterType.RateOfCountPerSecond32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsExecuting, CounterType.RawData32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsCompleted, CounterType.RawData32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsCompletedPerSecond, CounterType.RateOfCountPerSecond32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsAborted, CounterType.RawData32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsAbortedPerSecond, CounterType.RateOfCountPerSecond32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsInMemory, CounterType.RawData32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsPersisted, CounterType.RawData32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsPersistedPerSecond, CounterType.RateOfCountPerSecond32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsTerminated, CounterType.RawData32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsTerminatedPerSecond, CounterType.RateOfCountPerSecond32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsLoaded, CounterType.RawData32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsLoadedPerSecond, CounterType.RateOfCountPerSecond32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsUnloaded, CounterType.RawData32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsUnloadedPerSecond, CounterType.RateOfCountPerSecond32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsSuspended, CounterType.RawData32, perfCounterNames[(int)PerfCounters.WorkflowsSuspended]);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsSuspendedPerSecond, CounterType.RateOfCountPerSecond32);
-                        localCounterSet.AddCounter((int)PerfCounters.WorkflowsIdlePerSecond, CounterType.RateOfCountPerSecond32);
-                        localCounterSet.AddCounter((int)PerfCounters.AverageWorkflowLoadTime, CounterType.AverageTimer32);
-                        localCounterSet.AddCounter((int)PerfCounters.AverageWorkflowLoadTimeBase, CounterType.AverageBase);
-                        localCounterSet.AddCounter((int)PerfCounters.AverageWorkflowPersistTime, CounterType.AverageTimer32);
-                        localCounterSet.AddCounter((int)PerfCounters.AverageWorkflowPersistTimeBase, CounterType.AverageBase);
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsCreated,
+                            CounterType.RawData32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsCreatedPerSecond,
+                            CounterType.RateOfCountPerSecond32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsExecuting,
+                            CounterType.RawData32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsCompleted,
+                            CounterType.RawData32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsCompletedPerSecond,
+                            CounterType.RateOfCountPerSecond32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsAborted,
+                            CounterType.RawData32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsAbortedPerSecond,
+                            CounterType.RateOfCountPerSecond32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsInMemory,
+                            CounterType.RawData32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsPersisted,
+                            CounterType.RawData32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsPersistedPerSecond,
+                            CounterType.RateOfCountPerSecond32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsTerminated,
+                            CounterType.RawData32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsTerminatedPerSecond,
+                            CounterType.RateOfCountPerSecond32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsLoaded,
+                            CounterType.RawData32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsLoadedPerSecond,
+                            CounterType.RateOfCountPerSecond32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsUnloaded,
+                            CounterType.RawData32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsUnloadedPerSecond,
+                            CounterType.RateOfCountPerSecond32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsSuspended,
+                            CounterType.RawData32,
+                            perfCounterNames[(int)PerfCounters.WorkflowsSuspended]
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsSuspendedPerSecond,
+                            CounterType.RateOfCountPerSecond32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.WorkflowsIdlePerSecond,
+                            CounterType.RateOfCountPerSecond32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.AverageWorkflowLoadTime,
+                            CounterType.AverageTimer32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.AverageWorkflowLoadTimeBase,
+                            CounterType.AverageBase
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.AverageWorkflowPersistTime,
+                            CounterType.AverageTimer32
+                        );
+                        localCounterSet.AddCounter(
+                            (int)PerfCounters.AverageWorkflowPersistTimeBase,
+                            CounterType.AverageBase
+                        );
 
                         workflowServiceHostCounterSet = localCounterSet;
                     }
@@ -152,7 +211,7 @@ namespace System.ServiceModel.Activities.Diagnostics
             }
         }
 
-        static internal string CreateFriendlyInstanceName(ServiceHostBase serviceHost)
+        internal static string CreateFriendlyInstanceName(ServiceHostBase serviceHost)
         {
             // instance name is: serviceName@uri
             ServiceInfo serviceInfo = new ServiceInfo(serviceHost);
@@ -169,13 +228,21 @@ namespace System.ServiceModel.Activities.Diagnostics
                 int count = 0;
 
                 InstanceNameTruncOptions tasks = GetCompressionTasks(
-                    length, serviceName.Length, uri.Length);
+                    length,
+                    serviceName.Length,
+                    uri.Length
+                );
 
                 //if necessary, compress service name to 8 chars with a 2 char hash code
                 if ((tasks & InstanceNameTruncOptions.Service32) > 0)
                 {
                     count = 32;
-                    serviceName = GetHashedString(serviceName, count - hashLength, serviceName.Length - count + hashLength, true);
+                    serviceName = GetHashedString(
+                        serviceName,
+                        count - hashLength,
+                        serviceName.Length - count + hashLength,
+                        true
+                    );
                 }
 
                 //if necessary,  compress uri to 36 chars with a 2 char hash code
@@ -192,17 +259,24 @@ namespace System.ServiceModel.Activities.Diagnostics
 
         static bool TryGetFullVirtualPath(ServiceHostBase serviceHost, out string uri)
         {
-            VirtualPathExtension pathExtension = serviceHost.Extensions.Find<VirtualPathExtension>();
+            VirtualPathExtension pathExtension =
+                serviceHost.Extensions.Find<VirtualPathExtension>();
             if (pathExtension == null)
             {
                 uri = null;
                 return false;
             }
-            uri = pathExtension.ApplicationVirtualPath + pathExtension.VirtualPath.ToString().Replace("~", "");
+            uri =
+                pathExtension.ApplicationVirtualPath
+                + pathExtension.VirtualPath.ToString().Replace("~", "");
             return uri != null;
         }
 
-        static InstanceNameTruncOptions GetCompressionTasks(int totalLen, int serviceLen, int uriLen)
+        static InstanceNameTruncOptions GetCompressionTasks(
+            int totalLen,
+            int serviceLen,
+            int uriLen
+        )
         {
             InstanceNameTruncOptions bitmask = 0;
 
@@ -225,20 +299,29 @@ namespace System.ServiceModel.Activities.Diagnostics
             return bitmask;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls into Sys.Diag.PerformanceData.CounterSet..ctor marked as SecurityCritical", Safe = "We only make the call if PartialTrustHelper.AppDomainFullyTrusted is true.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into Sys.Diag.PerformanceData.CounterSet..ctor marked as SecurityCritical",
+            Safe = "We only make the call if PartialTrustHelper.AppDomainFullyTrusted is true."
+        )]
         [SecuritySafeCritical]
         static CounterSet CreateCounterSet()
         {
             if (PartialTrustHelpers.AppDomainFullyTrusted)
             {
-                return new CounterSet(workflowServiceHostProviderId, workflowServiceHostCounterSetId, CounterSetInstanceType.Multiple);
+                return new CounterSet(
+                    workflowServiceHostProviderId,
+                    workflowServiceHostCounterSetId,
+                    CounterSetInstanceType.Multiple
+                );
             }
             else
                 return null;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls into Sys.Diag.PerformanceData.CounterSetInstance.CreateCounterSetInstance marked as SecurityCritical",
-            Safe = "We only make the call if PartialTrustHelper.AppDomainFullyTrusted is true.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into Sys.Diag.PerformanceData.CounterSetInstance.CreateCounterSetInstance marked as SecurityCritical",
+            Safe = "We only make the call if PartialTrustHelper.AppDomainFullyTrusted is true."
+        )]
         [SecuritySafeCritical]
         static CounterSetInstance CreateCounterSetInstance(string name)
         {
@@ -248,7 +331,8 @@ namespace System.ServiceModel.Activities.Diagnostics
             {
                 try
                 {
-                    workflowServiceHostCounterSetInstance = workflowServiceHostCounterSet.CreateCounterSetInstance(name);
+                    workflowServiceHostCounterSetInstance =
+                        workflowServiceHostCounterSet.CreateCounterSetInstance(name);
                 }
                 catch (Exception exception)
                 {
@@ -256,7 +340,7 @@ namespace System.ServiceModel.Activities.Diagnostics
                     {
                         throw;
                     }
-                    // A conflicting instance name already exists and probably the unmanaged resource is not yet disposed. 
+                    // A conflicting instance name already exists and probably the unmanaged resource is not yet disposed.
                     FxTrace.Exception.AsWarning(exception);
                     workflowServiceHostCounterSetInstance = null;
                 }
@@ -273,23 +357,26 @@ namespace System.ServiceModel.Activities.Diagnostics
             {
                 EnsureCounterSet();
                 // Create an instance of the counter set (contains the counter data).
-                this.workflowServiceHostCounterSetInstance = CreateCounterSetInstance(this.InstanceName);
+                this.workflowServiceHostCounterSetInstance = CreateCounterSetInstance(
+                    this.InstanceName
+                );
 
                 if (this.workflowServiceHostCounterSetInstance != null)
                 {
-                    this.counters = new CounterData[(int)PerfCounters.TotalCounters]; 
+                    this.counters = new CounterData[(int)PerfCounters.TotalCounters];
                     for (int i = 0; i < (int)PerfCounters.TotalCounters; i++)
                     {
                         this.counters[i] = this.workflowServiceHostCounterSetInstance.Counters[i];
                         this.counters[i].Value = 0;
                     }
-                    // Enable perf counter only if CounterSetInstance is created without instance name conflict. 
-                    this.isPerformanceCounterEnabled = PerformanceCounters.PerformanceCountersEnabled;
+                    // Enable perf counter only if CounterSetInstance is created without instance name conflict.
+                    this.isPerformanceCounterEnabled =
+                        PerformanceCounters.PerformanceCountersEnabled;
                 }
             }
             this.initialized = true;
         }
-        
+
         protected override void Dispose(bool disposing)
         {
             try
@@ -315,7 +402,7 @@ namespace System.ServiceModel.Activities.Diagnostics
                 this.counters[(int)PerfCounters.WorkflowsCreatedPerSecond].Increment();
             }
         }
-        
+
         internal void WorkflowExecuting(bool increment)
         {
             if (PerformanceCountersEnabled)
@@ -339,7 +426,7 @@ namespace System.ServiceModel.Activities.Diagnostics
                 this.counters[(int)PerfCounters.WorkflowsCompletedPerSecond].Increment();
             }
         }
-        
+
         internal void WorkflowAborted()
         {
             if (PerformanceCountersEnabled)
@@ -361,7 +448,7 @@ namespace System.ServiceModel.Activities.Diagnostics
         {
             if (PerformanceCountersEnabled)
             {
-                if (this.counters[(int)PerfCounters.WorkflowsInMemory].RawValue > 0 )
+                if (this.counters[(int)PerfCounters.WorkflowsInMemory].RawValue > 0)
                     this.counters[(int)PerfCounters.WorkflowsInMemory].Decrement();
             }
         }
@@ -423,8 +510,8 @@ namespace System.ServiceModel.Activities.Diagnostics
         {
             if (PerformanceCountersEnabled)
             {
-                    this.counters[(int)PerfCounters.AverageWorkflowLoadTime].IncrementBy(time);
-                    this.counters[(int)PerfCounters.AverageWorkflowLoadTimeBase].Increment();
+                this.counters[(int)PerfCounters.AverageWorkflowLoadTime].IncrementBy(time);
+                this.counters[(int)PerfCounters.AverageWorkflowLoadTimeBase].Increment();
             }
         }
 
@@ -432,8 +519,8 @@ namespace System.ServiceModel.Activities.Diagnostics
         {
             if (PerformanceCountersEnabled)
             {
-                    this.counters[(int)PerfCounters.AverageWorkflowPersistTime].IncrementBy(time);
-                    this.counters[(int)PerfCounters.AverageWorkflowPersistTimeBase].Increment();
+                this.counters[(int)PerfCounters.AverageWorkflowPersistTime].IncrementBy(time);
+                this.counters[(int)PerfCounters.AverageWorkflowPersistTimeBase].Increment();
             }
         }
 
@@ -461,18 +548,17 @@ namespace System.ServiceModel.Activities.Diagnostics
             AverageWorkflowLoadTime,
             AverageWorkflowLoadTimeBase,
             AverageWorkflowPersistTime,
-            AverageWorkflowPersistTimeBase,            
-            TotalCounters = AverageWorkflowPersistTimeBase + 1
+            AverageWorkflowPersistTimeBase,
+            TotalCounters = AverageWorkflowPersistTimeBase + 1,
         }
 
-        // Truncate options for the Instance name in ServiceName@uri format. 
+        // Truncate options for the Instance name in ServiceName@uri format.
         [Flags]
         enum InstanceNameTruncOptions : uint
         {
             NoBits = 0,
             Service32 = 0x01, //compress service name to 16 chars
-            Uri31 = 0x04      //compress uri to 31 chars
+            Uri31 = 0x04, //compress uri to 31 chars
         }
-        
     }
 }

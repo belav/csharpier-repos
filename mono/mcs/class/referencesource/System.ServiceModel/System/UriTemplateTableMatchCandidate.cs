@@ -16,27 +16,19 @@ namespace System
             this.segmentsCount = segmentsCount;
             this.data = data;
         }
+
         public object Data
         {
-            get
-            {
-                return this.data;
-            }
+            get { return this.data; }
         }
         public int SegmentsCount
         {
-            get
-            {
-                return this.segmentsCount;
-            }
+            get { return this.segmentsCount; }
         }
 
         public UriTemplate Template
         {
-            get
-            {
-                return this.template;
-            }
+            get { return this.template; }
         }
     }
 }

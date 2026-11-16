@@ -8,8 +8,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     public partial class ContinueStatementSyntax
     {
-        public ContinueStatementSyntax Update(SyntaxToken continueKeyword, SyntaxToken semicolonToken)
-            => Update(AttributeLists, continueKeyword, semicolonToken);
+        public ContinueStatementSyntax Update(
+            SyntaxToken continueKeyword,
+            SyntaxToken semicolonToken
+        ) => Update(AttributeLists, continueKeyword, semicolonToken);
     }
 }
 
@@ -17,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public partial class SyntaxFactory
     {
-        public static ContinueStatementSyntax ContinueStatement(SyntaxToken continueKeyword, SyntaxToken semicolonToken)
-            => ContinueStatement(attributeLists: default, continueKeyword, semicolonToken);
+        public static ContinueStatementSyntax ContinueStatement(
+            SyntaxToken continueKeyword,
+            SyntaxToken semicolonToken
+        ) => ContinueStatement(attributeLists: default, continueKeyword, semicolonToken);
     }
 }

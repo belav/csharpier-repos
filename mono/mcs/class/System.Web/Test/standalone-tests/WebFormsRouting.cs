@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,47 +32,46 @@ using System.Configuration.Provider;
 using System.IO;
 using System.Web;
 using System.Web.Hosting;
-
+using NUnit.Framework;
 using StandAloneRunnerSupport;
 using StandAloneTests;
 
-using NUnit.Framework;
-
 namespace StandAloneTests.WebFormsRouting
 {
-	[TestCase ("WebFormsRouting 01", "Web forms routing")]
-	public sealed class WebFormsRouting_01 : ITestCase
-	{
-		public string PhysicalPath {
-			get {
-				return Path.Combine (Consts.BasePhysicalDir, "WebFormsRouting");
-			}
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase("WebFormsRouting 01", "Web forms routing")]
+    public sealed class WebFormsRouting_01 : ITestCase
+    {
+        public string PhysicalPath
+        {
+            get { return Path.Combine(Consts.BasePhysicalDir, "WebFormsRouting"); }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("/Default.aspx", Default_Aspx));
-			runItems.Add (new TestRunItem ("/search/test", Search_Test));
-			runItems.Add (new TestRunItem ("/search/true", Search_True));
-			runItems.Add (new TestRunItem ("/search/red", Search_Red));
-			
-			return true;
-		}
-	
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = @"<a href=""/search/test"">Search for 'test'</a>";
-			
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
+        public string VirtualPath
+        {
+            get { return "/"; }
+        }
 
-		void Search_Test (string result, TestRunItem runItem)
-		{
-			string originalHtml = @"Search term is: <span id=""label1"">test</span><br />
+        public bool SetUp(List<TestRunItem> runItems)
+        {
+            runItems.Add(new TestRunItem("/Default.aspx", Default_Aspx));
+            runItems.Add(new TestRunItem("/search/test", Search_Test));
+            runItems.Add(new TestRunItem("/search/true", Search_True));
+            runItems.Add(new TestRunItem("/search/red", Search_Red));
+
+            return true;
+        }
+
+        void Default_Aspx(string result, TestRunItem runItem)
+        {
+            string originalHtml = @"<a href=""/search/test"">Search for 'test'</a>";
+
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
+        }
+
+        void Search_Test(string result, TestRunItem runItem)
+        {
+            string originalHtml =
+                @"Search term is: <span id=""label1"">test</span><br />
 	Search term from expression is: <span id=""label2"">test</span><br />
 	<pre id=""testLog"">.: Missing key (key: &#39;SearchTermd&#39;)
 	Returned null.
@@ -99,13 +98,14 @@ namespace StandAloneTests.WebFormsRouting
 .: Non-string value (key: &#39;doubleValue&#39;)
 	Returned value of type &#39;System.Double&#39;: 1,23
 </pre>";
-			
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
 
-		void Search_True (string result, TestRunItem runItem)
-		{
-			string originalHtml = @"Search term is: <span id=""label1"">true</span><br />
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
+        }
+
+        void Search_True(string result, TestRunItem runItem)
+        {
+            string originalHtml =
+                @"Search term is: <span id=""label1"">true</span><br />
 	Search term from expression is: <span id=""label2"">true</span><br />
 	<pre id=""testLog"">.: Missing key (key: &#39;SearchTermd&#39;)
 	Returned null.
@@ -132,13 +132,14 @@ namespace StandAloneTests.WebFormsRouting
 .: Non-string value (key: &#39;doubleValue&#39;)
 	Returned value of type &#39;System.Double&#39;: 1,23
 </pre>";
-			
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
 
-		void Search_Red (string result, TestRunItem runItem)
-		{
-			string originalHtml = @"Search term is: <span id=""label1"">red</span><br /> 
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
+        }
+
+        void Search_Red(string result, TestRunItem runItem)
+        {
+            string originalHtml =
+                @"Search term is: <span id=""label1"">red</span><br /> 
 	Search term from expression is: <span id=""label2"">red</span><br /> 
 	<pre id=""testLog"">.: Missing key (key: &#39;SearchTermd&#39;)
 	Returned null.
@@ -165,8 +166,8 @@ namespace StandAloneTests.WebFormsRouting
 .: Non-string value (key: &#39;doubleValue&#39;)
 	Returned value of type &#39;System.Double&#39;: 1,23
 </pre>";
-			
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-	}
+
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
+        }
+    }
 }

@@ -6,6 +6,7 @@ using Xunit;
 public class Program
 {
     private static int s_result;
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -59,7 +60,5 @@ public interface Base
 
 public class C : Base
 {
-    public void Test(long arg)
-    {
-    }
+    public void Test(long arg) { }
 }

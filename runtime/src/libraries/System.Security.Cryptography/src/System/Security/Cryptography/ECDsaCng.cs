@@ -18,10 +18,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public CngAlgorithm HashAlgorithm
         {
-            get
-            {
-                return _hashAlgorithm;
-            }
+            get { return _hashAlgorithm; }
             set
             {
                 ArgumentNullException.ThrowIfNull(value);
@@ -90,7 +87,8 @@ namespace System.Security.Cryptography
             // so either value is acceptable for the ECDSA wrapper object.
             //
             // It is worth noting, however, that ECDSA-identified keys cannot be used for key exchange (ECDH) in CNG.
-            return algorithmGroup == CngAlgorithmGroup.ECDsa || algorithmGroup == CngAlgorithmGroup.ECDiffieHellman;
+            return algorithmGroup == CngAlgorithmGroup.ECDsa
+                || algorithmGroup == CngAlgorithmGroup.ECDiffieHellman;
         }
 
         internal string? GetCurveName(out string? oidValue)
@@ -112,7 +110,11 @@ namespace System.Security.Cryptography
             }
         }
 
-        private void ImportKeyBlob(byte[] ecfullKeyBlob, string curveName, bool includePrivateParameters)
+        private void ImportKeyBlob(
+            byte[] ecfullKeyBlob,
+            string curveName,
+            bool includePrivateParameters
+        )
         {
             CngKey key = ECCng.ImportKeyBlob(ecfullKeyBlob, curveName, includePrivateParameters);
             try
@@ -154,7 +156,8 @@ namespace System.Security.Cryptography
             return Key.TryExportKeyBlob(
                 Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
                 destination,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
 
         private byte[] ExportEncryptedPkcs8(ReadOnlySpan<char> pkcs8Password, int kdfCount)
@@ -166,39 +169,55 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> pkcs8Password,
             int kdfCount,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             return Key.TryExportPkcs8KeyBlob(
                 pkcs8Password,
                 kdfCount,
                 destination,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
 
-        [Obsolete(Obsoletions.EccXmlExportImportMessage, DiagnosticId = Obsoletions.EccXmlExportImportDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public void FromXmlString(string xml, ECKeyXmlFormat format)
-            => throw new PlatformNotSupportedException();
+        [Obsolete(
+            Obsoletions.EccXmlExportImportMessage,
+            DiagnosticId = Obsoletions.EccXmlExportImportDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public void FromXmlString(string xml, ECKeyXmlFormat format) =>
+            throw new PlatformNotSupportedException();
 
-        public byte[] SignData(byte[] data)
-            => SignData(data, new HashAlgorithmName(HashAlgorithm.Algorithm));
+        public byte[] SignData(byte[] data) =>
+            SignData(data, new HashAlgorithmName(HashAlgorithm.Algorithm));
 
         public byte[] SignData(byte[] data, int offset, int count) =>
             SignData(data, offset, count, new HashAlgorithmName(HashAlgorithm.Algorithm));
 
-        public byte[] SignData(Stream data)
-            => SignData(data, new HashAlgorithmName(HashAlgorithm.Algorithm));
+        public byte[] SignData(Stream data) =>
+            SignData(data, new HashAlgorithmName(HashAlgorithm.Algorithm));
 
-        [Obsolete(Obsoletions.EccXmlExportImportMessage, DiagnosticId = Obsoletions.EccXmlExportImportDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public string ToXmlString(ECKeyXmlFormat format)
-            => throw new PlatformNotSupportedException();
+        [Obsolete(
+            Obsoletions.EccXmlExportImportMessage,
+            DiagnosticId = Obsoletions.EccXmlExportImportDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public string ToXmlString(ECKeyXmlFormat format) =>
+            throw new PlatformNotSupportedException();
 
-        public bool VerifyData(byte[] data, byte[] signature)
-            => VerifyData(data, signature, new HashAlgorithmName(HashAlgorithm.Algorithm));
+        public bool VerifyData(byte[] data, byte[] signature) =>
+            VerifyData(data, signature, new HashAlgorithmName(HashAlgorithm.Algorithm));
 
-        public bool VerifyData(byte[] data, int offset, int count, byte[] signature)
-            => VerifyData(data, offset, count, signature, new HashAlgorithmName(HashAlgorithm.Algorithm));
+        public bool VerifyData(byte[] data, int offset, int count, byte[] signature) =>
+            VerifyData(
+                data,
+                offset,
+                count,
+                signature,
+                new HashAlgorithmName(HashAlgorithm.Algorithm)
+            );
 
-        public bool VerifyData(Stream data, byte[] signature)
-            => VerifyData(data, signature, new HashAlgorithmName(HashAlgorithm.Algorithm));
+        public bool VerifyData(Stream data, byte[] signature) =>
+            VerifyData(data, signature, new HashAlgorithmName(HashAlgorithm.Algorithm));
     }
 }

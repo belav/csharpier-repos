@@ -3,9 +3,7 @@
 
 using System;
 using System.Text;
-
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL
@@ -46,8 +44,10 @@ namespace Internal.IL
                     // Find the owning module so that the type name formatter can remove
                     // redundant assembly name qualifiers in type names.
                     TypeDesc owningTypeDefinition = _methodIL.OwningMethod.OwningType;
-                    ModuleDesc owningModule = owningTypeDefinition is MetadataType ?
-                        ((MetadataType)owningTypeDefinition).Module : null;
+                    ModuleDesc owningModule =
+                        owningTypeDefinition is MetadataType
+                            ? ((MetadataType)owningTypeDefinition).Module
+                            : null;
 
                     _typeNameFormatter = new ILTypeNameFormatter(owningModule);
                 }
@@ -60,7 +60,9 @@ namespace Internal.IL
             // Types referenced from the IL show as instantiated over generic parameter.
             // E.g. "initobj !0" becomes "initobj !T"
             TypeDesc typeInContext = type.InstantiateSignature(
-                _methodIL.OwningMethod.OwningType.Instantiation, _methodIL.OwningMethod.Instantiation);
+                _methodIL.OwningMethod.OwningType.Instantiation,
+                _methodIL.OwningMethod.Instantiation
+            );
             if (typeInContext.HasInstantiation || forceValueClassPrefix)
                 this.TypeNameFormatter.AppendNameWithValueClassPrefix(sb, typeInContext);
             else
@@ -198,11 +200,15 @@ namespace Internal.IL
 
         private uint ReadILUInt32()
         {
-            uint val = (uint)(_ilBytes[_currentOffset] + (_ilBytes[_currentOffset + 1] << 8) + (_ilBytes[_currentOffset + 2] << 16) + (_ilBytes[_currentOffset + 3] << 24));
+            uint val = (uint)(
+                _ilBytes[_currentOffset]
+                + (_ilBytes[_currentOffset + 1] << 8)
+                + (_ilBytes[_currentOffset + 2] << 16)
+                + (_ilBytes[_currentOffset + 3] << 24)
+            );
             _currentOffset += 4;
             return val;
         }
-
 
         private int ReadILToken()
         {
@@ -243,26 +249,17 @@ namespace Internal.IL
 
         public bool HasNextInstruction
         {
-            get
-            {
-                return _currentOffset < _ilBytes.Length;
-            }
+            get { return _currentOffset < _ilBytes.Length; }
         }
 
         public int Offset
         {
-            get
-            {
-                return _currentOffset;
-            }
+            get { return _currentOffset; }
         }
 
         public int CodeSize
         {
-            get
-            {
-                return _ilBytes.Length;
-            }
+            get { return _ilBytes.Length; }
         }
 
         public string GetNextInstruction()
@@ -271,7 +268,7 @@ namespace Internal.IL
             AppendOffset(decodedInstruction, _currentOffset);
             decodedInstruction.Append(":  ");
 
-        again:
+            again:
 
             ILOpcode opCode = (ILOpcode)ReadILByte();
             if (opCode == ILOpcode.prefix1)
@@ -409,21 +406,21 @@ namespace Internal.IL
                     return decodedInstruction.ToString();
 
                 case ILOpcode.switch_:
+                {
+                    decodedInstruction.Clear();
+                    decodedInstruction.Append("switch (");
+                    uint count = ReadILUInt32();
+                    int jmpBase = _currentOffset + (int)(4 * count);
+                    for (uint i = 0; i < count; i++)
                     {
-                        decodedInstruction.Clear();
-                        decodedInstruction.Append("switch (");
-                        uint count = ReadILUInt32();
-                        int jmpBase = _currentOffset + (int)(4 * count);
-                        for (uint i = 0; i < count; i++)
-                        {
-                            if (i != 0)
-                                decodedInstruction.Append(", ");
-                            int delta = (int)ReadILUInt32();
-                            AppendOffset(decodedInstruction, jmpBase + delta);
-                        }
-                        decodedInstruction.Append(')');
-                        return decodedInstruction.ToString();
+                        if (i != 0)
+                            decodedInstruction.Append(", ");
+                        int delta = (int)ReadILUInt32();
+                        AppendOffset(decodedInstruction, jmpBase + delta);
                     }
+                    decodedInstruction.Append(')');
+                    return decodedInstruction.ToString();
+                }
 
                 default:
                     return decodedInstruction.ToString();
@@ -443,11 +440,13 @@ namespace Internal.IL
 
             public void AppendNameWithValueClassPrefix(StringBuilder sb, TypeDesc type)
             {
-                if (!type.IsSignatureVariable
+                if (
+                    !type.IsSignatureVariable
                     && type.IsDefType
                     && !type.IsPrimitive
                     && !type.IsObject
-                    && !type.IsString)
+                    && !type.IsString
+                )
                 {
                     string prefix = type.IsValueType ? "valuetype " : "class ";
                     sb.Append(prefix);
@@ -601,6 +600,7 @@ namespace Internal.IL
 
                 AppendNameForNamespaceTypeWithoutAliases(sb, type);
             }
+
             public void AppendNameForNamespaceTypeWithoutAliases(StringBuilder sb, DefType type)
             {
                 ModuleDesc owningModule = (type as MetadataType)?.Module;
@@ -622,7 +622,11 @@ namespace Internal.IL
                 sb.Append(type.Name);
             }
 
-            protected override void AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType)
+            protected override void AppendNameForNestedType(
+                StringBuilder sb,
+                DefType nestedType,
+                DefType containingType
+            )
             {
                 AppendName(sb, containingType);
                 sb.Append('/');

@@ -13,19 +13,31 @@ namespace System.Threading
     public sealed partial class Mutex : WaitHandle
     {
         private const uint AccessRights =
-            (uint)Interop.Kernel32.MAXIMUM_ALLOWED | Interop.Kernel32.SYNCHRONIZE | Interop.Kernel32.MUTEX_MODIFY_STATE;
+            (uint)Interop.Kernel32.MAXIMUM_ALLOWED
+            | Interop.Kernel32.SYNCHRONIZE
+            | Interop.Kernel32.MUTEX_MODIFY_STATE;
 
         private void CreateMutexCore(bool initiallyOwned, string? name, out bool createdNew)
         {
             uint mutexFlags = initiallyOwned ? Interop.Kernel32.CREATE_MUTEX_INITIAL_OWNER : 0;
-            SafeWaitHandle mutexHandle = Interop.Kernel32.CreateMutexEx(IntPtr.Zero, name, mutexFlags, AccessRights);
+            SafeWaitHandle mutexHandle = Interop.Kernel32.CreateMutexEx(
+                IntPtr.Zero,
+                name,
+                mutexFlags,
+                AccessRights
+            );
             int errorCode = Marshal.GetLastPInvokeError();
 
             if (mutexHandle.IsInvalid)
             {
                 mutexHandle.SetHandleAsInvalid();
                 if (errorCode == Interop.Errors.ERROR_INVALID_HANDLE)
-                    throw new WaitHandleCannotBeOpenedException(SR.Format(SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle, name));
+                    throw new WaitHandleCannotBeOpenedException(
+                        SR.Format(
+                            SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle,
+                            name
+                        )
+                    );
 
                 throw Win32Marshal.GetExceptionForWin32Error(errorCode, name);
             }
@@ -51,7 +63,10 @@ namespace System.Threading
 
                 myHandle.Dispose();
 
-                if (Interop.Errors.ERROR_FILE_NOT_FOUND == errorCode || Interop.Errors.ERROR_INVALID_NAME == errorCode)
+                if (
+                    Interop.Errors.ERROR_FILE_NOT_FOUND == errorCode
+                    || Interop.Errors.ERROR_INVALID_NAME == errorCode
+                )
                     return OpenExistingResult.NameNotFound;
                 if (Interop.Errors.ERROR_PATH_NOT_FOUND == errorCode)
                     return OpenExistingResult.PathNotFound;

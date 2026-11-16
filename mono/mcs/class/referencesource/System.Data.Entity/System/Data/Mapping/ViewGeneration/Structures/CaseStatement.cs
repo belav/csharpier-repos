@@ -7,15 +7,15 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Common.Utils;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
 using System.Data.Mapping.ViewGeneration.CqlGeneration;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
@@ -45,10 +45,12 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// The field.
         /// </summary>
         private readonly MemberPath m_memberPath;
+
         /// <summary>
         /// All the WHEN THENs.
         /// </summary>
         private List<WhenThen> m_clauses;
+
         /// <summary>
         /// Value for the else clause.
         /// </summary>
@@ -116,14 +118,20 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             {
                 if (m_elseValue is MemberProjectedSlot)
                 {
-                    Debug.Assert(m_memberPath.Equals(((MemberProjectedSlot)m_elseValue).MemberPath), "case statement slot (ELSE) must depend only on its own slot value");
+                    Debug.Assert(
+                        m_memberPath.Equals(((MemberProjectedSlot)m_elseValue).MemberPath),
+                        "case statement slot (ELSE) must depend only on its own slot value"
+                    );
                     return true;
                 }
                 foreach (WhenThen whenThen in m_clauses)
                 {
                     if (whenThen.Value is MemberProjectedSlot)
                     {
-                        Debug.Assert(m_memberPath.Equals(((MemberProjectedSlot)whenThen.Value).MemberPath), "case statement slot (THEN) must depend only on its own slot value");
+                        Debug.Assert(
+                            m_memberPath.Equals(((MemberProjectedSlot)whenThen.Value).MemberPath),
+                            "case statement slot (THEN) must depend only on its own slot value"
+                        );
                         return true;
                     }
                 }
@@ -168,7 +176,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Simplifies the <see cref="CaseStatement"/> so that unnecessary WHEN/THENs for nulls/undefined values are eliminated. 
+        /// Simplifies the <see cref="CaseStatement"/> so that unnecessary WHEN/THENs for nulls/undefined values are eliminated.
         /// Also, adds an ELSE clause if possible.
         /// </summary>
         internal void Simplify()
@@ -187,7 +195,13 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             {
                 ConstantProjectedSlot constantSlot = clause.Value as ConstantProjectedSlot;
                 // If null or undefined, remove it
-                if (constantSlot != null && (constantSlot.CellConstant.IsNull() || constantSlot.CellConstant.IsUndefined()))
+                if (
+                    constantSlot != null
+                    && (
+                        constantSlot.CellConstant.IsNull()
+                        || constantSlot.CellConstant.IsUndefined()
+                    )
+                )
                 {
                     eliminatedNullClauses = true;
                 }
@@ -224,13 +238,28 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Generates eSQL for the current <see cref="CaseStatement"/>.
         /// </summary>
-        internal StringBuilder AsEsql(StringBuilder builder, IEnumerable<WithRelationship> withRelationships, string blockAlias, int indentLevel)
+        internal StringBuilder AsEsql(
+            StringBuilder builder,
+            IEnumerable<WithRelationship> withRelationships,
+            string blockAlias,
+            int indentLevel
+        )
         {
             if (this.Clauses.Count == 0)
             {
                 // This is just a single ELSE: no condition at all.
-                Debug.Assert(this.ElseValue != null, "CASE statement with no WHEN/THENs must have ELSE.");
-                CaseSlotValueAsEsql(builder, this.ElseValue, this.MemberPath, blockAlias, withRelationships, indentLevel);
+                Debug.Assert(
+                    this.ElseValue != null,
+                    "CASE statement with no WHEN/THENs must have ELSE."
+                );
+                CaseSlotValueAsEsql(
+                    builder,
+                    this.ElseValue,
+                    this.MemberPath,
+                    blockAlias,
+                    withRelationships,
+                    indentLevel
+                );
                 return builder;
             }
 
@@ -242,14 +271,28 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 builder.Append("WHEN ");
                 clause.Condition.AsEsql(builder, blockAlias);
                 builder.Append(" THEN ");
-                CaseSlotValueAsEsql(builder, clause.Value, this.MemberPath, blockAlias, withRelationships, indentLevel + 2);
+                CaseSlotValueAsEsql(
+                    builder,
+                    clause.Value,
+                    this.MemberPath,
+                    blockAlias,
+                    withRelationships,
+                    indentLevel + 2
+                );
             }
 
             if (this.ElseValue != null)
             {
                 StringUtil.IndentNewLine(builder, indentLevel + 2);
                 builder.Append("ELSE ");
-                CaseSlotValueAsEsql(builder, this.ElseValue, this.MemberPath, blockAlias, withRelationships, indentLevel + 2);
+                CaseSlotValueAsEsql(
+                    builder,
+                    this.ElseValue,
+                    this.MemberPath,
+                    blockAlias,
+                    withRelationships,
+                    indentLevel + 2
+                );
             }
             StringUtil.IndentNewLine(builder, indentLevel + 1);
             builder.Append("END");
@@ -259,7 +302,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Generates CQT for the current <see cref="CaseStatement"/>.
         /// </summary>
-        internal DbExpression AsCqt(DbExpression row, IEnumerable<WithRelationship> withRelationships)
+        internal DbExpression AsCqt(
+            DbExpression row,
+            IEnumerable<WithRelationship> withRelationships
+        )
         {
             // Generate the Case WHEN .. THEN ..., WHEN ... THEN ..., END
             List<DbExpression> conditions = new List<DbExpression>();
@@ -267,13 +313,16 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             foreach (CaseStatement.WhenThen clause in this.Clauses)
             {
                 conditions.Add(clause.Condition.AsCqt(row));
-                values.Add(CaseSlotValueAsCqt(row, clause.Value, this.MemberPath, withRelationships));
+                values.Add(
+                    CaseSlotValueAsCqt(row, clause.Value, this.MemberPath, withRelationships)
+                );
             }
 
             // Generate ELSE
-            DbExpression elseValue = this.ElseValue != null ?
-                CaseSlotValueAsCqt(row, this.ElseValue, this.MemberPath, withRelationships) :
-                Constant.Null.AsCqt(row, this.MemberPath);
+            DbExpression elseValue =
+                this.ElseValue != null
+                    ? CaseSlotValueAsCqt(row, this.ElseValue, this.MemberPath, withRelationships)
+                    : Constant.Null.AsCqt(row, this.MemberPath);
 
             if (this.Clauses.Count > 0)
             {
@@ -281,22 +330,48 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             }
             else
             {
-                Debug.Assert(elseValue != null, "CASE statement with no WHEN/THENs must have ELSE.");
+                Debug.Assert(
+                    elseValue != null,
+                    "CASE statement with no WHEN/THENs must have ELSE."
+                );
                 return elseValue;
             }
         }
 
-        private static StringBuilder CaseSlotValueAsEsql(StringBuilder builder, ProjectedSlot slot, MemberPath outputMember, string blockAlias, IEnumerable<WithRelationship> withRelationships, int indentLevel)
+        private static StringBuilder CaseSlotValueAsEsql(
+            StringBuilder builder,
+            ProjectedSlot slot,
+            MemberPath outputMember,
+            string blockAlias,
+            IEnumerable<WithRelationship> withRelationships,
+            int indentLevel
+        )
         {
             // We should never have THEN as a BooleanProjectedSlot.
-            Debug.Assert(slot is MemberProjectedSlot || slot is QualifiedSlot || slot is ConstantProjectedSlot,
-                         "Case statement THEN can only have constants or members.");
+            Debug.Assert(
+                slot is MemberProjectedSlot
+                    || slot is QualifiedSlot
+                    || slot is ConstantProjectedSlot,
+                "Case statement THEN can only have constants or members."
+            );
             slot.AsEsql(builder, outputMember, blockAlias, 1);
-            WithRelationshipsClauseAsEsql(builder, withRelationships, blockAlias, indentLevel, slot);
+            WithRelationshipsClauseAsEsql(
+                builder,
+                withRelationships,
+                blockAlias,
+                indentLevel,
+                slot
+            );
             return builder;
         }
 
-        private static void WithRelationshipsClauseAsEsql(StringBuilder builder, IEnumerable<WithRelationship> withRelationships, string blockAlias, int indentLevel, ProjectedSlot slot)
+        private static void WithRelationshipsClauseAsEsql(
+            StringBuilder builder,
+            IEnumerable<WithRelationship> withRelationships,
+            string blockAlias,
+            int indentLevel,
+            ProjectedSlot slot
+        )
         {
             bool first = true;
             WithRelationshipsClauseAsCql(
@@ -311,20 +386,35 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     withRelationship.AsEsql(builder, blockAlias, indentLevel);
                 },
                 withRelationships,
-                slot);
+                slot
+            );
         }
 
-        private static DbExpression CaseSlotValueAsCqt(DbExpression row, ProjectedSlot slot, MemberPath outputMember, IEnumerable<WithRelationship> withRelationships)
+        private static DbExpression CaseSlotValueAsCqt(
+            DbExpression row,
+            ProjectedSlot slot,
+            MemberPath outputMember,
+            IEnumerable<WithRelationship> withRelationships
+        )
         {
             // We should never have THEN as a BooleanProjectedSlot.
-            Debug.Assert(slot is MemberProjectedSlot || slot is QualifiedSlot || slot is ConstantProjectedSlot,
-                         "Case statement THEN can only have constants or members.");
+            Debug.Assert(
+                slot is MemberProjectedSlot
+                    || slot is QualifiedSlot
+                    || slot is ConstantProjectedSlot,
+                "Case statement THEN can only have constants or members."
+            );
             DbExpression cqt = slot.AsCqt(row, outputMember);
             cqt = WithRelationshipsClauseAsCqt(row, cqt, withRelationships, slot);
             return cqt;
         }
 
-        private static DbExpression WithRelationshipsClauseAsCqt(DbExpression row, DbExpression slotValueExpr, IEnumerable<WithRelationship> withRelationships, ProjectedSlot slot)
+        private static DbExpression WithRelationshipsClauseAsCqt(
+            DbExpression row,
+            DbExpression slotValueExpr,
+            IEnumerable<WithRelationship> withRelationships,
+            ProjectedSlot slot
+        )
         {
             List<DbRelatedEntityRef> relatedEntityRefs = new List<DbRelatedEntityRef>();
             WithRelationshipsClauseAsCql(
@@ -334,17 +424,23 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     relatedEntityRefs.Add(withRelationship.AsCqt(row));
                 },
                 withRelationships,
-                slot);
+                slot
+            );
 
             if (relatedEntityRefs.Count > 0)
             {
                 DbNewInstanceExpression typeConstructor = slotValueExpr as DbNewInstanceExpression;
-                Debug.Assert(typeConstructor != null && typeConstructor.ResultType.EdmType.BuiltInTypeKind == BuiltInTypeKind.EntityType,
-                    "WITH RELATIONSHIP clauses should be specified for entity type constructors only.");
+                Debug.Assert(
+                    typeConstructor != null
+                        && typeConstructor.ResultType.EdmType.BuiltInTypeKind
+                            == BuiltInTypeKind.EntityType,
+                    "WITH RELATIONSHIP clauses should be specified for entity type constructors only."
+                );
                 return DbExpressionBuilder.CreateNewEntityWithRelationshipsExpression(
                     (EntityType)typeConstructor.ResultType.EdmType,
                     typeConstructor.Arguments,
-                    relatedEntityRefs);
+                    relatedEntityRefs
+                );
             }
             else
             {
@@ -352,14 +448,24 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             }
         }
 
-        private static void WithRelationshipsClauseAsCql(Action<WithRelationship> emitWithRelationship, IEnumerable<WithRelationship> withRelationships, ProjectedSlot slot)
+        private static void WithRelationshipsClauseAsCql(
+            Action<WithRelationship> emitWithRelationship,
+            IEnumerable<WithRelationship> withRelationships,
+            ProjectedSlot slot
+        )
         {
             if (withRelationships != null && withRelationships.Count() > 0)
             {
                 ConstantProjectedSlot constantSlot = slot as ConstantProjectedSlot;
-                Debug.Assert(constantSlot != null, "WITH RELATIONSHIP clauses should be specified for type constant slots only.");
+                Debug.Assert(
+                    constantSlot != null,
+                    "WITH RELATIONSHIP clauses should be specified for type constant slots only."
+                );
                 TypeConstant typeConstant = constantSlot.CellConstant as TypeConstant;
-                Debug.Assert(typeConstant != null, "WITH RELATIONSHIP clauses should be there for type constants only.");
+                Debug.Assert(
+                    typeConstant != null,
+                    "WITH RELATIONSHIP clauses should be there for type constants only."
+                );
                 EdmType fromType = typeConstant.EdmType;
 
                 foreach (WithRelationship withRelationship in withRelationships)

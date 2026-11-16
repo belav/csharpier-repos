@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis
         private readonly IEnumerable<ISymbol> _symbols;
         private readonly SymbolDisplayFormat _symbolDisplayFormat;
 
-        internal FormattedSymbolList(IEnumerable<ISymbol> symbols, SymbolDisplayFormat symbolDisplayFormat = null)
+        internal FormattedSymbolList(
+            IEnumerable<ISymbol> symbols,
+            SymbolDisplayFormat symbolDisplayFormat = null
+        )
         {
             Debug.Assert(symbols != null);
 

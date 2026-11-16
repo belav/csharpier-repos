@@ -1,7 +1,7 @@
 //
 // System.ComponentModel.Design.Serialization.SerializeAbsoluteContext
 //
-// Authors:	 
+// Authors:
 //	  Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2007 Ivan N. Zlatev
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,37 +27,33 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 
-
 namespace System.ComponentModel.Design.Serialization
 {
-	public sealed class SerializeAbsoluteContext
-	{
+    public sealed class SerializeAbsoluteContext
+    {
+        private MemberDescriptor _member;
 
-		private MemberDescriptor _member;
+        public SerializeAbsoluteContext() { }
 
-		public SerializeAbsoluteContext ()
-		{
-		}
+        public SerializeAbsoluteContext(MemberDescriptor member)
+        {
+            _member = member;
+        }
 
-		public SerializeAbsoluteContext (MemberDescriptor member)
-		{
-			_member = member;
-		}
+        // null indicates that the context will be used for all members
+        //
+        public MemberDescriptor Member
+        {
+            get { return _member; }
+        }
 
-		// null indicates that the context will be used for all members
-		//
-		public MemberDescriptor Member {
-			get { return _member; }
-		}
-
-		public bool ShouldSerialize (MemberDescriptor member)
-		{
-			return member == _member;
-		}
-	}
+        public bool ShouldSerialize(MemberDescriptor member)
+        {
+            return member == _member;
+        }
+    }
 }

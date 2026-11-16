@@ -15,18 +15,26 @@ namespace System.Web.WebPages.Html
         {
             Text,
             Password,
-            Hidden
+            Hidden,
         }
 
         public IHtmlString TextBox(string name)
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
 
-            return BuildInputField(name, InputType.Text, value: null, isExplicitValue: false,
-                                   attributes: (IDictionary<string, object>)null);
+            return BuildInputField(
+                name,
+                InputType.Text,
+                value: null,
+                isExplicitValue: false,
+                attributes: (IDictionary<string, object>)null
+            );
         }
 
         public IHtmlString TextBox(string name, object value)
@@ -39,25 +47,46 @@ namespace System.Web.WebPages.Html
             return TextBox(name, value, AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
-        public IHtmlString TextBox(string name, object value, IDictionary<string, object> htmlAttributes)
+        public IHtmlString TextBox(
+            string name,
+            object value,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
 
-            return BuildInputField(name, InputType.Text, value, isExplicitValue: true, attributes: htmlAttributes);
+            return BuildInputField(
+                name,
+                InputType.Text,
+                value,
+                isExplicitValue: true,
+                attributes: htmlAttributes
+            );
         }
 
         public IHtmlString Hidden(string name)
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
 
-            return BuildInputField(name, InputType.Hidden, value: null, isExplicitValue: false,
-                                   attributes: (IDictionary<string, object>)null);
+            return BuildInputField(
+                name,
+                InputType.Hidden,
+                value: null,
+                isExplicitValue: false,
+                attributes: (IDictionary<string, object>)null
+            );
         }
 
         public IHtmlString Hidden(string name, object value)
@@ -70,15 +99,27 @@ namespace System.Web.WebPages.Html
             return Hidden(name, value, AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
-        public IHtmlString Hidden(string name, object value, IDictionary<string, object> htmlAttributes)
+        public IHtmlString Hidden(
+            string name,
+            object value,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
 
-            return BuildInputField(name, InputType.Hidden, GetHiddenFieldValue(value), isExplicitValue: true,
-                                   attributes: htmlAttributes);
+            return BuildInputField(
+                name,
+                InputType.Hidden,
+                GetHiddenFieldValue(value),
+                isExplicitValue: true,
+                attributes: htmlAttributes
+            );
         }
 
         private static object GetHiddenFieldValue(object value)
@@ -102,11 +143,19 @@ namespace System.Web.WebPages.Html
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
 
-            return BuildInputField(name, InputType.Password, null, isExplicitValue: false,
-                                   attributes: (IDictionary<string, object>)null);
+            return BuildInputField(
+                name,
+                InputType.Password,
+                null,
+                isExplicitValue: false,
+                attributes: (IDictionary<string, object>)null
+            );
         }
 
         public IHtmlString Password(string name, object value)
@@ -119,18 +168,36 @@ namespace System.Web.WebPages.Html
             return Password(name, value, AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
-        public IHtmlString Password(string name, object value, IDictionary<string, object> htmlAttributes)
+        public IHtmlString Password(
+            string name,
+            object value,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
 
-            return BuildInputField(name, InputType.Password, value, isExplicitValue: true, attributes: htmlAttributes);
+            return BuildInputField(
+                name,
+                InputType.Password,
+                value,
+                isExplicitValue: true,
+                attributes: htmlAttributes
+            );
         }
 
-        private IHtmlString BuildInputField(string name, InputType type, object value, bool isExplicitValue,
-                                            IDictionary<string, object> attributes)
+        private IHtmlString BuildInputField(
+            string name,
+            InputType type,
+            object value,
+            bool isExplicitValue,
+            IDictionary<string, object> attributes
+        )
         {
             TagBuilder tagBuilder = new TagBuilder("input");
             // Implicit parameters
@@ -143,7 +210,9 @@ namespace System.Web.WebPages.Html
             if (UnobtrusiveJavaScriptEnabled)
             {
                 // Add validation attributes
-                var validationAttributes = _validationHelper.GetUnobtrusiveValidationAttributes(name);
+                var validationAttributes = _validationHelper.GetUnobtrusiveValidationAttributes(
+                    name
+                );
                 tagBuilder.MergeAttributes(validationAttributes, replaceExisting: false);
             }
 
@@ -159,14 +228,22 @@ namespace System.Web.WebPages.Html
             if ((type != InputType.Password) || ((type == InputType.Password) && (value != null)))
             {
                 // Review: Do we really need to be this pedantic about sticking to mvc?
-                tagBuilder.MergeAttribute("value", (string)ConvertTo(value, typeof(string)), replaceExisting: isExplicitValue);
+                tagBuilder.MergeAttribute(
+                    "value",
+                    (string)ConvertTo(value, typeof(string)),
+                    replaceExisting: isExplicitValue
+                );
             }
 
             AddErrorClass(tagBuilder, name);
             return tagBuilder.ToHtmlString(TagRenderMode.SelfClosing);
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Input types are specified in lower case")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "Input types are specified in lower case"
+        )]
         private static string GetInputTypeString(InputType inputType)
         {
             if (!Enum.IsDefined(typeof(InputType), inputType))

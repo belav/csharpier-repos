@@ -10,7 +10,9 @@ namespace System.Collections.ObjectModel
     [Serializable]
     [DebuggerTypeProxy(typeof(ICollectionDebugView<>))]
     [DebuggerDisplay("Count = {Count}")]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ReadOnlyCollection<T> : IList<T>, IList, IReadOnlyList<T>
     {
         private readonly IList<T> list; // Do not rename (binary serialization)
@@ -27,7 +29,8 @@ namespace System.Collections.ObjectModel
         /// <summary>Gets an empty <see cref="ReadOnlyCollection{T}"/>.</summary>
         /// <value>An empty <see cref="ReadOnlyCollection{T}"/>.</value>
         /// <remarks>The returned instance is immutable and will always be empty.</remarks>
-        public static ReadOnlyCollection<T> Empty { get; } = new ReadOnlyCollection<T>(Array.Empty<T>());
+        public static ReadOnlyCollection<T> Empty { get; } =
+            new ReadOnlyCollection<T>(Array.Empty<T>());
 
         public int Count => list.Count;
 
@@ -44,8 +47,7 @@ namespace System.Collections.ObjectModel
         }
 
         public IEnumerator<T> GetEnumerator() =>
-            list.Count == 0 ? SZGenericArrayEnumerator<T>.Empty :
-            list.GetEnumerator();
+            list.Count == 0 ? SZGenericArrayEnumerator<T>.Empty : list.GetEnumerator();
 
         public int IndexOf(T value)
         {
@@ -59,33 +61,46 @@ namespace System.Collections.ObjectModel
         T IList<T>.this[int index]
         {
             get => list[index];
-            set => ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+            set =>
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_ReadOnlyCollection
+                );
         }
 
         void ICollection<T>.Add(T value)
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_ReadOnlyCollection
+            );
         }
 
         void ICollection<T>.Clear()
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_ReadOnlyCollection
+            );
         }
 
         void IList<T>.Insert(int index, T value)
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_ReadOnlyCollection
+            );
         }
 
         bool ICollection<T>.Remove(T value)
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_ReadOnlyCollection
+            );
             return false;
         }
 
         void IList<T>.RemoveAt(int index)
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_ReadOnlyCollection
+            );
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -138,7 +153,12 @@ namespace System.Collections.ObjectModel
                 //
                 Type targetType = array.GetType().GetElementType()!;
                 Type sourceType = typeof(T);
-                if (!(targetType.IsAssignableFrom(sourceType) || sourceType.IsAssignableFrom(targetType)))
+                if (
+                    !(
+                        targetType.IsAssignableFrom(sourceType)
+                        || sourceType.IsAssignableFrom(targetType)
+                    )
+                )
                 {
                     ThrowHelper.ThrowArgumentException_Argument_IncompatibleArrayType();
                 }
@@ -175,18 +195,25 @@ namespace System.Collections.ObjectModel
         object? IList.this[int index]
         {
             get => list[index];
-            set => ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+            set =>
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_ReadOnlyCollection
+                );
         }
 
         int IList.Add(object? value)
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_ReadOnlyCollection
+            );
             return -1;
         }
 
         void IList.Clear()
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_ReadOnlyCollection
+            );
         }
 
         private static bool IsCompatibleObject(object? value)
@@ -216,17 +243,23 @@ namespace System.Collections.ObjectModel
 
         void IList.Insert(int index, object? value)
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_ReadOnlyCollection
+            );
         }
 
         void IList.Remove(object? value)
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_ReadOnlyCollection
+            );
         }
 
         void IList.RemoveAt(int index)
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_ReadOnlyCollection
+            );
         }
     }
 }

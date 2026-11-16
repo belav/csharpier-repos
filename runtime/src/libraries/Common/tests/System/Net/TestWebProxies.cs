@@ -8,7 +8,11 @@ namespace System.Net.Test.Common
         private readonly Uri _uri;
         private readonly bool _bypass;
 
-        public UseSpecifiedUriWebProxy(Uri uri, ICredentials credentials = null, bool bypass = false)
+        public UseSpecifiedUriWebProxy(
+            Uri uri,
+            ICredentials credentials = null,
+            bool bypass = false
+        )
         {
             _uri = uri;
             _bypass = bypass;
@@ -16,7 +20,9 @@ namespace System.Net.Test.Common
         }
 
         public ICredentials Credentials { get; set; }
+
         public Uri GetProxy(Uri destination) => _uri;
+
         public bool IsBypassed(Uri host) => _bypass;
     }
 }

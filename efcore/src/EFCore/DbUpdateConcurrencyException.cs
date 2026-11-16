@@ -20,18 +20,14 @@ public class DbUpdateConcurrencyException : DbUpdateException
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbUpdateConcurrencyException" /> class.
     /// </summary>
-    public DbUpdateConcurrencyException()
-    {
-    }
+    public DbUpdateConcurrencyException() { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbUpdateConcurrencyException" /> class.
     /// </summary>
     /// <param name="message">The error message that explains the reason for the exception.</param>
     public DbUpdateConcurrencyException(string message)
-        : base(message)
-    {
-    }
+        : base(message) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbUpdateConcurrencyException" /> class.
@@ -39,9 +35,7 @@ public class DbUpdateConcurrencyException : DbUpdateException
     /// <param name="message">The error message that explains the reason for the exception.</param>
     /// <param name="innerException">The exception that is the cause of the current exception.</param>
     public DbUpdateConcurrencyException(string message, Exception? innerException)
-        : base(message, innerException)
-    {
-    }
+        : base(message, innerException) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbUpdateConcurrencyException" /> class.
@@ -52,31 +46,26 @@ public class DbUpdateConcurrencyException : DbUpdateException
     public DbUpdateConcurrencyException(
         string message,
         Exception? innerException,
-        IReadOnlyList<IUpdateEntry> entries)
-        : base(message, innerException, entries)
-    {
-    }
+        IReadOnlyList<IUpdateEntry> entries
+    )
+        : base(message, innerException, entries) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbUpdateConcurrencyException" /> class.
     /// </summary>
     /// <param name="message">The error message that explains the reason for the exception.</param>
     /// <param name="entries">The entries that were involved in the concurrency violation.</param>
-    public DbUpdateConcurrencyException(
-        string message,
-        IReadOnlyList<IUpdateEntry> entries)
-        : base(message, entries)
-    {
-    }
+    public DbUpdateConcurrencyException(string message, IReadOnlyList<IUpdateEntry> entries)
+        : base(message, entries) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbUpdateException" /> class from a serialized form.
     /// </summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context being used.</param>
-    [Obsolete("This API supports obsolete formatter-based serialization. It should not be called or extended by application code.")]
+    [Obsolete(
+        "This API supports obsolete formatter-based serialization. It should not be called or extended by application code."
+    )]
     public DbUpdateConcurrencyException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-    {
-    }
+        : base(info, context) { }
 }

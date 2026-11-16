@@ -64,7 +64,8 @@ namespace System.Xml.Tests
             try
             {
                 ReloadSourceStr(strXml);
-                while (DataReader.Read()) ;
+                while (DataReader.Read())
+                    ;
             }
             catch (XmlException e)
             {
@@ -81,7 +82,8 @@ namespace System.Xml.Tests
             try
             {
                 ReloadSourceStr(strXml);
-                while (DataReader.Read()) ;
+                while (DataReader.Read())
+                    ;
             }
             catch (XmlException e)
             {
@@ -96,7 +98,8 @@ namespace System.Xml.Tests
         {
             string filename = Path.Combine(TestData, "Common", "Bug81489.xml");
             ReloadSource(filename);
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             return TEST_PASS;
         }
 
@@ -116,7 +119,9 @@ namespace System.Xml.Tests
             return TEST_FAIL;
         }
 
-        [Variation("XmlReader: scanner error on invalid character for an encoding give pointer to scanner buffer, not file position")]
+        [Variation(
+            "XmlReader: scanner error on invalid character for an encoding give pointer to scanner buffer, not file position"
+        )]
         public int InvalidEncodingCharacterThrowsExceptionWithCorrectLineNumberAndPosition()
         {
             string filename = Path.Combine(TestData, "Common", "Bug61321.xml");
@@ -124,7 +129,8 @@ namespace System.Xml.Tests
 
             try
             {
-                while (DataReader.Read()) ;
+                while (DataReader.Read())
+                    ;
             }
             catch (System.Xml.XmlException e)
             {
@@ -134,14 +140,17 @@ namespace System.Xml.Tests
             return TEST_FAIL;
         }
 
-        [Variation("XmlDocument.Load: XmlException contains ambiguous error when finding unexpected token")]
+        [Variation(
+            "XmlDocument.Load: XmlException contains ambiguous error when finding unexpected token"
+        )]
         public int UnexpectedTokenThrowsErrorWithCorrectPositions()
         {
             string filename = Path.Combine(TestData, "Common", "Bug95253.xml");
             ReloadSource(filename);
             try
             {
-                while (DataReader.Read()) ;
+                while (DataReader.Read())
+                    ;
             }
             catch (System.Xml.XmlException e)
             {
@@ -159,7 +168,8 @@ namespace System.Xml.Tests
 
             try
             {
-                while (DataReader.Read()) ;
+                while (DataReader.Read())
+                    ;
             }
             catch (System.Xml.XmlException e)
             {

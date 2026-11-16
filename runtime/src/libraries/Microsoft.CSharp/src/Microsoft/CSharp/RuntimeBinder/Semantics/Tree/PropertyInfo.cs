@@ -10,7 +10,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     internal sealed class ExprPropertyInfo : ExprWithType
     {
-        public ExprPropertyInfo(CType type, PropertySymbol propertySymbol, AggregateType propertyType)
+        public ExprPropertyInfo(
+            CType type,
+            PropertySymbol propertySymbol,
+            AggregateType propertyType
+        )
             : base(ExpressionKind.PropertyInfo, type)
         {
             Debug.Assert(propertySymbol != null);
@@ -30,7 +34,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 AggregateType aggType = Property.Ats;
                 PropertySymbol propSym = Property.Prop();
 
-                TypeArray genericInstanceParams = TypeManager.SubstTypeArray(propSym.Params, aggType, null);
+                TypeArray genericInstanceParams = TypeManager.SubstTypeArray(
+                    propSym.Params,
+                    aggType,
+                    null
+                );
 
                 Type type = aggType.AssociatedSystemType;
                 PropertyInfo propertyInfo = propSym.AssociatedPropertyInfo;
@@ -43,21 +51,40 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     type = propertyInfo.DeclaringType;
                 }
 
-                foreach (PropertyInfo p in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+                foreach (
+                    PropertyInfo p in type.GetProperties(
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Instance
+                            | BindingFlags.Static
+                    )
+                )
                 {
                     if (!p.HasSameMetadataDefinitionAs(propertyInfo))
                     {
                         continue;
                     }
-                    Debug.Assert((p.Name == propertyInfo.Name) &&
-                        (p.GetIndexParameters() == null || p.GetIndexParameters().Length == genericInstanceParams.Count));
+                    Debug.Assert(
+                        (p.Name == propertyInfo.Name)
+                            && (
+                                p.GetIndexParameters() == null
+                                || p.GetIndexParameters().Length == genericInstanceParams.Count
+                            )
+                    );
 
                     bool match = true;
-                    ParameterInfo[] parameters = p.GetSetMethod(true) != null ?
-                        p.GetSetMethod(true).GetParameters() : p.GetGetMethod(true).GetParameters();
+                    ParameterInfo[] parameters =
+                        p.GetSetMethod(true) != null
+                            ? p.GetSetMethod(true).GetParameters()
+                            : p.GetGetMethod(true).GetParameters();
                     for (int i = 0; i < genericInstanceParams.Count; i++)
                     {
-                        if (!TypesAreEqual(parameters[i].ParameterType, genericInstanceParams[i].AssociatedSystemType))
+                        if (
+                            !TypesAreEqual(
+                                parameters[i].ParameterType,
+                                genericInstanceParams[i].AssociatedSystemType
+                            )
+                        )
                         {
                             match = false;
                             break;

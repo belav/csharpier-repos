@@ -23,12 +23,12 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Newtonsoft.Json.Bson;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Newtonsoft.Json.Bson;
+using Newtonsoft.Json.Linq;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -48,11 +48,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            JObject o = new JObject
-            {
-                { "name1", "value1" },
-                { "name2", "value2" }
-            };
+            JObject o = new JObject { { "name1", "value1" }, { "name2", "value2" } };
 
             MemoryStream ms = new MemoryStream();
             using (BsonWriter writer = new BsonWriter(ms))

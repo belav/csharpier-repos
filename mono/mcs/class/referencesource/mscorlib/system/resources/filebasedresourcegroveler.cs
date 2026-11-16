@@ -1,31 +1,32 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  FileBasedResourceGroveler
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
 ** Purpose: Searches for resources on disk, used for file-
 ** based resource lookup.
 **
-** 
+**
 ===========================================================*/
-namespace System.Resources {    
+namespace System.Resources
+{
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.IO;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.IO;
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
     using System.Text;
     using System.Threading;
-    using System.Diagnostics.Contracts;
 
     internal class FileBasedResourceGroveler : IResourceGroveler
     {
@@ -37,11 +38,17 @@ namespace System.Resources {
             _mediator = mediator;
         }
 
-        // Consider modifying IResourceGroveler interface (hence this method signature) when we figure out 
-        // serialization compat story for moving ResourceManager members to either file-based or 
+        // Consider modifying IResourceGroveler interface (hence this method signature) when we figure out
+        // serialization compat story for moving ResourceManager members to either file-based or
         // manifest-based classes. Want to continue tightening the design to get rid of unused params.
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public ResourceSet GrovelForResourceSet(CultureInfo culture, Dictionary<String, ResourceSet> localResourceSets, bool tryParents, bool createIfNotExists, ref StackCrawlMark stackMark) 
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public ResourceSet GrovelForResourceSet(
+            CultureInfo culture,
+            Dictionary<String, ResourceSet> localResourceSets,
+            bool tryParents,
+            bool createIfNotExists,
+            ref StackCrawlMark stackMark
+        )
         {
             Contract.Assert(culture != null, "culture shouldn't be null; check caller");
 
@@ -52,7 +59,9 @@ namespace System.Resources {
             try
             {
 #if MONO_FEATURE_CAS
-                new System.Security.Permissions.FileIOPermission(System.Security.Permissions.PermissionState.Unrestricted).Assert();
+                new System.Security.Permissions.FileIOPermission(
+                    System.Security.Permissions.PermissionState.Unrestricted
+                ).Assert();
 #endif
 
                 // Create new ResourceSet, if a file exists on disk for it.
@@ -67,7 +76,22 @@ namespace System.Resources {
                         {
                             // We really don't think this should happen - we always
                             // expect the neutral locale's resources to be present.
-                            throw new MissingManifestResourceException(Environment.GetResourceString("MissingManifestResource_NoNeutralDisk") + Environment.NewLine + "baseName: " + _mediator.BaseNameField + "  locationInfo: " + (_mediator.LocationInfo == null ? "<null>" : _mediator.LocationInfo.FullName) + "  fileName: " + _mediator.GetResourceFileName(culture));
+                            throw new MissingManifestResourceException(
+                                Environment.GetResourceString(
+                                    "MissingManifestResource_NoNeutralDisk"
+                                )
+                                    + Environment.NewLine
+                                    + "baseName: "
+                                    + _mediator.BaseNameField
+                                    + "  locationInfo: "
+                                    + (
+                                        _mediator.LocationInfo == null
+                                            ? "<null>"
+                                            : _mediator.LocationInfo.FullName
+                                    )
+                                    + "  fileName: "
+                                    + _mediator.GetResourceFileName(culture)
+                            );
                         }
                     }
                 }
@@ -103,10 +127,10 @@ namespace System.Resources {
         }
 #endif
 
-        // Given a CultureInfo, it generates the path &; file name for 
+        // Given a CultureInfo, it generates the path &; file name for
         // the .resources file for that CultureInfo.  This method will grovel
         // the disk looking for the correct file name & path.  Uses CultureInfo's
-        // Name property.  If the module directory was set in the ResourceManager 
+        // Name property.  If the module directory was set in the ResourceManager
         // constructor, we'll look there first.  If it couldn't be found in the module
         // diretory or the module dir wasn't provided, look in the current
         // directory.
@@ -118,13 +142,15 @@ namespace System.Resources {
             Contract.Assert(culture != null, "culture shouldn't be null; check caller");
             Contract.Assert(fileName != null, "fileName shouldn't be null; check caller");
 
-            // If we have a moduleDir, check there first.  Get module fully 
+            // If we have a moduleDir, check there first.  Get module fully
             // qualified name, append path to that.
             if (_mediator.ModuleDir != null)
             {
 #if _DEBUG
                 if (ResourceManager.DEBUG >= 3)
-                    BCLDebug.Log("FindResourceFile: checking module dir: \""+_mediator.ModuleDir+'\"');
+                    BCLDebug.Log(
+                        "FindResourceFile: checking module dir: \"" + _mediator.ModuleDir + '\"'
+                    );
 #endif
 
                 String path = Path.Combine(_mediator.ModuleDir, fileName);
@@ -132,7 +158,7 @@ namespace System.Resources {
                 {
 #if _DEBUG
                     if (ResourceManager.DEBUG >= 3)
-                        BCLDebug.Log("Found resource file in module dir!  "+path);
+                        BCLDebug.Log("Found resource file in module dir!  " + path);
 #endif
                     return path;
                 }
@@ -140,14 +166,14 @@ namespace System.Resources {
 
 #if _DEBUG
             if (ResourceManager.DEBUG >= 3)
-                BCLDebug.Log("Couldn't find resource file in module dir, checking .\\"+fileName);
+                BCLDebug.Log("Couldn't find resource file in module dir, checking .\\" + fileName);
 #endif
 
             // look in .
             if (File.Exists(fileName))
                 return fileName;
 
-            return null;  // give up.
+            return null; // give up.
         }
 
         // Constructs a new ResourceSet for a given file name.  The logic in
@@ -164,7 +190,7 @@ namespace System.Resources {
             {
                 // Explicitly avoid CreateInstance if possible, because it
                 // requires ReflectionPermission to call private & protected
-                // constructors.  
+                // constructors.
                 return new RuntimeResourceSet(file);
             }
             else
@@ -177,7 +203,13 @@ namespace System.Resources {
                 }
                 catch (MissingMethodException e)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_ResMgrBadResSet_Type", _mediator.UserResourceSet.AssemblyQualifiedName), e);
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString(
+                            "InvalidOperation_ResMgrBadResSet_Type",
+                            _mediator.UserResourceSet.AssemblyQualifiedName
+                        ),
+                        e
+                    );
                 }
             }
         }

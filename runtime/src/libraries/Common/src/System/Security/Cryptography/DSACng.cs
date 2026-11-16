@@ -16,9 +16,7 @@ namespace System.Security.Cryptography
         /// </summary>
         [SupportedOSPlatform("windows")]
         public DSACng()
-            : this(keySize: s_defaultKeySize)
-        {
-        }
+            : this(keySize: s_defaultKeySize) { }
 
         /// <summary>
         ///     Creates a new DSACng object that will use a randomly generated key of the specified size.
@@ -36,10 +34,7 @@ namespace System.Security.Cryptography
 
         public override KeySizes[] LegalKeySizes
         {
-            get
-            {
-                return base.LegalKeySizes;
-            }
+            get { return base.LegalKeySizes; }
         }
 
         public override string SignatureAlgorithm => "DSA";
@@ -64,11 +59,15 @@ namespace System.Security.Cryptography
         {
             Debug.Assert(OperatingSystem.IsWindows());
             Version version = Environment.OSVersion.Version;
-            bool isAtLeastWindows8 = version.Major > 6 || (version.Major == 6 && version.Minor >= 2);
+            bool isAtLeastWindows8 =
+                version.Major > 6 || (version.Major == 6 && version.Minor >= 2);
             return isAtLeastWindows8;
         }
 
-        private static readonly KeySizes[] s_legalKeySizes = new KeySizes[] { new KeySizes(minSize: 512, maxSize: 3072, skipSize: 64) };
+        private static readonly KeySizes[] s_legalKeySizes = new KeySizes[]
+        {
+            new KeySizes(minSize: 512, maxSize: 3072, skipSize: 64),
+        };
         private static readonly int s_defaultKeySize = Supports2048KeySize() ? 2048 : 1024;
     }
 }

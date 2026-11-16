@@ -29,6 +29,7 @@ namespace ILCompiler
         private BodySubstitution(object value) => _value = value;
 
         public static BodySubstitution Create(object value) => new BodySubstitution(value);
+
         public MethodIL EmitIL(MethodDesc method)
         {
             ILEmitter emit = new ILEmitter();
@@ -36,7 +37,10 @@ namespace ILCompiler
 
             if (_value == Throw)
             {
-                codestream.EmitCallThrowHelper(emit, method.Context.GetHelperEntryPoint("ThrowHelpers", "ThrowFeatureBodyRemoved"));
+                codestream.EmitCallThrowHelper(
+                    emit,
+                    method.Context.GetHelperEntryPoint("ThrowHelpers", "ThrowFeatureBodyRemoved")
+                );
             }
             else if (_value == null)
             {

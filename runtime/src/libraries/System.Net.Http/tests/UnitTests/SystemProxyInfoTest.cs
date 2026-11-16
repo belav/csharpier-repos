@@ -14,11 +14,18 @@ namespace System.Net.Http.Tests
         // to be sure they do not interfere with the test.
         private void CleanEnv()
         {
-            var envVars = new List<string> { "http_proxy", "HTTP_PROXY",
-                                             "https_proxy", "HTTPS_PROXY",
-                                             "all_proxy", "ALL_PROXY",
-                                             "no_proxy", "NO_PROXY",
-                                             "GATEWAY_INTERFACE" };
+            var envVars = new List<string>
+            {
+                "http_proxy",
+                "HTTP_PROXY",
+                "https_proxy",
+                "HTTPS_PROXY",
+                "all_proxy",
+                "ALL_PROXY",
+                "no_proxy",
+                "NO_PROXY",
+                "GATEWAY_INTERFACE",
+            };
 
             foreach (string v in envVars)
             {
@@ -34,14 +41,16 @@ namespace System.Net.Http.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void Ctor_NoEnvironmentVariables_NotHttpEnvironmentProxy()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                IWebProxy proxy = SystemProxyInfo.ConstructSystemProxy();
-                Assert.NotNull(proxy);
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    IWebProxy proxy = SystemProxyInfo.ConstructSystemProxy();
+                    Assert.NotNull(proxy);
 
-                HttpEnvironmentProxy envProxy = proxy as HttpEnvironmentProxy;
-                Assert.Null(envProxy);
-            }).Dispose();
+                    HttpEnvironmentProxy envProxy = proxy as HttpEnvironmentProxy;
+                    Assert.Null(envProxy);
+                })
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -49,12 +58,17 @@ namespace System.Net.Http.Tests
         {
             var options = new RemoteInvokeOptions();
             options.StartInfo.EnvironmentVariables.Add("http_proxy", "http://proxy.contoso.com");
-            RemoteExecutor.Invoke(() =>
-            {
-                IWebProxy proxy = SystemProxyInfo.ConstructSystemProxy();
-                HttpEnvironmentProxy envProxy = proxy as HttpEnvironmentProxy;
-                Assert.NotNull(envProxy);
-            }, options).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        IWebProxy proxy = SystemProxyInfo.ConstructSystemProxy();
+                        HttpEnvironmentProxy envProxy = proxy as HttpEnvironmentProxy;
+                        Assert.NotNull(envProxy);
+                    },
+                    options
+                )
+                .Dispose();
         }
     }
 }

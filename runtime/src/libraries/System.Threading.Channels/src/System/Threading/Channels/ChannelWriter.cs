@@ -30,7 +30,9 @@ namespace System.Threading.Channels
         /// A <see cref="ValueTask{Boolean}"/> that will complete with a <c>true</c> result when space is available to write an item
         /// or with a <c>false</c> result when no further writing will be permitted.
         /// </returns>
-        public abstract ValueTask<bool> WaitToWriteAsync(CancellationToken cancellationToken = default);
+        public abstract ValueTask<bool> WaitToWriteAsync(
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>Asynchronously writes an item to the channel.</summary>
         /// <param name="item">The value to write to the channel.</param>
@@ -40,10 +42,10 @@ namespace System.Threading.Channels
         {
             try
             {
-                return
-                    cancellationToken.IsCancellationRequested ? new ValueTask(Task.FromCanceled<T>(cancellationToken)) :
-                    TryWrite(item) ? default :
-                    WriteAsyncCore(item, cancellationToken);
+                return cancellationToken.IsCancellationRequested
+                        ? new ValueTask(Task.FromCanceled<T>(cancellationToken))
+                    : TryWrite(item) ? default
+                    : WriteAsyncCore(item, cancellationToken);
             }
             catch (Exception e)
             {

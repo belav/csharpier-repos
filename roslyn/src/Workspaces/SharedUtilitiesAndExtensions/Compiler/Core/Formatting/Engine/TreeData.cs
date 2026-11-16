@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.Formatting
 #endif
         }
 
-        public static TreeData Create(SyntaxTrivia trivia, int initialColumn)
-            => new StructuredTrivia(trivia, initialColumn);
+        public static TreeData Create(SyntaxTrivia trivia, int initialColumn) =>
+            new StructuredTrivia(trivia, initialColumn);
 
         private readonly SyntaxNode _root;
         private readonly SyntaxToken _firstToken;
@@ -51,11 +51,9 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         public SyntaxNode Root => _root;
 
-        public bool IsFirstToken(SyntaxToken token)
-            => _firstToken == token;
+        public bool IsFirstToken(SyntaxToken token) => _firstToken == token;
 
-        public bool IsLastToken(SyntaxToken token)
-            => _lastToken == token;
+        public bool IsLastToken(SyntaxToken token) => _lastToken == token;
 
         public int StartPosition
         {
@@ -67,7 +65,7 @@ namespace Microsoft.CodeAnalysis.Formatting
             get { return this.Root.FullSpan.End; }
         }
 
-        public IEnumerable<SyntaxToken> GetApplicableTokens(TextSpan textSpan)
-            => this.Root.DescendantTokens(textSpan);
+        public IEnumerable<SyntaxToken> GetApplicableTokens(TextSpan textSpan) =>
+            this.Root.DescendantTokens(textSpan);
     }
 }

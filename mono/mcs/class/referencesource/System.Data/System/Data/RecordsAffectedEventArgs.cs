@@ -6,21 +6,22 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
 
-    public sealed class StatementCompletedEventArgs : System.EventArgs {
+    public sealed class StatementCompletedEventArgs : System.EventArgs
+    {
         private readonly int _recordCount;
 
-        public StatementCompletedEventArgs(int recordCount) {
+        public StatementCompletedEventArgs(int recordCount)
+        {
             _recordCount = recordCount;
         }
 
-        public int RecordCount {
-            get {
-                return _recordCount;
-            }
+        public int RecordCount
+        {
+            get { return _recordCount; }
         }
     }
 }
-

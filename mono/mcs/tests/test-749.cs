@@ -4,9 +4,9 @@ using System;
 
 class M
 {
-	public static void Main ()
-	{
-		B b = new B ();
-		b.Prop = 2;
-	}
+    public static void Main()
+    {
+        B b = new B();
+        b.Prop = 2;
+    }
 }

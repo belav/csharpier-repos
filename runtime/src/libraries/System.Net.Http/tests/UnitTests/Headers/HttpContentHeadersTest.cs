@@ -24,7 +24,10 @@ namespace System.Net.Http.Tests
             _headers = new HttpContentHeaders(new ComputeLengthHttpContent(() => 15));
 
             // Use uppercase header name to make sure the parser gets retrieved using case-insensitive comparison.
-            Assert.Throws<FormatException>(() => { _headers.Add("CoNtEnT-LeNgTh", "this is invalid"); });
+            Assert.Throws<FormatException>(() =>
+            {
+                _headers.Add("CoNtEnT-LeNgTh", "this is invalid");
+            });
         }
 
         [Fact]
@@ -34,7 +37,10 @@ namespace System.Net.Http.Tests
 
             // The delegate is invoked to return the length.
             Assert.Equal(15, _headers.ContentLength);
-            Assert.Equal((long)15, _headers.GetSingleParsedValue(KnownHeaders.ContentLength.Descriptor));
+            Assert.Equal(
+                (long)15,
+                _headers.GetSingleParsedValue(KnownHeaders.ContentLength.Descriptor)
+            );
 
             // After getting the calculated content length, set it to null.
             _headers.ContentLength = null;
@@ -43,17 +49,28 @@ namespace System.Net.Http.Tests
 
             _headers.ContentLength = 27;
             Assert.Equal((long)27, _headers.ContentLength);
-            Assert.Equal((long)27, _headers.GetSingleParsedValue(KnownHeaders.ContentLength.Descriptor));
+            Assert.Equal(
+                (long)27,
+                _headers.GetSingleParsedValue(KnownHeaders.ContentLength.Descriptor)
+            );
         }
 
         [Fact]
         public void ContentLength_SetCustomValue_TryComputeLengthNotInvoked()
         {
-            _headers = new HttpContentHeaders(new ComputeLengthHttpContent(() => { throw new ShouldNotBeInvokedException(); }));
+            _headers = new HttpContentHeaders(
+                new ComputeLengthHttpContent(() =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                })
+            );
 
             _headers.ContentLength = 27;
             Assert.Equal((long)27, _headers.ContentLength);
-            Assert.Equal((long)27, _headers.GetSingleParsedValue(KnownHeaders.ContentLength.Descriptor));
+            Assert.Equal(
+                (long)27,
+                _headers.GetSingleParsedValue(KnownHeaders.ContentLength.Descriptor)
+            );
 
             // After explicitly setting the content length, set it to null.
             _headers.ContentLength = null;
@@ -68,7 +85,12 @@ namespace System.Net.Http.Tests
         [Fact]
         public void ContentLength_UseAddMethod_AddedValueCanBeRetrievedUsingProperty()
         {
-            _headers = new HttpContentHeaders(new ComputeLengthHttpContent(() => { throw new ShouldNotBeInvokedException(); }));
+            _headers = new HttpContentHeaders(
+                new ComputeLengthHttpContent(() =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                })
+            );
             _headers.TryAddWithoutValidation(HttpKnownHeaderNames.ContentLength, " 68 ");
 
             Assert.Equal(68, _headers.ContentLength);
@@ -93,7 +115,10 @@ namespace System.Net.Http.Tests
         [Fact]
         public void ContentType_UseAddMethod_AddedValueCanBeRetrievedUsingProperty()
         {
-            _headers.TryAddWithoutValidation("Content-Type", "text/plain; charset=utf-8; custom=value");
+            _headers.TryAddWithoutValidation(
+                "Content-Type",
+                "text/plain; charset=utf-8; custom=value"
+            );
 
             MediaTypeHeaderValue value = new MediaTypeHeaderValue("text/plain");
             value.CharSet = "utf-8";
@@ -105,11 +130,16 @@ namespace System.Net.Http.Tests
         [Fact]
         public void ContentType_UseAddMethodWithInvalidValue_InvalidValueRecognized()
         {
-            _headers.TryAddWithoutValidation("Content-Type", "text/plain; charset=utf-8; custom=value, other/type");
+            _headers.TryAddWithoutValidation(
+                "Content-Type",
+                "text/plain; charset=utf-8; custom=value, other/type"
+            );
             Assert.Null(_headers.ContentType);
             Assert.Equal(1, _headers.GetValues("Content-Type").Count());
-            Assert.Equal("text/plain; charset=utf-8; custom=value, other/type",
-                _headers.GetValues("Content-Type").First());
+            Assert.Equal(
+                "text/plain; charset=utf-8; custom=value, other/type",
+                _headers.GetValues("Content-Type").First()
+            );
 
             _headers.Clear();
             _headers.TryAddWithoutValidation("Content-Type", ",text/plain"); // leading separator
@@ -165,7 +195,10 @@ namespace System.Net.Http.Tests
         [Fact]
         public void ContentLocation_UseAddMethod_AddedValueCanBeRetrievedUsingProperty()
         {
-            _headers.TryAddWithoutValidation("Content-Location", "  http://www.example.com/path/?q=v  ");
+            _headers.TryAddWithoutValidation(
+                "Content-Location",
+                "  http://www.example.com/path/?q=v  "
+            );
             Assert.Equal(new Uri("http://www.example.com/path/?q=v"), _headers.ContentLocation);
 
             _headers.Clear();
@@ -176,10 +209,16 @@ namespace System.Net.Http.Tests
         [Fact]
         public void ContentLocation_UseAddMethodWithInvalidValue_InvalidValueRecognized()
         {
-            _headers.TryAddWithoutValidation("Content-Location", " http://example.com http://other");
+            _headers.TryAddWithoutValidation(
+                "Content-Location",
+                " http://example.com http://other"
+            );
             Assert.Null(_headers.GetSingleParsedValue(KnownHeaders.ContentLocation.Descriptor));
             Assert.Equal(1, _headers.GetValues("Content-Location").Count());
-            Assert.Equal(" http://example.com http://other", _headers.GetValues("Content-Location").First());
+            Assert.Equal(
+                " http://example.com http://other",
+                _headers.GetValues("Content-Location").First()
+            );
 
             _headers.Clear();
             _headers.TryAddWithoutValidation("Content-Location", "http://host /other");
@@ -390,11 +429,17 @@ namespace System.Net.Http.Tests
         public void Expires_UseAddMethod_AddedValueCanBeRetrievedUsingProperty()
         {
             _headers.TryAddWithoutValidation("Expires", "  Sun, 06 Nov 1994 08:49:37 GMT  ");
-            Assert.Equal(new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero), _headers.Expires);
+            Assert.Equal(
+                new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero),
+                _headers.Expires
+            );
 
             _headers.Clear();
             _headers.TryAddWithoutValidation("Expires", "Sun, 06 Nov 1994 08:49:37 GMT");
-            Assert.Equal(new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero), _headers.Expires);
+            Assert.Equal(
+                new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero),
+                _headers.Expires
+            );
         }
 
         [Fact]
@@ -430,11 +475,17 @@ namespace System.Net.Http.Tests
         public void LastModified_UseAddMethod_AddedValueCanBeRetrievedUsingProperty()
         {
             _headers.TryAddWithoutValidation("Last-Modified", "  Sun, 06 Nov 1994 08:49:37 GMT  ");
-            Assert.Equal(new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero), _headers.LastModified);
+            Assert.Equal(
+                new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero),
+                _headers.LastModified
+            );
 
             _headers.Clear();
             _headers.TryAddWithoutValidation("Last-Modified", "Sun, 06 Nov 1994 08:49:37 GMT");
-            Assert.Equal(new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero), _headers.LastModified);
+            Assert.Equal(
+                new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero),
+                _headers.LastModified
+            );
         }
 
         [Fact]
@@ -443,7 +494,10 @@ namespace System.Net.Http.Tests
             _headers.TryAddWithoutValidation("Last-Modified", " Sun, 06 Nov 1994 08:49:37 GMT ,");
             Assert.Null(_headers.GetSingleParsedValue(KnownHeaders.LastModified.Descriptor));
             Assert.Equal(1, _headers.GetValues("Last-Modified").Count());
-            Assert.Equal(" Sun, 06 Nov 1994 08:49:37 GMT ,", _headers.GetValues("Last-Modified").First());
+            Assert.Equal(
+                " Sun, 06 Nov 1994 08:49:37 GMT ,",
+                _headers.GetValues("Last-Modified").First()
+            );
 
             _headers.Clear();
             _headers.TryAddWithoutValidation("Last-Modified", " Sun, 06 Nov ");
@@ -457,45 +511,156 @@ namespace System.Net.Http.Tests
         {
             // Try adding request, response, and general _headers. Use different casing to make sure case-insensitive
             // comparison is used.
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Accept-Ranges", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("age", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("ETag", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Location", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Proxy-Authenticate", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Retry-After", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Server", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Vary", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("WWW-Authenticate", "v"); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Accept-Ranges", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("age", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("ETag", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Location", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Proxy-Authenticate", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Retry-After", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Server", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Vary", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("WWW-Authenticate", "v");
+            });
 
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Accept", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Accept-Charset", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Accept-Encoding", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Accept-Language", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Authorization", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Expect", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("From", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Host", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("If-Match", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("If-Modified-Since", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("If-None-Match", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("If-Range", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("If-Unmodified-Since", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Max-Forwards", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Proxy-Authorization", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Range", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Referer", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("TE", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("User-Agent", "v"); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Accept", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Accept-Charset", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Accept-Encoding", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Accept-Language", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Authorization", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Expect", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("From", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Host", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("If-Match", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("If-Modified-Since", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("If-None-Match", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("If-Range", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("If-Unmodified-Since", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Max-Forwards", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Proxy-Authorization", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Range", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Referer", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("TE", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("User-Agent", "v");
+            });
 
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Cache-Control", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Connection", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Date", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Pragma", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Trailer", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Transfer-Encoding", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Upgrade", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Via", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { _headers.Add("Warning", "v"); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Cache-Control", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Connection", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Date", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Pragma", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Trailer", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Transfer-Encoding", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Upgrade", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Via", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Warning", "v");
+            });
         }
 
         private sealed class ComputeLengthHttpContent : HttpContent
@@ -514,7 +679,10 @@ namespace System.Net.Http.Tests
                 return result.HasValue;
             }
 
-            protected override Task SerializeToStreamAsync(Stream stream, TransportContext context) { throw new NotImplementedException(); }
+            protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

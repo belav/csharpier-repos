@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,94 +26,83 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Runtime.InteropServices;
 using System.IO;
+using System.Runtime.InteropServices;
 
-namespace System.Web {
+namespace System.Web
+{
+    class InputFilterStream : Stream
+    {
+        Stream stream;
 
-	class InputFilterStream : Stream {
-		Stream stream;
+        public InputFilterStream() { }
 
-		public InputFilterStream ()
-		{
-		}
+        internal Stream BaseStream
+        {
+            set { stream = value; }
+        }
 
-		internal Stream BaseStream {
-			set { stream = value; }
-		}
+        public override bool CanRead
+        {
+            get { return true; }
+        }
 
-		public override bool CanRead {
-			get {
-				return true;
-			}
-		}
+        public override bool CanSeek
+        {
+            get { return true; }
+        }
 
-		public override bool CanSeek {
-			get {
-				return true;
-			}
-		}
+        public override bool CanWrite
+        {
+            get { return false; }
+        }
 
-		public override bool CanWrite {
-			get {
-				return false;
-			}
-		}
+        public override long Position
+        {
+            get { return stream.Position; }
+            set { stream.Position = value; }
+        }
 
-		public override long Position {
-			get {
-				return stream.Position;
-			}
+        public override long Length
+        {
+            get { return stream.Length; }
+        }
 
-			set {
-				stream.Position = value;
-			}
-		}
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            return stream.Read(buffer, offset, count);
+        }
 
-		public override long Length {
-			get {
-				return stream.Length;
-			}
-		}
+        public override int ReadByte()
+        {
+            return stream.ReadByte();
+        }
 
-		public override int Read (byte [] buffer, int offset, int count)
-		{
-			return stream.Read (buffer, offset, count);
-		}
+        public override long Seek(long offset, SeekOrigin loc)
+        {
+            return stream.Seek(offset, loc);
+        }
 
-		public override int ReadByte ()
-		{
-			return stream.ReadByte ();
-		}
+        public override void SetLength(long value)
+        {
+            throw new NotSupportedException("This stream can not change its size");
+        }
 
-		public override long Seek (long offset, SeekOrigin loc)
-		{
-			return stream.Seek (offset, loc);
-		}
-		
-		public override void SetLength (long value)
-		{
-			throw new NotSupportedException ("This stream can not change its size");
-		}
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+            throw new NotSupportedException("This stream can not change its size");
+        }
 
-		public override void Write (byte [] buffer, int offset, int count)
-		{
-			throw new NotSupportedException ("This stream can not change its size");
-		}
+        public override void WriteByte(byte value)
+        {
+            throw new NotSupportedException("This stream can not change its size");
+        }
 
-		public override void WriteByte (byte value)
-		{
-			throw new NotSupportedException ("This stream can not change its size");
-		}
-		
-		public override void Flush ()
-		{
-		}
+        public override void Flush() { }
 
-		public override void Close ()
-		{
-			stream.Close ();
-		}
-	}
+        public override void Close()
+        {
+            stream.Close();
+        }
+    }
 }
-

@@ -29,11 +29,23 @@ namespace System.Web.Razor.Test.Framework
         public abstract ParserBase CreateMarkupParser();
         public abstract ParserBase CreateCodeParser();
 
-        protected abstract ParserBase SelectActiveParser(ParserBase codeParser, ParserBase markupParser);
+        protected abstract ParserBase SelectActiveParser(
+            ParserBase codeParser,
+            ParserBase markupParser
+        );
 
-        public virtual ParserContext CreateParserContext(ITextDocument input, ParserBase codeParser, ParserBase markupParser)
+        public virtual ParserContext CreateParserContext(
+            ITextDocument input,
+            ParserBase codeParser,
+            ParserBase markupParser
+        )
         {
-            return new ParserContext(input, codeParser, markupParser, SelectActiveParser(codeParser, markupParser));
+            return new ParserContext(
+                input,
+                codeParser,
+                markupParser,
+                SelectActiveParser(codeParser, markupParser)
+            );
         }
 
         protected abstract SpanFactory CreateSpanFactory();
@@ -53,7 +65,11 @@ namespace System.Web.Razor.Test.Framework
             ParseBlockTest(document, false, expectedErrors);
         }
 
-        protected virtual void ParseBlockTest(string document, bool designTimeParser, params RazorError[] expectedErrors)
+        protected virtual void ParseBlockTest(
+            string document,
+            bool designTimeParser,
+            params RazorError[] expectedErrors
+        )
         {
             ParseBlockTest(document, null, designTimeParser, expectedErrors);
         }
@@ -63,47 +79,128 @@ namespace System.Web.Razor.Test.Framework
             ParseBlockTest(document, expectedRoot, false, null);
         }
 
-        protected virtual void ParseBlockTest(string document, Block expectedRoot, bool designTimeParser)
+        protected virtual void ParseBlockTest(
+            string document,
+            Block expectedRoot,
+            bool designTimeParser
+        )
         {
             ParseBlockTest(document, expectedRoot, designTimeParser, null);
         }
 
-        protected virtual void ParseBlockTest(string document, Block expectedRoot, params RazorError[] expectedErrors)
+        protected virtual void ParseBlockTest(
+            string document,
+            Block expectedRoot,
+            params RazorError[] expectedErrors
+        )
         {
             ParseBlockTest(document, expectedRoot, false, expectedErrors);
         }
 
-        protected virtual void ParseBlockTest(string document, Block expectedRoot, bool designTimeParser, params RazorError[] expectedErrors)
+        protected virtual void ParseBlockTest(
+            string document,
+            Block expectedRoot,
+            bool designTimeParser,
+            params RazorError[] expectedErrors
+        )
         {
-            RunParseTest(document, parser => parser.ParseBlock, expectedRoot, (expectedErrors ?? new RazorError[0]).ToList(), designTimeParser);
+            RunParseTest(
+                document,
+                parser => parser.ParseBlock,
+                expectedRoot,
+                (expectedErrors ?? new RazorError[0]).ToList(),
+                designTimeParser
+            );
         }
 
-        protected virtual void SingleSpanBlockTest(string document, BlockType blockType, SpanKind spanType, AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any)
+        protected virtual void SingleSpanBlockTest(
+            string document,
+            BlockType blockType,
+            SpanKind spanType,
+            AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any
+        )
         {
-            SingleSpanBlockTest(document, blockType, spanType, acceptedCharacters, expectedError: null);
+            SingleSpanBlockTest(
+                document,
+                blockType,
+                spanType,
+                acceptedCharacters,
+                expectedError: null
+            );
         }
 
-        protected virtual void SingleSpanBlockTest(string document, string spanContent, BlockType blockType, SpanKind spanType, AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any)
+        protected virtual void SingleSpanBlockTest(
+            string document,
+            string spanContent,
+            BlockType blockType,
+            SpanKind spanType,
+            AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any
+        )
         {
-            SingleSpanBlockTest(document, spanContent, blockType, spanType, acceptedCharacters, expectedErrors: null);
+            SingleSpanBlockTest(
+                document,
+                spanContent,
+                blockType,
+                spanType,
+                acceptedCharacters,
+                expectedErrors: null
+            );
         }
 
-        protected virtual void SingleSpanBlockTest(string document, BlockType blockType, SpanKind spanType, params RazorError[] expectedError)
+        protected virtual void SingleSpanBlockTest(
+            string document,
+            BlockType blockType,
+            SpanKind spanType,
+            params RazorError[] expectedError
+        )
         {
             SingleSpanBlockTest(document, document, blockType, spanType, expectedError);
         }
 
-        protected virtual void SingleSpanBlockTest(string document, string spanContent, BlockType blockType, SpanKind spanType, params RazorError[] expectedErrors)
+        protected virtual void SingleSpanBlockTest(
+            string document,
+            string spanContent,
+            BlockType blockType,
+            SpanKind spanType,
+            params RazorError[] expectedErrors
+        )
         {
-            SingleSpanBlockTest(document, spanContent, blockType, spanType, AcceptedCharacters.Any, expectedErrors ?? new RazorError[0]);
+            SingleSpanBlockTest(
+                document,
+                spanContent,
+                blockType,
+                spanType,
+                AcceptedCharacters.Any,
+                expectedErrors ?? new RazorError[0]
+            );
         }
 
-        protected virtual void SingleSpanBlockTest(string document, BlockType blockType, SpanKind spanType, AcceptedCharacters acceptedCharacters, params RazorError[] expectedError)
+        protected virtual void SingleSpanBlockTest(
+            string document,
+            BlockType blockType,
+            SpanKind spanType,
+            AcceptedCharacters acceptedCharacters,
+            params RazorError[] expectedError
+        )
         {
-            SingleSpanBlockTest(document, document, blockType, spanType, acceptedCharacters, expectedError);
+            SingleSpanBlockTest(
+                document,
+                document,
+                blockType,
+                spanType,
+                acceptedCharacters,
+                expectedError
+            );
         }
 
-        protected virtual void SingleSpanBlockTest(string document, string spanContent, BlockType blockType, SpanKind spanType, AcceptedCharacters acceptedCharacters, params RazorError[] expectedErrors)
+        protected virtual void SingleSpanBlockTest(
+            string document,
+            string spanContent,
+            BlockType blockType,
+            SpanKind spanType,
+            AcceptedCharacters acceptedCharacters,
+            params RazorError[] expectedErrors
+        )
         {
             BlockBuilder builder = new BlockBuilder();
             builder.Type = blockType;
@@ -111,52 +208,95 @@ namespace System.Web.Razor.Test.Framework
                 document,
                 ConfigureAndAddSpanToBlock(
                     builder,
-                    Factory.Span(spanType, spanContent, spanType == SpanKind.Markup)
-                           .Accepts(acceptedCharacters)),
-                expectedErrors ?? new RazorError[0]);
+                    Factory
+                        .Span(spanType, spanContent, spanType == SpanKind.Markup)
+                        .Accepts(acceptedCharacters)
+                ),
+                expectedErrors ?? new RazorError[0]
+            );
         }
 
-        protected virtual void ParseDocumentTest(string document) {
+        protected virtual void ParseDocumentTest(string document)
+        {
             ParseDocumentTest(document, null, false);
         }
 
-        protected virtual void ParseDocumentTest(string document, Block expectedRoot) {
+        protected virtual void ParseDocumentTest(string document, Block expectedRoot)
+        {
             ParseDocumentTest(document, expectedRoot, false, null);
         }
 
-        protected virtual void ParseDocumentTest(string document, Block expectedRoot, params RazorError[] expectedErrors) {
+        protected virtual void ParseDocumentTest(
+            string document,
+            Block expectedRoot,
+            params RazorError[] expectedErrors
+        )
+        {
             ParseDocumentTest(document, expectedRoot, false, expectedErrors);
         }
 
-        protected virtual void ParseDocumentTest(string document, bool designTimeParser) {
+        protected virtual void ParseDocumentTest(string document, bool designTimeParser)
+        {
             ParseDocumentTest(document, null, designTimeParser);
         }
 
-        protected virtual void ParseDocumentTest(string document, Block expectedRoot, bool designTimeParser) {
+        protected virtual void ParseDocumentTest(
+            string document,
+            Block expectedRoot,
+            bool designTimeParser
+        )
+        {
             ParseDocumentTest(document, expectedRoot, designTimeParser, null);
         }
 
-        protected virtual void ParseDocumentTest(string document, Block expectedRoot, bool designTimeParser, params RazorError[] expectedErrors) {
-            RunParseTest(document, parser => parser.ParseDocument, expectedRoot, expectedErrors, designTimeParser, parserSelector: c => c.MarkupParser);
+        protected virtual void ParseDocumentTest(
+            string document,
+            Block expectedRoot,
+            bool designTimeParser,
+            params RazorError[] expectedErrors
+        )
+        {
+            RunParseTest(
+                document,
+                parser => parser.ParseDocument,
+                expectedRoot,
+                expectedErrors,
+                designTimeParser,
+                parserSelector: c => c.MarkupParser
+            );
         }
 
-        protected virtual ParserResults ParseDocument(string document) {
+        protected virtual ParserResults ParseDocument(string document)
+        {
             return ParseDocument(document, designTimeParser: false);
         }
 
-        protected virtual ParserResults ParseDocument(string document, bool designTimeParser) {
-            return RunParse(document, parser => parser.ParseDocument, designTimeParser, parserSelector: c => c.MarkupParser);
+        protected virtual ParserResults ParseDocument(string document, bool designTimeParser)
+        {
+            return RunParse(
+                document,
+                parser => parser.ParseDocument,
+                designTimeParser,
+                parserSelector: c => c.MarkupParser
+            );
         }
 
-        protected virtual ParserResults ParseBlock(string document) {
+        protected virtual ParserResults ParseBlock(string document)
+        {
             return ParseBlock(document, designTimeParser: false);
         }
 
-        protected virtual ParserResults ParseBlock(string document, bool designTimeParser) {
+        protected virtual ParserResults ParseBlock(string document, bool designTimeParser)
+        {
             return RunParse(document, parser => parser.ParseBlock, designTimeParser);
         }
 
-        protected virtual ParserResults RunParse(string document, Func<ParserBase, Action> parserActionSelector, bool designTimeParser, Func<ParserContext, ParserBase> parserSelector = null)
+        protected virtual ParserResults RunParse(
+            string document,
+            Func<ParserBase, Action> parserActionSelector,
+            bool designTimeParser,
+            Func<ParserContext, ParserBase> parserSelector = null
+        )
         {
             parserSelector = parserSelector ?? (c => c.ActiveParser);
 
@@ -191,10 +331,22 @@ namespace System.Web.Razor.Test.Framework
             return results;
         }
 
-        protected virtual void RunParseTest(string document, Func<ParserBase, Action> parserActionSelector, Block expectedRoot, IList<RazorError> expectedErrors, bool designTimeParser, Func<ParserContext, ParserBase> parserSelector = null)
+        protected virtual void RunParseTest(
+            string document,
+            Func<ParserBase, Action> parserActionSelector,
+            Block expectedRoot,
+            IList<RazorError> expectedErrors,
+            bool designTimeParser,
+            Func<ParserContext, ParserBase> parserSelector = null
+        )
         {
             // Create the source
-            ParserResults results = RunParse(document, parserActionSelector, designTimeParser, parserSelector);
+            ParserResults results = RunParse(
+                document,
+                parserActionSelector,
+                designTimeParser,
+                parserSelector
+            );
 
             // Evaluate the results
             if (!ReferenceEquals(expectedRoot, IgnoreOutput))
@@ -206,7 +358,8 @@ namespace System.Web.Razor.Test.Framework
         [Conditional("PARSER_TRACE")]
         private void WriteNode(int indent, SyntaxTreeNode node)
         {
-            string content = node.ToString().Replace("\r", "\\r")
+            string content = node.ToString()
+                .Replace("\r", "\\r")
                 .Replace("\n", "\\n")
                 .Replace("{", "{{")
                 .Replace("}", "}}");
@@ -230,7 +383,11 @@ namespace System.Web.Razor.Test.Framework
             EvaluateResults(results, expectedRoot, null);
         }
 
-        public static void EvaluateResults(ParserResults results, Block expectedRoot, IList<RazorError> expectedErrors)
+        public static void EvaluateResults(
+            ParserResults results,
+            Block expectedRoot,
+            IList<RazorError> expectedErrors
+        )
         {
             EvaluateParseTree(results.Document, expectedRoot);
             EvaluateRazorErrors(results.ParserErrors, expectedErrors);
@@ -263,7 +420,11 @@ namespace System.Web.Razor.Test.Framework
             }
         }
 
-        private static void EvaluateSyntaxTreeNode(ErrorCollector collector, SyntaxTreeNode actual, SyntaxTreeNode expected)
+        private static void EvaluateSyntaxTreeNode(
+            ErrorCollector collector,
+            SyntaxTreeNode actual,
+            SyntaxTreeNode expected
+        )
         {
             if (actual == null)
             {
@@ -301,7 +462,10 @@ namespace System.Web.Razor.Test.Framework
 
         private static void EvaluateBlock(ErrorCollector collector, Block actual, Block expected)
         {
-            if (actual.Type != expected.Type || !expected.CodeGenerator.Equals(actual.CodeGenerator))
+            if (
+                actual.Type != expected.Type
+                || !expected.CodeGenerator.Equals(actual.CodeGenerator)
+            )
             {
                 AddMismatchError(collector, actual, expected);
             }
@@ -316,16 +480,26 @@ namespace System.Web.Razor.Test.Framework
                     {
                         if (!actualNodes.MoveNext())
                         {
-                            collector.AddError("{0} - FAILED :: No more elements at this node", expectedNodes.Current);
+                            collector.AddError(
+                                "{0} - FAILED :: No more elements at this node",
+                                expectedNodes.Current
+                            );
                         }
                         else
                         {
-                            EvaluateSyntaxTreeNode(collector, actualNodes.Current, expectedNodes.Current);
+                            EvaluateSyntaxTreeNode(
+                                collector,
+                                actualNodes.Current,
+                                expectedNodes.Current
+                            );
                         }
                     }
                     while (actualNodes.MoveNext())
                     {
-                        collector.AddError("End of Node - FAILED :: Found Node: {0}", actualNodes.Current);
+                        collector.AddError(
+                            "End of Node - FAILED :: Found Node: {0}",
+                            actualNodes.Current
+                        );
                     }
                 }
             }
@@ -336,32 +510,52 @@ namespace System.Web.Razor.Test.Framework
             collector.AddMessage("{0} - PASSED", expected);
         }
 
-        private static void AddMismatchError(ErrorCollector collector, SyntaxTreeNode actual, SyntaxTreeNode expected)
+        private static void AddMismatchError(
+            ErrorCollector collector,
+            SyntaxTreeNode actual,
+            SyntaxTreeNode expected
+        )
         {
             collector.AddError("{0} - FAILED :: Actual: {1}", expected, actual);
         }
 
-        private static void AddNullActualError(ErrorCollector collector, SyntaxTreeNode actual, SyntaxTreeNode expected)
+        private static void AddNullActualError(
+            ErrorCollector collector,
+            SyntaxTreeNode actual,
+            SyntaxTreeNode expected
+        )
         {
             collector.AddError("{0} - FAILED :: Actual: << Null >>", expected);
         }
 
-        public static void EvaluateRazorErrors(IList<RazorError> actualErrors, IList<RazorError> expectedErrors)
+        public static void EvaluateRazorErrors(
+            IList<RazorError> actualErrors,
+            IList<RazorError> expectedErrors
+        )
         {
             // Evaluate the errors
             if (expectedErrors == null || expectedErrors.Count == 0)
             {
-                Assert.True(actualErrors.Count == 0,
-                            String.Format("Expected that no errors would be raised, but the following errors were:\r\n{0}", FormatErrors(actualErrors)));
+                Assert.True(
+                    actualErrors.Count == 0,
+                    String.Format(
+                        "Expected that no errors would be raised, but the following errors were:\r\n{0}",
+                        FormatErrors(actualErrors)
+                    )
+                );
             }
             else
             {
-                Assert.True(expectedErrors.Count == actualErrors.Count,
-                            String.Format("Expected that {0} errors would be raised, but {1} errors were.\r\nExpected Errors: \r\n{2}\r\nActual Errors: \r\n{3}",
-                                          expectedErrors.Count,
-                                          actualErrors.Count,
-                                          FormatErrors(expectedErrors),
-                                          FormatErrors(actualErrors)));
+                Assert.True(
+                    expectedErrors.Count == actualErrors.Count,
+                    String.Format(
+                        "Expected that {0} errors would be raised, but {1} errors were.\r\nExpected Errors: \r\n{2}\r\nActual Errors: \r\n{3}",
+                        expectedErrors.Count,
+                        actualErrors.Count,
+                        FormatErrors(expectedErrors),
+                        FormatErrors(actualErrors)
+                    )
+                );
                 Assert.Equal(expectedErrors.ToArray(), actualErrors.ToArray());
             }
             WriteTraceLine("Expected Errors were raised:\r\n{0}", FormatErrors(expectedErrors));
@@ -389,13 +583,17 @@ namespace System.Web.Razor.Test.Framework
             Trace.WriteLine(String.Format(format, args));
         }
 
-        protected virtual Block CreateSimpleBlockAndSpan(string spanContent, BlockType blockType, SpanKind spanType, AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any)
+        protected virtual Block CreateSimpleBlockAndSpan(
+            string spanContent,
+            BlockType blockType,
+            SpanKind spanType,
+            AcceptedCharacters acceptedCharacters = AcceptedCharacters.Any
+        )
         {
-            SpanConstructor span = Factory.Span(spanType, spanContent, spanType == SpanKind.Markup).Accepts(acceptedCharacters);
-            BlockBuilder b = new BlockBuilder()
-            {
-                Type = blockType
-            };
+            SpanConstructor span = Factory
+                .Span(spanType, spanContent, spanType == SpanKind.Markup)
+                .Accepts(acceptedCharacters);
+            BlockBuilder b = new BlockBuilder() { Type = blockType };
             return ConfigureAndAddSpanToBlock(b, span);
         }
 
@@ -420,7 +618,8 @@ namespace System.Web.Razor.Test.Framework
 
         private class IgnoreOutputBlock : Block
         {
-            public IgnoreOutputBlock() : base(BlockType.Template, Enumerable.Empty<SyntaxTreeNode>(), null) { }
+            public IgnoreOutputBlock()
+                : base(BlockType.Template, Enumerable.Empty<SyntaxTreeNode>(), null) { }
         }
     }
 }

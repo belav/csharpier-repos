@@ -2,13 +2,11 @@
 
 public class C
 {
-	public IA Test (IC b)
-	{
-		IA a = b;
-		return a;
-	}
-	
-	public static void Main ()
-	{
-	}
+    public IA Test(IC b)
+    {
+        IA a = b;
+        return a;
+    }
+
+    public static void Main() { }
 }

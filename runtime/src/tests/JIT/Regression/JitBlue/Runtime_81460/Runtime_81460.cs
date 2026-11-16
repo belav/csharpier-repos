@@ -9,8 +9,8 @@ using Xunit;
 public static class FloatingPointHelper<TSelf>
     where TSelf : IFloatingPoint<TSelf>
 {
-    public static int GetExponentShortestBitLength(TSelf value)
-        => value.GetExponentShortestBitLength();
+    public static int GetExponentShortestBitLength(TSelf value) =>
+        value.GetExponentShortestBitLength();
 }
 
 public class Runtime_81460
@@ -22,6 +22,5 @@ public class Runtime_81460
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static int Test() =>
-        FloatingPointHelper<double>.GetExponentShortestBitLength(1.0);
+    public static int Test() => FloatingPointHelper<double>.GetExponentShortestBitLength(1.0);
 }

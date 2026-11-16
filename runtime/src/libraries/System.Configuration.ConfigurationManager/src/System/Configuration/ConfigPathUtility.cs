@@ -45,7 +45,11 @@ namespace System.Configuration
                         return false;
 
                     // ".." disallowed
-                    if ((examine == start + 3) && (configPath[start + 1] == '.') && (configPath[start + 2] == '.'))
+                    if (
+                        (examine == start + 3)
+                        && (configPath[start + 1] == '.')
+                        && (configPath[start + 2] == '.')
+                    )
                         return false;
 
                     start = examine;
@@ -57,10 +61,14 @@ namespace System.Configuration
 
         internal static string Combine(string parentConfigPath, string childConfigPath)
         {
-            Debug.Assert(string.IsNullOrEmpty(parentConfigPath) || IsValid(parentConfigPath),
-                "String.IsNullOrEmpty(parentConfigPath) || IsValid(parentConfigPath)");
-            Debug.Assert(string.IsNullOrEmpty(childConfigPath) || IsValid(childConfigPath),
-                "String.IsNullOrEmpty(childConfigPath) || IsValid(childConfigPath)");
+            Debug.Assert(
+                string.IsNullOrEmpty(parentConfigPath) || IsValid(parentConfigPath),
+                "String.IsNullOrEmpty(parentConfigPath) || IsValid(parentConfigPath)"
+            );
+            Debug.Assert(
+                string.IsNullOrEmpty(childConfigPath) || IsValid(childConfigPath),
+                "String.IsNullOrEmpty(childConfigPath) || IsValid(childConfigPath)"
+            );
 
             if (string.IsNullOrEmpty(parentConfigPath))
                 return childConfigPath;
@@ -83,8 +91,10 @@ namespace System.Configuration
         //   GetName("MACHINE/WEBROOT/Default Web Site/app") == "app"
         internal static string GetName(string configPath)
         {
-            Debug.Assert(string.IsNullOrEmpty(configPath) || IsValid(configPath),
-                "String.IsNullOrEmpty(configPath) || IsValid(configPath)");
+            Debug.Assert(
+                string.IsNullOrEmpty(configPath) || IsValid(configPath),
+                "String.IsNullOrEmpty(configPath) || IsValid(configPath)"
+            );
 
             if (string.IsNullOrEmpty(configPath))
                 return configPath;

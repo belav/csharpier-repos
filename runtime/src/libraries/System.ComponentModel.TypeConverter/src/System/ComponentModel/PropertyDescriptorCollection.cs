@@ -16,7 +16,8 @@ namespace System.ComponentModel
         /// <summary>
         /// An empty PropertyDescriptorCollection that can used instead of creating a new one with no items.
         /// </summary>
-        public static readonly PropertyDescriptorCollection Empty = new PropertyDescriptorCollection(null, true);
+        public static readonly PropertyDescriptorCollection Empty =
+            new PropertyDescriptorCollection(null, true);
 
         private IDictionary? _cachedFoundProperties;
         private bool _cachedIgnoreCase;
@@ -52,12 +53,18 @@ namespace System.ComponentModel
         /// Initializes a new instance of a property descriptor collection, and allows you to mark the
         /// collection as read-only so it cannot be modified.
         /// </summary>
-        public PropertyDescriptorCollection(PropertyDescriptor[]? properties, bool readOnly) : this(properties)
+        public PropertyDescriptorCollection(PropertyDescriptor[]? properties, bool readOnly)
+            : this(properties)
         {
             _readOnly = readOnly;
         }
 
-        private PropertyDescriptorCollection(PropertyDescriptor[] properties, int propCount, string[]? namedSort, IComparer? comparer)
+        private PropertyDescriptorCollection(
+            PropertyDescriptor[] properties,
+            int propCount,
+            string[]? namedSort,
+            IComparer? comparer
+        )
         {
             _propsOwned = false;
             if (namedSort != null)
@@ -207,7 +214,13 @@ namespace System.ComponentModel
                 {
                     if (ignoreCase)
                     {
-                        if (string.Equals(_properties[i].Name, name, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            string.Equals(
+                                _properties[i].Name,
+                                name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             _cachedFoundProperties[name] = _properties[i];
                             p = _properties[i];
@@ -229,7 +242,8 @@ namespace System.ComponentModel
             }
         }
 
-        public int IndexOf(PropertyDescriptor? value) => Array.IndexOf(_properties, value, 0, Count);
+        public int IndexOf(PropertyDescriptor? value) =>
+            Array.IndexOf(_properties, value, 0, Count);
 
         public void Insert(int index, PropertyDescriptor value)
         {
@@ -285,7 +299,6 @@ namespace System.ComponentModel
         {
             return new PropertyDescriptorCollection(_properties, Count, _namedSort, _comparer);
         }
-
 
         /// <summary>
         /// Sorts the members of this PropertyDescriptorCollection. Any specified NamedSort arguments will
@@ -364,7 +377,10 @@ namespace System.ComponentModel
                     }
                 }
 
-                Debug.Assert(foundCount == propCount, "We did not completely fill our property array");
+                Debug.Assert(
+                    foundCount == propCount,
+                    "We did not completely fill our property array"
+                );
             }
         }
 
@@ -447,7 +463,6 @@ namespace System.ComponentModel
                 }
                 return null;
             }
-
             set
             {
                 if (_readOnly)
@@ -574,7 +589,6 @@ namespace System.ComponentModel
                 {
                     throw new IndexOutOfRangeException();
                 }
-
 
                 if (value != null && !(value is PropertyDescriptor))
                 {

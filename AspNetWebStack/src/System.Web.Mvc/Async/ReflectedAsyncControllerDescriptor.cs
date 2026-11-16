@@ -7,8 +7,9 @@ namespace System.Web.Mvc.Async
 {
     public class ReflectedAsyncControllerDescriptor : ControllerDescriptor
     {
-        internal static readonly Func<Type, ControllerDescriptor> DefaultDescriptorFactory =
-            (type) => new ReflectedAsyncControllerDescriptor(type);
+        internal static readonly Func<Type, ControllerDescriptor> DefaultDescriptorFactory = (
+            type
+        ) => new ReflectedAsyncControllerDescriptor(type);
 
         private static readonly ActionDescriptor[] _emptyCanonicalActions = new ActionDescriptor[0];
 
@@ -38,7 +39,7 @@ namespace System.Web.Mvc.Async
         }
 
         /// <summary>
-        /// Determines if we should bind "Foo" to FooAsync/FooCompleted pattern. 
+        /// Determines if we should bind "Foo" to FooAsync/FooCompleted pattern.
         /// </summary>
         /// <param name="controllerType"></param>
         /// <returns></returns>
@@ -50,8 +51,8 @@ namespace System.Web.Mvc.Async
             }
             if (typeof(Controller).IsAssignableFrom(controllerType))
             {
-                // for backwards compat. Controller now supports IAsyncController, 
-                // but still use synchronous bindings patterns. 
+                // for backwards compat. Controller now supports IAsyncController,
+                // but still use synchronous bindings patterns.
                 return false;
             }
             if (!typeof(IAsyncController).IsAssignableFrom(controllerType))
@@ -61,7 +62,10 @@ namespace System.Web.Mvc.Async
             return true;
         }
 
-        public override ActionDescriptor FindAction(ControllerContext controllerContext, string actionName)
+        public override ActionDescriptor FindAction(
+            ControllerContext controllerContext,
+            string actionName
+        )
         {
             if (controllerContext == null)
             {

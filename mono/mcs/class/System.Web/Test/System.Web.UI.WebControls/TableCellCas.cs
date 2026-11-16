@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,46 +26,45 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI.WebControls;
-
 using MonoTests.System.Web.UI.WebControls;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
+namespace MonoCasTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class TableCellCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            TableCellTest unit = new TableCellTest();
+            unit.DefaultProperties();
+            unit.NullProperties();
+            unit.Render();
+            unit.CreateControlStyle();
+            unit.Add_LiteralControl_NoText();
+            unit.Text_Add_LiteralControl();
+            unit.Add_LiteralControl_Text();
+            unit.Add_LiteralControl_Literal_And_Literal();
+            unit.Add_LiteralControl_Control_And_Literal();
+            unit.Add_LiteralControl_Literal_And_Control();
+            unit.HasControls_Text();
+            unit.Text_Add_Controls();
+            unit.NoDefaultID();
+            unit.AssociatedHeaderCellID();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TableCellCas : AspNetHostingMinimal {
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			TableCellTest unit = new TableCellTest ();
-			unit.DefaultProperties ();
-			unit.NullProperties ();
-			unit.Render ();
-			unit.CreateControlStyle ();
-			unit.Add_LiteralControl_NoText ();
-			unit.Text_Add_LiteralControl ();
-			unit.Add_LiteralControl_Text ();
-			unit.Add_LiteralControl_Literal_And_Literal ();
-			unit.Add_LiteralControl_Control_And_Literal ();
-			unit.Add_LiteralControl_Literal_And_Control ();
-			unit.HasControls_Text ();
-			unit.Text_Add_Controls ();
-			unit.NoDefaultID ();
-			unit.AssociatedHeaderCellID ();
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (TableCell); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(TableCell); }
+        }
+    }
 }

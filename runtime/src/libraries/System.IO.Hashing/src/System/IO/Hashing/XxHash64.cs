@@ -33,9 +33,7 @@ namespace System.IO.Hashing
         ///   Instances created with this constructor use the default seed, zero.
         /// </remarks>
         public XxHash64()
-            : this(0)
-        {
-        }
+            : this(0) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="XxHash64"/> class with
@@ -198,7 +196,12 @@ namespace System.IO.Hashing
         ///   <see langword="true"/> if <paramref name="destination"/> is long enough to receive
         ///   the computed hash value (4 bytes); otherwise, <see langword="false"/>.
         /// </returns>
-        public static bool TryHash(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten, long seed = 0)
+        public static bool TryHash(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten,
+            long seed = 0
+        )
         {
             if (destination.Length < HashSize)
             {

@@ -27,9 +27,8 @@ public class OrderDetail : IComparable<OrderDetail>
     public virtual Product Product { get; set; }
     public virtual Order Order { get; set; }
 
-    protected bool Equals(OrderDetail other)
-        => OrderID == other.OrderID
-            && ProductID == other.ProductID;
+    protected bool Equals(OrderDetail other) =>
+        OrderID == other.OrderID && ProductID == other.ProductID;
 
     public override bool Equals(object obj)
     {
@@ -40,12 +39,10 @@ public class OrderDetail : IComparable<OrderDetail>
 
         return ReferenceEquals(this, obj)
             ? true
-            : obj.GetType() == GetType()
-            && Equals((OrderDetail)obj);
+            : obj.GetType() == GetType() && Equals((OrderDetail)obj);
     }
 
-    public override int GetHashCode()
-        => HashCode.Combine(OrderID, ProductID);
+    public override int GetHashCode() => HashCode.Combine(OrderID, ProductID);
 
     public int CompareTo(OrderDetail other)
     {
@@ -55,8 +52,6 @@ public class OrderDetail : IComparable<OrderDetail>
         }
 
         var comp1 = OrderID.CompareTo(other.OrderID);
-        return comp1 == 0
-            ? ProductID.CompareTo(other.ProductID)
-            : comp1;
+        return comp1 == 0 ? ProductID.CompareTo(other.ProductID) : comp1;
     }
 }

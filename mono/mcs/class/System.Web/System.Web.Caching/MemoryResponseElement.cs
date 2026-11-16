@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,29 +31,29 @@ using System.Web;
 
 namespace System.Web.Caching
 {
-	[Serializable]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Unrestricted)]
-	public class MemoryResponseElement : ResponseElement
-	{
-		public byte[] Buffer {
-			get;
-			private set;
-		}
-		
-		public long Length {
-			get;
-			private set;
-		}
-		
-		public MemoryResponseElement (byte[] buffer, long length)
-		{
-			if (buffer == null)
-				throw new ArgumentNullException ("buffer");
-			if (length < 0 || length > buffer.Length)
-				throw new ArgumentOutOfRangeException ("length", "is less than zero or greater than the size of buffer.");
-			
-			this.Buffer = buffer;
-			this.Length = length;
-		}
-	}
+    [Serializable]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Unrestricted
+    )]
+    public class MemoryResponseElement : ResponseElement
+    {
+        public byte[] Buffer { get; private set; }
+
+        public long Length { get; private set; }
+
+        public MemoryResponseElement(byte[] buffer, long length)
+        {
+            if (buffer == null)
+                throw new ArgumentNullException("buffer");
+            if (length < 0 || length > buffer.Length)
+                throw new ArgumentOutOfRangeException(
+                    "length",
+                    "is less than zero or greater than the size of buffer."
+                );
+
+            this.Buffer = buffer;
+            this.Length = length;
+        }
+    }
 }

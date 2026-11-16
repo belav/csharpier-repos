@@ -15,8 +15,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddFileBanner
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddFileBanner)]
     public partial class AddFileBannerTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpAddFileBannerCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpAddFileBannerCodeRefactoringProvider();
 
         [Fact]
         public async Task TestBanner1()
@@ -65,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddFileBanner
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -118,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddFileBanner
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33251")]
@@ -171,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddFileBanner
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33251")]
@@ -227,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddFileBanner
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -256,7 +262,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddFileBanner
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -264,9 +271,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddFileBanner
         [InlineData("file_header_template =", 1)]
         [InlineData("file_header_template = unset", 1)]
         [InlineData("file_header_template = defined file header", 0)]
-        public async Task TestMissingWhenHandledByAnalyzer(string fileHeaderTemplate, int expectedActionCount)
+        public async Task TestMissingWhenHandledByAnalyzer(
+            string fileHeaderTemplate,
+            int expectedActionCount
+        )
         {
-            var initialMarkup = $@"
+            var initialMarkup =
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""/0/Test0.cs"">[||]using System;
@@ -323,7 +334,8 @@ root = true
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -352,7 +364,8 @@ root = true
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32792")]
@@ -408,7 +421,8 @@ root = true
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32792")]
@@ -464,7 +478,8 @@ root = true
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33251")]
@@ -520,7 +535,8 @@ root = true
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33251")]
@@ -576,7 +592,8 @@ root = true
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
     }
 }

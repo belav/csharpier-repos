@@ -12,7 +12,8 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void ApplicationTrustCollectionCallMethods()
         {
-            ApplicationTrustCollection atc = (ApplicationTrustCollection)FormatterServices.GetUninitializedObject(typeof(ApplicationTrustCollection));
+            ApplicationTrustCollection atc = (ApplicationTrustCollection)
+                FormatterServices.GetUninitializedObject(typeof(ApplicationTrustCollection));
             ApplicationTrust at = new ApplicationTrust();
             int testint = atc.Add(at);
             ApplicationTrust[] atarray = new ApplicationTrust[1];
@@ -29,7 +30,8 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void ApplicationTrustEnumeratorCallMethods()
         {
-            ApplicationTrustEnumerator ate = (ApplicationTrustEnumerator)FormatterServices.GetUninitializedObject(typeof(ApplicationTrustEnumerator));
+            ApplicationTrustEnumerator ate = (ApplicationTrustEnumerator)
+                FormatterServices.GetUninitializedObject(typeof(ApplicationTrustEnumerator));
             bool testbool = ate.MoveNext();
             ate.Reset();
         }

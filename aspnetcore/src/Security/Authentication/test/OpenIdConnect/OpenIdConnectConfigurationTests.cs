@@ -66,8 +66,8 @@ public class OpenIdConnectConfigurationTests
         await context.SignOutAsync();
         Assert.Equal(1, forwardDefault.SignOutCount);
 
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            () => context.SignInAsync(new ClaimsPrincipal())
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            context.SignInAsync(new ClaimsPrincipal())
         );
     }
 
@@ -98,8 +98,8 @@ public class OpenIdConnectConfigurationTests
         var context = new DefaultHttpContext();
         context.RequestServices = sp;
 
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            () => context.SignInAsync(new ClaimsPrincipal())
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            context.SignInAsync(new ClaimsPrincipal())
         );
     }
 
@@ -309,8 +309,8 @@ public class OpenIdConnectConfigurationTests
         await context.SignOutAsync();
         Assert.Equal(1, selector.SignOutCount);
 
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            () => context.SignInAsync(new ClaimsPrincipal())
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            context.SignInAsync(new ClaimsPrincipal())
         );
 
         Assert.Equal(0, forwardDefault.AuthenticateCount);
@@ -367,8 +367,8 @@ public class OpenIdConnectConfigurationTests
         await context.SignOutAsync();
         Assert.Equal(1, forwardDefault.SignOutCount);
 
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            () => context.SignInAsync(new ClaimsPrincipal())
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            context.SignInAsync(new ClaimsPrincipal())
         );
 
         Assert.Equal(0, selector.AuthenticateCount);
@@ -430,8 +430,8 @@ public class OpenIdConnectConfigurationTests
         await context.SignOutAsync();
         Assert.Equal(1, specific.SignOutCount);
 
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            () => context.SignInAsync(new ClaimsPrincipal())
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            context.SignInAsync(new ClaimsPrincipal())
         );
 
         Assert.Equal(0, forwardDefault.AuthenticateCount);
@@ -616,8 +616,8 @@ public class OpenIdConnectConfigurationTests
     )
         where T : Exception
     {
-        var exception = await Assert.ThrowsAsync<T>(
-            () => BuildTestServer(options).SendAsync(@"https://example.com")
+        var exception = await Assert.ThrowsAsync<T>(() =>
+            BuildTestServer(options).SendAsync(@"https://example.com")
         );
         verifyException(exception);
     }

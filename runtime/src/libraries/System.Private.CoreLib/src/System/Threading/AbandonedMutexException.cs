@@ -8,7 +8,9 @@ using System.Runtime.Serialization;
 namespace System.Threading
 {
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class AbandonedMutexException : SystemException
     {
         private int _mutexIndex = -1;
@@ -46,19 +48,26 @@ namespace System.Threading
             SetupException(location, handle);
         }
 
-        public AbandonedMutexException(string? message, Exception? inner, int location, WaitHandle? handle)
+        public AbandonedMutexException(
+            string? message,
+            Exception? inner,
+            int location,
+            WaitHandle? handle
+        )
             : base(message, inner)
         {
             HResult = HResults.COR_E_ABANDONEDMUTEX;
             SetupException(location, handle);
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected AbandonedMutexException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
         private void SetupException(int location, WaitHandle? handle)
         {

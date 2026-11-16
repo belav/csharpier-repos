@@ -13,7 +13,10 @@ namespace System.Linq.Expressions.Tests
         /// Verifies that the below Types don't have any DynamicallyAccessedMembers attributes,
         /// so we can safely call MakeGenericMethod on their methods.
         /// </summary>
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming)
+        )]
         public static void VerifyMethodsCalledWithMakeGenericMethod()
         {
             Assembly linqExpressions = typeof(Expression).Assembly;
@@ -26,14 +29,23 @@ namespace System.Linq.Expressions.Tests
 
             foreach (Type type in types)
             {
-                foreach (MethodInfo method in type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+                foreach (
+                    MethodInfo method in type.GetMethods(
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Instance
+                            | BindingFlags.Static
+                    )
+                )
                 {
                     Type[] genericTypes = method.GetGenericArguments();
                     if (genericTypes != null)
                     {
                         foreach (Type genericType in genericTypes)
                         {
-                            Assert.Null(genericType.GetCustomAttribute<DynamicallyAccessedMembersAttribute>());
+                            Assert.Null(
+                                genericType.GetCustomAttribute<DynamicallyAccessedMembersAttribute>()
+                            );
                         }
                     }
                 }

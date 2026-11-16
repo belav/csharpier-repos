@@ -30,8 +30,8 @@ public interface IStoreStoredProcedureResultColumn : IColumnBase
     /// </summary>
     /// <param name="entityType">An entity type.</param>
     /// <returns>The property mapping or <see langword="null" /> if not found.</returns>
-    new IStoredProcedureResultColumnMapping? FindColumnMapping(IReadOnlyEntityType entityType)
-        => (IStoredProcedureResultColumnMapping?)((IColumnBase)this).FindColumnMapping(entityType);
+    new IStoredProcedureResultColumnMapping? FindColumnMapping(IReadOnlyEntityType entityType) =>
+        (IStoredProcedureResultColumnMapping?)((IColumnBase)this).FindColumnMapping(entityType);
 
     /// <summary>
     ///     <para>

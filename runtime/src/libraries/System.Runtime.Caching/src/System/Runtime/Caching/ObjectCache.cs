@@ -22,11 +22,7 @@ namespace System.Runtime.Caching
 
         public static IServiceProvider Host
         {
-            get
-            {
-                return s_host;
-            }
-
+            get { return s_host; }
             set
             {
                 if (value == null)
@@ -52,9 +48,14 @@ namespace System.Runtime.Caching
             return ((IEnumerable<KeyValuePair<string, object>>)this).GetEnumerator();
         }
 
-        public abstract CacheEntryChangeMonitor CreateCacheEntryChangeMonitor(IEnumerable<string> keys, string regionName = null);
+        public abstract CacheEntryChangeMonitor CreateCacheEntryChangeMonitor(
+            IEnumerable<string> keys,
+            string regionName = null
+        );
 
-        IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, object>> IEnumerable<
+            KeyValuePair<string, object>
+        >.GetEnumerator()
         {
             return GetEnumerator();
         }
@@ -65,7 +66,12 @@ namespace System.Runtime.Caching
         public abstract bool Contains(string key, string regionName = null);
 
         //The Add overloads are for adding an item without requiring the existing item to be returned.  This was requested for Velocity.
-        public virtual bool Add(string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)
+        public virtual bool Add(
+            string key,
+            object value,
+            DateTimeOffset absoluteExpiration,
+            string regionName = null
+        )
         {
             return (AddOrGetExisting(key, value, absoluteExpiration, regionName) == null);
         }
@@ -75,30 +81,61 @@ namespace System.Runtime.Caching
             return (AddOrGetExisting(item, policy) == null);
         }
 
-        public virtual bool Add(string key, object value, CacheItemPolicy policy, string regionName = null)
+        public virtual bool Add(
+            string key,
+            object value,
+            CacheItemPolicy policy,
+            string regionName = null
+        )
         {
             return (AddOrGetExisting(key, value, policy, regionName) == null);
         }
 
-        public abstract object AddOrGetExisting(string key, object value, DateTimeOffset absoluteExpiration, string regionName = null);
+        public abstract object AddOrGetExisting(
+            string key,
+            object value,
+            DateTimeOffset absoluteExpiration,
+            string regionName = null
+        );
         public abstract CacheItem AddOrGetExisting(CacheItem value, CacheItemPolicy policy);
 
-        public abstract object AddOrGetExisting(string key, object value, CacheItemPolicy policy, string regionName = null);
+        public abstract object AddOrGetExisting(
+            string key,
+            object value,
+            CacheItemPolicy policy,
+            string regionName = null
+        );
 
         public abstract object Get(string key, string regionName = null);
 
         public abstract CacheItem GetCacheItem(string key, string regionName = null);
 
-        public abstract void Set(string key, object value, DateTimeOffset absoluteExpiration, string regionName = null);
+        public abstract void Set(
+            string key,
+            object value,
+            DateTimeOffset absoluteExpiration,
+            string regionName = null
+        );
 
         public abstract void Set(CacheItem item, CacheItemPolicy policy);
 
-        public abstract void Set(string key, object value, CacheItemPolicy policy, string regionName = null);
+        public abstract void Set(
+            string key,
+            object value,
+            CacheItemPolicy policy,
+            string regionName = null
+        );
 
         //Get multiple items by keys
-        public abstract IDictionary<string, object> GetValues(IEnumerable<string> keys, string regionName = null);
+        public abstract IDictionary<string, object> GetValues(
+            IEnumerable<string> keys,
+            string regionName = null
+        );
 
-        public virtual IDictionary<string, object> GetValues(string regionName, params string[] keys)
+        public virtual IDictionary<string, object> GetValues(
+            string regionName,
+            params string[] keys
+        )
         {
             return GetValues(keys, regionName);
         }

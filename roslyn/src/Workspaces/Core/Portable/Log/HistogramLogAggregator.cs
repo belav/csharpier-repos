@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     /// <summary>
     /// Defines a log aggregator to create a histogram
     /// </summary>
-    internal sealed class HistogramLogAggregator<TKey> : AbstractLogAggregator<TKey, HistogramLogAggregator<TKey>.HistogramCounter> where TKey : notnull
+    internal sealed class HistogramLogAggregator<TKey>
+        : AbstractLogAggregator<TKey, HistogramLogAggregator<TKey>.HistogramCounter>
+        where TKey : notnull
     {
         private readonly int _bucketSize;
         private readonly int _maxBucketValue;
@@ -30,8 +32,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             _bucketCount = maxBucketValue / bucketSize + 1;
         }
 
-        protected override HistogramCounter CreateCounter()
-            => new(_bucketSize, _maxBucketValue, _bucketCount);
+        protected override HistogramCounter CreateCounter() =>
+            new(_bucketSize, _maxBucketValue, _bucketCount);
 
         public void IncreaseCount(TKey key, int value)
         {
@@ -107,9 +109,12 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             /// <summary>
             /// Writes out these statistics to a property bag for sending to telemetry.
             /// </summary>
-            /// <param name="prefix">The prefix given to any properties written. A period is used to delimit between the 
+            /// <param name="prefix">The prefix given to any properties written. A period is used to delimit between the
             /// prefix and the value.</param>
-            public void WriteTelemetryPropertiesTo(Dictionary<string, object?> properties, string prefix)
+            public void WriteTelemetryPropertiesTo(
+                Dictionary<string, object?> properties,
+                string prefix
+            )
             {
                 prefix += ".";
 

@@ -9,6 +9,6 @@ namespace System.Web.WebPages
     public enum BrowserOverride
     {
         Desktop,
-        Mobile
+        Mobile,
     }
 }

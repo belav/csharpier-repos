@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //+----------------------------------------------------------------------------
 //
@@ -22,7 +22,7 @@ namespace System.Runtime.Remoting.Lifetime
     [System.Runtime.InteropServices.ComVisible(true)]
     public interface ISponsor
     {
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         TimeSpan Renewal(ILease lease);
     }
-} 
+}

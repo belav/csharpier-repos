@@ -33,8 +33,14 @@ namespace System.Web.Mvc
         private static ActionExecutor GetExecutor(MethodInfo methodInfo)
         {
             // Parameters to executor
-            ParameterExpression controllerParameter = Expression.Parameter(typeof(ControllerBase), "controller");
-            ParameterExpression parametersParameter = Expression.Parameter(typeof(object[]), "parameters");
+            ParameterExpression controllerParameter = Expression.Parameter(
+                typeof(ControllerBase),
+                "controller"
+            );
+            ParameterExpression parametersParameter = Expression.Parameter(
+                typeof(object[]),
+                "parameters"
+            );
 
             // Build parameter list
             List<Expression> parameters = new List<Expression>();
@@ -42,7 +48,10 @@ namespace System.Web.Mvc
             for (int i = 0; i < paramInfos.Length; i++)
             {
                 ParameterInfo paramInfo = paramInfos[i];
-                BinaryExpression valueObj = Expression.ArrayIndex(parametersParameter, Expression.Constant(i));
+                BinaryExpression valueObj = Expression.ArrayIndex(
+                    parametersParameter,
+                    Expression.Constant(i)
+                );
                 UnaryExpression valueCast = Expression.Convert(valueObj, paramInfo.ParameterType);
 
                 // valueCast is "(Ti) parameters[i]"
@@ -50,14 +59,25 @@ namespace System.Web.Mvc
             }
 
             // Call method
-            UnaryExpression instanceCast = (!methodInfo.IsStatic) ? Expression.Convert(controllerParameter, methodInfo.ReflectedType) : null;
-            MethodCallExpression methodCall = methodCall = Expression.Call(instanceCast, methodInfo, parameters);
+            UnaryExpression instanceCast =
+                (!methodInfo.IsStatic)
+                    ? Expression.Convert(controllerParameter, methodInfo.ReflectedType)
+                    : null;
+            MethodCallExpression methodCall = methodCall = Expression.Call(
+                instanceCast,
+                methodInfo,
+                parameters
+            );
 
             // methodCall is "((TController) controller) method((T0) parameters[0], (T1) parameters[1], ...)"
             // Create function
             if (methodCall.Type == typeof(void))
             {
-                Expression<VoidActionExecutor> lambda = Expression.Lambda<VoidActionExecutor>(methodCall, controllerParameter, parametersParameter);
+                Expression<VoidActionExecutor> lambda = Expression.Lambda<VoidActionExecutor>(
+                    methodCall,
+                    controllerParameter,
+                    parametersParameter
+                );
                 VoidActionExecutor voidExecutor = lambda.Compile();
                 return WrapVoidAction(voidExecutor);
             }
@@ -65,7 +85,11 @@ namespace System.Web.Mvc
             {
                 // must coerce methodCall to match ActionExecutor signature
                 UnaryExpression castMethodCall = Expression.Convert(methodCall, typeof(object));
-                Expression<ActionExecutor> lambda = Expression.Lambda<ActionExecutor>(castMethodCall, controllerParameter, parametersParameter);
+                Expression<ActionExecutor> lambda = Expression.Lambda<ActionExecutor>(
+                    castMethodCall,
+                    controllerParameter,
+                    parametersParameter
+                );
                 return lambda.Compile();
             }
         }

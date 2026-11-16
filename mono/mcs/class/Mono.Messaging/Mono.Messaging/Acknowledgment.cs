@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,27 +29,27 @@
 //
 using System;
 
-namespace Mono.Messaging 
+namespace Mono.Messaging
 {
-	[Serializable]
-	public enum Acknowledgment 
-	{
-		AccessDenied = 32772,
-		BadDestinationQueue = 32768,
-		BadEncryption = 32775,
-		BadSignature = 32774,
-		CouldNotEncrypt = 32776,
-		HopCountExceeded = 32773,
-		None = 0,
-		NotTransactionalMessage = 32778,
-		NotTransactionalQueue = 32777,
-		Purged = 32769,
-		QueueDeleted = 49152,
-		QueueExceedMaximumSize = 32771,
-		QueuePurged = 49153,
-		ReachQueue = 2,
-		ReachQueueTimeout = 32770,
-		Receive = 16384,
-		ReceiveTimeout = 49154
-	}
+    [Serializable]
+    public enum Acknowledgment
+    {
+        AccessDenied = 32772,
+        BadDestinationQueue = 32768,
+        BadEncryption = 32775,
+        BadSignature = 32774,
+        CouldNotEncrypt = 32776,
+        HopCountExceeded = 32773,
+        None = 0,
+        NotTransactionalMessage = 32778,
+        NotTransactionalQueue = 32777,
+        Purged = 32769,
+        QueueDeleted = 49152,
+        QueueExceedMaximumSize = 32771,
+        QueuePurged = 49153,
+        ReachQueue = 2,
+        ReachQueueTimeout = 32770,
+        Receive = 16384,
+        ReceiveTimeout = 49154,
+    }
 }

@@ -6,28 +6,29 @@
 // @owner  Microsoft, Microsoft
 //---------------------------------------------------------------------
 
-using System.Linq.Expressions;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Reflection;
+
 namespace System.Data.Objects.ELinq
 {
     /// <summary>
     /// Replaces expression patterns produced by the compiler with approximations
     /// used in query translation. For instance, the following VB code:
-    /// 
+    ///
     ///     x = y
-    ///     
+    ///
     /// becomes the expression
-    /// 
+    ///
     ///     Equal(MethodCallExpression(Microsoft.VisualBasic.CompilerServices.Operators.CompareString(x, y, False), 0)
-    ///     
+    ///
     /// which is normalized to
-    /// 
+    ///
     ///     Equal(x, y)
-    ///     
+    ///
     /// Comment convention:
-    /// 
+    ///
     ///     CODE(Lang): _VB or C# coding pattern being simplified_
     ///     ORIGINAL: _original LINQ expression_
     ///     NORMALIZED: _normalized LINQ expression_
@@ -45,11 +46,12 @@ namespace System.Data.Objects.ELinq
         /// Gets a dictionary mapping from LINQ expressions to matched by those expressions. Used
         /// to identify composite expression patterns.
         /// </summary>
-        private readonly Dictionary<Expression, Pattern> _patterns = new Dictionary<Expression, Pattern>();
+        private readonly Dictionary<Expression, Pattern> _patterns =
+            new Dictionary<Expression, Pattern>();
 
         /// <summary>
         /// Handle binary patterns:
-        /// 
+        ///
         /// - VB 'Is' operator
         /// - Compare patterns
         /// </summary>
@@ -66,7 +68,11 @@ namespace System.Data.Objects.ELinq
                 Expression normalizedRight = UnwrapObjectConvert(b.Right);
                 if (normalizedLeft != b.Left || normalizedRight != b.Right)
                 {
-                    b = CreateRelationalOperator(ExpressionType.Equal, normalizedLeft, normalizedRight);
+                    b = CreateRelationalOperator(
+                        ExpressionType.Equal,
+                        normalizedLeft,
+                        normalizedRight
+                    );
                 }
             }
 
@@ -74,12 +80,23 @@ namespace System.Data.Objects.ELinq
             // ORIGINAL: Equal(Microsoft.VisualBasic.CompilerServices.Operators.CompareString(x, y, False), 0)
             // NORMALIZED: Equal(x, y)
             Pattern pattern;
-            if (_patterns.TryGetValue(b.Left, out pattern) && pattern.Kind == PatternKind.Compare && IsConstantZero(b.Right))
+            if (
+                _patterns.TryGetValue(b.Left, out pattern)
+                && pattern.Kind == PatternKind.Compare
+                && IsConstantZero(b.Right)
+            )
             {
                 ComparePattern comparePattern = (ComparePattern)pattern;
                 // handle relational operators
                 BinaryExpression relationalExpression;
-                if (TryCreateRelationalOperator(b.NodeType, comparePattern.Left, comparePattern.Right, out relationalExpression))
+                if (
+                    TryCreateRelationalOperator(
+                        b.NodeType,
+                        comparePattern.Left,
+                        comparePattern.Right,
+                        out relationalExpression
+                    )
+                )
                 {
                     b = relationalExpression;
                 }
@@ -97,14 +114,12 @@ namespace System.Data.Objects.ELinq
         private static Expression UnwrapObjectConvert(Expression input)
         {
             // recognize funcletized (already evaluated) Converts
-            if (input.NodeType == ExpressionType.Constant &&
-               input.Type == typeof(object))
+            if (input.NodeType == ExpressionType.Constant && input.Type == typeof(object))
             {
                 ConstantExpression constant = (ConstantExpression)input;
 
                 // we will handle nulls later, so just bypass those
-                if (constant.Value != null &&
-                    constant.Value.GetType() != typeof(object))
+                if (constant.Value != null && constant.Value.GetType() != typeof(object))
                 {
                     return Expression.Constant(constant.Value, constant.Value.GetType());
                 }
@@ -123,13 +138,13 @@ namespace System.Data.Objects.ELinq
         /// </summary>
         private bool IsConstantZero(Expression expression)
         {
-            return expression.NodeType == ExpressionType.Constant &&
-                ((ConstantExpression)expression).Value.Equals(0);
+            return expression.NodeType == ExpressionType.Constant
+                && ((ConstantExpression)expression).Value.Equals(0);
         }
 
         /// <summary>
         /// Handles MethodCall patterns:
-        /// 
+        ///
         /// - Operator overloads
         /// - VB operators
         /// </summary>
@@ -151,28 +166,66 @@ namespace System.Data.Objects.ELinq
                         switch (m.Method.Name)
                         {
                             case "op_Equality":
-                                return Expression.Equal(m.Arguments[0], m.Arguments[1], LiftToNull, m.Method);
+                                return Expression.Equal(
+                                    m.Arguments[0],
+                                    m.Arguments[1],
+                                    LiftToNull,
+                                    m.Method
+                                );
 
                             case "op_Inequality":
-                                return Expression.NotEqual(m.Arguments[0], m.Arguments[1], LiftToNull, m.Method);
+                                return Expression.NotEqual(
+                                    m.Arguments[0],
+                                    m.Arguments[1],
+                                    LiftToNull,
+                                    m.Method
+                                );
 
                             case "op_GreaterThan":
-                                return Expression.GreaterThan(m.Arguments[0], m.Arguments[1], LiftToNull, m.Method);
+                                return Expression.GreaterThan(
+                                    m.Arguments[0],
+                                    m.Arguments[1],
+                                    LiftToNull,
+                                    m.Method
+                                );
 
                             case "op_GreaterThanOrEqual":
-                                return Expression.GreaterThanOrEqual(m.Arguments[0], m.Arguments[1], LiftToNull, m.Method);
+                                return Expression.GreaterThanOrEqual(
+                                    m.Arguments[0],
+                                    m.Arguments[1],
+                                    LiftToNull,
+                                    m.Method
+                                );
 
                             case "op_LessThan":
-                                return Expression.LessThan(m.Arguments[0], m.Arguments[1], LiftToNull, m.Method);
+                                return Expression.LessThan(
+                                    m.Arguments[0],
+                                    m.Arguments[1],
+                                    LiftToNull,
+                                    m.Method
+                                );
 
                             case "op_LessThanOrEqual":
-                                return Expression.LessThanOrEqual(m.Arguments[0], m.Arguments[1], LiftToNull, m.Method);
+                                return Expression.LessThanOrEqual(
+                                    m.Arguments[0],
+                                    m.Arguments[1],
+                                    LiftToNull,
+                                    m.Method
+                                );
 
                             case "op_Multiply":
-                                return Expression.Multiply(m.Arguments[0], m.Arguments[1], m.Method);
+                                return Expression.Multiply(
+                                    m.Arguments[0],
+                                    m.Arguments[1],
+                                    m.Method
+                                );
 
                             case "op_Subtraction":
-                                return Expression.Subtract(m.Arguments[0], m.Arguments[1], m.Method);
+                                return Expression.Subtract(
+                                    m.Arguments[0],
+                                    m.Arguments[1],
+                                    m.Method
+                                );
 
                             case "op_Addition":
                                 return Expression.Add(m.Arguments[0], m.Arguments[1], m.Method);
@@ -190,7 +243,11 @@ namespace System.Data.Objects.ELinq
                                 return Expression.Or(m.Arguments[0], m.Arguments[1], m.Method);
 
                             case "op_ExclusiveOr":
-                                return Expression.ExclusiveOr(m.Arguments[0], m.Arguments[1], m.Method);
+                                return Expression.ExclusiveOr(
+                                    m.Arguments[0],
+                                    m.Arguments[1],
+                                    m.Method
+                                );
 
                             default:
                                 break;
@@ -235,7 +292,11 @@ namespace System.Data.Objects.ELinq
                 }
 
                 // check for Microsoft.VisualBasic.CompilerServices.Operators.CompareString method
-                if (m.Method.Name == "CompareString" && m.Method.DeclaringType.FullName == "Microsoft.VisualBasic.CompilerServices.Operators")
+                if (
+                    m.Method.Name == "CompareString"
+                    && m.Method.DeclaringType.FullName
+                        == "Microsoft.VisualBasic.CompilerServices.Operators"
+                )
                 {
                     // CODE(VB): x = y; where x and y are strings, a part of the expression looks like:
                     // ORIGINAL: MethodCallExpression(Microsoft.VisualBasic.CompilerServices.Operators.CompareString(x, y, False)
@@ -244,7 +305,11 @@ namespace System.Data.Objects.ELinq
                 }
 
                 // check for static Compare method
-                if (m.Method.Name == "Compare" && m.Arguments.Count > 1 && m.Method.ReturnType == typeof(int))
+                if (
+                    m.Method.Name == "Compare"
+                    && m.Arguments.Count > 1
+                    && m.Method.ReturnType == typeof(int)
+                )
                 {
                     // CODE(C#): Class.Compare(x, y)
                     // ORIGINAL: MethodCallExpression(<Compare>, x, y)
@@ -259,17 +324,28 @@ namespace System.Data.Objects.ELinq
                 {
                     // type-specific Equals method on spatial types becomes a call to the 'STEquals' spatial canonical function, so should remain in the expression tree.
                     Type parameterType = m.Method.GetParameters()[0].ParameterType;
-                    if (parameterType != typeof(System.Data.Spatial.DbGeography) && parameterType != typeof(System.Data.Spatial.DbGeometry))
+                    if (
+                        parameterType != typeof(System.Data.Spatial.DbGeography)
+                        && parameterType != typeof(System.Data.Spatial.DbGeometry)
+                    )
                     {
                         // CODE(C#): x.Equals(y)
                         // ORIGINAL: MethodCallExpression(x, <Equals>, y)
                         // NORMALIZED: Equal(x, y)
-                        return CreateRelationalOperator(ExpressionType.Equal, m.Object, m.Arguments[0]);
+                        return CreateRelationalOperator(
+                            ExpressionType.Equal,
+                            m.Object,
+                            m.Arguments[0]
+                        );
                     }
                 }
 
                 // check for instance CompareTo method
-                if (m.Method.Name == "CompareTo" && m.Arguments.Count == 1 && m.Method.ReturnType == typeof(int))
+                if (
+                    m.Method.Name == "CompareTo"
+                    && m.Arguments.Count == 1
+                    && m.Method.ReturnType == typeof(int)
+                )
                 {
                     // CODE(C#): x.CompareTo(y)
                     // ORIGINAL: MethodCallExpression(x.CompareTo(y))
@@ -278,19 +354,34 @@ namespace System.Data.Objects.ELinq
                 }
 
                 // check for List<> instance Contains method
-                if (m.Method.Name == "Contains" && m.Arguments.Count == 1) {
+                if (m.Method.Name == "Contains" && m.Arguments.Count == 1)
+                {
                     Type declaringType = m.Method.DeclaringType;
-                    if (declaringType.IsGenericType && declaringType.GetGenericTypeDefinition() == typeof(List<>))
+                    if (
+                        declaringType.IsGenericType
+                        && declaringType.GetGenericTypeDefinition() == typeof(List<>)
+                    )
                     {
                         // CODE(C#): List<T> x.Contains(y)
                         // ORIGINAL: MethodCallExpression(x.Contains(y))
                         // NORMALIZED: IEnumerable<T>.Contains(x, y)
 
                         MethodInfo containsMethod;
-                        if (ReflectionUtil.TryLookupMethod(SequenceMethod.Contains, out containsMethod))
+                        if (
+                            ReflectionUtil.TryLookupMethod(
+                                SequenceMethod.Contains,
+                                out containsMethod
+                            )
+                        )
                         {
-                            MethodInfo enumerableContainsMethod = containsMethod.MakeGenericMethod(declaringType.GetGenericArguments());
-                            return Expression.Call(enumerableContainsMethod, m.Object, m.Arguments[0]);
+                            MethodInfo enumerableContainsMethod = containsMethod.MakeGenericMethod(
+                                declaringType.GetGenericArguments()
+                            );
+                            return Expression.Call(
+                                enumerableContainsMethod,
+                                m.Object,
+                                m.Arguments[0]
+                            );
                         }
                     }
                 }
@@ -300,28 +391,39 @@ namespace System.Data.Objects.ELinq
             return NormalizePredicateArgument(m);
         }
 
-
-
         /// <summary>
         /// Identifies and normalizes any predicate argument in the given call expression. If no changes
         /// are needed, returns the existing expression. Otherwise, returns a new call expression
         /// with a normalized predicate argument.
         /// </summary>
-        private static MethodCallExpression NormalizePredicateArgument(MethodCallExpression callExpression)
+        private static MethodCallExpression NormalizePredicateArgument(
+            MethodCallExpression callExpression
+        )
         {
             MethodCallExpression result;
 
             int argumentOrdinal;
             Expression normalizedArgument;
-            if (HasPredicateArgument(callExpression, out argumentOrdinal) &&
-                TryMatchCoalescePattern(callExpression.Arguments[argumentOrdinal], out normalizedArgument))
+            if (
+                HasPredicateArgument(callExpression, out argumentOrdinal)
+                && TryMatchCoalescePattern(
+                    callExpression.Arguments[argumentOrdinal],
+                    out normalizedArgument
+                )
+            )
             {
-                List<Expression> normalizedArguments = new List<Expression>(callExpression.Arguments);
+                List<Expression> normalizedArguments = new List<Expression>(
+                    callExpression.Arguments
+                );
 
                 // replace the predicate argument with the normalized version
                 normalizedArguments[argumentOrdinal] = normalizedArgument;
 
-                result = Expression.Call(callExpression.Object, callExpression.Method, normalizedArguments);
+                result = Expression.Call(
+                    callExpression.Object,
+                    callExpression.Method,
+                    normalizedArguments
+                );
             }
             else
             {
@@ -333,13 +435,16 @@ namespace System.Data.Objects.ELinq
         }
 
         /// <summary>
-        /// Determines whether the given call expression has a 'predicate' argument (e.g. Where(source, predicate)) 
+        /// Determines whether the given call expression has a 'predicate' argument (e.g. Where(source, predicate))
         /// and returns the ordinal for the predicate.
         /// </summary>
         /// <remarks>
         /// Obviously this method will need to be replaced if we ever encounter a method with multiple predicates.
         /// </remarks>
-        private static bool HasPredicateArgument(MethodCallExpression callExpression, out int argumentOrdinal)
+        private static bool HasPredicateArgument(
+            MethodCallExpression callExpression,
+            out int argumentOrdinal
+        )
         {
             argumentOrdinal = default(int);
             bool result = false;
@@ -348,8 +453,13 @@ namespace System.Data.Objects.ELinq
             // argument. As a result, we always set argumentOrdinal to 1 when there is a match and
             // we can safely ignore all methods taking fewer than 2 arguments
             SequenceMethod sequenceMethod;
-            if (2 <= callExpression.Arguments.Count &&
-                ReflectionUtil.TryIdentifySequenceMethod(callExpression.Method, out sequenceMethod))
+            if (
+                2 <= callExpression.Arguments.Count
+                && ReflectionUtil.TryIdentifySequenceMethod(
+                    callExpression.Method,
+                    out sequenceMethod
+                )
+            )
             {
                 switch (sequenceMethod)
                 {
@@ -383,7 +493,10 @@ namespace System.Data.Objects.ELinq
         /// introduced by the VB compiler for predicate arguments. Returns the 'normalized' version of the expression
         /// Lambda((bool)left, ...)
         /// </summary>
-        private static bool TryMatchCoalescePattern(Expression expression, out Expression normalized)
+        private static bool TryMatchCoalescePattern(
+            Expression expression,
+            out Expression normalized
+        )
         {
             normalized = null;
             bool result = false;
@@ -406,12 +519,22 @@ namespace System.Data.Objects.ELinq
                 // CODE(VB): where a.NullableInt = 1
                 // ORIGINAL: Lambda(Coalesce(expr, Constant(false)), a)
                 // NORMALIZED: Lambda(expr, a)
-                if (lambda.Body.NodeType == ExpressionType.Coalesce && lambda.Body.Type == typeof(bool))
+                if (
+                    lambda.Body.NodeType == ExpressionType.Coalesce
+                    && lambda.Body.Type == typeof(bool)
+                )
                 {
                     BinaryExpression coalesce = (BinaryExpression)lambda.Body;
-                    if (coalesce.Right.NodeType == ExpressionType.Constant && false.Equals(((ConstantExpression)coalesce.Right).Value))
+                    if (
+                        coalesce.Right.NodeType == ExpressionType.Constant
+                        && false.Equals(((ConstantExpression)coalesce.Right).Value)
+                    )
                     {
-                        normalized = Expression.Lambda(lambda.Type, Expression.Convert(coalesce.Left, typeof(bool)), lambda.Parameters);
+                        normalized = Expression.Lambda(
+                            lambda.Type,
+                            Expression.Convert(coalesce.Left, typeof(bool)),
+                            lambda.Parameters
+                        );
                         result = true;
                     }
                 }
@@ -420,21 +543,32 @@ namespace System.Data.Objects.ELinq
             return result;
         }
 
-        private static readonly MethodInfo s_relationalOperatorPlaceholderMethod = typeof(LinqExpressionNormalizer).GetMethod("RelationalOperatorPlaceholder", BindingFlags.Static | BindingFlags.NonPublic);
+        private static readonly MethodInfo s_relationalOperatorPlaceholderMethod =
+            typeof(LinqExpressionNormalizer).GetMethod(
+                "RelationalOperatorPlaceholder",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
+
         /// <summary>
         /// This method exists solely to support creation of valid relational operator LINQ expressions that are not natively supported
         /// by the CLR (e.g. String > String). This method must not be invoked.
         /// </summary>
         private static bool RelationalOperatorPlaceholder<TLeft, TRight>(TLeft left, TRight right)
         {
-            Debug.Fail("This method should never be called. It exists merely to support creation of relational LINQ expressions.");
+            Debug.Fail(
+                "This method should never be called. It exists merely to support creation of relational LINQ expressions."
+            );
             return object.ReferenceEquals(left, right);
         }
 
         /// <summary>
         /// Create an operator relating 'left' and 'right' given a relational operator.
         /// </summary>
-        private static BinaryExpression CreateRelationalOperator(ExpressionType op, Expression left, Expression right)
+        private static BinaryExpression CreateRelationalOperator(
+            ExpressionType op,
+            Expression left,
+            Expression right
+        )
         {
             BinaryExpression result;
             if (!TryCreateRelationalOperator(op, left, right, out result))
@@ -448,36 +582,72 @@ namespace System.Data.Objects.ELinq
         /// Try to create an operator relating 'left' and 'right' using the given operator. If the given operator
         /// does not define a known relation, returns false.
         /// </summary>
-        private static bool TryCreateRelationalOperator(ExpressionType op, Expression left, Expression right, out BinaryExpression result)
+        private static bool TryCreateRelationalOperator(
+            ExpressionType op,
+            Expression left,
+            Expression right,
+            out BinaryExpression result
+        )
         {
-            MethodInfo relationalOperatorPlaceholderMethod = s_relationalOperatorPlaceholderMethod.MakeGenericMethod(left.Type, right.Type);
+            MethodInfo relationalOperatorPlaceholderMethod =
+                s_relationalOperatorPlaceholderMethod.MakeGenericMethod(left.Type, right.Type);
 
             switch (op)
             {
                 case ExpressionType.Equal:
-                    result = Expression.Equal(left, right, LiftToNull, relationalOperatorPlaceholderMethod);
+                    result = Expression.Equal(
+                        left,
+                        right,
+                        LiftToNull,
+                        relationalOperatorPlaceholderMethod
+                    );
                     return true;
 
                 case ExpressionType.NotEqual:
-                    result = Expression.NotEqual(left, right, LiftToNull, relationalOperatorPlaceholderMethod);
+                    result = Expression.NotEqual(
+                        left,
+                        right,
+                        LiftToNull,
+                        relationalOperatorPlaceholderMethod
+                    );
                     return true;
 
                 case ExpressionType.LessThan:
-                    result = Expression.LessThan(left, right, LiftToNull, relationalOperatorPlaceholderMethod);
+                    result = Expression.LessThan(
+                        left,
+                        right,
+                        LiftToNull,
+                        relationalOperatorPlaceholderMethod
+                    );
                     return true;
 
                 case ExpressionType.LessThanOrEqual:
-                    result = Expression.LessThanOrEqual(left, right, LiftToNull, relationalOperatorPlaceholderMethod);
+                    result = Expression.LessThanOrEqual(
+                        left,
+                        right,
+                        LiftToNull,
+                        relationalOperatorPlaceholderMethod
+                    );
                     return true;
 
                 case ExpressionType.GreaterThan:
-                    result = Expression.GreaterThan(left, right, LiftToNull, relationalOperatorPlaceholderMethod);
+                    result = Expression.GreaterThan(
+                        left,
+                        right,
+                        LiftToNull,
+                        relationalOperatorPlaceholderMethod
+                    );
                     return true;
 
                 case ExpressionType.GreaterThanOrEqual:
-                    result = Expression.GreaterThanOrEqual(left, right, LiftToNull, relationalOperatorPlaceholderMethod);
+                    result = Expression.GreaterThanOrEqual(
+                        left,
+                        right,
+                        LiftToNull,
+                        relationalOperatorPlaceholderMethod
+                    );
                     return true;
- 
+
                 default:
                     result = null;
                     return false;
@@ -488,7 +658,7 @@ namespace System.Data.Objects.ELinq
         /// CODE(C#): Class.Compare(left, right)
         /// ORIGINAL: MethodCallExpression(Compare, left, right)
         /// NORMALIZED: Condition(Equal(left, right), 0, Condition(left > right, 1, -1))
-        /// 
+        ///
         /// Why is this an improvement? We know how to evaluate Condition in the store, but we don't
         /// know how to evaluate MethodCallExpression... Where the CompareTo appears within a larger expression,
         /// e.g. left.CompareTo(right) > 0, we can further simplify to left > right (we register the "ComparePattern"
@@ -502,7 +672,9 @@ namespace System.Data.Objects.ELinq
                 Expression.Condition(
                     CreateRelationalOperator(ExpressionType.GreaterThan, left, right),
                     Expression.Constant(1),
-                    Expression.Constant(-1)));
+                    Expression.Constant(-1)
+                )
+            );
 
             // Remember that this node matches the pattern
             _patterns[result] = new ComparePattern(left, right);
@@ -549,7 +721,6 @@ namespace System.Data.Objects.ELinq
             /// Gets right-hand argument to Compare operation.
             /// </summary>
             internal readonly Expression Right;
-
 
             internal override PatternKind Kind
             {

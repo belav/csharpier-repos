@@ -1,21 +1,21 @@
 public class A
 {
-	public static A Get ()
-	{
-		return null;
-	}
+    public static A Get()
+    {
+        return null;
+    }
 }
 
 public class Test
 {
-	void M ()
-	{
-		A A = A.Get ();
-	}
+    void M()
+    {
+        A A = A.Get();
+    }
 
-	public static void Main ()
-	{
-		var t = new Test ();
-		t.M ();
-	}
+    public static void Main()
+    {
+        var t = new Test();
+        t.M();
+    }
 }

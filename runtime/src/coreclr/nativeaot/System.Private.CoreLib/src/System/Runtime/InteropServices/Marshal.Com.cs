@@ -30,19 +30,21 @@ namespace System.Runtime.InteropServices
             throw new NotSupportedException(SR.PlatformNotSupported_ComInterop);
         }
 
-        [RequiresUnreferencedCode("Built-in COM support is not trim compatible", Url = "https://aka.ms/dotnet-illink/com")]
+        [RequiresUnreferencedCode(
+            "Built-in COM support is not trim compatible",
+            Url = "https://aka.ms/dotnet-illink/com"
+        )]
         [SupportedOSPlatform("windows")]
         public static object BindToMoniker(string monikerName)
         {
             throw new NotSupportedException(SR.PlatformNotSupported_ComInterop);
         }
 
-        public static void CleanupUnusedObjectsInCurrentContext()
-        {
-        }
+        public static void CleanupUnusedObjectsInCurrentContext() { }
 
         [SupportedOSPlatform("windows")]
-        public static IntPtr CreateAggregatedObject<T>(IntPtr pOuter, T o) where T : notnull
+        public static IntPtr CreateAggregatedObject<T>(IntPtr pOuter, T o)
+            where T : notnull
         {
             throw new NotSupportedException(SR.PlatformNotSupported_ComInterop);
         }
@@ -85,7 +87,11 @@ namespace System.Runtime.InteropServices
 
         [SupportedOSPlatform("windows")]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static IntPtr GetComInterfaceForObject(object o, Type T, CustomQueryInterfaceMode mode)
+        public static IntPtr GetComInterfaceForObject(
+            object o,
+            Type T,
+            CustomQueryInterfaceMode mode
+        )
         {
             throw new NotSupportedException(SR.PlatformNotSupported_ComInterop);
         }
@@ -107,7 +113,22 @@ namespace System.Runtime.InteropServices
         {
             ArgumentNullException.ThrowIfNull(o);
 
-            return ComWrappers.ComInterfaceForObject(o, new Guid(0x00020400, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46) /* IID_IDispatch */);
+            return ComWrappers.ComInterfaceForObject(
+                o,
+                new Guid(
+                    0x00020400,
+                    0x0000,
+                    0x0000,
+                    0xC0,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x46
+                ) /* IID_IDispatch */
+            );
         }
 
         [SupportedOSPlatform("windows")]
@@ -187,10 +208,16 @@ namespace System.Runtime.InteropServices
                     break;
 #pragma warning restore 0618
                 case UnknownWrapper value:
-                    *data = ComVariant.CreateRaw(VarEnum.VT_UNKNOWN, GetIUnknownForObject(value.WrappedObject));
+                    *data = ComVariant.CreateRaw(
+                        VarEnum.VT_UNKNOWN,
+                        GetIUnknownForObject(value.WrappedObject)
+                    );
                     break;
                 case DispatchWrapper value:
-                    *data = ComVariant.CreateRaw(VarEnum.VT_DISPATCH, GetIDispatchForObject(value.WrappedObject));
+                    *data = ComVariant.CreateRaw(
+                        VarEnum.VT_DISPATCH,
+                        GetIDispatchForObject(value.WrappedObject)
+                    );
                     break;
                 case ErrorWrapper value:
                     *data = ComVariant.Create(value);
@@ -210,7 +237,10 @@ namespace System.Runtime.InteropServices
                             *data = default;
                             break;
                         case TypeCode.Object:
-                            *data = ComVariant.CreateRaw(VarEnum.VT_UNKNOWN, GetIUnknownForObject(value));
+                            *data = ComVariant.CreateRaw(
+                                VarEnum.VT_UNKNOWN,
+                                GetIUnknownForObject(value)
+                            );
                             break;
                         case TypeCode.DBNull:
                             *data = ComVariant.Null;
@@ -313,26 +343,46 @@ namespace System.Runtime.InteropServices
                 case VarEnum.VT_NULL:
                     return DBNull.Value;
 
-                case VarEnum.VT_I1: return data->As<sbyte>();
-                case VarEnum.VT_I2: return data->As<short>();
-                case VarEnum.VT_I4: return data->As<int>();
-                case VarEnum.VT_I8: return data->As<long>();
-                case VarEnum.VT_UI1: return data->As<byte>();
-                case VarEnum.VT_UI2: return data->As<ushort>();
-                case VarEnum.VT_UI4: return data->As<uint>();
-                case VarEnum.VT_UI8: return data->As<ulong>();
-                case VarEnum.VT_INT: return data->As<int>();
-                case VarEnum.VT_UINT: return data->As<uint>();
-                case VarEnum.VT_BOOL: return data->As<short>() != -1;
-                case VarEnum.VT_ERROR: return data->As<int>();
-                case VarEnum.VT_R4: return data->As<float>();
-                case VarEnum.VT_R8: return data->As<double>();
-                case VarEnum.VT_DECIMAL: return data->As<decimal>();
-                case VarEnum.VT_CY: return decimal.FromOACurrency(data->GetRawDataRef<long>());
-                case VarEnum.VT_DATE: return data->As<DateTime>();
-                case VarEnum.VT_BSTR: return PtrToStringBSTR(data->GetRawDataRef<nint>());
-                case VarEnum.VT_UNKNOWN: return GetObjectForIUnknown(data->GetRawDataRef<nint>());
-                case VarEnum.VT_DISPATCH: return GetObjectForIUnknown(data->GetRawDataRef<nint>());
+                case VarEnum.VT_I1:
+                    return data->As<sbyte>();
+                case VarEnum.VT_I2:
+                    return data->As<short>();
+                case VarEnum.VT_I4:
+                    return data->As<int>();
+                case VarEnum.VT_I8:
+                    return data->As<long>();
+                case VarEnum.VT_UI1:
+                    return data->As<byte>();
+                case VarEnum.VT_UI2:
+                    return data->As<ushort>();
+                case VarEnum.VT_UI4:
+                    return data->As<uint>();
+                case VarEnum.VT_UI8:
+                    return data->As<ulong>();
+                case VarEnum.VT_INT:
+                    return data->As<int>();
+                case VarEnum.VT_UINT:
+                    return data->As<uint>();
+                case VarEnum.VT_BOOL:
+                    return data->As<short>() != -1;
+                case VarEnum.VT_ERROR:
+                    return data->As<int>();
+                case VarEnum.VT_R4:
+                    return data->As<float>();
+                case VarEnum.VT_R8:
+                    return data->As<double>();
+                case VarEnum.VT_DECIMAL:
+                    return data->As<decimal>();
+                case VarEnum.VT_CY:
+                    return decimal.FromOACurrency(data->GetRawDataRef<long>());
+                case VarEnum.VT_DATE:
+                    return data->As<DateTime>();
+                case VarEnum.VT_BSTR:
+                    return PtrToStringBSTR(data->GetRawDataRef<nint>());
+                case VarEnum.VT_UNKNOWN:
+                    return GetObjectForIUnknown(data->GetRawDataRef<nint>());
+                case VarEnum.VT_DISPATCH:
+                    return GetObjectForIUnknown(data->GetRawDataRef<nint>());
 
                 default:
                     // Other VARIANT types not supported yet.

@@ -9,7 +9,8 @@ namespace System.CodeDom.Compiler
 {
     public sealed class CompilerInfo
     {
-        internal readonly IDictionary<string, string> _providerOptions = new Dictionary<string, string>();
+        internal readonly IDictionary<string, string> _providerOptions =
+            new Dictionary<string, string>();
         internal string _codeDomProviderTypeName; // This can never by null
         internal CompilerParameters _compilerParams; // This can never by null
         internal string[] _compilerLanguages; // This can never by null
@@ -50,7 +51,9 @@ namespace System.CodeDom.Compiler
 
             if (_providerOptions.Count > 0)
             {
-                ConstructorInfo ci = CodeDomProviderType.GetConstructor(new Type[] { typeof(IDictionary<string, string>) });
+                ConstructorInfo ci = CodeDomProviderType.GetConstructor(
+                    new Type[] { typeof(IDictionary<string, string>) }
+                );
                 if (ci != null)
                 {
                     return (CodeDomProvider)ci.Invoke(new object[] { _providerOptions });
@@ -67,14 +70,18 @@ namespace System.CodeDom.Compiler
                 throw new ArgumentNullException(nameof(providerOptions));
             }
 
-            ConstructorInfo constructor = CodeDomProviderType.GetConstructor(new Type[] { typeof(IDictionary<string, string>) });
+            ConstructorInfo constructor = CodeDomProviderType.GetConstructor(
+                new Type[] { typeof(IDictionary<string, string>) }
+            );
             if (constructor != null)
             {
                 return (CodeDomProvider)constructor.Invoke(new object[] { providerOptions });
             }
             else
             {
-                throw new InvalidOperationException(SR.Format(SR.Provider_does_not_support_options, CodeDomProviderType));
+                throw new InvalidOperationException(
+                    SR.Format(SR.Provider_does_not_support_options, CodeDomProviderType)
+                );
             }
         }
 
@@ -90,12 +97,12 @@ namespace System.CodeDom.Compiler
 
         public override bool Equals(object o)
         {
-            return
-                o is CompilerInfo other &&
-                CodeDomProviderType == other.CodeDomProviderType &&
-                CompilerParams.WarningLevel == other.CompilerParams.WarningLevel &&
-                CompilerParams.IncludeDebugInformation == other.CompilerParams.IncludeDebugInformation &&
-                CompilerParams.CompilerOptions == other.CompilerParams.CompilerOptions;
+            return o is CompilerInfo other
+                && CodeDomProviderType == other.CodeDomProviderType
+                && CompilerParams.WarningLevel == other.CompilerParams.WarningLevel
+                && CompilerParams.IncludeDebugInformation
+                    == other.CompilerParams.IncludeDebugInformation
+                && CompilerParams.CompilerOptions == other.CompilerParams.CompilerOptions;
         }
 
         private CompilerParameters CloneCompilerParameters()

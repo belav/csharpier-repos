@@ -21,7 +21,9 @@ namespace Microsoft.Extensions.Logging
         private readonly IConfiguration _configuration;
 
         [UnsupportedOSPlatform("browser")]
-        public ConsoleLoggerConfigureOptions(ILoggerProviderConfiguration<ConsoleLoggerProvider> providerConfiguration)
+        public ConsoleLoggerConfigureOptions(
+            ILoggerProviderConfiguration<ConsoleLoggerProvider> providerConfiguration
+        )
         {
             _configuration = providerConfiguration.Configuration;
         }

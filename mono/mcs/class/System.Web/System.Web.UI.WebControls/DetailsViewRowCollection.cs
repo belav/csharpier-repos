@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,54 +28,58 @@
 //
 
 using System;
-using System.Web.UI;
 using System.Collections;
+using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	public class DetailsViewRowCollection: ICollection, IEnumerable
-	{
-		ArrayList rows = new ArrayList ();
-		
-		public DetailsViewRowCollection (ArrayList rows)
-		{
-			this.rows = rows;
-		}
-		
-		public DetailsViewRow this [int index] {
-			get { return (DetailsViewRow) rows [index]; }
-		}
-		
-		public void CopyTo (DetailsViewRow[] array, int index)
-		{
-			rows.CopyTo (array, index);
-		}
-		
-		public IEnumerator GetEnumerator ()
-		{
-			return rows.GetEnumerator ();
-		}
-		
-		public int Count {
-			get { return rows.Count; }
-		}
-		
-		public bool IsSynchronized {
-			get { return false; }
-		}
-		
-		public object SyncRoot {
-			get { return this; }
-		}
-		
-		public bool IsReadOnly {
-			get { return false; }
-		}
-		
-		void System.Collections.ICollection.CopyTo (Array array, int index)
-		{
-			rows.CopyTo (array, index);
-		}
-	}
-}
+    public class DetailsViewRowCollection : ICollection, IEnumerable
+    {
+        ArrayList rows = new ArrayList();
 
+        public DetailsViewRowCollection(ArrayList rows)
+        {
+            this.rows = rows;
+        }
+
+        public DetailsViewRow this[int index]
+        {
+            get { return (DetailsViewRow)rows[index]; }
+        }
+
+        public void CopyTo(DetailsViewRow[] array, int index)
+        {
+            rows.CopyTo(array, index);
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return rows.GetEnumerator();
+        }
+
+        public int Count
+        {
+            get { return rows.Count; }
+        }
+
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
+
+        public object SyncRoot
+        {
+            get { return this; }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
+
+        void System.Collections.ICollection.CopyTo(Array array, int index)
+        {
+            rows.CopyTo(array, index);
+        }
+    }
+}

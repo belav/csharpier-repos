@@ -1,22 +1,28 @@
-namespace System.Web.Mvc {
+namespace System.Web.Mvc
+{
     using System;
     using System.Collections.Generic;
 
-    public class ViewEngineResult {
-
-        public ViewEngineResult(IEnumerable<string> searchedLocations) {
-            if (searchedLocations == null) {
+    public class ViewEngineResult
+    {
+        public ViewEngineResult(IEnumerable<string> searchedLocations)
+        {
+            if (searchedLocations == null)
+            {
                 throw new ArgumentNullException("searchedLocations");
             }
 
             SearchedLocations = searchedLocations;
         }
 
-        public ViewEngineResult(IView view, IViewEngine viewEngine) {
-            if (view == null) {
+        public ViewEngineResult(IView view, IViewEngine viewEngine)
+        {
+            if (view == null)
+            {
                 throw new ArgumentNullException("view");
             }
-            if (viewEngine == null) {
+            if (viewEngine == null)
+            {
                 throw new ArgumentNullException("viewEngine");
             }
 
@@ -24,19 +30,10 @@ namespace System.Web.Mvc {
             ViewEngine = viewEngine;
         }
 
-        public IEnumerable<string> SearchedLocations {
-            get;
-            private set;
-        }
+        public IEnumerable<string> SearchedLocations { get; private set; }
 
-        public IView View {
-            get;
-            private set;
-        }
+        public IView View { get; private set; }
 
-        public IViewEngine ViewEngine {
-            get;
-            private set;
-        }
+        public IViewEngine ViewEngine { get; private set; }
     }
 }

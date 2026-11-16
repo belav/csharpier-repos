@@ -8,31 +8,53 @@ namespace System.Reflection
     // Latch known constructors of pseudo-CustomAttribute types.
     public sealed partial class MetadataLoadContext
     {
-        internal ConstructorInfo? TryGetFieldOffsetCtor() => _lazyFieldOffset ??= TryGetConstructor(CoreType.FieldOffsetAttribute, CoreType.Int32);
+        internal ConstructorInfo? TryGetFieldOffsetCtor() =>
+            _lazyFieldOffset ??= TryGetConstructor(CoreType.FieldOffsetAttribute, CoreType.Int32);
+
         private volatile ConstructorInfo? _lazyFieldOffset;
 
-        internal ConstructorInfo? TryGetInCtor() => _lazyIn ??= TryGetConstructor(CoreType.InAttribute);
+        internal ConstructorInfo? TryGetInCtor() =>
+            _lazyIn ??= TryGetConstructor(CoreType.InAttribute);
+
         private volatile ConstructorInfo? _lazyIn;
 
-        internal ConstructorInfo? TryGetOutCtor() => _lazyOut ??= TryGetConstructor(CoreType.OutAttribute);
+        internal ConstructorInfo? TryGetOutCtor() =>
+            _lazyOut ??= TryGetConstructor(CoreType.OutAttribute);
+
         private volatile ConstructorInfo? _lazyOut;
 
-        internal ConstructorInfo? TryGetOptionalCtor() => _lazyOptional ??= TryGetConstructor(CoreType.OptionalAttribute);
+        internal ConstructorInfo? TryGetOptionalCtor() =>
+            _lazyOptional ??= TryGetConstructor(CoreType.OptionalAttribute);
+
         private volatile ConstructorInfo? _lazyOptional;
 
-        internal ConstructorInfo? TryGetPreserveSigCtor() => _lazyPreserveSig ??= TryGetConstructor(CoreType.PreserveSigAttribute);
+        internal ConstructorInfo? TryGetPreserveSigCtor() =>
+            _lazyPreserveSig ??= TryGetConstructor(CoreType.PreserveSigAttribute);
+
         private volatile ConstructorInfo? _lazyPreserveSig;
 
-        internal ConstructorInfo? TryGetComImportCtor() => _lazyComImport ??= TryGetConstructor(CoreType.ComImportAttribute);
+        internal ConstructorInfo? TryGetComImportCtor() =>
+            _lazyComImport ??= TryGetConstructor(CoreType.ComImportAttribute);
+
         private volatile ConstructorInfo? _lazyComImport;
 
-        internal ConstructorInfo? TryGetDllImportCtor() => _lazyDllImport ??= TryGetConstructor(CoreType.DllImportAttribute, CoreType.String);
+        internal ConstructorInfo? TryGetDllImportCtor() =>
+            _lazyDllImport ??= TryGetConstructor(CoreType.DllImportAttribute, CoreType.String);
+
         private volatile ConstructorInfo? _lazyDllImport;
 
-        internal ConstructorInfo? TryGetMarshalAsCtor() => _lazyMarshalAs ??= TryGetConstructor(CoreType.MarshalAsAttribute, CoreType.UnmanagedType);
+        internal ConstructorInfo? TryGetMarshalAsCtor() =>
+            _lazyMarshalAs ??= TryGetConstructor(
+                CoreType.MarshalAsAttribute,
+                CoreType.UnmanagedType
+            );
+
         private volatile ConstructorInfo? _lazyMarshalAs;
 
-        private ConstructorInfo? TryGetConstructor(CoreType attributeCoreType, params CoreType[] parameterCoreTypes)
+        private ConstructorInfo? TryGetConstructor(
+            CoreType attributeCoreType,
+            params CoreType[] parameterCoreTypes
+        )
         {
             int count = parameterCoreTypes.Length;
             Type? attributeType = TryGetCoreType(attributeCoreType);
@@ -45,7 +67,11 @@ namespace System.Reflection
                     return null;
             }
 
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.ExactBinding;
+            const BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.ExactBinding;
             return attributeType.GetConstructor(bf, null, parameterTypes!, null);
         }
     }

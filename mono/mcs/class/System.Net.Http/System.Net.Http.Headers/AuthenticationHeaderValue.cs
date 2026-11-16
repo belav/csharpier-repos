@@ -30,102 +30,107 @@ using System.Collections.Generic;
 
 namespace System.Net.Http.Headers
 {
-	public class AuthenticationHeaderValue : ICloneable
-	{
-		public AuthenticationHeaderValue (string scheme)
-			: this (scheme, null)
-		{
-		}
+    public class AuthenticationHeaderValue : ICloneable
+    {
+        public AuthenticationHeaderValue(string scheme)
+            : this(scheme, null) { }
 
-		public AuthenticationHeaderValue (string scheme, string parameter)
-		{
-			Parser.Token.Check (scheme);
+        public AuthenticationHeaderValue(string scheme, string parameter)
+        {
+            Parser.Token.Check(scheme);
 
-			this.Scheme = scheme;
-			this.Parameter = parameter;
-		}
+            this.Scheme = scheme;
+            this.Parameter = parameter;
+        }
 
-		private AuthenticationHeaderValue ()
-		{
-		}
+        private AuthenticationHeaderValue() { }
 
-		public string Parameter { get; private set; }
-		public string Scheme { get; private set; }
+        public string Parameter { get; private set; }
+        public string Scheme { get; private set; }
 
-		object ICloneable.Clone ()
-		{
-			return MemberwiseClone ();
-		}
+        object ICloneable.Clone()
+        {
+            return MemberwiseClone();
+        }
 
-		public override bool Equals (object obj)
-		{
-			var source = obj as AuthenticationHeaderValue;
-			return source != null &&
-				string.Equals (source.Scheme, Scheme, StringComparison.OrdinalIgnoreCase) &&
-				source.Parameter == Parameter;
-		}
+        public override bool Equals(object obj)
+        {
+            var source = obj as AuthenticationHeaderValue;
+            return source != null
+                && string.Equals(source.Scheme, Scheme, StringComparison.OrdinalIgnoreCase)
+                && source.Parameter == Parameter;
+        }
 
-		public override int GetHashCode ()
-		{
-			int hc = Scheme.ToLowerInvariant ().GetHashCode ();
-			if (!string.IsNullOrEmpty (Parameter)) {
-				hc ^= Parameter.ToLowerInvariant ().GetHashCode ();
-			}
+        public override int GetHashCode()
+        {
+            int hc = Scheme.ToLowerInvariant().GetHashCode();
+            if (!string.IsNullOrEmpty(Parameter))
+            {
+                hc ^= Parameter.ToLowerInvariant().GetHashCode();
+            }
 
-			return hc;
-		}
+            return hc;
+        }
 
-		public static AuthenticationHeaderValue Parse (string input)
-		{
-			AuthenticationHeaderValue value;
-			if (TryParse (input, out value))
-				return value;
+        public static AuthenticationHeaderValue Parse(string input)
+        {
+            AuthenticationHeaderValue value;
+            if (TryParse(input, out value))
+                return value;
 
-			throw new FormatException (input);
-		}
+            throw new FormatException(input);
+        }
 
-		public static bool TryParse (string input, out AuthenticationHeaderValue parsedValue)
-		{
-			var lexer = new Lexer (input);
-			Token token;
-			if (TryParseElement (lexer, out parsedValue, out token) && token == Token.Type.End)
-				return true;
+        public static bool TryParse(string input, out AuthenticationHeaderValue parsedValue)
+        {
+            var lexer = new Lexer(input);
+            Token token;
+            if (TryParseElement(lexer, out parsedValue, out token) && token == Token.Type.End)
+                return true;
 
-			parsedValue = null;
-			return false;
-		}
+            parsedValue = null;
+            return false;
+        }
 
-		internal static bool TryParse (string input, int minimalCount, out List<AuthenticationHeaderValue> result)
-		{
-			return CollectionParser.TryParse (input, minimalCount, TryParseElement, out result);
-		}
+        internal static bool TryParse(
+            string input,
+            int minimalCount,
+            out List<AuthenticationHeaderValue> result
+        )
+        {
+            return CollectionParser.TryParse(input, minimalCount, TryParseElement, out result);
+        }
 
-		static bool TryParseElement (Lexer lexer, out AuthenticationHeaderValue parsedValue, out Token t)
-		{
-			t = lexer.Scan ();
-			if (t != Token.Type.Token) {
-				parsedValue = null;
-				return false;
-			}
+        static bool TryParseElement(
+            Lexer lexer,
+            out AuthenticationHeaderValue parsedValue,
+            out Token t
+        )
+        {
+            t = lexer.Scan();
+            if (t != Token.Type.Token)
+            {
+                parsedValue = null;
+                return false;
+            }
 
-			parsedValue = new AuthenticationHeaderValue ();
-			parsedValue.Scheme = lexer.GetStringValue (t);
+            parsedValue = new AuthenticationHeaderValue();
+            parsedValue.Scheme = lexer.GetStringValue(t);
 
-			t = lexer.Scan ();
-			if (t == Token.Type.Token) {
-				// TODO: Wrong with multi value parsing
-				parsedValue.Parameter = lexer.GetRemainingStringValue (t.StartPosition);
-				t = new Token (Token.Type.End, 0, 0);
-			}
+            t = lexer.Scan();
+            if (t == Token.Type.Token)
+            {
+                // TODO: Wrong with multi value parsing
+                parsedValue.Parameter = lexer.GetRemainingStringValue(t.StartPosition);
+                t = new Token(Token.Type.End, 0, 0);
+            }
 
-			return true;
-		}
+            return true;
+        }
 
-		public override string ToString ()
-		{
-			return Parameter != null ?
-				Scheme + " " + Parameter :
-				Scheme;
-		}
-	}
+        public override string ToString()
+        {
+            return Parameter != null ? Scheme + " " + Parameter : Scheme;
+        }
+    }
 }

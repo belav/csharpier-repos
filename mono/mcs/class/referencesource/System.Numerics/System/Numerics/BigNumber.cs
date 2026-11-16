@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // The BigNumber class implements methods for formatting and parsing
 // big numeric values. To format and parse numeric values, applications should
@@ -137,7 +137,7 @@
 // user-defined format strings. The following table describes the formatting
 // characters that are supported in user defined format strings.
 //
-// 
+//
 // 0 - Digit placeholder. If the value being
 // formatted has a digit in the position where the '0' appears in the format
 // string, then that digit is copied to the output string. Otherwise, a '0' is
@@ -271,7 +271,8 @@
 // specified. Note, however, that the Parse methods do not accept
 // NaNs or Infinities.
 //
-namespace System.Numerics {
+namespace System.Numerics
+{
     using System;
     using System.Diagnostics.Contracts;
     using System.Globalization;
@@ -280,36 +281,52 @@ namespace System.Numerics {
     using System.Text;
     using Conditional = System.Diagnostics.ConditionalAttribute;
 
-    internal static class BigNumber {
-
+    internal static class BigNumber
+    {
 #if !SILVERLIGHT || FEATURE_NETCORE
-        private const NumberStyles InvalidNumberStyles = ~(NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite
-                                                           | NumberStyles.AllowLeadingSign | NumberStyles.AllowTrailingSign
-                                                           | NumberStyles.AllowParentheses | NumberStyles.AllowDecimalPoint
-                                                           | NumberStyles.AllowThousands | NumberStyles.AllowExponent
-                                                           | NumberStyles.AllowCurrencySymbol | NumberStyles.AllowHexSpecifier);
+        private const NumberStyles InvalidNumberStyles = ~(
+            NumberStyles.AllowLeadingWhite
+            | NumberStyles.AllowTrailingWhite
+            | NumberStyles.AllowLeadingSign
+            | NumberStyles.AllowTrailingSign
+            | NumberStyles.AllowParentheses
+            | NumberStyles.AllowDecimalPoint
+            | NumberStyles.AllowThousands
+            | NumberStyles.AllowExponent
+            | NumberStyles.AllowCurrencySymbol
+            | NumberStyles.AllowHexSpecifier
+        );
 
-        internal struct BigNumberBuffer {
+        internal struct BigNumberBuffer
+        {
             public StringBuilder digits;
             public int precision;
             public int scale;
-            public bool sign;  // negative sign exists
+            public bool sign; // negative sign exists
 
-            public static BigNumberBuffer Create() {
+            public static BigNumberBuffer Create()
+            {
                 BigNumberBuffer number = new BigNumberBuffer();
                 number.digits = new StringBuilder();
                 return number;
             }
         }
 
-        internal static bool TryValidateParseStyleInteger(NumberStyles style, out ArgumentException e) {
+        internal static bool TryValidateParseStyleInteger(
+            NumberStyles style,
+            out ArgumentException e
+        )
+        {
             // Check for undefined flags
-            if ((style & InvalidNumberStyles) != 0) {
+            if ((style & InvalidNumberStyles) != 0)
+            {
                 e = new ArgumentException(SR.GetString(SR.Argument_InvalidNumberStyles, "style"));
                 return false;
             }
-            if ((style & NumberStyles.AllowHexSpecifier) != 0) { // Check for hex number
-                if ((style & ~NumberStyles.HexNumber) != 0) {
+            if ((style & NumberStyles.AllowHexSpecifier) != 0)
+            { // Check for hex number
+                if ((style & ~NumberStyles.HexNumber) != 0)
+                {
                     e = new ArgumentException(SR.GetString(SR.Argument_InvalidHexStyle));
                     return false;
                 }
@@ -319,38 +336,54 @@ namespace System.Numerics {
         }
 
         [SecuritySafeCritical]
-        internal unsafe static Boolean TryParseBigInteger(String value, NumberStyles style, NumberFormatInfo info, out BigInteger result) {
+        internal static unsafe Boolean TryParseBigInteger(
+            String value,
+            NumberStyles style,
+            NumberFormatInfo info,
+            out BigInteger result
+        )
+        {
             result = BigInteger.Zero;
             ArgumentException e;
             if (!TryValidateParseStyleInteger(style, out e))
                 throw e; // TryParse still throws ArgumentException on invalid NumberStyles
 
             BigNumberBuffer bignumber = BigNumberBuffer.Create();
-            Byte * numberBufferBytes = stackalloc Byte[Number.NumberBuffer.NumberBufferBytes];
+            Byte* numberBufferBytes = stackalloc Byte[Number.NumberBuffer.NumberBufferBytes];
             Number.NumberBuffer number = new Number.NumberBuffer(numberBufferBytes);
             result = 0;
-    
-            if (!Number.TryStringToNumber(value, style, ref number, bignumber.digits, info, false)) {
+
+            if (!Number.TryStringToNumber(value, style, ref number, bignumber.digits, info, false))
+            {
                 return false;
             }
             bignumber.precision = number.precision;
             bignumber.scale = number.scale;
             bignumber.sign = number.sign;
 
-            if ((style & NumberStyles.AllowHexSpecifier) != 0) {
-                if (!HexNumberToBigInteger(ref bignumber, ref result)) { 
+            if ((style & NumberStyles.AllowHexSpecifier) != 0)
+            {
+                if (!HexNumberToBigInteger(ref bignumber, ref result))
+                {
                     return false;
                 }
             }
-            else {
-                if (!NumberToBigInteger(ref bignumber, ref result)) {
+            else
+            {
+                if (!NumberToBigInteger(ref bignumber, ref result))
+                {
                     return false;
                 }
             }
-            return true;           
+            return true;
         }
 
-        internal unsafe static BigInteger ParseBigInteger(String value, NumberStyles style, NumberFormatInfo info) {
+        internal static unsafe BigInteger ParseBigInteger(
+            String value,
+            NumberStyles style,
+            NumberFormatInfo info
+        )
+        {
             if (value == null)
                 throw new ArgumentNullException("value");
 
@@ -359,13 +392,18 @@ namespace System.Numerics {
                 throw e;
 
             BigInteger result = BigInteger.Zero;
-            if (!TryParseBigInteger(value, style, info, out result)) {
+            if (!TryParseBigInteger(value, style, info, out result))
+            {
                 throw new FormatException(SR.GetString(SR.Overflow_ParseBigInteger));
             }
             return result;
         }
 
-        private unsafe static Boolean HexNumberToBigInteger(ref BigNumberBuffer number, ref BigInteger value) {
+        private static unsafe Boolean HexNumberToBigInteger(
+            ref BigNumberBuffer number,
+            ref BigInteger value
+        )
+        {
             if (number.digits == null || number.digits.Length == 0)
                 return false;
 
@@ -381,28 +419,34 @@ namespace System.Numerics {
             // string index (i) : 0 1 2 3 4 5 <--
             // byte[] (bitIndex): 2 1 1 0 0 <--
             //
-            for (int i = len-1; i > -1; i--) {
+            for (int i = len - 1; i > -1; i--)
+            {
                 char c = number.digits[i];
 
                 byte b;
-                if (c >= '0' && c <= '9') {
+                if (c >= '0' && c <= '9')
+                {
                     b = (byte)(c - '0');
                 }
-                else if (c >= 'A' && c <= 'F') {
+                else if (c >= 'A' && c <= 'F')
+                {
                     b = (byte)((c - 'A') + 10);
                 }
-                else {
+                else
+                {
                     Contract.Assert(c >= 'a' && c <= 'f');
                     b = (byte)((c - 'a') + 10);
                 }
                 if (i == 0 && (b & 0x08) == 0x08)
                     isNegative = true;
 
-                if (shift) {
+                if (shift)
+                {
                     bits[bitIndex] = (byte)(bits[bitIndex] | (b << 4));
-                    bitIndex++;                    
+                    bitIndex++;
                 }
-                else {
+                else
+                {
                     bits[bitIndex] = isNegative ? (byte)(b | 0xF0) : (b);
                 }
                 shift = !shift;
@@ -412,21 +456,30 @@ namespace System.Numerics {
             return true;
         }
 
-        private unsafe static Boolean NumberToBigInteger(ref BigNumberBuffer number, ref BigInteger value) {
+        private static unsafe Boolean NumberToBigInteger(
+            ref BigNumberBuffer number,
+            ref BigInteger value
+        )
+        {
             Int32 i = number.scale;
             Int32 cur = 0;
 
             value = 0;
-            while (--i >= 0) {
+            while (--i >= 0)
+            {
                 value *= 10;
-                if (number.digits[cur] != '\0') {
+                if (number.digits[cur] != '\0')
+                {
                     value += (Int32)(number.digits[cur++] - '0');
                 }
             }
-            while (number.digits[cur] != '\0') {
-                if (number.digits[cur++] != '0') return false; // disallow non-zero trailing decimal places
+            while (number.digits[cur] != '\0')
+            {
+                if (number.digits[cur++] != '0')
+                    return false; // disallow non-zero trailing decimal places
             }
-            if (number.sign) {
+            if (number.sign)
+            {
                 value = -value;
             }
             return true;
@@ -434,27 +487,33 @@ namespace System.Numerics {
 #endif //!SILVERLIGHT ||FEATURE_NETCORE
 
         // this function is consistent with VM\COMNumber.cpp!COMNumber::ParseFormatSpecifier
-        internal static char ParseFormatSpecifier(String format, out Int32 digits) {
+        internal static char ParseFormatSpecifier(String format, out Int32 digits)
+        {
             digits = -1;
-            if (String.IsNullOrEmpty(format)) {
+            if (String.IsNullOrEmpty(format))
+            {
                 return 'R';
             }
 
             int i = 0;
             char ch = format[i];
-            if (ch >= 'A' && ch <= 'Z' || ch >= 'a' && ch <= 'z') {
+            if (ch >= 'A' && ch <= 'Z' || ch >= 'a' && ch <= 'z')
+            {
                 i++;
                 int n = -1;
 
-                if (i < format.Length && format[i] >= '0' && format[i] <= '9') {
+                if (i < format.Length && format[i] >= '0' && format[i] <= '9')
+                {
                     n = format[i++] - '0';
-                    while (i < format.Length &&  format[i] >= '0' && format[i] <= '9') {
+                    while (i < format.Length && format[i] >= '0' && format[i] <= '9')
+                    {
                         n = n * 10 + (format[i++] - '0');
                         if (n >= 10)
                             break;
                     }
                 }
-                if (i >= format.Length || format[i] == '\0') {
+                if (i >= format.Length || format[i] == '\0')
+                {
                     digits = n;
                     return ch;
                 }
@@ -462,23 +521,32 @@ namespace System.Numerics {
             return (char)0; // custom format
         }
 
-        private static String FormatBigIntegerToHexString(BigInteger value, char format, int digits, NumberFormatInfo info) {
+        private static String FormatBigIntegerToHexString(
+            BigInteger value,
+            char format,
+            int digits,
+            NumberFormatInfo info
+        )
+        {
             StringBuilder sb = new StringBuilder();
             byte[] bits = value.ToByteArray();
             String fmt = null;
-            int cur = bits.Length-1;
-           
-            if (cur > -1) {
+            int cur = bits.Length - 1;
+
+            if (cur > -1)
+            {
                 // [FF..F8] drop the high F as the two's complement negative number remains clear
                 // [F7..08] retain the high bits as the two's complement number is wrong without it
                 // [07..00] drop the high 0 as the two's complement positive number remains clear
                 bool clearHighF = false;
                 byte head = bits[cur];
-                if (head > 0xF7) {
+                if (head > 0xF7)
+                {
                     head -= 0xF0;
                     clearHighF = true;
                 }
-                if (head < 0x08 || clearHighF) {
+                if (head < 0x08 || clearHighF)
+                {
                     // {0xF8-0xFF} print as {8-F}
                     // {0x00-0x07} print as {0-7}
                     fmt = String.Format(CultureInfo.InvariantCulture, "{0}1", format);
@@ -486,16 +554,23 @@ namespace System.Numerics {
                     cur--;
                 }
             }
-            if (cur > -1) {
+            if (cur > -1)
+            {
                 fmt = String.Format(CultureInfo.InvariantCulture, "{0}2", format);
-                while (cur > -1) {
+                while (cur > -1)
+                {
                     sb.Append(bits[cur--].ToString(fmt, info));
                 }
             }
-            if (digits > 0 && digits > sb.Length) {
+            if (digits > 0 && digits > sb.Length)
+            {
                 // insert leading zeros.  User specified "X5" so we create "0ABCD" instead of "ABCD"
-                sb.Insert(0, (value._sign >= 0 ? ("0") : (format == 'x' ? "f" : "F")), digits - sb.Length);
-            }          
+                sb.Insert(
+                    0,
+                    (value._sign >= 0 ? ("0") : (format == 'x' ? "f" : "F")),
+                    digits - sb.Length
+                );
+            }
             return sb.ToString();
         }
 
@@ -507,33 +582,42 @@ namespace System.Numerics {
 #endif // !SILVERLIGHT ||FEATURE_NETCORE
         internal
 #if !SILVERLIGHT ||FEATURE_NETCORE
-                 unsafe
+        unsafe
 #endif //!SILVERLIGHT ||FEATURE_NETCORE
-                        static String FormatBigInteger(BigInteger value, String format, NumberFormatInfo info) {
+        static String FormatBigInteger(BigInteger value, String format, NumberFormatInfo info)
+        {
             int digits = 0;
             char fmt = ParseFormatSpecifier(format, out digits);
             if (fmt == 'x' || fmt == 'X')
                 return FormatBigIntegerToHexString(value, fmt, digits, info);
 
-            bool decimalFmt = (fmt == 'g' || fmt == 'G' || fmt == 'd' || fmt == 'D' || fmt == 'r' || fmt == 'R');           
+            bool decimalFmt = (
+                fmt == 'g' || fmt == 'G' || fmt == 'd' || fmt == 'D' || fmt == 'r' || fmt == 'R'
+            );
 
 #if SILVERLIGHT ||FEATURE_NETCORE || MONO
-            if (!decimalFmt) {
+            if (!decimalFmt)
+            {
                 // Silverlight supports invariant formats only
                 throw new FormatException(SR.GetString(SR.Format_InvalidFormatSpecifier));
             }
 #endif //SILVERLIGHT ||FEATURE_NETCORE || MONO
 
-            if (value._bits == null) {
-                if (fmt == 'g' || fmt == 'G' || fmt == 'r' || fmt == 'R') {
+            if (value._bits == null)
+            {
+                if (fmt == 'g' || fmt == 'G' || fmt == 'r' || fmt == 'R')
+                {
                     if (digits > 0)
-                        format = String.Format(CultureInfo.InvariantCulture, "D{0}", digits.ToString(CultureInfo.InvariantCulture));
+                        format = String.Format(
+                            CultureInfo.InvariantCulture,
+                            "D{0}",
+                            digits.ToString(CultureInfo.InvariantCulture)
+                        );
                     else
                         format = "D";
                 }
                 return value._sign.ToString(format, info);
             }
-
 
             // First convert to base 10^9.
             const uint kuBase = 1000000000; // 10^9
@@ -541,22 +625,29 @@ namespace System.Numerics {
 
             int cuSrc = BigInteger.Length(value._bits);
             int cuMax;
-            try {
+            try
+            {
                 cuMax = checked(cuSrc * 10 / 9 + 2);
             }
-            catch (OverflowException e) { throw new FormatException(SR.GetString(SR.Format_TooLarge), e); }
+            catch (OverflowException e)
+            {
+                throw new FormatException(SR.GetString(SR.Format_TooLarge), e);
+            }
             uint[] rguDst = new uint[cuMax];
             int cuDst = 0;
 
-            for (int iuSrc = cuSrc; --iuSrc >= 0; ) {
+            for (int iuSrc = cuSrc; --iuSrc >= 0; )
+            {
                 uint uCarry = value._bits[iuSrc];
-                for (int iuDst = 0; iuDst < cuDst; iuDst++) {
+                for (int iuDst = 0; iuDst < cuDst; iuDst++)
+                {
                     Contract.Assert(rguDst[iuDst] < kuBase);
                     ulong uuRes = NumericsHelpers.MakeUlong(rguDst[iuDst], uCarry);
                     rguDst[iuDst] = (uint)(uuRes % kuBase);
                     uCarry = (uint)(uuRes / kuBase);
                 }
-                if (uCarry != 0) {
+                if (uCarry != 0)
+                {
                     rguDst[cuDst++] = uCarry % kuBase;
                     uCarry /= kuBase;
                     if (uCarry != 0)
@@ -565,70 +656,96 @@ namespace System.Numerics {
             }
 
             int cchMax;
-            try {
+            try
+            {
                 // Each uint contributes at most 9 digits to the decimal representation.
                 cchMax = checked(cuDst * kcchBase);
             }
-            catch (OverflowException e) { throw new FormatException(SR.GetString(SR.Format_TooLarge), e); }
+            catch (OverflowException e)
+            {
+                throw new FormatException(SR.GetString(SR.Format_TooLarge), e);
+            }
 
-            if (decimalFmt) {
+            if (decimalFmt)
+            {
                 if (digits > 0 && digits > cchMax)
                     cchMax = digits;
-                if (value._sign < 0) {
-                    try {
+                if (value._sign < 0)
+                {
+                    try
+                    {
                         // Leave an extra slot for a minus sign.
                         cchMax = checked(cchMax + info.NegativeSign.Length);
                     }
-                    catch (OverflowException e) { throw new FormatException(SR.GetString(SR.Format_TooLarge), e); }
+                    catch (OverflowException e)
+                    {
+                        throw new FormatException(SR.GetString(SR.Format_TooLarge), e);
+                    }
                 }
             }
 
             int rgchBufSize;
 
-            try {
+            try
+            {
                 // We'll pass the rgch buffer to native code, which is going to treat it like a string of digits, so it needs
                 // to be null terminated.  Let's ensure that we can allocate a buffer of that size.
                 rgchBufSize = checked(cchMax + 1);
-            } catch (OverflowException e) { throw new FormatException(SR.GetString(SR.Format_TooLarge), e); }
+            }
+            catch (OverflowException e)
+            {
+                throw new FormatException(SR.GetString(SR.Format_TooLarge), e);
+            }
 
             char[] rgch = new char[rgchBufSize];
 
             int ichDst = cchMax;
 
-            for (int iuDst = 0; iuDst < cuDst - 1; iuDst++) {
+            for (int iuDst = 0; iuDst < cuDst - 1; iuDst++)
+            {
                 uint uDig = rguDst[iuDst];
                 Contract.Assert(uDig < kuBase);
-                for (int cch = kcchBase; --cch >= 0; ) {
+                for (int cch = kcchBase; --cch >= 0; )
+                {
                     rgch[--ichDst] = (char)('0' + uDig % 10);
                     uDig /= 10;
                 }
             }
-            for (uint uDig = rguDst[cuDst - 1]; uDig != 0; ) {
+            for (uint uDig = rguDst[cuDst - 1]; uDig != 0; )
+            {
                 rgch[--ichDst] = (char)('0' + uDig % 10);
                 uDig /= 10;
             }
 
 #if !SILVERLIGHT ||FEATURE_NETCORE
-            if (!decimalFmt) {
+            if (!decimalFmt)
+            {
                 //
                 // Go to the VM for GlobLoc aware formatting
-                //    
-                Byte * numberBufferBytes = stackalloc Byte[Number.NumberBuffer.NumberBufferBytes];
+                //
+                Byte* numberBufferBytes = stackalloc Byte[Number.NumberBuffer.NumberBufferBytes];
                 Number.NumberBuffer number = new Number.NumberBuffer(numberBufferBytes);
                 // sign = true for negative and false for 0 and positive values
                 number.sign = (value._sign < 0);
                 // the cut-off point to switch (G)eneral from (F)ixed-point to (E)xponential form
                 number.precision = 29;
-                number.digits[0] = '\0';    
+                number.digits[0] = '\0';
                 number.scale = cchMax - ichDst;
 
                 int maxDigits = Math.Min(ichDst + 50, cchMax);
-                for (int i = ichDst; i < maxDigits; i++) {
+                for (int i = ichDst; i < maxDigits; i++)
+                {
                     number.digits[i - ichDst] = rgch[i];
                 }
-              
-                fixed(char* pinnedExtraDigits = rgch) {
-                    return Number.FormatNumberBuffer(number.PackForNative(), format, info, pinnedExtraDigits + ichDst);
+
+                fixed (char* pinnedExtraDigits = rgch)
+                {
+                    return Number.FormatNumberBuffer(
+                        number.PackForNative(),
+                        format,
+                        info,
+                        pinnedExtraDigits + ichDst
+                    );
                 }
             }
 #endif //!SILVERLIGHT ||FEATURE_NETCORE
@@ -639,13 +756,15 @@ namespace System.Numerics {
             // specifier indicates the minimum number of digits desired in the resulting string. If required,
             // the number is padded with zeros to its left to produce the number of digits given by the
             // precision specifier.
-            int numDigitsPrinted = cchMax - ichDst;               
-            while (digits > 0 && digits > numDigitsPrinted) {
+            int numDigitsPrinted = cchMax - ichDst;
+            while (digits > 0 && digits > numDigitsPrinted)
+            {
                 // pad leading zeros
                 rgch[--ichDst] = '0';
-                digits--;                    
+                digits--;
             }
-            if (value._sign < 0) {
+            if (value._sign < 0)
+            {
                 String negativeSign = info.NegativeSign;
                 for (int i = info.NegativeSign.Length - 1; i > -1; i--)
                     rgch[--ichDst] = info.NegativeSign[i];

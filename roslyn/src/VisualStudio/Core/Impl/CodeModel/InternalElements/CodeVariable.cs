@@ -13,13 +13,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE80.CodeVariable2))]
-    public sealed class CodeVariable : AbstractCodeMember, EnvDTE.CodeVariable, EnvDTE80.CodeVariable2
+    public sealed class CodeVariable
+        : AbstractCodeMember,
+            EnvDTE.CodeVariable,
+            EnvDTE80.CodeVariable2
     {
         internal static EnvDTE.CodeVariable Create(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
+            int? nodeKind
+        )
         {
             var element = new CodeVariable(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeVariable)ComAggregate.CreateAggregatedObject(element);
@@ -33,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
+            string name
+        )
         {
             var element = new CodeVariable(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeVariable)ComAggregate.CreateAggregatedObject(element);
@@ -43,19 +48,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKey, nodeKind)
-        {
-        }
+            int? nodeKind
+        )
+            : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         private CodeVariable(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind, name)
-        {
-        }
+            string name
+        )
+            : base(state, fileCodeModel, nodeKind, name) { }
 
         private ITypeSymbol GetSymbolType()
         {
@@ -82,15 +85,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public EnvDTE80.vsCMConstKind ConstKind
         {
-            get
-            {
-                return CodeModelService.GetConstKind(LookupNode());
-            }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateConstKind, value);
-            }
+            get { return CodeModelService.GetConstKind(LookupNode()); }
+            set { UpdateNode(FileCodeModel.UpdateConstKind, value); }
         }
 
         public override EnvDTE.CodeElements Children
@@ -100,11 +96,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public object InitExpression
         {
-            get
-            {
-                return CodeModelService.GetInitExpression(LookupNode());
-            }
-
+            get { return CodeModelService.GetInitExpression(LookupNode()); }
             set
             {
                 if (value is null or string)
@@ -120,15 +112,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public bool IsConstant
         {
-            get
-            {
-                return CodeModelService.GetIsConstant(LookupNode());
-            }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateIsConstant, value);
-            }
+            get { return CodeModelService.GetIsConstant(LookupNode()); }
+            set { UpdateNode(FileCodeModel.UpdateIsConstant, value); }
         }
 
         public EnvDTE.CodeTypeRef Type
@@ -143,7 +128,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
                 return CodeTypeRef.Create(this.State, this, GetProjectId(), type);
             }
-
             set
             {
                 // The type is sometimes part of the node key, so we should be sure to reacquire

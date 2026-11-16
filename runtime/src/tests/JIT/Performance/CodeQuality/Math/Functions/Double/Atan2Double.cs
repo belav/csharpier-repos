@@ -15,11 +15,14 @@ namespace Functions
 
         public static void Atan2DoubleTest()
         {
-            var result = 0.0; var valueX = 1.0; var valueY = -1.0;
+            var result = 0.0;
+            var valueX = 1.0;
+            var valueY = -1.0;
 
             for (var iteration = 0; iteration < iterations; iteration++)
             {
-                valueX += atan2DoubleDeltaX; valueY += atan2DoubleDeltaY;
+                valueX += atan2DoubleDeltaX;
+                valueY += atan2DoubleDeltaY;
                 result += Math.Atan2(valueY, valueX);
             }
 
@@ -27,7 +30,9 @@ namespace Functions
 
             if (diff > doubleEpsilon)
             {
-                throw new Exception($"Expected Result {atan2DoubleExpectedResult,20:g17}; Actual Result {result,20:g17}");
+                throw new Exception(
+                    $"Expected Result {atan2DoubleExpectedResult, 20:g17}; Actual Result {result, 20:g17}"
+                );
             }
         }
     }

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Reflection;
-
 using Internal.Reflection.Augments;
 
 //==================================================================================================================
@@ -24,52 +23,115 @@ namespace Internal.Reflection.Extensions.NonPortable
         // Api helpers: Computes the effective set of custom attributes for various Reflection elements and returns them
         //              as CustomAttributeData objects.
         //==============================================================================================================================
-        public static IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(this Assembly element, Type optionalAttributeTypeFilter, bool skipTypeValidation = false)
+        public static IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(
+            this Assembly element,
+            Type optionalAttributeTypeFilter,
+            bool skipTypeValidation = false
+        )
         {
-            return AssemblyCustomAttributeSearcher.Default.GetMatchingCustomAttributes(element, optionalAttributeTypeFilter, inherit: false, skipTypeValidation: skipTypeValidation);
+            return AssemblyCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
+                element,
+                optionalAttributeTypeFilter,
+                inherit: false,
+                skipTypeValidation: skipTypeValidation
+            );
         }
 
-        public static IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(this Module element, Type optionalAttributeTypeFilter, bool skipTypeValidation = false)
+        public static IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(
+            this Module element,
+            Type optionalAttributeTypeFilter,
+            bool skipTypeValidation = false
+        )
         {
-            return ModuleCustomAttributeSearcher.Default.GetMatchingCustomAttributes(element, optionalAttributeTypeFilter, inherit: false, skipTypeValidation: skipTypeValidation);
+            return ModuleCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
+                element,
+                optionalAttributeTypeFilter,
+                inherit: false,
+                skipTypeValidation: skipTypeValidation
+            );
         }
 
-        public static IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(this ParameterInfo element, Type optionalAttributeTypeFilter, bool inherit, bool skipTypeValidation = false)
+        public static IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(
+            this ParameterInfo element,
+            Type optionalAttributeTypeFilter,
+            bool inherit,
+            bool skipTypeValidation = false
+        )
         {
-            return ParameterCustomAttributeSearcher.Default.GetMatchingCustomAttributes(element, optionalAttributeTypeFilter, inherit, skipTypeValidation: skipTypeValidation);
+            return ParameterCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
+                element,
+                optionalAttributeTypeFilter,
+                inherit,
+                skipTypeValidation: skipTypeValidation
+            );
         }
 
-        public static IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(this MemberInfo element, Type optionalAttributeTypeFilter, bool inherit, bool skipTypeValidation = false)
+        public static IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(
+            this MemberInfo element,
+            Type optionalAttributeTypeFilter,
+            bool inherit,
+            bool skipTypeValidation = false
+        )
         {
             {
                 Type? type = element as Type;
                 if (type != null)
-                    return TypeCustomAttributeSearcher.Default.GetMatchingCustomAttributes(type, optionalAttributeTypeFilter, inherit, skipTypeValidation: skipTypeValidation);
+                    return TypeCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
+                        type,
+                        optionalAttributeTypeFilter,
+                        inherit,
+                        skipTypeValidation: skipTypeValidation
+                    );
             }
             {
                 ConstructorInfo? constructorInfo = element as ConstructorInfo;
                 if (constructorInfo != null)
-                    return ConstructorCustomAttributeSearcher.Default.GetMatchingCustomAttributes(constructorInfo, optionalAttributeTypeFilter, inherit: false, skipTypeValidation: skipTypeValidation);
+                    return ConstructorCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
+                        constructorInfo,
+                        optionalAttributeTypeFilter,
+                        inherit: false,
+                        skipTypeValidation: skipTypeValidation
+                    );
             }
             {
                 MethodInfo? methodInfo = element as MethodInfo;
                 if (methodInfo != null)
-                    return MethodCustomAttributeSearcher.Default.GetMatchingCustomAttributes(methodInfo, optionalAttributeTypeFilter, inherit, skipTypeValidation: skipTypeValidation);
+                    return MethodCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
+                        methodInfo,
+                        optionalAttributeTypeFilter,
+                        inherit,
+                        skipTypeValidation: skipTypeValidation
+                    );
             }
             {
                 FieldInfo? fieldInfo = element as FieldInfo;
                 if (fieldInfo != null)
-                    return FieldCustomAttributeSearcher.Default.GetMatchingCustomAttributes(fieldInfo, optionalAttributeTypeFilter, inherit: false, skipTypeValidation: skipTypeValidation);
+                    return FieldCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
+                        fieldInfo,
+                        optionalAttributeTypeFilter,
+                        inherit: false,
+                        skipTypeValidation: skipTypeValidation
+                    );
             }
             {
                 PropertyInfo? propertyInfo = element as PropertyInfo;
                 if (propertyInfo != null)
-                    return PropertyCustomAttributeSearcher.Default.GetMatchingCustomAttributes(propertyInfo, optionalAttributeTypeFilter, inherit, skipTypeValidation: skipTypeValidation);
+                    return PropertyCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
+                        propertyInfo,
+                        optionalAttributeTypeFilter,
+                        inherit,
+                        skipTypeValidation: skipTypeValidation
+                    );
             }
             {
                 EventInfo? eventInfo = element as EventInfo;
                 if (eventInfo != null)
-                    return EventCustomAttributeSearcher.Default.GetMatchingCustomAttributes(eventInfo, optionalAttributeTypeFilter, inherit, skipTypeValidation: skipTypeValidation);
+                    return EventCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
+                        eventInfo,
+                        optionalAttributeTypeFilter,
+                        inherit,
+                        skipTypeValidation: skipTypeValidation
+                    );
             }
 
             ArgumentNullException.ThrowIfNull(element);
@@ -77,20 +139,20 @@ namespace Internal.Reflection.Extensions.NonPortable
             throw new NotSupportedException(); // Shouldn't get here.
         }
 
-
-
-
         //==============================================================================================================================
         // Searcher class for Assemblies.
         //==============================================================================================================================
         private sealed class AssemblyCustomAttributeSearcher : CustomAttributeSearcher<Assembly>
         {
-            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(Assembly element)
+            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
+                Assembly element
+            )
             {
                 return element.CustomAttributes;
             }
 
-            public static readonly AssemblyCustomAttributeSearcher Default = new AssemblyCustomAttributeSearcher();
+            public static readonly AssemblyCustomAttributeSearcher Default =
+                new AssemblyCustomAttributeSearcher();
         }
 
         //==============================================================================================================================
@@ -98,12 +160,15 @@ namespace Internal.Reflection.Extensions.NonPortable
         //==============================================================================================================================
         private sealed class ModuleCustomAttributeSearcher : CustomAttributeSearcher<Module>
         {
-            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(Module element)
+            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
+                Module element
+            )
             {
                 return element.CustomAttributes;
             }
 
-            public static readonly ModuleCustomAttributeSearcher Default = new ModuleCustomAttributeSearcher();
+            public static readonly ModuleCustomAttributeSearcher Default =
+                new ModuleCustomAttributeSearcher();
         }
 
         //==============================================================================================================================
@@ -111,7 +176,9 @@ namespace Internal.Reflection.Extensions.NonPortable
         //==============================================================================================================================
         private sealed class TypeCustomAttributeSearcher : CustomAttributeSearcher<Type>
         {
-            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(Type element)
+            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
+                Type element
+            )
             {
                 return element.CustomAttributes;
             }
@@ -130,7 +197,8 @@ namespace Internal.Reflection.Extensions.NonPortable
                 return baseType;
             }
 
-            public static readonly TypeCustomAttributeSearcher Default = new TypeCustomAttributeSearcher();
+            public static readonly TypeCustomAttributeSearcher Default =
+                new TypeCustomAttributeSearcher();
         }
 
         //==============================================================================================================================
@@ -138,25 +206,32 @@ namespace Internal.Reflection.Extensions.NonPortable
         //==============================================================================================================================
         private sealed class FieldCustomAttributeSearcher : CustomAttributeSearcher<FieldInfo>
         {
-            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(FieldInfo element)
+            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
+                FieldInfo element
+            )
             {
                 return element.CustomAttributes;
             }
 
-            public static readonly FieldCustomAttributeSearcher Default = new FieldCustomAttributeSearcher();
+            public static readonly FieldCustomAttributeSearcher Default =
+                new FieldCustomAttributeSearcher();
         }
 
         //==============================================================================================================================
         // Searcher class for ConstructorInfos.
         //==============================================================================================================================
-        private sealed class ConstructorCustomAttributeSearcher : CustomAttributeSearcher<ConstructorInfo>
+        private sealed class ConstructorCustomAttributeSearcher
+            : CustomAttributeSearcher<ConstructorInfo>
         {
-            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(ConstructorInfo element)
+            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
+                ConstructorInfo element
+            )
             {
                 return element.CustomAttributes;
             }
 
-            public static readonly ConstructorCustomAttributeSearcher Default = new ConstructorCustomAttributeSearcher();
+            public static readonly ConstructorCustomAttributeSearcher Default =
+                new ConstructorCustomAttributeSearcher();
         }
 
         //==============================================================================================================================
@@ -164,17 +239,22 @@ namespace Internal.Reflection.Extensions.NonPortable
         //==============================================================================================================================
         private sealed class MethodCustomAttributeSearcher : CustomAttributeSearcher<MethodInfo>
         {
-            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(MethodInfo element)
+            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
+                MethodInfo element
+            )
             {
                 return element.CustomAttributes;
             }
 
             public sealed override MethodInfo GetParent(MethodInfo e)
             {
-                return ReflectionAugments.ReflectionCoreCallbacks.GetImplicitlyOverriddenBaseClassMethod(e);
+                return ReflectionAugments.ReflectionCoreCallbacks.GetImplicitlyOverriddenBaseClassMethod(
+                    e
+                );
             }
 
-            public static readonly MethodCustomAttributeSearcher Default = new MethodCustomAttributeSearcher();
+            public static readonly MethodCustomAttributeSearcher Default =
+                new MethodCustomAttributeSearcher();
         }
 
         //==============================================================================================================================
@@ -182,44 +262,56 @@ namespace Internal.Reflection.Extensions.NonPortable
         //==============================================================================================================================
         private sealed class PropertyCustomAttributeSearcher : CustomAttributeSearcher<PropertyInfo>
         {
-            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(PropertyInfo element)
+            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
+                PropertyInfo element
+            )
             {
                 return element.CustomAttributes;
             }
 
             public sealed override PropertyInfo GetParent(PropertyInfo e)
             {
-                return ReflectionAugments.ReflectionCoreCallbacks.GetImplicitlyOverriddenBaseClassProperty(e);
+                return ReflectionAugments.ReflectionCoreCallbacks.GetImplicitlyOverriddenBaseClassProperty(
+                    e
+                );
             }
 
-            public static readonly PropertyCustomAttributeSearcher Default = new PropertyCustomAttributeSearcher();
+            public static readonly PropertyCustomAttributeSearcher Default =
+                new PropertyCustomAttributeSearcher();
         }
-
 
         //==============================================================================================================================
         // Searcher class for EventInfos.
         //==============================================================================================================================
         private sealed class EventCustomAttributeSearcher : CustomAttributeSearcher<EventInfo>
         {
-            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(EventInfo element)
+            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
+                EventInfo element
+            )
             {
                 return element.CustomAttributes;
             }
 
             public sealed override EventInfo GetParent(EventInfo e)
             {
-                return ReflectionAugments.ReflectionCoreCallbacks.GetImplicitlyOverriddenBaseClassEvent(e);
+                return ReflectionAugments.ReflectionCoreCallbacks.GetImplicitlyOverriddenBaseClassEvent(
+                    e
+                );
             }
 
-            public static readonly EventCustomAttributeSearcher Default = new EventCustomAttributeSearcher();
+            public static readonly EventCustomAttributeSearcher Default =
+                new EventCustomAttributeSearcher();
         }
 
         //==============================================================================================================================
         // Searcher class for ParameterInfos.
         //==============================================================================================================================
-        private sealed class ParameterCustomAttributeSearcher : CustomAttributeSearcher<ParameterInfo>
+        private sealed class ParameterCustomAttributeSearcher
+            : CustomAttributeSearcher<ParameterInfo>
         {
-            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(ParameterInfo element)
+            protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
+                ParameterInfo element
+            )
             {
                 return element.CustomAttributes;
             }
@@ -228,7 +320,7 @@ namespace Internal.Reflection.Extensions.NonPortable
             {
                 MethodInfo? method = e.Member as MethodInfo;
                 if (method == null)
-                    return null;     // This is a constructor parameter.
+                    return null; // This is a constructor parameter.
                 MethodInfo? methodParent = new MethodCustomAttributeSearcher().GetParent(method);
                 if (methodParent == null)
                     return null;
@@ -244,7 +336,8 @@ namespace Internal.Reflection.Extensions.NonPortable
                 }
             }
 
-            public static readonly ParameterCustomAttributeSearcher Default = new ParameterCustomAttributeSearcher();
+            public static readonly ParameterCustomAttributeSearcher Default =
+                new ParameterCustomAttributeSearcher();
         }
     }
 }

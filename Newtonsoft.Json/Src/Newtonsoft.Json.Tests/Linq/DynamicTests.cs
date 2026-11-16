@@ -52,7 +52,8 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void AccessPropertyValue()
         {
-            string rawJson = @"{
+            string rawJson =
+                @"{
   ""task"": {
     ""dueDate"": ""2012-12-03T00:00:00""
   }
@@ -77,7 +78,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 Assert.Pass();
             }
         }
-        
+
         private void UpdateValueCount(IDictionary<string, int> counts, dynamic d)
         {
             string s = d.ToString();
@@ -132,8 +133,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void JObjectPropertyNames()
         {
-            JObject o = new JObject(
-                new JProperty("ChildValue", "blah blah"));
+            JObject o = new JObject(new JProperty("ChildValue", "blah blah"));
 
             dynamic d = o;
 
@@ -179,8 +179,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void JObjectEnumerator()
         {
-            JObject o = new JObject(
-                new JProperty("ChildValue", "blah blah"));
+            JObject o = new JObject(new JProperty("ChildValue", "blah blah"));
 
             dynamic d = o;
 
@@ -200,8 +199,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void JObjectPropertyNameWithJArray()
         {
-            JObject o = new JObject(
-                new JProperty("ChildValue", "blah blah"));
+            JObject o = new JObject(new JProperty("ChildValue", "blah blah"));
 
             dynamic d = o;
 
@@ -214,19 +212,21 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void JObjectPropertyNameWithNonToken()
         {
-            ExceptionAssert.Throws<ArgumentException>(() =>
-            {
-                dynamic d = new JObject();
+            ExceptionAssert.Throws<ArgumentException>(
+                () =>
+                {
+                    dynamic d = new JObject();
 
-                d.First = new[] { "One", "II", "3" };
-            }, "Could not determine JSON object type for type System.String[].");
+                    d.First = new[] { "One", "II", "3" };
+                },
+                "Could not determine JSON object type for type System.String[]."
+            );
         }
 
         [Test]
         public void JObjectMethods()
         {
-            JObject o = new JObject(
-                new JProperty("ChildValue", "blah blah"));
+            JObject o = new JObject(new JProperty("ChildValue", "blah blah"));
 
             dynamic d = o;
 
@@ -250,7 +250,10 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JProperty("Integer", new JValue(1)),
                 new JProperty("Float", new JValue(1.1d)),
                 new JProperty("Decimal", new JValue(1.1m)),
-                new JProperty("DateTime", new JValue(new DateTime(2000, 12, 29, 23, 51, 10, DateTimeKind.Utc))),
+                new JProperty(
+                    "DateTime",
+                    new JValue(new DateTime(2000, 12, 29, 23, 51, 10, DateTimeKind.Utc))
+                ),
                 new JProperty("Boolean", new JValue(true)),
                 new JProperty("String", new JValue("A string lol!")),
                 new JProperty("Bytes", new JValue(Encoding.UTF8.GetBytes("A string lol!"))),
@@ -258,9 +261,10 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JProperty("Guid", new Guid("EA27FE1D-0D80-44F2-BF34-4654156FA7AF")),
                 new JProperty("TimeSpan", TimeSpan.FromDays(1))
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
-                , new JProperty("BigInteger", BigInteger.Parse("1"))
+                ,
+                new JProperty("BigInteger", BigInteger.Parse("1"))
 #endif
-                );
+            );
 
             dynamic d = o;
 
@@ -359,7 +363,10 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JProperty("Integer", new JValue(1)),
                 new JProperty("Float", new JValue(1.1d)),
                 new JProperty("Decimal", new JValue(1.1m)),
-                new JProperty("DateTime", new JValue(new DateTime(2000, 12, 29, 23, 51, 10, DateTimeKind.Utc))),
+                new JProperty(
+                    "DateTime",
+                    new JValue(new DateTime(2000, 12, 29, 23, 51, 10, DateTimeKind.Utc))
+                ),
                 new JProperty("Boolean", new JValue(true)),
                 new JProperty("String", new JValue("A string lol!")),
                 new JProperty("Bytes", new JValue(Encoding.UTF8.GetBytes("A string lol!"))),
@@ -367,9 +374,10 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JProperty("Guid", new Guid("EA27FE1D-0D80-44F2-BF34-4654156FA7AF")),
                 new JProperty("TimeSpan", TimeSpan.FromDays(1))
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
-                , new JProperty("BigInteger", new BigInteger(100))
+                ,
+                new JProperty("BigInteger", new BigInteger(100))
 #endif
-                );
+            );
 
             dynamic d = o;
             dynamic r;
@@ -693,7 +701,10 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JProperty("Null", JValue.CreateNull()),
                 new JProperty("Integer", new JValue(1)),
                 new JProperty("Float", new JValue(1.1)),
-                new JProperty("DateTime", new JValue(new DateTime(2000, 12, 29, 23, 51, 10, DateTimeKind.Utc))),
+                new JProperty(
+                    "DateTime",
+                    new JValue(new DateTime(2000, 12, 29, 23, 51, 10, DateTimeKind.Utc))
+                ),
                 new JProperty("Boolean", new JValue(true)),
                 new JProperty("String", new JValue("A string lol!")),
                 new JProperty("Bytes", new JValue(Encoding.UTF8.GetBytes("A string lol!"))),
@@ -701,16 +712,20 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JProperty("Guid", new Guid("EA27FE1D-0D80-44F2-BF34-4654156FA7AF")),
                 new JProperty("TimeSpan", TimeSpan.FromDays(1))
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
-                , new JProperty("BigInteger", new BigInteger(100))
+                ,
+                new JProperty("BigInteger", new BigInteger(100))
 #endif
-                );
+            );
 
             dynamic d = o;
 
             Assert.AreEqual("", d.Null.ToString());
             Assert.AreEqual("1", d.Integer.ToString());
             Assert.AreEqual("1.1", d.Float.ToString(CultureInfo.InvariantCulture));
-            Assert.AreEqual("12/29/2000 23:51:10", d.DateTime.ToString(null, CultureInfo.InvariantCulture));
+            Assert.AreEqual(
+                "12/29/2000 23:51:10",
+                d.DateTime.ToString(null, CultureInfo.InvariantCulture)
+            );
             Assert.AreEqual("True", d.Boolean.ToString());
             Assert.AreEqual("A string lol!", d.String.ToString());
             Assert.AreEqual("System.Byte[]", d.Bytes.ToString());
@@ -727,7 +742,8 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             JObject o = new JObject(
                 new JProperty("ChildValue", "blah blah"),
-                new JProperty("Hello Joe", null));
+                new JProperty("Hello Joe", null)
+            );
 
             dynamic d = o;
 
@@ -739,7 +755,8 @@ namespace Newtonsoft.Json.Tests.Linq
 
             o = new JObject(
                 new JProperty("ChildValue1", "blah blah"),
-                new JProperty("Hello Joe1", null));
+                new JProperty("Hello Joe1", null)
+            );
 
             d = o;
 
@@ -761,10 +778,16 @@ namespace Newtonsoft.Json.Tests.Linq
             AssertValueConverted<byte[]>(null);
             AssertValueConverted<byte[]>(Encoding.UTF8.GetBytes("blah"));
             AssertValueConverted<DateTime>(new DateTime(2000, 12, 20, 23, 59, 2, DateTimeKind.Utc));
-            AssertValueConverted<DateTime?>(new DateTime(2000, 12, 20, 23, 59, 2, DateTimeKind.Utc));
+            AssertValueConverted<DateTime?>(
+                new DateTime(2000, 12, 20, 23, 59, 2, DateTimeKind.Utc)
+            );
             AssertValueConverted<DateTime?>(null);
-            AssertValueConverted<DateTimeOffset>(new DateTimeOffset(2000, 12, 20, 23, 59, 2, TimeSpan.FromHours(1)));
-            AssertValueConverted<DateTimeOffset?>(new DateTimeOffset(2000, 12, 20, 23, 59, 2, TimeSpan.FromHours(1)));
+            AssertValueConverted<DateTimeOffset>(
+                new DateTimeOffset(2000, 12, 20, 23, 59, 2, TimeSpan.FromHours(1))
+            );
+            AssertValueConverted<DateTimeOffset?>(
+                new DateTimeOffset(2000, 12, 20, 23, 59, 2, TimeSpan.FromHours(1))
+            );
             AssertValueConverted<DateTimeOffset?>(null);
             AssertValueConverted<decimal>(99.9m);
             AssertValueConverted<decimal?>(99.9m);
@@ -895,13 +918,16 @@ namespace Newtonsoft.Json.Tests.Linq
             //   "StockValue": 22050.00
             // }
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""ProductName"": ""Elbow Grease (SALE)"",
   ""Enabled"": true,
   ""Price"": 2.45,
   ""StockCount"": 9000,
   ""StockValue"": 22050.00
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -951,8 +977,12 @@ namespace Newtonsoft.Json.Tests.Linq
             dynamic json = JObject.FromObject(new { uid = g });
 
             ExceptionAssert.Throws<InvalidOperationException>(
-                () => { JObject token = json.uid; },
-                "Can not convert from System.Guid to Newtonsoft.Json.Linq.JObject.");
+                () =>
+                {
+                    JObject token = json.uid;
+                },
+                "Can not convert from System.Guid to Newtonsoft.Json.Linq.JObject."
+            );
         }
     }
 

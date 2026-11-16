@@ -3,29 +3,27 @@ using System.Linq;
 
 class B
 {
-	public object Foo (object obj)
-	{
-		return null;
-	}
+    public object Foo(object obj)
+    {
+        return null;
+    }
 }
 
 class C
 {
-	B ctx = new B ();
+    B ctx = new B();
 
-	public static void Main ()
-	{
-		foreach (var c in new C ().Test ()) {			
-		}
-	}
+    public static void Main()
+    {
+        foreach (var c in new C().Test()) { }
+    }
 
-	IEnumerable<ushort> Test ()
-	{
-		string[] s = new[] { "a", "b", "c" };
+    IEnumerable<ushort> Test()
+    {
+        string[] s = new[] { "a", "b", "c" };
 
-		var m = s.Select (l => ctx.Foo (l)).ToArray ();
+        var m = s.Select(l => ctx.Foo(l)).ToArray();
 
-		yield break;
-	}
+        yield break;
+    }
 }
-

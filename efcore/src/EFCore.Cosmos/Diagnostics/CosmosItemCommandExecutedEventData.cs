@@ -32,7 +32,8 @@ public class CosmosItemCommandExecutedEventData : EventData
         string containerId,
         string resourceId,
         string? partitionKey,
-        bool logSensitiveData)
+        bool logSensitiveData
+    )
         : base(eventDefinition, messageGenerator)
     {
         Elapsed = elapsed;

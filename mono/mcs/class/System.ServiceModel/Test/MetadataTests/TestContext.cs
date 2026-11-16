@@ -36,240 +36,256 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
-
 using SysConfig = System.Configuration.Configuration;
-
 using MonoTests.Helpers;
 
-namespace MonoTests.System.ServiceModel.MetadataTests {
+namespace MonoTests.System.ServiceModel.MetadataTests
+{
+    public abstract class TestContext
+    {
+        #region Abstract API
 
-	public abstract class TestContext {
+        public abstract MetadataSet GetMetadata(string name);
 
-		#region Abstract API
+        public abstract XmlDocument GetConfiguration(string name);
 
-		public abstract MetadataSet GetMetadata (string name);
+        #endregion
 
-		public abstract XmlDocument GetConfiguration (string name);
+        #region Default Context
 
-		#endregion
+        public static TestContext LoadMetadataContext = new _LoadMetadataContext();
 
-		#region Default Context
+        public static TestContext CreateMetadataContext = new _CreateMetadataContext();
 
-		public static TestContext LoadMetadataContext = new _LoadMetadataContext ();
+        public static TestContext RoundTripContext = new _RoundTripContext();
 
-		public static TestContext CreateMetadataContext = new _CreateMetadataContext ();
+        #endregion
 
-		public static TestContext RoundTripContext = new _RoundTripContext ();
+        #region Implementations
 
-		#endregion
+        class _LoadMetadataContext : TestContext
+        {
+            public override MetadataSet GetMetadata(string name)
+            {
+                return LoadMetadata(name);
+            }
 
-		#region Implementations
+            public override XmlDocument GetConfiguration(string name)
+            {
+                return LoadConfiguration(name);
+            }
+        }
 
-		class _LoadMetadataContext : TestContext {
-			public override MetadataSet GetMetadata (string name)
-			{
-				return LoadMetadata (name);
-			}
+        class _CreateMetadataContext : TestContext
+        {
+            public override MetadataSet GetMetadata(string name)
+            {
+                return MetadataSamples.GetMetadataByName(name);
+            }
 
-			public override XmlDocument GetConfiguration (string name)
-			{
-				return LoadConfiguration (name);
-			}
-		}
+            public override XmlDocument GetConfiguration(string name)
+            {
+                var metadata = GetMetadata(name);
+                var doc = new XmlDocument();
+                doc.LoadXml(SaveConfigToString(metadata));
+                return doc;
+            }
+        }
 
-		class _CreateMetadataContext : TestContext {
-			public override MetadataSet GetMetadata (string name)
-			{
-				return MetadataSamples.GetMetadataByName (name);
-			}
+        class _RoundTripContext : TestContext
+        {
+            public override MetadataSet GetMetadata(string name)
+            {
+                return RoundTrip(name);
+            }
 
-			public override XmlDocument GetConfiguration (string name)
-			{
-				var metadata = GetMetadata (name);
-				var doc = new XmlDocument ();
-				doc.LoadXml (SaveConfigToString (metadata));
-				return doc;
-			}
-		}
+            public override XmlDocument GetConfiguration(string name)
+            {
+                var metadata = GetMetadata(name);
+                var doc = new XmlDocument();
+                doc.LoadXml(SaveConfigToString(metadata));
+                return doc;
+            }
+        }
 
-		class _RoundTripContext : TestContext {
-			public override MetadataSet GetMetadata (string name)
-			{
-				return RoundTrip (name);
-			}
+        #endregion
 
-			public override XmlDocument GetConfiguration (string name)
-			{
-				var metadata = GetMetadata (name);
-				var doc = new XmlDocument ();
-				doc.LoadXml (SaveConfigToString (metadata));
-				return doc;
-			}
-		}
+        #region Public Static API
 
-		#endregion
+        public static MetadataSet LoadMetadata(string name)
+        {
+            return LoadMetadataFromFile(name);
+        }
 
-		#region Public Static API
+        public static XmlDocument LoadConfiguration(string name)
+        {
+            return LoadConfigurationFromFile(name);
+        }
 
-		public static MetadataSet LoadMetadata (string name)
-		{
-			return LoadMetadataFromFile (name);
-		}
+        public static void SaveMetadata(string name, MetadataSet metadata)
+        {
+            SaveMetadataToFile(name, metadata);
+        }
 
-		public static XmlDocument LoadConfiguration (string name)
-		{
-			return LoadConfigurationFromFile (name);
-		}
+        public static MetadataSet LoadMetadataFromFile(string name)
+        {
+            var asm = Assembly.GetExecutingAssembly();
+            if (!name.EndsWith(".xml"))
+                name = name + ".xml";
 
-		public static void SaveMetadata (string name, MetadataSet metadata)
-		{
-			SaveMetadataToFile (name, metadata);
-		}
+            var filename = TestResourceHelper.GetFullPathOfResource(
+                "Test/MetadataTests/Resources/" + name
+            );
+            using (var stream = new StreamReader(filename))
+            {
+                var reader = new XmlTextReader(stream);
+                return MetadataSet.ReadFrom(reader);
+            }
+        }
 
-		public static MetadataSet LoadMetadataFromFile (string name)
-		{
-			var asm = Assembly.GetExecutingAssembly ();
-			if (!name.EndsWith (".xml"))
-				name = name + ".xml";
+        public static XmlDocument LoadConfigurationFromFile(string name)
+        {
+            var asm = Assembly.GetExecutingAssembly();
+            if (!name.EndsWith(".config"))
+                name = name + ".config";
 
-			var filename = TestResourceHelper.GetFullPathOfResource ("Test/MetadataTests/Resources/" + name);
-			using (var stream = new StreamReader (filename)) {
-				var reader = new XmlTextReader (stream);
-				return MetadataSet.ReadFrom (reader);
-			}
-		}
+            var filename = TestResourceHelper.GetFullPathOfResource(
+                "Test/MetadataTests/Resources/" + name
+            );
+            using (var stream = new StreamReader(filename))
+            {
+                var xml = new XmlDocument();
+                xml.Load(stream);
+                return xml;
+            }
+        }
 
-		public static XmlDocument LoadConfigurationFromFile (string name)
-		{
-			var asm = Assembly.GetExecutingAssembly ();
-			if (!name.EndsWith (".config"))
-				name = name + ".config";
+        public static void SaveMetadataToFile(string filename, MetadataSet metadata)
+        {
+            if (File.Exists(filename))
+                return;
 
-			var filename = TestResourceHelper.GetFullPathOfResource ("Test/MetadataTests/Resources/" + name);
-			using (var stream = new StreamReader (filename)) {
-				var xml = new XmlDocument ();
-				xml.Load (stream);
-				return xml;
-			}
-		}
+            using (var file = new StreamWriter(filename, false))
+            {
+                var writer = new XmlTextWriter(file);
+                writer.Formatting = Formatting.Indented;
+                metadata.WriteTo(writer);
+            }
 
-		public static void SaveMetadataToFile (string filename, MetadataSet metadata)
-		{
-			if (File.Exists (filename))
-				return;
+            Console.WriteLine("Exported {0}.", filename);
+        }
 
-			using (var file = new StreamWriter (filename, false)) {
-				var writer = new XmlTextWriter (file);
-				writer.Formatting = Formatting.Indented;
-				metadata.WriteTo (writer);
-			}
+        internal static string SaveMetadataToString(MetadataSet metadata)
+        {
+            using (var ms = new MemoryStream())
+            {
+                var writer = new XmlTextWriter(new StreamWriter(ms));
+                writer.Formatting = Formatting.Indented;
+                metadata.WriteTo(writer);
+                writer.Flush();
 
-			Console.WriteLine ("Exported {0}.", filename);
-		}
+                return Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position);
+            }
+        }
 
-		internal static string SaveMetadataToString (MetadataSet metadata)
-		{
-			using (var ms = new MemoryStream ()) {
-				var writer = new XmlTextWriter (new StreamWriter (ms));
-				writer.Formatting = Formatting.Indented;
-				metadata.WriteTo (writer);
-				writer.Flush ();
+        internal static MetadataSet LoadMetadataFromString(string doc)
+        {
+            var buffer = Encoding.UTF8.GetBytes(doc);
+            using (var ms = new MemoryStream(buffer))
+            {
+                var reader = new XmlTextReader(ms);
+                return MetadataSet.ReadFrom(reader);
+            }
+        }
 
-				return Encoding.UTF8.GetString (ms.GetBuffer (), 0, (int)ms.Position);
-			}
-		}
+        public static MetadataSet RoundTrip(string name)
+        {
+            var metadata = MetadataSamples.GetMetadataByName(name);
 
-		internal static MetadataSet LoadMetadataFromString (string doc)
-		{
-			var buffer = Encoding.UTF8.GetBytes (doc);
-			using (var ms = new MemoryStream (buffer)) {
-				var reader = new XmlTextReader (ms);
-				return MetadataSet.ReadFrom (reader);
-			}
-		}
+            var doc = SaveMetadataToString(metadata);
+            return LoadMetadataFromString(doc);
+        }
 
-		public static MetadataSet RoundTrip (string name)
-		{
-			var metadata = MetadataSamples.GetMetadataByName (name);
+        public static void GenerateConfig(MetadataSet metadata, SysConfig config)
+        {
+            WsdlImporter importer = new WsdlImporter(metadata);
 
-			var doc = SaveMetadataToString (metadata);
-			return LoadMetadataFromString (doc);
-		}
+            var endpoints = importer.ImportAllEndpoints();
 
-		public static void GenerateConfig (MetadataSet metadata, SysConfig config)
-		{
-			WsdlImporter importer = new WsdlImporter (metadata);
-			
-			var endpoints = importer.ImportAllEndpoints ();
-			
-			var generator = new ServiceContractGenerator (config);
-			generator.Options = ServiceContractGenerationOptions.None;
-			
-			foreach (var endpoint in endpoints) {
-				ChannelEndpointElement channelElement;
-				generator.GenerateServiceEndpoint (endpoint, out channelElement);
-			}
-		}
+            var generator = new ServiceContractGenerator(config);
+            generator.Options = ServiceContractGenerationOptions.None;
 
-		public static void GenerateConfig (string filename, MetadataSet metadata)
-		{
-			var fileMap = new ExeConfigurationFileMap ();
-			fileMap.ExeConfigFilename = filename;
-			var config = ConfigurationManager.OpenMappedExeConfiguration (
-				fileMap, ConfigurationUserLevel.None);
-				
-			GenerateConfig (metadata, config);
-			config.Save (ConfigurationSaveMode.Minimal);
-			NormalizeConfig (filename);
-		}
+            foreach (var endpoint in endpoints)
+            {
+                ChannelEndpointElement channelElement;
+                generator.GenerateServiceEndpoint(endpoint, out channelElement);
+            }
+        }
 
-		internal static string SaveConfigToString (MetadataSet metadata)
-		{
-			var filename = Path.GetTempFileName ();
-			File.Delete (filename);
+        public static void GenerateConfig(string filename, MetadataSet metadata)
+        {
+            var fileMap = new ExeConfigurationFileMap();
+            fileMap.ExeConfigFilename = filename;
+            var config = ConfigurationManager.OpenMappedExeConfiguration(
+                fileMap,
+                ConfigurationUserLevel.None
+            );
 
-			try {
-				GenerateConfig (filename, metadata);
+            GenerateConfig(metadata, config);
+            config.Save(ConfigurationSaveMode.Minimal);
+            NormalizeConfig(filename);
+        }
 
-				using (var reader = new StreamReader (filename))
-					return reader.ReadToEnd ();
-			} finally {
-				File.Delete (filename);
-			}
-		}
-		
-		public static void NormalizeConfig (string filename)
-		{
-			// Mono-specific hack.
-			if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-				return;
+        internal static string SaveConfigToString(MetadataSet metadata)
+        {
+            var filename = Path.GetTempFileName();
+            File.Delete(filename);
 
-			var doc = new XmlDocument ();
-			doc.Load (filename);
-			var nav = doc.CreateNavigator ();
-			
-			var empty = new List<XPathNavigator> ();
-			var iter = nav.Select ("/configuration/system.serviceModel//*");
-			foreach (XPathNavigator node in iter) {
-				if (!node.HasChildren && !node.HasAttributes && string.IsNullOrEmpty (node.Value))
-					empty.Add (node);
-			}
-			foreach (var node in empty)
-				node.DeleteSelf ();
-			
-			var settings = new XmlWriterSettings ();
-			settings.Indent = true;
-			settings.NewLineHandling = NewLineHandling.Replace;
-			
-			using (var writer = XmlWriter.Create (filename, settings)) {
-				doc.WriteTo (writer);
-			}
-			Console.WriteLine ();
-		}
+            try
+            {
+                GenerateConfig(filename, metadata);
 
-		#endregion
-	}
+                using (var reader = new StreamReader(filename))
+                    return reader.ReadToEnd();
+            }
+            finally
+            {
+                File.Delete(filename);
+            }
+        }
+
+        public static void NormalizeConfig(string filename)
+        {
+            // Mono-specific hack.
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                return;
+
+            var doc = new XmlDocument();
+            doc.Load(filename);
+            var nav = doc.CreateNavigator();
+
+            var empty = new List<XPathNavigator>();
+            var iter = nav.Select("/configuration/system.serviceModel//*");
+            foreach (XPathNavigator node in iter)
+            {
+                if (!node.HasChildren && !node.HasAttributes && string.IsNullOrEmpty(node.Value))
+                    empty.Add(node);
+            }
+            foreach (var node in empty)
+                node.DeleteSelf();
+
+            var settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.NewLineHandling = NewLineHandling.Replace;
+
+            using (var writer = XmlWriter.Create(filename, settings))
+            {
+                doc.WriteTo(writer);
+            }
+            Console.WriteLine();
+        }
+
+        #endregion
+    }
 }
 #endif
-
-

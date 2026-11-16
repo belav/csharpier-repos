@@ -9,7 +9,9 @@ namespace System.Security.Cryptography
 {
     public sealed class CryptographicAttributeObjectEnumerator : IEnumerator
     {
-        internal CryptographicAttributeObjectEnumerator(CryptographicAttributeObjectCollection attributes)
+        internal CryptographicAttributeObjectEnumerator(
+            CryptographicAttributeObjectCollection attributes
+        )
         {
             _attributes = attributes;
             _current = -1;
@@ -17,18 +19,12 @@ namespace System.Security.Cryptography
 
         public CryptographicAttributeObject Current
         {
-            get
-            {
-                return _attributes[_current];
-            }
+            get { return _attributes[_current]; }
         }
 
         object IEnumerator.Current
         {
-            get
-            {
-                return _attributes[_current];
-            }
+            get { return _attributes[_current]; }
         }
 
         public bool MoveNext()

@@ -12,30 +12,105 @@ namespace System.IO
     {
         private static volatile delegate* unmanaged<int, char*, uint> s_GetTempPathWFunc;
 
-        public static char[] GetInvalidFileNameChars() => new char[]
-        {
-            '\"', '<', '>', '|', '\0',
-            (char)1, (char)2, (char)3, (char)4, (char)5, (char)6, (char)7, (char)8, (char)9, (char)10,
-            (char)11, (char)12, (char)13, (char)14, (char)15, (char)16, (char)17, (char)18, (char)19, (char)20,
-            (char)21, (char)22, (char)23, (char)24, (char)25, (char)26, (char)27, (char)28, (char)29, (char)30,
-            (char)31, ':', '*', '?', '\\', '/'
-        };
+        public static char[] GetInvalidFileNameChars() =>
+            new char[]
+            {
+                '\"',
+                '<',
+                '>',
+                '|',
+                '\0',
+                (char)1,
+                (char)2,
+                (char)3,
+                (char)4,
+                (char)5,
+                (char)6,
+                (char)7,
+                (char)8,
+                (char)9,
+                (char)10,
+                (char)11,
+                (char)12,
+                (char)13,
+                (char)14,
+                (char)15,
+                (char)16,
+                (char)17,
+                (char)18,
+                (char)19,
+                (char)20,
+                (char)21,
+                (char)22,
+                (char)23,
+                (char)24,
+                (char)25,
+                (char)26,
+                (char)27,
+                (char)28,
+                (char)29,
+                (char)30,
+                (char)31,
+                ':',
+                '*',
+                '?',
+                '\\',
+                '/',
+            };
 
-        public static char[] GetInvalidPathChars() => new char[]
-        {
-            '|', '\0',
-            (char)1, (char)2, (char)3, (char)4, (char)5, (char)6, (char)7, (char)8, (char)9, (char)10,
-            (char)11, (char)12, (char)13, (char)14, (char)15, (char)16, (char)17, (char)18, (char)19, (char)20,
-            (char)21, (char)22, (char)23, (char)24, (char)25, (char)26, (char)27, (char)28, (char)29, (char)30,
-            (char)31
-        };
+        public static char[] GetInvalidPathChars() =>
+            new char[]
+            {
+                '|',
+                '\0',
+                (char)1,
+                (char)2,
+                (char)3,
+                (char)4,
+                (char)5,
+                (char)6,
+                (char)7,
+                (char)8,
+                (char)9,
+                (char)10,
+                (char)11,
+                (char)12,
+                (char)13,
+                (char)14,
+                (char)15,
+                (char)16,
+                (char)17,
+                (char)18,
+                (char)19,
+                (char)20,
+                (char)21,
+                (char)22,
+                (char)23,
+                (char)24,
+                (char)25,
+                (char)26,
+                (char)27,
+                (char)28,
+                (char)29,
+                (char)30,
+                (char)31,
+            };
 
         private static bool ExistsCore(string fullPath, out bool isDirectory)
         {
             Interop.Kernel32.WIN32_FILE_ATTRIBUTE_DATA data = default;
-            int errorCode = FileSystem.FillAttributeInfo(fullPath, ref data, returnErrorOnNotFound: true);
-            bool result = (errorCode == Interop.Errors.ERROR_SUCCESS) && (data.dwFileAttributes != -1);
-            isDirectory = result && (data.dwFileAttributes & Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY) != 0;
+            int errorCode = FileSystem.FillAttributeInfo(
+                fullPath,
+                ref data,
+                returnErrorOnNotFound: true
+            );
+            bool result =
+                (errorCode == Interop.Errors.ERROR_SUCCESS) && (data.dwFileAttributes != -1);
+            isDirectory =
+                result
+                && (
+                    data.dwFileAttributes & Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY
+                ) != 0;
 
             return result;
         }
@@ -84,7 +159,11 @@ namespace System.IO
                 // "\Foo" and "\\?\C:\Bar" => "\\?\C:\Foo"
                 combinedPath = Join(GetPathRoot(basePath.AsSpan()), path.AsSpan(1)); // Cut the separator to ensure we don't end up with two separators when joining with the root.
             }
-            else if (length >= 2 && PathInternal.IsValidDriveChar(path[0]) && path[1] == PathInternal.VolumeSeparatorChar)
+            else if (
+                length >= 2
+                && PathInternal.IsValidDriveChar(path[0])
+                && path[1] == PathInternal.VolumeSeparatorChar
+            )
             {
                 // Drive relative paths
                 Debug.Assert(length == 2 || !PathInternal.IsDirectorySeparator(path[2]));
@@ -101,11 +180,16 @@ namespace System.IO
                     // No matching root, root to specified drive
                     // "D:Foo" and "C:\Bar" => "D:Foo"
                     // "D:Foo" and "\\?\C:\Bar" => "\\?\D:\Foo"
-                    combinedPath = !PathInternal.IsDevice(basePath.AsSpan())
-                        ? path.Insert(2, @"\")
+                    combinedPath =
+                        !PathInternal.IsDevice(basePath.AsSpan()) ? path.Insert(2, @"\")
                         : length == 2
                             ? JoinInternal(basePath.AsSpan(0, 4), path.AsSpan(), @"\".AsSpan())
-                            : JoinInternal(basePath.AsSpan(0, 4), path.AsSpan(0, 2), @"\".AsSpan(), path.AsSpan(2));
+                        : JoinInternal(
+                            basePath.AsSpan(0, 4),
+                            path.AsSpan(0, 2),
+                            @"\".AsSpan(),
+                            path.AsSpan(2)
+                        );
                 }
             }
             else
@@ -121,7 +205,10 @@ namespace System.IO
             // them properly. As such we need to manually remove segments and not use GetFullPath().
 
             return PathInternal.IsDevice(combinedPath.AsSpan())
-                ? PathInternal.RemoveRelativeSegments(combinedPath, PathInternal.GetRootLength(combinedPath.AsSpan()))
+                ? PathInternal.RemoveRelativeSegments(
+                    combinedPath,
+                    PathInternal.GetRootLength(combinedPath.AsSpan())
+                )
                 : GetFullPathInternal(combinedPath);
         }
 
@@ -156,7 +243,11 @@ namespace System.IO
 
         private static unsafe delegate* unmanaged<int, char*, uint> GetGetTempPathWFunc()
         {
-            IntPtr kernel32 = Interop.Kernel32.LoadLibraryEx(Interop.Libraries.Kernel32, 0, Interop.Kernel32.LOAD_LIBRARY_SEARCH_SYSTEM32);
+            IntPtr kernel32 = Interop.Kernel32.LoadLibraryEx(
+                Interop.Libraries.Kernel32,
+                0,
+                Interop.Kernel32.LOAD_LIBRARY_SEARCH_SYSTEM32
+            );
 
             if (!NativeLibrary.TryGetExport(kernel32, "GetTempPath2W", out IntPtr func))
             {
@@ -169,7 +260,10 @@ namespace System.IO
         internal static void GetTempPath(ref ValueStringBuilder builder)
         {
             uint result;
-            while ((result = GetTempPathW(builder.Capacity, ref builder.GetPinnableReference())) > builder.Capacity)
+            while (
+                (result = GetTempPathW(builder.Capacity, ref builder.GetPinnableReference()))
+                > builder.Capacity
+            )
             {
                 // Reported size is greater than the buffer size. Increase the capacity.
                 builder.EnsureCapacity(checked((int)result));
@@ -231,7 +325,7 @@ namespace System.IO
             int i = 0;
             while (true)
             {
-                Interop.GetRandomBytes(bytes, KeyLength);  // 4 bytes = more than 6 x 5 bits
+                Interop.GetRandomBytes(bytes, KeyLength); // 4 bytes = more than 6 x 5 bits
 
                 byte b0 = bytes[0];
                 byte b1 = bytes[1];
@@ -251,7 +345,11 @@ namespace System.IO
                 {
                     File.OpenHandle(path, FileMode.CreateNew, FileAccess.Write).Dispose();
                 }
-                catch (IOException ex) when (i < 100 && Win32Marshal.TryMakeWin32ErrorCodeFromHR(ex.HResult) == Interop.Errors.ERROR_FILE_EXISTS)
+                catch (IOException ex)
+                    when (i < 100
+                        && Win32Marshal.TryMakeWin32ErrorCodeFromHR(ex.HResult)
+                            == Interop.Errors.ERROR_FILE_EXISTS
+                    )
                 {
                     i++; // Don't let unforeseen circumstances cause us to loop forever
                     continue; // File already exists: very, very unlikely
@@ -272,7 +370,11 @@ namespace System.IO
         {
             int length = path.Length;
             return (length >= 1 && PathInternal.IsDirectorySeparator(path[0]))
-                || (length >= 2 && PathInternal.IsValidDriveChar(path[0]) && path[1] == PathInternal.VolumeSeparatorChar);
+                || (
+                    length >= 2
+                    && PathInternal.IsValidDriveChar(path[0])
+                    && path[1] == PathInternal.VolumeSeparatorChar
+                );
         }
 
         // Returns the root portion of the given path. The resulting string
@@ -334,7 +436,9 @@ namespace System.IO
             }
 
             ReadOnlySpan<char> pathToTrim = root.Slice(startOffset);
-            return EndsInDirectorySeparator(pathToTrim) ? pathToTrim.Slice(0, pathToTrim.Length - 1) : pathToTrim;
+            return EndsInDirectorySeparator(pathToTrim)
+                ? pathToTrim.Slice(0, pathToTrim.Length - 1)
+                : pathToTrim;
         }
 
         /// <summary>
@@ -348,9 +452,14 @@ namespace System.IO
 
             if (!isDevice && path.Slice(0, 2).EqualsOrdinal(@"\\".AsSpan()))
                 return 2;
-            else if (isDevice && path.Length >= 8
-                && (path.Slice(0, 8).EqualsOrdinal(PathInternal.UncExtendedPathPrefix.AsSpan())
-                || path.Slice(5, 4).EqualsOrdinal(@"UNC\".AsSpan())))
+            else if (
+                isDevice
+                && path.Length >= 8
+                && (
+                    path.Slice(0, 8).EqualsOrdinal(PathInternal.UncExtendedPathPrefix.AsSpan())
+                    || path.Slice(5, 4).EqualsOrdinal(@"UNC\".AsSpan())
+                )
+            )
                 return 8;
 
             return -1;

@@ -59,15 +59,78 @@ namespace System.Buffers.Text
             // Map the log2(value) to a power of 10.
             ReadOnlySpan<byte> log2ToPow10 =
             [
-                1,  1,  1,  2,  2,  2,  3,  3,  3,  4,  4,  4,  4,  5,  5,  5,
-                6,  6,  6,  7,  7,  7,  7,  8,  8,  8,  9,  9,  9,  10, 10, 10,
-                10, 11, 11, 11, 12, 12, 12, 13, 13, 13, 13, 14, 14, 14, 15, 15,
-                15, 16, 16, 16, 16, 17, 17, 17, 18, 18, 18, 19, 19, 19, 19, 20
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                3,
+                3,
+                3,
+                4,
+                4,
+                4,
+                4,
+                5,
+                5,
+                5,
+                6,
+                6,
+                6,
+                7,
+                7,
+                7,
+                7,
+                8,
+                8,
+                8,
+                9,
+                9,
+                9,
+                10,
+                10,
+                10,
+                10,
+                11,
+                11,
+                11,
+                12,
+                12,
+                12,
+                13,
+                13,
+                13,
+                13,
+                14,
+                14,
+                14,
+                15,
+                15,
+                15,
+                16,
+                16,
+                16,
+                16,
+                17,
+                17,
+                17,
+                18,
+                18,
+                18,
+                19,
+                19,
+                19,
+                19,
+                20,
             ];
             Debug.Assert(log2ToPow10.Length == 64);
 
             // TODO: Replace with log2ToPow10[BitOperations.Log2(value)] once https://github.com/dotnet/runtime/issues/79257 is fixed
-            uint index = Unsafe.Add(ref MemoryMarshal.GetReference(log2ToPow10), BitOperations.Log2(value));
+            uint index = Unsafe.Add(
+                ref MemoryMarshal.GetReference(log2ToPow10),
+                BitOperations.Log2(value)
+            );
 
             // Read the associated power of 10.
             ReadOnlySpan<ulong> powersOf10 =
@@ -142,7 +205,10 @@ namespace System.Buffers.Text
                 42949672960,
                 42949672960,
             ];
-            Debug.Assert(table.Length == 32, "Every result of uint.Log2(value) needs a long entry in the table.");
+            Debug.Assert(
+                table.Length == 32,
+                "Every result of uint.Log2(value) needs a long entry in the table."
+            );
 
             // TODO: Replace with table[uint.Log2(value)] once https://github.com/dotnet/runtime/issues/79257 is fixed
             long tableValue = Unsafe.Add(ref MemoryMarshal.GetReference(table), uint.Log2(value));

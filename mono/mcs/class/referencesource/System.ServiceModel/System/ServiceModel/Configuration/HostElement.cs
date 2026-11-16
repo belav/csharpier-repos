@@ -8,15 +8,22 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class HostElement : ConfigurationElement
     {
-        public HostElement() : base() { }
+        public HostElement()
+            : base() { }
 
-        [ConfigurationProperty(ConfigurationStrings.BaseAddresses, Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.BaseAddresses,
+            Options = ConfigurationPropertyOptions.None
+        )]
         public BaseAddressElementCollection BaseAddresses
         {
             get { return (BaseAddressElementCollection)base[ConfigurationStrings.BaseAddresses]; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Timeouts, Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Timeouts,
+            Options = ConfigurationPropertyOptions.None
+        )]
         public HostTimeoutsElement Timeouts
         {
             get { return (HostTimeoutsElement)base[ConfigurationStrings.Timeouts]; }

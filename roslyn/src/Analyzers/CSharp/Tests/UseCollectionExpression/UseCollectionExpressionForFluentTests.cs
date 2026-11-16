@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCollectionExpress
 
 using VerifyCS = CSharpCodeFixVerifier<
     CSharpUseCollectionExpressionForFluentDiagnosticAnalyzer,
-    CSharpUseCollectionExpressionForFluentCodeFixProvider>;
+    CSharpUseCollectionExpressionForFluentCodeFixProvider
+>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsUseCollectionExpression)]
 public class UseCollectionExpressionForFluentTests
@@ -49,7 +50,7 @@ public class UseCollectionExpressionForFluentTests
             TestCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -61,7 +62,7 @@ public class UseCollectionExpressionForFluentTests
             FixedCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -83,7 +84,7 @@ public class UseCollectionExpressionForFluentTests
             TestCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -95,7 +96,7 @@ public class UseCollectionExpressionForFluentTests
             FixedCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -117,7 +118,7 @@ public class UseCollectionExpressionForFluentTests
             TestCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -129,7 +130,7 @@ public class UseCollectionExpressionForFluentTests
             FixedCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -152,7 +153,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using X = System.Collections.Generic.List<int>;
-                
+
                 class C
                 {
                     void M()
@@ -174,7 +175,7 @@ public class UseCollectionExpressionForFluentTests
             TestCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -186,7 +187,7 @@ public class UseCollectionExpressionForFluentTests
             FixedCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -208,7 +209,7 @@ public class UseCollectionExpressionForFluentTests
             TestCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -220,7 +221,7 @@ public class UseCollectionExpressionForFluentTests
             FixedCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -242,7 +243,7 @@ public class UseCollectionExpressionForFluentTests
             TestCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -265,7 +266,7 @@ public class UseCollectionExpressionForFluentTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -278,7 +279,7 @@ public class UseCollectionExpressionForFluentTests
                 using System;
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -301,7 +302,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -314,7 +315,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -337,7 +338,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -350,7 +351,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -373,7 +374,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -386,7 +387,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -409,7 +410,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -422,7 +423,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -445,7 +446,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -458,7 +459,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -481,7 +482,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -494,7 +495,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -517,7 +518,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -530,7 +531,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -553,7 +554,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -566,7 +567,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -589,7 +590,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -602,7 +603,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -625,7 +626,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -638,7 +639,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -661,7 +662,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -674,7 +675,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -697,7 +698,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -720,7 +721,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -743,7 +744,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -765,7 +766,7 @@ public class UseCollectionExpressionForFluentTests
             TestCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -780,7 +781,7 @@ public class UseCollectionExpressionForFluentTests
             FixedCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -806,7 +807,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -819,7 +820,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -842,7 +843,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -869,32 +870,34 @@ public class UseCollectionExpressionForFluentTests
 
         await new VerifyCS.Test
         {
-            TestCode = """
-                using System.Linq;
-                using System.Collections.Generic;
-                using System.Collections.Immutable;
-                
-                class C
-                {
-                    void M(int x)
+            TestCode =
+                """
+                    using System.Linq;
+                    using System.Collections.Generic;
+                    using System.Collections.Immutable;
+
+                    class C
                     {
-                        List<int> list = new int[] { 1, 2, 3 }.Concat(x).[|ToList|]();
+                        void M(int x)
+                        {
+                            List<int> list = new int[] { 1, 2, 3 }.Concat(x).[|ToList|]();
+                        }
                     }
-                }
-                """ + singleArgConcat,
-            FixedCode = """
-                using System.Linq;
-                using System.Collections.Generic;
-                using System.Collections.Immutable;
-                
-                class C
-                {
-                    void M(int x)
+                    """ + singleArgConcat,
+            FixedCode =
+                """
+                    using System.Linq;
+                    using System.Collections.Generic;
+                    using System.Collections.Immutable;
+
+                    class C
                     {
-                        List<int> list = [1, 2, 3, x];
+                        void M(int x)
+                        {
+                            List<int> list = [1, 2, 3, x];
+                        }
                     }
-                }
-                """ + singleArgConcat,
+                    """ + singleArgConcat,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -909,7 +912,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int x)
@@ -922,7 +925,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int x)
@@ -945,7 +948,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int x)
@@ -968,7 +971,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -981,7 +984,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1004,7 +1007,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1017,7 +1020,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1040,7 +1043,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1056,7 +1059,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1082,7 +1085,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1100,7 +1103,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1129,7 +1132,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1145,7 +1148,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1171,7 +1174,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1189,7 +1192,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1218,7 +1221,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1244,7 +1247,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1270,7 +1273,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1296,7 +1299,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -1321,7 +1324,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1346,7 +1349,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -1359,7 +1362,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -1382,7 +1385,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -1395,7 +1398,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -1418,7 +1421,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -1431,7 +1434,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -1455,7 +1458,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -1469,7 +1472,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -1493,7 +1496,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -1507,7 +1510,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(IEnumerable<int> x)
@@ -1531,7 +1534,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1555,7 +1558,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1582,7 +1585,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1596,7 +1599,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1620,7 +1623,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1634,7 +1637,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1657,7 +1660,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1671,7 +1674,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1695,7 +1698,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1710,7 +1713,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1739,7 +1742,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1754,7 +1757,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1783,7 +1786,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     List<int> list = ImmutableArray<int>.Empty.AddRange(1 +
@@ -1795,7 +1798,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     List<int> list =
@@ -1821,7 +1824,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     List<int> list = ImmutableArray<int>.Empty.Add(1 +
@@ -1833,7 +1836,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     List<int> list =
@@ -1859,7 +1862,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1876,7 +1879,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1905,7 +1908,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1921,7 +1924,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M()
@@ -1949,7 +1952,7 @@ public class UseCollectionExpressionForFluentTests
             TestCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -1961,7 +1964,7 @@ public class UseCollectionExpressionForFluentTests
             FixedCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -1983,21 +1986,18 @@ public class UseCollectionExpressionForFluentTests
             TestCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 List<int> list = new[] { 1, 2, 3 }.[|ToList|]();
                 """,
             FixedCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 List<int> list = [1, 2, 3];
                 """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
-            TestState =
-            {
-                OutputKind = OutputKind.ConsoleApplication,
-            },
+            TestState = { OutputKind = OutputKind.ConsoleApplication },
         }.RunAsync();
     }
 
@@ -2010,7 +2010,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 List<int> list = ImmutableArray<int>.Empty.Add(1 +
                     2).Add(3 +
                     4).[|ToList|]();
@@ -2019,7 +2019,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 List<int> list =
                 [
                     1 +
@@ -2030,10 +2030,7 @@ public class UseCollectionExpressionForFluentTests
                 """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
-            TestState =
-            {
-                OutputKind = OutputKind.ConsoleApplication,
-            },
+            TestState = { OutputKind = OutputKind.ConsoleApplication },
         }.RunAsync();
     }
 
@@ -2045,7 +2042,7 @@ public class UseCollectionExpressionForFluentTests
             TestCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -2057,24 +2054,29 @@ public class UseCollectionExpressionForFluentTests
             FixedState =
             {
                 Sources =
-                { """
-                    using System.Linq;
-                    using System.Collections.Generic;
-                
-                    class C
-                    {
-                        void M()
+                {
+                    """
+                        using System.Linq;
+                        using System.Collections.Generic;
+
+                        class C
                         {
-                            List<List<int>> list = [new[] { 1, 2, 3 }.ToList()];
+                            void M()
+                            {
+                                List<List<int>> list = [new[] { 1, 2, 3 }.ToList()];
+                            }
                         }
-                    }
-                    """,
+                        """,
                 },
                 ExpectedDiagnostics =
                 {
                     // /0/Test0.cs(8,51): info IDE0305: Collection initialization can be simplified
-                    VerifyCS.Diagnostic().WithSpan(8, 51, 8, 57).WithSpan(8, 33, 8, 59).WithSeverity(DiagnosticSeverity.Info),
-                }
+                    VerifyCS
+                        .Diagnostic()
+                        .WithSpan(8, 51, 8, 57)
+                        .WithSpan(8, 33, 8, 59)
+                        .WithSeverity(DiagnosticSeverity.Info),
+                },
             },
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
@@ -2090,7 +2092,7 @@ public class UseCollectionExpressionForFluentTests
             TestCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -2102,7 +2104,7 @@ public class UseCollectionExpressionForFluentTests
             FixedCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M()
@@ -2125,7 +2127,7 @@ public class UseCollectionExpressionForFluentTests
             TestCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -2137,7 +2139,7 @@ public class UseCollectionExpressionForFluentTests
             FixedCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int[] x)
@@ -2159,7 +2161,7 @@ public class UseCollectionExpressionForFluentTests
             TestCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int[] x, int[] y)
@@ -2171,7 +2173,7 @@ public class UseCollectionExpressionForFluentTests
             FixedCode = """
                 using System.Linq;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     void M(int[] x, int[] y)
@@ -2194,7 +2196,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(ImmutableArray<int> x, int y)
@@ -2217,7 +2219,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(ImmutableArray<int> x, int y)
@@ -2230,7 +2232,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(ImmutableArray<int> x, int y)
@@ -2253,7 +2255,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(ImmutableArray<int> x, int[] y)
@@ -2276,7 +2278,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(ImmutableArray<int> x, int[] y)
@@ -2289,7 +2291,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(ImmutableArray<int> x, int[] y)
@@ -2312,7 +2314,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(ImmutableArray<int> x, int y, int z)
@@ -2335,7 +2337,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(ImmutableArray<int> x, int y, int z)
@@ -2348,7 +2350,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(ImmutableArray<int> x, int y, int z)
@@ -2373,7 +2375,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(ImmutableArray<int> x, int y, int z)
@@ -2386,7 +2388,7 @@ public class UseCollectionExpressionForFluentTests
                 using System.Linq;
                 using System.Collections.Generic;
                 using System.Collections.Immutable;
-                
+
                 class C
                 {
                     void M(ImmutableArray<int> x, int y, int z)
@@ -2422,7 +2424,7 @@ public class UseCollectionExpressionForFluentTests
                 using System;
                 using System.Collections.Immutable;
                 using System.Linq;
-                
+
                 static class EnumValueCache<T>
                     where T : struct, Enum
                 {
@@ -2456,7 +2458,7 @@ public class UseCollectionExpressionForFluentTests
                 using System;
                 using System.Collections.Immutable;
                 using System.Linq;
-                
+
                 static class EnumValueCache<T>
                     where T : struct, Enum
                 {
@@ -2490,7 +2492,7 @@ public class UseCollectionExpressionForFluentTests
                 using System;
                 using System.Collections.Immutable;
                 using System.Linq;
-                
+
                 static class EnumValueCache<T>
                     where T : struct, Enum
                 {
@@ -2525,7 +2527,7 @@ public class UseCollectionExpressionForFluentTests
                 using System;
                 using System.Collections.Immutable;
                 using System.Linq;
-                
+
                 static class EnumValueCache<T>
                     where T : struct, Enum
                 {
@@ -2561,7 +2563,7 @@ public class UseCollectionExpressionForFluentTests
                 using System;
                 using System.Collections.Immutable;
                 using System.Linq;
-                
+
                 static class EnumValueCache<T>
                     where T : struct, Enum
                 {
@@ -2598,7 +2600,7 @@ public class UseCollectionExpressionForFluentTests
                 using System;
                 using System.Collections.Immutable;
                 using System.Linq;
-                
+
                 static class EnumValueCache<T>
                     where T : struct, Enum
                 {

@@ -4,11 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Serialization;
-using System.Text;
 
 namespace System.Workflow.Activities.Rules.Design
 {
@@ -17,7 +17,11 @@ namespace System.Workflow.Activities.Rules.Design
     /// </summary>
     internal static class DesignerHelpers
     {
-        internal static void DisplayError(string message, string messageBoxTitle, IServiceProvider serviceProvider)
+        internal static void DisplayError(
+            string message,
+            string messageBoxTitle,
+            IServiceProvider serviceProvider
+        )
         {
             IUIService uis = null;
             if (serviceProvider != null)
@@ -26,10 +30,17 @@ namespace System.Workflow.Activities.Rules.Design
             if (uis != null)
                 uis.ShowError(message);
             else
-                MessageBox.Show(message, messageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, 0);
+                MessageBox.Show(
+                    message,
+                    messageBoxTitle,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1,
+                    0
+                );
         }
 
-        static internal string GetRulePreview(Rule rule)
+        internal static string GetRulePreview(Rule rule)
         {
             StringBuilder rulePreview = new StringBuilder();
 
@@ -60,7 +71,7 @@ namespace System.Workflow.Activities.Rules.Design
             return rulePreview.ToString();
         }
 
-        static internal string GetRuleSetPreview(RuleSet ruleSet)
+        internal static string GetRuleSetPreview(RuleSet ruleSet)
         {
             StringBuilder preview = new StringBuilder();
             bool first = true;

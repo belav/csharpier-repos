@@ -11,9 +11,7 @@ namespace System.Diagnostics.Eventing.Reader
     internal sealed class CoTaskMemSafeHandle : SafeHandle
     {
         public CoTaskMemSafeHandle()
-            : base(IntPtr.Zero, true)
-        {
-        }
+            : base(IntPtr.Zero, true) { }
 
         internal void SetMemory(IntPtr handle)
         {
@@ -27,10 +25,7 @@ namespace System.Diagnostics.Eventing.Reader
 
         public override bool IsInvalid
         {
-            get
-            {
-                return IsClosed || handle == IntPtr.Zero;
-            }
+            get { return IsClosed || handle == IntPtr.Zero; }
         }
 
         protected override bool ReleaseHandle()
@@ -46,10 +41,7 @@ namespace System.Diagnostics.Eventing.Reader
         //
         public static CoTaskMemSafeHandle Zero
         {
-            get
-            {
-                return new CoTaskMemSafeHandle();
-            }
+            get { return new CoTaskMemSafeHandle(); }
         }
     }
 }

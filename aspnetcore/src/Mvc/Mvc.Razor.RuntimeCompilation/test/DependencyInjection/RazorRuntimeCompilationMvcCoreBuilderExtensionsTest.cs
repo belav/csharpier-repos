@@ -24,9 +24,8 @@ public class RazorRuntimeCompilationMvcCoreBuilderExtensionsTest
         RazorRuntimeCompilationMvcCoreBuilderExtensions.AddServices(services);
 
         // Assert
-        var serviceDescriptor = Assert.Single(
-            services,
-            service => service.ServiceType == typeof(IViewCompilerProvider)
+        var serviceDescriptor = Assert.Single(services, service =>
+            service.ServiceType == typeof(IViewCompilerProvider)
         );
         Assert.Equal(typeof(RuntimeViewCompilerProvider), serviceDescriptor.ImplementationType);
     }
@@ -44,15 +43,13 @@ public class RazorRuntimeCompilationMvcCoreBuilderExtensionsTest
         RazorRuntimeCompilationMvcCoreBuilderExtensions.AddServices(services);
 
         // Assert
-        var serviceDescriptor = Assert.Single(
-            services,
-            service => service.ServiceType == typeof(IActionDescriptorProvider)
+        var serviceDescriptor = Assert.Single(services, service =>
+            service.ServiceType == typeof(IActionDescriptorProvider)
         );
         Assert.Equal(typeof(PageActionDescriptorProvider), serviceDescriptor.ImplementationType);
 
-        serviceDescriptor = Assert.Single(
-            services,
-            service => service.ServiceType == typeof(MatcherPolicy)
+        serviceDescriptor = Assert.Single(services, service =>
+            service.ServiceType == typeof(MatcherPolicy)
         );
         Assert.Equal(typeof(PageLoaderMatcherPolicy), serviceDescriptor.ImplementationType);
     }

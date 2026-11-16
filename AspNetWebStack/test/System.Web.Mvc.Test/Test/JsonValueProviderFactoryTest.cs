@@ -16,13 +16,20 @@ namespace System.Web.Mvc.Test
         {
             JsonValueProviderFactory factory = new JsonValueProviderFactory();
 
-            Assert.ThrowsArgumentNull(delegate() { factory.GetValueProvider(controllerContext: null); }, "controllerContext");
+            Assert.ThrowsArgumentNull(
+                delegate()
+                {
+                    factory.GetValueProvider(controllerContext: null);
+                },
+                "controllerContext"
+            );
         }
 
         [Fact]
         public void GetValueProvider_SimpleArrayJsonObject()
         {
-            const string jsonString = @"
+            const string jsonString =
+                @"
 [ ""abc"", null, ""foobar"" ]
 ";
             ControllerContext cc = GetJsonEnabledControllerContext(jsonString);
@@ -47,7 +54,8 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void GetValueProvider_SimpleDictionaryJsonObject()
         {
-            const string jsonString = @"
+            const string jsonString =
+                @"
 {   ""FirstName"":""John"",
     ""LastName"": ""Doe""
 }";
@@ -68,7 +76,8 @@ namespace System.Web.Mvc.Test
         public void GetValueProvider_ComplexJsonObject()
         {
             // Arrange
-            const string jsonString = @"
+            const string jsonString =
+                @"
 [
   { 
     ""BillingAddress"": {
@@ -112,8 +121,12 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.Setup(o => o.HttpContext.Request.ContentType).Returns("application/json");
-            mockControllerContext.Setup(o => o.HttpContext.Request.InputStream).Returns(new MemoryStream());
+            mockControllerContext
+                .Setup(o => o.HttpContext.Request.ContentType)
+                .Returns("application/json");
+            mockControllerContext
+                .Setup(o => o.HttpContext.Request.InputStream)
+                .Returns(new MemoryStream());
 
             JsonValueProviderFactory factory = new JsonValueProviderFactory();
 
@@ -146,7 +159,9 @@ namespace System.Web.Mvc.Test
             MemoryStream jsonStream = new MemoryStream(jsonBytes);
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.Setup(o => o.HttpContext.Request.ContentType).Returns("application/json");
+            mockControllerContext
+                .Setup(o => o.HttpContext.Request.ContentType)
+                .Returns("application/json");
             mockControllerContext.Setup(o => o.HttpContext.Request.InputStream).Returns(jsonStream);
             return mockControllerContext.Object;
         }

@@ -19,12 +19,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(byte[])),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(byte[])
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "foo", "not base64 encoded!" }
-                }
+                ValueProvider = new SimpleValueProvider { { "foo", "not base64 encoded!" } },
             };
 
             BinaryDataModelBinderProvider binderProvider = new BinaryDataModelBinderProvider();
@@ -43,12 +43,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(byte[])),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(byte[])
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "foo", "" }
-                }
+                ValueProvider = new SimpleValueProvider { { "foo", "" } },
             };
 
             BinaryDataModelBinderProvider binderProvider = new BinaryDataModelBinderProvider();
@@ -67,12 +67,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(byte[])),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(byte[])
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "foo", _base64String }
-                }
+                ValueProvider = new SimpleValueProvider { { "foo", _base64String } },
             };
 
             BinaryDataModelBinderProvider binderProvider = new BinaryDataModelBinderProvider();
@@ -92,12 +92,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(Binary)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(Binary)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "foo", _base64String }
-                }
+                ValueProvider = new SimpleValueProvider { { "foo", _base64String } },
             };
 
             BinaryDataModelBinderProvider binderProvider = new BinaryDataModelBinderProvider();
@@ -118,12 +118,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(byte[])),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(byte[])
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "foo.bar", _base64String }
-                }
+                ValueProvider = new SimpleValueProvider { { "foo.bar", _base64String } },
             };
 
             BinaryDataModelBinderProvider binderProvider = new BinaryDataModelBinderProvider();
@@ -142,12 +142,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(object)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(object)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "foo", _base64String }
-                }
+                ValueProvider = new SimpleValueProvider { { "foo", _base64String } },
             };
 
             BinaryDataModelBinderProvider binderProvider = new BinaryDataModelBinderProvider();

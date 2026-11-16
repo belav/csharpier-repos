@@ -16,11 +16,11 @@ namespace System.Data.Objects.Internal
     using System.Text;
 
     /// <summary>
-    /// Provides Entity-SQL query building services for <see cref="EntitySqlQueryState"/>. 
+    /// Provides Entity-SQL query building services for <see cref="EntitySqlQueryState"/>.
     /// Knowledge of how to compose Entity-SQL fragments using query builder operators resides entirely in this class.
     /// </summary>
     internal static class EntitySqlQueryBuilder
-    {        
+    {
         /// <summary>
         /// Helper method to extract the Entity-SQL command text from an <see cref="ObjectQueryState"/> instance if that
         /// instance models an Entity-SQL-backed ObjectQuery, or to throw an exception indicating that query builder methods
@@ -34,9 +34,11 @@ namespace System.Data.Objects.Internal
         private static string GetCommandText(ObjectQueryState query)
         {
             string commandText = null;
-            if(!query.TryGetCommandText(out commandText))
+            if (!query.TryGetCommandText(out commandText))
             {
-                throw EntityUtil.NotSupported(System.Data.Entity.Strings.ObjectQuery_QueryBuilder_NotSupportedLinqSource);
+                throw EntityUtil.NotSupported(
+                    System.Data.Entity.Strings.ObjectQuery_QueryBuilder_NotSupportedLinqSource
+                );
             }
 
             return commandText;
@@ -50,7 +52,11 @@ namespace System.Data.Objects.Internal
         /// <param name="sourceQueryParams">ObjectParameters from the ObjectQuery on which the query builder method was called</param>
         /// <param name="builderMethodParams">ObjectParameters that were specified as an argument to the builder method</param>
         /// <returns>A new ObjectParameterCollection containing copies of all parameters</returns>
-        private static ObjectParameterCollection MergeParameters(ObjectContext context, ObjectParameterCollection sourceQueryParams, ObjectParameter[] builderMethodParams)
+        private static ObjectParameterCollection MergeParameters(
+            ObjectContext context,
+            ObjectParameterCollection sourceQueryParams,
+            ObjectParameter[] builderMethodParams
+        )
         {
             Debug.Assert(builderMethodParams != null, "params array argument should not be null");
             if (sourceQueryParams == null && builderMethodParams.Length == 0)
@@ -58,7 +64,9 @@ namespace System.Data.Objects.Internal
                 return null;
             }
 
-            ObjectParameterCollection mergedParams = ObjectParameterCollection.DeepCopy(sourceQueryParams);
+            ObjectParameterCollection mergedParams = ObjectParameterCollection.DeepCopy(
+                sourceQueryParams
+            );
             if (mergedParams == null)
             {
                 mergedParams = new ObjectParameterCollection(context.Perspective);
@@ -79,7 +87,10 @@ namespace System.Data.Objects.Internal
         /// <param name="query1Params">ObjectParameters from the first ObjectQuery argument (on which the query builder method was called)</param>
         /// <param name="query2Params">ObjectParameters from the second ObjectQuery argument (specified as an argument to the builder method)</param>
         /// <returns>A new ObjectParameterCollection containing copies of all parameters</returns>
-        private static ObjectParameterCollection MergeParameters(ObjectParameterCollection query1Params, ObjectParameterCollection query2Params)
+        private static ObjectParameterCollection MergeParameters(
+            ObjectParameterCollection query1Params,
+            ObjectParameterCollection query2Params
+        )
         {
             if (query1Params == null && query2Params == null)
             {
@@ -110,12 +121,32 @@ namespace System.Data.Objects.Internal
             return mergedParams;
         }
 
-        private static ObjectQueryState NewBuilderQuery(ObjectQueryState sourceQuery, Type elementType, StringBuilder queryText, Span newSpan, IEnumerable<ObjectParameter> enumerableParams)
+        private static ObjectQueryState NewBuilderQuery(
+            ObjectQueryState sourceQuery,
+            Type elementType,
+            StringBuilder queryText,
+            Span newSpan,
+            IEnumerable<ObjectParameter> enumerableParams
+        )
         {
-            return NewBuilderQuery(sourceQuery, elementType, queryText, false, newSpan, enumerableParams);
+            return NewBuilderQuery(
+                sourceQuery,
+                elementType,
+                queryText,
+                false,
+                newSpan,
+                enumerableParams
+            );
         }
 
-        private static ObjectQueryState NewBuilderQuery(ObjectQueryState sourceQuery, Type elementType, StringBuilder queryText, bool allowsLimit, Span newSpan, IEnumerable<ObjectParameter> enumerableParams)
+        private static ObjectQueryState NewBuilderQuery(
+            ObjectQueryState sourceQuery,
+            Type elementType,
+            StringBuilder queryText,
+            bool allowsLimit,
+            Span newSpan,
+            IEnumerable<ObjectParameter> enumerableParams
+        )
         {
             ObjectParameterCollection queryParams = enumerableParams as ObjectParameterCollection;
             if (queryParams == null && enumerableParams != null)
@@ -127,49 +158,72 @@ namespace System.Data.Objects.Internal
                 }
             }
 
-            EntitySqlQueryState newState = new EntitySqlQueryState(elementType, queryText.ToString(), allowsLimit, sourceQuery.ObjectContext, queryParams, newSpan);
-            
+            EntitySqlQueryState newState = new EntitySqlQueryState(
+                elementType,
+                queryText.ToString(),
+                allowsLimit,
+                sourceQuery.ObjectContext,
+                queryParams,
+                newSpan
+            );
+
             sourceQuery.ApplySettingsTo(newState);
-            
+
             return newState;
         }
 
         // Note that all query builder string constants contain embedded newlines to prevent manipulation of the
         // query text by single line comments (--) that might appear in user-supplied portions of the string such
         // as a filter predicate, projection list, etc.
-        
+
         #region SetOp Helpers
 
         private const string _setOpEpilog =
-@"
+            @"
 )";
 
         private const string _setOpProlog =
-@"(
+            @"(
 ";
 
         // SetOp helper - note that this doesn't merge Spans, since Except uses the original query's Span
         // while Intersect/Union/UnionAll use the merged Span.
-        private static ObjectQueryState BuildSetOp(ObjectQueryState leftQuery, ObjectQueryState rightQuery, Span newSpan, string setOp)
+        private static ObjectQueryState BuildSetOp(
+            ObjectQueryState leftQuery,
+            ObjectQueryState rightQuery,
+            Span newSpan,
+            string setOp
+        )
         {
             // Assert that the arguments aren't null (should have been verified by ObjectQuery)
             Debug.Assert(leftQuery != null, "Left query is null?");
             Debug.Assert(rightQuery != null, "Right query is null?");
-            Debug.Assert(leftQuery.ElementType.Equals(rightQuery.ElementType), "Incompatible element types in arguments to Except<T>/Intersect<T>/Union<T>/UnionAll<T>?");
+            Debug.Assert(
+                leftQuery.ElementType.Equals(rightQuery.ElementType),
+                "Incompatible element types in arguments to Except<T>/Intersect<T>/Union<T>/UnionAll<T>?"
+            );
 
-            // Retrieve the left and right arguments to the set operation - 
+            // Retrieve the left and right arguments to the set operation -
             // this will throw if either input query is not an Entity-SQL query.
             string left = GetCommandText(leftQuery);
             string right = GetCommandText(rightQuery);
-                        
+
             // ObjectQuery arguments must be associated with the same ObjectContext instance as the implemented query
             if (!object.ReferenceEquals(leftQuery.ObjectContext, rightQuery.ObjectContext))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidQueryArgument, "query"); 
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidQueryArgument,
+                    "query"
+                );
             }
-                                    
+
             // Create a string builder only large enough to contain the new query text
-            int queryLength = _setOpProlog.Length + left.Length + setOp.Length + right.Length + _setOpEpilog.Length;
+            int queryLength =
+                _setOpProlog.Length
+                + left.Length
+                + setOp.Length
+                + right.Length
+                + _setOpEpilog.Length;
             StringBuilder builder = new StringBuilder(queryLength);
 
             // Build the new query
@@ -182,22 +236,35 @@ namespace System.Data.Objects.Internal
             // Create a new query implementation and apply the state of this implementation to it.
             // The Span of the query argument will be merged into the new query's Span by the caller, iff the Set Op is NOT Except.
             // See the Except, Intersect, Union and UnionAll methods in this class for examples.
-            return NewBuilderQuery(leftQuery, leftQuery.ElementType, builder, newSpan, MergeParameters(leftQuery.Parameters, rightQuery.Parameters));
+            return NewBuilderQuery(
+                leftQuery,
+                leftQuery.ElementType,
+                builder,
+                newSpan,
+                MergeParameters(leftQuery.Parameters, rightQuery.Parameters)
+            );
         }
         #endregion
 
         #region Select/SelectValue Helpers
-        
+
         private const string _fromOp =
-@"
+            @"
 FROM (
 ";
 
-        private const string _asOp = 
-@"
+        private const string _asOp =
+            @"
 ) AS ";
 
-        private static ObjectQueryState BuildSelectOrSelectValue(ObjectQueryState query, string alias, string projection, ObjectParameter[] parameters, string projectOp, Type elementType)
+        private static ObjectQueryState BuildSelectOrSelectValue(
+            ObjectQueryState query,
+            string alias,
+            string projection,
+            ObjectParameter[] parameters,
+            string projectOp,
+            Type elementType
+        )
         {
             Debug.Assert(!StringUtil.IsNullOrEmptyOrWhiteSpace(alias), "Invalid alias");
             Debug.Assert(!StringUtil.IsNullOrEmptyOrWhiteSpace(projection), "Invalid projection");
@@ -205,12 +272,13 @@ FROM (
             string queryText = GetCommandText(query);
 
             // Build the new query string - "<project op> <projection> FROM (<this query>) AS <alias>"
-            int queryLength = projectOp.Length +
-                              projection.Length +
-                              _fromOp.Length +
-                              queryText.Length +
-                              _asOp.Length +
-                              alias.Length;
+            int queryLength =
+                projectOp.Length
+                + projection.Length
+                + _fromOp.Length
+                + queryText.Length
+                + _asOp.Length
+                + alias.Length;
 
             StringBuilder builder = new StringBuilder(queryLength);
             builder.Append(projectOp);
@@ -222,18 +290,38 @@ FROM (
 
             // Create a new EntitySqlQueryImplementation that uses the new query as its command text.
             // Span should not be carried over from a Select or SelectValue operation.
-            return NewBuilderQuery(query, elementType, builder, null, MergeParameters(query.ObjectContext, query.Parameters, parameters));
+            return NewBuilderQuery(
+                query,
+                elementType,
+                builder,
+                null,
+                MergeParameters(query.ObjectContext, query.Parameters, parameters)
+            );
         }
 
         #endregion
 
         #region OrderBy/Where Helper
 
-        private static ObjectQueryState BuildOrderByOrWhere(ObjectQueryState query, string alias, string predicateOrKeys, ObjectParameter[] parameters, string op, string skipCount, bool allowsLimit)
+        private static ObjectQueryState BuildOrderByOrWhere(
+            ObjectQueryState query,
+            string alias,
+            string predicateOrKeys,
+            ObjectParameter[] parameters,
+            string op,
+            string skipCount,
+            bool allowsLimit
+        )
         {
             Debug.Assert(!StringUtil.IsNullOrEmptyOrWhiteSpace(alias), "Invalid alias");
-            Debug.Assert(!StringUtil.IsNullOrEmptyOrWhiteSpace(predicateOrKeys), "Invalid predicate/keys");
-            Debug.Assert(null == skipCount || op == _orderByOp, "Skip clause used with WHERE operator?");
+            Debug.Assert(
+                !StringUtil.IsNullOrEmptyOrWhiteSpace(predicateOrKeys),
+                "Invalid predicate/keys"
+            );
+            Debug.Assert(
+                null == skipCount || op == _orderByOp,
+                "Skip clause used with WHERE operator?"
+            );
 
             string queryText = GetCommandText(query);
 
@@ -242,15 +330,16 @@ FROM (
             //  (for Where)
             // Or:  "SELECT VALUE <alias> FROM (<this query>) AS <alias> ORDER BY <keys> <optional: SKIP <skip>>"
             // Depending on the value of 'op'
-            int queryLength = _selectValueOp.Length +
-                              alias.Length +
-                              _fromOp.Length +
-                              queryText.Length +
-                              _asOp.Length +
-                              alias.Length +
-                              op.Length +
-                              predicateOrKeys.Length;
-            
+            int queryLength =
+                _selectValueOp.Length
+                + alias.Length
+                + _fromOp.Length
+                + queryText.Length
+                + _asOp.Length
+                + alias.Length
+                + op.Length
+                + predicateOrKeys.Length;
+
             if (skipCount != null)
             {
                 queryLength += (_skipOp.Length + skipCount.Length);
@@ -273,62 +362,91 @@ FROM (
 
             // Create a new EntitySqlQueryImplementation that uses the new query as its command text.
             // Span is carried over, no adjustment is needed.
-            return NewBuilderQuery(query, query.ElementType, builder, allowsLimit, query.Span, MergeParameters(query.ObjectContext, query.Parameters,  parameters));
+            return NewBuilderQuery(
+                query,
+                query.ElementType,
+                builder,
+                allowsLimit,
+                query.Span,
+                MergeParameters(query.ObjectContext, query.Parameters, parameters)
+            );
         }
 
         #endregion
-        
-        
+
+
         #region Distinct
 
-        private const string _distinctProlog = 
-@"SET(
+        private const string _distinctProlog =
+            @"SET(
 ";
 
-        private const string _distinctEpilog = 
-@"
+        private const string _distinctEpilog =
+            @"
 )";
 
         internal static ObjectQueryState Distinct(ObjectQueryState query)
         {
             // Build the new query string - "SET(<this query>)"
             string queryText = GetCommandText(query);
-            StringBuilder builder = new StringBuilder(_distinctProlog.Length + queryText.Length + _distinctEpilog.Length);
+            StringBuilder builder = new StringBuilder(
+                _distinctProlog.Length + queryText.Length + _distinctEpilog.Length
+            );
             builder.Append(_distinctProlog);
             builder.Append(queryText);
             builder.Append(_distinctEpilog);
 
             // Span is carried over, no adjustment is needed
 
-            return NewBuilderQuery(query, query.ElementType, builder, query.Span, ObjectParameterCollection.DeepCopy(query.Parameters));
+            return NewBuilderQuery(
+                query,
+                query.ElementType,
+                builder,
+                query.Span,
+                ObjectParameterCollection.DeepCopy(query.Parameters)
+            );
         }
 
         #endregion
 
         #region Except
 
-        private const string _exceptOp = 
-@"
+        private const string _exceptOp =
+            @"
 ) EXCEPT (
 ";
-                
-        internal static ObjectQueryState Except(ObjectQueryState leftQuery, ObjectQueryState rightQuery)
+
+        internal static ObjectQueryState Except(
+            ObjectQueryState leftQuery,
+            ObjectQueryState rightQuery
+        )
         {
             // Call the SetOp helper.
             // Span is taken from the leftmost query.
-            return EntitySqlQueryBuilder.BuildSetOp(leftQuery, rightQuery, leftQuery.Span, _exceptOp);
+            return EntitySqlQueryBuilder.BuildSetOp(
+                leftQuery,
+                rightQuery,
+                leftQuery.Span,
+                _exceptOp
+            );
         }
 
         #endregion
 
         #region GroupBy
 
-        private const string _groupByOp = 
-@"
+        private const string _groupByOp =
+            @"
 GROUP BY
 ";
 
-        internal static ObjectQueryState GroupBy(ObjectQueryState query, string alias, string keys, string projection, ObjectParameter[] parameters)
+        internal static ObjectQueryState GroupBy(
+            ObjectQueryState query,
+            string alias,
+            string keys,
+            string projection,
+            ObjectParameter[] parameters
+        )
         {
             Debug.Assert(!StringUtil.IsNullOrEmptyOrWhiteSpace(alias), "Invalid alias");
             Debug.Assert(!StringUtil.IsNullOrEmptyOrWhiteSpace(alias), "Invalid keys");
@@ -338,14 +456,15 @@ GROUP BY
 
             // Build the new query string:
             // "SELECT <projection> FROM (<this query>) AS <alias> GROUP BY <keys>"
-            int queryLength = _selectOp.Length +
-                              projection.Length +
-                              _fromOp.Length +
-                              queryText.Length +
-                              _asOp.Length +
-                              alias.Length +
-                              _groupByOp.Length +
-                              keys.Length;
+            int queryLength =
+                _selectOp.Length
+                + projection.Length
+                + _fromOp.Length
+                + queryText.Length
+                + _asOp.Length
+                + alias.Length
+                + _groupByOp.Length
+                + keys.Length;
 
             StringBuilder builder = new StringBuilder(queryLength);
             builder.Append(_selectOp);
@@ -359,19 +478,28 @@ GROUP BY
 
             // Create a new EntitySqlQueryImplementation that uses the new query as its command text.
             // Span should not be carried over from a GroupBy operation.
-            return NewBuilderQuery(query, typeof(DbDataRecord), builder, null, MergeParameters(query.ObjectContext, query.Parameters, parameters));
+            return NewBuilderQuery(
+                query,
+                typeof(DbDataRecord),
+                builder,
+                null,
+                MergeParameters(query.ObjectContext, query.Parameters, parameters)
+            );
         }
 
         #endregion
 
         #region Intersect
 
-        private const string _intersectOp = 
-@"
+        private const string _intersectOp =
+            @"
 ) INTERSECT (
 ";
-        
-        internal static ObjectQueryState Intersect(ObjectQueryState leftQuery, ObjectQueryState rightQuery)
+
+        internal static ObjectQueryState Intersect(
+            ObjectQueryState leftQuery,
+            ObjectQueryState rightQuery
+        )
         {
             // Ensure the Spans of the query arguments are merged into the new query's Span.
             Span newSpan = Span.CopyUnion(leftQuery.Span, rightQuery.Span);
@@ -383,37 +511,45 @@ GROUP BY
 
         #region OfType
 
-        private const string _ofTypeProlog = 
-@"OFTYPE(
+        private const string _ofTypeProlog =
+            @"OFTYPE(
 (
 ";
-        
-        private const string _ofTypeInfix = 
-@"
+
+        private const string _ofTypeInfix =
+            @"
 ),
 [";
 
         private const string _ofTypeInfix2 = "].[";
 
-        private const string _ofTypeEpilog = 
-@"]
+        private const string _ofTypeEpilog =
+            @"]
 )";
 
-        internal static ObjectQueryState OfType(ObjectQueryState query, EdmType newType, Type clrOfType)
+        internal static ObjectQueryState OfType(
+            ObjectQueryState query,
+            EdmType newType,
+            Type clrOfType
+        )
         {
             Debug.Assert(newType != null, "OfType cannot be null");
-            Debug.Assert(Helper.IsEntityType(newType) || Helper.IsComplexType(newType), "OfType must be Entity or Complex type");
+            Debug.Assert(
+                Helper.IsEntityType(newType) || Helper.IsComplexType(newType),
+                "OfType must be Entity or Complex type"
+            );
 
             string queryText = GetCommandText(query);
 
             // Build the new query string - "OFTYPE((<query>), [<type namespace>].[<type name>])"
-            int queryLength = _ofTypeProlog.Length +
-                              queryText.Length +
-                              _ofTypeInfix.Length +
-                              newType.NamespaceName.Length +
-                              (newType.NamespaceName != string.Empty ? _ofTypeInfix2.Length : 0) +
-                              newType.Name.Length +
-                              _ofTypeEpilog.Length;
+            int queryLength =
+                _ofTypeProlog.Length
+                + queryText.Length
+                + _ofTypeInfix.Length
+                + newType.NamespaceName.Length
+                + (newType.NamespaceName != string.Empty ? _ofTypeInfix2.Length : 0)
+                + newType.Name.Length
+                + _ofTypeEpilog.Length;
 
             StringBuilder builder = new StringBuilder(queryLength);
             builder.Append(_ofTypeProlog);
@@ -429,19 +565,30 @@ GROUP BY
 
             // Create a new EntitySqlQueryImplementation that uses the new query as its command text.
             // Span is carried over, no adjustment is needed
-            return NewBuilderQuery(query, clrOfType, builder, query.Span, ObjectParameterCollection.DeepCopy(query.Parameters));
+            return NewBuilderQuery(
+                query,
+                clrOfType,
+                builder,
+                query.Span,
+                ObjectParameterCollection.DeepCopy(query.Parameters)
+            );
         }
 
         #endregion
 
         #region OrderBy
 
-        private const string _orderByOp = 
-@"
+        private const string _orderByOp =
+            @"
 ORDER BY
 ";
 
-        internal static ObjectQueryState OrderBy(ObjectQueryState query, string alias, string keys, ObjectParameter[] parameters)
+        internal static ObjectQueryState OrderBy(
+            ObjectQueryState query,
+            string alias,
+            string keys,
+            ObjectParameter[] parameters
+        )
         {
             return BuildOrderByOrWhere(query, alias, keys, parameters, _orderByOp, null, true);
         }
@@ -452,9 +599,21 @@ ORDER BY
 
         private const string _selectOp = "SELECT ";
 
-        internal static ObjectQueryState Select(ObjectQueryState query, string alias, string projection, ObjectParameter[] parameters)
+        internal static ObjectQueryState Select(
+            ObjectQueryState query,
+            string alias,
+            string projection,
+            ObjectParameter[] parameters
+        )
         {
-            return BuildSelectOrSelectValue(query, alias, projection, parameters, _selectOp, typeof(DbDataRecord));
+            return BuildSelectOrSelectValue(
+                query,
+                alias,
+                projection,
+                parameters,
+                _selectOp,
+                typeof(DbDataRecord)
+            );
         }
 
         #endregion
@@ -463,21 +622,40 @@ ORDER BY
 
         private const string _selectValueOp = "SELECT VALUE ";
 
-        internal static ObjectQueryState SelectValue(ObjectQueryState query, string alias, string projection, ObjectParameter[] parameters, Type projectedType)
+        internal static ObjectQueryState SelectValue(
+            ObjectQueryState query,
+            string alias,
+            string projection,
+            ObjectParameter[] parameters,
+            Type projectedType
+        )
         {
-            return BuildSelectOrSelectValue(query, alias, projection, parameters, _selectValueOp, projectedType);
+            return BuildSelectOrSelectValue(
+                query,
+                alias,
+                projection,
+                parameters,
+                _selectValueOp,
+                projectedType
+            );
         }
 
         #endregion
 
         #region Skip
 
-        private const string _skipOp = 
-@"
+        private const string _skipOp =
+            @"
 SKIP
 ";
 
-        internal static ObjectQueryState Skip(ObjectQueryState query, string alias, string keys, string count, ObjectParameter[] parameters)
+        internal static ObjectQueryState Skip(
+            ObjectQueryState query,
+            string alias,
+            string keys,
+            string count,
+            ObjectParameter[] parameters
+        )
         {
             Debug.Assert(!StringUtil.IsNullOrEmptyOrWhiteSpace(count), "Invalid skip count");
             return BuildOrderByOrWhere(query, alias, keys, parameters, _orderByOp, count, true);
@@ -487,19 +665,24 @@ SKIP
 
         #region Top
 
-        private const string _limitOp = 
-@"
+        private const string _limitOp =
+            @"
 LIMIT
 ";
-        private const string _topOp = 
-@"SELECT VALUE TOP(
+        private const string _topOp =
+            @"SELECT VALUE TOP(
 ";
 
-        private const string _topInfix = 
-@"
+        private const string _topInfix =
+            @"
 ) ";
 
-        internal static ObjectQueryState Top(ObjectQueryState query, string alias, string count, ObjectParameter[] parameters)
+        internal static ObjectQueryState Top(
+            ObjectQueryState query,
+            string alias,
+            string count,
+            ObjectParameter[] parameters
+        )
         {
             int queryLength = count.Length;
             string queryText = GetCommandText(query);
@@ -509,23 +692,26 @@ LIMIT
             {
                 // Build the new query string:
                 // <this query> LIMIT <count>
-                queryLength += (queryText.Length +
-                                _limitOp.Length
-                    // + count.Length is added above
-                                );
+                queryLength += (
+                    queryText.Length + _limitOp.Length
+                // + count.Length is added above
+                );
             }
             else
             {
                 // Build the new query string:
                 // "SELECT VALUE TOP(<count>) <alias> FROM (<this query>) AS <alias>"
-                queryLength += (_topOp.Length +
+                queryLength += (
+                    _topOp.Length
+                    +
                     // count.Length + is added above
-                               _topInfix.Length +
-                               alias.Length +
-                               _fromOp.Length +
-                               queryText.Length +
-                               _asOp.Length +
-                               alias.Length);
+                    _topInfix.Length
+                    + alias.Length
+                    + _fromOp.Length
+                    + queryText.Length
+                    + _asOp.Length
+                    + alias.Length
+                );
             }
 
             StringBuilder builder = new StringBuilder(queryLength);
@@ -549,19 +735,28 @@ LIMIT
 
             // Create a new EntitySqlQueryImplementation that uses the new query as its command text.
             // Span is carried over, no adjustment is needed.
-            return NewBuilderQuery(query, query.ElementType, builder, query.Span, MergeParameters(query.ObjectContext, query.Parameters, parameters));
+            return NewBuilderQuery(
+                query,
+                query.ElementType,
+                builder,
+                query.Span,
+                MergeParameters(query.ObjectContext, query.Parameters, parameters)
+            );
         }
 
         #endregion
 
         #region Union
 
-        private const string _unionOp = 
-@"
+        private const string _unionOp =
+            @"
 ) UNION (
 ";
 
-        internal static ObjectQueryState Union(ObjectQueryState leftQuery, ObjectQueryState rightQuery)
+        internal static ObjectQueryState Union(
+            ObjectQueryState leftQuery,
+            ObjectQueryState rightQuery
+        )
         {
             // Ensure the Spans of the query arguments are merged into the new query's Span.
             Span newSpan = Span.CopyUnion(leftQuery.Span, rightQuery.Span);
@@ -573,12 +768,15 @@ LIMIT
 
         #region Union
 
-        private const string _unionAllOp = 
-@"
+        private const string _unionAllOp =
+            @"
 ) UNION ALL (
 ";
 
-        internal static ObjectQueryState UnionAll(ObjectQueryState leftQuery, ObjectQueryState rightQuery)
+        internal static ObjectQueryState UnionAll(
+            ObjectQueryState leftQuery,
+            ObjectQueryState rightQuery
+        )
         {
             // Ensure the Spans of the query arguments are merged into the new query's Span.
             Span newSpan = Span.CopyUnion(leftQuery.Span, rightQuery.Span);
@@ -590,12 +788,17 @@ LIMIT
 
         #region Where
 
-        private const string _whereOp = 
-@"
+        private const string _whereOp =
+            @"
 WHERE
 ";
 
-        internal static ObjectQueryState Where(ObjectQueryState query, string alias, string predicate, ObjectParameter[] parameters)
+        internal static ObjectQueryState Where(
+            ObjectQueryState query,
+            string alias,
+            string predicate,
+            ObjectParameter[] parameters
+        )
         {
             return BuildOrderByOrWhere(query, alias, predicate, parameters, _whereOp, null, false);
         }

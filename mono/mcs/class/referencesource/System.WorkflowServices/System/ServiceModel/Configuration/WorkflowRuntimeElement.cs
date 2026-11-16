@@ -11,7 +11,9 @@ namespace System.ServiceModel.Configuration
     using System.Workflow.Runtime;
     using System.Workflow.Runtime.Configuration;
 
-    [Obsolete("The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*")]
+    [Obsolete(
+        "The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*"
+    )]
     public class WorkflowRuntimeElement : BehaviorExtensionElement
     {
         const string cachedInstanceExpiration = "cachedInstanceExpiration";
@@ -25,94 +27,67 @@ namespace System.ServiceModel.Configuration
 
         WorkflowRuntimeSection wrtSection = null;
 
+        public WorkflowRuntimeElement() { }
 
-        public WorkflowRuntimeElement()
-        {
-
-        }
-
-        // This property is not supposed to be exposed in config. 
-        [SuppressMessage("Configuration", "Configuration102:ConfigurationPropertyAttributeRule", MessageId = "System.ServiceModel.Configuration.WorkflowRuntimeElement.BehaviorType")]
+        // This property is not supposed to be exposed in config.
+        [SuppressMessage(
+            "Configuration",
+            "Configuration102:ConfigurationPropertyAttributeRule",
+            MessageId = "System.ServiceModel.Configuration.WorkflowRuntimeElement.BehaviorType"
+        )]
         public override Type BehaviorType
         {
-            get
-            {
-                return typeof(WorkflowRuntimeBehavior);
-            }
+            get { return typeof(WorkflowRuntimeBehavior); }
         }
 
-        [ConfigurationProperty(cachedInstanceExpiration, IsRequired = false, DefaultValue = WorkflowRuntimeBehavior.DefaultCachedInstanceExpirationString)]
+        [ConfigurationProperty(
+            cachedInstanceExpiration,
+            IsRequired = false,
+            DefaultValue = WorkflowRuntimeBehavior.DefaultCachedInstanceExpirationString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [PositiveTimeSpanValidator]
         public TimeSpan CachedInstanceExpiration
         {
-            get
-            {
-                return (TimeSpan) base[cachedInstanceExpiration];
-            }
-            set
-            {
-                base[cachedInstanceExpiration] = value;
-            }
+            get { return (TimeSpan)base[cachedInstanceExpiration]; }
+            set { base[cachedInstanceExpiration] = value; }
         }
 
         [ConfigurationProperty(commonParameters, DefaultValue = null)]
         public NameValueConfigurationCollection CommonParameters
         {
-            get
-            {
-                return (NameValueConfigurationCollection) base[commonParameters];
-            }
+            get { return (NameValueConfigurationCollection)base[commonParameters]; }
         }
 
         [ConfigurationProperty(enablePerfCounters, DefaultValue = true)]
         public bool EnablePerformanceCounters
         {
-            get
-            {
-                return (bool) base[enablePerfCounters];
-            }
-            set
-            {
-                base[enablePerfCounters] = value;
-            }
+            get { return (bool)base[enablePerfCounters]; }
+            set { base[enablePerfCounters] = value; }
         }
-
 
         [ConfigurationProperty(name, DefaultValue = "")]
         [StringValidator(MinLength = 0)]
         public string Name
         {
-            get
-            {
-                return (string) base[name];
-            }
-            set
-            {
-                base[name] = value;
-            }
+            get { return (string)base[name]; }
+            set { base[name] = value; }
         }
 
         [ConfigurationProperty(services, DefaultValue = null)]
         public ExtendedWorkflowRuntimeServiceElementCollection Services
         {
-            get
-            {
-                return (ExtendedWorkflowRuntimeServiceElementCollection) base[services];
-            }
+            get { return (ExtendedWorkflowRuntimeServiceElementCollection)base[services]; }
         }
 
-        [ConfigurationProperty(validateOnCreate, DefaultValue = WorkflowRuntimeBehavior.DefaultValidateOnCreate)]
+        [ConfigurationProperty(
+            validateOnCreate,
+            DefaultValue = WorkflowRuntimeBehavior.DefaultValidateOnCreate
+        )]
         public bool ValidateOnCreate
         {
-            get
-            {
-                return (bool) base[validateOnCreate];
-            }
-            set
-            {
-                base[validateOnCreate] = value;
-            }
+            get { return (bool)base[validateOnCreate]; }
+            set { base[validateOnCreate] = value; }
         }
 
         protected override ConfigurationPropertyCollection Properties
@@ -123,11 +98,33 @@ namespace System.ServiceModel.Configuration
                 {
                     this.configProperties = new ConfigurationPropertyCollection();
                     configProperties.Add(new ConfigurationProperty(name, typeof(string), null));
-                    configProperties.Add(new ConfigurationProperty(validateOnCreate, typeof(bool), true));
-                    configProperties.Add(new ConfigurationProperty(enablePerfCounters, typeof(bool), true));
-                    configProperties.Add(new ConfigurationProperty(services, typeof(ExtendedWorkflowRuntimeServiceElementCollection), null));
-                    configProperties.Add(new ConfigurationProperty(commonParameters, typeof(NameValueConfigurationCollection), null));
-                    configProperties.Add(new ConfigurationProperty(cachedInstanceExpiration, typeof(TimeSpan), WorkflowRuntimeBehavior.DefaultCachedInstanceExpiration));
+                    configProperties.Add(
+                        new ConfigurationProperty(validateOnCreate, typeof(bool), true)
+                    );
+                    configProperties.Add(
+                        new ConfigurationProperty(enablePerfCounters, typeof(bool), true)
+                    );
+                    configProperties.Add(
+                        new ConfigurationProperty(
+                            services,
+                            typeof(ExtendedWorkflowRuntimeServiceElementCollection),
+                            null
+                        )
+                    );
+                    configProperties.Add(
+                        new ConfigurationProperty(
+                            commonParameters,
+                            typeof(NameValueConfigurationCollection),
+                            null
+                        )
+                    );
+                    configProperties.Add(
+                        new ConfigurationProperty(
+                            cachedInstanceExpiration,
+                            typeof(TimeSpan),
+                            WorkflowRuntimeBehavior.DefaultCachedInstanceExpiration
+                        )
+                    );
                 }
 
                 return this.configProperties;
@@ -136,7 +133,11 @@ namespace System.ServiceModel.Configuration
 
         protected internal override object CreateBehavior()
         {
-            return new WorkflowRuntimeBehavior(new WorkflowRuntime(CreateWorkflowRuntimeSection()), this.CachedInstanceExpiration, this.ValidateOnCreate);
+            return new WorkflowRuntimeBehavior(
+                new WorkflowRuntime(CreateWorkflowRuntimeSection()),
+                this.CachedInstanceExpiration,
+                this.ValidateOnCreate
+            );
         }
 
         WorkflowRuntimeSection CreateWorkflowRuntimeSection()

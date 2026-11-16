@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal class AllocBug
 {
     public int ret = 0;
-    public AllocBug()
-    {
-    }
+
+    public AllocBug() { }
 
     private static int Main()
     {
@@ -17,6 +17,7 @@ internal class AllocBug
         Console.WriteLine(100 == ab.ret ? "Test Passed" : "Test Failed");
         return ab.ret;
     }
+
     private void RunTest(int start, int stop)
     {
         for (int i = start; i <= stop; i++)
@@ -38,7 +39,7 @@ internal class AllocBug
         }
         catch (Exception)
         {
-            Console.WriteLine("Unexpected Exception when allocating "+bytesToAlloc+" bytes.");
+            Console.WriteLine("Unexpected Exception when allocating " + bytesToAlloc + " bytes.");
             ret = -1;
         }
     }

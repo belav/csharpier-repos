@@ -25,13 +25,10 @@ public class Startup
                     "/PageRouteTransformer/PageWithConfiguredRoute",
                     "/PageRouteTransformer/NewConventionRoute/{id?}"
                 );
-                options.Conventions.AddFolderRouteModelConvention(
-                    "/PageRouteTransformer",
-                    model =>
-                    {
-                        pageRouteTransformerConvention.Apply(model);
-                    }
-                );
+                options.Conventions.AddFolderRouteModelConvention("/PageRouteTransformer", model =>
+                {
+                    pageRouteTransformerConvention.Apply(model);
+                });
             });
 
         ConfigureRoutingServices(services);
@@ -114,14 +111,10 @@ public class Startup
             endpoints.MapRazorPages();
         });
 
-        app.Map(
-            "/afterrouting",
-            b =>
-                b.Run(c =>
-                {
-                    return c.Response.WriteAsync("Hello from middleware after routing");
-                })
-        );
+        app.Map("/afterrouting", b => b.Run(c =>
+            {
+                return c.Response.WriteAsync("Hello from middleware after routing");
+            }));
     }
 
     protected virtual void ConfigureMvcOptions(MvcOptions options)

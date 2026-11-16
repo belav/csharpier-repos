@@ -26,11 +26,7 @@ namespace System.Diagnostics
         /// </devdoc>
         public TraceListener this[int i]
         {
-            get
-            {
-                return _list[i]!;
-            }
-
+            get { return _list[i]!; }
             set
             {
                 InitializeListener(value);
@@ -61,10 +57,7 @@ namespace System.Diagnostics
         /// </devdoc>
         public int Count
         {
-            get
-            {
-                return _list.Count;
-            }
+            get { return _list.Count; }
         }
 
         /// <devdoc>
@@ -209,11 +202,7 @@ namespace System.Diagnostics
         /// <internalonly/>
         object? IList.this[int index]
         {
-            get
-            {
-                return _list[index];
-            }
-
+            get { return _list[index]; }
             set
             {
                 TraceListener? listener = value as TraceListener;
@@ -227,19 +216,13 @@ namespace System.Diagnostics
         /// <internalonly/>
         bool IList.IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <internalonly/>
         bool IList.IsFixedSize
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <internalonly/>
@@ -296,19 +279,13 @@ namespace System.Diagnostics
         /// <internalonly/>
         object ICollection.SyncRoot
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         /// <internalonly/>
         bool ICollection.IsSynchronized
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <internalonly/>

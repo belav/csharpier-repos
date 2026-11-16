@@ -14,7 +14,11 @@ namespace System.ServiceModel.Security
 
     static class MessagePartProtectionModeHelper
     {
-        public static MessagePartProtectionMode GetProtectionMode(bool sign, bool encrypt, bool signThenEncrypt)
+        public static MessagePartProtectionMode GetProtectionMode(
+            bool sign,
+            bool encrypt,
+            bool signThenEncrypt
+        )
         {
             if (sign)
             {

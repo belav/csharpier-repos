@@ -12,7 +12,9 @@ namespace System.ComponentModel.DataAnnotations
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     public class DisplayFormatAttribute : Attribute
     {
-        private readonly LocalizableString _nullDisplayText = new LocalizableString(nameof(NullDisplayText));
+        private readonly LocalizableString _nullDisplayText = new LocalizableString(
+            nameof(NullDisplayText)
+        );
 
         /// <summary>
         ///     Default constructor

@@ -8,7 +8,7 @@ namespace System.ServiceModel.Diagnostics
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.Xml;
-    
+
     class WmiPutTraceRecord : TraceRecord
     {
         string originalValue;
@@ -19,11 +19,15 @@ namespace System.ServiceModel.Diagnostics
         {
             Fx.Assert(!String.IsNullOrEmpty(valueName), "valueName must be set");
             this.valueName = valueName;
-            this.originalValue = originalValue == null ? SR.GetString(SR.ConfigNull) : originalValue.ToString();
+            this.originalValue =
+                originalValue == null ? SR.GetString(SR.ConfigNull) : originalValue.ToString();
             this.newValue = newValue == null ? SR.GetString(SR.ConfigNull) : newValue.ToString();
         }
 
-        internal override string EventId { get { return BuildEventId("WmiPut"); } }
+        internal override string EventId
+        {
+            get { return BuildEventId("WmiPut"); }
+        }
 
         internal override void WriteTo(XmlWriter xml)
         {

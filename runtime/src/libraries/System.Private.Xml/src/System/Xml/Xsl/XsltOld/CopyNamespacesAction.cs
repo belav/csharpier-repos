@@ -29,7 +29,10 @@ namespace System.Xml.Xsl.XsltOld
                 switch (frame.State)
                 {
                     case Initialized:
-                        if (frame.Node!.MoveToFirstNamespace(XPathNamespaceScope.ExcludeXml) == false)
+                        if (
+                            frame.Node!.MoveToFirstNamespace(XPathNamespaceScope.ExcludeXml)
+                            == false
+                        )
                         {
                             frame.Finished();
                             break;
@@ -42,7 +45,15 @@ namespace System.Xml.Xsl.XsltOld
                         Debug.Assert(frame.State == BeginEvent);
                         Debug.Assert(frame.Node!.NodeType == XPathNodeType.Namespace);
 
-                        if (processor.BeginEvent(XPathNodeType.Namespace, null, frame.Node.LocalName, frame.Node.Value, false) == false)
+                        if (
+                            processor.BeginEvent(
+                                XPathNodeType.Namespace,
+                                null,
+                                frame.Node.LocalName,
+                                frame.Node.Value,
+                                false
+                            ) == false
+                        )
                         {
                             // This one wasn't output
                             break;
@@ -79,7 +90,7 @@ namespace System.Xml.Xsl.XsltOld
                         }
                 }
                 break;
-            }// while
+            } // while
         }
     }
 }

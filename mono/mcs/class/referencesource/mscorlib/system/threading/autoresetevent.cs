@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
@@ -14,17 +14,17 @@
 **
 **
 =============================================================================*/
-namespace System.Threading {
-    
+namespace System.Threading
+{
     using System;
-    using System.Security.Permissions;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
 
-    [HostProtection(Synchronization=true, ExternalThreading=true)]
+    [HostProtection(Synchronization = true, ExternalThreading = true)]
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class AutoResetEvent : EventWaitHandle
     {
-        public AutoResetEvent(bool initialState) : base(initialState,EventResetMode.AutoReset){ }
+        public AutoResetEvent(bool initialState)
+            : base(initialState, EventResetMode.AutoReset) { }
     }
 }
-    

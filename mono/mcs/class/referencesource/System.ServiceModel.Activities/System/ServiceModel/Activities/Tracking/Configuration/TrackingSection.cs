@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
     using System;
-    using System.Configuration;
     using System.Activities.Tracking;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
 
     public class TrackingSection : ConfigurationSection
     {
@@ -18,9 +18,7 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
 
         ConfigurationPropertyCollection properties;
 
-        public TrackingSection()
-        {
-        }
+        public TrackingSection() { }
 
         protected override ConfigurationPropertyCollection Properties
         {
@@ -28,8 +26,18 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-                    properties.Add(new ConfigurationProperty(TrackingConfigurationStrings.Profiles, typeof(System.ServiceModel.Activities.Tracking.Configuration.ProfileElementCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
+                    properties.Add(
+                        new ConfigurationProperty(
+                            TrackingConfigurationStrings.Profiles,
+                            typeof(System.ServiceModel.Activities.Tracking.Configuration.ProfileElementCollection),
+                            null,
+                            null,
+                            null,
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
                     this.properties = properties;
                 }
                 return this.properties;
@@ -39,14 +47,14 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
         [ConfigurationProperty(TrackingConfigurationStrings.Profiles)]
         public ProfileElementCollection Profiles
         {
-            get
-            {
-                return (ProfileElementCollection)base[TrackingConfigurationStrings.Profiles];
-            }
+            get { return (ProfileElementCollection)base[TrackingConfigurationStrings.Profiles]; }
         }
-    
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationPropertyAttributeRule,
-            Justification = "This property returns a list of profiles in format suitable for the runtime")]
+
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationPropertyAttributeRule,
+            Justification = "This property returns a list of profiles in format suitable for the runtime"
+        )]
         public Collection<TrackingProfile> TrackingProfiles
         {
             get
@@ -59,13 +67,16 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
                     {
                         if (profileElement.Workflows != null)
                         {
-                            foreach (ProfileWorkflowElement workflowElement in profileElement.Workflows)
+                            foreach (
+                                ProfileWorkflowElement workflowElement in profileElement.Workflows
+                            )
                             {
                                 TrackingProfile profile = new TrackingProfile()
                                 {
                                     Name = profileElement.Name,
-                                    ImplementationVisibility = profileElement.ImplementationVisibility,
-                                    ActivityDefinitionId = workflowElement.ActivityDefinitionId
+                                    ImplementationVisibility =
+                                        profileElement.ImplementationVisibility,
+                                    ActivityDefinitionId = workflowElement.ActivityDefinitionId,
                                 };
 
                                 workflowElement.AddQueries(profile.Queries);

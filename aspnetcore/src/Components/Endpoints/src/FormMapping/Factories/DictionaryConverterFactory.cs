@@ -51,9 +51,10 @@ internal class DictionaryConverterFactory : IFormDataConverterFactory
     {
         // Type must implement IDictionary<TKey, TValue> IReadOnlyDictionary<TKey, TValue>
         // Note that IDictionary doesn't extend IReadOnlyDictionary, hence the need for two checks
-        var dictionaryType =
-            ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IDictionary<,>))
-            ?? ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IReadOnlyDictionary<,>));
+        var dictionaryType = ClosedGenericMatcher.ExtractGenericInterface(
+            type,
+            typeof(IDictionary<,>)
+        ) ?? ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IReadOnlyDictionary<,>));
 
         if (dictionaryType == null)
         {
@@ -86,9 +87,10 @@ internal class DictionaryConverterFactory : IFormDataConverterFactory
     {
         // Type must implement IDictionary<TKey, TValue> IReadOnlyDictionary<TKey, TValue>
         // Note that IDictionary doesn't extend IReadOnlyDictionary, hence the need for two checks
-        var dictionaryType =
-            ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IDictionary<,>))
-            ?? ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IReadOnlyDictionary<,>));
+        var dictionaryType = ClosedGenericMatcher.ExtractGenericInterface(
+            type,
+            typeof(IDictionary<,>)
+        ) ?? ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IReadOnlyDictionary<,>));
         if (dictionaryType == null)
         {
             throw new InvalidOperationException(

@@ -1,28 +1,31 @@
 //------------------------------------------------------------------------------
 // <copyright file="EditableTreeList.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls.Util
 {
     using System;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Drawing;
-    using System.ComponentModel;
     using System.Globalization;
-    using System.Windows.Forms;
     using System.Web.UI.Design.MobileControls;
+    using System.Windows.Forms;
 
     [
         ToolboxItem(false),
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-            Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
+        System.Security.Permissions.SecurityPermission(
+            System.Security.Permissions.SecurityAction.Demand,
+            Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+        )
     ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class EditableTreeList : Panel
     {
-        
         private const String _assertMsgNullNodeSelected =
             "Caller is responsible for ensuring a TreeNode is selected. "
             + "Modified TreeViewNode without calling UpdateButtonsEnabling()?";
@@ -46,10 +49,9 @@ namespace System.Web.UI.Design.MobileControls.Util
         internal System.Windows.Forms.ContextMenu CntxtMenu;
         internal System.Windows.Forms.MenuItem CntxtMenuItem;
 
-        internal EditableTreeList() : this(true, true, 16)
-        {
-        }
-        
+        internal EditableTreeList()
+            : this(true, true, 16) { }
+
         internal EditableTreeList(bool showAddButton, bool caseSensitive, int Y)
         {
             this.TvList = new System.Windows.Forms.TreeView();
@@ -60,17 +62,16 @@ namespace System.Web.UI.Design.MobileControls.Util
             this.BtnRemove = new System.Windows.Forms.Button();
             this.CntxtMenuItem = new System.Windows.Forms.MenuItem();
             this.CntxtMenu = new System.Windows.Forms.ContextMenu();
-            
+
             LblTitle.Size = new System.Drawing.Size(210, 16);
-            LblTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;;
+            LblTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            ;
 
             TvList.Location = new System.Drawing.Point(0, 16);
             TvList.Size = new System.Drawing.Size(178, 148);
             TvList.ForeColor = System.Drawing.SystemColors.WindowText;
-            TvList.Anchor = AnchorStyles.Top
-                | AnchorStyles.Bottom
-                | AnchorStyles.Left
-                | AnchorStyles.Right;
+            TvList.Anchor =
+                AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TvList.LabelEdit = true;
             TvList.ShowPlusMinus = false;
             TvList.HideSelection = false;
@@ -78,21 +79,22 @@ namespace System.Web.UI.Design.MobileControls.Util
             TvList.ShowRootLines = false;
             TvList.ShowLines = false;
             TvList.ContextMenu = CntxtMenu;
-            
+
             BtnUp.AccessibleName = SR.GetString(SR.EditableTreeList_MoveUpName);
             BtnUp.AccessibleDescription = SR.GetString(SR.EditableTreeList_MoveUpDescription);
             BtnUp.Name = SR.GetString(SR.EditableTreeList_MoveUpName);
             BtnUp.Location = new System.Drawing.Point(182, 16);
             BtnUp.Size = new System.Drawing.Size(28, 27);
-            BtnUp.Anchor = AnchorStyles.Top | AnchorStyles.Right;;
-            
+            BtnUp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ;
+
             BtnDown.AccessibleName = SR.GetString(SR.EditableTreeList_MoveDownName);
             BtnDown.AccessibleDescription = SR.GetString(SR.EditableTreeList_MoveDownDescription);
             BtnDown.Name = SR.GetString(SR.EditableTreeList_MoveDownName);
             BtnDown.Location = new System.Drawing.Point(182, 48);
             BtnDown.Size = new System.Drawing.Size(28, 27);
             BtnDown.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            
+
             BtnRemove.AccessibleName = SR.GetString(SR.EditableTreeList_DeleteName);
             BtnRemove.AccessibleDescription = SR.GetString(SR.EditableTreeList_DeleteDescription);
             BtnRemove.Name = SR.GetString(SR.EditableTreeList_DeleteName);
@@ -112,7 +114,7 @@ namespace System.Web.UI.Design.MobileControls.Util
 
             this.Location = new System.Drawing.Point(8, Y);
             this.Size = new System.Drawing.Size(210, 196);
-            
+
             this.Controls.Add(LblTitle);
             this.Controls.Add(TvList);
             this.Controls.Add(BtnUp);
@@ -134,10 +136,10 @@ namespace System.Web.UI.Design.MobileControls.Util
             TvList.MouseDown += new MouseEventHandler(OnListMouseDown);
             CntxtMenu.Popup += new EventHandler(OnPopup);
             CntxtMenuItem.Click += new EventHandler(OnContextMenuItemClick);
-            
+
             UpdateButtonsEnabling();
 
-            if(!showAddButton)
+            if (!showAddButton)
             {
                 // stretch UI to occupy space where add button was.
                 BtnAdd.Visible = false;
@@ -157,7 +159,7 @@ namespace System.Web.UI.Design.MobileControls.Util
             get
             {
                 TreeNode selectedNode = TvList.SelectedNode;
-                if(selectedNode != null)
+                if (selectedNode != null)
                 {
                     return selectedNode.Index;
                 }
@@ -170,10 +172,7 @@ namespace System.Web.UI.Design.MobileControls.Util
 
         internal TreeNode SelectedNode
         {
-            get
-            {
-                return TvList.SelectedNode;
-            }
+            get { return TvList.SelectedNode; }
         }
 
         private TreeNode SelectedNodeChecked
@@ -181,10 +180,7 @@ namespace System.Web.UI.Design.MobileControls.Util
             get
             {
                 TreeNode node = TvList.SelectedNode;
-                Debug.Assert(
-                    node != null,
-                    _assertMsgNullNodeSelected
-                );
+                Debug.Assert(node != null, _assertMsgNullNodeSelected);
                 return node;
             }
         }
@@ -193,21 +189,17 @@ namespace System.Web.UI.Design.MobileControls.Util
         {
             Debug.Assert(direction == 1 || direction == -1);
             LastNodeChanged = TvList.SelectedNode;
-            Debug.Assert(
-                LastNodeChanged != null,
-                _assertMsgNullNodeSelected
-            );
+            Debug.Assert(LastNodeChanged != null, _assertMsgNullNodeSelected);
             int index = LastNodeChanged.Index;
             Debug.Assert(
-                (index + direction >= 0)
-                && ((index + direction) < TvList.Nodes.Count),
+                (index + direction >= 0) && ((index + direction) < TvList.Nodes.Count),
                 _assertMsgOutOfBounds
             );
             TvList.Nodes.RemoveAt(index);
             TvList.Nodes.Insert(index + direction, LastNodeChanged);
             TvList.SelectedNode = LastNodeChanged;
         }
-        
+
         internal void MoveSelectedItemUp(Object sender, EventArgs e)
         {
             MoveSelectedNode(-1);
@@ -229,12 +221,12 @@ namespace System.Web.UI.Design.MobileControls.Util
 
         private void OnKeyDown(Object sender, KeyEventArgs e)
         {
-            switch(e.KeyData)
+            switch (e.KeyData)
             {
                 case Keys.F2:
                 {
                     TreeNode selectedNode = TvList.SelectedNode;
-                    if(selectedNode != null)
+                    if (selectedNode != null)
                     {
                         selectedNode.BeginEdit();
                     }
@@ -242,7 +234,7 @@ namespace System.Web.UI.Design.MobileControls.Util
                 }
                 case (Keys.Control | Keys.Home):
                 {
-                    if(TvList.Nodes.Count > 0)
+                    if (TvList.Nodes.Count > 0)
                     {
                         TvList.SelectedNode = TvList.Nodes[0];
                     }
@@ -251,7 +243,7 @@ namespace System.Web.UI.Design.MobileControls.Util
                 case (Keys.Control | Keys.End):
                 {
                     int numNodes = TvList.Nodes.Count;
-                    if(numNodes > 0)
+                    if (numNodes > 0)
                     {
                         TvList.SelectedNode = TvList.Nodes[numNodes - 1];
                     }
@@ -272,10 +264,10 @@ namespace System.Web.UI.Design.MobileControls.Util
 
         private void OnListMouseUp(Object sender, MouseEventArgs e)
         {
-            EditCandidateNode= null;
+            EditCandidateNode = null;
             if (e.Button == MouseButtons.Right)
             {
-                EditCandidateNode = (TreeNode)TvList.GetNodeAt (e.X, e.Y);
+                EditCandidateNode = (TreeNode)TvList.GetNodeAt(e.X, e.Y);
             }
         }
 
@@ -284,25 +276,24 @@ namespace System.Web.UI.Design.MobileControls.Util
             EditCandidateNode = null;
             if (e.Button == MouseButtons.Right)
             {
-                EditCandidateNode = (TreeNode)TvList.GetNodeAt (e.X, e.Y);
+                EditCandidateNode = (TreeNode)TvList.GetNodeAt(e.X, e.Y);
             }
         }
-        
+
         private void OnPopup(Object sender, EventArgs e)
         {
-            CntxtMenuItem.Enabled = (EditCandidateNode != null || 
-                                                    TvList.SelectedNode != null);
+            CntxtMenuItem.Enabled = (EditCandidateNode != null || TvList.SelectedNode != null);
         }
 
         private void OnContextMenuItemClick(Object sender, EventArgs e)
         {
-            if(EditCandidateNode == null)
+            if (EditCandidateNode == null)
             {
-               // context menu key pressed
-               if (TvList.SelectedNode!=null)
-               {
+                // context menu key pressed
+                if (TvList.SelectedNode != null)
+                {
                     TvList.SelectedNode.BeginEdit();
-               }
+                }
             }
             else
             {
@@ -311,12 +302,12 @@ namespace System.Web.UI.Design.MobileControls.Util
             }
             EditCandidateNode = null;
         }
-        
+
         internal String GetUniqueLabel(String label)
         {
             int index = 1;
             String uniqueLabel = label + index;
-            while(LabelExists(uniqueLabel))
+            while (LabelExists(uniqueLabel))
             {
                 uniqueLabel = label + (++index);
             }
@@ -325,9 +316,19 @@ namespace System.Web.UI.Design.MobileControls.Util
 
         internal bool LabelExists(String label)
         {
-            foreach(TreeNode node in TvList.Nodes)
+            foreach (TreeNode node in TvList.Nodes)
             {
-                if(String.Compare(node.Text, label, ((!_caseSensitive) ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal)) == 0)
+                if (
+                    String.Compare(
+                        node.Text,
+                        label,
+                        (
+                            (!_caseSensitive)
+                                ? StringComparison.OrdinalIgnoreCase
+                                : StringComparison.Ordinal
+                        )
+                    ) == 0
+                )
                 {
                     return true;
                 }

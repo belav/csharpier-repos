@@ -13,11 +13,20 @@ namespace HostApiInvokerApp
 #if WINDOWS
         internal static class kernel32
         {
-            [DllImport(nameof(kernel32), CharSet = CharSet.Auto, BestFitMapping = false, SetLastError = true)]
+            [DllImport(
+                nameof(kernel32),
+                CharSet = CharSet.Auto,
+                BestFitMapping = false,
+                SetLastError = true
+            )]
             internal static extern IntPtr GetModuleHandle(String moduleName);
 
             [DllImport(nameof(kernel32), CharSet = CharSet.Auto)]
-            internal static extern uint GetModuleFileName(IntPtr hModule, StringBuilder fileName, int size);
+            internal static extern uint GetModuleFileName(
+                IntPtr hModule,
+                StringBuilder fileName,
+                int size
+            );
         }
 #endif
 

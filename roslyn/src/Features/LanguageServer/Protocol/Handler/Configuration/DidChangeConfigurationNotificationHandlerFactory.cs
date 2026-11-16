@@ -9,7 +9,10 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
 {
-    [ExportCSharpVisualBasicLspServiceFactory(typeof(DidChangeConfigurationNotificationHandler)), Shared]
+    [
+        ExportCSharpVisualBasicLspServiceFactory(typeof(DidChangeConfigurationNotificationHandler)),
+        Shared
+    ]
     internal class DidChangeConfigurationNotificationHandlerFactory : ILspServiceFactory
     {
         private readonly IGlobalOptionService _globalOptionService;
@@ -17,16 +20,24 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public DidChangeConfigurationNotificationHandlerFactory(
-            IGlobalOptionService globalOptionService)
+            IGlobalOptionService globalOptionService
+        )
         {
             _globalOptionService = globalOptionService;
         }
 
-        public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+        public ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        )
         {
             var clientManager = lspServices.GetRequiredService<IClientLanguageServerManager>();
             var lspLogger = lspServices.GetRequiredService<ILspServiceLogger>();
-            return new DidChangeConfigurationNotificationHandler(lspLogger, _globalOptionService, clientManager);
+            return new DidChangeConfigurationNotificationHandler(
+                lspLogger,
+                _globalOptionService,
+                clientManager
+            );
         }
     }
 }

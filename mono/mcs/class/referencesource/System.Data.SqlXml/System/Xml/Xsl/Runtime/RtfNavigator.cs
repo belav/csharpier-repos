@@ -1,30 +1,30 @@
 //------------------------------------------------------------------------------
 // <copyright file="RtfNavigator.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System;
-using System.Threading;
-using System.IO;
 using System.Collections;
-using System.Globalization;
-using System.Text;
 using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Threading;
 using System.Xml;
-using System.Xml.XPath;
 using System.Xml.Schema;
+using System.Xml.XPath;
 
-namespace System.Xml.Xsl.Runtime {
-
+namespace System.Xml.Xsl.Runtime
+{
     /// <summary>
     /// RtfNavigators store Xslt result-tree-fragments.  At runtime, the Xslt library tests to see if a Navigator
     /// is an RtfNavigator in order to enforce certain restrictions, such as prohibiting querying into Rtfs.
     /// Furthermore, Rtfs must store extra serialization information required in order to properly implement the
     /// Xslt disable-output-escaping flag.
     /// </summary>
-    internal abstract class RtfNavigator : XPathNavigator {
-
+    internal abstract class RtfNavigator : XPathNavigator
+    {
         //-----------------------------------------------
         // RtfNavigator
         //-----------------------------------------------
@@ -39,7 +39,6 @@ namespace System.Xml.Xsl.Runtime {
         /// </summary>
         public abstract XPathNavigator ToNavigator();
 
-
         //-----------------------------------------------
         // XPathNavigator
         //-----------------------------------------------
@@ -47,42 +46,48 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Get the XPath node type of the current node.
         /// </summary>
-        public override XPathNodeType NodeType {
+        public override XPathNodeType NodeType
+        {
             get { return XPathNodeType.Root; }
         }
 
         /// <summary>
         /// Get the local name portion of the current node's name.
         /// </summary>
-        public override string LocalName {
+        public override string LocalName
+        {
             get { return string.Empty; }
         }
 
         /// <summary>
         /// Get the namespace portion of the current node's name.
         /// </summary>
-        public override string NamespaceURI {
+        public override string NamespaceURI
+        {
             get { return string.Empty; }
         }
 
         /// <summary>
         /// Get the name of the current node.
         /// </summary>
-        public override string Name {
+        public override string Name
+        {
             get { return string.Empty; }
         }
 
         /// <summary>
         /// Get the prefix portion of the current node's name.
         /// </summary>
-        public override string Prefix {
+        public override string Prefix
+        {
             get { return string.Empty; }
         }
 
         /// <summary>
         /// Return true if this is an element which used a shortcut tag in its Xml 1.0 serialized form.
         /// </summary>
-        public override bool IsEmptyElement {
+        public override bool IsEmptyElement
+        {
             get { return false; }
         }
 
@@ -90,7 +95,8 @@ namespace System.Xml.Xsl.Runtime {
         /// Return the xml name table which was used to atomize all prefixes, local-names, and
         /// namespace uris in the document.
         /// </summary>
-        public override XmlNameTable NameTable {
+        public override XmlNameTable NameTable
+        {
             get { throw new NotSupportedException(); }
         }
 
@@ -98,7 +104,8 @@ namespace System.Xml.Xsl.Runtime {
         /// Position the navigator on the first attribute of the current node and return true.  If no attributes
         /// can be found, return false.
         /// </summary>
-        public override bool MoveToFirstAttribute() {
+        public override bool MoveToFirstAttribute()
+        {
             throw new NotSupportedException();
         }
 
@@ -106,7 +113,8 @@ namespace System.Xml.Xsl.Runtime {
         /// If positioned on an attribute, move to its next sibling attribute.  If no attributes can be found,
         /// return false.
         /// </summary>
-        public override bool MoveToNextAttribute() {
+        public override bool MoveToNextAttribute()
+        {
             throw new NotSupportedException();
         }
 
@@ -114,7 +122,8 @@ namespace System.Xml.Xsl.Runtime {
         /// Position the navigator on the namespace within the specified scope.  If no matching namespace
         /// can be found, return false.
         /// </summary>
-        public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope) {
+        public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope)
+        {
             throw new NotSupportedException();
         }
 
@@ -122,7 +131,8 @@ namespace System.Xml.Xsl.Runtime {
         /// Position the navigator on the next namespace within the specified scope.  If no matching namespace
         /// can be found, return false.
         /// </summary>
-        public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope) {
+        public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope)
+        {
             throw new NotSupportedException();
         }
 
@@ -130,7 +140,8 @@ namespace System.Xml.Xsl.Runtime {
         /// If the current node is an attribute or namespace (not content), return false.  Otherwise,
         /// move to the next content node.  Return false if there are no more content nodes.
         /// </summary>
-        public override bool MoveToNext() {
+        public override bool MoveToNext()
+        {
             throw new NotSupportedException();
         }
 
@@ -138,7 +149,8 @@ namespace System.Xml.Xsl.Runtime {
         /// If the current node is an attribute or namespace (not content), return false.  Otherwise,
         /// move to the previous (sibling) content node.  Return false if there are no previous content nodes.
         /// </summary>
-        public override bool MoveToPrevious() {
+        public override bool MoveToPrevious()
+        {
             throw new NotSupportedException();
         }
 
@@ -146,7 +158,8 @@ namespace System.Xml.Xsl.Runtime {
         /// Move to the first content-typed child of the current node.  Return false if the current
         /// node has no content children.
         /// </summary>
-        public override bool MoveToFirstChild() {
+        public override bool MoveToFirstChild()
+        {
             throw new NotSupportedException();
         }
 
@@ -154,14 +167,16 @@ namespace System.Xml.Xsl.Runtime {
         /// Position the navigator on the parent of the current node.  If the current node has no parent,
         /// return false.
         /// </summary>
-        public override bool MoveToParent() {
+        public override bool MoveToParent()
+        {
             throw new NotSupportedException();
         }
 
         /// <summary>
         /// Position to the navigator to the element whose id is equal to the specified "id" string.
         /// </summary>
-        public override bool MoveToId(string id) {
+        public override bool MoveToId(string id)
+        {
             throw new NotSupportedException();
         }
 
@@ -169,20 +184,20 @@ namespace System.Xml.Xsl.Runtime {
         /// Returns true if this navigator is positioned to the same node as the "other" navigator.  Returns false
         /// if not, or if the "other" navigator is not the same type as this navigator.
         /// </summary>
-        public override bool IsSamePosition(XPathNavigator other) {
+        public override bool IsSamePosition(XPathNavigator other)
+        {
             throw new NotSupportedException();
         }
     }
 
-
     /// <summary>
     /// This navigator is a cursor over a cache that stores Xslt disable-output-escaping flags.
     /// </summary>
-    internal sealed class RtfTreeNavigator : RtfNavigator {
+    internal sealed class RtfTreeNavigator : RtfNavigator
+    {
         private XmlEventCache events;
         private NavigatorConstructor constr;
         private XmlNameTable nameTable;
-
 
         //-----------------------------------------------
         // Constructors
@@ -191,7 +206,8 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Create a new navigator over the specified cache of Xml events.
         /// </summary>
-        public RtfTreeNavigator(XmlEventCache events, XmlNameTable nameTable) {
+        public RtfTreeNavigator(XmlEventCache events, XmlNameTable nameTable)
+        {
             this.events = events;
             this.constr = new NavigatorConstructor();
             this.nameTable = nameTable;
@@ -200,12 +216,12 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Copy constructor.
         /// </summary>
-        public RtfTreeNavigator(RtfTreeNavigator that) {
+        public RtfTreeNavigator(RtfTreeNavigator that)
+        {
             this.events = that.events;
             this.constr = that.constr;
             this.nameTable = that.nameTable;
         }
-
 
         //-----------------------------------------------
         // RtfNavigator
@@ -214,17 +230,18 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Preserve serialization hints when deep copying.
         /// </summary>
-        public override void CopyToWriter(XmlWriter writer) {
+        public override void CopyToWriter(XmlWriter writer)
+        {
             this.events.EventsToWriter(writer);
         }
 
         /// <summary>
         /// Discard serialization hints and return a navigator that actually allows navigation.
         /// </summary>
-        public override XPathNavigator ToNavigator() {
+        public override XPathNavigator ToNavigator()
+        {
             return this.constr.GetNavigator(this.events, this.nameTable);
         }
-
 
         //-----------------------------------------------
         // XPathItem
@@ -236,10 +253,10 @@ namespace System.Xml.Xsl.Runtime {
         /// is not a parent type (comment, text, pi, etc.), get its simple text value.  Otherwise,
         /// concatenate all text node descendants of the current node.
         /// </summary>
-        public override string Value {
+        public override string Value
+        {
             get { return this.events.EventsToString(); }
         }
-
 
         //-----------------------------------------------
         // XPathNavigator
@@ -248,14 +265,16 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Get the base URI of the Rtf.
         /// </summary>
-        public override string BaseURI {
+        public override string BaseURI
+        {
             get { return this.events.BaseUri; }
         }
 
         /// <summary>
         /// Create a copy of this navigator, positioned to the same node in the tree.
         /// </summary>
-        public override XPathNavigator Clone() {
+        public override XPathNavigator Clone()
+        {
             return new RtfTreeNavigator(this);
         }
 
@@ -263,9 +282,11 @@ namespace System.Xml.Xsl.Runtime {
         /// Position this navigator to the same position as the "other" navigator.  If the "other" navigator
         /// is not of the same type as this navigator, then return false.
         /// </summary>
-        public override bool MoveTo(XPathNavigator other) {
+        public override bool MoveTo(XPathNavigator other)
+        {
             RtfTreeNavigator that = other as RtfTreeNavigator;
-            if (that != null) {
+            if (that != null)
+            {
                 this.events = that.events;
                 this.constr = that.constr;
                 this.nameTable = that.nameTable;
@@ -275,15 +296,15 @@ namespace System.Xml.Xsl.Runtime {
         }
     }
 
-
     /// <summary>
     /// This RtfNavigator specializes the case of a root node having a single text node child.  This is a very common
     /// case, such as in <xsl:variable name="foo">bar</xsl:variable>.
     /// </summary>
-    internal sealed class RtfTextNavigator : RtfNavigator {
-        private string text, baseUri;
+    internal sealed class RtfTextNavigator : RtfNavigator
+    {
+        private string text,
+            baseUri;
         private NavigatorConstructor constr;
-
 
         //-----------------------------------------------
         // Constructors
@@ -292,7 +313,8 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Create a new navigator having a text node with value = "text" string.
         /// </summary>
-        public RtfTextNavigator(string text, string baseUri) {
+        public RtfTextNavigator(string text, string baseUri)
+        {
             this.text = text;
             this.baseUri = baseUri;
             this.constr = new NavigatorConstructor();
@@ -301,12 +323,12 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Copy constructor.
         /// </summary>
-        public RtfTextNavigator(RtfTextNavigator that) {
+        public RtfTextNavigator(RtfTextNavigator that)
+        {
             this.text = that.text;
             this.baseUri = that.baseUri;
             this.constr = that.constr;
         }
-
 
         //-----------------------------------------------
         // RtfNavigator
@@ -315,17 +337,18 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Preserve serialization hints when deep copying.
         /// </summary>
-        public override void CopyToWriter(XmlWriter writer) {
+        public override void CopyToWriter(XmlWriter writer)
+        {
             writer.WriteString(Value);
         }
 
         /// <summary>
         /// Discard serialization hints and return a navigator that actually allows navigation.
         /// </summary>
-        public override XPathNavigator ToNavigator() {
+        public override XPathNavigator ToNavigator()
+        {
             return this.constr.GetNavigator(this.text, this.baseUri, new NameTable());
         }
-
 
         //-----------------------------------------------
         // XPathItem
@@ -337,10 +360,10 @@ namespace System.Xml.Xsl.Runtime {
         /// is not a parent type (comment, text, pi, etc.), get its simple text value.  Otherwise,
         /// concatenate all text node descendants of the current node.
         /// </summary>
-        public override string Value {
+        public override string Value
+        {
             get { return this.text; }
         }
-
 
         //-----------------------------------------------
         // XPathNavigator
@@ -349,14 +372,16 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Get the base URI of the Rtf.
         /// </summary>
-        public override string BaseURI {
+        public override string BaseURI
+        {
             get { return this.baseUri; }
         }
 
         /// <summary>
         /// Create a copy of this navigator, positioned to the same node in the tree.
         /// </summary>
-        public override XPathNavigator Clone() {
+        public override XPathNavigator Clone()
+        {
             return new RtfTextNavigator(this);
         }
 
@@ -364,9 +389,11 @@ namespace System.Xml.Xsl.Runtime {
         /// Position this navigator to the same position as the "other" navigator.  If the "other" navigator
         /// is not of the same type as this navigator, then return false.
         /// </summary>
-        public override bool MoveTo(XPathNavigator other) {
+        public override bool MoveTo(XPathNavigator other)
+        {
             RtfTextNavigator that = other as RtfTextNavigator;
-            if (that != null) {
+            if (that != null)
+            {
                 this.text = that.text;
                 this.baseUri = that.baseUri;
                 this.constr = that.constr;
@@ -376,12 +403,12 @@ namespace System.Xml.Xsl.Runtime {
         }
     }
 
-
     /// <summary>
     /// This class creates a document on the first call to GetNavigator(), and returns a Navigator from it.  On
     /// subsequent calls, Navigators from the same document are returned (no new document is created).
     /// </summary>
-    internal sealed class NavigatorConstructor {
+    internal sealed class NavigatorConstructor
+    {
         object cache;
 
         /// <summary>
@@ -389,11 +416,21 @@ namespace System.Xml.Xsl.Runtime {
         /// This method is thread-safe, and is always guaranteed to return the exact same document, no matter how many
         /// threads have called it concurrently.
         /// </summary>
-        public XPathNavigator GetNavigator(XmlEventCache events, XmlNameTable nameTable) {
-            if (this.cache == null) {
+        public XPathNavigator GetNavigator(XmlEventCache events, XmlNameTable nameTable)
+        {
+            if (this.cache == null)
+            {
                 // Create XPathDocument from event cache
                 XPathDocument doc = new XPathDocument(nameTable);
-                XmlRawWriter writer = doc.LoadFromWriter(XPathDocument.LoadFlags.AtomizeNames | (events.HasRootNode ? XPathDocument.LoadFlags.None : XPathDocument.LoadFlags.Fragment), events.BaseUri);
+                XmlRawWriter writer = doc.LoadFromWriter(
+                    XPathDocument.LoadFlags.AtomizeNames
+                        | (
+                            events.HasRootNode
+                                ? XPathDocument.LoadFlags.None
+                                : XPathDocument.LoadFlags.Fragment
+                        ),
+                    events.BaseUri
+                );
 
                 events.EventsToWriter(writer);
                 writer.Close();
@@ -401,7 +438,7 @@ namespace System.Xml.Xsl.Runtime {
                 this.cache = doc;
             }
 
-            return ((XPathDocument) this.cache).CreateNavigator();
+            return ((XPathDocument)this.cache).CreateNavigator();
         }
 
         /// <summary>
@@ -409,18 +446,23 @@ namespace System.Xml.Xsl.Runtime {
         /// This method is thread-safe, and is always guaranteed to return the exact same document, no matter how many
         /// threads have called it concurrently.
         /// </summary>
-        public XPathNavigator GetNavigator(string text, string baseUri, XmlNameTable nameTable) {
-            if (this.cache == null) {
+        public XPathNavigator GetNavigator(string text, string baseUri, XmlNameTable nameTable)
+        {
+            if (this.cache == null)
+            {
                 // Create XPathDocument
                 XPathDocument doc = new XPathDocument(nameTable);
-                XmlRawWriter writer = doc.LoadFromWriter(XPathDocument.LoadFlags.AtomizeNames, baseUri);
+                XmlRawWriter writer = doc.LoadFromWriter(
+                    XPathDocument.LoadFlags.AtomizeNames,
+                    baseUri
+                );
                 writer.WriteString(text);
                 writer.Close();
 
                 this.cache = doc;
             }
 
-            return ((XPathDocument) this.cache).CreateNavigator();
+            return ((XPathDocument)this.cache).CreateNavigator();
         }
     }
 }

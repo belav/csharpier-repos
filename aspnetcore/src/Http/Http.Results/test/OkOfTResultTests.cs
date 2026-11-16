@@ -108,9 +108,8 @@ public class OkOfTResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>(
-            "httpContext",
-            () => result.ExecuteAsync(httpContext)
+        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () =>
+            result.ExecuteAsync(httpContext)
         );
     }
 
@@ -118,27 +117,23 @@ public class OkOfTResultTests
     public void PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>(
-            "method",
-            () =>
-                PopulateMetadata<Ok<object>>(
-                    null,
-                    new RouteEndpointBuilder(
-                        requestDelegate: null,
-                        RoutePatternFactory.Parse("/"),
-                        order: 0
-                    )
+        Assert.Throws<ArgumentNullException>("method", () =>
+            PopulateMetadata<Ok<object>>(
+                null,
+                new RouteEndpointBuilder(
+                    requestDelegate: null,
+                    RoutePatternFactory.Parse("/"),
+                    order: 0
                 )
+            )
         );
-        Assert.Throws<ArgumentNullException>(
-            "builder",
-            () =>
-                PopulateMetadata<Ok<object>>(
-                    (
-                        (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
-                    ).GetMethodInfo(),
-                    null
-                )
+        Assert.Throws<ArgumentNullException>("builder", () =>
+            PopulateMetadata<Ok<object>>(
+                (
+                    (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
+                ).GetMethodInfo(),
+                null
+            )
         );
     }
 

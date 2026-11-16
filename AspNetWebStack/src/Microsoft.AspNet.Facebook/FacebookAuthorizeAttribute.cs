@@ -13,8 +13,16 @@ namespace Microsoft.AspNet.Facebook
     /// Restricts the access to requests with valid Facebook signed request parameter and to users that have the required permissions.
     /// This attribute can be declared on a controller, an action or both.
     /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments", Justification = "The attribute argument is already defined as a ReadOnlyCollection.")]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1019:DefineAccessorsForAttributeArguments",
+        Justification = "The attribute argument is already defined as a ReadOnlyCollection."
+    )]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = false
+    )]
     public sealed class FacebookAuthorizeAttribute : Attribute
     {
         private ReadOnlyCollection<string> _permissions;
@@ -23,9 +31,7 @@ namespace Microsoft.AspNet.Facebook
         /// Initializes a new instance of the <see cref="FacebookAuthorizeAttribute" /> class without requiring permissions.
         /// </summary>
         public FacebookAuthorizeAttribute()
-            : this(new string[0])
-        {
-        }
+            : this(new string[0]) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FacebookAuthorizeAttribute" /> class requiring permissions.
@@ -46,8 +52,10 @@ namespace Microsoft.AspNet.Facebook
                         String.Format(
                             CultureInfo.CurrentCulture,
                             Resources.PermissionStringShouldNotContainComma,
-                            permission),
-                            "permissions");
+                            permission
+                        ),
+                        "permissions"
+                    );
                 }
             }
 
@@ -59,10 +67,7 @@ namespace Microsoft.AspNet.Facebook
         /// </summary>
         public ReadOnlyCollection<string> Permissions
         {
-            get
-            {
-                return _permissions;
-            }
+            get { return _permissions; }
         }
     }
 }

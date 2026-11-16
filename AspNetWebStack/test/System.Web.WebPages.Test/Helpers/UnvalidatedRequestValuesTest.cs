@@ -17,7 +17,8 @@ namespace Microsoft.WebPages.Test.Helpers
             NameValueCollection expectedForm = new NameValueCollection();
             NameValueCollection expectedQueryString = new NameValueCollection();
 
-            Mock<System.Web.UnvalidatedRequestValuesBase> mockUnvalidatedRequestValue = new Mock<System.Web.UnvalidatedRequestValuesBase>();
+            Mock<System.Web.UnvalidatedRequestValuesBase> mockUnvalidatedRequestValue =
+                new Mock<System.Web.UnvalidatedRequestValuesBase>();
             mockUnvalidatedRequestValue.SetupGet(u => u.Form).Returns(expectedForm);
             mockUnvalidatedRequestValue.SetupGet(u => u.QueryString).Returns(expectedQueryString);
 
@@ -26,7 +27,8 @@ namespace Microsoft.WebPages.Test.Helpers
 
             // Act
 #pragma warning disable 0618 // Obsolete System.Web.Helpers.UnvalidatedRequestValues
-            System.Web.Helpers.UnvalidatedRequestValues unvalidatedValues = new System.Web.Helpers.UnvalidatedRequestValues(mockRequest.Object);
+            System.Web.Helpers.UnvalidatedRequestValues unvalidatedValues =
+                new System.Web.Helpers.UnvalidatedRequestValues(mockRequest.Object);
 #pragma warning restore
 
             // Assert
@@ -42,7 +44,7 @@ namespace Microsoft.WebPages.Test.Helpers
             // Arrange
             NameValueCollection queryString = new NameValueCollection()
             {
-                { "foo", "fooQueryString" }
+                { "foo", "fooQueryString" },
             };
 
             NameValueCollection form = new NameValueCollection()
@@ -55,7 +57,7 @@ namespace Microsoft.WebPages.Test.Helpers
             {
                 new HttpCookie("foo", "fooCookie"),
                 new HttpCookie("bar", "barCookie"),
-                new HttpCookie("baz", "bazCookie")
+                new HttpCookie("baz", "bazCookie"),
             };
 
             NameValueCollection serverVars = new NameValueCollection()
@@ -72,12 +74,14 @@ namespace Microsoft.WebPages.Test.Helpers
             mockRequest.SetupGet(r => r.QueryString).Returns(queryString);
             mockRequest.SetupGet(r => r.Cookies).Returns(cookies);
 
-            TestUnvalidatedRequestValues testUnvalidatedRequestValue = new TestUnvalidatedRequestValues(mockRequest.Object);
+            TestUnvalidatedRequestValues testUnvalidatedRequestValue =
+                new TestUnvalidatedRequestValues(mockRequest.Object);
 
             mockRequest.SetupGet(r => r.Unvalidated).Returns(testUnvalidatedRequestValue);
 
 #pragma warning disable 0618 // Obsolete System.Web.Helpers.UnvalidatedRequestValues
-            System.Web.Helpers.UnvalidatedRequestValues unvalidatedValues = new System.Web.Helpers.UnvalidatedRequestValues(mockRequest.Object);
+            System.Web.Helpers.UnvalidatedRequestValues unvalidatedValues =
+                new System.Web.Helpers.UnvalidatedRequestValues(mockRequest.Object);
 #pragma warning restore
 
             // Act

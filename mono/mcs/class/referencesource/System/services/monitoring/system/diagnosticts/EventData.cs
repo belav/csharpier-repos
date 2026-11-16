@@ -1,26 +1,32 @@
 using System.ComponentModel;
-using System.Security.Permissions;
 using System.Security;
+using System.Security.Permissions;
 
-namespace System.Diagnostics {
-
-    public class EventInstance {
+namespace System.Diagnostics
+{
+    public class EventInstance
+    {
         private int _categoryNumber;
         private EventLogEntryType _entryType = EventLogEntryType.Information;
         private long _instanceId;
 
-        public EventInstance(long instanceId, int categoryId) {
+        public EventInstance(long instanceId, int categoryId)
+        {
             CategoryId = categoryId;
             InstanceId = instanceId;
         }
 
-        public EventInstance(long instanceId, int  categoryId, EventLogEntryType entryType) : this (instanceId, categoryId) {
+        public EventInstance(long instanceId, int categoryId, EventLogEntryType entryType)
+            : this(instanceId, categoryId)
+        {
             EntryType = entryType;
         }
 
-        public int CategoryId {
+        public int CategoryId
+        {
             get { return _categoryNumber; }
-            set {
+            set
+            {
                 if (value > UInt16.MaxValue || value < 0)
                     throw new ArgumentOutOfRangeException("value");
 
@@ -28,20 +34,27 @@ namespace System.Diagnostics {
             }
         }
 
-        public EventLogEntryType EntryType {
+        public EventLogEntryType EntryType
+        {
             get { return _entryType; }
-
-            set {
+            set
+            {
                 if (!Enum.IsDefined(typeof(EventLogEntryType), value))
-                    throw new InvalidEnumArgumentException("value", (int)value, typeof(EventLogEntryType));
-                
+                    throw new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(EventLogEntryType)
+                    );
+
                 _entryType = value;
             }
         }
 
-        public long InstanceId {
+        public long InstanceId
+        {
             get { return _instanceId; }
-            set {
+            set
+            {
                 if (value > UInt32.MaxValue || value < 0)
                     throw new ArgumentOutOfRangeException("value");
 

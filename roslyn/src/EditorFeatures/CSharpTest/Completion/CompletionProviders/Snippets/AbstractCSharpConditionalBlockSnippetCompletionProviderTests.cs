@@ -10,7 +10,8 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public abstract class AbstractCSharpConditionalBlockSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public abstract class AbstractCSharpConditionalBlockSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         [WpfFact]
         public async Task InsertSnippetInMethodTest()
@@ -38,7 +39,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -55,7 +60,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -122,7 +131,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -159,7 +172,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -192,7 +209,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -217,7 +238,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 };
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -229,7 +254,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     public void Method()
                     {
                        var operation = 2;
-  
+
                         var result = operation switch
                         {
                             $$
@@ -375,7 +400,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -404,7 +433,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -433,7 +466,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -499,7 +536,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -533,13 +574,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
         [InlineData("// comment")]
         [InlineData("/* comment */")]
-        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest1(string trivia)
+        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest1(
+            string trivia
+        )
         {
             var markupBeforeCommit = $$"""
                 {{trivia}}
@@ -554,7 +601,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -562,7 +613,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("#if true")]
         [InlineData("#pragma warning disable CS0108")]
         [InlineData("#nullable enable")]
-        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest2(string trivia)
+        public async Task CorrectlyDealWithLeadingTriviaInInlineSnippetInGlobalStatementTest2(
+            string trivia
+        )
         {
             var markupBeforeCommit = $$"""
                 {{trivia}}
@@ -578,7 +631,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
     }
 }

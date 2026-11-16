@@ -18,13 +18,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         protected CodeAnalysis.NullableAnnotation NullableAnnotation { get; }
 
-        protected abstract ITypeSymbol WithNullableAnnotation(CodeAnalysis.NullableAnnotation nullableAnnotation);
+        protected abstract ITypeSymbol WithNullableAnnotation(
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        );
 
         internal abstract Symbols.TypeSymbol UnderlyingTypeSymbol { get; }
 
         CodeAnalysis.NullableAnnotation ITypeSymbol.NullableAnnotation => NullableAnnotation;
 
-        ITypeSymbol ITypeSymbol.WithNullableAnnotation(CodeAnalysis.NullableAnnotation nullableAnnotation)
+        ITypeSymbol ITypeSymbol.WithNullableAnnotation(
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        )
         {
             if (NullableAnnotation == nullableAnnotation)
             {
@@ -40,10 +44,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         bool ISymbol.IsDefinition
         {
-            get
-            {
-                return (object)this == ((ISymbol)this).OriginalDefinition;
-            }
+            get { return (object)this == ((ISymbol)this).OriginalDefinition; }
         }
 
         bool ISymbol.Equals(ISymbol other, CodeAnalysis.SymbolEqualityComparer equalityComparer)
@@ -51,7 +52,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return this.Equals(other as TypeSymbol, equalityComparer);
         }
 
-        protected bool Equals(TypeSymbol otherType, CodeAnalysis.SymbolEqualityComparer equalityComparer)
+        protected bool Equals(
+            TypeSymbol otherType,
+            CodeAnalysis.SymbolEqualityComparer equalityComparer
+        )
         {
             if (otherType is null)
             {
@@ -64,10 +68,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
             var compareKind = equalityComparer.CompareKind;
 
-            if (NullableAnnotation != otherType.NullableAnnotation && (compareKind & TypeCompareKind.IgnoreNullableModifiersForReferenceTypes) == 0 &&
-                ((compareKind & TypeCompareKind.ObliviousNullableModifierMatchesAny) == 0 ||
-                    (NullableAnnotation != CodeAnalysis.NullableAnnotation.None && otherType.NullableAnnotation != CodeAnalysis.NullableAnnotation.None)) &&
-                !(UnderlyingTypeSymbol.IsValueType && !UnderlyingTypeSymbol.IsNullableType()))
+            if (
+                NullableAnnotation != otherType.NullableAnnotation
+                && (compareKind & TypeCompareKind.IgnoreNullableModifiersForReferenceTypes) == 0
+                && (
+                    (compareKind & TypeCompareKind.ObliviousNullableModifierMatchesAny) == 0
+                    || (
+                        NullableAnnotation != CodeAnalysis.NullableAnnotation.None
+                        && otherType.NullableAnnotation != CodeAnalysis.NullableAnnotation.None
+                    )
+                )
+                && !(UnderlyingTypeSymbol.IsValueType && !UnderlyingTypeSymbol.IsNullableType())
+            )
             {
                 return false;
             }
@@ -77,26 +89,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ITypeSymbol ITypeSymbol.OriginalDefinition
         {
-            get
-            {
-                return UnderlyingTypeSymbol.OriginalDefinition.GetPublicSymbol();
-            }
+            get { return UnderlyingTypeSymbol.OriginalDefinition.GetPublicSymbol(); }
         }
 
         INamedTypeSymbol ITypeSymbol.BaseType
         {
-            get
-            {
-                return UnderlyingTypeSymbol.BaseTypeNoUseSiteDiagnostics.GetPublicSymbol();
-            }
+            get { return UnderlyingTypeSymbol.BaseTypeNoUseSiteDiagnostics.GetPublicSymbol(); }
         }
 
         ImmutableArray<INamedTypeSymbol> ITypeSymbol.Interfaces
         {
-            get
-            {
-                return UnderlyingTypeSymbol.InterfacesNoUseSiteDiagnostics().GetPublicSymbols();
-            }
+            get { return UnderlyingTypeSymbol.InterfacesNoUseSiteDiagnostics().GetPublicSymbols(); }
         }
 
         ImmutableArray<INamedTypeSymbol> ITypeSymbol.AllInterfaces
@@ -110,7 +113,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         ISymbol ITypeSymbol.FindImplementationForInterfaceMember(ISymbol interfaceMember)
         {
             return interfaceMember is Symbol symbol
-                ? UnderlyingTypeSymbol.FindImplementationForInterfaceMember(symbol.UnderlyingSymbol).GetPublicSymbol()
+                ? UnderlyingTypeSymbol
+                    .FindImplementationForInterfaceMember(symbol.UnderlyingSymbol)
+                    .GetPublicSymbol()
                 : null;
         }
 
@@ -118,50 +123,69 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         bool ITypeSymbol.IsReferenceType
         {
-            get
-            {
-                return UnderlyingTypeSymbol.IsReferenceType;
-            }
+            get { return UnderlyingTypeSymbol.IsReferenceType; }
         }
 
         bool ITypeSymbol.IsValueType
         {
-            get
-            {
-                return UnderlyingTypeSymbol.IsValueType;
-            }
+            get { return UnderlyingTypeSymbol.IsValueType; }
         }
 
         TypeKind ITypeSymbol.TypeKind
         {
-            get
-            {
-                return UnderlyingTypeSymbol.TypeKind;
-            }
+            get { return UnderlyingTypeSymbol.TypeKind; }
         }
 
         bool ITypeSymbol.IsTupleType => UnderlyingTypeSymbol.IsTupleType;
 
         bool ITypeSymbol.IsNativeIntegerType => UnderlyingTypeSymbol.IsNativeIntegerType;
 
-        string ITypeSymbol.ToDisplayString(CodeAnalysis.NullableFlowState topLevelNullability, SymbolDisplayFormat format)
+        string ITypeSymbol.ToDisplayString(
+            CodeAnalysis.NullableFlowState topLevelNullability,
+            SymbolDisplayFormat format
+        )
         {
             return SymbolDisplay.ToDisplayString(this, topLevelNullability, format);
         }
 
-        ImmutableArray<SymbolDisplayPart> ITypeSymbol.ToDisplayParts(CodeAnalysis.NullableFlowState topLevelNullability, SymbolDisplayFormat format)
+        ImmutableArray<SymbolDisplayPart> ITypeSymbol.ToDisplayParts(
+            CodeAnalysis.NullableFlowState topLevelNullability,
+            SymbolDisplayFormat format
+        )
         {
             return SymbolDisplay.ToDisplayParts(this, topLevelNullability, format);
         }
 
-        string ITypeSymbol.ToMinimalDisplayString(SemanticModel semanticModel, CodeAnalysis.NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format)
+        string ITypeSymbol.ToMinimalDisplayString(
+            SemanticModel semanticModel,
+            CodeAnalysis.NullableFlowState topLevelNullability,
+            int position,
+            SymbolDisplayFormat format
+        )
         {
-            return SymbolDisplay.ToMinimalDisplayString(this, topLevelNullability, semanticModel, position, format);
+            return SymbolDisplay.ToMinimalDisplayString(
+                this,
+                topLevelNullability,
+                semanticModel,
+                position,
+                format
+            );
         }
 
-        ImmutableArray<SymbolDisplayPart> ITypeSymbol.ToMinimalDisplayParts(SemanticModel semanticModel, CodeAnalysis.NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format)
+        ImmutableArray<SymbolDisplayPart> ITypeSymbol.ToMinimalDisplayParts(
+            SemanticModel semanticModel,
+            CodeAnalysis.NullableFlowState topLevelNullability,
+            int position,
+            SymbolDisplayFormat format
+        )
         {
-            return SymbolDisplay.ToMinimalDisplayParts(this, topLevelNullability, semanticModel, position, format);
+            return SymbolDisplay.ToMinimalDisplayParts(
+                this,
+                topLevelNullability,
+                semanticModel,
+                position,
+                format
+            );
         }
 
         bool ITypeSymbol.IsAnonymousType => UnderlyingTypeSymbol.IsAnonymousType;
@@ -172,6 +196,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         bool ITypeSymbol.IsReadOnly => UnderlyingTypeSymbol.IsReadOnly;
 
-        bool ITypeSymbol.IsRecord => UnderlyingTypeSymbol.IsRecord || UnderlyingTypeSymbol.IsRecordStruct;
+        bool ITypeSymbol.IsRecord =>
+            UnderlyingTypeSymbol.IsRecord || UnderlyingTypeSymbol.IsRecordStruct;
     }
 }

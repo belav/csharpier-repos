@@ -7,4 +7,7 @@ namespace Microsoft.CodeAnalysis.Emit;
 /// <summary>
 /// Key used to group anonymous delegate templates by properties that are easy to infer from both source symbols and metadata.
 /// </summary>
-internal readonly record struct AnonymousDelegateWithIndexedNamePartialKey(int GenericArity, int ParameterCount);
+internal readonly record struct AnonymousDelegateWithIndexedNamePartialKey(
+    int GenericArity,
+    int ParameterCount
+);

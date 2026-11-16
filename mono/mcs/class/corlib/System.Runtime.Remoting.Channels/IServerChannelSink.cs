@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,21 +32,36 @@
 using System.IO;
 using System.Runtime.Remoting.Messaging;
 
-namespace System.Runtime.Remoting.Channels {
+namespace System.Runtime.Remoting.Channels
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public interface IServerChannelSink : IChannelSinkBase
+    {
+        IServerChannelSink NextChannelSink { get; }
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IServerChannelSink : IChannelSinkBase
-	{
-		IServerChannelSink NextChannelSink { get; }
+        void AsyncProcessResponse(
+            IServerResponseChannelSinkStack sinkStack,
+            object state,
+            IMessage msg,
+            ITransportHeaders headers,
+            Stream stream
+        );
 
-		void AsyncProcessResponse (IServerResponseChannelSinkStack sinkStack, object state,
-					   IMessage msg, ITransportHeaders headers, Stream stream);
+        Stream GetResponseStream(
+            IServerResponseChannelSinkStack sinkStack,
+            object state,
+            IMessage msg,
+            ITransportHeaders headers
+        );
 
-		Stream GetResponseStream (IServerResponseChannelSinkStack sinkStack, object state,
-					  IMessage msg, ITransportHeaders headers);
-
-		ServerProcessing ProcessMessage (IServerChannelSinkStack sinkStack,
-						 IMessage requestMsg, ITransportHeaders requestHeaders, Stream requestStream,
-						 out IMessage responseMsg, out ITransportHeaders responseHeaders, out Stream responseStream);
-	}
+        ServerProcessing ProcessMessage(
+            IServerChannelSinkStack sinkStack,
+            IMessage requestMsg,
+            ITransportHeaders requestHeaders,
+            Stream requestStream,
+            out IMessage responseMsg,
+            out ITransportHeaders responseHeaders,
+            out Stream responseStream
+        );
+    }
 }

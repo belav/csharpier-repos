@@ -34,7 +34,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             ValidateToBytes([false, false, false, false, false, true], 0x20);
             ValidateToBytes([false, false, false, false, false, false, true], 0x40);
             ValidateToBytes([false, false, false, false, false, false, false, true], 0x80);
-            ValidateToBytes([false, false, false, false, false, false, false, false, true], 0x00, 0x01);
+            ValidateToBytes(
+                [false, false, false, false, false, false, false, false, true],
+                0x00,
+                0x01
+            );
         }
 
         [Fact]
@@ -53,7 +57,25 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             ValidateCopyTo([0x20], false, false, false, false, false, true, false, false);
             ValidateCopyTo([0x40], false, false, false, false, false, false, true, false);
             ValidateCopyTo([0x80], false, false, false, false, false, false, false, true);
-            ValidateCopyTo([0x00, 0x01], false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false);
+            ValidateCopyTo(
+                [0x00, 0x01],
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            );
         }
 
         [Fact]
@@ -77,7 +99,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             Assert.Equal(255, encoded[0]);
             ReadOnlyCollection<byte> dynamicFlags;
             ReadOnlyCollection<string> tupleElementNames;
-            CustomTypeInfo.Decode(CustomTypeInfo.PayloadTypeId, encoded, out dynamicFlags, out tupleElementNames);
+            CustomTypeInfo.Decode(
+                CustomTypeInfo.PayloadTypeId,
+                encoded,
+                out dynamicFlags,
+                out tupleElementNames
+            );
             Assert.Equal(bytes, dynamicFlags);
             Assert.Null(tupleElementNames);
 
@@ -86,12 +113,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             // ... with names.
             names = new ReadOnlyCollection<string>(new[] { "A" });
             encoded = CustomTypeInfo.Encode(bytes, names);
-            CustomTypeInfo.Decode(CustomTypeInfo.PayloadTypeId, encoded, out dynamicFlags, out tupleElementNames);
+            CustomTypeInfo.Decode(
+                CustomTypeInfo.PayloadTypeId,
+                encoded,
+                out dynamicFlags,
+                out tupleElementNames
+            );
             Assert.Null(dynamicFlags);
             Assert.Equal(names, tupleElementNames);
             // ... without names.
             encoded = CustomTypeInfo.Encode(bytes, null);
-            CustomTypeInfo.Decode(CustomTypeInfo.PayloadTypeId, encoded, out dynamicFlags, out tupleElementNames);
+            CustomTypeInfo.Decode(
+                CustomTypeInfo.PayloadTypeId,
+                encoded,
+                out dynamicFlags,
+                out tupleElementNames
+            );
             Assert.Null(dynamicFlags);
             Assert.Null(tupleElementNames);
 
@@ -100,12 +137,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             // ... with dynamic flags.
             bytes = GetBytesInRange(0, 255);
             encoded = CustomTypeInfo.Encode(bytes, names);
-            CustomTypeInfo.Decode(CustomTypeInfo.PayloadTypeId, encoded, out dynamicFlags, out tupleElementNames);
+            CustomTypeInfo.Decode(
+                CustomTypeInfo.PayloadTypeId,
+                encoded,
+                out dynamicFlags,
+                out tupleElementNames
+            );
             Assert.Equal(bytes, dynamicFlags);
             Assert.Null(tupleElementNames);
             // ... without dynamic flags.
             encoded = CustomTypeInfo.Encode(null, names);
-            CustomTypeInfo.Decode(CustomTypeInfo.PayloadTypeId, encoded, out dynamicFlags, out tupleElementNames);
+            CustomTypeInfo.Decode(
+                CustomTypeInfo.PayloadTypeId,
+                encoded,
+                out dynamicFlags,
+                out tupleElementNames
+            );
             Assert.Null(dynamicFlags);
             Assert.Null(tupleElementNames);
 
@@ -115,12 +162,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             bytes = GetBytesInRange(0, 255);
             encoded = CustomTypeInfo.Encode(bytes, names);
             Assert.Equal(255, encoded[0]);
-            CustomTypeInfo.Decode(CustomTypeInfo.PayloadTypeId, encoded, out dynamicFlags, out tupleElementNames);
+            CustomTypeInfo.Decode(
+                CustomTypeInfo.PayloadTypeId,
+                encoded,
+                out dynamicFlags,
+                out tupleElementNames
+            );
             Assert.Equal(bytes, dynamicFlags);
             Assert.Equal(names, tupleElementNames);
             // ... without dynamic flags.
             encoded = CustomTypeInfo.Encode(null, names);
-            CustomTypeInfo.Decode(CustomTypeInfo.PayloadTypeId, encoded, out dynamicFlags, out tupleElementNames);
+            CustomTypeInfo.Decode(
+                CustomTypeInfo.PayloadTypeId,
+                encoded,
+                out dynamicFlags,
+                out tupleElementNames
+            );
             Assert.Null(dynamicFlags);
             Assert.Equal(names, tupleElementNames);
 
@@ -130,19 +187,31 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             bytes = GetBytesInRange(0, 255);
             encoded = CustomTypeInfo.Encode(bytes, names);
             Assert.Equal(255, encoded[0]);
-            CustomTypeInfo.Decode(CustomTypeInfo.PayloadTypeId, encoded, out dynamicFlags, out tupleElementNames);
+            CustomTypeInfo.Decode(
+                CustomTypeInfo.PayloadTypeId,
+                encoded,
+                out dynamicFlags,
+                out tupleElementNames
+            );
             Assert.Equal(bytes, dynamicFlags);
             Assert.Equal(names, tupleElementNames);
             // ... without dynamic flags.
             encoded = CustomTypeInfo.Encode(null, names);
-            CustomTypeInfo.Decode(CustomTypeInfo.PayloadTypeId, encoded, out dynamicFlags, out tupleElementNames);
+            CustomTypeInfo.Decode(
+                CustomTypeInfo.PayloadTypeId,
+                encoded,
+                out dynamicFlags,
+                out tupleElementNames
+            );
             Assert.Null(dynamicFlags);
             Assert.Equal(names, tupleElementNames);
         }
 
         private static ReadOnlyCollection<byte> GetBytesInRange(int start, int length)
         {
-            return new ReadOnlyCollection<byte>(Enumerable.Range(start, length).Select(i => (byte)(i % 256)).ToArray());
+            return new ReadOnlyCollection<byte>(
+                Enumerable.Range(start, length).Select(i => (byte)(i % 256)).ToArray()
+            );
         }
 
         [Fact]
@@ -167,14 +236,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         [Fact]
         public void CustomTypeInfoConstructor_OtherGuid()
         {
-            var customTypeInfo = DkmClrCustomTypeInfo.Create(Guid.NewGuid(), new ReadOnlyCollection<byte>(new byte[] { 0x01 }));
+            var customTypeInfo = DkmClrCustomTypeInfo.Create(
+                Guid.NewGuid(),
+                new ReadOnlyCollection<byte>(new byte[] { 0x01 })
+            );
             ReadOnlyCollection<byte> dynamicFlags;
             ReadOnlyCollection<string> tupleElementNames;
             CustomTypeInfo.Decode(
                 customTypeInfo.PayloadTypeId,
                 customTypeInfo.Payload,
                 out dynamicFlags,
-                out tupleElementNames);
+                out tupleElementNames
+            );
             Assert.Null(dynamicFlags);
             Assert.Null(tupleElementNames);
         }
@@ -206,30 +279,52 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
 
             var dynamicFlagsCustomTypeInfo = new ReadOnlyCollection<byte>(new byte[] { 0x80 });
 
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
+            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
+                dynamicFlagsCustomTypeInfo
+            );
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x40);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
+            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
+                dynamicFlagsCustomTypeInfo
+            );
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x20);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
+            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
+                dynamicFlagsCustomTypeInfo
+            );
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x10);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
+            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
+                dynamicFlagsCustomTypeInfo
+            );
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x08);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
+            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
+                dynamicFlagsCustomTypeInfo
+            );
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x04);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
+            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
+                dynamicFlagsCustomTypeInfo
+            );
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x02);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
+            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
+                dynamicFlagsCustomTypeInfo
+            );
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x01);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
+            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
+                dynamicFlagsCustomTypeInfo
+            );
             ValidateBytes(dynamicFlagsCustomTypeInfo);
 
             dynamicFlagsCustomTypeInfo = new ReadOnlyCollection<byte>(new byte[] { 0x00, 0x02 });
 
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
+            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
+                dynamicFlagsCustomTypeInfo
+            );
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x00, 0x01);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
+            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
+                dynamicFlagsCustomTypeInfo
+            );
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x80, 0x00);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
+            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
+                dynamicFlagsCustomTypeInfo
+            );
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x40, 0x00);
         }
 
@@ -237,7 +332,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         {
             Assert.NotNull(payload);
 
-            var dkmClrCustomTypeInfo = CustomTypeInfo.Create(new ReadOnlyCollection<byte>(payload), null);
+            var dkmClrCustomTypeInfo = CustomTypeInfo.Create(
+                new ReadOnlyCollection<byte>(payload),
+                null
+            );
             Assert.Equal(CustomTypeInfo.PayloadTypeId, dkmClrCustomTypeInfo.PayloadTypeId);
             Assert.NotNull(dkmClrCustomTypeInfo.Payload);
 
@@ -247,7 +345,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 dkmClrCustomTypeInfo.PayloadTypeId,
                 dkmClrCustomTypeInfo.Payload,
                 out dynamicFlags,
-                out tupleElementNames);
+                out tupleElementNames
+            );
 
             ValidateBytes(dynamicFlags, payload);
             Assert.Null(tupleElementNames);
@@ -266,8 +365,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 var customTypeInfo = DynamicFlagsCustomTypeInfo.ToBytes(builder);
                 builder.Free();
 
-                AssertEx.All(dynamicFlags.Select((f, i) => f == DynamicFlagsCustomTypeInfo.GetFlag(customTypeInfo, i)), x => x);
-                Assert.False(DynamicFlagsCustomTypeInfo.GetFlag(customTypeInfo, dynamicFlags.Length));
+                AssertEx.All(
+                    dynamicFlags.Select(
+                        (f, i) => f == DynamicFlagsCustomTypeInfo.GetFlag(customTypeInfo, i)
+                    ),
+                    x => x
+                );
+                Assert.False(
+                    DynamicFlagsCustomTypeInfo.GetFlag(customTypeInfo, dynamicFlags.Length)
+                );
             }
         }
 
@@ -291,7 +397,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             Assert.Equal(expectedFlags, actualFlags);
         }
 
-        private static void ValidateBytes(ReadOnlyCollection<byte> actualBytes, params byte[] expectedBytes)
+        private static void ValidateBytes(
+            ReadOnlyCollection<byte> actualBytes,
+            params byte[] expectedBytes
+        )
         {
             Assert.NotNull(expectedBytes);
 

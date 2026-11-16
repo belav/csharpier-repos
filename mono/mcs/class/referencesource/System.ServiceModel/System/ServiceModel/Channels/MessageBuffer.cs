@@ -3,13 +3,13 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
-    using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
-    using System.Xml.XPath;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-    using System.Collections.Generic;
+    using System.ServiceModel;
+    using System.ServiceModel.Dispatcher;
+    using System.Xml;
+    using System.Xml.XPath;
 
     public abstract class MessageBuffer : IXPathNavigable, IDisposable
     {
@@ -25,11 +25,18 @@ namespace System.ServiceModel.Channels
         public virtual void WriteMessage(Stream stream)
         {
             if (stream == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("stream"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("stream")
+                );
             Message message = CreateMessage();
             using (message)
             {
-                XmlDictionaryWriter writer = XmlDictionaryWriter.CreateBinaryWriter(stream, XD.Dictionary, null, false);
+                XmlDictionaryWriter writer = XmlDictionaryWriter.CreateBinaryWriter(
+                    stream,
+                    XD.Dictionary,
+                    null,
+                    false
+                );
                 using (writer)
                 {
                     message.WriteMessage(writer);
@@ -67,7 +74,9 @@ namespace System.ServiceModel.Channels
         public XPathNavigator CreateNavigator(int nodeQuota, XmlSpace space)
         {
             if (nodeQuota <= 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("nodeQuota", SR.GetString(SR.FilterQuotaRange)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("nodeQuota", SR.GetString(SR.FilterQuotaRange))
+                );
 
             return new SeekableMessageNavigator(this.CreateMessage(), nodeQuota, space, true, true);
         }
@@ -134,7 +143,9 @@ namespace System.ServiceModel.Channels
         public override Message CreateMessage()
         {
             if (closed)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateBufferDisposedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateBufferDisposedException()
+                );
 
             Message msg;
             if (this.isNullMessage)
@@ -180,8 +191,12 @@ namespace System.ServiceModel.Channels
         bool[] understoodHeaders;
         bool understoodHeadersModified;
 
-        public BufferedMessageBuffer(IBufferedMessageData messageData,
-            KeyValuePair<string, object>[] properties, bool[] understoodHeaders, bool understoodHeadersModified)
+        public BufferedMessageBuffer(
+            IBufferedMessageData messageData,
+            KeyValuePair<string, object>[] properties,
+            bool[] understoodHeaders,
+            bool understoodHeadersModified
+        )
         {
             this.messageData = messageData;
             this.properties = properties;
@@ -198,7 +213,9 @@ namespace System.ServiceModel.Channels
                 {
                     if (closed)
 #pragma warning suppress 56503 // Microsoft, Invalid State after dispose
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateBufferDisposedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            CreateBufferDisposedException()
+                        );
                     return messageData.Buffer.Count;
                 }
             }
@@ -207,11 +224,15 @@ namespace System.ServiceModel.Channels
         public override void WriteMessage(Stream stream)
         {
             if (stream == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("stream"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("stream")
+                );
             lock (ThisLock)
             {
                 if (closed)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateBufferDisposedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateBufferDisposedException()
+                    );
                 ArraySegment<byte> buffer = messageData.Buffer;
                 stream.Write(buffer.Array, buffer.Offset, buffer.Count);
             }
@@ -225,7 +246,9 @@ namespace System.ServiceModel.Channels
                 {
                     if (closed)
 #pragma warning suppress 56503 // Microsoft, Invalid State after dispose
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateBufferDisposedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            CreateBufferDisposedException()
+                        );
                     return messageData.MessageEncoder.ContentType;
                 }
             }
@@ -254,11 +277,18 @@ namespace System.ServiceModel.Channels
             lock (ThisLock)
             {
                 if (closed)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateBufferDisposedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateBufferDisposedException()
+                    );
                 RecycledMessageState recycledMessageState = messageData.TakeMessageState();
                 if (recycledMessageState == null)
                     recycledMessageState = new RecycledMessageState();
-                BufferedMessage bufferedMessage = new BufferedMessage(messageData, recycledMessageState, this.understoodHeaders, this.understoodHeadersModified);
+                BufferedMessage bufferedMessage = new BufferedMessage(
+                    messageData,
+                    recycledMessageState,
+                    this.understoodHeaders,
+                    this.understoodHeadersModified
+                );
                 bufferedMessage.Properties.CopyProperties(this.properties);
                 messageData.Open();
                 return bufferedMessage;
@@ -274,8 +304,11 @@ namespace System.ServiceModel.Channels
         bool closed;
         object thisLock = new object();
 
-        public BodyWriterMessageBuffer(MessageHeaders headers,
-            KeyValuePair<string, object>[] properties, BodyWriter bodyWriter)
+        public BodyWriterMessageBuffer(
+            MessageHeaders headers,
+            KeyValuePair<string, object>[] properties,
+            BodyWriter bodyWriter
+        )
         {
             this.bodyWriter = bodyWriter;
             this.headers = new MessageHeaders(headers);
@@ -311,7 +344,9 @@ namespace System.ServiceModel.Channels
             lock (ThisLock)
             {
                 if (closed)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateBufferDisposedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateBufferDisposedException()
+                    );
                 return new BodyWriterMessage(headers, properties, bodyWriter);
             }
         }

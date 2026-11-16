@@ -10,7 +10,6 @@ struct S
     public String str;
 }
 
-
 public class Test_struct1
 {
     static void c(S s1)

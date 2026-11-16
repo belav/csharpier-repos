@@ -47,7 +47,8 @@ public sealed record RelationalConventionSetBuilderDependencies
     [EntityFrameworkInternal]
     public RelationalConventionSetBuilderDependencies(
         IRelationalAnnotationProvider relationalAnnotationProvider,
-        IUpdateSqlGenerator updateSqlGenerator)
+        IUpdateSqlGenerator updateSqlGenerator
+    )
     {
         RelationalAnnotationProvider = relationalAnnotationProvider;
         UpdateSqlGenerator = updateSqlGenerator;

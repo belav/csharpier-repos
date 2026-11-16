@@ -16,11 +16,13 @@ namespace Roslyn.Utilities
         /// </summary>
         /// <remarks>
         /// </remarks>
-        internal static ulong ConvertEnumUnderlyingTypeToUInt64(object value, SpecialType specialType)
+        internal static ulong ConvertEnumUnderlyingTypeToUInt64(
+            object value,
+            SpecialType specialType
+        )
         {
             RoslynDebug.Assert(value != null);
             Debug.Assert(value.GetType().GetTypeInfo().IsPrimitive);
-
             unchecked
             {
                 switch (specialType)
@@ -45,18 +47,25 @@ namespace Roslyn.Utilities
                     default:
                         // not using ExceptionUtilities.UnexpectedValue() because this is used by the Services layer
                         // which doesn't have those utilities.
-                        throw new InvalidOperationException(string.Format("{0} is not a valid underlying type for an enum", specialType));
+                        throw new InvalidOperationException(
+                            string.Format(
+                                "{0} is not a valid underlying type for an enum",
+                                specialType
+                            )
+                        );
                 }
             }
         }
 
-        internal static T[] GetValues<T>() where T : struct
+        internal static T[] GetValues<T>()
+            where T : struct
         {
             return (T[])Enum.GetValues(typeof(T));
         }
 
 #if DEBUG
-        internal static bool ContainsAllValues<T>(int mask) where T : struct, Enum, IConvertible
+        internal static bool ContainsAllValues<T>(int mask)
+            where T : struct, Enum, IConvertible
         {
             foreach (T value in GetValues<T>())
             {
@@ -69,7 +78,8 @@ namespace Roslyn.Utilities
             return true;
         }
 
-        internal static bool ContainsValue<T>(T value) where T : struct, Enum
+        internal static bool ContainsValue<T>(T value)
+            where T : struct, Enum
         {
             return Array.IndexOf(GetValues<T>(), value) >= 0;
         }

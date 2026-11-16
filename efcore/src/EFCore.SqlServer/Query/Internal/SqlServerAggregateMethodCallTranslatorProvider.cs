@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class SqlServerAggregateMethodCallTranslatorProvider : RelationalAggregateMethodCallTranslatorProvider
+public class SqlServerAggregateMethodCallTranslatorProvider
+    : RelationalAggregateMethodCallTranslatorProvider
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -17,7 +18,9 @@ public class SqlServerAggregateMethodCallTranslatorProvider : RelationalAggregat
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqlServerAggregateMethodCallTranslatorProvider(RelationalAggregateMethodCallTranslatorProviderDependencies dependencies)
+    public SqlServerAggregateMethodCallTranslatorProvider(
+        RelationalAggregateMethodCallTranslatorProviderDependencies dependencies
+    )
         : base(dependencies)
     {
         var sqlExpressionFactory = dependencies.SqlExpressionFactory;
@@ -27,8 +30,15 @@ public class SqlServerAggregateMethodCallTranslatorProvider : RelationalAggregat
             new IAggregateMethodCallTranslator[]
             {
                 new SqlServerLongCountMethodTranslator(sqlExpressionFactory),
-                new SqlServerStatisticsAggregateMethodTranslator(sqlExpressionFactory, typeMappingSource),
-                new SqlServerStringAggregateMethodTranslator(sqlExpressionFactory, typeMappingSource)
-            });
+                new SqlServerStatisticsAggregateMethodTranslator(
+                    sqlExpressionFactory,
+                    typeMappingSource
+                ),
+                new SqlServerStringAggregateMethodTranslator(
+                    sqlExpressionFactory,
+                    typeMappingSource
+                ),
+            }
+        );
     }
 }

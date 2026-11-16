@@ -17,14 +17,15 @@ namespace System.Configuration
             this.properties.Add(this.enabled);
         }
 
-        protected override ConfigurationPropertyCollection Properties 
+        protected override ConfigurationPropertyCollection Properties
         {
-            get{
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
-        [ConfigurationProperty(CommonConfigurationStrings.Enabled, DefaultValue = EnabledDefaultValue)]
+        [ConfigurationProperty(
+            CommonConfigurationStrings.Enabled,
+            DefaultValue = EnabledDefaultValue
+        )]
         public bool Enabled
         {
             get { return (bool)this[this.enabled]; }
@@ -33,11 +34,11 @@ namespace System.Configuration
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty enabled =
-            new ConfigurationProperty(CommonConfigurationStrings.Enabled, typeof(bool), EnabledDefaultValue, 
-                ConfigurationPropertyOptions.None);
-
+        readonly ConfigurationProperty enabled = new ConfigurationProperty(
+            CommonConfigurationStrings.Enabled,
+            typeof(bool),
+            EnabledDefaultValue,
+            ConfigurationPropertyOptions.None
+        );
     }
 }
-
-

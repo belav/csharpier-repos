@@ -23,10 +23,8 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct a new node
         /// </summary>
-        public QilDataSource(QilNodeType nodeType, QilNode name, QilNode baseUri) : base(nodeType, name, baseUri)
-        {
-        }
-
+        public QilDataSource(QilNodeType nodeType, QilNode name, QilNode baseUri)
+            : base(nodeType, name, baseUri) { }
 
         //-----------------------------------------------
         // QilDataSource methods

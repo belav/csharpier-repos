@@ -11,9 +11,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     {
         ACCESSERROR_NOACCESS,
         ACCESSERROR_NOACCESSTHRU,
-        ACCESSERROR_NOERROR
+        ACCESSERROR_NOERROR,
     };
-
 
     //
     // Semantic check methods on SymbolLoader
@@ -30,15 +29,22 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public static ACCESSERROR CheckAccess2(Symbol symCheck, AggregateType atsCheck, Symbol symWhere, CType typeThru)
+        public static ACCESSERROR CheckAccess2(
+            Symbol symCheck,
+            AggregateType atsCheck,
+            Symbol symWhere,
+            CType typeThru
+        )
         {
             Debug.Assert(symCheck != null);
             Debug.Assert(atsCheck == null || symCheck.parent == atsCheck.OwningAggregate);
-            Debug.Assert(typeThru == null ||
-                   typeThru is AggregateType ||
-                   typeThru is TypeParameterType ||
-                   typeThru is ArrayType ||
-                   typeThru is NullableType);
+            Debug.Assert(
+                typeThru == null
+                    || typeThru is AggregateType
+                    || typeThru is TypeParameterType
+                    || typeThru is ArrayType
+                    || typeThru is NullableType
+            );
 
 #if DEBUG
 
@@ -76,7 +82,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 type = TypeManager.SubstType(type, atsCheck);
             }
 
-            return CheckTypeAccess(type, symWhere) ? ACCESSERROR.ACCESSERROR_NOERROR : ACCESSERROR.ACCESSERROR_NOACCESS;
+            return CheckTypeAccess(type, symWhere)
+                ? ACCESSERROR.ACCESSERROR_NOERROR
+                : ACCESSERROR.ACCESSERROR_NOACCESS;
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -95,7 +103,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             do
             {
-                if (ACCESSERROR.ACCESSERROR_NOERROR != CheckAccessCore(ats.OwningAggregate, ats.OuterType, symWhere, null))
+                if (
+                    ACCESSERROR.ACCESSERROR_NOERROR
+                    != CheckAccessCore(ats.OwningAggregate, ats.OuterType, symWhere, null)
+                )
                 {
                     return false;
                 }
@@ -114,15 +125,22 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private static ACCESSERROR CheckAccessCore(Symbol symCheck, AggregateType atsCheck, Symbol symWhere, CType typeThru)
+        private static ACCESSERROR CheckAccessCore(
+            Symbol symCheck,
+            AggregateType atsCheck,
+            Symbol symWhere,
+            CType typeThru
+        )
         {
             Debug.Assert(symCheck != null);
             Debug.Assert(atsCheck == null || symCheck.parent == atsCheck.OwningAggregate);
-            Debug.Assert(typeThru == null ||
-                   typeThru is AggregateType ||
-                   typeThru is TypeParameterType ||
-                   typeThru is ArrayType ||
-                   typeThru is NullableType);
+            Debug.Assert(
+                typeThru == null
+                    || typeThru is AggregateType
+                    || typeThru is TypeParameterType
+                    || typeThru is ArrayType
+                    || typeThru is NullableType
+            );
 
             switch (symCheck.GetAccess())
             {
@@ -145,7 +163,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     break;
 
                 case ACCESS.ACC_INTERNAL:
-                case ACCESS.ACC_INTERNALPROTECTED:   // Check internal, then protected.
+                case ACCESS.ACC_INTERNALPROTECTED: // Check internal, then protected.
 
                     if (symWhere == null)
                     {
@@ -207,9 +225,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             }
 
             // Handle the protected case - which is the only real complicated one.
-            Debug.Assert(symCheck.GetAccess() == ACCESS.ACC_PROTECTED
-                || symCheck.GetAccess() == ACCESS.ACC_INTERNALPROTECTED
-                || symCheck.GetAccess() == ACCESS.ACC_INTERNAL_AND_PROTECTED);
+            Debug.Assert(
+                symCheck.GetAccess() == ACCESS.ACC_PROTECTED
+                    || symCheck.GetAccess() == ACCESS.ACC_INTERNALPROTECTED
+                    || symCheck.GetAccess() == ACCESS.ACC_INTERNAL_AND_PROTECTED
+            );
 
             // Check if symCheck is in aggWhere or a base of aggWhere,
             // or in an outer agg of aggWhere or a base of an outer agg of aggWhere.
@@ -251,19 +271,31 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         public static bool CheckBogus(Symbol sym) => (sym as PropertySymbol)?.Bogus ?? false;
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public static RuntimeBinderException ReportAccessError(SymWithType swtBad, Symbol symWhere, CType typeQual)
+        public static RuntimeBinderException ReportAccessError(
+            SymWithType swtBad,
+            Symbol symWhere,
+            CType typeQual
+        )
         {
-            Debug.Assert(!CheckAccess(swtBad.Sym, swtBad.GetType(), symWhere, typeQual) ||
-                   !CheckTypeAccess(swtBad.GetType(), symWhere));
+            Debug.Assert(
+                !CheckAccess(swtBad.Sym, swtBad.GetType(), symWhere, typeQual)
+                    || !CheckTypeAccess(swtBad.GetType(), symWhere)
+            );
 
-            return CheckAccess2(swtBad.Sym, swtBad.GetType(), symWhere, typeQual)
-                   == ACCESSERROR.ACCESSERROR_NOACCESSTHRU
+            return
+                CheckAccess2(swtBad.Sym, swtBad.GetType(), symWhere, typeQual)
+                == ACCESSERROR.ACCESSERROR_NOACCESSTHRU
                 ? ErrorHandling.Error(ErrorCode.ERR_BadProtectedAccess, swtBad, typeQual, symWhere)
                 : ErrorHandling.Error(ErrorCode.ERR_BadAccess, swtBad);
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public static bool CheckAccess(Symbol symCheck, AggregateType atsCheck, Symbol symWhere, CType typeThru) =>
+        public static bool CheckAccess(
+            Symbol symCheck,
+            AggregateType atsCheck,
+            Symbol symWhere,
+            CType typeThru
+        ) =>
             CheckAccess2(symCheck, atsCheck, symWhere, typeThru) == ACCESSERROR.ACCESSERROR_NOERROR;
     }
 }

@@ -44,7 +44,8 @@ namespace System.Security.Cryptography.Xml.Tests
             Assert.NotNull(xmlElement);
             Assert.Equal(
                 $"<CipherData xmlns=\"http://www.w3.org/2001/04/xmlenc#\"><CipherValue>{Convert.ToBase64String(cipherValue)}</CipherValue></CipherData>",
-                xmlElement.OuterXml);
+                xmlElement.OuterXml
+            );
         }
 
         [Fact]
@@ -68,13 +69,15 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 Assert.Equal(
                     $"<CipherData xmlns=\"http://www.w3.org/2001/04/xmlenc#\"><CipherReference URI=\"{cipherReference.Uri}\" /></CipherData>",
-                    xmlElement.OuterXml);
+                    xmlElement.OuterXml
+                );
             }
             else
             {
                 Assert.Equal(
                     "<CipherData xmlns=\"http://www.w3.org/2001/04/xmlenc#\"><CipherReference /></CipherData>",
-                    xmlElement.OuterXml);
+                    xmlElement.OuterXml
+                );
             }
         }
 
@@ -82,9 +85,12 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             return new object[][]
             {
-                new [] { new CipherReference() },
-                new [] { new CipherReference("http://dummy.urionly.io") },
-                new [] { new CipherReference("http://dummy.uri.transform.io", new TransformChain()) },
+                new[] { new CipherReference() },
+                new[] { new CipherReference("http://dummy.urionly.io") },
+                new[]
+                {
+                    new CipherReference("http://dummy.uri.transform.io", new TransformChain()),
+                },
             };
         }
 
@@ -99,7 +105,9 @@ namespace System.Security.Cryptography.Xml.Tests
         public void CipherReference_CipherValueSet()
         {
             CipherData cipherData = new CipherData(new byte[0]);
-            Assert.Throws<CryptographicException>(() => cipherData.CipherReference = new CipherReference());
+            Assert.Throws<CryptographicException>(() =>
+                cipherData.CipherReference = new CipherReference()
+            );
         }
 
         [Fact]
@@ -131,7 +139,9 @@ namespace System.Security.Cryptography.Xml.Tests
 
             CipherData cipherData = new CipherData();
 
-            Assert.Throws<CryptographicException>(() => cipherData.LoadXml(xmlDocument.DocumentElement));
+            Assert.Throws<CryptographicException>(() =>
+                cipherData.LoadXml(xmlDocument.DocumentElement)
+            );
         }
 
         [Theory]
@@ -153,16 +163,31 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             return new[]
             {
-                ToCipherDataTestCase("<root xmlns:enc='{0}'><enc:CipherValue>{1}</enc:CipherValue></root>", new byte[0]),
-                ToCipherDataTestCase("<root xmlns:enc='{0}'><enc:CipherValue>{1}</enc:CipherValue></root>", new byte[] { 5, 6, 7 }),
-                ToCipherDataTestCase("<root xmlns='{0}'><CipherValue>{1}</CipherValue></root>", new byte[0]),
+                ToCipherDataTestCase(
+                    "<root xmlns:enc='{0}'><enc:CipherValue>{1}</enc:CipherValue></root>",
+                    new byte[0]
+                ),
+                ToCipherDataTestCase(
+                    "<root xmlns:enc='{0}'><enc:CipherValue>{1}</enc:CipherValue></root>",
+                    new byte[] { 5, 6, 7 }
+                ),
+                ToCipherDataTestCase(
+                    "<root xmlns='{0}'><CipherValue>{1}</CipherValue></root>",
+                    new byte[0]
+                ),
             };
         }
 
         public static object[] ToCipherDataTestCase(string xml, byte[] cipherData)
         {
             XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml(string.Format(xml, EncryptedXml.XmlEncNamespaceUrl, Convert.ToBase64String(cipherData)));
+            xmlDocument.LoadXml(
+                string.Format(
+                    xml,
+                    EncryptedXml.XmlEncNamespaceUrl,
+                    Convert.ToBase64String(cipherData)
+                )
+            );
             return new object[] { xmlDocument.DocumentElement, cipherData };
         }
 
@@ -185,9 +210,18 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             return new[]
             {
-                ToCipherReferenceXmlElement("<root xmlns:enc='{0}'><enc:CipherReference URI=\"{1}\" /></root>", "http://dummy.io"),
-                ToCipherReferenceXmlElement("<root xmlns:enc='{0}'><enc:CipherReference URI=\"{1}\" /></root>", "https://encrypted.dummy.io"),
-                ToCipherReferenceXmlElement("<root xmlns='{0}'><CipherReference URI=\"{1}\" /></root>", "ftp://wtf.org"),
+                ToCipherReferenceXmlElement(
+                    "<root xmlns:enc='{0}'><enc:CipherReference URI=\"{1}\" /></root>",
+                    "http://dummy.io"
+                ),
+                ToCipherReferenceXmlElement(
+                    "<root xmlns:enc='{0}'><enc:CipherReference URI=\"{1}\" /></root>",
+                    "https://encrypted.dummy.io"
+                ),
+                ToCipherReferenceXmlElement(
+                    "<root xmlns='{0}'><CipherReference URI=\"{1}\" /></root>",
+                    "ftp://wtf.org"
+                ),
             };
         }
 

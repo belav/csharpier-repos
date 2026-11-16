@@ -1,20 +1,20 @@
 //------------------------------------------------------------------------------
 // <copyright file="FileSystemEventArgs.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.IO {
-
+namespace System.IO
+{
+    using System;
     using System.Diagnostics;
     using System.Security.Permissions;
-
-    using System;
 
     /// <devdoc>
     /// <para>Provides data for the directory events: <see cref='System.IO.FileSystemWatcher.Changed'/>, <see cref='System.IO.FileSystemWatcher.Created'/>, <see cref='System.IO.FileSystemWatcher.Deleted'/>.</para>
     /// </devdoc>
-    public class FileSystemEventArgs : EventArgs {
+    public class FileSystemEventArgs : EventArgs
+    {
         private WatcherChangeTypes changeType;
         private string name;
         private string fullPath;
@@ -28,7 +28,8 @@ namespace System.IO {
             this.name = name;
 
             // Ensure that the directory name ends with a "\"
-            if (!directory.EndsWith("\\", StringComparison.Ordinal)) {
+            if (!directory.EndsWith("\\", StringComparison.Ordinal))
+            {
                 directory = directory + "\\";
             }
 
@@ -42,10 +43,9 @@ namespace System.IO {
         ///       values.
         ///    </para>
         /// </devdoc>
-        public WatcherChangeTypes ChangeType {
-            get {
-                return changeType;
-            }
+        public WatcherChangeTypes ChangeType
+        {
+            get { return changeType; }
         }
 
         /// <devdoc>
@@ -55,12 +55,10 @@ namespace System.IO {
         ///       fully qualifed path of the affected file or directory.
         ///    </para>
         /// </devdoc>
-        public string FullPath {
-            get {
-                return fullPath;
-            }
+        public string FullPath
+        {
+            get { return fullPath; }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -68,11 +66,9 @@ namespace System.IO {
         ///       the name of the affected file or directory.
         ///    </para>
         /// </devdoc>
-        public string Name {
-            get {
-                return name;
-            }
+        public string Name
+        {
+            get { return name; }
         }
     }
-
 }

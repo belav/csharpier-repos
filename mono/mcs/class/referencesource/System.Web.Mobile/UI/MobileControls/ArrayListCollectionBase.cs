@@ -1,17 +1,17 @@
 //------------------------------------------------------------------------------
 // <copyright file="ArrayListCollectionBase.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
 using System.Diagnostics;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Security.Permissions;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
@@ -23,9 +23,17 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\ArrayListCollectionBase.uex' path='docs/doc[@for="ArrayListCollectionBase"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class ArrayListCollectionBase : ICollection
     {
         private ArrayList _items;
@@ -37,20 +45,14 @@ namespace System.Web.UI.MobileControls
             {
                 if (_items == null)
                 {
-                    _items = new ArrayList ();
+                    _items = new ArrayList();
                 }
                 return _items;
             }
-
-            set
-            {
-                _items = value;
-            }
+            set { _items = value; }
         }
 
-        internal ArrayListCollectionBase()
-        {
-        }
+        internal ArrayListCollectionBase() { }
 
         internal ArrayListCollectionBase(ArrayList items)
         {
@@ -60,55 +62,40 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\ArrayListCollectionBase.uex' path='docs/doc[@for="ArrayListCollectionBase.Count"]/*' />
         public int Count
         {
-            get
-            {
-                return Items.Count;
-            }
+            get { return Items.Count; }
         }
 
         /// <include file='doc\ArrayListCollectionBase.uex' path='docs/doc[@for="ArrayListCollectionBase.IsReadOnly"]/*' />
         public bool IsReadOnly
         {
-            get
-            {
-                return Items.IsReadOnly;
-            }
+            get { return Items.IsReadOnly; }
         }
 
         /// <include file='doc\ArrayListCollectionBase.uex' path='docs/doc[@for="ArrayListCollectionBase.IsSynchronized"]/*' />
         public bool IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <include file='doc\ArrayListCollectionBase.uex' path='docs/doc[@for="ArrayListCollectionBase.SyncRoot"]/*' />
-        public Object SyncRoot 
+        public Object SyncRoot
         {
-            get 
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         /// <include file='doc\ArrayListCollectionBase.uex' path='docs/doc[@for="ArrayListCollectionBase.CopyTo"]/*' />
-        public void CopyTo(Array array, int index) 
+        public void CopyTo(Array array, int index)
         {
             foreach (Object item in Items)
             {
-                array.SetValue (item, index++);
+                array.SetValue(item, index++);
             }
         }
 
         /// <include file='doc\ArrayListCollectionBase.uex' path='docs/doc[@for="ArrayListCollectionBase.GetEnumerator"]/*' />
         public IEnumerator GetEnumerator()
         {
-            return Items.GetEnumerator ();
+            return Items.GetEnumerator();
         }
     }
-
 }
-
-

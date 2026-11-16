@@ -19,7 +19,10 @@ namespace System.Globalization
         internal TextElementEnumerator(string str, int startIndex)
         {
             Debug.Assert(str != null, "TextElementEnumerator(): str != null");
-            Debug.Assert(startIndex >= 0 && startIndex <= str.Length, "TextElementEnumerator(): startIndex >= 0 && startIndex <= str.Length");
+            Debug.Assert(
+                startIndex >= 0 && startIndex <= str.Length,
+                "TextElementEnumerator(): startIndex >= 0 && startIndex <= str.Length"
+            );
 
             _str = str;
             _strStartIndex = startIndex;
@@ -40,7 +43,10 @@ namespace System.Globalization
                 return false; // reached the end of the data
             }
 
-            _currentTextElementLength = TextSegmentationUtility.GetLengthOfFirstUtf16ExtendedGraphemeCluster(_str.AsSpan(newOffset));
+            _currentTextElementLength =
+                TextSegmentationUtility.GetLengthOfFirstUtf16ExtendedGraphemeCluster(
+                    _str.AsSpan(newOffset)
+                );
             return true;
         }
 
@@ -59,7 +65,10 @@ namespace System.Globalization
                     throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
                 }
 
-                currentSubstr = _str.Substring(_currentTextElementOffset, _currentTextElementLength);
+                currentSubstr = _str.Substring(
+                    _currentTextElementOffset,
+                    _currentTextElementLength
+                );
                 _currentTextElementSubstr = currentSubstr;
             }
 

@@ -11,8 +11,8 @@ using System.Data.Metadata.Edm;
 
 namespace System.Web.UI.Design.WebControls
 {
-
-    internal class EntityDataSourceEntityTypeFilterItem : IComparable<EntityDataSourceEntityTypeFilterItem>
+    internal class EntityDataSourceEntityTypeFilterItem
+        : IComparable<EntityDataSourceEntityTypeFilterItem>
     {
         // Only one of the following should be set. This is enforced through the constructors and the fact that these fields are readonly.
         private readonly EntityType _entityType; // used when we have a real EntityType backing this item
@@ -45,10 +45,7 @@ namespace System.Web.UI.Design.WebControls
 
         internal EntityType EntityType
         {
-            get
-            {
-                return _entityType;
-            }
+            get { return _entityType; }
         }
 
         public override string ToString()
@@ -56,9 +53,17 @@ namespace System.Web.UI.Design.WebControls
             return EntityTypeName;
         }
 
-        int IComparable<EntityDataSourceEntityTypeFilterItem>.CompareTo(EntityDataSourceEntityTypeFilterItem other)
+        int IComparable<EntityDataSourceEntityTypeFilterItem>.CompareTo(
+            EntityDataSourceEntityTypeFilterItem other
+        )
         {
-            return (String.Compare(this.EntityTypeName, other.EntityTypeName, StringComparison.OrdinalIgnoreCase));
+            return (
+                String.Compare(
+                    this.EntityTypeName,
+                    other.EntityTypeName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
         }
     }
 }

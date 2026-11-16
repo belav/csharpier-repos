@@ -16,15 +16,15 @@ public sealed class JsonDateOnlyReaderWriter : JsonValueReaderWriter<DateOnly>
     /// </summary>
     public static JsonDateOnlyReaderWriter Instance { get; } = new();
 
-    private JsonDateOnlyReaderWriter()
-    {
-    }
+    private JsonDateOnlyReaderWriter() { }
 
     /// <inheritdoc />
-    public override DateOnly FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => DateOnly.Parse(manager.CurrentReader.GetString()!, CultureInfo.InvariantCulture);
+    public override DateOnly FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => DateOnly.Parse(manager.CurrentReader.GetString()!, CultureInfo.InvariantCulture);
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, DateOnly value)
-        => writer.WriteStringValue(value.ToString("o", CultureInfo.InvariantCulture));
+    public override void ToJsonTyped(Utf8JsonWriter writer, DateOnly value) =>
+        writer.WriteStringValue(value.ToString("o", CultureInfo.InvariantCulture));
 }

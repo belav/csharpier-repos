@@ -5,8 +5,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
-public class
-    LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly
+public class LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly
 {
     public int ProfileId { get; set; }
     public string? ProfileId1 { get; set; }

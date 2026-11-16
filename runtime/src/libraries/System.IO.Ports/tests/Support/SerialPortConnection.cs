@@ -118,12 +118,19 @@ namespace Legacy.Support
                 int bufferSize = MeasureTransmitBufferSize(portName, probeLength);
                 if (bufferSize < probeLength)
                 {
-                    Debug.WriteLine("{0}: Found blocking packet of length {1}, hardware buffer {2}", portName, probeLength, bufferSize);
+                    Debug.WriteLine(
+                        "{0}: Found blocking packet of length {1}, hardware buffer {2}",
+                        portName,
+                        probeLength,
+                        bufferSize
+                    );
                     return new FlowControlCapabilities(probeLength, bufferSize, true);
                 }
             }
 
-            Debug.WriteLine("Failed to achieve write blocking on serial port - no hardware flow-control available");
+            Debug.WriteLine(
+                "Failed to achieve write blocking on serial port - no hardware flow-control available"
+            );
             return new FlowControlCapabilities(0, -1, false);
         }
 
@@ -169,9 +176,7 @@ namespace Legacy.Support
                 {
                     com.Write(testBlock, 0, testBlock.Length);
                 }
-                catch (TimeoutException)
-                {
-                }
+                catch (TimeoutException) { }
                 catch (IOException)
                 {
                     // We may see hardware exceptions when the task calls Discard

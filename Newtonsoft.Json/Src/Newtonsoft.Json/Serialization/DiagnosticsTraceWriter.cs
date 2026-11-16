@@ -59,7 +59,13 @@ namespace Newtonsoft.Json.Serialization
                 {
                     lock (listener)
                     {
-                        listener.TraceEvent(eventCache, "Newtonsoft.Json", traceEventType, 0, message);
+                        listener.TraceEvent(
+                            eventCache,
+                            "Newtonsoft.Json",
+                            traceEventType,
+                            0,
+                            message
+                        );
                     }
                 }
                 else

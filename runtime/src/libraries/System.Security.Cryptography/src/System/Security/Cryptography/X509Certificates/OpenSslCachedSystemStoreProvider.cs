@@ -43,7 +43,6 @@ namespace System.Security.Cryptography.X509Certificates
         internal static OpenSslCachedSystemStoreProvider MachineIntermediate { get; } =
             new OpenSslCachedSystemStoreProvider(false);
 
-
         public void Dispose()
         {
             // No-op
@@ -58,12 +57,17 @@ namespace System.Security.Cryptography.X509Certificates
 
             for (int i = 0; i < count; i++)
             {
-                X509Certificate2 clone = new X509Certificate2(Interop.Crypto.GetX509StackField(nativeColl, i));
+                X509Certificate2 clone = new X509Certificate2(
+                    Interop.Crypto.GetX509StackField(nativeColl, i)
+                );
                 collection.Add(clone);
             }
         }
 
-        internal static void GetNativeCollections(out SafeX509StackHandle root, out SafeX509StackHandle intermediate)
+        internal static void GetNativeCollections(
+            out SafeX509StackHandle root,
+            out SafeX509StackHandle intermediate
+        )
         {
             Tuple<SafeX509StackHandle, SafeX509StackHandle> nativeColls = GetCollections();
             root = nativeColls.Item1;
@@ -93,9 +97,11 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 lock (s_recheckStopwatch)
                 {
-                    if (ret == null ||
-                        elapsed > s_assumeInvalidInterval ||
-                        LastWriteTimesHaveChanged())
+                    if (
+                        ret == null
+                        || elapsed > s_assumeInvalidInterval
+                        || LastWriteTimesHaveChanged()
+                    )
                     {
                         ret = LoadMachineStores();
                     }
@@ -110,7 +116,8 @@ namespace System.Security.Cryptography.X509Certificates
         {
             Debug.Assert(
                 Monitor.IsEntered(s_recheckStopwatch),
-                "LastWriteTimesHaveChanged assumes a lock(s_recheckStopwatch)");
+                "LastWriteTimesHaveChanged assumes a lock(s_recheckStopwatch)"
+            );
 
             if (s_rootStoreFile != null)
             {
@@ -140,7 +147,8 @@ namespace System.Security.Cryptography.X509Certificates
         {
             Debug.Assert(
                 Monitor.IsEntered(s_recheckStopwatch),
-                "LoadMachineStores assumes a lock(s_recheckStopwatch)");
+                "LoadMachineStores assumes a lock(s_recheckStopwatch)"
+            );
 
             SafeX509StackHandle rootStore = Interop.Crypto.NewX509Stack();
             Interop.Crypto.CheckValidOpenSslHandle(rootStore);
@@ -232,8 +240,10 @@ namespace System.Security.Cryptography.X509Certificates
                     // Because we don't validate for a specific usage, derived certificates are rejected.
                     // For now, we skip the certificates with AUX data and use the regular certificates.
                     ICertificatePal? pal;
-                    while (OpenSslX509CertificateReader.TryReadX509PemNoAux(fileBio, out pal) ||
-                        OpenSslX509CertificateReader.TryReadX509Der(fileBio, out pal))
+                    while (
+                        OpenSslX509CertificateReader.TryReadX509PemNoAux(fileBio, out pal)
+                        || OpenSslX509CertificateReader.TryReadX509Der(fileBio, out pal)
+                    )
                     {
                         readData = true;
                         X509Certificate2 cert = new X509Certificate2(pal);
@@ -295,12 +305,15 @@ namespace System.Security.Cryptography.X509Certificates
                 cert.Dispose();
             }
 
-            Tuple<SafeX509StackHandle, SafeX509StackHandle> newCollections =
-                Tuple.Create(rootStore, intermedStore);
+            Tuple<SafeX509StackHandle, SafeX509StackHandle> newCollections = Tuple.Create(
+                rootStore,
+                intermedStore
+            );
 
             Debug.Assert(
                 Monitor.IsEntered(s_recheckStopwatch),
-                "LoadMachineStores assumes a lock(s_recheckStopwatch)");
+                "LoadMachineStores assumes a lock(s_recheckStopwatch)"
+            );
 
             // The existing collections are not Disposed here, intentionally.
             // They could be in the gap between when they are returned from this method and not yet used
@@ -330,7 +343,10 @@ namespace System.Security.Cryptography.X509Certificates
         {
             string rootDirectory = Interop.Crypto.GetX509RootStorePath(out isDefault) ?? "";
 
-            string[] directories = rootDirectory.Split(Path.PathSeparator, StringSplitOptions.RemoveEmptyEntries);
+            string[] directories = rootDirectory.Split(
+                Path.PathSeparator,
+                StringSplitOptions.RemoveEmptyEntries
+            );
 
             for (int i = 0; i < directories.Length; i++)
             {
@@ -362,11 +378,11 @@ namespace System.Security.Cryptography.X509Certificates
             return directories;
         }
 
-        private static bool TryStatFile(string path, out DateTime lastModified)
-            => TryStat(path, Interop.Sys.FileTypes.S_IFREG, out lastModified);
+        private static bool TryStatFile(string path, out DateTime lastModified) =>
+            TryStat(path, Interop.Sys.FileTypes.S_IFREG, out lastModified);
 
-        private static bool TryStatDirectory(string path, out DateTime lastModified)
-            => TryStat(path, Interop.Sys.FileTypes.S_IFDIR, out lastModified);
+        private static bool TryStatDirectory(string path, out DateTime lastModified) =>
+            TryStat(path, Interop.Sys.FileTypes.S_IFDIR, out lastModified);
 
         private static bool TryStat(string path, int fileType, out DateTime lastModified)
         {
@@ -374,13 +390,20 @@ namespace System.Security.Cryptography.X509Certificates
 
             Interop.Sys.FileStatus status;
             // Use Stat to follow links.
-            if (Interop.Sys.Stat(path, out status) < 0 ||
-                (status.Mode & Interop.Sys.FileTypes.S_IFMT) != fileType)
+            if (
+                Interop.Sys.Stat(path, out status) < 0
+                || (status.Mode & Interop.Sys.FileTypes.S_IFMT) != fileType
+            )
             {
                 return false;
             }
 
-            lastModified = DateTime.UnixEpoch + TimeSpan.FromTicks(status.MTime * TimeSpan.TicksPerSecond + status.MTimeNsec / TimeSpan.NanosecondsPerTick);
+            lastModified =
+                DateTime.UnixEpoch
+                + TimeSpan.FromTicks(
+                    status.MTime * TimeSpan.TicksPerSecond
+                        + status.MTimeNsec / TimeSpan.NanosecondsPerTick
+                );
             return true;
         }
     }

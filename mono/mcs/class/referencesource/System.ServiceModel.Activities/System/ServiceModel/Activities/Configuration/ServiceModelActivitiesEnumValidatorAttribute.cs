@@ -8,7 +8,8 @@ namespace System.ServiceModel.Activities.Configuration
     using System.Configuration;
 
     [AttributeUsage(AttributeTargets.Property)]
-    internal sealed class ServiceModelActivitiesEnumValidatorAttribute : ConfigurationValidatorAttribute
+    internal sealed class ServiceModelActivitiesEnumValidatorAttribute
+        : ConfigurationValidatorAttribute
     {
         Type enumHelperType;
 

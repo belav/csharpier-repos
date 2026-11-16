@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // <copyright file="CancelEventArgs.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Security.Permissions;
-
 
     /// <devdoc>
     ///    <para>
@@ -18,22 +18,22 @@ namespace System.ComponentModel {
     ///    </para>
     /// </devdoc>
     [HostProtection(SharedState = true)]
-    public class CancelEventArgs : EventArgs {
-
+    public class CancelEventArgs : EventArgs
+    {
         /// <devdoc>
         ///     Indicates, on return, whether or not the operation should be cancelled
         ///     or not.  'true' means cancel it, 'false' means don't.
         /// </devdoc>
         private bool cancel;
-        
+
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of the <see cref='System.ComponentModel.CancelEventArgs'/> class with
         ///       cancel set to <see langword='false'/>.
         ///    </para>
         /// </devdoc>
-        public CancelEventArgs() : this(false) {
-        }
+        public CancelEventArgs()
+            : this(false) { }
 
         /// <devdoc>
         ///    <para>
@@ -42,7 +42,8 @@ namespace System.ComponentModel {
         ///    </para>
         /// </devdoc>
         public CancelEventArgs(bool cancel)
-        : base() {
+            : base()
+        {
             this.cancel = cancel;
         }
 
@@ -52,13 +53,10 @@ namespace System.ComponentModel {
         ///       indicating whether the operation should be cancelled.
         ///    </para>
         /// </devdoc>
-        public bool Cancel {
-            get {
-                return cancel;
-            }
-            set {
-                this.cancel = value;
-            }
+        public bool Cancel
+        {
+            get { return cancel; }
+            set { this.cancel = value; }
         }
     }
 }

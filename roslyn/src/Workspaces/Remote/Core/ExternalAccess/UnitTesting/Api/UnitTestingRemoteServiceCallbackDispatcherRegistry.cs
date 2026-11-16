@@ -9,18 +9,33 @@ using Microsoft.CodeAnalysis.Remote;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 {
-    internal sealed class UnitTestingRemoteServiceCallbackDispatcherRegistry : IRemoteServiceCallbackDispatcherProvider
+    internal sealed class UnitTestingRemoteServiceCallbackDispatcherRegistry
+        : IRemoteServiceCallbackDispatcherProvider
     {
-        public static readonly UnitTestingRemoteServiceCallbackDispatcherRegistry Empty = new(Array.Empty<(Type, UnitTestingRemoteServiceCallbackDispatcher)>());
+        public static readonly UnitTestingRemoteServiceCallbackDispatcherRegistry Empty = new(
+            Array.Empty<(Type, UnitTestingRemoteServiceCallbackDispatcher)>()
+        );
 
-        private readonly ImmutableDictionary<Type, UnitTestingRemoteServiceCallbackDispatcher> _lazyDispatchers;
+        private readonly ImmutableDictionary<
+            Type,
+            UnitTestingRemoteServiceCallbackDispatcher
+        > _lazyDispatchers;
 
-        public UnitTestingRemoteServiceCallbackDispatcherRegistry(IEnumerable<(Type serviceType, UnitTestingRemoteServiceCallbackDispatcher dispatcher)> lazyDispatchers)
+        public UnitTestingRemoteServiceCallbackDispatcherRegistry(
+            IEnumerable<(
+                Type serviceType,
+                UnitTestingRemoteServiceCallbackDispatcher dispatcher
+            )> lazyDispatchers
+        )
         {
-            _lazyDispatchers = lazyDispatchers.ToImmutableDictionary(e => e.serviceType, e => e.dispatcher);
+            _lazyDispatchers = lazyDispatchers.ToImmutableDictionary(
+                e => e.serviceType,
+                e => e.dispatcher
+            );
         }
 
-        IRemoteServiceCallbackDispatcher IRemoteServiceCallbackDispatcherProvider.GetDispatcher(Type serviceType)
-            => _lazyDispatchers[serviceType];
+        IRemoteServiceCallbackDispatcher IRemoteServiceCallbackDispatcherProvider.GetDispatcher(
+            Type serviceType
+        ) => _lazyDispatchers[serviceType];
     }
 }

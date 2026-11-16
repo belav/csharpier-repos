@@ -9,7 +9,11 @@ using System.Runtime.Loader;
 
 namespace System.Xml.Serialization
 {
-    internal sealed class ContextAwareTables<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T> where T : class?
+    internal sealed class ContextAwareTables<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            T
+    >
+        where T : class?
     {
         private readonly Hashtable _defaultTable;
         private readonly ConditionalWeakTable<Type, T> _collectibleTable;
@@ -46,7 +50,6 @@ namespace System.Xml.Serialization
                     }
                 }
             }
-
             // Collectible load contexts should use the ConditionalWeakTable so they can be unloaded
             else
             {

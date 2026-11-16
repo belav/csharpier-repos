@@ -27,7 +27,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
             NotifyPropertyChanged(name);
         }
 
-        protected void NotifyPropertyChanged(string name)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        protected void NotifyPropertyChanged(string name) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

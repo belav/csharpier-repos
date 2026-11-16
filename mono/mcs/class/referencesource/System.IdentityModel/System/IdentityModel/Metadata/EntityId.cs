@@ -17,9 +17,7 @@ namespace System.IdentityModel.Metadata
         /// The empty constructor.
         /// </summary>
         public EntityId()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         /// <summary>
         /// Constructs an entity id with the id.
@@ -43,7 +41,10 @@ namespace System.IdentityModel.Metadata
                 {
                     if (value.ToString().Length > MaximumLength)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID3199));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "value",
+                            SR.GetString(SR.ID3199)
+                        );
                     }
                 }
 

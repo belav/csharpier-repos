@@ -2,53 +2,57 @@ using System;
 
 class P
 {
-	public int A;
+    public int A;
 }
 
 static class Program
 {
-	static int Extra () { return 36; }
+    static int Extra()
+    {
+        return 36;
+    }
 
-	delegate int D ();
+    delegate int D();
 
-	static D Get (int dummy)
-	{
-		var p = new P { A = 6 };
-		switch (dummy) {
-		case 0:
-			int extra = Extra ();
-			return () => p.A + extra;
-		case 1:
-			extra = 9;
-			return () => p.A * extra;
-		case 2:
-			return () => p.A * 2;
-		}
-		throw new NotSupportedException ();
-	}
+    static D Get(int dummy)
+    {
+        var p = new P { A = 6 };
+        switch (dummy)
+        {
+            case 0:
+                int extra = Extra();
+                return () => p.A + extra;
+            case 1:
+                extra = 9;
+                return () => p.A * extra;
+            case 2:
+                return () => p.A * 2;
+        }
+        throw new NotSupportedException();
+    }
 
-	static int Run (int i)
-	{
-		return Get (i) ();
-	}
+    static int Run(int i)
+    {
+        return Get(i)();
+    }
 
-	public static int Main ()
-	{
-		if (Run (0) != 42)
-			return 1;
+    public static int Main()
+    {
+        if (Run(0) != 42)
+            return 1;
 
-		if (Run (1) != 54)
-			return 2;
+        if (Run(1) != 54)
+            return 2;
 
-		if (Run (2) != 12)
-			return 3;
+        if (Run(2) != 12)
+            return 3;
 
-		if (Run (1) != 54)
-			return 4;
+        if (Run(1) != 54)
+            return 4;
 
-		if (Run (0) != 42)
-			return 5;
+        if (Run(0) != 42)
+            return 5;
 
-		return 0;
-	}
+        return 0;
+    }
 }

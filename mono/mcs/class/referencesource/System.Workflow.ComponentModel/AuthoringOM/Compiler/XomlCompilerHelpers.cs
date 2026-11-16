@@ -3,30 +3,30 @@ namespace System.Workflow.ComponentModel.Compiler
     #region Imports
 
     using System;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Collections.Generic;
     using System.CodeDom;
+    using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.CodeDom.Compiler;
-    using System.Reflection;
-    using System.Xml;
-    using System.Globalization;
-    using System.IO;
-    using System.Text;
-    using System.Diagnostics;
-    using System.Text.RegularExpressions;
-    using Microsoft.CSharp;
-    using Microsoft.VisualBasic;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Serialization;
-    using Microsoft.Win32;
     using System.ComponentModel.Design.Serialization;
     using System.Configuration;
-    using System.Runtime.InteropServices;
-    using System.Workflow.Interop;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
+    using System.Workflow.Interop;
+    using System.Xml;
+    using Microsoft.CSharp;
+    using Microsoft.VisualBasic;
+    using Microsoft.Win32;
 
     #endregion
 
@@ -41,15 +41,30 @@ namespace System.Workflow.ComponentModel.Compiler
 
         #region Main compilation helper
 
-        internal static void InternalCompileFromDomBatch(string[] files, string[] codeFiles, WorkflowCompilerParameters parameters, WorkflowCompilerResults results, string localAssemblyPath)
+        internal static void InternalCompileFromDomBatch(
+            string[] files,
+            string[] codeFiles,
+            WorkflowCompilerParameters parameters,
+            WorkflowCompilerResults results,
+            string localAssemblyPath
+        )
         {
             // Check all the library paths are valid.
             foreach (string libraryPath in parameters.LibraryPaths)
             {
                 if (!XomlCompilerHelper.CheckPathName(libraryPath))
                 {
-                    WorkflowCompilerError libPathError =
-                        new WorkflowCompilerError(string.Empty, 0, 0, ErrorNumbers.Error_LibraryPath.ToString(CultureInfo.InvariantCulture), string.Format(CultureInfo.CurrentCulture, SR.GetString(SR.LibraryPathIsInvalid), libraryPath));
+                    WorkflowCompilerError libPathError = new WorkflowCompilerError(
+                        string.Empty,
+                        0,
+                        0,
+                        ErrorNumbers.Error_LibraryPath.ToString(CultureInfo.InvariantCulture),
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            SR.GetString(SR.LibraryPathIsInvalid),
+                            libraryPath
+                        )
+                    );
                     libPathError.IsWarning = true;
                     results.Errors.Add(libPathError);
                 }
@@ -62,13 +77,18 @@ namespace System.Workflow.ComponentModel.Compiler
                 authorizedTypes = WorkflowCompilationContext.Current.GetAuthorizedTypes();
                 if (authorizedTypes == null)
                 {
-                    ValidationError error = new ValidationError(SR.GetString(SR.Error_ConfigFileMissingOrInvalid), ErrorNumbers.Error_ConfigFileMissingOrInvalid);
+                    ValidationError error = new ValidationError(
+                        SR.GetString(SR.Error_ConfigFileMissingOrInvalid),
+                        ErrorNumbers.Error_ConfigFileMissingOrInvalid
+                    );
                     results.Errors.Add(CreateXomlCompilerError(error, parameters));
                     return;
                 }
             }
 
-            ITypeProvider typeProvider = WorkflowCompilationContext.Current.ServiceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
+            ITypeProvider typeProvider =
+                WorkflowCompilationContext.Current.ServiceProvider.GetService(typeof(ITypeProvider))
+                as ITypeProvider;
             ArrayList activities = new ArrayList();
 
             using (PDBReader pdbReader = new PDBReader(localAssemblyPath))
@@ -81,7 +101,8 @@ namespace System.Workflow.ComponentModel.Compiler
 
                     // Fetch file name.
                     string fileName = string.Empty;
-                    WorkflowMarkupSourceAttribute[] sourceAttrs = (WorkflowMarkupSourceAttribute[])type.GetCustomAttributes(typeof(WorkflowMarkupSourceAttribute), false);
+                    WorkflowMarkupSourceAttribute[] sourceAttrs = (WorkflowMarkupSourceAttribute[])
+                        type.GetCustomAttributes(typeof(WorkflowMarkupSourceAttribute), false);
                     if (sourceAttrs != null && sourceAttrs.Length > 0)
                     {
                         fileName = sourceAttrs[0].FileName;
@@ -93,8 +114,15 @@ namespace System.Workflow.ComponentModel.Compiler
                         {
                             try
                             {
-                                uint line = 0, column = 0;
-                                pdbReader.GetSourceLocationForOffset((uint)ctorMethod.MetadataToken, 0, out fileName, out line, out column);
+                                uint line = 0,
+                                    column = 0;
+                                pdbReader.GetSourceLocationForOffset(
+                                    (uint)ctorMethod.MetadataToken,
+                                    0,
+                                    out fileName,
+                                    out line,
+                                    out column
+                                );
                             }
                             catch
                             {
@@ -103,29 +131,60 @@ namespace System.Workflow.ComponentModel.Compiler
                             }
                         }
 
-                        // In case of VB, if the ctor is autogenerated the PDB will not have symbol 
+                        // In case of VB, if the ctor is autogenerated the PDB will not have symbol
                         // information. Use InitializeComponent method as the fallback. Bug 19085.
                         if (String.IsNullOrEmpty(fileName))
                         {
-                            MethodInfo initializeComponent = type.GetMethod("InitializeComponent", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
+                            MethodInfo initializeComponent = type.GetMethod(
+                                "InitializeComponent",
+                                BindingFlags.Public
+                                    | BindingFlags.NonPublic
+                                    | BindingFlags.Instance,
+                                null,
+                                Type.EmptyTypes,
+                                null
+                            );
                             if (initializeComponent != null)
                             {
                                 try
                                 {
-                                    uint line = 0, column = 0;
-                                    pdbReader.GetSourceLocationForOffset((uint)initializeComponent.MetadataToken, 0, out fileName, out line, out column);
+                                    uint line = 0,
+                                        column = 0;
+                                    pdbReader.GetSourceLocationForOffset(
+                                        (uint)initializeComponent.MetadataToken,
+                                        0,
+                                        out fileName,
+                                        out line,
+                                        out column
+                                    );
 
                                     if (!String.IsNullOrEmpty(fileName))
                                     {
-                                        if (fileName.EndsWith(".designer.cs", StringComparison.OrdinalIgnoreCase))
-                                            fileName = fileName.Substring(0, fileName.Length - ".designer.cs".Length) + ".cs";
-                                        else if (fileName.EndsWith(".designer.vb", StringComparison.OrdinalIgnoreCase))
-                                            fileName = fileName.Substring(0, fileName.Length - ".designer.vb".Length) + ".vb";
+                                        if (
+                                            fileName.EndsWith(
+                                                ".designer.cs",
+                                                StringComparison.OrdinalIgnoreCase
+                                            )
+                                        )
+                                            fileName =
+                                                fileName.Substring(
+                                                    0,
+                                                    fileName.Length - ".designer.cs".Length
+                                                ) + ".cs";
+                                        else if (
+                                            fileName.EndsWith(
+                                                ".designer.vb",
+                                                StringComparison.OrdinalIgnoreCase
+                                            )
+                                        )
+                                            fileName =
+                                                fileName.Substring(
+                                                    0,
+                                                    fileName.Length - ".designer.vb".Length
+                                                ) + ".vb";
                                     }
                                 }
-                                catch
-                                {
-                                }
+                                catch { }
                             }
                         }
                     }
@@ -148,37 +207,107 @@ namespace System.Workflow.ComponentModel.Compiler
                         {
                             CompositeActivity compositeActivity = activity as CompositeActivity;
                             if (compositeActivity.CanModifyActivities)
-                                results.Errors.Add(CreateXomlCompilerError(new ValidationError(SR.GetString(SR.Error_Missing_CanModifyProperties_False, activity.GetType().FullName), ErrorNumbers.Error_CustomActivityCantCreate), parameters));
+                                results.Errors.Add(
+                                    CreateXomlCompilerError(
+                                        new ValidationError(
+                                            SR.GetString(
+                                                SR.Error_Missing_CanModifyProperties_False,
+                                                activity.GetType().FullName
+                                            ),
+                                            ErrorNumbers.Error_CustomActivityCantCreate
+                                        ),
+                                        parameters
+                                    )
+                                );
                         }
                         if (sourceAttrs.Length > 0)
                         {
-                            DesignerSerializationManager manager = new DesignerSerializationManager(WorkflowCompilationContext.Current.ServiceProvider);
+                            DesignerSerializationManager manager = new DesignerSerializationManager(
+                                WorkflowCompilationContext.Current.ServiceProvider
+                            );
                             Activity instance2 = null;
                             using (manager.CreateSession())
                             {
-                                WorkflowMarkupSerializationManager xomlSerializationManager = new WorkflowMarkupSerializationManager(manager);
+                                WorkflowMarkupSerializationManager xomlSerializationManager =
+                                    new WorkflowMarkupSerializationManager(manager);
                                 xomlSerializationManager.LocalAssembly = parameters.LocalAssembly;
-                                using (XmlReader reader = XmlReader.Create((sourceAttrs[0].FileName)))
-                                    instance2 = new WorkflowMarkupSerializer().Deserialize(xomlSerializationManager, reader) as Activity;
+                                using (
+                                    XmlReader reader = XmlReader.Create((sourceAttrs[0].FileName))
+                                )
+                                    instance2 =
+                                        new WorkflowMarkupSerializer().Deserialize(
+                                            xomlSerializationManager,
+                                            reader
+                                        ) as Activity;
                             }
                             if (instance2 is CompositeActivity)
-                                ActivityMarkupSerializer.ReplaceChildActivities(activity as CompositeActivity, instance2 as CompositeActivity);
+                                ActivityMarkupSerializer.ReplaceChildActivities(
+                                    activity as CompositeActivity,
+                                    instance2 as CompositeActivity
+                                );
                         }
                     }
                     catch (TargetInvocationException tie)
                     {
                         // For TypeInitializationException, the message is available at the inner Exception
-                        if (tie.InnerException is TypeInitializationException && tie.InnerException.InnerException != null)
-                            results.Errors.Add(CreateXomlCompilerError(new ValidationError(SR.GetString(SR.Error_CustomActivityCantCreate, type.FullName, tie.InnerException.InnerException.ToString()), ErrorNumbers.Error_CustomActivityCantCreate), parameters));
+                        if (
+                            tie.InnerException is TypeInitializationException
+                            && tie.InnerException.InnerException != null
+                        )
+                            results.Errors.Add(
+                                CreateXomlCompilerError(
+                                    new ValidationError(
+                                        SR.GetString(
+                                            SR.Error_CustomActivityCantCreate,
+                                            type.FullName,
+                                            tie.InnerException.InnerException.ToString()
+                                        ),
+                                        ErrorNumbers.Error_CustomActivityCantCreate
+                                    ),
+                                    parameters
+                                )
+                            );
                         else if (tie.InnerException.InnerException != null)
-                            results.Errors.Add(CreateXomlCompilerError(new ValidationError(tie.InnerException.InnerException.ToString(), ErrorNumbers.Error_CustomActivityCantCreate), parameters));
+                            results.Errors.Add(
+                                CreateXomlCompilerError(
+                                    new ValidationError(
+                                        tie.InnerException.InnerException.ToString(),
+                                        ErrorNumbers.Error_CustomActivityCantCreate
+                                    ),
+                                    parameters
+                                )
+                            );
                         else
-                            results.Errors.Add(CreateXomlCompilerError(new ValidationError(SR.GetString(SR.Error_CustomActivityCantCreate, type.FullName, tie.InnerException.ToString()), ErrorNumbers.Error_CustomActivityCantCreate), parameters));
+                            results.Errors.Add(
+                                CreateXomlCompilerError(
+                                    new ValidationError(
+                                        SR.GetString(
+                                            SR.Error_CustomActivityCantCreate,
+                                            type.FullName,
+                                            tie.InnerException.ToString()
+                                        ),
+                                        ErrorNumbers.Error_CustomActivityCantCreate
+                                    ),
+                                    parameters
+                                )
+                            );
                         continue;
                     }
                     catch (Exception e)
                     {
-                        results.Errors.Add(CreateXomlCompilerError(new ValidationError(SR.GetString(SR.Error_CustomActivityCantCreate, type.FullName, e.ToString()), ErrorNumbers.Error_CustomActivityCantCreate), parameters));
+                        results.Errors.Add(
+                            CreateXomlCompilerError(
+                                new ValidationError(
+                                    SR.GetString(
+                                        SR.Error_CustomActivityCantCreate,
+                                        type.FullName,
+                                        e.ToString()
+                                    ),
+                                    ErrorNumbers.Error_CustomActivityCantCreate
+                                ),
+                                parameters
+                            )
+                        );
                         continue;
                     }
 
@@ -195,11 +324,21 @@ namespace System.Workflow.ComponentModel.Compiler
             // Add all type load errors to compiler results.
             foreach (KeyValuePair<object, Exception> entry in typeProvider.TypeLoadErrors)
             {
-                WorkflowCompilerError compilerError = new WorkflowCompilerError(string.Empty, 0, 0, ErrorNumbers.Error_TypeLoad.ToString(CultureInfo.InvariantCulture), entry.Value.Message);
+                WorkflowCompilerError compilerError = new WorkflowCompilerError(
+                    string.Empty,
+                    0,
+                    0,
+                    ErrorNumbers.Error_TypeLoad.ToString(CultureInfo.InvariantCulture),
+                    entry.Value.Message
+                );
                 compilerError.IsWarning = true;
                 results.Errors.Add(compilerError);
             }
-            results.CompiledUnit = WorkflowCompilerInternal.GenerateCodeFromFileBatch(files, parameters, results);
+            results.CompiledUnit = WorkflowCompilerInternal.GenerateCodeFromFileBatch(
+                files,
+                parameters,
+                results
+            );
 
             WorkflowCompilationContext context = WorkflowCompilationContext.Current;
             if (context == null)
@@ -207,19 +346,33 @@ namespace System.Workflow.ComponentModel.Compiler
                 throw new Exception(SR.GetString(SR.Error_MissingCompilationContext));
             }
             // Fix standard namespaces and root namespace.
-            WorkflowMarkupSerializationHelpers.ReapplyRootNamespace(results.CompiledUnit.Namespaces, context.RootNamespace, CompilerHelpers.GetSupportedLanguage(context.Language));
-            WorkflowMarkupSerializationHelpers.FixStandardNamespacesAndRootNamespace(results.CompiledUnit.Namespaces, context.RootNamespace, CompilerHelpers.GetSupportedLanguage(context.Language));
+            WorkflowMarkupSerializationHelpers.ReapplyRootNamespace(
+                results.CompiledUnit.Namespaces,
+                context.RootNamespace,
+                CompilerHelpers.GetSupportedLanguage(context.Language)
+            );
+            WorkflowMarkupSerializationHelpers.FixStandardNamespacesAndRootNamespace(
+                results.CompiledUnit.Namespaces,
+                context.RootNamespace,
+                CompilerHelpers.GetSupportedLanguage(context.Language)
+            );
             if (!results.Errors.HasErrors)
             {
                 // ask activities to generate code for themselves
-                CodeGenerationManager codeGenerationManager = new CodeGenerationManager(WorkflowCompilationContext.Current.ServiceProvider);
+                CodeGenerationManager codeGenerationManager = new CodeGenerationManager(
+                    WorkflowCompilationContext.Current.ServiceProvider
+                );
                 codeGenerationManager.Context.Push(results.CompiledUnit.Namespaces);
                 foreach (Activity activity in activities)
                 {
                     // Need to call code generators associated with the root activity.
                     if (activity.Parent == null)
                     {
-                        foreach (System.Workflow.ComponentModel.Compiler.ActivityCodeGenerator codeGenerator in codeGenerationManager.GetCodeGenerators(activity.GetType()))
+                        foreach (
+                            System.Workflow.ComponentModel.Compiler.ActivityCodeGenerator codeGenerator in codeGenerationManager.GetCodeGenerators(
+                                activity.GetType()
+                            )
+                        )
                             codeGenerator.GenerateCode(codeGenerationManager, activity);
                     }
                 }
@@ -228,45 +381,81 @@ namespace System.Workflow.ComponentModel.Compiler
                 if (!parameters.GenerateCodeCompileUnitOnly || parameters.CheckTypes)
                 {
                     // Convert all compile units to source files.
-                    SupportedLanguages language = CompilerHelpers.GetSupportedLanguage(parameters.LanguageToUse);
-                    CodeDomProvider codeDomProvider = CompilerHelpers.GetCodeDomProvider(language, parameters.CompilerVersion);
+                    SupportedLanguages language = CompilerHelpers.GetSupportedLanguage(
+                        parameters.LanguageToUse
+                    );
+                    CodeDomProvider codeDomProvider = CompilerHelpers.GetCodeDomProvider(
+                        language,
+                        parameters.CompilerVersion
+                    );
                     ArrayList ccus = new ArrayList((ICollection)parameters.UserCodeCompileUnits);
                     ccus.Add(results.CompiledUnit);
 
                     ArrayList sourceFilePaths = new ArrayList();
                     sourceFilePaths.AddRange(codeFiles);
-                    sourceFilePaths.AddRange(XomlCompilerHelper.GenerateFiles(codeDomProvider, parameters, (CodeCompileUnit[])ccus.ToArray(typeof(CodeCompileUnit))));
+                    sourceFilePaths.AddRange(
+                        XomlCompilerHelper.GenerateFiles(
+                            codeDomProvider,
+                            parameters,
+                            (CodeCompileUnit[])ccus.ToArray(typeof(CodeCompileUnit))
+                        )
+                    );
 
                     // Finally give it to Code Compiler.
-                    CompilerResults results2 = codeDomProvider.CompileAssemblyFromFile(parameters, (string[])sourceFilePaths.ToArray(typeof(string)));
+                    CompilerResults results2 = codeDomProvider.CompileAssemblyFromFile(
+                        parameters,
+                        (string[])sourceFilePaths.ToArray(typeof(string))
+                    );
                     results.AddCompilerErrorsFromCompilerResults(results2);
                     results.PathToAssembly = results2.PathToAssembly;
                     results.NativeCompilerReturnValue = results2.NativeCompilerReturnValue;
 
                     if (!results.Errors.HasErrors && parameters.CheckTypes)
                     {
-                        foreach (string referenceType in MetaDataReader.GetTypeRefNames(results2.CompiledAssembly.Location))
+                        foreach (
+                            string referenceType in MetaDataReader.GetTypeRefNames(
+                                results2.CompiledAssembly.Location
+                            )
+                        )
                         {
                             bool authorized = false;
                             foreach (AuthorizedType authorizedType in authorizedTypes)
                             {
                                 if (authorizedType.RegularExpression.IsMatch(referenceType))
                                 {
-                                    authorized = (String.Compare(bool.TrueString, authorizedType.Authorized, StringComparison.OrdinalIgnoreCase) == 0);
+                                    authorized = (
+                                        String.Compare(
+                                            bool.TrueString,
+                                            authorizedType.Authorized,
+                                            StringComparison.OrdinalIgnoreCase
+                                        ) == 0
+                                    );
                                     if (!authorized)
                                         break;
                                 }
                             }
                             if (!authorized)
                             {
-                                ValidationError error = new ValidationError(SR.GetString(SR.Error_TypeNotAuthorized, referenceType), ErrorNumbers.Error_TypeNotAuthorized);
+                                ValidationError error = new ValidationError(
+                                    SR.GetString(SR.Error_TypeNotAuthorized, referenceType),
+                                    ErrorNumbers.Error_TypeNotAuthorized
+                                );
                                 results.Errors.Add(CreateXomlCompilerError(error, parameters));
                             }
                         }
                     }
                     //this line was throwing for the delay sign case. besides, copying PathToAssembly should do the same...
-                    if (!results.Errors.HasErrors && !parameters.GenerateCodeCompileUnitOnly && parameters.GenerateInMemory &&
-                        (string.IsNullOrEmpty(parameters.CompilerOptions) || !parameters.CompilerOptions.ToLower(CultureInfo.InvariantCulture).Contains("/delaysign")))
+                    if (
+                        !results.Errors.HasErrors
+                        && !parameters.GenerateCodeCompileUnitOnly
+                        && parameters.GenerateInMemory
+                        && (
+                            string.IsNullOrEmpty(parameters.CompilerOptions)
+                            || !parameters
+                                .CompilerOptions.ToLower(CultureInfo.InvariantCulture)
+                                .Contains("/delaysign")
+                        )
+                    )
                         results.CompiledAssembly = results2.CompiledAssembly;
                 }
             }
@@ -275,7 +464,11 @@ namespace System.Workflow.ComponentModel.Compiler
 
         #region Service Helpers
 
-        internal static string ProcessCompilerOptions(string options, out bool noCode, out bool checkTypes)
+        internal static string ProcessCompilerOptions(
+            string options,
+            out bool noCode,
+            out bool checkTypes
+        )
         {
             if (string.IsNullOrEmpty(options))
             {
@@ -286,21 +479,36 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 string compilerSwitchValue;
 
-                noCode = ExtractCompilerOptionSwitch(ref options, WorkflowCompilerParameters.NoCodeSwitch, out compilerSwitchValue);
-                checkTypes = ExtractCompilerOptionSwitch(ref options, WorkflowCompilerParameters.CheckTypesSwitch, out compilerSwitchValue);
+                noCode = ExtractCompilerOptionSwitch(
+                    ref options,
+                    WorkflowCompilerParameters.NoCodeSwitch,
+                    out compilerSwitchValue
+                );
+                checkTypes = ExtractCompilerOptionSwitch(
+                    ref options,
+                    WorkflowCompilerParameters.CheckTypesSwitch,
+                    out compilerSwitchValue
+                );
             }
 
             return options;
         }
 
-        static bool ExtractCompilerOptionSwitch(ref string options, string compilerSwitch, out string compilerSwitchValue)
+        static bool ExtractCompilerOptionSwitch(
+            ref string options,
+            string compilerSwitch,
+            out string compilerSwitchValue
+        )
         {
             int switchPos = options.IndexOf(compilerSwitch, StringComparison.OrdinalIgnoreCase);
             if (switchPos != -1)
             {
                 int switchValueStart = switchPos + compilerSwitch.Length;
                 int switchValueLength = 0;
-                while ((switchValueStart + switchValueLength < options.Length) && !char.IsWhiteSpace(options[switchValueStart + switchValueLength]))
+                while (
+                    (switchValueStart + switchValueLength < options.Length)
+                    && !char.IsWhiteSpace(options[switchValueStart + switchValueLength])
+                )
                 {
                     switchValueLength++;
                 }
@@ -312,7 +520,11 @@ namespace System.Workflow.ComponentModel.Compiler
                 {
                     compilerSwitchValue = string.Empty;
                 }
-                RemoveCompilerOptionSwitch(ref options, switchPos, compilerSwitch.Length + switchValueLength);
+                RemoveCompilerOptionSwitch(
+                    ref options,
+                    switchPos,
+                    compilerSwitch.Length + switchValueLength
+                );
                 return true;
             }
             else
@@ -321,13 +533,18 @@ namespace System.Workflow.ComponentModel.Compiler
                 return false;
             }
         }
+
         static void RemoveCompilerOptionSwitch(ref string options, int startPos, int length)
         {
             if ((startPos > 0) && char.IsWhiteSpace(options[startPos - 1]))
             {
                 options = options.Remove(startPos - 1, length + 1);
             }
-            else if ((startPos == 0) && (startPos + length + 1 < options.Length) && char.IsWhiteSpace(options[startPos + length + 1]))
+            else if (
+                (startPos == 0)
+                && (startPos + length + 1 < options.Length)
+                && char.IsWhiteSpace(options[startPos + length + 1])
+            )
             {
                 options = options.Remove(startPos, length + 1);
             }
@@ -337,14 +554,19 @@ namespace System.Workflow.ComponentModel.Compiler
             }
         }
 
-        internal static CompilerParameters CloneCompilerParameters(WorkflowCompilerParameters sourceParams)
+        internal static CompilerParameters CloneCompilerParameters(
+            WorkflowCompilerParameters sourceParams
+        )
         {
             bool noCode;
             bool checkTypes;
 
             CompilerParameters clonedParams = new CompilerParameters();
-            clonedParams.CompilerOptions =
-                ProcessCompilerOptions(sourceParams.CompilerOptions, out noCode, out checkTypes);
+            clonedParams.CompilerOptions = ProcessCompilerOptions(
+                sourceParams.CompilerOptions,
+                out noCode,
+                out checkTypes
+            );
 
             foreach (string embeddedResource in sourceParams.EmbeddedResources)
                 clonedParams.EmbeddedResources.Add(embeddedResource);
@@ -372,9 +594,16 @@ namespace System.Workflow.ComponentModel.Compiler
 
         #region References helpers
 
-        internal static void FixReferencedAssemblies(WorkflowCompilerParameters parameters, WorkflowCompilerResults results, StringCollection libraryPaths)
+        internal static void FixReferencedAssemblies(
+            WorkflowCompilerParameters parameters,
+            WorkflowCompilerResults results,
+            StringCollection libraryPaths
+        )
         {
-            Debug.Assert(parameters.MultiTargetingInformation == null, "Shouldn't come here if opted to MT support");
+            Debug.Assert(
+                parameters.MultiTargetingInformation == null,
+                "Shouldn't come here if opted to MT support"
+            );
 
             // First add all WinOE assemblies
             foreach (string assemblyPath in XomlCompilerHelper.StandardAssemblies)
@@ -387,7 +616,16 @@ namespace System.Workflow.ComponentModel.Compiler
                     {
                         string userAssemblyFileName = Path.GetFileName(userAssembly);
                         string standardAssemblyFileName = Path.GetFileName(assemblyPath);
-                        if (null != userAssemblyFileName && null != standardAssemblyFileName && 0 == string.Compare(userAssemblyFileName, standardAssemblyFileName, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            null != userAssemblyFileName
+                            && null != standardAssemblyFileName
+                            && 0
+                                == string.Compare(
+                                    userAssemblyFileName,
+                                    standardAssemblyFileName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                        )
                         {
                             //we will use the user-provided assembly path instead of the standard one
                             shouldAdd = false;
@@ -400,8 +638,11 @@ namespace System.Workflow.ComponentModel.Compiler
             }
 
             // Resolve all the references.
-            StringCollection resolvedAssemblyReferences = ResolveAssemblyReferences(parameters.ReferencedAssemblies,
-                GetCompleteLibraryPaths(libraryPaths), results);
+            StringCollection resolvedAssemblyReferences = ResolveAssemblyReferences(
+                parameters.ReferencedAssemblies,
+                GetCompleteLibraryPaths(libraryPaths),
+                results
+            );
             parameters.ReferencedAssemblies.Clear();
             foreach (string resolvedAssemblyReference in resolvedAssemblyReferences)
             {
@@ -433,6 +674,7 @@ namespace System.Workflow.ComponentModel.Compiler
         }
 
         private static char[] trimCharsArray = null;
+
         internal static string TrimDirectorySeparatorChar(string dir)
         {
             if (trimCharsArray == null)
@@ -450,7 +692,11 @@ namespace System.Workflow.ComponentModel.Compiler
             libraryPaths.Add(Environment.CurrentDirectory);
 
             // Add the CLR system directory, for example: "C:\WINDOWS\Microsoft.NET\Framework\v1.2.30703"
-            libraryPaths.Add(TrimDirectorySeparatorChar(System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory()));
+            libraryPaths.Add(
+                TrimDirectorySeparatorChar(
+                    System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory()
+                )
+            );
 
             // Add /lib paths.
             string[] stringArray = new String[userLibraryPaths.Count];
@@ -461,14 +707,20 @@ namespace System.Workflow.ComponentModel.Compiler
             string libLibraryPaths = Environment.GetEnvironmentVariable("LIB");
             if ((libLibraryPaths != null) && (libLibraryPaths.Length > 0))
             {
-                string[] libLibraryPathsArray = Environment.GetEnvironmentVariable("LIB").Split(new char[] { ',', ';' });
+                string[] libLibraryPathsArray = Environment
+                    .GetEnvironmentVariable("LIB")
+                    .Split(new char[] { ',', ';' });
                 libraryPaths.AddRange(libLibraryPathsArray);
             }
 
             return libraryPaths;
         }
 
-        private static StringCollection ResolveAssemblyReferences(StringCollection originalReferences, StringCollection libraryPaths, WorkflowCompilerResults results)
+        private static StringCollection ResolveAssemblyReferences(
+            StringCollection originalReferences,
+            StringCollection libraryPaths,
+            WorkflowCompilerResults results
+        )
         {
             StringCollection resolvedReferences = new StringCollection();
 
@@ -480,7 +732,15 @@ namespace System.Workflow.ComponentModel.Compiler
                     resolvedReferences.Add(fullReferenceName);
                 else
                 {
-                    WorkflowCompilerError compilerError = new WorkflowCompilerError(string.Empty, 0, 0, ErrorNumbers.Error_InvalidReferencedAssembly.ToString(CultureInfo.InvariantCulture), SR.GetString(SR.Error_ReferencedAssemblyIsInvalid, reference));
+                    WorkflowCompilerError compilerError = new WorkflowCompilerError(
+                        string.Empty,
+                        0,
+                        0,
+                        ErrorNumbers.Error_InvalidReferencedAssembly.ToString(
+                            CultureInfo.InvariantCulture
+                        ),
+                        SR.GetString(SR.Error_ReferencedAssemblyIsInvalid, reference)
+                    );
                     results.Errors.Add(compilerError);
                 }
             }
@@ -488,7 +748,10 @@ namespace System.Workflow.ComponentModel.Compiler
             return resolvedReferences;
         }
 
-        private static void ResolveReferencedAssemblies(CompilerParameters parameters, CodeCompileUnit cu)
+        private static void ResolveReferencedAssemblies(
+            CompilerParameters parameters,
+            CodeCompileUnit cu
+        )
         {
             if (cu.ReferencedAssemblies.Count > 0)
                 foreach (string assemblyName in cu.ReferencedAssemblies)
@@ -496,7 +759,11 @@ namespace System.Workflow.ComponentModel.Compiler
                         parameters.ReferencedAssemblies.Add(assemblyName);
         }
 
-        private static bool CheckFileNameUsingPaths(string fileName, StringCollection paths, out string fullFileName)
+        private static bool CheckFileNameUsingPaths(
+            string fileName,
+            StringCollection paths,
+            out string fullFileName
+        )
         {
             fullFileName = null;
 
@@ -540,15 +807,25 @@ namespace System.Workflow.ComponentModel.Compiler
 
         #region Error helpers
 
-        internal static WorkflowCompilerError CreateXomlCompilerError(ValidationError error, WorkflowCompilerParameters parameters)
+        internal static WorkflowCompilerError CreateXomlCompilerError(
+            ValidationError error,
+            WorkflowCompilerParameters parameters
+        )
         {
             WorkflowCompilerError compilerError;
-            compilerError = new WorkflowCompilerError(GetFileName(error), (int)GetValue(error, XomlCompilerHelper.LineNumber), (int)GetValue(error, XomlCompilerHelper.ColumnNumber), string.Empty, GetPrettifiedErrorText(error));
+            compilerError = new WorkflowCompilerError(
+                GetFileName(error),
+                (int)GetValue(error, XomlCompilerHelper.LineNumber),
+                (int)GetValue(error, XomlCompilerHelper.ColumnNumber),
+                string.Empty,
+                GetPrettifiedErrorText(error)
+            );
 
             if (!parameters.TreatWarningsAsErrors)
                 compilerError.IsWarning = error.IsWarning;
 
-            compilerError.ErrorNumber = "WF" + error.ErrorNumber.ToString(CultureInfo.InvariantCulture);
+            compilerError.ErrorNumber =
+                "WF" + error.ErrorNumber.ToString(CultureInfo.InvariantCulture);
 
             if (error.UserData != null)
             {
@@ -563,7 +840,9 @@ namespace System.Workflow.ComponentModel.Compiler
             return compilerError;
         }
 
-        internal static ValidationErrorCollection MorphIntoFriendlyValidationErrors(IEnumerable<ValidationError> errors)
+        internal static ValidationErrorCollection MorphIntoFriendlyValidationErrors(
+            IEnumerable<ValidationError> errors
+        )
         {
             ValidationErrorCollection friendlyErrors = new ValidationErrorCollection();
 
@@ -574,7 +853,11 @@ namespace System.Workflow.ComponentModel.Compiler
 
                 if (error.GetType() == typeof(ValidationError))
                 {
-                    ValidationError error2 = new ValidationError(GetPrettifiedErrorText(error), error.ErrorNumber, error.IsWarning);
+                    ValidationError error2 = new ValidationError(
+                        GetPrettifiedErrorText(error),
+                        error.ErrorNumber,
+                        error.IsWarning
+                    );
                     friendlyErrors.Add(error2);
                 }
                 else
@@ -594,7 +877,8 @@ namespace System.Workflow.ComponentModel.Compiler
 
             string fileName = string.Empty;
             if (activity != null)
-                fileName = activity.GetValue(ActivityCodeDomSerializer.MarkupFileNameProperty) as string;
+                fileName =
+                    activity.GetValue(ActivityCodeDomSerializer.MarkupFileNameProperty) as string;
 
             if (fileName == null)
                 fileName = string.Empty;
@@ -609,16 +893,21 @@ namespace System.Workflow.ComponentModel.Compiler
             if (activity != null)
             {
                 // get the ID
-                string identifier = (Helpers.GetRootActivity(activity) != activity) ? activity.QualifiedName : activity.GetType().Name;
+                string identifier =
+                    (Helpers.GetRootActivity(activity) != activity)
+                        ? activity.QualifiedName
+                        : activity.GetType().Name;
 
                 if ((identifier == null) || (identifier.Length == 0))
                     identifier = SR.GetString(SR.EmptyValue);
 
                 // prettify error text
                 if (error.IsWarning)
-                    errorText = SR.GetString(SR.Warning_ActivityValidation, identifier) + " " + errorText;
+                    errorText =
+                        SR.GetString(SR.Warning_ActivityValidation, identifier) + " " + errorText;
                 else
-                    errorText = SR.GetString(SR.Error_ActivityValidation, identifier) + " " + errorText;
+                    errorText =
+                        SR.GetString(SR.Error_ActivityValidation, identifier) + " " + errorText;
             }
             return errorText;
         }
@@ -648,7 +937,9 @@ namespace System.Workflow.ComponentModel.Compiler
                     e.Action = WalkerAction.Skip;
                     return;
                 }
-                CodeTypeMemberCollection codeCollection = currentActivity.GetValue(WorkflowMarkupSerializer.XCodeProperty) as CodeTypeMemberCollection;
+                CodeTypeMemberCollection codeCollection =
+                    currentActivity.GetValue(WorkflowMarkupSerializer.XCodeProperty)
+                    as CodeTypeMemberCollection;
                 if (codeCollection != null && codeCollection.Count != 0)
                 {
                     hasCodeWithin = true;
@@ -660,10 +951,16 @@ namespace System.Workflow.ComponentModel.Compiler
             return hasCodeWithin;
         }
 
-        internal static void ValidateActivity(Activity activity, WorkflowCompilerParameters parameters, WorkflowCompilerResults results)
+        internal static void ValidateActivity(
+            Activity activity,
+            WorkflowCompilerParameters parameters,
+            WorkflowCompilerResults results
+        )
         {
             ValidationErrorCollection errors = null;
-            ValidationManager validationManager = new ValidationManager(WorkflowCompilationContext.Current.ServiceProvider);
+            ValidationManager validationManager = new ValidationManager(
+                WorkflowCompilationContext.Current.ServiceProvider
+            );
 
             foreach (Validator validator in validationManager.GetValidators(activity.GetType()))
             {
@@ -681,12 +978,30 @@ namespace System.Workflow.ComponentModel.Compiler
                 catch (TargetInvocationException tie)
                 {
                     Exception e = tie.InnerException ?? tie;
-                    ValidationError error = new ValidationError(SR.GetString(SR.Error_ValidatorThrewException, e.GetType().FullName, validator.GetType().FullName, activity.Name, e.ToString()), ErrorNumbers.Error_ValidatorThrewException);
+                    ValidationError error = new ValidationError(
+                        SR.GetString(
+                            SR.Error_ValidatorThrewException,
+                            e.GetType().FullName,
+                            validator.GetType().FullName,
+                            activity.Name,
+                            e.ToString()
+                        ),
+                        ErrorNumbers.Error_ValidatorThrewException
+                    );
                     results.Errors.Add(CreateXomlCompilerError(error, parameters));
                 }
                 catch (Exception e)
                 {
-                    ValidationError error = new ValidationError(SR.GetString(SR.Error_ValidatorThrewException, e.GetType().FullName, validator.GetType().FullName, activity.Name, e.ToString()), ErrorNumbers.Error_ValidatorThrewException);
+                    ValidationError error = new ValidationError(
+                        SR.GetString(
+                            SR.Error_ValidatorThrewException,
+                            e.GetType().FullName,
+                            validator.GetType().FullName,
+                            activity.Name,
+                            e.ToString()
+                        ),
+                        ErrorNumbers.Error_ValidatorThrewException
+                    );
                     results.Errors.Add(CreateXomlCompilerError(error, parameters));
                 }
             }
@@ -696,7 +1011,11 @@ namespace System.Workflow.ComponentModel.Compiler
 
         #region Code generation Helpers
 
-        internal static string[] GenerateFiles(CodeDomProvider codeDomProvider, CompilerParameters parameters, CodeCompileUnit[] ccus)
+        internal static string[] GenerateFiles(
+            CodeDomProvider codeDomProvider,
+            CompilerParameters parameters,
+            CodeCompileUnit[] ccus
+        )
         {
             CodeGeneratorOptions options = new CodeGeneratorOptions();
             options.BracingStyle = "C";
@@ -705,7 +1024,12 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 ResolveReferencedAssemblies(parameters, ccus[i]);
                 filenames[i] = parameters.TempFiles.AddExtension(i + codeDomProvider.FileExtension);
-                Stream temp = new FileStream(filenames[i], FileMode.Create, FileAccess.Write, FileShare.Read);
+                Stream temp = new FileStream(
+                    filenames[i],
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileShare.Read
+                );
                 try
                 {
                     using (StreamWriter sw = new StreamWriter(temp, Encoding.UTF8))
@@ -727,7 +1051,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
     #region Class MetaDataReader
 
-    // The GUIDs, enums, structs and interface definitions in this class are from 
+    // The GUIDs, enums, structs and interface definitions in this class are from
     // cor.h and corhdr.h in the SDK\v2.0\include folder of the .net Framework SDK.
     internal static class MetaDataReader
     {
@@ -736,13 +1060,14 @@ namespace System.Workflow.ComponentModel.Compiler
             public const string CLSID_MetaDataDispenser = "E5CB7A31-7512-11d2-89CE-0080C792E5D8";
             public const string IID_IMetaDataDispenser = "809C652E-7396-11d2-9771-00A0C9B4D50C";
             public const string IID_IMetaDataImport = "7DAC8207-D3AE-4c75-9B67-92801A497D44";
-            public const string IID_IMetaDataAssemblyImport = "EE62470B-E94B-424e-9B7C-2F00C9249F93";
+            public const string IID_IMetaDataAssemblyImport =
+                "EE62470B-E94B-424e-9B7C-2F00C9249F93";
         }
 
         enum MetadataTokenType
         {
             ModuleRef = 0x1a000000,
-            AssemblyRef = 0x23000000
+            AssemblyRef = 0x23000000,
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -760,7 +1085,12 @@ namespace System.Workflow.ComponentModel.Compiler
             public ushort minorVersion;
             public ushort buildNumber;
             public ushort revisionNumber;
-            [SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources", Justification = "This points to memory and not to a native handle. So leaking will result in a memory leak at worst")]
+
+            [SuppressMessage(
+                "Microsoft.Reliability",
+                "CA2006:UseSafeHandleToEncapsulateNativeResources",
+                Justification = "This points to memory and not to a native handle. So leaking will result in a memory leak at worst"
+            )]
             public IntPtr locale;
             public uint localeSize;
             public IntPtr processorIds;
@@ -770,20 +1100,30 @@ namespace System.Workflow.ComponentModel.Compiler
         };
 
         [ComImport(), Guid(Guids.CLSID_MetaDataDispenser)]
-        private class MetaDataDispenser
-        {
-        }
+        private class MetaDataDispenser { }
 
-        [ComImport(), Guid(Guids.IID_IMetaDataDispenser), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        [
+            ComImport(),
+            Guid(Guids.IID_IMetaDataDispenser),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+        ]
         private interface IMetaDataDispenser
         {
             void DefineScope();
-            int OpenScope([In, MarshalAs(UnmanagedType.LPWStr)]string scopeName, uint openFlags, [In]ref Guid riid, [Out, MarshalAs(UnmanagedType.IUnknown)] out object unknown);
+            int OpenScope(
+                [In, MarshalAs(UnmanagedType.LPWStr)] string scopeName,
+                uint openFlags,
+                [In] ref Guid riid,
+                [Out, MarshalAs(UnmanagedType.IUnknown)] out object unknown
+            );
             void OpenScopeOnMemory();
-
         }
 
-        [ComImport(), Guid(Guids.IID_IMetaDataImport), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        [
+            ComImport(),
+            Guid(Guids.IID_IMetaDataImport),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+        ]
         private interface IMetaDataImport
         {
             void CloseEnum([In] IntPtr enumHandle);
@@ -791,21 +1131,47 @@ namespace System.Workflow.ComponentModel.Compiler
             void ResetEnum();
             void EnumTypeDefs();
             void EnumInterfaceImpls();
-            int EnumTypeRefs([In, Out] ref IntPtr enumHandle, [In, Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] uint[] rTypeRefs, uint cMax, ref uint typeRefs);
+            int EnumTypeRefs(
+                [In, Out] ref IntPtr enumHandle,
+                [In, Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] uint[] rTypeRefs,
+                uint cMax,
+                ref uint typeRefs
+            );
             void FindTypeDefByName();
             void GetScopeProps();
             void GetModuleFromScope();
             void GetTypeDefProps();
             void GetInterfaceImplProps();
-            int GetTypeRefProps([In] uint typeRefToken, [Out] out uint resolutionScopeToken, IntPtr typeRefName, uint nameLength, [Out] out uint actualLength);
+            int GetTypeRefProps(
+                [In] uint typeRefToken,
+                [Out] out uint resolutionScopeToken,
+                IntPtr typeRefName,
+                uint nameLength,
+                [Out] out uint actualLength
+            );
             /*....*/
         }
 
-        [ComImport(), Guid(Guids.IID_IMetaDataAssemblyImport), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        [
+            ComImport(),
+            Guid(Guids.IID_IMetaDataAssemblyImport),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+        ]
         private interface IMetaDataAssemblyImport
         {
             void GetAssemblyProps();
-            int GetAssemblyRefProps([In] uint assemblyRefToken, [Out] out IntPtr publicKeyOrToken, [Out] out uint sizePublicKeyOrToken, IntPtr assemblyName, [In] uint assemblyNameBufferSize, [Out] out uint assemblyNameSize, [Out] out AssemblyMetadata assemblyMetaData, [Out] out IntPtr hashValueBlob, [Out] out uint hashValueSize, [Out] out uint assemblyRefFlags);
+            int GetAssemblyRefProps(
+                [In] uint assemblyRefToken,
+                [Out] out IntPtr publicKeyOrToken,
+                [Out] out uint sizePublicKeyOrToken,
+                IntPtr assemblyName,
+                [In] uint assemblyNameBufferSize,
+                [Out] out uint assemblyNameSize,
+                [Out] out AssemblyMetadata assemblyMetaData,
+                [Out] out IntPtr hashValueBlob,
+                [Out] out uint hashValueSize,
+                [Out] out uint assemblyRefFlags
+            );
             /*....*/
         }
 
@@ -820,17 +1186,36 @@ namespace System.Workflow.ComponentModel.Compiler
 
             if (metaDataDispenser == null)
             {
-                throw new InvalidOperationException(String.Format(SR.GetString(SR.Error_MetaDataInterfaceMissing), assemblyLocation, "IMetaDataDispenser"));
+                throw new InvalidOperationException(
+                    String.Format(
+                        SR.GetString(SR.Error_MetaDataInterfaceMissing),
+                        assemblyLocation,
+                        "IMetaDataDispenser"
+                    )
+                );
             }
 
             Guid guidMetaDataImport = new Guid(Guids.IID_IMetaDataImport);
             object metaDataImportObj = null;
 
-            NativeMethods.ThrowOnFailure(metaDataDispenser.OpenScope(assemblyLocation, 0, ref guidMetaDataImport, out metaDataImportObj));
+            NativeMethods.ThrowOnFailure(
+                metaDataDispenser.OpenScope(
+                    assemblyLocation,
+                    0,
+                    ref guidMetaDataImport,
+                    out metaDataImportObj
+                )
+            );
             IMetaDataImport metaDataImport = metaDataImportObj as IMetaDataImport;
             if (metaDataImport == null)
             {
-                throw new InvalidOperationException(String.Format(SR.GetString(SR.Error_MetaDataInterfaceMissing), assemblyLocation, "IMetaDataImport"));
+                throw new InvalidOperationException(
+                    String.Format(
+                        SR.GetString(SR.Error_MetaDataInterfaceMissing),
+                        assemblyLocation,
+                        "IMetaDataImport"
+                    )
+                );
             }
 
             IntPtr enumHandle = new IntPtr();
@@ -841,21 +1226,48 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 do
                 {
-                    NativeMethods.ThrowOnFailure((metaDataImport.EnumTypeRefs(ref enumHandle, typeRefs, (uint)typeRefs.Length, ref typeRefCount)));
+                    NativeMethods.ThrowOnFailure(
+                        (
+                            metaDataImport.EnumTypeRefs(
+                                ref enumHandle,
+                                typeRefs,
+                                (uint)typeRefs.Length,
+                                ref typeRefCount
+                            )
+                        )
+                    );
                     for (int typeRefIndex = 0; typeRefIndex < typeRefCount; typeRefIndex++)
                     {
                         IntPtr typeRefNamePtr = IntPtr.Zero;
                         uint typeRefNameLength;
                         uint resolutionScopeToken;
 
-                        NativeMethods.ThrowOnFailure(metaDataImport.GetTypeRefProps(typeRefs[typeRefIndex], out resolutionScopeToken, typeRefNamePtr, 0, out typeRefNameLength));
+                        NativeMethods.ThrowOnFailure(
+                            metaDataImport.GetTypeRefProps(
+                                typeRefs[typeRefIndex],
+                                out resolutionScopeToken,
+                                typeRefNamePtr,
+                                0,
+                                out typeRefNameLength
+                            )
+                        );
                         if (typeRefNameLength > 0)
                         {
                             string typeRefName = String.Empty;
-                            typeRefNamePtr = Marshal.AllocCoTaskMem((int)(2 * (typeRefNameLength + 1)));
+                            typeRefNamePtr = Marshal.AllocCoTaskMem(
+                                (int)(2 * (typeRefNameLength + 1))
+                            );
                             try
                             {
-                                NativeMethods.ThrowOnFailure(metaDataImport.GetTypeRefProps(typeRefs[typeRefIndex], out resolutionScopeToken, typeRefNamePtr, typeRefNameLength, out typeRefNameLength));
+                                NativeMethods.ThrowOnFailure(
+                                    metaDataImport.GetTypeRefProps(
+                                        typeRefs[typeRefIndex],
+                                        out resolutionScopeToken,
+                                        typeRefNamePtr,
+                                        typeRefNameLength,
+                                        out typeRefNameLength
+                                    )
+                                );
                             }
                             finally
                             {
@@ -863,13 +1275,23 @@ namespace System.Workflow.ComponentModel.Compiler
                                 Marshal.FreeCoTaskMem(typeRefNamePtr);
                             }
 
-                            IMetaDataAssemblyImport metaDataAssemblyImport = metaDataImportObj as IMetaDataAssemblyImport;
+                            IMetaDataAssemblyImport metaDataAssemblyImport =
+                                metaDataImportObj as IMetaDataAssemblyImport;
                             if (metaDataAssemblyImport == null)
                             {
-                                throw new InvalidOperationException(String.Format(SR.GetString(SR.Error_MetaDataInterfaceMissing), assemblyLocation, "IMetaDataAssemblyImport"));
+                                throw new InvalidOperationException(
+                                    String.Format(
+                                        SR.GetString(SR.Error_MetaDataInterfaceMissing),
+                                        assemblyLocation,
+                                        "IMetaDataAssemblyImport"
+                                    )
+                                );
                             }
 
-                            if (TokenTypeFromToken(resolutionScopeToken) == MetadataTokenType.AssemblyRef)
+                            if (
+                                TokenTypeFromToken(resolutionScopeToken)
+                                == MetadataTokenType.AssemblyRef
+                            )
                             {
                                 AssemblyMetadata assemblyMetadata;
                                 IntPtr publicKeyOrToken = IntPtr.Zero;
@@ -880,28 +1302,77 @@ namespace System.Workflow.ComponentModel.Compiler
                                 uint hashValueSize;
                                 uint assemblyRefFlags;
 
-                                NativeMethods.ThrowOnFailure(metaDataAssemblyImport.GetAssemblyRefProps(resolutionScopeToken, out publicKeyOrToken, out publicKeyOrTokenSize, assemblyName, 0, out assemblyNameSize, out assemblyMetadata, out hashValueBlob, out hashValueSize, out assemblyRefFlags));
+                                NativeMethods.ThrowOnFailure(
+                                    metaDataAssemblyImport.GetAssemblyRefProps(
+                                        resolutionScopeToken,
+                                        out publicKeyOrToken,
+                                        out publicKeyOrTokenSize,
+                                        assemblyName,
+                                        0,
+                                        out assemblyNameSize,
+                                        out assemblyMetadata,
+                                        out hashValueBlob,
+                                        out hashValueSize,
+                                        out assemblyRefFlags
+                                    )
+                                );
 
                                 if (assemblyNameSize > 0)
-                                    assemblyName = Marshal.AllocCoTaskMem((int)(2 * (assemblyNameSize + 1)));
+                                    assemblyName = Marshal.AllocCoTaskMem(
+                                        (int)(2 * (assemblyNameSize + 1))
+                                    );
 
                                 if (assemblyMetadata.localeSize > 0)
-                                    assemblyMetadata.locale = Marshal.AllocCoTaskMem((int)(2 * (assemblyMetadata.localeSize + 1)));
+                                    assemblyMetadata.locale = Marshal.AllocCoTaskMem(
+                                        (int)(2 * (assemblyMetadata.localeSize + 1))
+                                    );
 
                                 try
                                 {
                                     if (assemblyNameSize > 0 || assemblyMetadata.localeSize > 0)
                                     {
-                                        NativeMethods.ThrowOnFailure(metaDataAssemblyImport.GetAssemblyRefProps(resolutionScopeToken, out publicKeyOrToken, out publicKeyOrTokenSize, assemblyName, assemblyNameSize, out assemblyNameSize, out assemblyMetadata, out hashValueBlob, out hashValueSize, out assemblyRefFlags));
+                                        NativeMethods.ThrowOnFailure(
+                                            metaDataAssemblyImport.GetAssemblyRefProps(
+                                                resolutionScopeToken,
+                                                out publicKeyOrToken,
+                                                out publicKeyOrTokenSize,
+                                                assemblyName,
+                                                assemblyNameSize,
+                                                out assemblyNameSize,
+                                                out assemblyMetadata,
+                                                out hashValueBlob,
+                                                out hashValueSize,
+                                                out assemblyRefFlags
+                                            )
+                                        );
                                     }
 
                                     String publicKeyString = String.Empty;
                                     for (int pos = 0; pos < publicKeyOrTokenSize; pos++)
                                     {
-                                        publicKeyString += String.Format("{0}", Marshal.ReadByte(publicKeyOrToken, pos).ToString("x2"));
+                                        publicKeyString += String.Format(
+                                            "{0}",
+                                            Marshal.ReadByte(publicKeyOrToken, pos).ToString("x2")
+                                        );
                                     }
 
-                                    yield return String.Format("{0}, {1}, Version={2}.{3}.{4}.{5}, Culture={6}, PublicKeyToken={7}", typeRefName, Marshal.PtrToStringUni(assemblyName), assemblyMetadata.majorVersion, assemblyMetadata.minorVersion, assemblyMetadata.buildNumber, assemblyMetadata.revisionNumber, String.IsNullOrEmpty(Marshal.PtrToStringUni(assemblyMetadata.locale)) ? "neutral" : Marshal.PtrToStringUni(assemblyMetadata.locale), String.IsNullOrEmpty(publicKeyString) ? "null" : publicKeyString);
+                                    yield return String.Format(
+                                        "{0}, {1}, Version={2}.{3}.{4}.{5}, Culture={6}, PublicKeyToken={7}",
+                                        typeRefName,
+                                        Marshal.PtrToStringUni(assemblyName),
+                                        assemblyMetadata.majorVersion,
+                                        assemblyMetadata.minorVersion,
+                                        assemblyMetadata.buildNumber,
+                                        assemblyMetadata.revisionNumber,
+                                        String.IsNullOrEmpty(
+                                            Marshal.PtrToStringUni(assemblyMetadata.locale)
+                                        )
+                                            ? "neutral"
+                                            : Marshal.PtrToStringUni(assemblyMetadata.locale),
+                                        String.IsNullOrEmpty(publicKeyString)
+                                            ? "null"
+                                            : publicKeyString
+                                    );
                                 }
                                 finally
                                 {
@@ -911,7 +1382,10 @@ namespace System.Workflow.ComponentModel.Compiler
                                         assemblyName = IntPtr.Zero;
                                     }
 
-                                    if (assemblyMetadata.locale != IntPtr.Zero && assemblyMetadata.localeSize > 0)
+                                    if (
+                                        assemblyMetadata.locale != IntPtr.Zero
+                                        && assemblyMetadata.localeSize > 0
+                                    )
                                     {
                                         Marshal.FreeCoTaskMem(assemblyMetadata.locale);
                                         assemblyMetadata.locale = IntPtr.Zero;
@@ -920,8 +1394,7 @@ namespace System.Workflow.ComponentModel.Compiler
                             }
                         }
                     }
-                }
-                while (typeRefCount > 0);
+                } while (typeRefCount > 0);
             }
             finally
             {

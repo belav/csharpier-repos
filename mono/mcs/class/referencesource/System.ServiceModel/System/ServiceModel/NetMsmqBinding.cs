@@ -32,7 +32,13 @@ namespace System.ServiceModel
         public NetMsmqBinding(NetMsmqSecurityMode securityMode)
         {
             if (!NetMsmqSecurityModeHelper.IsDefined(securityMode))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("mode", (int)securityMode, typeof(NetMsmqSecurityMode)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "mode",
+                        (int)securityMode,
+                        typeof(NetMsmqSecurityMode)
+                    )
+                );
             Initialize();
             this.security = new NetMsmqSecurity(securityMode);
         }
@@ -47,14 +53,8 @@ namespace System.ServiceModel
         [DefaultValue(MsmqDefaults.QueueTransferProtocol)]
         public QueueTransferProtocol QueueTransferProtocol
         {
-            get
-            {
-                return (this.transport as MsmqTransportBindingElement).QueueTransferProtocol;
-            }
-            set
-            {
-                (this.transport as MsmqTransportBindingElement).QueueTransferProtocol = value;
-            }
+            get { return (this.transport as MsmqTransportBindingElement).QueueTransferProtocol; }
+            set { (this.transport as MsmqTransportBindingElement).QueueTransferProtocol = value; }
         }
 
         public XmlDictionaryReaderQuotas ReaderQuotas
@@ -83,35 +83,20 @@ namespace System.ServiceModel
         public long MaxBufferPoolSize
         {
             get { return transport.MaxBufferPoolSize; }
-            set
-            {
-                transport.MaxBufferPoolSize = value;
-            }
+            set { transport.MaxBufferPoolSize = value; }
         }
 
         internal int MaxPoolSize
         {
-            get
-            {
-                return (transport as MsmqTransportBindingElement).MaxPoolSize;
-            }
-            set
-            {
-                (transport as MsmqTransportBindingElement).MaxPoolSize = value;
-            }
+            get { return (transport as MsmqTransportBindingElement).MaxPoolSize; }
+            set { (transport as MsmqTransportBindingElement).MaxPoolSize = value; }
         }
 
         [DefaultValue(MsmqDefaults.UseActiveDirectory)]
         public bool UseActiveDirectory
         {
-            get
-            {
-                return (transport as MsmqTransportBindingElement).UseActiveDirectory;
-            }
-            set
-            {
-                (transport as MsmqTransportBindingElement).UseActiveDirectory = value;
-            }
+            get { return (transport as MsmqTransportBindingElement).UseActiveDirectory; }
+            set { (transport as MsmqTransportBindingElement).UseActiveDirectory = value; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -148,16 +133,24 @@ namespace System.ServiceModel
                 return true;
             }
 
-            if (this.security.Transport.MsmqAuthenticationMode != MsmqDefaults.MsmqAuthenticationMode ||
-            this.security.Transport.MsmqEncryptionAlgorithm != MsmqDefaults.MsmqEncryptionAlgorithm ||
-            this.security.Transport.MsmqSecureHashAlgorithm != MsmqDefaults.MsmqSecureHashAlgorithm ||
-            this.security.Transport.MsmqProtectionLevel != MsmqDefaults.MsmqProtectionLevel)
+            if (
+                this.security.Transport.MsmqAuthenticationMode
+                    != MsmqDefaults.MsmqAuthenticationMode
+                || this.security.Transport.MsmqEncryptionAlgorithm
+                    != MsmqDefaults.MsmqEncryptionAlgorithm
+                || this.security.Transport.MsmqSecureHashAlgorithm
+                    != MsmqDefaults.MsmqSecureHashAlgorithm
+                || this.security.Transport.MsmqProtectionLevel != MsmqDefaults.MsmqProtectionLevel
+            )
             {
                 return true;
             }
 
-            if (this.security.Message.AlgorithmSuite != MsmqDefaults.MessageSecurityAlgorithmSuite ||
-            this.security.Message.ClientCredentialType != MsmqDefaults.DefaultClientCredentialType)
+            if (
+                this.security.Message.AlgorithmSuite != MsmqDefaults.MessageSecurityAlgorithmSuite
+                || this.security.Message.ClientCredentialType
+                    != MsmqDefaults.DefaultClientCredentialType
+            )
             {
                 return true;
             }
@@ -170,7 +163,10 @@ namespace System.ServiceModel
             encoding = new BinaryMessageEncodingBindingElement();
         }
 
-        void InitializeFrom(MsmqTransportBindingElement transport, BinaryMessageEncodingBindingElement encoding)
+        void InitializeFrom(
+            MsmqTransportBindingElement transport,
+            BinaryMessageEncodingBindingElement encoding
+        )
         {
             // only set properties that have standard binding manifestations: MaxPoolSize *is not* one of them
             this.CustomDeadLetterQueue = transport.CustomDeadLetterQueue;
@@ -193,10 +189,13 @@ namespace System.ServiceModel
             this.ReaderQuotas = encoding.ReaderQuotas;
         }
 
-        // check that properties of the HttpTransportBindingElement and 
+        // check that properties of the HttpTransportBindingElement and
         // MessageEncodingBindingElement not exposed as properties on NetMsmqBinding
         // match default values of the binding elements
-        bool IsBindingElementsMatch(MsmqTransportBindingElement transport, MessageEncodingBindingElement encoding)
+        bool IsBindingElementsMatch(
+            MsmqTransportBindingElement transport,
+            MessageEncodingBindingElement encoding
+        )
         {
             // we do not have to check the transport match here: they always match
             if (!this.GetTransport().IsMatch(transport))
@@ -209,14 +208,20 @@ namespace System.ServiceModel
 
         void ApplyConfiguration(string configurationName)
         {
-            Config.NetMsmqBindingCollectionElement section = Config.NetMsmqBindingCollectionElement.GetBindingCollectionElement();
+            Config.NetMsmqBindingCollectionElement section =
+                Config.NetMsmqBindingCollectionElement.GetBindingCollectionElement();
             Config.NetMsmqBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                    SR.GetString(SR.ConfigInvalidBindingConfigurationName,
-                                 configurationName,
-                                 Config.ConfigurationStrings.NetMsmqBindingCollectionElementName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigInvalidBindingConfigurationName,
+                            configurationName,
+                            Config.ConfigurationStrings.NetMsmqBindingCollectionElementName
+                        )
+                    )
+                );
             }
             else
             {
@@ -225,7 +230,7 @@ namespace System.ServiceModel
         }
 
         public override BindingElementCollection CreateBindingElements()
-        {   // return collection of BindingElements
+        { // return collection of BindingElements
             BindingElementCollection bindingElements = new BindingElementCollection();
             // order of BindingElements is important
             // add security
@@ -286,7 +291,10 @@ namespace System.ServiceModel
 
         SecurityBindingElement CreateMessageSecurity()
         {
-            if (this.security.Mode == NetMsmqSecurityMode.Message || this.security.Mode == NetMsmqSecurityMode.Both)
+            if (
+                this.security.Mode == NetMsmqSecurityMode.Message
+                || this.security.Mode == NetMsmqSecurityMode.Both
+            )
             {
                 return this.security.CreateMessageSecurity();
             }
@@ -296,15 +304,27 @@ namespace System.ServiceModel
             }
         }
 
-        static bool TryCreateSecurity(SecurityBindingElement sbe, UnifiedSecurityMode mode, out NetMsmqSecurity security)
+        static bool TryCreateSecurity(
+            SecurityBindingElement sbe,
+            UnifiedSecurityMode mode,
+            out NetMsmqSecurity security
+        )
         {
             if (sbe != null)
                 mode &= UnifiedSecurityMode.Message | UnifiedSecurityMode.Both;
             else
                 mode &= ~(UnifiedSecurityMode.Message | UnifiedSecurityMode.Both);
 
-            NetMsmqSecurityMode netMsmqSecurityMode = NetMsmqSecurityModeHelper.ToSecurityMode(mode);
-            Fx.Assert(NetMsmqSecurityModeHelper.IsDefined(netMsmqSecurityMode), string.Format("Invalid NetMsmqSecurityMode value: {0}.", netMsmqSecurityMode.ToString()));
+            NetMsmqSecurityMode netMsmqSecurityMode = NetMsmqSecurityModeHelper.ToSecurityMode(
+                mode
+            );
+            Fx.Assert(
+                NetMsmqSecurityModeHelper.IsDefined(netMsmqSecurityMode),
+                string.Format(
+                    "Invalid NetMsmqSecurityMode value: {0}.",
+                    netMsmqSecurityMode.ToString()
+                )
+            );
 
             if (NetMsmqSecurity.TryCreate(sbe, netMsmqSecurityMode, out security))
             {

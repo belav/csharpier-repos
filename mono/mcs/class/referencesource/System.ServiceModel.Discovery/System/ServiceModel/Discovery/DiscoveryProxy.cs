@@ -14,36 +14,33 @@ namespace System.ServiceModel.Discovery
     using System.Xml;
 
     [Fx.Tag.XamlVisible(false)]
-    public abstract class DiscoveryProxy :
-        IAnnouncementContractApril2005,
-        IAnnouncementContract11,
-        IAnnouncementContractCD1,
-        IDiscoveryContractAdhocApril2005,
-        IDiscoveryContractManagedApril2005,
-        IDiscoveryContractAdhoc11,
-        IDiscoveryContractManaged11,
-        IDiscoveryContractAdhocCD1,
-        IDiscoveryContractManagedCD1,
-        IAnnouncementServiceImplementation,
-        IDiscoveryServiceImplementation,
-        IMulticastSuppressionImplementation
+    public abstract class DiscoveryProxy
+        : IAnnouncementContractApril2005,
+            IAnnouncementContract11,
+            IAnnouncementContractCD1,
+            IDiscoveryContractAdhocApril2005,
+            IDiscoveryContractManagedApril2005,
+            IDiscoveryContractAdhoc11,
+            IDiscoveryContractManaged11,
+            IDiscoveryContractAdhocCD1,
+            IDiscoveryContractManagedCD1,
+            IAnnouncementServiceImplementation,
+            IDiscoveryServiceImplementation,
+            IMulticastSuppressionImplementation
     {
         DiscoveryMessageSequenceGenerator messageSequenceGenerator;
         DuplicateDetector<UniqueId> duplicateDetector;
 
         protected DiscoveryProxy()
-            : this(new DiscoveryMessageSequenceGenerator())
-        {
-        }
+            : this(new DiscoveryMessageSequenceGenerator()) { }
 
         protected DiscoveryProxy(DiscoveryMessageSequenceGenerator messageSequenceGenerator)
-            : this(messageSequenceGenerator, DiscoveryDefaults.DuplicateMessageHistoryLength)
-        {
-        }
+            : this(messageSequenceGenerator, DiscoveryDefaults.DuplicateMessageHistoryLength) { }
 
         protected DiscoveryProxy(
             DiscoveryMessageSequenceGenerator messageSequenceGenerator,
-            int duplicateMessageHistoryLength)
+            int duplicateMessageHistoryLength
+        )
         {
             if (messageSequenceGenerator == null)
             {
@@ -54,21 +51,30 @@ namespace System.ServiceModel.Discovery
                 throw FxTrace.Exception.ArgumentOutOfRange(
                     "duplicateMessageHistoryLength",
                     duplicateMessageHistoryLength,
-                    SR.DiscoveryNegativeDuplicateMessageHistoryLength);
+                    SR.DiscoveryNegativeDuplicateMessageHistoryLength
+                );
             }
             if (duplicateMessageHistoryLength > 0)
             {
-                this.duplicateDetector = new DuplicateDetector<UniqueId>(duplicateMessageHistoryLength);
+                this.duplicateDetector = new DuplicateDetector<UniqueId>(
+                    duplicateMessageHistoryLength
+                );
             }
             this.messageSequenceGenerator = messageSequenceGenerator;
         }
 
         void IAnnouncementContractApril2005.HelloOperation(HelloMessageApril2005 message)
         {
-            Fx.Assert("The sync method IAnnouncementContractApril2005.HelloOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IAnnouncementContractApril2005.HelloOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IAnnouncementContractApril2005.BeginHelloOperation(HelloMessageApril2005 message, AsyncCallback callback, object state)
+        IAsyncResult IAnnouncementContractApril2005.BeginHelloOperation(
+            HelloMessageApril2005 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new HelloOperationApril2005AsyncResult(this, message, callback, state);
         }
@@ -80,10 +86,16 @@ namespace System.ServiceModel.Discovery
 
         void IAnnouncementContractApril2005.ByeOperation(ByeMessageApril2005 message)
         {
-            Fx.Assert("The sync method IAnnouncementContractApril2005.ByeOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IAnnouncementContractApril2005.ByeOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IAnnouncementContractApril2005.BeginByeOperation(ByeMessageApril2005 message, AsyncCallback callback, object state)
+        IAsyncResult IAnnouncementContractApril2005.BeginByeOperation(
+            ByeMessageApril2005 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ByeOperationApril2005AsyncResult(this, message, callback, state);
         }
@@ -95,10 +107,16 @@ namespace System.ServiceModel.Discovery
 
         void IAnnouncementContract11.HelloOperation(HelloMessage11 message)
         {
-            Fx.Assert("The sync method IAnnouncementContract11.HelloOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IAnnouncementContract11.HelloOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IAnnouncementContract11.BeginHelloOperation(HelloMessage11 message, AsyncCallback callback, object state)
+        IAsyncResult IAnnouncementContract11.BeginHelloOperation(
+            HelloMessage11 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new HelloOperation11AsyncResult(this, message, callback, state);
         }
@@ -110,10 +128,16 @@ namespace System.ServiceModel.Discovery
 
         void IAnnouncementContract11.ByeOperation(ByeMessage11 message)
         {
-            Fx.Assert("The sync method IAnnouncementContract11.ByeOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IAnnouncementContract11.ByeOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IAnnouncementContract11.BeginByeOperation(ByeMessage11 message, AsyncCallback callback, object state)
+        IAsyncResult IAnnouncementContract11.BeginByeOperation(
+            ByeMessage11 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ByeOperation11AsyncResult(this, message, callback, state);
         }
@@ -125,10 +149,16 @@ namespace System.ServiceModel.Discovery
 
         void IAnnouncementContractCD1.HelloOperation(HelloMessageCD1 message)
         {
-            Fx.Assert("The sync method IAnnouncementContractCD1.HelloOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IAnnouncementContractCD1.HelloOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IAnnouncementContractCD1.BeginHelloOperation(HelloMessageCD1 message, AsyncCallback callback, object state)
+        IAsyncResult IAnnouncementContractCD1.BeginHelloOperation(
+            HelloMessageCD1 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new HelloOperationCD1AsyncResult(this, message, callback, state);
         }
@@ -140,10 +170,16 @@ namespace System.ServiceModel.Discovery
 
         void IAnnouncementContractCD1.ByeOperation(ByeMessageCD1 message)
         {
-            Fx.Assert("The sync method IAnnouncementContractCD1.ByeOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IAnnouncementContractCD1.ByeOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IAnnouncementContractCD1.BeginByeOperation(ByeMessageCD1 message, AsyncCallback callback, object state)
+        IAsyncResult IAnnouncementContractCD1.BeginByeOperation(
+            ByeMessageCD1 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ByeOperationCD1AsyncResult(this, message, callback, state);
         }
@@ -155,10 +191,16 @@ namespace System.ServiceModel.Discovery
 
         void IDiscoveryContractApril2005.ProbeOperation(ProbeMessageApril2005 request)
         {
-            Fx.Assert("The sync method IDiscoveryContractApril2005.ProbeOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IDiscoveryContractApril2005.ProbeOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IDiscoveryContractApril2005.BeginProbeOperation(ProbeMessageApril2005 request, AsyncCallback callback, object state)
+        IAsyncResult IDiscoveryContractApril2005.BeginProbeOperation(
+            ProbeMessageApril2005 request,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ProbeDuplexApril2005AsyncResult(request, this, this, callback, state);
         }
@@ -170,10 +212,16 @@ namespace System.ServiceModel.Discovery
 
         void IDiscoveryContractApril2005.ResolveOperation(ResolveMessageApril2005 request)
         {
-            Fx.Assert("The sync method IDiscoveryContractApril2005.ResolveOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IDiscoveryContractApril2005.ResolveOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IDiscoveryContractApril2005.BeginResolveOperation(ResolveMessageApril2005 request, AsyncCallback callback, object state)
+        IAsyncResult IDiscoveryContractApril2005.BeginResolveOperation(
+            ResolveMessageApril2005 request,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ResolveDuplexApril2005AsyncResult(request, this, this, callback, state);
         }
@@ -185,10 +233,16 @@ namespace System.ServiceModel.Discovery
 
         void IDiscoveryContractAdhoc11.ProbeOperation(ProbeMessage11 request)
         {
-            Fx.Assert("The sync method IDiscoveryContractAdhoc11.ProbeOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IDiscoveryContractAdhoc11.ProbeOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IDiscoveryContractAdhoc11.BeginProbeOperation(ProbeMessage11 request, AsyncCallback callback, object state)
+        IAsyncResult IDiscoveryContractAdhoc11.BeginProbeOperation(
+            ProbeMessage11 request,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ProbeDuplex11AsyncResult(request, this, this, callback, state);
         }
@@ -200,10 +254,16 @@ namespace System.ServiceModel.Discovery
 
         void IDiscoveryContractAdhoc11.ResolveOperation(ResolveMessage11 request)
         {
-            Fx.Assert("The sync method IDiscoveryContractAdhoc11.ResolveOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IDiscoveryContractAdhoc11.ResolveOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IDiscoveryContractAdhoc11.BeginResolveOperation(ResolveMessage11 request, AsyncCallback callback, object state)
+        IAsyncResult IDiscoveryContractAdhoc11.BeginResolveOperation(
+            ResolveMessage11 request,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ResolveDuplex11AsyncResult(request, this, this, callback, state);
         }
@@ -215,11 +275,17 @@ namespace System.ServiceModel.Discovery
 
         ProbeMatchesMessage11 IDiscoveryContractManaged11.ProbeOperation(ProbeMessage11 request)
         {
-            Fx.Assert("The sync method IDiscoveryContractManaged11.ProbeOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IDiscoveryContractManaged11.ProbeOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
             return null;
         }
 
-        IAsyncResult IDiscoveryContractManaged11.BeginProbeOperation(ProbeMessage11 request, AsyncCallback callback, object state)
+        IAsyncResult IDiscoveryContractManaged11.BeginProbeOperation(
+            ProbeMessage11 request,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ProbeRequestResponse11AsyncResult(request, this, callback, state);
         }
@@ -229,13 +295,21 @@ namespace System.ServiceModel.Discovery
             return ProbeRequestResponse11AsyncResult.End(result);
         }
 
-        ResolveMatchesMessage11 IDiscoveryContractManaged11.ResolveOperation(ResolveMessage11 request)
+        ResolveMatchesMessage11 IDiscoveryContractManaged11.ResolveOperation(
+            ResolveMessage11 request
+        )
         {
-            Fx.Assert("The sync method IDiscoveryContractManaged11.ResolveOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IDiscoveryContractManaged11.ResolveOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
             return null;
         }
 
-        IAsyncResult IDiscoveryContractManaged11.BeginResolveOperation(ResolveMessage11 request, AsyncCallback callback, object state)
+        IAsyncResult IDiscoveryContractManaged11.BeginResolveOperation(
+            ResolveMessage11 request,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ResolveRequestResponse11AsyncResult(request, this, callback, state);
         }
@@ -247,10 +321,16 @@ namespace System.ServiceModel.Discovery
 
         void IDiscoveryContractAdhocCD1.ProbeOperation(ProbeMessageCD1 request)
         {
-            Fx.Assert("The sync method IDiscoveryContractAdhocCD1.ProbeOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IDiscoveryContractAdhocCD1.ProbeOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IDiscoveryContractAdhocCD1.BeginProbeOperation(ProbeMessageCD1 request, AsyncCallback callback, object state)
+        IAsyncResult IDiscoveryContractAdhocCD1.BeginProbeOperation(
+            ProbeMessageCD1 request,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ProbeDuplexCD1AsyncResult(request, this, this, callback, state);
         }
@@ -262,10 +342,16 @@ namespace System.ServiceModel.Discovery
 
         void IDiscoveryContractAdhocCD1.ResolveOperation(ResolveMessageCD1 request)
         {
-            Fx.Assert("The sync method IDiscoveryContractAdhocCD1.ResolveOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IDiscoveryContractAdhocCD1.ResolveOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IDiscoveryContractAdhocCD1.BeginResolveOperation(ResolveMessageCD1 request, AsyncCallback callback, object state)
+        IAsyncResult IDiscoveryContractAdhocCD1.BeginResolveOperation(
+            ResolveMessageCD1 request,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ResolveDuplexCD1AsyncResult(request, this, this, callback, state);
         }
@@ -277,11 +363,17 @@ namespace System.ServiceModel.Discovery
 
         ProbeMatchesMessageCD1 IDiscoveryContractManagedCD1.ProbeOperation(ProbeMessageCD1 request)
         {
-            Fx.Assert("The sync method IDiscoveryContractManagedCD1.ProbeOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IDiscoveryContractManagedCD1.ProbeOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
             return null;
         }
 
-        IAsyncResult IDiscoveryContractManagedCD1.BeginProbeOperation(ProbeMessageCD1 request, AsyncCallback callback, object state)
+        IAsyncResult IDiscoveryContractManagedCD1.BeginProbeOperation(
+            ProbeMessageCD1 request,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ProbeRequestResponseCD1AsyncResult(request, this, callback, state);
         }
@@ -291,34 +383,51 @@ namespace System.ServiceModel.Discovery
             return ProbeRequestResponseCD1AsyncResult.End(result);
         }
 
-        ResolveMatchesMessageCD1 IDiscoveryContractManagedCD1.ResolveOperation(ResolveMessageCD1 request)
+        ResolveMatchesMessageCD1 IDiscoveryContractManagedCD1.ResolveOperation(
+            ResolveMessageCD1 request
+        )
         {
-            Fx.Assert("The sync method IDiscoveryContractManagedCD1.ResolveOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IDiscoveryContractManagedCD1.ResolveOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
             return null;
         }
 
-        IAsyncResult IDiscoveryContractManagedCD1.BeginResolveOperation(ResolveMessageCD1 request, AsyncCallback callback, object state)
+        IAsyncResult IDiscoveryContractManagedCD1.BeginResolveOperation(
+            ResolveMessageCD1 request,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ResolveRequestResponseCD1AsyncResult(request, this, callback, state);
         }
 
-        ResolveMatchesMessageCD1 IDiscoveryContractManagedCD1.EndResolveOperation(IAsyncResult result)
+        ResolveMatchesMessageCD1 IDiscoveryContractManagedCD1.EndResolveOperation(
+            IAsyncResult result
+        )
         {
             return ResolveRequestResponseCD1AsyncResult.End(result);
         }
 
         bool IAnnouncementServiceImplementation.IsDuplicate(UniqueId messageId)
         {
-            return (this.duplicateDetector != null) && (!this.duplicateDetector.AddIfNotDuplicate(messageId));
+            return (this.duplicateDetector != null)
+                && (!this.duplicateDetector.AddIfNotDuplicate(messageId));
         }
 
         IAsyncResult IAnnouncementServiceImplementation.OnBeginOnlineAnnouncement(
             DiscoveryMessageSequence messageSequence,
             EndpointDiscoveryMetadata endpointDiscoveryMetadata,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
-            return this.OnBeginOnlineAnnouncement(messageSequence, endpointDiscoveryMetadata, callback, state);
+            return this.OnBeginOnlineAnnouncement(
+                messageSequence,
+                endpointDiscoveryMetadata,
+                callback,
+                state
+            );
         }
 
         void IAnnouncementServiceImplementation.OnEndOnlineAnnouncement(IAsyncResult result)
@@ -330,9 +439,15 @@ namespace System.ServiceModel.Discovery
             DiscoveryMessageSequence messageSequence,
             EndpointDiscoveryMetadata endpointDiscoveryMetadata,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
-            return this.OnBeginOfflineAnnouncement(messageSequence, endpointDiscoveryMetadata, callback, state);
+            return this.OnBeginOfflineAnnouncement(
+                messageSequence,
+                endpointDiscoveryMetadata,
+                callback,
+                state
+            );
         }
 
         void IAnnouncementServiceImplementation.OnEndOfflineAnnouncement(IAsyncResult result)
@@ -342,7 +457,8 @@ namespace System.ServiceModel.Discovery
 
         bool IDiscoveryServiceImplementation.IsDuplicate(UniqueId messageId)
         {
-            return (this.duplicateDetector != null) && (!this.duplicateDetector.AddIfNotDuplicate(messageId));
+            return (this.duplicateDetector != null)
+                && (!this.duplicateDetector.AddIfNotDuplicate(messageId));
         }
 
         DiscoveryMessageSequence IDiscoveryServiceImplementation.GetNextMessageSequence()
@@ -350,7 +466,11 @@ namespace System.ServiceModel.Discovery
             return this.messageSequenceGenerator.Next();
         }
 
-        IAsyncResult IDiscoveryServiceImplementation.BeginFind(FindRequestContext findRequestContext, AsyncCallback callback, object state)
+        IAsyncResult IDiscoveryServiceImplementation.BeginFind(
+            FindRequestContext findRequestContext,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.OnBeginFind(findRequestContext, callback, state);
         }
@@ -360,7 +480,11 @@ namespace System.ServiceModel.Discovery
             this.OnEndFind(result);
         }
 
-        IAsyncResult IDiscoveryServiceImplementation.BeginResolve(ResolveCriteria resolveCriteria, AsyncCallback callback, object state)
+        IAsyncResult IDiscoveryServiceImplementation.BeginResolve(
+            ResolveCriteria resolveCriteria,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.OnBeginResolve(resolveCriteria, callback, state);
         }
@@ -370,69 +494,114 @@ namespace System.ServiceModel.Discovery
             return this.OnEndResolve(result);
         }
 
-        IAsyncResult IMulticastSuppressionImplementation.BeginShouldRedirectFind(FindCriteria findCriteria, AsyncCallback callback, object state)
+        IAsyncResult IMulticastSuppressionImplementation.BeginShouldRedirectFind(
+            FindCriteria findCriteria,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.BeginShouldRedirectFind(findCriteria, callback, state);
         }
 
-        bool IMulticastSuppressionImplementation.EndShouldRedirectFind(IAsyncResult result, out Collection<EndpointDiscoveryMetadata> redirectionEndpoints)
+        bool IMulticastSuppressionImplementation.EndShouldRedirectFind(
+            IAsyncResult result,
+            out Collection<EndpointDiscoveryMetadata> redirectionEndpoints
+        )
         {
             return this.EndShouldRedirectFind(result, out redirectionEndpoints);
         }
 
-        IAsyncResult IMulticastSuppressionImplementation.BeginShouldRedirectResolve(ResolveCriteria resolveCriteria, AsyncCallback callback, object state)
+        IAsyncResult IMulticastSuppressionImplementation.BeginShouldRedirectResolve(
+            ResolveCriteria resolveCriteria,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.BeginShouldRedirectResolve(resolveCriteria, callback, state);
         }
 
-        bool IMulticastSuppressionImplementation.EndShouldRedirectResolve(IAsyncResult result, out Collection<EndpointDiscoveryMetadata> redirectionEndpoints)
+        bool IMulticastSuppressionImplementation.EndShouldRedirectResolve(
+            IAsyncResult result,
+            out Collection<EndpointDiscoveryMetadata> redirectionEndpoints
+        )
         {
             return this.EndShouldRedirectResolve(result, out redirectionEndpoints);
         }
 
-        protected virtual IAsyncResult BeginShouldRedirectFind(FindCriteria resolveCriteria, AsyncCallback callback, object state)
+        protected virtual IAsyncResult BeginShouldRedirectFind(
+            FindCriteria resolveCriteria,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult<bool>(false, callback, state);
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters, Justification = "This is a Try pattern that requires out parameter.")]
-        protected virtual bool EndShouldRedirectFind(IAsyncResult result, out Collection<EndpointDiscoveryMetadata> redirectionEndpoints)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "This is a Try pattern that requires out parameter."
+        )]
+        protected virtual bool EndShouldRedirectFind(
+            IAsyncResult result,
+            out Collection<EndpointDiscoveryMetadata> redirectionEndpoints
+        )
         {
             redirectionEndpoints = null;
             return CompletedAsyncResult<bool>.End(result);
         }
 
-        protected virtual IAsyncResult BeginShouldRedirectResolve(ResolveCriteria findCriteria, AsyncCallback callback, object state)
+        protected virtual IAsyncResult BeginShouldRedirectResolve(
+            ResolveCriteria findCriteria,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult<bool>(false, callback, state);
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters, Justification = "This is a Try pattern that requires out parameter.")]
-        protected virtual bool EndShouldRedirectResolve(IAsyncResult result, out Collection<EndpointDiscoveryMetadata> redirectionEndpoints)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "This is a Try pattern that requires out parameter."
+        )]
+        protected virtual bool EndShouldRedirectResolve(
+            IAsyncResult result,
+            out Collection<EndpointDiscoveryMetadata> redirectionEndpoints
+        )
         {
             redirectionEndpoints = null;
             return CompletedAsyncResult<bool>.End(result);
         }
-
 
         protected abstract IAsyncResult OnBeginOnlineAnnouncement(
             DiscoveryMessageSequence messageSequence,
             EndpointDiscoveryMetadata endpointDiscoveryMetadata,
             AsyncCallback callback,
-            object state);
+            object state
+        );
         protected abstract void OnEndOnlineAnnouncement(IAsyncResult result);
 
         protected abstract IAsyncResult OnBeginOfflineAnnouncement(
             DiscoveryMessageSequence messageSequence,
             EndpointDiscoveryMetadata endpointDiscoveryMetadata,
             AsyncCallback callback,
-            object state);
+            object state
+        );
         protected abstract void OnEndOfflineAnnouncement(IAsyncResult result);
 
-        protected abstract IAsyncResult OnBeginFind(FindRequestContext findRequestContext, AsyncCallback callback, object state);
+        protected abstract IAsyncResult OnBeginFind(
+            FindRequestContext findRequestContext,
+            AsyncCallback callback,
+            object state
+        );
         protected abstract void OnEndFind(IAsyncResult result);
 
-        protected abstract IAsyncResult OnBeginResolve(ResolveCriteria resolveCriteria, AsyncCallback callback, object state);
+        protected abstract IAsyncResult OnBeginResolve(
+            ResolveCriteria resolveCriteria,
+            AsyncCallback callback,
+            object state
+        );
         protected abstract EndpointDiscoveryMetadata OnEndResolve(IAsyncResult result);
     }
 }

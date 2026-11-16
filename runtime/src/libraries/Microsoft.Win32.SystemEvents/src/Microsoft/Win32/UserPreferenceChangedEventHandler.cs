@@ -6,5 +6,8 @@ namespace Microsoft.Win32
     /// <devdoc>
     /// <para>Represents the method that will handle the <see cref='Microsoft.Win32.SystemEvents.UserPreferenceChanged'/> event.</para>
     /// </devdoc>
-    public delegate void UserPreferenceChangedEventHandler(object sender, UserPreferenceChangedEventArgs e);
+    public delegate void UserPreferenceChangedEventHandler(
+        object sender,
+        UserPreferenceChangedEventArgs e
+    );
 }

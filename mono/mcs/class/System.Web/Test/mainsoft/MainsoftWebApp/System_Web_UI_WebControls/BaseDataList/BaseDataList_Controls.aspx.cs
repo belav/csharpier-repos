@@ -28,62 +28,61 @@
 //
 
 using System;
+using System.Data;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Data;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class BaseDataList_Controls
-		: GHTDataListBase
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			HtmlForm frm = (HtmlForm)FindControl("form1");
-			this.GHTTestBegin(frm);
-			DataGrid grid1 = new DataGrid();
-			this.GHTBuildSampleDataGrid(grid1);
-			this.TestControls(grid1);
-			DataList list1 = new DataList();
-			this.GHTBuildSampleDataList(list1);
-			this.TestControls(list1);
-			this.GHTTestEnd();
-		}
+    public class BaseDataList_Controls : GHTDataListBase
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void TestControls(BaseDataList ctl)
-		{
-			this.GHTSubTestBegin("BaseDataList_" + ctl.GetType().Name + "_Controls1");
-			base.GHTActiveSubTest.Controls.Add(ctl);
-			try
-			{
-				ControlCollection collection1 = ctl.Controls;
-			}
-			catch (Exception exception2)
-			{
-				this.GHTSubTestUnexpectedExceptionCaught(exception2);
-			}
-			this.GHTSubTestEnd();
-		}
-	}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("form1");
+            this.GHTTestBegin(frm);
+            DataGrid grid1 = new DataGrid();
+            this.GHTBuildSampleDataGrid(grid1);
+            this.TestControls(grid1);
+            DataList list1 = new DataList();
+            this.GHTBuildSampleDataList(list1);
+            this.TestControls(list1);
+            this.GHTTestEnd();
+        }
+
+        private void TestControls(BaseDataList ctl)
+        {
+            this.GHTSubTestBegin("BaseDataList_" + ctl.GetType().Name + "_Controls1");
+            base.GHTActiveSubTest.Controls.Add(ctl);
+            try
+            {
+                ControlCollection collection1 = ctl.Controls;
+            }
+            catch (Exception exception2)
+            {
+                this.GHTSubTestUnexpectedExceptionCaught(exception2);
+            }
+            this.GHTSubTestEnd();
+        }
+    }
 }

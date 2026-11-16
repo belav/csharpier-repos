@@ -9,7 +9,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
 {
     public sealed class ModelValidatingEventArgs : CancelEventArgs
     {
-        public ModelValidatingEventArgs(ControllerContext controllerContext, ModelValidationNode parentNode)
+        public ModelValidatingEventArgs(
+            ControllerContext controllerContext,
+            ModelValidationNode parentNode
+        )
         {
             if (controllerContext == null)
             {

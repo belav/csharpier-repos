@@ -14,8 +14,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpFormattingService()
-        {
-        }
+        public CSharpFormattingService() { }
     }
 }

@@ -5,14 +5,14 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
     using System.Xml;
-    using System.Runtime.Serialization;
-    using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
     using System.Xml.Serialization;
+    using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
 
     class SingleBodyParameterXmlSerializerMessageFormatter : SingleBodyParameterMessageFormatter
     {
@@ -25,7 +25,13 @@ namespace System.ServiceModel.Dispatcher
         Object thisLock;
         UnwrappedTypesXmlSerializerManager.TypeSerializerPair[] typeSerializerPairs;
 
-        public SingleBodyParameterXmlSerializerMessageFormatter(OperationDescription operation, Type parameterType, bool isRequestFormatter, XmlSerializerOperationBehavior xsob, UnwrappedTypesXmlSerializerManager serializerManager)
+        public SingleBodyParameterXmlSerializerMessageFormatter(
+            OperationDescription operation,
+            Type parameterType,
+            bool isRequestFormatter,
+            XmlSerializerOperationBehavior xsob,
+            UnwrappedTypesXmlSerializerManager serializerManager
+        )
             : base(operation, isRequestFormatter, "XmlSerializer")
         {
             if (operation == null)
@@ -42,7 +48,9 @@ namespace System.ServiceModel.Dispatcher
             }
             if (serializerManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serializerManager");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "serializerManager"
+                );
             }
             this.serializerManager = serializerManager;
             this.parameterType = parameterType;
@@ -57,7 +65,9 @@ namespace System.ServiceModel.Dispatcher
                     operationTypes.Add(knownType);
                 }
             }
-            Type nullableType = SingleBodyParameterDataContractMessageFormatter.UnwrapNullableType(this.parameterType);
+            Type nullableType = SingleBodyParameterDataContractMessageFormatter.UnwrapNullableType(
+                this.parameterType
+            );
             if (nullableType != this.parameterType)
             {
                 this.knownTypes.Add(nullableType);
@@ -82,7 +92,11 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.cachedOutputSerializerType != type)
                 {
-                    Type typeForSerializer = GetTypeForSerializer(type, this.parameterType, this.knownTypes);
+                    Type typeForSerializer = GetTypeForSerializer(
+                        type,
+                        this.parameterType,
+                        this.knownTypes
+                    );
                     EnsureSerializers();
                     bool foundSerializer = false;
                     if (this.typeSerializerPairs != null)
@@ -91,7 +105,9 @@ namespace System.ServiceModel.Dispatcher
                         {
                             if (typeForSerializer == this.typeSerializerPairs[i].Type)
                             {
-                                this.cachedOutputSerializer = this.typeSerializerPairs[i].Serializer;
+                                this.cachedOutputSerializer = this.typeSerializerPairs[
+                                    i
+                                ].Serializer;
                                 this.cachedOutputSerializerType = type;
                                 foundSerializer = true;
                                 break;
@@ -122,4 +138,3 @@ namespace System.ServiceModel.Dispatcher
         }
     }
 }
-

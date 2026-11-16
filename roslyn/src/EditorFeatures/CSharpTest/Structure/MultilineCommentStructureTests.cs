@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 [Trait(Traits.Feature, Traits.Features.Outlining)]
 public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructureTests
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new MultilineCommentBlockStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new MultilineCommentBlockStructureProvider();
 
     [Fact]
     public async Task TestMultilineComment1()
@@ -33,8 +34,7 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/* Hello ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "/* Hello ...", autoCollapse: true));
     }
 
     [Fact]
@@ -47,8 +47,7 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/* Hello C# ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "/* Hello C# ...", autoCollapse: true));
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1108049")]
@@ -59,8 +58,7 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             {|span:$$/*|}
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/*  ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "/*  ...", autoCollapse: true));
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1108049")]
@@ -71,8 +69,7 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             {|span:$$/* |}
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/*  ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "/*  ...", autoCollapse: true));
     }
 
     [Fact]
@@ -92,8 +89,7 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* My ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span1", "/* My ...", autoCollapse: true));
     }
 
     [Fact]
@@ -116,8 +112,7 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* My ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span1", "/* My ...", autoCollapse: true));
     }
 
     [Fact]
@@ -141,8 +136,7 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* My ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span1", "/* My ...", autoCollapse: true));
     }
 
     [Fact]
@@ -162,8 +156,7 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* My ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span1", "/* My ...", autoCollapse: true));
     }
 
     [Fact]
@@ -186,8 +179,7 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* My ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span1", "/* My ...", autoCollapse: true));
     }
 
     [Fact]
@@ -211,8 +203,7 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* My ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span1", "/* My ...", autoCollapse: true));
     }
 
     [Fact]
@@ -226,8 +217,10 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* Comment in file ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span1", "/* Comment in file ...", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -241,8 +234,10 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* Comment in namespace ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span1", "/* Comment in namespace ...", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -260,8 +255,10 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* Comment in class ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span1", "/* Comment in class ...", autoCollapse: true)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/64001")]
@@ -282,8 +279,10 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* Comment in method ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span1", "/* Comment in method ...", autoCollapse: true)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/64001")]
@@ -307,8 +306,10 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* Comment in local function ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span1", "/* Comment in local function ...", autoCollapse: true)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/64001")]
@@ -329,8 +330,10 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
             }
             """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* Comment in constructor ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span1", "/* Comment in constructor ...", autoCollapse: true)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16186")]
@@ -338,7 +341,6 @@ public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructur
     {
         const string code = @"$${|span:/*/|}";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/* / ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "/* / ...", autoCollapse: true));
     }
 }

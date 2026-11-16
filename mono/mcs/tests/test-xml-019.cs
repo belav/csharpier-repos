@@ -3,27 +3,24 @@ using System;
 
 namespace Testing
 {
-	public class Test
-	{
-		public static void Main ()
-		{
-		}
+    public class Test
+    {
+        public static void Main() { }
 
-		/// <summary>
-		/// comment for unary operator
-		/// </summary>
-		public static bool operator ! (Test t)
-		{
-			return false;
-		}
+        /// <summary>
+        /// comment for unary operator
+        /// </summary>
+        public static bool operator !(Test t)
+        {
+            return false;
+        }
 
-		/// <summary>
-		/// comment for binary operator
-		/// </summary>
-		public static int operator + (Test t, int b)
-		{
-			return b;
-		}
-	}
+        /// <summary>
+        /// comment for binary operator
+        /// </summary>
+        public static int operator +(Test t, int b)
+        {
+            return b;
+        }
+    }
 }
-

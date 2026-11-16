@@ -9,10 +9,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Diagnostics;
 using System.Data.Common;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Globalization;
 
 namespace System.Data.Query.InternalTrees
 {
@@ -39,36 +39,42 @@ namespace System.Data.Query.InternalTrees
         /// </summary>
         /// <param name="opType"></param>
         protected ConstantBaseOp(OpType opType)
-            : base(opType)
-        {
-        }
+            : base(opType) { }
         #endregion
 
         #region public properties and methods
         /// <summary>
         /// Get the constant value
         /// </summary>
-        internal virtual Object Value { get { return m_value; } }
+        internal virtual Object Value
+        {
+            get { return m_value; }
+        }
 
         /// <summary>
         /// 0 children
         /// </summary>
-        internal override int Arity { get { return 0; } }
+        internal override int Arity
+        {
+            get { return 0; }
+        }
 
         /// <summary>
-        /// Two CostantBaseOps are equivalent if they are of the same 
-        /// derived type and have the same type and value. 
+        /// Two CostantBaseOps are equivalent if they are of the same
+        /// derived type and have the same type and value.
         /// </summary>
         /// <param name="other">the other Op</param>
         /// <returns>true, if these are equivalent (not a strict equality test)</returns>
         internal override bool IsEquivalent(Op other)
         {
             ConstantBaseOp otherConstant = other as ConstantBaseOp;
-            return 
-                otherConstant != null && 
-                this.OpType == other.OpType &&
-                otherConstant.Type.EdmEquals(this.Type) && 
-                ((otherConstant.Value == null && this.Value == null) || otherConstant.Value.Equals(this.Value));
+            return otherConstant != null
+                && this.OpType == other.OpType
+                && otherConstant.Type.EdmEquals(this.Type)
+                && (
+                    (otherConstant.Value == null && this.Value == null)
+                    || otherConstant.Value.Equals(this.Value)
+                );
         }
         #endregion
     }
@@ -84,7 +90,9 @@ namespace System.Data.Query.InternalTrees
         {
             Debug.Assert(value != null, "ConstantOp with a null value?");
         }
-        private ConstantOp() : base(OpType.Constant) { }
+
+        private ConstantOp()
+            : base(OpType.Constant) { }
         #endregion
 
         #region public methods
@@ -99,7 +107,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -108,7 +119,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
 
         #endregion
     }
@@ -120,10 +134,10 @@ namespace System.Data.Query.InternalTrees
     {
         #region constructors
         internal NullOp(TypeUsage type)
-            : base(OpType.Null, type, null)
-        {
-        }
-        private NullOp() : base(OpType.Null) { }
+            : base(OpType.Null, type, null) { }
+
+        private NullOp()
+            : base(OpType.Null) { }
         #endregion
 
         #region public apis
@@ -139,7 +153,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -148,7 +165,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
 
         #endregion
     }
@@ -164,7 +184,9 @@ namespace System.Data.Query.InternalTrees
         {
             Debug.Assert(value != null, "InternalConstantOp with a null value?");
         }
-        private InternalConstantOp() : base(OpType.InternalConstant) { }
+
+        private InternalConstantOp()
+            : base(OpType.InternalConstant) { }
         #endregion
 
         #region public apis
@@ -180,7 +202,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -189,23 +214,26 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
 
         #endregion
     }
 
     /// <summary>
-    /// Represents an internally generated constant that is used to serve as a null sentinel, 
+    /// Represents an internally generated constant that is used to serve as a null sentinel,
     /// i.e. to be checked whether it is null.
     /// </summary>
     internal sealed class NullSentinelOp : ConstantBaseOp
     {
         #region constructors
         internal NullSentinelOp(TypeUsage type, object value)
-            : base(OpType.NullSentinel, type, value)
-        {
-        }
-        private NullSentinelOp() : base(OpType.NullSentinel) { }
+            : base(OpType.NullSentinel, type, value) { }
+
+        private NullSentinelOp()
+            : base(OpType.NullSentinel) { }
         #endregion
 
         #region public apis
@@ -220,7 +248,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -229,7 +260,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
 
         #endregion
     }
@@ -241,12 +275,10 @@ namespace System.Data.Query.InternalTrees
     {
         #region constructors
         internal ConstantPredicateOp(TypeUsage type, bool value)
-            : base(OpType.ConstantPredicate, type, value)
-        {
-        }
+            : base(OpType.ConstantPredicate, type, value) { }
+
         private ConstantPredicateOp()
-            : base(OpType.ConstantPredicate)
-        { }
+            : base(OpType.ConstantPredicate) { }
         #endregion
 
         #region public methods
@@ -258,17 +290,26 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Value of the constant predicate
         /// </summary>
-        internal new bool Value { get { return (bool)base.Value; } }
+        internal new bool Value
+        {
+            get { return (bool)base.Value; }
+        }
 
         /// <summary>
         /// Is this the true predicate
         /// </summary>
-        internal bool IsTrue { get { return this.Value; } }
+        internal bool IsTrue
+        {
+            get { return this.Value; }
+        }
 
         /// <summary>
         /// Is this the 'false' predicate
         /// </summary>
-        internal bool IsFalse { get { return this.Value == false; } }
+        internal bool IsFalse
+        {
+            get { return this.Value == false; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -276,7 +317,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -285,7 +329,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
 
         #endregion
     }
@@ -302,11 +349,14 @@ namespace System.Data.Query.InternalTrees
         #endregion
 
         #region constructors
-        internal VarRefOp(Var v) : base(OpType.VarRef, v.Type)
+        internal VarRefOp(Var v)
+            : base(OpType.VarRef, v.Type)
         {
             m_var = v;
         }
-        private VarRefOp() : base(OpType.VarRef) { }
+
+        private VarRefOp()
+            : base(OpType.VarRef) { }
         #endregion
 
         #region public methods
@@ -318,7 +368,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 0 children
         /// </summary>
-        internal override int Arity { get { return 0; } }
+        internal override int Arity
+        {
+            get { return 0; }
+        }
 
         /// <summary>
         /// Two VarRefOps are equivalent, if they reference the same Var
@@ -334,7 +387,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// The Var that this Op is referencing
         /// </summary>
-        internal Var Var { get { return m_var; } }
+        internal Var Var
+        {
+            get { return m_var; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -342,7 +398,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -351,7 +410,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -370,7 +432,9 @@ namespace System.Data.Query.InternalTrees
         {
             m_function = function;
         }
-        private FunctionOp() : base(OpType.Function) { }
+
+        private FunctionOp()
+            : base(OpType.Function) { }
         #endregion
 
         #region public methods
@@ -382,7 +446,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// The function that's being invoked
         /// </summary>
-        internal EdmFunction Function { get { return m_function; } }
+        internal EdmFunction Function
+        {
+            get { return m_function; }
+        }
 
         /// <summary>
         /// Two FunctionOps are equivalent if they reference the same EdmFunction
@@ -401,7 +468,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -410,7 +480,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -427,10 +500,17 @@ namespace System.Data.Query.InternalTrees
         internal PropertyOp(TypeUsage type, EdmMember property)
             : base(OpType.Property, type)
         {
-            Debug.Assert((property is EdmProperty) || (property is RelationshipEndMember) || (property is NavigationProperty), "Unexpected EdmMember type");
+            Debug.Assert(
+                (property is EdmProperty)
+                    || (property is RelationshipEndMember)
+                    || (property is NavigationProperty),
+                "Unexpected EdmMember type"
+            );
             m_property = property;
         }
-        private PropertyOp() : base(OpType.Property) { }
+
+        private PropertyOp()
+            : base(OpType.Property) { }
         #endregion
 
         #region public methods
@@ -442,12 +522,18 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - the instance
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
-		/// <summary>
+        /// <summary>
         /// The property metadata
         /// </summary>
-        internal EdmMember PropertyInfo { get { return m_property; } }
+        internal EdmMember PropertyInfo
+        {
+            get { return m_property; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -455,7 +541,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -464,8 +553,11 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
-	    #endregion
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
+        #endregion
     }
 
     /// <summary>
@@ -483,7 +575,9 @@ namespace System.Data.Query.InternalTrees
         {
             m_isFake = isFake;
         }
-        private TreatOp() : base(OpType.Treat) { }
+
+        private TreatOp()
+            : base(OpType.Treat) { }
         #endregion
 
         #region public methods
@@ -495,12 +589,18 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - instance
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// Is this a "fake" treat?
         /// </summary>
-        internal bool IsFakeTreat { get { return m_isFake; } }
+        internal bool IsFakeTreat
+        {
+            get { return m_isFake; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -508,7 +608,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -517,7 +620,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -538,7 +644,9 @@ namespace System.Data.Query.InternalTrees
             m_isOfType = isOfType;
             m_isOfOnly = isOfOnly;
         }
-        private IsOfOp() : base(OpType.IsOf) { }
+
+        private IsOfOp()
+            : base(OpType.IsOf) { }
         #endregion
 
         #region public methods
@@ -550,14 +658,23 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - instance
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// The type being checked for
         /// </summary>
-        internal TypeUsage IsOfType { get { return m_isOfType; } }
+        internal TypeUsage IsOfType
+        {
+            get { return m_isOfType; }
+        }
 
-        internal bool IsOfOnly { get { return m_isOfOnly; } }
+        internal bool IsOfOnly
+        {
+            get { return m_isOfOnly; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -565,7 +682,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -574,7 +694,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -584,8 +707,11 @@ namespace System.Data.Query.InternalTrees
     internal sealed class CastOp : ScalarOp
     {
         #region constructors
-        internal CastOp(TypeUsage type) : base(OpType.Cast, type) { }
-        private CastOp() : base(OpType.Cast) { }
+        internal CastOp(TypeUsage type)
+            : base(OpType.Cast, type) { }
+
+        private CastOp()
+            : base(OpType.Cast) { }
         #endregion
 
         #region public methods
@@ -597,7 +723,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - instance
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -605,7 +734,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -614,24 +746,30 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
     /// <summary>
     /// An internal cast operation. (Softly) Convert a type instance into an instance of another type
-    /// 
+    ///
     /// This Op is intended to capture "promotion" semantics. (ie) int16 promotes to an int32; Customer promotes to Person
-    /// etc. This Op is intended to shield the PlanCompiler from having to reason about 
-    /// the promotion semantics; and is intended to make the query tree very 
+    /// etc. This Op is intended to shield the PlanCompiler from having to reason about
+    /// the promotion semantics; and is intended to make the query tree very
     /// explicit
-    /// 
+    ///
     /// </summary>
     internal sealed class SoftCastOp : ScalarOp
     {
         #region constructors
-        internal SoftCastOp(TypeUsage type) : base(OpType.SoftCast, type) { }
-        private SoftCastOp() : base(OpType.SoftCast) { }
+        internal SoftCastOp(TypeUsage type)
+            : base(OpType.SoftCast, type) { }
+
+        private SoftCastOp()
+            : base(OpType.SoftCast) { }
         #endregion
 
         #region public methods
@@ -643,7 +781,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - input expression
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -651,7 +792,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -660,7 +804,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -671,10 +818,10 @@ namespace System.Data.Query.InternalTrees
     {
         #region constructors
         internal ComparisonOp(OpType opType, TypeUsage type)
-            : base(opType, type)
-        {
-        }
-        private ComparisonOp(OpType opType) : base(opType) { }
+            : base(opType, type) { }
+
+        private ComparisonOp(OpType opType)
+            : base(opType) { }
         #endregion
 
         #region public methods
@@ -686,7 +833,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 2 children - left, right
         /// </summary>
-        internal override int Arity { get { return 2; } }
+        internal override int Arity
+        {
+            get { return 2; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -694,7 +844,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -703,7 +856,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -715,7 +871,9 @@ namespace System.Data.Query.InternalTrees
         #region constructors
         internal LikeOp(TypeUsage boolType)
             : base(OpType.Like, boolType) { }
-        private LikeOp() : base(OpType.Like) { }
+
+        private LikeOp()
+            : base(OpType.Like) { }
         #endregion
 
         #region public surface
@@ -727,7 +885,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 3 children - string, pattern , escape
         /// </summary>
-        internal override int Arity { get { return 3; } }
+        internal override int Arity
+        {
+            get { return 3; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -735,7 +896,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -744,7 +908,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -756,10 +923,11 @@ namespace System.Data.Query.InternalTrees
     internal sealed class ConditionalOp : ScalarOp
     {
         #region constructors
-        internal ConditionalOp(OpType optype, TypeUsage type) : base(optype, type)
-        {
-        }
-        private ConditionalOp(OpType opType) : base(opType) { }
+        internal ConditionalOp(OpType optype, TypeUsage type)
+            : base(optype, type) { }
+
+        private ConditionalOp(OpType opType)
+            : base(opType) { }
         #endregion
 
         #region public methods
@@ -777,7 +945,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -786,7 +957,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -796,8 +970,11 @@ namespace System.Data.Query.InternalTrees
     internal sealed class CaseOp : ScalarOp
     {
         #region constructors
-        internal CaseOp(TypeUsage type) : base(OpType.Case, type) { }
-        private CaseOp() : base(OpType.Case) { }
+        internal CaseOp(TypeUsage type)
+            : base(OpType.Case, type) { }
+
+        private CaseOp()
+            : base(OpType.Case) { }
         #endregion
 
         #region public methods
@@ -812,7 +989,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -821,7 +1001,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -842,7 +1025,9 @@ namespace System.Data.Query.InternalTrees
             m_aggFunc = aggFunc;
             m_distinctAgg = distinctAgg;
         }
-        private AggregateOp() : base(OpType.Aggregate) { }
+
+        private AggregateOp()
+            : base(OpType.Aggregate) { }
         #endregion
 
         #region public methods
@@ -854,17 +1039,26 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// The Aggregate function's metadata
         /// </summary>
-        internal EdmFunction AggFunc { get { return m_aggFunc; } }
+        internal EdmFunction AggFunc
+        {
+            get { return m_aggFunc; }
+        }
 
         /// <summary>
         /// Is this a "distinct" aggregate
         /// </summary>
-        internal bool IsDistinctAggregate { get { return m_distinctAgg; } }
+        internal bool IsDistinctAggregate
+        {
+            get { return m_distinctAgg; }
+        }
 
         /// <summary>
         /// Yes; this is an aggregate
         /// </summary>
-        internal override bool IsAggregateOp {get{return true;}}
+        internal override bool IsAggregateOp
+        {
+            get { return true; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -872,7 +1066,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -881,7 +1078,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -891,8 +1091,11 @@ namespace System.Data.Query.InternalTrees
     internal sealed class CollectOp : ScalarOp
     {
         #region constructors
-        internal CollectOp(TypeUsage type) : base(OpType.Collect, type) { }
-        private CollectOp() : base(OpType.Collect) { }
+        internal CollectOp(TypeUsage type)
+            : base(OpType.Collect, type) { }
+
+        private CollectOp()
+            : base(OpType.Collect) { }
         #endregion
 
         #region public methods
@@ -904,7 +1107,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - instance
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -912,7 +1118,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -921,12 +1130,15 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
     /// <summary>
-    /// Almost identical to a PropertyOp - the only difference being that we're dealing with an 
+    /// Almost identical to a PropertyOp - the only difference being that we're dealing with an
     /// "extended" property (a rel property) this time
     /// </summary>
     internal sealed class RelPropertyOp : ScalarOp
@@ -936,7 +1148,8 @@ namespace System.Data.Query.InternalTrees
         #endregion
 
         #region constructors
-        private RelPropertyOp() : base(OpType.RelProperty) { }
+        private RelPropertyOp()
+            : base(OpType.RelProperty) { }
 
         internal RelPropertyOp(TypeUsage type, RelProperty property)
             : base(OpType.RelProperty, type)
@@ -954,12 +1167,18 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - the entity instance
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// Get the property metadata
         /// </summary>
-        public RelProperty PropertyInfo { get { return m_property; } }
+        public RelProperty PropertyInfo
+        {
+            get { return m_property; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -967,7 +1186,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -976,7 +1198,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
 
         #endregion
     }
@@ -993,17 +1218,27 @@ namespace System.Data.Query.InternalTrees
         #endregion
 
         #region constructors
-        internal NewEntityBaseOp(OpType opType, TypeUsage type, bool scoped, EntitySet entitySet, List<RelProperty> relProperties)
+        internal NewEntityBaseOp(
+            OpType opType,
+            TypeUsage type,
+            bool scoped,
+            EntitySet entitySet,
+            List<RelProperty> relProperties
+        )
             : base(opType, type)
         {
-            Debug.Assert(scoped || entitySet == null, "entitySet cann't be set of constructor isn't scoped");
+            Debug.Assert(
+                scoped || entitySet == null,
+                "entitySet cann't be set of constructor isn't scoped"
+            );
             Debug.Assert(relProperties != null, "expected non-null list of rel-properties");
             m_scoped = scoped;
             m_entitySet = entitySet;
             m_relProperties = relProperties;
         }
 
-        protected NewEntityBaseOp(OpType opType) : base(opType) { }
+        protected NewEntityBaseOp(OpType opType)
+            : base(opType) { }
         #endregion
 
         #region public APIs
@@ -1011,17 +1246,26 @@ namespace System.Data.Query.InternalTrees
         /// True if the entity constructor is scoped to a particular entity set or null (scoped as "unscoped").
         /// False if the scope is not yet known. Scope is determined in PreProcessor.
         /// </summary>
-        internal bool Scoped { get { return m_scoped; } }
+        internal bool Scoped
+        {
+            get { return m_scoped; }
+        }
 
         /// <summary>
         /// Get the entityset (if any) associated with this constructor
         /// </summary>
-        internal EntitySet EntitySet { get { return m_entitySet; } }
+        internal EntitySet EntitySet
+        {
+            get { return m_entitySet; }
+        }
 
         /// <summary>
         /// get the list of relationship properties (if any) specified for this constructor
         /// </summary>
-        internal List<RelProperty> RelationshipProperties { get { return m_relProperties; } }
+        internal List<RelProperty> RelationshipProperties
+        {
+            get { return m_relProperties; }
+        }
         #endregion
     }
 
@@ -1031,12 +1275,16 @@ namespace System.Data.Query.InternalTrees
     internal sealed class NewEntityOp : NewEntityBaseOp
     {
         #region constructors
-        private NewEntityOp() : base(OpType.NewEntity) { }
+        private NewEntityOp()
+            : base(OpType.NewEntity) { }
 
-        internal NewEntityOp(TypeUsage type, List<RelProperty> relProperties, bool scoped, EntitySet entitySet)
-            : base(OpType.NewEntity, type, scoped, entitySet, relProperties)
-        {
-        }
+        internal NewEntityOp(
+            TypeUsage type,
+            List<RelProperty> relProperties,
+            bool scoped,
+            EntitySet entitySet
+        )
+            : base(OpType.NewEntity, type, scoped, entitySet, relProperties) { }
         #endregion
 
         #region public methods
@@ -1051,7 +1299,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -1060,7 +1311,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -1070,12 +1324,18 @@ namespace System.Data.Query.InternalTrees
     internal sealed class NewInstanceOp : ScalarOp
     {
         #region constructors
-        internal NewInstanceOp(TypeUsage type) : base(OpType.NewInstance, type) 
+        internal NewInstanceOp(TypeUsage type)
+            : base(OpType.NewInstance, type)
         {
             Debug.Assert(!type.EdmType.Abstract, "cannot create new instance of abstract type");
-            Debug.Assert(!TypeSemantics.IsEntityType(type), "cannot use this Op for entity construction");
+            Debug.Assert(
+                !TypeSemantics.IsEntityType(type),
+                "cannot use this Op for entity construction"
+            );
         }
-        private NewInstanceOp() : base(OpType.NewInstance) { }
+
+        private NewInstanceOp()
+            : base(OpType.NewInstance) { }
         #endregion
 
         #region public methods
@@ -1090,7 +1350,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -1099,29 +1362,38 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
     /// <summary>
     /// Polymorphic new instance creation (takes all properties of all types in the hierarchy + discriminator)
     /// </summary>
-    internal sealed class DiscriminatedNewEntityOp : NewEntityBaseOp 
+    internal sealed class DiscriminatedNewEntityOp : NewEntityBaseOp
     {
         #region Private state
         private readonly ExplicitDiscriminatorMap m_discriminatorMap;
         #endregion
 
         #region Constructors
-        internal DiscriminatedNewEntityOp(TypeUsage type, ExplicitDiscriminatorMap discriminatorMap,
-            EntitySet entitySet, List<RelProperty> relProperties) 
+        internal DiscriminatedNewEntityOp(
+            TypeUsage type,
+            ExplicitDiscriminatorMap discriminatorMap,
+            EntitySet entitySet,
+            List<RelProperty> relProperties
+        )
             : base(OpType.DiscriminatedNewEntity, type, true, entitySet, relProperties)
         {
             Debug.Assert(null != discriminatorMap, "null discriminator map");
             m_discriminatorMap = discriminatorMap;
         }
-        private DiscriminatedNewEntityOp() : base(OpType.DiscriminatedNewEntity) { }
-        #endregion 
+
+        private DiscriminatedNewEntityOp()
+            : base(OpType.DiscriminatedNewEntity) { }
+        #endregion
 
         #region "Public" members
         internal static readonly DiscriminatedNewEntityOp Pattern = new DiscriminatedNewEntityOp();
@@ -1135,10 +1407,16 @@ namespace System.Data.Query.InternalTrees
         }
 
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -1156,10 +1434,12 @@ namespace System.Data.Query.InternalTrees
         /// Basic constructor. All fields have a value specified
         /// </summary>
         /// <param name="type"></param>
-        internal NewRecordOp(TypeUsage type) : base(OpType.NewRecord, type)
+        internal NewRecordOp(TypeUsage type)
+            : base(OpType.NewRecord, type)
         {
             m_fields = new List<EdmProperty>(TypeHelpers.GetEdmType<RowType>(type).Properties);
         }
+
         /// <summary>
         /// Alternate form of the constructor. Only some fields have a value specified
         /// The arguments to the corresponding Node are exactly 1-1 with the fields
@@ -1179,7 +1459,9 @@ namespace System.Data.Query.InternalTrees
 #endif
             m_fields = fields;
         }
-        private NewRecordOp() : base(OpType.NewRecord) { }
+
+        private NewRecordOp()
+            : base(OpType.NewRecord) { }
         #endregion
 
         #region public methods
@@ -1199,8 +1481,10 @@ namespace System.Data.Query.InternalTrees
         /// <returns></returns>
         internal bool GetFieldPosition(EdmProperty field, out int fieldPosition)
         {
-            Debug.Assert(Object.ReferenceEquals(field.DeclaringType, this.Type.EdmType),
-                "attempt to get invalid field from this record type");
+            Debug.Assert(
+                Object.ReferenceEquals(field.DeclaringType, this.Type.EdmType),
+                "attempt to get invalid field from this record type"
+            );
 
             fieldPosition = 0;
             for (int i = 0; i < m_fields.Count; i++)
@@ -1217,7 +1501,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// List of all properties that have values specified
         /// </summary>
-        internal List<EdmProperty> Properties { get { return m_fields; } }
+        internal List<EdmProperty> Properties
+        {
+            get { return m_fields; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -1225,7 +1512,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -1234,15 +1524,21 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
     internal sealed class NewMultisetOp : ScalarOp
     {
         #region constructors
-        internal NewMultisetOp(TypeUsage type) : base(OpType.NewMultiset, type) { }
-        private NewMultisetOp() : base(OpType.NewMultiset) { }
+        internal NewMultisetOp(TypeUsage type)
+            : base(OpType.NewMultiset, type) { }
+
+        private NewMultisetOp()
+            : base(OpType.NewMultiset) { }
         #endregion
 
         #region public methods
@@ -1257,7 +1553,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -1266,7 +1565,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -1288,7 +1590,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -1297,7 +1602,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -1316,7 +1624,9 @@ namespace System.Data.Query.InternalTrees
         {
             m_entitySet = entitySet;
         }
-        private RefOp() : base(OpType.Ref) { }
+
+        private RefOp()
+            : base(OpType.Ref) { }
         #endregion
 
         #region public methods
@@ -1328,12 +1638,18 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - key
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// The EntitySet to which the reference refers
         /// </summary>
-        internal EntitySet EntitySet { get { return m_entitySet; } }
+        internal EntitySet EntitySet
+        {
+            get { return m_entitySet; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -1341,7 +1657,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -1350,7 +1669,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -1361,10 +1683,10 @@ namespace System.Data.Query.InternalTrees
     {
         #region constructors
         internal ExistsOp(TypeUsage type)
-            : base(OpType.Exists, type)
-        {
-        }
-        private ExistsOp() : base(OpType.Exists) { }
+            : base(OpType.Exists, type) { }
+
+        private ExistsOp()
+            : base(OpType.Exists) { }
         #endregion
 
         #region public methods
@@ -1376,7 +1698,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - collection input
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -1384,7 +1709,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -1393,7 +1721,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -1403,8 +1734,11 @@ namespace System.Data.Query.InternalTrees
     internal sealed class ElementOp : ScalarOp
     {
         #region constructors
-        internal ElementOp(TypeUsage type) : base(OpType.Element, type) { }
-        private ElementOp() : base(OpType.Element) { }
+        internal ElementOp(TypeUsage type)
+            : base(OpType.Element, type) { }
+
+        private ElementOp()
+            : base(OpType.Element) { }
         #endregion
 
         #region public methods
@@ -1416,7 +1750,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - collection instance
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -1424,7 +1761,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -1433,7 +1773,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -1443,8 +1786,11 @@ namespace System.Data.Query.InternalTrees
     internal sealed class GetRefKeyOp : ScalarOp
     {
         #region constructors
-        internal GetRefKeyOp(TypeUsage type) : base(OpType.GetRefKey, type) { }
-        private GetRefKeyOp() : base(OpType.GetRefKey) { }
+        internal GetRefKeyOp(TypeUsage type)
+            : base(OpType.GetRefKey, type) { }
+
+        private GetRefKeyOp()
+            : base(OpType.GetRefKey) { }
         #endregion
 
         #region public methods
@@ -1456,7 +1802,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - ref instance
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -1464,7 +1813,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -1473,7 +1825,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -1483,8 +1838,11 @@ namespace System.Data.Query.InternalTrees
     internal sealed class GetEntityRefOp : ScalarOp
     {
         #region constructors
-        internal GetEntityRefOp(TypeUsage type) : base(OpType.GetEntityRef, type) { }
-        private GetEntityRefOp() : base(OpType.GetEntityRef) { }
+        internal GetEntityRefOp(TypeUsage type)
+            : base(OpType.GetEntityRef, type) { }
+
+        private GetEntityRefOp()
+            : base(OpType.GetEntityRef) { }
         #endregion
 
         #region public methods
@@ -1496,7 +1854,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - entity instance
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -1504,7 +1865,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -1513,7 +1877,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -1523,8 +1890,11 @@ namespace System.Data.Query.InternalTrees
     internal sealed class DerefOp : ScalarOp
     {
         #region constructors
-        internal DerefOp(TypeUsage type) : base(OpType.Deref, type) { }
-        private DerefOp() : base(OpType.Deref) { }
+        internal DerefOp(TypeUsage type)
+            : base(OpType.Deref, type) { }
+
+        private DerefOp()
+            : base(OpType.Deref) { }
         #endregion
 
         #region public methods
@@ -1536,7 +1906,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - entity instance
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -1544,7 +1917,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -1553,7 +1929,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -1568,11 +1947,13 @@ namespace System.Data.Query.InternalTrees
 
         #region constructors
         internal NavigateOp(TypeUsage type, RelProperty relProperty)
-            : base(OpType.Navigate, type) 
+            : base(OpType.Navigate, type)
         {
             m_property = relProperty;
         }
-        private NavigateOp() : base(OpType.Navigate) { }
+
+        private NavigateOp()
+            : base(OpType.Navigate) { }
         #endregion
 
         #region public methods
@@ -1584,25 +1965,42 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - entity instance
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// The rel property that describes this nvaigation
         /// </summary>
-        internal RelProperty RelProperty { get { return m_property; } }
+        internal RelProperty RelProperty
+        {
+            get { return m_property; }
+        }
 
         /// <summary>
         /// The relationship we're traversing
         /// </summary>
-        internal RelationshipType Relationship { get { return m_property.Relationship; } }
+        internal RelationshipType Relationship
+        {
+            get { return m_property.Relationship; }
+        }
+
         /// <summary>
         /// The starting point of the traversal
         /// </summary>
-        internal RelationshipEndMember FromEnd { get { return m_property.FromEnd; } }
+        internal RelationshipEndMember FromEnd
+        {
+            get { return m_property.FromEnd; }
+        }
+
         /// <summary>
         /// The end-point of the traversal
         /// </summary>
-        internal RelationshipEndMember ToEnd { get { return m_property.ToEnd; } }
+        internal RelationshipEndMember ToEnd
+        {
+            get { return m_property.ToEnd; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -1610,7 +2008,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
 
         /// <summary>
         /// Visitor pattern method for visitors with a return value
@@ -1619,7 +2020,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 }

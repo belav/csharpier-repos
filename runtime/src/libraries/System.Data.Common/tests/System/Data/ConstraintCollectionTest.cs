@@ -127,7 +127,9 @@ namespace System.Data.Tests
         {
             _table.Constraints.Add(new UniqueConstraint(_table.Columns[0]));
             Assert.Null(_table.Constraints["notInCollection"]);
-            Assert.Throws<IndexOutOfRangeException>(() => _table.Constraints[_table.Constraints.Count]);
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                _table.Constraints[_table.Constraints.Count]
+            );
             Assert.Throws<IndexOutOfRangeException>(() => _table.Constraints[-1]);
         }
 
@@ -183,7 +185,11 @@ namespace System.Data.Tests
             _constraint1.ConstraintName = "UK1";
             _constraint2.ConstraintName = "UK12";
 
-            var _constraint3 = new ForeignKeyConstraint("FK2", _table.Columns[0], _table2.Columns[0]);
+            var _constraint3 = new ForeignKeyConstraint(
+                "FK2",
+                _table.Columns[0],
+                _table2.Columns[0]
+            );
             var _constraint4 = new UniqueConstraint("UK2", _table2.Columns[1]);
 
             // Add the constraints.
@@ -237,7 +243,9 @@ namespace System.Data.Tests
         [Fact]
         public void RemoveExceptions()
         {
-            Assert.Throws<IndexOutOfRangeException>(() => _table.Constraints.Remove(_table.Constraints[0]));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                _table.Constraints.Remove(_table.Constraints[0])
+            );
         }
     }
 }

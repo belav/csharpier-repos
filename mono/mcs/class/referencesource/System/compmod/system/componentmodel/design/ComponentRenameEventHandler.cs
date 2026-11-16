@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="ComponentRenameEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
+namespace System.ComponentModel.Design
+{
     using System;
     using System.ComponentModel;
     using System.Diagnostics;

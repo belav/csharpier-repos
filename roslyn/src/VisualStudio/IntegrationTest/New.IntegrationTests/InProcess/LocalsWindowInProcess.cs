@@ -17,7 +17,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
     [TestService]
     internal partial class LocalsWindowInProcess
     {
-        private async Task<EnvDTE100.Debugger5> GetDebuggerAsync(CancellationToken cancellationToken)
+        private async Task<EnvDTE100.Debugger5> GetDebuggerAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -33,7 +35,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             return debugger.CurrentStackFrame?.Locals.Count ?? 0;
         }
 
-        public async Task<(string type, string value)> GetEntryAsync(string[] entryNames, CancellationToken cancellationToken)
+        public async Task<(string type, string value)> GetEntryAsync(
+            string[] entryNames,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -47,7 +52,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             EnvDTE.Expression? entry = null;
 
             var i = 0;
-            while (i < entryNames.Length && TryGetEntryInternal(entryNames[i], expressions, out entry))
+            while (
+                i < entryNames.Length && TryGetEntryInternal(entryNames[i], expressions, out entry)
+            )
             {
                 i++;
                 expressions = entry.DataMembers;
@@ -59,15 +66,26 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             }
 
             var localHierarchicalName = string.Join("->", entryNames);
-            var allLocalsString = string.Join(Environment.NewLine, GetAllLocals(debugger.CurrentStackFrame.Locals));
-            throw new Exception($"{Environment.NewLine}Could not find the local named {localHierarchicalName}.{Environment.NewLine}All available locals are: \n{allLocalsString}");
+            var allLocalsString = string.Join(
+                Environment.NewLine,
+                GetAllLocals(debugger.CurrentStackFrame.Locals)
+            );
+            throw new Exception(
+                $"{Environment.NewLine}Could not find the local named {localHierarchicalName}.{Environment.NewLine}All available locals are: \n{allLocalsString}"
+            );
         }
 
-        private bool TryGetEntryInternal(string entryName, EnvDTE.Expressions expressions, [NotNullWhen(true)] out EnvDTE.Expression? expression)
+        private bool TryGetEntryInternal(
+            string entryName,
+            EnvDTE.Expressions expressions,
+            [NotNullWhen(true)] out EnvDTE.Expression? expression
+        )
         {
             Contract.ThrowIfFalse(JoinableTaskFactory.Context.IsOnMainThread);
 
-            expression = expressions.Cast<EnvDTE.Expression>().FirstOrDefault(e => e.Name == entryName);
+            expression = expressions
+                .Cast<EnvDTE.Expression>()
+                .FirstOrDefault(e => e.Name == entryName);
             if (expression != null)
             {
                 return true;

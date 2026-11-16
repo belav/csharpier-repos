@@ -8,6 +8,7 @@ public struct A
 {
     public int m_aval;
 };
+
 public struct B
 {
     public int m_bval;
@@ -17,6 +18,7 @@ public struct AA
 {
     public A m_a;
     public B m_b;
+
     public AA(int a, int b)
     {
         m_a.m_aval = a;
@@ -30,6 +32,7 @@ public class TestApp
     {
         return 0;
     }
+
     [Fact]
     public static unsafe void TestEntryPoint()
     {

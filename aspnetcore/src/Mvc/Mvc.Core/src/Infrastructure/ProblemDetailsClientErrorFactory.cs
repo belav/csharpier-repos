@@ -9,8 +9,8 @@ internal sealed class ProblemDetailsClientErrorFactory : IClientErrorFactory
 
     public ProblemDetailsClientErrorFactory(ProblemDetailsFactory problemDetailsFactory)
     {
-        _problemDetailsFactory =
-            problemDetailsFactory ?? throw new ArgumentNullException(nameof(problemDetailsFactory));
+        _problemDetailsFactory = problemDetailsFactory
+            ?? throw new ArgumentNullException(nameof(problemDetailsFactory));
     }
 
     public IActionResult GetClientError(

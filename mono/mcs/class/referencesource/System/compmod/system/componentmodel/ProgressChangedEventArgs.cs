@@ -4,7 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel 
+namespace System.ComponentModel
 {
     using System.Security.Permissions;
 
@@ -19,19 +19,17 @@ namespace System.ComponentModel
             this.progressPercentage = progressPercentage;
             this.userState = userState;
         }
-        
-        [ SRDescription(SR.Async_ProgressChangedEventArgs_ProgressPercentage) ]
+
+        [SRDescription(SR.Async_ProgressChangedEventArgs_ProgressPercentage)]
         public int ProgressPercentage
         {
             get { return progressPercentage; }
         }
 
-        [ SRDescription(SR.Async_ProgressChangedEventArgs_UserState) ]
+        [SRDescription(SR.Async_ProgressChangedEventArgs_UserState)]
         public object UserState
         {
             get { return userState; }
         }
-
     }
 }
-

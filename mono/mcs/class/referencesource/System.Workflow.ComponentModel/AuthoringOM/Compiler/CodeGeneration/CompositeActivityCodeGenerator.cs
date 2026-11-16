@@ -1,11 +1,14 @@
 using System.Workflow.ComponentModel.Design;
+
 namespace System.Workflow.ComponentModel.Compiler
 {
     #region Class CompositeActivityCodeGenerator
 
     using System.Workflow.ComponentModel.Design;
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class CompositeActivityCodeGenerator : ActivityCodeGenerator
     {
         public override void GenerateCode(CodeGenerationManager manager, object obj)
@@ -17,13 +20,23 @@ namespace System.Workflow.ComponentModel.Compiler
 
             CompositeActivity compositeActivity = obj as CompositeActivity;
             if (compositeActivity == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(CompositeActivity).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_UnexpectedArgumentType,
+                        typeof(CompositeActivity).FullName
+                    ),
+                    "obj"
+                );
 
             base.GenerateCode(manager, obj);
 
             foreach (Activity child in Helpers.GetAllEnabledActivities(compositeActivity))
             {
-                foreach (ActivityCodeGenerator codeGenerator in manager.GetCodeGenerators(child.GetType()))
+                foreach (
+                    ActivityCodeGenerator codeGenerator in manager.GetCodeGenerators(
+                        child.GetType()
+                    )
+                )
                     codeGenerator.GenerateCode(manager, child);
             }
         }

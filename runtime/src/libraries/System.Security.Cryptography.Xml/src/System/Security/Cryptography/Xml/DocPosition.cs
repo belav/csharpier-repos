@@ -8,6 +8,6 @@ namespace System.Security.Cryptography.Xml
     {
         BeforeRootElement,
         InRootElement,
-        AfterRootElement
+        AfterRootElement,
     }
 }

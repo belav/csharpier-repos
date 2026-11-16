@@ -10,7 +10,7 @@ namespace System.Activities
     using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
-    public sealed class HandleInitializationContext 
+    public sealed class HandleInitializationContext
     {
         ActivityExecutor executor;
         ActivityInstance scope;
@@ -24,21 +24,16 @@ namespace System.Activities
 
         internal ActivityInstance OwningActivityInstance
         {
-            get
-            {
-                return this.scope;
-            }
+            get { return this.scope; }
         }
 
         internal ActivityExecutor Executor
         {
-            get
-            {
-                return this.executor;
-            }
+            get { return this.executor; }
         }
 
-        public THandle CreateAndInitializeHandle<THandle>() where THandle : Handle
+        public THandle CreateAndInitializeHandle<THandle>()
+            where THandle : Handle
         {
             ThrowIfDisposed();
             THandle value = Activator.CreateInstance<THandle>();
@@ -59,7 +54,8 @@ namespace System.Activities
             return value;
         }
 
-        public T GetExtension<T>() where T : class
+        public T GetExtension<T>()
+            where T : class
         {
             return this.executor.GetExtension<T>();
         }
@@ -72,7 +68,10 @@ namespace System.Activities
 
         internal object CreateAndInitializeHandle(Type handleType)
         {
-            Fx.Assert(ActivityUtilities.IsHandle(handleType), "This should only be called with Handle subtypes.");
+            Fx.Assert(
+                ActivityUtilities.IsHandle(handleType),
+                "This should only be called with Handle subtypes."
+            );
 
             object value = Activator.CreateInstance(handleType);
 
@@ -108,7 +107,9 @@ namespace System.Activities
         {
             if (this.isDiposed)
             {
-                throw FxTrace.Exception.AsError(new ObjectDisposedException(SR.HandleInitializationContextDisposed));
+                throw FxTrace.Exception.AsError(
+                    new ObjectDisposedException(SR.HandleInitializationContextDisposed)
+                );
             }
         }
 
@@ -118,5 +119,3 @@ namespace System.Activities
         }
     }
 }
-
-

@@ -1,33 +1,33 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
-    using System.CodeDom;
-    using System.ComponentModel;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Drawing.Design;
     using System.Drawing;
+    using System.Drawing.Design;
     using System.Drawing.Drawing2D;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Runtime.Serialization;
 
     #region Class ParallelToolboxItem
     [Serializable]
     internal sealed class ParallelToolboxItem : ActivityToolboxItem
     {
         public ParallelToolboxItem(Type type)
-            : base(type)
-        {
-        }
+            : base(type) { }
+
         private ParallelToolboxItem(SerializationInfo info, StreamingContext context)
         {
             Deserialize(info, context);
         }
+
         protected override IComponent[] CreateComponentsCore(IDesignerHost designerHost)
         {
             CompositeActivity parallelActivity = new ParallelActivity();
@@ -48,7 +48,10 @@ namespace System.Workflow.Activities
             return new SequenceActivity();
         }
 
-        public override bool CanInsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public override bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             foreach (Activity activity in activitiesToInsert)
             {

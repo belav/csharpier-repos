@@ -18,7 +18,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             OptionalRightChild = right;
         }
 
-        public ExprBinOp(ExpressionKind kind, CType type, Expr left, Expr right, Expr call, MethPropWithInst userMethod)
+        public ExprBinOp(
+            ExpressionKind kind,
+            CType type,
+            Expr left,
+            Expr right,
+            Expr call,
+            MethPropWithInst userMethod
+        )
             : base(kind, type, call, userMethod)
         {
             Debug.Assert(kind > ExpressionKind.TypeLimit);

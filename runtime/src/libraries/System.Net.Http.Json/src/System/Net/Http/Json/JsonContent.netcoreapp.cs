@@ -11,11 +11,25 @@ namespace System.Net.Http.Json
 {
     public sealed partial class JsonContent
     {
-        protected override void SerializeToStream(Stream stream, TransportContext? context, CancellationToken cancellationToken)
+        protected override void SerializeToStream(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        )
         {
-            if (JsonHelpers.GetEncoding(this) is Encoding targetEncoding && targetEncoding != Encoding.UTF8)
+            if (
+                JsonHelpers.GetEncoding(this) is Encoding targetEncoding
+                && targetEncoding != Encoding.UTF8
+            )
             {
-                SerializeToStreamAsyncTranscoding(stream, async: false, targetEncoding, cancellationToken).GetAwaiter().GetResult();
+                SerializeToStreamAsyncTranscoding(
+                        stream,
+                        async: false,
+                        targetEncoding,
+                        cancellationToken
+                    )
+                    .GetAwaiter()
+                    .GetResult();
             }
             else
             {
@@ -23,7 +37,10 @@ namespace System.Net.Http.Json
             }
         }
 
-        protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context, CancellationToken cancellationToken)
-            => SerializeToStreamAsyncCore(stream, cancellationToken);
+        protected override Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        ) => SerializeToStreamAsyncCore(stream, cancellationToken);
     }
 }

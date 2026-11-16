@@ -24,42 +24,64 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpImplementInterfaceService()
-        {
-        }
+        public CSharpImplementInterfaceService() { }
 
-        protected override string ToDisplayString(IMethodSymbol disposeImplMethod, SymbolDisplayFormat format)
-            => SymbolDisplay.ToDisplayString(disposeImplMethod, format);
+        protected override string ToDisplayString(
+            IMethodSymbol disposeImplMethod,
+            SymbolDisplayFormat format
+        ) => SymbolDisplay.ToDisplayString(disposeImplMethod, format);
 
-        protected override bool AllowDelegateAndEnumConstraints(ParseOptions options)
-            => options.LanguageVersion() >= LanguageVersion.CSharp7_3;
+        protected override bool AllowDelegateAndEnumConstraints(ParseOptions options) =>
+            options.LanguageVersion() >= LanguageVersion.CSharp7_3;
 
         protected override bool TryInitializeState(
-            Document document, SemanticModel model, SyntaxNode node, CancellationToken cancellationToken,
-            out SyntaxNode classOrStructDecl, out INamedTypeSymbol classOrStructType, out IEnumerable<INamedTypeSymbol> interfaceTypes)
+            Document document,
+            SemanticModel model,
+            SyntaxNode node,
+            CancellationToken cancellationToken,
+            out SyntaxNode classOrStructDecl,
+            out INamedTypeSymbol classOrStructType,
+            out IEnumerable<INamedTypeSymbol> interfaceTypes
+        )
         {
             if (!cancellationToken.IsCancellationRequested)
             {
-                if (node is TypeSyntax interfaceNode && interfaceNode.Parent is BaseTypeSyntax baseType &&
-                    baseType.IsParentKind(SyntaxKind.BaseList) &&
-                    baseType.Type == interfaceNode)
+                if (
+                    node is TypeSyntax interfaceNode
+                    && interfaceNode.Parent is BaseTypeSyntax baseType
+                    && baseType.IsParentKind(SyntaxKind.BaseList)
+                    && baseType.Type == interfaceNode
+                )
                 {
-                    if (interfaceNode.Parent.Parent?.Parent.Kind() is
-                            SyntaxKind.ClassDeclaration or
-                            SyntaxKind.StructDeclaration or
-                            SyntaxKind.RecordDeclaration or
-                            SyntaxKind.RecordStructDeclaration)
+                    if (
+                        interfaceNode.Parent.Parent?.Parent.Kind()
+                        is SyntaxKind.ClassDeclaration
+                            or SyntaxKind.StructDeclaration
+                            or SyntaxKind.RecordDeclaration
+                            or SyntaxKind.RecordStructDeclaration
+                    )
                     {
-                        var interfaceSymbolInfo = model.GetSymbolInfo(interfaceNode, cancellationToken);
+                        var interfaceSymbolInfo = model.GetSymbolInfo(
+                            interfaceNode,
+                            cancellationToken
+                        );
                         if (interfaceSymbolInfo.CandidateReason != CandidateReason.WrongArity)
                         {
                             cancellationToken.ThrowIfCancellationRequested();
 
-                            if (interfaceSymbolInfo.GetAnySymbol() is INamedTypeSymbol interfaceType && interfaceType.TypeKind == TypeKind.Interface)
+                            if (
+                                interfaceSymbolInfo.GetAnySymbol() is INamedTypeSymbol interfaceType
+                                && interfaceType.TypeKind == TypeKind.Interface
+                            )
                             {
-                                classOrStructDecl = interfaceNode.Parent.Parent.Parent as TypeDeclarationSyntax;
-                                classOrStructType = model.GetDeclaredSymbol(classOrStructDecl, cancellationToken) as INamedTypeSymbol;
-                                interfaceTypes = SpecializedCollections.SingletonEnumerable(interfaceType);
+                                classOrStructDecl =
+                                    interfaceNode.Parent.Parent.Parent as TypeDeclarationSyntax;
+                                classOrStructType =
+                                    model.GetDeclaredSymbol(classOrStructDecl, cancellationToken)
+                                    as INamedTypeSymbol;
+                                interfaceTypes = SpecializedCollections.SingletonEnumerable(
+                                    interfaceType
+                                );
 
                                 return interfaceTypes != null && classOrStructType != null;
                             }
@@ -78,29 +100,51 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
 
         protected override bool HasHiddenExplicitImplementation => true;
 
-        protected override SyntaxNode AddCommentInsideIfStatement(SyntaxNode ifStatement, SyntaxTriviaList trivia)
+        protected override SyntaxNode AddCommentInsideIfStatement(
+            SyntaxNode ifStatement,
+            SyntaxTriviaList trivia
+        )
         {
             return ifStatement.ReplaceToken(
                 ifStatement.GetLastToken(),
-                ifStatement.GetLastToken().WithPrependedLeadingTrivia(trivia));
+                ifStatement.GetLastToken().WithPrependedLeadingTrivia(trivia)
+            );
         }
 
         protected override SyntaxNode CreateFinalizer(
-            SyntaxGenerator g, INamedTypeSymbol classType, string disposeMethodDisplayString)
+            SyntaxGenerator g,
+            INamedTypeSymbol classType,
+            string disposeMethodDisplayString
+        )
         {
             // ' Do not change this code...
             // Dispose(false)
-            var disposeStatement = (StatementSyntax)AddComment(g,
-                string.Format(FeaturesResources.Do_not_change_this_code_Put_cleanup_code_in_0_method, disposeMethodDisplayString),
-                g.ExpressionStatement(g.InvocationExpression(
-                    g.IdentifierName(nameof(IDisposable.Dispose)),
-                    g.Argument(DisposingName, RefKind.None, g.FalseLiteralExpression()))));
+            var disposeStatement = (StatementSyntax)AddComment(
+                g,
+                string.Format(
+                    FeaturesResources.Do_not_change_this_code_Put_cleanup_code_in_0_method,
+                    disposeMethodDisplayString
+                ),
+                g.ExpressionStatement(
+                    g.InvocationExpression(
+                        g.IdentifierName(nameof(IDisposable.Dispose)),
+                        g.Argument(DisposingName, RefKind.None, g.FalseLiteralExpression())
+                    )
+                )
+            );
 
-            var methodDecl = SyntaxFactory.DestructorDeclaration(classType.Name).AddBodyStatements(disposeStatement);
+            var methodDecl = SyntaxFactory
+                .DestructorDeclaration(classType.Name)
+                .AddBodyStatements(disposeStatement);
 
-            return AddComment(g,
-                string.Format(FeaturesResources.TODO_colon_override_finalizer_only_if_0_has_code_to_free_unmanaged_resources, disposeMethodDisplayString),
-                methodDecl);
+            return AddComment(
+                g,
+                string.Format(
+                    FeaturesResources.TODO_colon_override_finalizer_only_if_0_has_code_to_free_unmanaged_resources,
+                    disposeMethodDisplayString
+                ),
+                methodDecl
+            );
         }
     }
 }

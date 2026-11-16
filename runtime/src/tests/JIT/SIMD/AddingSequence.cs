@@ -2,16 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Collections.Generic;
-using Point = System.Numerics.Vector2;
 using Xunit;
+using Point = System.Numerics.Vector2;
 
 namespace VectorMathTests
 {
     public class Program
     {
-		const float EPS = Single.Epsilon * 5;
-		
-		static bool CheckEQ(float a, float b)
+        const float EPS = Single.Epsilon * 5;
+
+        static bool CheckEQ(float a, float b)
         {
             return Math.Abs(a - b) < 5 * EPS;
         }
@@ -45,7 +45,8 @@ namespace VectorMathTests
         [Fact]
         public static int TestEntryPoint()
         {
-            Point a = new Point(0, 0), b = new Point(1, 0);
+            Point a = new Point(0, 0),
+                b = new Point(1, 0);
             Point c = a + b;
             Point d = c - b;
             Point e = d - a;

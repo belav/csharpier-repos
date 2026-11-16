@@ -23,7 +23,9 @@ namespace System.ServiceModel.Discovery
         protected IteratorAsyncResult(AsyncCallback callback, object state)
             : base(callback, state)
         {
-            this.onStepCompletedCallback = Fx.ThunkCallback(new AsyncCallback(this.OnStepCompleted));
+            this.onStepCompletedCallback = Fx.ThunkCallback(
+                new AsyncCallback(this.OnStepCompleted)
+            );
             this.thisLock = new object();
         }
 
@@ -125,7 +127,8 @@ namespace System.ServiceModel.Discovery
                     this.iterState,
                     this.timeoutHelper.RemainingTime(),
                     this.onStepCompletedCallback,
-                    step);
+                    step
+                );
             }
             catch (Exception e)
             {
@@ -217,7 +220,7 @@ namespace System.ServiceModel.Discovery
 
             try
             {
-                step.End(this.iterState, result);             
+                step.End(this.iterState, result);
             }
             catch (Exception e)
             {
@@ -266,11 +269,15 @@ namespace System.ServiceModel.Discovery
             TIteratorState iterState,
             TimeSpan timeout,
             AsyncCallback asyncCallback,
-            object state);
+            object state
+        );
 
         public delegate void EndCall(TIteratorState iterState, IAsyncResult result);
 
-        public delegate Exception ExceptionHandler<TException>(TIteratorState iterState, TException exception)
+        public delegate Exception ExceptionHandler<TException>(
+            TIteratorState iterState,
+            TException exception
+        )
             where TException : Exception;
 
         public class AsyncStep
@@ -305,11 +312,11 @@ namespace System.ServiceModel.Discovery
         public class AsyncCatch<TException> : IAsyncCatch
             where TException : Exception
         {
-            readonly ExceptionHandler<TException> handler;            
+            readonly ExceptionHandler<TException> handler;
 
             public AsyncCatch(ExceptionHandler<TException> handler)
             {
-                this.handler = handler;                
+                this.handler = handler;
             }
 
             public bool HandleException(TIteratorState state, Exception ex, out Exception outEx)

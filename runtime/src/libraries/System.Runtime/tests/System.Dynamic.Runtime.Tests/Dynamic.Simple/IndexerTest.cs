@@ -17,6 +17,7 @@ namespace SampleDynamicTests
                     return 3;
             }
         }
+
         [Fact]
         public static void IndexerTest_RunTest()
         {

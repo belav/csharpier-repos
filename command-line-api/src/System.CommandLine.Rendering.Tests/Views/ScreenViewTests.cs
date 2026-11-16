@@ -29,7 +29,10 @@ namespace System.CommandLine.Rendering.Tests.Views
         {
             Action nullRenderer = () => new ScreenView(null, _terminal);
 
-            nullRenderer.Should().Throw<ArgumentNullException>().Where(ex => ex.ParamName == "renderer");
+            nullRenderer
+                .Should()
+                .Throw<ArgumentNullException>()
+                .Where(ex => ex.ParamName == "renderer");
         }
 
         [Fact]
@@ -37,7 +40,10 @@ namespace System.CommandLine.Rendering.Tests.Views
         {
             Action nullRenderer = () => new ScreenView(_renderer, null);
 
-            nullRenderer.Should().Throw<ArgumentNullException>().Where(ex => ex.ParamName == "console");
+            nullRenderer
+                .Should()
+                .Throw<ArgumentNullException>()
+                .Where(ex => ex.ParamName == "console");
         }
 
         [Fact]
@@ -47,9 +53,7 @@ namespace System.CommandLine.Rendering.Tests.Views
 
             screen.Render();
 
-            _terminal.Events
-                .Should()
-                .BeEquivalentSequenceTo(new TestTerminal.CursorHidden());
+            _terminal.Events.Should().BeEquivalentSequenceTo(new TestTerminal.CursorHidden());
         }
 
         [Fact]
@@ -59,9 +63,7 @@ namespace System.CommandLine.Rendering.Tests.Views
 
             screen.Dispose();
 
-            _terminal.Events
-                .Should()
-                .BeEquivalentSequenceTo(new TestTerminal.CursorShown());
+            _terminal.Events.Should().BeEquivalentSequenceTo(new TestTerminal.CursorShown());
         }
 
         [Fact]
@@ -102,9 +104,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             view.RaiseUpdated();
 
             _synchronizationContext.InvokePostCallbacks();
-            view.RenderedRegions
-                .Should()
-                .BeEquivalentSequenceTo(new Region(0, 0, 100, 40));
+            view.RenderedRegions.Should().BeEquivalentSequenceTo(new Region(0, 0, 100, 40));
         }
 
         [Fact]
@@ -124,9 +124,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             _synchronizationContext.InvokePostCallbacks();
 
             _synchronizationContext.PostInvocationCount.Should().Be(1);
-            view.RenderedRegions
-                .Should()
-                .BeEquivalentSequenceTo(new Region(0, 0, 100, 40));
+            view.RenderedRegions.Should().BeEquivalentSequenceTo(new Region(0, 0, 100, 40));
         }
 
         [Fact]
@@ -152,16 +150,14 @@ namespace System.CommandLine.Rendering.Tests.Views
             _synchronizationContext.InvokePostCallbacks();
 
             _synchronizationContext.PostInvocationCount.Should().Be(2);
-            view.RenderedRegions
-                .Should()
-                .BeEquivalentSequenceTo(
-                    new Region(0, 0, 100, 40),
-                    new Region(0, 0, 100, 40));
+            view.RenderedRegions.Should()
+                .BeEquivalentSequenceTo(new Region(0, 0, 100, 40), new Region(0, 0, 100, 40));
         }
 
         private class TestSynchronizationContext : SynchronizationContext
         {
             private readonly List<Action> _postActions = new();
+
             public void InvokePostCallbacks()
             {
                 while (_postActions.FirstOrDefault() is Action postAction)
@@ -172,6 +168,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             }
 
             public int PostInvocationCount { get; private set; }
+
             public override void Post(SendOrPostCallback d, object state)
             {
                 PostInvocationCount++;
@@ -190,7 +187,8 @@ namespace System.CommandLine.Rendering.Tests.Views
                 RenderedRegions.Add(region);
             }
 
-            public override Size Measure(ConsoleRenderer renderer, Size maxSize) => throw new NotImplementedException();
+            public override Size Measure(ConsoleRenderer renderer, Size maxSize) =>
+                throw new NotImplementedException();
 
             public void RaiseUpdated() => OnUpdated();
         }

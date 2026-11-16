@@ -25,39 +25,36 @@ namespace System.Speech.Recognition
         private RecognitionResult _result;
         #endregion
     }
+
     [Serializable]
     public class SpeechRecognizedEventArgs : RecognitionEventArgs
     {
         #region Constructors
 
         internal SpeechRecognizedEventArgs(RecognitionResult result)
-            : base(result)
-        {
-        }
+            : base(result) { }
 
         #endregion
     }
+
     [Serializable]
     public class SpeechRecognitionRejectedEventArgs : RecognitionEventArgs
     {
         #region Constructors
 
         internal SpeechRecognitionRejectedEventArgs(RecognitionResult result)
-            : base(result)
-        {
-        }
+            : base(result) { }
 
         #endregion
     }
+
     [Serializable]
     public class SpeechHypothesizedEventArgs : RecognitionEventArgs
     {
         #region Constructors
 
         internal SpeechHypothesizedEventArgs(RecognitionResult result)
-            : base(result)
-        {
-        }
+            : base(result) { }
 
         #endregion
     }

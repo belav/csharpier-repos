@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestGetCurrentNodeAfterTrackNodesReturnsCurrentNode()
         {
             var expr = SyntaxFactory.ParseExpression("a + b");
-            var a = expr.DescendantNodes().OfType<IdentifierNameSyntax>().First(n => n.Identifier.Text == "a");
+            var a = expr.DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .First(n => n.Identifier.Text == "a");
             var trackedExpr = expr.TrackNodes(a);
             var currentA = trackedExpr.GetCurrentNode(a);
             Assert.NotNull(currentA);
@@ -32,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestGetCurrentNodesAfterTrackNodesReturnsSingletonSequence()
         {
             var expr = SyntaxFactory.ParseExpression("a + b");
-            var a = expr.DescendantNodes().OfType<IdentifierNameSyntax>().First(n => n.Identifier.Text == "a");
+            var a = expr.DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .First(n => n.Identifier.Text == "a");
             var trackedExpr = expr.TrackNodes(a);
             var currentAs = trackedExpr.GetCurrentNodes(a);
             Assert.NotNull(currentAs);
@@ -44,7 +48,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestGetCurrentNodeWithoutTrackNodesReturnsNull()
         {
             var expr = SyntaxFactory.ParseExpression("a + b");
-            var a = expr.DescendantNodes().OfType<IdentifierNameSyntax>().First(n => n.Identifier.Text == "a");
+            var a = expr.DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .First(n => n.Identifier.Text == "a");
             var currentA = expr.GetCurrentNode(a);
             Assert.Null(currentA);
         }
@@ -53,7 +59,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestGetCurrentNodesWithoutTrackNodesReturnsEmptySequence()
         {
             var expr = SyntaxFactory.ParseExpression("a + b");
-            var a = expr.DescendantNodes().OfType<IdentifierNameSyntax>().First(n => n.Identifier.Text == "a");
+            var a = expr.DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .First(n => n.Identifier.Text == "a");
             var currentAs = expr.GetCurrentNodes(a);
             Assert.NotNull(currentAs);
             Assert.Equal(0, currentAs.Count());
@@ -63,7 +71,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestGetCurrentNodeAfterEditReturnsCurrentNode()
         {
             var expr = SyntaxFactory.ParseExpression("a + b");
-            var originalA = expr.DescendantNodes().OfType<IdentifierNameSyntax>().First(n => n.Identifier.Text == "a");
+            var originalA = expr.DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .First(n => n.Identifier.Text == "a");
             var trackedExpr = expr.TrackNodes(originalA);
             var currentA = trackedExpr.GetCurrentNode(originalA);
             var newA = currentA.WithLeadingTrivia(SyntaxFactory.Comment("/* ayup */"));
@@ -78,7 +88,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestGetCurrentNodeAfterEditReturnsSingletonSequence()
         {
             var expr = SyntaxFactory.ParseExpression("a + b");
-            var originalA = expr.DescendantNodes().OfType<IdentifierNameSyntax>().First(n => n.Identifier.Text == "a");
+            var originalA = expr.DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .First(n => n.Identifier.Text == "a");
             var trackedExpr = expr.TrackNodes(originalA);
             var currentA = trackedExpr.GetCurrentNode(originalA);
             var newA = currentA.WithLeadingTrivia(SyntaxFactory.Comment("/* ayup */"));
@@ -94,7 +106,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestGetCurrentNodeAfterRemovalReturnsNull()
         {
             var expr = SyntaxFactory.ParseExpression("a + b");
-            var originalA = expr.DescendantNodes().OfType<IdentifierNameSyntax>().First(n => n.Identifier.Text == "a");
+            var originalA = expr.DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .First(n => n.Identifier.Text == "a");
             var trackedExpr = expr.TrackNodes(originalA);
             var currentA = trackedExpr.GetCurrentNode(originalA);
             var replacedExpr = trackedExpr.ReplaceNode(currentA, SyntaxFactory.IdentifierName("c"));
@@ -106,7 +120,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestGetCurrentNodesAfterRemovalEmptySequence()
         {
             var expr = SyntaxFactory.ParseExpression("a + b");
-            var originalA = expr.DescendantNodes().OfType<IdentifierNameSyntax>().First(n => n.Identifier.Text == "a");
+            var originalA = expr.DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .First(n => n.Identifier.Text == "a");
             var trackedExpr = expr.TrackNodes(originalA);
             var currentA = trackedExpr.GetCurrentNode(originalA);
             var replacedExpr = trackedExpr.ReplaceNode(currentA, SyntaxFactory.IdentifierName("c"));
@@ -119,11 +135,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestGetCurrentNodeAfterAddingMultipleThrows()
         {
             var expr = SyntaxFactory.ParseExpression("a + b");
-            var originalA = expr.DescendantNodes().OfType<IdentifierNameSyntax>().First(n => n.Identifier.Text == "a");
+            var originalA = expr.DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .First(n => n.Identifier.Text == "a");
             var trackedExpr = expr.TrackNodes(originalA);
             var currentA = trackedExpr.GetCurrentNode(originalA);
             // replace all identifiers with same 'a'
-            var replacedExpr = trackedExpr.ReplaceNodes(trackedExpr.DescendantNodes().OfType<IdentifierNameSyntax>(), (original, changed) => currentA);
+            var replacedExpr = trackedExpr.ReplaceNodes(
+                trackedExpr.DescendantNodes().OfType<IdentifierNameSyntax>(),
+                (original, changed) => currentA
+            );
             Assert.Throws<InvalidOperationException>(() => replacedExpr.GetCurrentNode(originalA));
         }
 
@@ -131,11 +152,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestGetCurrentNodeAfterAddingMultipleReturnsMultiple()
         {
             var expr = SyntaxFactory.ParseExpression("a + b");
-            var originalA = expr.DescendantNodes().OfType<IdentifierNameSyntax>().First(n => n.Identifier.Text == "a");
+            var originalA = expr.DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .First(n => n.Identifier.Text == "a");
             var trackedExpr = expr.TrackNodes(originalA);
             var currentA = trackedExpr.GetCurrentNode(originalA);
             // replace all identifiers with same 'a'
-            var replacedExpr = trackedExpr.ReplaceNodes(trackedExpr.DescendantNodes().OfType<IdentifierNameSyntax>(), (original, changed) => currentA);
+            var replacedExpr = trackedExpr.ReplaceNodes(
+                trackedExpr.DescendantNodes().OfType<IdentifierNameSyntax>(),
+                (original, changed) => currentA
+            );
             var nodes = replacedExpr.GetCurrentNodes(originalA).ToList();
             Assert.Equal(2, nodes.Count);
             Assert.Equal("a", nodes[0].ToString());
@@ -181,7 +207,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestTrackNodeThatIsNotInTheSubtreeThrows()
         {
             var expr = SyntaxFactory.ParseExpression("a + b");
-            Assert.Throws<ArgumentException>(() => expr.TrackNodes(SyntaxFactory.IdentifierName("c")));
+            Assert.Throws<ArgumentException>(() =>
+                expr.TrackNodes(SyntaxFactory.IdentifierName("c"))
+            );
         }
     }
 }

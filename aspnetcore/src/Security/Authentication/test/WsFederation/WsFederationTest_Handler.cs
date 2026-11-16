@@ -66,8 +66,8 @@ public class WsFederationTestHandlers
         var httpClient = server.CreateClient();
 
         // Verify if the request is redirected to STS with right parameters
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => httpClient.GetAsync("/")
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            httpClient.GetAsync("/")
         );
         Assert.Equal(
             "Provide MetadataAddress, Configuration, or ConfigurationManager to WsFederationOptions",
@@ -176,8 +176,8 @@ public class WsFederationTestHandlers
     {
         var httpClient = await CreateClient();
         var form = CreateSignInContent("WsFederation/ValidToken.xml", suppressWctx: true);
-        var exception = await Assert.ThrowsAsync<AuthenticationFailureException>(
-            () => httpClient.PostAsync(httpClient.BaseAddress + "signin-wsfed", form)
+        var exception = await Assert.ThrowsAsync<AuthenticationFailureException>(() =>
+            httpClient.PostAsync(httpClient.BaseAddress + "signin-wsfed", form)
         );
         Assert.Contains("Unsolicited logins are not allowed.", exception.InnerException.Message);
     }
@@ -449,78 +449,63 @@ public class WsFederationTestHandlers
 
     private void ConfigureApp(IApplicationBuilder app)
     {
-        app.Map(
-            "/PreMapped-Challenge",
-            mapped =>
+        app.Map("/PreMapped-Challenge", mapped =>
+        {
+            mapped.UseAuthentication();
+            mapped.Run(async context =>
             {
-                mapped.UseAuthentication();
-                mapped.Run(async context =>
-                {
-                    await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
-                });
-            }
-        );
+                await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
+            });
+        });
 
         app.UseAuthentication();
 
-        app.Map(
-            "/Logout",
-            subApp =>
+        app.Map("/Logout", subApp =>
+        {
+            subApp.Run(async context =>
             {
-                subApp.Run(async context =>
+                if (context.User.Identity.IsAuthenticated)
                 {
-                    if (context.User.Identity.IsAuthenticated)
+                    var authProperties = new AuthenticationProperties()
                     {
-                        var authProperties = new AuthenticationProperties()
-                        {
-                            RedirectUri = context.Request.GetEncodedUrl(),
-                        };
-                        await context.SignOutAsync(
-                            WsFederationDefaults.AuthenticationScheme,
-                            authProperties
-                        );
-                        await context.Response.WriteAsync("Signing out...");
-                    }
-                    else
-                    {
-                        await context.Response.WriteAsync("SignedOut");
-                    }
-                });
-            }
-        );
-
-        app.Map(
-            "/AuthenticationFailed",
-            subApp =>
-            {
-                subApp.Run(async context =>
+                        RedirectUri = context.Request.GetEncodedUrl(),
+                    };
+                    await context.SignOutAsync(
+                        WsFederationDefaults.AuthenticationScheme,
+                        authProperties
+                    );
+                    await context.Response.WriteAsync("Signing out...");
+                }
+                else
                 {
-                    await context.Response.WriteAsync("AuthenticationFailed");
-                });
-            }
-        );
+                    await context.Response.WriteAsync("SignedOut");
+                }
+            });
+        });
 
-        app.Map(
-            "/signout-wsfed",
-            subApp =>
+        app.Map("/AuthenticationFailed", subApp =>
+        {
+            subApp.Run(async context =>
             {
-                subApp.Run(async context =>
-                {
-                    await context.Response.WriteAsync("signout-wsfed");
-                });
-            }
-        );
+                await context.Response.WriteAsync("AuthenticationFailed");
+            });
+        });
 
-        app.Map(
-            "/mapped-challenge",
-            subApp =>
+        app.Map("/signout-wsfed", subApp =>
+        {
+            subApp.Run(async context =>
             {
-                subApp.Run(async context =>
-                {
-                    await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
-                });
-            }
-        );
+                await context.Response.WriteAsync("signout-wsfed");
+            });
+        });
+
+        app.Map("/mapped-challenge", subApp =>
+        {
+            subApp.Run(async context =>
+            {
+                await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
+            });
+        });
 
         app.Run(async context =>
         {

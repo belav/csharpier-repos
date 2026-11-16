@@ -65,7 +65,10 @@ public class ReferenceEntryTest
         Assert.Same(chunky, cherry.Monkeys.Single());
         Assert.Equal(cherry.Id, chunky.GarciaId);
         Assert.Same(cherry, reference.CurrentValue);
-        Assert.Same(reference.TargetEntry.GetInfrastructure(), context.Entry(cherry).GetInfrastructure());
+        Assert.Same(
+            reference.TargetEntry.GetInfrastructure(),
+            context.Entry(cherry).GetInfrastructure()
+        );
 
         reference.CurrentValue = null;
 
@@ -94,7 +97,10 @@ public class ReferenceEntryTest
         Assert.Same(chunky, cherry.Monkeys.Single());
         Assert.Equal(cherry.Id, chunky.GarciaId);
         Assert.Same(cherry, reference.CurrentValue);
-        Assert.Same(reference.TargetEntry.GetInfrastructure(), context.Entry(cherry).GetInfrastructure());
+        Assert.Same(
+            reference.TargetEntry.GetInfrastructure(),
+            context.Entry(cherry).GetInfrastructure()
+        );
 
         reference.CurrentValue = null;
 
@@ -176,7 +182,10 @@ public class ReferenceEntryTest
         Assert.Equal(cherry.Id, chunky.GarciaId);
         Assert.Same(cherry, reference.CurrentValue);
 
-        Assert.Same(reference.TargetEntry.GetInfrastructure(), context.Entry(cherry).GetInfrastructure());
+        Assert.Same(
+            reference.TargetEntry.GetInfrastructure(),
+            context.Entry(cherry).GetInfrastructure()
+        );
         Assert.Equal(EntityState.Added, context.Entry(cherry).State);
         Assert.Equal(EntityState.Added, context.Entry(chunky).State);
 
@@ -211,7 +220,10 @@ public class ReferenceEntryTest
         Assert.Equal(cherry.Id, chunky.GarciaId);
         Assert.Same(cherry, reference.CurrentValue);
 
-        Assert.Same(reference.TargetEntry.GetInfrastructure(), context.Entry(cherry).GetInfrastructure());
+        Assert.Same(
+            reference.TargetEntry.GetInfrastructure(),
+            context.Entry(cherry).GetInfrastructure()
+        );
         Assert.Equal(EntityState.Added, context.Entry(cherry).State);
         Assert.Equal(EntityState.Added, context.Entry(chunky).State);
 
@@ -412,7 +424,8 @@ public class ReferenceEntryTest
     [InlineData(EntityState.Unchanged, EntityState.Deleted)]
     public void IsModified_can_set_fk_to_modified_principal_with_Added_or_Deleted_dependent(
         EntityState principalState,
-        EntityState dependentState)
+        EntityState dependentState
+    )
     {
         using var context = new FreezerContext();
         var half = new Half();
@@ -446,7 +459,8 @@ public class ReferenceEntryTest
     [InlineData(EntityState.Unchanged, EntityState.Unchanged)]
     public void IsModified_can_set_fk_to_modified_principal_with_Unchanged_dependent(
         EntityState principalState,
-        EntityState dependentState)
+        EntityState dependentState
+    )
     {
         using var context = new FreezerContext();
         var half = new Half();
@@ -480,7 +494,8 @@ public class ReferenceEntryTest
     [InlineData(EntityState.Unchanged, EntityState.Modified)]
     public void IsModified_can_set_fk_to_modified_principal_with_Modified_dependent(
         EntityState principalState,
-        EntityState dependentState)
+        EntityState dependentState
+    )
     {
         using var context = new FreezerContext();
         var half = new Half { Id = 7 };
@@ -539,8 +554,8 @@ public class ReferenceEntryTest
 
     private class FreezerContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(nameof(FreezerContext));
 

@@ -1,6 +1,6 @@
 ﻿// <copyright>
 // Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright> 
+// </copyright>
 
 namespace System.ServiceModel.Channels
 {
@@ -32,7 +32,8 @@ namespace System.ServiceModel.Channels
             UdpSocket[] sendSockets,
             UdpRetransmissionSettings retransmissionSettings,
             Uri via,
-            bool isMulticast)
+            bool isMulticast
+        )
             : base(factory)
         {
             Fx.Assert(encoder != null, "encoder shouldn't be null");
@@ -52,7 +53,9 @@ namespace System.ServiceModel.Channels
             if (this.retransmitSettings.Enabled)
             {
                 this.retransmitList = new Dictionary<UniqueId, IUdpRetransmitter>();
-                this.randomNumberGenerator = new SynchronizedRandom(AppDomain.CurrentDomain.GetHashCode() | Environment.TickCount);
+                this.randomNumberGenerator = new SynchronizedRandom(
+                    AppDomain.CurrentDomain.GetHashCode() | Environment.TickCount
+                );
             }
         }
 
@@ -73,36 +76,24 @@ namespace System.ServiceModel.Channels
             get { return this.via; }
         }
 
-        internal bool IsMulticast
-        {
-            get;
-            private set;
-        }
+        internal bool IsMulticast { get; private set; }
 
         internal TimeSpan InternalSendTimeout
         {
             get { return this.DefaultSendTimeout; }
         }
 
-        protected BufferManager BufferManager
-        {
-            get;
-            private set;
-        }
+        protected BufferManager BufferManager { get; private set; }
 
-        protected MessageEncoder Encoder
-        {
-            get;
-            private set;
-        }
+        protected MessageEncoder Encoder { get; private set; }
 
-        protected UdpSocket[] SendSockets
-        {
-            get;
-            private set;
-        }
+        protected UdpSocket[] SendSockets { get; private set; }
 
-        [SuppressMessage("Microsoft.StyleCop.CSharp.ReadabilityRules", "SA1100:DoNotPrefixCallsWithBaseUnlessLocalImplementationExists", Justification = "StyleCop 4.5 does not validate this rule properly.")]
+        [SuppressMessage(
+            "Microsoft.StyleCop.CSharp.ReadabilityRules",
+            "SA1100:DoNotPrefixCallsWithBaseUnlessLocalImplementationExists",
+            Justification = "StyleCop 4.5 does not validate this rule properly."
+        )]
         public override T GetProperty<T>()
         {
             if (typeof(T) == typeof(IOutputChannel))
@@ -140,19 +131,32 @@ namespace System.ServiceModel.Channels
 
         protected static void LogMessage(ref Message message, ArraySegment<byte> messageData)
         {
-            using (XmlDictionaryReader xmlDictionaryReader = XmlDictionaryReader.CreateTextReader(messageData.Array, messageData.Offset, messageData.Count, null, XmlDictionaryReaderQuotas.Max, null))
+            using (
+                XmlDictionaryReader xmlDictionaryReader = XmlDictionaryReader.CreateTextReader(
+                    messageData.Array,
+                    messageData.Offset,
+                    messageData.Count,
+                    null,
+                    XmlDictionaryReaderQuotas.Max,
+                    null
+                )
+            )
             {
-                MessageLogger.LogMessage(ref message, xmlDictionaryReader, MessageLoggingSource.TransportSend);
+                MessageLogger.LogMessage(
+                    ref message,
+                    xmlDictionaryReader,
+                    MessageLoggingSource.TransportSend
+                );
             }
         }
 
         protected override void AddHeadersTo(Message message)
         {
             Fx.Assert(message != null, "Message can't be null");
-            
+
             if (message is NullMessage)
             {
-                return; 
+                return;
             }
 
             if (message.Version.Addressing != AddressingVersion.None)
@@ -167,18 +171,29 @@ namespace System.ServiceModel.Channels
                 if (this.retransmitSettings.Enabled == true)
                 {
                     // we should only get here if some channel above us starts producing messages that don't match the encoder's message version.
-                    throw FxTrace.Exception.AsError(new ProtocolException(SR.RetransmissionRequiresAddressingOnMessage(message.Version.Addressing.ToString())));
+                    throw FxTrace.Exception.AsError(
+                        new ProtocolException(
+                            SR.RetransmissionRequiresAddressingOnMessage(
+                                message.Version.Addressing.ToString()
+                            )
+                        )
+                    );
                 }
             }
         }
 
-        protected override IAsyncResult OnBeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (message is NullMessage)
             {
-                return new CompletedAsyncResult(callback, state); 
+                return new CompletedAsyncResult(callback, state);
             }
-            
+
             return new SendAsyncResult(this, message, timeout, callback, state);
         }
 
@@ -186,9 +201,9 @@ namespace System.ServiceModel.Channels
         {
             if (result is CompletedAsyncResult)
             {
-                CompletedAsyncResult.End(result); 
+                CompletedAsyncResult.End(result);
             }
-            else 
+            else
             {
                 SendAsyncResult.End(result);
             }
@@ -198,9 +213,9 @@ namespace System.ServiceModel.Channels
         {
             if (message is NullMessage)
             {
-                return; 
+                return;
             }
-        
+
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
 
             IPEndPoint remoteEndPoint;
@@ -215,7 +230,9 @@ namespace System.ServiceModel.Channels
 
             if (timeoutHelper.RemainingTime() <= TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(new TimeoutException(SR.SendTimedOut(remoteEndPoint, timeout)));
+                throw FxTrace.Exception.AsError(
+                    new TimeoutException(SR.SendTimedOut(remoteEndPoint, timeout))
+                );
             }
 
             bool returnBuffer = false;
@@ -226,7 +243,7 @@ namespace System.ServiceModel.Channels
             RetransmitIterator retransmitIterator = null;
 
             bool shouldRetransmit = this.ShouldRetransmitMessage(sendingMulticast);
-            
+
             try
             {
                 if (shouldRetransmit)
@@ -264,7 +281,12 @@ namespace System.ServiceModel.Channels
                             UdpOutputChannel.LogMessage(ref message, messageData);
                         }
 
-                        this.TransmitMessage(messageData, sendSockets, remoteEndPoint, timeoutHelper);
+                        this.TransmitMessage(
+                            messageData,
+                            sendSockets,
+                            remoteEndPoint,
+                            timeoutHelper
+                        );
                     }
                 }
             }
@@ -287,21 +309,29 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected abstract UdpSocket[] GetSendSockets(Message message, out IPEndPoint remoteEndPoint, out Exception exceptionToBeThrown);
+        protected abstract UdpSocket[] GetSendSockets(
+            Message message,
+            out IPEndPoint remoteEndPoint,
+            out Exception exceptionToBeThrown
+        );
 
         protected override void OnAbort()
         {
             this.Cleanup(true, TimeSpan.Zero);
         }
 
-        [SuppressMessage("Microsoft.StyleCop.CSharp.ReadabilityRules", "SA1100:DoNotPrefixCallsWithBaseUnlessLocalImplementationExists", Justification = "If BeginClose is overridden we still pass base.BeginClose here")]
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        [SuppressMessage(
+            "Microsoft.StyleCop.CSharp.ReadabilityRules",
+            "SA1100:DoNotPrefixCallsWithBaseUnlessLocalImplementationExists",
+            Justification = "If BeginClose is overridden we still pass base.BeginClose here"
+        )]
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new CloseAsyncResult(
-                this,
-                timeout,
-                callback,
-                state);
+            return new CloseAsyncResult(this, timeout, callback, state);
         }
 
         protected override void OnClose(TimeSpan timeout)
@@ -315,7 +345,11 @@ namespace System.ServiceModel.Channels
             CloseAsyncResult.End(result);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.OnOpen(timeout);
             return new CompletedAsyncResult(callback, state);
@@ -346,20 +380,28 @@ namespace System.ServiceModel.Channels
 
         private RetransmitIterator CreateRetransmitIterator(bool sendingMulticast)
         {
-            Fx.Assert(this.retransmitSettings.Enabled, "CreateRetransmitCalculator called when no retransmission set to happen");
+            Fx.Assert(
+                this.retransmitSettings.Enabled,
+                "CreateRetransmitCalculator called when no retransmission set to happen"
+            );
             int lowerBound = this.retransmitSettings.GetDelayLowerBound();
             int upperBound = this.retransmitSettings.GetDelayUpperBound();
             int currentDelay = this.randomNumberGenerator.Next(lowerBound, upperBound);
 
             int maxDelay = this.retransmitSettings.GetMaxDelayPerRetransmission();
-            int maxRetransmitCount = sendingMulticast ? this.retransmitSettings.MaxMulticastRetransmitCount : this.retransmitSettings.MaxUnicastRetransmitCount;
+            int maxRetransmitCount = sendingMulticast
+                ? this.retransmitSettings.MaxMulticastRetransmitCount
+                : this.retransmitSettings.MaxUnicastRetransmitCount;
 
             return new RetransmitIterator(currentDelay, maxDelay, maxRetransmitCount);
         }
 
         private void RetransmitStarting(UniqueId messageId, IUdpRetransmitter retransmitter)
         {
-            Fx.Assert(this.retransmitSettings.Enabled, "RetransmitStarting called when retransmission is disabled");
+            Fx.Assert(
+                this.retransmitSettings.Enabled,
+                "RetransmitStarting called when retransmission is disabled"
+            );
 
             lock (this.ThisLock)
             {
@@ -367,9 +409,13 @@ namespace System.ServiceModel.Channels
 
                 if (this.retransmitList.ContainsKey(messageId))
                 {
-                    // someone is sending a message with the same MessageId 
+                    // someone is sending a message with the same MessageId
                     // while a retransmission is still in progress for that ID.
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.RecycledMessageIdDuringRetransmission(messageId)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.RecycledMessageIdDuringRetransmission(messageId)
+                        )
+                    );
                 }
                 else
                 {
@@ -380,7 +426,10 @@ namespace System.ServiceModel.Channels
 
         private void RetransmitStopping(UniqueId messageId)
         {
-            Fx.Assert(this.retransmitSettings.Enabled, "RetransmitStopping called when retransmission is disabled");
+            Fx.Assert(
+                this.retransmitSettings.Enabled,
+                "RetransmitStopping called when retransmission is disabled"
+            );
 
             lock (this.ThisLock)
             {
@@ -389,8 +438,8 @@ namespace System.ServiceModel.Channels
                 {
                     this.retransmitList.Remove(messageId);
 
-                    // if we are closing down, then we need to unblock the Cleanup code 
-                    //  this.retransmissionDoneEvent only != null if on cleaning up; abort case means that it == null. 
+                    // if we are closing down, then we need to unblock the Cleanup code
+                    //  this.retransmissionDoneEvent only != null if on cleaning up; abort case means that it == null.
                     if (this.retransmitList.Count == 0 && this.retransmissionDoneWaitHandle != null)
                     {
                         this.retransmissionDoneWaitHandle.Set();
@@ -411,7 +460,12 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        private void TransmitMessage(ArraySegment<byte> messageBytes, UdpSocket[] sockets, IPEndPoint remoteEndpoint, TimeoutHelper timeoutHelper)
+        private void TransmitMessage(
+            ArraySegment<byte> messageBytes,
+            UdpSocket[] sockets,
+            IPEndPoint remoteEndpoint,
+            TimeoutHelper timeoutHelper
+        )
         {
             Fx.Assert(messageBytes.Array != null, "message data array can't be null");
             Fx.Assert(sockets != null, "sockets can't be null");
@@ -422,14 +476,24 @@ namespace System.ServiceModel.Channels
             {
                 if (timeoutHelper.RemainingTime() <= TimeSpan.Zero)
                 {
-                    throw FxTrace.Exception.AsError(new TimeoutException(SR.SendTimedOut(remoteEndpoint, timeoutHelper.OriginalTimeout)));
+                    throw FxTrace.Exception.AsError(
+                        new TimeoutException(
+                            SR.SendTimedOut(remoteEndpoint, timeoutHelper.OriginalTimeout)
+                        )
+                    );
                 }
 
-                sockets[i].SendTo(messageBytes.Array, messageBytes.Offset, messageBytes.Count, remoteEndpoint);
+                sockets[i]
+                    .SendTo(
+                        messageBytes.Array,
+                        messageBytes.Offset,
+                        messageBytes.Count,
+                        remoteEndpoint
+                    );
             }
         }
 
-        // we're guaranteed by CommunicationObject that at most ONE of Close or BeginClose will be called once. 
+        // we're guaranteed by CommunicationObject that at most ONE of Close or BeginClose will be called once.
         private void Cleanup(bool aborting, TimeSpan timeout)
         {
             bool needToWait = false;
@@ -449,11 +513,13 @@ namespace System.ServiceModel.Channels
                 if (!aborting && this.retransmitList != null && this.retransmitList.Count > 0)
                 {
                     needToWait = true;
-                    this.retransmissionDoneWaitHandle = new AsyncWaitHandle(EventResetMode.ManualReset);
+                    this.retransmissionDoneWaitHandle = new AsyncWaitHandle(
+                        EventResetMode.ManualReset
+                    );
                 }
                 else
                 {
-                    // copied this call here in order to avoid releasing then retaking lock 
+                    // copied this call here in order to avoid releasing then retaking lock
                     this.CleanupAfterWait(aborting);
                 }
             }
@@ -462,7 +528,9 @@ namespace System.ServiceModel.Channels
             {
                 if (!this.retransmissionDoneWaitHandle.Wait(timeout))
                 {
-                    throw FxTrace.Exception.AsError(new TimeoutException(SR.TimeoutOnOperation(timeout)));
+                    throw FxTrace.Exception.AsError(
+                        new TimeoutException(SR.TimeoutOnOperation(timeout))
+                    );
                 }
 
                 lock (this.ThisLock)
@@ -505,7 +573,7 @@ namespace System.ServiceModel.Channels
             for (int i = 0; i < this.SendSockets.Length; i++)
             {
                 this.SendSockets[i].Close();
-            }                
+            }
 
             this.cleanedUp = true;
         }
@@ -528,13 +596,9 @@ namespace System.ServiceModel.Channels
                 this.retransmitCount = retransmitCount;
             }
 
-            public int CurrentDelay
-            {
-                get;
-                private set;
-            }
+            public int CurrentDelay { get; private set; }
 
-            // should be called before each retransmission to determine if 
+            // should be called before each retransmission to determine if
             // another one is needed.
             public bool MoveNext()
             {
@@ -568,17 +632,9 @@ namespace System.ServiceModel.Channels
                 this.cancelEvent = new ManualResetEvent(false);
             }
 
-            public bool IsMulticast
-            {
-                get;
-                private set;
-            }
+            public bool IsMulticast { get; private set; }
 
-            public bool IsCanceled
-            {
-                get;
-                private set;
-            }
+            public bool IsCanceled { get; private set; }
 
             public void Wait(int millisecondsTimeout)
             {
@@ -632,8 +688,12 @@ namespace System.ServiceModel.Channels
 
         private class SendAsyncResult : AsyncResult, IUdpRetransmitter
         {
-            private static AsyncCallback onSocketSendComplete = Fx.ThunkCallback(new AsyncCallback(OnSocketSendComplete));
-            private static Action<object> onRetransmitMessage = new Action<object>(OnRetransmitMessage);
+            private static AsyncCallback onSocketSendComplete = Fx.ThunkCallback(
+                new AsyncCallback(OnSocketSendComplete)
+            );
+            private static Action<object> onRetransmitMessage = new Action<object>(
+                OnRetransmitMessage
+            );
 
             private UdpOutputChannel channel;
             private ArraySegment<byte> messageData;
@@ -646,7 +706,13 @@ namespace System.ServiceModel.Channels
             private Message message;
             private bool retransmissionEnabled;
 
-            public SendAsyncResult(UdpOutputChannel channel, Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            public SendAsyncResult(
+                UdpOutputChannel channel,
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.timeoutHelper = new TimeoutHelper(timeout);
@@ -690,17 +756,9 @@ namespace System.ServiceModel.Channels
                 TransmitCompleted,
             }
 
-            public bool IsCanceled
-            {
-                get;
-                private set;
-            }
+            public bool IsCanceled { get; private set; }
 
-            public bool IsMulticast
-            {
-                get;
-                private set;
-            }
+            public bool IsMulticast { get; private set; }
 
             public static void End(IAsyncResult result)
             {
@@ -789,13 +847,15 @@ namespace System.ServiceModel.Channels
                 {
                     if (socketAsyncResult == null)
                     {
-                        socketAsyncResult = this.sendSockets[this.currentSocket].BeginSendTo(
-                            this.messageData.Array,
-                            this.messageData.Offset,
-                            this.messageData.Count,
-                            this.remoteEndpoint,
-                            onSocketSendComplete,
-                            this);
+                        socketAsyncResult = this.sendSockets[this.currentSocket]
+                            .BeginSendTo(
+                                this.messageData.Array,
+                                this.messageData.Offset,
+                                this.messageData.Count,
+                                this.remoteEndpoint,
+                                onSocketSendComplete,
+                                this
+                            );
 
                         if (!socketAsyncResult.CompletedSynchronously)
                         {
@@ -805,7 +865,7 @@ namespace System.ServiceModel.Channels
 
                     this.sendSockets[this.currentSocket].EndSendTo(socketAsyncResult);
 
-                    // check for timeout after calling socket.EndSendTo 
+                    // check for timeout after calling socket.EndSendTo
                     // so that we don't leave the socket in a bad state/leak async results
                     this.ThrowIfTimedOut();
 
@@ -885,7 +945,11 @@ namespace System.ServiceModel.Channels
             private void Initialize(Message message)
             {
                 Exception exceptionToThrow;
-                this.sendSockets = this.channel.GetSendSockets(message, out this.remoteEndpoint, out exceptionToThrow);
+                this.sendSockets = this.channel.GetSendSockets(
+                    message,
+                    out this.remoteEndpoint,
+                    out exceptionToThrow
+                );
 
                 if (exceptionToThrow != null)
                 {
@@ -899,7 +963,9 @@ namespace System.ServiceModel.Channels
                     this.retransmissionEnabled = true;
                     this.channel.RetransmitStarting(this.message.Headers.MessageId, this);
                     this.retransmitTimer = new IOThreadTimer(onRetransmitMessage, this, false);
-                    this.retransmitIterator = this.channel.CreateRetransmitIterator(this.IsMulticast);
+                    this.retransmitIterator = this.channel.CreateRetransmitIterator(
+                        this.IsMulticast
+                    );
                 }
 
                 this.messageData = this.channel.EncodeMessage(message);
@@ -909,7 +975,11 @@ namespace System.ServiceModel.Channels
             {
                 if (this.timeoutHelper.RemainingTime() <= TimeSpan.Zero)
                 {
-                    throw FxTrace.Exception.AsError(new TimeoutException(SR.TimeoutOnOperation(this.timeoutHelper.OriginalTimeout)));
+                    throw FxTrace.Exception.AsError(
+                        new TimeoutException(
+                            SR.TimeoutOnOperation(this.timeoutHelper.OriginalTimeout)
+                        )
+                    );
                 }
             }
 
@@ -928,7 +998,10 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            private void CompleteAndCleanup(bool completedSynchronously, Exception completionException)
+            private void CompleteAndCleanup(
+                bool completedSynchronously,
+                Exception completionException
+            )
             {
                 this.Cleanup();
                 this.Complete(completedSynchronously, completionException);
@@ -936,18 +1009,26 @@ namespace System.ServiceModel.Channels
         }
 
         // Control flow for async path
-        // We use this mechanism to avoid initializing two async objects as logically cleanup+close is one operation. 
-        // At any point in the Begin* methods, we may go async. The steps are: 
+        // We use this mechanism to avoid initializing two async objects as logically cleanup+close is one operation.
+        // At any point in the Begin* methods, we may go async. The steps are:
         // - Cleanup channel
         // - Close channel
         private class CloseAsyncResult : AsyncResult
         {
-            private static Action<object, TimeoutException> completeCleanupCallback = new Action<object, TimeoutException>(CompleteCleanup);
+            private static Action<object, TimeoutException> completeCleanupCallback = new Action<
+                object,
+                TimeoutException
+            >(CompleteCleanup);
 
             private UdpOutputChannel channel;
             private TimeoutHelper timeoutHelper;
 
-            public CloseAsyncResult(UdpOutputChannel channel, TimeSpan timeout, AsyncCallback callback, object state)
+            public CloseAsyncResult(
+                UdpOutputChannel channel,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.channel = channel;
@@ -971,8 +1052,15 @@ namespace System.ServiceModel.Channels
 
                 if (exception != null)
                 {
-                    Fx.Assert(exception.GetType() == typeof(TimeoutException), "Exception on callback should always be TimeoutException");
-                    throw FxTrace.Exception.AsError(new TimeoutException(SR.TimeoutOnOperation(thisPtr.timeoutHelper.OriginalTimeout)));
+                    Fx.Assert(
+                        exception.GetType() == typeof(TimeoutException),
+                        "Exception on callback should always be TimeoutException"
+                    );
+                    throw FxTrace.Exception.AsError(
+                        new TimeoutException(
+                            SR.TimeoutOnOperation(thisPtr.timeoutHelper.OriginalTimeout)
+                        )
+                    );
                 }
 
                 try
@@ -1019,19 +1107,29 @@ namespace System.ServiceModel.Channels
                     }
 
                     // we're never aborting in this case...
-                    if (this.channel.retransmitList != null && this.channel.retransmitList.Count > 0)
+                    if (
+                        this.channel.retransmitList != null
+                        && this.channel.retransmitList.Count > 0
+                    )
                     {
                         needToWait = true;
-                        this.channel.retransmissionDoneWaitHandle = new AsyncWaitHandle(EventResetMode.ManualReset);
+                        this.channel.retransmissionDoneWaitHandle = new AsyncWaitHandle(
+                            EventResetMode.ManualReset
+                        );
                     }
                     else
                     {
                         this.channel.CleanupAfterWait(false);
                     }
 
-                    // we're guaranteed by CommunicationObject that at most ONE of Close or BeginClose will be called once. 
-                    // we don't null out retransmissionDoneEvent in the abort case; should be safe to use here. 
-                    return !needToWait || this.channel.retransmissionDoneWaitHandle.WaitAsync(completeCleanupCallback, this, this.timeoutHelper.RemainingTime());
+                    // we're guaranteed by CommunicationObject that at most ONE of Close or BeginClose will be called once.
+                    // we don't null out retransmissionDoneEvent in the abort case; should be safe to use here.
+                    return !needToWait
+                        || this.channel.retransmissionDoneWaitHandle.WaitAsync(
+                            completeCleanupCallback,
+                            this,
+                            this.timeoutHelper.RemainingTime()
+                        );
                 }
             }
         }

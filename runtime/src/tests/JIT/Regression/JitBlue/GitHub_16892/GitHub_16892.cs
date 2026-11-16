@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 //
 //  Test case for a GC Stress 4 failure
 //
@@ -12,7 +13,7 @@ using Xunit;
 //     1. has evaluated and stored the two outgoing stack based arguments: a5, a6
 //     2. and then performs a call to the helper CORINFO_HELP_RNGCHKFAIL
 //
-//  With the fix the JIT will evaluate the arr[3] with the rangecheck 
+//  With the fix the JIT will evaluate the arr[3] with the rangecheck
 //  into a new compiler temp, before storing any outgoing arguments.
 //
 
@@ -21,10 +22,16 @@ class Item
     int _value;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public Item(int value)  { _value = value; }
+    public Item(int value)
+    {
+        _value = value;
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public int GetValue() { return _value; }
+    public int GetValue()
+    {
+        return _value;
+    }
 }
 
 public class Program
@@ -35,7 +42,7 @@ public class Program
     void Init()
     {
         itemArray = new Item[11];
-        for (int i=0; i<11; i++)
+        for (int i = 0; i < 11; i++)
         {
             itemArray[i] = new Item(i);
         }
@@ -63,7 +70,8 @@ public class Program
         // Form a possible infinte loop that the JIT believes could execute
         // without encountering a GC safe point.
         //
-        do {
+        do
+        {
             if (result < 5)
             {
                 result = Compute(a1, a2, arr[3], a4, a5, a6);
@@ -71,7 +79,6 @@ public class Program
         } while (result < 0);
 
         return result;
-            
     }
 
     [Fact]

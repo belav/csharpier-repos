@@ -19,9 +19,11 @@ namespace System.Runtime.InteropServices
     ///     Otherwise null.
     /// </param>
     /// <returns>The handle for the loaded native library on success, null on failure.</returns>
-    public delegate IntPtr DllImportResolver(string libraryName,
-                                             Assembly assembly,
-                                             DllImportSearchPath? searchPath);
+    public delegate IntPtr DllImportResolver(
+        string libraryName,
+        Assembly assembly,
+        DllImportSearchPath? searchPath
+    );
 
     /// <summary>
     /// APIs for managing Native Libraries
@@ -81,7 +83,11 @@ namespace System.Runtime.InteropServices
         /// <exception cref="ArgumentException">If assembly is not a RuntimeAssembly</exception>
         /// <exception cref="DllNotFoundException">If the library can't be found.</exception>
         /// <exception cref="BadImageFormatException">If the library is not valid.</exception>
-        public static IntPtr Load(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
+        public static IntPtr Load(
+            string libraryName,
+            Assembly assembly,
+            DllImportSearchPath? searchPath
+        )
         {
             ArgumentNullException.ThrowIfNull(libraryName);
             ArgumentNullException.ThrowIfNull(assembly);
@@ -89,10 +95,7 @@ namespace System.Runtime.InteropServices
             if (assembly is not RuntimeAssembly)
                 throw new ArgumentException(SR.Argument_MustBeRuntimeAssembly);
 
-            return LoadLibraryByName(libraryName,
-                              assembly,
-                              searchPath,
-                              throwOnError: true);
+            return LoadLibraryByName(libraryName, assembly, searchPath, throwOnError: true);
         }
 
         /// <summary>
@@ -116,7 +119,12 @@ namespace System.Runtime.InteropServices
         /// <returns>True on successful load, false otherwise.</returns>
         /// <exception cref="ArgumentNullException">If libraryPath or assembly is null</exception>
         /// <exception cref="ArgumentException">If assembly is not a RuntimeAssembly</exception>
-        public static bool TryLoad(string libraryName, Assembly assembly, DllImportSearchPath? searchPath, out IntPtr handle)
+        public static bool TryLoad(
+            string libraryName,
+            Assembly assembly,
+            DllImportSearchPath? searchPath,
+            out IntPtr handle
+        )
         {
             ArgumentNullException.ThrowIfNull(libraryName);
             ArgumentNullException.ThrowIfNull(assembly);
@@ -124,10 +132,7 @@ namespace System.Runtime.InteropServices
             if (assembly is not RuntimeAssembly)
                 throw new ArgumentException(SR.Argument_MustBeRuntimeAssembly);
 
-            handle = LoadLibraryByName(libraryName,
-                                assembly,
-                                searchPath,
-                                throwOnError: false);
+            handle = LoadLibraryByName(libraryName, assembly, searchPath, throwOnError: false);
             return handle != IntPtr.Zero;
         }
 
@@ -208,13 +213,18 @@ namespace System.Runtime.InteropServices
 
             if (s_nativeDllResolveMap == null)
             {
-                Interlocked.CompareExchange(ref s_nativeDllResolveMap,
-                    new ConditionalWeakTable<Assembly, DllImportResolver>(), null);
+                Interlocked.CompareExchange(
+                    ref s_nativeDllResolveMap,
+                    new ConditionalWeakTable<Assembly, DllImportResolver>(),
+                    null
+                );
             }
 
             if (!s_nativeDllResolveMap.TryAdd(assembly, resolver))
             {
-                throw new InvalidOperationException(SR.InvalidOperation_CannotRegisterSecondResolver);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_CannotRegisterSecondResolver
+                );
             }
         }
 
@@ -228,8 +238,12 @@ namespace System.Runtime.InteropServices
         /// <param name="dllImportSearchPathFlags">If hasdllImportSearchPathFlags is true, the flags in
         ///                                       DefaultDllImportSearchPathAttribute; meaningless otherwise </param>
         /// <returns>The handle for the loaded library on success. Null on failure.</returns>
-        internal static IntPtr LoadLibraryCallbackStub(string libraryName, Assembly assembly,
-                                                       bool hasDllImportSearchPathFlags, uint dllImportSearchPathFlags)
+        internal static IntPtr LoadLibraryCallbackStub(
+            string libraryName,
+            Assembly assembly,
+            bool hasDllImportSearchPathFlags,
+            uint dllImportSearchPathFlags
+        )
         {
             if (s_nativeDllResolveMap == null)
             {
@@ -241,7 +255,11 @@ namespace System.Runtime.InteropServices
                 return IntPtr.Zero;
             }
 
-            return resolver(libraryName, assembly, hasDllImportSearchPathFlags ? (DllImportSearchPath?)dllImportSearchPathFlags : null);
+            return resolver(
+                libraryName,
+                assembly,
+                hasDllImportSearchPathFlags ? (DllImportSearchPath?)dllImportSearchPathFlags : null
+            );
         }
 
         /// <summary>

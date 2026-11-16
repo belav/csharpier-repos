@@ -19,8 +19,18 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             DiagnosticSeverity severity,
             ImmutableHashSet<string> fixableCompilerDiagnostics,
             ILogger logger,
-            CancellationToken cancellationToken)
-            => RunCodeAnalysisAsync(result, ImmutableArray.Create(analyzers), project, formattableDocumentPaths, severity, fixableCompilerDiagnostics, logger, cancellationToken);
+            CancellationToken cancellationToken
+        ) =>
+            RunCodeAnalysisAsync(
+                result,
+                ImmutableArray.Create(analyzers),
+                project,
+                formattableDocumentPaths,
+                severity,
+                fixableCompilerDiagnostics,
+                logger,
+                cancellationToken
+            );
 
         public async Task RunCodeAnalysisAsync(
             CodeAnalysisResult result,
@@ -30,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             DiagnosticSeverity severity,
             ImmutableHashSet<string> fixableCompilerDiagnostics,
             ILogger logger,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // If are not running any analyzers and are not reporting compiler diagnostics, then there is
             // nothing to report.
@@ -43,18 +54,24 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             // This file is generated during a `dotnet restore`.
             if (!AllReferencedProjectsLoaded(project))
             {
-                logger.LogWarning(Resources.Required_references_did_not_load_for_0_or_referenced_project_Run_dotnet_restore_prior_to_formatting, project.Name);
+                logger.LogWarning(
+                    Resources.Required_references_did_not_load_for_0_or_referenced_project_Run_dotnet_restore_prior_to_formatting,
+                    project.Name
+                );
                 return;
             }
 
-            var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await project
+                .GetCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (compilation is null)
             {
                 return;
             }
 
             var compilerDiagnostics = !fixableCompilerDiagnostics.IsEmpty
-                ? compilation.GetDiagnostics(cancellationToken)
+                ? compilation
+                    .GetDiagnostics(cancellationToken)
                     .Where(diagnostic => fixableCompilerDiagnostics.Contains(diagnostic.Id))
                     .ToImmutableArray()
                 : ImmutableArray<Diagnostic>.Empty;
@@ -73,21 +90,26 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     onAnalyzerException: null,
                     concurrentAnalysis: true,
                     logAnalyzerExecutionTime: false,
-                    reportSuppressedDiagnostics: false);
+                    reportSuppressedDiagnostics: false
+                );
                 var analyzerCompilation = compilation.WithAnalyzers(analyzers, analyzerOptions);
 
-                diagnostics = await analyzerCompilation.GetAnalyzerDiagnosticsAsync(cancellationToken).ConfigureAwait(false);
+                diagnostics = await analyzerCompilation
+                    .GetAnalyzerDiagnosticsAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 diagnostics = diagnostics.AddRange(compilerDiagnostics);
             }
 
             // filter diagnostics
             foreach (var diagnostic in diagnostics)
             {
-                if (!diagnostic.IsSuppressed &&
-                    diagnostic.Severity >= severity &&
-                    diagnostic.Location.IsInSource &&
-                    diagnostic.Location.SourceTree != null &&
-                    formattableDocumentPaths.Contains(diagnostic.Location.SourceTree.FilePath))
+                if (
+                    !diagnostic.IsSuppressed
+                    && diagnostic.Severity >= severity
+                    && diagnostic.Location.IsInSource
+                    && diagnostic.Location.SourceTree != null
+                    && formattableDocumentPaths.Contains(diagnostic.Location.SourceTree.FilePath)
+                )
                 {
                     result.AddDiagnostic(project, diagnostic);
                 }
@@ -98,14 +120,22 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             static bool AllReferencedProjectsLoaded(Project project)
             {
                 // Use mscorlib to represent Runtime references being loaded.
-                if (!project.MetadataReferences.Any(reference => reference.Display?.EndsWith("mscorlib.dll") == true))
+                if (
+                    !project.MetadataReferences.Any(reference =>
+                        reference.Display?.EndsWith("mscorlib.dll") == true
+                    )
+                )
                 {
                     return false;
                 }
 
-                return project.ProjectReferences
-                    .Select(projectReference => project.Solution.GetProject(projectReference.ProjectId))
-                    .All(referencedProject => referencedProject != null && AllReferencedProjectsLoaded(referencedProject));
+                return project
+                    .ProjectReferences.Select(projectReference =>
+                        project.Solution.GetProject(projectReference.ProjectId)
+                    )
+                    .All(referencedProject =>
+                        referencedProject != null && AllReferencedProjectsLoaded(referencedProject)
+                    );
             }
         }
     }

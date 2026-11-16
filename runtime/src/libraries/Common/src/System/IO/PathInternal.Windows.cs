@@ -59,10 +59,13 @@ namespace System.IO
 
         internal const int MaxShortPath = 260;
         internal const int MaxShortDirectoryPath = 248;
+
         // \\?\, \\.\, \??\
         internal const int DevicePrefixLength = 4;
+
         // \\
         internal const int UncPrefixLength = 2;
+
         // \\?\UNC\, \\.\UNC\
         internal const int UncExtendedPrefixLength = 8;
 
@@ -136,8 +139,7 @@ namespace System.IO
             // If the path begins with any two separators is will be recognized and normalized and prepped with
             // "\??\" for internal usage correctly. "\??\" is recognized and handled, "/??/" is not.
             return IsExtended(path)
-                ||
-                (
+                || (
                     path.Length >= DevicePrefixLength
                     && IsDirectorySeparator(path[0])
                     && IsDirectorySeparator(path[1])
@@ -220,9 +222,7 @@ namespace System.IO
                 if (i < pathLength && i > DevicePrefixLength && IsDirectorySeparator(path[i]))
                     i++;
             }
-            else if (pathLength >= 2
-                && path[1] == VolumeSeparatorChar
-                && IsValidDriveChar(path[0]))
+            else if (pathLength >= 2 && path[1] == VolumeSeparatorChar && IsValidDriveChar(path[0]))
             {
                 // Valid drive specified path ("C:", "D:", etc.)
                 i = 2;
@@ -265,12 +265,14 @@ namespace System.IO
 
             // The only way to specify a fixed path that doesn't begin with two slashes
             // is the drive, colon, slash format- i.e. C:\
-            return !((path.Length >= 3)
+            return !(
+                (path.Length >= 3)
                 && (path[1] == VolumeSeparatorChar)
                 && IsDirectorySeparator(path[2])
                 // To match old behavior we'll check the drive character for validity as the path is technically
                 // not qualified if you don't have a valid drive. "=:\" is the "=" file's default data stream.
-                && IsValidDriveChar(path[0]));
+                && IsValidDriveChar(path[0])
+            );
         }
 
         /// <summary>
@@ -328,10 +330,14 @@ namespace System.IO
             for (int i = 0; i < path.Length; i++)
             {
                 current = path[i];
-                if (IsDirectorySeparator(current)
-                    && (current != DirectorySeparatorChar
+                if (
+                    IsDirectorySeparator(current)
+                    && (
+                        current != DirectorySeparatorChar
                         // Check for sequential separators past the first position (we need to keep initial two for UNC/extended)
-                        || (i > 0 && i + 1 < path.Length && IsDirectorySeparator(path[i + 1]))))
+                        || (i > 0 && i + 1 < path.Length && IsDirectorySeparator(path[i + 1]))
+                    )
+                )
                 {
                     normalized = false;
                     break;

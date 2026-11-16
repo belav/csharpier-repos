@@ -28,7 +28,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
     internal sealed class GenericTypeSignature : TypeSignature
     {
-        internal GenericTypeSignature(QualifiedTypeSignature qualifiedName, ImmutableArray<TypeSignature> typeArguments)
+        internal GenericTypeSignature(
+            QualifiedTypeSignature qualifiedName,
+            ImmutableArray<TypeSignature> typeArguments
+        )
         {
             Debug.Assert(qualifiedName != null);
             Debug.Assert(!typeArguments.IsDefault);

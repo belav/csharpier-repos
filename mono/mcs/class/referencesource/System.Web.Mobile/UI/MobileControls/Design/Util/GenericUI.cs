@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="GenericUI.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls.Util
@@ -9,42 +9,51 @@ namespace System.Web.UI.Design.MobileControls.Util
     using System;
     using System.Collections;
     using System.ComponentModel;
-    using System.Drawing;
     using System.Diagnostics;
+    using System.Drawing;
+    using System.Text;
     using System.Windows.Forms;
     using System.Windows.Forms.Design;
-    using System.Text;
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class GenericUI
     {
         // Internal type should not be instantiated.
-        private GenericUI() {
-        }
+        private GenericUI() { }
 
-        internal static readonly Bitmap SortDownIcon =
-            new Icon(typeof(MobileControlDesigner), "SortDown.ico").ToBitmap();
+        internal static readonly Bitmap SortDownIcon = new Icon(
+            typeof(MobileControlDesigner),
+            "SortDown.ico"
+        ).ToBitmap();
 
-        internal static readonly Bitmap SortUpIcon =
-            new Icon(typeof(MobileControlDesigner), "SortUp.ico").ToBitmap();
-        
-        internal static readonly Bitmap DeleteIcon =
-            new Icon(typeof(MobileControlDesigner), "Delete.ico").ToBitmap();
-        
-        internal static readonly Bitmap ErrorIcon = 
-            new Icon(typeof(MobileContainerDesigner), "Error.ico").ToBitmap();
+        internal static readonly Bitmap SortUpIcon = new Icon(
+            typeof(MobileControlDesigner),
+            "SortUp.ico"
+        ).ToBitmap();
 
-        internal static readonly Bitmap InfoIcon = 
-            new Icon(typeof(MobileContainerDesigner), "Info.ico").ToBitmap();
+        internal static readonly Bitmap DeleteIcon = new Icon(
+            typeof(MobileControlDesigner),
+            "Delete.ico"
+        ).ToBitmap();
 
-        internal static void InitDialog(
-            Form dialog,
-            ISite site
-        ) {
+        internal static readonly Bitmap ErrorIcon = new Icon(
+            typeof(MobileContainerDesigner),
+            "Error.ico"
+        ).ToBitmap();
+
+        internal static readonly Bitmap InfoIcon = new Icon(
+            typeof(MobileContainerDesigner),
+            "Info.ico"
+        ).ToBitmap();
+
+        internal static void InitDialog(Form dialog, ISite site)
+        {
             dialog.FormBorderStyle = FormBorderStyle.FixedDialog;
             dialog.Icon = null;
             dialog.MaximizeBox = false;
@@ -60,23 +69,22 @@ namespace System.Web.UI.Design.MobileControls.Util
             System.Drawing.Font vsfont = Control.DefaultFont;
             if (site != null)
             {
-                IUIService uiService = (IUIService) site.GetService(
-                    typeof(IUIService)
-                    );
+                IUIService uiService = (IUIService)site.GetService(typeof(IUIService));
                 if (uiService != null)
                 {
-                    vsfont = (Font) uiService.Styles["DialogFont"];
+                    vsfont = (Font)uiService.Styles["DialogFont"];
                 }
             }
             return vsfont;
-        }    
-        
+        }
+
         // This version of InitDialog() handles merged UIs
         internal static int InitDialog(
             Form dialog,
             IDeviceSpecificDesigner designer,
             int mergingContext
-        ) {
+        )
+        {
             InitDialog(dialog, designer.UnderlyingControl.Site);
             int tabOffset = 0;
             designer.InitHeader(mergingContext);
@@ -100,11 +108,11 @@ namespace System.Web.UI.Design.MobileControls.Util
         internal static int GetMaxContainedTabIndex(Control control)
         {
             int maxTabIndex = control.TabIndex;
-            
-            foreach(Control child in control.Controls)
+
+            foreach (Control child in control.Controls)
             {
                 int maxChildTabIndex = GetMaxContainedTabIndex(child);
-                if(maxChildTabIndex > maxTabIndex)
+                if (maxChildTabIndex > maxTabIndex)
                 {
                     maxTabIndex = maxChildTabIndex;
                 }
@@ -131,7 +139,7 @@ namespace System.Web.UI.Design.MobileControls.Util
 
             foreach (String str in stringList)
             {
-                if(delimitedString.Length > 0)
+                if (delimitedString.Length > 0)
                 {
                     delimitedString.Append(", ");
                 }
@@ -152,7 +160,7 @@ namespace System.Web.UI.Design.MobileControls.Util
                 0
             );
         }
-        
+
         internal static bool ConfirmYesNo(String title, String message)
         {
             DialogResult result = RTLAwareMessageBox.Show(
@@ -169,12 +177,13 @@ namespace System.Web.UI.Design.MobileControls.Util
     }
 
     // Copied from ndp\fx\src\Designer\Microsoft\System\Microsoft\Design\RTLAwareMessageBox.cs
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal sealed class RTLAwareMessageBox {
-
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal sealed class RTLAwareMessageBox
+    {
         // Private helper class shouldn't be instantiated.
-        private RTLAwareMessageBox() {
-        }
+        private RTLAwareMessageBox() { }
 
         /// <include file='doc\MessageBox.uex' path='docs/doc[@for="MessageBox.Show6"]/*' />
         /// <devdoc>
@@ -183,9 +192,18 @@ namespace System.Web.UI.Design.MobileControls.Util
         ///       Makes the dialog RTL if the resources for this dll have been localized to a RTL language.
         ///    </para>
         /// </devdoc>
-        public static DialogResult Show(IWin32Window owner, string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon,
-                                        MessageBoxDefaultButton defaultButton, MessageBoxOptions options) {
-            if (RTLAwareMessageBox.IsRTLResources) {
+        public static DialogResult Show(
+            IWin32Window owner,
+            string text,
+            string caption,
+            MessageBoxButtons buttons,
+            MessageBoxIcon icon,
+            MessageBoxDefaultButton defaultButton,
+            MessageBoxOptions options
+        )
+        {
+            if (RTLAwareMessageBox.IsRTLResources)
+            {
                 options |= (MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
             }
             return MessageBox.Show(owner, text, caption, buttons, icon, defaultButton, options);
@@ -195,8 +213,10 @@ namespace System.Web.UI.Design.MobileControls.Util
         ///     Tells whether the current resources for this dll have been
         ///     localized for a RTL language.
         /// </devdoc>
-        public static bool IsRTLResources {
-            get {
+        public static bool IsRTLResources
+        {
+            get
+            {
                 // Set RightToLeft mode based on resource file
                 string rtlText = SR.GetString(SR.RTL);
 

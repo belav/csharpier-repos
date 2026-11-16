@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Testing;
 [ExportLanguageService(typeof(ITestMethodFinder), LanguageNames.CSharp), Shared]
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-internal class CSharpTestMethodFinder([ImportMany] IEnumerable<ITestFrameworkMetadata> testFrameworks) : AbstractTestMethodFinder<MethodDeclarationSyntax>(testFrameworks)
+internal class CSharpTestMethodFinder(
+    [ImportMany] IEnumerable<ITestFrameworkMetadata> testFrameworks
+) : AbstractTestMethodFinder<MethodDeclarationSyntax>(testFrameworks)
 {
     protected override bool DescendIntoChildren(SyntaxNode node)
     {
@@ -45,7 +47,9 @@ internal class CSharpTestMethodFinder([ImportMany] IEnumerable<ITestFrameworkMet
     {
         var attributeName = attribute.Name.GetNameToken().Text;
 
-        var matches = TestFrameworkMetadata.Any(metadata => metadata.MatchesAttributeSyntacticName(attributeName));
+        var matches = TestFrameworkMetadata.Any(metadata =>
+            metadata.MatchesAttributeSyntacticName(attributeName)
+        );
         return matches;
     }
 }

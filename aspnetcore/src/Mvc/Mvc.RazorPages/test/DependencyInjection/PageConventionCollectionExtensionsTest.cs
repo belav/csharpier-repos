@@ -194,9 +194,8 @@ public class PageConventionCollectionExtensionsTest
             {
                 Assert.Equal("/Index", model.ViewEnginePath);
                 Assert.Empty(model.Filters);
-                Assert.Collection(
-                    model.EndpointMetadata,
-                    metadata => Assert.IsType<AuthorizeAttribute>(metadata)
+                Assert.Collection(model.EndpointMetadata, metadata =>
+                    Assert.IsType<AuthorizeAttribute>(metadata)
                 );
             },
             model =>
@@ -291,9 +290,8 @@ public class PageConventionCollectionExtensionsTest
             {
                 Assert.Equal("/Index", model.ViewEnginePath);
                 Assert.Empty(model.Filters);
-                Assert.Collection(
-                    model.EndpointMetadata,
-                    metadata => Assert.IsType<AuthorizeAttribute>(metadata)
+                Assert.Collection(model.EndpointMetadata, metadata =>
+                    Assert.IsType<AuthorizeAttribute>(metadata)
                 );
             },
             model =>
@@ -1086,14 +1084,11 @@ public class PageConventionCollectionExtensionsTest
             model =>
             {
                 Assert.Equal("/About", model.ViewEnginePath);
-                Assert.Collection(
-                    model.Selectors,
-                    selector =>
-                    {
-                        Assert.Equal("About", selector.AttributeRouteModel.Template);
-                        Assert.False(selector.AttributeRouteModel.SuppressLinkGeneration);
-                    }
-                );
+                Assert.Collection(model.Selectors, selector =>
+                {
+                    Assert.Equal("About", selector.AttributeRouteModel.Template);
+                    Assert.False(selector.AttributeRouteModel.SuppressLinkGeneration);
+                });
             }
         );
     }
@@ -1125,14 +1120,11 @@ public class PageConventionCollectionExtensionsTest
             model =>
             {
                 Assert.Equal("/Pages/Profile.cshtml", model.RelativePath);
-                Assert.Collection(
-                    model.Selectors,
-                    selector =>
-                    {
-                        Assert.Equal("Profile", selector.AttributeRouteModel.Template);
-                        Assert.False(selector.AttributeRouteModel.SuppressLinkGeneration);
-                    }
-                );
+                Assert.Collection(model.Selectors, selector =>
+                {
+                    Assert.Equal("Profile", selector.AttributeRouteModel.Template);
+                    Assert.False(selector.AttributeRouteModel.SuppressLinkGeneration);
+                });
             },
             model =>
             {

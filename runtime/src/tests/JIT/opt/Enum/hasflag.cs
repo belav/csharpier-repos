@@ -14,21 +14,21 @@ enum E
 {
     ZERO,
     RED,
-    BLUE
+    BLUE,
 }
 
 enum F : ulong
 {
     ZERO,
-    RED =  0x800000000UL,
-    BLUE = 0x1000000000UL
+    RED = 0x800000000UL,
+    BLUE = 0x1000000000UL,
 }
 
 enum G : byte
 {
     ZERO,
-    RED  = 6,
-    BLUE = 9
+    RED = 6,
+    BLUE = 9,
 }
 
 struct EStruct
@@ -43,7 +43,11 @@ class EClass
 
 class ShortHolder
 {
-    public ShortHolder(short s) { v = s; }
+    public ShortHolder(short s)
+    {
+        v = s;
+    }
+
     public short v;
 }
 
@@ -144,8 +148,33 @@ public class P
 
         bool false10 = GitHub23847(E.RED, 0x100);
 
-        bool[] trueResults = {true0, true1, true2, true3, true4, true5, true6, true7, true8, true9};
-        bool[] falseResults = {false0, false1, false2, false3, false4, false5, false6, false7, false8, false9, false10};
+        bool[] trueResults =
+        {
+            true0,
+            true1,
+            true2,
+            true3,
+            true4,
+            true5,
+            true6,
+            true7,
+            true8,
+            true9,
+        };
+        bool[] falseResults =
+        {
+            false0,
+            false1,
+            false2,
+            false3,
+            false4,
+            false5,
+            false6,
+            false7,
+            false8,
+            false9,
+            false10,
+        };
 
         bool resultOk = true;
 
@@ -153,7 +182,7 @@ public class P
         foreach (var b in trueResults)
         {
             i++;
-            if (!b) 
+            if (!b)
             {
                 Console.WriteLine("true{0} failed\n", i);
                 resultOk = false;
@@ -164,7 +193,7 @@ public class P
         foreach (var b in falseResults)
         {
             i++;
-            if (b) 
+            if (b)
             {
                 Console.WriteLine("false{0} failed\n", i);
                 resultOk = false;
@@ -175,7 +204,7 @@ public class P
         bool didThrow = false;
         try
         {
-            bool badFlag = E.RED.HasFlag((Enum) F.RED);
+            bool badFlag = E.RED.HasFlag((Enum)F.RED);
         }
         catch (ArgumentException)
         {

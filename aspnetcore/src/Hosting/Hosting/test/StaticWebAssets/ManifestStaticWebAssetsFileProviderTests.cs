@@ -118,15 +118,13 @@ public class ManifestStaticWebAssetsFileProviderTest
         );
         var comparer = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.PathComparer;
 
-        var provider = new ManifestStaticWebAssetFileProvider(
-            manifest,
-            contentRoot =>
-                contentRoot switch
-                {
-                    "D:\\path\\" => first.Object,
-                    "D:\\other\\" => second.Object,
-                    _ => throw new InvalidOperationException("Unknown provider"),
-                }
+        var provider = new ManifestStaticWebAssetFileProvider(manifest, contentRoot =>
+            contentRoot switch
+            {
+                "D:\\path\\" => first.Object,
+                "D:\\other\\" => second.Object,
+                _ => throw new InvalidOperationException("Unknown provider"),
+            }
         );
 
         // Act
@@ -205,15 +203,13 @@ public class ManifestStaticWebAssetsFileProviderTest
         );
         var comparer = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.PathComparer;
 
-        var provider = new ManifestStaticWebAssetFileProvider(
-            manifest,
-            contentRoot =>
-                contentRoot switch
-                {
-                    "D:\\path\\" => first.Object,
-                    "D:\\other\\" => second.Object,
-                    _ => throw new InvalidOperationException("Unknown provider"),
-                }
+        var provider = new ManifestStaticWebAssetFileProvider(manifest, contentRoot =>
+            contentRoot switch
+            {
+                "D:\\path\\" => first.Object,
+                "D:\\other\\" => second.Object,
+                _ => throw new InvalidOperationException("Unknown provider"),
+            }
         );
 
         // Act
@@ -291,15 +287,13 @@ public class ManifestStaticWebAssetsFileProviderTest
         );
         var comparer = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.PathComparer;
 
-        var provider = new ManifestStaticWebAssetFileProvider(
-            manifest,
-            contentRoot =>
-                contentRoot switch
-                {
-                    "D:\\path\\" => first.Object,
-                    "D:\\other\\" => second.Object,
-                    _ => throw new InvalidOperationException("Unknown provider"),
-                }
+        var provider = new ManifestStaticWebAssetFileProvider(manifest, contentRoot =>
+            contentRoot switch
+            {
+                "D:\\path\\" => first.Object,
+                "D:\\other\\" => second.Object,
+                _ => throw new InvalidOperationException("Unknown provider"),
+            }
         );
 
         // Act

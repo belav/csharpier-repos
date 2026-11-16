@@ -41,7 +41,11 @@ namespace System.Security.Cryptography.Pkcs
         public ContentInfo ContentInfo { get; private set; }
         public bool Detached { get; private set; }
 
-        public SignedCms(SubjectIdentifierType signerIdentifierType, ContentInfo contentInfo, bool detached)
+        public SignedCms(
+            SubjectIdentifierType signerIdentifierType,
+            ContentInfo contentInfo,
+            bool detached
+        )
         {
             if (contentInfo is null)
             {
@@ -49,7 +53,10 @@ namespace System.Security.Cryptography.Pkcs
             }
 
             if (contentInfo.Content == null)
-                throw new ArgumentException(SR.Format(SR.Arg_EmptyOrNullString_Named, "contentInfo.Content"), nameof(contentInfo));
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_EmptyOrNullString_Named, "contentInfo.Content"),
+                    nameof(contentInfo)
+                );
 
             // Normalize the subject identifier type the same way as .NET Framework.
             // This value is only used in the zero-argument ComputeSignature overload,
@@ -97,9 +104,9 @@ namespace System.Security.Cryptography.Pkcs
                     {
                         coll.Add(new X509Certificate2(choice.Certificate.Value
 #if NETCOREAPP
-                            .Span
+                                .Span
 #else
-                            .ToArray()
+                                .ToArray()
 #endif
                             ));
                     }
@@ -221,20 +228,28 @@ namespace System.Security.Cryptography.Pkcs
                 {
                     fixed (byte* pin = encodedMessage)
                     {
-                        using (var manager = new PointerMemoryManager<byte>(pin, encodedMessage.Length))
+                        using (
+                            var manager = new PointerMemoryManager<byte>(pin, encodedMessage.Length)
+                        )
                         {
-                            AsnValueReader reader = new AsnValueReader(encodedMessage, AsnEncodingRules.BER);
+                            AsnValueReader reader = new AsnValueReader(
+                                encodedMessage,
+                                AsnEncodingRules.BER
+                            );
 
                             // Windows (and thus NetFx) reads the leading data and ignores extra.
                             // So use the Decode overload which doesn't throw on extra data.
                             ContentInfoAsn.Decode(
                                 ref reader,
                                 manager.Memory,
-                                out ContentInfoAsn contentInfo);
+                                out ContentInfoAsn contentInfo
+                            );
 
                             if (contentInfo.ContentType != Oids.Pkcs7Signed)
                             {
-                                throw new CryptographicException(SR.Cryptography_Cms_InvalidMessageType);
+                                throw new CryptographicException(
+                                    SR.Cryptography_Cms_InvalidMessageType
+                                );
                             }
 
                             return contentInfo.Content.ToArray();
@@ -246,7 +261,8 @@ namespace System.Security.Cryptography.Pkcs
 
         internal static ReadOnlyMemory<byte> GetContent(
             ReadOnlyMemory<byte> wrappedContent,
-            string contentType)
+            string contentType
+        )
         {
             // Read the input.
             //
@@ -274,15 +290,15 @@ namespace System.Security.Cryptography.Pkcs
 
                 if (!reader.TryReadOctetString(rented, out bytesWritten))
                 {
-                    Debug.Fail($"TryCopyOctetStringBytes failed with an array larger than the encoded value");
+                    Debug.Fail(
+                        $"TryCopyOctetStringBytes failed with an array larger than the encoded value"
+                    );
                     throw new CryptographicException();
                 }
 
                 return rented.AsSpan(0, bytesWritten).ToArray();
             }
-            catch (Exception) when (contentType != Oids.Pkcs7Data)
-            {
-            }
+            catch (Exception) when (contentType != Oids.Pkcs7Data) { }
             catch (AsnContentException e)
             {
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding, e);
@@ -301,7 +317,8 @@ namespace System.Security.Cryptography.Pkcs
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public void ComputeSignature() => ComputeSignature(new CmsSigner(_signerIdentifierType), true);
+        public void ComputeSignature() =>
+            ComputeSignature(new CmsSigner(_signerIdentifierType), true);
 
         public void ComputeSignature(CmsSigner signer) => ComputeSignature(signer, true);
 
@@ -326,10 +343,15 @@ namespace System.Security.Cryptography.Pkcs
                 // on a loaded (from file, or from first signature) document.
                 //
                 // This matches the .NET Framework behavior.
-                throw new CryptographicException(SR.Cryptography_Cms_Sign_No_Signature_First_Signer);
+                throw new CryptographicException(
+                    SR.Cryptography_Cms_Sign_No_Signature_First_Signer
+                );
             }
 
-            if (signer.Certificate == null && signer.SignerIdentifierType != SubjectIdentifierType.NoSignature)
+            if (
+                signer.Certificate == null
+                && signer.SignerIdentifierType != SubjectIdentifierType.NoSignature
+            )
             {
                 if (silent)
                 {
@@ -404,7 +426,10 @@ namespace System.Security.Cryptography.Pkcs
 
             if (index < 0 || index >= _signedData.SignerInfos.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLess
+                );
             }
 
             AlgorithmIdentifierAsn signerAlgorithm = _signedData.SignerInfos[index].DigestAlgorithm;
@@ -451,7 +476,8 @@ namespace System.Security.Cryptography.Pkcs
                     AsnEncodingRules.BER,
                     out int contentOffset,
                     out int contentLength,
-                    out _);
+                    out _
+                );
 
                 return contentSpan.Slice(contentOffset, contentLength);
             }
@@ -537,7 +563,9 @@ namespace System.Security.Cryptography.Pkcs
 
             for (int i = 0; i < _signedData.SignerInfos.Length; i++)
             {
-                ref AlgorithmIdentifierAsn signerAlg = ref _signedData.SignerInfos[i].DigestAlgorithm;
+                ref AlgorithmIdentifierAsn signerAlg = ref _signedData
+                    .SignerInfos[i]
+                    .DigestAlgorithm;
 
                 if (candidate.Equals(ref signerAlg))
                 {
@@ -606,7 +634,7 @@ namespace System.Security.Cryptography.Pkcs
             {
                 _signedData.CertificateSet[i] = new CertificateChoiceAsn
                 {
-                    Certificate = newCerts[i - existingLength].RawData
+                    Certificate = newCerts[i - existingLength].RawData,
                 };
             }
         }
@@ -627,7 +655,8 @@ namespace System.Security.Cryptography.Pkcs
         private static void CheckSignatures(
             SignerInfoCollection signers,
             X509Certificate2Collection extraStore,
-            bool verifySignatureOnly)
+            bool verifySignatureOnly
+        )
         {
             Debug.Assert(signers != null);
 
@@ -686,9 +715,14 @@ namespace System.Security.Cryptography.Pkcs
             {
                 foreach (CertificateChoiceAsn cert in _signedData.CertificateSet!)
                 {
-                    if (cert.Certificate is not null && cert.Certificate.Value.Span.SequenceEqual(rawData))
+                    if (
+                        cert.Certificate is not null
+                        && cert.Certificate.Value.Span.SequenceEqual(rawData)
+                    )
                     {
-                        throw new CryptographicException(SR.Cryptography_Cms_CertificateAlreadyInCollection);
+                        throw new CryptographicException(
+                            SR.Cryptography_Cms_CertificateAlreadyInCollection
+                        );
                     }
                 }
             }
@@ -704,7 +738,7 @@ namespace System.Security.Cryptography.Pkcs
 
             _signedData.CertificateSet[existingLength] = new CertificateChoiceAsn
             {
-                Certificate = rawData
+                Certificate = rawData,
             };
 
             Reencode();
@@ -721,7 +755,10 @@ namespace System.Security.Cryptography.Pkcs
 
                 foreach (CertificateChoiceAsn cert in _signedData.CertificateSet!)
                 {
-                    if (cert.Certificate is not null && cert.Certificate.Value.Span.SequenceEqual(rawData))
+                    if (
+                        cert.Certificate is not null
+                        && cert.Certificate.Value.Span.SequenceEqual(rawData)
+                    )
                     {
                         PkcsHelpers.RemoveAt(ref _signedData.CertificateSet, idx);
                         Reencode();

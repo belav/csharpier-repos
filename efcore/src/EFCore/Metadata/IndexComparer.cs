@@ -21,9 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// </remarks>
 public sealed class IndexComparer : IEqualityComparer<IReadOnlyIndex>, IComparer<IReadOnlyIndex>
 {
-    private IndexComparer()
-    {
-    }
+    private IndexComparer() { }
 
     /// <summary>
     ///     The singleton instance of the comparer to use.
@@ -39,7 +37,9 @@ public sealed class IndexComparer : IEqualityComparer<IReadOnlyIndex>, IComparer
     public int Compare(IReadOnlyIndex? x, IReadOnlyIndex? y)
     {
         var result = PropertyListComparer.Instance.Compare(x?.Properties, y?.Properties);
-        return result != 0 ? result : TypeBaseNameComparer.Instance.Compare(x?.DeclaringEntityType, y?.DeclaringEntityType);
+        return result != 0
+            ? result
+            : TypeBaseNameComparer.Instance.Compare(x?.DeclaringEntityType, y?.DeclaringEntityType);
     }
 
     /// <summary>
@@ -48,8 +48,7 @@ public sealed class IndexComparer : IEqualityComparer<IReadOnlyIndex>, IComparer
     /// <param name="x">The first object to compare.</param>
     /// <param name="y">The second object to compare.</param>
     /// <returns><see langword="true" /> if the specified objects are equal; otherwise, <see langword="false" />.</returns>
-    public bool Equals(IReadOnlyIndex? x, IReadOnlyIndex? y)
-        => Compare(x, y) == 0;
+    public bool Equals(IReadOnlyIndex? x, IReadOnlyIndex? y) => Compare(x, y) == 0;
 
     /// <summary>
     ///     Returns a hash code for the specified object.

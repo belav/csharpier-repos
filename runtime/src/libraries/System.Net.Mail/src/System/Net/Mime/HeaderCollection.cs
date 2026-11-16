@@ -14,9 +14,8 @@ namespace System.Net.Mime
     {
         // default constructor
         // intentionally override the default comparer in the derived base class
-        internal HeaderCollection() : base(StringComparer.OrdinalIgnoreCase)
-        {
-        }
+        internal HeaderCollection()
+            : base(StringComparer.OrdinalIgnoreCase) { }
 
 #pragma warning disable CS8765 // Nullability of parameter 'name' doesn't match overridden member
         public override void Remove(string name)
@@ -26,7 +25,6 @@ namespace System.Net.Mime
 
             base.Remove(name);
         }
-
 
 #pragma warning disable CS8765 // Nullability of parameter 'name' doesn't match overridden member
         public override string? Get(string name)
@@ -45,7 +43,6 @@ namespace System.Net.Mime
 
             return base.GetValues(name);
         }
-
 
         internal void InternalRemove(string name) => base.Remove(name);
 
@@ -84,7 +81,6 @@ namespace System.Net.Mime
 
             base.Set(name, value);
         }
-
 
 #pragma warning disable CS8765 // Nullability of parameters 'name' and 'value' don't match overridden member
         public override void Add(string name, string value)

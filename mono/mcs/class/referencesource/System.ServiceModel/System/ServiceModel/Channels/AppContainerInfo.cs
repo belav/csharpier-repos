@@ -10,13 +10,12 @@ namespace System.ServiceModel.Channels
     using System.Security;
     using System.Security.Principal;
     using System.Text;
-
     using SafeCloseHandle = System.ServiceModel.Activation.SafeCloseHandle;
 
     /// <summary>
-    /// This class provides the entry points into Application Container related functionality. 
-    /// Callers are expected to check if the application is running in an AppContainer before 
-    /// invoking any of the methods in this class. 
+    /// This class provides the entry points into Application Container related functionality.
+    /// Callers are expected to check if the application is running in an AppContainer before
+    /// invoking any of the methods in this class.
     /// </summary>
     class AppContainerInfo
     {
@@ -47,16 +46,13 @@ namespace System.ServiceModel.Channels
 
         internal static bool IsAppContainerSupported
         {
-            get
-            {
-                return isAppContainerSupported;
-            }
+            get { return isAppContainerSupported; }
         }
 
         internal static bool IsRunningInAppContainer
         {
             get
-            {                
+            {
                 // The AppContainerInfo.RunningInAppContainer() API may throw security exceptions,
                 // so cannot be used inside the static constructor of the class.
                 if (!isRunningInAppContainerSet)
@@ -82,7 +78,10 @@ namespace System.ServiceModel.Channels
         internal static AppContainerInfo CreateAppContainerInfo(string fullName, int sessionId)
         {
             Fx.Assert(IsAppContainerSupported, "AppContainers are not supported.");
-            Fx.Assert(!string.IsNullOrEmpty(fullName), "fullName should be provided to initialize an AppContainerInfo.");
+            Fx.Assert(
+                !string.IsNullOrEmpty(fullName),
+                "fullName should be provided to initialize an AppContainerInfo."
+            );
 
             int appSession = sessionId;
             if (appSession == ApplicationContainerSettings.CurrentSession)
@@ -103,9 +102,11 @@ namespace System.ServiceModel.Channels
         }
 
         [SecuritySafeCritical]
-        [Fx.Tag.SecurityNote(Critical = "This calls into the SecurityCritical method GetCurrentProcessToken and unsafe GetAppContainerSid.",
-            Safe = "All critical token access and dispose is ensured. " +
-            " The Sid is a non protected resource and can be obtained only if we have the appropriate process token permissions.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "This calls into the SecurityCritical method GetCurrentProcessToken and unsafe GetAppContainerSid.",
+            Safe = "All critical token access and dispose is ensured. "
+                + " The Sid is a non protected resource and can be obtained only if we have the appropriate process token permissions."
+        )]
         internal static SecurityIdentifier GetCurrentAppContainerSid()
         {
             Fx.Assert(AppContainerInfo.IsAppContainerSupported, "AppContainers are not supported.");
@@ -119,7 +120,9 @@ namespace System.ServiceModel.Channels
                         try
                         {
                             tokenHandle = AppContainerInfo.GetCurrentProcessToken();
-                            currentAppContainerSid = UnsafeNativeMethods.GetAppContainerSid(tokenHandle);
+                            currentAppContainerSid = UnsafeNativeMethods.GetAppContainerSid(
+                                tokenHandle
+                            );
                         }
                         finally
                         {
@@ -136,7 +139,9 @@ namespace System.ServiceModel.Channels
         }
 
         [SecuritySafeCritical]
-        [Fx.Tag.SecurityNote(Safe = "Process token handle access and dispose is ensured here and we only return a non-critical flag.")]
+        [Fx.Tag.SecurityNote(
+            Safe = "Process token handle access and dispose is ensured here and we only return a non-critical flag."
+        )]
         static bool RunningInAppContainer()
         {
             Fx.Assert(AppContainerInfo.IsAppContainerSupported, "AppContainers are not supported.");
@@ -156,9 +161,11 @@ namespace System.ServiceModel.Channels
         }
 
         [SecuritySafeCritical]
-        [Fx.Tag.SecurityNote(Critical = "Calls into unsafe native AppContainer package resolution methods.",
-            Safe = "Wraps all access and disposal of securityDescriptors and returns a NamedObjectPath, " +
-            "which is a non protected resource.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into unsafe native AppContainer package resolution methods.",
+            Safe = "Wraps all access and disposal of securityDescriptors and returns a NamedObjectPath, "
+                + "which is a non protected resource."
+        )]
         static string GetAppContainerNamedObjectPath(string name)
         {
             // 1. Derive the PackageFamilyName(PFN) from the PackageFullName
@@ -169,12 +176,20 @@ namespace System.ServiceModel.Channels
 
             // Package Full Name => Package family name
             uint packageFamilyNameLength = UnsafeNativeMethods.MAX_PATH;
-            StringBuilder packageFamilyNameBuilder = new StringBuilder((int)UnsafeNativeMethods.MAX_PATH);
+            StringBuilder packageFamilyNameBuilder = new StringBuilder(
+                (int)UnsafeNativeMethods.MAX_PATH
+            );
             string packageFamilyName;
-            int errorCode = UnsafeNativeMethods.PackageFamilyNameFromFullName(name, ref packageFamilyNameLength, packageFamilyNameBuilder);
+            int errorCode = UnsafeNativeMethods.PackageFamilyNameFromFullName(
+                name,
+                ref packageFamilyNameLength,
+                packageFamilyNameBuilder
+            );
             if (errorCode != UnsafeNativeMethods.ERROR_SUCCESS)
             {
-                throw FxTrace.Exception.AsError(new Win32Exception(errorCode, SR.GetString(SR.PackageFullNameInvalid, name)));
+                throw FxTrace.Exception.AsError(
+                    new Win32Exception(errorCode, SR.GetString(SR.PackageFullNameInvalid, name))
+                );
             }
 
             packageFamilyName = packageFamilyNameBuilder.ToString();
@@ -183,8 +198,9 @@ namespace System.ServiceModel.Channels
             {
                 // PackageFamilyName => AppContainerSID
                 int hresult = UnsafeNativeMethods.DeriveAppContainerSidFromAppContainerName(
-                                                                    packageFamilyName,
-                                                                    out appContainerSid);
+                    packageFamilyName,
+                    out appContainerSid
+                );
                 if (hresult != 0)
                 {
                     errorCode = Marshal.GetLastWin32Error();
@@ -192,14 +208,19 @@ namespace System.ServiceModel.Channels
                 }
 
                 // AppContainerSID => NamedObjectPath
-                StringBuilder namedObjectPath = new StringBuilder((int)UnsafeNativeMethods.MAX_PATH);
+                StringBuilder namedObjectPath = new StringBuilder(
+                    (int)UnsafeNativeMethods.MAX_PATH
+                );
                 uint returnLength = 0;
-                if (!UnsafeNativeMethods.GetAppContainerNamedObjectPath(
-                                                                IntPtr.Zero,
-                                                                appContainerSid,
-                                                                UnsafeNativeMethods.MAX_PATH,
-                                                                namedObjectPath,
-                                                                ref returnLength))
+                if (
+                    !UnsafeNativeMethods.GetAppContainerNamedObjectPath(
+                        IntPtr.Zero,
+                        appContainerSid,
+                        UnsafeNativeMethods.MAX_PATH,
+                        namedObjectPath,
+                        ref returnLength
+                    )
+                )
                 {
                     errorCode = Marshal.GetLastWin32Error();
                     throw FxTrace.Exception.AsError(new Win32Exception(errorCode));
@@ -217,9 +238,11 @@ namespace System.ServiceModel.Channels
         }
 
         [SecuritySafeCritical]
-        [Fx.Tag.SecurityNote(Critical = "Accesses the native current process token.",
-            Safe = "The session id returned is a non-critical resource and " +
-            " we ensure that the current process token handle created is disposed here.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses the native current process token.",
+            Safe = "The session id returned is a non-critical resource and "
+                + " we ensure that the current process token handle created is disposed here."
+        )]
         static int GetCurrentSessionId()
         {
             Fx.Assert(AppContainerInfo.IsAppContainerSupported, "AppContainers are not supported.");
@@ -243,14 +266,19 @@ namespace System.ServiceModel.Channels
         /// </summary>
         /// <returns>ProcessToken as a SafeCloseHandle.</returns>
         [SecurityCritical]
-        [Fx.Tag.SecurityNote(Critical = "Returns a process token. The caller is responsible for disposing the SafeCloseHandle.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Returns a process token. The caller is responsible for disposing the SafeCloseHandle."
+        )]
         static SafeCloseHandle GetCurrentProcessToken()
         {
             SafeCloseHandle tokenHandle = null;
-            if (!UnsafeNativeMethods.OpenProcessToken(
-                            UnsafeNativeMethods.GetCurrentProcess(),
-                            TokenAccessLevels.Query,
-                            out tokenHandle))
+            if (
+                !UnsafeNativeMethods.OpenProcessToken(
+                    UnsafeNativeMethods.GetCurrentProcess(),
+                    TokenAccessLevels.Query,
+                    out tokenHandle
+                )
+            )
             {
                 int error = Marshal.GetLastWin32Error();
                 throw FxTrace.Exception.AsError(new Win32Exception(error));

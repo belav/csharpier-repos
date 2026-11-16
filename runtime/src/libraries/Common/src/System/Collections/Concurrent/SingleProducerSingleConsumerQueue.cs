@@ -15,7 +15,9 @@ namespace System.Collections.Concurrent
     /// </summary>
     /// <typeparam name="T">Specifies the type of data contained in the queue.</typeparam>
     [DebuggerDisplay("Count = {Count}")]
-    [DebuggerTypeProxy(typeof(SingleProducerSingleConsumerQueue<>.SingleProducerSingleConsumerQueue_DebugView))]
+    [DebuggerTypeProxy(
+        typeof(SingleProducerSingleConsumerQueue<>.SingleProducerSingleConsumerQueue_DebugView)
+    )]
     internal sealed class SingleProducerSingleConsumerQueue<T> : IProducerConsumerQueue<T>
     {
         // Design:
@@ -52,11 +54,13 @@ namespace System.Collections.Concurrent
 
         /// <summary>The initial size to use for segments (in number of elements).</summary>
         private const int InitialSegmentSize = 32; // must be a power of 2
+
         /// <summary>The maximum size to use for segments (in number of elements).</summary>
         private const int MaxSegmentSize = 0x1000000; // this could be made as large as int.MaxValue / 2
 
         /// <summary>The head of the linked list of segments.</summary>
         private volatile Segment _head;
+
         /// <summary>The tail of the linked list of segments.</summary>
         private volatile Segment _tail;
 
@@ -65,9 +69,18 @@ namespace System.Collections.Concurrent
         {
             // Validate constants in ctor rather than in an explicit cctor that would cause perf degradation
             Debug.Assert(InitialSegmentSize > 0, "Initial segment size must be > 0.");
-            Debug.Assert((InitialSegmentSize & (InitialSegmentSize - 1)) == 0, "Initial segment size must be a power of 2");
-            Debug.Assert(InitialSegmentSize <= MaxSegmentSize, "Initial segment size should be <= maximum.");
-            Debug.Assert(MaxSegmentSize < int.MaxValue / 2, "Max segment size * 2 must be < int.MaxValue, or else overflow could occur.");
+            Debug.Assert(
+                (InitialSegmentSize & (InitialSegmentSize - 1)) == 0,
+                "Initial segment size must be a power of 2"
+            );
+            Debug.Assert(
+                InitialSegmentSize <= MaxSegmentSize,
+                "Initial segment size should be <= maximum."
+            );
+            Debug.Assert(
+                MaxSegmentSize < int.MaxValue / 2,
+                "Max segment size * 2 must be < int.MaxValue, or else overflow could occur."
+            );
 
             // Initialize the queue
             _head = _tail = new Segment(InitialSegmentSize);
@@ -109,7 +122,10 @@ namespace System.Collections.Concurrent
             }
 
             int newSegmentSize = Math.Min(_tail._array.Length * 2, MaxSegmentSize);
-            Debug.Assert(newSegmentSize > 0, "The max size should always be small enough that we don't overflow.");
+            Debug.Assert(
+                newSegmentSize > 0,
+                "The max size should always be small enough that we don't overflow."
+            );
 
             var newSegment = new Segment(newSegmentSize);
             newSegment._array[0] = item;
@@ -174,7 +190,12 @@ namespace System.Collections.Concurrent
         /// <param name="peek">true if this is only a peek operation; false if the item should be dequeued.</param>
         /// <param name="result">The dequeued item.</param>
         /// <returns>true if an item could be dequeued; otherwise, false.</returns>
-        private bool TryDequeueSlow(Segment segment, T[] array, bool peek, [MaybeNullWhen(false)] out T result)
+        private bool TryDequeueSlow(
+            Segment segment,
+            T[] array,
+            bool peek,
+            [MaybeNullWhen(false)] out T result
+        )
         {
             Debug.Assert(segment != null, "Expected a non-null segment.");
             Debug.Assert(array != null, "Expected a non-null item array.");
@@ -182,9 +203,7 @@ namespace System.Collections.Concurrent
             if (segment._state._last != segment._state._lastCopy)
             {
                 segment._state._lastCopy = segment._state._last;
-                return peek ?
-                    TryPeek(out result) :
-                    TryDequeue(out result); // will only recur once for this operation
+                return peek ? TryPeek(out result) : TryDequeue(out result); // will only recur once for this operation
             }
 
             if (segment._next != null && segment._state._first == segment._state._last)
@@ -248,7 +267,12 @@ namespace System.Collections.Concurrent
         /// <param name="segment">The segment from which the item was dequeued.</param>
         /// <param name="result">The dequeued item.</param>
         /// <returns>true if an item could be dequeued; otherwise, false.</returns>
-        private bool TryDequeueIfSlow(Predicate<T>? predicate, Segment segment, T[] array, [MaybeNullWhen(false)] out T result)
+        private bool TryDequeueIfSlow(
+            Predicate<T>? predicate,
+            Segment segment,
+            T[] array,
+            [MaybeNullWhen(false)] out T result
+        )
         {
             Debug.Assert(segment != null, "Expected a non-null segment.");
             Debug.Assert(array != null, "Expected a non-null item array.");
@@ -289,7 +313,8 @@ namespace System.Collections.Concurrent
 
         public void Clear()
         {
-            while (TryDequeue(out _)) ;
+            while (TryDequeue(out _))
+                ;
         }
 
         /// <summary>Gets whether the collection is currently empty.</summary>
@@ -322,17 +347,23 @@ namespace System.Collections.Concurrent
         {
             for (Segment? segment = _head; segment != null; segment = segment._next)
             {
-                for (int pt = segment._state._first;
+                for (
+                    int pt = segment._state._first;
                     pt != segment._state._last;
-                    pt = (pt + 1) & (segment._array.Length - 1))
+                    pt = (pt + 1) & (segment._array.Length - 1)
+                )
                 {
                     yield return segment._array[pt];
                 }
             }
         }
+
         /// <summary>Gets an enumerable for the collection.</summary>
         /// <remarks>This method is not safe to use concurrently with any other members that may mutate the collection.</remarks>
-        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 
         /// <summary>Gets the number of items in the collection.</summary>
         /// <remarks>This method is not safe to use concurrently with any other members that may mutate the collection.</remarks>
@@ -344,7 +375,8 @@ namespace System.Collections.Concurrent
                 for (Segment? segment = _head; segment != null; segment = segment._next)
                 {
                     int arraySize = segment._array.Length;
-                    int first, last;
+                    int first,
+                        last;
                     while (true) // Count is not meant to be used concurrently, but this helps to avoid issues if it is
                     {
                         first = segment._state._first;
@@ -378,8 +410,10 @@ namespace System.Collections.Concurrent
         {
             /// <summary>The next segment in the linked list of segments.</summary>
             internal Segment? _next;
+
             /// <summary>The data stored in this segment.</summary>
             internal readonly T[] _array;
+
             /// <summary>Details about the segment.</summary>
             internal SegmentState _state; // separated out to enable StructLayout attribute to take effect
 
@@ -401,6 +435,7 @@ namespace System.Collections.Concurrent
 
             /// <summary>The index of the current head in the segment.</summary>
             internal volatile int _first;
+
             /// <summary>A copy of the current tail index.</summary>
             internal int _lastCopy; // not volatile as read and written by the producer, except for IsEmpty, and there _lastCopy is only read after reading the volatile _first
 
@@ -409,6 +444,7 @@ namespace System.Collections.Concurrent
 
             /// <summary>A copy of the current head index.</summary>
             internal int _firstCopy; // not volatile as only read and written by the consumer thread
+
             /// <summary>The index of the current tail in the segment.</summary>
             internal volatile int _last;
 
@@ -424,7 +460,9 @@ namespace System.Collections.Concurrent
 
             /// <summary>Initializes the debug view.</summary>
             /// <param name="queue">The queue being debugged.</param>
-            public SingleProducerSingleConsumerQueue_DebugView(SingleProducerSingleConsumerQueue<T> queue)
+            public SingleProducerSingleConsumerQueue_DebugView(
+                SingleProducerSingleConsumerQueue<T> queue
+            )
             {
                 Debug.Assert(queue != null, "Expected a non-null queue.");
                 _queue = queue;

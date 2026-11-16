@@ -18,8 +18,10 @@ namespace System.Diagnostics.Tracing
     {
         private delegate UnderlyingType Transformer<ValueType>(ValueType value);
 
-        private static readonly MethodInfo IdentityInfo =
-            Statics.GetDeclaredStaticMethod(typeof(EnumHelper<UnderlyingType>), "Identity");
+        private static readonly MethodInfo IdentityInfo = Statics.GetDeclaredStaticMethod(
+            typeof(EnumHelper<UnderlyingType>),
+            "Identity"
+        );
 
         public static UnderlyingType Cast<ValueType>(ValueType value)
         {
@@ -34,9 +36,8 @@ namespace System.Diagnostics.Tracing
         private static class Caster<ValueType>
         {
             public static readonly Transformer<ValueType> Instance =
-                (Transformer<ValueType>)Statics.CreateDelegate(
-                typeof(Transformer<ValueType>),
-                IdentityInfo);
+                (Transformer<ValueType>)
+                    Statics.CreateDelegate(typeof(Transformer<ValueType>), IdentityInfo);
         }
     }
 }

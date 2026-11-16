@@ -10,6 +10,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal interface IVSTypeScriptNavigationBarItemService
     {
-        Task<ImmutableArray<VSTypescriptNavigationBarItem>> GetItemsAsync(Document document, CancellationToken cancellationToken);
+        Task<ImmutableArray<VSTypescriptNavigationBarItem>> GetItemsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
     }
 }

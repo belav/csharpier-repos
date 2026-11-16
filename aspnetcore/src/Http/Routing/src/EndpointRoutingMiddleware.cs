@@ -47,8 +47,8 @@ internal sealed partial class EndpointRoutingMiddleware
 
         _matcherFactory = matcherFactory ?? throw new ArgumentNullException(nameof(matcherFactory));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _diagnosticListener =
-            diagnosticListener ?? throw new ArgumentNullException(nameof(diagnosticListener));
+        _diagnosticListener = diagnosticListener
+            ?? throw new ArgumentNullException(nameof(diagnosticListener));
         _metrics = metrics;
         _next = next ?? throw new ArgumentNullException(nameof(next));
         _routeOptions = routeOptions.Value;
@@ -142,8 +142,7 @@ internal sealed partial class EndpointRoutingMiddleware
 
                 // It shouldn't be possible for a route to be matched via the route matcher and not have a route.
                 // Just in case, add a special (missing) value as the route tag to metrics.
-                var route =
-                    endpoint.Metadata.GetMetadata<IRouteDiagnosticsMetadata>()?.Route
+                var route = endpoint.Metadata.GetMetadata<IRouteDiagnosticsMetadata>()?.Route
                     ?? "(missing)";
                 _metrics.MatchSuccess(route, isFallback);
             }

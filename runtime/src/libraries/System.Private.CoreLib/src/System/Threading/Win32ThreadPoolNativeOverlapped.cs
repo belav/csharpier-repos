@@ -16,7 +16,7 @@ namespace System.Threading
 
         private static ContextCallback? s_executionContextCallback;
         private static OverlappedData[]? s_dataArray;
-        private static int s_dataCount;   // Current number of valid entries in _dataArray
+        private static int s_dataCount; // Current number of valid entries in _dataArray
         private static IntPtr s_freeList; // Lock-free linked stack of free ThreadPoolNativeOverlapped instances.
 
         private NativeOverlapped _overlapped; // must be first, so we can cast to and from NativeOverlapped.
@@ -28,7 +28,13 @@ namespace System.Threading
             get { return s_dataArray![_dataIndex]; }
         }
 
-        internal static unsafe Win32ThreadPoolNativeOverlapped* Allocate(IOCompletionCallback callback, object? state, object? pinData, PreAllocatedOverlapped? preAllocated, bool flowExecutionControl)
+        internal static unsafe Win32ThreadPoolNativeOverlapped* Allocate(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData,
+            PreAllocatedOverlapped? preAllocated,
+            bool flowExecutionControl
+        )
         {
             Win32ThreadPoolNativeOverlapped* overlapped = AllocateNew();
             try
@@ -54,7 +60,10 @@ namespace System.Threading
             {
                 overlapped = (Win32ThreadPoolNativeOverlapped*)freePtr;
 
-                if (Interlocked.CompareExchange(ref s_freeList, overlapped->_nextFree, freePtr) != freePtr)
+                if (
+                    Interlocked.CompareExchange(ref s_freeList, overlapped->_nextFree, freePtr)
+                    != freePtr
+                )
                     continue;
 
                 overlapped->_nextFree = IntPtr.Zero;
@@ -62,7 +71,8 @@ namespace System.Threading
             }
 
             // None are free; allocate a new one.
-            overlapped = (Win32ThreadPoolNativeOverlapped*)NativeMemory.Alloc((nuint)sizeof(Win32ThreadPoolNativeOverlapped));
+            overlapped = (Win32ThreadPoolNativeOverlapped*)
+                NativeMemory.Alloc((nuint)sizeof(Win32ThreadPoolNativeOverlapped));
             *overlapped = default(Win32ThreadPoolNativeOverlapped);
 
             // Allocate a OverlappedData object, and an index at which to store it in _dataArray.
@@ -71,7 +81,9 @@ namespace System.Threading
 
             // Make sure we didn't wrap around.
             if (dataIndex < 0)
-                Environment.FailFast("Too many outstanding Win32ThreadPoolNativeOverlapped instances");
+                Environment.FailFast(
+                    "Too many outstanding Win32ThreadPoolNativeOverlapped instances"
+                );
 
             while (true)
             {
@@ -90,7 +102,10 @@ namespace System.Threading
                     OverlappedData[]? newDataArray = dataArray;
                     Array.Resize(ref newDataArray, newLength);
 
-                    if (Interlocked.CompareExchange(ref s_dataArray, newDataArray, dataArray) != dataArray)
+                    if (
+                        Interlocked.CompareExchange(ref s_dataArray, newDataArray, dataArray)
+                        != dataArray
+                    )
                         continue; // Someone else got the free one, try again
 
                     dataArray = newDataArray;
@@ -112,7 +127,13 @@ namespace System.Threading
             }
         }
 
-        private void SetData(IOCompletionCallback callback, object? state, object? pinData, PreAllocatedOverlapped? preAllocated, bool flowExecutionContext)
+        private void SetData(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData,
+            PreAllocatedOverlapped? preAllocated,
+            bool flowExecutionContext
+        )
         {
             Debug.Assert(callback != null);
 
@@ -167,22 +188,33 @@ namespace System.Threading
                 IntPtr freePtr = Volatile.Read(ref s_freeList);
                 overlapped->_nextFree = freePtr;
 
-                if (Interlocked.CompareExchange(ref s_freeList, (IntPtr)overlapped, freePtr) == freePtr)
+                if (
+                    Interlocked.CompareExchange(ref s_freeList, (IntPtr)overlapped, freePtr)
+                    == freePtr
+                )
                     break;
             }
         }
 
-        internal static unsafe NativeOverlapped* ToNativeOverlapped(Win32ThreadPoolNativeOverlapped* overlapped)
+        internal static unsafe NativeOverlapped* ToNativeOverlapped(
+            Win32ThreadPoolNativeOverlapped* overlapped
+        )
         {
             return (NativeOverlapped*)overlapped;
         }
 
-        internal static unsafe Win32ThreadPoolNativeOverlapped* FromNativeOverlapped(NativeOverlapped* overlapped)
+        internal static unsafe Win32ThreadPoolNativeOverlapped* FromNativeOverlapped(
+            NativeOverlapped* overlapped
+        )
         {
             return (Win32ThreadPoolNativeOverlapped*)overlapped;
         }
 
-        internal static unsafe void CompleteWithCallback(uint errorCode, uint bytesWritten, Win32ThreadPoolNativeOverlapped* overlapped)
+        internal static unsafe void CompleteWithCallback(
+            uint errorCode,
+            uint bytesWritten,
+            Win32ThreadPoolNativeOverlapped* overlapped
+        )
         {
             OverlappedData data = overlapped->Data;
 
@@ -191,7 +223,10 @@ namespace System.Threading
 
             if (data._executionContext == null)
             {
-                Debug.Assert(data._callback != null, "Does CompleteWithCallback called after Reset?");
+                Debug.Assert(
+                    data._callback != null,
+                    "Does CompleteWithCallback called after Reset?"
+                );
                 data._callback(errorCode, bytesWritten, ToNativeOverlapped(overlapped));
                 return;
             }
@@ -228,7 +263,10 @@ namespace System.Threading
             args._data = null;
             t_executionContextCallbackArgs = args;
 
-            Debug.Assert(data._callback != null, "Does OnExecutionContextCallback called after Reset?");
+            Debug.Assert(
+                data._callback != null,
+                "Does OnExecutionContextCallback called after Reset?"
+            );
             data._callback(errorCode, bytesWritten, ToNativeOverlapped(overlapped));
         }
 

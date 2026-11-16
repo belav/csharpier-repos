@@ -12,8 +12,10 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
 {
-    using VerifyCS = CSharpCodeFixVerifier<CSharpConvertTypeOfToNameOfDiagnosticAnalyzer,
-        CSharpConvertTypeOfToNameOfCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        CSharpConvertTypeOfToNameOfDiagnosticAnalyzer,
+        CSharpConvertTypeOfToNameOfCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.ConvertTypeOfToNameOf)]
     public partial class ConvertTypeOfToNameOfTests

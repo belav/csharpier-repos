@@ -13,7 +13,8 @@ namespace System.Xml
         private readonly string? _systemId;
         private readonly string _name;
 
-        internal XmlNotation(string name, string? publicId, string? systemId, XmlDocument doc) : base(doc)
+        internal XmlNotation(string name, string? publicId, string? systemId, XmlDocument doc)
+            : base(doc)
         {
             _name = doc.NameTable.Add(name);
             _publicId = publicId;
@@ -53,7 +54,7 @@ namespace System.Xml
         {
             get
             {
-                return true;        // Make notations readonly
+                return true; // Make notations readonly
             }
         }
 
@@ -83,13 +84,9 @@ namespace System.Xml
         }
 
         // Saves the node to the specified XmlWriter.
-        public override void WriteTo(XmlWriter w)
-        {
-        }
+        public override void WriteTo(XmlWriter w) { }
 
         // Saves all the children of the node to the specified XmlWriter.
-        public override void WriteContentTo(XmlWriter w)
-        {
-        }
+        public override void WriteContentTo(XmlWriter w) { }
     }
 }

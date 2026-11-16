@@ -21,7 +21,16 @@ public class Runtime_57606
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static CompositeTypeMoreThan16Bytes ReturnsViaBuffer(int x1, int x2, int x3, int x4, int x5, int x6, CompositeType16Bytes x7Stack, __arglist)
+    public static CompositeTypeMoreThan16Bytes ReturnsViaBuffer(
+        int x1,
+        int x2,
+        int x3,
+        int x4,
+        int x5,
+        int x6,
+        CompositeType16Bytes x7Stack,
+        __arglist
+    )
     {
         // Note that VarArgHnd is passed in register x0
         // When allocating a parameter of CompositeType16Bytes to registers and stack
@@ -36,7 +45,16 @@ public class Runtime_57606
     [Fact]
     public static int TestEntryPoint()
     {
-        CompositeTypeMoreThan16Bytes r = ReturnsViaBuffer(1, 2, 3, 4, 5, 6, default(CompositeType16Bytes), __arglist());
+        CompositeTypeMoreThan16Bytes r = ReturnsViaBuffer(
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            default(CompositeType16Bytes),
+            __arglist()
+        );
         return r._2;
     }
 }

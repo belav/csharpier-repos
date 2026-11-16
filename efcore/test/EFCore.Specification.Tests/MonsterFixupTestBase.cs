@@ -35,7 +35,9 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
     [ConditionalFact]
     public virtual void Can_build_monster_model_and_seed_data_using_all_navigations()
     {
-        CreateAndSeedDatabase(context => context.SeedUsingNavigations(dependentNavs: true, principalNavs: true));
+        CreateAndSeedDatabase(context =>
+            context.SeedUsingNavigations(dependentNavs: true, principalNavs: true)
+        );
 
         SimpleVerification();
         FkVerification();
@@ -45,7 +47,9 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
     [ConditionalFact]
     public virtual void Can_build_monster_model_and_seed_data_using_dependent_navigations()
     {
-        CreateAndSeedDatabase(context => context.SeedUsingNavigations(dependentNavs: true, principalNavs: false));
+        CreateAndSeedDatabase(context =>
+            context.SeedUsingNavigations(dependentNavs: true, principalNavs: false)
+        );
 
         SimpleVerification();
         FkVerification();
@@ -55,7 +59,9 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
     [ConditionalFact]
     public virtual void Can_build_monster_model_and_seed_data_using_principal_navigations()
     {
-        CreateAndSeedDatabase(context => context.SeedUsingNavigations(dependentNavs: false, principalNavs: true));
+        CreateAndSeedDatabase(context =>
+            context.SeedUsingNavigations(dependentNavs: false, principalNavs: true)
+        );
 
         SimpleVerification();
         FkVerification();
@@ -526,8 +532,12 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
                 ? context.ProductPhotos.ToList().Single(e => e.Photo[0] == 105)
                 : context.ProductPhotos.Single(e => e.Photo[0] == 105);
 
-            var productWebFeature1 = context.ProductWebFeatures.Single(e => e.Heading.StartsWith("Waffle"));
-            var productWebFeature2 = context.ProductWebFeatures.Single(e => e.Heading.StartsWith("What"));
+            var productWebFeature1 = context.ProductWebFeatures.Single(e =>
+                e.Heading.StartsWith("Waffle")
+            );
+            var productWebFeature2 = context.ProductWebFeatures.Single(e =>
+                e.Heading.StartsWith("What")
+            );
 
             Assert.NotNull(product2);
             AssertPhotosConsistent(productPhoto1, productWebFeature1);
@@ -749,141 +759,181 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         using var context = CreateContext();
         Assert.Equal(
             new[] { "Eeky Bear", "Sheila Koalie", "Sue Pandy", "Tarquin Tiger" },
-            context.Customers.Select(c => c.Name).OrderBy(n => n));
+            context.Customers.Select(c => c.Name).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Assorted Dog Treats", "Chocolate Donuts", "Mrs Koalie's Famous Waffles" },
-            context.Products.Select(c => c.Description).OrderBy(n => n));
+            context.Products.Select(c => c.Description).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Barcode 1 2 3 4", "Barcode 2 2 3 4", "Barcode 3 2 3 4" },
-            context.Barcodes.Select(c => c.Text).OrderBy(n => n));
+            context.Barcodes.Select(c => c.Text).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Barcode 1 2 3 4", "Barcode 2 2 3 4", "Barcode 3 2 3 4" },
-            context.Barcodes.Select(c => c.Text).OrderBy(n => n));
+            context.Barcodes.Select(c => c.Text).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Eeky Bear", "Trent" },
-            context.BarcodeDetails.Select(c => c.RegisteredTo).OrderBy(n => n));
+            context.BarcodeDetails.Select(c => c.RegisteredTo).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Treats not Donuts", "Wot no waffles?" },
-            context.IncorrectScans.Select(c => c.Details).OrderBy(n => n));
+            context.IncorrectScans.Select(c => c.Details).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Don't give coffee to Eeky!", "Really! Don't give coffee to Eeky!" },
-            context.Complaints.Select(c => c.Details).OrderBy(n => n));
+            context.Complaints.Select(c => c.Details).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Destroyed all coffee in Redmond area." },
-            context.Resolutions.Select(c => c.Details).OrderBy(n => n));
+            context.Resolutions.Select(c => c.Details).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "MrsBossyPants", "MrsKoalie73", "TheStripedMenace" },
-            context.Logins.Select(c => c.Username).OrderBy(n => n));
+            context.Logins.Select(c => c.Username).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Crumbs in the cupboard", "Donuts gone missing", "Pig prints on keyboard" },
-            context.SuspiciousActivities.Select(c => c.Activity).OrderBy(n => n));
+            context.SuspiciousActivities.Select(c => c.Activity).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "1234", "2234" },
-            context.RsaTokens.Select(c => c.Serial).OrderBy(n => n));
+            context.RsaTokens.Select(c => c.Serial).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "MrsBossyPants", "MrsKoalie73" },
-            context.SmartCards.Select(c => c.Username).OrderBy(n => n));
+            context.SmartCards.Select(c => c.Username).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Rent-A-Mole" },
-            context.PasswordResets.Select(c => c.TempPassword).OrderBy(n => n));
+            context.PasswordResets.Select(c => c.TempPassword).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "somePage1", "somePage2", "somePage3" },
-            context.PageViews.Select(c => c.PageUrl).OrderBy(n => n));
+            context.PageViews.Select(c => c.PageUrl).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "MrsBossyPants", "MrsKoalie73" },
-            context.LastLogins.Select(c => c.Username).OrderBy(n => n));
+            context.LastLogins.Select(c => c.Username).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Fancy a cup of tea?", "I'll put the kettle on.", "Love one!" },
-            context.Messages.Select(c => c.Body).OrderBy(n => n));
+            context.Messages.Select(c => c.Body).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "MrsBossyPants", "MrsKoalie73", "TheStripedMenace" },
-            context.Orders.Select(c => c.Username).OrderBy(n => n));
+            context.Orders.Select(c => c.Username).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "And donuts!", "But no coffee. :-(", "Must have tea!" },
-            context.OrderNotes.Select(c => c.Note).OrderBy(n => n));
+            context.OrderNotes.Select(c => c.Note).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Eeky Bear", "Eeky Bear", "Eeky Bear" },
-            context.OrderQualityChecks.Select(c => c.CheckedBy).OrderBy(n => n));
+            context.OrderQualityChecks.Select(c => c.CheckedBy).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { 1, 2, 3, 4, 5, 7 },
-            context.OrderLines.Select(c => c.Quantity).OrderBy(n => n));
+            context.OrderLines.Select(c => c.Quantity).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "A Waffle Cart specialty!", "Eeky Bear's favorite!" },
-            context.ProductDetails.Select(c => c.Details).OrderBy(n => n));
+            context.ProductDetails.Select(c => c.Details).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Better than Tarqies!", "Eeky says yes!", "Good with maple syrup." },
-            context.ProductReviews.Select(c => c.Review).OrderBy(n => n));
+            context.ProductReviews.Select(c => c.Review).OrderBy(n => n)
+        );
 
         // See issue#16428
         if (context.Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
         {
             Assert.Equal(
                 new[] { "101", "103", "105" },
-                context.ProductPhotos.ToList().Select(c => c.Photo.First().ToString()).OrderBy(n => n));
+                context
+                    .ProductPhotos.ToList()
+                    .Select(c => c.Photo.First().ToString())
+                    .OrderBy(n => n)
+            );
         }
         else
         {
             Assert.Equal(
                 new[] { "101", "103", "105" },
-                context.ProductPhotos.Select(c => c.Photo.First().ToString()).OrderBy(n => n));
+                context.ProductPhotos.Select(c => c.Photo.First().ToString()).OrderBy(n => n)
+            );
         }
 
         Assert.Equal(
             new[] { "Waffle Style", "What does the waffle say?" },
-            context.ProductWebFeatures.Select(c => c.Heading).OrderBy(n => n));
+            context.ProductWebFeatures.Select(c => c.Heading).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Ants By Boris", "Trading As Trent" },
-            context.Suppliers.Select(c => c.Name).OrderBy(n => n));
+            context.Suppliers.Select(c => c.Name).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "201", "202" },
-            context.SupplierLogos.ToList().SelectMany(c => c.Logo).Select(l => l.ToString()).OrderBy(n => n));
+            context
+                .SupplierLogos.ToList()
+                .SelectMany(c => c.Logo)
+                .Select(l => l.ToString())
+                .OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Orange fur?", "Seems a bit dodgy.", "Very expensive!" },
-            context.SupplierInformation.Select(c => c.Information).OrderBy(n => n));
+            context.SupplierInformation.Select(c => c.Information).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Mrs Bossy Pants!", "Really likes tea." },
-            context.CustomerInformation.Select(c => c.Information).OrderBy(n => n));
+            context.CustomerInformation.Select(c => c.Information).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "markash420", "unicorns420" },
-            context.Computers.Select(c => c.Name).OrderBy(n => n));
+            context.Computers.Select(c => c.Name).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "It's a Dell!", "It's not a Dell!" },
-            context.ComputerDetails.Select(c => c.Specifications).OrderBy(n => n));
+            context.ComputerDetails.Select(c => c.Specifications).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "Eeky Bear", "Splash Bear" },
-            context.Drivers.Select(c => c.Name).OrderBy(n => n));
+            context.Drivers.Select(c => c.Name).OrderBy(n => n)
+        );
 
         Assert.Equal(
             new[] { "10", "11" },
-            context.Licenses.Select(c => c.LicenseNumber).OrderBy(n => n));
+            context.Licenses.Select(c => c.LicenseNumber).OrderBy(n => n)
+        );
     }
 
     protected void FkVerification()
@@ -943,9 +993,15 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         Assert.Equal(customer2.CustomerId, login2.CustomerId);
         Assert.Equal(customer3.CustomerId, login3.CustomerId);
 
-        var suspiciousActivity1 = context.SuspiciousActivities.Single(e => e.Activity.StartsWith("Pig"));
-        var suspiciousActivity2 = context.SuspiciousActivities.Single(e => e.Activity.StartsWith("Crumbs"));
-        var suspiciousActivity3 = context.SuspiciousActivities.Single(e => e.Activity.StartsWith("Donuts"));
+        var suspiciousActivity1 = context.SuspiciousActivities.Single(e =>
+            e.Activity.StartsWith("Pig")
+        );
+        var suspiciousActivity2 = context.SuspiciousActivities.Single(e =>
+            e.Activity.StartsWith("Crumbs")
+        );
+        var suspiciousActivity3 = context.SuspiciousActivities.Single(e =>
+            e.Activity.StartsWith("Donuts")
+        );
 
         Assert.Equal(login3.Username, suspiciousActivity1.Username);
         Assert.Equal(login3.Username, suspiciousActivity2.Username);
@@ -1052,8 +1108,12 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         Assert.Equal(product1.ProductId, productPhoto2.ProductId);
         Assert.Equal(product3.ProductId, productPhoto3.ProductId);
 
-        var productWebFeature1 = context.ProductWebFeatures.Single(e => e.Heading.StartsWith("Waffle"));
-        var productWebFeature2 = context.ProductWebFeatures.Single(e => e.Heading.StartsWith("What"));
+        var productWebFeature1 = context.ProductWebFeatures.Single(e =>
+            e.Heading.StartsWith("Waffle")
+        );
+        var productWebFeature2 = context.ProductWebFeatures.Single(e =>
+            e.Heading.StartsWith("What")
+        );
 
         Assert.Equal(product1.ProductId, productWebFeature1.ProductId);
         Assert.Equal(product2.ProductId, productWebFeature2.ProductId);
@@ -1071,16 +1131,26 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
 
         Assert.Equal(supplier1.SupplierId, supplierLogo1.SupplierId);
 
-        var supplierInfo1 = context.SupplierInformation.Single(e => e.Information.StartsWith("Seems"));
-        var supplierInfo2 = context.SupplierInformation.Single(e => e.Information.StartsWith("Orange"));
-        var supplierInfo3 = context.SupplierInformation.Single(e => e.Information.StartsWith("Very"));
+        var supplierInfo1 = context.SupplierInformation.Single(e =>
+            e.Information.StartsWith("Seems")
+        );
+        var supplierInfo2 = context.SupplierInformation.Single(e =>
+            e.Information.StartsWith("Orange")
+        );
+        var supplierInfo3 = context.SupplierInformation.Single(e =>
+            e.Information.StartsWith("Very")
+        );
 
         Assert.Equal(supplier1.SupplierId, supplierInfo1.SupplierId);
         Assert.Equal(supplier1.SupplierId, supplierInfo2.SupplierId);
         Assert.Equal(supplier2.SupplierId, supplierInfo3.SupplierId);
 
-        var customerInfo1 = context.CustomerInformation.Single(e => e.Information.StartsWith("Really"));
-        var customerInfo2 = context.CustomerInformation.Single(e => e.Information.StartsWith("Mrs"));
+        var customerInfo1 = context.CustomerInformation.Single(e =>
+            e.Information.StartsWith("Really")
+        );
+        var customerInfo2 = context.CustomerInformation.Single(e =>
+            e.Information.StartsWith("Mrs")
+        );
 
         Assert.Equal(customer1.CustomerId, customerInfo1.CustomerInfoId);
         Assert.Equal(customer2.CustomerId, customerInfo2.CustomerInfoId);
@@ -1088,8 +1158,12 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         var computer1 = context.Computers.Single(e => e.Name == "markash420");
         var computer2 = context.Computers.Single(e => e.Name == "unicorns420");
 
-        var computerDetail1 = context.ComputerDetails.Single(e => e.Specifications == "It's a Dell!");
-        var computerDetail2 = context.ComputerDetails.Single(e => e.Specifications == "It's not a Dell!");
+        var computerDetail1 = context.ComputerDetails.Single(e =>
+            e.Specifications == "It's a Dell!"
+        );
+        var computerDetail2 = context.ComputerDetails.Single(e =>
+            e.Specifications == "It's not a Dell!"
+        );
 
         Assert.Equal(computer1.ComputerId, computerDetail1.ComputerDetailId);
         Assert.Equal(computer2.ComputerId, computerDetail2.ComputerDetailId);
@@ -1227,7 +1301,8 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         Assert.Same(login1, message3.Sender);
         Assert.Equal(
             new[] { "Fanc", "I'll" },
-            login1.SentMessages.Select(m => m.Body.Substring(0, 4)).OrderBy(m => m).ToArray());
+            login1.SentMessages.Select(m => m.Body.Substring(0, 4)).OrderBy(m => m).ToArray()
+        );
 
         Assert.Same(login2, message2.Sender);
         Assert.Same(message2, login2.SentMessages.Single());
@@ -1236,7 +1311,8 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         Assert.Same(login2, message3.Recipient);
         Assert.Equal(
             new[] { "Fanc", "I'll" },
-            login2.ReceivedMessages.Select(m => m.Body.Substring(0, 4)).OrderBy(m => m).ToArray());
+            login2.ReceivedMessages.Select(m => m.Body.Substring(0, 4)).OrderBy(m => m).ToArray()
+        );
 
         Assert.Same(login1, message2.Recipient);
         Assert.Same(message2, login1.ReceivedMessages.Single());
@@ -1277,11 +1353,13 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
 
         Assert.Equal(
             new[] { orderLine2, orderLine1 },
-            order1.OrderLines.OrderBy(e => e.Quantity).ToArray());
+            order1.OrderLines.OrderBy(e => e.Quantity).ToArray()
+        );
 
         Assert.Equal(
             new[] { orderLine3, orderLine4, orderLine5 },
-            order2.OrderLines.OrderBy(e => e.Quantity).ToArray());
+            order2.OrderLines.OrderBy(e => e.Quantity).ToArray()
+        );
 
         Assert.Same(orderLine6, order3.OrderLines.Single());
 
@@ -1302,7 +1380,8 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         Assert.Same(product1, productReview2.Product);
         Assert.Equal(
             new[] { productReview1, productReview2 },
-            product1.Reviews.OrderBy(r => r.Review).ToArray());
+            product1.Reviews.OrderBy(r => r.Review).ToArray()
+        );
 
         Assert.Same(product2, productReview3.Product);
         Assert.Same(productReview3, product2.Reviews.Single());
@@ -1323,13 +1402,18 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
 
         Assert.Equal(
             new[] { productPhoto1, productPhoto2 },
-            product1.Photos.OrderBy(r => r.Photo.First()).ToArray());
+            product1.Photos.OrderBy(r => r.Photo.First()).ToArray()
+        );
 
         Assert.Same(productPhoto3, product3.Photos.Single());
         Assert.True(product2.Photos == null || product2.Photos.Count == 0);
 
-        var productWebFeature1 = context.ProductWebFeatures.Single(e => e.Heading.StartsWith("Waffle"));
-        var productWebFeature2 = context.ProductWebFeatures.Single(e => e.Heading.StartsWith("What"));
+        var productWebFeature1 = context.ProductWebFeatures.Single(e =>
+            e.Heading.StartsWith("Waffle")
+        );
+        var productWebFeature2 = context.ProductWebFeatures.Single(e =>
+            e.Heading.StartsWith("What")
+        );
 
         Assert.Same(productPhoto1, productWebFeature1.Photo);
         Assert.Same(productWebFeature1, productPhoto1.Features.Single());
@@ -1355,16 +1439,26 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
 
         Assert.Same(supplierLogo1, supplier1.Logo);
 
-        var supplierInfo1 = context.SupplierInformation.Single(e => e.Information.StartsWith("Seems"));
-        var supplierInfo2 = context.SupplierInformation.Single(e => e.Information.StartsWith("Orange"));
-        var supplierInfo3 = context.SupplierInformation.Single(e => e.Information.StartsWith("Very"));
+        var supplierInfo1 = context.SupplierInformation.Single(e =>
+            e.Information.StartsWith("Seems")
+        );
+        var supplierInfo2 = context.SupplierInformation.Single(e =>
+            e.Information.StartsWith("Orange")
+        );
+        var supplierInfo3 = context.SupplierInformation.Single(e =>
+            e.Information.StartsWith("Very")
+        );
 
         Assert.Same(supplier1, supplierInfo1.Supplier);
         Assert.Same(supplier1, supplierInfo2.Supplier);
         Assert.Same(supplier2, supplierInfo3.Supplier);
 
-        var customerInfo1 = context.CustomerInformation.Single(e => e.Information.StartsWith("Really"));
-        var customerInfo2 = context.CustomerInformation.Single(e => e.Information.StartsWith("Mrs"));
+        var customerInfo1 = context.CustomerInformation.Single(e =>
+            e.Information.StartsWith("Really")
+        );
+        var customerInfo2 = context.CustomerInformation.Single(e =>
+            e.Information.StartsWith("Mrs")
+        );
 
         Assert.Same(customerInfo1, customer1.Info);
         Assert.Same(customerInfo2, customer2.Info);
@@ -1372,8 +1466,12 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         var computer1 = context.Computers.Single(e => e.Name == "markash420");
         var computer2 = context.Computers.Single(e => e.Name == "unicorns420");
 
-        var computerDetail1 = context.ComputerDetails.Single(e => e.Specifications == "It's a Dell!");
-        var computerDetail2 = context.ComputerDetails.Single(e => e.Specifications == "It's not a Dell!");
+        var computerDetail1 = context.ComputerDetails.Single(e =>
+            e.Specifications == "It's a Dell!"
+        );
+        var computerDetail2 = context.ComputerDetails.Single(e =>
+            e.Specifications == "It's not a Dell!"
+        );
 
         Assert.Same(computer1, computerDetail1.Computer);
         Assert.Same(computerDetail1, computer1.ComputerDetail);
@@ -1394,168 +1492,197 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         Assert.Same(license2, driver2.License);
     }
 
-    protected bool UseDetectChanges
-        => Fixture.UseDetectChanges;
+    protected bool UseDetectChanges => Fixture.UseDetectChanges;
 
-    protected void CreateAndSeedDatabase(Action<MonsterContext> seed)
-        => TestStore.Initialize(Fixture.ServiceProvider, CreateContext, c => seed((MonsterContext)c));
+    protected void CreateAndSeedDatabase(Action<MonsterContext> seed) =>
+        TestStore.Initialize(Fixture.ServiceProvider, CreateContext, c => seed((MonsterContext)c));
 
-    protected MonsterContext CreateContext()
-        => Fixture.CreateContext(Options);
+    protected MonsterContext CreateContext() => Fixture.CreateContext(Options);
 
-    public virtual void Dispose()
-        => TestStore.Dispose();
+    public virtual void Dispose() => TestStore.Dispose();
 
     public abstract class MonsterFixupFixtureBase : ServiceProviderFixtureBase
     {
         public abstract string StoreName { get; }
         public abstract bool UseDetectChanges { get; }
 
-        public TestStore CreateTestStore()
-            => TestStoreFactory.Create(StoreName);
+        public TestStore CreateTestStore() => TestStoreFactory.Create(StoreName);
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder);
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder);
 
         public abstract MonsterContext CreateContext(DbContextOptions options);
 
-        protected virtual void OnModelCreating<TMessage, TProduct, TProductPhoto, TProductReview, TComputerDetail, TDimensions>(
-            ModelBuilder builder)
+        protected virtual void OnModelCreating<
+            TMessage,
+            TProduct,
+            TProductPhoto,
+            TProductReview,
+            TComputerDetail,
+            TDimensions
+        >(ModelBuilder builder)
             where TMessage : class, IMessage
             where TProduct : class, IProduct
             where TProductPhoto : class, IProductPhoto
             where TProductReview : class, IProductReview
             where TComputerDetail : class, IComputerDetail
-            where TDimensions : class, IDimensions
-        {
-        }
+            where TDimensions : class, IDimensions { }
     }
 
     public abstract class MonsterFixupSnapshotFixtureBase : MonsterFixupFixtureBase
     {
-        public override string StoreName
-            => "MonsterSnapshot";
+        public override string StoreName => "MonsterSnapshot";
 
-        public override bool UseDetectChanges
-            => true;
+        public override bool UseDetectChanges => true;
 
-        public override MonsterContext CreateContext(DbContextOptions options)
-            => new SnapshotMonsterContext(options);
+        public override MonsterContext CreateContext(DbContextOptions options) =>
+            new SnapshotMonsterContext(options);
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
             base.OnModelCreating(modelBuilder, context);
             modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
-            OnModelCreating<SnapshotMonsterContext.Message,
+            OnModelCreating<
+                SnapshotMonsterContext.Message,
                 SnapshotMonsterContext.Product,
                 SnapshotMonsterContext.ProductPhoto,
                 SnapshotMonsterContext.ProductReview,
                 SnapshotMonsterContext.ComputerDetail,
-                SnapshotMonsterContext.Dimensions>(modelBuilder);
+                SnapshotMonsterContext.Dimensions
+            >(modelBuilder);
         }
     }
 
     public abstract class MonsterFixupChangedOnlyFixtureBase : MonsterFixupFixtureBase
     {
-        public override string StoreName
-            => "MonsterChangedOnly";
+        public override string StoreName => "MonsterChangedOnly";
 
-        public override bool UseDetectChanges
-            => false;
+        public override bool UseDetectChanges => false;
 
-        public override MonsterContext CreateContext(DbContextOptions options)
-            => new ChangedOnlyMonsterContext(options);
+        public override MonsterContext CreateContext(DbContextOptions options) =>
+            new ChangedOnlyMonsterContext(options);
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
             base.OnModelCreating(modelBuilder, context);
             modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
-            OnModelCreating<ChangedOnlyMonsterContext.Message,
+            OnModelCreating<
+                ChangedOnlyMonsterContext.Message,
                 ChangedOnlyMonsterContext.Product,
                 ChangedOnlyMonsterContext.ProductPhoto,
                 ChangedOnlyMonsterContext.ProductReview,
                 ChangedOnlyMonsterContext.ComputerDetail,
-                ChangedOnlyMonsterContext.Dimensions>(modelBuilder);
+                ChangedOnlyMonsterContext.Dimensions
+            >(modelBuilder);
         }
     }
 
     public abstract class MonsterFixupChangedChangingFixtureBase : MonsterFixupFixtureBase
     {
-        public override string StoreName
-            => "MonsterFullNotify";
+        public override string StoreName => "MonsterFullNotify";
 
-        public override bool UseDetectChanges
-            => false;
+        public override bool UseDetectChanges => false;
 
-        public override MonsterContext CreateContext(DbContextOptions options)
-            => new ChangedChangingMonsterContext(options);
+        public override MonsterContext CreateContext(DbContextOptions options) =>
+            new ChangedChangingMonsterContext(options);
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
             base.OnModelCreating(modelBuilder, context);
-            modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotifications);
-            OnModelCreating<ChangedChangingMonsterContext.Message,
+            modelBuilder.HasChangeTrackingStrategy(
+                ChangeTrackingStrategy.ChangingAndChangedNotifications
+            );
+            OnModelCreating<
+                ChangedChangingMonsterContext.Message,
                 ChangedChangingMonsterContext.Product,
                 ChangedChangingMonsterContext.ProductPhoto,
                 ChangedChangingMonsterContext.ProductReview,
                 ChangedChangingMonsterContext.ComputerDetail,
-                ChangedChangingMonsterContext.Dimensions>(modelBuilder);
+                ChangedChangingMonsterContext.Dimensions
+            >(modelBuilder);
         }
     }
 
-    private static void AssertBadScansConsistent(IBarcode expectedPrincipal, params IIncorrectScan[] expectedDependents)
-        => AssertConsistent(
+    private static void AssertBadScansConsistent(
+        IBarcode expectedPrincipal,
+        params IIncorrectScan[] expectedDependents
+    ) =>
+        AssertConsistent(
             expectedPrincipal,
             expectedDependents,
             e => e.BadScans.NullChecked().OrderBy(m => m.Details),
             e => e.ExpectedBarcode,
             e => e.Code,
-            e => e.ExpectedCode);
+            e => e.ExpectedCode
+        );
 
-    private static void AssertActualBarcodeConsistent(IBarcode expectedPrincipal, params IIncorrectScan[] expectedDependents)
-        => AssertConsistent(
+    private static void AssertActualBarcodeConsistent(
+        IBarcode expectedPrincipal,
+        params IIncorrectScan[] expectedDependents
+    ) =>
+        AssertConsistent(
             expectedPrincipal,
             expectedDependents,
             null,
             e => e.ActualBarcode,
             e => e.Code,
-            e => e.ActualCode);
+            e => e.ActualCode
+        );
 
-    private static void AssertPhotosConsistent(IProductPhoto expectedPrincipal, params IProductWebFeature[] expectedDependents)
-        => AssertConsistent(
+    private static void AssertPhotosConsistent(
+        IProductPhoto expectedPrincipal,
+        params IProductWebFeature[] expectedDependents
+    ) =>
+        AssertConsistent(
             expectedPrincipal,
             expectedDependents,
             e => e.Features.NullChecked().OrderBy(f => f.Heading),
             e => e.Photo,
             e => Tuple.Create(e.PhotoId, e.ProductId),
-            e => e.ProductId == null || e.PhotoId == null ? null : Tuple.Create(e.PhotoId.Value, e.ProductId.Value));
+            e =>
+                e.ProductId == null || e.PhotoId == null
+                    ? null
+                    : Tuple.Create(e.PhotoId.Value, e.ProductId.Value)
+        );
 
-    private static void AssertReviewsConsistent(IProductReview expectedPrincipal, params IProductWebFeature[] expectedDependents)
-        => AssertConsistent(
+    private static void AssertReviewsConsistent(
+        IProductReview expectedPrincipal,
+        params IProductWebFeature[] expectedDependents
+    ) =>
+        AssertConsistent(
             expectedPrincipal,
             expectedDependents,
             e => e.Features.NullChecked().OrderBy(f => f.Heading),
             e => e.Review,
             e => Tuple.Create(e.ReviewId, e.ProductId),
-            e => e.ProductId == null ? null : Tuple.Create(e.ReviewId, e.ProductId.Value));
+            e => e.ProductId == null ? null : Tuple.Create(e.ReviewId, e.ProductId.Value)
+        );
 
-    private static void AssertReceivedMessagesConsistent(ILogin expectedPrincipal, params IMessage[] expectedDependents)
-        => AssertConsistent(
+    private static void AssertReceivedMessagesConsistent(
+        ILogin expectedPrincipal,
+        params IMessage[] expectedDependents
+    ) =>
+        AssertConsistent(
             expectedPrincipal,
             expectedDependents,
             e => e.ReceivedMessages.NullChecked().OrderBy(m => m.Body),
             e => e.Recipient,
             e => e.Username,
-            e => e.ToUsername);
+            e => e.ToUsername
+        );
 
-    private static void AssertSentMessagesConsistent(ILogin expectedPrincipal, params IMessage[] expectedDependents)
-        => AssertConsistent(
+    private static void AssertSentMessagesConsistent(
+        ILogin expectedPrincipal,
+        params IMessage[] expectedDependents
+    ) =>
+        AssertConsistent(
             expectedPrincipal,
             expectedDependents,
             e => e.SentMessages.NullChecked().OrderBy(m => m.Body),
             e => e.Sender,
             e => e.Username,
-            e => e.FromUsername);
+            e => e.FromUsername
+        );
 
     private static void AssertConsistent<TPrincipal, TDependent>(
         TPrincipal expectedPrincipal,
@@ -1563,7 +1690,8 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         Func<TPrincipal, IEnumerable<TDependent>> getDependents,
         Func<TDependent, TPrincipal> getPrincipal,
         Func<TPrincipal, object> getPrincipalKey,
-        Func<TDependent, object> getForeignKey)
+        Func<TDependent, object> getForeignKey
+    )
         where TPrincipal : class
         where TDependent : class
     {
@@ -1602,23 +1730,20 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         }
     }
 
-    private static void AssertSpousesConsistent(ICustomer wife, ICustomer husband)
-        => AssertConsistent(
+    private static void AssertSpousesConsistent(ICustomer wife, ICustomer husband) =>
+        AssertConsistent(
             husband,
             wife,
             e => e.Wife,
             e => e.Husband,
             e => e.CustomerId,
-            e => e.HusbandId);
+            e => e.HusbandId
+        );
 
-    private static void AssertBarcodeDetailsConsistent(IBarcode principal, IBarcodeDetail dependent)
-        => AssertConsistent(
-            principal,
-            dependent,
-            e => e.Detail,
-            null,
-            e => e.Code,
-            e => e.Code);
+    private static void AssertBarcodeDetailsConsistent(
+        IBarcode principal,
+        IBarcodeDetail dependent
+    ) => AssertConsistent(principal, dependent, e => e.Detail, null, e => e.Code, e => e.Code);
 
     private static void AssertConsistent<TPrincipal, TDependent>(
         TPrincipal expectedPrincipal,
@@ -1626,18 +1751,17 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         Func<TPrincipal, TDependent> getDependent,
         Func<TDependent, TPrincipal> getPrincipal,
         Func<TPrincipal, object> getPrincipalKey,
-        Func<TDependent, object> getForeignKey)
+        Func<TDependent, object> getForeignKey
+    )
         where TPrincipal : class
         where TDependent : class
     {
-        if (expectedDependent != null
-            && getPrincipal != null)
+        if (expectedDependent != null && getPrincipal != null)
         {
             Assert.Same(expectedPrincipal, getPrincipal(expectedDependent));
         }
 
-        if (expectedPrincipal != null
-            && getDependent != null)
+        if (expectedPrincipal != null && getDependent != null)
         {
             Assert.Same(expectedDependent, getDependent(expectedPrincipal));
         }
@@ -1647,7 +1771,9 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
             Assert.True(
                 StructuralComparisons.StructuralEqualityComparer.Equals(
                     expectedPrincipal == null ? null : getPrincipalKey(expectedPrincipal),
-                    getForeignKey(expectedDependent)));
+                    getForeignKey(expectedDependent)
+                )
+            );
         }
     }
 }

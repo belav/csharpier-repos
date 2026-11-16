@@ -30,13 +30,20 @@ namespace Microsoft.CodeAnalysis
             s_corlibDirectory = Path.GetDirectoryName(corlibAssemblyFile);
 
             var systemAssemblyFile = typeof(Uri).Assembly.Location;
-            s_gacDirectory = Directory.GetParent(Path.GetDirectoryName(systemAssemblyFile)).Parent.FullName;
+            s_gacDirectory = Directory
+                .GetParent(Path.GetDirectoryName(systemAssemblyFile))
+                .Parent.FullName;
         }
 
-        private static AssemblyName CreateAssemblyNameFromFile(string path)
-            => AssemblyName.GetAssemblyName(path);
+        private static AssemblyName CreateAssemblyNameFromFile(string path) =>
+            AssemblyName.GetAssemblyName(path);
 
-        private static IEnumerable<string> GetGacAssemblyPaths(string gacPath, string name, Version version, byte[] publicKeyTokenBytes)
+        private static IEnumerable<string> GetGacAssemblyPaths(
+            string gacPath,
+            string name,
+            Version version,
+            byte[] publicKeyTokenBytes
+        )
         {
             var fileName = name + ".dll";
 
@@ -74,12 +81,18 @@ namespace Microsoft.CodeAnalysis
 
             foreach (var assemblyDir in gacAssemblyRootDir.GetDirectories())
             {
-                if (version != null && !assemblyDir.Name.StartsWith(version.ToString(), StringComparison.Ordinal))
+                if (
+                    version != null
+                    && !assemblyDir.Name.StartsWith(version.ToString(), StringComparison.Ordinal)
+                )
                 {
                     continue;
                 }
 
-                if (publicKeyToken != null && !assemblyDir.Name.EndsWith(publicKeyToken, StringComparison.Ordinal))
+                if (
+                    publicKeyToken != null
+                    && !assemblyDir.Name.EndsWith(publicKeyToken, StringComparison.Ordinal)
+                )
                 {
                     continue;
                 }
@@ -92,17 +105,36 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private static IEnumerable<(AssemblyIdentity Identity, string Path)> GetAssemblyIdentitiesAndPaths(AssemblyName name, ImmutableArray<ProcessorArchitecture> architectureFilter)
+        private static IEnumerable<(
+            AssemblyIdentity Identity,
+            string Path
+        )> GetAssemblyIdentitiesAndPaths(
+            AssemblyName name,
+            ImmutableArray<ProcessorArchitecture> architectureFilter
+        )
         {
             if (name == null)
             {
                 return GetAssemblyIdentitiesAndPaths(null, null, null, architectureFilter);
             }
 
-            return GetAssemblyIdentitiesAndPaths(name.Name, name.Version, name.GetPublicKeyToken(), architectureFilter);
+            return GetAssemblyIdentitiesAndPaths(
+                name.Name,
+                name.Version,
+                name.GetPublicKeyToken(),
+                architectureFilter
+            );
         }
 
-        private static IEnumerable<(AssemblyIdentity Identity, string Path)> GetAssemblyIdentitiesAndPaths(string name, Version version, byte[] publicKeyToken, ImmutableArray<ProcessorArchitecture> architectureFilter)
+        private static IEnumerable<(
+            AssemblyIdentity Identity,
+            string Path
+        )> GetAssemblyIdentitiesAndPaths(
+            string name,
+            Version version,
+            byte[] publicKeyToken,
+            ImmutableArray<ProcessorArchitecture> architectureFilter
+        )
         {
             var assemblyPaths = GetGacAssemblyPaths(s_gacDirectory, name, version, publicKeyToken);
 
@@ -117,10 +149,12 @@ namespace Microsoft.CodeAnalysis
 
 #pragma warning disable SYSLIB0037
                 // warning SYSLIB0037: 'AssemblyName.ProcessorArchitecture' is obsolete: 'AssemblyName members HashAlgorithm, ProcessorArchitecture, and VersionCompatibility are obsolete and not supported.'
-                if (gacAssemblyName.ProcessorArchitecture != ProcessorArchitecture.None &&
-                    architectureFilter != default(ImmutableArray<ProcessorArchitecture>) &&
-                    architectureFilter.Length > 0 &&
-                    !architectureFilter.Contains(gacAssemblyName.ProcessorArchitecture))
+                if (
+                    gacAssemblyName.ProcessorArchitecture != ProcessorArchitecture.None
+                    && architectureFilter != default(ImmutableArray<ProcessorArchitecture>)
+                    && architectureFilter.Length > 0
+                    && !architectureFilter.Contains(gacAssemblyName.ProcessorArchitecture)
+                )
                 {
                     continue;
                 }
@@ -130,18 +164,28 @@ namespace Microsoft.CodeAnalysis
                     gacAssemblyName.Name,
                     gacAssemblyName.Version,
                     gacAssemblyName.CultureName,
-                    ImmutableArray.Create(gacAssemblyName.GetPublicKeyToken()));
+                    ImmutableArray.Create(gacAssemblyName.GetPublicKeyToken())
+                );
 
                 yield return (assemblyIdentity, assemblyPath);
             }
         }
 
-        public override IEnumerable<AssemblyIdentity> GetAssemblyIdentities(AssemblyName partialName, ImmutableArray<ProcessorArchitecture> architectureFilter = default(ImmutableArray<ProcessorArchitecture>))
+        public override IEnumerable<AssemblyIdentity> GetAssemblyIdentities(
+            AssemblyName partialName,
+            ImmutableArray<ProcessorArchitecture> architectureFilter =
+                default(ImmutableArray<ProcessorArchitecture>)
+        )
         {
-            return GetAssemblyIdentitiesAndPaths(partialName, architectureFilter).Select(identityAndPath => identityAndPath.Item1);
+            return GetAssemblyIdentitiesAndPaths(partialName, architectureFilter)
+                .Select(identityAndPath => identityAndPath.Item1);
         }
 
-        public override IEnumerable<AssemblyIdentity> GetAssemblyIdentities(string partialName = null, ImmutableArray<ProcessorArchitecture> architectureFilter = default(ImmutableArray<ProcessorArchitecture>))
+        public override IEnumerable<AssemblyIdentity> GetAssemblyIdentities(
+            string partialName = null,
+            ImmutableArray<ProcessorArchitecture> architectureFilter =
+                default(ImmutableArray<ProcessorArchitecture>)
+        )
         {
             AssemblyName name;
             try
@@ -156,24 +200,37 @@ namespace Microsoft.CodeAnalysis
             return GetAssemblyIdentities(name, architectureFilter);
         }
 
-        public override IEnumerable<string> GetAssemblySimpleNames(ImmutableArray<ProcessorArchitecture> architectureFilter = default(ImmutableArray<ProcessorArchitecture>))
+        public override IEnumerable<string> GetAssemblySimpleNames(
+            ImmutableArray<ProcessorArchitecture> architectureFilter =
+                default(ImmutableArray<ProcessorArchitecture>)
+        )
         {
-            return GetAssemblyIdentitiesAndPaths(name: null, version: null, publicKeyToken: null, architectureFilter: architectureFilter).
-                Select(identityAndPath => identityAndPath.Identity.Name).Distinct();
+            return GetAssemblyIdentitiesAndPaths(
+                    name: null,
+                    version: null,
+                    publicKeyToken: null,
+                    architectureFilter: architectureFilter
+                )
+                .Select(identityAndPath => identityAndPath.Identity.Name)
+                .Distinct();
         }
 
         public override AssemblyIdentity ResolvePartialName(
             string displayName,
             out string location,
             ImmutableArray<ProcessorArchitecture> architectureFilter,
-            CultureInfo preferredCulture)
+            CultureInfo preferredCulture
+        )
         {
             if (displayName == null)
             {
                 throw new ArgumentNullException(nameof(displayName));
             }
 
-            string cultureName = (preferredCulture != null && !preferredCulture.IsNeutralCulture) ? preferredCulture.Name : null;
+            string cultureName =
+                (preferredCulture != null && !preferredCulture.IsNeutralCulture)
+                    ? preferredCulture.Name
+                    : null;
 
             var assemblyName = new AssemblyName(displayName);
             AssemblyIdentity assemblyIdentity = null;
@@ -181,7 +238,12 @@ namespace Microsoft.CodeAnalysis
             location = null;
             bool isBestMatch = false;
 
-            foreach (var identityAndPath in GetAssemblyIdentitiesAndPaths(assemblyName, architectureFilter))
+            foreach (
+                var identityAndPath in GetAssemblyIdentitiesAndPaths(
+                    assemblyName,
+                    architectureFilter
+                )
+            )
             {
                 var assemblyPath = identityAndPath.Path;
 

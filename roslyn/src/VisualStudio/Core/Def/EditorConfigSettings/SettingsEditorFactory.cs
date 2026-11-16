@@ -25,8 +25,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
     [Guid(SettingsEditorFactoryGuidString)]
     internal sealed class SettingsEditorFactory : IVsEditorFactory, IVsEditorFactory4, IDisposable
     {
-        public static readonly Guid SettingsEditorFactoryGuid = new(SettingsEditorFactoryGuidString);
-        public const string SettingsEditorFactoryGuidString = "68b46364-d378-42f2-9e72-37d86c5f4468";
+        public static readonly Guid SettingsEditorFactoryGuid = new(
+            SettingsEditorFactoryGuidString
+        );
+        public const string SettingsEditorFactoryGuidString =
+            "68b46364-d378-42f2-9e72-37d86c5f4468";
         public const string Extension = ".editorconfig";
 
         private readonly ISettingsAggregator _settingsDataProviderFactory;
@@ -39,13 +42,16 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SettingsEditorFactory(VisualStudioWorkspace workspace,
-                                     IWpfTableControlProvider controlProvider,
-                                     ITableManagerProvider tableMangerProvider,
-                                     IVsEditorAdaptersFactoryService vsEditorAdaptersFactoryService,
-                                     IThreadingContext threadingContext)
+        public SettingsEditorFactory(
+            VisualStudioWorkspace workspace,
+            IWpfTableControlProvider controlProvider,
+            ITableManagerProvider tableMangerProvider,
+            IVsEditorAdaptersFactoryService vsEditorAdaptersFactoryService,
+            IThreadingContext threadingContext
+        )
         {
-            _settingsDataProviderFactory = workspace.Services.GetRequiredService<ISettingsAggregator>();
+            _settingsDataProviderFactory =
+                workspace.Services.GetRequiredService<ISettingsAggregator>();
             _workspace = workspace;
             _controlProvider = controlProvider;
             _tableMangerProvider = tableMangerProvider;
@@ -62,17 +68,19 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             }
         }
 
-        public int CreateEditorInstance(uint grfCreateDoc,
-                                        string filePath,
-                                        string pszPhysicalView,
-                                        IVsHierarchy pvHier,
-                                        uint itemid,
-                                        IntPtr punkDocDataExisting,
-                                        out IntPtr ppunkDocView,
-                                        out IntPtr ppunkDocData,
-                                        out string? pbstrEditorCaption,
-                                        out Guid pguidCmdUI,
-                                        out int pgrfCDW)
+        public int CreateEditorInstance(
+            uint grfCreateDoc,
+            string filePath,
+            string pszPhysicalView,
+            IVsHierarchy pvHier,
+            uint itemid,
+            IntPtr punkDocDataExisting,
+            out IntPtr ppunkDocView,
+            out IntPtr ppunkDocData,
+            out string? pbstrEditorCaption,
+            out Guid pguidCmdUI,
+            out int pgrfCDW
+        )
         {
             // Initialize to null
             ppunkDocView = IntPtr.Zero;
@@ -81,14 +89,24 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             pgrfCDW = 0;
             pbstrEditorCaption = null;
 
-            if (!_workspace.CurrentSolution.Projects.Any(p => p.Language is LanguageNames.CSharp or LanguageNames.VisualBasic))
+            if (
+                !_workspace.CurrentSolution.Projects.Any(p =>
+                    p.Language is LanguageNames.CSharp or LanguageNames.VisualBasic
+                )
+            )
             {
                 // If there are no VB or C# projects loaded in the solution (so an editorconfig file in a C++ project) then we want their
                 // editorfactory to present the file instead of use showing ours
                 return VSConstants.VS_E_UNSUPPORTEDFORMAT;
             }
 
-            if (!_workspace.CurrentSolution.Projects.Any(p => p.AnalyzerConfigDocuments.Any(editorconfig => StringComparer.OrdinalIgnoreCase.Equals(editorconfig.FilePath, filePath))))
+            if (
+                !_workspace.CurrentSolution.Projects.Any(p =>
+                    p.AnalyzerConfigDocuments.Any(editorconfig =>
+                        StringComparer.OrdinalIgnoreCase.Equals(editorconfig.FilePath, filePath)
+                    )
+                )
+            )
             {
                 // If the user is simply opening an editorconfig file that does not apply to the current solution we just want to show the text view
                 return VSConstants.VS_E_UNSUPPORTEDFORMAT;
@@ -104,10 +122,22 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             if (punkDocDataExisting == IntPtr.Zero)
             {
                 Assumes.NotNull(_vsServiceProvider);
-                if (_vsServiceProvider.TryGetService<SLocalRegistry, ILocalRegistry>(_threadingContext.JoinableTaskFactory, out var localRegistry))
+                if (
+                    _vsServiceProvider.TryGetService<SLocalRegistry, ILocalRegistry>(
+                        _threadingContext.JoinableTaskFactory,
+                        out var localRegistry
+                    )
+                )
                 {
                     var textLinesGuid = typeof(IVsTextLines).GUID;
-                    _ = localRegistry.CreateInstance(typeof(VsTextBufferClass).GUID, null, ref textLinesGuid, 1 /*CLSCTX_INPROC_SERVER*/, out var ptr);
+                    _ = localRegistry.CreateInstance(
+                        typeof(VsTextBufferClass).GUID,
+                        null,
+                        ref textLinesGuid,
+                        1 /*CLSCTX_INPROC_SERVER*/
+                        ,
+                        out var ptr
+                    );
                     try
                     {
                         textBuffer = Marshal.GetObjectForIUnknown(ptr) as IVsTextLines;
@@ -119,7 +149,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 
                     if (textBuffer is IObjectWithSite objectWithSite)
                     {
-                        var oleServiceProvider = _vsServiceProvider.GetService<IOleServiceProvider>(_threadingContext.JoinableTaskFactory);
+                        var oleServiceProvider = _vsServiceProvider.GetService<IOleServiceProvider>(
+                            _threadingContext.JoinableTaskFactory
+                        );
                         objectWithSite.SetSite(oleServiceProvider);
                     }
                 }
@@ -139,14 +171,16 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             }
 
             // Create the editor
-            var newEditor = new SettingsEditorPane(_vsEditorAdaptersFactoryService,
-                                                   _threadingContext,
-                                                   _settingsDataProviderFactory,
-                                                   _controlProvider,
-                                                   _tableMangerProvider,
-                                                   filePath,
-                                                   textBuffer,
-                                                   _workspace);
+            var newEditor = new SettingsEditorPane(
+                _vsEditorAdaptersFactoryService,
+                _threadingContext,
+                _settingsDataProviderFactory,
+                _controlProvider,
+                _tableMangerProvider,
+                filePath,
+                textBuffer,
+                _workspace
+            );
             ppunkDocView = Marshal.GetIUnknownForObject(newEditor);
             ppunkDocData = Marshal.GetIUnknownForObject(textBuffer);
             pbstrEditorCaption = "";
@@ -163,29 +197,46 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 
         public int MapLogicalView(ref Guid rguidLogicalView, out string? pbstrPhysicalView)
         {
-            pbstrPhysicalView = null;    // initialize out parameter
+            pbstrPhysicalView = null; // initialize out parameter
 
             // we support only a single physical view
             if (VSConstants.LOGVIEWID_Primary == rguidLogicalView)
             {
-                return VSConstants.S_OK;        // primary view uses NULL as pbstrPhysicalView
+                return VSConstants.S_OK; // primary view uses NULL as pbstrPhysicalView
             }
             else
             {
-                return VSConstants.E_NOTIMPL;   // you must return E_NOTIMPL for any unrecognized rguidLogicalView values
+                return VSConstants.E_NOTIMPL; // you must return E_NOTIMPL for any unrecognized rguidLogicalView values
             }
         }
 
-        public object? GetDocumentData(uint grfCreate, string pszMkDocument, IVsHierarchy pHier, uint itemid)
-            => null;
+        public object? GetDocumentData(
+            uint grfCreate,
+            string pszMkDocument,
+            IVsHierarchy pHier,
+            uint itemid
+        ) => null;
 
-        public object? GetDocumentView(uint grfCreate, string pszPhysicalView, IVsHierarchy pHier, IntPtr punkDocData, uint itemid)
-            => null;
+        public object? GetDocumentView(
+            uint grfCreate,
+            string pszPhysicalView,
+            IVsHierarchy pHier,
+            IntPtr punkDocData,
+            uint itemid
+        ) => null;
 
-        public string? GetEditorCaption(string pszMkDocument, string pszPhysicalView, IVsHierarchy pHier, IntPtr punkDocData, out Guid pguidCmdUI)
-            => throw new NotImplementedException();
+        public string? GetEditorCaption(
+            string pszMkDocument,
+            string pszPhysicalView,
+            IVsHierarchy pHier,
+            IntPtr punkDocData,
+            out Guid pguidCmdUI
+        ) => throw new NotImplementedException();
 
-        public bool ShouldDeferUntilIntellisenseIsReady(uint grfCreate, string pszMkDocument, string pszPhysicalView)
-            => true;
+        public bool ShouldDeferUntilIntellisenseIsReady(
+            uint grfCreate,
+            string pszMkDocument,
+            string pszPhysicalView
+        ) => true;
     }
 }

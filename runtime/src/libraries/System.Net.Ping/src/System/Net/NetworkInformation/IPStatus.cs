@@ -6,6 +6,7 @@ namespace System.Net.NetworkInformation
     public enum IPStatus
     {
         Success = 0,
+
         //BufferTooSmall = 11000 + 1,
 
         DestinationNetworkUnreachable = 11000 + 2,
@@ -19,6 +20,7 @@ namespace System.Net.NetworkInformation
         HardwareError = 11000 + 8,
         PacketTooBig = 11000 + 9,
         TimedOut = 11000 + 10,
+
         //  BadRequest = 11000 + 11,
         BadRoute = 11000 + 12,
 
@@ -27,6 +29,7 @@ namespace System.Net.NetworkInformation
 
         ParameterProblem = 11000 + 15,
         SourceQuench = 11000 + 16,
+
         //OptionTooBig = 11000 + 17,
         BadDestination = 11000 + 18,
 

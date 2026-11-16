@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [Fact]
         public void TestOutParamSignature()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M(out int x)
@@ -24,32 +25,48 @@ class C
         x = 0;
     }
 }";
-            CompileAndVerify(source, expectedSignatures: new[]
-            {
-                Signature("C", "M", ".method private hidebysig instance System.Void M([out] System.Int32& x) cil managed")
-            });
+            CompileAndVerify(
+                source,
+                expectedSignatures: new[]
+                {
+                    Signature(
+                        "C",
+                        "M",
+                        ".method private hidebysig instance System.Void M([out] System.Int32& x) cil managed"
+                    ),
+                }
+            );
         }
 
         [Fact]
         public void TestRefParamSignature()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M(ref int x)
     {
     }
 }";
-            CompileAndVerify(source, expectedSignatures: new[]
-            {
-                Signature("C", "M", ".method private hidebysig instance System.Void M(System.Int32& x) cil managed")
-            });
+            CompileAndVerify(
+                source,
+                expectedSignatures: new[]
+                {
+                    Signature(
+                        "C",
+                        "M",
+                        ".method private hidebysig instance System.Void M(System.Int32& x) cil managed"
+                    ),
+                }
+            );
         }
 
         [Fact]
         public void TestOneReferenceMultipleParameters()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void Main()
@@ -71,7 +88,8 @@ class C
         [Fact]
         public void TestReferenceParameterOrder()
         {
-            var source = @"
+            var source =
+                @"
 public class Test
 {
     static int[] array = new int[1];
@@ -103,18 +121,22 @@ public class Test
         return array;
     }
 }";
-            CompileAndVerify(source, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                expectedOutput: @"
 Array A
 Index B
 Array C
 Index D
-2");
+2"
+            );
         }
 
         [Fact]
         public void TestPassMutableStructByReference()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void Main()
@@ -175,7 +197,9 @@ struct MutableStruct
         System.Console.WriteLine(flagged ? ""Flagged"" : ""Unflagged"");
     }
 }";
-            CompileAndVerify(source, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                expectedOutput: @"
 Unflagged
 Unflagged
 Unflagged
@@ -188,13 +212,15 @@ Unflagged
 Unflagged
 Unflagged
 Unflagged
-Unflagged");
+Unflagged"
+            );
         }
 
         [Fact]
         public void TestPassFieldByReference()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int field;
@@ -229,7 +255,9 @@ class C
         x++;
     }
 }";
-            CompileAndVerify(source, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                expectedOutput: @"
 0
 1
 0
@@ -237,13 +265,15 @@ class C
 0
 1
 0
-1");
+1"
+            );
         }
 
         [Fact]
         public void TestSetFieldViaOutParameter()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int field;
@@ -278,7 +308,9 @@ class C
         x = 1;
     }
 }";
-            CompileAndVerify(source, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                expectedOutput: @"
 0
 1
 0
@@ -286,14 +318,16 @@ class C
 0
 1
 0
-1");
+1"
+            );
         }
 
         [WorkItem(543521, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543521")]
         [Fact()]
         public void TestConstructorWithOutParameter()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 class Class1
 {
 	Class1(out bool outParam)
@@ -305,14 +339,16 @@ class Class1
 		var b = false;
 		var c1 = new Class1(out b);
 	}
-}");
+}"
+            );
         }
 
         [WorkItem(24014, "https://github.com/dotnet/roslyn/issues/24014")]
         [Fact]
         public void RefExtensionMethods_OutParam()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 public class C
 {
@@ -347,10 +383,15 @@ public struct S1
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(code, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                code,
+                options: TestOptions.ReleaseExe
+            );
             var verifier = CompileAndVerify(compilation, expectedOutput: "042");
 
-            verifier.VerifyIL("C.Main", @"
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       36 (0x24)
   .maxstack  2
@@ -368,15 +409,16 @@ public struct S1
   IL_0019:  ldfld      ""int S1.x""
   IL_001e:  call       ""void System.Console.Write(int)""
   IL_0023:  ret
-}");
-
+}"
+            );
         }
 
         [WorkItem(24014, "https://github.com/dotnet/roslyn/issues/24014")]
         [Fact]
         public void OutParamAndOptional()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 public class C
 {
@@ -409,10 +451,15 @@ public class C
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(code, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                code,
+                options: TestOptions.ReleaseExe
+            );
             var verifier = CompileAndVerify(compilation, expectedOutput: "Q");
 
-            verifier.VerifyIL("C..ctor(int)", @"
+            verifier.VerifyIL(
+                "C..ctor(int)",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  6
@@ -429,14 +476,16 @@ public class C
   IL_001b:  callvirt   ""C C.Test(object, C, out int, out int, object)""
   IL_0020:  pop
   IL_0021:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(24014, "https://github.com/dotnet/roslyn/issues/24014")]
         [Fact]
         public void OutParamAndOptionalNested()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 public class C
 {
@@ -471,10 +520,15 @@ public class C
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(code, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                code,
+                options: TestOptions.ReleaseExe
+            );
             var verifier = CompileAndVerify(compilation, expectedOutput: "Q");
 
-            verifier.VerifyIL("C..ctor(int)", @"
+            verifier.VerifyIL(
+                "C..ctor(int)",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  6
@@ -495,13 +549,15 @@ public class C
   IL_0020:  call       ""C C.<.ctor>g__Test|5_0(object, C, out int, out int, object, ref C.<>c__DisplayClass5_0)""
   IL_0025:  pop
   IL_0026:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(53113, "https://github.com/dotnet/roslyn/issues/53113")]
         public void TestRefOnPointerIndirection()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 unsafe
@@ -511,7 +567,9 @@ unsafe
 }
 ";
 
-            verify(TestOptions.UnsafeReleaseExe, @"
+            verify(
+                TestOptions.UnsafeReleaseExe,
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  1
@@ -520,9 +578,12 @@ unsafe
   IL_0002:  call       ""void Program.<<Main>$>g__M|0_0(ref int)""
   IL_0007:  ret
 }
-");
+"
+            );
 
-            verify(TestOptions.UnsafeDebugExe, @"
+            verify(
+                TestOptions.UnsafeDebugExe,
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -535,12 +596,17 @@ unsafe
   IL_000a:  nop
   IL_000b:  ret
 }
-");
+"
+            );
 
             void verify(CSharpCompilationOptions options, string expectedIL)
             {
                 var comp = CreateCompilation(code, options: options);
-                var verifier = CompileAndVerify(comp, expectedOutput: "run", verify: Verification.Fails);
+                var verifier = CompileAndVerify(
+                    comp,
+                    expectedOutput: "run",
+                    verify: Verification.Fails
+                );
                 verifier.VerifyDiagnostics();
                 verifier.VerifyIL("<top-level-statements-entry-point>", expectedIL);
             }
@@ -549,7 +615,8 @@ unsafe
         [Fact, WorkItem(53113, "https://github.com/dotnet/roslyn/issues/53113")]
         public void TestOutOnPointerIndirection()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 unsafe
@@ -570,7 +637,9 @@ unsafe
 }
 ";
 
-            verify(TestOptions.UnsafeReleaseExe, @"
+            verify(
+                TestOptions.UnsafeReleaseExe,
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  1
@@ -589,9 +658,12 @@ unsafe
   }
   IL_0015:  ret
 }
-");
+"
+            );
 
-            verify(TestOptions.UnsafeDebugExe, @"
+            verify(
+                TestOptions.UnsafeDebugExe,
+                @"
 {
   // Code size       33 (0x21)
   .maxstack  1
@@ -622,12 +694,17 @@ unsafe
   IL_001f:  nop
   IL_0020:  ret
 }
-");
+"
+            );
 
             void verify(CSharpCompilationOptions options, string expectedIL)
             {
                 var comp = CreateCompilation(code, options: options);
-                var verifier = CompileAndVerify(comp, expectedOutput: "run", verify: Verification.Fails);
+                var verifier = CompileAndVerify(
+                    comp,
+                    expectedOutput: "run",
+                    verify: Verification.Fails
+                );
                 verifier.VerifyDiagnostics();
                 verifier.VerifyIL("<top-level-statements-entry-point>", expectedIL);
             }
@@ -636,7 +713,8 @@ unsafe
         [Fact, WorkItem(53113, "https://github.com/dotnet/roslyn/issues/53113")]
         public void TestRefOnPointerIndirection_ThroughTernary_01()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 unsafe
@@ -647,7 +725,9 @@ unsafe
 }
 ";
 
-            verify(TestOptions.UnsafeReleaseExe, @"
+            verify(
+                TestOptions.UnsafeReleaseExe,
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  1
@@ -661,9 +741,12 @@ unsafe
   IL_0009:  call       ""void Program.<<Main>$>g__M|0_0(ref int)""
   IL_000e:  ret
 }
-");
+"
+            );
 
-            verify(TestOptions.UnsafeDebugExe, @"
+            verify(
+                TestOptions.UnsafeDebugExe,
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  1
@@ -684,12 +767,17 @@ unsafe
   IL_0013:  nop
   IL_0014:  ret
 }
-");
+"
+            );
 
             void verify(CSharpCompilationOptions options, string expectedIL)
             {
                 var comp = CreateCompilation(code, options: options);
-                var verifier = CompileAndVerify(comp, expectedOutput: "run", verify: Verification.Fails);
+                var verifier = CompileAndVerify(
+                    comp,
+                    expectedOutput: "run",
+                    verify: Verification.Fails
+                );
                 verifier.VerifyDiagnostics();
                 verifier.VerifyIL("<top-level-statements-entry-point>", expectedIL);
             }
@@ -698,7 +786,8 @@ unsafe
         [Fact, WorkItem(53113, "https://github.com/dotnet/roslyn/issues/53113")]
         public void TestRefOnPointerIndirection_ThroughTernary_02()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 unsafe
@@ -718,7 +807,9 @@ unsafe
 }
 ";
 
-            verify(TestOptions.UnsafeReleaseExe, @"
+            verify(
+                TestOptions.UnsafeReleaseExe,
+                @"
 {
   // Code size       26 (0x1a)
   .maxstack  1
@@ -739,9 +830,12 @@ unsafe
   IL_0014:  call       ""void Program.<<Main>$>g__M2|0_1(ref int)""
   IL_0019:  ret
 }
-");
+"
+            );
 
-            verify(TestOptions.UnsafeDebugExe, @"
+            verify(
+                TestOptions.UnsafeDebugExe,
+                @"
 {
   // Code size       33 (0x21)
   .maxstack  1
@@ -770,12 +864,17 @@ unsafe
   IL_001f:  nop
   IL_0020:  ret
 }
-");
+"
+            );
 
             void verify(CSharpCompilationOptions options, string expectedIL)
             {
                 var comp = CreateCompilation(code, options: options);
-                var verifier = CompileAndVerify(comp, expectedOutput: "0run", verify: Verification.Fails);
+                var verifier = CompileAndVerify(
+                    comp,
+                    expectedOutput: "0run",
+                    verify: Verification.Fails
+                );
                 verifier.VerifyDiagnostics();
                 verifier.VerifyIL("<top-level-statements-entry-point>", expectedIL);
             }
@@ -784,7 +883,8 @@ unsafe
         [Fact, WorkItem(53113, "https://github.com/dotnet/roslyn/issues/53113")]
         public void TestRefOnPointerArrayAccess()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 unsafe
@@ -794,7 +894,9 @@ unsafe
 }
 ";
 
-            verify(TestOptions.UnsafeReleaseExe, @"
+            verify(
+                TestOptions.UnsafeReleaseExe,
+                @"
 {
   // Code size       10 (0xa)
   .maxstack  2
@@ -805,9 +907,12 @@ unsafe
   IL_0004:  call       ""void Program.<<Main>$>g__M|0_0(ref int)""
   IL_0009:  ret
 }
-");
+"
+            );
 
-            verify(TestOptions.UnsafeDebugExe, @"
+            verify(
+                TestOptions.UnsafeDebugExe,
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  2
@@ -822,12 +927,17 @@ unsafe
   IL_000c:  nop
   IL_000d:  ret
 }
-");
+"
+            );
 
             void verify(CSharpCompilationOptions options, string expectedIL)
             {
                 var comp = CreateCompilation(code, options: options);
-                var verifier = CompileAndVerify(comp, expectedOutput: "run", verify: Verification.Fails);
+                var verifier = CompileAndVerify(
+                    comp,
+                    expectedOutput: "run",
+                    verify: Verification.Fails
+                );
                 verifier.VerifyDiagnostics();
                 verifier.VerifyIL("<top-level-statements-entry-point>", expectedIL);
             }

@@ -18,8 +18,11 @@ namespace System.Diagnostics
             var tmp = timeSync;
 
             // Timer ticks need to be converted to DateTime ticks
-            long dateTimeTicksDiff = (long)((Stopwatch.GetTimestamp() - tmp.SyncStopwatchTicks) * 10000000L /
-                                            (double)Stopwatch.Frequency);
+            long dateTimeTicksDiff = (long)(
+                (Stopwatch.GetTimestamp() - tmp.SyncStopwatchTicks)
+                * 10000000L
+                / (double)Stopwatch.Frequency
+            );
 
             // DateTime.AddSeconds (or Milliseconds) rounds value to 1 ms, use AddTicks to prevent it
             return tmp.SyncUtcNow.AddTicks(dateTimeTicksDiff);
@@ -59,7 +62,15 @@ namespace System.Diagnostics
                     restoreFlow = true;
                 }
 
-                timer = new Timer(s => { Sync(); }, null, 0, 7200000);
+                timer = new Timer(
+                    s =>
+                    {
+                        Sync();
+                    },
+                    null,
+                    0,
+                    7200000
+                );
             }
             finally
             {

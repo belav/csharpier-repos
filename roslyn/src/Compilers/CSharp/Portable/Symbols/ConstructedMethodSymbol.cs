@@ -15,21 +15,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         private readonly ImmutableArray<TypeWithAnnotations> _typeArgumentsWithAnnotations;
 
-        internal ConstructedMethodSymbol(MethodSymbol constructedFrom, ImmutableArray<TypeWithAnnotations> typeArgumentsWithAnnotations)
-            : base(containingSymbol: constructedFrom.ContainingType,
-                   map: new TypeMap(constructedFrom.ContainingType, ((MethodSymbol)constructedFrom.OriginalDefinition).TypeParameters, typeArgumentsWithAnnotations),
-                   originalDefinition: (MethodSymbol)constructedFrom.OriginalDefinition,
-                   constructedFrom: constructedFrom)
+        internal ConstructedMethodSymbol(
+            MethodSymbol constructedFrom,
+            ImmutableArray<TypeWithAnnotations> typeArgumentsWithAnnotations
+        )
+            : base(
+                containingSymbol: constructedFrom.ContainingType,
+                map: new TypeMap(
+                    constructedFrom.ContainingType,
+                    ((MethodSymbol)constructedFrom.OriginalDefinition).TypeParameters,
+                    typeArgumentsWithAnnotations
+                ),
+                originalDefinition: (MethodSymbol)constructedFrom.OriginalDefinition,
+                constructedFrom: constructedFrom
+            )
         {
             _typeArgumentsWithAnnotations = typeArgumentsWithAnnotations;
         }
 
         public override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotations
         {
-            get
-            {
-                return _typeArgumentsWithAnnotations;
-            }
+            get { return _typeArgumentsWithAnnotations; }
         }
     }
 }

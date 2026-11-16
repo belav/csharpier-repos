@@ -44,6 +44,7 @@ namespace System.Xml.Schema
         {
             _moreAttributes = moreAttributes;
         }
+
         internal override void AddAnnotation(XmlSchemaAnnotation annotation)
         {
             _annotation = annotation;

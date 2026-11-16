@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -15,13 +16,9 @@ namespace Test
 
     // In the original program ApplicationException was used, but for the
     // the purposes of this test any exception other than the one thrown works.
-    class OtherException : Exception
-    {
-    }
+    class OtherException : Exception { }
 
-    public class BB
-    {
-    }
+    public class BB { }
 
     public struct AA
     {
@@ -55,7 +52,7 @@ namespace Test
                         BB[] local13 = (new BB[22]);
                         sbyte local14 = App.m_sbFwd3;
                         ulong[] local15 = App.m_aulFwd7;
-                        for (long[] b244656 = new long[] { local4 }; App.m_bFwd2;)
+                        for (long[] b244656 = new long[] { local4 }; App.m_bFwd2; )
                         {
                             int[] local16 = (new int[30]);
                             TestEnum local17 = new TestEnum();
@@ -111,9 +108,7 @@ namespace Test
                     double local13 = (0.0);
                     throw new NullReferenceException();
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             }
             return 72u;
         }

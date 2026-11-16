@@ -4,18 +4,16 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.ServiceModel;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Runtime.Serialization;
-    using System.ServiceModel.Diagnostics;
     using System.Diagnostics;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Diagnostics;
 
     public abstract class ChannelManagerBase : CommunicationObject, IDefaultCommunicationTimeouts
     {
-        protected ChannelManagerBase()
-        {
-        }
+        protected ChannelManagerBase() { }
 
         protected abstract TimeSpan DefaultReceiveTimeout { get; }
         protected abstract TimeSpan DefaultSendTimeout { get; }
@@ -52,7 +50,10 @@ namespace System.ServiceModel.Channels
 
         internal Exception CreateChannelTypeNotSupportedException(Type type)
         {
-            return new ArgumentException(SR.GetString(SR.ChannelTypeNotSupported, type), "TChannel");
+            return new ArgumentException(
+                SR.GetString(SR.ChannelTypeNotSupported, type),
+                "TChannel"
+            );
         }
     }
 }

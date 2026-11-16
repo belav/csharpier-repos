@@ -12,13 +12,22 @@ namespace System.IdentityModel.Tokens
 
     public abstract class SamlStatement
     {
-        public abstract IAuthorizationPolicy CreatePolicy(ClaimSet issuer, SamlSecurityTokenAuthenticator samlAuthenticator);
-        public abstract bool IsReadOnly
-        {
-            get;
-        }
+        public abstract IAuthorizationPolicy CreatePolicy(
+            ClaimSet issuer,
+            SamlSecurityTokenAuthenticator samlAuthenticator
+        );
+        public abstract bool IsReadOnly { get; }
         public abstract void MakeReadOnly();
-        public abstract void ReadXml(XmlDictionaryReader reader, SamlSerializer samlSerializer, SecurityTokenSerializer keyInfoSerializer, SecurityTokenResolver outOfBandTokenResolver);
-        public abstract void WriteXml(XmlDictionaryWriter writer, SamlSerializer samlSerializer, SecurityTokenSerializer keyInfoSerializer);
+        public abstract void ReadXml(
+            XmlDictionaryReader reader,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver
+        );
+        public abstract void WriteXml(
+            XmlDictionaryWriter writer,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer
+        );
     }
 }

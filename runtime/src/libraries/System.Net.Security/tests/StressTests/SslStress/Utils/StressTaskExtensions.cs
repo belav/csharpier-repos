@@ -11,7 +11,6 @@ namespace SslStress.Utils
 {
     public static class StressTaskExtensions
     {
-
         /// <summary>
         /// Starts and awaits a collection of cancellable tasks.
         /// Will surface the first exception that has occurred (instead of AggregateException)
@@ -20,7 +19,10 @@ namespace SslStress.Utils
         /// <param name="token"></param>
         /// <param name="tasks"></param>
         /// <returns></returns>
-        public static async Task WhenAllThrowOnFirstException(CancellationToken token, params Func<CancellationToken, Task>[] tasks)
+        public static async Task WhenAllThrowOnFirstException(
+            CancellationToken token,
+            params Func<CancellationToken, Task>[] tasks
+        )
         {
             using var cts = CancellationTokenSource.CreateLinkedTokenSource(token);
             Exception? firstException = null;

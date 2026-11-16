@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,105 +29,174 @@
 
 #if SECURITY_DEP
 
-namespace System.Security.Cryptography.X509Certificates {
+namespace System.Security.Cryptography.X509Certificates
+{
+    public class X509ChainElement
+    {
+        private X509Certificate2 certificate;
+        private X509ChainStatus[] status;
+        private string info;
+        private X509ChainStatusFlags compressed_status_flags;
 
-	public class X509ChainElement {
+        // constructors
 
-		private X509Certificate2 certificate;
-		private X509ChainStatus[] status;
-		private string info;
-		private X509ChainStatusFlags compressed_status_flags;
+        // only accessible from X509Chain.ChainElements
+        internal X509ChainElement(X509Certificate2 certificate)
+        {
+            this.certificate = certificate;
+            // so far String.Empty is the only thing I've seen.
+            // The interesting stuff is inside X509ChainStatus.Information
+            info = String.Empty;
+        }
 
-		// constructors
+        // properties
 
-		// only accessible from X509Chain.ChainElements
-		internal X509ChainElement (X509Certificate2 certificate)
-		{
-			this.certificate = certificate;
-			// so far String.Empty is the only thing I've seen. 
-			// The interesting stuff is inside X509ChainStatus.Information
-			info = String.Empty;
-		}
+        public X509Certificate2 Certificate
+        {
+            get { return certificate; }
+        }
 
-		// properties
+        public X509ChainStatus[] ChainElementStatus
+        {
+            get { return status; }
+        }
 
-		public X509Certificate2 Certificate {
-			get { return certificate; }
-		}
+        public string Information
+        {
+            get { return info; }
+        }
 
-		public X509ChainStatus[] ChainElementStatus {
-			get { return status; }
-		}
+        // private stuff
 
-		public string Information {
-			get { return info; }
-		}
+        internal X509ChainStatusFlags StatusFlags
+        {
+            get { return compressed_status_flags; }
+            set { compressed_status_flags = value; }
+        }
 
-		// private stuff
+        private int Count(X509ChainStatusFlags flags)
+        {
+            int size = 0;
+            int n = 0;
+            int f = (int)flags;
+            int m = 0x1;
+            while (n++ < 32)
+            {
+                if ((f & m) == m)
+                    size++;
+                m <<= 1;
+            }
+            return size;
+        }
 
-		internal X509ChainStatusFlags StatusFlags {
-			get { return compressed_status_flags; }
-			set { compressed_status_flags = value; }
-		}
+        private void Set(
+            X509ChainStatus[] status,
+            ref int position,
+            X509ChainStatusFlags flags,
+            X509ChainStatusFlags mask
+        )
+        {
+            if ((flags & mask) != 0)
+            {
+                status[position].Status = mask;
+                status[position].StatusInformation = X509ChainStatus.GetInformation(mask);
+                position++;
+            }
+        }
 
-		private int Count (X509ChainStatusFlags flags)
-		{
-			int size = 0;
-			int n = 0;
-			int f = (int) flags;
-			int m = 0x1;
-			while (n++ < 32) {
-				if ((f & m) == m)
-					size++;
-				m <<= 1;
-			}
-			return size;
-		}
+        internal void UncompressFlags()
+        {
+            if (compressed_status_flags == X509ChainStatusFlags.NoError)
+            {
+                status = new X509ChainStatus[0];
+            }
+            else
+            {
+                int size = Count(compressed_status_flags);
+                status = new X509ChainStatus[size];
 
-		private void Set (X509ChainStatus[] status, ref int position, X509ChainStatusFlags flags, X509ChainStatusFlags mask)
-		{
-			if ((flags & mask) != 0) {
-				status [position].Status = mask;
-				status [position].StatusInformation = X509ChainStatus.GetInformation (mask);
-				position++;
-			}
-		}
-
-		internal void UncompressFlags ()
-		{
-			if (compressed_status_flags == X509ChainStatusFlags.NoError) {
-				status = new X509ChainStatus [0];
-			} else {
-				int size = Count (compressed_status_flags);
-				status = new X509ChainStatus [size];
-
-				int n = 0;
-				// process every possible error
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.UntrustedRoot);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.NotTimeValid);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.NotTimeNested);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.Revoked);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.NotSignatureValid);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.NotValidForUsage);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.RevocationStatusUnknown);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.Cyclic);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.InvalidExtension);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.InvalidPolicyConstraints);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.InvalidBasicConstraints);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.InvalidNameConstraints);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.HasNotSupportedNameConstraint);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.HasNotDefinedNameConstraint);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.HasNotPermittedNameConstraint);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.HasExcludedNameConstraint);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.PartialChain);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.CtlNotTimeValid);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.CtlNotSignatureValid);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.CtlNotValidForUsage);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.OfflineRevocation);
-				Set (status, ref n, compressed_status_flags, X509ChainStatusFlags.NoIssuanceChainPolicy);
-			}
-		}
-	}
+                int n = 0;
+                // process every possible error
+                Set(status, ref n, compressed_status_flags, X509ChainStatusFlags.UntrustedRoot);
+                Set(status, ref n, compressed_status_flags, X509ChainStatusFlags.NotTimeValid);
+                Set(status, ref n, compressed_status_flags, X509ChainStatusFlags.NotTimeNested);
+                Set(status, ref n, compressed_status_flags, X509ChainStatusFlags.Revoked);
+                Set(status, ref n, compressed_status_flags, X509ChainStatusFlags.NotSignatureValid);
+                Set(status, ref n, compressed_status_flags, X509ChainStatusFlags.NotValidForUsage);
+                Set(
+                    status,
+                    ref n,
+                    compressed_status_flags,
+                    X509ChainStatusFlags.RevocationStatusUnknown
+                );
+                Set(status, ref n, compressed_status_flags, X509ChainStatusFlags.Cyclic);
+                Set(status, ref n, compressed_status_flags, X509ChainStatusFlags.InvalidExtension);
+                Set(
+                    status,
+                    ref n,
+                    compressed_status_flags,
+                    X509ChainStatusFlags.InvalidPolicyConstraints
+                );
+                Set(
+                    status,
+                    ref n,
+                    compressed_status_flags,
+                    X509ChainStatusFlags.InvalidBasicConstraints
+                );
+                Set(
+                    status,
+                    ref n,
+                    compressed_status_flags,
+                    X509ChainStatusFlags.InvalidNameConstraints
+                );
+                Set(
+                    status,
+                    ref n,
+                    compressed_status_flags,
+                    X509ChainStatusFlags.HasNotSupportedNameConstraint
+                );
+                Set(
+                    status,
+                    ref n,
+                    compressed_status_flags,
+                    X509ChainStatusFlags.HasNotDefinedNameConstraint
+                );
+                Set(
+                    status,
+                    ref n,
+                    compressed_status_flags,
+                    X509ChainStatusFlags.HasNotPermittedNameConstraint
+                );
+                Set(
+                    status,
+                    ref n,
+                    compressed_status_flags,
+                    X509ChainStatusFlags.HasExcludedNameConstraint
+                );
+                Set(status, ref n, compressed_status_flags, X509ChainStatusFlags.PartialChain);
+                Set(status, ref n, compressed_status_flags, X509ChainStatusFlags.CtlNotTimeValid);
+                Set(
+                    status,
+                    ref n,
+                    compressed_status_flags,
+                    X509ChainStatusFlags.CtlNotSignatureValid
+                );
+                Set(
+                    status,
+                    ref n,
+                    compressed_status_flags,
+                    X509ChainStatusFlags.CtlNotValidForUsage
+                );
+                Set(status, ref n, compressed_status_flags, X509ChainStatusFlags.OfflineRevocation);
+                Set(
+                    status,
+                    ref n,
+                    compressed_status_flags,
+                    X509ChainStatusFlags.NoIssuanceChainPolicy
+                );
+            }
+        }
+    }
 }
 
 #endif

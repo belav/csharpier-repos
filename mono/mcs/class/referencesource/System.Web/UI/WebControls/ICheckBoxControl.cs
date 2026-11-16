@@ -3,13 +3,13 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     /// <devdoc>
     ///    <para>Represents a control used to render a check box that can be changed by the browser user.</para>
     /// </devdoc>
-    public interface ICheckBoxControl {
-
+    public interface ICheckBoxControl
+    {
         /// <devdoc>
         ///     The checked state of the control.
         /// </devdoc>

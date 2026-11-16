@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Security.AntiXss {
+namespace System.Web.Security.AntiXss
+{
     using System;
     using System.Text;
     using System.Threading;
@@ -12,7 +13,8 @@ namespace System.Web.Security.AntiXss {
     /// <summary>
     /// Provides HTML encoding methods.
     /// </summary>
-    internal static class UnicodeCharacterEncoder {
+    internal static class UnicodeCharacterEncoder
+    {
         /// <summary>
         /// A lock object to use when performing safe listing.
         /// </summary>
@@ -36,7 +38,8 @@ namespace System.Web.Security.AntiXss {
         /// <summary>
         /// The current lower middle code chart settings.
         /// </summary>
-        private static LowerMidCodeCharts currentLowerMidCodeChartSettings = LowerMidCodeCharts.None;
+        private static LowerMidCodeCharts currentLowerMidCodeChartSettings =
+            LowerMidCodeCharts.None;
 
         /// <summary>
         /// The current middle code chart settings.
@@ -46,7 +49,8 @@ namespace System.Web.Security.AntiXss {
         /// <summary>
         /// The current upper middle code chart settings.
         /// </summary>
-        private static UpperMidCodeCharts currentUpperMidCodeChartSettings = UpperMidCodeCharts.None;
+        private static UpperMidCodeCharts currentUpperMidCodeChartSettings =
+            UpperMidCodeCharts.None;
 
         /// <summary>
         /// The current upper code chart settings.
@@ -61,7 +65,9 @@ namespace System.Web.Security.AntiXss {
         /// <summary>
         /// The values to output for HTML named entities.
         /// </summary>
-        private static Lazy<char[][]> namedEntitiesLazy = new Lazy<char[][]>(InitialiseNamedEntityList);
+        private static Lazy<char[][]> namedEntitiesLazy = new Lazy<char[][]>(
+            InitialiseNamedEntityList
+        );
 
         /// <summary>
         /// Provides method specific encoding of characters.
@@ -85,18 +91,25 @@ namespace System.Web.Security.AntiXss {
             LowerMidCodeCharts lowerMidCodeCharts,
             MidCodeCharts midCodeCharts,
             UpperMidCodeCharts upperMidCodeCharts,
-            UpperCodeCharts upperCodeCharts) {
-            if (lowerCodeCharts == currentLowerCodeChartSettings &&
-                lowerMidCodeCharts == currentLowerMidCodeChartSettings &&
-                midCodeCharts == currentMidCodeChartSettings &&
-                upperMidCodeCharts == currentUpperMidCodeChartSettings &&
-                upperCodeCharts == currentUpperCodeChartSettings) {
+            UpperCodeCharts upperCodeCharts
+        )
+        {
+            if (
+                lowerCodeCharts == currentLowerCodeChartSettings
+                && lowerMidCodeCharts == currentLowerMidCodeChartSettings
+                && midCodeCharts == currentMidCodeChartSettings
+                && upperMidCodeCharts == currentUpperMidCodeChartSettings
+                && upperCodeCharts == currentUpperCodeChartSettings
+            )
+            {
                 return;
             }
 
             SyncLock.EnterWriteLock();
-            try {
-                if (characterValues == null) {
+            try
+            {
+                if (characterValues == null)
+                {
                     characterValues = SafeList.Generate(65536, SafeList.HashThenValueGenerator);
                 }
 
@@ -106,7 +119,8 @@ namespace System.Web.Security.AntiXss {
                     lowerMidCodeCharts,
                     midCodeCharts,
                     upperMidCodeCharts,
-                    upperCodeCharts);
+                    upperCodeCharts
+                );
 
                 ApplyHtmlSpecificValues();
 
@@ -116,7 +130,8 @@ namespace System.Web.Security.AntiXss {
                 currentUpperMidCodeChartSettings = upperMidCodeCharts;
                 currentUpperCodeChartSettings = upperCodeCharts;
             }
-            finally {
+            finally
+            {
                 SyncLock.ExitWriteLock();
             }
         }
@@ -128,7 +143,8 @@ namespace System.Web.Security.AntiXss {
         /// <returns>
         /// Encoded string for use in XML.
         /// </returns>
-        internal static string XmlEncode(string input) {
+        internal static string XmlEncode(string input)
+        {
             return HtmlEncode(input, false, XmlTweak);
         }
 
@@ -139,7 +155,8 @@ namespace System.Web.Security.AntiXss {
         /// <returns>
         /// Encoded string for use in XML.
         /// </returns>
-        internal static string XmlAttributeEncode(string input) {
+        internal static string XmlAttributeEncode(string input)
+        {
             return HtmlEncode(input, false, XmlAttributeTweak);
         }
 
@@ -150,7 +167,8 @@ namespace System.Web.Security.AntiXss {
         /// <returns>
         /// Encoded string for use in HTML attributes.
         /// </returns>
-        internal static string HtmlAttributeEncode(string input) {
+        internal static string HtmlAttributeEncode(string input)
+        {
             return HtmlEncode(input, false, HtmlAttributeTweak);
         }
 
@@ -162,7 +180,8 @@ namespace System.Web.Security.AntiXss {
         /// <returns>
         /// Encoded string for use in HTML.
         /// </returns>
-        internal static string HtmlEncode(string input, bool useNamedEntities) {
+        internal static string HtmlEncode(string input, bool useNamedEntities)
+        {
             return HtmlEncode(input, useNamedEntities, null);
         }
 
@@ -172,8 +191,10 @@ namespace System.Web.Security.AntiXss {
         /// <param name="input">The character to potentially encode.</param>
         /// <param name="output">The encoded character, if any.</param>
         /// <returns>True if encoding took place, otherwise false.</returns>
-        private static bool HtmlAttributeTweak(char input, out char[] output) {
-            if (input == ' ') {
+        private static bool HtmlAttributeTweak(char input, out char[] output)
+        {
+            if (input == ' ')
+            {
                 output = UnicodeSpace;
                 return true;
             }
@@ -188,8 +209,10 @@ namespace System.Web.Security.AntiXss {
         /// <param name="input">The character to potentially encode.</param>
         /// <param name="output">The encoded character, if any.</param>
         /// <returns>True if encoding took place, otherwise false.</returns>
-        private static bool XmlTweak(char input, out char[] output) {
-            if (input == '\'') {
+        private static bool XmlTweak(char input, out char[] output)
+        {
+            if (input == '\'')
+            {
                 output = XmlApostrophe;
                 return true;
             }
@@ -204,13 +227,16 @@ namespace System.Web.Security.AntiXss {
         /// <param name="input">The character to potentially encode.</param>
         /// <param name="output">The encoded character, if any.</param>
         /// <returns>True if encoding took place, otherwise false.</returns>
-        private static bool XmlAttributeTweak(char input, out char[] output) {
-            if (input == '\'') {
+        private static bool XmlAttributeTweak(char input, out char[] output)
+        {
+            if (input == '\'')
+            {
                 output = XmlApostrophe;
                 return true;
             }
 
-            if (input == ' ') {
+            if (input == ' ')
+            {
                 output = UnicodeSpace;
                 return true;
             }
@@ -228,34 +254,49 @@ namespace System.Web.Security.AntiXss {
         /// <returns>
         /// Encoded string for use in HTML.
         /// </returns>
-        private static string HtmlEncode(string input, bool useNamedEntities, MethodSpecificEncoder encoderTweak) {
-            if (string.IsNullOrEmpty(input)) {
+        private static string HtmlEncode(
+            string input,
+            bool useNamedEntities,
+            MethodSpecificEncoder encoderTweak
+        )
+        {
+            if (string.IsNullOrEmpty(input))
+            {
                 return input;
             }
 
-            if (characterValues == null) {
+            if (characterValues == null)
+            {
                 InitialiseSafeList();
             }
 
             char[][] namedEntities = null;
-            if (useNamedEntities) {
+            if (useNamedEntities)
+            {
                 namedEntities = namedEntitiesLazy.Value;
             }
 
             // Setup a new StringBuilder for output.
             // Worse case scenario - the longest entity name, thetasym is 10 characters, including the & and ;.
-            StringBuilder builder = EncoderUtil.GetOutputStringBuilder(input.Length, 10 /* worstCaseOutputCharsPerInputChar */);
+            StringBuilder builder = EncoderUtil.GetOutputStringBuilder(
+                input.Length,
+                10 /* worstCaseOutputCharsPerInputChar */
+            );
 
             SyncLock.EnterReadLock();
-            try {
+            try
+            {
                 Utf16StringReader stringReader = new Utf16StringReader(input);
-                while (true) {
+                while (true)
+                {
                     int currentCodePoint = stringReader.ReadNextScalarValue();
-                    if (currentCodePoint < 0) {
+                    if (currentCodePoint < 0)
+                    {
                         break; // EOF
                     }
 
-                    if (currentCodePoint > Char.MaxValue) {
+                    if (currentCodePoint > Char.MaxValue)
+                    {
                         // We don't have a pre-generated mapping of characters beyond the Basic Multilingual
                         // Plane (BMP), so we need to generate these encodings on-the-fly. We should encode
                         // the code point rather than the surrogate code units that make up this code point.
@@ -266,35 +307,44 @@ namespace System.Web.Security.AntiXss {
                         builder.Append(encodedCharacter);
                         builder.Append(';');
                     }
-                    else {
+                    else
+                    {
                         // If we reached this point, the code point is within the BMP.
                         char currentCharacter = (char)currentCodePoint;
                         char[] tweekedValue;
 
-                        if (encoderTweak != null && encoderTweak(currentCharacter, out tweekedValue)) {
+                        if (
+                            encoderTweak != null
+                            && encoderTweak(currentCharacter, out tweekedValue)
+                        )
+                        {
                             builder.Append(tweekedValue);
                         }
-                        else if (useNamedEntities && namedEntities[currentCodePoint] != null) {
+                        else if (useNamedEntities && namedEntities[currentCodePoint] != null)
+                        {
                             char[] encodedCharacter = namedEntities[currentCodePoint];
                             builder.Append('&');
                             builder.Append(encodedCharacter);
                             builder.Append(';');
                         }
-                        else if (characterValues[currentCodePoint] != null) {
+                        else if (characterValues[currentCodePoint] != null)
+                        {
                             // character needs to be encoded
                             char[] encodedCharacter = characterValues[currentCodePoint];
                             builder.Append('&');
                             builder.Append(encodedCharacter);
                             builder.Append(';');
                         }
-                        else {
+                        else
+                        {
                             // character does not need encoding
                             builder.Append(currentCharacter);
                         }
                     }
                 }
             }
-            finally {
+            finally
+            {
                 SyncLock.ExitReadLock();
             }
 
@@ -304,10 +354,13 @@ namespace System.Web.Security.AntiXss {
         /// <summary>
         /// Initializes the HTML safe list.
         /// </summary>
-        private static void InitialiseSafeList() {
+        private static void InitialiseSafeList()
+        {
             SyncLock.EnterWriteLock();
-            try {
-                if (characterValues == null) {
+            try
+            {
+                if (characterValues == null)
+                {
                     characterValues = SafeList.Generate(0xFFFF, SafeList.HashThenValueGenerator);
                     SafeList.PunchUnicodeThrough(
                         ref characterValues,
@@ -315,11 +368,13 @@ namespace System.Web.Security.AntiXss {
                         LowerMidCodeCharts.None,
                         MidCodeCharts.None,
                         UpperMidCodeCharts.None,
-                        UpperCodeCharts.None);
+                        UpperCodeCharts.None
+                    );
                     ApplyHtmlSpecificValues();
                 }
             }
-            finally {
+            finally
+            {
                 SyncLock.ExitWriteLock();
             }
         }
@@ -334,7 +389,8 @@ namespace System.Web.Security.AntiXss {
         /// characters that are meaningful inside HTML attributes, like the single quote. Encoding spaces
         /// isn't mandatory since it's expected that users will surround such variables with quotes.
         /// </remarks>
-        private static void ApplyHtmlSpecificValues() {
+        private static void ApplyHtmlSpecificValues()
+        {
             characterValues['<'] = "lt".ToCharArray();
             characterValues['>'] = "gt".ToCharArray();
             characterValues['&'] = "amp".ToCharArray();
@@ -348,8 +404,10 @@ namespace System.Web.Security.AntiXss {
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Maintainability",
             "CA1505:AvoidUnmaintainableCode",
-            Justification = "Splitting or initialising via lookups has too large a performance increase.")]
-        private static char[][] InitialiseNamedEntityList() {
+            Justification = "Splitting or initialising via lookups has too large a performance increase."
+        )]
+        private static char[][] InitialiseNamedEntityList()
+        {
             char[][] namedEntities = new char[65536][];
             namedEntities[160] = "nbsp".ToCharArray();
             namedEntities[161] = "iexcl".ToCharArray();

@@ -244,24 +244,21 @@ public class Program
         // commented out from here to turn them off, or additional ones can be added.
         var clientOperations = new (string, Func<ClientContext, Task>)[]
         {
-            (
-                "GET",
-                async ctx =>
-                {
-                    Version httpVersion = ctx.GetRandomVersion(httpVersions);
-                    using (
-                        var req = new HttpRequestMessage(HttpMethod.Get, serverUri)
-                        {
-                            Version = httpVersion,
-                        }
-                    )
-                    using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
+            ("GET", async ctx =>
+            {
+                Version httpVersion = ctx.GetRandomVersion(httpVersions);
+                using (
+                    var req = new HttpRequestMessage(HttpMethod.Get, serverUri)
                     {
-                        ValidateResponse(m, httpVersion);
-                        ValidateContent(contentSource, await m.Content.ReadAsStringAsync());
+                        Version = httpVersion,
                     }
+                )
+                using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
+                {
+                    ValidateResponse(m, httpVersion);
+                    ValidateContent(contentSource, await m.Content.ReadAsStringAsync());
                 }
-            ),
+            }),
             // TODO re-enable after HttpClient fixes. https://github.com/dotnet/corefx/issues/39461
             //("GET Partial",
             //async ctx =>
@@ -279,93 +276,130 @@ public class Program
             //    }
             //}),
 
-            (
-                "GET Headers",
-                async ctx =>
-                {
-                    Version httpVersion = ctx.GetRandomVersion(httpVersions);
-                    using (
-                        var req = new HttpRequestMessage(HttpMethod.Get, serverUri + "/headers")
-                        {
-                            Version = httpVersion,
-                        }
-                    )
-                    using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
+            ("GET Headers", async ctx =>
+            {
+                Version httpVersion = ctx.GetRandomVersion(httpVersions);
+                using (
+                    var req = new HttpRequestMessage(HttpMethod.Get, serverUri + "/headers")
                     {
-                        ValidateResponse(m, httpVersion);
-                        ValidateContent(contentSource, await m.Content.ReadAsStringAsync());
+                        Version = httpVersion,
                     }
-                }
-            ),
-            (
-                "GET Cancellation",
-                async ctx =>
+                )
+                using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
                 {
-                    Version httpVersion = ctx.GetRandomVersion(httpVersions);
-                    using (
-                        var req = new HttpRequestMessage(HttpMethod.Get, serverUri)
-                        {
-                            Version = httpVersion,
-                        }
-                    )
-                    {
-                        var cts = new CancellationTokenSource();
-                        Task<HttpResponseMessage> t = ctx.HttpClient.SendAsync(
-                            req,
-                            HttpCompletionOption.ResponseHeadersRead,
-                            cts.Token
-                        );
-                        await Task.Delay(1);
-                        cts.Cancel();
-                        try
-                        {
-                            using (HttpResponseMessage m = await t)
-                            {
-                                ValidateResponse(m, httpVersion);
-                                ValidateContent(contentSource, await m.Content.ReadAsStringAsync());
-                            }
-                        }
-                        catch (OperationCanceledException) { }
-                    }
+                    ValidateResponse(m, httpVersion);
+                    ValidateContent(contentSource, await m.Content.ReadAsStringAsync());
                 }
-            ),
+            }),
+            ("GET Cancellation", async ctx =>
+            {
+                Version httpVersion = ctx.GetRandomVersion(httpVersions);
+                using (
+                    var req = new HttpRequestMessage(HttpMethod.Get, serverUri)
+                    {
+                        Version = httpVersion,
+                    }
+                )
+                {
+                    var cts = new CancellationTokenSource();
+                    Task<HttpResponseMessage> t = ctx.HttpClient.SendAsync(
+                        req,
+                        HttpCompletionOption.ResponseHeadersRead,
+                        cts.Token
+                    );
+                    await Task.Delay(1);
+                    cts.Cancel();
+                    try
+                    {
+                        using (HttpResponseMessage m = await t)
+                        {
+                            ValidateResponse(m, httpVersion);
+                            ValidateContent(contentSource, await m.Content.ReadAsStringAsync());
+                        }
+                    }
+                    catch (OperationCanceledException) { }
+                }
+            }),
             ("GET Abort", TestAbort("/abort")),
             ("GET Parallel Abort", TestAbort("/parallel-abort")),
-            (
-                "POST",
-                async ctx =>
-                {
-                    string content = ctx.GetRandomSubstring(contentSource);
-                    Version httpVersion = ctx.GetRandomVersion(httpVersions);
+            ("POST", async ctx =>
+            {
+                string content = ctx.GetRandomSubstring(contentSource);
+                Version httpVersion = ctx.GetRandomVersion(httpVersions);
 
-                    using (
-                        var req = new HttpRequestMessage(HttpMethod.Post, serverUri)
-                        {
-                            Version = httpVersion,
-                            Content = new StringDuplexContent(content),
-                        }
-                    )
-                    using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
+                using (
+                    var req = new HttpRequestMessage(HttpMethod.Post, serverUri)
                     {
-                        ValidateResponse(m, httpVersion);
-                        ValidateContent(content, await m.Content.ReadAsStringAsync());
+                        Version = httpVersion,
+                        Content = new StringDuplexContent(content),
                     }
-                }
-            ),
-            (
-                "POST Duplex",
-                async ctx =>
+                )
+                using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
                 {
-                    string content = ctx.GetRandomSubstring(contentSource);
-                    Version httpVersion = ctx.GetRandomVersion(httpVersions);
+                    ValidateResponse(m, httpVersion);
+                    ValidateContent(content, await m.Content.ReadAsStringAsync());
+                }
+            }),
+            ("POST Duplex", async ctx =>
+            {
+                string content = ctx.GetRandomSubstring(contentSource);
+                Version httpVersion = ctx.GetRandomVersion(httpVersions);
 
-                    using (
-                        var req = new HttpRequestMessage(HttpMethod.Post, serverUri + "/duplex")
-                        {
-                            Version = httpVersion,
-                            Content = new StringDuplexContent(content),
-                        }
+                using (
+                    var req = new HttpRequestMessage(HttpMethod.Post, serverUri + "/duplex")
+                    {
+                        Version = httpVersion,
+                        Content = new StringDuplexContent(content),
+                    }
+                )
+                using (
+                    HttpResponseMessage m = await ctx.HttpClient.SendAsync(
+                        req,
+                        HttpCompletionOption.ResponseHeadersRead
                     )
+                )
+                {
+                    ValidateResponse(m, httpVersion);
+                    ValidateContent(content, await m.Content.ReadAsStringAsync());
+                }
+            }),
+            ("POST Duplex Slow", async ctx =>
+            {
+                string content = ctx.GetRandomSubstring(contentSource);
+                Version httpVersion = ctx.GetRandomVersion(httpVersions);
+
+                using (
+                    var req = new HttpRequestMessage(HttpMethod.Post, serverUri + "/duplexSlow")
+                    {
+                        Version = httpVersion,
+                        Content = new ByteAtATimeNoLengthContent(Encoding.ASCII.GetBytes(content)),
+                    }
+                )
+                using (
+                    HttpResponseMessage m = await ctx.HttpClient.SendAsync(
+                        req,
+                        HttpCompletionOption.ResponseHeadersRead
+                    )
+                )
+                {
+                    ValidateResponse(m, httpVersion);
+                    ValidateContent(content, await m.Content.ReadAsStringAsync());
+                }
+            }),
+            ("POST ExpectContinue", async ctx =>
+            {
+                string content = ctx.GetRandomSubstring(contentSource);
+                Version httpVersion = ctx.GetRandomVersion(httpVersions);
+
+                using (
+                    var req = new HttpRequestMessage(HttpMethod.Post, serverUri)
+                    {
+                        Version = httpVersion,
+                        Content = new StringContent(content),
+                    }
+                )
+                {
+                    req.Headers.ExpectContinue = true;
                     using (
                         HttpResponseMessage m = await ctx.HttpClient.SendAsync(
                             req,
@@ -377,153 +411,87 @@ public class Program
                         ValidateContent(content, await m.Content.ReadAsStringAsync());
                     }
                 }
-            ),
-            (
-                "POST Duplex Slow",
-                async ctx =>
-                {
-                    string content = ctx.GetRandomSubstring(contentSource);
-                    Version httpVersion = ctx.GetRandomVersion(httpVersions);
+            }),
+            ("POST Cancellation", async ctx =>
+            {
+                string content = ctx.GetRandomSubstring(contentSource);
+                Version httpVersion = ctx.GetRandomVersion(httpVersions);
 
-                    using (
-                        var req = new HttpRequestMessage(HttpMethod.Post, serverUri + "/duplexSlow")
-                        {
-                            Version = httpVersion,
-                            Content = new ByteAtATimeNoLengthContent(
-                                Encoding.ASCII.GetBytes(content)
-                            ),
-                        }
-                    )
-                    using (
-                        HttpResponseMessage m = await ctx.HttpClient.SendAsync(
-                            req,
-                            HttpCompletionOption.ResponseHeadersRead
-                        )
-                    )
+                using (
+                    var req = new HttpRequestMessage(HttpMethod.Post, serverUri)
                     {
-                        ValidateResponse(m, httpVersion);
-                        ValidateContent(content, await m.Content.ReadAsStringAsync());
+                        Version = httpVersion,
+                        Content = new StringContent(content),
                     }
-                }
-            ),
-            (
-                "POST ExpectContinue",
-                async ctx =>
+                )
                 {
-                    string content = ctx.GetRandomSubstring(contentSource);
-                    Version httpVersion = ctx.GetRandomVersion(httpVersions);
-
-                    using (
-                        var req = new HttpRequestMessage(HttpMethod.Post, serverUri)
-                        {
-                            Version = httpVersion,
-                            Content = new StringContent(content),
-                        }
-                    )
+                    var cts = new CancellationTokenSource();
+                    req.Content = new CancelableContent(cts.Token);
+                    Task<HttpResponseMessage> t = ctx.HttpClient.SendAsync(
+                        req,
+                        HttpCompletionOption.ResponseHeadersRead,
+                        cts.Token
+                    );
+                    await Task.Delay(1);
+                    cts.Cancel();
+                    try
                     {
-                        req.Headers.ExpectContinue = true;
-                        using (
-                            HttpResponseMessage m = await ctx.HttpClient.SendAsync(
-                                req,
-                                HttpCompletionOption.ResponseHeadersRead
-                            )
-                        )
+                        using (HttpResponseMessage m = await t)
                         {
                             ValidateResponse(m, httpVersion);
                             ValidateContent(content, await m.Content.ReadAsStringAsync());
                         }
                     }
+                    catch (OperationCanceledException) { }
                 }
-            ),
-            (
-                "POST Cancellation",
-                async ctx =>
-                {
-                    string content = ctx.GetRandomSubstring(contentSource);
-                    Version httpVersion = ctx.GetRandomVersion(httpVersions);
-
-                    using (
-                        var req = new HttpRequestMessage(HttpMethod.Post, serverUri)
-                        {
-                            Version = httpVersion,
-                            Content = new StringContent(content),
-                        }
-                    )
+            }),
+            ("HEAD", async ctx =>
+            {
+                Version httpVersion = ctx.GetRandomVersion(httpVersions);
+                using (
+                    var req = new HttpRequestMessage(HttpMethod.Head, serverUri)
                     {
-                        var cts = new CancellationTokenSource();
-                        req.Content = new CancelableContent(cts.Token);
-                        Task<HttpResponseMessage> t = ctx.HttpClient.SendAsync(
-                            req,
-                            HttpCompletionOption.ResponseHeadersRead,
-                            cts.Token
+                        Version = httpVersion,
+                    }
+                )
+                using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
+                {
+                    ValidateResponse(m, httpVersion);
+                    if (m.Content.Headers.ContentLength != maxContentLength)
+                    {
+                        throw new Exception(
+                            $"Expected {maxContentLength}, got {m.Content.Headers.ContentLength}"
                         );
-                        await Task.Delay(1);
-                        cts.Cancel();
-                        try
-                        {
-                            using (HttpResponseMessage m = await t)
-                            {
-                                ValidateResponse(m, httpVersion);
-                                ValidateContent(content, await m.Content.ReadAsStringAsync());
-                            }
-                        }
-                        catch (OperationCanceledException) { }
                     }
-                }
-            ),
-            (
-                "HEAD",
-                async ctx =>
-                {
-                    Version httpVersion = ctx.GetRandomVersion(httpVersions);
-                    using (
-                        var req = new HttpRequestMessage(HttpMethod.Head, serverUri)
-                        {
-                            Version = httpVersion,
-                        }
-                    )
-                    using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
+                    string r = await m.Content.ReadAsStringAsync();
+                    if (r.Length > 0)
                     {
-                        ValidateResponse(m, httpVersion);
-                        if (m.Content.Headers.ContentLength != maxContentLength)
-                        {
-                            throw new Exception(
-                                $"Expected {maxContentLength}, got {m.Content.Headers.ContentLength}"
-                            );
-                        }
-                        string r = await m.Content.ReadAsStringAsync();
-                        if (r.Length > 0)
-                        {
-                            throw new Exception($"Got unexpected response: {r}");
-                        }
+                        throw new Exception($"Got unexpected response: {r}");
                     }
                 }
-            ),
-            (
-                "PUT",
-                async ctx =>
-                {
-                    string content = ctx.GetRandomSubstring(contentSource);
-                    Version httpVersion = ctx.GetRandomVersion(httpVersions);
+            }),
+            ("PUT", async ctx =>
+            {
+                string content = ctx.GetRandomSubstring(contentSource);
+                Version httpVersion = ctx.GetRandomVersion(httpVersions);
 
-                    using (
-                        var req = new HttpRequestMessage(HttpMethod.Put, serverUri)
-                        {
-                            Version = httpVersion,
-                            Content = new StringContent(content),
-                        }
-                    )
-                    using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
+                using (
+                    var req = new HttpRequestMessage(HttpMethod.Put, serverUri)
                     {
-                        ValidateResponse(m, httpVersion);
-                        string r = await m.Content.ReadAsStringAsync();
-                        if (r != "")
-                        {
-                            throw new Exception($"Got unexpected response: {r}");
-                        }
+                        Version = httpVersion,
+                        Content = new StringContent(content),
+                    }
+                )
+                using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
+                {
+                    ValidateResponse(m, httpVersion);
+                    string r = await m.Content.ReadAsStringAsync();
+                    if (r != "")
+                    {
+                        throw new Exception($"Got unexpected response: {r}");
                     }
                 }
-            ),
+            }),
         };
 
         if (listOps)
@@ -579,53 +547,47 @@ public class Program
                 webHost
                     .UseKestrel(ko =>
                     {
-                        ko.ListenLocalhost(
-                            HttpsPort,
-                            listenOptions =>
+                        ko.ListenLocalhost(HttpsPort, listenOptions =>
+                        {
+                            using (RSA rsa = RSA.Create())
                             {
-                                using (RSA rsa = RSA.Create())
+                                var certReq = new CertificateRequest(
+                                    $"CN={LocalhostName}",
+                                    rsa,
+                                    HashAlgorithmName.SHA256,
+                                    RSASignaturePadding.Pkcs1
+                                );
+                                certReq.CertificateExtensions.Add(
+                                    new X509BasicConstraintsExtension(false, false, 0, false)
+                                );
+                                certReq.CertificateExtensions.Add(
+                                    new X509EnhancedKeyUsageExtension(
+                                        new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
+                                        false
+                                    )
+                                );
+                                certReq.CertificateExtensions.Add(
+                                    new X509KeyUsageExtension(
+                                        X509KeyUsageFlags.DigitalSignature,
+                                        false
+                                    )
+                                );
+                                X509Certificate2 cert = certReq.CreateSelfSigned(
+                                    DateTimeOffset.UtcNow.AddMonths(-1),
+                                    DateTimeOffset.UtcNow.AddMonths(1)
+                                );
+                                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                                 {
-                                    var certReq = new CertificateRequest(
-                                        $"CN={LocalhostName}",
-                                        rsa,
-                                        HashAlgorithmName.SHA256,
-                                        RSASignaturePadding.Pkcs1
-                                    );
-                                    certReq.CertificateExtensions.Add(
-                                        new X509BasicConstraintsExtension(false, false, 0, false)
-                                    );
-                                    certReq.CertificateExtensions.Add(
-                                        new X509EnhancedKeyUsageExtension(
-                                            new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
-                                            false
-                                        )
-                                    );
-                                    certReq.CertificateExtensions.Add(
-                                        new X509KeyUsageExtension(
-                                            X509KeyUsageFlags.DigitalSignature,
-                                            false
-                                        )
-                                    );
-                                    X509Certificate2 cert = certReq.CreateSelfSigned(
-                                        DateTimeOffset.UtcNow.AddMonths(-1),
-                                        DateTimeOffset.UtcNow.AddMonths(1)
-                                    );
-                                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                                    {
-                                        cert = new X509Certificate2(
-                                            cert.Export(X509ContentType.Pfx)
-                                        );
-                                    }
-                                    listenOptions.UseHttps(cert);
+                                    cert = new X509Certificate2(cert.Export(X509ContentType.Pfx));
                                 }
+                                listenOptions.UseHttps(cert);
                             }
-                        );
+                        });
                     })
                     // Output only warnings and errors from Kestrel
                     .ConfigureLogging(log =>
-                        log.AddFilter(
-                            "Microsoft.AspNetCore",
-                            level => aspnetLog ? level >= LogLevel.Error : false
+                        log.AddFilter("Microsoft.AspNetCore", level =>
+                            aspnetLog ? level >= LogLevel.Error : false
                         )
                     )
                     // Set up how each request should be handled by the server.
@@ -635,37 +597,42 @@ public class Program
                         app.UseRouting();
                         app.UseEndpoints(endpoints =>
                         {
-                            endpoints.MapGet(
-                                "/",
-                                async context =>
+                            endpoints.MapGet("/", async context =>
+                            {
+                                // Get requests just send back the requested content.
+                                await context.Response.WriteAsync(contentSource);
+                            });
+                            endpoints.MapGet("/slow", async context =>
+                            {
+                                // Sends back the content a character at a time.
+                                for (int i = 0; i < contentSource.Length; i++)
                                 {
-                                    // Get requests just send back the requested content.
-                                    await context.Response.WriteAsync(contentSource);
+                                    await context.Response.WriteAsync(contentSource[i].ToString());
+                                    await context.Response.Body.FlushAsync();
                                 }
-                            );
-                            endpoints.MapGet(
-                                "/slow",
-                                async context =>
+                            });
+                            endpoints.MapGet("/headers", async context =>
+                            {
+                                // Get request but with a bunch of extra headers
+                                for (int i = 0; i < 20; i++)
                                 {
-                                    // Sends back the content a character at a time.
-                                    for (int i = 0; i < contentSource.Length; i++)
-                                    {
-                                        await context.Response.WriteAsync(
-                                            contentSource[i].ToString()
-                                        );
-                                        await context.Response.Body.FlushAsync();
-                                    }
+                                    context.Response.Headers.Add(
+                                        "CustomHeader" + i,
+                                        new StringValues(
+                                            Enumerable
+                                                .Range(0, i)
+                                                .Select(id => "value" + id)
+                                                .ToArray()
+                                        )
+                                    );
                                 }
-                            );
-                            endpoints.MapGet(
-                                "/headers",
-                                async context =>
+                                await context.Response.WriteAsync(contentSource);
+                                if (context.Response.SupportsTrailers())
                                 {
-                                    // Get request but with a bunch of extra headers
-                                    for (int i = 0; i < 20; i++)
+                                    for (int i = 0; i < 10; i++)
                                     {
-                                        context.Response.Headers.Add(
-                                            "CustomHeader" + i,
+                                        context.Response.AppendTrailer(
+                                            "CustomTrailer" + i,
                                             new StringValues(
                                                 Enumerable
                                                     .Range(0, i)
@@ -674,97 +641,59 @@ public class Program
                                             )
                                         );
                                     }
-                                    await context.Response.WriteAsync(contentSource);
-                                    if (context.Response.SupportsTrailers())
-                                    {
-                                        for (int i = 0; i < 10; i++)
-                                        {
-                                            context.Response.AppendTrailer(
-                                                "CustomTrailer" + i,
-                                                new StringValues(
-                                                    Enumerable
-                                                        .Range(0, i)
-                                                        .Select(id => "value" + id)
-                                                        .ToArray()
-                                                )
-                                            );
-                                        }
-                                    }
                                 }
-                            );
-                            endpoints.MapGet(
-                                "/abort",
-                                async context =>
+                            });
+                            endpoints.MapGet("/abort", async context =>
+                            {
+                                // Server writes some content, then aborts the connection
+                                await context.Response.WriteAsync(
+                                    contentSource.Substring(0, contentSource.Length / 2)
+                                );
+                                context.Abort();
+                            });
+                            endpoints.MapGet("/parallel-abort", async context =>
+                            {
+                                // Server writes some content and aborts the connection in the background.
+                                var writeTask = context.Response.WriteAsync(
+                                    contentSource.Substring(0, contentSource.Length)
+                                );
+                                await Task.Yield();
+                                context.Abort();
+                                await writeTask;
+                            });
+                            endpoints.MapPost("/", async context =>
+                            {
+                                // Post echos back the requested content, first buffering it all server-side, then sending it all back.
+                                var s = new MemoryStream();
+                                await context.Request.Body.CopyToAsync(s);
+                                s.Position = 0;
+                                await s.CopyToAsync(context.Response.Body);
+                            });
+                            endpoints.MapPost("/duplex", async context =>
+                            {
+                                // Echos back the requested content in a full duplex manner.
+                                await context.Request.Body.CopyToAsync(context.Response.Body);
+                            });
+                            endpoints.MapPost("/duplexSlow", async context =>
+                            {
+                                // Echos back the requested content in a full duplex manner, but one byte at a time.
+                                var buffer = new byte[1];
+                                while ((await context.Request.Body.ReadAsync(buffer)) != 0)
                                 {
-                                    // Server writes some content, then aborts the connection
-                                    await context.Response.WriteAsync(
-                                        contentSource.Substring(0, contentSource.Length / 2)
-                                    );
-                                    context.Abort();
+                                    await context.Response.Body.WriteAsync(buffer);
                                 }
-                            );
-                            endpoints.MapGet(
-                                "/parallel-abort",
-                                async context =>
-                                {
-                                    // Server writes some content and aborts the connection in the background.
-                                    var writeTask = context.Response.WriteAsync(
-                                        contentSource.Substring(0, contentSource.Length)
-                                    );
-                                    await Task.Yield();
-                                    context.Abort();
-                                    await writeTask;
-                                }
-                            );
-                            endpoints.MapPost(
-                                "/",
-                                async context =>
-                                {
-                                    // Post echos back the requested content, first buffering it all server-side, then sending it all back.
-                                    var s = new MemoryStream();
-                                    await context.Request.Body.CopyToAsync(s);
-                                    s.Position = 0;
-                                    await s.CopyToAsync(context.Response.Body);
-                                }
-                            );
-                            endpoints.MapPost(
-                                "/duplex",
-                                async context =>
-                                {
-                                    // Echos back the requested content in a full duplex manner.
-                                    await context.Request.Body.CopyToAsync(context.Response.Body);
-                                }
-                            );
-                            endpoints.MapPost(
-                                "/duplexSlow",
-                                async context =>
-                                {
-                                    // Echos back the requested content in a full duplex manner, but one byte at a time.
-                                    var buffer = new byte[1];
-                                    while ((await context.Request.Body.ReadAsync(buffer)) != 0)
-                                    {
-                                        await context.Response.Body.WriteAsync(buffer);
-                                    }
-                                }
-                            );
-                            endpoints.MapMethods(
-                                "/",
-                                head,
-                                context =>
-                                {
-                                    // Just set the max content length on the response.
-                                    context.Response.Headers.ContentLength = maxContentLength;
-                                    return Task.CompletedTask;
-                                }
-                            );
-                            endpoints.MapPut(
-                                "/",
-                                async context =>
-                                {
-                                    // Read the full request but don't send back a response body.
-                                    await context.Request.Body.CopyToAsync(Stream.Null);
-                                }
-                            );
+                            });
+                            endpoints.MapMethods("/", head, context =>
+                            {
+                                // Just set the max content length on the response.
+                                context.Response.Headers.ContentLength = maxContentLength;
+                                return Task.CompletedTask;
+                            });
+                            endpoints.MapPut("/", async context =>
+                            {
+                                // Read the full request but don't send back a response body.
+                                await context.Request.Body.CopyToAsync(Stream.Null);
+                            });
                         });
                     });
             })

@@ -5,21 +5,16 @@ namespace System.Runtime.InteropServices.CustomMarshalers
 {
     internal sealed class TypeToTypeInfoMarshaler : ICustomMarshaler
     {
-        private static readonly TypeToTypeInfoMarshaler s_typeToTypeInfoMarshaler = new TypeToTypeInfoMarshaler();
+        private static readonly TypeToTypeInfoMarshaler s_typeToTypeInfoMarshaler =
+            new TypeToTypeInfoMarshaler();
 
         public static ICustomMarshaler GetInstance(string? cookie) => s_typeToTypeInfoMarshaler;
 
-        private TypeToTypeInfoMarshaler()
-        {
-        }
+        private TypeToTypeInfoMarshaler() { }
 
-        public void CleanUpManagedData(object ManagedObj)
-        {
-        }
+        public void CleanUpManagedData(object ManagedObj) { }
 
-        public void CleanUpNativeData(IntPtr pNativeData)
-        {
-        }
+        public void CleanUpNativeData(IntPtr pNativeData) { }
 
         public int GetNativeDataSize()
         {

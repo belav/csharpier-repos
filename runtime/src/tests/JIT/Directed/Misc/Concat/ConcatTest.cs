@@ -12,16 +12,16 @@ public class ConcatTest
     static string strD = "D";
     static string strE = "E";
 
-    static string strAB      = "AB";
-    static string strABC     = "ABC";
-    static string strABCD    = "ABCD";
-    static string strABCDE   = "ABCDE";
-    static string strABCDx2  = "ABCDABCD";
+    static string strAB = "AB";
+    static string strABC = "ABC";
+    static string strABCD = "ABCD";
+    static string strABCDE = "ABCDE";
+    static string strABCDx2 = "ABCDABCD";
 
     static int iReturn = 100;
 
     [Fact]
-    static public int TestEntryPoint()
+    public static int TestEntryPoint()
     {
         iReturn = 100;
         try
@@ -59,8 +59,9 @@ public class ConcatTest
     {
         if (result != expected)
         {
-            Console.WriteLine("FAILED: result was '" + result +
-                              "', expected was '" + expected + "'");
+            Console.WriteLine(
+                "FAILED: result was '" + result + "', expected was '" + expected + "'"
+            );
             iReturn++;
         }
     }

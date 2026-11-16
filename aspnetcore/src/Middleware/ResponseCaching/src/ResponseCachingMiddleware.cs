@@ -278,8 +278,7 @@ public class ResponseCachingMiddleware
             var varyQueryKeys = new StringValues(
                 context.HttpContext.Features.Get<IResponseCachingFeature>()?.VaryByQueryKeys
             );
-            context.CachedResponseValidFor =
-                context.ResponseSharedMaxAge
+            context.CachedResponseValidFor = context.ResponseSharedMaxAge
                 ?? context.ResponseMaxAge
                 ?? (context.ResponseExpires - context.ResponseTime!.Value)
                 ?? DefaultExpirationTimeSpan;

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,39 +32,39 @@ using Microsoft.Build.Construction;
 
 namespace Microsoft.Build.Execution
 {
-	public sealed class ProjectItemGroupTaskInstance : ProjectTargetInstanceChild
-	{
-		internal ProjectItemGroupTaskInstance (ProjectItemGroupElement xml)
-		{
-			condition = xml.Condition;
-			condition_location = xml.ConditionLocation;
-			//this.FullPath = fullPath;
-			location = xml.Location;
-			
-			Items = xml.Items.Select (item => new ProjectItemGroupTaskItemInstance (item)).ToArray ();
-		}
-		
-		readonly string condition;
-		readonly ElementLocation condition_location, location;
-		
-		public override string Condition {
-			get { return condition; }
-		}
+    public sealed class ProjectItemGroupTaskInstance : ProjectTargetInstanceChild
+    {
+        internal ProjectItemGroupTaskInstance(ProjectItemGroupElement xml)
+        {
+            condition = xml.Condition;
+            condition_location = xml.ConditionLocation;
+            //this.FullPath = fullPath;
+            location = xml.Location;
 
-		public
-		override ElementLocation ConditionLocation {
-			get { return condition_location; }
-		}
+            Items = xml.Items.Select(item => new ProjectItemGroupTaskItemInstance(item)).ToArray();
+        }
 
-		public
-		override ElementLocation Location {
-			get { return location; }
-		}
+        readonly string condition;
+        readonly ElementLocation condition_location,
+            location;
 
-		public
-		ElementLocation ExecuteTargetsLocation { get; private set; }
-		
-		public ICollection<ProjectItemGroupTaskItemInstance> Items { get; private set; }
-	}
+        public override string Condition
+        {
+            get { return condition; }
+        }
+
+        public override ElementLocation ConditionLocation
+        {
+            get { return condition_location; }
+        }
+
+        public override ElementLocation Location
+        {
+            get { return location; }
+        }
+
+        public ElementLocation ExecuteTargetsLocation { get; private set; }
+
+        public ICollection<ProjectItemGroupTaskItemInstance> Items { get; private set; }
+    }
 }
-

@@ -113,30 +113,26 @@ public class HubConnectionHandler<THub> : ConnectionHandler
         // We check to see if HubOptions<THub> are set because those take precedence over global hub options.
         // Then set the keepAlive and handshakeTimeout values to the defaults in HubOptionsSetup when they were explicitly set to null.
 
-        var supportedProtocols =
-            _hubOptions.SupportedProtocols ?? _globalHubOptions.SupportedProtocols;
+        var supportedProtocols = _hubOptions.SupportedProtocols
+            ?? _globalHubOptions.SupportedProtocols;
         if (supportedProtocols == null || supportedProtocols.Count == 0)
         {
             throw new InvalidOperationException("There are no supported protocols");
         }
 
-        var handshakeTimeout =
-            _hubOptions.HandshakeTimeout
+        var handshakeTimeout = _hubOptions.HandshakeTimeout
             ?? _globalHubOptions.HandshakeTimeout
             ?? HubOptionsSetup.DefaultHandshakeTimeout;
 
         var contextOptions = new HubConnectionContextOptions()
         {
-            KeepAliveInterval =
-                _hubOptions.KeepAliveInterval
+            KeepAliveInterval = _hubOptions.KeepAliveInterval
                 ?? _globalHubOptions.KeepAliveInterval
                 ?? HubOptionsSetup.DefaultKeepAliveInterval,
-            ClientTimeoutInterval =
-                _hubOptions.ClientTimeoutInterval
+            ClientTimeoutInterval = _hubOptions.ClientTimeoutInterval
                 ?? _globalHubOptions.ClientTimeoutInterval
                 ?? HubOptionsSetup.DefaultClientTimeoutInterval,
-            StreamBufferCapacity =
-                _hubOptions.StreamBufferCapacity
+            StreamBufferCapacity = _hubOptions.StreamBufferCapacity
                 ?? _globalHubOptions.StreamBufferCapacity
                 ?? HubOptionsSetup.DefaultStreamBufferCapacity,
             MaximumReceiveMessageSize = _maximumMessageSize,
@@ -153,8 +149,8 @@ public class HubConnectionHandler<THub> : ConnectionHandler
             _loggerFactory
         );
 
-        var resolvedSupportedProtocols =
-            (supportedProtocols as IReadOnlyList<string>) ?? supportedProtocols.ToList();
+        var resolvedSupportedProtocols = (supportedProtocols as IReadOnlyList<string>)
+            ?? supportedProtocols.ToList();
         if (
             !await connectionContext.HandshakeAsync(
                 handshakeTimeout,

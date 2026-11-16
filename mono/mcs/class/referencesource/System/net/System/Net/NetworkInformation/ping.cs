@@ -1,35 +1,45 @@
-
-namespace System.Net.NetworkInformation {
-
-    using System.Net;
-    using System.Net.Sockets;
+namespace System.Net.NetworkInformation
+{
     using System;
-    using System.Runtime.InteropServices;
-    using System.Threading;
-    using System.Threading.Tasks;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Runtime.InteropServices;
     using System.Security.Permissions;
+    using System.Threading;
+    using System.Threading.Tasks;
 
-    public delegate void PingCompletedEventHandler (object sender, PingCompletedEventArgs e);
+    public delegate void PingCompletedEventHandler(object sender, PingCompletedEventArgs e);
 
-
-    public class PingCompletedEventArgs: System.ComponentModel.AsyncCompletedEventArgs {
+    public class PingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
         PingReply reply;
 
-        internal PingCompletedEventArgs (PingReply reply, Exception error, bool cancelled, object userToken):base(error,cancelled,userToken) {
+        internal PingCompletedEventArgs(
+            PingReply reply,
+            Exception error,
+            bool cancelled,
+            object userToken
+        )
+            : base(error, cancelled, userToken)
+        {
             this.reply = reply;
         }
-        public PingReply Reply{get {return reply;}}
+
+        public PingReply Reply
+        {
+            get { return reply; }
+        }
     }
 
-    public class Ping:Component
+    public class Ping : Component
     {
-        const int MaxUdpPacket = 0xFFFF + 256; // Marshal.SizeOf(typeof(Icmp6EchoReply)) * 2 + ip header info;  
+        const int MaxUdpPacket = 0xFFFF + 256; // Marshal.SizeOf(typeof(Icmp6EchoReply)) * 2 + ip header info;
         const int MaxBufferSize = 65500; //artificial constraint due to win32 api limitations.
         const int DefaultTimeout = 5000; //5 seconds same as ping.exe
-        const int DefaultSendBufferSize = 32;  //same as ping.exe
-        
+        const int DefaultSendBufferSize = 32; //same as ping.exe
+
         byte[] defaultSendBuffer = null;
         bool ipv6 = false;
         bool cancelled = false;
@@ -41,8 +51,8 @@ namespace System.Net.NetworkInformation {
         private RegisteredWaitHandle registeredWait = null;
         SafeLocalFree requestBuffer = null;
         SafeLocalFree replyBuffer = null;
-        int sendSize = 0;  //needed to determine what reply size is for ipv6 in callback
-        
+        int sendSize = 0; //needed to determine what reply size is for ipv6 in callback
+
         SafeCloseIcmpHandle handlePingV4 = null;
         SafeCloseIcmpHandle handlePingV6 = null;
 
@@ -53,14 +63,17 @@ namespace System.Net.NetworkInformation {
 
         // For blocking in SendAsyncCancel()
         ManualResetEvent asyncFinished = null;
-        bool InAsyncCall {
-            get {
+        bool InAsyncCall
+        {
+            get
+            {
                 if (asyncFinished == null)
                     return false;
                 // Never blocks, just checks if a thread would block.
                 return !asyncFinished.WaitOne(0);
             }
-            set {
+            set
+            {
                 if (asyncFinished == null)
                     asyncFinished = new ManualResetEvent(!value);
                 else if (value)
@@ -113,23 +126,27 @@ namespace System.Net.NetworkInformation {
             }
         }
 
-        protected void OnPingCompleted(PingCompletedEventArgs e) 
+        protected void OnPingCompleted(PingCompletedEventArgs e)
         {
-            if (PingCompleted != null) {
-                PingCompleted (this,e);
+            if (PingCompleted != null)
+            {
+                PingCompleted(this, e);
             }
         }
 
-        void PingCompletedWaitCallback (object operationState) {
+        void PingCompletedWaitCallback(object operationState)
+        {
             OnPingCompleted((PingCompletedEventArgs)operationState);
         }
 
-        public Ping () {
-            onPingCompletedDelegate = new SendOrPostCallback (PingCompletedWaitCallback);
+        public Ping()
+        {
+            onPingCompletedDelegate = new SendOrPostCallback(PingCompletedWaitCallback);
         }
 
         //cancel pending async requests, close the handles
-        private void InternalDispose () {
+        private void InternalDispose()
+        {
             disposeRequested = true;
 
             if (Interlocked.CompareExchange(ref status, Disposed, Free) != Free)
@@ -138,29 +155,34 @@ namespace System.Net.NetworkInformation {
                 return;
             }
 
-            if (handlePingV4 != null) {
-                handlePingV4.Close ();
+            if (handlePingV4 != null)
+            {
+                handlePingV4.Close();
                 handlePingV4 = null;
             }
 
-            if (handlePingV6 != null) {
-                handlePingV6.Close ();
+            if (handlePingV6 != null)
+            {
+                handlePingV6.Close();
                 handlePingV6 = null;
             }
 
             UnregisterWaitHandle();
 
-            if (pingEvent != null) {
+            if (pingEvent != null)
+            {
                 pingEvent.Close();
                 pingEvent = null;
             }
 
-            if (replyBuffer != null) {
+            if (replyBuffer != null)
+            {
                 replyBuffer.Close();
                 replyBuffer = null;
             }
 
-            if (asyncFinished != null) {
+            if (asyncFinished != null)
+            {
                 asyncFinished.Close();
                 asyncFinished = null;
             }
@@ -172,7 +194,7 @@ namespace System.Net.NetworkInformation {
             {
                 if (registeredWait != null)
                 {
-                    registeredWait.Unregister(null); 
+                    registeredWait.Unregister(null);
                     // If Unregister returns false, it is sufficient to nullify registeredWait
                     // and let its own finilizer clean up later.
                     registeredWait = null;
@@ -182,29 +204,32 @@ namespace System.Net.NetworkInformation {
 
         protected override void Dispose(Boolean disposing)
         {
-            if (disposing) { // Only on explicit dispose.  Otherwise, the GC can cleanup everything else.
+            if (disposing)
+            { // Only on explicit dispose.  Otherwise, the GC can cleanup everything else.
                 InternalDispose();
             }
             base.Dispose(disposing);
         }
 
         //cancels pending async calls
-        public void SendAsyncCancel() {
-            lock (lockObject) {
-                if (!InAsyncCall) {
+        public void SendAsyncCancel()
+        {
+            lock (lockObject)
+            {
+                if (!InAsyncCall)
+                {
                     return;
                 }
 
                 cancelled = true;
             }
-            // Because there is no actual native cancel, 
+            // Because there is no actual native cancel,
             // we just have to block until the current operation is completed.
             asyncFinished.WaitOne();
         }
 
-
         //private callback invoked when icmpsendecho apis succeed
-        private static void PingCallback (object state, bool signaled) 
+        private static void PingCallback(object state, bool signaled)
         {
             Ping ping = (Ping)state;
             PingCompletedEventArgs eventArgs = null;
@@ -214,110 +239,158 @@ namespace System.Net.NetworkInformation {
 
             try
             {
-                lock (ping.lockObject) {
+                lock (ping.lockObject)
+                {
                     cancelled = ping.cancelled;
                     asyncOp = ping.asyncOp;
                     onPingCompletedDelegate = ping.onPingCompletedDelegate;
 
-                    if (!cancelled) {
+                    if (!cancelled)
+                    {
                         //parse reply buffer
                         SafeLocalFree buffer = ping.replyBuffer;
-                        
+
                         //marshals and constructs new reply
                         PingReply reply;
 
-                        if (ping.ipv6) {
-                            Icmp6EchoReply icmp6Reply = (Icmp6EchoReply)Marshal.PtrToStructure (buffer.DangerousGetHandle (), typeof(Icmp6EchoReply));
-                            reply = new PingReply (icmp6Reply,buffer.DangerousGetHandle(),ping.sendSize);
+                        if (ping.ipv6)
+                        {
+                            Icmp6EchoReply icmp6Reply = (Icmp6EchoReply)
+                                Marshal.PtrToStructure(
+                                    buffer.DangerousGetHandle(),
+                                    typeof(Icmp6EchoReply)
+                                );
+                            reply = new PingReply(
+                                icmp6Reply,
+                                buffer.DangerousGetHandle(),
+                                ping.sendSize
+                            );
                         }
-                        else {
-                            IcmpEchoReply icmpReply = (IcmpEchoReply)Marshal.PtrToStructure (buffer.DangerousGetHandle (), typeof(IcmpEchoReply));
-                            reply = new PingReply (icmpReply);
+                        else
+                        {
+                            IcmpEchoReply icmpReply = (IcmpEchoReply)
+                                Marshal.PtrToStructure(
+                                    buffer.DangerousGetHandle(),
+                                    typeof(IcmpEchoReply)
+                                );
+                            reply = new PingReply(icmpReply);
                         }
-                        
-                        eventArgs = new PingCompletedEventArgs (reply, null, false, asyncOp.UserSuppliedState);
-                    } else { //cancelled
-                        eventArgs = new PingCompletedEventArgs (null, null, true, asyncOp.UserSuppliedState);
+
+                        eventArgs = new PingCompletedEventArgs(
+                            reply,
+                            null,
+                            false,
+                            asyncOp.UserSuppliedState
+                        );
+                    }
+                    else
+                    { //cancelled
+                        eventArgs = new PingCompletedEventArgs(
+                            null,
+                            null,
+                            true,
+                            asyncOp.UserSuppliedState
+                        );
                     }
                 }
             }
             // in case of failure, create a failed event arg
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 PingException pe = new PingException(SR.GetString(SR.net_ping), e);
-                eventArgs = new PingCompletedEventArgs (null,pe, false, asyncOp.UserSuppliedState);
+                eventArgs = new PingCompletedEventArgs(null, pe, false, asyncOp.UserSuppliedState);
             }
-            finally {
-                ping.FreeUnmanagedStructures ();
+            finally
+            {
+                ping.FreeUnmanagedStructures();
                 ping.UnregisterWaitHandle();
                 ping.Finish(true);
             }
-            
-            asyncOp.PostOperationCompleted (onPingCompletedDelegate, eventArgs);
-        }
-        
-        public PingReply Send (string hostNameOrAddress) {
-            return Send (hostNameOrAddress, DefaultTimeout, DefaultSendBuffer, null);
+
+            asyncOp.PostOperationCompleted(onPingCompletedDelegate, eventArgs);
         }
 
-
-        public PingReply Send (string hostNameOrAddress, int timeout) {
-            return Send (hostNameOrAddress, timeout, DefaultSendBuffer, null);
+        public PingReply Send(string hostNameOrAddress)
+        {
+            return Send(hostNameOrAddress, DefaultTimeout, DefaultSendBuffer, null);
         }
 
-
-        public PingReply Send (IPAddress address) {
-            return Send (address, DefaultTimeout, DefaultSendBuffer, null);
+        public PingReply Send(string hostNameOrAddress, int timeout)
+        {
+            return Send(hostNameOrAddress, timeout, DefaultSendBuffer, null);
         }
 
-        public PingReply Send (IPAddress address, int timeout) {
-            return Send (address, timeout, DefaultSendBuffer, null);
+        public PingReply Send(IPAddress address)
+        {
+            return Send(address, DefaultTimeout, DefaultSendBuffer, null);
         }
 
-        public PingReply Send (string hostNameOrAddress, int timeout, byte[] buffer) {
-            return Send (hostNameOrAddress, timeout, buffer, null);
+        public PingReply Send(IPAddress address, int timeout)
+        {
+            return Send(address, timeout, DefaultSendBuffer, null);
         }
 
-        public PingReply Send (IPAddress address, int timeout, byte[] buffer) {
-            return Send (address, timeout, buffer, null);
+        public PingReply Send(string hostNameOrAddress, int timeout, byte[] buffer)
+        {
+            return Send(hostNameOrAddress, timeout, buffer, null);
         }
 
-        public PingReply Send (string hostNameOrAddress, int timeout, byte[] buffer, PingOptions options) {
-            if (ValidationHelper.IsBlankString(hostNameOrAddress)) {
-                throw new ArgumentNullException ("hostNameOrAddress");
+        public PingReply Send(IPAddress address, int timeout, byte[] buffer)
+        {
+            return Send(address, timeout, buffer, null);
+        }
+
+        public PingReply Send(
+            string hostNameOrAddress,
+            int timeout,
+            byte[] buffer,
+            PingOptions options
+        )
+        {
+            if (ValidationHelper.IsBlankString(hostNameOrAddress))
+            {
+                throw new ArgumentNullException("hostNameOrAddress");
             }
 
-            IPAddress address; 
-            if (!IPAddress.TryParse(hostNameOrAddress, out address)) {
-                try {
+            IPAddress address;
+            if (!IPAddress.TryParse(hostNameOrAddress, out address))
+            {
+                try
+                {
                     address = Dns.GetHostAddresses(hostNameOrAddress)[0];
                 }
-                catch (ArgumentException) 
+                catch (ArgumentException)
                 {
                     throw;
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     throw new PingException(SR.GetString(SR.net_ping), ex);
                 }
             }
             return Send(address, timeout, buffer, options);
         }
 
-
-        public PingReply Send (IPAddress address, int timeout, byte[] buffer, PingOptions options) {
-            if (buffer == null) {
-                throw new ArgumentNullException ("buffer");
+        public PingReply Send(IPAddress address, int timeout, byte[] buffer, PingOptions options)
+        {
+            if (buffer == null)
+            {
+                throw new ArgumentNullException("buffer");
             }
 
-            if (buffer.Length > MaxBufferSize ) {
+            if (buffer.Length > MaxBufferSize)
+            {
                 throw new ArgumentException(SR.GetString(SR.net_invalidPingBufferSize), "buffer");
             }
 
-            if (timeout < 0) {
-                throw new ArgumentOutOfRangeException ("timeout");
+            if (timeout < 0)
+            {
+                throw new ArgumentOutOfRangeException("timeout");
             }
 
-            if (address == null) {
-                throw new ArgumentNullException ("address");
+            if (address == null)
+            {
+                throw new ArgumentNullException("address");
             }
 
             TestIsIpSupported(address); // Address family is installed?
@@ -326,14 +399,14 @@ namespace System.Net.NetworkInformation {
             {
                 throw new ArgumentException(SR.GetString(SR.net_invalid_ip_addr), "address");
             }
-            
+
             //
             // FxCop: need to snapshot the address here, so we're sure that it's not changed between the permission
             // and the operation, and to be sure that IPAddress.ToString() is called and not some override that
             // always returns "localhost" or something.
             //
             IPAddress addressSnapshot;
-            if (address.AddressFamily == AddressFamily.InterNetwork) 
+            if (address.AddressFamily == AddressFamily.InterNetwork)
             {
                 addressSnapshot = new IPAddress(address.GetAddressBytes());
             }
@@ -345,71 +418,88 @@ namespace System.Net.NetworkInformation {
             (new NetworkInformationPermission(NetworkInformationAccess.Ping)).Demand();
 
             CheckStart(false);
-            try {
-                return InternalSend (addressSnapshot, buffer, timeout, options, false);
+            try
+            {
+                return InternalSend(addressSnapshot, buffer, timeout, options, false);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 throw new PingException(SR.GetString(SR.net_ping), e);
             }
-            finally {
+            finally
+            {
                 Finish(false);
             }
         }
 
-
-
-        [HostProtection(ExternalThreading=true)]
-        public void SendAsync (string hostNameOrAddress, object userToken) {
-            SendAsync (hostNameOrAddress, DefaultTimeout, DefaultSendBuffer, userToken);
+        [HostProtection(ExternalThreading = true)]
+        public void SendAsync(string hostNameOrAddress, object userToken)
+        {
+            SendAsync(hostNameOrAddress, DefaultTimeout, DefaultSendBuffer, userToken);
         }
 
-
-        [HostProtection(ExternalThreading=true)]
-        public void SendAsync (string hostNameOrAddress, int timeout, object userToken) {
-            SendAsync (hostNameOrAddress, timeout, DefaultSendBuffer, userToken);
+        [HostProtection(ExternalThreading = true)]
+        public void SendAsync(string hostNameOrAddress, int timeout, object userToken)
+        {
+            SendAsync(hostNameOrAddress, timeout, DefaultSendBuffer, userToken);
         }
 
-
-        [HostProtection(ExternalThreading=true)]
-        public void SendAsync (IPAddress address, object userToken) {
-            SendAsync (address, DefaultTimeout, DefaultSendBuffer, userToken);
+        [HostProtection(ExternalThreading = true)]
+        public void SendAsync(IPAddress address, object userToken)
+        {
+            SendAsync(address, DefaultTimeout, DefaultSendBuffer, userToken);
         }
 
-
-        [HostProtection(ExternalThreading=true)]
-        public void SendAsync (IPAddress address, int timeout, object userToken) {
-            SendAsync (address, timeout, DefaultSendBuffer, userToken);
+        [HostProtection(ExternalThreading = true)]
+        public void SendAsync(IPAddress address, int timeout, object userToken)
+        {
+            SendAsync(address, timeout, DefaultSendBuffer, userToken);
         }
 
-
-        [HostProtection(ExternalThreading=true)]
-        public void SendAsync (string hostNameOrAddress, int timeout, byte[] buffer, object userToken) {
-            SendAsync (hostNameOrAddress, timeout, buffer, null, userToken);
+        [HostProtection(ExternalThreading = true)]
+        public void SendAsync(
+            string hostNameOrAddress,
+            int timeout,
+            byte[] buffer,
+            object userToken
+        )
+        {
+            SendAsync(hostNameOrAddress, timeout, buffer, null, userToken);
         }
 
-
-        [HostProtection(ExternalThreading=true)]
-        public void SendAsync (IPAddress address, int timeout, byte[] buffer, object userToken) {
-            SendAsync (address, timeout, buffer, null, userToken);
+        [HostProtection(ExternalThreading = true)]
+        public void SendAsync(IPAddress address, int timeout, byte[] buffer, object userToken)
+        {
+            SendAsync(address, timeout, buffer, null, userToken);
         }
 
-
-        [HostProtection(ExternalThreading=true)]
-        public void SendAsync (string hostNameOrAddress, int timeout, byte[] buffer, PingOptions options, object userToken) {
-            if (ValidationHelper.IsBlankString(hostNameOrAddress)) {
-                throw new ArgumentNullException ("hostNameOrAddress");
+        [HostProtection(ExternalThreading = true)]
+        public void SendAsync(
+            string hostNameOrAddress,
+            int timeout,
+            byte[] buffer,
+            PingOptions options,
+            object userToken
+        )
+        {
+            if (ValidationHelper.IsBlankString(hostNameOrAddress))
+            {
+                throw new ArgumentNullException("hostNameOrAddress");
             }
 
-            if (buffer == null) {
-                throw new ArgumentNullException ("buffer");
+            if (buffer == null)
+            {
+                throw new ArgumentNullException("buffer");
             }
 
-            if (buffer.Length > MaxBufferSize ) {
+            if (buffer.Length > MaxBufferSize)
+            {
                 throw new ArgumentException(SR.GetString(SR.net_invalidPingBufferSize), "buffer");
             }
 
-            if (timeout < 0) {
-                throw new ArgumentOutOfRangeException ("timeout");
+            if (timeout < 0)
+            {
+                throw new ArgumentOutOfRangeException("timeout");
             }
 
             IPAddress address;
@@ -420,36 +510,53 @@ namespace System.Net.NetworkInformation {
             }
 
             CheckStart(true);
-            try {
+            try
+            {
                 cancelled = false;
-                asyncOp = AsyncOperationManager.CreateOperation (userToken);
-                AsyncStateObject state = new AsyncStateObject(hostNameOrAddress,buffer,timeout,options,userToken);
+                asyncOp = AsyncOperationManager.CreateOperation(userToken);
+                AsyncStateObject state = new AsyncStateObject(
+                    hostNameOrAddress,
+                    buffer,
+                    timeout,
+                    options,
+                    userToken
+                );
                 ThreadPool.QueueUserWorkItem(new WaitCallback(ContinueAsyncSend), state);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Finish(true);
                 throw new PingException(SR.GetString(SR.net_ping), e);
             }
         }
 
-
-
-        [HostProtection(ExternalThreading=true)]
-        public void SendAsync (IPAddress address, int timeout, byte[] buffer, PingOptions options, object userToken) {
-            if (buffer == null) {
-                throw new ArgumentNullException ("buffer");
+        [HostProtection(ExternalThreading = true)]
+        public void SendAsync(
+            IPAddress address,
+            int timeout,
+            byte[] buffer,
+            PingOptions options,
+            object userToken
+        )
+        {
+            if (buffer == null)
+            {
+                throw new ArgumentNullException("buffer");
             }
 
-            if (buffer.Length > MaxBufferSize ) {
+            if (buffer.Length > MaxBufferSize)
+            {
                 throw new ArgumentException(SR.GetString(SR.net_invalidPingBufferSize), "buffer");
             }
 
-            if (timeout < 0) {
-                throw new ArgumentOutOfRangeException ("timeout");
+            if (timeout < 0)
+            {
+                throw new ArgumentOutOfRangeException("timeout");
             }
 
-            if (address == null) {
-                throw new ArgumentNullException ("address");
+            if (address == null)
+            {
+                throw new ArgumentNullException("address");
             }
 
             TestIsIpSupported(address); // Address family is installed?
@@ -466,7 +573,7 @@ namespace System.Net.NetworkInformation {
             //
 
             IPAddress addressSnapshot;
-            if (address.AddressFamily == AddressFamily.InterNetwork) 
+            if (address.AddressFamily == AddressFamily.InterNetwork)
             {
                 addressSnapshot = new IPAddress(address.GetAddressBytes());
             }
@@ -478,17 +585,18 @@ namespace System.Net.NetworkInformation {
             (new NetworkInformationPermission(NetworkInformationAccess.Ping)).Demand();
 
             CheckStart(true);
-            try{
+            try
+            {
                 cancelled = false;
-                asyncOp = AsyncOperationManager.CreateOperation (userToken);
-                InternalSend (addressSnapshot, buffer, timeout, options, true);
+                asyncOp = AsyncOperationManager.CreateOperation(userToken);
+                InternalSend(addressSnapshot, buffer, timeout, options, true);
             }
-            catch(Exception e){
+            catch (Exception e)
+            {
                 Finish(true);
                 throw new PingException(SR.GetString(SR.net_ping), e);
             }
         }
-
 
         //************* Task-based async public methods *************************
         [HostProtection(ExternalThreading = true)]
@@ -528,15 +636,27 @@ namespace System.Net.NetworkInformation {
         }
 
         [HostProtection(ExternalThreading = true)]
-        public Task<PingReply> SendPingAsync(IPAddress address, int timeout, byte[] buffer, PingOptions options)
+        public Task<PingReply> SendPingAsync(
+            IPAddress address,
+            int timeout,
+            byte[] buffer,
+            PingOptions options
+        )
         {
             return SendPingAsyncCore(tcs => SendAsync(address, timeout, buffer, options, tcs));
         }
 
         [HostProtection(ExternalThreading = true)]
-        public Task<PingReply> SendPingAsync(string hostNameOrAddress, int timeout, byte[] buffer, PingOptions options)
+        public Task<PingReply> SendPingAsync(
+            string hostNameOrAddress,
+            int timeout,
+            byte[] buffer,
+            PingOptions options
+        )
         {
-            return SendPingAsyncCore(tcs => SendAsync(hostNameOrAddress, timeout, buffer, options, tcs));
+            return SendPingAsyncCore(tcs =>
+                SendAsync(hostNameOrAddress, timeout, buffer, options, tcs)
+            );
         }
 
         private Task<PingReply> SendPingAsyncCore(Action<TaskCompletionSource<PingReply>> sendAsync)
@@ -550,7 +670,10 @@ namespace System.Net.NetworkInformation {
             this.PingCompleted += handler;
 
             // Start the async operation.
-            try { sendAsync(tcs); }
+            try
+            {
+                sendAsync(tcs);
+            }
             catch
             {
                 this.PingCompleted -= handler;
@@ -561,23 +684,39 @@ namespace System.Net.NetworkInformation {
             return tcs.Task;
         }
 
-        private void HandleCompletion(TaskCompletionSource<PingReply> tcs, PingCompletedEventArgs e, PingCompletedEventHandler handler)
+        private void HandleCompletion(
+            TaskCompletionSource<PingReply> tcs,
+            PingCompletedEventArgs e,
+            PingCompletedEventHandler handler
+        )
         {
             if (e.UserState == tcs)
             {
-                try { this.PingCompleted -= handler; }
+                try
+                {
+                    this.PingCompleted -= handler;
+                }
                 finally
                 {
-                    if (e.Error != null) tcs.TrySetException(e.Error);
-                    else if (e.Cancelled) tcs.TrySetCanceled();
-                    else tcs.TrySetResult(e.Reply);
+                    if (e.Error != null)
+                        tcs.TrySetException(e.Error);
+                    else if (e.Cancelled)
+                        tcs.TrySetCanceled();
+                    else
+                        tcs.TrySetResult(e.Reply);
                 }
             }
         }
 
-
-        internal class AsyncStateObject{
-            internal AsyncStateObject(string hostName, byte[] buffer, int timeout, PingOptions options, object userToken)
+        internal class AsyncStateObject
+        {
+            internal AsyncStateObject(
+                string hostName,
+                byte[] buffer,
+                int timeout,
+                PingOptions options,
+                object userToken
+            )
             {
                 this.hostName = hostName;
                 this.buffer = buffer;
@@ -593,7 +732,8 @@ namespace System.Net.NetworkInformation {
             internal object userToken;
         }
 
-        private void ContinueAsyncSend(object state) {
+        private void ContinueAsyncSend(object state)
+        {
             //
             // FxCop: need to snapshot the address here, so we're sure that it's not changed between the permission
             // and the operation, and to be sure that IPAddress.ToString() is called and not some override that
@@ -602,55 +742,75 @@ namespace System.Net.NetworkInformation {
 
             Debug.Assert(asyncOp != null, "Null AsyncOp?");
 
-            AsyncStateObject stateObject = (AsyncStateObject) state;
+            AsyncStateObject stateObject = (AsyncStateObject)state;
 
-            try {
+            try
+            {
                 IPAddress addressSnapshot = Dns.GetHostAddresses(stateObject.hostName)[0];
 
                 (new NetworkInformationPermission(NetworkInformationAccess.Ping)).Demand();
-                InternalSend (addressSnapshot, stateObject.buffer, stateObject.timeout, stateObject.options, true);
+                InternalSend(
+                    addressSnapshot,
+                    stateObject.buffer,
+                    stateObject.timeout,
+                    stateObject.options,
+                    true
+                );
             }
-
-            catch(Exception e){
+            catch (Exception e)
+            {
                 PingException pe = new PingException(SR.GetString(SR.net_ping), e);
-                PingCompletedEventArgs eventArgs = new PingCompletedEventArgs (null, pe, false, asyncOp.UserSuppliedState);
+                PingCompletedEventArgs eventArgs = new PingCompletedEventArgs(
+                    null,
+                    pe,
+                    false,
+                    asyncOp.UserSuppliedState
+                );
                 Finish(true);
                 asyncOp.PostOperationCompleted(onPingCompletedDelegate, eventArgs);
             }
         }
 
-
-
         // internal method responsible for sending echo request on win2k and higher
 
-        private PingReply InternalSend (IPAddress address, byte[] buffer, int timeout, PingOptions options, bool async) {
-                        
-            ipv6 =  (address.AddressFamily == AddressFamily.InterNetworkV6)?true:false;
+        private PingReply InternalSend(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions options,
+            bool async
+        )
+        {
+            ipv6 = (address.AddressFamily == AddressFamily.InterNetworkV6) ? true : false;
             sendSize = buffer.Length;
 
             //get and cache correct handle
-            if (!ipv6 && handlePingV4 == null) {
-                handlePingV4 = UnsafeNetInfoNativeMethods.IcmpCreateFile ();
-                if (handlePingV4.IsInvalid) {
+            if (!ipv6 && handlePingV4 == null)
+            {
+                handlePingV4 = UnsafeNetInfoNativeMethods.IcmpCreateFile();
+                if (handlePingV4.IsInvalid)
+                {
                     handlePingV4 = null;
                     throw new Win32Exception(); // Gets last error
                 }
             }
-            else if (ipv6 && handlePingV6 == null) {
+            else if (ipv6 && handlePingV6 == null)
+            {
                 handlePingV6 = UnsafeNetInfoNativeMethods.Icmp6CreateFile();
-                if (handlePingV6.IsInvalid) {
+                if (handlePingV6.IsInvalid)
+                {
                     handlePingV6 = null;
                     throw new Win32Exception(); // Gets last error
                 }
             }
 
-
             //setup the options
-            IPOptions ipOptions = new IPOptions (options);
+            IPOptions ipOptions = new IPOptions(options);
 
             //setup the reply buffer
-            if (replyBuffer == null) {
-                replyBuffer = SafeLocalFree.LocalAlloc (MaxUdpPacket);
+            if (replyBuffer == null)
+            {
+                replyBuffer = SafeLocalFree.LocalAlloc(MaxUdpPacket);
             }
 
             //queue the event
@@ -658,35 +818,102 @@ namespace System.Net.NetworkInformation {
 
             try
             {
-                if (async) {
+                if (async)
+                {
                     if (pingEvent == null)
-                        pingEvent = new ManualResetEvent (false);
+                        pingEvent = new ManualResetEvent(false);
                     else
                         pingEvent.Reset();
-                
-                    registeredWait = ThreadPool.RegisterWaitForSingleObject (pingEvent, new WaitOrTimerCallback (PingCallback), this, -1, true);
+
+                    registeredWait = ThreadPool.RegisterWaitForSingleObject(
+                        pingEvent,
+                        new WaitOrTimerCallback(PingCallback),
+                        this,
+                        -1,
+                        true
+                    );
                 }
 
                 //Copy user dfata into the native world
-                SetUnmanagedStructures (buffer);
+                SetUnmanagedStructures(buffer);
 
-                if (!ipv6) {
-                    if (async) {
-                        error = (int)UnsafeNetInfoNativeMethods.IcmpSendEcho2 (handlePingV4, pingEvent.SafeWaitHandle, IntPtr.Zero, IntPtr.Zero, (uint)address.m_Address, requestBuffer, (ushort)buffer.Length, ref ipOptions, replyBuffer, MaxUdpPacket, (uint)timeout);
+                if (!ipv6)
+                {
+                    if (async)
+                    {
+                        error = (int)
+                            UnsafeNetInfoNativeMethods.IcmpSendEcho2(
+                                handlePingV4,
+                                pingEvent.SafeWaitHandle,
+                                IntPtr.Zero,
+                                IntPtr.Zero,
+                                (uint)address.m_Address,
+                                requestBuffer,
+                                (ushort)buffer.Length,
+                                ref ipOptions,
+                                replyBuffer,
+                                MaxUdpPacket,
+                                (uint)timeout
+                            );
                     }
-                    else{
-                        error = (int)UnsafeNetInfoNativeMethods.IcmpSendEcho2 (handlePingV4, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, (uint)address.m_Address, requestBuffer, (ushort)buffer.Length, ref ipOptions, replyBuffer, MaxUdpPacket, (uint)timeout);
+                    else
+                    {
+                        error = (int)
+                            UnsafeNetInfoNativeMethods.IcmpSendEcho2(
+                                handlePingV4,
+                                IntPtr.Zero,
+                                IntPtr.Zero,
+                                IntPtr.Zero,
+                                (uint)address.m_Address,
+                                requestBuffer,
+                                (ushort)buffer.Length,
+                                ref ipOptions,
+                                replyBuffer,
+                                MaxUdpPacket,
+                                (uint)timeout
+                            );
                     }
                 }
-                else {                                                   
-                    IPEndPoint ep = new IPEndPoint (address, 0);
-                    SocketAddress remoteAddr = ep.Serialize ();
+                else
+                {
+                    IPEndPoint ep = new IPEndPoint(address, 0);
+                    SocketAddress remoteAddr = ep.Serialize();
                     byte[] sourceAddr = new byte[28];
-                    if(async){
-                        error = (int)UnsafeNetInfoNativeMethods.Icmp6SendEcho2 (handlePingV6, pingEvent.SafeWaitHandle, IntPtr.Zero, IntPtr.Zero, sourceAddr, remoteAddr.m_Buffer, requestBuffer, (ushort)buffer.Length, ref ipOptions, replyBuffer, MaxUdpPacket, (uint)timeout);
+                    if (async)
+                    {
+                        error = (int)
+                            UnsafeNetInfoNativeMethods.Icmp6SendEcho2(
+                                handlePingV6,
+                                pingEvent.SafeWaitHandle,
+                                IntPtr.Zero,
+                                IntPtr.Zero,
+                                sourceAddr,
+                                remoteAddr.m_Buffer,
+                                requestBuffer,
+                                (ushort)buffer.Length,
+                                ref ipOptions,
+                                replyBuffer,
+                                MaxUdpPacket,
+                                (uint)timeout
+                            );
                     }
-                    else{
-                        error = (int)UnsafeNetInfoNativeMethods.Icmp6SendEcho2 (handlePingV6, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, sourceAddr, remoteAddr.m_Buffer, requestBuffer, (ushort)buffer.Length, ref ipOptions, replyBuffer, MaxUdpPacket, (uint)timeout);
+                    else
+                    {
+                        error = (int)
+                            UnsafeNetInfoNativeMethods.Icmp6SendEcho2(
+                                handlePingV6,
+                                IntPtr.Zero,
+                                IntPtr.Zero,
+                                IntPtr.Zero,
+                                sourceAddr,
+                                remoteAddr.m_Buffer,
+                                requestBuffer,
+                                (ushort)buffer.Length,
+                                ref ipOptions,
+                                replyBuffer,
+                                MaxUdpPacket,
+                                (uint)timeout
+                            );
                     }
                 }
             }
@@ -697,39 +924,50 @@ namespace System.Net.NetworkInformation {
             }
 
             //need this if something is bogus.
-            if (error == 0) {
+            if (error == 0)
+            {
                 error = (int)Marshal.GetLastWin32Error();
-                
+
                 // Only skip Async IO Pending error value
                 if (async && error == UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING)
                     return null; // Expected async return value
-                
+
                 // Cleanup
                 FreeUnmanagedStructures();
                 UnregisterWaitHandle();
 
-                if (async // No IPStatus async errors
+                if (
+                    async // No IPStatus async errors
                     || error < (int)IPStatus.DestinationNetworkUnreachable // Min
-                    || error > (int)IPStatus.DestinationScopeMismatch) // Max // Out of IPStatus range
+                    || error > (int)IPStatus.DestinationScopeMismatch
+                ) // Max // Out of IPStatus range
                     throw new Win32Exception(error);
 
-                return new PingReply((IPStatus)error); // Synchronous IPStatus errors 
+                return new PingReply((IPStatus)error); // Synchronous IPStatus errors
             }
 
-            if (async) {
+            if (async)
+            {
                 return null;
             }
 
-            FreeUnmanagedStructures ();
+            FreeUnmanagedStructures();
 
             //return the reply
             PingReply reply;
-            if (ipv6) {
-                Icmp6EchoReply icmp6Reply = (Icmp6EchoReply)Marshal.PtrToStructure(replyBuffer.DangerousGetHandle(), typeof(Icmp6EchoReply));
+            if (ipv6)
+            {
+                Icmp6EchoReply icmp6Reply = (Icmp6EchoReply)
+                    Marshal.PtrToStructure(
+                        replyBuffer.DangerousGetHandle(),
+                        typeof(Icmp6EchoReply)
+                    );
                 reply = new PingReply(icmp6Reply, replyBuffer.DangerousGetHandle(), sendSize);
             }
-            else {
-                IcmpEchoReply icmpReply = (IcmpEchoReply)Marshal.PtrToStructure(replyBuffer.DangerousGetHandle(), typeof(IcmpEchoReply));
+            else
+            {
+                IcmpEchoReply icmpReply = (IcmpEchoReply)
+                    Marshal.PtrToStructure(replyBuffer.DangerousGetHandle(), typeof(IcmpEchoReply));
                 reply = new PingReply(icmpReply);
             }
 
@@ -739,9 +977,10 @@ namespace System.Net.NetworkInformation {
 
             return reply;
         }
-        
+
         // Tests if the current machine supports the given ip protocol family
-        private void TestIsIpSupported(IPAddress ip) {
+        private void TestIsIpSupported(IPAddress ip)
+        {
             // Catches if IPv4 has been uninstalled on Vista+
             if (ip.AddressFamily == AddressFamily.InterNetwork && !Socket.OSSupportsIPv4)
                 throw new NotSupportedException(SR.GetString(SR.net_ipv4_not_installed));
@@ -751,7 +990,8 @@ namespace System.Net.NetworkInformation {
         }
 
         // copies sendbuffer into unmanaged memory for async icmpsendecho apis
-        private unsafe void SetUnmanagedStructures (byte[] buffer) {
+        private unsafe void SetUnmanagedStructures(byte[] buffer)
+        {
             requestBuffer = SafeLocalFree.LocalAlloc(buffer.Length);
             byte* dst = (byte*)requestBuffer.DangerousGetHandle();
             for (int i = 0; i < buffer.Length; ++i)
@@ -761,30 +1001,29 @@ namespace System.Net.NetworkInformation {
         }
 
         // release the unmanaged memory after ping completion
-        void FreeUnmanagedStructures () {
-            if (requestBuffer != null) {
+        void FreeUnmanagedStructures()
+        {
+            if (requestBuffer != null)
+            {
                 requestBuffer.Close();
                 requestBuffer = null;
             }
         }
 
-
         // creates a default send buffer if a buffer wasn't specified.  This follows the
         // ping.exe model
-        private byte[] DefaultSendBuffer {
-            get {
-                if (defaultSendBuffer == null) {
+        private byte[] DefaultSendBuffer
+        {
+            get
+            {
+                if (defaultSendBuffer == null)
+                {
                     defaultSendBuffer = new byte[DefaultSendBufferSize];
-                    for (int i=0;i<DefaultSendBufferSize;i++)
-                        defaultSendBuffer[i] = (byte)((int)'a'+ i % 23);
+                    for (int i = 0; i < DefaultSendBufferSize; i++)
+                        defaultSendBuffer[i] = (byte)((int)'a' + i % 23);
                 }
                 return defaultSendBuffer;
             }
         }
-
-        
     }
-
 }
-
-

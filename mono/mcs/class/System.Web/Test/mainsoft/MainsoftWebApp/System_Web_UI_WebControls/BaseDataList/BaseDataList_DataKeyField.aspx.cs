@@ -30,91 +30,94 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class BaseDataList_DataKeyField
-		: GHTDataListBase
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
-		private delegate void BuildDataListControl(BaseDataList ctl);
+    public class BaseDataList_DataKeyField : GHTDataListBase
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
- 
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+        private delegate void BuildDataListControl(BaseDataList ctl);
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			HtmlForm frm = (HtmlForm)FindControl("form1");
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("form1");
 
-			GHTTestBegin(frm);
+            GHTTestBegin(frm);
 
-			this.Test(typeof(DataGrid), new BaseDataList_DataKeyField.BuildDataListControl(this.GHTBuildSampleDataGrid));
-			this.Test(typeof(DataList), new BaseDataList_DataKeyField.BuildDataListControl(this.GHTBuildSampleDataList));
+            this.Test(
+                typeof(DataGrid),
+                new BaseDataList_DataKeyField.BuildDataListControl(this.GHTBuildSampleDataGrid)
+            );
+            this.Test(
+                typeof(DataList),
+                new BaseDataList_DataKeyField.BuildDataListControl(this.GHTBuildSampleDataList)
+            );
 
-			GHTTestEnd();
+            GHTTestEnd();
+        }
 
-		}
-		private void Test(Type CtlType, BaseDataList_DataKeyField.BuildDataListControl CtlBuilder)
-		{
-			BaseDataList list1;
-			try
-			{
-				this.GHTSubTestBegin("BaseDataList_" + CtlType.Name + "_DataKeyField1");
-				list1 = (BaseDataList) this.GHTElementClone(CtlType);
-				CtlBuilder(list1);
-				base.GHTActiveSubTest.Controls.Add(list1);
-				list1.DataKeyField = "colB";
-			}
-			catch (Exception exception4)
-			{
-				this.GHTSubTestUnexpectedExceptionCaught(exception4);
-			}
-			this.GHTSubTestEnd();
-			try
-			{
-				this.GHTSubTestBegin("BaseDataList_" + CtlType.Name + "_DataKeyField2");
-				list1 = (BaseDataList) this.GHTElementClone(CtlType);
-				CtlBuilder(list1);
-				base.GHTActiveSubTest.Controls.Add(list1);
-				list1.DataKeyField = "colB";
-				this.GHTSubTestAddResult("Result = " + list1.DataKeyField);
-			}
-			catch (Exception exception5)
-			{
-				this.GHTSubTestUnexpectedExceptionCaught(exception5);
-			}
-			this.GHTSubTestEnd();
-			try
-			{
-				this.GHTSubTestBegin("BaseDataList_" + CtlType.Name + "_DataKeyField3");
-				list1 = (BaseDataList) this.GHTElementClone(CtlType);
-				base.GHTActiveSubTest.Controls.Add(list1);
-				list1.DataKeyField = "Unknown";
-			}
-			catch (Exception exception6)
-			{
-				this.GHTSubTestUnexpectedExceptionCaught(exception6);
-			}
-			this.GHTSubTestEnd();
-		}
- 	}
+        private void Test(Type CtlType, BaseDataList_DataKeyField.BuildDataListControl CtlBuilder)
+        {
+            BaseDataList list1;
+            try
+            {
+                this.GHTSubTestBegin("BaseDataList_" + CtlType.Name + "_DataKeyField1");
+                list1 = (BaseDataList)this.GHTElementClone(CtlType);
+                CtlBuilder(list1);
+                base.GHTActiveSubTest.Controls.Add(list1);
+                list1.DataKeyField = "colB";
+            }
+            catch (Exception exception4)
+            {
+                this.GHTSubTestUnexpectedExceptionCaught(exception4);
+            }
+            this.GHTSubTestEnd();
+            try
+            {
+                this.GHTSubTestBegin("BaseDataList_" + CtlType.Name + "_DataKeyField2");
+                list1 = (BaseDataList)this.GHTElementClone(CtlType);
+                CtlBuilder(list1);
+                base.GHTActiveSubTest.Controls.Add(list1);
+                list1.DataKeyField = "colB";
+                this.GHTSubTestAddResult("Result = " + list1.DataKeyField);
+            }
+            catch (Exception exception5)
+            {
+                this.GHTSubTestUnexpectedExceptionCaught(exception5);
+            }
+            this.GHTSubTestEnd();
+            try
+            {
+                this.GHTSubTestBegin("BaseDataList_" + CtlType.Name + "_DataKeyField3");
+                list1 = (BaseDataList)this.GHTElementClone(CtlType);
+                base.GHTActiveSubTest.Controls.Add(list1);
+                list1.DataKeyField = "Unknown";
+            }
+            catch (Exception exception6)
+            {
+                this.GHTSubTestUnexpectedExceptionCaught(exception6);
+            }
+            this.GHTSubTestEnd();
+        }
+    }
 }

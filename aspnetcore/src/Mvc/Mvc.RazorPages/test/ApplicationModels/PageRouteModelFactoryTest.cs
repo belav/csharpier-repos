@@ -24,19 +24,15 @@ public class PageRouteModelFactoryTest
         Assert.Equal("/Users/Profile", routeModel.ViewEnginePath);
         Assert.Null(routeModel.AreaName);
 
-        Assert.Collection(
-            routeModel.Selectors,
-            selector => Assert.Equal("Users/Profile/{id?}", selector.AttributeRouteModel.Template)
+        Assert.Collection(routeModel.Selectors, selector =>
+            Assert.Equal("Users/Profile/{id?}", selector.AttributeRouteModel.Template)
         );
 
-        Assert.Collection(
-            routeModel.RouteValues,
-            kvp =>
-            {
-                Assert.Equal("page", kvp.Key);
-                Assert.Equal("/Users/Profile", kvp.Value);
-            }
-        );
+        Assert.Collection(routeModel.RouteValues, kvp =>
+        {
+            Assert.Equal("page", kvp.Key);
+            Assert.Equal("/Users/Profile", kvp.Value);
+        });
     }
 
     [Fact]
@@ -61,14 +57,11 @@ public class PageRouteModelFactoryTest
             selector => Assert.Equal("Users/Profile/{id?}", selector.AttributeRouteModel.Template)
         );
 
-        Assert.Collection(
-            routeModel.RouteValues,
-            kvp =>
-            {
-                Assert.Equal("page", kvp.Key);
-                Assert.Equal("/Users/Profile/Index", kvp.Value);
-            }
-        );
+        Assert.Collection(routeModel.RouteValues, kvp =>
+        {
+            Assert.Equal("page", kvp.Key);
+            Assert.Equal("/Users/Profile/Index", kvp.Value);
+        });
     }
 
     [Fact]
@@ -86,19 +79,15 @@ public class PageRouteModelFactoryTest
         Assert.Equal(relativePath, routeModel.RelativePath);
         Assert.Equal("/Users/Profile/Index", routeModel.ViewEnginePath);
 
-        Assert.Collection(
-            routeModel.Selectors,
-            selector => Assert.Equal("my-override", selector.AttributeRouteModel.Template)
+        Assert.Collection(routeModel.Selectors, selector =>
+            Assert.Equal("my-override", selector.AttributeRouteModel.Template)
         );
 
-        Assert.Collection(
-            routeModel.RouteValues,
-            kvp =>
-            {
-                Assert.Equal("page", kvp.Key);
-                Assert.Equal("/Users/Profile/Index", kvp.Value);
-            }
-        );
+        Assert.Collection(routeModel.RouteValues, kvp =>
+        {
+            Assert.Equal("page", kvp.Key);
+            Assert.Equal("/Users/Profile/Index", kvp.Value);
+        });
     }
 
     [Fact]
@@ -117,10 +106,8 @@ public class PageRouteModelFactoryTest
         Assert.Equal("/Users/Profile", routeModel.ViewEnginePath);
         Assert.Equal("TestArea", routeModel.AreaName);
 
-        Assert.Collection(
-            routeModel.Selectors,
-            selector =>
-                Assert.Equal("TestArea/Users/Profile/{id?}", selector.AttributeRouteModel.Template)
+        Assert.Collection(routeModel.Selectors, selector =>
+            Assert.Equal("TestArea/Users/Profile/{id?}", selector.AttributeRouteModel.Template)
         );
 
         Assert.Collection(

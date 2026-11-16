@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
 {
-    // These tests handle changing between different unary expressions 
+    // These tests handle changing between different unary expressions
     public class UnaryExpression
     {
         [Fact]
@@ -43,7 +43,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
         [Fact]
         public void PlusToPointerIndirect()
         {
-            MakeUnaryChange(SyntaxKind.UnaryPlusExpression, SyntaxKind.PointerIndirectionExpression);
+            MakeUnaryChange(
+                SyntaxKind.UnaryPlusExpression,
+                SyntaxKind.PointerIndirectionExpression
+            );
         }
 
         [Fact]
@@ -66,17 +69,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
             MakeUnaryChanges(oldStyle, newStyle, topLevel: true, options: TestOptions.Script);
         }
 
-        private static void MakeUnaryChanges(SyntaxKind oldSyntaxKind, SyntaxKind newSyntaxKind, bool topLevel = false, CSharpParseOptions options = null)
+        private static void MakeUnaryChanges(
+            SyntaxKind oldSyntaxKind,
+            SyntaxKind newSyntaxKind,
+            bool topLevel = false,
+            CSharpParseOptions options = null
+        )
         {
             string oldName = GetExpressionString(oldSyntaxKind);
             string newName = GetExpressionString(newSyntaxKind);
 
             string topLevelStatement = oldName + " y";
             // Be warned when changing the fields here
-            var code = @"class C { void m() {
-                 " + topLevelStatement + @";
+            var code =
+                @"class C { void m() {
+                 "
+                + topLevelStatement
+                + @";
                 }}";
-            var oldTree = SyntaxFactory.ParseSyntaxTree(topLevel ? topLevelStatement : code, options: options);
+            var oldTree = SyntaxFactory.ParseSyntaxTree(
+                topLevel ? topLevelStatement : code,
+                options: options
+            );
 
             // Make the change to the node
             var newTree = oldTree.WithReplaceFirst(oldName, newName);
@@ -96,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
 
         private static PrefixUnaryExpressionSyntax GetGlobalExpressionNode(SyntaxTree newTree)
         {
-            var statementType = newTree.GetCompilationUnitRoot().Members[0] as GlobalStatementSyntax;
+            var statementType =
+                newTree.GetCompilationUnitRoot().Members[0] as GlobalStatementSyntax;
             Assert.True(statementType.AttributeLists.Count == 0);
             Assert.True(statementType.Modifiers.Count == 0);
             var statement = statementType.Statement as ExpressionStatementSyntax;

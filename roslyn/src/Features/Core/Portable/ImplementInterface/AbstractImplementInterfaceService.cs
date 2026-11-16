@@ -23,26 +23,48 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
     {
         protected const string DisposingName = "disposing";
 
-        protected AbstractImplementInterfaceService()
-        {
-        }
+        protected AbstractImplementInterfaceService() { }
 
-        protected abstract string ToDisplayString(IMethodSymbol disposeImplMethod, SymbolDisplayFormat format);
+        protected abstract string ToDisplayString(
+            IMethodSymbol disposeImplMethod,
+            SymbolDisplayFormat format
+        );
 
         protected abstract bool CanImplementImplicitly { get; }
         protected abstract bool HasHiddenExplicitImplementation { get; }
-        protected abstract bool TryInitializeState(Document document, SemanticModel model, SyntaxNode interfaceNode, CancellationToken cancellationToken, out SyntaxNode classOrStructDecl, out INamedTypeSymbol classOrStructType, out IEnumerable<INamedTypeSymbol> interfaceTypes);
+        protected abstract bool TryInitializeState(
+            Document document,
+            SemanticModel model,
+            SyntaxNode interfaceNode,
+            CancellationToken cancellationToken,
+            out SyntaxNode classOrStructDecl,
+            out INamedTypeSymbol classOrStructType,
+            out IEnumerable<INamedTypeSymbol> interfaceTypes
+        );
         protected abstract bool AllowDelegateAndEnumConstraints(ParseOptions options);
 
-        protected abstract SyntaxNode AddCommentInsideIfStatement(SyntaxNode ifDisposingStatement, SyntaxTriviaList trivia);
-        protected abstract SyntaxNode CreateFinalizer(SyntaxGenerator generator, INamedTypeSymbol classType, string disposeMethodDisplayString);
+        protected abstract SyntaxNode AddCommentInsideIfStatement(
+            SyntaxNode ifDisposingStatement,
+            SyntaxTriviaList trivia
+        );
+        protected abstract SyntaxNode CreateFinalizer(
+            SyntaxGenerator generator,
+            INamedTypeSymbol classType,
+            string disposeMethodDisplayString
+        );
 
         public async Task<Document> ImplementInterfaceAsync(
-            Document document, ImplementTypeGenerationOptions options, SyntaxNode node, CancellationToken cancellationToken)
+            Document document,
+            ImplementTypeGenerationOptions options,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             using (Logger.LogBlock(FunctionId.Refactoring_ImplementInterface, cancellationToken))
             {
-                var model = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                var model = await document
+                    .GetSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var state = State.Generate(this, document, model, node, cancellationToken);
                 if (state == null)
                 {
@@ -53,39 +75,75 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 // While implementing just one default action, like in the case of pressing enter after interface name in VB,
                 // choose to implement with the dispose pattern as that's the Dev12 behavior.
                 var action = ShouldImplementDisposePattern(state, explicitly: false)
-                    ? ImplementInterfaceWithDisposePatternCodeAction.CreateImplementWithDisposePatternCodeAction(this, document, options, state)
-                    : ImplementInterfaceCodeAction.CreateImplementCodeAction(this, document, options, state);
+                    ? ImplementInterfaceWithDisposePatternCodeAction.CreateImplementWithDisposePatternCodeAction(
+                        this,
+                        document,
+                        options,
+                        state
+                    )
+                    : ImplementInterfaceCodeAction.CreateImplementCodeAction(
+                        this,
+                        document,
+                        options,
+                        state
+                    );
 
-                return await action.GetUpdatedDocumentAsync(cancellationToken).ConfigureAwait(false);
+                return await action
+                    .GetUpdatedDocumentAsync(cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
-        public ImmutableArray<CodeAction> GetCodeActions(Document document, ImplementTypeGenerationOptions options, SemanticModel model, SyntaxNode node, CancellationToken cancellationToken)
+        public ImmutableArray<CodeAction> GetCodeActions(
+            Document document,
+            ImplementTypeGenerationOptions options,
+            SemanticModel model,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             var state = State.Generate(this, document, model, node, cancellationToken);
             return GetActions(document, options, state, cancellationToken).ToImmutableArray();
         }
 
         private IEnumerable<CodeAction> GetActions(
-            Document document, ImplementTypeGenerationOptions options, State state, CancellationToken cancellationToken)
+            Document document,
+            ImplementTypeGenerationOptions options,
+            State state,
+            CancellationToken cancellationToken
+        )
         {
             if (state == null)
             {
                 yield break;
             }
 
-            if (state.MembersWithoutExplicitOrImplicitImplementationWhichCanBeImplicitlyImplemented.Length > 0)
+            if (
+                state
+                    .MembersWithoutExplicitOrImplicitImplementationWhichCanBeImplicitlyImplemented
+                    .Length > 0
+            )
             {
                 var totalMemberCount = 0;
                 var inaccessibleMemberCount = 0;
 
-                foreach (var (_, members) in state.MembersWithoutExplicitOrImplicitImplementationWhichCanBeImplicitlyImplemented)
+                foreach (
+                    var (
+                        _,
+                        members
+                    ) in state.MembersWithoutExplicitOrImplicitImplementationWhichCanBeImplicitlyImplemented
+                )
                 {
                     foreach (var member in members)
                     {
                         totalMemberCount++;
 
-                        if (AccessibilityHelper.IsLessAccessibleThan(member, state.ClassOrStructType))
+                        if (
+                            AccessibilityHelper.IsLessAccessibleThan(
+                                member,
+                                state.ClassOrStructType
+                            )
+                        )
                         {
                             inaccessibleMemberCount++;
                         }
@@ -96,45 +154,84 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 // will be the same as "Implement interface explicitly", so there is no point in having both of them
                 if (totalMemberCount != inaccessibleMemberCount)
                 {
-                    yield return ImplementInterfaceCodeAction.CreateImplementCodeAction(this, document, options, state);
+                    yield return ImplementInterfaceCodeAction.CreateImplementCodeAction(
+                        this,
+                        document,
+                        options,
+                        state
+                    );
                 }
 
                 if (ShouldImplementDisposePattern(state, explicitly: false))
                 {
-                    yield return ImplementInterfaceWithDisposePatternCodeAction.CreateImplementWithDisposePatternCodeAction(this, document, options, state);
+                    yield return ImplementInterfaceWithDisposePatternCodeAction.CreateImplementWithDisposePatternCodeAction(
+                        this,
+                        document,
+                        options,
+                        state
+                    );
                 }
 
                 var delegatableMembers = GetDelegatableMembers(state, cancellationToken);
                 foreach (var member in delegatableMembers)
                 {
-                    yield return ImplementInterfaceCodeAction.CreateImplementThroughMemberCodeAction(this, document, options, state, member);
+                    yield return ImplementInterfaceCodeAction.CreateImplementThroughMemberCodeAction(
+                        this,
+                        document,
+                        options,
+                        state,
+                        member
+                    );
                 }
 
                 if (state.ClassOrStructType.IsAbstract)
                 {
-                    yield return ImplementInterfaceCodeAction.CreateImplementAbstractlyCodeAction(this, document, options, state);
+                    yield return ImplementInterfaceCodeAction.CreateImplementAbstractlyCodeAction(
+                        this,
+                        document,
+                        options,
+                        state
+                    );
                 }
             }
 
             if (state.MembersWithoutExplicitImplementation.Length > 0)
             {
-                yield return ImplementInterfaceCodeAction.CreateImplementExplicitlyCodeAction(this, document, options, state);
+                yield return ImplementInterfaceCodeAction.CreateImplementExplicitlyCodeAction(
+                    this,
+                    document,
+                    options,
+                    state
+                );
 
                 if (ShouldImplementDisposePattern(state, explicitly: true))
                 {
-                    yield return ImplementInterfaceWithDisposePatternCodeAction.CreateImplementExplicitlyWithDisposePatternCodeAction(this, document, options, state);
+                    yield return ImplementInterfaceWithDisposePatternCodeAction.CreateImplementExplicitlyWithDisposePatternCodeAction(
+                        this,
+                        document,
+                        options,
+                        state
+                    );
                 }
             }
 
             if (AnyImplementedImplicitly(state))
             {
-                yield return ImplementInterfaceCodeAction.CreateImplementRemainingExplicitlyCodeAction(this, document, options, state);
+                yield return ImplementInterfaceCodeAction.CreateImplementRemainingExplicitlyCodeAction(
+                    this,
+                    document,
+                    options,
+                    state
+                );
             }
         }
 
         private static bool AnyImplementedImplicitly(State state)
         {
-            if (state.MembersWithoutExplicitOrImplicitImplementation.Length != state.MembersWithoutExplicitImplementation.Length)
+            if (
+                state.MembersWithoutExplicitOrImplicitImplementation.Length
+                != state.MembersWithoutExplicitImplementation.Length
+            )
             {
                 return true;
             }
@@ -157,7 +254,10 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             return false;
         }
 
-        private static ImmutableArray<ISymbol> GetDelegatableMembers(State state, CancellationToken cancellationToken)
+        private static ImmutableArray<ISymbol> GetDelegatableMembers(
+            State state,
+            CancellationToken cancellationToken
+        )
         {
             var firstInterfaceType = state.InterfaceTypes.First();
 
@@ -165,19 +265,29 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 state.Document,
                 state.ClassOrStructType,
                 t => t.GetAllInterfacesIncludingThis().Contains(firstInterfaceType),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        protected static TNode AddComment<TNode>(SyntaxGenerator g, string comment, TNode node) where TNode : SyntaxNode
-            => AddComments(g, [comment], node);
+        protected static TNode AddComment<TNode>(SyntaxGenerator g, string comment, TNode node)
+            where TNode : SyntaxNode => AddComments(g, [comment], node);
 
-        protected static TNode AddComments<TNode>(SyntaxGenerator g, string comment1, string comment2, TNode node) where TNode : SyntaxNode
-            => AddComments(g, [comment1, comment2,], node);
+        protected static TNode AddComments<TNode>(
+            SyntaxGenerator g,
+            string comment1,
+            string comment2,
+            TNode node
+        )
+            where TNode : SyntaxNode => AddComments(g, [comment1, comment2], node);
 
-        protected static TNode AddComments<TNode>(SyntaxGenerator g, string[] comments, TNode node) where TNode : SyntaxNode
-            => node.WithPrependedLeadingTrivia(CreateCommentTrivia(g, comments));
+        protected static TNode AddComments<TNode>(SyntaxGenerator g, string[] comments, TNode node)
+            where TNode : SyntaxNode =>
+            node.WithPrependedLeadingTrivia(CreateCommentTrivia(g, comments));
 
-        protected static SyntaxTriviaList CreateCommentTrivia(SyntaxGenerator generator, params string[] comments)
+        protected static SyntaxTriviaList CreateCommentTrivia(
+            SyntaxGenerator generator,
+            params string[] comments
+        )
         {
             using var _ = ArrayBuilder<SyntaxTrivia>.GetInstance(out var trivia);
 

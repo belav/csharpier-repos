@@ -8,18 +8,20 @@ namespace Profiler.Tests
 {
     class GCBasicTests
     {
-        static readonly Guid GcBasicEventsProfilerGuid = new Guid("A040B953-EDE7-42D9-9077-AA69BB2BE024");
+        static readonly Guid GcBasicEventsProfilerGuid = new Guid(
+            "A040B953-EDE7-42D9-9077-AA69BB2BE024"
+        );
 
-        public static void DoWork() 
+        public static void DoWork()
         {
             // Allocate POH objects
             var arr0 = GC.AllocateUninitializedArray<int>(100000, true);
             var arr1 = GC.AllocateArray<int>(200000, true);
 
             int k = 0;
-            while(k < 3) 
+            while (k < 3)
             {
-                Console.WriteLine("{0}: Restarting run {1}",Thread.CurrentThread.Name,k);
+                Console.WriteLine("{0}: Restarting run {1}", Thread.CurrentThread.Name, k);
                 int[] largeArray = new int[1000000];
                 for (int i = 0; i <= 100; i++)
                 {
@@ -28,33 +30,35 @@ namespace Profiler.Tests
                     saveArray = null;
                     //Console.WriteLine("{0} at size {1}",Thread.CurrentThread.Name,largeArray.Length.ToString());
                 }
-                
+
                 k++;
-           }
+            }
 
             GC.KeepAlive(arr0);
             GC.KeepAlive(arr1);
         }
 
-        public static int RunTest(String[] args) 
+        public static int RunTest(String[] args)
         {
             long Threads = 1;
 
-            if(args.Length > 2)
+            if (args.Length > 2)
             {
                 Console.WriteLine("usage: LargeObjectAlloc runtest <number of threads>");
                 return 1;
             }
-            else if(args.Length == 2)
+            else if (args.Length == 2)
             {
                 Threads = Int64.Parse(args[1]);
             }
 
-            Console.WriteLine("LargeObjectAlloc started with {0} threads. Control-C to exit",
-                Threads.ToString());
+            Console.WriteLine(
+                "LargeObjectAlloc started with {0} threads. Control-C to exit",
+                Threads.ToString()
+            );
 
             Thread myThread = null;
-            for(long i = 0; i < Threads; i++)
+            for (long i = 0; i < Threads; i++)
             {
                 myThread = new Thread(new ThreadStart(DoWork));
                 myThread.Name = i.ToString();
@@ -75,9 +79,11 @@ namespace Profiler.Tests
                 return RunTest(args);
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "GCCallbacksBasic",
-                                          profilerClsid: GcBasicEventsProfilerGuid);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "GCCallbacksBasic",
+                profilerClsid: GcBasicEventsProfilerGuid
+            );
         }
     }
 }

@@ -30,14 +30,11 @@ public class UrlHelperExtensionsTest
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(
-            Assert.IsType<RouteValueDictionary>(actual.Values),
-            value =>
-            {
-                Assert.Equal("page", value.Key);
-                Assert.Equal("/TestPage", value.Value);
-            }
-        );
+        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values), value =>
+        {
+            Assert.Equal("page", value.Key);
+            Assert.Equal("/TestPage", value.Value);
+        });
         Assert.Null(actual.Host);
         Assert.Null(actual.Protocol);
         Assert.Null(actual.Fragment);
@@ -458,14 +455,11 @@ public class UrlHelperExtensionsTest
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(
-            Assert.IsType<RouteValueDictionary>(actual.Values),
-            value =>
-            {
-                Assert.Equal("page", value.Key);
-                Assert.Equal(expected, value.Value);
-            }
-        );
+        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values), value =>
+        {
+            Assert.Equal("page", value.Key);
+            Assert.Equal(expected, value.Value);
+        });
     }
 
     [Fact]
@@ -488,14 +482,11 @@ public class UrlHelperExtensionsTest
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(
-            Assert.IsType<RouteValueDictionary>(actual.Values),
-            value =>
-            {
-                Assert.Equal("page", value.Key);
-                Assert.Equal(expected, value.Value);
-            }
-        );
+        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values), value =>
+        {
+            Assert.Equal("page", value.Key);
+            Assert.Equal(expected, value.Value);
+        });
     }
 
     [Fact]
@@ -526,14 +517,11 @@ public class UrlHelperExtensionsTest
         urlHelper.Verify();
         Assert.NotNull(actual);
         Assert.Null(actual.RouteName);
-        Assert.Collection(
-            Assert.IsType<RouteValueDictionary>(actual.Values),
-            value =>
-            {
-                Assert.Equal("page", value.Key);
-                Assert.Equal(expected, value.Value);
-            }
-        );
+        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values), value =>
+        {
+            Assert.Equal("page", value.Key);
+            Assert.Equal(expected, value.Value);
+        });
     }
 
     [Fact]
@@ -724,14 +712,11 @@ public class UrlHelperExtensionsTest
         // Assert
         urlHelper.Verify();
         Assert.NotNull(actual);
-        Assert.Collection(
-            Assert.IsType<RouteValueDictionary>(actual.Values),
-            value =>
-            {
-                Assert.Equal("page", value.Key);
-                Assert.Equal(expectedPage, value.Value);
-            }
-        );
+        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values), value =>
+        {
+            Assert.Equal("page", value.Key);
+            Assert.Equal(expectedPage, value.Value);
+        });
         Assert.Null(actual.RouteName);
 
         Assert.Equal(expectedProtocol, actual.Protocol);
@@ -765,14 +750,11 @@ public class UrlHelperExtensionsTest
         // Assert
         urlHelper.Verify();
         Assert.NotNull(actual);
-        Assert.Collection(
-            Assert.IsType<RouteValueDictionary>(actual.Values),
-            value =>
-            {
-                Assert.Equal("page", value.Key);
-                Assert.Equal("ambient-page", value.Value);
-            }
-        );
+        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values), value =>
+        {
+            Assert.Equal("page", value.Key);
+            Assert.Equal("ambient-page", value.Value);
+        });
         Assert.Null(actual.RouteName);
 
         Assert.Equal(expectedProtocol, actual.Protocol);
@@ -806,14 +788,11 @@ public class UrlHelperExtensionsTest
         // Assert
         urlHelper.Verify();
         Assert.NotNull(actual);
-        Assert.Collection(
-            Assert.IsType<RouteValueDictionary>(actual.Values),
-            value =>
-            {
-                Assert.Equal("page", value.Key);
-                Assert.Equal("ambient-page", value.Value);
-            }
-        );
+        Assert.Collection(Assert.IsType<RouteValueDictionary>(actual.Values), value =>
+        {
+            Assert.Equal("page", value.Key);
+            Assert.Equal("ambient-page", value.Value);
+        });
         Assert.Null(actual.RouteName);
 
         Assert.Equal(expectedProtocol, actual.Protocol);

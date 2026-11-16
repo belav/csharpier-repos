@@ -26,22 +26,28 @@ public class MiscTests : BlazorWasmTestBase
     {
         string id = $"blz_deploy_on_build_{config}_{nativeRelink}_{GetRandomId()}";
         string projectFile = CreateProjectWithNativeReference(id);
-        string extraProperties = config == "Debug"
-                                    ? ("<EmccLinkOptimizationFlag>-O1</EmccLinkOptimizationFlag>" +
-                                        "<EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>")
-                                    : string.Empty;
+        string extraProperties =
+            config == "Debug"
+                ? (
+                    "<EmccLinkOptimizationFlag>-O1</EmccLinkOptimizationFlag>"
+                    + "<EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>"
+                )
+                : string.Empty;
         if (!nativeRelink)
             extraProperties += "<RunAOTCompilation>true</RunAOTCompilation>";
         AddItemsPropertiesToProject(projectFile, extraProperties: extraProperties);
 
         // build with -p:DeployOnBuild=true, and that will trigger a publish
-        (CommandResult res, _) = BlazorBuild(new BlazorBuildOptions(
-                                        Id: id,
-                                        Config: config,
-                                        ExpectedFileType: nativeRelink ? NativeFilesType.Relinked : NativeFilesType.AOT,
-                                        ExpectRelinkDirWhenPublishing: false,
-                                        IsPublish: false),
-                                    "-p:DeployBuild=true");
+        (CommandResult res, _) = BlazorBuild(
+            new BlazorBuildOptions(
+                Id: id,
+                Config: config,
+                ExpectedFileType: nativeRelink ? NativeFilesType.Relinked : NativeFilesType.AOT,
+                ExpectRelinkDirWhenPublishing: false,
+                IsPublish: false
+            ),
+            "-p:DeployBuild=true"
+        );
 
         // double check relinking!
         int index = res.Output.IndexOf("pinvoke.c -> pinvoke.o");
@@ -60,17 +66,30 @@ public class MiscTests : BlazorWasmTestBase
         string id = $"blz_aot_prj_file_{config}_{GetRandomId()}";
         string projectFile = CreateBlazorWasmTemplateProject(id);
 
-        string extraProperties = config == "Debug"
-                                    ? ("<EmccLinkOptimizationFlag>-O1</EmccLinkOptimizationFlag>" +
-                                        "<EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>")
-                                    : string.Empty;
-        AddItemsPropertiesToProject(projectFile, extraProperties: "<RunAOTCompilation>true</RunAOTCompilation>" + extraProperties);
+        string extraProperties =
+            config == "Debug"
+                ? (
+                    "<EmccLinkOptimizationFlag>-O1</EmccLinkOptimizationFlag>"
+                    + "<EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>"
+                )
+                : string.Empty;
+        AddItemsPropertiesToProject(
+            projectFile,
+            extraProperties: "<RunAOTCompilation>true</RunAOTCompilation>" + extraProperties
+        );
 
         // No relinking, no AOT
         BlazorBuild(new BlazorBuildOptions(id, config, NativeFilesType.FromRuntimePack));
 
         // will aot
-        BlazorPublish(new BlazorBuildOptions(id, config, NativeFilesType.AOT, ExpectRelinkDirWhenPublishing: true));
+        BlazorPublish(
+            new BlazorBuildOptions(
+                id,
+                config,
+                NativeFilesType.AOT,
+                ExpectRelinkDirWhenPublishing: true
+            )
+        );
 
         // build again
         BlazorBuild(new BlazorBuildOptions(id, config, NativeFilesType.FromRuntimePack));

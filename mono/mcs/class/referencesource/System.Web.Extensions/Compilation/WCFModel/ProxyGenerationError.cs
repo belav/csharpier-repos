@@ -56,7 +56,11 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="fileName"></param>
         /// <param name="errorException">An IOException</param>
         /// <remarks> </remarks>
-        public ProxyGenerationError(GeneratorState generatorState, string fileName, Exception errorException)
+        public ProxyGenerationError(
+            GeneratorState generatorState,
+            string fileName,
+            Exception errorException
+        )
         {
             m_ErrorGeneratorState = generatorState;
             m_IsWarning = false;
@@ -74,7 +78,12 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="errorException">An IOException</param>
         /// <param name="isWarning">An IOException</param>
         /// <remarks> </remarks>
-        public ProxyGenerationError(GeneratorState generatorState, string fileName, Exception errorException, bool isWarning)
+        public ProxyGenerationError(
+            GeneratorState generatorState,
+            string fileName,
+            Exception errorException,
+            bool isWarning
+        )
         {
             m_ErrorGeneratorState = generatorState;
             m_IsWarning = isWarning;
@@ -91,7 +100,11 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="fileName"></param>
         /// <param name="errorException">An XmlException</param>
         /// <remarks> </remarks>
-        public ProxyGenerationError(GeneratorState generatorState, string fileName, XmlException errorException)
+        public ProxyGenerationError(
+            GeneratorState generatorState,
+            string fileName,
+            XmlException errorException
+        )
         {
             m_ErrorGeneratorState = generatorState;
             m_IsWarning = false;
@@ -108,7 +121,11 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="fileName"></param>
         /// <param name="errorException">An XmlException</param>
         /// <remarks> </remarks>
-        public ProxyGenerationError(GeneratorState generatorState, string fileName, XmlSchemaException errorException)
+        public ProxyGenerationError(
+            GeneratorState generatorState,
+            string fileName,
+            XmlSchemaException errorException
+        )
         {
             m_ErrorGeneratorState = generatorState;
             m_IsWarning = false;
@@ -126,7 +143,12 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="errorException">An XmlException</param>
         /// <param name="isWarning">An XmlException</param>
         /// <remarks> </remarks>
-        public ProxyGenerationError(GeneratorState generatorState, string fileName, XmlSchemaException errorException, bool isWarning)
+        public ProxyGenerationError(
+            GeneratorState generatorState,
+            string fileName,
+            XmlSchemaException errorException,
+            bool isWarning
+        )
         {
             m_ErrorGeneratorState = generatorState;
             m_IsWarning = isWarning;
@@ -143,10 +165,7 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         public GeneratorState ErrorGeneratorState
         {
-            get
-            {
-                return m_ErrorGeneratorState;
-            }
+            get { return m_ErrorGeneratorState; }
         }
 
         /// <summary>
@@ -156,10 +175,7 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         public bool IsWarning
         {
-            get
-            {
-                return m_IsWarning;
-            }
+            get { return m_IsWarning; }
         }
 
         /// <summary>
@@ -169,10 +185,7 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         public int LineNumber
         {
-            get
-            {
-                return m_LineNumber;
-            }
+            get { return m_LineNumber; }
         }
 
         /// <summary>
@@ -182,10 +195,7 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         public int LinePosition
         {
-            get
-            {
-                return m_LinePosition;
-            }
+            get { return m_LinePosition; }
         }
 
         /// <summary>
@@ -195,10 +205,7 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         public string Message
         {
-            get
-            {
-                return m_Message;
-            }
+            get { return m_Message; }
         }
 
         /// <summary>
@@ -208,10 +215,7 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         public string MetadataFile
         {
-            get
-            {
-                return m_MetadataFile;
-            }
+            get { return m_MetadataFile; }
         }
 
         /// <summary>
@@ -224,6 +228,5 @@ namespace Microsoft.VSDesigner.WCFModel
             MergeMetadata = 1,
             GenerateCode = 2,
         }
-
     }
 }

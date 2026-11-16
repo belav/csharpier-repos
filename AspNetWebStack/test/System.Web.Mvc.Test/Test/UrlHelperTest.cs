@@ -139,7 +139,10 @@ namespace System.Web.Mvc.Test
         public void RequestContextProperty()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
             UrlHelper urlHelper = new UrlHelper(requestContext);
 
             // Assert
@@ -151,8 +154,12 @@ namespace System.Web.Mvc.Test
         {
             // Assert
             Assert.ThrowsArgumentNull(
-                delegate { new UrlHelper(null); },
-                "requestContext");
+                delegate
+                {
+                    new UrlHelper(null);
+                },
+                "requestContext"
+            );
         }
 
         [Fact]
@@ -160,8 +167,12 @@ namespace System.Web.Mvc.Test
         {
             // Assert
             Assert.ThrowsArgumentNull(
-                delegate { new UrlHelper(GetRequestContext(), null); },
-                "routeCollection");
+                delegate
+                {
+                    new UrlHelper(GetRequestContext(), null);
+                },
+                "routeCollection"
+            );
         }
 
         [Fact]
@@ -210,7 +221,11 @@ namespace System.Web.Mvc.Test
             UrlHelper urlHelper = GetUrlHelper();
 
             // Act
-            string url = urlHelper.Action("newaction", "home2", new RouteValueDictionary(new { id = "someid" }));
+            string url = urlHelper.Action(
+                "newaction",
+                "home2",
+                new RouteValueDictionary(new { id = "someid" })
+            );
 
             // Assert
             Assert.Equal(MvcHelper.AppPathModifier + "/app/home2/newaction/someid", url);
@@ -236,7 +251,10 @@ namespace System.Web.Mvc.Test
             UrlHelper urlHelper = GetUrlHelper();
 
             // Act
-            string url = urlHelper.Action("newaction", new RouteValueDictionary(new { Controller = "home2", id = "someid" }));
+            string url = urlHelper.Action(
+                "newaction",
+                new RouteValueDictionary(new { Controller = "home2", id = "someid" })
+            );
 
             // Assert
             Assert.Equal(MvcHelper.AppPathModifier + "/app/home2/newaction/someid", url);
@@ -262,7 +280,12 @@ namespace System.Web.Mvc.Test
             UrlHelper urlHelper = GetUrlHelper();
 
             // Act
-            string url = urlHelper.Action("newaction", "home2", new { id = "someid" }, null /* protocol */);
+            string url = urlHelper.Action(
+                "newaction",
+                "home2",
+                new { id = "someid" },
+                null /* protocol */
+            );
 
             // Assert
             Assert.Equal(MvcHelper.AppPathModifier + "/app/home2/newaction/someid", url);
@@ -304,7 +327,10 @@ namespace System.Web.Mvc.Test
             string url = urlHelper.Action("newaction", "home2", new { id = "someid" }, "https");
 
             // Assert
-            Assert.Equal("https://localhost" + MvcHelper.AppPathModifier + "/app/home2/newaction/someid", url);
+            Assert.Equal(
+                "https://localhost" + MvcHelper.AppPathModifier + "/app/home2/newaction/someid",
+                url
+            );
         }
 
         [Fact]
@@ -314,10 +340,18 @@ namespace System.Web.Mvc.Test
             UrlHelper urlHelper = GetUrlHelper();
 
             // Act
-            string url = urlHelper.Action("newaction", "home2", new RouteValueDictionary(new { id = "someid" }), "https");
+            string url = urlHelper.Action(
+                "newaction",
+                "home2",
+                new RouteValueDictionary(new { id = "someid" }),
+                "https"
+            );
 
             // Assert
-            Assert.Equal("https://localhost" + MvcHelper.AppPathModifier + "/app/home2/newaction/someid", url);
+            Assert.Equal(
+                "https://localhost" + MvcHelper.AppPathModifier + "/app/home2/newaction/someid",
+                url
+            );
         }
 
         [Fact]
@@ -354,8 +388,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate() { urlHelper.Content(String.Empty); },
-                "contentPath");
+                delegate()
+                {
+                    urlHelper.Content(String.Empty);
+                },
+                "contentPath"
+            );
         }
 
         [Fact]
@@ -402,8 +440,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate() { UrlHelper.GenerateContentUrl(null, null); },
-                "contentPath");
+                delegate()
+                {
+                    UrlHelper.GenerateContentUrl(null, null);
+                },
+                "contentPath"
+            );
         }
 
         [Fact]
@@ -411,8 +453,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate() { UrlHelper.GenerateContentUrl("Content/foo.png", null); },
-                "httpContext");
+                delegate()
+                {
+                    UrlHelper.GenerateContentUrl("Content/foo.png", null);
+                },
+                "httpContext"
+            );
         }
 
         [Fact]
@@ -420,8 +466,25 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate() { UrlHelper.GenerateUrl(null /* routeName */, null /* actionName */, null /* controllerName */, null /* routeValues */, new RouteCollection(), null /* requestContext */, false); },
-                "requestContext");
+                delegate()
+                {
+                    UrlHelper.GenerateUrl(
+                        null /* routeName */
+                        ,
+                        null /* actionName */
+                        ,
+                        null /* controllerName */
+                        ,
+                        null /* routeValues */
+                        ,
+                        new RouteCollection(),
+                        null /* requestContext */
+                        ,
+                        false
+                    );
+                },
+                "requestContext"
+            );
         }
 
         [Fact]
@@ -429,8 +492,26 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate() { UrlHelper.GenerateUrl(null /* routeName */, null /* actionName */, null /* controllerName */, null /* routeValues */, null /* routeCollection */, null /* requestContext */, false); },
-                "routeCollection");
+                delegate()
+                {
+                    UrlHelper.GenerateUrl(
+                        null /* routeName */
+                        ,
+                        null /* actionName */
+                        ,
+                        null /* controllerName */
+                        ,
+                        null /* routeValues */
+                        ,
+                        null /* routeCollection */
+                        ,
+                        null /* requestContext */
+                        ,
+                        false
+                    );
+                },
+                "routeCollection"
+            );
         }
 
         [Fact]
@@ -440,7 +521,15 @@ namespace System.Web.Mvc.Test
             RequestContext requestContext = GetRequestContext();
 
             // Act
-            string url = UrlHelper.GenerateUrl(null, null, null, null, new RouteCollection(), requestContext, true);
+            string url = UrlHelper.GenerateUrl(
+                null,
+                null,
+                null,
+                null,
+                new RouteCollection(),
+                requestContext,
+                true
+            );
 
             // Assert
             Assert.Null(url);
@@ -453,7 +542,15 @@ namespace System.Web.Mvc.Test
             RequestContext requestContext = GetRequestContext(GetRouteData());
 
             // Act
-            string url = UrlHelper.GenerateUrl(null, "newaction", null, null, GetRouteCollection(), requestContext, true);
+            string url = UrlHelper.GenerateUrl(
+                null,
+                "newaction",
+                null,
+                null,
+                GetRouteCollection(),
+                requestContext,
+                true
+            );
 
             // Assert
             Assert.Equal(MvcHelper.AppPathModifier + "/app/home/newaction", url);
@@ -466,7 +563,15 @@ namespace System.Web.Mvc.Test
             RequestContext requestContext = GetRequestContext(GetRouteData());
 
             // Act
-            string url = UrlHelper.GenerateUrl(null, "newaction", "newcontroller", null, GetRouteCollection(), requestContext, true);
+            string url = UrlHelper.GenerateUrl(
+                null,
+                "newaction",
+                "newcontroller",
+                null,
+                GetRouteCollection(),
+                requestContext,
+                true
+            );
 
             // Assert
             Assert.Equal(MvcHelper.AppPathModifier + "/app/newcontroller/newaction", url);
@@ -479,7 +584,15 @@ namespace System.Web.Mvc.Test
             RequestContext requestContext = GetRequestContext(GetRouteData());
 
             // Act
-            string url = UrlHelper.GenerateUrl(null, null, null, null, GetRouteCollection(), requestContext, true);
+            string url = UrlHelper.GenerateUrl(
+                null,
+                null,
+                null,
+                null,
+                GetRouteCollection(),
+                requestContext,
+                true
+            );
 
             // Assert
             Assert.Equal(MvcHelper.AppPathModifier + "/app/home/oldaction", url);
@@ -492,7 +605,11 @@ namespace System.Web.Mvc.Test
 
             // Arrange
             UrlHelper urlHelper = GetUrlHelper();
-            urlHelper.RouteCollection.MapRoute("MyRouteName", "any/url", new { controller = "Charlie" });
+            urlHelper.RouteCollection.MapRoute(
+                "MyRouteName",
+                "any/url",
+                new { controller = "Charlie" }
+            );
 
             // Act
             string result = urlHelper.RouteUrl("MyRouteName");
@@ -508,7 +625,16 @@ namespace System.Web.Mvc.Test
             UrlHelper urlHelper = GetUrlHelper();
 
             // Act
-            string url = urlHelper.RouteUrl(new RouteValueDictionary(new { Action = "newaction", Controller = "home2", id = "someid" }));
+            string url = urlHelper.RouteUrl(
+                new RouteValueDictionary(
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid",
+                    }
+                )
+            );
 
             // Assert
             Assert.Equal(MvcHelper.AppPathModifier + "/app/home2/newaction/someid", url);
@@ -521,10 +647,27 @@ namespace System.Web.Mvc.Test
             UrlHelper urlHelper = GetUrlHelper();
 
             // Act
-            string url = urlHelper.RouteUrl("namedroute", new RouteValueDictionary(new { Action = "newaction", Controller = "home2", id = "someid" }), "http", String.Empty /* hostName */);
+            string url = urlHelper.RouteUrl(
+                "namedroute",
+                new RouteValueDictionary(
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid",
+                    }
+                ),
+                "http",
+                String.Empty /* hostName */
+            );
 
             // Assert
-            Assert.Equal("http://localhost" + MvcHelper.AppPathModifier + "/app/named/home2/newaction/someid", url);
+            Assert.Equal(
+                "http://localhost"
+                    + MvcHelper.AppPathModifier
+                    + "/app/named/home2/newaction/someid",
+                url
+            );
         }
 
         [Fact]
@@ -534,10 +677,28 @@ namespace System.Web.Mvc.Test
             UrlHelper urlHelper = GetUrlHelper();
 
             // Act
-            string url = urlHelper.RouteUrl("namedroute", new RouteValueDictionary(new { Action = "newaction", Controller = "home2", id = "someid" }), String.Empty /* protocol */, "foo.bar.com");
+            string url = urlHelper.RouteUrl(
+                "namedroute",
+                new RouteValueDictionary(
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid",
+                    }
+                ),
+                String.Empty /* protocol */
+                ,
+                "foo.bar.com"
+            );
 
             // Assert
-            Assert.Equal("http://foo.bar.com" + MvcHelper.AppPathModifier + "/app/named/home2/newaction/someid", url);
+            Assert.Equal(
+                "http://foo.bar.com"
+                    + MvcHelper.AppPathModifier
+                    + "/app/named/home2/newaction/someid",
+                url
+            );
         }
 
         [Fact]
@@ -547,10 +708,28 @@ namespace System.Web.Mvc.Test
             UrlHelper urlHelper = GetUrlHelper();
 
             // Act
-            string url = urlHelper.RouteUrl("namedroute", new RouteValueDictionary(new { Action = "newaction", Controller = "home2", id = "someid" }), null /* protocol */, "foo.bar.com");
+            string url = urlHelper.RouteUrl(
+                "namedroute",
+                new RouteValueDictionary(
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid",
+                    }
+                ),
+                null /* protocol */
+                ,
+                "foo.bar.com"
+            );
 
             // Assert
-            Assert.Equal("http://foo.bar.com" + MvcHelper.AppPathModifier + "/app/named/home2/newaction/someid", url);
+            Assert.Equal(
+                "http://foo.bar.com"
+                    + MvcHelper.AppPathModifier
+                    + "/app/named/home2/newaction/someid",
+                url
+            );
         }
 
         [Fact]
@@ -560,7 +739,20 @@ namespace System.Web.Mvc.Test
             UrlHelper urlHelper = GetUrlHelper();
 
             // Act
-            string url = urlHelper.RouteUrl("namedroute", new RouteValueDictionary(new { Action = "newaction", Controller = "home2", id = "someid" }), null /* protocol */, null /* hostName */);
+            string url = urlHelper.RouteUrl(
+                "namedroute",
+                new RouteValueDictionary(
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid",
+                    }
+                ),
+                null /* protocol */
+                ,
+                null /* hostName */
+            );
 
             // Assert
             Assert.Equal(MvcHelper.AppPathModifier + "/app/named/home2/newaction/someid", url);
@@ -573,7 +765,14 @@ namespace System.Web.Mvc.Test
             UrlHelper urlHelper = GetUrlHelper();
 
             // Act
-            string url = urlHelper.RouteUrl(new { Action = "newaction", Controller = "home2", id = "someid" });
+            string url = urlHelper.RouteUrl(
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid",
+                }
+            );
 
             // Assert
             Assert.Equal(MvcHelper.AppPathModifier + "/app/home2/newaction/someid", url);
@@ -586,10 +785,24 @@ namespace System.Web.Mvc.Test
             UrlHelper urlHelper = GetUrlHelper();
 
             // Act
-            string url = urlHelper.RouteUrl("namedroute", new { Action = "newaction", Controller = "home2", id = "someid" }, "https");
+            string url = urlHelper.RouteUrl(
+                "namedroute",
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid",
+                },
+                "https"
+            );
 
             // Assert
-            Assert.Equal("https://localhost" + MvcHelper.AppPathModifier + "/app/named/home2/newaction/someid", url);
+            Assert.Equal(
+                "https://localhost"
+                    + MvcHelper.AppPathModifier
+                    + "/app/named/home2/newaction/someid",
+                url
+            );
         }
 
         [Fact]
@@ -612,7 +825,17 @@ namespace System.Web.Mvc.Test
             UrlHelper urlHelper = GetUrlHelper();
 
             // Act
-            string url = urlHelper.RouteUrl("namedroute", new RouteValueDictionary(new { Action = "newaction", Controller = "home2", id = "someid" }));
+            string url = urlHelper.RouteUrl(
+                "namedroute",
+                new RouteValueDictionary(
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid",
+                    }
+                )
+            );
 
             // Assert
             Assert.Equal(MvcHelper.AppPathModifier + "/app/named/home2/newaction/someid", url);
@@ -625,7 +848,15 @@ namespace System.Web.Mvc.Test
             UrlHelper urlHelper = GetUrlHelper();
 
             // Act
-            string url = urlHelper.RouteUrl("namedroute", new { Action = "newaction", Controller = "home2", id = "someid" });
+            string url = urlHelper.RouteUrl(
+                "namedroute",
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid",
+                }
+            );
 
             // Assert
             Assert.Equal(MvcHelper.AppPathModifier + "/app/named/home2/newaction/someid", url);
@@ -638,7 +869,15 @@ namespace System.Web.Mvc.Test
             UrlHelper urlHelper = GetUrlHelper();
 
             // Act
-            string url = urlHelper.HttpRouteUrl("httproute", new { Action = "newaction", Controller = "home2", id = "someid" });
+            string url = urlHelper.HttpRouteUrl(
+                "httproute",
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid",
+                }
+            );
 
             // Assert
             Assert.Equal(MvcHelper.AppPathModifier + "/app/mock/http/route", url);
@@ -664,14 +903,17 @@ namespace System.Web.Mvc.Test
         { // Dev10 Bug #924729
             // Arrange
             RouteCollection routes = new RouteCollection();
-            routes.MapRoute("SampleRoute", "testing/{a}/{b}/{c}",
-                            new
-                            {
-                                controller = "controller",
-                                action = "action",
-                                b = UrlParameter.Optional,
-                                c = UrlParameter.Optional
-                            });
+            routes.MapRoute(
+                "SampleRoute",
+                "testing/{a}/{b}/{c}",
+                new
+                {
+                    controller = "controller",
+                    action = "action",
+                    b = UrlParameter.Optional,
+                    c = UrlParameter.Optional,
+                }
+            );
 
             UrlHelper helper = GetUrlHelper(routeCollection: routes);
 
@@ -698,12 +940,31 @@ namespace System.Web.Mvc.Test
         private static RouteCollection GetRouteCollection()
         {
             RouteCollection rt = new RouteCollection();
-            rt.Add(new Route("{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
-            rt.Add("namedroute", new Route("named/{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
+            rt.Add(
+                new Route("{controller}/{action}/{id}", null)
+                {
+                    Defaults = new RouteValueDictionary(new { id = "defaultid" }),
+                }
+            );
+            rt.Add(
+                "namedroute",
+                new Route("named/{controller}/{action}/{id}", null)
+                {
+                    Defaults = new RouteValueDictionary(new { id = "defaultid" }),
+                }
+            );
 
             // Adding a route that recognizes the httproute value for the HttpRouteUrl tests
             Mock<RouteBase> mockHttpRoute = new Mock<RouteBase>();
-            mockHttpRoute.Setup(mock => mock.GetVirtualPath(It.IsAny<RequestContext>(), It.Is<RouteValueDictionary>(routeValues => routeValues.ContainsKey("httproute"))))
+            mockHttpRoute
+                .Setup(mock =>
+                    mock.GetVirtualPath(
+                        It.IsAny<RequestContext>(),
+                        It.Is<RouteValueDictionary>(routeValues =>
+                            routeValues.ContainsKey("httproute")
+                        )
+                    )
+                )
                 .Returns(new VirtualPathData(null, "mock/http/route"));
             rt.Add("httproute", mockHttpRoute.Object);
 
@@ -723,17 +984,25 @@ namespace System.Web.Mvc.Test
             return GetUrlHelper(GetRouteData(), GetRouteCollection());
         }
 
-        private static UrlHelper GetUrlHelper(RouteData routeData = null, RouteCollection routeCollection = null)
+        private static UrlHelper GetUrlHelper(
+            RouteData routeData = null,
+            RouteCollection routeCollection = null
+        )
         {
             HttpContextBase httpcontext = MvcHelper.GetHttpContext("/app/", null, null);
-            UrlHelper urlHelper = new UrlHelper(new RequestContext(httpcontext, routeData ?? new RouteData()), routeCollection ?? new RouteCollection());
+            UrlHelper urlHelper = new UrlHelper(
+                new RequestContext(httpcontext, routeData ?? new RouteData()),
+                routeCollection ?? new RouteCollection()
+            );
             return urlHelper;
         }
 
         private static UrlHelper GetUrlHelperForIsLocalUrl()
         {
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>();
-            contextMock.SetupGet(context => context.Request.Url).Returns(new Uri("http://www.mysite.com/"));
+            contextMock
+                .SetupGet(context => context.Request.Url)
+                .Returns(new Uri("http://www.mysite.com/"));
             RequestContext requestContext = new RequestContext(contextMock.Object, new RouteData());
             UrlHelper helper = new UrlHelper(requestContext);
             return helper;

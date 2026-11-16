@@ -29,11 +29,15 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (this.singleton == null)
                         {
-                            InstanceContext instanceContext = this.DispatchRuntime.SingletonInstanceContext;
+                            InstanceContext instanceContext =
+                                this.DispatchRuntime.SingletonInstanceContext;
 
                             if (instanceContext == null)
                             {
-                                instanceContext = new InstanceContext(this.DispatchRuntime.ChannelDispatcher.Host, false);
+                                instanceContext = new InstanceContext(
+                                    this.DispatchRuntime.ChannelDispatcher.Host,
+                                    false
+                                );
                                 instanceContext.Open();
                             }
                             else if (instanceContext.State != CommunicationState.Opened)
@@ -53,7 +57,7 @@ namespace System.ServiceModel.Dispatcher
                             //Set the IsUsercreated flag to false for singleton mode even in cases when users create their own runtime.
                             instanceContext.IsUserCreated = false;
 
-                            //Delay assigning the potentially newly created InstanceContext (till after its opened) to this.Singleton 
+                            //Delay assigning the potentially newly created InstanceContext (till after its opened) to this.Singleton
                             //to ensure that it is opened only once.
                             this.singleton = instanceContext;
                         }
@@ -65,7 +69,10 @@ namespace System.ServiceModel.Dispatcher
 
         #region IInstanceContextProvider Members
 
-        public override InstanceContext GetExistingInstanceContext(Message message, IContextChannel channel)
+        public override InstanceContext GetExistingInstanceContext(
+            Message message,
+            IContextChannel channel
+        )
         {
             ServiceChannel serviceChannel = this.GetServiceChannelFromProxy(channel);
             if (serviceChannel != null && serviceChannel.HasSession)
@@ -75,7 +82,11 @@ namespace System.ServiceModel.Dispatcher
             return this.SingletonInstance;
         }
 
-        public override void InitializeInstanceContext(InstanceContext instanceContext, Message message, IContextChannel channel)
+        public override void InitializeInstanceContext(
+            InstanceContext instanceContext,
+            Message message,
+            IContextChannel channel
+        )
         {
             //no-op
         }
@@ -86,7 +97,10 @@ namespace System.ServiceModel.Dispatcher
             return false;
         }
 
-        public override void NotifyIdle(InstanceContextIdleCallback callback, InstanceContext instanceContext)
+        public override void NotifyIdle(
+            InstanceContextIdleCallback callback,
+            InstanceContext instanceContext
+        )
         {
             //no-op
         }

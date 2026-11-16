@@ -106,13 +106,18 @@ namespace System.Tests
         [Fact]
         public static void CustomTypeTest()
         {
-            CustomRangeTester crt = new CustomRangeTester(new int [] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+            CustomRangeTester crt = new CustomRangeTester(
+                new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+            );
             for (int i = 0; i < crt.Length; i++)
             {
                 Assert.Equal(crt[i], crt[Index.FromStart(i)]);
                 Assert.Equal(crt[crt.Length - i - 1], crt[^(i + 1)]);
 
-                Assert.True(crt.Slice(i, crt.Length - i).Equals(crt[i..^0]), $"Index = {i} and {crt.Slice(i, crt.Length - i)} != {crt[i..^0]}");
+                Assert.True(
+                    crt.Slice(i, crt.Length - i).Equals(crt[i..^0]),
+                    $"Index = {i} and {crt.Slice(i, crt.Length - i)} != {crt[i..^0]}"
+                );
             }
         }
 
@@ -122,16 +127,19 @@ namespace System.Tests
         //      this[Range]
         private class CustomRangeTester : IEquatable<CustomRangeTester>
         {
-            private int [] _data;
+            private int[] _data;
 
-            public CustomRangeTester(int [] data) => _data = data;
+            public CustomRangeTester(int[] data) => _data = data;
+
             public int Length => _data.Length;
             public int this[int index] => _data[index];
-            public CustomRangeTester Slice(int start, int length) => new CustomRangeTester(_data.AsSpan(start, length).ToArray());
 
-            public int [] Data => _data;
+            public CustomRangeTester Slice(int start, int length) =>
+                new CustomRangeTester(_data.AsSpan(start, length).ToArray());
 
-            public bool Equals (CustomRangeTester other)
+            public int[] Data => _data;
+
+            public bool Equals(CustomRangeTester other)
             {
                 if (_data.Length == other.Data.Length)
                 {

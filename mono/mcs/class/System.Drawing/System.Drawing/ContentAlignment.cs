@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,18 +28,22 @@
 
 using System.ComponentModel;
 
-namespace System.Drawing {
-
-	[Editor ("System.Drawing.Design.ContentAlignmentEditor, " + Consts.AssemblySystem_Drawing_Design, typeof (System.Drawing.Design.UITypeEditor))]
-	public enum ContentAlignment {
-		TopLeft      = 0x001,
-		TopCenter    = 0x002,
-		TopRight     = 0x004,
-		MiddleLeft   = 0x010,
-		MiddleCenter = 0x020,
-		MiddleRight  = 0x040,
-		BottomLeft   = 0x100,
-		BottomCenter = 0x200,
-		BottomRight  = 0x400
-	}
+namespace System.Drawing
+{
+    [Editor(
+        "System.Drawing.Design.ContentAlignmentEditor, " + Consts.AssemblySystem_Drawing_Design,
+        typeof(System.Drawing.Design.UITypeEditor)
+    )]
+    public enum ContentAlignment
+    {
+        TopLeft = 0x001,
+        TopCenter = 0x002,
+        TopRight = 0x004,
+        MiddleLeft = 0x010,
+        MiddleCenter = 0x020,
+        MiddleRight = 0x040,
+        BottomLeft = 0x100,
+        BottomCenter = 0x200,
+        BottomRight = 0x400,
+    }
 }

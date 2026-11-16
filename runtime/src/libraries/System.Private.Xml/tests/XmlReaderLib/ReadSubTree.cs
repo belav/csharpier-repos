@@ -37,7 +37,10 @@ namespace System.Xml.Tests
 
                     if (flag)
                     {
-                        CError.WriteLine("ReadSubtree doesn't throw InvalidOp Exception on NodeType : " + nodeType);
+                        CError.WriteLine(
+                            "ReadSubtree doesn't throw InvalidOp Exception on NodeType : "
+                                + nodeType
+                        );
                         return TEST_FAIL;
                     }
 
@@ -68,7 +71,9 @@ namespace System.Xml.Tests
                         }
                         if (flag)
                         {
-                            CError.WriteLine("ReadSubtree doesn't throw InvalidOp Exception on Attribute Node Type");
+                            CError.WriteLine(
+                                "ReadSubtree doesn't throw InvalidOp Exception on Attribute Node Type"
+                            );
                             return TEST_FAIL;
                         }
 
@@ -84,11 +89,12 @@ namespace System.Xml.Tests
                         }
                     }
                 }
-            }//end while
+            } //end while
             return TEST_PASS;
         }
 
-        private string _xml = "<root><elem1><elempi/><?pi target?><elem2 xmlns='xyz'><elem/><!--Comment--><x:elem3 xmlns:x='pqr'><elem4 attr4='4'/></x:elem3></elem2></elem1><elem5/><elem6/></root>";
+        private string _xml =
+            "<root><elem1><elempi/><?pi target?><elem2 xmlns='xyz'><elem/><!--Comment--><x:elem3 xmlns:x='pqr'><elem4 attr4='4'/></x:elem3></elem2></elem1><elem5/><elem6/></root>";
 
         //[Variation("ReadSubtree Test on Root", Pri = 0, Params = new object[]{"root", "", "ELEMENT", "", "", "NONE" })]
         //[Variation("ReadSubtree Test depth=1", Pri = 0, Params = new object[] { "elem1", "", "ELEMENT", "elem5", "", "ELEMENT" })]
@@ -124,10 +130,15 @@ namespace System.Xml.Tests
             CError.Compare(r.ReadState, ReadState.Interactive, "Reader state is not Interactive");
             CError.Compare(r.Name, name, "Subreader name doesn't match");
             CError.Compare(r.Value, value, "Subreader value doesn't match");
-            CError.Compare(r.NodeType.ToString().ToUpperInvariant(), type, "Subreader nodetype doesn't match");
+            CError.Compare(
+                r.NodeType.ToString().ToUpperInvariant(),
+                type,
+                "Subreader nodetype doesn't match"
+            );
             CError.Compare(r.Depth, 0, "Subreader Depth is not zero");
 
-            while (r.Read()) ;
+            while (r.Read())
+                ;
             r.Dispose();
 
             CError.Compare(r.ReadState, ReadState.Closed, "Reader state is not Initial");
@@ -138,7 +149,11 @@ namespace System.Xml.Tests
 
             CError.Compare(DataReader.Name, oname, "Main name doesn't match");
             CError.Compare(DataReader.Value, ovalue, "Main value doesn't match");
-            CError.Compare(DataReader.NodeType.ToString().ToUpperInvariant(), otype, "Main nodetype doesn't match");
+            CError.Compare(
+                DataReader.NodeType.ToString().ToUpperInvariant(),
+                otype,
+                "Main nodetype doesn't match"
+            );
 
             DataReader.Close();
             return TEST_PASS;
@@ -221,7 +236,11 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement("elem2");
             XmlReader r = DataReader.ReadSubtree();
 
-            CError.Compare(DataReader.ReadState, ReadState.Interactive, "ReadState not interactive");
+            CError.Compare(
+                DataReader.ReadState,
+                ReadState.Interactive,
+                "ReadState not interactive"
+            );
 
             DataReader.Close();
             return TEST_PASS;
@@ -243,7 +262,8 @@ namespace System.Xml.Tests
         [Variation("Nested Subtree reader calls", Pri = 2)]
         public int v8()
         {
-            string xmlStr = "<elem1><elem2><elem3><elem4><elem5><elem6><elem7><elem8><elem9><elem0></elem0></elem9></elem8></elem7></elem6></elem5></elem4></elem3></elem2></elem1>";
+            string xmlStr =
+                "<elem1><elem2><elem3><elem4><elem5><elem6><elem7><elem8><elem9><elem0></elem0></elem9></elem8></elem7></elem6></elem5></elem4></elem3></elem2></elem1>";
             ReloadSource(new StringReader(xmlStr));
             XmlReader r = DataReader.Internal;
 
@@ -262,8 +282,7 @@ namespace System.Xml.Tests
             {
                 mnw.OpenElement();
                 mnw.CloseElement();
-            }
-            while (mnw.GetNodes().Length < 4096);
+            } while (mnw.GetNodes().Length < 4096);
 
             mnw.Finish();
 
@@ -272,13 +291,18 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement("ELEMENT_2");
 
             XmlReader r = DataReader.ReadSubtree();
-            while (r.Read()) ;
+            while (r.Read())
+                ;
 
             DataReader.Read();
 
             CError.Compare(DataReader.Name, "ELEMENT_1", "Main name doesn't match");
             CError.Compare(DataReader.Value, "", "Main value doesn't match");
-            CError.Compare(DataReader.NodeType.ToString().ToUpperInvariant(), "ENDELEMENT", "Main nodetype doesn't match");
+            CError.Compare(
+                DataReader.NodeType.ToString().ToUpperInvariant(),
+                "ENDELEMENT",
+                "Main nodetype doesn't match"
+            );
 
             DataReader.Close();
             return TEST_PASS;
@@ -291,12 +315,16 @@ namespace System.Xml.Tests
             ReloadSource(new StringReader(xmlStr));
             DataReader.PositionOnElement("e");
             XmlReader r = DataReader.ReadSubtree();
-            while (r.Read()) ;
+            while (r.Read())
+                ;
             DataReader.Close();
             return TEST_PASS;
         }
 
-        [Variation("Subtree Reader caches the NodeType and reports node type of Attribute on subsequent reads.", Pri = 1)]
+        [Variation(
+            "Subtree Reader caches the NodeType and reports node type of Attribute on subsequent reads.",
+            Pri = 1
+        )]
         public int SubtreeReaderReadsProperlyNodeTypeOfAttributes()
         {
             string xmlStr = "<root xmlns='foo'><b blah='blah'/><b/></root>";
@@ -342,13 +370,14 @@ namespace System.Xml.Tests
         {
             Dictionary<string, object> localNames = new Dictionary<string, object>();
 
-            string xml = "<?xml version='1.0' encoding='utf-8'?>" +
-                "<IXmlSerializable z:CLRType='A' z:ClrAssembly='test, " +
-                "Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' " +
-                "xmlns='http://schemas.datacontract.org' xmlns:z='http://schemas.microsoft.com' >" +
-                "<WriteAttributeString p3:attributeName3='attributeValue3' " +
-                "abc:attributeName='attributeValue' attributeName2='attributeValue2' " +
-                "xmlns:abc='myNameSpace' xmlns:p3='myNameSpace3' /></IXmlSerializable>";
+            string xml =
+                "<?xml version='1.0' encoding='utf-8'?>"
+                + "<IXmlSerializable z:CLRType='A' z:ClrAssembly='test, "
+                + "Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' "
+                + "xmlns='http://schemas.datacontract.org' xmlns:z='http://schemas.microsoft.com' >"
+                + "<WriteAttributeString p3:attributeName3='attributeValue3' "
+                + "abc:attributeName='attributeValue' attributeName2='attributeValue2' "
+                + "xmlns:abc='myNameSpace' xmlns:p3='myNameSpace3' /></IXmlSerializable>";
 
             ReloadSourceStr(xml);
 
@@ -395,45 +424,53 @@ namespace System.Xml.Tests
 
             using (XmlReader subtreeReader = DataReader.ReadSubtree()) { }
 
-            if (DataReader.NodeType.ToString() == "EndElement" && DataReader.Name.ToString() == "b" && DataReader.Read() == true)
+            if (
+                DataReader.NodeType.ToString() == "EndElement"
+                && DataReader.Name.ToString() == "b"
+                && DataReader.Read() == true
+            )
                 return TEST_PASS;
 
             return TEST_FAIL;
         }
 
-        private string[] _s = new string[] {
-                "<root xmlns:p1='a' xmlns:p2='b'><e p1:a='' p2:a=''></e></root>",
-                "<root xmlns:p1='a' xmlns:p2='b'><e p1:a='' p2:a='' xmlns:p2='b' ></e></root>",
-                "<root xmlns:p1='a' xmlns:p2='b'><e xmlns:p2='b' p1:a='' p2:a='' ></e></root>",
-                "<root xmlns:p1='a' ><e p1:a='' p2:a='' xmlns:p2='b' ></e></root>",
-                "<root xmlns:p2='b'><e xmlns:p1='a' p1:a='' p2:a=''></e></root>",
-                "<root xmlns:p1='a' xmlns:p2='b'><e p1:a='' p2:a='' xmlns:p1='a' xmlns:p2='b'></e></root>"
-            };
-        private string[][] _exp = {
-            new string[] {"p1:a", "p2:a", "xmlns:p1", "xmlns:p2"},
-            new string[] {"p1:a", "p2:a", "xmlns:p2", "xmlns:p1"},
-            new string[] {"xmlns:p2", "p1:a", "p2:a", "xmlns:p1" },
-            new string[] {"p1:a", "p2:a", "xmlns:p2", "xmlns:p1"},
-            new string[] {"xmlns:p1", "p1:a", "p2:a", "xmlns:p2"},
-            new string[] {"p1:a", "p2:a", "xmlns:p1", "xmlns:p2"},
+        private string[] _s = new string[]
+        {
+            "<root xmlns:p1='a' xmlns:p2='b'><e p1:a='' p2:a=''></e></root>",
+            "<root xmlns:p1='a' xmlns:p2='b'><e p1:a='' p2:a='' xmlns:p2='b' ></e></root>",
+            "<root xmlns:p1='a' xmlns:p2='b'><e xmlns:p2='b' p1:a='' p2:a='' ></e></root>",
+            "<root xmlns:p1='a' ><e p1:a='' p2:a='' xmlns:p2='b' ></e></root>",
+            "<root xmlns:p2='b'><e xmlns:p1='a' p1:a='' p2:a=''></e></root>",
+            "<root xmlns:p1='a' xmlns:p2='b'><e p1:a='' p2:a='' xmlns:p1='a' xmlns:p2='b'></e></root>",
+        };
+        private string[][] _exp =
+        {
+            new string[] { "p1:a", "p2:a", "xmlns:p1", "xmlns:p2" },
+            new string[] { "p1:a", "p2:a", "xmlns:p2", "xmlns:p1" },
+            new string[] { "xmlns:p2", "p1:a", "p2:a", "xmlns:p1" },
+            new string[] { "p1:a", "p2:a", "xmlns:p2", "xmlns:p1" },
+            new string[] { "xmlns:p1", "p1:a", "p2:a", "xmlns:p2" },
+            new string[] { "p1:a", "p2:a", "xmlns:p1", "xmlns:p2" },
         };
 
-        private string[][] _expXpath = {
-            new string[] {"p1:a", "p2:a", "xmlns:p1", "xmlns:p2"},
-            new string[] {"xmlns:p2", "p1:a", "p2:a", "xmlns:p1"},
-            new string[] {"xmlns:p2", "p1:a", "p2:a", "xmlns:p1" },
-            new string[] {"xmlns:p2", "p1:a", "p2:a", "xmlns:p1"},
-            new string[] {"xmlns:p1", "p1:a", "p2:a", "xmlns:p2"},
-            new string[] {"xmlns:p1", "xmlns:p2", "p1:a", "p2:a"},
+        private string[][] _expXpath =
+        {
+            new string[] { "p1:a", "p2:a", "xmlns:p1", "xmlns:p2" },
+            new string[] { "xmlns:p2", "p1:a", "p2:a", "xmlns:p1" },
+            new string[] { "xmlns:p2", "p1:a", "p2:a", "xmlns:p1" },
+            new string[] { "xmlns:p2", "p1:a", "p2:a", "xmlns:p1" },
+            new string[] { "xmlns:p1", "p1:a", "p2:a", "xmlns:p2" },
+            new string[] { "xmlns:p1", "xmlns:p2", "p1:a", "p2:a" },
         };
 
-        private string[][] _expXslt = {
-            new string[] {"p1:a", "p2:a", "xmlns:p1", "xmlns:p2"},
-            new string[] {"p1:a", "p2:a", "xmlns:p1", "xmlns:p2"},
-            new string[] {"p1:a", "p2:a", "xmlns:p1", "xmlns:p2" },
-            new string[] {"p1:a", "p2:a", "xmlns:p2", "xmlns:p1"},
-            new string[] {"p1:a", "p2:a", "xmlns:p1", "xmlns:p2"},
-            new string[] {"p1:a", "p2:a", "xmlns:p1", "xmlns:p2"},
+        private string[][] _expXslt =
+        {
+            new string[] { "p1:a", "p2:a", "xmlns:p1", "xmlns:p2" },
+            new string[] { "p1:a", "p2:a", "xmlns:p1", "xmlns:p2" },
+            new string[] { "p1:a", "p2:a", "xmlns:p1", "xmlns:p2" },
+            new string[] { "p1:a", "p2:a", "xmlns:p2", "xmlns:p1" },
+            new string[] { "p1:a", "p2:a", "xmlns:p1", "xmlns:p2" },
+            new string[] { "p1:a", "p2:a", "xmlns:p1", "xmlns:p2" },
         };
 
         //[Variation("0. XmlReader.Name inconsistent when reading namespace node attribute", Param = 0)]
@@ -509,9 +546,10 @@ namespace System.Xml.Tests
         {
             int param = (int)CurVariation.Param;
             byte[] b = new byte[4];
-            string xml = "<Report><Account><Balance>-4,095,783.00" +
-                       "</Balance><LastActivity>2006/01/05</LastActivity>" +
-                       "</Account></Report>";
+            string xml =
+                "<Report><Account><Balance>-4,095,783.00"
+                + "</Balance><LastActivity>2006/01/05</LastActivity>"
+                + "</Account></Report>";
             ReloadSourceStr(xml);
             while (DataReader.Name != "Account")
                 DataReader.Read();
@@ -525,28 +563,83 @@ namespace System.Xml.Tests
                     {
                         switch (param)
                         {
-                            case 1: decimal num1 = sub.ReadElementContentAsDecimal(); break;
-                            case 2: object num2 = sub.ReadElementContentAs(typeof(float), null); break;
-                            case 3: bool num3 = sub.ReadElementContentAsBoolean(); break;
-                            case 5: float num5 = sub.ReadElementContentAsFloat(); break;
-                            case 6: double num6 = sub.ReadElementContentAsDouble(); break;
-                            case 7: int num7 = sub.ReadElementContentAsInt(); break;
-                            case 8: long num8 = sub.ReadElementContentAsLong(); break;
-                            case 9: object num9 = sub.ReadElementContentAs(typeof(double), null); break;
-                            case 10: object num10 = sub.ReadElementContentAs(typeof(decimal), null); break;
-                            case 11: sub.Read(); decimal num11 = sub.ReadContentAsDecimal(); break;
-                            case 12: sub.Read(); object num12 = sub.ReadContentAs(typeof(float), null); break;
-                            case 13: sub.Read(); bool num13 = sub.ReadContentAsBoolean(); break;
-                            case 15: sub.Read(); float num15 = sub.ReadContentAsFloat(); break;
-                            case 16: sub.Read(); double num16 = sub.ReadContentAsDouble(); break;
-                            case 17: sub.Read(); int num17 = sub.ReadContentAsInt(); break;
-                            case 18: sub.Read(); long num18 = sub.ReadContentAsLong(); break;
-                            case 19: sub.Read(); object num19 = sub.ReadContentAs(typeof(double), null); break;
-                            case 20: sub.Read(); object num20 = sub.ReadContentAs(typeof(decimal), null); break;
-                            case 21: object num21 = sub.ReadElementContentAsBase64(b, 0, 2); break;
-                            case 22: object num22 = sub.ReadElementContentAsBinHex(b, 0, 2); break;
-                            case 23: sub.Read(); object num23 = sub.ReadContentAsBase64(b, 0, 2); break;
-                            case 24: sub.Read(); object num24 = sub.ReadContentAsBinHex(b, 0, 2); break;
+                            case 1:
+                                decimal num1 = sub.ReadElementContentAsDecimal();
+                                break;
+                            case 2:
+                                object num2 = sub.ReadElementContentAs(typeof(float), null);
+                                break;
+                            case 3:
+                                bool num3 = sub.ReadElementContentAsBoolean();
+                                break;
+                            case 5:
+                                float num5 = sub.ReadElementContentAsFloat();
+                                break;
+                            case 6:
+                                double num6 = sub.ReadElementContentAsDouble();
+                                break;
+                            case 7:
+                                int num7 = sub.ReadElementContentAsInt();
+                                break;
+                            case 8:
+                                long num8 = sub.ReadElementContentAsLong();
+                                break;
+                            case 9:
+                                object num9 = sub.ReadElementContentAs(typeof(double), null);
+                                break;
+                            case 10:
+                                object num10 = sub.ReadElementContentAs(typeof(decimal), null);
+                                break;
+                            case 11:
+                                sub.Read();
+                                decimal num11 = sub.ReadContentAsDecimal();
+                                break;
+                            case 12:
+                                sub.Read();
+                                object num12 = sub.ReadContentAs(typeof(float), null);
+                                break;
+                            case 13:
+                                sub.Read();
+                                bool num13 = sub.ReadContentAsBoolean();
+                                break;
+                            case 15:
+                                sub.Read();
+                                float num15 = sub.ReadContentAsFloat();
+                                break;
+                            case 16:
+                                sub.Read();
+                                double num16 = sub.ReadContentAsDouble();
+                                break;
+                            case 17:
+                                sub.Read();
+                                int num17 = sub.ReadContentAsInt();
+                                break;
+                            case 18:
+                                sub.Read();
+                                long num18 = sub.ReadContentAsLong();
+                                break;
+                            case 19:
+                                sub.Read();
+                                object num19 = sub.ReadContentAs(typeof(double), null);
+                                break;
+                            case 20:
+                                sub.Read();
+                                object num20 = sub.ReadContentAs(typeof(decimal), null);
+                                break;
+                            case 21:
+                                object num21 = sub.ReadElementContentAsBase64(b, 0, 2);
+                                break;
+                            case 22:
+                                object num22 = sub.ReadElementContentAsBinHex(b, 0, 2);
+                                break;
+                            case 23:
+                                sub.Read();
+                                object num23 = sub.ReadContentAsBase64(b, 0, 2);
+                                break;
+                            case 24:
+                                sub.Read();
+                                object num24 = sub.ReadContentAsBinHex(b, 0, 2);
+                                break;
                         }
                     }
                     catch (XmlException)
@@ -555,35 +648,100 @@ namespace System.Xml.Tests
                         {
                             switch (param)
                             {
-                                case 1: decimal num1 = sub.ReadElementContentAsDecimal(); break;
-                                case 2: object num2 = sub.ReadElementContentAs(typeof(float), null); break;
-                                case 3: bool num3 = sub.ReadElementContentAsBoolean(); break;
-                                case 5: float num5 = sub.ReadElementContentAsFloat(); break;
-                                case 6: double num6 = sub.ReadElementContentAsDouble(); break;
-                                case 7: int num7 = sub.ReadElementContentAsInt(); break;
-                                case 8: long num8 = sub.ReadElementContentAsLong(); break;
-                                case 9: object num9 = sub.ReadElementContentAs(typeof(double), null); break;
-                                case 10: object num10 = sub.ReadElementContentAs(typeof(decimal), null); break;
-                                case 11: sub.Read(); decimal num11 = sub.ReadContentAsDecimal(); break;
-                                case 12: sub.Read(); object num12 = sub.ReadContentAs(typeof(float), null); break;
-                                case 13: sub.Read(); bool num13 = sub.ReadContentAsBoolean(); break;
-                                case 15: sub.Read(); float num15 = sub.ReadContentAsFloat(); break;
-                                case 16: sub.Read(); double num16 = sub.ReadContentAsDouble(); break;
-                                case 17: sub.Read(); int num17 = sub.ReadContentAsInt(); break;
-                                case 18: sub.Read(); long num18 = sub.ReadContentAsLong(); break;
-                                case 19: sub.Read(); object num19 = sub.ReadContentAs(typeof(double), null); break;
-                                case 20: sub.Read(); object num20 = sub.ReadContentAs(typeof(decimal), null); break;
-                                case 21: object num21 = sub.ReadElementContentAsBase64(b, 0, 2); break;
-                                case 22: object num22 = sub.ReadElementContentAsBinHex(b, 0, 2); break;
-                                case 23: sub.Read(); object num23 = sub.ReadContentAsBase64(b, 0, 2); break;
-                                case 24: sub.Read(); object num24 = sub.ReadContentAsBinHex(b, 0, 2); break;
+                                case 1:
+                                    decimal num1 = sub.ReadElementContentAsDecimal();
+                                    break;
+                                case 2:
+                                    object num2 = sub.ReadElementContentAs(typeof(float), null);
+                                    break;
+                                case 3:
+                                    bool num3 = sub.ReadElementContentAsBoolean();
+                                    break;
+                                case 5:
+                                    float num5 = sub.ReadElementContentAsFloat();
+                                    break;
+                                case 6:
+                                    double num6 = sub.ReadElementContentAsDouble();
+                                    break;
+                                case 7:
+                                    int num7 = sub.ReadElementContentAsInt();
+                                    break;
+                                case 8:
+                                    long num8 = sub.ReadElementContentAsLong();
+                                    break;
+                                case 9:
+                                    object num9 = sub.ReadElementContentAs(typeof(double), null);
+                                    break;
+                                case 10:
+                                    object num10 = sub.ReadElementContentAs(typeof(decimal), null);
+                                    break;
+                                case 11:
+                                    sub.Read();
+                                    decimal num11 = sub.ReadContentAsDecimal();
+                                    break;
+                                case 12:
+                                    sub.Read();
+                                    object num12 = sub.ReadContentAs(typeof(float), null);
+                                    break;
+                                case 13:
+                                    sub.Read();
+                                    bool num13 = sub.ReadContentAsBoolean();
+                                    break;
+                                case 15:
+                                    sub.Read();
+                                    float num15 = sub.ReadContentAsFloat();
+                                    break;
+                                case 16:
+                                    sub.Read();
+                                    double num16 = sub.ReadContentAsDouble();
+                                    break;
+                                case 17:
+                                    sub.Read();
+                                    int num17 = sub.ReadContentAsInt();
+                                    break;
+                                case 18:
+                                    sub.Read();
+                                    long num18 = sub.ReadContentAsLong();
+                                    break;
+                                case 19:
+                                    sub.Read();
+                                    object num19 = sub.ReadContentAs(typeof(double), null);
+                                    break;
+                                case 20:
+                                    sub.Read();
+                                    object num20 = sub.ReadContentAs(typeof(decimal), null);
+                                    break;
+                                case 21:
+                                    object num21 = sub.ReadElementContentAsBase64(b, 0, 2);
+                                    break;
+                                case 22:
+                                    object num22 = sub.ReadElementContentAsBinHex(b, 0, 2);
+                                    break;
+                                case 23:
+                                    sub.Read();
+                                    object num23 = sub.ReadContentAsBase64(b, 0, 2);
+                                    break;
+                                case 24:
+                                    sub.Read();
+                                    object num24 = sub.ReadContentAsBinHex(b, 0, 2);
+                                    break;
                             }
                         }
-                        catch (InvalidOperationException) { return TEST_PASS; }
-                        catch (XmlException) { return TEST_PASS; }
-                        if (param == 24 || param == 23) return TEST_PASS;
+                        catch (InvalidOperationException)
+                        {
+                            return TEST_PASS;
+                        }
+                        catch (XmlException)
+                        {
+                            return TEST_PASS;
+                        }
+                        if (param == 24 || param == 23)
+                            return TEST_PASS;
                     }
-                    catch (NotSupportedException) { return TEST_PASS; }
+                    catch (NotSupportedException)
+                    {
+                        return TEST_PASS;
+                    }
                 }
             }
             return TEST_FAIL;
@@ -592,30 +750,41 @@ namespace System.Xml.Tests
         [Variation("SubtreeReader has empty namespace")]
         public int v101()
         {
-            string xml = @"<a xmlns:f='urn:foobar' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>" +
-               "<b><c xsi:type='f:mytype'>some content</c></b></a>";
+            string xml =
+                @"<a xmlns:f='urn:foobar' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>"
+                + "<b><c xsi:type='f:mytype'>some content</c></b></a>";
             ReloadSourceStr(xml);
 
-            DataReader.Read(); CError.Compare(DataReader.Name, "a", "a");
-            DataReader.Read(); CError.Compare(DataReader.Name, "b", "b");
+            DataReader.Read();
+            CError.Compare(DataReader.Name, "a", "a");
+            DataReader.Read();
+            CError.Compare(DataReader.Name, "b", "b");
             using (XmlReader subtree = DataReader.ReadSubtree())
             {
-                subtree.Read(); CError.Compare(subtree.Name, "b", "b2");
-                subtree.Read(); CError.Compare(subtree.Name, "c", "c");
+                subtree.Read();
+                CError.Compare(subtree.Name, "b", "b2");
+                subtree.Read();
+                CError.Compare(subtree.Name, "c", "c");
                 subtree.MoveToAttribute("type", "http://www.w3.org/2001/XMLSchema-instance");
                 CError.Compare(subtree.Value, "f:mytype", "value");
                 string ns = subtree.LookupNamespace("f");
-                if (ns == null) { return TEST_PASS; }
+                if (ns == null)
+                {
+                    return TEST_PASS;
+                }
             }
             return TEST_FAIL;
         }
 
-        [Variation("ReadValueChunk on an xmlns attribute that has been added by the subtree reader")]
+        [Variation(
+            "ReadValueChunk on an xmlns attribute that has been added by the subtree reader"
+        )]
         public int v102()
         {
             char[] c = new char[10];
-            string xml = @"<a xmlns:f='urn:foobar' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>" +
-                       "<b><c xsi:type='f:mytype'>some content</c></b></a>";
+            string xml =
+                @"<a xmlns:f='urn:foobar' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>"
+                + "<b><c xsi:type='f:mytype'>some content</c></b></a>";
             ReloadSourceStr(xml);
             DataReader.Read();
             using (XmlReader subtree = DataReader.ReadSubtree())
@@ -624,7 +793,11 @@ namespace System.Xml.Tests
                 CError.Compare(subtree.Name, "a", "a");
                 string s = subtree[0];
                 CError.Compare(s, "urn:foobar", "urn:foobar");
-                CError.Compare(subtree.LookupNamespace("xmlns"), "http://www.w3.org/2000/xmlns/", "xmlns");
+                CError.Compare(
+                    subtree.LookupNamespace("xmlns"),
+                    "http://www.w3.org/2000/xmlns/",
+                    "xmlns"
+                );
                 CError.Compare(subtree.MoveToFirstAttribute(), "True");
                 try
                 {
@@ -632,7 +805,11 @@ namespace System.Xml.Tests
                     CError.Compare(c[0].ToString(), "u", "u");
                     CError.Compare(c[9].ToString(), "r", "r");
                 }
-                catch (NotSupportedException) { if (IsCustomReader() || IsCharCheckingReader()) return TEST_PASS; }
+                catch (NotSupportedException)
+                {
+                    if (IsCustomReader() || IsCharCheckingReader())
+                        return TEST_PASS;
+                }
             }
             return TEST_PASS;
         }

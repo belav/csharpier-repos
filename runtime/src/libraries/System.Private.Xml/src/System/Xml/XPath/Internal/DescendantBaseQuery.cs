@@ -12,12 +12,22 @@ namespace MS.Internal.Xml.XPath
         protected bool matchSelf;
         protected bool abbrAxis;
 
-        public DescendantBaseQuery(Query qyParent, string Name, string Prefix, XPathNodeType Type, bool matchSelf, bool abbrAxis) : base(qyParent, Name, Prefix, Type)
+        public DescendantBaseQuery(
+            Query qyParent,
+            string Name,
+            string Prefix,
+            XPathNodeType Type,
+            bool matchSelf,
+            bool abbrAxis
+        )
+            : base(qyParent, Name, Prefix, Type)
         {
             this.matchSelf = matchSelf;
             this.abbrAxis = abbrAxis;
         }
-        public DescendantBaseQuery(DescendantBaseQuery other) : base(other)
+
+        public DescendantBaseQuery(DescendantBaseQuery other)
+            : base(other)
         {
             this.matchSelf = other.matchSelf;
             this.abbrAxis = other.abbrAxis;

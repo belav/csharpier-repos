@@ -3,7 +3,13 @@
 
 namespace System.Runtime.InteropServices
 {
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Event, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Event,
+        Inherited = false
+    )]
     public sealed class DispIdAttribute : Attribute
     {
         public DispIdAttribute(int dispId)

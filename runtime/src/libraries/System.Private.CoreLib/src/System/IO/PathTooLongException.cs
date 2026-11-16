@@ -8,7 +8,9 @@ using System.Runtime.Serialization;
 namespace System.IO
 {
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class PathTooLongException : IOException
     {
         public PathTooLongException()
@@ -29,11 +31,13 @@ namespace System.IO
             HResult = HResults.COR_E_PATHTOOLONG;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected PathTooLongException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

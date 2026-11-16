@@ -35,7 +35,9 @@ namespace System.ComponentModel.Composition
 
     public class TypeCatalogTests
     {
-        private static void Constructor_NullReflectionContextArgument_ShouldThrowArgumentNull(Func<ReflectionContext, TypeCatalog> catalogCreator)
+        private static void Constructor_NullReflectionContextArgument_ShouldThrowArgumentNull(
+            Func<ReflectionContext, TypeCatalog> catalogCreator
+        )
         {
             Assert.Throws<ArgumentNullException>("reflectionContext", () =>
             {
@@ -43,7 +45,9 @@ namespace System.ComponentModel.Composition
             });
         }
 
-        private static void Constructor_NullDefinitionOriginArgument_ShouldThrowArgumentNull(Func<ICompositionElement, TypeCatalog> catalogCreator)
+        private static void Constructor_NullDefinitionOriginArgument_ShouldThrowArgumentNull(
+            Func<ICompositionElement, TypeCatalog> catalogCreator
+        )
         {
             Assert.Throws<ArgumentNullException>("definitionOrigin", () =>
             {
@@ -54,37 +58,49 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor1_ReflectOnlyTypes_ShouldThrowArgumentNull()
         {
-            TypeCatalogTests.Constructor_NullReflectionContextArgument_ShouldThrowArgumentNull((rc) =>
-            {
-                return new TypeCatalog(new Type[0], rc);
-            });
+            TypeCatalogTests.Constructor_NullReflectionContextArgument_ShouldThrowArgumentNull(
+                (rc) =>
+                {
+                    return new TypeCatalog(new Type[0], rc);
+                }
+            );
         }
 
         [Fact]
         public void Constructor3_NullDefinitionOriginArgument_ShouldThrowArgumentNull()
         {
-            TypeCatalogTests.Constructor_NullDefinitionOriginArgument_ShouldThrowArgumentNull((dO) =>
-            {
-                return new TypeCatalog(new Type[0], dO);
-            });
+            TypeCatalogTests.Constructor_NullDefinitionOriginArgument_ShouldThrowArgumentNull(
+                (dO) =>
+                {
+                    return new TypeCatalog(new Type[0], dO);
+                }
+            );
         }
 
         [Fact]
         public void Constructor4_NullReflectionContextArgument_ShouldThrowArgumentNull()
         {
-            TypeCatalogTests.Constructor_NullReflectionContextArgument_ShouldThrowArgumentNull((rc) =>
-            {
-                return new TypeCatalog(new Type[0], rc, new TypeCatalog(new Type[0]));
-            });
+            TypeCatalogTests.Constructor_NullReflectionContextArgument_ShouldThrowArgumentNull(
+                (rc) =>
+                {
+                    return new TypeCatalog(new Type[0], rc, new TypeCatalog(new Type[0]));
+                }
+            );
         }
 
         [Fact]
         public void Constructor4_NullDefinitionOriginArgument_ShouldThrowArgumentNull()
         {
-            TypeCatalogTests.Constructor_NullDefinitionOriginArgument_ShouldThrowArgumentNull((dO) =>
-            {
-                return new TypeCatalog(new Type[0], new TypeCatalogTestsReflectionContext(), dO);
-            });
+            TypeCatalogTests.Constructor_NullDefinitionOriginArgument_ShouldThrowArgumentNull(
+                (dO) =>
+                {
+                    return new TypeCatalog(
+                        new Type[0],
+                        new TypeCatalogTestsReflectionContext(),
+                        dO
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -164,7 +180,8 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_ShouldSetOriginToNull()
         {
-            var catalog = (ICompositionElement)new TypeCatalog(PartFactory.GetAttributedExporterType());
+            var catalog = (ICompositionElement)
+                new TypeCatalog(PartFactory.GetAttributedExporterType());
 
             Assert.Null(catalog.Origin);
         }
@@ -172,7 +189,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor3_ShouldSetOriginToNull()
         {
-            var catalog = (ICompositionElement)new TypeCatalog((IEnumerable<Type>)new Type[] { PartFactory.GetAttributedExporterType() });
+            var catalog = (ICompositionElement)
+                new TypeCatalog(
+                    (IEnumerable<Type>)new Type[] { PartFactory.GetAttributedExporterType() }
+                );
 
             Assert.Null(catalog.Origin);
         }
@@ -243,9 +263,7 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Dispose_ShouldNotThrow()
         {
-            using (var catalog = CreateTypeCatalog())
-            {
-            }
+            using (var catalog = CreateTypeCatalog()) { }
         }
 
         [Fact]
@@ -288,7 +306,11 @@ namespace System.ComponentModel.Composition
             {
                 var catalog = (ICompositionElement)CreateTypeCatalog(e);
 
-                string expected = SR.Format(SR.TypeCatalog_DisplayNameFormat, typeof(TypeCatalog).Name, AttributedModelServices.GetTypeIdentity(e));
+                string expected = SR.Format(
+                    SR.TypeCatalog_DisplayNameFormat,
+                    typeof(TypeCatalog).Name,
+                    AttributedModelServices.GetTypeIdentity(e)
+                );
 
                 Assert.Equal(expected, catalog.DisplayName);
             }
@@ -298,23 +320,65 @@ namespace System.ComponentModel.Composition
         public void ICompositionElementDisplayName_ValueAsTypesArgument_ShouldIncludeCatalogTypeNameAndTypeFullNames()
         {
             var expectations = new ExpectationCollection<Type[], string>();
-            expectations.Add(new Type[] { typeof(Type) },
-                             GetDisplayName(false, typeof(TypeCatalog)));
+            expectations.Add(
+                new Type[] { typeof(Type) },
+                GetDisplayName(false, typeof(TypeCatalog))
+            );
 
-            expectations.Add(new Type[] { typeof(ExportValueTypeSingleton) },
-                             GetDisplayName(false, typeof(TypeCatalog), typeof(ExportValueTypeSingleton)));
+            expectations.Add(
+                new Type[] { typeof(ExportValueTypeSingleton) },
+                GetDisplayName(false, typeof(TypeCatalog), typeof(ExportValueTypeSingleton))
+            );
 
-            expectations.Add(new Type[] { typeof(ExportValueTypeSingleton), typeof(ExportValueTypeSingleton) },
-                             GetDisplayName(false, typeof(TypeCatalog), typeof(ExportValueTypeSingleton), typeof(ExportValueTypeSingleton)));
+            expectations.Add(
+                new Type[] { typeof(ExportValueTypeSingleton), typeof(ExportValueTypeSingleton) },
+                GetDisplayName(
+                    false,
+                    typeof(TypeCatalog),
+                    typeof(ExportValueTypeSingleton),
+                    typeof(ExportValueTypeSingleton)
+                )
+            );
 
-            expectations.Add(new Type[] { typeof(ExportValueTypeSingleton), typeof(string), typeof(ExportValueTypeSingleton) },
-                             GetDisplayName(false, typeof(TypeCatalog), typeof(ExportValueTypeSingleton), typeof(ExportValueTypeSingleton)));
+            expectations.Add(
+                new Type[]
+                {
+                    typeof(ExportValueTypeSingleton),
+                    typeof(string),
+                    typeof(ExportValueTypeSingleton),
+                },
+                GetDisplayName(
+                    false,
+                    typeof(TypeCatalog),
+                    typeof(ExportValueTypeSingleton),
+                    typeof(ExportValueTypeSingleton)
+                )
+            );
 
-            expectations.Add(new Type[] { typeof(ExportValueTypeSingleton), typeof(ExportValueTypeFactory) },
-                             GetDisplayName(false, typeof(TypeCatalog), typeof(ExportValueTypeSingleton), typeof(ExportValueTypeFactory)));
+            expectations.Add(
+                new Type[] { typeof(ExportValueTypeSingleton), typeof(ExportValueTypeFactory) },
+                GetDisplayName(
+                    false,
+                    typeof(TypeCatalog),
+                    typeof(ExportValueTypeSingleton),
+                    typeof(ExportValueTypeFactory)
+                )
+            );
 
-            expectations.Add(new Type[] { typeof(ExportValueTypeSingleton), typeof(ExportValueTypeFactory), typeof(CallbackExecuteCodeDuringCompose) },
-                             GetDisplayName(true, typeof(TypeCatalog), typeof(ExportValueTypeSingleton), typeof(ExportValueTypeFactory)));
+            expectations.Add(
+                new Type[]
+                {
+                    typeof(ExportValueTypeSingleton),
+                    typeof(ExportValueTypeFactory),
+                    typeof(CallbackExecuteCodeDuringCompose),
+                },
+                GetDisplayName(
+                    true,
+                    typeof(TypeCatalog),
+                    typeof(ExportValueTypeSingleton),
+                    typeof(ExportValueTypeFactory)
+                )
+            );
 
             foreach (var e in expectations)
             {
@@ -334,7 +398,11 @@ namespace System.ComponentModel.Composition
             {
                 var catalog = (ICompositionElement)new DerivedTypeCatalog(e);
 
-                string expected = SR.Format(SR.TypeCatalog_DisplayNameFormat, typeof(DerivedTypeCatalog).Name, AttributedModelServices.GetTypeIdentity(e));
+                string expected = SR.Format(
+                    SR.TypeCatalog_DisplayNameFormat,
+                    typeof(DerivedTypeCatalog).Name,
+                    AttributedModelServices.GetTypeIdentity(e)
+                );
 
                 Assert.Equal(expected, catalog.DisplayName);
             }
@@ -359,14 +427,27 @@ namespace System.ComponentModel.Composition
         public void GetExports()
         {
             var catalog = new TypeCatalog(Assembly.GetExecutingAssembly().GetTypes());
-            Expression<Func<ExportDefinition, bool>> constraint = (ExportDefinition exportDefinition) => exportDefinition.ContractName == AttributedModelServices.GetContractName(typeof(MyExport));
-            IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> matchingExports = catalog.GetExports(constraint);
+            Expression<Func<ExportDefinition, bool>> constraint = (
+                ExportDefinition exportDefinition
+            ) =>
+                exportDefinition.ContractName
+                == AttributedModelServices.GetContractName(typeof(MyExport));
+            IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> matchingExports =
+                catalog.GetExports(constraint);
             Assert.NotNull(matchingExports);
             Assert.True(matchingExports.Count() >= 0);
 
-            IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> expectedMatchingExports = catalog.Parts
-                .SelectMany(part => part.ExportDefinitions, (part, export) => new Tuple<ComposablePartDefinition, ExportDefinition>(part, export))
-                .Where(partAndExport => partAndExport.Item2.ContractName == AttributedModelServices.GetContractName(typeof(MyExport)));
+            IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> expectedMatchingExports =
+                catalog
+                    .Parts.SelectMany(
+                        part => part.ExportDefinitions,
+                        (part, export) =>
+                            new Tuple<ComposablePartDefinition, ExportDefinition>(part, export)
+                    )
+                    .Where(partAndExport =>
+                        partAndExport.Item2.ContractName
+                        == AttributedModelServices.GetContractName(typeof(MyExport))
+                    );
             Assert.True(matchingExports.SequenceEqual(expectedMatchingExports));
         }
 
@@ -383,7 +464,8 @@ namespace System.ComponentModel.Composition
 
             Assert.Equal(23, unique1.MyIntProperty);
 
-            NotSoUniqueName2.NotSoUniqueName nestedUnique = container.GetExportedValue<NotSoUniqueName2.NotSoUniqueName>();
+            NotSoUniqueName2.NotSoUniqueName nestedUnique =
+                container.GetExportedValue<NotSoUniqueName2.NotSoUniqueName>();
 
             Assert.NotNull(nestedUnique);
 
@@ -397,7 +479,9 @@ namespace System.ComponentModel.Composition
             var catalog = new TypeCatalog(Assembly.GetExecutingAssembly().GetTypes());
             var container = new CompositionContainer(catalog);
 
-            ImportDefaultFunctions import = container.GetExportedValue<ImportDefaultFunctions>("ImportDefaultFunctions");
+            ImportDefaultFunctions import = container.GetExportedValue<ImportDefaultFunctions>(
+                "ImportDefaultFunctions"
+            );
             import.VerifyIsBound();
         }
 
@@ -499,18 +583,30 @@ namespace System.ComponentModel.Composition
             var container = new CompositionContainer(catalog);
 
             // Should find a type that inherits from an export
-            Assert.NotNull(container.GetExportedValueOrDefault<object>(AttributedModelServices.GetContractName(typeof(ExportWhichInheritsFromGeneric))));
+            Assert.NotNull(
+                container.GetExportedValueOrDefault<object>(
+                    AttributedModelServices.GetContractName(typeof(ExportWhichInheritsFromGeneric))
+                )
+            );
 
             // This should be exported because it is inherited by ExportWhichInheritsFromGeneric
-            Assert.NotNull(container.GetExportedValueOrDefault<object>(AttributedModelServices.GetContractName(typeof(ExportWithGenericParameter<string>))));
+            Assert.NotNull(
+                container.GetExportedValueOrDefault<object>(
+                    AttributedModelServices.GetContractName(
+                        typeof(ExportWithGenericParameter<string>)
+                    )
+                )
+            );
         }
 
         private string GetDisplayName(bool useEllipses, Type catalogType, params Type[] types)
         {
-            return string.Format(CultureInfo.CurrentCulture,
-                    SR.TypeCatalog_DisplayNameFormat,
-                    catalogType.Name,
-                    this.GetTypesDisplay(useEllipses, types));
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                SR.TypeCatalog_DisplayNameFormat,
+                catalogType.Name,
+                this.GetTypesDisplay(useEllipses, types)
+            );
         }
 
         private string GetTypesDisplay(bool useEllipses, Type[] types)
@@ -534,7 +630,7 @@ namespace System.ComponentModel.Composition
             }
 
             if (useEllipses)
-            {   // Add an elipse to indicate that there
+            { // Add an elipse to indicate that there
                 // are more types than actually listed
                 builder.Append(CultureInfo.CurrentCulture.TextInfo.ListSeparator);
                 builder.Append(" ...");
@@ -558,9 +654,7 @@ namespace System.ComponentModel.Composition
         private class DerivedTypeCatalog : TypeCatalog
         {
             public DerivedTypeCatalog(params Type[] types)
-                : base(types)
-            {
-            }
+                : base(types) { }
         }
     }
 }

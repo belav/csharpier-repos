@@ -22,21 +22,21 @@ namespace System.Web.Mvc.Test
             Assert.ThrowsArgumentNull(
                 () => collection.GetFilters(null, descriptor),
                 "controllerContext"
-                );
+            );
             Assert.ThrowsArgumentNull(
                 () => collection.GetFilters(context, null),
                 "actionDescriptor"
-                );
+            );
         }
 
         [Fact]
         public void FilterProviderCollectionCombinedItemsCaches()
         {
             // Arrange
-            var providers = new IFilterProvider[] 
+            var providers = new IFilterProvider[]
             {
-                new Mock<IFilterProvider>(MockBehavior.Strict).Object, 
-                new Mock<IFilterProvider>(MockBehavior.Strict).Object
+                new Mock<IFilterProvider>(MockBehavior.Strict).Object,
+                new Mock<IFilterProvider>(MockBehavior.Strict).Object,
             };
             var collection = new FilterProviderCollection(providers);
 
@@ -58,7 +58,10 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void FilterProviderCollectionCombinedItemsInsertResetsCache()
         {
-            TestCacheReset((collection) => collection.Insert(0, new Mock<IFilterProvider>(MockBehavior.Strict).Object));
+            TestCacheReset(
+                (collection) =>
+                    collection.Insert(0, new Mock<IFilterProvider>(MockBehavior.Strict).Object)
+            );
         }
 
         [Fact]
@@ -70,16 +73,19 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void FilterProviderCollectionCombinedItemsSetResetsCache()
         {
-            TestCacheReset((collection) => collection[0] = new Mock<IFilterProvider>(MockBehavior.Strict).Object);
+            TestCacheReset(
+                (collection) =>
+                    collection[0] = new Mock<IFilterProvider>(MockBehavior.Strict).Object
+            );
         }
 
         private static void TestCacheReset(Action<FilterProviderCollection> mutatingAction)
         {
             // Arrange
-            var providers = new List<IFilterProvider>() 
+            var providers = new List<IFilterProvider>()
             {
-                new Mock<IFilterProvider>(MockBehavior.Strict).Object, 
-                new Mock<IFilterProvider>(MockBehavior.Strict).Object
+                new Mock<IFilterProvider>(MockBehavior.Strict).Object,
+                new Mock<IFilterProvider>(MockBehavior.Strict).Object,
             };
             var collection = new FilterProviderCollection(providers);
 
@@ -99,12 +105,23 @@ namespace System.Web.Mvc.Test
             var firstProvider = new Mock<IFilterProvider>();
             var secondProvider = new Mock<IFilterProvider>();
             var thirdProvider = new Mock<IFilterProvider>();
-            var dependencyProviders = new IFilterProvider[] { firstProvider.Object, secondProvider.Object };
+            var dependencyProviders = new IFilterProvider[]
+            {
+                firstProvider.Object,
+                secondProvider.Object,
+            };
             var collectionProviders = new IFilterProvider[] { thirdProvider.Object };
-            var expectedProviders = new IFilterProvider[] { firstProvider.Object, secondProvider.Object, thirdProvider.Object };
+            var expectedProviders = new IFilterProvider[]
+            {
+                firstProvider.Object,
+                secondProvider.Object,
+                thirdProvider.Object,
+            };
 
             Mock<IDependencyResolver> resolver = new Mock<IDependencyResolver>();
-            resolver.Setup(r => r.GetServices(typeof(IFilterProvider))).Returns(dependencyProviders);
+            resolver
+                .Setup(r => r.GetServices(typeof(IFilterProvider)))
+                .Returns(dependencyProviders);
 
             var providers = new FilterProviderCollection(collectionProviders, resolver.Object);
 
@@ -144,8 +161,9 @@ namespace System.Web.Mvc.Test
             provider.Setup(p => p.GetFilters(context, descriptor)).Returns(new[] { filter });
 
             Mock<IDependencyResolver> resolver = new Mock<IDependencyResolver>();
-            resolver.Setup(r => r.GetServices(typeof(IFilterProvider))).Returns(new[] { provider.Object });
-
+            resolver
+                .Setup(r => r.GetServices(typeof(IFilterProvider)))
+                .Returns(new[] { provider.Object });
 
             var collection = new FilterProviderCollection(new IFilterProvider[0], resolver.Object);
 
@@ -169,8 +187,18 @@ namespace System.Web.Mvc.Test
             var lateGlobalFilter = new Filter(new Object(), FilterScope.Global, 100);
             var provider = new Mock<IFilterProvider>(MockBehavior.Strict);
             var collection = new FilterProviderCollection(new[] { provider.Object });
-            provider.Setup(p => p.GetFilters(context, descriptor))
-                .Returns(new[] { actionFilter, controllerFilter, globalFilter, earlyActionFilter, lateGlobalFilter });
+            provider
+                .Setup(p => p.GetFilters(context, descriptor))
+                .Returns(
+                    new[]
+                    {
+                        actionFilter,
+                        controllerFilter,
+                        globalFilter,
+                        earlyActionFilter,
+                        lateGlobalFilter,
+                    }
+                );
 
             // Act
             Filter[] result = collection.GetFilters(context, descriptor).ToArray();
@@ -185,9 +213,7 @@ namespace System.Web.Mvc.Test
         }
 
         [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
-        private class AllowMultipleFalseAttribute : FilterAttribute
-        {
-        }
+        private class AllowMultipleFalseAttribute : FilterAttribute { }
 
         [Fact]
         public void GetFiltersIncludesLastFilterOnlyWithAttributeUsageAllowMultipleFalse()
@@ -195,12 +221,25 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var descriptor = new Mock<ActionDescriptor>().Object;
-            var globalFilter = new Filter(new AllowMultipleFalseAttribute(), FilterScope.Global, null);
-            var controllerFilter = new Filter(new AllowMultipleFalseAttribute(), FilterScope.Controller, null);
-            var actionFilter = new Filter(new AllowMultipleFalseAttribute(), FilterScope.Action, null);
+            var globalFilter = new Filter(
+                new AllowMultipleFalseAttribute(),
+                FilterScope.Global,
+                null
+            );
+            var controllerFilter = new Filter(
+                new AllowMultipleFalseAttribute(),
+                FilterScope.Controller,
+                null
+            );
+            var actionFilter = new Filter(
+                new AllowMultipleFalseAttribute(),
+                FilterScope.Action,
+                null
+            );
             var provider = new Mock<IFilterProvider>(MockBehavior.Strict);
             var collection = new FilterProviderCollection(new[] { provider.Object });
-            provider.Setup(p => p.GetFilters(context, descriptor))
+            provider
+                .Setup(p => p.GetFilters(context, descriptor))
                 .Returns(new[] { controllerFilter, actionFilter, globalFilter });
 
             // Act
@@ -211,9 +250,7 @@ namespace System.Web.Mvc.Test
         }
 
         [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
-        private class AllowMultipleTrueAttribute : FilterAttribute
-        {
-        }
+        private class AllowMultipleTrueAttribute : FilterAttribute { }
 
         [Fact]
         public void GetFiltersIncludesAllFiltersWithAttributeUsageAllowMultipleTrue()
@@ -221,12 +258,25 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var descriptor = new Mock<ActionDescriptor>().Object;
-            var globalFilter = new Filter(new AllowMultipleTrueAttribute(), FilterScope.Global, null);
-            var controllerFilter = new Filter(new AllowMultipleTrueAttribute(), FilterScope.Controller, null);
-            var actionFilter = new Filter(new AllowMultipleTrueAttribute(), FilterScope.Action, null);
+            var globalFilter = new Filter(
+                new AllowMultipleTrueAttribute(),
+                FilterScope.Global,
+                null
+            );
+            var controllerFilter = new Filter(
+                new AllowMultipleTrueAttribute(),
+                FilterScope.Controller,
+                null
+            );
+            var actionFilter = new Filter(
+                new AllowMultipleTrueAttribute(),
+                FilterScope.Action,
+                null
+            );
             var provider = new Mock<IFilterProvider>(MockBehavior.Strict);
             var collection = new FilterProviderCollection(new[] { provider.Object });
-            provider.Setup(p => p.GetFilters(context, descriptor))
+            provider
+                .Setup(p => p.GetFilters(context, descriptor))
                 .Returns(new[] { controllerFilter, actionFilter, globalFilter });
 
             // Act
@@ -241,9 +291,7 @@ namespace System.Web.Mvc.Test
         private class AllowMultipleCustomFilter : MvcFilter
         {
             public AllowMultipleCustomFilter(bool allowMultiple)
-                : base(allowMultiple, -1)
-            {
-            }
+                : base(allowMultiple, -1) { }
         }
 
         [Fact]
@@ -252,12 +300,25 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var descriptor = new Mock<ActionDescriptor>().Object;
-            var globalFilter = new Filter(new AllowMultipleCustomFilter(false), FilterScope.Global, null);
-            var controllerFilter = new Filter(new AllowMultipleCustomFilter(false), FilterScope.Controller, null);
-            var actionFilter = new Filter(new AllowMultipleCustomFilter(false), FilterScope.Action, null);
+            var globalFilter = new Filter(
+                new AllowMultipleCustomFilter(false),
+                FilterScope.Global,
+                null
+            );
+            var controllerFilter = new Filter(
+                new AllowMultipleCustomFilter(false),
+                FilterScope.Controller,
+                null
+            );
+            var actionFilter = new Filter(
+                new AllowMultipleCustomFilter(false),
+                FilterScope.Action,
+                null
+            );
             var provider = new Mock<IFilterProvider>(MockBehavior.Strict);
             var collection = new FilterProviderCollection(new[] { provider.Object });
-            provider.Setup(p => p.GetFilters(context, descriptor))
+            provider
+                .Setup(p => p.GetFilters(context, descriptor))
                 .Returns(new[] { controllerFilter, actionFilter, globalFilter });
 
             // Act
@@ -273,12 +334,25 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var descriptor = new Mock<ActionDescriptor>().Object;
-            var globalFilter = new Filter(new AllowMultipleCustomFilter(true), FilterScope.Global, null);
-            var controllerFilter = new Filter(new AllowMultipleCustomFilter(true), FilterScope.Controller, null);
-            var actionFilter = new Filter(new AllowMultipleCustomFilter(true), FilterScope.Action, null);
+            var globalFilter = new Filter(
+                new AllowMultipleCustomFilter(true),
+                FilterScope.Global,
+                null
+            );
+            var controllerFilter = new Filter(
+                new AllowMultipleCustomFilter(true),
+                FilterScope.Controller,
+                null
+            );
+            var actionFilter = new Filter(
+                new AllowMultipleCustomFilter(true),
+                FilterScope.Action,
+                null
+            );
             var provider = new Mock<IFilterProvider>(MockBehavior.Strict);
             var collection = new FilterProviderCollection(new[] { provider.Object });
-            provider.Setup(p => p.GetFilters(context, descriptor))
+            provider
+                .Setup(p => p.GetFilters(context, descriptor))
                 .Returns(new[] { controllerFilter, actionFilter, globalFilter });
 
             // Act

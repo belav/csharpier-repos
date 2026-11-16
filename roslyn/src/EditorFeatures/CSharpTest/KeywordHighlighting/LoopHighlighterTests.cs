@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class LoopHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(LoopHighlighter);
+        internal override Type GetHighlighterType() => typeof(LoopHighlighter);
 
         [Fact]
         public async Task TestExample1_1()
@@ -40,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -90,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         [|while|] (true);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -142,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         [|while|] (true);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -168,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         [|while|] (true);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -194,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         {|Cursor:[|while|]|} (true);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -220,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         while {|Cursor:(true)|};
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -246,7 +253,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         [|while|] (true);{|Cursor:|}
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -271,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -296,7 +305,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -321,7 +331,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -346,7 +357,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -371,7 +383,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -396,7 +409,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -440,7 +454,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -484,7 +499,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -528,7 +544,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -572,7 +589,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -616,7 +634,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -660,7 +679,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -704,7 +724,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -748,7 +769,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         // TestNestedExample1 9-13 are in SwitchStatementHighlighterTests.cs
@@ -794,7 +816,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -838,7 +861,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -876,7 +900,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -914,7 +939,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -952,7 +978,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -990,7 +1017,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1028,7 +1056,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1066,7 +1095,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1104,7 +1134,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1142,7 +1173,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1180,7 +1212,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1218,7 +1251,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1256,7 +1290,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

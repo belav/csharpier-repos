@@ -18,11 +18,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpEntryPointFinderService()
-        {
-        }
+        public CSharpEntryPointFinderService() { }
 
-        public IEnumerable<INamedTypeSymbol> FindEntryPoints(INamespaceSymbol symbol, bool findFormsOnly)
-            => EntryPointFinder.FindEntryPoints(symbol);
+        public IEnumerable<INamedTypeSymbol> FindEntryPoints(
+            INamespaceSymbol symbol,
+            bool findFormsOnly
+        ) => EntryPointFinder.FindEntryPoints(symbol);
     }
 }

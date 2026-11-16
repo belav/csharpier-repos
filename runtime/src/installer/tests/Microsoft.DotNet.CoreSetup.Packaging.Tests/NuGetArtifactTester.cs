@@ -1,16 +1,16 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.DotNet.CoreSetup.Test;
-using NuGet.Packaging;
-using NuGet.Packaging.Core;
-using NuGet.Versioning;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Xml.Linq;
+using Microsoft.DotNet.CoreSetup.Test;
+using NuGet.Packaging;
+using NuGet.Packaging.Core;
+using NuGet.Versioning;
 using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
@@ -20,7 +20,8 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
         public static NuGetArtifactTester Open(
             RepoDirectoriesProvider dirs,
             string project,
-            string id = null)
+            string id = null
+        )
         {
             var tester = OpenOrNull(dirs, project, id);
             Assert.NotNull(tester);
@@ -30,7 +31,8 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
         public static NuGetArtifactTester OpenOrNull(
             RepoDirectoriesProvider dirs,
             string project,
-            string id = null)
+            string id = null
+        )
         {
             id = id ?? project;
 
@@ -39,7 +41,8 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
                 "packages",
                 TestContext.Configuration,
                 "Shipping",
-                $"{id}.{TestContext.MicrosoftNETCoreAppVersion}.nupkg");
+                $"{id}.{TestContext.MicrosoftNETCoreAppVersion}.nupkg"
+            );
 
             // If the nuspec exists, the nupkg should exist.
             Assert.True(File.Exists(nupkgPath));
@@ -91,8 +94,7 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
         {
             IsRuntimeSpecificPack();
 
-            HasOnlyTheseDataFiles(
-                "data/RuntimeList.xml");
+            HasOnlyTheseDataFiles("data/RuntimeList.xml");
 
             ContainsFrameworkList("RuntimeList.xml");
         }
@@ -103,29 +105,34 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
 
             Assert.True(
                 dataFileSet.SetEquals(expectedDataFiles),
-                "Invalid set of data files: " +
-                    $"expected '{string.Join(", ", expectedDataFiles)}', " +
-                    $"actual '{string.Join(", ", dataFileSet)}'");
+                "Invalid set of data files: "
+                    + $"expected '{string.Join(", ", expectedDataFiles)}', "
+                    + $"actual '{string.Join(", ", dataFileSet)}'"
+            );
         }
 
         public void HasGoodPlatformManifest()
         {
             string platformManifestContent = ReadEntryContent(
-                _reader.GetEntry("data/PlatformManifest.txt"));
+                _reader.GetEntry("data/PlatformManifest.txt")
+            );
 
             // Sanity: check if the manifest has some content.
             Assert.Contains(".dll", platformManifestContent);
 
             // Check that the lines contain the package ID where they're supposed to.
-            foreach (var parts in platformManifestContent
-                .Split('\r', '\n')
-                .Select(line => line.Split("|"))
-                .Where(parts => parts.Length > 1))
+            foreach (
+                var parts in platformManifestContent
+                    .Split('\r', '\n')
+                    .Select(line => line.Split("|"))
+                    .Where(parts => parts.Length > 1)
+            )
             {
                 Assert.True(
                     parts[1] == Identity.Id,
-                    $"Platform manifest package id column '{parts[1]}' doesn't match " +
-                        $"actual package id '{Identity.Id}'");
+                    $"Platform manifest package id column '{parts[1]}' doesn't match "
+                        + $"actual package id '{Identity.Id}'"
+                );
             }
         }
 
@@ -159,8 +166,7 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
 
         private void ContainsFrameworkList(string name)
         {
-            XDocument frameworkList = ReadEntryXDocument(
-                _reader.GetEntry($"data/{name}"));
+            XDocument frameworkList = ReadEntryXDocument(_reader.GetEntry($"data/{name}"));
 
             XElement[] frameworkListFiles = frameworkList
                 .Element("FileList")

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,17 +32,16 @@ using System.Linq;
 using System.Text;
 using Mono.Cecil;
 
-namespace Mono.CodeContracts.Rewrite.Ast {
-	abstract class ExprBinaryOpComparison : ExprBinaryOp {
+namespace Mono.CodeContracts.Rewrite.Ast
+{
+    abstract class ExprBinaryOpComparison : ExprBinaryOp
+    {
+        public ExprBinaryOpComparison(MethodInfo methodInfo, Expr left, Expr right, Sn signage)
+            : base(methodInfo, left, right, signage) { }
 
-		public ExprBinaryOpComparison (MethodInfo methodInfo, Expr left, Expr right, Sn signage)
-			: base (methodInfo, left, right, signage)
-		{
-		}
-
-		public override TypeReference ReturnType {
-			get { return base.MethodInfo.TypeBoolean; }
-		}
-
-	}
+        public override TypeReference ReturnType
+        {
+            get { return base.MethodInfo.TypeBoolean; }
+        }
+    }
 }

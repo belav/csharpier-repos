@@ -1,12 +1,12 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
-// There are cases where we have multiple assemblies that are going to import this file and 
+// There are cases where we have multiple assemblies that are going to import this file and
 // if they are going to also have InternalsVisibleTo between them, there will be a compiler warning
-// that the type is found both in the source and in a referenced assembly. The compiler will prefer 
+// that the type is found both in the source and in a referenced assembly. The compiler will prefer
 // the version of the type defined in the source
 //
 // In order to disable the warning for this type we are disabling this warning for this entire file.
@@ -21,7 +21,8 @@ namespace System
     {
         public static void PopulateDefaultValues()
         {
-            string platformIdentifier, profile;
+            string platformIdentifier,
+                profile;
             int version;
 
             ParseTargetFrameworkName(out platformIdentifier, out profile, out version);
@@ -34,19 +35,33 @@ namespace System
         /// We have this separate method for getting the parsed elements out of the TargetFrameworkName so we can
         /// more easily support this on other platforms.
         /// </summary>
-        private static void ParseTargetFrameworkName(out string identifier, out string profile, out int version)
+        private static void ParseTargetFrameworkName(
+            out string identifier,
+            out string profile,
+            out int version
+        )
         {
-            string targetFrameworkMoniker = AppDomain.CurrentDomain.SetupInformation.TargetFrameworkName;
+            string targetFrameworkMoniker = AppDomain
+                .CurrentDomain
+                .SetupInformation
+                .TargetFrameworkName;
 
             // If we don't have a TFM then we should default to the 4.0 behavior where all quirks are turned on.
-            if (!TryParseFrameworkName(targetFrameworkMoniker, out identifier, out version, out profile))
+            if (
+                !TryParseFrameworkName(
+                    targetFrameworkMoniker,
+                    out identifier,
+                    out version,
+                    out profile
+                )
+            )
             {
 #if FEATURE_CORECLR
                 if (CompatibilitySwitches.UseLatestBehaviorWhenTFMNotSpecified)
                 {
                     // If we want to use the latest behavior it is enough to set the value of the switch to string.Empty.
-                    // When the get to the caller of this method (PopulateDefaultValuesPartial) we are going to use the 
-                    // identifier we just set to decide which switches to turn on. By having an empty string as the 
+                    // When the get to the caller of this method (PopulateDefaultValuesPartial) we are going to use the
+                    // identifier we just set to decide which switches to turn on. By having an empty string as the
                     // identifier we are simply saying -- don't turn on any switches, and we are going to get the latest
                     // behavior for all the switches
                     identifier = string.Empty;
@@ -66,7 +81,12 @@ namespace System
         //  - The identifier and version is required, profile is optional
         //  - Only three components are allowed.
         //  - The version string must be in the System.Version format; an optional "v" or "V" prefix is allowed
-        private static bool TryParseFrameworkName(String frameworkName, out String identifier, out int version, out String profile)
+        private static bool TryParseFrameworkName(
+            String frameworkName,
+            out String identifier,
+            out int version,
+            out String profile
+        )
         {
             // For parsing a target Framework moniker, from the FrameworkName class
             const char c_componentSeparator = ',';
@@ -105,7 +125,7 @@ namespace System
             bool versionFound = false;
             profile = null;
 
-            // 
+            //
             // The required "Version" and optional "Profile" component can be in any order
             //
             for (int i = 1; i < components.Length; i++)
@@ -169,11 +189,19 @@ namespace System
         // This is a partial method. Platforms (such as Desktop) can provide an implementation of it that will read override value
         // from whatever mechanism is available on that platform. If no implementation is provided, the compiler is going to remove the calls
         // to it from the code
-        static partial void TryGetSwitchOverridePartial(string switchName, ref bool overrideFound, ref bool overrideValue);
+        static partial void TryGetSwitchOverridePartial(
+            string switchName,
+            ref bool overrideFound,
+            ref bool overrideValue
+        );
 
         /// This is a partial method. This method is responsible for populating the default values based on a TFM.
         /// It is partial because each library should define this method in their code to contain their defaults.
-        static partial void PopulateDefaultValuesPartial(string platformIdentifier, string profile, int version);
+        static partial void PopulateDefaultValuesPartial(
+            string platformIdentifier,
+            string profile,
+            int version
+        );
     }
 }
 

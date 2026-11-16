@@ -12,9 +12,7 @@ namespace System.Speech.Internal.GrammarBuilding
     {
         #region Constructors
 
-        internal OneOfElement()
-        {
-        }
+        internal OneOfElement() { }
 
         #endregion
 
@@ -27,7 +25,12 @@ namespace System.Speech.Internal.GrammarBuilding
             return oneOf;
         }
 
-        internal override IElement CreateElement(IElementFactory elementFactory, IElement parent, IRule rule, IdentifierCollection ruleIds)
+        internal override IElement CreateElement(
+            IElementFactory elementFactory,
+            IElement parent,
+            IRule rule,
+            IdentifierCollection ruleIds
+        )
         {
             // Create and return the IOneOf representing the current object
             IOneOf oneOf = elementFactory.CreateOneOf(parent, rule);

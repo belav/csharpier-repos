@@ -28,7 +28,13 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Logging
             return true;
         }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception? exception,
+            Func<TState, Exception?, string> formatter
+        )
         {
             // Not all formatters will actually include the exception even if we pass it through, so include it here.
             var message = formatter(state, exception);

@@ -20,7 +20,8 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractRenameCommandHandler : ICommandHandler<RenameCommandArgs>
+    internal abstract partial class AbstractRenameCommandHandler
+        : ICommandHandler<RenameCommandArgs>
     {
         public CommandState GetCommandState(RenameCommandArgs args)
         {
@@ -62,22 +63,33 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             var caretPoint = args.TextView.GetCaretPoint(args.SubjectBuffer);
             if (!caretPoint.HasValue)
             {
-                await ShowErrorDialogAsync(workspace, FeaturesResources.You_must_rename_an_identifier).ConfigureAwait(false);
+                await ShowErrorDialogAsync(
+                        workspace,
+                        FeaturesResources.You_must_rename_an_identifier
+                    )
+                    .ConfigureAwait(false);
                 return;
             }
 
-            var backgroundWorkIndicatorFactory = workspace.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+            var backgroundWorkIndicatorFactory =
+                workspace.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
             using var context = backgroundWorkIndicatorFactory.Create(
-                    args.TextView,
-                    args.TextView.GetTextElementSpan(caretPoint.Value),
-                    EditorFeaturesResources.Finding_token_to_rename);
+                args.TextView,
+                args.TextView.GetTextElementSpan(caretPoint.Value),
+                EditorFeaturesResources.Finding_token_to_rename
+            );
 
             // If there is already an active session, commit it first
             if (_renameService.ActiveSession != null)
             {
                 // Is the caret within any of the rename fields in this buffer?
                 // If so, focus the dashboard
-                if (_renameService.ActiveSession.TryGetContainingEditableSpan(caretPoint.Value, out _))
+                if (
+                    _renameService.ActiveSession.TryGetContainingEditableSpan(
+                        caretPoint.Value,
+                        out _
+                    )
+                )
                 {
                     SetFocusToAdornment(args.TextView);
                     return;
@@ -92,47 +104,69 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             var cancellationToken = context.UserCancellationToken;
 
             var document = await args
-                .SubjectBuffer
-                .CurrentSnapshot
-                .GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(context)
+                .SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
+                    context
+                )
                 .ConfigureAwait(false);
 
             if (document == null)
             {
-                await ShowErrorDialogAsync(workspace, FeaturesResources.You_must_rename_an_identifier).ConfigureAwait(false);
+                await ShowErrorDialogAsync(
+                        workspace,
+                        FeaturesResources.You_must_rename_an_identifier
+                    )
+                    .ConfigureAwait(false);
                 return;
             }
 
-            var selectedSpans = args.TextView.Selection.GetSnapshotSpansOnBuffer(args.SubjectBuffer);
+            var selectedSpans = args.TextView.Selection.GetSnapshotSpansOnBuffer(
+                args.SubjectBuffer
+            );
 
             // Now make sure the entire selection is contained within that token.
             // There can be zero selectedSpans in projection scenarios.
             if (selectedSpans.Count != 1)
             {
-                await ShowErrorDialogAsync(workspace, FeaturesResources.You_must_rename_an_identifier).ConfigureAwait(false);
+                await ShowErrorDialogAsync(
+                        workspace,
+                        FeaturesResources.You_must_rename_an_identifier
+                    )
+                    .ConfigureAwait(false);
                 return;
             }
 
-            var sessionInfo = await _renameService.StartInlineSessionAsync(document, selectedSpans.Single().Span.ToTextSpan(), cancellationToken).ConfigureAwait(false);
+            var sessionInfo = await _renameService
+                .StartInlineSessionAsync(
+                    document,
+                    selectedSpans.Single().Span.ToTextSpan(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (!sessionInfo.CanRename)
             {
-                await ShowErrorDialogAsync(workspace, sessionInfo.LocalizedErrorMessage).ConfigureAwait(false);
+                await ShowErrorDialogAsync(workspace, sessionInfo.LocalizedErrorMessage)
+                    .ConfigureAwait(false);
                 return;
             }
         }
 
         private static bool CanRename(RenameCommandArgs args)
         {
-            return args.SubjectBuffer.TryGetWorkspace(out var workspace) &&
-                workspace.CanApplyChange(ApplyChangesKind.ChangeDocument) &&
-                args.SubjectBuffer.SupportsRename() && !args.SubjectBuffer.IsInLspEditorContext();
+            return args.SubjectBuffer.TryGetWorkspace(out var workspace)
+                && workspace.CanApplyChange(ApplyChangesKind.ChangeDocument)
+                && args.SubjectBuffer.SupportsRename()
+                && !args.SubjectBuffer.IsInLspEditorContext();
         }
 
         private async Task ShowErrorDialogAsync(Workspace workspace, string message)
         {
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
             var notificationService = workspace.Services.GetService<INotificationService>();
-            notificationService.SendNotification(message, title: EditorFeaturesResources.Rename, severity: NotificationSeverity.Error);
+            notificationService.SendNotification(
+                message,
+                title: EditorFeaturesResources.Rename,
+                severity: NotificationSeverity.Error
+            );
         }
     }
 }

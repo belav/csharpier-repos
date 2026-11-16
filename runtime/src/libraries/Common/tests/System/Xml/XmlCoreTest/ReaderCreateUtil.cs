@@ -18,8 +18,6 @@ using OLEDB.Test.ModuleCore;
 
 namespace XmlCoreTest.Common
 {
-
-
     /// <summary>
     /// This class contains helper methods for Readers.
     /// ConvertToBinaryStream : Converts the given xml string to the binary equivalent of the string and returns it
@@ -38,9 +36,8 @@ namespace XmlCoreTest.Common
             CUSTOMREADER,
             CHARCHECKINGREADER,
             SUBTREEREADER,
-            WRAPPEDREADER
+            WRAPPEDREADER,
         }
-
 
         public enum ReadOverload
         {
@@ -48,7 +45,7 @@ namespace XmlCoreTest.Common
             TextReader,
             Stream,
             URL,
-            XmlReader
+            XmlReader,
         }
 
         public class CreateReaderParams
@@ -70,6 +67,7 @@ namespace XmlCoreTest.Common
             {
                 readerType = type;
             }
+
             public CreateReaderParams(
                 ReaderType type,
                 ReadOverload inputType,
@@ -77,7 +75,8 @@ namespace XmlCoreTest.Common
                 string baseUri,
                 bool isFragment,
                 bool enableNormalization,
-                XmlReaderSettings readerSettings)
+                XmlReaderSettings readerSettings
+            )
             {
                 readerType = type;
                 BaseUri = baseUri;
@@ -92,7 +91,8 @@ namespace XmlCoreTest.Common
                 ReaderType type,
                 ReadOverload inputType,
                 object input,
-                XmlReaderSettings readerSettings)
+                XmlReaderSettings readerSettings
+            )
             {
                 readerType = type;
                 Input = input;
@@ -102,24 +102,60 @@ namespace XmlCoreTest.Common
         }
 
         //Using these overloads with external entities may not work because there is no evidence or baseuri used.
-        public static XmlReader CreateReader(ReaderType readerType, TextReader stringReader, bool enableNormalization)
+        public static XmlReader CreateReader(
+            ReaderType readerType,
+            TextReader stringReader,
+            bool enableNormalization
+        )
         {
-            return CreateReader(readerType.ToString(), stringReader, enableNormalization, null, null);
+            return CreateReader(
+                readerType.ToString(),
+                stringReader,
+                enableNormalization,
+                null,
+                null
+            );
         }
 
-        public static XmlReader CreateReader(string readerType, TextReader stringReader, bool enableNormalization)
+        public static XmlReader CreateReader(
+            string readerType,
+            TextReader stringReader,
+            bool enableNormalization
+        )
         {
             return CreateReader(readerType, stringReader, enableNormalization, null, null); //use default eventhandler
         }
 
-        public static XmlReader CreateReader(string readerType, TextReader stringReader, bool enableNormalization, object eventHndlr, XmlReaderSettings settings)
+        public static XmlReader CreateReader(
+            string readerType,
+            TextReader stringReader,
+            bool enableNormalization,
+            object eventHndlr,
+            XmlReaderSettings settings
+        )
         {
-            return CreateReader(readerType, stringReader, enableNormalization, eventHndlr, settings, false);
+            return CreateReader(
+                readerType,
+                stringReader,
+                enableNormalization,
+                eventHndlr,
+                settings,
+                false
+            );
         }
-        public static XmlReader CreateReader(string readerType, TextReader stringReader, bool enableNormalization, object eventHndlr, XmlReaderSettings settings, bool isFragment)
+
+        public static XmlReader CreateReader(
+            string readerType,
+            TextReader stringReader,
+            bool enableNormalization,
+            object eventHndlr,
+            XmlReaderSettings settings,
+            bool isFragment
+        )
         {
             CError.WriteLineIgnore(readerType);
-            ReaderType type = (ReaderType)Enum.Parse(typeof(ReaderType), readerType.ToUpperInvariant());
+            ReaderType type = (ReaderType)
+                Enum.Parse(typeof(ReaderType), readerType.ToUpperInvariant());
             CreateReaderParams readerParams = new CreateReaderParams(type);
             readerParams.InputType = ReadOverload.TextReader;
             readerParams.Input = stringReader;
@@ -131,19 +167,55 @@ namespace XmlCoreTest.Common
         }
 
         //This API doesn't attach a default validation event handler.
-        public static XmlReader CreateReader(ReaderType readerType, Stream stream, string baseUri, bool enableNormalization)
+        public static XmlReader CreateReader(
+            ReaderType readerType,
+            Stream stream,
+            string baseUri,
+            bool enableNormalization
+        )
         {
-            return CreateReader(readerType.ToString(), stream, baseUri, enableNormalization, null, null, false);
-        }
-        public static XmlReader CreateReader(string readerType, Stream stream, string baseUri, bool enableNormalization)
-        {
-            return CreateReader(readerType, stream, baseUri, enableNormalization, null, null, false); //use default eventhandler
+            return CreateReader(
+                readerType.ToString(),
+                stream,
+                baseUri,
+                enableNormalization,
+                null,
+                null,
+                false
+            );
         }
 
-        public static XmlReader CreateReader(string readerType, Stream stream, string baseUri, bool enableNormalization, object eventHndlr, XmlReaderSettings settings, bool isFragment)
+        public static XmlReader CreateReader(
+            string readerType,
+            Stream stream,
+            string baseUri,
+            bool enableNormalization
+        )
+        {
+            return CreateReader(
+                readerType,
+                stream,
+                baseUri,
+                enableNormalization,
+                null,
+                null,
+                false
+            ); //use default eventhandler
+        }
+
+        public static XmlReader CreateReader(
+            string readerType,
+            Stream stream,
+            string baseUri,
+            bool enableNormalization,
+            object eventHndlr,
+            XmlReaderSettings settings,
+            bool isFragment
+        )
         {
             CError.WriteLineIgnore(readerType);
-            ReaderType type = (ReaderType)Enum.Parse(typeof(ReaderType), readerType.ToUpperInvariant());
+            ReaderType type = (ReaderType)
+                Enum.Parse(typeof(ReaderType), readerType.ToUpperInvariant());
             CreateReaderParams readerParams = new CreateReaderParams(type);
             readerParams.InputType = ReadOverload.Stream;
             readerParams.Input = stream;
@@ -156,23 +228,47 @@ namespace XmlCoreTest.Common
         }
 
         //This API attaches a default validation event handler.
-        public static XmlReader CreateReader(ReaderType readerType, string url, bool enableNormalization)
+        public static XmlReader CreateReader(
+            ReaderType readerType,
+            string url,
+            bool enableNormalization
+        )
         {
             return CreateReader(readerType.ToString(), url, enableNormalization, null, null);
         }
-        public static XmlReader CreateReader(string readerType, string url, bool enableNormalization)
+
+        public static XmlReader CreateReader(
+            string readerType,
+            string url,
+            bool enableNormalization
+        )
         {
             return CreateReader(readerType, url, enableNormalization, null, null); //use default eventhandler
         }
 
-        public static XmlReader CreateReader(string readerType, string url, bool enableNormalization, object eventHndlr, XmlReaderSettings settings)
+        public static XmlReader CreateReader(
+            string readerType,
+            string url,
+            bool enableNormalization,
+            object eventHndlr,
+            XmlReaderSettings settings
+        )
         {
             return CreateReader(readerType, url, enableNormalization, eventHndlr, settings, false);
         }
-        public static XmlReader CreateReader(string readerType, string url, bool enableNormalization, object eventHndlr, XmlReaderSettings settings, bool isFragment)
+
+        public static XmlReader CreateReader(
+            string readerType,
+            string url,
+            bool enableNormalization,
+            object eventHndlr,
+            XmlReaderSettings settings,
+            bool isFragment
+        )
         {
             CError.WriteLineIgnore(readerType);
-            ReaderType type = (ReaderType)Enum.Parse(typeof(ReaderType), readerType.ToUpperInvariant());
+            ReaderType type = (ReaderType)
+                Enum.Parse(typeof(ReaderType), readerType.ToUpperInvariant());
             CreateReaderParams readerParams = new CreateReaderParams(type);
             readerParams.InputType = ReadOverload.URL;
             readerParams.Input = url;
@@ -183,23 +279,60 @@ namespace XmlCoreTest.Common
             return CreateReader(readerParams);
         }
 
-        public static XmlReader CreateReader(ReaderType readerType, XmlReader underlyingReader, bool enableNormalization)
+        public static XmlReader CreateReader(
+            ReaderType readerType,
+            XmlReader underlyingReader,
+            bool enableNormalization
+        )
         {
-            return CreateReader(readerType.ToString(), underlyingReader, enableNormalization, null, null);
+            return CreateReader(
+                readerType.ToString(),
+                underlyingReader,
+                enableNormalization,
+                null,
+                null
+            );
         }
-        public static XmlReader CreateReader(string readerType, XmlReader underlyingReader, bool enableNormalization)
+
+        public static XmlReader CreateReader(
+            string readerType,
+            XmlReader underlyingReader,
+            bool enableNormalization
+        )
         {
             return CreateReader(readerType, underlyingReader, enableNormalization, null, null); //use default eventhandler
         }
 
-        public static XmlReader CreateReader(string readerType, XmlReader underlyingReader, bool enableNormalization, object eventHndlr, XmlReaderSettings settings)
+        public static XmlReader CreateReader(
+            string readerType,
+            XmlReader underlyingReader,
+            bool enableNormalization,
+            object eventHndlr,
+            XmlReaderSettings settings
+        )
         {
-            return CreateReader(readerType, underlyingReader, enableNormalization, eventHndlr, settings, false);
+            return CreateReader(
+                readerType,
+                underlyingReader,
+                enableNormalization,
+                eventHndlr,
+                settings,
+                false
+            );
         }
-        public static XmlReader CreateReader(string readerType, XmlReader underlyingReader, bool enableNormalization, object eventHndlr, XmlReaderSettings settings, bool isFragment)
+
+        public static XmlReader CreateReader(
+            string readerType,
+            XmlReader underlyingReader,
+            bool enableNormalization,
+            object eventHndlr,
+            XmlReaderSettings settings,
+            bool isFragment
+        )
         {
             CError.WriteLineIgnore(readerType);
-            ReaderType type = (ReaderType)Enum.Parse(typeof(ReaderType), readerType.ToUpperInvariant());
+            ReaderType type = (ReaderType)
+                Enum.Parse(typeof(ReaderType), readerType.ToUpperInvariant());
             CreateReaderParams readerParams = new CreateReaderParams(type);
             readerParams.InputType = ReadOverload.XmlReader;
             readerParams.Input = underlyingReader;
@@ -210,10 +343,7 @@ namespace XmlCoreTest.Common
             return CreateReader(readerParams);
         }
 
-        public static void CreateXSLTStyleSheetWCopyTestFile(string strFileName)
-        {
-        }
-
+        public static void CreateXSLTStyleSheetWCopyTestFile(string strFileName) { }
 
         public static XmlReader CreateReader(CreateReaderParams createParams)
         {
@@ -246,7 +376,11 @@ namespace XmlCoreTest.Common
             switch (createParams.InputType)
             {
                 case ReadOverload.String:
-                    r = Create(new StringReader((string)createParams.Input), settings, parserContext);
+                    r = Create(
+                        new StringReader((string)createParams.Input),
+                        settings,
+                        parserContext
+                    );
                     return Create(r, rs);
 
                 case ReadOverload.URL:
@@ -278,7 +412,11 @@ namespace XmlCoreTest.Common
             switch (createParams.InputType)
             {
                 case ReadOverload.String:
-                    r = Create(new StringReader((string)createParams.Input), settings, parserContext);
+                    r = Create(
+                        new StringReader((string)createParams.Input),
+                        settings,
+                        parserContext
+                    );
                     while (r.Read())
                     {
                         if (r.NodeType == XmlNodeType.Element)
@@ -335,7 +473,11 @@ namespace XmlCoreTest.Common
             switch (createParams.InputType)
             {
                 case ReadOverload.String:
-                    r = Create(new StringReader((string)createParams.Input), settings, parserContext);
+                    r = Create(
+                        new StringReader((string)createParams.Input),
+                        settings,
+                        parserContext
+                    );
                     return Create(r, settings);
 
                 case ReadOverload.URL:
@@ -384,7 +526,17 @@ namespace XmlCoreTest.Common
             {
                 if (createParams.BaseUri != null)
                 {
-                    XmlParserContext parserContext = new XmlParserContext(null, null, null, null, null, null, createParams.BaseUri, null, XmlSpace.None);
+                    XmlParserContext parserContext = new XmlParserContext(
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        createParams.BaseUri,
+                        null,
+                        XmlSpace.None
+                    );
                     return parserContext;
                 }
                 else
@@ -401,7 +553,11 @@ namespace XmlCoreTest.Common
             switch (createParams.InputType)
             {
                 case ReadOverload.String:
-                    return Create(new StringReader((string)createParams.Input), settings, parserContext);
+                    return Create(
+                        new StringReader((string)createParams.Input),
+                        settings,
+                        parserContext
+                    );
 
                 case ReadOverload.URL:
                     return Create((string)createParams.Input, settings, parserContext);
@@ -424,7 +580,9 @@ namespace XmlCoreTest.Common
 
         public static IEnumerable<string> GenerateNames(int count, bool isValid, CharType charType)
         {
-            Func<CharType, string> generator = isValid ? (Func<CharType, string>)UnicodeCharHelper.GetValidCharacters : (Func<CharType, string>)UnicodeCharHelper.GetInvalidCharacters;
+            Func<CharType, string> generator = isValid
+                ? (Func<CharType, string>)UnicodeCharHelper.GetValidCharacters
+                : (Func<CharType, string>)UnicodeCharHelper.GetInvalidCharacters;
             string chars = generator(charType);
             for (int i = 0; i < count; i++)
             {
@@ -478,15 +636,23 @@ namespace XmlCoreTest.Common
             }
         }
 
-        public static XmlReader Create(string inputUri, XmlReaderSettings settings, XmlParserContext inputContext)
+        public static XmlReader Create(
+            string inputUri,
+            XmlReaderSettings settings,
+            XmlParserContext inputContext
+        )
         {
             if (AsyncUtil.IsAsyncEnabled)
             {
-                return XmlReaderAsync.Create(FilePathUtil.getStream(inputUri), settings, inputContext);
+                return XmlReaderAsync.Create(
+                    FilePathUtil.getStream(inputUri),
+                    settings,
+                    inputContext
+                );
             }
             else
             {
-                return XmlReader.Create(FilePathUtil.getStream(inputUri));//, settings, inputContext);
+                return XmlReader.Create(FilePathUtil.getStream(inputUri)); //, settings, inputContext);
             }
         }
 
@@ -522,11 +688,15 @@ namespace XmlCoreTest.Common
             }
             else
             {
-                return XmlReader.Create(input, settings);//, baseUri);
+                return XmlReader.Create(input, settings); //, baseUri);
             }
         }
 
-        public static XmlReader Create(Stream input, XmlReaderSettings settings, XmlParserContext inputContext)
+        public static XmlReader Create(
+            Stream input,
+            XmlReaderSettings settings,
+            XmlParserContext inputContext
+        )
         {
             if (AsyncUtil.IsAsyncEnabled)
             {
@@ -570,11 +740,15 @@ namespace XmlCoreTest.Common
             }
             else
             {
-                return XmlReader.Create(input, settings);//, baseUri);
+                return XmlReader.Create(input, settings); //, baseUri);
             }
         }
 
-        public static XmlReader Create(TextReader input, XmlReaderSettings settings, XmlParserContext inputContext)
+        public static XmlReader Create(
+            TextReader input,
+            XmlReaderSettings settings,
+            XmlParserContext inputContext
+        )
         {
             if (AsyncUtil.IsAsyncEnabled)
             {

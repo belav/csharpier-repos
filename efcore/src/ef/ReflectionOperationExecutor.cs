@@ -15,8 +15,10 @@ internal class ReflectionOperationExecutor : OperationExecutorBase
 {
     private readonly object _executor;
     private readonly Assembly _commandsAssembly;
-    private const string ReportHandlerTypeName = "Microsoft.EntityFrameworkCore.Design.OperationReportHandler";
-    private const string ResultHandlerTypeName = "Microsoft.EntityFrameworkCore.Design.OperationResultHandler";
+    private const string ReportHandlerTypeName =
+        "Microsoft.EntityFrameworkCore.Design.OperationReportHandler";
+    private const string ResultHandlerTypeName =
+        "Microsoft.EntityFrameworkCore.Design.OperationResultHandler";
     private readonly Type _resultHandlerType;
 
     public ReflectionOperationExecutor(
@@ -27,8 +29,17 @@ internal class ReflectionOperationExecutor : OperationExecutorBase
         string? rootNamespace,
         string? language,
         bool nullable,
-        string[] remainingArguments)
-        : base(assembly, startupAssembly, projectDir, rootNamespace, language, nullable, remainingArguments)
+        string[] remainingArguments
+    )
+        : base(
+            assembly,
+            startupAssembly,
+            projectDir,
+            rootNamespace,
+            language,
+            nullable,
+            remainingArguments
+        )
     {
         var configurationFile = (startupAssembly ?? assembly) + ".config";
         if (File.Exists(configurationFile))
@@ -46,14 +57,19 @@ internal class ReflectionOperationExecutor : OperationExecutorBase
         AppDomain.CurrentDomain.AssemblyResolve += ResolveAssembly;
 
         _commandsAssembly = Assembly.Load(new AssemblyName { Name = DesignAssemblyName });
-        var reportHandlerType = _commandsAssembly.GetType(ReportHandlerTypeName, throwOnError: true, ignoreCase: false)!;
+        var reportHandlerType = _commandsAssembly.GetType(
+            ReportHandlerTypeName,
+            throwOnError: true,
+            ignoreCase: false
+        )!;
 
         var reportHandler = Activator.CreateInstance(
             reportHandlerType,
             (Action<string>)Reporter.WriteError,
             (Action<string>)Reporter.WriteWarning,
             (Action<string>)Reporter.WriteInformation,
-            (Action<string>)Reporter.WriteVerbose)!;
+            (Action<string>)Reporter.WriteVerbose
+        )!;
 
         _executor = Activator.CreateInstance(
             _commandsAssembly.GetType(ExecutorTypeName, throwOnError: true, ignoreCase: false)!,
@@ -67,21 +83,35 @@ internal class ReflectionOperationExecutor : OperationExecutorBase
                 { "language", Language },
                 { "nullable", Nullable },
                 { "toolsVersion", ProductInfo.GetVersion() },
-                { "remainingArguments", RemainingArguments }
-            })!;
+                { "remainingArguments", RemainingArguments },
+            }
+        )!;
 
-        _resultHandlerType = _commandsAssembly.GetType(ResultHandlerTypeName, throwOnError: true, ignoreCase: false)!;
+        _resultHandlerType = _commandsAssembly.GetType(
+            ResultHandlerTypeName,
+            throwOnError: true,
+            ignoreCase: false
+        )!;
     }
 
-    protected override object CreateResultHandler()
-        => Activator.CreateInstance(_resultHandlerType)!;
+    protected override object CreateResultHandler() =>
+        Activator.CreateInstance(_resultHandlerType)!;
 
-    protected override void Execute(string operationName, object resultHandler, IDictionary arguments)
-        => Activator.CreateInstance(
-            _commandsAssembly.GetType(ExecutorTypeName + "+" + operationName, throwOnError: true, ignoreCase: true)!,
+    protected override void Execute(
+        string operationName,
+        object resultHandler,
+        IDictionary arguments
+    ) =>
+        Activator.CreateInstance(
+            _commandsAssembly.GetType(
+                ExecutorTypeName + "+" + operationName,
+                throwOnError: true,
+                ignoreCase: true
+            )!,
             _executor,
             resultHandler,
-            arguments);
+            arguments
+        );
 
     private Assembly? ResolveAssembly(object? sender, ResolveEventArgs args)
     {
@@ -96,15 +126,12 @@ internal class ReflectionOperationExecutor : OperationExecutorBase
                 {
                     return Assembly.LoadFrom(path);
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 
         return null;
     }
 
-    public override void Dispose()
-        => AppDomain.CurrentDomain.AssemblyResolve -= ResolveAssembly;
+    public override void Dispose() => AppDomain.CurrentDomain.AssemblyResolve -= ResolveAssembly;
 }

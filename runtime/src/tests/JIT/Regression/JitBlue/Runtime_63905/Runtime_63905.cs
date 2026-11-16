@@ -37,9 +37,7 @@ public class Runtime_63905
     private static int GetOne() => 1;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Foo(object o, int val)
-    {
-    }
+    private static void Foo(object o, int val) { }
 
     private class C
     {

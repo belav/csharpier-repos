@@ -30,18 +30,25 @@ namespace Microsoft.Extensions.Logging
                 return;
             }
 
-            options.CaptureScopes = _configuration.GetValue(nameof(options.CaptureScopes), options.CaptureScopes);
+            options.CaptureScopes = _configuration.GetValue(
+                nameof(options.CaptureScopes),
+                options.CaptureScopes
+            );
 
             foreach (IConfigurationSection configurationSection in _configuration.GetChildren())
             {
-                if (configurationSection.Key.Equals(LogLevelKey, StringComparison.OrdinalIgnoreCase))
+                if (
+                    configurationSection.Key.Equals(LogLevelKey, StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     // Load global category defaults
                     LoadRules(options, configurationSection, null);
                 }
                 else
                 {
-                    IConfigurationSection logLevelSection = configurationSection.GetSection(LogLevelKey);
+                    IConfigurationSection logLevelSection = configurationSection.GetSection(
+                        LogLevelKey
+                    );
                     if (logLevelSection != null)
                     {
                         // Load logger specific rules
@@ -52,9 +59,18 @@ namespace Microsoft.Extensions.Logging
             }
         }
 
-        private static void LoadRules(LoggerFilterOptions options, IConfigurationSection configurationSection, string? logger)
+        private static void LoadRules(
+            LoggerFilterOptions options,
+            IConfigurationSection configurationSection,
+            string? logger
+        )
         {
-            foreach (System.Collections.Generic.KeyValuePair<string, string?> section in configurationSection.AsEnumerable(true))
+            foreach (
+                System.Collections.Generic.KeyValuePair<
+                    string,
+                    string?
+                > section in configurationSection.AsEnumerable(true)
+            )
             {
                 if (TryGetSwitch(section.Value, out LogLevel level))
                 {

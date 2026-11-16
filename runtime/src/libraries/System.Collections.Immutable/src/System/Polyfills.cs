@@ -10,7 +10,11 @@ namespace System.Collections.Generic
     internal static class KeyValuePairExtensions
     {
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static void Deconstruct<TKey, TValue>(this KeyValuePair<TKey, TValue> source, out TKey key, out TValue value)
+        public static void Deconstruct<TKey, TValue>(
+            this KeyValuePair<TKey, TValue> source,
+            out TKey key,
+            out TValue value
+        )
         {
             key = source.Key;
             value = source.Value;
@@ -38,7 +42,8 @@ namespace System.Numerics
     internal static class BitOperations
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint RotateLeft(uint value, int offset) => (value << offset) | (value >> (32 - offset));
+        public static uint RotateLeft(uint value, int offset) =>
+            (value << offset) | (value >> (32 - offset));
     }
 #endif
 }
@@ -49,7 +54,8 @@ namespace System.Runtime.CompilerServices
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
     internal sealed class CallerArgumentExpressionAttribute : Attribute
     {
-        public CallerArgumentExpressionAttribute(string parameterName) => ParameterName = parameterName;
+        public CallerArgumentExpressionAttribute(string parameterName) =>
+            ParameterName = parameterName;
 
         public string ParameterName { get; }
     }

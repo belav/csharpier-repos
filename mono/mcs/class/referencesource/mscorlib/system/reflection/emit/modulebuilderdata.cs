@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 namespace System.Reflection.Emit
 {
@@ -23,10 +23,15 @@ namespace System.Reflection.Emit
     [Serializable]
     internal class ModuleBuilderData
     {
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal ModuleBuilderData(ModuleBuilder module, String strModuleName, String strFileName, int tkFile)
+        internal ModuleBuilderData(
+            ModuleBuilder module,
+            String strModuleName,
+            String strFileName,
+            int tkFile
+        )
         {
             m_globalTypeBuilder = new TypeBuilder(module);
             m_module = module;
@@ -36,7 +41,7 @@ namespace System.Reflection.Emit
         }
 
         // Initialize module and file names.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         private void InitNames(String strModuleName, String strFileName)
@@ -53,21 +58,29 @@ namespace System.Reflection.Emit
                 if (strExtension == null || strExtension == String.Empty)
                 {
                     // This is required by our loader. It cannot load module file that does not have file extension.
-                    throw new ArgumentException(Environment.GetResourceString("Argument_NoModuleFileExtension", strFileName));
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Argument_NoModuleFileExtension", strFileName)
+                    );
                 }
                 m_strFileName = strFileName;
             }
         }
 
-        // This is a method for changing module and file name of the manifest module (created by default for 
+        // This is a method for changing module and file name of the manifest module (created by default for
         // each assembly).
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         internal virtual void ModifyModuleName(String strModuleName)
         {
-            Contract.Assert(m_strModuleName == AssemblyBuilder.MANIFEST_MODULE_NAME, "Changing names for non-manifest module");
-            InitNames(strModuleName, null /*strFileName*/);
+            Contract.Assert(
+                m_strModuleName == AssemblyBuilder.MANIFEST_MODULE_NAME,
+                "Changing names for non-manifest module"
+            );
+            InitNames(
+                strModuleName,
+                null /*strFileName*/
+            );
         }
 
         internal int FileToken
@@ -76,37 +89,36 @@ namespace System.Reflection.Emit
             {
                 // Before save, the scope of m_tkFile is the in-memory assembly manifest
                 // During save, the scope of m_tkFile is the on-disk assembly manifest
-                // For transient modules m_tkFile never change. 
+                // For transient modules m_tkFile never change.
 
                 // Theoretically no one should emit anything after a dynamic assembly has
                 // been saved. So m_tkFile shouldn't used when m_isSaved is true.
-                // But that was never completely enforced: you can still emit everything after 
+                // But that was never completely enforced: you can still emit everything after
                 // the assembly has been saved (except for public types in persistent modules).
 
                 return m_tkFile;
             }
-
-            set
-            {
-                m_tkFile = value;
-            }
+            set { m_tkFile = value; }
         }
 
-        internal String        m_strModuleName;     // scope name (can be different from file name)
-        internal String        m_strFileName;
-        internal bool          m_fGlobalBeenCreated;
-        internal bool          m_fHasGlobal;   
+        internal String m_strModuleName; // scope name (can be different from file name)
+        internal String m_strFileName;
+        internal bool m_fGlobalBeenCreated;
+        internal bool m_fHasGlobal;
+
         [NonSerialized]
-        internal TypeBuilder   m_globalTypeBuilder;
+        internal TypeBuilder m_globalTypeBuilder;
+
         [NonSerialized]
         internal ModuleBuilder m_module;
 
-        private int            m_tkFile;
-        internal bool          m_isSaved;
+        private int m_tkFile;
+        internal bool m_isSaved;
+
         [NonSerialized]
         internal ResWriterData m_embeddedRes;
         internal const String MULTI_BYTE_VALUE_CLASS = "$ArrayType$";
-        internal String        m_strResourceFileName;
-        internal byte[]        m_resourceBytes;
+        internal String m_strResourceFileName;
+        internal byte[] m_resourceBytes;
     } // class ModuleBuilderData
 }

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -13,35 +13,36 @@
 **
 =============================================================================*/
 
-namespace System 
+namespace System
 {
     using System.Runtime.Serialization;
 
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public class TimeoutException : SystemException {
-        
-        public TimeoutException() 
-            : base(Environment.GetResourceString("Arg_TimeoutException")) {
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class TimeoutException : SystemException
+    {
+        public TimeoutException()
+            : base(Environment.GetResourceString("Arg_TimeoutException"))
+        {
             SetErrorCode(__HResults.COR_E_TIMEOUT);
         }
-    
-        public TimeoutException(String message) 
-            : base(message) {
+
+        public TimeoutException(String message)
+            : base(message)
+        {
             SetErrorCode(__HResults.COR_E_TIMEOUT);
         }
-        
+
         public TimeoutException(String message, Exception innerException)
-            : base(message, innerException) {
+            : base(message, innerException)
+        {
             SetErrorCode(__HResults.COR_E_TIMEOUT);
         }
-    
+
         //
         //This constructor is required for serialization.
         //
-        protected TimeoutException(SerializationInfo info, StreamingContext context) 
-            : base(info, context) {
-        }
+        protected TimeoutException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }
-

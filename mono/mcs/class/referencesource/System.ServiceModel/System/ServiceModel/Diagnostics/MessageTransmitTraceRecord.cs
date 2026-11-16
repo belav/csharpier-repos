@@ -13,18 +13,21 @@ namespace System.ServiceModel.Diagnostics
         Uri address = null;
         string addressElementName = null;
 
-        MessageTransmitTraceRecord(Message message) : base(message) { }
+        MessageTransmitTraceRecord(Message message)
+            : base(message) { }
 
         MessageTransmitTraceRecord(Message message, string addressElementName)
-            :
-            this(message)
+            : this(message)
         {
             this.addressElementName = addressElementName;
         }
 
-        MessageTransmitTraceRecord(Message message, string addressElementName, EndpointAddress address)
-            :
-            this(message, addressElementName)
+        MessageTransmitTraceRecord(
+            Message message,
+            string addressElementName,
+            EndpointAddress address
+        )
+            : this(message, addressElementName)
         {
             if (address != null)
             {
@@ -33,25 +36,36 @@ namespace System.ServiceModel.Diagnostics
         }
 
         MessageTransmitTraceRecord(Message message, string addressElementName, Uri uri)
-            :
-            this(message, addressElementName)
+            : this(message, addressElementName)
         {
             this.address = uri;
         }
 
-        internal override string EventId { get { return BuildEventId("MessageTransmit"); } }
+        internal override string EventId
+        {
+            get { return BuildEventId("MessageTransmit"); }
+        }
 
-        internal static MessageTransmitTraceRecord CreateSendTraceRecord(Message message, EndpointAddress address)
+        internal static MessageTransmitTraceRecord CreateSendTraceRecord(
+            Message message,
+            EndpointAddress address
+        )
         {
             return new MessageTransmitTraceRecord(message, "RemoteAddress", address);
         }
 
-        internal static MessageTransmitTraceRecord CreateReceiveTraceRecord(Message message, Uri uri)
+        internal static MessageTransmitTraceRecord CreateReceiveTraceRecord(
+            Message message,
+            Uri uri
+        )
         {
             return new MessageTransmitTraceRecord(message, "LocalAddress", uri);
         }
 
-        internal static MessageTransmitTraceRecord CreateReceiveTraceRecord(Message message, EndpointAddress address)
+        internal static MessageTransmitTraceRecord CreateReceiveTraceRecord(
+            Message message,
+            EndpointAddress address
+        )
         {
             return new MessageTransmitTraceRecord(message, "LocalAddress", address);
         }

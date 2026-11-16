@@ -13,43 +13,51 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
 
-    [TypeForwardedFrom("System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public partial class NetTcpContextBindingElement : NetTcpBindingElement
     {
-        const string ContextManagementEnabledName = ContextBindingElementExtensionElement.ContextManagementEnabledName;
+        const string ContextManagementEnabledName =
+            ContextBindingElementExtensionElement.ContextManagementEnabledName;
         const string ContextProtectionLevelName = "contextProtectionLevel";
 
         public NetTcpContextBindingElement()
-            : base()
-        {
-        }
+            : base() { }
 
         public NetTcpContextBindingElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         [ConfigurationProperty(ConfigurationStrings.ClientCallbackAddressName, DefaultValue = null)]
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationValidatorAttributeRule,
-            Justification = "Is of type Uri, we don't have a validator for it")]
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationValidatorAttributeRule,
+            Justification = "Is of type Uri, we don't have a validator for it"
+        )]
         public Uri ClientCallbackAddress
         {
             get { return (Uri)base[ConfigurationStrings.ClientCallbackAddressName]; }
             set { base[ConfigurationStrings.ClientCallbackAddressName] = value; }
         }
 
-        [ConfigurationProperty(ContextManagementEnabledName, DefaultValue = ContextBindingElement.DefaultContextManagementEnabled)]
+        [ConfigurationProperty(
+            ContextManagementEnabledName,
+            DefaultValue = ContextBindingElement.DefaultContextManagementEnabled
+        )]
         public bool ContextManagementEnabled
         {
             get { return (bool)base[ContextManagementEnabledName]; }
             set { base[ContextManagementEnabledName] = value; }
         }
 
-        [ConfigurationProperty(ContextProtectionLevelName, DefaultValue = ContextBindingElement.DefaultProtectionLevel)]
+        [ConfigurationProperty(
+            ContextProtectionLevelName,
+            DefaultValue = ContextBindingElement.DefaultProtectionLevel
+        )]
         [ServiceModelEnumValidator(typeof(ProtectionLevelHelper))]
         public ProtectionLevel ContextProtectionLevel
         {
-            get { return (ProtectionLevel) base[ContextProtectionLevelName]; }
+            get { return (ProtectionLevel)base[ContextProtectionLevelName]; }
             set { base[ContextProtectionLevelName] = value; }
         }
 
@@ -62,9 +70,18 @@ namespace System.ServiceModel.Configuration
         {
             base.InitializeFrom(binding);
             NetTcpContextBinding netTcpContextBinding = (NetTcpContextBinding)binding;
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ClientCallbackAddressName, netTcpContextBinding.ClientCallbackAddress);
-            SetPropertyValueIfNotDefaultValue(NetTcpContextBindingElement.ContextManagementEnabledName, netTcpContextBinding.ContextManagementEnabled);
-            SetPropertyValueIfNotDefaultValue(NetTcpContextBindingElement.ContextProtectionLevelName, netTcpContextBinding.ContextProtectionLevel);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ClientCallbackAddressName,
+                netTcpContextBinding.ClientCallbackAddress
+            );
+            SetPropertyValueIfNotDefaultValue(
+                NetTcpContextBindingElement.ContextManagementEnabledName,
+                netTcpContextBinding.ContextManagementEnabled
+            );
+            SetPropertyValueIfNotDefaultValue(
+                NetTcpContextBindingElement.ContextProtectionLevelName,
+                netTcpContextBinding.ContextProtectionLevel
+            );
         }
 
         protected override void OnApplyConfiguration(Binding binding)

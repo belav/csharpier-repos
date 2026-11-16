@@ -51,7 +51,9 @@ namespace System.ServiceModel.Channels
                 if (empty == null)
                 {
                     ContextDictionary localEmpty = new ContextDictionary();
-                    localEmpty.dictionaryStore = new ReadOnlyDictionaryInternal<string, string>(new Dictionary<string, string>(0));
+                    localEmpty.dictionaryStore = new ReadOnlyDictionaryInternal<string, string>(
+                        new Dictionary<string, string>(0)
+                    );
                     empty = localEmpty;
                 }
 
@@ -108,7 +110,6 @@ namespace System.ServiceModel.Channels
             this.dictionaryStore.Add(key, value);
         }
 
-
         public void Add(KeyValuePair<string, string> item)
         {
             if (item.Key == null)
@@ -143,7 +144,6 @@ namespace System.ServiceModel.Channels
             return this.dictionaryStore.Contains(item);
         }
 
-
         public bool ContainsKey(string key)
         {
             ValidateKeyValueSpace(key);
@@ -154,7 +154,6 @@ namespace System.ServiceModel.Channels
         {
             this.dictionaryStore.CopyTo(array, arrayIndex);
         }
-
 
         public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
         {
@@ -204,7 +203,12 @@ namespace System.ServiceModel.Channels
             {
                 char currentCharacter = key[counter];
 
-                if (!IsLetterOrDigit(currentCharacter) && currentCharacter != '-' && currentCharacter != '_' && currentCharacter != '.')
+                if (
+                    !IsLetterOrDigit(currentCharacter)
+                    && currentCharacter != '-'
+                    && currentCharacter != '_'
+                    && currentCharacter != '.'
+                )
                 {
                     return false;
                 }
@@ -214,16 +218,21 @@ namespace System.ServiceModel.Channels
 
         static bool IsLetterOrDigit(char c)
         {
-            return (('A' <= c) && (c <= 'Z')) ||
-                (('a' <= c) && (c <= 'z')) ||
-                (('0' <= c) && (c <= '9'));
+            return (('A' <= c) && (c <= 'Z'))
+                || (('a' <= c) && (c <= 'z'))
+                || (('0' <= c) && (c <= '9'));
         }
 
         static void ValidateKeyValueSpace(string key)
         {
             if (!TryValidateKeyValueSpace(key))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("key", SR.GetString(SR.InvalidCookieContent, key)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "key",
+                        SR.GetString(SR.InvalidCookieContent, key)
+                    )
+                );
             }
         }
     }

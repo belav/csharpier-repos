@@ -31,10 +31,13 @@ namespace System.ComponentModel.Design.Serialization.Tests
         private class TestSerializationStore : SerializationStore
         {
             public bool CalledClose { get; set; }
+
             public void DoDispose(bool disposing) => base.Dispose(disposing);
 
             public override ICollection Errors => throw new NotImplementedException();
+
             public override void Close() => CalledClose = true;
+
             public override void Save(Stream stream) => throw new NotImplementedException();
         }
     }

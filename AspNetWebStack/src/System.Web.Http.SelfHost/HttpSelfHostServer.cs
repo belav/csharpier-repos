@@ -31,13 +31,22 @@ namespace System.Web.Http.SelfHost
     {
         internal const string SecurityKey = "Security";
 
-        private static readonly AsyncCallback _onCloseListenerComplete = new AsyncCallback(OnCloseListenerComplete);
-        private static readonly AsyncCallback _onCloseChannelComplete = new AsyncCallback(OnCloseChannelComplete);
+        private static readonly AsyncCallback _onCloseListenerComplete = new AsyncCallback(
+            OnCloseListenerComplete
+        );
+        private static readonly AsyncCallback _onCloseChannelComplete = new AsyncCallback(
+            OnCloseChannelComplete
+        );
 
         private static readonly TimeSpan _acceptTimeout = TimeSpan.MaxValue;
         private static readonly TimeSpan _receiveTimeout = TimeSpan.MaxValue;
 
-        private static readonly Func<HttpRequestMessage, X509Certificate2> _retrieveClientCertificate = new Func<HttpRequestMessage, X509Certificate2>(RetrieveClientCertificate);
+        private static readonly Func<
+            HttpRequestMessage,
+            X509Certificate2
+        > _retrieveClientCertificate = new Func<HttpRequestMessage, X509Certificate2>(
+            RetrieveClientCertificate
+        );
 
         // Window size gets increased if the ratio of outstanding requests to the window size is greater than IncreaseWindowSizeRatio
         // Window size gets decreased if the ratio of outstanding requests to the window size is less than DecreaseWindowsSizeRatio
@@ -45,8 +54,10 @@ namespace System.Web.Http.SelfHost
         private const double DecreaseWindowSizeRatio = .2;
         private const int InitialWindowSizeMultiplier = 8;
         private const int MinimumWindowSizeMultiplier = 1;
-        private static readonly int InitialWindowSize = HttpSelfHostConfiguration.MultiplyByProcessorCount(InitialWindowSizeMultiplier);
-        private static readonly int MinimumWindowSize = HttpSelfHostConfiguration.MultiplyByProcessorCount(MinimumWindowSizeMultiplier);
+        private static readonly int InitialWindowSize =
+            HttpSelfHostConfiguration.MultiplyByProcessorCount(InitialWindowSizeMultiplier);
+        private static readonly int MinimumWindowSize =
+            HttpSelfHostConfiguration.MultiplyByProcessorCount(MinimumWindowSizeMultiplier);
 
         private AsyncCallback _onOpenListenerComplete;
         private AsyncCallback _onAcceptChannelComplete;
@@ -91,7 +102,10 @@ namespace System.Web.Http.SelfHost
         /// </summary>
         /// <param name="configuration">The configuration.</param>
         /// <param name="dispatcher">The dispatcher.</param>
-        public HttpSelfHostServer(HttpSelfHostConfiguration configuration, HttpMessageHandler dispatcher)
+        public HttpSelfHostServer(
+            HttpSelfHostConfiguration configuration,
+            HttpMessageHandler dispatcher
+        )
             : base(configuration, dispatcher)
         {
             if (configuration == null)
@@ -123,7 +137,10 @@ namespace System.Web.Http.SelfHost
         {
             if (Interlocked.CompareExchange(ref _state, 1, 0) == 1)
             {
-                throw Error.InvalidOperation(SRResources.HttpServerAlreadyRunning, typeof(HttpSelfHostServer).Name);
+                throw Error.InvalidOperation(
+                    SRResources.HttpServerAlreadyRunning,
+                    typeof(HttpSelfHostServer).Name
+                );
             }
 
             _openTaskCompletionSource = new TaskCompletionSource<bool>();
@@ -172,7 +189,10 @@ namespace System.Web.Http.SelfHost
 
         // async void is OK here. This is a fire and forget method and any exceptions that occur will be turned into
         // HTTP responses that get sent back to clients.
-        private async void ProcessRequestContext(ChannelContext channelContext, RequestContext requestContext)
+        private async void ProcessRequestContext(
+            ChannelContext channelContext,
+            RequestContext requestContext
+        )
         {
             Contract.Assert(channelContext != null);
             Contract.Assert(requestContext != null);
@@ -182,7 +202,10 @@ namespace System.Web.Http.SelfHost
             BeginReply(new ReplyContext(channelContext, requestContext, reply));
         }
 
-        private async Task<HttpResponseMessage> SendAsync(ChannelContext channelContext, RequestContext requestContext)
+        private async Task<HttpResponseMessage> SendAsync(
+            ChannelContext channelContext,
+            RequestContext requestContext
+        )
         {
             HttpRequestMessage request = null;
             try
@@ -197,7 +220,10 @@ namespace System.Web.Http.SelfHost
             // Submit request up the stack
             try
             {
-                HttpResponseMessage response = await channelContext.Server.SendAsync(request, channelContext.Server._cancellationTokenSource.Token);
+                HttpResponseMessage response = await channelContext.Server.SendAsync(
+                    request,
+                    channelContext.Server._cancellationTokenSource.Token
+                );
 
                 if (response == null)
                 {
@@ -208,7 +234,11 @@ namespace System.Web.Http.SelfHost
             }
             catch (OperationCanceledException operationCanceledException)
             {
-                return request.CreateErrorResponse(HttpStatusCode.ServiceUnavailable, SRResources.RequestCancelled, operationCanceledException);
+                return request.CreateErrorResponse(
+                    HttpStatusCode.ServiceUnavailable,
+                    SRResources.RequestCancelled,
+                    operationCanceledException
+                );
             }
         }
 
@@ -218,31 +248,48 @@ namespace System.Web.Http.SelfHost
             HttpRequestMessage request = requestContext.RequestMessage.ToHttpRequestMessage();
             if (request == null)
             {
-                throw Error.InvalidOperation(SRResources.HttpMessageHandlerInvalidMessage, requestContext.RequestMessage.GetType());
+                throw Error.InvalidOperation(
+                    SRResources.HttpMessageHandlerInvalidMessage,
+                    requestContext.RequestMessage.GetType()
+                );
             }
 
             // create principal information and add it the request for the windows auth case
             SetCurrentPrincipal(request);
 
-            HttpRequestContext httpRequestContext = new SelfHostHttpRequestContext(requestContext, _configuration,
-                request);
+            HttpRequestContext httpRequestContext = new SelfHostHttpRequestContext(
+                requestContext,
+                _configuration,
+                request
+            );
             request.SetRequestContext(httpRequestContext);
 
             // The following two properties are set for backwards compatibility only. The request context controls the
             // behavior for all cases except when accessing the property directly by key.
 
             // Add the retrieve client certificate delegate to the property bag to enable lookup later on
-            request.Properties.Add(HttpPropertyKeys.RetrieveClientCertificateDelegateKey, _retrieveClientCertificate);
+            request.Properties.Add(
+                HttpPropertyKeys.RetrieveClientCertificateDelegateKey,
+                _retrieveClientCertificate
+            );
 
             // Add information about whether the request is local or not
-            request.Properties.Add(HttpPropertyKeys.IsLocalKey, new Lazy<bool>(() => IsLocal(requestContext.RequestMessage)));
+            request.Properties.Add(
+                HttpPropertyKeys.IsLocalKey,
+                new Lazy<bool>(() => IsLocal(requestContext.RequestMessage))
+            );
             return request;
         }
 
         internal static bool IsLocal(Message message)
         {
             RemoteEndpointMessageProperty remoteEndpointProperty;
-            if (message.Properties.TryGetValue(RemoteEndpointMessageProperty.Name, out remoteEndpointProperty))
+            if (
+                message.Properties.TryGetValue(
+                    RemoteEndpointMessageProperty.Name,
+                    out remoteEndpointProperty
+                )
+            )
             {
                 IPAddress remoteAddress;
                 if (IPAddress.TryParse(remoteEndpointProperty.Address, out remoteAddress))
@@ -281,10 +328,19 @@ namespace System.Web.Http.SelfHost
             SecurityMessageProperty property = request.GetSecurityMessageProperty();
             X509Certificate2 result = null;
 
-            if (property != null && property.ServiceSecurityContext != null && property.ServiceSecurityContext.AuthorizationContext != null)
+            if (
+                property != null
+                && property.ServiceSecurityContext != null
+                && property.ServiceSecurityContext.AuthorizationContext != null
+            )
             {
                 X509CertificateClaimSet certClaimSet = null;
-                foreach (ClaimSet claimSet in property.ServiceSecurityContext.AuthorizationContext.ClaimSets)
+                foreach (
+                    ClaimSet claimSet in property
+                        .ServiceSecurityContext
+                        .AuthorizationContext
+                        .ClaimSets
+                )
                 {
                     certClaimSet = claimSet as X509CertificateClaimSet;
 
@@ -305,7 +361,10 @@ namespace System.Web.Http.SelfHost
             taskCompletionSource.TrySetCanceled();
         }
 
-        private static void FaultTask(TaskCompletionSource<bool> taskCompletionSource, Exception exception)
+        private static void FaultTask(
+            TaskCompletionSource<bool> taskCompletionSource,
+            Exception exception
+        )
         {
             Contract.Assert(taskCompletionSource != null);
             taskCompletionSource.TrySetException(exception);
@@ -317,7 +376,11 @@ namespace System.Web.Http.SelfHost
             taskCompletionSource.TrySetResult(true);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
         private void BeginOpenListener(HttpSelfHostServer server)
         {
             Contract.Assert(server != null);
@@ -328,17 +391,25 @@ namespace System.Web.Http.SelfHost
                 HttpBinding binding = new HttpBinding();
 
                 // Get it configured
-                BindingParameterCollection bindingParameters = server._configuration.ConfigureBinding(binding);
+                BindingParameterCollection bindingParameters =
+                    server._configuration.ConfigureBinding(binding);
                 if (bindingParameters == null)
                 {
                     bindingParameters = new BindingParameterCollection();
                 }
 
                 // Build channel listener
-                server._listener = binding.BuildChannelListener<IReplyChannel>(server._configuration.BaseAddress, bindingParameters);
+                server._listener = binding.BuildChannelListener<IReplyChannel>(
+                    server._configuration.BaseAddress,
+                    bindingParameters
+                );
                 if (server._listener == null)
                 {
-                    throw Error.InvalidOperation(SRResources.InvalidChannelListener, typeof(IChannelListener).Name, typeof(IReplyChannel).Name);
+                    throw Error.InvalidOperation(
+                        SRResources.InvalidChannelListener,
+                        typeof(IChannelListener).Name,
+                        typeof(IReplyChannel).Name
+                    );
                 }
 
                 IAsyncResult result = server._listener.BeginOpen(_onOpenListenerComplete, server);
@@ -365,7 +436,11 @@ namespace System.Web.Http.SelfHost
             OpenListenerComplete(result);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
         private void OpenListenerComplete(IAsyncResult result)
         {
             HttpSelfHostServer server = (HttpSelfHostServer)result.AsyncState;
@@ -436,8 +511,15 @@ namespace System.Web.Http.SelfHost
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
-        private static IAsyncResult BeginTryAcceptChannel(HttpSelfHostServer server, AsyncCallback callback)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
+        private static IAsyncResult BeginTryAcceptChannel(
+            HttpSelfHostServer server,
+            AsyncCallback callback
+        )
         {
             Contract.Assert(server != null);
             Contract.Assert(server._listener != null);
@@ -469,7 +551,11 @@ namespace System.Web.Http.SelfHost
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
         private static bool EndTryAcceptChannel(IAsyncResult result, out IReplyChannel channel)
         {
             Contract.Assert(result != null);
@@ -518,7 +604,11 @@ namespace System.Web.Http.SelfHost
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
         private void BeginOpenChannel(ChannelContext channelContext)
         {
             Contract.Assert(channelContext != null);
@@ -526,7 +616,10 @@ namespace System.Web.Http.SelfHost
 
             try
             {
-                IAsyncResult result = channelContext.Channel.BeginOpen(_onOpenChannelComplete, channelContext);
+                IAsyncResult result = channelContext.Channel.BeginOpen(
+                    _onOpenChannelComplete,
+                    channelContext
+                );
                 if (result.CompletedSynchronously)
                 {
                     OpenChannelComplete(result);
@@ -550,7 +643,11 @@ namespace System.Web.Http.SelfHost
             OpenChannelComplete(result);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
         private void OpenChannelComplete(IAsyncResult result)
         {
             ChannelContext channelContext = (ChannelContext)result.AsyncState;
@@ -565,7 +662,10 @@ namespace System.Web.Http.SelfHost
                 CompleteTask(channelContext.Server._openTaskCompletionSource);
 
                 // Start pumping messages
-                int initialWindowSize = Math.Min(InitialWindowSize, _configuration.MaxConcurrentRequests);
+                int initialWindowSize = Math.Min(
+                    InitialWindowSize,
+                    _configuration.MaxConcurrentRequests
+                );
                 Interlocked.Add(ref _windowSize, initialWindowSize);
                 for (int index = 0; index < initialWindowSize; index++)
                 {
@@ -590,7 +690,10 @@ namespace System.Web.Http.SelfHost
                 return;
             }
 
-            IAsyncResult result = BeginTryReceiveRequestContext(context, _onReceiveRequestContextComplete);
+            IAsyncResult result = BeginTryReceiveRequestContext(
+                context,
+                _onReceiveRequestContextComplete
+            );
             if (result.CompletedSynchronously)
             {
                 ReceiveRequestContextComplete(result);
@@ -630,15 +733,26 @@ namespace System.Web.Http.SelfHost
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
-        private static IAsyncResult BeginTryReceiveRequestContext(ChannelContext channelContext, AsyncCallback callback)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
+        private static IAsyncResult BeginTryReceiveRequestContext(
+            ChannelContext channelContext,
+            AsyncCallback callback
+        )
         {
             Contract.Assert(channelContext != null);
             Contract.Assert(callback != null);
 
             try
             {
-                return channelContext.Channel.BeginTryReceiveRequest(_receiveTimeout, callback, channelContext);
+                return channelContext.Channel.BeginTryReceiveRequest(
+                    _receiveTimeout,
+                    callback,
+                    channelContext
+                );
             }
             catch (CommunicationObjectAbortedException)
             {
@@ -662,8 +776,15 @@ namespace System.Web.Http.SelfHost
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
-        private static bool EndTryReceiveRequestContext(IAsyncResult result, out System.ServiceModel.Channels.RequestContext requestContext)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
+        private static bool EndTryReceiveRequestContext(
+            IAsyncResult result,
+            out System.ServiceModel.Channels.RequestContext requestContext
+        )
         {
             Contract.Assert(result != null);
 
@@ -709,14 +830,22 @@ namespace System.Web.Http.SelfHost
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
         private void BeginReply(ReplyContext replyContext)
         {
             Contract.Assert(replyContext != null);
 
             try
             {
-                IAsyncResult result = replyContext.RequestContext.BeginReply(replyContext.Reply, _onReplyComplete, replyContext);
+                IAsyncResult result = replyContext.RequestContext.BeginReply(
+                    replyContext.Reply,
+                    _onReplyComplete,
+                    replyContext
+                );
                 if (result.CompletedSynchronously)
                 {
                     ReplyComplete(result);
@@ -742,7 +871,11 @@ namespace System.Web.Http.SelfHost
             ReplyComplete(result);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
         private void ReplyComplete(IAsyncResult result)
         {
             ReplyContext replyContext = (ReplyContext)result.AsyncState;
@@ -752,9 +885,7 @@ namespace System.Web.Http.SelfHost
             {
                 replyContext.RequestContext.EndReply(result);
             }
-            catch
-            {
-            }
+            catch { }
             finally
             {
                 Interlocked.Decrement(ref _requestsOutstanding);
@@ -831,15 +962,21 @@ namespace System.Web.Http.SelfHost
 
         private bool ShouldIncreaseWindowSize()
         {
-            return _windowSize < _configuration.MaxConcurrentRequests && _requestsOutstanding > _windowSize * IncreaseWindowSizeRatio;
+            return _windowSize < _configuration.MaxConcurrentRequests
+                && _requestsOutstanding > _windowSize * IncreaseWindowSizeRatio;
         }
 
         private bool ShouldDecreaseWindowSize()
         {
-            return _windowSize > MinimumWindowSize && _requestsOutstanding < _windowSize * DecreaseWindowSizeRatio;
+            return _windowSize > MinimumWindowSize
+                && _requestsOutstanding < _windowSize * DecreaseWindowSizeRatio;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
         private static void BeginCloseListener(HttpSelfHostServer server)
         {
             Contract.Assert(server != null);
@@ -848,7 +985,10 @@ namespace System.Web.Http.SelfHost
             {
                 if (server._listener != null)
                 {
-                    IAsyncResult result = server._listener.BeginClose(_onCloseListenerComplete, server);
+                    IAsyncResult result = server._listener.BeginClose(
+                        _onCloseListenerComplete,
+                        server
+                    );
                     if (result.CompletedSynchronously)
                     {
                         CloseListenerComplete(result);
@@ -873,7 +1013,11 @@ namespace System.Web.Http.SelfHost
             CloseListenerComplete(result);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
         private static void CloseListenerComplete(IAsyncResult result)
         {
             HttpSelfHostServer server = (HttpSelfHostServer)result.AsyncState;
@@ -884,9 +1028,7 @@ namespace System.Web.Http.SelfHost
             {
                 server._listener.EndClose(result);
             }
-            catch
-            {
-            }
+            catch { }
             finally
             {
                 CloseNextChannel(server);
@@ -908,14 +1050,21 @@ namespace System.Web.Http.SelfHost
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
         private static void BeginCloseChannel(ChannelContext channelContext)
         {
             Contract.Assert(channelContext != null);
 
             try
             {
-                IAsyncResult result = channelContext.Channel.BeginClose(_onCloseChannelComplete, channelContext);
+                IAsyncResult result = channelContext.Channel.BeginClose(
+                    _onCloseChannelComplete,
+                    channelContext
+                );
                 if (result.CompletedSynchronously)
                 {
                     CloseChannelComplete(result);
@@ -939,7 +1088,11 @@ namespace System.Web.Http.SelfHost
             CloseChannelComplete(result);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to fail here so we have to catch all exceptions."
+        )]
         private static void CloseChannelComplete(IAsyncResult result)
         {
             ChannelContext channelContext = (ChannelContext)result.AsyncState;
@@ -949,9 +1102,7 @@ namespace System.Web.Http.SelfHost
             {
                 channelContext.Channel.EndClose(result);
             }
-            catch
-            {
-            }
+            catch { }
             finally
             {
                 CloseNextChannel(channelContext.Server);
@@ -1007,7 +1158,11 @@ namespace System.Web.Http.SelfHost
             /// <param name="channelContext">The channel context to associate with this reply context.</param>
             /// <param name="requestContext">The request context to associate with this reply context.</param>
             /// <param name="reply">The reply to associate with this reply context.</param>
-            public ReplyContext(ChannelContext channelContext, RequestContext requestContext, Message reply)
+            public ReplyContext(
+                ChannelContext channelContext,
+                RequestContext requestContext,
+                Message reply
+            )
             {
                 Contract.Assert(channelContext != null);
                 Contract.Assert(requestContext != null);
@@ -1055,7 +1210,11 @@ namespace System.Web.Http.SelfHost
             /// Releases unmanaged and - optionally - managed resources
             /// </summary>
             /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged SRResources.</param>
-            [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We never want to fail here so we have to catch all exceptions.")]
+            [SuppressMessage(
+                "Microsoft.Design",
+                "CA1031:DoNotCatchGeneralExceptionTypes",
+                Justification = "We never want to fail here so we have to catch all exceptions."
+            )]
             protected virtual void Dispose(bool disposing)
             {
                 if (!_disposed)
@@ -1068,9 +1227,7 @@ namespace System.Web.Http.SelfHost
                         {
                             RequestContext.Close();
                         }
-                        catch
-                        {
-                        }
+                        catch { }
 
                         // HttpMessage.Close can throw if the request message throws in its Dispose implementation
                         // Catch here to avoid throwing in a Dispose method
@@ -1078,9 +1235,7 @@ namespace System.Web.Http.SelfHost
                         {
                             Reply.Close();
                         }
-                        catch
-                        {
-                        }
+                        catch { }
                     }
 
                     _disposed = true;

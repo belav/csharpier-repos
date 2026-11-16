@@ -45,7 +45,10 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
             // Arrange
             var collection = new TestServiceCollection();
-            collection.AddTransient(typeof(IFakeOpenGenericService<>), typeof(FakeOpenGenericService<>));
+            collection.AddTransient(
+                typeof(IFakeOpenGenericService<>),
+                typeof(FakeOpenGenericService<>)
+            );
             var provider = CreateServiceProvider(collection);
 
             // Act
@@ -53,7 +56,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
             // Assert
             Assert.NotNull(serviceProviderIsService);
-            Assert.True(serviceProviderIsService.IsService(typeof(IFakeOpenGenericService<IFakeService>)));
+            Assert.True(
+                serviceProviderIsService.IsService(typeof(IFakeOpenGenericService<IFakeService>))
+            );
             Assert.False(serviceProviderIsService.IsService(typeof(IFakeOpenGenericService<>)));
         }
 
@@ -67,7 +72,10 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
             // Arrange
             var collection = new TestServiceCollection();
-            collection.AddTransient(typeof(IFakeOpenGenericService<IFakeService>), typeof(FakeOpenGenericService<IFakeService>));
+            collection.AddTransient(
+                typeof(IFakeOpenGenericService<IFakeService>),
+                typeof(FakeOpenGenericService<IFakeService>)
+            );
             var provider = CreateServiceProvider(collection);
 
             // Act
@@ -75,7 +83,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
             // Assert
             Assert.NotNull(serviceProviderIsService);
-            Assert.True(serviceProviderIsService.IsService(typeof(IFakeOpenGenericService<IFakeService>)));
+            Assert.True(
+                serviceProviderIsService.IsService(typeof(IFakeOpenGenericService<IFakeService>))
+            );
         }
 
         [Fact]

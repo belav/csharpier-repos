@@ -8,18 +8,19 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.ConvertTypeOfToNameOf
 {
-    internal abstract class AbstractConvertTypeOfToNameOfDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal abstract class AbstractConvertTypeOfToNameOfDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         protected AbstractConvertTypeOfToNameOfDiagnosticAnalyzer(LocalizableString title)
-            : base(diagnosticId: IDEDiagnosticIds.ConvertTypeOfToNameOfDiagnosticId,
-                  EnforceOnBuildValues.ConvertTypeOfToNameOf,
-                  option: null,
-                  title: title)
-        {
-        }
+            : base(
+                diagnosticId: IDEDiagnosticIds.ConvertTypeOfToNameOfDiagnosticId,
+                EnforceOnBuildValues.ConvertTypeOfToNameOf,
+                option: null,
+                title: title
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected abstract bool IsValidTypeofAction(OperationAnalysisContext context);
 
@@ -48,7 +49,6 @@ namespace Microsoft.CodeAnalysis.ConvertTypeOfToNameOf
 
             var location = parent.GetLocation();
             context.ReportDiagnostic(Diagnostic.Create(Descriptor, location));
-
         }
 
         private static bool IsValidOperation(IOperation operation)
@@ -68,7 +68,7 @@ namespace Microsoft.CodeAnalysis.ConvertTypeOfToNameOf
                 return false;
             }
 
-            // If it's a generic type, do not offer the fix because nameof(T) and typeof(T).Name are not 
+            // If it's a generic type, do not offer the fix because nameof(T) and typeof(T).Name are not
             // semantically equivalent, the resulting string is formatted differently, where typeof(T).Name
             // return "T`1" and nameof just returns "T"
             if (typeofOperation.TypeOperand is IErrorTypeSymbol)
@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.ConvertTypeOfToNameOf
                 return false;
             }
 
-            return typeofOperation.TypeOperand is INamedTypeSymbol namedType && namedType.TypeArguments.Length == 0;
+            return typeofOperation.TypeOperand is INamedTypeSymbol namedType
+                && namedType.TypeArguments.Length == 0;
         }
     }
 }

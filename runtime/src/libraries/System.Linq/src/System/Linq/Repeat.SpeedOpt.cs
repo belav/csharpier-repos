@@ -8,10 +8,14 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        private sealed partial class RepeatIterator<TResult> : IPartition<TResult>, IList<TResult>, IReadOnlyList<TResult>
+        private sealed partial class RepeatIterator<TResult>
+            : IPartition<TResult>,
+                IList<TResult>,
+                IReadOnlyList<TResult>
         {
-            public override IEnumerable<TResult2> Select<TResult2>(Func<TResult, TResult2> selector) =>
-                new SelectIPartitionIterator<TResult, TResult2>(this, selector);
+            public override IEnumerable<TResult2> Select<TResult2>(
+                Func<TResult, TResult2> selector
+            ) => new SelectIPartitionIterator<TResult, TResult2>(this, selector);
 
             public TResult[] ToArray()
             {
@@ -112,9 +116,15 @@ namespace System.Linq
             public bool IsReadOnly => true;
 
             void ICollection<TResult>.Add(TResult item) => ThrowHelper.ThrowNotSupportedException();
+
             void ICollection<TResult>.Clear() => ThrowHelper.ThrowNotSupportedException();
-            void IList<TResult>.Insert(int index, TResult item) => ThrowHelper.ThrowNotSupportedException();
-            bool ICollection<TResult>.Remove(TResult item) => ThrowHelper.ThrowNotSupportedException_Boolean();
+
+            void IList<TResult>.Insert(int index, TResult item) =>
+                ThrowHelper.ThrowNotSupportedException();
+
+            bool ICollection<TResult>.Remove(TResult item) =>
+                ThrowHelper.ThrowNotSupportedException_Boolean();
+
             void IList<TResult>.RemoveAt(int index) => ThrowHelper.ThrowNotSupportedException();
         }
     }

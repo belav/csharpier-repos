@@ -30,54 +30,53 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class ListItem_ctor_
-		: GHTBaseWeb 
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+    public class ListItem_ctor_ : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			HtmlForm frm = (HtmlForm)FindControl("Form1");
-			GHTTestBegin(frm);
-      
-			// Default values
-			GHTSubTestBegin("Default values");
-			try 
-			{
-				System.Web.UI.WebControls.ListItem item = new System.Web.UI.WebControls.ListItem();
-				Compare(item.Text, String.Empty);
-				Compare(item.Value, String.Empty);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}      
-			GHTSubTestEnd();
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			GHTTestEnd();
-		}
-	}
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(frm);
+
+            // Default values
+            GHTSubTestBegin("Default values");
+            try
+            {
+                System.Web.UI.WebControls.ListItem item = new System.Web.UI.WebControls.ListItem();
+                Compare(item.Text, String.Empty);
+                Compare(item.Value, String.Empty);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
+
+            GHTTestEnd();
+        }
+    }
 }

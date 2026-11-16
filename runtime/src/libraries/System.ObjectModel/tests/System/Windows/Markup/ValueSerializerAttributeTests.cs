@@ -26,7 +26,10 @@ namespace System.Windows.Markup.Tests
         public void Ctor_Type(Type valueSerializerType)
         {
             var attribute = new ValueSerializerAttribute(valueSerializerType);
-            Assert.Equal(valueSerializerType?.AssemblyQualifiedName, attribute.ValueSerializerTypeName);
+            Assert.Equal(
+                valueSerializerType?.AssemblyQualifiedName,
+                attribute.ValueSerializerTypeName
+            );
             Assert.Equal(valueSerializerType, attribute.ValueSerializerType);
         }
     }

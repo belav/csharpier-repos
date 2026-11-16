@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis.MSBuild.Logging
         [DataMember(Order = 2)]
         public string ProjectFilePath { get; }
 
-        public DiagnosticLogItem(WorkspaceDiagnosticKind kind, string message, string projectFilePath)
+        public DiagnosticLogItem(
+            WorkspaceDiagnosticKind kind,
+            string message,
+            string projectFilePath
+        )
         {
             Kind = kind;
             Message = message ?? throw new ArgumentNullException(nameof(message));

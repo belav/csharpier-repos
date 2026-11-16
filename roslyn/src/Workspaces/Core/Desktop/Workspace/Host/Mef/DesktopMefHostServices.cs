@@ -10,6 +10,7 @@ namespace Microsoft.CodeAnalysis.Host.Mef
     public static class DesktopMefHostServices
     {
         public static MefHostServices DefaultServices => MefHostServices.DefaultHost;
-        public static ImmutableArray<Assembly> DefaultAssemblies => MefHostServices.DefaultAssemblies;
+        public static ImmutableArray<Assembly> DefaultAssemblies =>
+            MefHostServices.DefaultAssemblies;
     }
 }

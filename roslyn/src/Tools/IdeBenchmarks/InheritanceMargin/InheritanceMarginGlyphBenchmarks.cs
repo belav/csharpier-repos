@@ -113,7 +113,8 @@ namespace IdeBenchmarks.InheritanceMargin
                             _operationExecutor,
                             tag,
                             _mockTextView,
-                            _listener);
+                            _listener
+                        );
                         Canvas.SetTop(glyph, j * WidthAndHeightOfGlyph);
                         _canvas.Children.Add(glyph);
                     }
@@ -127,9 +128,14 @@ namespace IdeBenchmarks.InheritanceMargin
         {
             var testFile = CreateTestFile();
             using var workspace = TestWorkspace.CreateCSharp(testFile);
-            var items = await BenchmarksHelpers.GenerateInheritanceMarginItemsAsync(workspace.CurrentSolution, cancellationToken).ConfigureAwait(false);
+            var items = await BenchmarksHelpers
+                .GenerateInheritanceMarginItemsAsync(workspace.CurrentSolution, cancellationToken)
+                .ConfigureAwait(false);
 
-            using var _ = Microsoft.CodeAnalysis.PooledObjects.ArrayBuilder<InheritanceMarginTag>.GetInstance(out var builder);
+            using var _ =
+                Microsoft.CodeAnalysis.PooledObjects.ArrayBuilder<InheritanceMarginTag>.GetInstance(
+                    out var builder
+                );
             foreach (var grouping in items.GroupBy(i => i.LineNumber))
             {
                 builder.Add(new InheritanceMarginTag(grouping.Key, grouping.ToImmutableArray()));
@@ -138,12 +144,17 @@ namespace IdeBenchmarks.InheritanceMargin
             _tags = builder.ToImmutableArray();
             var exportProvider = workspace.ExportProvider;
             _threadingContext = exportProvider.GetExportedValue<IThreadingContext>();
-            _streamingFindUsagesPresenter = exportProvider.GetExportedValue<IStreamingFindUsagesPresenter>();
+            _streamingFindUsagesPresenter =
+                exportProvider.GetExportedValue<IStreamingFindUsagesPresenter>();
             _classificationTypeMap = exportProvider.GetExportedValue<ClassificationTypeMap>();
-            var classificationFormatMapService = exportProvider.GetExportedValue<IClassificationFormatMapService>();
-            _classificationFormatMap = classificationFormatMapService.GetClassificationFormatMap("tooltip");
+            var classificationFormatMapService =
+                exportProvider.GetExportedValue<IClassificationFormatMapService>();
+            _classificationFormatMap = classificationFormatMapService.GetClassificationFormatMap(
+                "tooltip"
+            );
             _operationExecutor = exportProvider.GetExportedValue<IUIThreadOperationExecutor>();
-            var listenerProvider = exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
             _listener = listenerProvider.GetListener(FeatureAttribute.InheritanceMargin);
         }
 
@@ -175,7 +186,7 @@ namespace IdeBenchmarks.InheritanceMargin
                     {
                         ClipToBounds = true,
                         Width = WidthAndHeightOfGlyph,
-                        Height = HeightOfCanvas
+                        Height = HeightOfCanvas,
                     };
 
                     _wpfApp.MainWindow.Content = _canvas;
@@ -196,32 +207,42 @@ namespace IdeBenchmarks.InheritanceMargin
             var builder = new StringBuilder();
             builder.Append(@"using System;");
             builder.Append(Environment.NewLine);
-            builder.Append(@"namespace TestNs
+            builder.Append(
+                @"namespace TestNs
 {
-");
-            builder.Append(@"   public interface IBar
+"
+            );
+            builder.Append(
+                @"   public interface IBar
     {
-");
+"
+            );
             for (var i = 0; i < MemberCount; i++)
             {
                 builder.Append($"       int Method{i}();");
                 builder.Append(Environment.NewLine);
             }
 
-            builder.Append(@"   }
-");
+            builder.Append(
+                @"   }
+"
+            );
 
-            builder.Append(@"       public class Bar : IBar
+            builder.Append(
+                @"       public class Bar : IBar
     {
-");
+"
+            );
             for (var i = 0; i < MemberCount; i++)
             {
                 builder.Append($"       public int Method{i}() => 1");
                 builder.Append(Environment.NewLine);
             }
 
-            builder.Append(@"   }
-");
+            builder.Append(
+                @"   }
+"
+            );
 
             builder.Append('}');
             return builder.ToString();

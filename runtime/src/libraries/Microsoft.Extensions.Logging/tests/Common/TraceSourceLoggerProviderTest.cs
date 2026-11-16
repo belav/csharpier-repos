@@ -16,7 +16,10 @@ namespace Microsoft.Extensions.Logging.Test
         public void Dispose_TraceListenerIsFlushedOnce()
         {
             // Arrange
-            var testSwitch = new SourceSwitch("TestSwitch", "Level will be set to warning for this test");
+            var testSwitch = new SourceSwitch(
+                "TestSwitch",
+                "Level will be set to warning for this test"
+            );
             testSwitch.Level = SourceLevels.Warning;
             var listener = new BufferedConsoleTraceListener();
 
@@ -35,13 +38,16 @@ namespace Microsoft.Extensions.Logging.Test
 
             // Assert
             Assert.Equal(1, listener.FlushCount);
-            Assert.Equal(new []
-            {
-                "FirstLogger Error: 0 : ",
-                "message1" + Environment.NewLine,
-                "SecondLogger Error: 0 : ",
-                "message2" + Environment.NewLine
-            }, listener.Messages);
+            Assert.Equal(
+                new[]
+                {
+                    "FirstLogger Error: 0 : ",
+                    "message1" + Environment.NewLine,
+                    "SecondLogger Error: 0 : ",
+                    "message2" + Environment.NewLine,
+                },
+                listener.Messages
+            );
         }
 
         private class BufferedConsoleTraceListener : TraceListener

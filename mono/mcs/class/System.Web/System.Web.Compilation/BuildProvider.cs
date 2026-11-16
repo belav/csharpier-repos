@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,207 +43,239 @@ using System.Web.Util;
 
 namespace System.Web.Compilation
 {
-	public abstract class BuildProvider
-	{
-		static Dictionary <string, Type> registeredBuildProviderTypes;
-		ArrayList ref_assemblies;
-		
-		ICollection vpath_deps;
-		CompilationSection compilationSection;
+    public abstract class BuildProvider
+    {
+        static Dictionary<string, Type> registeredBuildProviderTypes;
+        ArrayList ref_assemblies;
 
-		VirtualPath vpath;
-		
-		CompilationSection CompilationConfig {
-			get {
-				if (compilationSection == null)
-					compilationSection = WebConfigurationManager.GetWebApplicationSection ("system.web/compilation") as CompilationSection;
-				return compilationSection;
-			}
-		}
-		
-		internal virtual string LanguageName {
-			get { return CompilationConfig.DefaultLanguage; }
-		}
-		
-		protected BuildProvider()
-		{
-			ref_assemblies = new ArrayList ();
-		}
+        ICollection vpath_deps;
+        CompilationSection compilationSection;
 
-		internal void SetVirtualPath (VirtualPath virtualPath)
-		{
-			vpath = virtualPath;
-		}
+        VirtualPath vpath;
 
-		internal virtual void GenerateCode ()
-		{
-		}
+        CompilationSection CompilationConfig
+        {
+            get
+            {
+                if (compilationSection == null)
+                    compilationSection =
+                        WebConfigurationManager.GetWebApplicationSection("system.web/compilation")
+                        as CompilationSection;
+                return compilationSection;
+            }
+        }
 
-		internal virtual IDictionary <string, bool> ExtractDependencies ()
-		{
-			return null;
-		}
-		
-		public virtual void GenerateCode (AssemblyBuilder assemblyBuilder)
-		{
-		}
+        internal virtual string LanguageName
+        {
+            get { return CompilationConfig.DefaultLanguage; }
+        }
 
-		public virtual string GetCustomString (CompilerResults results)
-		{
-			return null;
-		}
+        protected BuildProvider()
+        {
+            ref_assemblies = new ArrayList();
+        }
 
-		protected CompilerType GetDefaultCompilerType ()
-		{
-			return BuildManager.GetDefaultCompilerTypeForLanguage (CompilationConfig.DefaultLanguage, CompilationConfig);
-		}
-		
-		protected CompilerType GetDefaultCompilerTypeForLanguage (string language)
-		{
-			return BuildManager.GetDefaultCompilerTypeForLanguage (language, null);
-		}
+        internal void SetVirtualPath(VirtualPath virtualPath)
+        {
+            vpath = virtualPath;
+        }
 
-		public virtual Type GetGeneratedType (CompilerResults results)
-		{
-			return null;
-		}
+        internal virtual void GenerateCode() { }
 
-		public virtual BuildProviderResultFlags GetResultFlags (CompilerResults results)
-		{
-			return BuildProviderResultFlags.Default;
-		}
+        internal virtual IDictionary<string, bool> ExtractDependencies()
+        {
+            return null;
+        }
 
-		protected TextReader OpenReader ()
-		{
-			return OpenReader (VirtualPath);
-		}
+        public virtual void GenerateCode(AssemblyBuilder assemblyBuilder) { }
 
-		protected TextReader OpenReader (string virtualPath)
-		{
-			Stream st = OpenStream (virtualPath);
-			return new StreamReader (st, WebEncoding.FileEncoding);
-		}
+        public virtual string GetCustomString(CompilerResults results)
+        {
+            return null;
+        }
 
-		protected Stream OpenStream ()
-		{
-			return OpenStream (VirtualPath);
-		}
+        protected CompilerType GetDefaultCompilerType()
+        {
+            return BuildManager.GetDefaultCompilerTypeForLanguage(
+                CompilationConfig.DefaultLanguage,
+                CompilationConfig
+            );
+        }
 
-		protected Stream OpenStream (string virtualPath)
-		{
-			// MS also throws a NullReferenceException here when not hosted.
-			return VirtualPathProvider.OpenFile (virtualPath);
-		}
-		public static void RegisterBuildProvider (string extension, Type providerType)
-		{
-			if (String.IsNullOrEmpty (extension))
-				throw new ArgumentException ("The string parameter 'extension' cannot be null or empty.", "extension");
+        protected CompilerType GetDefaultCompilerTypeForLanguage(string language)
+        {
+            return BuildManager.GetDefaultCompilerTypeForLanguage(language, null);
+        }
 
-			if (providerType == null)
-				throw new ArgumentNullException ("providerType");
+        public virtual Type GetGeneratedType(CompilerResults results)
+        {
+            return null;
+        }
 
-			if (!typeof (BuildProvider).IsAssignableFrom (providerType))
-				throw new ArgumentException ("The parameter 'providerType' is invalid", "providerType");
+        public virtual BuildProviderResultFlags GetResultFlags(CompilerResults results)
+        {
+            return BuildProviderResultFlags.Default;
+        }
 
-			BuildManager.AssertPreStartMethodsRunning ();
+        protected TextReader OpenReader()
+        {
+            return OpenReader(VirtualPath);
+        }
 
-			if (registeredBuildProviderTypes == null)
-				registeredBuildProviderTypes = new Dictionary <string, Type> (StringComparer.OrdinalIgnoreCase);
+        protected TextReader OpenReader(string virtualPath)
+        {
+            Stream st = OpenStream(virtualPath);
+            return new StreamReader(st, WebEncoding.FileEncoding);
+        }
 
-			registeredBuildProviderTypes [extension] = providerType;
-		}
+        protected Stream OpenStream()
+        {
+            return OpenStream(VirtualPath);
+        }
 
-		internal static Type GetProviderTypeForExtension (string extension)
-		{
-			if (String.IsNullOrEmpty (extension))
-				return null;
+        protected Stream OpenStream(string virtualPath)
+        {
+            // MS also throws a NullReferenceException here when not hosted.
+            return VirtualPathProvider.OpenFile(virtualPath);
+        }
 
-			Type type = null;
-			if (registeredBuildProviderTypes == null || !registeredBuildProviderTypes.TryGetValue (extension, out type) || type == null) {
-				var cs = WebConfigurationManager.GetSection ("system.web/compilation") as CompilationSection;
-				BuildProviderCollection bpcoll = cs != null ? cs.BuildProviders : null;
-				global::System.Web.Configuration.BuildProvider bpcfg = bpcoll != null ? bpcoll [extension] : null;
-				if (bpcfg != null)
-					type = HttpApplication.LoadType (bpcfg.Type);
-			}
+        public static void RegisterBuildProvider(string extension, Type providerType)
+        {
+            if (String.IsNullOrEmpty(extension))
+                throw new ArgumentException(
+                    "The string parameter 'extension' cannot be null or empty.",
+                    "extension"
+                );
 
-			return type;
-		}
-		
-		internal static BuildProvider GetProviderInstanceForExtension (string extension)
-		{
-			Type type = GetProviderTypeForExtension (extension);
-			if (type == null)
-				return null;
-			
-			return Activator.CreateInstance (type, null) as global::System.Web.Compilation.BuildProvider;
-		}
-		public virtual CompilerType CodeCompilerType {
-			get { return null; } // Documented to return null
-		}
+            if (providerType == null)
+                throw new ArgumentNullException("providerType");
 
-		protected ICollection ReferencedAssemblies {
-			get { return ref_assemblies; }
-		}
+            if (!typeof(BuildProvider).IsAssignableFrom(providerType))
+                throw new ArgumentException(
+                    "The parameter 'providerType' is invalid",
+                    "providerType"
+                );
 
-		protected internal string VirtualPath {
-			get { return vpath != null ? vpath.Absolute : null; }
-		}
+            BuildManager.AssertPreStartMethodsRunning();
 
-		internal VirtualPath VirtualPathInternal {
-			get { return vpath; }
-		}
-		
-		public virtual ICollection VirtualPathDependencies {
-			get {
-				if (vpath_deps == null)
-					vpath_deps = new OneNullCollection ();
+            if (registeredBuildProviderTypes == null)
+                registeredBuildProviderTypes = new Dictionary<string, Type>(
+                    StringComparer.OrdinalIgnoreCase
+                );
 
-				return vpath_deps;
-			}
-		}
+            registeredBuildProviderTypes[extension] = providerType;
+        }
 
-		internal virtual CodeCompileUnit CodeUnit {
-			get { return null; }
-		}
-	}
+        internal static Type GetProviderTypeForExtension(string extension)
+        {
+            if (String.IsNullOrEmpty(extension))
+                return null;
 
-	class OneNullCollection : ICollection {
-		public int Count {
-			get { return 1; }
-		}
+            Type type = null;
+            if (
+                registeredBuildProviderTypes == null
+                || !registeredBuildProviderTypes.TryGetValue(extension, out type)
+                || type == null
+            )
+            {
+                var cs =
+                    WebConfigurationManager.GetSection("system.web/compilation")
+                    as CompilationSection;
+                BuildProviderCollection bpcoll = cs != null ? cs.BuildProviders : null;
+                global::System.Web.Configuration.BuildProvider bpcfg =
+                    bpcoll != null ? bpcoll[extension] : null;
+                if (bpcfg != null)
+                    type = HttpApplication.LoadType(bpcfg.Type);
+            }
 
-		public bool IsSynchronized {
-			get { return false; }
-		}
+            return type;
+        }
 
-		public object SyncRoot {
-			get { return this; }
-		}
+        internal static BuildProvider GetProviderInstanceForExtension(string extension)
+        {
+            Type type = GetProviderTypeForExtension(extension);
+            if (type == null)
+                return null;
 
-		public void CopyTo (Array array, int index)
-		{
-			if (array == null)
-				throw new ArgumentNullException ();
+            return Activator.CreateInstance(type, null)
+                as global::System.Web.Compilation.BuildProvider;
+        }
 
-			if (index < 0)
-				throw new ArgumentOutOfRangeException ();
+        public virtual CompilerType CodeCompilerType
+        {
+            get { return null; } // Documented to return null
+        }
 
-			if (array.Rank > 1)
-				throw new ArgumentException ();
+        protected ICollection ReferencedAssemblies
+        {
+            get { return ref_assemblies; }
+        }
 
-			int length = array.Length;
-			if (index >= length || index > length - 1)
-				throw new ArgumentException ();
+        protected internal string VirtualPath
+        {
+            get { return vpath != null ? vpath.Absolute : null; }
+        }
 
-			array.SetValue (null, index);
-		}
+        internal VirtualPath VirtualPathInternal
+        {
+            get { return vpath; }
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			yield return null;
-		}
-	}
+        public virtual ICollection VirtualPathDependencies
+        {
+            get
+            {
+                if (vpath_deps == null)
+                    vpath_deps = new OneNullCollection();
+
+                return vpath_deps;
+            }
+        }
+
+        internal virtual CodeCompileUnit CodeUnit
+        {
+            get { return null; }
+        }
+    }
+
+    class OneNullCollection : ICollection
+    {
+        public int Count
+        {
+            get { return 1; }
+        }
+
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
+
+        public object SyncRoot
+        {
+            get { return this; }
+        }
+
+        public void CopyTo(Array array, int index)
+        {
+            if (array == null)
+                throw new ArgumentNullException();
+
+            if (index < 0)
+                throw new ArgumentOutOfRangeException();
+
+            if (array.Rank > 1)
+                throw new ArgumentException();
+
+            int length = array.Length;
+            if (index >= length || index > length - 1)
+                throw new ArgumentException();
+
+            array.SetValue(null, index);
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            yield return null;
+        }
+    }
 }
-
-

@@ -49,41 +49,38 @@ namespace System.Security.Principal
 
         public override IEnumerable<Claim> Claims
         {
-            get
-            {
-                return base.Claims;
-            }
+            get { return base.Claims; }
         }
 
         public override string Name
         {
-            get
-            {
-                return m_name;
-            }
+            get { return m_name; }
         }
 
         public override string AuthenticationType
         {
-            get
-            {
-                return m_type;
-            }
+            get { return m_type; }
         }
 
         public override bool IsAuthenticated
         {
-            get
-            {
-                return !m_name.Equals("");
-            }
+            get { return !m_name.Equals(""); }
         }
 
         private void AddNameClaim()
         {
             if (m_name != null)
             {
-                base.AddClaim(new Claim(base.NameClaimType, m_name, ClaimValueTypes.String, ClaimsIdentity.DefaultIssuer, ClaimsIdentity.DefaultIssuer, this));
+                base.AddClaim(
+                    new Claim(
+                        base.NameClaimType,
+                        m_name,
+                        ClaimValueTypes.String,
+                        ClaimsIdentity.DefaultIssuer,
+                        ClaimsIdentity.DefaultIssuer,
+                        this
+                    )
+                );
             }
         }
     }

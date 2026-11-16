@@ -12,16 +12,16 @@ namespace System.IdentityModel.Selectors
 
     public class RsaSecurityTokenAuthenticator : SecurityTokenAuthenticator
     {
-        public RsaSecurityTokenAuthenticator()
-        {
-        }
+        public RsaSecurityTokenAuthenticator() { }
 
         protected override bool CanValidateTokenCore(SecurityToken token)
         {
             return token is RsaSecurityToken;
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(SecurityToken token)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             RsaSecurityToken rsaToken = (RsaSecurityToken)token;
             List<Claim> claims = new List<Claim>(2);

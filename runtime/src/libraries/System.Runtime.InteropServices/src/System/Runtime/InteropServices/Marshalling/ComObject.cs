@@ -13,10 +13,25 @@ namespace System.Runtime.InteropServices.Marshalling
     /// <summary>
     /// Base class for all COM source generated Runtime Callable Wrapper (RCWs).
     /// </summary>
-    public sealed unsafe class ComObject : IDynamicInterfaceCastable, IUnmanagedVirtualMethodTableProvider, ComImportInteropInterfaceDetailsStrategy.IComImportAdapter
+    public sealed unsafe class ComObject
+        : IDynamicInterfaceCastable,
+            IUnmanagedVirtualMethodTableProvider,
+            ComImportInteropInterfaceDetailsStrategy.IComImportAdapter
     {
-        internal static bool BuiltInComSupported { get; } = AppContext.TryGetSwitch("System.Runtime.InteropServices.BuiltInComInterop.IsSupported", out bool supported) ? supported : true;
-        internal static bool ComImportInteropEnabled { get; } = AppContext.TryGetSwitch("System.Runtime.InteropServices.Marshalling.EnableGeneratedComInterfaceComImportInterop", out bool enabled) ? enabled : false;
+        internal static bool BuiltInComSupported { get; } =
+            AppContext.TryGetSwitch(
+                "System.Runtime.InteropServices.BuiltInComInterop.IsSupported",
+                out bool supported
+            )
+                ? supported
+                : true;
+        internal static bool ComImportInteropEnabled { get; } =
+            AppContext.TryGetSwitch(
+                "System.Runtime.InteropServices.Marshalling.EnableGeneratedComInterfaceComImportInterop",
+                out bool enabled
+            )
+                ? enabled
+                : false;
 
         private readonly void* _instancePointer;
 
@@ -29,7 +44,12 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <param name="iunknownStrategy">Interaction strategy for IUnknown</param>
         /// <param name="cacheStrategy">Caching strategy</param>
         /// <param name="thisPointer">Pointer to the identity IUnknown interface for the object.</param>
-        internal ComObject(IIUnknownInterfaceDetailsStrategy interfaceDetailsStrategy, IIUnknownStrategy iunknownStrategy, IIUnknownCacheStrategy cacheStrategy, void* thisPointer)
+        internal ComObject(
+            IIUnknownInterfaceDetailsStrategy interfaceDetailsStrategy,
+            IIUnknownStrategy iunknownStrategy,
+            IIUnknownCacheStrategy cacheStrategy,
+            void* thisPointer
+        )
         {
             InterfaceDetailsStrategy = interfaceDetailsStrategy;
             IUnknownStrategy = iunknownStrategy;
@@ -85,9 +105,17 @@ namespace System.Runtime.InteropServices.Marshalling
         }
 
         /// <inheritdoc />
-        RuntimeTypeHandle IDynamicInterfaceCastable.GetInterfaceImplementation(RuntimeTypeHandle interfaceType)
+        RuntimeTypeHandle IDynamicInterfaceCastable.GetInterfaceImplementation(
+            RuntimeTypeHandle interfaceType
+        )
         {
-            if (!LookUpVTableInfo(interfaceType, out IIUnknownCacheStrategy.TableInfo info, out int qiResult))
+            if (
+                !LookUpVTableInfo(
+                    interfaceType,
+                    out IIUnknownCacheStrategy.TableInfo info,
+                    out int qiResult
+                )
+            )
             {
                 Marshal.ThrowExceptionForHR(qiResult);
             }
@@ -95,7 +123,10 @@ namespace System.Runtime.InteropServices.Marshalling
         }
 
         /// <inheritdoc />
-        bool IDynamicInterfaceCastable.IsInterfaceImplemented(RuntimeTypeHandle interfaceType, bool throwIfNotImplemented)
+        bool IDynamicInterfaceCastable.IsInterfaceImplemented(
+            RuntimeTypeHandle interfaceType,
+            bool throwIfNotImplemented
+        )
         {
             if (!LookUpVTableInfo(interfaceType, out _, out int qiResult))
             {
@@ -108,17 +139,26 @@ namespace System.Runtime.InteropServices.Marshalling
             return true;
         }
 
-        private bool LookUpVTableInfo(RuntimeTypeHandle handle, out IIUnknownCacheStrategy.TableInfo result, out int qiHResult)
+        private bool LookUpVTableInfo(
+            RuntimeTypeHandle handle,
+            out IIUnknownCacheStrategy.TableInfo result,
+            out int qiHResult
+        )
         {
             qiHResult = 0;
             if (!CacheStrategy.TryGetTableInfo(handle, out result))
             {
-                IIUnknownDerivedDetails? details = InterfaceDetailsStrategy.GetIUnknownDerivedDetails(handle);
+                IIUnknownDerivedDetails? details =
+                    InterfaceDetailsStrategy.GetIUnknownDerivedDetails(handle);
                 if (details is null)
                 {
                     return false;
                 }
-                int hr = IUnknownStrategy.QueryInterface(_instancePointer, details.Iid, out void* ppv);
+                int hr = IUnknownStrategy.QueryInterface(
+                    _instancePointer,
+                    details.Iid,
+                    out void* ppv
+                );
                 if (hr < 0)
                 {
                     qiHResult = hr;
@@ -141,9 +181,17 @@ namespace System.Runtime.InteropServices.Marshalling
         }
 
         /// <inheritdoc />
-        VirtualMethodTableInfo IUnmanagedVirtualMethodTableProvider.GetVirtualMethodTableInfoForKey(Type type)
+        VirtualMethodTableInfo IUnmanagedVirtualMethodTableProvider.GetVirtualMethodTableInfoForKey(
+            Type type
+        )
         {
-            if (!LookUpVTableInfo(type.TypeHandle, out IIUnknownCacheStrategy.TableInfo result, out int qiHResult))
+            if (
+                !LookUpVTableInfo(
+                    type.TypeHandle,
+                    out IIUnknownCacheStrategy.TableInfo result,
+                    out int qiHResult
+                )
+            )
             {
                 Marshal.ThrowExceptionForHR(qiHResult);
             }

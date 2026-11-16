@@ -385,15 +385,12 @@ public class ParameterBinderTest
         Assert.Same(model, result.Model);
 
         Assert.False(actionContext.ModelState.IsValid);
-        Assert.Collection(
-            actionContext.ModelState,
-            kvp =>
-            {
-                Assert.Equal($"{parameter.Name}.{nameof(DerivedPerson.DerivedProperty)}", kvp.Key);
-                var error = Assert.Single(kvp.Value.Errors);
-                Assert.Equal("The DerivedProperty field is required.", error.ErrorMessage);
-            }
-        );
+        Assert.Collection(actionContext.ModelState, kvp =>
+        {
+            Assert.Equal($"{parameter.Name}.{nameof(DerivedPerson.DerivedProperty)}", kvp.Key);
+            var error = Assert.Single(kvp.Value.Errors);
+            Assert.Equal("The DerivedProperty field is required.", error.ErrorMessage);
+        });
     }
 
     [Fact]
@@ -448,15 +445,12 @@ public class ParameterBinderTest
         Assert.Same(model, result.Model);
 
         Assert.False(actionContext.ModelState.IsValid);
-        Assert.Collection(
-            actionContext.ModelState,
-            kvp =>
-            {
-                Assert.Equal(parameter.Name, kvp.Key);
-                var error = Assert.Single(kvp.Value.Errors);
-                Assert.Equal("Always Invalid", error.ErrorMessage);
-            }
-        );
+        Assert.Collection(actionContext.ModelState, kvp =>
+        {
+            Assert.Equal(parameter.Name, kvp.Key);
+            var error = Assert.Single(kvp.Value.Errors);
+            Assert.Equal("Always Invalid", error.ErrorMessage);
+        });
     }
 
     [Fact]
@@ -510,15 +504,12 @@ public class ParameterBinderTest
         Assert.Same(model, result.Model);
 
         Assert.False(actionContext.ModelState.IsValid);
-        Assert.Collection(
-            actionContext.ModelState,
-            kvp =>
-            {
-                Assert.Equal($"{property.Name}.{nameof(DerivedPerson.DerivedProperty)}", kvp.Key);
-                var error = Assert.Single(kvp.Value.Errors);
-                Assert.Equal("The DerivedProperty field is required.", error.ErrorMessage);
-            }
-        );
+        Assert.Collection(actionContext.ModelState, kvp =>
+        {
+            Assert.Equal($"{property.Name}.{nameof(DerivedPerson.DerivedProperty)}", kvp.Key);
+            var error = Assert.Single(kvp.Value.Errors);
+            Assert.Equal("The DerivedProperty field is required.", error.ErrorMessage);
+        });
     }
 
     [Fact]
@@ -573,15 +564,12 @@ public class ParameterBinderTest
         Assert.Same(model, result.Model);
 
         Assert.False(actionContext.ModelState.IsValid);
-        Assert.Collection(
-            actionContext.ModelState,
-            kvp =>
-            {
-                Assert.Equal($"{property.Name}", kvp.Key);
-                var error = Assert.Single(kvp.Value.Errors);
-                Assert.Equal("Always Invalid", error.ErrorMessage);
-            }
-        );
+        Assert.Collection(actionContext.ModelState, kvp =>
+        {
+            Assert.Equal($"{property.Name}", kvp.Key);
+            var error = Assert.Single(kvp.Value.Errors);
+            Assert.Equal("Always Invalid", error.ErrorMessage);
+        });
     }
 
     // Regression test 1 for aspnet/Mvc#7963. ModelState should never be valid.
@@ -637,16 +625,13 @@ public class ParameterBinderTest
         // Assert
         Assert.True(result.IsModelSet);
         Assert.False(modelState.IsValid);
-        Assert.Collection(
-            modelState,
-            kvp =>
-            {
-                Assert.Equal("id", kvp.Key);
-                Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
-                var error = Assert.Single(kvp.Value.Errors);
-                Assert.Equal("This is not valid.", error.ErrorMessage);
-            }
-        );
+        Assert.Collection(modelState, kvp =>
+        {
+            Assert.Equal("id", kvp.Key);
+            Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
+            var error = Assert.Single(kvp.Value.Errors);
+            Assert.Equal("This is not valid.", error.ErrorMessage);
+        });
     }
 
     // Regression test 2 for aspnet/Mvc#7963. ModelState should never be valid.

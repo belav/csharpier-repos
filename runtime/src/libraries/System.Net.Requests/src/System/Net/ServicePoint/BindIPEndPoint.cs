@@ -3,5 +3,9 @@
 
 namespace System.Net
 {
-    public delegate IPEndPoint BindIPEndPoint(ServicePoint servicePoint, IPEndPoint remoteEndPoint, int retryCount);
+    public delegate IPEndPoint BindIPEndPoint(
+        ServicePoint servicePoint,
+        IPEndPoint remoteEndPoint,
+        int retryCount
+    );
 }

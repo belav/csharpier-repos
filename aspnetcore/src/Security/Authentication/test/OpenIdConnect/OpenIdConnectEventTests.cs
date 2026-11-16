@@ -1093,13 +1093,10 @@ public class OpenIdConnectEventTests
     public async Task OnRedirectToIdentityProviderForSignOut_Invoked()
     {
         var events = new ExpectedOidcEvents() { ExpectRedirectForSignOut = true };
-        var server = CreateServer(
-            events,
-            context =>
-            {
-                return context.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
-            }
-        );
+        var server = CreateServer(events, context =>
+        {
+            return context.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
+        });
 
         var client = server.CreateClient();
         var response = await client.GetAsync("/");
@@ -1119,13 +1116,10 @@ public class OpenIdConnectEventTests
             context.HandleResponse();
             return Task.CompletedTask;
         };
-        var server = CreateServer(
-            events,
-            context =>
-            {
-                return context.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
-            }
-        );
+        var server = CreateServer(events, context =>
+        {
+            return context.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
+        });
 
         var client = server.CreateClient();
         var response = await client.GetAsync("/");
@@ -1181,14 +1175,11 @@ public class OpenIdConnectEventTests
             context.SkipHandler();
             return Task.CompletedTask;
         };
-        var server = CreateServer(
-            events,
-            context =>
-            {
-                context.Response.StatusCode = StatusCodes.Status202Accepted;
-                return Task.CompletedTask;
-            }
-        );
+        var server = CreateServer(events, context =>
+        {
+            context.Response.StatusCode = StatusCodes.Status202Accepted;
+            return Task.CompletedTask;
+        });
 
         var client = server.CreateClient();
         var response = await client.GetAsync("/signout-oidc");
@@ -1241,14 +1232,11 @@ public class OpenIdConnectEventTests
             context.SkipHandler();
             return Task.CompletedTask;
         };
-        var server = CreateServer(
-            events,
-            context =>
-            {
-                context.Response.StatusCode = StatusCodes.Status202Accepted;
-                return Task.CompletedTask;
-            }
-        );
+        var server = CreateServer(events, context =>
+        {
+            context.Response.StatusCode = StatusCodes.Status202Accepted;
+            return Task.CompletedTask;
+        });
 
         var client = server.CreateClient();
         var response = await client.GetAsync("/signout-callback-oidc?state=protected_state");

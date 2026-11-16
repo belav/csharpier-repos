@@ -11,12 +11,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint;
 
 internal sealed class InlayHintCache : ResolveCache<InlayHintCacheEntry>
 {
-    public InlayHintCache() : base(maxCacheSize: 3)
-    {
-    }
+    public InlayHintCache()
+        : base(maxCacheSize: 3) { }
 
     /// <summary>
     /// Cached data need to resolve a specific inlay hint item.
     /// </summary>
-    internal record InlayHintCacheEntry(ImmutableArray<InlineHint> InlayHintMembers, VersionStamp SyntaxVersion);
+    internal record InlayHintCacheEntry(
+        ImmutableArray<InlineHint> InlayHintMembers,
+        VersionStamp SyntaxVersion
+    );
 }

@@ -5,12 +5,9 @@ namespace System.Reflection.Emit
 {
     public abstract class FieldBuilder : FieldInfo
     {
-        protected FieldBuilder()
-        {
-        }
+        protected FieldBuilder() { }
 
-        public void SetConstant(object? defaultValue)
-            => SetConstantCore(defaultValue);
+        public void SetConstant(object? defaultValue) => SetConstantCore(defaultValue);
 
         protected abstract void SetConstantCore(object? defaultValue);
 
@@ -22,7 +19,10 @@ namespace System.Reflection.Emit
             SetCustomAttributeCore(con, binaryAttribute);
         }
 
-        protected abstract void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute);
+        protected abstract void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        );
 
         public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
         {
@@ -31,8 +31,7 @@ namespace System.Reflection.Emit
             SetCustomAttributeCore(customBuilder.Ctor, customBuilder.Data);
         }
 
-        public void SetOffset(int iOffset)
-            => SetOffsetCore(iOffset);
+        public void SetOffset(int iOffset) => SetOffsetCore(iOffset);
 
         protected abstract void SetOffsetCore(int iOffset);
     }

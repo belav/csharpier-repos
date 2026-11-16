@@ -16,6 +16,7 @@ namespace System.Xml.Xsl.XsltOld
         private Avt? _nsAvt;
         private bool _empty;
         private InputScopeManager? _manager;
+
         // Compile time precalculated AVTs
         private string? _name;
         private string? _nsUri;
@@ -23,7 +24,11 @@ namespace System.Xml.Xsl.XsltOld
 
         internal ElementAction() { }
 
-        private static PrefixQName CreateElementQName(string name, string? nsUri, InputScopeManager? manager)
+        private static PrefixQName CreateElementQName(
+            string name,
+            string? nsUri,
+            InputScopeManager? manager
+        )
         {
             if (nsUri == XmlReservedNs.NsXmlNs)
             {
@@ -120,26 +125,34 @@ namespace System.Xml.Xsl.XsltOld
                     goto case NameDone;
 
                 case NameDone:
+                {
+                    PrefixQName qname = frame.CalculatedName!;
+                    if (
+                        processor.BeginEvent(
+                            XPathNodeType.Element,
+                            qname.Prefix,
+                            qname.Name,
+                            qname.Namespace,
+                            _empty
+                        ) == false
+                    )
                     {
-                        PrefixQName qname = frame.CalculatedName!;
-                        if (processor.BeginEvent(XPathNodeType.Element, qname.Prefix, qname.Name, qname.Namespace, _empty) == false)
-                        {
-                            // Come back later
-                            frame.State = NameDone;
-                            break;
-                        }
-
-                        if (!_empty)
-                        {
-                            processor.PushActionFrame(frame);
-                            frame.State = ProcessingChildren;
-                            break;                              // Allow children to run
-                        }
-                        else
-                        {
-                            goto case ProcessingChildren;
-                        }
+                        // Come back later
+                        frame.State = NameDone;
+                        break;
                     }
+
+                    if (!_empty)
+                    {
+                        processor.PushActionFrame(frame);
+                        frame.State = ProcessingChildren;
+                        break; // Allow children to run
+                    }
+                    else
+                    {
+                        goto case ProcessingChildren;
+                    }
+                }
                 case ProcessingChildren:
                     if (processor.EndEvent(XPathNodeType.Element) == false)
                     {

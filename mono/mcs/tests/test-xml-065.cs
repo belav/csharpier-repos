@@ -3,12 +3,8 @@
 /// <seealso cref="Test(System.Byte*)"/>
 public class Test
 {
-	/// Start
-	unsafe Test (byte* o)
-	{
-	}
+    /// Start
+    unsafe Test(byte* o) { }
 
-	static void Main ()
-	{
-	}
+    static void Main() { }
 }

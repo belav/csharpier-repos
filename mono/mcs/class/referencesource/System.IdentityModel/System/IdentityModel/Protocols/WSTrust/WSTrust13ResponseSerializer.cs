@@ -20,7 +20,10 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="context">Current Serialization context.</param>
         /// <returns>RequestSecurityTokenResponse object if deserialization was successful.</returns>
         /// <exception cref="ArgumentNullException">The given reader or context parameter is null</exception>
-        public override RequestSecurityTokenResponse ReadXml(XmlReader reader, WSTrustSerializationContext context)
+        public override RequestSecurityTokenResponse ReadXml(
+            XmlReader reader,
+            WSTrustSerializationContext context
+        )
         {
             if (reader == null)
             {
@@ -33,13 +36,26 @@ namespace System.IdentityModel.Protocols.WSTrust
             }
 
             bool isFinal = false;
-            if (reader.IsStartElement(WSTrust13Constants.ElementNames.RequestSecurityTokenResponseCollection, WSTrust13Constants.NamespaceURI))
+            if (
+                reader.IsStartElement(
+                    WSTrust13Constants.ElementNames.RequestSecurityTokenResponseCollection,
+                    WSTrust13Constants.NamespaceURI
+                )
+            )
             {
-                reader.ReadStartElement(WSTrust13Constants.ElementNames.RequestSecurityTokenResponseCollection, WSTrust13Constants.NamespaceURI);
+                reader.ReadStartElement(
+                    WSTrust13Constants.ElementNames.RequestSecurityTokenResponseCollection,
+                    WSTrust13Constants.NamespaceURI
+                );
                 isFinal = true;
             }
 
-            RequestSecurityTokenResponse rstr = WSTrustSerializationHelper.CreateResponse(reader, context, this, WSTrustConstantsAdapter.Trust13);
+            RequestSecurityTokenResponse rstr = WSTrustSerializationHelper.CreateResponse(
+                reader,
+                context,
+                this,
+                WSTrustConstantsAdapter.Trust13
+            );
             rstr.IsFinal = isFinal;
 
             if (isFinal)
@@ -58,7 +74,11 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="context">Current Serialization context.</param>
         /// <exception cref="ArgumentNullException">Either reader or rstr or context parameter is null.</exception>
         /// <exception cref="WSTrustSerializationException">Unable to deserialize the current parameter.</exception>
-        public override void ReadXmlElement(XmlReader reader, RequestSecurityTokenResponse rstr, WSTrustSerializationContext context)
+        public override void ReadXmlElement(
+            XmlReader reader,
+            RequestSecurityTokenResponse rstr,
+            WSTrustSerializationContext context
+        )
         {
             if (reader == null)
             {
@@ -75,23 +95,37 @@ namespace System.IdentityModel.Protocols.WSTrust
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
 
-            if (reader.IsStartElement(WSTrust13Constants.ElementNames.KeyWrapAlgorithm, WSTrust13Constants.NamespaceURI))
+            if (
+                reader.IsStartElement(
+                    WSTrust13Constants.ElementNames.KeyWrapAlgorithm,
+                    WSTrust13Constants.NamespaceURI
+                )
+            )
             {
                 rstr.KeyWrapAlgorithm = reader.ReadElementContentAsString();
                 return;
             }
 
-            WSTrustSerializationHelper.ReadRSTRXml(reader, rstr, context, WSTrustConstantsAdapter.Trust13);
+            WSTrustSerializationHelper.ReadRSTRXml(
+                reader,
+                rstr,
+                context,
+                WSTrustConstantsAdapter.Trust13
+            );
         }
 
         /// <summary>
-        /// Writes out the supported elements on the response object. 
+        /// Writes out the supported elements on the response object.
         /// </summary>
         /// <param name="rstr">The response instance</param>
         /// <param name="writer">The writer to write to</param>
         /// <param name="context">Current Serialization context.</param>
         /// <exception cref="ArgumentNullException">Either rstr or writer or context parameter is null.</exception>
-        public override void WriteKnownResponseElement(RequestSecurityTokenResponse rstr, XmlWriter writer, WSTrustSerializationContext context)
+        public override void WriteKnownResponseElement(
+            RequestSecurityTokenResponse rstr,
+            XmlWriter writer,
+            WSTrustSerializationContext context
+        )
         {
             if (rstr == null)
             {
@@ -109,12 +143,24 @@ namespace System.IdentityModel.Protocols.WSTrust
             }
 
             // Write out the exisiting ones
-            WSTrustSerializationHelper.WriteKnownResponseElement(rstr, writer, context, this, WSTrustConstantsAdapter.Trust13);
+            WSTrustSerializationHelper.WriteKnownResponseElement(
+                rstr,
+                writer,
+                context,
+                this,
+                WSTrustConstantsAdapter.Trust13
+            );
 
             // Specific to WS-Trust 13
             if (!string.IsNullOrEmpty(rstr.KeyWrapAlgorithm))
             {
-                this.WriteXmlElement(writer, WSTrust13Constants.ElementNames.KeyWrapAlgorithm, rstr.KeyWrapAlgorithm, rstr, context);
+                this.WriteXmlElement(
+                    writer,
+                    WSTrust13Constants.ElementNames.KeyWrapAlgorithm,
+                    rstr.KeyWrapAlgorithm,
+                    rstr,
+                    context
+                );
             }
         }
 
@@ -126,7 +172,11 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="writer">XmlWriter into which the object will be serialized</param>
         /// <param name="context">Current Serialization context.</param>
         /// <exception cref="ArgumentNullException">The given response or writer or context parameter is null</exception>
-        public override void WriteXml(RequestSecurityTokenResponse response, XmlWriter writer, WSTrustSerializationContext context)
+        public override void WriteXml(
+            RequestSecurityTokenResponse response,
+            XmlWriter writer,
+            WSTrustSerializationContext context
+        )
         {
             if (response == null)
             {
@@ -145,10 +195,20 @@ namespace System.IdentityModel.Protocols.WSTrust
 
             if (response.IsFinal)
             {
-                writer.WriteStartElement(WSTrust13Constants.Prefix, WSTrust13Constants.ElementNames.RequestSecurityTokenResponseCollection, WSTrust13Constants.NamespaceURI);
+                writer.WriteStartElement(
+                    WSTrust13Constants.Prefix,
+                    WSTrust13Constants.ElementNames.RequestSecurityTokenResponseCollection,
+                    WSTrust13Constants.NamespaceURI
+                );
             }
 
-            WSTrustSerializationHelper.WriteResponse(response, writer, context, this, WSTrustConstantsAdapter.Trust13);
+            WSTrustSerializationHelper.WriteResponse(
+                response,
+                writer,
+                context,
+                this,
+                WSTrustConstantsAdapter.Trust13
+            );
 
             if (response.IsFinal)
             {
@@ -166,7 +226,13 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="context">Current Serialization context.</param>
         /// <exception cref="ArgumentNullException">Either writer or rstr or context is null.</exception>
         /// <exception cref="ArgumentException">elementName is null or an empty string.</exception>
-        public override void WriteXmlElement(XmlWriter writer, string elementName, object elementValue, RequestSecurityTokenResponse rstr, WSTrustSerializationContext context)
+        public override void WriteXmlElement(
+            XmlWriter writer,
+            string elementName,
+            object elementValue,
+            RequestSecurityTokenResponse rstr,
+            WSTrustSerializationContext context
+        )
         {
             if (writer == null)
             {
@@ -188,22 +254,38 @@ namespace System.IdentityModel.Protocols.WSTrust
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
 
-            if (StringComparer.Ordinal.Equals(elementName, WSTrust13Constants.ElementNames.KeyWrapAlgorithm))
+            if (
+                StringComparer.Ordinal.Equals(
+                    elementName,
+                    WSTrust13Constants.ElementNames.KeyWrapAlgorithm
+                )
+            )
             {
-                writer.WriteElementString(WSTrust13Constants.Prefix, WSTrust13Constants.ElementNames.KeyWrapAlgorithm, WSTrust13Constants.NamespaceURI, (string)elementValue);
+                writer.WriteElementString(
+                    WSTrust13Constants.Prefix,
+                    WSTrust13Constants.ElementNames.KeyWrapAlgorithm,
+                    WSTrust13Constants.NamespaceURI,
+                    (string)elementValue
+                );
                 return;
             }
 
-            WSTrustSerializationHelper.WriteRSTRXml(writer, elementName, elementValue, context, WSTrustConstantsAdapter.Trust13);
+            WSTrustSerializationHelper.WriteRSTRXml(
+                writer,
+                elementName,
+                elementValue,
+                context,
+                WSTrustConstantsAdapter.Trust13
+            );
         }
 
         /// <summary>
-        /// Checks if the given reader is positioned at a RequestSecurityTokenResponse or 
+        /// Checks if the given reader is positioned at a RequestSecurityTokenResponse or
         /// RequestSecurityTokenResponseCollection element with namespace 'http://docs.oasis-open.org/ws-sx/ws-trust/200512'
         /// </summary>
         /// <param name="reader">The reader to read from</param>
         /// <returns>
-        /// 'True' if the reader is positioned at a RequestSecurityTokenResponse or RequestSecurityTokenResponseCollection 
+        /// 'True' if the reader is positioned at a RequestSecurityTokenResponse or RequestSecurityTokenResponseCollection
         /// element with namespace 'http://docs.oasis-open.org/ws-sx/ws-trust/200512'.
         /// </returns>
         /// <exception cref="ArgumentNullException">The input argument is null.</exception>
@@ -214,8 +296,14 @@ namespace System.IdentityModel.Protocols.WSTrust
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            return reader.IsStartElement(WSTrust13Constants.ElementNames.RequestSecurityTokenResponseCollection, WSTrust13Constants.NamespaceURI)
-                || reader.IsStartElement(WSTrust13Constants.ElementNames.RequestSecurityTokenResponse, WSTrust13Constants.NamespaceURI);
+            return reader.IsStartElement(
+                    WSTrust13Constants.ElementNames.RequestSecurityTokenResponseCollection,
+                    WSTrust13Constants.NamespaceURI
+                )
+                || reader.IsStartElement(
+                    WSTrust13Constants.ElementNames.RequestSecurityTokenResponse,
+                    WSTrust13Constants.NamespaceURI
+                );
         }
     }
 }

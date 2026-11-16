@@ -8,6 +8,6 @@ namespace System.Activities
     {
         Public,
         Imports,
-        Implementation
+        Implementation,
     }
 }

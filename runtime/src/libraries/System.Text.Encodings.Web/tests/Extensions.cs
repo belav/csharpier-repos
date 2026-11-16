@@ -9,7 +9,10 @@ namespace System.Text.Encodings.Web.Tests
 {
     public static class Extensions
     {
-        public unsafe static int FindFirstCharacterToEncodeUtf16(this TextEncoder encoder, ReadOnlySpan<char> text)
+        public static unsafe int FindFirstCharacterToEncodeUtf16(
+            this TextEncoder encoder,
+            ReadOnlySpan<char> text
+        )
         {
             if (text.IsEmpty)
             {

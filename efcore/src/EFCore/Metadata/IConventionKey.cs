@@ -45,6 +45,6 @@ public interface IConventionKey : IReadOnlyKey, IConventionAnnotatable
     ///     Gets all foreign keys that target a given primary or alternate key.
     /// </summary>
     /// <returns>The foreign keys that reference the given key.</returns>
-    new IEnumerable<IConventionForeignKey> GetReferencingForeignKeys()
-        => ((IReadOnlyKey)this).GetReferencingForeignKeys().Cast<IConventionForeignKey>();
+    new IEnumerable<IConventionForeignKey> GetReferencingForeignKeys() =>
+        ((IReadOnlyKey)this).GetReferencingForeignKeys().Cast<IConventionForeignKey>();
 }

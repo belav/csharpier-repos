@@ -22,7 +22,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
     internal class MemberSelectionViewModel : AbstractNotifyPropertyChanged
     {
         private readonly IUIThreadOperationExecutor _uiThreadOperationExecutor;
-        private readonly ImmutableDictionary<ISymbol, Task<ImmutableArray<ISymbol>>> _symbolToDependentsMap;
+        private readonly ImmutableDictionary<
+            ISymbol,
+            Task<ImmutableArray<ISymbol>>
+        > _symbolToDependentsMap;
         private readonly ImmutableDictionary<ISymbol, MemberSymbolViewModel> _symbolToMemberViewMap;
 
         public MemberSelectionViewModel(
@@ -31,13 +34,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
             ImmutableDictionary<ISymbol, Task<ImmutableArray<ISymbol>>> dependentsMap,
             TypeKind destinationTypeKind = TypeKind.Class,
             bool showDependentsButton = true,
-            bool showPublicButton = true)
+            bool showPublicButton = true
+        )
         {
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
             // Use public property to hook property change events up
             Members = members.OrderBy(s => s.SymbolName).ToImmutableArray();
             _symbolToDependentsMap = dependentsMap;
-            _symbolToMemberViewMap = members.ToImmutableDictionary(memberViewModel => memberViewModel.Symbol);
+            _symbolToMemberViewMap = members.ToImmutableDictionary(memberViewModel =>
+                memberViewModel.Symbol
+            );
 
             UpdateMembersBasedOnDestinationKind(destinationTypeKind);
 
@@ -48,7 +54,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
         public bool ShowCheckDependentsButton { get; }
         public bool ShowPublicButton { get; }
         public bool ShowMakeAbstract => _members.Any(m => m.IsMakeAbstractCheckable);
-        public ImmutableArray<MemberSymbolViewModel> CheckedMembers => Members.WhereAsArray(m => m.IsChecked && m.IsCheckable);
+        public ImmutableArray<MemberSymbolViewModel> CheckedMembers =>
+            Members.WhereAsArray(m => m.IsChecked && m.IsCheckable);
 
         private ImmutableArray<MemberSymbolViewModel> _members;
         public ImmutableArray<MemberSymbolViewModel> Members
@@ -60,7 +67,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
                 if (SetProperty(ref _members, value))
                 {
                     // If we have registered for events before, remove the handlers
-                    // to be a good citizen in the world 
+                    // to be a good citizen in the world
                     if (!oldMembers.IsDefaultOrEmpty)
                     {
                         foreach (var oldMember in oldMembers)
@@ -93,64 +100,79 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
             }
         }
 
-        public void SelectPublic()
-            => SelectMembers(Members.WhereAsArray(v => v.Symbol.DeclaredAccessibility == Accessibility.Public));
+        public void SelectPublic() =>
+            SelectMembers(
+                Members.WhereAsArray(v => v.Symbol.DeclaredAccessibility == Accessibility.Public)
+            );
 
-        public void SelectAll()
-            => SelectMembers(Members);
+        public void SelectAll() => SelectMembers(Members);
 
-        internal void DeselectAll()
-            => SelectMembers(Members, isChecked: false);
+        internal void DeselectAll() => SelectMembers(Members, isChecked: false);
 
         public void SelectDependents()
         {
             Contract.ThrowIfFalse(ShowCheckDependentsButton);
 
-            var checkedMembers = Members
-              .WhereAsArray(member => member.IsChecked && member.IsCheckable);
+            var checkedMembers = Members.WhereAsArray(member =>
+                member.IsChecked && member.IsCheckable
+            );
 
             var result = _uiThreadOperationExecutor.Execute(
-                    title: ServicesVSResources.Pull_Members_Up,
-                    defaultDescription: ServicesVSResources.Calculating_dependents,
-                    allowCancellation: true,
-                    showProgress: true,
-                    context =>
+                title: ServicesVSResources.Pull_Members_Up,
+                defaultDescription: ServicesVSResources.Calculating_dependents,
+                allowCancellation: true,
+                showProgress: true,
+                context =>
+                {
+                    foreach (var member in Members)
                     {
-                        foreach (var member in Members)
-                        {
-                            _symbolToDependentsMap[member.Symbol].Wait(context.UserCancellationToken);
-                        }
-                    });
+                        _symbolToDependentsMap[member.Symbol].Wait(context.UserCancellationToken);
+                    }
+                }
+            );
 
             if (result == UIThreadOperationStatus.Completed)
             {
                 foreach (var member in checkedMembers)
                 {
-                    var membersToSelected = FindDependentsRecursively(member.Symbol).SelectAsArray(symbol => _symbolToMemberViewMap[symbol]);
+                    var membersToSelected = FindDependentsRecursively(member.Symbol)
+                        .SelectAsArray(symbol => _symbolToMemberViewMap[symbol]);
                     SelectMembers(membersToSelected);
                 }
             }
         }
 
-        public ImmutableArray<(ISymbol member, bool makeAbstract)> GetSelectedMembers()
-            => Members.
-                Where(memberSymbolView => memberSymbolView.IsChecked && memberSymbolView.IsCheckable).
-                SelectAsArray(memberViewModel =>
-                    (member: memberViewModel.Symbol,
-                    makeAbstract: memberViewModel.IsMakeAbstractCheckable && memberViewModel.MakeAbstract));
+        public ImmutableArray<(ISymbol member, bool makeAbstract)> GetSelectedMembers() =>
+            Members
+                .Where(memberSymbolView =>
+                    memberSymbolView.IsChecked && memberSymbolView.IsCheckable
+                )
+                .SelectAsArray(memberViewModel =>
+                    (
+                        member: memberViewModel.Symbol,
+                        makeAbstract: memberViewModel.IsMakeAbstractCheckable
+                            && memberViewModel.MakeAbstract
+                    )
+                );
 
         public void UpdateMembersBasedOnDestinationKind(TypeKind destinationType)
         {
-            var fields = Members.WhereAsArray(memberViewModel => memberViewModel.Symbol.IsKind(SymbolKind.Field));
-            var makeAbstractEnabledCheckboxes = Members.
-                WhereAsArray(memberViewModel => !memberViewModel.Symbol.IsKind(SymbolKind.Field) && !memberViewModel.Symbol.IsAbstract);
+            var fields = Members.WhereAsArray(memberViewModel =>
+                memberViewModel.Symbol.IsKind(SymbolKind.Field)
+            );
+            var makeAbstractEnabledCheckboxes = Members.WhereAsArray(memberViewModel =>
+                !memberViewModel.Symbol.IsKind(SymbolKind.Field)
+                && !memberViewModel.Symbol.IsAbstract
+            );
             var isInterface = destinationType == TypeKind.Interface;
 
             // Disable field check box and make abstract if destination is interface
             foreach (var member in fields)
             {
                 member.IsCheckable = !isInterface;
-                member.TooltipText = isInterface ? ServicesVSResources.Interface_cannot_have_field : string.Empty;
+                member.TooltipText = isInterface
+                    ? ServicesVSResources.Interface_cannot_have_field
+                    : string.Empty;
             }
 
             foreach (var member in makeAbstractEnabledCheckboxes)
@@ -159,7 +181,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
             }
         }
 
-        private static void SelectMembers(ImmutableArray<MemberSymbolViewModel> members, bool isChecked = true)
+        private static void SelectMembers(
+            ImmutableArray<MemberSymbolViewModel> members,
+            bool isChecked = true
+        )
         {
             foreach (var member in members.Where(viewModel => viewModel.IsCheckable))
             {
@@ -170,7 +195,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
         private ImmutableHashSet<ISymbol> FindDependentsRecursively(ISymbol member)
         {
             var queue = new Queue<ISymbol>();
-            // Under situation like two methods call each other, this hashset is used to 
+            // Under situation like two methods call each other, this hashset is used to
             // prevent the infinity loop.
             var visited = new HashSet<ISymbol>();
             var result = new HashSet<ISymbol>();

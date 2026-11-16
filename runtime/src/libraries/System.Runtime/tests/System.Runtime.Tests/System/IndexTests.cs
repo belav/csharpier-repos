@@ -36,8 +36,12 @@ namespace System.Tests
             Assert.Equal(10, index.Value);
             Assert.True(index.IsFromEnd);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => new Index(-1, fromEnd: false));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => Index.FromStart(-3));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                new Index(-1, fromEnd: false)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                Index.FromStart(-3)
+            );
             AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => Index.FromEnd(-1));
         }
 
@@ -68,7 +72,7 @@ namespace System.Tests
             Assert.Equal(10, index.Value);
             Assert.False(index.IsFromEnd);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => index = -10 );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => index = -10);
         }
 
         [Fact]
@@ -115,7 +119,7 @@ namespace System.Tests
         [Fact]
         public static void CollectionTest()
         {
-            int [] array = new int [] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            int[] array = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             List<int> list = new List<int>(array);
 
             for (int i = 0; i < list.Count; i++)

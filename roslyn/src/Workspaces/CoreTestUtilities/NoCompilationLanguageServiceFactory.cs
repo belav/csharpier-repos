@@ -9,17 +9,21 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {
-    [ExportLanguageService(typeof(INoCompilationLanguageService), NoCompilationConstants.LanguageName, ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportLanguageService(
+            typeof(INoCompilationLanguageService),
+            NoCompilationConstants.LanguageName,
+            ServiceLayer.Test
+        ),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal sealed class NoCompilationLanguageService : INoCompilationLanguageService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NoCompilationLanguageService()
-        {
-        }
+        public NoCompilationLanguageService() { }
     }
 
-    internal interface INoCompilationLanguageService : ILanguageService
-    {
-    }
+    internal interface INoCompilationLanguageService : ILanguageService { }
 }

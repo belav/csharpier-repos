@@ -34,7 +34,9 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
                 _timer.Change(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
             }
 
-            WriteLine($"{instrument.Meter.Name}-{instrument.Name} Started; Description: {instrument.Description}.");
+            WriteLine(
+                $"{instrument.Meter.Name}-{instrument.Name} Started; Description: {instrument.Description}."
+            );
             userState = this;
             return true;
         }
@@ -47,18 +49,25 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
 
         public void Initialize(IObservableInstrumentsSource source) => _source = source;
 
-        public MeasurementHandlers GetMeasurementHandlers() => new MeasurementHandlers
-        {
-            ByteHandler = MeasurementHandler,
-            ShortHandler = MeasurementHandler,
-            IntHandler = MeasurementHandler,
-            LongHandler = MeasurementHandler,
-            FloatHandler = MeasurementHandler,
-            DoubleHandler = MeasurementHandler,
-            DecimalHandler = MeasurementHandler,
-        };
+        public MeasurementHandlers GetMeasurementHandlers() =>
+            new MeasurementHandlers
+            {
+                ByteHandler = MeasurementHandler,
+                ShortHandler = MeasurementHandler,
+                IntHandler = MeasurementHandler,
+                LongHandler = MeasurementHandler,
+                FloatHandler = MeasurementHandler,
+                DoubleHandler = MeasurementHandler,
+                DecimalHandler = MeasurementHandler,
+            };
 
-        private void MeasurementHandler<T>(Instrument instrument, T measurement, ReadOnlySpan<KeyValuePair<string, object?>> tags, object? state) where T : struct
+        private void MeasurementHandler<T>(
+            Instrument instrument,
+            T measurement,
+            ReadOnlySpan<KeyValuePair<string, object?>> tags,
+            object? state
+        )
+            where T : struct
         {
             Debug.Assert(state == this);
             WriteLine($"{instrument.Meter.Name}-{instrument.Name} {measurement} {instrument.Unit}");

@@ -79,7 +79,7 @@ namespace RabbitMQ.Client.Events
     /// call in the IDictionary available through the Detail property.
     ///</para>
     ///</remarks>
-    public class CallbackExceptionEventArgs: EventArgs
+    public class CallbackExceptionEventArgs : EventArgs
     {
         private IDictionary m_detail;
         private Exception m_exception;
@@ -93,9 +93,15 @@ namespace RabbitMQ.Client.Events
 
         ///<summary>Access helpful information about the context in
         ///which the wrapped exception was thrown.</summary>
-        public IDictionary Detail { get { return m_detail; } }
+        public IDictionary Detail
+        {
+            get { return m_detail; }
+        }
 
         ///<summary>Access the wrapped exception.</summary>
-        public Exception Exception { get { return m_exception; } }
+        public Exception Exception
+        {
+            get { return m_exception; }
+        }
     }
 }

@@ -4,18 +4,19 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.UI;
-    using System.ComponentModel;
-    using System.Security.Permissions;
+    using System.Xml;
 
     /*             <outputCacheSettings>
                 <!--
@@ -40,54 +41,56 @@ namespace System.Web.Configuration {
             </outputCacheSettings>
 
  */
-    public sealed class OutputCacheSettingsSection : ConfigurationSection {
+    public sealed class OutputCacheSettingsSection : ConfigurationSection
+    {
         private static ConfigurationPropertyCollection _properties;
         private static readonly ConfigurationProperty _propOutputCacheProfiles;
 #if NOT_UNTIL_LATER
         private static readonly ConfigurationProperty _propFragmentCacheProfiles;
 #endif
-        static OutputCacheSettingsSection() {
+
+        static OutputCacheSettingsSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
-            _propOutputCacheProfiles = new ConfigurationProperty("outputCacheProfiles", 
-                                            typeof(OutputCacheProfileCollection), 
-                                            null, 
-                                            ConfigurationPropertyOptions.None);
+            _propOutputCacheProfiles = new ConfigurationProperty(
+                "outputCacheProfiles",
+                typeof(OutputCacheProfileCollection),
+                null,
+                ConfigurationPropertyOptions.None
+            );
             _properties.Add(_propOutputCacheProfiles);
 
 #if NOT_UNTIL_LATER
-            _propFragmentCacheProfiles = new ConfigurationProperty("fragmentCacheProfiles", 
-                                        typeof(FragmentCacheProfileCollection), 
-                                        new FragmentCacheProfileCollection(), 
-                                        ConfigurationPropertyOptions.None);
+            _propFragmentCacheProfiles = new ConfigurationProperty(
+                "fragmentCacheProfiles",
+                typeof(FragmentCacheProfileCollection),
+                new FragmentCacheProfileCollection(),
+                ConfigurationPropertyOptions.None
+            );
             _properties.Add(_propFragmentCacheProfiles);
 #endif
         }
 
-        public OutputCacheSettingsSection() {
-        }
+        public OutputCacheSettingsSection() { }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("outputCacheProfiles")]
-        public OutputCacheProfileCollection OutputCacheProfiles {
-            get {
-                return (OutputCacheProfileCollection)base[_propOutputCacheProfiles];
-            }
+        public OutputCacheProfileCollection OutputCacheProfiles
+        {
+            get { return (OutputCacheProfileCollection)base[_propOutputCacheProfiles]; }
         }
 
 #if NOT_UNTIL_LATER
         [ConfigurationProperty("FragmentCacheProfiles")]
-        public FragmentCacheProfileCollection FragmentCacheProfiles {
-            get {
-                return (FragmentCacheProfileCollection) base[_propFragmentCacheProfiles];
-            }
+        public FragmentCacheProfileCollection FragmentCacheProfiles
+        {
+            get { return (FragmentCacheProfileCollection)base[_propFragmentCacheProfiles]; }
         }
 #endif
-
     }
 }

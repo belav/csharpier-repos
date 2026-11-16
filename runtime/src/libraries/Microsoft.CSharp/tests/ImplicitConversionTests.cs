@@ -13,11 +13,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 {
     public class ImplicitConversionTests
     {
-        private static void AssertImplicitConvert<TSource, TTarget>(TSource argument, TTarget expected)
+        private static void AssertImplicitConvert<TSource, TTarget>(
+            TSource argument,
+            TTarget expected
+        )
         {
-            CallSiteBinder binder = Binder.Convert(CSharpBinderFlags.None, typeof(TTarget), typeof(ImplicitConversionTests));
-            CallSite<Func<CallSite, TSource, TTarget>> callSite =
-                CallSite<Func<CallSite, TSource, TTarget>>.Create(binder);
+            CallSiteBinder binder = Binder.Convert(
+                CSharpBinderFlags.None,
+                typeof(TTarget),
+                typeof(ImplicitConversionTests)
+            );
+            CallSite<Func<CallSite, TSource, TTarget>> callSite = CallSite<
+                Func<CallSite, TSource, TTarget>
+            >.Create(binder);
             Func<CallSite, TSource, TTarget> func = callSite.Target;
             TTarget result = func(callSite, argument);
             Assert.Equal(expected, result);
@@ -30,9 +38,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         private static void AssertBadImplicitConvert<TSource, TTarget>(TSource argument)
         {
-            CallSiteBinder binder = Binder.Convert(CSharpBinderFlags.None, typeof(TTarget), typeof(ImplicitConversionTests));
-            CallSite<Func<CallSite, TSource, TTarget>> callSite =
-                CallSite<Func<CallSite, TSource, TTarget>>.Create(binder);
+            CallSiteBinder binder = Binder.Convert(
+                CSharpBinderFlags.None,
+                typeof(TTarget),
+                typeof(ImplicitConversionTests)
+            );
+            CallSite<Func<CallSite, TSource, TTarget>> callSite = CallSite<
+                Func<CallSite, TSource, TTarget>
+            >.Create(binder);
             Func<CallSite, TSource, TTarget> func = callSite.Target;
             Assert.Throws<RuntimeBinderException>(() => func(callSite, argument));
 
@@ -59,7 +72,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             AssertImplicitConvert<int?, ValueType>(null, null);
             AssertImplicitConvert<int?, object>(2, 2);
         }
-
 
         [Fact]
         public void NullablesToBaseTypesInterfaces()
@@ -339,10 +351,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void ArraysToInterfaces()
         {
-            int[] intArray = {1, 2, 3};
+            int[] intArray = { 1, 2, 3 };
             AssertImplicitConvert<int[], IEnumerable>(intArray, intArray);
             AssertImplicitConvert<int[], IEnumerable<int>>(intArray, intArray);
             AssertImplicitConvert<int[], IList<int>>(intArray, intArray);
@@ -354,7 +369,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void ArraysToInterfacesAsArguments()
         {
-            dynamic intArray = new[] {1, 2, 3};
+            dynamic intArray = new[] { 1, 2, 3 };
             TestTypeAsArgument<IEnumerable>(intArray);
             TestTypeAsArgument<IEnumerable<int>>(intArray);
             TestTypeAsArgument<IList<int>>(intArray);

@@ -22,10 +22,7 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-
-namespace System.Windows.Forms {
-
-	public delegate void TreeViewCancelEventHandler (object sender, TreeViewCancelEventArgs e);
-
+namespace System.Windows.Forms
+{
+    public delegate void TreeViewCancelEventHandler(object sender, TreeViewCancelEventArgs e);
 }
-

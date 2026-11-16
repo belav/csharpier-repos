@@ -12,7 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class CheckConstraintConvention : IEntityTypeBaseTypeChangedConvention, IEntityTypeAddedConvention
+public class CheckConstraintConvention
+    : IEntityTypeBaseTypeChangedConvention,
+        IEntityTypeAddedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="CheckConstraintConvention" />.
@@ -21,7 +23,8 @@ public class CheckConstraintConvention : IEntityTypeBaseTypeChangedConvention, I
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public CheckConstraintConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -44,7 +47,8 @@ public class CheckConstraintConvention : IEntityTypeBaseTypeChangedConvention, I
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         var entityType = entityTypeBuilder.Metadata;
         if (!entityType.HasSharedClrType)
@@ -72,7 +76,9 @@ public class CheckConstraintConvention : IEntityTypeBaseTypeChangedConvention, I
 
         foreach (var checkConstraint in constraintsToReattach)
         {
-            var removedCheckConstraint = entityType.RemoveCheckConstraint(checkConstraint.ModelName);
+            var removedCheckConstraint = entityType.RemoveCheckConstraint(
+                checkConstraint.ModelName
+            );
             if (removedCheckConstraint != null)
             {
                 CheckConstraint.Attach(entityType, removedCheckConstraint);
@@ -91,30 +97,48 @@ public class CheckConstraintConvention : IEntityTypeBaseTypeChangedConvention, I
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionEntityType? newBaseType,
         IConventionEntityType? oldBaseType,
-        IConventionContext<IConventionEntityType> context)
+        IConventionContext<IConventionEntityType> context
+    )
     {
         var entityType = entityTypeBuilder.Metadata;
         if (newBaseType != null)
         {
             var configurationSource = entityType.GetBaseTypeConfigurationSource();
-            var baseCheckConstraints = newBaseType.GetCheckConstraints().ToDictionary(c => c.ModelName);
+            var baseCheckConstraints = newBaseType
+                .GetCheckConstraints()
+                .ToDictionary(c => c.ModelName);
             List<IConventionCheckConstraint>? checkConstraintsToBeDetached = null;
             List<IConventionCheckConstraint>? checkConstraintsToBeRemoved = null;
-            foreach (var checkConstraint in entityType.GetDerivedTypesInclusive().SelectMany(et => et.GetDeclaredCheckConstraints()))
+            foreach (
+                var checkConstraint in entityType
+                    .GetDerivedTypesInclusive()
+                    .SelectMany(et => et.GetDeclaredCheckConstraints())
+            )
             {
-                if (baseCheckConstraints.TryGetValue(checkConstraint.ModelName, out var baseCheckConstraint)
-                    && baseCheckConstraint.GetConfigurationSource().Overrides(checkConstraint.GetConfigurationSource())
-                    && !AreCompatible(checkConstraint, baseCheckConstraint))
+                if (
+                    baseCheckConstraints.TryGetValue(
+                        checkConstraint.ModelName,
+                        out var baseCheckConstraint
+                    )
+                    && baseCheckConstraint
+                        .GetConfigurationSource()
+                        .Overrides(checkConstraint.GetConfigurationSource())
+                    && !AreCompatible(checkConstraint, baseCheckConstraint)
+                )
                 {
-                    if (baseCheckConstraint.GetConfigurationSource() == ConfigurationSource.Explicit
+                    if (
+                        baseCheckConstraint.GetConfigurationSource() == ConfigurationSource.Explicit
                         && configurationSource == ConfigurationSource.Explicit
-                        && checkConstraint.GetConfigurationSource() == ConfigurationSource.Explicit)
+                        && checkConstraint.GetConfigurationSource() == ConfigurationSource.Explicit
+                    )
                     {
                         throw new InvalidOperationException(
                             RelationalStrings.DuplicateCheckConstraint(
                                 checkConstraint.ModelName,
                                 checkConstraint.EntityType.DisplayName(),
-                                baseCheckConstraint.EntityType.DisplayName()));
+                                baseCheckConstraint.EntityType.DisplayName()
+                            )
+                        );
                     }
 
                     checkConstraintsToBeRemoved ??= new List<IConventionCheckConstraint>();
@@ -135,7 +159,9 @@ public class CheckConstraintConvention : IEntityTypeBaseTypeChangedConvention, I
             {
                 foreach (var checkConstraintToBeRemoved in checkConstraintsToBeRemoved)
                 {
-                    checkConstraintToBeRemoved.EntityType.RemoveCheckConstraint(checkConstraintToBeRemoved.ModelName);
+                    checkConstraintToBeRemoved.EntityType.RemoveCheckConstraint(
+                        checkConstraintToBeRemoved.ModelName
+                    );
                 }
             }
 
@@ -143,26 +169,41 @@ public class CheckConstraintConvention : IEntityTypeBaseTypeChangedConvention, I
             {
                 foreach (var checkConstraintToBeDetached in checkConstraintsToBeDetached)
                 {
-                    var baseCheckConstraint = baseCheckConstraints[checkConstraintToBeDetached.ModelName];
+                    var baseCheckConstraint = baseCheckConstraints[
+                        checkConstraintToBeDetached.ModelName
+                    ];
                     CheckConstraint.MergeInto(checkConstraintToBeDetached, baseCheckConstraint);
 
-                    checkConstraintToBeDetached.EntityType.RemoveCheckConstraint(checkConstraintToBeDetached.ModelName);
+                    checkConstraintToBeDetached.EntityType.RemoveCheckConstraint(
+                        checkConstraintToBeDetached.ModelName
+                    );
                 }
             }
         }
     }
 
-    private static bool AreCompatible(IConventionCheckConstraint checkConstraint, IConventionCheckConstraint baseCheckConstraint)
+    private static bool AreCompatible(
+        IConventionCheckConstraint checkConstraint,
+        IConventionCheckConstraint baseCheckConstraint
+    )
     {
-        var baseTable = StoreObjectIdentifier.Create(baseCheckConstraint.EntityType, StoreObjectType.Table);
+        var baseTable = StoreObjectIdentifier.Create(
+            baseCheckConstraint.EntityType,
+            StoreObjectType.Table
+        );
         if (baseTable == null)
         {
             return true;
         }
 
-        if (checkConstraint.GetName(baseTable.Value) != baseCheckConstraint.GetName(baseTable.Value)
-            && checkConstraint.GetNameConfigurationSource() is ConfigurationSource nameConfigurationSource
-            && !nameConfigurationSource.OverridesStrictly(baseCheckConstraint.GetNameConfigurationSource()))
+        if (
+            checkConstraint.GetName(baseTable.Value) != baseCheckConstraint.GetName(baseTable.Value)
+            && checkConstraint.GetNameConfigurationSource()
+                is ConfigurationSource nameConfigurationSource
+            && !nameConfigurationSource.OverridesStrictly(
+                baseCheckConstraint.GetNameConfigurationSource()
+            )
+        )
         {
             return false;
         }
@@ -171,6 +212,7 @@ public class CheckConstraintConvention : IEntityTypeBaseTypeChangedConvention, I
             checkConstraint,
             baseCheckConstraint,
             baseTable.Value,
-            shouldThrow: false);
+            shouldThrow: false
+        );
     }
 }

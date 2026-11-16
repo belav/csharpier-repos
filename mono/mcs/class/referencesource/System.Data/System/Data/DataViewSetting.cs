@@ -1,56 +1,60 @@
 //------------------------------------------------------------------------------
 // <copyright file="DataViewSetting.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 // <owner current="true" primary="false">Microsoft</owner>
 // <owner current="false" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
     using System.ComponentModel;
 
-    [
-    TypeConverter((typeof(ExpandableObjectConverter))),
-    ]
-    public class DataViewSetting {
+    [TypeConverter((typeof(ExpandableObjectConverter)))]
+    public class DataViewSetting
+    {
         DataViewManager dataViewManager;
-        DataTable       table;
-        string sort      = "";
+        DataTable table;
+        string sort = "";
         string rowFilter = "";
         DataViewRowState rowStateFilter = DataViewRowState.CurrentRows;
         bool applyDefaultSort = false;
 
-        internal DataViewSetting() {}
+        internal DataViewSetting() { }
 
-        internal DataViewSetting(string sort, string rowFilter, DataViewRowState rowStateFilter) {
+        internal DataViewSetting(string sort, string rowFilter, DataViewRowState rowStateFilter)
+        {
             this.sort = sort;
             this.rowFilter = rowFilter;
-            this.rowStateFilter = rowStateFilter; 
+            this.rowStateFilter = rowStateFilter;
         }
 
-        public bool ApplyDefaultSort {
-            get {
-                return applyDefaultSort;
-            }
-            set {
-                if (applyDefaultSort != value) {
+        public bool ApplyDefaultSort
+        {
+            get { return applyDefaultSort; }
+            set
+            {
+                if (applyDefaultSort != value)
+                {
                     applyDefaultSort = value;
                 }
             }
         }
 
         [Browsable(false)]
-        public DataViewManager DataViewManager {
-            get {
-                return dataViewManager;
-            }
+        public DataViewManager DataViewManager
+        {
+            get { return dataViewManager; }
         }
 
-        internal void SetDataViewManager(DataViewManager dataViewManager) {
-            if(this.dataViewManager != dataViewManager) {
-                if(this.dataViewManager != null) {
+        internal void SetDataViewManager(DataViewManager dataViewManager)
+        {
+            if (this.dataViewManager != dataViewManager)
+            {
+                if (this.dataViewManager != null)
+                {
                     // throw exception here;
                 }
                 this.dataViewManager = dataViewManager;
@@ -58,55 +62,60 @@ namespace System.Data {
         }
 
         [Browsable(false)]
-        public DataTable Table {
-            get {
-                return table;
-            }
+        public DataTable Table
+        {
+            get { return table; }
         }
 
-        internal void SetDataTable(DataTable table) {
-            if(this.table != table) {
-                if(this.table != null) {
+        internal void SetDataTable(DataTable table)
+        {
+            if (this.table != table)
+            {
+                if (this.table != null)
+                {
                     // throw exception here;
                 }
                 this.table = table;
             }
         }
 
-        public string RowFilter {
-            get {
-                return rowFilter;
-            }
-            set {
+        public string RowFilter
+        {
+            get { return rowFilter; }
+            set
+            {
                 if (value == null)
                     value = "";
 
-                if (this.rowFilter != value) {
+                if (this.rowFilter != value)
+                {
                     this.rowFilter = value;
                 }
             }
         }
 
-        public DataViewRowState RowStateFilter {
-            get {
-                return rowStateFilter;
-            }
-            set {
-                if (this.rowStateFilter != value) {
+        public DataViewRowState RowStateFilter
+        {
+            get { return rowStateFilter; }
+            set
+            {
+                if (this.rowStateFilter != value)
+                {
                     this.rowStateFilter = value;
                 }
             }
         }
 
-        public string Sort {
-            get {
-                return sort;
-            }
-            set {
+        public string Sort
+        {
+            get { return sort; }
+            set
+            {
                 if (value == null)
                     value = "";
 
-                if (this.sort != value) {
+                if (this.sort != value)
+                {
                     this.sort = value;
                 }
             }

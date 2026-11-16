@@ -29,8 +29,14 @@ namespace System.Security.AccessControl.Tests
             revision = 0;
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
-            gAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), false, null);
+            gAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             discretionaryAcl = new DiscretionaryAcl(true, false, rawAcl);
             Assert.True(8 + gAce.BinaryLength == discretionaryAcl.BinaryLength);
@@ -39,16 +45,33 @@ namespace System.Security.AccessControl.Tests
             revision = 0;
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
-            gAce = new CommonAce(AceFlags.None, AceQualifier.AccessDenied, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")), false, null);
+            gAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessDenied,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
-            gAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 2,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                2,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             discretionaryAcl = new DiscretionaryAcl(false, false, rawAcl);
-            Assert.True(8 + discretionaryAcl[0].BinaryLength + discretionaryAcl[1].BinaryLength == discretionaryAcl.BinaryLength);
-
-
+            Assert.True(
+                8 + discretionaryAcl[0].BinaryLength + discretionaryAcl[1].BinaryLength
+                    == discretionaryAcl.BinaryLength
+            );
         }
 
         [Fact]
@@ -60,7 +83,9 @@ namespace System.Security.AccessControl.Tests
             byte revision = 0;
             int capacity = 0;
             string sid = "BG";
-            sid = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)).ToString();
+            sid = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+            ).ToString();
             int expectedLength = 0;
 
             //case 1, DiscretionaryAcl with huge number of Aces
@@ -71,14 +96,21 @@ namespace System.Security.AccessControl.Tests
 
             for (int i = 0; i < 1820; i++)
             {
-                gAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, i + 1,
-                    new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid + i.ToString())), false, null);
+                gAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    i + 1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid + i.ToString())
+                    ),
+                    false,
+                    null
+                );
                 rawAcl.InsertAce(0, gAce);
                 expectedLength += gAce.BinaryLength;
             }
             discretionaryAcl = new DiscretionaryAcl(false, false, rawAcl);
             Assert.True(expectedLength == discretionaryAcl.BinaryLength);
-
         }
     }
 }

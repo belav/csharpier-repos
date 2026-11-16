@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
 {
     internal readonly struct StackTraceAnalysisResult(
         string originalString,
-        ImmutableArray<ParsedFrame> parsedLines)
+        ImmutableArray<ParsedFrame> parsedLines
+    )
     {
         public string OriginalString { get; } = originalString;
         public ImmutableArray<ParsedFrame> ParsedFrames { get; } = parsedLines;

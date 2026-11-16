@@ -160,7 +160,11 @@ namespace System.Text.Json.SourceGeneration
             }
 
             // Discard fields when JsonInclude or IncludeFields aren't enabled.
-            if (!IsProperty && !HasJsonInclude && contextSpec.GeneratedOptionsSpec?.IncludeFields != true)
+            if (
+                !IsProperty
+                && !HasJsonInclude
+                && contextSpec.GeneratedOptionsSpec?.IncludeFields != true
+            )
             {
                 return false;
             }

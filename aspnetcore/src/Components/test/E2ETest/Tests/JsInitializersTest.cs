@@ -33,9 +33,8 @@ public class JsInitializersTest : ServerTestBase<ToggleExecutionModeServerFixtur
         Browser.Exists(By.Id("initializer-start"));
         Browser.Exists(By.Id("initializer-end"));
         var expectedCallbacks = GetExpectedCallbacks();
-        Browser.Equal(
-            expectedCallbacks.Length,
-            () => Browser.FindElements(By.CssSelector("#initializers-content > p")).Count
+        Browser.Equal(expectedCallbacks.Length, () =>
+            Browser.FindElements(By.CssSelector("#initializers-content > p")).Count
         );
         foreach (var callback in expectedCallbacks)
         {
@@ -60,9 +59,8 @@ public class JsInitializersTest : ServerTestBase<ToggleExecutionModeServerFixtur
     public void CanLoadJsModulePackagesFromLibrary()
     {
         Browser.MountTestComponent<ExternalContentPackage>();
-        Browser.Equal<string>(
-            "Hello from module",
-            () => Browser.Exists(By.CssSelector(".js-module-message > p")).Text
+        Browser.Equal<string>("Hello from module", () =>
+            Browser.Exists(By.CssSelector(".js-module-message > p")).Text
         );
     }
 }

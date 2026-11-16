@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,30 +33,29 @@ using System.Runtime.Remoting.Channels;
 
 namespace System.Runtime.Remoting.Channels.Tcp
 {
-	internal class TcpClientTransportSinkProvider : IClientChannelSinkProvider
-	{
-		public TcpClientTransportSinkProvider ()
-		{
-			// what should we do here ?
-		}
+    internal class TcpClientTransportSinkProvider : IClientChannelSinkProvider
+    {
+        public TcpClientTransportSinkProvider()
+        {
+            // what should we do here ?
+        }
 
-		public IClientChannelSinkProvider Next
-		{
-			get 
-			{
-				return null;
-			}
+        public IClientChannelSinkProvider Next
+        {
+            get { return null; }
+            set
+            {
+                // ignore, we are always the last in the chain
+            }
+        }
 
-			set 
-			{
-				// ignore, we are always the last in the chain 
-			}
-		}
-
-		public IClientChannelSink CreateSink (IChannelSender channel, string url,
-			object remoteChannelData)
-		{
-			return new TcpClientTransportSink (url);
-		}
-	}
+        public IClientChannelSink CreateSink(
+            IChannelSender channel,
+            string url,
+            object remoteChannelData
+        )
+        {
+            return new TcpClientTransportSink(url);
+        }
+    }
 }

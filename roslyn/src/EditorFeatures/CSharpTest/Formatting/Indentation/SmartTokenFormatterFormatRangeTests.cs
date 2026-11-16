@@ -42,19 +42,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
             var code = @"        using System;$$";
             var expected = @"        using System;";
 
-            Assert.NotNull(await Record.ExceptionAsync(() => AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.None)));
+            Assert.NotNull(
+                await Record.ExceptionAsync(() =>
+                    AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.None)
+                )
+            );
         }
 
         [WpfFact]
         public async Task Namespace1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 namespace NS
 {
 
     }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 namespace NS
 {
 
@@ -66,7 +72,8 @@ namespace NS
         [WpfFact]
         public async Task Namespace2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 namespace NS
 {
         class Class
@@ -74,7 +81,8 @@ namespace NS
         }
     }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 namespace NS
 {
     class Class
@@ -88,10 +96,12 @@ namespace NS
         [WpfFact]
         public async Task Namespace3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 namespace NS { }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 namespace NS { }";
 
             await AutoFormatOnCloseBraceAsync(code, expected, SyntaxKind.SemicolonToken);
@@ -100,11 +110,13 @@ namespace NS { }";
         [WpfFact]
         public async Task Namespace4()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 namespace NS { 
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 namespace NS
 {
 }";
@@ -115,13 +127,15 @@ namespace NS
         [WpfFact]
         public async Task Namespace5()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 namespace NS
 {
     class Class { } 
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 namespace NS
 {
     class Class { }
@@ -133,14 +147,16 @@ namespace NS
         [WpfFact]
         public async Task Namespace6()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 namespace NS
 {
     class Class { 
 } 
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 namespace NS
 {
     class Class
@@ -154,7 +170,8 @@ namespace NS
         [WpfFact]
         public async Task Namespace7()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 namespace NS
 {
     class Class { 
@@ -163,7 +180,8 @@ namespace NS
 {}
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 namespace NS
 {
     class Class
@@ -179,10 +197,12 @@ namespace NS
         [WpfFact]
         public async Task Namespace8()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 namespace NS { class Class { } namespace NS2 { } }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 namespace NS { class Class { } namespace NS2 { } }";
 
             await AutoFormatOnCloseBraceAsync(code, expected, SyntaxKind.SemicolonToken);
@@ -191,11 +211,13 @@ namespace NS { class Class { } namespace NS2 { } }";
         [WpfFact]
         public async Task Class1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
     class Class { 
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
 }";
@@ -206,14 +228,16 @@ class Class
         [WpfFact]
         public async Task Class2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
     class Class
 {
     void Method(int i) {
                 }
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method(int i)
@@ -227,13 +251,15 @@ class Class
         [WpfFact]
         public async Task Class3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
     class Class
 {
     void Method(int i) { }
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method(int i) { }
@@ -245,13 +271,15 @@ class Class
         [WpfFact]
         public async Task Class4()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
     class Class
 {
             delegate void Test(int i);
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     delegate void Test(int i);
@@ -263,7 +291,8 @@ class Class
         [WpfFact]
         public async Task Class5()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
     class Class
 {
             delegate void Test(int i);
@@ -272,7 +301,8 @@ class Class
                 }
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     delegate void Test(int i);
@@ -287,14 +317,16 @@ class Class
         [WpfFact]
         public async Task Interface1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
     interface II
 {
             delegate void Test(int i);
 int Prop { get; set; }
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 interface II
 {
     delegate void Test(int i);
@@ -307,7 +339,8 @@ interface II
         [WpfFact]
         public async Task Struct1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
     struct Struct
 {
             Struct(int i)
@@ -315,7 +348,8 @@ interface II
                 }
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 struct Struct
 {
     Struct(int i)
@@ -329,14 +363,16 @@ struct Struct
         [WpfFact]
         public async Task Enum1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
     enum Enum
 {
                 A = 1, B = 2,
     C = 3
             }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 enum Enum
 {
     A = 1, B = 2,
@@ -349,12 +385,14 @@ enum Enum
         [WpfFact]
         public async Task AccessorList1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     int Prop { get { return 1; }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     int Prop { get { return 1; }";
@@ -365,12 +403,14 @@ class Class
         [WpfFact]
         public async Task AccessorList2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     int Prop { get { return 1; } }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     int Prop { get { return 1; } }";
@@ -381,13 +421,15 @@ class Class
         [WpfFact]
         public async Task AccessorList3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     int Prop { get { return 1; }  
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     int Prop
@@ -401,13 +443,15 @@ class Class
         [WpfFact]
         public async Task AccessorList4()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     int Prop { get { return 1;   
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     int Prop { get
@@ -421,14 +465,16 @@ class Class
         [WpfFact]
         public async Task AccessorList5()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     int Prop {
         get { return 1;   
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     int Prop {
@@ -441,7 +487,8 @@ class Class
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/16984")]
         public async Task AccessorList5b()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     int Prop {
@@ -450,7 +497,8 @@ class Class
 }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     int Prop {
@@ -467,7 +515,8 @@ class Class
         [WpfFact]
         public async Task AccessorList6()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     int Prop 
@@ -475,7 +524,8 @@ class Class
 get { return 1;   
 } }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     int Prop
@@ -492,7 +542,8 @@ class Class
         [WpfFact]
         public async Task AccessorList7()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     int Prop
@@ -503,7 +554,8 @@ return 1;$$
         }
     }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     int Prop
@@ -520,7 +572,8 @@ class Class
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/16984")]
         public async Task AccessorList8()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     int Prop
     {
@@ -531,7 +584,8 @@ get
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     int Prop
     {
@@ -551,7 +605,8 @@ get
         [InlineData("init")]
         public async Task AccessorList9(string accessor)
         {
-            var code = $@"class C
+            var code =
+                $@"class C
 {{
     int Prop
     {{
@@ -562,7 +617,8 @@ get
     }}
 }}";
 
-            var expected = $@"class C
+            var expected =
+                $@"class C
 {{
     int Prop
     {{
@@ -579,7 +635,8 @@ get
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/16984")]
         public async Task AccessorList10()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     event EventHandler E
     {
@@ -593,7 +650,8 @@ add
 
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     event EventHandler E
     {
@@ -613,7 +671,8 @@ add
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/16984")]
         public async Task AccessorList11()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     event EventHandler E
     {
@@ -627,7 +686,8 @@ remove
 
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     event EventHandler E
     {
@@ -647,13 +707,15 @@ remove
         [WpfFact]
         public async Task Block1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     public int Method()
     { }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     public int Method()
@@ -665,12 +727,14 @@ class Class
         [WpfFact]
         public async Task Block2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     public int Method() { }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     public int Method() { }";
@@ -681,14 +745,16 @@ class Class
         [WpfFact]
         public async Task Block3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     public int Method() { 
 }$$
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     public int Method()
@@ -702,14 +768,16 @@ class Class
         [WpfFact]
         public async Task Block4()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     public static Class operator +(Class c1, Class c2) {
             }$$
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     public static Class operator +(Class c1, Class c2)
@@ -723,14 +791,16 @@ class Class
         [WpfFact]
         public async Task Block5()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
     {
         { }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -743,7 +813,8 @@ class Class
         [WpfFact]
         public async Task Block6()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -751,7 +822,8 @@ class Class
         { 
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -765,14 +837,16 @@ class Class
         [WpfFact]
         public async Task Block7()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
     {
         { { }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -785,7 +859,8 @@ class Class
         [WpfFact]
         public async Task Block8()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -794,7 +869,8 @@ class Class
 }$$
         }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -810,7 +886,8 @@ class Class
         [WpfFact]
         public async Task SwitchStatement1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -822,7 +899,8 @@ class Class
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -841,14 +919,16 @@ class Class
         [WpfFact]
         public async Task SwitchStatement2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
     {
         switch (true) { }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -861,7 +941,8 @@ class Class
         [WpfFact]
         public async Task SwitchStatement3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -870,7 +951,8 @@ class Class
         {
             case 1: { }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -885,7 +967,8 @@ class Class
         [WpfFact]
         public async Task SwitchStatement4()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -895,7 +978,8 @@ class Class
             case 1: { 
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -912,14 +996,16 @@ class Class
         [WpfFact]
         public async Task Initializer1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
     {
         var arr = new int[] { }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -932,7 +1018,8 @@ class Class
         [WpfFact]
         public async Task Initializer2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -940,7 +1027,8 @@ class Class
         var arr = new int[] { 
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -954,7 +1042,8 @@ class Class
         [WpfFact]
         public async Task Initializer3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -962,7 +1051,8 @@ class Class
         var arr = new { A = 1, B = 2
 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -979,14 +1069,16 @@ class Class
         [WpfFact]
         public async Task Initializer4()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
     {
         var arr = new { A = 1, B = 2 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -999,7 +1091,8 @@ class Class
         [WpfFact]
         public async Task Initializer5()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1008,7 +1101,8 @@ class Class
             1, 2, 3, 4,
             5 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1023,7 +1117,8 @@ class Class
         [WpfFact]
         public async Task Initializer6()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1032,7 +1127,8 @@ class Class
             1, 2, 3, 4,
             5 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1047,14 +1143,16 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
     {
         if (true) { }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1067,7 +1165,8 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1076,7 +1175,8 @@ class Class
         }$$
     }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1092,7 +1192,8 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1100,7 +1201,8 @@ class Class
         if (true)
         { }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1114,7 +1216,8 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement4()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1123,7 +1226,8 @@ class Class
 }$$
     }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1139,7 +1243,8 @@ class Class
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/8413")]
         public async Task EmbeddedStatementDoBlockAlone()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1149,7 +1254,8 @@ class Class
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1166,7 +1272,8 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement5()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1176,7 +1283,8 @@ class Class
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1193,7 +1301,8 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement6()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1202,7 +1311,8 @@ class Class
 }$$
     }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1218,7 +1328,8 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement7()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1227,7 +1338,8 @@ class Class
 }$$
     }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1243,7 +1355,8 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement8()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1252,7 +1365,8 @@ class Class
 }$$
     }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1268,7 +1382,8 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement9()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1276,7 +1391,8 @@ class Class
         if (true)
                 int i = 10;$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1290,13 +1406,15 @@ class Class
         [WpfFact]
         public async Task FieldlInitializer()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
           string str =              Console.Title;$$
 ";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     string str = Console.Title;
@@ -1308,7 +1426,8 @@ class Class
         [WpfFact]
         public async Task ArrayFieldlInitializer()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 namespace NS
 {
     class Class
@@ -1316,7 +1435,8 @@ namespace NS
                     string[] strArr = {           ""1"",                       ""2"" };$$
 ";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 namespace NS
 {
     class Class
@@ -1330,13 +1450,15 @@ namespace NS
         [WpfFact]
         public async Task ExpressionValuedPropertyInitializer()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
           public int  Three =>   1+2;$$
 ";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     public int Three => 1 + 2;
@@ -1348,7 +1470,8 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement10()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1357,7 +1480,8 @@ class Class
                 int i = 10;$$
     }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1372,14 +1496,16 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement11()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
     {
                 using (var resource = GetResource()) resource.Do();$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1392,7 +1518,8 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement12()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1400,7 +1527,8 @@ class Class
                 using (var resource = GetResource()) 
     resource.Do();$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1414,7 +1542,8 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement13()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1423,7 +1552,8 @@ class Class
     resource.Do();$$
     }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1438,14 +1568,16 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement14()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
     {
                 do i = 10;$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1458,7 +1590,8 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement15()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1466,7 +1599,8 @@ class Class
                 do
     i = 10;$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1480,7 +1614,8 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement16()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1489,7 +1624,8 @@ class Class
     i = 10;$$
     }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1504,7 +1640,8 @@ class Class
         [WpfFact]
         public async Task EmbeddedStatement17()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
     void Method()
@@ -1514,7 +1651,8 @@ class Class
 while (true);$$
     }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
     void Method()
@@ -1530,13 +1668,15 @@ class Class
         [WpfFact]
         public async Task FollowPreviousElement1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
                     int i = 10;
                     int i2 = 10;$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
                     int i = 10;
@@ -1548,7 +1688,8 @@ class Class
         [WpfFact]
         public async Task FollowPreviousElement2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
             void Method(int i)
@@ -1560,7 +1701,8 @@ class Class
             }$$
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
             void Method(int i)
@@ -1578,7 +1720,8 @@ class Class
         [WpfFact]
         public async Task FollowPreviousElement3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
             void Method(int i)
@@ -1592,7 +1735,8 @@ class Class
             };$$
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
             void Method(int i)
@@ -1612,7 +1756,8 @@ class Class
         [WpfFact]
         public async Task FollowPreviousElement4()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
             void Method(int i)
@@ -1620,7 +1765,8 @@ class Class
                         int i = 10;
              int i2 = 10;$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
             void Method(int i)
@@ -1634,7 +1780,8 @@ class Class
         [WpfFact]
         public async Task FollowPreviousElement5()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class
 {
             void Method(int i)
@@ -1643,7 +1790,8 @@ class Class
                 if (true)
 i = 50;$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class
 {
             void Method(int i)
@@ -1658,10 +1806,12 @@ class Class
         [WpfFact]
         public async Task FollowPreviousElement6()
         {
-            var code = @"        using System;
+            var code =
+                @"        using System;
         using System.Linq;$$";
 
-            var expected = @"        using System;
+            var expected =
+                @"        using System;
 using System.Linq;";
 
             await AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.SemicolonToken);
@@ -1670,7 +1820,8 @@ using System.Linq;";
         [WpfFact]
         public async Task FollowPreviousElement7()
         {
-            var code = @"            using System;
+            var code =
+                @"            using System;
 
             namespace NS
             {
@@ -1680,7 +1831,8 @@ using System.Linq;";
         {
         }$$";
 
-            var expected = @"            using System;
+            var expected =
+                @"            using System;
 
             namespace NS
             {
@@ -1696,7 +1848,8 @@ namespace NS2
         [WpfFact]
         public async Task FollowPreviousElement8()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 namespace NS
 {
@@ -1709,7 +1862,8 @@ namespace NS
         }$$
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 namespace NS
 {
@@ -1728,7 +1882,8 @@ namespace NS
         [WpfFact]
         public async Task IfStatement1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Class
 {
@@ -1738,7 +1893,8 @@ class Class
         {
     }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Class
 {
@@ -1754,7 +1910,8 @@ class Class
         [WpfFact]
         public async Task IfStatement2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Class
 {
@@ -1767,7 +1924,8 @@ else
         {
                 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Class
 {
@@ -1786,7 +1944,8 @@ class Class
         [WpfFact]
         public async Task IfStatement3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Class
 {
@@ -1799,7 +1958,8 @@ else    if (false)
         {
                 }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Class
 {
@@ -1818,7 +1978,8 @@ class Class
         [WpfFact]
         public async Task IfStatement4()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Class
 {
@@ -1829,7 +1990,8 @@ class Class
 else    if (false)
                     return          ;$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Class
 {
@@ -1846,7 +2008,8 @@ class Class
         [WpfFact]
         public async Task TryStatement1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Class
 {
@@ -1856,7 +2019,8 @@ class Class
     {
         }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Class
 {
@@ -1872,7 +2036,8 @@ class Class
         [WpfFact]
         public async Task TryStatement2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Class
 {
@@ -1885,7 +2050,8 @@ catch    (  Exception       ex)
                 {
     }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Class
 {
@@ -1904,7 +2070,8 @@ class Class
         [WpfFact]
         public async Task TryStatement3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Class
 {
@@ -1920,7 +2087,8 @@ catch    (  Exception       ex)
                       {
    }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Class
 {
@@ -1942,7 +2110,8 @@ class Class
         [WpfFact]
         public async Task TryStatement4()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Class
 {
@@ -1955,7 +2124,8 @@ class Class
                       {
    }$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Class
 {
@@ -1974,7 +2144,8 @@ class Class
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/6645")]
         public async Task TryStatement5()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Class
 {
@@ -1985,7 +2156,8 @@ class Class
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Class
 {
@@ -2017,7 +2189,12 @@ class Class
             var code = @"class C { void M() { C.M(""Test {0}$$";
 
             var expected = string.Empty;
-            await AutoFormatOnMarkerAsync(code, expected, SyntaxKind.StringLiteralToken, SyntaxKind.None);
+            await AutoFormatOnMarkerAsync(
+                code,
+                expected,
+                SyntaxKind.StringLiteralToken,
+                SyntaxKind.None
+            );
         }
 
         [Fact]
@@ -2026,7 +2203,12 @@ class Class
             var code = @"class C { void M() { C.M('}$$";
 
             var expected = string.Empty;
-            await AutoFormatOnMarkerAsync(code, expected, SyntaxKind.CharacterLiteralToken, SyntaxKind.None);
+            await AutoFormatOnMarkerAsync(
+                code,
+                expected,
+                SyntaxKind.CharacterLiteralToken,
+                SyntaxKind.None
+            );
         }
 
         [Fact]
@@ -2036,7 +2218,12 @@ class Class
             var code = @"';$$";
 
             var expected = string.Empty;
-            await AutoFormatOnMarkerAsync(code, expected, SyntaxKind.CharacterLiteralToken, SyntaxKind.None);
+            await AutoFormatOnMarkerAsync(
+                code,
+                expected,
+                SyntaxKind.CharacterLiteralToken,
+                SyntaxKind.None
+            );
         }
 
         [Fact]
@@ -2045,7 +2232,12 @@ class Class
             var code = @"class C { void M() { // { }$$";
 
             var expected = string.Empty;
-            await AutoFormatOnMarkerAsync(code, expected, SyntaxKind.OpenBraceToken, SyntaxKind.OpenBraceToken);
+            await AutoFormatOnMarkerAsync(
+                code,
+                expected,
+                SyntaxKind.OpenBraceToken,
+                SyntaxKind.OpenBraceToken
+            );
         }
 
         [WpfFact]
@@ -2059,14 +2251,16 @@ class Class
         [WpfFact]
         public async Task Label1()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
                 L           :               int             i               =               20;$$
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void Method()
     {
@@ -2079,7 +2273,8 @@ class Class
         [WpfFact]
         public async Task Label2()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -2087,7 +2282,8 @@ class Class
 int             i               =               20;$$
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void Method()
     {
@@ -2101,7 +2297,8 @@ int             i               =               20;$$
         [WpfFact]
         public async Task Label3()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -2110,7 +2307,8 @@ int             i               =               20;$$
 int             i               =               20;$$
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void Method()
     {
@@ -2125,7 +2323,8 @@ int             i               =               20;$$
         [WpfFact]
         public async Task Label4()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -2135,7 +2334,8 @@ int             i               =               20;$$
 int         nextLine            =           30          ;$$
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void Method()
     {
@@ -2151,7 +2351,8 @@ int         nextLine            =           30          ;$$
         [WpfFact]
         public async Task Label6()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -2160,7 +2361,8 @@ int         nextLine            =           30          ;$$
 int         nextLine            =           30          ;$$
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void Method()
     {
@@ -2176,23 +2378,22 @@ int         nextLine            =           30          ;$$
         [WpfFact]
         public async Task DisappearedTokens()
         {
-            var code = @"class Class1
+            var code =
+                @"class Class1
 {
     int goo()
         return 0;
         }$$
 }";
 
-            var expected = @"class Class1
+            var expected =
+                @"class Class1
 {
     int goo()
         return 0;
         }
 }";
-            await AutoFormatOnCloseBraceAsync(
-                code,
-                expected,
-                SyntaxKind.ClassKeyword);
+            await AutoFormatOnCloseBraceAsync(code, expected, SyntaxKind.ClassKeyword);
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537779")]
@@ -2218,10 +2419,7 @@ int         nextLine            =           30          ;$$
                 }
                 """;
 
-            await AutoFormatOnSemicolonAsync(
-                code,
-                expected,
-                SyntaxKind.OpenBraceToken);
+            await AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.OpenBraceToken);
         }
 
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537793")]
@@ -2232,17 +2430,15 @@ int         nextLine            =           30          ;$$
 
             var expected = @"delegate void MyDelegate(int a, int b);";
 
-            await AutoFormatOnSemicolonAsync(
-                code,
-                expected,
-                SyntaxKind.DelegateKeyword);
+            await AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.DelegateKeyword);
         }
 
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537827")]
         [WpfFact]
         public async Task DoubleInitializer()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -2250,7 +2446,8 @@ int         nextLine            =           30          ;$$
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void Method()
     {
@@ -2258,36 +2455,33 @@ int         nextLine            =           30          ;$$
     }
 }";
 
-            await AutoFormatOnCloseBraceAsync(
-                code,
-                expected,
-                SyntaxKind.OpenBraceToken);
+            await AutoFormatOnCloseBraceAsync(code, expected, SyntaxKind.OpenBraceToken);
         }
 
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537825")]
         [WpfFact]
         public async Task MissingToken1()
         {
-            var code = @"public class Class1
+            var code =
+                @"public class Class1
 {
     int a = 1}$$;
 }";
 
-            var expected = @"public class Class1
+            var expected =
+                @"public class Class1
 {
     int a = 1};
 }";
 
-            await AutoFormatOnCloseBraceAsync(
-                code,
-                expected,
-                SyntaxKind.PublicKeyword);
+            await AutoFormatOnCloseBraceAsync(code, expected, SyntaxKind.PublicKeyword);
         }
 
         [WpfFact]
         public async Task ArrayInitializer1()
         {
-            var code = @"public class Class1
+            var code =
+                @"public class Class1
 {
     var a = new [] 
     {
@@ -2295,7 +2489,8 @@ int         nextLine            =           30          ;$$
         }$$
 }";
 
-            var expected = @"public class Class1
+            var expected =
+                @"public class Class1
 {
     var a = new[]
     {
@@ -2303,16 +2498,14 @@ int         nextLine            =           30          ;$$
         }
 }";
 
-            await AutoFormatOnCloseBraceAsync(
-                code,
-                expected,
-                SyntaxKind.NewKeyword);
+            await AutoFormatOnCloseBraceAsync(code, expected, SyntaxKind.NewKeyword);
         }
 
         [WpfFact]
         public async Task ArrayInitializer2()
         {
-            var code = @"public class Class1
+            var code =
+                @"public class Class1
 {
     var a = new [] 
     {
@@ -2320,7 +2513,8 @@ int         nextLine            =           30          ;$$
         }   ;$$
 }";
 
-            var expected = @"public class Class1
+            var expected =
+                @"public class Class1
 {
     var a = new[]
     {
@@ -2328,16 +2522,14 @@ int         nextLine            =           30          ;$$
         };
 }";
 
-            await AutoFormatOnSemicolonAsync(
-                code,
-                expected,
-                SyntaxKind.OpenBraceToken);
+            await AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.OpenBraceToken);
         }
 
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537825")]
         public async Task MalformedCode()
         {
-            var code = @"namespace ClassLibrary1
+            var code =
+                @"namespace ClassLibrary1
 {
     public class Class1
     {
@@ -2345,7 +2537,8 @@ int         nextLine            =           30          ;$$
     }
 }";
 
-            var expected = @"namespace ClassLibrary1
+            var expected =
+                @"namespace ClassLibrary1
 {
     public class Class1
     {
@@ -2353,16 +2546,14 @@ int         nextLine            =           30          ;$$
     }
 }";
 
-            await AutoFormatOnCloseBraceAsync(
-                code,
-                expected,
-                SyntaxKind.OpenBraceToken);
+            await AutoFormatOnCloseBraceAsync(code, expected, SyntaxKind.OpenBraceToken);
         }
 
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537804")]
         public async Task Colon_SwitchLabel()
         {
-            var code = @"namespace ClassLibrary1
+            var code =
+                @"namespace ClassLibrary1
 {
     public class Class1
     {
@@ -2376,7 +2567,8 @@ int         nextLine            =           30          ;$$
     }
 }";
 
-            var expected = @"namespace ClassLibrary1
+            var expected =
+                @"namespace ClassLibrary1
 {
     public class Class1
     {
@@ -2390,16 +2582,14 @@ int         nextLine            =           30          ;$$
     }
 }";
 
-            await AutoFormatOnColonAsync(
-                code,
-                expected,
-                SyntaxKind.OpenBraceToken);
+            await AutoFormatOnColonAsync(code, expected, SyntaxKind.OpenBraceToken);
         }
 
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/584599")]
         public async Task Colon_SwitchLabel_Comment()
         {
-            var code = @"namespace ClassLibrary1
+            var code =
+                @"namespace ClassLibrary1
 {
     public class Class1
     {
@@ -2414,7 +2604,8 @@ int         nextLine            =           30          ;$$
     }
 }";
 
-            var expected = @"namespace ClassLibrary1
+            var expected =
+                @"namespace ClassLibrary1
 {
     public class Class1
     {
@@ -2429,16 +2620,14 @@ int         nextLine            =           30          ;$$
     }
 }";
 
-            await AutoFormatOnColonAsync(
-                code,
-                expected,
-                SyntaxKind.OpenBraceToken);
+            await AutoFormatOnColonAsync(code, expected, SyntaxKind.OpenBraceToken);
         }
 
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/584599")]
         public async Task Colon_SwitchLabel_Comment2()
         {
-            var code = @"namespace ClassLibrary1
+            var code =
+                @"namespace ClassLibrary1
 {
     public class Class1
     {
@@ -2454,7 +2643,8 @@ int         nextLine            =           30          ;$$
     }
 }";
 
-            var expected = @"namespace ClassLibrary1
+            var expected =
+                @"namespace ClassLibrary1
 {
     public class Class1
     {
@@ -2470,16 +2660,14 @@ int         nextLine            =           30          ;$$
     }
 }";
 
-            await AutoFormatOnColonAsync(
-                code,
-                expected,
-                SyntaxKind.ColonToken);
+            await AutoFormatOnColonAsync(code, expected, SyntaxKind.ColonToken);
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537804")]
         public async Task Colon_Label()
         {
-            var code = @"namespace ClassLibrary1
+            var code =
+                @"namespace ClassLibrary1
 {
     public class Class1
     {
@@ -2490,7 +2678,8 @@ int         nextLine            =           30          ;$$
     }
 }";
 
-            var expected = @"namespace ClassLibrary1
+            var expected =
+                @"namespace ClassLibrary1
 {
     public class Class1
     {
@@ -2501,16 +2690,14 @@ int         nextLine            =           30          ;$$
     }
 }";
 
-            await AutoFormatOnColonAsync(
-                code,
-                expected,
-                SyntaxKind.None);
+            await AutoFormatOnColonAsync(code, expected, SyntaxKind.None);
         }
 
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538793")]
         public async Task Colon_Label2()
         {
-            var code = @"namespace ClassLibrary1
+            var code =
+                @"namespace ClassLibrary1
 {
     public class Class1
     {
@@ -2521,7 +2708,8 @@ int         nextLine            =           30          ;$$
     }
 }";
 
-            var expected = @"namespace ClassLibrary1
+            var expected =
+                @"namespace ClassLibrary1
 {
     public class Class1
     {
@@ -2532,16 +2720,14 @@ int         nextLine            =           30          ;$$
     }
 }";
 
-            await AutoFormatOnSemicolonAsync(
-                code,
-                expected,
-                SyntaxKind.OpenBraceToken);
+            await AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.OpenBraceToken);
         }
 
         [WpfFact, WorkItem(3186, "DevDiv_Projects/Roslyn")]
         public async Task SemicolonInElseIfStatement()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2560,7 +2746,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2579,16 +2766,14 @@ class Program
     }
 }";
 
-            await AutoFormatOnSemicolonAsync(
-                code,
-                expected,
-                SyntaxKind.SemicolonToken);
+            await AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.SemicolonToken);
         }
 
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538391")]
         public async Task SemicolonInElseIfStatement2()
         {
-            var code = @"public class Class1
+            var code =
+                @"public class Class1
 {
     void Method()
     {
@@ -2600,7 +2785,8 @@ class Program
     }
 }";
 
-            var expected = @"public class Class1
+            var expected =
+                @"public class Class1
 {
     void Method()
     {
@@ -2612,16 +2798,14 @@ class Program
     }
 }";
 
-            await AutoFormatOnSemicolonAsync(
-                code,
-                expected,
-                SyntaxKind.SemicolonToken);
+            await AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.SemicolonToken);
         }
 
         [WpfFact, WorkItem(8385, "DevDiv_Projects/Roslyn")]
         public async Task NullCoalescingOperator()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void M()
     {
@@ -2629,7 +2813,8 @@ class Program
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void M()
     {
@@ -2637,16 +2822,14 @@ class Program
     }
 }";
 
-            await AutoFormatOnSemicolonAsync(
-                code,
-                expected,
-                SyntaxKind.OpenBraceToken);
+            await AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.OpenBraceToken);
         }
 
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541517")]
         public async Task SwitchDefault()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     static void Main()
@@ -2663,7 +2846,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Program
 {
     static void Main()
@@ -2680,16 +2864,14 @@ class Program
     }
 }";
 
-            await AutoFormatOnColonAsync(
-                code,
-                expected,
-                SyntaxKind.SemicolonToken);
+            await AutoFormatOnColonAsync(code, expected, SyntaxKind.SemicolonToken);
         }
 
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542538")]
         public async Task MissingTokens1()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2697,7 +2879,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2709,7 +2892,8 @@ class Program
                 code,
                 expected,
                 SyntaxKind.ColonColonToken,
-                SyntaxKind.OpenBraceToken);
+                SyntaxKind.OpenBraceToken
+            );
         }
 
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542538")]
@@ -2719,10 +2903,7 @@ class Program
 
             var expected = @"class C { void M() { M(() => { } } }";
 
-            await AutoFormatOnCloseBraceAsync(
-                code,
-                expected,
-                SyntaxKind.EqualsGreaterThanToken);
+            await AutoFormatOnCloseBraceAsync(code, expected, SyntaxKind.EqualsGreaterThanToken);
         }
 
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542953")]
@@ -2732,16 +2913,14 @@ class Program
 
             var expected = @"using Alias = System;";
 
-            await AutoFormatOnSemicolonAsync(
-                code,
-                expected,
-                SyntaxKind.UsingKeyword);
+            await AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.UsingKeyword);
         }
 
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542953")]
         public async Task NoLineChangeWithSyntaxError()
         {
-            var code = @"struct Goo { public int member; }
+            var code =
+                @"struct Goo { public int member; }
 class Program{
     void Main()
     {
@@ -2749,7 +2928,8 @@ class Program{
     }
 }";
 
-            var expected = @"struct Goo { public int member; }
+            var expected =
+                @"struct Goo { public int member; }
 class Program{
     void Main()
     {
@@ -2757,10 +2937,7 @@ class Program{
     }
 }";
 
-            await AutoFormatOnSemicolonAsync(
-                code,
-                expected,
-                SyntaxKind.OpenBraceToken);
+            await AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.OpenBraceToken);
         }
 
         [WpfTheory]
@@ -2780,12 +2957,14 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530830")]
         public void AutoPropertyAccessor(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     int Prop {          get             ;$$
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     int Prop {          get;
 }";
@@ -2798,12 +2977,14 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530830")]
         public void AutoPropertyAccessor2(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     int Prop {          get;                set             ;$$
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     int Prop {          get;                set;
 }";
@@ -2816,12 +2997,14 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530830")]
         public void AutoPropertyAccessor3(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     int Prop {          get;                set             ;           }$$
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     int Prop { get; set; }
 }";
@@ -2834,12 +3017,14 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/784674")]
         public void AutoPropertyAccessor4(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     int Prop {          get;$$             }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     int Prop { get; }
 }";
@@ -2852,12 +3037,14 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/924469")]
         public void AutoPropertyAccessor5(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     int Prop {          get;                set             ;$$           }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     int Prop { get; set; }
 }";
@@ -2869,12 +3056,14 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/924469")]
         public void AutoPropertyAccessor6(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     int Prop { get;set;$$}
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     int Prop { get; set; }
 }";
@@ -2887,12 +3076,14 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/924469")]
         public void AutoPropertyAccessor7(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     int Prop     { get;set;$$}    
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     int Prop     { get; set; }    
 }";
@@ -2905,7 +3096,8 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/912965")]
         public void NestedUsingStatement(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     public void M()
     {
@@ -2914,7 +3106,8 @@ class Program{
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public void M()
     {
@@ -2931,7 +3124,8 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/912965")]
         public void NestedNotUsingStatement(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     public void M()
     {
@@ -2940,7 +3134,8 @@ class Program{
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public void M()
     {
@@ -2956,7 +3151,8 @@ class Program{
         [CombinatorialData]
         public void UsingStatementWithNestedFixedStatement(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     public void M()
     {
@@ -2967,7 +3163,8 @@ class Program{
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public void M()
     {
@@ -2985,7 +3182,8 @@ class Program{
         [CombinatorialData]
         public void UsingStatementWithNestedCheckedStatement(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     public void M()
     {
@@ -2996,7 +3194,8 @@ class Program{
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public void M()
     {
@@ -3014,7 +3213,8 @@ class Program{
         [CombinatorialData]
         public void UsingStatementWithNestedUncheckedStatement(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     public void M()
     {
@@ -3025,7 +3225,8 @@ class Program{
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public void M()
     {
@@ -3043,7 +3244,8 @@ class Program{
         [CombinatorialData]
         public void FixedStatementWithNestedUsingStatement(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     public void M()
     {
@@ -3052,7 +3254,8 @@ class Program{
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public void M()
     {
@@ -3068,7 +3271,8 @@ class Program{
         [CombinatorialData]
         public void FixedStatementWithNestedFixedStatement(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     public void M()
     {
@@ -3079,7 +3283,8 @@ class Program{
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public void M()
     {
@@ -3097,7 +3302,8 @@ class Program{
         [CombinatorialData]
         public void FixedStatementWithNestedNotFixedStatement(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     public void M()
     {
@@ -3108,7 +3314,8 @@ class Program{
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public void M()
     {
@@ -3126,7 +3333,8 @@ class Program{
         [CombinatorialData]
         public void NotFixedStatementWithNestedFixedStatement(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     public void M()
     {
@@ -3137,7 +3345,8 @@ class Program{
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public void M()
     {
@@ -3156,14 +3365,16 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/954386")]
         public void FormattingRangeForFirstStatementOfBlock(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     public void M()
     {int s;$$
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public void M()
     {
@@ -3179,14 +3390,16 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/954386")]
         public void FormattingRangeForFirstMemberofType(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {int s;$$
     public void M()
     {
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     int s;
     public void M()
@@ -3202,11 +3415,13 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/954386")]
         public void FormattingRangeForFirstMethodMemberofType(bool useTabs)
         {
-            var code = @"interface C
+            var code =
+                @"interface C
 {void s();$$
 }";
 
-            var expected = @"interface C
+            var expected =
+                @"interface C
 {
     void s();
 }";
@@ -3219,11 +3434,13 @@ class Program{
         [WorkItem("https://github.com/dotnet/roslyn/issues/17257")]
         public void FormattingRangeForConstructor(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {public C()=>f=1;$$
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public C() => f = 1;
 }";
@@ -3236,11 +3453,13 @@ class Program{
         [WorkItem("https://github.com/dotnet/roslyn/issues/17257")]
         public void FormattingRangeForDestructor(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {~C()=>f=1;$$
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     ~C() => f = 1;
 }";
@@ -3253,12 +3472,14 @@ class Program{
         [WorkItem("https://github.com/dotnet/roslyn/issues/17257")]
         public void FormattingRangeForOperator(bool useTabs)
         {
-            var code = @"class C
+            var code =
+                @"class C
 {public static C operator +(C left, C right)=>field=1;$$
     static int field;
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public static C operator +(C left, C right) => field = 1;
     static int field;
@@ -3272,11 +3493,13 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/954386")]
         public void FormattingRangeForFirstMemberOfNamespace(bool useTabs)
         {
-            var code = @"namespace C
+            var code =
+                @"namespace C
 {delegate void s();$$
 }";
 
-            var expected = @"namespace C
+            var expected =
+                @"namespace C
 {
     delegate void s();
 }";
@@ -3289,7 +3512,8 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/981821")]
         public void FormatDirectiveTriviaAlwaysToColumnZero(bool useTabs)
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3299,7 +3523,8 @@ class Program{
 }
 ";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3317,7 +3542,8 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/981821")]
         public void FormatDirectiveTriviaAlwaysToColumnZeroWithCode(bool useTabs)
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3328,7 +3554,8 @@ class Program{
 }
 ";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3347,7 +3574,8 @@ class Program{
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/981821")]
         public void FormatDirectiveTriviaAlwaysToColumnZeroWithBrokenElseDirective(bool useTabs)
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3357,7 +3585,8 @@ class Program{
 }
 ";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3387,30 +3616,89 @@ class Program{
             editorOptions.SetOptionValue(DefaultOptions.ConvertTabsToSpacesOptionId, !useTabs);
 
             var commandHandler = workspace.GetService<FormatCommandHandler>();
-            var typedChar = textBuffer.CurrentSnapshot.GetText(subjectDocument.CursorPosition.Value - 1, 1);
-            commandHandler.ExecuteCommand(new TypeCharCommandArgs(subjectDocument.GetTextView(), textBuffer, typedChar[0]), () => { }, TestCommandExecutionContext.Create());
+            var typedChar = textBuffer.CurrentSnapshot.GetText(
+                subjectDocument.CursorPosition.Value - 1,
+                1
+            );
+            commandHandler.ExecuteCommand(
+                new TypeCharCommandArgs(subjectDocument.GetTextView(), textBuffer, typedChar[0]),
+                () => { },
+                TestCommandExecutionContext.Create()
+            );
 
             var newSnapshot = textBuffer.CurrentSnapshot;
 
             Assert.Equal(expected, newSnapshot.GetText());
         }
 
-        private static Task AutoFormatOnColonAsync(string codeWithMarker, string expected, SyntaxKind startTokenKind)
-            => AutoFormatOnMarkerAsync(codeWithMarker, expected, SyntaxKind.ColonToken, startTokenKind);
+        private static Task AutoFormatOnColonAsync(
+            string codeWithMarker,
+            string expected,
+            SyntaxKind startTokenKind
+        ) =>
+            AutoFormatOnMarkerAsync(
+                codeWithMarker,
+                expected,
+                SyntaxKind.ColonToken,
+                startTokenKind
+            );
 
-        private static Task AutoFormatOnSemicolonAsync(string codeWithMarker, string expected, SyntaxKind startTokenKind)
-            => AutoFormatOnMarkerAsync(codeWithMarker, expected, SyntaxKind.SemicolonToken, startTokenKind);
+        private static Task AutoFormatOnSemicolonAsync(
+            string codeWithMarker,
+            string expected,
+            SyntaxKind startTokenKind
+        ) =>
+            AutoFormatOnMarkerAsync(
+                codeWithMarker,
+                expected,
+                SyntaxKind.SemicolonToken,
+                startTokenKind
+            );
 
-        private static Task AutoFormatOnCloseBraceAsync(string codeWithMarker, string expected, SyntaxKind startTokenKind)
-            => AutoFormatOnMarkerAsync(codeWithMarker, expected, SyntaxKind.CloseBraceToken, startTokenKind);
+        private static Task AutoFormatOnCloseBraceAsync(
+            string codeWithMarker,
+            string expected,
+            SyntaxKind startTokenKind
+        ) =>
+            AutoFormatOnMarkerAsync(
+                codeWithMarker,
+                expected,
+                SyntaxKind.CloseBraceToken,
+                startTokenKind
+            );
 
-        private static async Task AutoFormatOnMarkerAsync(string initialMarkup, string expected, SyntaxKind tokenKind, SyntaxKind startTokenKind)
+        private static async Task AutoFormatOnMarkerAsync(
+            string initialMarkup,
+            string expected,
+            SyntaxKind tokenKind,
+            SyntaxKind startTokenKind
+        )
         {
-            await AutoFormatOnMarkerAsync(initialMarkup, expected, useTabs: false, tokenKind, startTokenKind).ConfigureAwait(false);
-            await AutoFormatOnMarkerAsync(initialMarkup.Replace("    ", "\t"), expected.Replace("    ", "\t"), useTabs: true, tokenKind, startTokenKind).ConfigureAwait(false);
+            await AutoFormatOnMarkerAsync(
+                    initialMarkup,
+                    expected,
+                    useTabs: false,
+                    tokenKind,
+                    startTokenKind
+                )
+                .ConfigureAwait(false);
+            await AutoFormatOnMarkerAsync(
+                    initialMarkup.Replace("    ", "\t"),
+                    expected.Replace("    ", "\t"),
+                    useTabs: true,
+                    tokenKind,
+                    startTokenKind
+                )
+                .ConfigureAwait(false);
         }
 
-        private static async Task AutoFormatOnMarkerAsync(string initialMarkup, string expected, bool useTabs, SyntaxKind tokenKind, SyntaxKind startTokenKind)
+        private static async Task AutoFormatOnMarkerAsync(
+            string initialMarkup,
+            string expected,
+            bool useTabs,
+            SyntaxKind tokenKind,
+            SyntaxKind startTokenKind
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp(initialMarkup);
 
@@ -3424,7 +3712,10 @@ class Program{
 
             var root = (CompilationUnitSyntax)await document.GetSyntaxRootAsync();
             var endToken = root.FindToken(position);
-            if (position == endToken.SpanStart && !endToken.GetPreviousToken().IsKind(SyntaxKind.None))
+            if (
+                position == endToken.SpanStart
+                && !endToken.GetPreviousToken().IsKind(SyntaxKind.None)
+            )
             {
                 endToken = endToken.GetPreviousToken();
             }
@@ -3432,9 +3723,15 @@ class Program{
             Assert.Equal(tokenKind, endToken.Kind());
 
             var options = new IndentationOptions(
-                new CSharpSyntaxFormattingOptions() { LineFormatting = new() { UseTabs = useTabs } });
+                new CSharpSyntaxFormattingOptions() { LineFormatting = new() { UseTabs = useTabs } }
+            );
 
-            var formatter = new CSharpSmartTokenFormatter(options, rules, (CompilationUnitSyntax)documentSyntax.Root, documentSyntax.Text);
+            var formatter = new CSharpSmartTokenFormatter(
+                options,
+                rules,
+                (CompilationUnitSyntax)documentSyntax.Root,
+                documentSyntax.Text
+            );
 
             var tokenRange = FormattingRangeHelper.FindAppropriateRange(endToken);
             if (tokenRange == null)
@@ -3449,7 +3746,11 @@ class Program{
                 return;
             }
 
-            var changes = formatter.FormatRange(tokenRange.Value.Item1, tokenRange.Value.Item2, CancellationToken.None);
+            var changes = formatter.FormatRange(
+                tokenRange.Value.Item1,
+                tokenRange.Value.Item2,
+                CancellationToken.None
+            );
             var actual = GetFormattedText(buffer, changes);
             Assert.Equal(expected, actual);
         }

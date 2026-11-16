@@ -4,7 +4,5 @@
 namespace System.Reflection
 {
     // Base class for runtime implemented Assembly
-    public abstract class RuntimeAssembly : Assembly
-    {
-    }
+    public abstract class RuntimeAssembly : Assembly { }
 }

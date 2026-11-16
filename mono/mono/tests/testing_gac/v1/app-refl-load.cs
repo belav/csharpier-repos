@@ -1,45 +1,55 @@
 using System;
 using System.Reflection;
 
-public class App {
-	const string assemblyName = "gactestlib";
-	const string assemblyVersion = "1.0.0.0";
-	const string assemblyPublicKeyToken = "537eab56aa911cb7"; /* see testkey.snk */
-	public static int Main (string[] args)
-	{
-		TestAssemblyLoad ();
+public class App
+{
+    const string assemblyName = "gactestlib";
+    const string assemblyVersion = "1.0.0.0";
+    const string assemblyPublicKeyToken = "537eab56aa911cb7"; /* see testkey.snk */
 
-		TestReflectionOnlyLoad ();
+    public static int Main(string[] args)
+    {
+        TestAssemblyLoad();
 
-		return 0;
-	}
+        TestReflectionOnlyLoad();
 
-	public static void TestAssemblyLoad ()
-	{
-		var expectedVersion = new Version (assemblyVersion);
+        return 0;
+    }
 
-		var s = String.Format ("{0}, Version={1}, Culture=\"\", PublicKeyToken={2}",
-				       assemblyName, assemblyVersion, assemblyPublicKeyToken);
-		var n = new AssemblyName (s);
-		var a = AppDomain.CurrentDomain.Load (n);
+    public static void TestAssemblyLoad()
+    {
+        var expectedVersion = new Version(assemblyVersion);
 
-		if (a == null)
-			Environment.Exit (1);
-		if (a.GetName ().Version != expectedVersion)
-			Environment.Exit (2);
-	}
+        var s = String.Format(
+            "{0}, Version={1}, Culture=\"\", PublicKeyToken={2}",
+            assemblyName,
+            assemblyVersion,
+            assemblyPublicKeyToken
+        );
+        var n = new AssemblyName(s);
+        var a = AppDomain.CurrentDomain.Load(n);
 
-	public static void TestReflectionOnlyLoad ()
-	{
-		var expectedVersion = new Version (assemblyVersion);
+        if (a == null)
+            Environment.Exit(1);
+        if (a.GetName().Version != expectedVersion)
+            Environment.Exit(2);
+    }
 
-		var s = String.Format ("{0}, Version={1}, Culture=\"\", PublicKeyToken={2}",
-				       assemblyName, assemblyVersion, assemblyPublicKeyToken);
-		var a = Assembly.ReflectionOnlyLoad (s);
+    public static void TestReflectionOnlyLoad()
+    {
+        var expectedVersion = new Version(assemblyVersion);
 
-		if (a == null)
-			Environment.Exit (3);
-		if (a.GetName ().Version != expectedVersion)
-			Environment.Exit (4);
-	}
+        var s = String.Format(
+            "{0}, Version={1}, Culture=\"\", PublicKeyToken={2}",
+            assemblyName,
+            assemblyVersion,
+            assemblyPublicKeyToken
+        );
+        var a = Assembly.ReflectionOnlyLoad(s);
+
+        if (a == null)
+            Environment.Exit(3);
+        if (a.GetName().Version != expectedVersion)
+            Environment.Exit(4);
+    }
 }

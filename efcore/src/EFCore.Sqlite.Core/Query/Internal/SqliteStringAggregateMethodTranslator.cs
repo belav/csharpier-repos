@@ -13,11 +13,15 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqliteStringAggregateMethodTranslator : IAggregateMethodCallTranslator
 {
-    private static readonly MethodInfo StringConcatMethod
-        = typeof(string).GetRuntimeMethod(nameof(string.Concat), new[] { typeof(IEnumerable<string>) })!;
+    private static readonly MethodInfo StringConcatMethod = typeof(string).GetRuntimeMethod(
+        nameof(string.Concat),
+        new[] { typeof(IEnumerable<string>) }
+    )!;
 
-    private static readonly MethodInfo StringJoinMethod
-        = typeof(string).GetRuntimeMethod(nameof(string.Join), new[] { typeof(string), typeof(IEnumerable<string>) })!;
+    private static readonly MethodInfo StringJoinMethod = typeof(string).GetRuntimeMethod(
+        nameof(string.Join),
+        new[] { typeof(string), typeof(IEnumerable<string>) }
+    )!;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -42,12 +46,15 @@ public class SqliteStringAggregateMethodTranslator : IAggregateMethodCallTransla
         MethodInfo method,
         EnumerableExpression source,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         // Docs: https://sqlite.org/lang_aggfunc.html#group_concat
 
-        if (source.Selector is not SqlExpression sqlExpression
-            || (method != StringJoinMethod && method != StringConcatMethod))
+        if (
+            source.Selector is not SqlExpression sqlExpression
+            || (method != StringJoinMethod && method != StringConcatMethod)
+        )
         {
             return null;
         }
@@ -63,7 +70,8 @@ public class SqliteStringAggregateMethodTranslator : IAggregateMethodCallTransla
         {
             sqlExpression = _sqlExpressionFactory.Coalesce(
                 sqlExpression,
-                _sqlExpressionFactory.Constant(string.Empty, typeof(string)));
+                _sqlExpressionFactory.Constant(string.Empty, typeof(string))
+            );
         }
 
         if (source.Predicate != null)
@@ -75,7 +83,8 @@ public class SqliteStringAggregateMethodTranslator : IAggregateMethodCallTransla
 
             sqlExpression = _sqlExpressionFactory.Case(
                 new List<CaseWhenClause> { new(source.Predicate, sqlExpression) },
-                elseResult: null);
+                elseResult: null
+            );
         }
 
         if (source.IsDistinct)
@@ -91,13 +100,18 @@ public class SqliteStringAggregateMethodTranslator : IAggregateMethodCallTransla
                 {
                     sqlExpression,
                     _sqlExpressionFactory.ApplyTypeMapping(
-                        method == StringJoinMethod ? arguments[0] : _sqlExpressionFactory.Constant(string.Empty, typeof(string)),
-                        sqlExpression.TypeMapping)
+                        method == StringJoinMethod
+                            ? arguments[0]
+                            : _sqlExpressionFactory.Constant(string.Empty, typeof(string)),
+                        sqlExpression.TypeMapping
+                    ),
                 },
                 nullable: true,
                 argumentsPropagateNullability: new[] { false, true },
-                typeof(string)),
+                typeof(string)
+            ),
             _sqlExpressionFactory.Constant(string.Empty, typeof(string)),
-            sqlExpression.TypeMapping);
+            sqlExpression.TypeMapping
+        );
     }
 }

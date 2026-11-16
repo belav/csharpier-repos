@@ -57,7 +57,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         GenericAddMethodToExistingType = 1 << 7,
 
         /// <summary>
-        /// Updating an existing static or instance method, property or event (without backing fields) that is generic and/or contained in a generic type. 
+        /// Updating an existing static or instance method, property or event (without backing fields) that is generic and/or contained in a generic type.
         /// </summary>
         GenericUpdateMethod = 1 << 8,
 
@@ -77,28 +77,43 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             {
                 caps |= capability switch
                 {
-                    nameof(EditAndContinueCapabilities.Baseline) => EditAndContinueCapabilities.Baseline,
-                    nameof(EditAndContinueCapabilities.AddMethodToExistingType) => EditAndContinueCapabilities.AddMethodToExistingType,
-                    nameof(EditAndContinueCapabilities.AddStaticFieldToExistingType) => EditAndContinueCapabilities.AddStaticFieldToExistingType,
-                    nameof(EditAndContinueCapabilities.AddInstanceFieldToExistingType) => EditAndContinueCapabilities.AddInstanceFieldToExistingType,
-                    nameof(EditAndContinueCapabilities.NewTypeDefinition) => EditAndContinueCapabilities.NewTypeDefinition,
-                    nameof(EditAndContinueCapabilities.ChangeCustomAttributes) => EditAndContinueCapabilities.ChangeCustomAttributes,
-                    nameof(EditAndContinueCapabilities.UpdateParameters) => EditAndContinueCapabilities.UpdateParameters,
-                    nameof(EditAndContinueCapabilities.GenericAddMethodToExistingType) => EditAndContinueCapabilities.GenericAddMethodToExistingType,
-                    nameof(EditAndContinueCapabilities.GenericUpdateMethod) => EditAndContinueCapabilities.GenericUpdateMethod,
-                    nameof(EditAndContinueCapabilities.GenericAddFieldToExistingType) => EditAndContinueCapabilities.GenericAddFieldToExistingType,
+                    nameof(EditAndContinueCapabilities.Baseline) =>
+                        EditAndContinueCapabilities.Baseline,
+                    nameof(EditAndContinueCapabilities.AddMethodToExistingType) =>
+                        EditAndContinueCapabilities.AddMethodToExistingType,
+                    nameof(EditAndContinueCapabilities.AddStaticFieldToExistingType) =>
+                        EditAndContinueCapabilities.AddStaticFieldToExistingType,
+                    nameof(EditAndContinueCapabilities.AddInstanceFieldToExistingType) =>
+                        EditAndContinueCapabilities.AddInstanceFieldToExistingType,
+                    nameof(EditAndContinueCapabilities.NewTypeDefinition) =>
+                        EditAndContinueCapabilities.NewTypeDefinition,
+                    nameof(EditAndContinueCapabilities.ChangeCustomAttributes) =>
+                        EditAndContinueCapabilities.ChangeCustomAttributes,
+                    nameof(EditAndContinueCapabilities.UpdateParameters) =>
+                        EditAndContinueCapabilities.UpdateParameters,
+                    nameof(EditAndContinueCapabilities.GenericAddMethodToExistingType) =>
+                        EditAndContinueCapabilities.GenericAddMethodToExistingType,
+                    nameof(EditAndContinueCapabilities.GenericUpdateMethod) =>
+                        EditAndContinueCapabilities.GenericUpdateMethod,
+                    nameof(EditAndContinueCapabilities.GenericAddFieldToExistingType) =>
+                        EditAndContinueCapabilities.GenericAddFieldToExistingType,
 
                     // To make it eaiser for  runtimes to specify more broad capabilities
-                    "AddDefinitionToExistingType" => EditAndContinueCapabilities.AddMethodToExistingType | EditAndContinueCapabilities.AddStaticFieldToExistingType | EditAndContinueCapabilities.AddInstanceFieldToExistingType,
+                    "AddDefinitionToExistingType" =>
+                        EditAndContinueCapabilities.AddMethodToExistingType
+                            | EditAndContinueCapabilities.AddStaticFieldToExistingType
+                            | EditAndContinueCapabilities.AddInstanceFieldToExistingType,
 
-                    _ => EditAndContinueCapabilities.None
+                    _ => EditAndContinueCapabilities.None,
                 };
             }
 
             return caps;
         }
 
-        public static ImmutableArray<string> ToStringArray(this EditAndContinueCapabilities capabilities)
+        public static ImmutableArray<string> ToStringArray(
+            this EditAndContinueCapabilities capabilities
+        )
         {
             using var _ = ArrayBuilder<string>.GetInstance(out var builder);
 

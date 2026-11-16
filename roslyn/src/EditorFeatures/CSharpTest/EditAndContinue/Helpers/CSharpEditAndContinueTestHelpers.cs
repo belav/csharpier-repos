@@ -25,12 +25,16 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         public override string LanguageName => LanguageNames.CSharp;
         public override string ProjectFileExtension => ".csproj";
         public override TreeComparer<SyntaxNode> TopSyntaxComparer => SyntaxComparer.TopLevel;
-        public override string? TryGetResource(string keyword) => EditingTestBase.TryGetResource(keyword);
+
+        public override string? TryGetResource(string keyword) =>
+            EditingTestBase.TryGetResource(keyword);
 
         public override ImmutableArray<SyntaxNode> GetDeclarators(ISymbol method)
         {
             Assert.True(method is MethodSymbol, "Only methods should have a syntax map.");
-            return LocalVariableDeclaratorsCollector.GetDeclarators((SourceMemberMethodSymbol)method);
+            return LocalVariableDeclaratorsCollector.GetDeclarators(
+                (SourceMemberMethodSymbol)method
+            );
         }
     }
 }

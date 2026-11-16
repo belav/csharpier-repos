@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,33 +31,34 @@ using System.Xaml.Schema;
 
 namespace System.Xaml
 {
-	class NameScope : INameScope
-	{
-		Dictionary<string,object> table = new Dictionary<string,object> ();
-		// It is an external read-only namescope.
-		INameScope external;
+    class NameScope : INameScope
+    {
+        Dictionary<string, object> table = new Dictionary<string, object>();
 
-		public NameScope (INameScope external)
-		{
-			this.external = external;
-		}
+        // It is an external read-only namescope.
+        INameScope external;
 
-		public object FindName (string name)
-		{
-			object obj = external != null ? external.FindName (name) : null;
-			if (obj != null)
-				return obj;
-			return table.TryGetValue (name, out obj) ? obj : null;
-		}
+        public NameScope(INameScope external)
+        {
+            this.external = external;
+        }
 
-		public void RegisterName (string name, object scopedElement)
-		{
-			table.Add (name, scopedElement);
-		}
+        public object FindName(string name)
+        {
+            object obj = external != null ? external.FindName(name) : null;
+            if (obj != null)
+                return obj;
+            return table.TryGetValue(name, out obj) ? obj : null;
+        }
 
-		public void UnregisterName (string name)
-		{
-			table.Remove (name);
-		}
-	}
+        public void RegisterName(string name, object scopedElement)
+        {
+            table.Add(name, scopedElement);
+        }
+
+        public void UnregisterName(string name)
+        {
+            table.Remove(name);
+        }
+    }
 }

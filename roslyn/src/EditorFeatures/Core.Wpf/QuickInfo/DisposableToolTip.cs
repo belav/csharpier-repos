@@ -23,7 +23,6 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
             _workspaceOpt = workspaceOpt;
         }
 
-        public void Dispose()
-            => Interlocked.Exchange(ref _workspaceOpt, null)?.Dispose();
+        public void Dispose() => Interlocked.Exchange(ref _workspaceOpt, null)?.Dispose();
     }
 }

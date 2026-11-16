@@ -10,7 +10,7 @@ struct R
     int a;
 }
 
-public class X<K> 
+public class X<K>
 {
     public X(K k1)
     {
@@ -33,7 +33,7 @@ public class B
     {
         X<R> a = null;
         bool result = false;
-        try 
+        try
         {
             X<R>.Test(a);
         }

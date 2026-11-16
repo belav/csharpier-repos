@@ -131,16 +131,25 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                         break;
                 }
                 Assert.Equal(string.Format(format, (int)ch, expected), FormatValue(ch));
-                Assert.Equal(string.Format(formatUsingHex, (int)ch, expected), FormatValue(ch, useHexadecimal: true));
+                Assert.Equal(
+                    string.Format(formatUsingHex, (int)ch, expected),
+                    FormatValue(ch, useHexadecimal: true)
+                );
             }
 
             ch = (char)0xabcd;
             Assert.Equal(string.Format(format, (int)ch, ch), FormatValue(ch));
-            Assert.Equal(string.Format(formatUsingHex, (int)ch, ch), FormatValue(ch, useHexadecimal: true));
+            Assert.Equal(
+                string.Format(formatUsingHex, (int)ch, ch),
+                FormatValue(ch, useHexadecimal: true)
+            );
 
             ch = (char)0xfeef;
             Assert.Equal(string.Format(format, (int)ch, ch), FormatValue(ch));
-            Assert.Equal(string.Format(formatUsingHex, (int)ch, ch), FormatValue(ch, useHexadecimal: true));
+            Assert.Equal(
+                string.Format(formatUsingHex, (int)ch, ch),
+                FormatValue(ch, useHexadecimal: true)
+            );
 
             ch = (char)0xffef;
             Assert.Equal("65519 '\\uffef'", FormatValue(ch));
@@ -200,7 +209,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                         break;
                 }
                 Assert.Equal(string.Format(format, expected), FormatValue(ch.ToString()));
-                Assert.Equal(string.Format(format, expected), FormatValue(ch.ToString(), useHexadecimal: true));
+                Assert.Equal(
+                    string.Format(format, expected),
+                    FormatValue(ch.ToString(), useHexadecimal: true)
+                );
             }
 
             var s = ((char)0xabcd).ToString();
@@ -226,11 +238,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
 
             multiByte = "\udbff\udfff"; // unicode surrogates representing an unprintable Unicode codepoint
             Assert.Equal(string.Format(format, "\\U0010ffff"), FormatValue(multiByte));
-            Assert.Equal(string.Format(format, "\\U0010ffff"), FormatValue(multiByte, useHexadecimal: true));
+            Assert.Equal(
+                string.Format(format, "\\U0010ffff"),
+                FormatValue(multiByte, useHexadecimal: true)
+            );
 
             multiByte = "\udfc8\ud83c"; // unicode surrogates not properly paired (in the wrong order in this case)
             Assert.Equal(string.Format(format, "\\udfc8\\ud83c"), FormatValue(multiByte));
-            Assert.Equal(string.Format(format, "\\udfc8\\ud83c"), FormatValue(multiByte, useHexadecimal: true));
+            Assert.Equal(
+                string.Format(format, "\\udfc8\\ud83c"),
+                FormatValue(multiByte, useHexadecimal: true)
+            );
         }
 
         private static string FormatStringChar(char c)
@@ -244,7 +262,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void Void()
         {
             // Something happens but, in practice, we expect the debugger to recognize
-            // that the value is of type void and turn it into the error string 
+            // that the value is of type void and turn it into the error string
             // "Expression has been evaluated and has no value".
             Assert.Equal("{void}", FormatValue(null, typeof(void)));
         }
@@ -253,22 +271,43 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void InvalidValue_1()
         {
             const string errorMessage = "An error has occurred.";
-            var clrValue = CreateDkmClrValue(errorMessage, typeof(string), evalFlags: DkmEvaluationResultFlags.None, valueFlags: DkmClrValueFlags.Error);
-            Assert.Equal(errorMessage, ((DkmFailedEvaluationResult)FormatResult("invalidIdentifier", clrValue)).ErrorMessage);
+            var clrValue = CreateDkmClrValue(
+                errorMessage,
+                typeof(string),
+                evalFlags: DkmEvaluationResultFlags.None,
+                valueFlags: DkmClrValueFlags.Error
+            );
+            Assert.Equal(
+                errorMessage,
+                (
+                    (DkmFailedEvaluationResult)FormatResult("invalidIdentifier", clrValue)
+                ).ErrorMessage
+            );
         }
 
         [Fact]
         public void InvalidValue_2()
         {
             const string errorMessage = "An error has occurred.";
-            var clrValue = CreateDkmClrValue(errorMessage, typeof(int), evalFlags: DkmEvaluationResultFlags.None, valueFlags: DkmClrValueFlags.Error);
-            Assert.Equal(errorMessage, ((DkmFailedEvaluationResult)FormatResult("invalidIdentifier", clrValue)).ErrorMessage);
+            var clrValue = CreateDkmClrValue(
+                errorMessage,
+                typeof(int),
+                evalFlags: DkmEvaluationResultFlags.None,
+                valueFlags: DkmClrValueFlags.Error
+            );
+            Assert.Equal(
+                errorMessage,
+                (
+                    (DkmFailedEvaluationResult)FormatResult("invalidIdentifier", clrValue)
+                ).ErrorMessage
+            );
         }
 
         [Fact]
         public void NonFlagsEnum()
         {
-            var source = @"
+            var source =
+                @"
 enum E
 {
     A = 1,
@@ -288,7 +327,8 @@ enum E
         [Fact]
         public void NonFlagsEnum_Negative()
         {
-            var source = @"
+            var source =
+                @"
 enum E
 {
     A = -1,
@@ -308,7 +348,8 @@ enum E
         [Fact]
         public void NonFlagsEnum_Order()
         {
-            var source = @"
+            var source =
+                @"
 enum E1 
 {
     A = 1,
@@ -333,7 +374,8 @@ enum E2
         [Fact]
         public void FlagsEnum()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 [Flags]
@@ -357,7 +399,8 @@ enum E
         [Fact]
         public void FlagsEnum_Zero()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 [Flags]
@@ -382,7 +425,8 @@ enum E
         [Fact]
         public void FlagsEnum_Combination()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 [Flags]
@@ -408,7 +452,8 @@ enum E
         [Fact]
         public void FlagsEnum_Negative()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 [Flags]
@@ -433,7 +478,8 @@ enum E
         [Fact]
         public void FlagsEnum_Order()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 [Flags]
@@ -473,7 +519,8 @@ enum E2
         [Fact]
         public void Arrays()
         {
-            var source = @"
+            var source =
+                @"
 namespace N
 {
     public class A<T>
@@ -497,9 +544,18 @@ namespace N
             Assert.Equal("{N.A<bool>.B<long>[3, 4]}", FormatValue(matrixInstance));
             Assert.Equal("{N.A<bool>.B<long>[3..3, 4..5]}", FormatValue(irregularInstance));
 
-            Assert.Equal("{N.A<bool>.B<long>[0x00000002]}", FormatValue(vectorInstance, useHexadecimal: true));
-            Assert.Equal("{N.A<bool>.B<long>[0x00000003, 0x00000004]}", FormatValue(matrixInstance, useHexadecimal: true));
-            Assert.Equal("{N.A<bool>.B<long>[0x00000003..0x00000003, 0x00000004..0x00000005]}", FormatValue(irregularInstance, useHexadecimal: true));
+            Assert.Equal(
+                "{N.A<bool>.B<long>[0x00000002]}",
+                FormatValue(vectorInstance, useHexadecimal: true)
+            );
+            Assert.Equal(
+                "{N.A<bool>.B<long>[0x00000003, 0x00000004]}",
+                FormatValue(matrixInstance, useHexadecimal: true)
+            );
+            Assert.Equal(
+                "{N.A<bool>.B<long>[0x00000003..0x00000003, 0x00000004..0x00000005]}",
+                FormatValue(irregularInstance, useHexadecimal: true)
+            );
         }
 
         [Fact]
@@ -518,7 +574,8 @@ namespace N
         [Fact]
         public void Nullable()
         {
-            var source = @"
+            var source =
+                @"
 namespace N
 {
     public struct A<T>
@@ -542,7 +599,10 @@ namespace N
             var nullableInt = nullableType.MakeGenericType(typeof(int));
 
             Assert.Equal("null", FormatValue(null, nullableConstructedType));
-            Assert.Equal("{ToString() called.}", FormatValue(constructedType.Instantiate(), nullableConstructedType));
+            Assert.Equal(
+                "{ToString() called.}",
+                FormatValue(constructedType.Instantiate(), nullableConstructedType)
+            );
 
             Assert.Equal("null", FormatValue(null, nullableInt));
             Assert.Equal("1", FormatValue(1, nullableInt));
@@ -551,7 +611,8 @@ namespace N
         [Fact]
         public void ToStringOverrides()
         {
-            var source = @"
+            var source =
+                @"
 public class A<T>
 {
 }
@@ -604,7 +665,8 @@ public class C : B
         [Fact]
         public void VisualizeSqlString()
         {
-            var source = @"
+            var source =
+                @"
 namespace System.Data.SqlTypes
 {
     public struct SqlString
@@ -631,7 +693,8 @@ namespace System.Data.SqlTypes
         [Fact]
         public void VisualizeXNode()
         {
-            var source = @"
+            var source =
+                @"
 namespace System.Xml.Linq
 {
     public class XNode
@@ -667,8 +730,13 @@ namespace System.Xml.Linq
         public void HostValueNotFound_int()
         {
             var clrValue = new DkmClrValue(
-                value: null, hostObjectValue: null, new DkmClrType((TypeImpl)typeof(int)),
-                alias: null, evalFlags: DkmEvaluationResultFlags.None, valueFlags: DkmClrValueFlags.None);
+                value: null,
+                hostObjectValue: null,
+                new DkmClrType((TypeImpl)typeof(int)),
+                alias: null,
+                evalFlags: DkmEvaluationResultFlags.None,
+                valueFlags: DkmClrValueFlags.None
+            );
 
             Assert.Equal(Resources.HostValueNotFound, FormatValue(clrValue));
         }
@@ -677,8 +745,13 @@ namespace System.Xml.Linq
         public void HostValueNotFound_char()
         {
             var clrValue = new DkmClrValue(
-                value: null, hostObjectValue: null, new DkmClrType((TypeImpl)typeof(char)),
-                alias: null, evalFlags: DkmEvaluationResultFlags.None, valueFlags: DkmClrValueFlags.None);
+                value: null,
+                hostObjectValue: null,
+                new DkmClrType((TypeImpl)typeof(char)),
+                alias: null,
+                evalFlags: DkmEvaluationResultFlags.None,
+                valueFlags: DkmClrValueFlags.None
+            );
 
             Assert.Equal(Resources.HostValueNotFound, FormatValue(clrValue));
         }
@@ -687,8 +760,13 @@ namespace System.Xml.Linq
         public void HostValueNotFound_IntPtr()
         {
             var clrValue = new DkmClrValue(
-                value: null, hostObjectValue: null, new DkmClrType((TypeImpl)typeof(IntPtr)),
-                alias: null, evalFlags: DkmEvaluationResultFlags.None, valueFlags: DkmClrValueFlags.None);
+                value: null,
+                hostObjectValue: null,
+                new DkmClrType((TypeImpl)typeof(IntPtr)),
+                alias: null,
+                evalFlags: DkmEvaluationResultFlags.None,
+                valueFlags: DkmClrValueFlags.None
+            );
 
             Assert.Equal(Resources.HostValueNotFound, FormatValue(clrValue));
         }
@@ -697,8 +775,13 @@ namespace System.Xml.Linq
         public void HostValueNotFound_UIntPtr()
         {
             var clrValue = new DkmClrValue(
-                value: null, hostObjectValue: null, new DkmClrType((TypeImpl)typeof(UIntPtr)),
-                alias: null, evalFlags: DkmEvaluationResultFlags.None, valueFlags: DkmClrValueFlags.None);
+                value: null,
+                hostObjectValue: null,
+                new DkmClrType((TypeImpl)typeof(UIntPtr)),
+                alias: null,
+                evalFlags: DkmEvaluationResultFlags.None,
+                valueFlags: DkmClrValueFlags.None
+            );
 
             Assert.Equal(Resources.HostValueNotFound, FormatValue(clrValue));
         }
@@ -707,15 +790,20 @@ namespace System.Xml.Linq
         public void HostValueNotFound_enum()
         {
             var clrValue = new DkmClrValue(
-                value: null, hostObjectValue: null, new DkmClrType((TypeImpl)typeof(TestEnum)),
-                alias: null, evalFlags: DkmEvaluationResultFlags.None, valueFlags: DkmClrValueFlags.None);
+                value: null,
+                hostObjectValue: null,
+                new DkmClrType((TypeImpl)typeof(TestEnum)),
+                alias: null,
+                evalFlags: DkmEvaluationResultFlags.None,
+                valueFlags: DkmClrValueFlags.None
+            );
 
             Assert.Equal(Resources.HostValueNotFound, FormatValue(clrValue));
         }
 
         private enum TestEnum
         {
-            One
+            One,
         }
     }
 }

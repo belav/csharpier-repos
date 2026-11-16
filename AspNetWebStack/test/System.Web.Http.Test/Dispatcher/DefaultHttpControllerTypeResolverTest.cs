@@ -26,7 +26,7 @@ namespace System.Web.Http.Dispatcher
                     typeof(ControllerWrapper.ValidNestedController),
                     typeof(ControllerWrapper.ValidInheritedNestedController),
                     typeof(ControllerWrapper.ControllerNestedWrapper.ValidNestedNestedController),
-                    typeof(InheritedControllerHidingWrapper.ValidNestedController)
+                    typeof(InheritedControllerHidingWrapper.ValidNestedController),
                 };
             }
         }
@@ -41,7 +41,7 @@ namespace System.Web.Http.Dispatcher
                     typeof(ControllerWrapper.InvalidAbstractNestedController),
                     ControllerWrapper.TypeOfInvalidProtectedNestedController(), // NOTE: Unable to get through typeof(ControllerWrapper.InvalidProtectedNestedController),
                     ControllerWrapper.TypeOfInvalidPrivateNestedController(), // NOTE: Unable to get through typeof(ControllerWrapper.InvalidPrivateNestedController),
-                    typeof(ControllerWrapper.InvalidInternalNestedController)
+                    typeof(ControllerWrapper.InvalidInternalNestedController),
                 };
             }
         }
@@ -57,7 +57,7 @@ namespace System.Web.Http.Dispatcher
                     typeof(ControllerPrefix),
                     typeof(InvalidControllerStruct),
                     typeof(InvalidControllerWithInconsistentName),
-                    typeof(InvalidControllerWithNoBaseType)
+                    typeof(InvalidControllerWithNoBaseType),
                 };
             }
         }
@@ -65,7 +65,10 @@ namespace System.Web.Http.Dispatcher
         [Fact]
         public void DefaultHttpControllerTypeResolver_GuardClauses()
         {
-            Assert.ThrowsArgumentNull(() => new DefaultHttpControllerTypeResolver(null), "predicate");
+            Assert.ThrowsArgumentNull(
+                () => new DefaultHttpControllerTypeResolver(null),
+                "predicate"
+            );
         }
 
         [Theory]
@@ -76,7 +79,10 @@ namespace System.Web.Http.Dispatcher
         }
 
         [Theory]
-        [PropertyData("InvalidControllerTypesWithValidNames"), PropertyData("InvalidControllerTypesWithInvalidNames")]
+        [
+            PropertyData("InvalidControllerTypesWithValidNames"),
+            PropertyData("InvalidControllerTypesWithInvalidNames")
+        ]
         public void IsControllerType_RejectsInvalidControllerTypes(Type invalidControllerType)
         {
             Assert.False(DefaultHttpControllerTypeResolver.IsControllerType(invalidControllerType));
@@ -86,21 +92,28 @@ namespace System.Web.Http.Dispatcher
         [PropertyData("ValidControllerTypes")]
         public void HasValidControllerName_AcceptsValidControllerNames(Type validControllerType)
         {
-            Assert.True(DefaultHttpControllerTypeResolver.HasValidControllerName(validControllerType));
+            Assert.True(
+                DefaultHttpControllerTypeResolver.HasValidControllerName(validControllerType)
+            );
         }
 
         [Theory]
         [PropertyData("InvalidControllerTypesWithInvalidNames")]
         public void HasValidControllerName_RejectsInvalidControllerNames(Type invalidControllerType)
         {
-            Assert.False(DefaultHttpControllerTypeResolver.HasValidControllerName(invalidControllerType));
+            Assert.False(
+                DefaultHttpControllerTypeResolver.HasValidControllerName(invalidControllerType)
+            );
         }
 
         [Fact]
         public void GetControllerTypes_ThrowsOnNull()
         {
             DefaultHttpControllerTypeResolver resolver = new DefaultHttpControllerTypeResolver();
-            Assert.ThrowsArgumentNull(() => resolver.GetControllerTypes(null), "assembliesResolver");
+            Assert.ThrowsArgumentNull(
+                () => resolver.GetControllerTypes(null),
+                "assembliesResolver"
+            );
         }
 
         [Fact]
@@ -110,52 +123,81 @@ namespace System.Web.Http.Dispatcher
             DefaultHttpControllerTypeResolver resolver = new DefaultHttpControllerTypeResolver();
             Mock<IAssembliesResolver> mockAssemblyResolver = new Mock<IAssembliesResolver>();
 
-            mockAssemblyResolver.Setup(a => a.GetAssemblies()).Returns(new List<Assembly> 
-            {
-                null,
-                new MockExportedTypesAssembly(ThrowException.ReflectionTypeLoadException,
-                    typeof(ControllerWrapper.ValidNestedController),
-                    typeof(ControllerWrapper.ValidInheritedNestedController),
-                    typeof(ControllerWrapper.ControllerNestedWrapper.ValidNestedNestedController),
-                    typeof(InheritedControllerHidingWrapper.ValidNestedController)),
-                new MockExportedTypesAssembly(ThrowException.Exception,
-                    typeof(ControllerWrapper.InvalidAbstractNestedController),
-                    ControllerWrapper.TypeOfInvalidProtectedNestedController(), // NOTE: Unable to get through typeof(ControllerWrapper.InvalidProtectedNestedController),
-                    ControllerWrapper.TypeOfInvalidPrivateNestedController(), // NOTE: Unable to get through typeof(ControllerWrapper.InvalidPrivateNestedController),
-                    typeof(ControllerWrapper.InvalidInternalNestedController)),
-                new MockExportedTypesAssembly(ThrowException.None,
-                    typeof(ValidSealedController),
-                    typeof(ValidPartialController),
-                    typeof(ValidInheritedController),
-                    typeof(ValidController),
-                    typeof(VALIDController),
-                    typeof(VALIDCONTROLLER),
-                    typeof(InvalidAbstractController),
-                    typeof(InvalidControllerStruct),
-                    typeof(InvalidControllerWithInconsistentName),
-                    typeof(InvalidControllerWithNoBaseType))
-            });
+            mockAssemblyResolver
+                .Setup(a => a.GetAssemblies())
+                .Returns(
+                    new List<Assembly>
+                    {
+                        null,
+                        new MockExportedTypesAssembly(
+                            ThrowException.ReflectionTypeLoadException,
+                            typeof(ControllerWrapper.ValidNestedController),
+                            typeof(ControllerWrapper.ValidInheritedNestedController),
+                            typeof(ControllerWrapper.ControllerNestedWrapper.ValidNestedNestedController),
+                            typeof(InheritedControllerHidingWrapper.ValidNestedController)
+                        ),
+                        new MockExportedTypesAssembly(
+                            ThrowException.Exception,
+                            typeof(ControllerWrapper.InvalidAbstractNestedController),
+                            ControllerWrapper.TypeOfInvalidProtectedNestedController(), // NOTE: Unable to get through typeof(ControllerWrapper.InvalidProtectedNestedController),
+                            ControllerWrapper.TypeOfInvalidPrivateNestedController(), // NOTE: Unable to get through typeof(ControllerWrapper.InvalidPrivateNestedController),
+                            typeof(ControllerWrapper.InvalidInternalNestedController)
+                        ),
+                        new MockExportedTypesAssembly(
+                            ThrowException.None,
+                            typeof(ValidSealedController),
+                            typeof(ValidPartialController),
+                            typeof(ValidInheritedController),
+                            typeof(ValidController),
+                            typeof(VALIDController),
+                            typeof(VALIDCONTROLLER),
+                            typeof(InvalidAbstractController),
+                            typeof(InvalidControllerStruct),
+                            typeof(InvalidControllerWithInconsistentName),
+                            typeof(InvalidControllerWithNoBaseType)
+                        ),
+                    }
+                );
 
             // Act
-            ICollection<Type> actualControllerTypes = resolver.GetControllerTypes(mockAssemblyResolver.Object);
+            ICollection<Type> actualControllerTypes = resolver.GetControllerTypes(
+                mockAssemblyResolver.Object
+            );
 
             // Assert
             Assert.Equal(10, actualControllerTypes.Count);
-            Assert.True(actualControllerTypes.Contains(typeof(ControllerWrapper.ValidNestedController)));
-            Assert.True(actualControllerTypes.Contains(typeof(ControllerWrapper.ValidInheritedNestedController)));
-            Assert.True(actualControllerTypes.Contains(typeof(ControllerWrapper.ControllerNestedWrapper.ValidNestedNestedController)));
+            Assert.True(
+                actualControllerTypes.Contains(typeof(ControllerWrapper.ValidNestedController))
+            );
+            Assert.True(
+                actualControllerTypes.Contains(
+                    typeof(ControllerWrapper.ValidInheritedNestedController)
+                )
+            );
+            Assert.True(
+                actualControllerTypes.Contains(
+                    typeof(ControllerWrapper.ControllerNestedWrapper.ValidNestedNestedController)
+                )
+            );
             Assert.True(actualControllerTypes.Contains(typeof(ValidSealedController)));
             Assert.True(actualControllerTypes.Contains(typeof(ValidPartialController)));
             Assert.True(actualControllerTypes.Contains(typeof(ValidInheritedController)));
             Assert.True(actualControllerTypes.Contains(typeof(ValidController)));
             Assert.True(actualControllerTypes.Contains(typeof(VALIDController)));
             Assert.True(actualControllerTypes.Contains(typeof(VALIDCONTROLLER)));
-            Assert.True(actualControllerTypes.Contains(typeof(InheritedControllerHidingWrapper.ValidNestedController)));
+            Assert.True(
+                actualControllerTypes.Contains(
+                    typeof(InheritedControllerHidingWrapper.ValidNestedController)
+                )
+            );
         }
 
         private static string GetDefaultControllerRouteName(Type controllerType)
         {
-            return controllerType.Name.Substring(0, controllerType.Name.Length - "Controller".Length);
+            return controllerType.Name.Substring(
+                0,
+                controllerType.Name.Length - "Controller".Length
+            );
         }
     }
 
@@ -190,7 +232,11 @@ namespace System.Web.Http.Dispatcher
                     throw new Exception("GetTypes exception");
 
                 case ThrowException.ReflectionTypeLoadException:
-                    throw new ReflectionTypeLoadException(_exportedTypes, null, "GetTypes exception");
+                    throw new ReflectionTypeLoadException(
+                        _exportedTypes,
+                        null,
+                        "GetTypes exception"
+                    );
             }
 
             return _exportedTypes;
@@ -209,102 +255,56 @@ namespace System.Web.Http.Dispatcher
             return typeof(InvalidProtectedNestedController);
         }
 
-        public class ValidNestedController : ApiController
-        {
-        }
+        public class ValidNestedController : ApiController { }
 
-        public abstract class InvalidAbstractNestedController : ApiController
-        {
-        }
+        public abstract class InvalidAbstractNestedController : ApiController { }
 
-        public class ValidInheritedNestedController : InvalidAbstractNestedController
-        {
-        }
+        public class ValidInheritedNestedController : InvalidAbstractNestedController { }
 
-        protected class InvalidProtectedNestedController : ApiController
-        {
-        }
+        protected class InvalidProtectedNestedController : ApiController { }
 
-        private class InvalidPrivateNestedController : ApiController
-        {
-        }
+        private class InvalidPrivateNestedController : ApiController { }
 
-        internal class InvalidInternalNestedController : ApiController
-        {
-        }
+        internal class InvalidInternalNestedController : ApiController { }
 
         public class ControllerNestedWrapper
         {
-            public class ValidNestedNestedController : ApiController
-            {
-            }
+            public class ValidNestedNestedController : ApiController { }
         }
     }
 
-    public abstract class InvalidAbstractController : ApiController
-    {
-    }
+    public abstract class InvalidAbstractController : ApiController { }
 
-    public struct InvalidControllerStruct
-    {
-    }
+    public struct InvalidControllerStruct { }
 
-    public class ControllerPrefix
-    {
-    }
+    public class ControllerPrefix { }
 
-    public class InvalidControllerWithInconsistentName : ApiController
-    {
-    }
+    public class InvalidControllerWithInconsistentName : ApiController { }
 
-    public class InvalidControllerWithNoBaseType
-    {
-    }
+    public class InvalidControllerWithNoBaseType { }
 
-    public sealed class ValidSealedController : ApiController
-    {
-    }
+    public sealed class ValidSealedController : ApiController { }
 
-    public partial class ValidPartialController : ApiController
-    {
-    }
+    public partial class ValidPartialController : ApiController { }
 
-    public partial class ValidPartialController
-    {
-    }
+    public partial class ValidPartialController { }
 
-    public class ValidInheritedController : InvalidAbstractController
-    {
-    }
+    public class ValidInheritedController : InvalidAbstractController { }
 
-    public class Controller : ApiController
-    {
-    }
+    public class Controller : ApiController { }
 
-    public class Ctrl : ApiController
-    {
-    }
+    public class Ctrl : ApiController { }
 
-    public class validcontroller : ApiController
-    {
-    }
+    public class validcontroller : ApiController { }
 
-    public class ValidController : ApiController
-    {
-    }
+    public class ValidController : ApiController { }
 
-    public class VALIDController : ApiController
-    {
-    }
+    public class VALIDController : ApiController { }
 
-    public class VALIDCONTROLLER : ApiController
-    {
-    }
+    public class VALIDCONTROLLER : ApiController { }
 
     public class InheritedControllerHidingWrapper : ControllerWrapper
     {
-        public new class ValidNestedController : ControllerWrapper.ValidNestedController
-        {
-        }
+        public new class ValidNestedController : ControllerWrapper.ValidNestedController { }
     }
 }

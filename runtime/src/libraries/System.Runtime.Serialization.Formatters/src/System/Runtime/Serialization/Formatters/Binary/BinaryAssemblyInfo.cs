@@ -15,7 +15,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             _assemblyString = assemblyString;
         }
 
-        internal BinaryAssemblyInfo(string assemblyString, Assembly? assembly) : this(assemblyString)
+        internal BinaryAssemblyInfo(string assemblyString, Assembly? assembly)
+            : this(assemblyString)
         {
             _assembly = assembly;
         }
@@ -27,7 +28,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 _assembly = FormatterServices.LoadAssemblyFromStringNoThrow(_assemblyString);
                 if (_assembly == null)
                 {
-                    throw new SerializationException(SR.Format(SR.Serialization_AssemblyNotFound, _assemblyString));
+                    throw new SerializationException(
+                        SR.Format(SR.Serialization_AssemblyNotFound, _assemblyString)
+                    );
                 }
             }
             return _assembly;

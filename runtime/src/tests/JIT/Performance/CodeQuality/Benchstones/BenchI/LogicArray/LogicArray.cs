@@ -8,78 +8,94 @@ using Xunit;
 
 namespace Benchstone.BenchI
 {
-public static class LogicArray
-{
-
+    public static class LogicArray
+    {
 #if DEBUG
-    public const int Iterations = 1;
+        public const int Iterations = 1;
 #else
-    public const int Iterations = 3000;
+        public const int Iterations = 3000;
 #endif
 
-    struct Workarea
-    {
-        public int X;
-        public int[][] A;
-    }
-
-    static T[][] AllocArray<T>(int n1, int n2) {
-        T[][] a = new T[n1][];
-        for (int i = 0; i < n1; ++i) {
-            a[i] = new T[n2];
+        struct Workarea
+        {
+            public int X;
+            public int[][] A;
         }
-        return a;
-    }
 
-    static bool Inner(ref Workarea cmn) {
-        int i, j, k;
-        cmn.X = 0;
-        for (i = 1; i <= 50; i++) {
-            for (j = 1; j <= 50; j++) {
-                cmn.A[i][j] = 1;
+        static T[][] AllocArray<T>(int n1, int n2)
+        {
+            T[][] a = new T[n1][];
+            for (int i = 0; i < n1; ++i)
+            {
+                a[i] = new T[n2];
             }
+            return a;
         }
-        for (k = 1; k <= 50; k++) {
-            for (j = 1; j <= 50; j++) {
-                i = 1;
-                do {
-                    cmn.X = cmn.X | cmn.A[i][j] & cmn.A[i + 1][k];
-                    i = i + 2;
-                } while (i <= 50);
-            }
-        }
-        if (cmn.X != 1) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
 
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    static bool Bench() {
-        Workarea cmn = new Workarea();
-        cmn.X = 0;
-        cmn.A = AllocArray<int>(51, 51);
-        for (int n = 1; n <= Iterations; n++) {
-            bool result = Inner(ref cmn);
-            if (!result) {
+        static bool Inner(ref Workarea cmn)
+        {
+            int i,
+                j,
+                k;
+            cmn.X = 0;
+            for (i = 1; i <= 50; i++)
+            {
+                for (j = 1; j <= 50; j++)
+                {
+                    cmn.A[i][j] = 1;
+                }
+            }
+            for (k = 1; k <= 50; k++)
+            {
+                for (j = 1; j <= 50; j++)
+                {
+                    i = 1;
+                    do
+                    {
+                        cmn.X = cmn.X | cmn.A[i][j] & cmn.A[i + 1][k];
+                        i = i + 2;
+                    } while (i <= 50);
+                }
+            }
+            if (cmn.X != 1)
+            {
                 return false;
             }
+            else
+            {
+                return true;
+            }
         }
 
-        return true;
-    }
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        static bool Bench()
+        {
+            Workarea cmn = new Workarea();
+            cmn.X = 0;
+            cmn.A = AllocArray<int>(51, 51);
+            for (int n = 1; n <= Iterations; n++)
+            {
+                bool result = Inner(ref cmn);
+                if (!result)
+                {
+                    return false;
+                }
+            }
 
-    static bool TestBase() {
-        bool result = Bench();
-        return result;
-    }
+            return true;
+        }
 
-    [Fact]
-    public static int TestEntryPoint() {
-        bool result = TestBase();
-        return (result ? 100 : -1);
+        static bool TestBase()
+        {
+            bool result = Bench();
+            return result;
+        }
+
+        [Fact]
+        public static int TestEntryPoint()
+        {
+            bool result = TestBase();
+            return (result ? 100 : -1);
+        }
     }
-}
 }

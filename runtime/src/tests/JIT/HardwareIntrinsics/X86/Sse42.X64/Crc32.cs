@@ -18,7 +18,9 @@ namespace IntelHardwareIntrinsicTest._Crc32.X64
         [ActiveIssue("https://github.com/dotnet/runtime/issues/54185", TestRuntimes.Mono)]
         public static void Test()
         {
-            ulong s1l = 0, s2l = 0, resl;
+            ulong s1l = 0,
+                s2l = 0,
+                resl;
             int testResult = Pass;
 
             if (Sse42.X64.IsSupported)
@@ -31,16 +33,35 @@ namespace IntelHardwareIntrinsicTest._Crc32.X64
                     resl = Sse42.X64.Crc32(s1l, s2l);
                     if (resl != longCrcTable[i].res)
                     {
-                        Console.WriteLine("{0}: Inputs: 0x{1,16:x}, 0x{2,16:x} Expected: 0x{3,16:x} actual: 0x{4,16:x}",
-                            i, s1l, s2l, longCrcTable[i].res, resl);
+                        Console.WriteLine(
+                            "{0}: Inputs: 0x{1,16:x}, 0x{2,16:x} Expected: 0x{3,16:x} actual: 0x{4,16:x}",
+                            i,
+                            s1l,
+                            s2l,
+                            longCrcTable[i].res,
+                            resl
+                        );
                         testResult = Fail;
                     }
 
-                    resl = Convert.ToUInt64(typeof(Sse42.X64).GetMethod(nameof(Sse42.X64.Crc32), new Type[] { s1l.GetType(), s2l.GetType() }).Invoke(null, new object[] { s1l, s2l }));
+                    resl = Convert.ToUInt64(
+                        typeof(Sse42.X64)
+                            .GetMethod(
+                                nameof(Sse42.X64.Crc32),
+                                new Type[] { s1l.GetType(), s2l.GetType() }
+                            )
+                            .Invoke(null, new object[] { s1l, s2l })
+                    );
                     if (resl != longCrcTable[i].res)
                     {
-                        Console.WriteLine("{0}: Inputs: 0x{1,16:x}, 0x{2,16:x} Expected: 0x{3,16:x} actual: 0x{4,16:x} - Reflection",
-                            i, s1l, s2l, longCrcTable[i].res, resl);
+                        Console.WriteLine(
+                            "{0}: Inputs: 0x{1,16:x}, 0x{2,16:x} Expected: 0x{3,16:x} actual: 0x{4,16:x} - Reflection",
+                            i,
+                            s1l,
+                            s2l,
+                            longCrcTable[i].res,
+                            resl
+                        );
                         testResult = Fail;
                     }
                 }
@@ -50,36 +71,47 @@ namespace IntelHardwareIntrinsicTest._Crc32.X64
                 try
                 {
                     resl = Sse42.X64.Crc32(s1l, s2l);
-                    Console.WriteLine("Intrinsic Sse42.X64.Crc32 is called on non-supported hardware.");
+                    Console.WriteLine(
+                        "Intrinsic Sse42.X64.Crc32 is called on non-supported hardware."
+                    );
                     Console.WriteLine("Sse42.IsSupported " + Sse42.IsSupported);
                     Console.WriteLine("Environment.Is64BitProcess " + Environment.Is64BitProcess);
                     testResult = Fail;
                 }
-                catch (PlatformNotSupportedException)
-                {
-                }
+                catch (PlatformNotSupportedException) { }
 
                 try
                 {
-                    resl = Convert.ToUInt64(typeof(Sse42.X64).GetMethod(nameof(Sse42.X64.Crc32), new Type[] { s1l.GetType(), s2l.GetType() }).Invoke(null, new object[] { s1l, s2l }));
-                    Console.WriteLine("Intrinsic Sse42.X64.Crc32 is called via reflection on non-supported hardware.");
+                    resl = Convert.ToUInt64(
+                        typeof(Sse42.X64)
+                            .GetMethod(
+                                nameof(Sse42.X64.Crc32),
+                                new Type[] { s1l.GetType(), s2l.GetType() }
+                            )
+                            .Invoke(null, new object[] { s1l, s2l })
+                    );
+                    Console.WriteLine(
+                        "Intrinsic Sse42.X64.Crc32 is called via reflection on non-supported hardware."
+                    );
                     Console.WriteLine("Sse42.IsSupported " + Sse42.IsSupported);
                     Console.WriteLine("Environment.Is64BitProcess " + Environment.Is64BitProcess);
                     testResult = Fail;
                 }
-                catch (TargetInvocationException e) when (e.InnerException is PlatformNotSupportedException)
-                {
-                }
+                catch (TargetInvocationException e)
+                    when (e.InnerException is PlatformNotSupportedException) { }
             }
 
             Assert.Equal(Pass, testResult);
         }
 
-        public struct Crc<T, U> where T : struct where U : struct
+        public struct Crc<T, U>
+            where T : struct
+            where U : struct
         {
             public T s1;
             public U s2;
             public T res;
+
             public Crc(T a, U b, T c)
             {
                 this.s1 = a;
@@ -88,7 +120,8 @@ namespace IntelHardwareIntrinsicTest._Crc32.X64
             }
         }
 
-        public static Crc<ulong, ulong>[] longCrcTable = {
+        public static Crc<ulong, ulong>[] longCrcTable =
+        {
             new Crc<ulong, ulong>(0x0000000000000000UL, 0x0000000000000000UL, 0x0000000000000000UL),
             new Crc<ulong, ulong>(0x0000000000000000UL, 0x0000000000000001UL, 0x00000000493c7d27UL),
             new Crc<ulong, ulong>(0x0000000000000001UL, 0x0000000000000000UL, 0x00000000493c7d27UL),
@@ -101,8 +134,7 @@ namespace IntelHardwareIntrinsicTest._Crc32.X64
             new Crc<ulong, ulong>(0xfffffffffffe1f0dUL, 0x00000000f5c1ddb3UL, 0x000000000504c066UL),
             new Crc<ulong, ulong>(0x0000000000000005UL, 0x000000bce1263cffUL, 0x000000004ab954daUL),
             new Crc<ulong, ulong>(0x0000000000000463UL, 0xffffffffff840d0dUL, 0x00000000797d59f3UL),
-            new Crc<ulong, ulong>(0x00000000000f423fUL, 0x000000000001e0f3UL, 0x000000005c6b8093UL)
+            new Crc<ulong, ulong>(0x00000000000f423fUL, 0x000000000001e0f3UL, 0x000000005c6b8093UL),
         };
-
     }
 }

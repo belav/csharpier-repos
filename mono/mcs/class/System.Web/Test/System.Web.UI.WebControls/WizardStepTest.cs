@@ -26,20 +26,17 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
-
 using System;
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	
-	[TestFixture]
-	public class WizardStepTest
-	{
-		// Represents a basic step that is displayed in a Wizard control. 
-		// This class cannot be inherited.
-		// All Public Properties ,Public Methods ,Public Events ,Protected Methods 
-		// are inherited from base and tested on base classes.
-	}
+    [TestFixture]
+    public class WizardStepTest
+    {
+        // Represents a basic step that is displayed in a Wizard control.
+        // This class cannot be inherited.
+        // All Public Properties ,Public Methods ,Public Events ,Protected Methods
+        // are inherited from base and tested on base classes.
+    }
 }

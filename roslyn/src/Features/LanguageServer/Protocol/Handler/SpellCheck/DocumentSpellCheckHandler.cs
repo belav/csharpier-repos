@@ -10,31 +10,44 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SpellCheck
 {
     [Method(VSInternalMethods.TextDocumentSpellCheckableRangesName)]
-    internal class DocumentSpellCheckHandler : AbstractSpellCheckHandler<VSInternalDocumentSpellCheckableParams, VSInternalSpellCheckableRangeReport>
+    internal class DocumentSpellCheckHandler
+        : AbstractSpellCheckHandler<
+            VSInternalDocumentSpellCheckableParams,
+            VSInternalSpellCheckableRangeReport
+        >
     {
-        public override TextDocumentIdentifier GetTextDocumentIdentifier(VSInternalDocumentSpellCheckableParams requestParams)
-            => requestParams.TextDocument;
+        public override TextDocumentIdentifier GetTextDocumentIdentifier(
+            VSInternalDocumentSpellCheckableParams requestParams
+        ) => requestParams.TextDocument;
 
-        protected override VSInternalSpellCheckableRangeReport CreateReport(TextDocumentIdentifier identifier, int[]? ranges, string? resultId)
-            => new()
-            {
-                Ranges = ranges,
-                ResultId = resultId,
-            };
+        protected override VSInternalSpellCheckableRangeReport CreateReport(
+            TextDocumentIdentifier identifier,
+            int[]? ranges,
+            string? resultId
+        ) => new() { Ranges = ranges, ResultId = resultId };
 
-        protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(VSInternalDocumentSpellCheckableParams requestParams)
+        protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(
+            VSInternalDocumentSpellCheckableParams requestParams
+        )
         {
             if (requestParams.PreviousResultId != null && requestParams.TextDocument != null)
             {
-                return ImmutableArray.Create(new PreviousPullResult(requestParams.PreviousResultId, requestParams.TextDocument));
+                return ImmutableArray.Create(
+                    new PreviousPullResult(
+                        requestParams.PreviousResultId,
+                        requestParams.TextDocument
+                    )
+                );
             }
 
             // The client didn't provide us with a previous result to look for, so we can't lookup anything.
             return null;
         }
 
-        protected override ImmutableArray<Document> GetOrderedDocuments(RequestContext context, CancellationToken cancellationToken)
-            => GetRequestedDocument(context);
+        protected override ImmutableArray<Document> GetOrderedDocuments(
+            RequestContext context,
+            CancellationToken cancellationToken
+        ) => GetRequestedDocument(context);
 
         internal static ImmutableArray<Document> GetRequestedDocument(RequestContext context)
         {
@@ -48,13 +61,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SpellCheck
             // handler treats those as separate worlds that they are responsible for.
             if (context.Document == null)
             {
-                context.TraceInformation("Ignoring spell check request because no document was provided");
+                context.TraceInformation(
+                    "Ignoring spell check request because no document was provided"
+                );
                 return ImmutableArray<Document>.Empty;
             }
 
             if (!context.IsTracking(context.Document.GetURI()))
             {
-                context.TraceInformation($"Ignoring spell check request for untracked document: {context.Document.GetURI()}");
+                context.TraceInformation(
+                    $"Ignoring spell check request for untracked document: {context.Document.GetURI()}"
+                );
                 return ImmutableArray<Document>.Empty;
             }
 

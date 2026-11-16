@@ -11,7 +11,8 @@ namespace System.Globalization.Tests
         private const int MaxTwoDigitYear = 99;
         private const int MinTwoDigitYear = 0;
 
-        private static readonly RandomDataGenerator s_randomDataGenerator = new RandomDataGenerator();
+        private static readonly RandomDataGenerator s_randomDataGenerator =
+            new RandomDataGenerator();
 
         public static IEnumerable<object[]> ToFourDigitYear_TestData()
         {
@@ -22,13 +23,17 @@ namespace System.Globalization.Tests
                 GregorianCalendarTypes.MiddleEastFrench,
                 GregorianCalendarTypes.TransliteratedEnglish,
                 GregorianCalendarTypes.TransliteratedFrench,
-                GregorianCalendarTypes.USEnglish
+                GregorianCalendarTypes.USEnglish,
             };
 
             foreach (GregorianCalendarTypes calendarType in calendarTypes)
             {
                 // 0-99
-                yield return new object[] { calendarType, s_randomDataGenerator.GetInt32(-55) % (MaxTwoDigitYear + 1) };
+                yield return new object[]
+                {
+                    calendarType,
+                    s_randomDataGenerator.GetInt32(-55) % (MaxTwoDigitYear + 1),
+                };
 
                 // Min two digit year
                 yield return new object[] { calendarType, MinTwoDigitYear };
@@ -49,7 +54,8 @@ namespace System.Globalization.Tests
 
         private static int GetExpectedFourDigitYear(Calendar calendar, int twoDigitYear)
         {
-            int expectedFourDigitYear = calendar.TwoDigitYearMax - calendar.TwoDigitYearMax % 100 + twoDigitYear;
+            int expectedFourDigitYear =
+                calendar.TwoDigitYearMax - calendar.TwoDigitYearMax % 100 + twoDigitYear;
             if (expectedFourDigitYear > calendar.TwoDigitYearMax)
             {
                 expectedFourDigitYear -= 100;

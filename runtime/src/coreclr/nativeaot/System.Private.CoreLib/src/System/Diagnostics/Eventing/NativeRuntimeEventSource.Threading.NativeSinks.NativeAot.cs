@@ -6,7 +6,6 @@ using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
-
 using Internal.Runtime;
 using Internal.Runtime.CompilerServices;
 
@@ -25,57 +24,137 @@ namespace System.Diagnostics.Tracing
         }
 
         [NonEvent]
-        internal static void LogContentionLockCreated(nint LockID, nint AssociatedObjectID, ushort ClrInstanceID)
+        internal static void LogContentionLockCreated(
+            nint LockID,
+            nint AssociatedObjectID,
+            ushort ClrInstanceID
+        )
         {
-            RuntimeImports.NativeRuntimeEventSource_LogContentionLockCreated(LockID, AssociatedObjectID, ClrInstanceID);
+            RuntimeImports.NativeRuntimeEventSource_LogContentionLockCreated(
+                LockID,
+                AssociatedObjectID,
+                ClrInstanceID
+            );
         }
 
         [NonEvent]
-        internal static void LogContentionStart(ContentionFlagsMap ContentionFlags, ushort ClrInstanceID, nint LockID, nint AssociatedObjectID, ulong LockOwnerThreadID)
+        internal static void LogContentionStart(
+            ContentionFlagsMap ContentionFlags,
+            ushort ClrInstanceID,
+            nint LockID,
+            nint AssociatedObjectID,
+            ulong LockOwnerThreadID
+        )
         {
-            RuntimeImports.NativeRuntimeEventSource_LogContentionStart((byte)ContentionFlags, ClrInstanceID, LockID, AssociatedObjectID, LockOwnerThreadID);
+            RuntimeImports.NativeRuntimeEventSource_LogContentionStart(
+                (byte)ContentionFlags,
+                ClrInstanceID,
+                LockID,
+                AssociatedObjectID,
+                LockOwnerThreadID
+            );
         }
 
         [NonEvent]
-        internal static void LogContentionStop(ContentionFlagsMap ContentionFlags, ushort ClrInstanceID, double DurationNs)
+        internal static void LogContentionStop(
+            ContentionFlagsMap ContentionFlags,
+            ushort ClrInstanceID,
+            double DurationNs
+        )
         {
-            RuntimeImports.NativeRuntimeEventSource_LogContentionStop((byte)ContentionFlags, ClrInstanceID, DurationNs);
+            RuntimeImports.NativeRuntimeEventSource_LogContentionStop(
+                (byte)ContentionFlags,
+                ClrInstanceID,
+                DurationNs
+            );
         }
 
         [NonEvent]
-        internal static void LogThreadPoolWorkerThreadStart(uint ActiveWorkerThreadCount, uint RetiredWorkerThreadCount, ushort ClrInstanceID)
+        internal static void LogThreadPoolWorkerThreadStart(
+            uint ActiveWorkerThreadCount,
+            uint RetiredWorkerThreadCount,
+            ushort ClrInstanceID
+        )
         {
-            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolWorkerThreadStart(ActiveWorkerThreadCount, RetiredWorkerThreadCount, ClrInstanceID);
+            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolWorkerThreadStart(
+                ActiveWorkerThreadCount,
+                RetiredWorkerThreadCount,
+                ClrInstanceID
+            );
         }
 
         [NonEvent]
-        internal static void LogThreadPoolWorkerThreadStop(uint ActiveWorkerThreadCount, uint RetiredWorkerThreadCount, ushort ClrInstanceID)
+        internal static void LogThreadPoolWorkerThreadStop(
+            uint ActiveWorkerThreadCount,
+            uint RetiredWorkerThreadCount,
+            ushort ClrInstanceID
+        )
         {
-            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolWorkerThreadStop(ActiveWorkerThreadCount, RetiredWorkerThreadCount, ClrInstanceID);
+            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolWorkerThreadStop(
+                ActiveWorkerThreadCount,
+                RetiredWorkerThreadCount,
+                ClrInstanceID
+            );
         }
 
         [NonEvent]
-        internal static void LogThreadPoolWorkerThreadWait(uint ActiveWorkerThreadCount, uint RetiredWorkerThreadCount, ushort ClrInstanceID)
+        internal static void LogThreadPoolWorkerThreadWait(
+            uint ActiveWorkerThreadCount,
+            uint RetiredWorkerThreadCount,
+            ushort ClrInstanceID
+        )
         {
-            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolWorkerThreadWait(ActiveWorkerThreadCount, RetiredWorkerThreadCount, ClrInstanceID);
+            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolWorkerThreadWait(
+                ActiveWorkerThreadCount,
+                RetiredWorkerThreadCount,
+                ClrInstanceID
+            );
         }
 
         [NonEvent]
-        internal static void LogThreadPoolMinMaxThreads(ushort MinWorkerThreads, ushort MaxWorkerThreads, ushort MinIOCompletionThreads, ushort MaxIOCompletionThreads, ushort ClrInstanceID)
+        internal static void LogThreadPoolMinMaxThreads(
+            ushort MinWorkerThreads,
+            ushort MaxWorkerThreads,
+            ushort MinIOCompletionThreads,
+            ushort MaxIOCompletionThreads,
+            ushort ClrInstanceID
+        )
         {
-            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolMinMaxThreads(MinWorkerThreads, MaxWorkerThreads, MinIOCompletionThreads, MaxIOCompletionThreads, ClrInstanceID);
+            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolMinMaxThreads(
+                MinWorkerThreads,
+                MaxWorkerThreads,
+                MinIOCompletionThreads,
+                MaxIOCompletionThreads,
+                ClrInstanceID
+            );
         }
 
         [NonEvent]
-        internal static void LogThreadPoolWorkerThreadAdjustmentSample(double Throughput, ushort ClrInstanceID)
+        internal static void LogThreadPoolWorkerThreadAdjustmentSample(
+            double Throughput,
+            ushort ClrInstanceID
+        )
         {
-            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolWorkerThreadAdjustmentSample(Throughput, ClrInstanceID);
+            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolWorkerThreadAdjustmentSample(
+                Throughput,
+                ClrInstanceID
+            );
         }
 
         [NonEvent]
-        internal static void LogThreadPoolWorkerThreadAdjustmentAdjustment(double AverageThroughput, uint NewWorkerThreadCount, ThreadAdjustmentReasonMap Reason, ushort ClrInstanceID)
+        internal static void LogThreadPoolWorkerThreadAdjustmentAdjustment(
+            double AverageThroughput,
+            uint NewWorkerThreadCount,
+            ThreadAdjustmentReasonMap Reason,
+            ushort ClrInstanceID
+        )
         {
-            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolWorkerThreadAdjustmentAdjustment(AverageThroughput, NewWorkerThreadCount, (uint)Reason, ClrInstanceID);
+            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolWorkerThreadAdjustmentAdjustment(
+                AverageThroughput,
+                NewWorkerThreadCount,
+                (uint)Reason,
+                ClrInstanceID
+            );
         }
 
         [NonEvent]
@@ -90,10 +169,22 @@ namespace System.Diagnostics.Tracing
             double Confidence,
             double NewControlSetting,
             ushort NewThreadWaveMagnitude,
-            ushort ClrInstanceID)
+            ushort ClrInstanceID
+        )
         {
-            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolWorkerThreadAdjustmentStats(Duration, Throughput, ThreadPoolWorkerThreadWait, ThroughputWave,
-            ThroughputErrorEstimate, AverageThroughputErrorEstimate, ThroughputRatio, Confidence, NewControlSetting, NewThreadWaveMagnitude, ClrInstanceID);
+            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolWorkerThreadAdjustmentStats(
+                Duration,
+                Throughput,
+                ThreadPoolWorkerThreadWait,
+                ThroughputWave,
+                ThroughputErrorEstimate,
+                AverageThroughputErrorEstimate,
+                ThroughputRatio,
+                Confidence,
+                NewControlSetting,
+                NewThreadWaveMagnitude,
+                ClrInstanceID
+            );
         }
 
         [NonEvent]
@@ -101,36 +192,52 @@ namespace System.Diagnostics.Tracing
             IntPtr NativeOverlapped,
             IntPtr Overlapped,
             [MarshalAs(UnmanagedType.Bool)] bool MultiDequeues,
-            ushort ClrInstanceID)
+            ushort ClrInstanceID
+        )
         {
-            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolIOEnqueue(NativeOverlapped, Overlapped, MultiDequeues, ClrInstanceID);
+            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolIOEnqueue(
+                NativeOverlapped,
+                Overlapped,
+                MultiDequeues,
+                ClrInstanceID
+            );
         }
 
         [NonEvent]
         internal static void LogThreadPoolIODequeue(
             IntPtr NativeOverlapped,
             IntPtr Overlapped,
-            ushort ClrInstanceID)
-        {
-            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolIODequeue(NativeOverlapped, Overlapped, ClrInstanceID);
-        }
-
-        [NonEvent]
-        internal static void LogThreadPoolWorkingThreadCount(
-            uint Count,
             ushort ClrInstanceID
         )
         {
-            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolWorkingThreadCount(Count, ClrInstanceID);
+            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolIODequeue(
+                NativeOverlapped,
+                Overlapped,
+                ClrInstanceID
+            );
+        }
+
+        [NonEvent]
+        internal static void LogThreadPoolWorkingThreadCount(uint Count, ushort ClrInstanceID)
+        {
+            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolWorkingThreadCount(
+                Count,
+                ClrInstanceID
+            );
         }
 
         [NonEvent]
         internal static void LogThreadPoolIOPack(
             IntPtr NativeOverlapped,
             IntPtr Overlapped,
-            ushort ClrInstanceID)
+            ushort ClrInstanceID
+        )
         {
-            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolIOPack(NativeOverlapped, Overlapped, ClrInstanceID);
+            RuntimeImports.NativeRuntimeEventSource_LogThreadPoolIOPack(
+                NativeOverlapped,
+                Overlapped,
+                ClrInstanceID
+            );
         }
     }
 }

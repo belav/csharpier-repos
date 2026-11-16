@@ -10,7 +10,8 @@ namespace Microsoft.Web.Mvc
 {
     internal static class TypeDescriptorHelper
     {
-        private static readonly MockMetadataProvider _mockMetadataProvider = new MockMetadataProvider();
+        private static readonly MockMetadataProvider _mockMetadataProvider =
+            new MockMetadataProvider();
 
         public static ICustomTypeDescriptor Get(Type type)
         {
@@ -21,7 +22,13 @@ namespace Microsoft.Web.Mvc
         // access to it via the GetTypeDescriptor() virtual method.
         private sealed class MockMetadataProvider : AssociatedMetadataProvider
         {
-            protected override ModelMetadata CreateMetadata(IEnumerable<Attribute> attributes, Type containerType, Func<object> modelAccessor, Type modelType, string propertyName)
+            protected override ModelMetadata CreateMetadata(
+                IEnumerable<Attribute> attributes,
+                Type containerType,
+                Func<object> modelAccessor,
+                Type modelType,
+                string propertyName
+            )
             {
                 throw new NotImplementedException();
             }

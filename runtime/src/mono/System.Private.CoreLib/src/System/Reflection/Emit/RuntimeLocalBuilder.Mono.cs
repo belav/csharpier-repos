@@ -43,18 +43,18 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal sealed partial class RuntimeLocalBuilder : LocalBuilder
     {
-#region Sync with MonoReflectionLocalBuilder in object-internals.h
+        #region Sync with MonoReflectionLocalBuilder in object-internals.h
         internal Type type;
         internal bool is_pinned;
         internal ushort position;
         private string? name;
-#endregion
+        #endregion
 
         internal ILGenerator ilgen;
         private int startOffset;
         private int endOffset;
 
-        [DynamicDependency(nameof(name))]  // Automatically keeps all previous fields too due to StructLayout
+        [DynamicDependency(nameof(name))] // Automatically keeps all previous fields too due to StructLayout
         internal RuntimeLocalBuilder(Type t, ILGenerator ilgen)
         {
             this.type = t;
@@ -63,26 +63,17 @@ namespace System.Reflection.Emit
 
         public override Type LocalType
         {
-            get
-            {
-                return type;
-            }
+            get { return type; }
         }
 
         public override bool IsPinned
         {
-            get
-            {
-                return is_pinned;
-            }
+            get { return is_pinned; }
         }
 
         public override int LocalIndex
         {
-            get
-            {
-                return position;
-            }
+            get { return position; }
         }
 
         internal string? Name

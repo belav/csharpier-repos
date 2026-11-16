@@ -7,21 +7,22 @@
 namespace System.ServiceModel.Channels
 {
     using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
     using System.Xml;
-    using System.Runtime.Serialization;
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
-    using System.IO;
 
     class WebScriptMetadataMessage : BodyWriterMessage
     {
         const string proxyContentTag = "JavaScriptProxy";
         string proxyContent;
 
-        public WebScriptMetadataMessage(string action, string proxyContent) : base(MessageVersion.None, action, new WebScriptMetadataBodyWriter(proxyContent))
+        public WebScriptMetadataMessage(string action, string proxyContent)
+            : base(MessageVersion.None, action, new WebScriptMetadataBodyWriter(proxyContent))
         {
             this.proxyContent = proxyContent;
         }

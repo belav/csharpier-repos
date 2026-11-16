@@ -25,7 +25,23 @@ namespace XLinqTests
         public void NodeWithNoParent()
         {
             _runWithEvents = (bool)Params[0];
-            XNode[] nodes = { new XElement("a"), new XElement("b", new XAttribute("id", "a0")), new XElement("c", new XAttribute("id", "a0"), new XElement("cc")), new XComment("comm"), new XProcessingInstruction("PI", ""), new XText(""), new XText("  "), new XText("normal"), new XCData("cdata"), new XDocument(), new XDocument(new XDeclaration("1.0", "UTF8", "true"), new XElement("c", new XAttribute("id", "a0"), new XElement("cc"))) };
+            XNode[] nodes =
+            {
+                new XElement("a"),
+                new XElement("b", new XAttribute("id", "a0")),
+                new XElement("c", new XAttribute("id", "a0"), new XElement("cc")),
+                new XComment("comm"),
+                new XProcessingInstruction("PI", ""),
+                new XText(""),
+                new XText("  "),
+                new XText("normal"),
+                new XCData("cdata"),
+                new XDocument(),
+                new XDocument(
+                    new XDeclaration("1.0", "UTF8", "true"),
+                    new XElement("c", new XAttribute("id", "a0"), new XElement("cc"))
+                ),
+            };
 
             foreach (XNode n in nodes)
             {
@@ -42,9 +58,7 @@ namespace XLinqTests
                     }
                     TestLog.Compare(false, "Exception expected [" + n.NodeType + "] " + n);
                 }
-                catch (InvalidOperationException)
-                {
-                }
+                catch (InvalidOperationException) { }
             }
         }
 
@@ -54,7 +68,19 @@ namespace XLinqTests
             var itemCount = (int)Variation.Params[0];
             var addDecl = (bool)Variation.Params[1];
 
-            object[] data = { new XDocumentType("root", null, null, null), new XElement("A"), new XElement("B", new XElement("x"), "string", new XAttribute("at", "home")), new XProcessingInstruction("PI1", ""), new XProcessingInstruction("PI2", ""), new XText(" "), new XText(" "), new XText(" "), new XComment("comment1"), new XComment("comment2") };
+            object[] data =
+            {
+                new XDocumentType("root", null, null, null),
+                new XElement("A"),
+                new XElement("B", new XElement("x"), "string", new XAttribute("at", "home")),
+                new XProcessingInstruction("PI1", ""),
+                new XProcessingInstruction("PI2", ""),
+                new XText(" "),
+                new XText(" "),
+                new XText(" "),
+                new XComment("comment1"),
+                new XComment("comment2"),
+            };
 
             foreach (var nodes in data.NonRecursiveVariations(itemCount))
             {
@@ -66,7 +92,9 @@ namespace XLinqTests
                 int length = (new XDocument(nodes)).Nodes().Count();
                 for (int i = 0; i < length; i++)
                 {
-                    XDocument doc = addDecl ? new XDocument(new XDeclaration("1.0", "UTF8", "true"), nodes) : new XDocument(nodes);
+                    XDocument doc = addDecl
+                        ? new XDocument(new XDeclaration("1.0", "UTF8", "true"), nodes)
+                        : new XDocument(nodes);
                     XNode o = doc.Nodes().ElementAt(i);
 
                     if (_runWithEvents)
@@ -91,7 +119,24 @@ namespace XLinqTests
             var useDocument = (bool)Variation.Params[1];
             var itemCount = (int)Variation.Params[2];
 
-            object[] data = { new XElement("A"), new XElement("B", new XElement("X")), new XProcessingInstruction("PI1", ""), new XProcessingInstruction("PI2", ""), new XAttribute("id", "a0"), new XText("text"), new XText(""), new XText("text2"), new XCData("cdata1"), new XCData("cdata2"), null, "string1", "string2", new XComment("comment1"), new XComment("comment2") };
+            object[] data =
+            {
+                new XElement("A"),
+                new XElement("B", new XElement("X")),
+                new XProcessingInstruction("PI1", ""),
+                new XProcessingInstruction("PI2", ""),
+                new XAttribute("id", "a0"),
+                new XText("text"),
+                new XText(""),
+                new XText("text2"),
+                new XCData("cdata1"),
+                new XCData("cdata2"),
+                null,
+                "string1",
+                "string2",
+                new XComment("comment1"),
+                new XComment("comment2"),
+            };
 
             foreach (var nodes in data.NonRecursiveVariations(itemCount))
             {
@@ -102,7 +147,13 @@ namespace XLinqTests
                     XElement parent = null;
                     if (useParentElement)
                     {
-                        parent = new XElement("Parent", new XAttribute("id", "x07"), "text", elem, "text2");
+                        parent = new XElement(
+                            "Parent",
+                            new XAttribute("id", "x07"),
+                            "text",
+                            elem,
+                            "text2"
+                        );
                     }
                     if (useDocument)
                     {
@@ -147,7 +198,18 @@ namespace XLinqTests
         public void UsagePattern1()
         {
             _runWithEvents = (bool)Params[0];
-            var e = new XElement("root", new XElement("b", new XAttribute("id", "a0")), new XElement("c", new XAttribute("id", "a0"), new XElement("cc")), new XComment("comm"), new XProcessingInstruction("PI", ""), new XText(""), new XElement("a"), new XText("  "), new XText("normal"), new XCData("cdata"));
+            var e = new XElement(
+                "root",
+                new XElement("b", new XAttribute("id", "a0")),
+                new XElement("c", new XAttribute("id", "a0"), new XElement("cc")),
+                new XComment("comm"),
+                new XProcessingInstruction("PI", ""),
+                new XText(""),
+                new XElement("a"),
+                new XText("  "),
+                new XText("normal"),
+                new XCData("cdata")
+            );
 
             // Need to do snapshot -> otherwise will stop on the first node when Removed.
             if (_runWithEvents)
@@ -173,7 +235,12 @@ namespace XLinqTests
 
         private void DoRemoveTest(XContainer elem, int position)
         {
-            List<ExpectedValue> expectedData = elem.Nodes().Take(position).Concat(elem.Nodes().Skip(position + 1)).Select(n => new ExpectedValue(!(n is XText), n)).ProcessNodes().ToList();
+            List<ExpectedValue> expectedData = elem.Nodes()
+                .Take(position)
+                .Concat(elem.Nodes().Skip(position + 1))
+                .Select(n => new ExpectedValue(!(n is XText), n))
+                .ProcessNodes()
+                .ToList();
 
             XNode toRemove = elem.Nodes().ElementAt(position);
             toRemove.Remove();
@@ -187,20 +254,27 @@ namespace XLinqTests
                 foreach (XNode child in (toRemove as XContainer).Nodes())
                 {
                     TestLog.Compare(child.Document == null, "Document of child of Removed");
-                    TestLog.Compare(child.Parent == toRemove, "Parent of child of Removed should be set");
+                    TestLog.Compare(
+                        child.Parent == toRemove,
+                        "Parent of child of Removed should be set"
+                    );
                 }
             }
             // try Remove Removed node
             try
             {
                 toRemove.Remove();
-                TestLog.Compare(false, "Exception expected [" + toRemove.NodeType + "] " + toRemove);
+                TestLog.Compare(
+                    false,
+                    "Exception expected [" + toRemove.NodeType + "] " + toRemove
+                );
             }
-            catch (InvalidOperationException)
-            {
-            }
+            catch (InvalidOperationException) { }
 
-            TestLog.Compare(expectedData.EqualAll(elem.Nodes(), XNode.EqualityComparer), "The rest of the tree - Nodes()");
+            TestLog.Compare(
+                expectedData.EqualAll(elem.Nodes(), XNode.EqualityComparer),
+                "The rest of the tree - Nodes()"
+            );
         }
         #endregion
     }

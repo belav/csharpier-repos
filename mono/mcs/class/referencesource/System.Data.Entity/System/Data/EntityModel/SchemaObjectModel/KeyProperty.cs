@@ -10,9 +10,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Data.Metadata.Edm;
-
+using System.Diagnostics;
 
 namespace System.Data.EntityModel.SchemaObjectModel
 {
@@ -31,9 +30,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         /// <param name="parentElement"></param>
         public PropertyRefElement(SchemaElement parentElement)
-            : base(parentElement)
-        {
-        }
+            : base(parentElement) { }
         #endregion
 
         #region Public Properties
@@ -42,10 +39,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         public StructuredProperty Property
         {
-            get
-            {
-                return _property;
-            }
+            get { return _property; }
         }
         #endregion
 
@@ -58,7 +52,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         /// <summary>
         /// Since this method can be used in different context, this method does not add any errors
-        /// Please make sure that the caller of this methods handles the error case and add errors 
+        /// Please make sure that the caller of this methods handles the error case and add errors
         /// appropriately
         /// </summary>
         /// <param name="entityType"></param>

@@ -14,6 +14,7 @@ internal static partial class Interop
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool SetCommTimeouts(
             SafeFileHandle hFile,
-            ref COMMTIMEOUTS lpCommTimeouts);
+            ref COMMTIMEOUTS lpCommTimeouts
+        );
     }
 }

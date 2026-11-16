@@ -7,9 +7,9 @@
 namespace System.IdentityModel.Protocols.WSTrust
 {
     /// <summary>
-    /// This classes defines the protocol aganostic RequestType strings.  
+    /// This classes defines the protocol aganostic RequestType strings.
     /// </summary>
-    public static class RequestTypes 
+    public static class RequestTypes
     {
 #pragma warning disable 1591
         public const string Cancel = "http://schemas.microsoft.com/idfx/requesttype/cancel";
@@ -18,7 +18,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         public const string Validate = "http://schemas.microsoft.com/idfx/requesttype/validate";
 
         public const string IssueCard = "http://schemas.microsoft.com/idfx/requesttype/issueCard";
-        public const string GetMetadata = "http://schemas.microsoft.com/idfx/requesttype/getMetadata";
+        public const string GetMetadata =
+            "http://schemas.microsoft.com/idfx/requesttype/getMetadata";
 #pragma warning restore 1591
     }
 }

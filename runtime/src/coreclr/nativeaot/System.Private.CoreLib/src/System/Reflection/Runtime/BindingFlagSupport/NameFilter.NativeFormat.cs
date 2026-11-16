@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Globalization;
-
 using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.BindingFlagSupport
@@ -14,11 +13,20 @@ namespace System.Reflection.Runtime.BindingFlagSupport
 
     internal sealed partial class NameFilterCaseSensitive : NameFilter
     {
-        public sealed override bool Matches(ConstantStringValueHandle stringHandle, MetadataReader reader) => stringHandle.StringEquals(ExpectedName, reader);
+        public sealed override bool Matches(
+            ConstantStringValueHandle stringHandle,
+            MetadataReader reader
+        ) => stringHandle.StringEquals(ExpectedName, reader);
     }
 
     internal sealed partial class NameFilterCaseInsensitive : NameFilter
     {
-        public sealed override bool Matches(ConstantStringValueHandle stringHandle, MetadataReader reader) => stringHandle.GetConstantStringValue(reader).Value.Equals(ExpectedName, StringComparison.OrdinalIgnoreCase);
+        public sealed override bool Matches(
+            ConstantStringValueHandle stringHandle,
+            MetadataReader reader
+        ) =>
+            stringHandle
+                .GetConstantStringValue(reader)
+                .Value.Equals(ExpectedName, StringComparison.OrdinalIgnoreCase);
     }
 }

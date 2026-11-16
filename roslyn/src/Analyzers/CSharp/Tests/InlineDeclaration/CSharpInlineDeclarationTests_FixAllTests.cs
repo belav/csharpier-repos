@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         public async Task FixAllInDocument1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -36,15 +36,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument2()
         {
-
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -62,7 +62,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -77,14 +77,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -93,21 +94,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         GetExeAndArguments(useCmdShell, executable, arguments, out finalExecutable, out finalArguments);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         // Now get final exe and args. CTtrl-F5 wraps exe in cmd prompt
         GetExeAndArguments(useCmdShell, executable, arguments, out string finalExecutable, out string finalArguments);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29935")]
         public async Task FixAllInDocumentSymbolResolution()
         {
             await TestInRegularAndScriptAsync(
-@"class C 
+                @"class C 
 {
     void M()
     {
@@ -127,7 +129,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         s = s2 = string.Empty;
     }
 }",
-@"class C 
+                @"class C 
 {
     void M()
     {
@@ -144,14 +146,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
     {
         s = s2 = string.Empty;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28323")]
         public async Task FixAllInDocument4()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -160,21 +163,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         int.TryParse(v, out i2);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int.TryParse(v, out int i1);
         int.TryParse(v, out int i2);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28323")]
         public async Task FixAllInDocument5()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -184,7 +188,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         dummy = 42;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -193,14 +197,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         int.TryParse(v, out int i2);
         dummy = 42;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28323")]
         public async Task FixAllInDocument6()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -210,7 +215,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         dummy = 42;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -219,14 +224,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         int.TryParse(v, out int i2);
         dummy = 42;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28323")]
         public async Task FixAllInDocument7()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -236,7 +242,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         dummy = 42;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -245,14 +251,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         int.TryParse(v, out int i2);
         dummy = 42;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument8()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -262,7 +269,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         dummy = 42;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -271,14 +278,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         int.TryParse(v, out int i2);
         dummy = 42;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument9()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -288,7 +296,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         dummy = 42;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -297,14 +305,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         int.TryParse(v, out int i2);
         dummy = 42;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument10()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -314,7 +323,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         dummy = 42;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -323,14 +332,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         int.TryParse(v, out int i2);
         dummy = 42;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument11()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -339,21 +349,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         int.TryParse(v, out i2);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int.TryParse(v, out int i1);
         int.TryParse(v, out int i2);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28323")]
         public async Task FixAllInDocumentComments1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -362,7 +373,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         int.TryParse(v, out i2);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -370,14 +381,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         int.TryParse(v, out int i1);
         int.TryParse(v, out int i2);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28323")]
         public async Task FixAllInDocumentComments2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -387,7 +399,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         dummy = 42;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -396,14 +408,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         int.TryParse(v, out int i2);
         dummy = 42;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28323")]
         public async Task FixAllInDocumentComments3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -413,7 +426,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         dummy = 42;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -423,7 +436,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
         int.TryParse(v, out int i2);
         dummy = 42;
     }
-}");
+}"
+            );
         }
     }
 }

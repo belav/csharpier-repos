@@ -112,11 +112,17 @@ namespace System.Xml.Tests
         [Fact]
         public static void XmlDataDocument_LoadXmlReader()
         {
-            string xml = "<CustomTypesData>" + Environment.NewLine +
-                        "<CustomTypesTable>" + Environment.NewLine +
-                        "<Dummy>99</Dummy>" + Environment.NewLine +
-                        "</CustomTypesTable>" + Environment.NewLine +
-                        "</CustomTypesData>" + Environment.NewLine;
+            string xml =
+                "<CustomTypesData>"
+                + Environment.NewLine
+                + "<CustomTypesTable>"
+                + Environment.NewLine
+                + "<Dummy>99</Dummy>"
+                + Environment.NewLine
+                + "</CustomTypesTable>"
+                + Environment.NewLine
+                + "</CustomTypesData>"
+                + Environment.NewLine;
 
             StringReader sr = new StringReader(xml);
             XmlReader xr = new XmlTextReader(sr);

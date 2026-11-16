@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Channels
 {
     using System.Runtime;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     sealed class Msmq4PoisonHandler : IPoisonHandlingStrategy
     {
@@ -34,9 +34,15 @@ namespace System.ServiceModel.Channels
             this.receiver = receiver;
             this.timer = new IOThreadTimer(new Action<object>(OnTimer), null, false);
             this.disposed = false;
-            this.mainQueueName = this.ReceiveParameters.AddressTranslator.UriToFormatName(this.ListenUri);
-            this.poisonQueueName = this.ReceiveParameters.AddressTranslator.UriToFormatName(new Uri(this.ListenUri.AbsoluteUri + ";poison"));
-            this.retryQueueName = this.ReceiveParameters.AddressTranslator.UriToFormatName(new Uri(this.ListenUri.AbsoluteUri + ";retry"));
+            this.mainQueueName = this.ReceiveParameters.AddressTranslator.UriToFormatName(
+                this.ListenUri
+            );
+            this.poisonQueueName = this.ReceiveParameters.AddressTranslator.UriToFormatName(
+                new Uri(this.ListenUri.AbsoluteUri + ";poison")
+            );
+            this.retryQueueName = this.ReceiveParameters.AddressTranslator.UriToFormatName(
+                new Uri(this.ListenUri.AbsoluteUri + ";retry")
+            );
         }
 
         MsmqReceiveParameters ReceiveParameters
@@ -53,16 +59,33 @@ namespace System.ServiceModel.Channels
         {
             if (this.ReceiveParameters.ReceiveContextSettings.Enabled)
             {
-                Fx.Assert(this.receiver.Queue is MsmqSubqueueLockingQueue, "Queue must be MsmqSubqueueLockingQueue");
-                this.lockQueueForReceive = ((MsmqSubqueueLockingQueue)this.receiver.Queue).LockQueueForReceive;
+                Fx.Assert(
+                    this.receiver.Queue is MsmqSubqueueLockingQueue,
+                    "Queue must be MsmqSubqueueLockingQueue"
+                );
+                this.lockQueueForReceive = (
+                    (MsmqSubqueueLockingQueue)this.receiver.Queue
+                ).LockQueueForReceive;
             }
 
             this.mainQueue = this.receiver.Queue;
-            this.mainQueueForMove = new MsmqQueue(this.mainQueueName, UnsafeNativeMethods.MQ_MOVE_ACCESS);
+            this.mainQueueForMove = new MsmqQueue(
+                this.mainQueueName,
+                UnsafeNativeMethods.MQ_MOVE_ACCESS
+            );
             // Open up the poison queue (for handling poison messages).
-            this.poisonQueue = new MsmqQueue(this.poisonQueueName, UnsafeNativeMethods.MQ_MOVE_ACCESS);
-            this.retryQueueForMove = new MsmqQueue(this.retryQueueName, UnsafeNativeMethods.MQ_MOVE_ACCESS);
-            this.retryQueueForPeek = new MsmqQueue(this.retryQueueName, UnsafeNativeMethods.MQ_RECEIVE_ACCESS);
+            this.poisonQueue = new MsmqQueue(
+                this.poisonQueueName,
+                UnsafeNativeMethods.MQ_MOVE_ACCESS
+            );
+            this.retryQueueForMove = new MsmqQueue(
+                this.retryQueueName,
+                UnsafeNativeMethods.MQ_MOVE_ACCESS
+            );
+            this.retryQueueForPeek = new MsmqQueue(
+                this.retryQueueName,
+                UnsafeNativeMethods.MQ_RECEIVE_ACCESS
+            );
             this.retryQueueMessage = new MsmqRetryQueueMessage();
 
             if (Thread.CurrentThread.IsThreadPoolThread)
@@ -82,7 +105,12 @@ namespace System.ServiceModel.Channels
             {
                 if (!handler.disposed)
                 {
-                    handler.retryQueueForPeek.BeginPeek(handler.retryQueueMessage, TimeSpan.MaxValue, onPeekCompleted, handler);
+                    handler.retryQueueForPeek.BeginPeek(
+                        handler.retryQueueMessage,
+                        TimeSpan.MaxValue,
+                        onPeekCompleted,
+                        handler
+                    );
                 }
             }
         }
@@ -120,22 +148,27 @@ namespace System.ServiceModel.Channels
             int maxMovePerCycle = (2 * actualReceiveRetryCount) + 1;
 
             // Number of recycles the message has been through
-            int messageCyclesCompleted = messageProperty.MoveCount / (maxMovePerCycle + retryMoveCount);
+            int messageCyclesCompleted =
+                messageProperty.MoveCount / (maxMovePerCycle + retryMoveCount);
 
             // Total number of moves on the message at the end of the last recycle
-            int messageMoveCountForCyclesCompleted = messageCyclesCompleted * (maxMovePerCycle + retryMoveCount);
+            int messageMoveCountForCyclesCompleted =
+                messageCyclesCompleted * (maxMovePerCycle + retryMoveCount);
 
             // The differential move count for the current cycle
-            int messageMoveCountForCurrentCycle = messageProperty.MoveCount - messageMoveCountForCyclesCompleted;
+            int messageMoveCountForCurrentCycle =
+                messageProperty.MoveCount - messageMoveCountForCyclesCompleted;
 
             lock (this)
             {
                 if (this.disposed)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ObjectDisposedException(this.GetType().ToString())
+                    );
 
                 // Check if the message has already completed its max recycle count (MaxRetryCycles)
                 // and the disposed the message first. Such a message was previously disposed using the ReceiveErrorHandling method
-                // and the channel/listener would immediately fault 
+                // and the channel/listener would immediately fault
                 //
                 if (messageCyclesCompleted > maxRetryCycles)
                 {
@@ -153,8 +186,16 @@ namespace System.ServiceModel.Channels
                     if (messageCyclesCompleted < maxRetryCycles)
                     {
                         // The message is eligible for recycling, move the message the message to retry queue
-                        MsmqReceiveHelper.MoveReceivedMessage(this.lockQueueForReceive, this.retryQueueForMove, messageProperty.LookupId);
-                        MsmqDiagnostics.PoisonMessageMoved(messageProperty.MessageId, false, this.receiver.InstanceId);
+                        MsmqReceiveHelper.MoveReceivedMessage(
+                            this.lockQueueForReceive,
+                            this.retryQueueForMove,
+                            messageProperty.LookupId
+                        );
+                        MsmqDiagnostics.PoisonMessageMoved(
+                            messageProperty.MessageId,
+                            false,
+                            this.receiver.InstanceId
+                        );
                     }
                     else
                     {
@@ -184,7 +225,9 @@ namespace System.ServiceModel.Channels
             lock (this)
             {
                 if (this.disposed)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ObjectDisposedException(this.GetType().ToString())
+                    );
 
                 if (retryCycle >= this.ReceiveParameters.MaxRetryCycles)
                 {
@@ -196,8 +239,16 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    MsmqReceiveHelper.MoveReceivedMessage(this.mainQueue, this.retryQueueForMove, messageProperty.LookupId);
-                    MsmqDiagnostics.PoisonMessageMoved(messageProperty.MessageId, false, this.receiver.InstanceId);
+                    MsmqReceiveHelper.MoveReceivedMessage(
+                        this.mainQueue,
+                        this.retryQueueForMove,
+                        messageProperty.LookupId
+                    );
+                    MsmqDiagnostics.PoisonMessageMoved(
+                        messageProperty.MessageId,
+                        false,
+                        this.receiver.InstanceId
+                    );
                 }
             }
             return true;
@@ -215,13 +266,19 @@ namespace System.ServiceModel.Channels
             }
         }
 
-
-        private void InternalFinalDisposition(MsmqQueue disposeFromQueue, MsmqMessageProperty messageProperty)
+        private void InternalFinalDisposition(
+            MsmqQueue disposeFromQueue,
+            MsmqMessageProperty messageProperty
+        )
         {
             switch (this.ReceiveParameters.ReceiveErrorHandling)
             {
                 case ReceiveErrorHandling.Drop:
-                    this.receiver.DropOrRejectReceivedMessage(disposeFromQueue, messageProperty, false);
+                    this.receiver.DropOrRejectReceivedMessage(
+                        disposeFromQueue,
+                        messageProperty,
+                        false
+                    );
                     break;
 
                 case ReceiveErrorHandling.Fault:
@@ -233,17 +290,34 @@ namespace System.ServiceModel.Channels
                     break;
 
                 case ReceiveErrorHandling.Reject:
-                    this.receiver.DropOrRejectReceivedMessage(disposeFromQueue, messageProperty, true);
-                    MsmqDiagnostics.PoisonMessageRejected(messageProperty.MessageId, this.receiver.InstanceId);
+                    this.receiver.DropOrRejectReceivedMessage(
+                        disposeFromQueue,
+                        messageProperty,
+                        true
+                    );
+                    MsmqDiagnostics.PoisonMessageRejected(
+                        messageProperty.MessageId,
+                        this.receiver.InstanceId
+                    );
                     break;
 
                 case ReceiveErrorHandling.Move:
-                    MsmqReceiveHelper.MoveReceivedMessage(disposeFromQueue, this.poisonQueue, messageProperty.LookupId);
-                    MsmqDiagnostics.PoisonMessageMoved(messageProperty.MessageId, true, this.receiver.InstanceId);
+                    MsmqReceiveHelper.MoveReceivedMessage(
+                        disposeFromQueue,
+                        this.poisonQueue,
+                        messageProperty.LookupId
+                    );
+                    MsmqDiagnostics.PoisonMessageMoved(
+                        messageProperty.MessageId,
+                        true,
+                        this.receiver.InstanceId
+                    );
                     break;
 
                 default:
-                    Fx.Assert("System.ServiceModel.Channels.Msmq4PoisonHandler.FinalDisposition(): (unexpected ReceiveErrorHandling)");
+                    Fx.Assert(
+                        "System.ServiceModel.Channels.Msmq4PoisonHandler.FinalDisposition(): (unexpected ReceiveErrorHandling)"
+                    );
                     break;
             }
         }
@@ -291,9 +365,14 @@ namespace System.ServiceModel.Channels
                         // Check the time - move it, and begin peeking again
                         // if necessary, or wait for the timeout.
 
-                        DateTime lastMoveTime = MsmqDateTime.ToDateTime(handler.retryQueueMessage.LastMoveTime.Value);
+                        DateTime lastMoveTime = MsmqDateTime.ToDateTime(
+                            handler.retryQueueMessage.LastMoveTime.Value
+                        );
 
-                        TimeSpan waitTime = lastMoveTime + handler.ReceiveParameters.RetryCycleDelay - DateTime.UtcNow;
+                        TimeSpan waitTime =
+                            lastMoveTime
+                            + handler.ReceiveParameters.RetryCycleDelay
+                            - DateTime.UtcNow;
                         if (waitTime < TimeSpan.Zero)
                             handler.OnTimer(handler);
                         else
@@ -311,13 +390,22 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        this.retryQueueForPeek.TryMoveMessage(this.retryQueueMessage.LookupId.Value, this.mainQueueForMove, MsmqTransactionMode.Single);
+                        this.retryQueueForPeek.TryMoveMessage(
+                            this.retryQueueMessage.LookupId.Value,
+                            this.mainQueueForMove,
+                            MsmqTransactionMode.Single
+                        );
                     }
                     catch (MsmqException ex)
                     {
                         MsmqDiagnostics.ExpectedException(ex);
                     }
-                    this.retryQueueForPeek.BeginPeek(this.retryQueueMessage, TimeSpan.MaxValue, onPeekCompleted, this);
+                    this.retryQueueForPeek.BeginPeek(
+                        this.retryQueueMessage,
+                        TimeSpan.MaxValue,
+                        onPeekCompleted,
+                        this
+                    );
                 }
             }
         }
@@ -331,7 +419,10 @@ namespace System.ServiceModel.Channels
                 : base(2)
             {
                 this.lookupId = new LongProperty(this, UnsafeNativeMethods.PROPID_M_LOOKUPID);
-                this.lastMoveTime = new IntProperty(this, UnsafeNativeMethods.PROPID_M_LAST_MOVE_TIME);
+                this.lastMoveTime = new IntProperty(
+                    this,
+                    UnsafeNativeMethods.PROPID_M_LAST_MOVE_TIME
+                );
             }
 
             public LongProperty LookupId

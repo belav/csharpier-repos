@@ -13,7 +13,12 @@ namespace System.IdentityModel
     {
         internal static readonly UTF8Encoding Utf8WithoutPreamble = new UTF8Encoding(false);
 
-        protected static void Base64EncodeAndWrite(Stream stream, byte[] workBuffer, char[] base64WorkBuffer, byte[] data)
+        protected static void Base64EncodeAndWrite(
+            Stream stream,
+            byte[] workBuffer,
+            char[] base64WorkBuffer,
+            byte[] data
+        )
         {
             if ((data.Length / 3) * 4 + 4 > base64WorkBuffer.Length)
             {
@@ -21,7 +26,14 @@ namespace System.IdentityModel
                 return;
             }
 
-            int encodedLength = Convert.ToBase64CharArray(data, 0, data.Length, base64WorkBuffer, 0, Base64FormattingOptions.None);
+            int encodedLength = Convert.ToBase64CharArray(
+                data,
+                0,
+                data.Length,
+                base64WorkBuffer,
+                0,
+                Base64FormattingOptions.None
+            );
             EncodeAndWrite(stream, workBuffer, base64WorkBuffer, encodedLength);
         }
 
@@ -38,7 +50,7 @@ namespace System.IdentityModel
                 char c = s[i];
                 if (c < 127)
                 {
-                    workBuffer[i] = (byte) c;
+                    workBuffer[i] = (byte)c;
                 }
                 else
                 {
@@ -55,7 +67,12 @@ namespace System.IdentityModel
             EncodeAndWrite(stream, workBuffer, chars, chars.Length);
         }
 
-        protected static void EncodeAndWrite(Stream stream, byte[] workBuffer, char[] chars, int count)
+        protected static void EncodeAndWrite(
+            Stream stream,
+            byte[] workBuffer,
+            char[] chars,
+            int count
+        )
         {
             if (count > workBuffer.Length)
             {
@@ -68,7 +85,7 @@ namespace System.IdentityModel
                 char c = chars[i];
                 if (c < 127)
                 {
-                    workBuffer[i] = (byte) c;
+                    workBuffer[i] = (byte)c;
                 }
                 else
                 {

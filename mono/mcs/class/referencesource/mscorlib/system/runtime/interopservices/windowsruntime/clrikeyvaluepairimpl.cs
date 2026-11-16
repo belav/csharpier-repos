@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
@@ -49,7 +49,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         internal static object UnboxHelper(object wrapper)
         {
             Contract.Requires(wrapper != null);
-            
+
             CLRIKeyValuePairImpl<K, V> reference = (CLRIKeyValuePairImpl<K, V>)wrapper;
             return reference._pair;
         }

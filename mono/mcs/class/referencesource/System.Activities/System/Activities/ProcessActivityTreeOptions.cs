@@ -11,8 +11,8 @@ namespace System.Activities
     class ProcessActivityTreeOptions
     {
         static ProcessActivityTreeOptions validationOptions;
-        static ProcessActivityTreeOptions validationAndPrepareForRuntimeOptions;        
-        static ProcessActivityTreeOptions singleLevelValidationOptions;        
+        static ProcessActivityTreeOptions validationAndPrepareForRuntimeOptions;
+        static ProcessActivityTreeOptions singleLevelValidationOptions;
         static ProcessActivityTreeOptions fullCachingOptions;
         static ProcessActivityTreeOptions dynamicUpdateOptions;
         static ProcessActivityTreeOptions dynamicUpdateOptionsForImplementation;
@@ -22,63 +22,25 @@ namespace System.Activities
         static ProcessActivityTreeOptions skipRootConfigurationValidationOptions;
         static ProcessActivityTreeOptions singleLevelSkipRootConfigurationValidationOptions;
 
-        ProcessActivityTreeOptions()
-        {
-        }
+        ProcessActivityTreeOptions() { }
 
-        public CancellationToken CancellationToken
-        {
-            get;
-            private set;
-        }
+        public CancellationToken CancellationToken { get; private set; }
 
-        public bool SkipIfCached
-        {
-            get;
-            private set;
-        }
+        public bool SkipIfCached { get; private set; }
 
-        public bool CreateEmptyBindings
-        {
-            get;
-            private set;
-        }
+        public bool CreateEmptyBindings { get; private set; }
 
-        public bool SkipPrivateChildren
-        {
-            get;
-            private set;
-        }
+        public bool SkipPrivateChildren { get; private set; }
 
-        public bool OnlyCallCallbackForDeclarations
-        {
-            get;
-            private set;
-        }
+        public bool OnlyCallCallbackForDeclarations { get; private set; }
 
-        public bool SkipConstraints
-        {
-            get;
-            private set;
-        }
+        public bool SkipConstraints { get; private set; }
 
-        public bool OnlyVisitSingleLevel
-        {
-            get;
-            private set;
-        }
+        public bool OnlyVisitSingleLevel { get; private set; }
 
-        public bool SkipRootConfigurationValidation
-        {
-            get;
-            private set;
-        }
+        public bool SkipRootConfigurationValidation { get; private set; }
 
-        public bool StoreTempViolations
-        {
-            get;
-            private set;
-        }
+        public bool StoreTempViolations { get; private set; }
 
         public bool IsRuntimeReadyOptions
         {
@@ -105,7 +67,7 @@ namespace System.Activities
                     {
                         SkipIfCached = true,
                         CreateEmptyBindings = true,
-                        OnlyCallCallbackForDeclarations = true
+                        OnlyCallCallbackForDeclarations = true,
                     };
                 }
 
@@ -124,7 +86,7 @@ namespace System.Activities
                         SkipPrivateChildren = false,
                         // We don't want to interfere with activities doing null-checks
                         // by creating empty bindings.
-                        CreateEmptyBindings = false
+                        CreateEmptyBindings = false,
                     };
                 }
 
@@ -141,7 +103,7 @@ namespace System.Activities
                     validationAndPrepareForRuntimeOptions = new ProcessActivityTreeOptions
                     {
                         SkipIfCached = false,
-                        SkipPrivateChildren = false,                        
+                        SkipPrivateChildren = false,
                         CreateEmptyBindings = true,
                     };
                 }
@@ -162,8 +124,7 @@ namespace System.Activities
                         // We don't want to interfere with activities doing null-checks
                         // by creating empty bindings.
                         CreateEmptyBindings = false,
-                        SkipRootConfigurationValidation = true
-
+                        SkipRootConfigurationValidation = true,
                     };
                 }
 
@@ -177,15 +138,16 @@ namespace System.Activities
             {
                 if (singleLevelSkipRootConfigurationValidationOptions == null)
                 {
-                    singleLevelSkipRootConfigurationValidationOptions = new ProcessActivityTreeOptions
-                    {
-                        SkipPrivateChildren = false,
-                        // We don't want to interfere with activities doing null-checks
-                        // by creating empty bindings.
-                        CreateEmptyBindings = false,
-                        SkipRootConfigurationValidation = true,
-                        OnlyVisitSingleLevel = true
-                    };
+                    singleLevelSkipRootConfigurationValidationOptions =
+                        new ProcessActivityTreeOptions
+                        {
+                            SkipPrivateChildren = false,
+                            // We don't want to interfere with activities doing null-checks
+                            // by creating empty bindings.
+                            CreateEmptyBindings = false,
+                            SkipRootConfigurationValidation = true,
+                            OnlyVisitSingleLevel = true,
+                        };
                 }
 
                 return singleLevelSkipRootConfigurationValidationOptions;
@@ -204,7 +166,7 @@ namespace System.Activities
                         // We don't want to interfere with activities doing null-checks
                         // by creating empty bindings.
                         CreateEmptyBindings = false,
-                        OnlyVisitSingleLevel = true
+                        OnlyVisitSingleLevel = true,
                     };
                 }
 
@@ -220,11 +182,12 @@ namespace System.Activities
                 {
                     // We don't want to run constraints and we only want to hit
                     // the public path.
-                    finishCachingSubtreeOptionsWithoutCreateEmptyBindings = new ProcessActivityTreeOptions
-                    {
-                        SkipConstraints = true,
-                        StoreTempViolations = true
-                    };
+                    finishCachingSubtreeOptionsWithoutCreateEmptyBindings =
+                        new ProcessActivityTreeOptions
+                        {
+                            SkipConstraints = true,
+                            StoreTempViolations = true,
+                        };
                 }
 
                 return finishCachingSubtreeOptionsWithoutCreateEmptyBindings;
@@ -243,7 +206,7 @@ namespace System.Activities
                     {
                         SkipConstraints = true,
                         SkipRootConfigurationValidation = true,
-                        StoreTempViolations = true
+                        StoreTempViolations = true,
                     };
                 }
 
@@ -259,12 +222,13 @@ namespace System.Activities
                 {
                     // We don't want to run constraints and we only want to hit
                     // the public path.
-                    finishCachingSubtreeOptionsWithCreateEmptyBindings = new ProcessActivityTreeOptions
-                    {
-                        SkipConstraints = true,
-                        CreateEmptyBindings = true,
-                        StoreTempViolations = true
-                    };
+                    finishCachingSubtreeOptionsWithCreateEmptyBindings =
+                        new ProcessActivityTreeOptions
+                        {
+                            SkipConstraints = true,
+                            CreateEmptyBindings = true,
+                            StoreTempViolations = true,
+                        };
                 }
 
                 return finishCachingSubtreeOptionsWithCreateEmptyBindings;
@@ -306,14 +270,20 @@ namespace System.Activities
             }
         }
 
-        public static ProcessActivityTreeOptions GetFinishCachingSubtreeOptions(ProcessActivityTreeOptions originalOptions)
+        public static ProcessActivityTreeOptions GetFinishCachingSubtreeOptions(
+            ProcessActivityTreeOptions originalOptions
+        )
         {
             ProcessActivityTreeOptions result;
             if (originalOptions.CreateEmptyBindings)
             {
-                Fx.Assert(!originalOptions.SkipRootConfigurationValidation, "If we ever add code that uses this combination of options, " +
-                    "we need a new predefined setting on ProcessActivityTreeOptions.");
-                result = ProcessActivityTreeOptions.FinishCachingSubtreeOptionsWithCreateEmptyBindings;
+                Fx.Assert(
+                    !originalOptions.SkipRootConfigurationValidation,
+                    "If we ever add code that uses this combination of options, "
+                        + "we need a new predefined setting on ProcessActivityTreeOptions."
+                );
+                result =
+                    ProcessActivityTreeOptions.FinishCachingSubtreeOptionsWithCreateEmptyBindings;
             }
             else
             {
@@ -323,7 +293,8 @@ namespace System.Activities
                 }
                 else
                 {
-                    result = ProcessActivityTreeOptions.FinishCachingSubtreeOptionsWithoutCreateEmptyBindings;
+                    result =
+                        ProcessActivityTreeOptions.FinishCachingSubtreeOptionsWithoutCreateEmptyBindings;
                 }
             }
 
@@ -342,7 +313,8 @@ namespace System.Activities
             ProcessActivityTreeOptions result = null;
             if (settings.SkipValidatingRootConfiguration && settings.SingleLevel)
             {
-                result = ProcessActivityTreeOptions.SingleLevelSkipRootConfigurationValidationOptions;
+                result =
+                    ProcessActivityTreeOptions.SingleLevelSkipRootConfigurationValidationOptions;
             }
             else if (settings.SkipValidatingRootConfiguration)
             {
@@ -354,7 +326,12 @@ namespace System.Activities
             }
             else if (settings.PrepareForRuntime)
             {
-                Fx.Assert(!settings.SkipValidatingRootConfiguration && !settings.SingleLevel && !settings.OnlyUseAdditionalConstraints, "PrepareForRuntime cannot be set at the same time any of the three is set.");
+                Fx.Assert(
+                    !settings.SkipValidatingRootConfiguration
+                        && !settings.SingleLevel
+                        && !settings.OnlyUseAdditionalConstraints,
+                    "PrepareForRuntime cannot be set at the same time any of the three is set."
+                );
                 result = ProcessActivityTreeOptions.ValidationAndPrepareForRuntimeOptions;
             }
             else
@@ -371,7 +348,10 @@ namespace System.Activities
             }
         }
 
-        static ProcessActivityTreeOptions AttachCancellationToken(ProcessActivityTreeOptions result, CancellationToken cancellationToken)
+        static ProcessActivityTreeOptions AttachCancellationToken(
+            ProcessActivityTreeOptions result,
+            CancellationToken cancellationToken
+        )
         {
             ProcessActivityTreeOptions clone = result.Clone();
             clone.CancellationToken = cancellationToken;

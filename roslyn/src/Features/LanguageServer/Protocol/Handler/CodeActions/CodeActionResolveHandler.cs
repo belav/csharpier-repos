@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// </summary>
     [ExportCSharpVisualBasicStatelessLspService(typeof(CodeActionResolveHandler)), Shared]
     [Method(LSP.Methods.CodeActionResolveName)]
-    internal class CodeActionResolveHandler : ILspServiceDocumentRequestHandler<LSP.CodeAction, LSP.CodeAction>
+    internal class CodeActionResolveHandler
+        : ILspServiceDocumentRequestHandler<LSP.CodeAction, LSP.CodeAction>
     {
         private readonly ICodeFixService _codeFixService;
         private readonly ICodeRefactoringService _codeRefactoringService;
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public CodeActionResolveHandler(
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             _codeFixService = codeFixService;
             _codeRefactoringService = codeRefactoringService;
@@ -60,10 +62,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public TextDocumentIdentifier GetTextDocumentIdentifier(LSP.CodeAction request)
-            => ((JToken)request.Data!).ToObject<CodeActionResolveData>()!.TextDocument;
+        public TextDocumentIdentifier GetTextDocumentIdentifier(LSP.CodeAction request) =>
+            ((JToken)request.Data!).ToObject<CodeActionResolveData>()!.TextDocument;
 
-        public async Task<LSP.CodeAction> HandleRequestAsync(LSP.CodeAction codeAction, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.CodeAction> HandleRequestAsync(
+            LSP.CodeAction codeAction,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var data = ((JToken)codeAction.Data!).ToObject<CodeActionResolveData>();
             Assumes.Present(data);
@@ -86,23 +92,33 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var solution = document.Project.Solution;
             var options = _globalOptions.GetCodeActionOptionsProvider();
 
-            var codeActions = await CodeActionHelpers.GetCodeActionsAsync(
-                document,
-                data.Range,
-                options,
-                _codeFixService,
-                _codeRefactoringService,
-                fixAllScope: null,
-                cancellationToken).ConfigureAwait(false);
+            var codeActions = await CodeActionHelpers
+                .GetCodeActionsAsync(
+                    document,
+                    data.Range,
+                    options,
+                    _codeFixService,
+                    _codeRefactoringService,
+                    fixAllScope: null,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             Contract.ThrowIfNull(data.CodeActionPath);
-            var codeActionToResolve = CodeActionHelpers.GetCodeActionToResolve(data.CodeActionPath, codeActions, isFixAllAction: false);
+            var codeActionToResolve = CodeActionHelpers.GetCodeActionToResolve(
+                data.CodeActionPath,
+                codeActions,
+                isFixAllAction: false
+            );
 
             // LSP currently has no way to report progress for code action computation.
-            var operations = await codeActionToResolve.GetOperationsAsync(
-                solution, CodeAnalysisProgress.None, cancellationToken).ConfigureAwait(false);
+            var operations = await codeActionToResolve
+                .GetOperationsAsync(solution, CodeAnalysisProgress.None, cancellationToken)
+                .ConfigureAwait(false);
 
-            var edit = await CodeActionResolveHelper.GetCodeActionResolveEditsAsync(context, data, operations, cancellationToken).ConfigureAwait(false);
+            var edit = await CodeActionResolveHelper
+                .GetCodeActionResolveEditsAsync(context, data, operations, cancellationToken)
+                .ConfigureAwait(false);
 
             codeAction.Edit = edit;
             return codeAction;

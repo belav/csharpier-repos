@@ -553,8 +553,8 @@ public class GenerateEmbeddedResourcesManifestTest
         new Dictionary<string, string>
         {
             ["TargetPath"] = targetPath,
-            ["ManifestResourceName"] =
-                manifestResourceName ?? targetPath.Replace("/", ".").Replace("\\", "."),
+            ["ManifestResourceName"] = manifestResourceName
+                ?? targetPath.Replace("/", ".").Replace("\\", "."),
             ["LogicalName"] = logicalName ?? targetPath.Replace("/", ".").Replace("\\", "."),
         };
 

@@ -6,7 +6,11 @@ namespace System.Workflow
 
     static class Utility
     {
-        [SuppressMessage("Reliability", "Reliability113", Justification = "These are the core methods that should be used for all other Guid(string) calls.")]
+        [SuppressMessage(
+            "Reliability",
+            "Reliability113",
+            Justification = "These are the core methods that should be used for all other Guid(string) calls."
+        )]
         internal static Guid CreateGuid(string guidString)
         {
             bool success = false;
@@ -28,7 +32,11 @@ namespace System.Workflow
             return result;
         }
 
-        [SuppressMessage("Reliability", "Reliability113", Justification = "These are the core methods that should be used for all other Guid(string) calls.")]
+        [SuppressMessage(
+            "Reliability",
+            "Reliability113",
+            Justification = "These are the core methods that should be used for all other Guid(string) calls."
+        )]
         internal static bool TryCreateGuid(string guidString, out Guid result)
         {
             bool success = false;

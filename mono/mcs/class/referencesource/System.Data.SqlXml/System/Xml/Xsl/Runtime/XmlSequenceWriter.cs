@@ -8,11 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml;
-using System.Xml.XPath;
 using System.Xml.Schema;
+using System.Xml.XPath;
 
-namespace System.Xml.Xsl.Runtime {
-    using Res           = System.Xml.Utils.Res;
+namespace System.Xml.Xsl.Runtime
+{
+    using Res = System.Xml.Utils.Res;
 
     /// <summary>
     ///                         External XmlWriter      Cached Sequence
@@ -25,7 +26,7 @@ namespace System.Xml.Xsl.Runtime {
     /// Namespace               Error                   Floating
     /// at top-level                                    Namespace
     ///
-    /// Elements, Text, PI      Implicit Root           Floating            
+    /// Elements, Text, PI      Implicit Root           Floating
     /// Comments at top-level                           Nodes
     ///
     /// Root at top-level       Ignored                 Root
@@ -35,11 +36,16 @@ namespace System.Xml.Xsl.Runtime {
     ///
     /// Nodes By Reference      Copied                  Preserve Identity
     /// </summary>
-    internal abstract class XmlSequenceWriter {
+    internal abstract class XmlSequenceWriter
+    {
         /// <summary>
         /// Start construction of a new Xml tree (document or fragment).
         /// </summary>
-        public abstract XmlRawWriter StartTree(XPathNodeType rootType, IXmlNamespaceResolver nsResolver, XmlNameTable nameTable);
+        public abstract XmlRawWriter StartTree(
+            XPathNodeType rootType,
+            IXmlNamespaceResolver nsResolver,
+            XmlNameTable nameTable
+        );
 
         /// <summary>
         /// End construction of a new Xml tree (document or fragment).
@@ -52,11 +58,11 @@ namespace System.Xml.Xsl.Runtime {
         public abstract void WriteItem(XPathItem item);
     }
 
-
     /// <summary>
     /// An implementation of XmlSequenceWriter that builds a cached XPath/XQuery sequence.
     /// </summary>
-    internal class XmlCachedSequenceWriter : XmlSequenceWriter {
+    internal class XmlCachedSequenceWriter : XmlSequenceWriter
+    {
         private XmlQueryItemSequence seqTyped;
         private XPathDocument doc;
         private XmlRawWriter writer;
@@ -64,25 +70,40 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Constructor.
         /// </summary>
-        public XmlCachedSequenceWriter() {
+        public XmlCachedSequenceWriter()
+        {
             this.seqTyped = new XmlQueryItemSequence();
         }
 
         /// <summary>
         /// Return the sequence after it has been fully constructed.
         /// </summary>
-        public XmlQueryItemSequence ResultSequence {
+        public XmlQueryItemSequence ResultSequence
+        {
             get { return this.seqTyped; }
         }
 
         /// <summary>
         /// Start construction of a new Xml tree (document or fragment).
         /// </summary>
-        public override XmlRawWriter StartTree(XPathNodeType rootType, IXmlNamespaceResolver nsResolver, XmlNameTable nameTable) {
+        public override XmlRawWriter StartTree(
+            XPathNodeType rootType,
+            IXmlNamespaceResolver nsResolver,
+            XmlNameTable nameTable
+        )
+        {
             // Build XPathDocument
             // If rootType != XPathNodeType.Root, then build an XQuery fragment
             this.doc = new XPathDocument(nameTable);
-            this.writer = doc.LoadFromWriter(XPathDocument.LoadFlags.AtomizeNames | (rootType == XPathNodeType.Root ? XPathDocument.LoadFlags.None : XPathDocument.LoadFlags.Fragment), string.Empty);
+            this.writer = doc.LoadFromWriter(
+                XPathDocument.LoadFlags.AtomizeNames
+                    | (
+                        rootType == XPathNodeType.Root
+                            ? XPathDocument.LoadFlags.None
+                            : XPathDocument.LoadFlags.Fragment
+                    ),
+                string.Empty
+            );
             this.writer.NamespaceResolver = nsResolver;
             return this.writer;
         }
@@ -90,7 +111,8 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// End construction of a new Xml tree (document or fragment).
         /// </summary>
-        public override void EndTree() {
+        public override void EndTree()
+        {
             // Add newly constructed document to sequence
             this.writer.Close();
             this.seqTyped.Add(this.doc.CreateNavigator());
@@ -99,12 +121,12 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Write a top-level item by reference.
         /// </summary>
-        public override void WriteItem(XPathItem item) {
+        public override void WriteItem(XPathItem item)
+        {
             // Preserve identity
             this.seqTyped.AddClone(item);
         }
     }
-
 
     /// <summary>
     /// An implementation of XmlSequenceWriter that converts an instance of the XQuery data model into a series
@@ -115,14 +137,16 @@ namespace System.Xml.Xsl.Runtime {
     ///   3. A call to XmlRawWriter.WriteWhitespace(" ") is made between adjacent atomic values at the top-level
     ///   4. All items in the top-level sequence are merged together into a single result document.
     /// </summary>
-    internal class XmlMergeSequenceWriter : XmlSequenceWriter {
+    internal class XmlMergeSequenceWriter : XmlSequenceWriter
+    {
         private XmlRawWriter xwrt;
         private bool lastItemWasAtomic;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public XmlMergeSequenceWriter(XmlRawWriter xwrt) {
+        public XmlMergeSequenceWriter(XmlRawWriter xwrt)
+        {
             this.xwrt = xwrt;
             this.lastItemWasAtomic = false;
         }
@@ -130,7 +154,12 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Start construction of a new Xml tree (document or fragment).
         /// </summary>
-        public override XmlRawWriter StartTree(XPathNodeType rootType, IXmlNamespaceResolver nsResolver, XmlNameTable nameTable) {
+        public override XmlRawWriter StartTree(
+            XPathNodeType rootType,
+            IXmlNamespaceResolver nsResolver,
+            XmlNameTable nameTable
+        )
+        {
             if (rootType == XPathNodeType.Attribute || rootType == XPathNodeType.Namespace)
                 throw new XslTransformException(Res.XmlIl_TopLevelAttrNmsp, string.Empty);
 
@@ -143,25 +172,32 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// End construction of a new Xml tree (document or fragment).
         /// </summary>
-        public override void EndTree() {
+        public override void EndTree()
+        {
             this.lastItemWasAtomic = false;
         }
 
         /// <summary>
         /// Write a top-level item by reference.
         /// </summary>
-        public override void WriteItem(XPathItem item) {
-            if (item.IsNode) {
+        public override void WriteItem(XPathItem item)
+        {
+            if (item.IsNode)
+            {
                 XPathNavigator nav = item as XPathNavigator;
 
-                if (nav.NodeType == XPathNodeType.Attribute || nav.NodeType == XPathNodeType.Namespace)
+                if (
+                    nav.NodeType == XPathNodeType.Attribute
+                    || nav.NodeType == XPathNodeType.Namespace
+                )
                     throw new XslTransformException(Res.XmlIl_TopLevelAttrNmsp, string.Empty);
 
                 // Copy navigator to raw writer
                 CopyNode(nav);
                 this.lastItemWasAtomic = false;
             }
-            else {
+            else
+            {
                 WriteString(item.Value);
             }
         }
@@ -169,12 +205,15 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Write the string value of a top-level atomic value.
         /// </summary>
-        private void WriteString(string value) {
-            if (this.lastItemWasAtomic) {
+        private void WriteString(string value)
+        {
+            if (this.lastItemWasAtomic)
+            {
                 // Insert space character between adjacent atomic values
                 this.xwrt.WriteWhitespace(" ");
             }
-            else {
+            else
+            {
                 this.lastItemWasAtomic = true;
             }
             this.xwrt.WriteString(value);
@@ -183,26 +222,35 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Copy the navigator subtree to the raw writer.
         /// </summary>
-        private void CopyNode(XPathNavigator nav) {
+        private void CopyNode(XPathNavigator nav)
+        {
             XPathNodeType nodeType;
             int iLevel = 0;
 
-            while (true) {
-                if (CopyShallowNode(nav)) {
+            while (true)
+            {
+                if (CopyShallowNode(nav))
+                {
                     nodeType = nav.NodeType;
-                    if (nodeType == XPathNodeType.Element) {
+                    if (nodeType == XPathNodeType.Element)
+                    {
                         // Copy attributes
-                        if (nav.MoveToFirstAttribute()) {
-                            do {
+                        if (nav.MoveToFirstAttribute())
+                        {
+                            do
+                            {
                                 CopyShallowNode(nav);
-                            }
-                            while (nav.MoveToNextAttribute());
+                            } while (nav.MoveToNextAttribute());
                             nav.MoveToParent();
                         }
 
                         // Copy namespaces in document order (navigator returns them in reverse document order)
-                        XPathNamespaceScope nsScope = (iLevel == 0) ? XPathNamespaceScope.ExcludeXml : XPathNamespaceScope.Local;
-                        if (nav.MoveToFirstNamespace(nsScope)) {
+                        XPathNamespaceScope nsScope =
+                            (iLevel == 0)
+                                ? XPathNamespaceScope.ExcludeXml
+                                : XPathNamespaceScope.Local;
+                        if (nav.MoveToFirstNamespace(nsScope))
+                        {
                             CopyNamespaces(nav, nsScope);
                             nav.MoveToParent();
                         }
@@ -211,11 +259,13 @@ namespace System.Xml.Xsl.Runtime {
                     }
 
                     // If children exist, move down to next level
-                    if (nav.MoveToFirstChild()) {
+                    if (nav.MoveToFirstChild())
+                    {
                         iLevel++;
                         continue;
                     }
-                    else {
+                    else
+                    {
                         // EndElement
                         if (nav.NodeType == XPathNodeType.Element)
                             this.xwrt.WriteEndElement(nav.Prefix, nav.LocalName, nav.NamespaceURI);
@@ -223,13 +273,16 @@ namespace System.Xml.Xsl.Runtime {
                 }
 
                 // No children
-                while (true) {
-                    if (iLevel == 0) {
+                while (true)
+                {
+                    if (iLevel == 0)
+                    {
                         // The entire subtree has been copied
                         return;
                     }
 
-                    if (nav.MoveToNext()) {
+                    if (nav.MoveToNext())
+                    {
                         // Found a sibling, so break to outer loop
                         break;
                     }
@@ -248,10 +301,12 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Begin shallow copy of the specified node to the writer.  Returns true if the node might have content.
         /// </summary>
-        private bool CopyShallowNode(XPathNavigator nav) {
+        private bool CopyShallowNode(XPathNavigator nav)
+        {
             bool mayHaveChildren = false;
 
-            switch (nav.NodeType) {
+            switch (nav.NodeType)
+            {
                 case XPathNodeType.Element:
                     this.xwrt.WriteStartElement(nav.Prefix, nav.LocalName, nav.NamespaceURI);
                     mayHaveChildren = true;
@@ -300,11 +355,13 @@ namespace System.Xml.Xsl.Runtime {
         /// Copy all or some (which depends on nsScope) of the namespaces on the navigator's current node to the
         /// raw writer.
         /// </summary>
-        private void CopyNamespaces(XPathNavigator nav, XPathNamespaceScope nsScope) {
+        private void CopyNamespaces(XPathNavigator nav, XPathNamespaceScope nsScope)
+        {
             string prefix = nav.LocalName;
             string ns = nav.Value;
 
-            if (nav.MoveToNextNamespace(nsScope)) {
+            if (nav.MoveToNextNamespace(nsScope))
+            {
                 CopyNamespaces(nav, nsScope);
             }
 

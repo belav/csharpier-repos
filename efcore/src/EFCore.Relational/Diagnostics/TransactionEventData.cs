@@ -31,7 +31,8 @@ public class TransactionEventData : DbContextEventData
         Guid transactionId,
         Guid connectionId,
         bool async,
-        DateTimeOffset startTime)
+        DateTimeOffset startTime
+    )
         : base(eventDefinition, messageGenerator, context)
     {
         Transaction = transaction;

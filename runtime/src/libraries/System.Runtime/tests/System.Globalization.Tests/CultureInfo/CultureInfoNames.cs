@@ -10,7 +10,8 @@ namespace System.Globalization.Tests
 {
     public class CultureInfoNames
     {
-        private static bool SupportFullIcuResources => PlatformDetection.IsNotMobile && PlatformDetection.IsIcuGlobalization;
+        private static bool SupportFullIcuResources =>
+            PlatformDetection.IsNotMobile && PlatformDetection.IsIcuGlobalization;
 
         [ConditionalTheory(nameof(SupportFullIcuResources))]
         [InlineData("en", "en", "English", "English")]
@@ -20,10 +21,30 @@ namespace System.Globalization.Tests
         [InlineData("en-US", "fr-FR", "English (United States)", "anglais (\u00C9tats-Unis)")]
         [InlineData("en-US", "de-DE", "English (United States)", "Englisch (Vereinigte Staaten)")]
         [InlineData("aa-ER", "aa-ER", "Afar (Eritrea)", "Afar (Eritrea)")]
-        [InlineData("", "en-US", "Invariant Language (Invariant Country)", "Invariant Language (Invariant Country)")]
-        [InlineData("", "fr-FR", "Invariant Language (Invariant Country)", "Invariant Language (Invariant Country)")]
-        [InlineData("", "", "Invariant Language (Invariant Country)", "Invariant Language (Invariant Country)")]
-        public void TestDisplayName(string cultureName, string uiCultureName, string nativeName, string displayName)
+        [InlineData(
+            "",
+            "en-US",
+            "Invariant Language (Invariant Country)",
+            "Invariant Language (Invariant Country)"
+        )]
+        [InlineData(
+            "",
+            "fr-FR",
+            "Invariant Language (Invariant Country)",
+            "Invariant Language (Invariant Country)"
+        )]
+        [InlineData(
+            "",
+            "",
+            "Invariant Language (Invariant Country)",
+            "Invariant Language (Invariant Country)"
+        )]
+        public void TestDisplayName(
+            string cultureName,
+            string uiCultureName,
+            string nativeName,
+            string displayName
+        )
         {
             using (new ThreadCultureChange(null, CultureInfo.GetCultureInfo(uiCultureName)))
             {

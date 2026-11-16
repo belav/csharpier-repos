@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -14,6 +15,7 @@ namespace Test
             ulong loc = 10;
             return loc *= loc;
         }
+
         [Fact]
         public static void TestEntryPoint()
         {

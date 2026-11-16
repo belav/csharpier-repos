@@ -18,14 +18,25 @@ namespace System.Xml.XmlSchemaTests
             _output = output;
         }
 
-
         public XmlSchema GetSchema(string ns, string a1, string a2)
         {
             string xsd = string.Empty;
             if (ns.Equals(string.Empty))
-                xsd = "<schema xmlns='http://www.w3.org/2001/XMLSchema'><attribute name='" + a1 + "'/><attribute name='" + a2 + "'/></schema>";
+                xsd =
+                    "<schema xmlns='http://www.w3.org/2001/XMLSchema'><attribute name='"
+                    + a1
+                    + "'/><attribute name='"
+                    + a2
+                    + "'/></schema>";
             else
-                xsd = "<schema xmlns='http://www.w3.org/2001/XMLSchema' targetNamespace='" + ns + "'><attribute name='" + a1 + "'/><attribute name='" + a2 + "'/></schema>";
+                xsd =
+                    "<schema xmlns='http://www.w3.org/2001/XMLSchema' targetNamespace='"
+                    + ns
+                    + "'><attribute name='"
+                    + a1
+                    + "'/><attribute name='"
+                    + a2
+                    + "'/></schema>";
 
             XmlSchema schema = XmlSchema.Read(new StringReader(xsd), null);
             return schema;
@@ -52,7 +63,14 @@ namespace System.Xml.XmlSchemaTests
         //[Variation(Desc = "v2.2 - GlobalAttributes with set with two schemas, both with NS", Params = new object[] { "a", "a1", "a2", "b", "a3", "a4" })]
         [InlineData("a", "a1", "a2", "b", "a3", "a4")]
         [Theory]
-        public void v2(object param0, object param1, object param2, object param3, object param4, object param5)
+        public void v2(
+            object param0,
+            object param1,
+            object param2,
+            object param3,
+            object param4,
+            object param5
+        )
         {
             string ns1 = param0.ToString();
             string ns2 = param3.ToString();
@@ -74,10 +92,26 @@ namespace System.Xml.XmlSchemaTests
 
             //Verify
             CError.Compare(ss.GlobalAttributes.Count, 4, "Elements Count after add/compile");
-            CError.Compare(ss.GlobalAttributes.Contains(new XmlQualifiedName(a1, ns1)), true, "Contains1");
-            CError.Compare(ss.GlobalAttributes.Contains(new XmlQualifiedName(a2, ns1)), true, "Contains2");
-            CError.Compare(ss.GlobalAttributes.Contains(new XmlQualifiedName(a3, ns2)), true, "Contains3");
-            CError.Compare(ss.GlobalAttributes.Contains(new XmlQualifiedName(a4, ns2)), true, "Contains4");
+            CError.Compare(
+                ss.GlobalAttributes.Contains(new XmlQualifiedName(a1, ns1)),
+                true,
+                "Contains1"
+            );
+            CError.Compare(
+                ss.GlobalAttributes.Contains(new XmlQualifiedName(a2, ns1)),
+                true,
+                "Contains2"
+            );
+            CError.Compare(
+                ss.GlobalAttributes.Contains(new XmlQualifiedName(a3, ns2)),
+                true,
+                "Contains3"
+            );
+            CError.Compare(
+                ss.GlobalAttributes.Contains(new XmlQualifiedName(a4, ns2)),
+                true,
+                "Contains4"
+            );
 
             //Now reprocess one schema and check
             ss.Reprocess(s1);
@@ -111,7 +145,15 @@ namespace System.Xml.XmlSchemaTests
         //[Variation(Desc = "v3.8 - GlobalAttributes with a set having schema (ns) to another set with schema(ns), no compile", Params = new object[] { "a", "a1", "a2", "b", "a3", "a4", false })]
         [InlineData("a", "a1", "a2", "b", "a3", "a4", false)]
         [Theory]
-        public void v3(object param0, object param1, object param2, object param3, object param4, object param5, object param6)
+        public void v3(
+            object param0,
+            object param1,
+            object param2,
+            object param3,
+            object param4,
+            object param5,
+            object param6
+        )
         {
             string ns1 = param0.ToString();
             string ns2 = param3.ToString();
@@ -140,10 +182,26 @@ namespace System.Xml.XmlSchemaTests
                 ss1.Compile();
             //Verify
             CError.Compare(ss1.GlobalAttributes.Count, 4, "Types Count after add");
-            CError.Compare(ss1.GlobalAttributes.Contains(new XmlQualifiedName(a1, ns1)), true, "Contains1");
-            CError.Compare(ss1.GlobalAttributes.Contains(new XmlQualifiedName(a2, ns1)), true, "Contains2");
-            CError.Compare(ss1.GlobalAttributes.Contains(new XmlQualifiedName(a3, ns2)), true, "Contains3");
-            CError.Compare(ss1.GlobalAttributes.Contains(new XmlQualifiedName(a4, ns2)), true, "Contains4");
+            CError.Compare(
+                ss1.GlobalAttributes.Contains(new XmlQualifiedName(a1, ns1)),
+                true,
+                "Contains1"
+            );
+            CError.Compare(
+                ss1.GlobalAttributes.Contains(new XmlQualifiedName(a2, ns1)),
+                true,
+                "Contains2"
+            );
+            CError.Compare(
+                ss1.GlobalAttributes.Contains(new XmlQualifiedName(a3, ns2)),
+                true,
+                "Contains3"
+            );
+            CError.Compare(
+                ss1.GlobalAttributes.Contains(new XmlQualifiedName(a4, ns2)),
+                true,
+                "Contains4"
+            );
 
             //Now reprocess one schema and check
             ss1.Reprocess(s1);

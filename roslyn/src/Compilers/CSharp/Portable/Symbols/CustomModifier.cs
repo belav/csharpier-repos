@@ -27,18 +27,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override INamedTypeSymbol Modifier
         {
-            get
-            {
-                return modifier.GetPublicSymbol();
-            }
+            get { return modifier.GetPublicSymbol(); }
         }
 
         public NamedTypeSymbol ModifierSymbol
         {
-            get
-            {
-                return modifier;
-            }
+            get { return modifier; }
         }
 
         public abstract override int GetHashCode();
@@ -55,7 +49,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return new RequiredCustomModifier(modifier);
         }
 
-        internal static ImmutableArray<CustomModifier> Convert(ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers)
+        internal static ImmutableArray<CustomModifier> Convert(
+            ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers
+        )
         {
             if (customModifiers.IsDefault)
             {
@@ -73,15 +69,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private class OptionalCustomModifier : CSharpCustomModifier
         {
             public OptionalCustomModifier(NamedTypeSymbol modifier)
-                : base(modifier)
-            { }
+                : base(modifier) { }
 
             public override bool IsOptional
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public override int GetHashCode()
@@ -105,15 +97,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private class RequiredCustomModifier : CSharpCustomModifier
         {
             public RequiredCustomModifier(NamedTypeSymbol modifier)
-                : base(modifier)
-            { }
+                : base(modifier) { }
 
             public override bool IsOptional
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override int GetHashCode()

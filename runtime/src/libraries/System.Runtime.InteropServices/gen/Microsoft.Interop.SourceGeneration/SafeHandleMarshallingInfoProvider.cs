@@ -19,10 +19,15 @@ namespace Microsoft.Interop
         private readonly INamedTypeSymbol _safeHandleMarshallerType;
         private readonly ITypeSymbol _containingScope;
 
-        public SafeHandleMarshallingInfoProvider(Compilation compilation, ITypeSymbol containingScope)
+        public SafeHandleMarshallingInfoProvider(
+            Compilation compilation,
+            ITypeSymbol containingScope
+        )
         {
             _compilation = compilation;
-            _safeHandleMarshallerType = compilation.GetBestTypeByMetadataName(TypeNames.System_Runtime_InteropServices_Marshalling_SafeHandleMarshaller_Metadata);
+            _safeHandleMarshallerType = compilation.GetBestTypeByMetadataName(
+                TypeNames.System_Runtime_InteropServices_Marshalling_SafeHandleMarshaller_Metadata
+            );
             _containingScope = containingScope;
         }
 
@@ -30,13 +35,18 @@ namespace Microsoft.Interop
         {
             // Check for an implicit SafeHandle conversion.
             // The SafeHandle type might not be defined if we're using one of the test CoreLib implementations used for NativeAOT.
-            ITypeSymbol? safeHandleType = _compilation.GetTypeByMetadataName(TypeNames.System_Runtime_InteropServices_SafeHandle);
+            ITypeSymbol? safeHandleType = _compilation.GetTypeByMetadataName(
+                TypeNames.System_Runtime_InteropServices_SafeHandle
+            );
             if (safeHandleType is not null)
             {
-                CodeAnalysis.Operations.CommonConversion conversion = _compilation.ClassifyCommonConversion(type, safeHandleType);
-                if (conversion.Exists
+                CodeAnalysis.Operations.CommonConversion conversion =
+                    _compilation.ClassifyCommonConversion(type, safeHandleType);
+                if (
+                    conversion.Exists
                     && conversion.IsImplicit
-                    && (conversion.IsReference || conversion.IsIdentity))
+                    && (conversion.IsReference || conversion.IsIdentity)
+                )
                 {
                     return true;
                 }
@@ -44,10 +54,19 @@ namespace Microsoft.Interop
             return false;
         }
 
-        public MarshallingInfo GetMarshallingInfo(ITypeSymbol type, int indirectionDepth, UseSiteAttributeProvider useSiteAttributes, GetMarshallingInfoCallback marshallingInfoCallback)
+        public MarshallingInfo GetMarshallingInfo(
+            ITypeSymbol type,
+            int indirectionDepth,
+            UseSiteAttributeProvider useSiteAttributes,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        )
         {
             bool hasDefaultConstructor = false;
-            if (type is INamedTypeSymbol named && !named.IsAbstract && named.InstanceConstructors.Length > 0)
+            if (
+                type is INamedTypeSymbol named
+                && !named.IsAbstract
+                && named.InstanceConstructors.Length > 0
+            )
             {
                 foreach (IMethodSymbol ctor in named.InstanceConstructors)
                 {
@@ -67,11 +86,14 @@ namespace Microsoft.Interop
             }
 
             INamedTypeSymbol entryPointType = _safeHandleMarshallerType.Construct(type);
-            if (!ManualTypeMarshallingHelper.TryGetValueMarshallersFromEntryType(
-                entryPointType,
-                type,
-                _compilation,
-                out CustomTypeMarshallers? marshallers))
+            if (
+                !ManualTypeMarshallingHelper.TryGetValueMarshallersFromEntryType(
+                    entryPointType,
+                    type,
+                    _compilation,
+                    out CustomTypeMarshallers? marshallers
+                )
+            )
             {
                 return NoMarshallingInfo.Instance;
             }
@@ -82,14 +104,17 @@ namespace Microsoft.Interop
             {
                 marshallers = marshallers.Value with
                 {
-                    Modes = ImmutableDictionary<MarshalMode, CustomTypeMarshallerData>.Empty
-                        .Add(
-                            MarshalMode.ManagedToUnmanagedIn,
-                            marshallers.Value.GetModeOrDefault(MarshalMode.ManagedToUnmanagedIn))
+                    Modes = ImmutableDictionary<MarshalMode, CustomTypeMarshallerData>.Empty.Add(
+                        MarshalMode.ManagedToUnmanagedIn,
+                        marshallers.Value.GetModeOrDefault(MarshalMode.ManagedToUnmanagedIn)
+                    ),
                 };
             }
 
-            return new NativeMarshallingAttributeInfo(ManagedTypeInfo.CreateTypeInfoForTypeSymbol(entryPointType), marshallers.Value);
+            return new NativeMarshallingAttributeInfo(
+                ManagedTypeInfo.CreateTypeInfoForTypeSymbol(entryPointType),
+                marshallers.Value
+            );
         }
     }
 }

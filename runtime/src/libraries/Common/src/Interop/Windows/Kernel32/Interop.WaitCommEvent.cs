@@ -14,6 +14,7 @@ internal static partial class Interop
         internal static unsafe partial bool WaitCommEvent(
             SafeFileHandle hFile,
             int* lpEvtMask,
-            NativeOverlapped* lpOverlapped);
+            NativeOverlapped* lpOverlapped
+        );
     }
 }

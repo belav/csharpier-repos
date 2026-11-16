@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,18 +30,18 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Configuration
 {
-	public interface IBindingConfigurationElement
-	{
-		TimeSpan CloseTimeout { get; }
+    public interface IBindingConfigurationElement
+    {
+        TimeSpan CloseTimeout { get; }
 
-		string Name { get; }
+        string Name { get; }
 
-		TimeSpan OpenTimeout { get; }
+        TimeSpan OpenTimeout { get; }
 
-		TimeSpan ReceiveTimeout { get; }
+        TimeSpan ReceiveTimeout { get; }
 
-		TimeSpan SendTimeout { get; }
+        TimeSpan SendTimeout { get; }
 
-		void ApplyConfiguration (Binding binding);
-	}
+        void ApplyConfiguration(Binding binding);
+    }
 }

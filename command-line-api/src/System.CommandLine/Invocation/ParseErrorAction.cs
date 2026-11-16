@@ -62,13 +62,14 @@ public sealed class ParseErrorAction : SynchronousCliAction
     private static void WriteHelp(ParseResult parseResult)
     {
         // Find the most proximate help option (if any) and invoke its action.
-        var availableHelpOptions =
-            parseResult
-                .CommandResult
-                .RecurseWhileNotNull(r => r.Parent as CommandResult)
-                .Select(r => r.Command.Options.OfType<HelpOption>().FirstOrDefault());
+        var availableHelpOptions = parseResult
+            .CommandResult.RecurseWhileNotNull(r => r.Parent as CommandResult)
+            .Select(r => r.Command.Options.OfType<HelpOption>().FirstOrDefault());
 
-        if (availableHelpOptions.FirstOrDefault(o => o is not null) is { Action: not null } helpOption)
+        if (
+            availableHelpOptions.FirstOrDefault(o => o is not null) is
+            { Action: not null } helpOption
+        )
         {
             switch (helpOption.Action)
             {
@@ -77,7 +78,11 @@ public sealed class ParseErrorAction : SynchronousCliAction
                     break;
 
                 case AsynchronousCliAction asyncAction:
-                    asyncAction.InvokeAsync(parseResult, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                    asyncAction
+                        .InvokeAsync(parseResult, CancellationToken.None)
+                        .ConfigureAwait(false)
+                        .GetAwaiter()
+                        .GetResult();
                     break;
             }
         }
@@ -92,11 +97,15 @@ public sealed class ParseErrorAction : SynchronousCliAction
             var token = unmatchedTokens[i];
 
             bool first = true;
-            foreach (string suggestion in GetPossibleTokens(parseResult.CommandResult.Command, token))
+            foreach (
+                string suggestion in GetPossibleTokens(parseResult.CommandResult.Command, token)
+            )
             {
                 if (first)
                 {
-                    parseResult.Configuration.Output.WriteLine(LocalizationResources.SuggestionsTokenNotMatched(token));
+                    parseResult.Configuration.Output.WriteLine(
+                        LocalizationResources.SuggestionsTokenNotMatched(token)
+                    );
                     first = false;
                 }
 
@@ -117,48 +126,50 @@ public sealed class ParseErrorAction : SynchronousCliAction
             }
 
             IEnumerable<string> possibleMatches = targetSymbol
-                                                  .Children
-                                                  .Where(x => !x.Hidden && x is CliOption or CliCommand)
-                                                  .Select(symbol =>
-                                                  {
-                                                      AliasSet? aliasSet = symbol is CliOption option ? option._aliases : ((CliCommand)symbol)._aliases;
+                .Children.Where(x => !x.Hidden && x is CliOption or CliCommand)
+                .Select(symbol =>
+                {
+                    AliasSet? aliasSet = symbol is CliOption option
+                        ? option._aliases
+                        : ((CliCommand)symbol)._aliases;
 
-                                                      if (aliasSet is null)
-                                                      {
-                                                          return symbol.Name;
-                                                      }
+                    if (aliasSet is null)
+                    {
+                        return symbol.Name;
+                    }
 
-                                                      return new[] { symbol.Name }.Concat(aliasSet)
-                                                                                  .OrderBy(x => GetDistance(token, x))
-                                                                                  .ThenByDescending(x => GetStartsWithDistance(token, x))
-                                                                                  .First();
-                                                  });
+                    return new[] { symbol.Name }
+                        .Concat(aliasSet)
+                        .OrderBy(x => GetDistance(token, x))
+                        .ThenByDescending(x => GetStartsWithDistance(token, x))
+                        .First();
+                });
 
             int? bestDistance = null;
             return possibleMatches
-                   .Select(possibleMatch => (possibleMatch, distance: GetDistance(token, possibleMatch)))
-                   .Where(tuple => tuple.distance <= MaxLevenshteinDistance)
-                   .OrderBy(tuple => tuple.distance)
-                   .ThenByDescending(tuple => GetStartsWithDistance(token, tuple.possibleMatch))
-                   .TakeWhile(tuple =>
-                   {
-                       var (_, distance) = tuple;
-                       if (bestDistance is null)
-                       {
-                           bestDistance = distance;
-                       }
+                .Select(possibleMatch =>
+                    (possibleMatch, distance: GetDistance(token, possibleMatch))
+                )
+                .Where(tuple => tuple.distance <= MaxLevenshteinDistance)
+                .OrderBy(tuple => tuple.distance)
+                .ThenByDescending(tuple => GetStartsWithDistance(token, tuple.possibleMatch))
+                .TakeWhile(tuple =>
+                {
+                    var (_, distance) = tuple;
+                    if (bestDistance is null)
+                    {
+                        bestDistance = distance;
+                    }
 
-                       return distance == bestDistance;
-                   })
-                   .Select(tuple => tuple.possibleMatch);
+                    return distance == bestDistance;
+                })
+                .Select(tuple => tuple.possibleMatch);
         }
 
         static int GetStartsWithDistance(string first, string second)
         {
             int i;
-            for (i = 0; i < first.Length && i < second.Length && first[i] == second[i]; i++)
-            {
-            }
+            for (i = 0; i < first.Length && i < second.Length && first[i] == second[i]; i++) { }
 
             return i;
         }
@@ -181,15 +192,19 @@ public sealed class ParseErrorAction : SynchronousCliAction
             // the length of the other, since that number of insertions
             // would be required.
 
-            int n = first.Length, m = second.Length;
-            if (n == 0) return m;
-            if (m == 0) return n;
+            int n = first.Length,
+                m = second.Length;
+            if (n == 0)
+                return m;
+            if (m == 0)
+                return n;
 
             // Rather than maintain an entire matrix (which would require O(n*m) space),
             // just store the current row and the next row, each of which has a length m+1,
             // so just O(m) space. Initialize the current row.
 
-            int curRow = 0, nextRow = 1;
+            int curRow = 0,
+                nextRow = 1;
             int[][] rows = { new int[m + 1], new int[m + 1] };
 
             for (int j = 0; j <= m; ++j)

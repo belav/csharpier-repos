@@ -10,7 +10,8 @@ using Microsoft.VisualStudio.Shell.TableManager;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
 {
-    internal abstract class SettingsSnapshotFactoryBase<T, TEntriesSnapshot> : TableEntriesSnapshotFactoryBase
+    internal abstract class SettingsSnapshotFactoryBase<T, TEntriesSnapshot>
+        : TableEntriesSnapshotFactoryBase
         where TEntriesSnapshot : SettingsEntriesSnapshotBase<T>
     {
         private readonly ISettingsProvider<T> _data;
@@ -30,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
 
         public override int CurrentVersionNumber => _currentVersionNumber;
 
-        public override ITableEntriesSnapshot? GetCurrentSnapshot() => GetSnapshot(CurrentVersionNumber);
+        public override ITableEntriesSnapshot? GetCurrentSnapshot() =>
+            GetSnapshot(CurrentVersionNumber);
 
         internal void NotifyOfUpdate() => Interlocked.Increment(ref _currentVersionNumber);
 
@@ -63,11 +65,16 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
                 }
                 else // versionNumber > this.currentVersionNumber
                 {
-                    throw new InvalidOperationException($"Invalid GetSnapshot request. Requested version: {versionNumber}. Current version: {_currentVersionNumber}");
+                    throw new InvalidOperationException(
+                        $"Invalid GetSnapshot request. Requested version: {versionNumber}. Current version: {_currentVersionNumber}"
+                    );
                 }
             }
         }
 
-        protected abstract TEntriesSnapshot CreateSnapshot(ImmutableArray<T> data, int currentVersionNumber);
+        protected abstract TEntriesSnapshot CreateSnapshot(
+            ImmutableArray<T> data,
+            int currentVersionNumber
+        );
     }
 }

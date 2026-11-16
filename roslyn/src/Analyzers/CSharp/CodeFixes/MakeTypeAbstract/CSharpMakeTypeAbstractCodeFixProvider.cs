@@ -12,21 +12,33 @@ using Microsoft.CodeAnalysis.MakeTypeAbstract;
 
 namespace Microsoft.CodeAnalysis.CSharp.MakeTypeAbstract
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.MakeTypeAbstract), Shared]
-    internal sealed class CSharpMakeTypeAbstractCodeFixProvider : AbstractMakeTypeAbstractCodeFixProvider<TypeDeclarationSyntax>
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.MakeTypeAbstract
+        ),
+        Shared
+    ]
+    internal sealed class CSharpMakeTypeAbstractCodeFixProvider
+        : AbstractMakeTypeAbstractCodeFixProvider<TypeDeclarationSyntax>
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpMakeTypeAbstractCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpMakeTypeAbstractCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
-               ImmutableArray.Create(
-                   "CS0513" // 'C.M()' is abstract but it is contained in non-abstract type 'C'
-               );
+            ImmutableArray.Create(
+                "CS0513" // 'C.M()' is abstract but it is contained in non-abstract type 'C'
+            );
 
-        protected override bool IsValidRefactoringContext(SyntaxNode? node, [NotNullWhen(true)] out TypeDeclarationSyntax? typeDeclaration)
+        protected override bool IsValidRefactoringContext(
+            SyntaxNode? node,
+            [NotNullWhen(true)] out TypeDeclarationSyntax? typeDeclaration
+        )
         {
             switch (node)
             {
@@ -54,8 +66,11 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeTypeAbstract
             }
 
             var enclosingType = node.FirstAncestorOrSelf<TypeDeclarationSyntax>();
-            if (enclosingType?.Kind() is SyntaxKind.ClassDeclaration or SyntaxKind.RecordDeclaration &&
-                !enclosingType.Modifiers.Any(SyntaxKind.AbstractKeyword) && !enclosingType.Modifiers.Any(SyntaxKind.StaticKeyword))
+            if (
+                enclosingType?.Kind() is SyntaxKind.ClassDeclaration or SyntaxKind.RecordDeclaration
+                && !enclosingType.Modifiers.Any(SyntaxKind.AbstractKeyword)
+                && !enclosingType.Modifiers.Any(SyntaxKind.StaticKeyword)
+            )
             {
                 typeDeclaration = enclosingType;
                 return true;

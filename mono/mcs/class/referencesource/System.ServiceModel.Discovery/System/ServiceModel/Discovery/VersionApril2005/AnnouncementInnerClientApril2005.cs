@@ -5,12 +5,14 @@
 namespace System.ServiceModel.Discovery.VersionApril2005
 {
     using System.ComponentModel;
-    using System.ServiceModel.Channels;
     using System.Runtime;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.Threading;
 
-    class AnnouncementInnerClientApril2005 : ClientBase<IAnnouncementContractApril2005>, IAnnouncementInnerClient
+    class AnnouncementInnerClientApril2005
+        : ClientBase<IAnnouncementContractApril2005>,
+            IAnnouncementInnerClient
     {
         DiscoveryMessageSequenceGenerator discoveryMessageSequenceGenerator;
 
@@ -33,92 +35,78 @@ namespace System.ServiceModel.Discovery.VersionApril2005
 
         event EventHandler<AsyncCompletedEventArgs> IAnnouncementInnerClient.HelloOperationCompleted
         {
-            add
-            {
-                this.HelloOperationCompletedEventHandler += value;
-            }
-            remove
-            {
-                this.HelloOperationCompletedEventHandler -= value;
-            }
+            add { this.HelloOperationCompletedEventHandler += value; }
+            remove { this.HelloOperationCompletedEventHandler -= value; }
         }
 
         event EventHandler<AsyncCompletedEventArgs> IAnnouncementInnerClient.ByeOperationCompleted
         {
-            add
-            {
-                this.ByeOperationCompletedEventHandler += value;
-            }
-            remove
-            {
-                this.ByeOperationCompletedEventHandler -= value;
-            }
+            add { this.ByeOperationCompletedEventHandler += value; }
+            remove { this.ByeOperationCompletedEventHandler -= value; }
         }
 
         public DiscoveryMessageSequenceGenerator DiscoveryMessageSequenceGenerator
         {
-            get
-            {
-                return this.discoveryMessageSequenceGenerator;
-            }
-            set
-            {
-                this.discoveryMessageSequenceGenerator = value;
-            }
+            get { return this.discoveryMessageSequenceGenerator; }
+            set { this.discoveryMessageSequenceGenerator = value; }
         }
 
         public new ChannelFactory ChannelFactory
         {
-            get
-            {
-                return base.ChannelFactory;
-            }
+            get { return base.ChannelFactory; }
         }
 
         public new IClientChannel InnerChannel
         {
-            get
-            {
-                return base.InnerChannel;
-            }
+            get { return base.InnerChannel; }
         }
 
         public new ServiceEndpoint Endpoint
         {
-            get
-            {
-                return base.Endpoint;
-            }
+            get { return base.Endpoint; }
         }
 
         public ICommunicationObject InnerCommunicationObject
         {
-            get
-            {
-                return this as ICommunicationObject;
-            }
-
+            get { return this as ICommunicationObject; }
         }
 
         public void HelloOperation(EndpointDiscoveryMetadata endpointDiscoveryMetadata)
         {
-            HelloMessageApril2005 message = HelloMessageApril2005.Create(DiscoveryMessageSequenceGenerator.Next(), endpointDiscoveryMetadata);
+            HelloMessageApril2005 message = HelloMessageApril2005.Create(
+                DiscoveryMessageSequenceGenerator.Next(),
+                endpointDiscoveryMetadata
+            );
             base.Channel.HelloOperation(message);
         }
 
         public void ByeOperation(EndpointDiscoveryMetadata endpointDiscoveryMetadata)
         {
-            ByeMessageApril2005 message = ByeMessageApril2005.Create(DiscoveryMessageSequenceGenerator.Next(), endpointDiscoveryMetadata);
+            ByeMessageApril2005 message = ByeMessageApril2005.Create(
+                DiscoveryMessageSequenceGenerator.Next(),
+                endpointDiscoveryMetadata
+            );
             base.Channel.ByeOperation(message);
         }
 
-        public IAsyncResult BeginHelloOperation(EndpointDiscoveryMetadata endpointDiscoveryMetadata, AsyncCallback callback, object state)
+        public IAsyncResult BeginHelloOperation(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata,
+            AsyncCallback callback,
+            object state
+        )
         {
-            HelloMessageApril2005 message = HelloMessageApril2005.Create(DiscoveryMessageSequenceGenerator.Next(), endpointDiscoveryMetadata);
+            HelloMessageApril2005 message = HelloMessageApril2005.Create(
+                DiscoveryMessageSequenceGenerator.Next(),
+                endpointDiscoveryMetadata
+            );
             return base.Channel.BeginHelloOperation(message, callback, state);
         }
 
-        IAsyncResult BeginHelloOperation(HelloMessageApril2005 message, AsyncCallback callback, object state)
+        IAsyncResult BeginHelloOperation(
+            HelloMessageApril2005 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return base.Channel.BeginHelloOperation(message, callback, state);
         }
@@ -128,13 +116,24 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             base.Channel.EndHelloOperation(result);
         }
 
-        public IAsyncResult BeginByeOperation(EndpointDiscoveryMetadata endpointDiscoveryMetadata, AsyncCallback callback, object state)
+        public IAsyncResult BeginByeOperation(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata,
+            AsyncCallback callback,
+            object state
+        )
         {
-            ByeMessageApril2005 message = ByeMessageApril2005.Create(DiscoveryMessageSequenceGenerator.Next(), endpointDiscoveryMetadata);
+            ByeMessageApril2005 message = ByeMessageApril2005.Create(
+                DiscoveryMessageSequenceGenerator.Next(),
+                endpointDiscoveryMetadata
+            );
             return base.Channel.BeginByeOperation(message, callback, state);
         }
 
-        IAsyncResult BeginByeOperation(ByeMessageApril2005 message, AsyncCallback callback, object state)
+        IAsyncResult BeginByeOperation(
+            ByeMessageApril2005 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return base.Channel.BeginByeOperation(message, callback, state);
         }
@@ -144,7 +143,11 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             base.Channel.EndByeOperation(result);
         }
 
-        IAsyncResult OnBeginHelloOperation(object[] inValues, System.AsyncCallback callback, object asyncState)
+        IAsyncResult OnBeginHelloOperation(
+            object[] inValues,
+            System.AsyncCallback callback,
+            object asyncState
+        )
         {
             HelloMessageApril2005 message = ((HelloMessageApril2005)(inValues[0]));
             return this.BeginHelloOperation(message, callback, asyncState);
@@ -161,35 +164,59 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             if ((this.HelloOperationCompletedEventHandler != null))
             {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.HelloOperationCompletedEventHandler(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+                this.HelloOperationCompletedEventHandler(
+                    this,
+                    new System.ComponentModel.AsyncCompletedEventArgs(
+                        e.Error,
+                        e.Cancelled,
+                        e.UserState
+                    )
+                );
             }
         }
 
-        public void HelloOperationAsync(EndpointDiscoveryMetadata endpointDiscoveryMetadata, object userState)
+        public void HelloOperationAsync(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata,
+            object userState
+        )
         {
-            HelloMessageApril2005 message = HelloMessageApril2005.Create(DiscoveryMessageSequenceGenerator.Next(), endpointDiscoveryMetadata);
+            HelloMessageApril2005 message = HelloMessageApril2005.Create(
+                DiscoveryMessageSequenceGenerator.Next(),
+                endpointDiscoveryMetadata
+            );
 
             if ((this.onBeginHelloOperationDelegate == null))
             {
-                this.onBeginHelloOperationDelegate = new BeginOperationDelegate(this.OnBeginHelloOperation);
+                this.onBeginHelloOperationDelegate = new BeginOperationDelegate(
+                    this.OnBeginHelloOperation
+                );
             }
             if ((this.onEndHelloOperationDelegate == null))
             {
-                this.onEndHelloOperationDelegate = new EndOperationDelegate(this.OnEndHelloOperation);
+                this.onEndHelloOperationDelegate = new EndOperationDelegate(
+                    this.OnEndHelloOperation
+                );
             }
             if ((this.onHelloOperationCompletedDelegate == null))
             {
-                this.onHelloOperationCompletedDelegate = Fx.ThunkCallback(new SendOrPostCallback(this.OnHelloOperationCompleted));
+                this.onHelloOperationCompletedDelegate = Fx.ThunkCallback(
+                    new SendOrPostCallback(this.OnHelloOperationCompleted)
+                );
             }
             base.InvokeAsync(
                 this.onBeginHelloOperationDelegate,
                 new object[] { message },
                 this.onEndHelloOperationDelegate,
                 this.onHelloOperationCompletedDelegate,
-                userState);
+                userState
+            );
         }
 
-        IAsyncResult OnBeginByeOperation(object[] inValues, System.AsyncCallback callback, object asyncState)
+        IAsyncResult OnBeginByeOperation(
+            object[] inValues,
+            System.AsyncCallback callback,
+            object asyncState
+        )
         {
             ByeMessageApril2005 message = ((ByeMessageApril2005)(inValues[0]));
             return this.BeginByeOperation(message, callback, asyncState);
@@ -206,17 +233,32 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             if ((this.ByeOperationCompletedEventHandler != null))
             {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.ByeOperationCompletedEventHandler(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+                this.ByeOperationCompletedEventHandler(
+                    this,
+                    new System.ComponentModel.AsyncCompletedEventArgs(
+                        e.Error,
+                        e.Cancelled,
+                        e.UserState
+                    )
+                );
             }
         }
 
-        public void ByeOperationAsync(EndpointDiscoveryMetadata endpointDiscoveryMetadata, object userState)
+        public void ByeOperationAsync(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata,
+            object userState
+        )
         {
-            ByeMessageApril2005 message = ByeMessageApril2005.Create(DiscoveryMessageSequenceGenerator.Next(), endpointDiscoveryMetadata);
+            ByeMessageApril2005 message = ByeMessageApril2005.Create(
+                DiscoveryMessageSequenceGenerator.Next(),
+                endpointDiscoveryMetadata
+            );
 
             if ((this.onBeginByeOperationDelegate == null))
             {
-                this.onBeginByeOperationDelegate = new BeginOperationDelegate(this.OnBeginByeOperation);
+                this.onBeginByeOperationDelegate = new BeginOperationDelegate(
+                    this.OnBeginByeOperation
+                );
             }
             if ((this.onEndByeOperationDelegate == null))
             {
@@ -224,14 +266,17 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             }
             if ((this.onByeOperationCompletedDelegate == null))
             {
-                this.onByeOperationCompletedDelegate = Fx.ThunkCallback(new SendOrPostCallback(this.OnByeOperationCompleted));
+                this.onByeOperationCompletedDelegate = Fx.ThunkCallback(
+                    new SendOrPostCallback(this.OnByeOperationCompleted)
+                );
             }
             base.InvokeAsync(
                 this.onBeginByeOperationDelegate,
                 new object[] { message },
                 this.onEndByeOperationDelegate,
                 this.onByeOperationCompletedDelegate,
-                userState);
+                userState
+            );
         }
     }
 }

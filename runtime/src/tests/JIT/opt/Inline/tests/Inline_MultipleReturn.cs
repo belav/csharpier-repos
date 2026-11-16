@@ -53,7 +53,6 @@ public class MainApp
         return v;
     }
 
-
     public static int SmallFunc_Inline()
     {
         return 111;
@@ -76,11 +75,15 @@ public class MainApp
         {
             int returncode = 0;
             Console.WriteLine(s_s);
-            if ((111 == Method_QMark_Inline(s_s)) && (100 == Method_WithMultipleReturn_Inline()) && (100 == Method_WithOneReturn_Inline()) && (100 == Method_ConstantProp_Inline(2)))
+            if (
+                (111 == Method_QMark_Inline(s_s))
+                && (100 == Method_WithMultipleReturn_Inline())
+                && (100 == Method_WithOneReturn_Inline())
+                && (100 == Method_ConstantProp_Inline(2))
+            )
             {
                 returncode = 100;
             }
-
             else
             {
                 returncode = 101;
@@ -94,5 +97,3 @@ public class MainApp
         }
     }
 }
-
-

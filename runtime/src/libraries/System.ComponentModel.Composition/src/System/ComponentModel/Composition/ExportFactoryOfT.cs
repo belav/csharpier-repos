@@ -17,7 +17,10 @@ namespace System.ComponentModel.Composition
         public ExportLifetimeContext<T> CreateExport()
         {
             Tuple<T, Action> untypedLifetimeContext = _exportLifetimeContextCreator.Invoke();
-            return new ExportLifetimeContext<T>(untypedLifetimeContext.Item1, untypedLifetimeContext.Item2);
+            return new ExportLifetimeContext<T>(
+                untypedLifetimeContext.Item1,
+                untypedLifetimeContext.Item2
+            );
         }
     }
 }

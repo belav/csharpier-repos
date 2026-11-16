@@ -9,23 +9,22 @@ namespace System.Net.Http.QPack
     [Serializable]
     internal sealed class QPackDecodingException : Exception
     {
-        public QPackDecodingException()
-        {
-        }
+        public QPackDecodingException() { }
 
-        public QPackDecodingException(string message) : base(message)
-        {
-        }
+        public QPackDecodingException(string message)
+            : base(message) { }
 
-        public QPackDecodingException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+        public QPackDecodingException(string message, Exception innerException)
+            : base(message, innerException) { }
 
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
 #endif
-        private QPackDecodingException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        private QPackDecodingException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

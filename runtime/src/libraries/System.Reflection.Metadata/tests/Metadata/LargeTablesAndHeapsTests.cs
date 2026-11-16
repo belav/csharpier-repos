@@ -14,14 +14,22 @@ namespace System.Reflection.Metadata.Tests
         {
             var mdBuilder = new MetadataBuilder();
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 var mdReader = mdProvider.GetMetadataReader();
 
@@ -82,14 +90,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.GetOrAddGuid(Guid.NewGuid());
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -150,14 +166,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.GetOrAddBlob(ImmutableArray.Create(BitConverter.GetBytes(i)));
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -218,14 +242,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.GetOrAddString($"<{i}>");
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -285,17 +317,29 @@ namespace System.Reflection.Metadata.Tests
 
             for (int i = 0; i < 0x10000; i++)
             {
-                mdBuilder.AddTypeReference(default(ModuleDefinitionHandle), default(StringHandle), default(StringHandle));
+                mdBuilder.AddTypeReference(
+                    default(ModuleDefinitionHandle),
+                    default(StringHandle),
+                    default(StringHandle)
+                );
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -356,18 +400,33 @@ namespace System.Reflection.Metadata.Tests
 
             for (int i = 0; i < 0x10000; i++)
             {
-                var t = mdBuilder.AddTypeDefinition(0, default(StringHandle), default(StringHandle), default(EntityHandle), default(FieldDefinitionHandle), default(MethodDefinitionHandle));
+                var t = mdBuilder.AddTypeDefinition(
+                    0,
+                    default(StringHandle),
+                    default(StringHandle),
+                    default(EntityHandle),
+                    default(FieldDefinitionHandle),
+                    default(MethodDefinitionHandle)
+                );
                 mdBuilder.AddTypeLayout(t, 0, 0);
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -428,18 +487,33 @@ namespace System.Reflection.Metadata.Tests
 
             for (int i = 0; i < 0x10000; i++)
             {
-                var t = mdBuilder.AddTypeDefinition(0, default(StringHandle), default(StringHandle), default(EntityHandle), default(FieldDefinitionHandle), default(MethodDefinitionHandle));
+                var t = mdBuilder.AddTypeDefinition(
+                    0,
+                    default(StringHandle),
+                    default(StringHandle),
+                    default(EntityHandle),
+                    default(FieldDefinitionHandle),
+                    default(MethodDefinitionHandle)
+                );
                 mdBuilder.AddTypeLayout(t, 0, 0);
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -502,14 +576,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.AddFieldDefinition(0, default(StringHandle), default(BlobHandle));
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -574,14 +656,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.AddFieldLayout(f, 0);
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -646,14 +736,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.AddFieldRelativeVirtualAddress(f, 0);
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -713,17 +811,32 @@ namespace System.Reflection.Metadata.Tests
 
             for (int i = 0; i < 0x10000; i++)
             {
-                mdBuilder.AddMethodDefinition(0, 0, default(StringHandle), default(BlobHandle), 0, default(ParameterHandle));
+                mdBuilder.AddMethodDefinition(
+                    0,
+                    0,
+                    default(StringHandle),
+                    default(BlobHandle),
+                    0,
+                    default(ParameterHandle)
+                );
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -784,18 +897,33 @@ namespace System.Reflection.Metadata.Tests
 
             for (int i = 0; i < 0x10000; i++)
             {
-                var m = mdBuilder.AddMethodDefinition(0, 0, default(StringHandle), default(BlobHandle), 0, default(ParameterHandle));
+                var m = mdBuilder.AddMethodDefinition(
+                    0,
+                    0,
+                    default(StringHandle),
+                    default(BlobHandle),
+                    0,
+                    default(ParameterHandle)
+                );
                 mdBuilder.AddStateMachineMethod(m, default(MethodDefinitionHandle));
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -858,14 +986,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.AddParameter(0, default(StringHandle), 0);
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -927,18 +1063,29 @@ namespace System.Reflection.Metadata.Tests
             {
                 for (int j = 0; j < 0x100; j++)
                 {
-                    mdBuilder.AddInterfaceImplementation(MetadataTokens.TypeDefinitionHandle(i + 1), MetadataTokens.TypeDefinitionHandle(j + 1));
+                    mdBuilder.AddInterfaceImplementation(
+                        MetadataTokens.TypeDefinitionHandle(i + 1),
+                        MetadataTokens.TypeDefinitionHandle(j + 1)
+                    );
                 }
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -998,17 +1145,29 @@ namespace System.Reflection.Metadata.Tests
 
             for (int i = 0; i < 0x10000; i++)
             {
-                mdBuilder.AddMemberReference(default(TypeDefinitionHandle), default(StringHandle), default(BlobHandle));
+                mdBuilder.AddMemberReference(
+                    default(TypeDefinitionHandle),
+                    default(StringHandle),
+                    default(BlobHandle)
+                );
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -1071,14 +1230,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.AddStandaloneSignature(default(BlobHandle));
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -1138,17 +1305,29 @@ namespace System.Reflection.Metadata.Tests
 
             for (int i = 0; i < 0x10000; i++)
             {
-                mdBuilder.AddDeclarativeSecurityAttribute(default(TypeDefinitionHandle), 0, default(BlobHandle));
+                mdBuilder.AddDeclarativeSecurityAttribute(
+                    default(TypeDefinitionHandle),
+                    0,
+                    default(BlobHandle)
+                );
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -1211,14 +1390,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.AddEvent(0, default(StringHandle), default(TypeDefinitionHandle));
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -1281,14 +1468,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.AddProperty(0, default(StringHandle), default(BlobHandle));
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -1350,17 +1545,32 @@ namespace System.Reflection.Metadata.Tests
 
             for (int i = 0; i < 0x10000; i++)
             {
-                mdBuilder.AddAssemblyReference(default(StringHandle), nullVersion, default(StringHandle), default(BlobHandle), 0, default(BlobHandle));
+                mdBuilder.AddAssemblyReference(
+                    default(StringHandle),
+                    nullVersion,
+                    default(StringHandle),
+                    default(BlobHandle),
+                    0,
+                    default(BlobHandle)
+                );
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -1425,14 +1635,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.AddAssemblyFile(default(StringHandle), default(BlobHandle), true);
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -1494,17 +1712,31 @@ namespace System.Reflection.Metadata.Tests
 
             for (int i = 0; i < 0x10000; i++)
             {
-                mdBuilder.AddExportedType(0, default(StringHandle), default(StringHandle), default(AssemblyFileHandle), 0);
+                mdBuilder.AddExportedType(
+                    0,
+                    default(StringHandle),
+                    default(StringHandle),
+                    default(AssemblyFileHandle),
+                    0
+                );
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -1567,14 +1799,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.AddManifestResource(0, default(StringHandle), default(EntityHandle), 0);
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -1634,17 +1874,30 @@ namespace System.Reflection.Metadata.Tests
 
             for (int i = 0; i < 0x10000; i++)
             {
-                mdBuilder.AddGenericParameter(default(TypeDefinitionHandle), 0, default(StringHandle), i);
+                mdBuilder.AddGenericParameter(
+                    default(TypeDefinitionHandle),
+                    0,
+                    default(StringHandle),
+                    i
+                );
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -1704,17 +1957,28 @@ namespace System.Reflection.Metadata.Tests
 
             for (int i = 0; i < 0x10000; i++)
             {
-                mdBuilder.AddGenericParameterConstraint(default(GenericParameterHandle), default(TypeDefinitionHandle));
+                mdBuilder.AddGenericParameterConstraint(
+                    default(GenericParameterHandle),
+                    default(TypeDefinitionHandle)
+                );
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -1774,17 +2038,28 @@ namespace System.Reflection.Metadata.Tests
 
             for (int i = 0; i < 0x10000; i++)
             {
-                mdBuilder.AddMethodSpecification(default(MethodDefinitionHandle), default(BlobHandle));
+                mdBuilder.AddMethodSpecification(
+                    default(MethodDefinitionHandle),
+                    default(BlobHandle)
+                );
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -1844,17 +2119,30 @@ namespace System.Reflection.Metadata.Tests
 
             for (int i = 0; i < 0x10000; i++)
             {
-                mdBuilder.AddDocument(default(BlobHandle), default(GuidHandle), default(BlobHandle), default(GuidHandle));
+                mdBuilder.AddDocument(
+                    default(BlobHandle),
+                    default(GuidHandle),
+                    default(BlobHandle),
+                    default(GuidHandle)
+                );
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -1914,17 +2202,32 @@ namespace System.Reflection.Metadata.Tests
 
             for (int i = 0; i < 0x10000; i++)
             {
-                mdBuilder.AddLocalScope(default(MethodDefinitionHandle), default(ImportScopeHandle), default(LocalVariableHandle), default(LocalConstantHandle), 0, 0);
+                mdBuilder.AddLocalScope(
+                    default(MethodDefinitionHandle),
+                    default(ImportScopeHandle),
+                    default(LocalVariableHandle),
+                    default(LocalConstantHandle),
+                    0,
+                    0
+                );
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -1987,14 +2290,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.AddLocalVariable(0, 0, default(StringHandle));
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -2057,14 +2368,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.AddLocalConstant(default(StringHandle), default(BlobHandle));
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -2127,14 +2446,22 @@ namespace System.Reflection.Metadata.Tests
                 mdBuilder.AddImportScope(default(ImportScopeHandle), default(BlobHandle));
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder);
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 const int LARGE = 4;
 
@@ -2204,24 +2531,57 @@ namespace System.Reflection.Metadata.Tests
             for (int i = 0; i < 0x10000; i++)
             {
                 mdBuilder.AddConstant(default(ParameterHandle), one);
-                mdBuilder.AddCustomAttribute(default(ParameterHandle), default(MethodDefinitionHandle), default(BlobHandle));
+                mdBuilder.AddCustomAttribute(
+                    default(ParameterHandle),
+                    default(MethodDefinitionHandle),
+                    default(BlobHandle)
+                );
                 mdBuilder.AddMarshallingDescriptor(default(ParameterHandle), default(BlobHandle));
-                mdBuilder.AddEventMap(default(TypeDefinitionHandle), default(EventDefinitionHandle));
-                mdBuilder.AddPropertyMap(default(TypeDefinitionHandle), default(PropertyDefinitionHandle));
-                mdBuilder.AddMethodSemantics(default(EventDefinitionHandle), 0, default(MethodDefinitionHandle));
-                mdBuilder.AddMethodImplementation(default(TypeDefinitionHandle), default(MethodDefinitionHandle), default(MethodDefinitionHandle));
-                mdBuilder.AddNestedType(default(TypeDefinitionHandle), default(TypeDefinitionHandle));
-                mdBuilder.AddCustomDebugInformation(default(ParameterHandle), default(GuidHandle), default(BlobHandle));
+                mdBuilder.AddEventMap(
+                    default(TypeDefinitionHandle),
+                    default(EventDefinitionHandle)
+                );
+                mdBuilder.AddPropertyMap(
+                    default(TypeDefinitionHandle),
+                    default(PropertyDefinitionHandle)
+                );
+                mdBuilder.AddMethodSemantics(
+                    default(EventDefinitionHandle),
+                    0,
+                    default(MethodDefinitionHandle)
+                );
+                mdBuilder.AddMethodImplementation(
+                    default(TypeDefinitionHandle),
+                    default(MethodDefinitionHandle),
+                    default(MethodDefinitionHandle)
+                );
+                mdBuilder.AddNestedType(
+                    default(TypeDefinitionHandle),
+                    default(TypeDefinitionHandle)
+                );
+                mdBuilder.AddCustomDebugInformation(
+                    default(ParameterHandle),
+                    default(GuidHandle),
+                    default(BlobHandle)
+                );
             }
 
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder, suppressValidation: true); // NestedClass not sorted
             var mdBlob = new BlobBuilder();
             rootBuilder.Serialize(mdBlob, 0, 0);
 
             // validate sizes table rows that reference guids:
-            using (var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray()))
+            using (
+                var mdProvider = MetadataReaderProvider.FromMetadataImage(mdBlob.ToImmutableArray())
+            )
             {
                 var mdReader = mdProvider.GetMetadataReader();
 

@@ -9,7 +9,8 @@ namespace System.Activities.Core.Presentation
     using System.Activities.Statements;
     using System.Collections.Generic;
 
-    internal class StateMachineValidationErrorSourceLocatorFeature : ValidationErrorSourceLocatorFeature
+    internal class StateMachineValidationErrorSourceLocatorFeature
+        : ValidationErrorSourceLocatorFeature
     {
         protected override IValidationErrorSourceLocator ValidationErrorSourceLocator
         {

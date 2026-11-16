@@ -3,6 +3,4 @@
 
 using System;
 
-public class ClassFromC
-{
-}
+public class ClassFromC { }

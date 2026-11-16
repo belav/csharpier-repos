@@ -29,14 +29,36 @@ namespace System.Activities.Debugger
         InstrumentationTracker instrumentationTracker;
         List<string> temporaryFiles;
 
-        public DebugManager(Activity root, string moduleNamePrefix, string typeNamePrefix, string auxiliaryThreadName, bool breakOnStartup,
-            WorkflowInstance host, bool debugStartedAtRoot) :
-            this(root, moduleNamePrefix, typeNamePrefix, auxiliaryThreadName, breakOnStartup, host, debugStartedAtRoot, false)
-        {
-        }
+        public DebugManager(
+            Activity root,
+            string moduleNamePrefix,
+            string typeNamePrefix,
+            string auxiliaryThreadName,
+            bool breakOnStartup,
+            WorkflowInstance host,
+            bool debugStartedAtRoot
+        )
+            : this(
+                root,
+                moduleNamePrefix,
+                typeNamePrefix,
+                auxiliaryThreadName,
+                breakOnStartup,
+                host,
+                debugStartedAtRoot,
+                false
+            ) { }
 
-        internal DebugManager(Activity root, string moduleNamePrefix, string typeNamePrefix, string auxiliaryThreadName, bool breakOnStartup, 
-            WorkflowInstance host, bool debugStartedAtRoot, bool resetDynamicModule)
+        internal DebugManager(
+            Activity root,
+            string moduleNamePrefix,
+            string typeNamePrefix,
+            string auxiliaryThreadName,
+            bool breakOnStartup,
+            WorkflowInstance host,
+            bool debugStartedAtRoot,
+            bool resetDynamicModule
+        )
         {
             if (resetDynamicModule)
             {
@@ -50,14 +72,16 @@ namespace System.Activities.Debugger
 
             this.stateManager = new StateManager(
                 new StateManager.Properties
-                    {
-                        ModuleNamePrefix = moduleNamePrefix,
-                        TypeNamePrefix = typeNamePrefix,
-                        AuxiliaryThreadName = auxiliaryThreadName,
-                        BreakOnStartup = breakOnStartup
-                    },
-                    debugStartedAtRoot, dynamicModuleManager);
-            
+                {
+                    ModuleNamePrefix = moduleNamePrefix,
+                    TypeNamePrefix = typeNamePrefix,
+                    AuxiliaryThreadName = auxiliaryThreadName,
+                    BreakOnStartup = breakOnStartup,
+                },
+                debugStartedAtRoot,
+                dynamicModuleManager
+            );
+
             this.states = new Dictionary<object, State>();
             this.runningThreads = new Dictionary<int, Stack<Activity>>();
             this.instrumentationTracker = new InstrumentationTracker(root);
@@ -74,10 +98,7 @@ namespace System.Activities.Debugger
         // contrast to attaching into the middle of a running workflow.
         bool DebugStartedAtRoot
         {
-            get
-            {
-                return this.stateManager.DebugStartedAtRoot;
-            }
+            get { return this.stateManager.DebugStartedAtRoot; }
         }
 
         internal void Instrument(Activity activity)
@@ -89,13 +110,24 @@ namespace System.Activities.Debugger
             try
             {
                 byte[] checksum;
-                Dictionary<object, SourceLocation> sourceLocations = SourceLocationProvider.GetSourceLocations(activity, out sourcePath, out isTemporaryFile, out checksum);
+                Dictionary<object, SourceLocation> sourceLocations =
+                    SourceLocationProvider.GetSourceLocations(
+                        activity,
+                        out sourcePath,
+                        out isTemporaryFile,
+                        out checksum
+                    );
                 if (checksum != null)
                 {
                     checksumCache = new Dictionary<string, byte[]>();
                     checksumCache.Add(sourcePath.ToUpperInvariant(), checksum);
                 }
-                Instrument(activity, sourceLocations, Path.GetFileNameWithoutExtension(sourcePath), checksumCache);
+                Instrument(
+                    activity,
+                    sourceLocations,
+                    Path.GetFileNameWithoutExtension(sourcePath),
+                    checksumCache
+                );
             }
             catch (Exception ex)
             {
@@ -108,7 +140,9 @@ namespace System.Activities.Debugger
                 }
             }
 
-            List<Activity> sameSourceActivities = this.instrumentationTracker.GetSameSourceSubRoots(activity);
+            List<Activity> sameSourceActivities = this.instrumentationTracker.GetSameSourceSubRoots(
+                activity
+            );
             this.instrumentationTracker.MarkInstrumented(activity);
 
             foreach (Activity sameSourceActivity in sameSourceActivities)
@@ -128,7 +162,10 @@ namespace System.Activities.Debugger
                 {
                     this.temporaryFiles = new List<string>();
                 }
-                Fx.Assert(!string.IsNullOrEmpty(sourcePath), "SourcePath cannot be null for temporary file");
+                Fx.Assert(
+                    !string.IsNullOrEmpty(sourcePath),
+                    "SourcePath cannot be null for temporary file"
+                );
                 this.temporaryFiles.Add(sourcePath);
             }
         }
@@ -138,13 +175,16 @@ namespace System.Activities.Debugger
         // rootActivity1 has been instrumented and its instrumentation states can be
         // re-used by rootActivity2.
         //
-        // MapInstrumentationStates will walk both Workflow trees in parallel and map every 
+        // MapInstrumentationStates will walk both Workflow trees in parallel and map every
         // state for activities in rootActivity1 to corresponding activities in rootActivity2.
         void MapInstrumentationStates(Activity rootActivity1, Activity rootActivity2)
         {
-            Queue<KeyValuePair<Activity, Activity>> pairsRemaining = new Queue<KeyValuePair<Activity, Activity>>();
+            Queue<KeyValuePair<Activity, Activity>> pairsRemaining =
+                new Queue<KeyValuePair<Activity, Activity>>();
 
-            pairsRemaining.Enqueue(new KeyValuePair<Activity, Activity>(rootActivity1, rootActivity2));
+            pairsRemaining.Enqueue(
+                new KeyValuePair<Activity, Activity>(rootActivity1, rootActivity2)
+            );
             HashSet<Activity> visited = new HashSet<Activity>();
             KeyValuePair<Activity, Activity> currentPair;
             State state;
@@ -159,7 +199,10 @@ namespace System.Activities.Debugger
                 {
                     if (this.states.ContainsKey(activity2))
                     {
-                        Trace.WriteLine("Workflow", SR.DuplicateInstrumentation(activity2.DisplayName));
+                        Trace.WriteLine(
+                            "Workflow",
+                            SR.DuplicateInstrumentation(activity2.DisplayName)
+                        );
                     }
                     else
                     {
@@ -172,24 +215,37 @@ namespace System.Activities.Debugger
                 visited.Add(activity1);
 
                 // This to avoid comparing any value expression with DesignTimeValueExpression (in designer case).
-                IEnumerator<Activity> enumerator1 = WorkflowInspectionServices.GetActivities(activity1).GetEnumerator();
-                IEnumerator<Activity> enumerator2 = WorkflowInspectionServices.GetActivities(activity2).GetEnumerator();
+                IEnumerator<Activity> enumerator1 = WorkflowInspectionServices
+                    .GetActivities(activity1)
+                    .GetEnumerator();
+                IEnumerator<Activity> enumerator2 = WorkflowInspectionServices
+                    .GetActivities(activity2)
+                    .GetEnumerator();
 
                 bool hasNextItem1 = enumerator1.MoveNext();
                 bool hasNextItem2 = enumerator2.MoveNext();
 
                 while (hasNextItem1 && hasNextItem2)
                 {
-                    if (!visited.Contains(enumerator1.Current))  // avoid adding the same activity (e.g. some default implementation).
+                    if (!visited.Contains(enumerator1.Current)) // avoid adding the same activity (e.g. some default implementation).
                     {
                         if (enumerator1.Current.GetType() != enumerator2.Current.GetType())
                         {
                             // Give debugger log instead of just asserting; to help user find out mismatch problem.
                             Trace.WriteLine(
-                                "Unmatched type: " + enumerator1.Current.GetType().FullName +
-                                " vs " + enumerator2.Current.GetType().FullName + "\n");
+                                "Unmatched type: "
+                                    + enumerator1.Current.GetType().FullName
+                                    + " vs "
+                                    + enumerator2.Current.GetType().FullName
+                                    + "\n"
+                            );
                         }
-                        pairsRemaining.Enqueue(new KeyValuePair<Activity, Activity>(enumerator1.Current, enumerator2.Current));
+                        pairsRemaining.Enqueue(
+                            new KeyValuePair<Activity, Activity>(
+                                enumerator1.Current,
+                                enumerator2.Current
+                            )
+                        );
                     }
 
                     hasNextItem1 = enumerator1.MoveNext();
@@ -204,19 +260,27 @@ namespace System.Activities.Debugger
                 }
             }
         }
-        
 
         // Main instrumentation.
         // Currently the typeNamePrefix is used to notify the Designer of which file to show.
-        // This will no longer necessary when the callstack API can give us the source line 
+        // This will no longer necessary when the callstack API can give us the source line
         // information.
-        public void Instrument(Activity rootActivity, Dictionary<object, SourceLocation> sourceLocations, string typeNamePrefix, Dictionary<string, byte[]> checksumCache)
+        public void Instrument(
+            Activity rootActivity,
+            Dictionary<object, SourceLocation> sourceLocations,
+            string typeNamePrefix,
+            Dictionary<string, byte[]> checksumCache
+        )
         {
-            Queue<KeyValuePair<Activity, string>> pairsRemaining = new Queue<KeyValuePair<Activity, string>>();
+            Queue<KeyValuePair<Activity, string>> pairsRemaining =
+                new Queue<KeyValuePair<Activity, string>>();
 
             string name;
             Activity activity = rootActivity;
-            KeyValuePair<Activity, string> pair = new KeyValuePair<Activity, string>(activity, string.Empty);
+            KeyValuePair<Activity, string> pair = new KeyValuePair<Activity, string>(
+                activity,
+                string.Empty
+            );
             pairsRemaining.Enqueue(pair);
             HashSet<string> existingNames = new HashSet<string>();
             HashSet<Activity> visited = new HashSet<Activity>();
@@ -228,7 +292,7 @@ namespace System.Activities.Debugger
                 activity = pair.Key;
                 string parentName = pair.Value;
                 string displayName = activity.DisplayName;
-                
+
                 // If no DisplayName, then use the type name.
                 if (string.IsNullOrEmpty(displayName))
                 {
@@ -236,19 +300,30 @@ namespace System.Activities.Debugger
                 }
 
                 if (parentName == string.Empty)
-                {   // the root
+                { // the root
                     name = displayName;
                 }
                 else
                 {
-                    name = string.Format(CultureInfo.InvariantCulture, "{0}.{1}", parentName, displayName);
+                    name = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}.{1}",
+                        parentName,
+                        displayName
+                    );
                 }
 
                 int i = 0;
                 while (existingNames.Contains(name))
                 {
                     ++i;
-                    name = string.Format(CultureInfo.InvariantCulture, "{0}.{1}{2}", parentName, displayName, i.ToString(CultureInfo.InvariantCulture));
+                    name = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}.{1}{2}",
+                        parentName,
+                        displayName,
+                        i.ToString(CultureInfo.InvariantCulture)
+                    );
                 }
 
                 existingNames.Add(name);
@@ -257,18 +332,24 @@ namespace System.Activities.Debugger
 
                 if (sourceLocations.TryGetValue(activity, out sourceLocation))
                 {
-                    object[] objects = activity.GetType().GetCustomAttributes(typeof(DebuggerStepThroughAttribute), false);
+                    object[] objects = activity
+                        .GetType()
+                        .GetCustomAttributes(typeof(DebuggerStepThroughAttribute), false);
                     if ((objects == null || objects.Length == 0))
                     {
                         Instrument(activity, sourceLocation, name);
                     }
                 }
 
-                foreach (Activity childActivity in WorkflowInspectionServices.GetActivities(activity))
+                foreach (
+                    Activity childActivity in WorkflowInspectionServices.GetActivities(activity)
+                )
                 {
                     if (!visited.Contains(childActivity))
                     {
-                        pairsRemaining.Enqueue(new KeyValuePair<Activity, string>(childActivity, name));
+                        pairsRemaining.Enqueue(
+                            new KeyValuePair<Activity, string>(childActivity, name)
+                        );
                     }
                 }
             }
@@ -276,7 +357,7 @@ namespace System.Activities.Debugger
         }
 
         // Exiting the DebugManager.
-        // Delete all temporary files 
+        // Delete all temporary files
         public void Exit()
         {
             if (this.temporaryFiles != null)
@@ -309,7 +390,10 @@ namespace System.Activities.Debugger
             }
             else
             {
-                State activityState = this.stateManager.DefineStateWithDebugInfo(sourceLocation, name);
+                State activityState = this.stateManager.DefineStateWithDebugInfo(
+                    sourceLocation,
+                    name
+                );
                 this.states.Add(activity, activityState);
             }
         }
@@ -325,7 +409,7 @@ namespace System.Activities.Debugger
             {
                 return true;
             }
-            
+
             // No states correspond to this yet.
             if (this.instrumentationTracker.IsUninstrumentedSubRoot(activity))
             {
@@ -354,6 +438,7 @@ namespace System.Activities.Debugger
                 Fx.Assert(false, "Uninstrumented activity is disallowed: " + activity.DisplayName);
             }
         }
+
         public void OnEnterState(ActivityInstance instance)
         {
             Fx.Assert(instance != null, "ActivityInstance cannot be null");
@@ -361,16 +446,28 @@ namespace System.Activities.Debugger
 
             if (this.EnsureInstrumented(activity))
             {
-                this.EnterState(GetOrCreateThreadId(activity, instance), activity, GenerateLocals(instance));
+                this.EnterState(
+                    GetOrCreateThreadId(activity, instance),
+                    activity,
+                    GenerateLocals(instance)
+                );
             }
         }
 
         [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.ReviewUnusedParameters)]
-        public void OnEnterState(Activity expression, ActivityInstance instance, LocationEnvironment environment)
+        public void OnEnterState(
+            Activity expression,
+            ActivityInstance instance,
+            LocationEnvironment environment
+        )
         {
             if (this.EnsureInstrumented(expression))
             {
-                this.EnterState(GetOrCreateThreadId(expression, instance), expression, GenerateLocals(instance));
+                this.EnterState(
+                    GetOrCreateThreadId(expression, instance),
+                    expression,
+                    GenerateLocals(instance)
+                );
             }
         }
 
@@ -382,7 +479,7 @@ namespace System.Activities.Debugger
             // If debugging was not started from the root, then threadId should not be < 0.
             Fx.Assert(!this.DebugStartedAtRoot || threadId >= 0, "Leaving from an unknown state");
 
-            if (threadId >= 0) 
+            if (threadId >= 0)
             {
                 State activityState;
                 if (this.states.TryGetValue(activity, out activityState))
@@ -391,7 +488,10 @@ namespace System.Activities.Debugger
                 }
                 else
                 {
-                    Fx.Assert(false, "Uninstrumented activity is disallowed: " + activity.DisplayName);
+                    Fx.Assert(
+                        false,
+                        "Uninstrumented activity is disallowed: " + activity.DisplayName
+                    );
                 }
                 this.Pop(threadId);
             }
@@ -434,7 +534,7 @@ namespace System.Activities.Debugger
         // Boolean "strict" parameter determine whether the activity itself should
         // be on top of the stack.
         // Strict checking is needed in the case of "Leave"-ing a state.
-        // Non-strict checking is needed for "Enter"-ing a state, since the direct parent of 
+        // Non-strict checking is needed for "Enter"-ing a state, since the direct parent of
         // the activity may not yet be executed (e.g. the activity is an argument of another activity,
         // the activity is "enter"-ed even though the direct parent is not yet "enter"-ed.
         int GetExecutingThreadId(Activity activity, bool strict)
@@ -457,7 +557,10 @@ namespace System.Activities.Debugger
                 {
                     Stack<Activity> threadStack = entry.Value;
                     Activity topActivity = threadStack.Peek();
-                    if (!IsParallelActivity(topActivity) && IsAncestorOf(threadStack.Peek(), activity))
+                    if (
+                        !IsParallelActivity(topActivity)
+                        && IsAncestorOf(threadStack.Peek(), activity)
+                    )
                     {
                         threadId = entry.Key;
                         break;
@@ -470,9 +573,14 @@ namespace System.Activities.Debugger
         static bool IsAncestorOf(Activity ancestorActivity, Activity activity)
         {
             Fx.Assert(activity != null, "IsAncestorOf: Cannot pass null as activity");
-            Fx.Assert(ancestorActivity != null, "IsAncestorOf: Cannot pass null as ancestorActivity");
+            Fx.Assert(
+                ancestorActivity != null,
+                "IsAncestorOf: Cannot pass null as ancestorActivity"
+            );
             activity = activity.Parent;
-            while (activity != null && activity != ancestorActivity && !IsParallelActivity(activity))
+            while (
+                activity != null && activity != ancestorActivity && !IsParallelActivity(activity)
+            )
             {
                 activity = activity.Parent;
             }
@@ -482,11 +590,14 @@ namespace System.Activities.Debugger
         static bool IsParallelActivity(Activity activity)
         {
             Fx.Assert(activity != null, "IsParallel: Cannot pass null as activity");
-            return activity is Parallel ||
-                    (activity.GetType().IsGenericType && activity.GetType().GetGenericTypeDefinition() == typeof(ParallelForEach<>));
+            return activity is Parallel
+                || (
+                    activity.GetType().IsGenericType
+                    && activity.GetType().GetGenericTypeDefinition() == typeof(ParallelForEach<>)
+                );
         }
 
-        // Get threads currently executing the parent of the given activity, 
+        // Get threads currently executing the parent of the given activity,
         // if none then create a new one and prep the call stack to current state.
         int GetOrCreateThreadId(Activity activity, ActivityInstance instance)
         {
@@ -506,7 +617,11 @@ namespace System.Activities.Debugger
         // the root up to (but not including) the instance.
         // If the activity is an expression though, then the call stack will also include the instance
         // (since it is the parent of the expression).
-        int CreateLogicalThread(Activity activity, ActivityInstance instance, bool primeCurrentInstance)
+        int CreateLogicalThread(
+            Activity activity,
+            ActivityInstance instance,
+            bool primeCurrentInstance
+        )
         {
             Stack<ActivityInstance> ancestors = null;
 
@@ -515,11 +630,17 @@ namespace System.Activities.Debugger
                 ancestors = new Stack<ActivityInstance>();
 
                 if (activity != instance.Activity || primeCurrentInstance)
-                {   // This mean that activity is an expression and 
+                { // This mean that activity is an expression and
                     // instance is the parent of this expression.
-                   
-                    Fx.Assert(primeCurrentInstance || (activity is ActivityWithResult), "Expect an ActivityWithResult");
-                    Fx.Assert(primeCurrentInstance || (activity.Parent == instance.Activity), "Argument Expression is not given correct parent instance");
+
+                    Fx.Assert(
+                        primeCurrentInstance || (activity is ActivityWithResult),
+                        "Expect an ActivityWithResult"
+                    );
+                    Fx.Assert(
+                        primeCurrentInstance || (activity.Parent == instance.Activity),
+                        "Argument Expression is not given correct parent instance"
+                    );
                     if (primeCurrentInstance || !IsParallelActivity(instance.Activity))
                     {
                         ancestors.Push(instance);
@@ -539,7 +660,11 @@ namespace System.Activities.Debugger
                     int parentThreadId = GetExecutingThreadId(instanceParent.Activity, false);
                     if (parentThreadId < 0)
                     {
-                        parentThreadId = CreateLogicalThread(instanceParent.Activity, instanceParent, true);
+                        parentThreadId = CreateLogicalThread(
+                            instanceParent.Activity,
+                            instanceParent,
+                            true
+                        );
                         Fx.Assert(parentThreadId > 0, "Parallel main thread can't be created");
                     }
                 }
@@ -551,7 +676,7 @@ namespace System.Activities.Debugger
                 threadName += activity.Parent.DisplayName;
             }
             else // Special case for the root of WorklowService that does not have a parent.
-            {   
+            {
                 threadName += activity.DisplayName;
             }
 
@@ -560,10 +685,10 @@ namespace System.Activities.Debugger
             this.runningThreads.Add(newThreadId, newStack);
 
             if (!this.DebugStartedAtRoot && ancestors != null)
-            { // Need to create callstack to current activity.                        
+            { // Need to create callstack to current activity.
                 PrimeCallStack(newThreadId, ancestors);
             }
-            
+
             return newThreadId;
         }
 
@@ -571,7 +696,10 @@ namespace System.Activities.Debugger
         // Note: the call stack will not include the current instance.
         void PrimeCallStack(int threadId, Stack<ActivityInstance> ancestors)
         {
-            Fx.Assert(!this.DebugStartedAtRoot, "Priming should not be called if the debugging is attached from the start of the workflow");
+            Fx.Assert(
+                !this.DebugStartedAtRoot,
+                "Priming should not be called if the debugging is attached from the start of the workflow"
+            );
             bool currentIsPrimingValue = this.stateManager.IsPriming;
             this.stateManager.IsPriming = true;
             while (ancestors.Count > 0)
@@ -579,7 +707,11 @@ namespace System.Activities.Debugger
                 ActivityInstance currentInstance = ancestors.Pop();
                 if (EnsureInstrumented(currentInstance.Activity))
                 {
-                    this.EnterState(threadId, currentInstance.Activity, GenerateLocals(currentInstance));
+                    this.EnterState(
+                        threadId,
+                        currentInstance.Activity,
+                        GenerateLocals(currentInstance)
+                    );
                 }
             }
             this.stateManager.IsPriming = currentIsPrimingValue;

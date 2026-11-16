@@ -22,7 +22,7 @@ namespace System.ServiceModel.Description
         bool isAuthenticationManagerSet;
         bool isAuthenticationSchemesSet;
         bool isReadOnly;
-       
+
         public ServiceAuthenticationBehavior()
         {
             this.ServiceAuthenticationManager = defaultServiceAuthenticationManager;
@@ -40,10 +40,7 @@ namespace System.ServiceModel.Description
 
         public ServiceAuthenticationManager ServiceAuthenticationManager
         {
-            get
-            {
-                return this.serviceAuthenticationManager;
-            }
+            get { return this.serviceAuthenticationManager; }
             set
             {
                 ThrowIfImmutable();
@@ -54,10 +51,7 @@ namespace System.ServiceModel.Description
 
         public AuthenticationSchemes AuthenticationSchemes
         {
-            get
-            {
-                return this.authenticationSchemes;
-            }
+            get { return this.authenticationSchemes; }
             set
             {
                 ThrowIfImmutable();
@@ -76,11 +70,17 @@ namespace System.ServiceModel.Description
             return this.isAuthenticationSchemesSet;
         }
 
-        void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase serviceHostBase)
-        {
-        }
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
 
-        void IServiceBehavior.AddBindingParameters(ServiceDescription description, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        )
         {
             if (parameters == null)
             {
@@ -90,10 +90,18 @@ namespace System.ServiceModel.Description
             if (this.serviceAuthenticationManager != null)
             {
                 // throw if bindingParameters already has a AuthenticationManager
-                ServiceAuthenticationManager otherAuthenticationManager = parameters.Find<ServiceAuthenticationManager>();
+                ServiceAuthenticationManager otherAuthenticationManager =
+                    parameters.Find<ServiceAuthenticationManager>();
                 if (otherAuthenticationManager != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MultipleAuthenticationManagersInServiceBindingParameters, otherAuthenticationManager)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.MultipleAuthenticationManagersInServiceBindingParameters,
+                                otherAuthenticationManager
+                            )
+                        )
+                    );
                 }
 
                 parameters.Add(this.serviceAuthenticationManager);
@@ -102,27 +110,47 @@ namespace System.ServiceModel.Description
             if (this.authenticationSchemes != AuthenticationSchemes.None)
             {
                 // throw if bindingParameters already has an AuthenticationSchemes
-                AuthenticationSchemesBindingParameter otherAuthenticationSchemesBindingParameter = parameters.Find<AuthenticationSchemesBindingParameter>();
+                AuthenticationSchemesBindingParameter otherAuthenticationSchemesBindingParameter =
+                    parameters.Find<AuthenticationSchemesBindingParameter>();
                 if (otherAuthenticationSchemesBindingParameter != null)
                 {
-                    if (otherAuthenticationSchemesBindingParameter.AuthenticationSchemes != authenticationSchemes)
+                    if (
+                        otherAuthenticationSchemesBindingParameter.AuthenticationSchemes
+                        != authenticationSchemes
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MultipleAuthenticationSchemesInServiceBindingParameters, otherAuthenticationSchemesBindingParameter.AuthenticationSchemes)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.MultipleAuthenticationSchemesInServiceBindingParameters,
+                                    otherAuthenticationSchemesBindingParameter.AuthenticationSchemes
+                                )
+                            )
+                        );
                     }
                 }
                 else
                 {
-                    parameters.Add(new AuthenticationSchemesBindingParameter(this.authenticationSchemes));
+                    parameters.Add(
+                        new AuthenticationSchemesBindingParameter(this.authenticationSchemes)
+                    );
                 }
             }
         }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
         {
             if (description == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("description"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("description")
+                );
             if (serviceHostBase == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("serviceHostBase"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("serviceHostBase")
+                );
 
             if (this.serviceAuthenticationManager == null)
             {
@@ -131,23 +159,46 @@ namespace System.ServiceModel.Description
 
             for (int i = 0; i < serviceHostBase.ChannelDispatchers.Count; i++)
             {
-                ChannelDispatcher channelDispatcher = serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
-                if (channelDispatcher != null && !ServiceMetadataBehavior.IsHttpGetMetadataDispatcher(description, channelDispatcher))
+                ChannelDispatcher channelDispatcher =
+                    serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
+                if (
+                    channelDispatcher != null
+                    && !ServiceMetadataBehavior.IsHttpGetMetadataDispatcher(
+                        description,
+                        channelDispatcher
+                    )
+                )
                 {
                     foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
                     {
                         DispatchRuntime behavior = endpointDispatcher.DispatchRuntime;
                         behavior.ServiceAuthenticationManager = this.serviceAuthenticationManager;
 
-                        ServiceEndpoint endpoint = FindMatchingServiceEndpoint(description, endpointDispatcher);
+                        ServiceEndpoint endpoint = FindMatchingServiceEndpoint(
+                            description,
+                            endpointDispatcher
+                        );
                         if (endpoint != null)
                         {
-                            bool isSecureConversationBinding = IsSecureConversationBinding(endpoint.Binding);
+                            bool isSecureConversationBinding = IsSecureConversationBinding(
+                                endpoint.Binding
+                            );
 
                             if (isSecureConversationBinding)
                             {
-                                SecurityStandardsManager standardsManager = GetConfiguredSecurityStandardsManager(endpoint.Binding);
-                                behavior.ServiceAuthenticationManager = new ServiceAuthenticationManagerWrapper(this.serviceAuthenticationManager, new string[] { standardsManager.SecureConversationDriver.CloseAction.Value });
+                                SecurityStandardsManager standardsManager =
+                                    GetConfiguredSecurityStandardsManager(endpoint.Binding);
+                                behavior.ServiceAuthenticationManager =
+                                    new ServiceAuthenticationManagerWrapper(
+                                        this.serviceAuthenticationManager,
+                                        new string[]
+                                        {
+                                            standardsManager
+                                                .SecureConversationDriver
+                                                .CloseAction
+                                                .Value,
+                                        }
+                                    );
                             }
                         }
                     }
@@ -169,11 +220,16 @@ namespace System.ServiceModel.Description
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
         }
 
-        ServiceEndpoint FindMatchingServiceEndpoint(ServiceDescription description, EndpointDispatcher endpointDispatcher)
+        ServiceEndpoint FindMatchingServiceEndpoint(
+            ServiceDescription description,
+            EndpointDispatcher endpointDispatcher
+        )
         {
             foreach (ServiceEndpoint endpoint in description.Endpoints)
             {
@@ -191,13 +247,20 @@ namespace System.ServiceModel.Description
             if (binding == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("binding");
 
-            SecurityBindingElement securityBindingElement = binding.CreateBindingElements().Find<SecurityBindingElement>();
+            SecurityBindingElement securityBindingElement = binding
+                .CreateBindingElements()
+                .Find<SecurityBindingElement>();
             if (securityBindingElement == null)
             {
                 return false;
             }
 
-            foreach (SecurityTokenParameters tokenParam in new SecurityTokenParametersEnumerable(securityBindingElement, true))
+            foreach (
+                SecurityTokenParameters tokenParam in new SecurityTokenParametersEnumerable(
+                    securityBindingElement,
+                    true
+                )
+            )
             {
                 if (tokenParam is SecureConversationSecurityTokenParameters)
                 {
@@ -213,15 +276,23 @@ namespace System.ServiceModel.Description
             if (binding == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("binding");
 
-            SecurityBindingElement securityBindingElement = binding.CreateBindingElements().Find<SecurityBindingElement>();
+            SecurityBindingElement securityBindingElement = binding
+                .CreateBindingElements()
+                .Find<SecurityBindingElement>();
             if (securityBindingElement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("binding", SR.GetString(SR.NoSecurityBindingElementFound));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "binding",
+                    SR.GetString(SR.NoSecurityBindingElementFound)
+                );
             }
 
-            return new SecurityStandardsManager(securityBindingElement.MessageSecurityVersion, new WSSecurityTokenSerializer(securityBindingElement.MessageSecurityVersion.SecurityVersion));
+            return new SecurityStandardsManager(
+                securityBindingElement.MessageSecurityVersion,
+                new WSSecurityTokenSerializer(
+                    securityBindingElement.MessageSecurityVersion.SecurityVersion
+                )
+            );
         }
-
     }
-
 }

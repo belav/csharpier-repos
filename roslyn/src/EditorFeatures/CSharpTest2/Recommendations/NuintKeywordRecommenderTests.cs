@@ -15,5 +15,6 @@ public class NuintKeywordRecommenderTests : NativeIntegerKeywordRecommenderTests
 {
     protected override string KeywordText => "nuint";
 
-    private protected override AbstractNativeIntegerKeywordRecommender Recommender => new NuintKeywordRecommender();
+    private protected override AbstractNativeIntegerKeywordRecommender Recommender =>
+        new NuintKeywordRecommender();
 }

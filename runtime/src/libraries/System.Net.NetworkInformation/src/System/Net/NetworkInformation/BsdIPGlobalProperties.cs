@@ -11,7 +11,8 @@ namespace System.Net.NetworkInformation
         {
             int realCount = Interop.Sys.GetEstimatedTcpConnectionCount();
             int infoCount = realCount * 2;
-            Interop.Sys.NativeTcpConnectionInformation[] infos = new Interop.Sys.NativeTcpConnectionInformation[infoCount];
+            Interop.Sys.NativeTcpConnectionInformation[] infos =
+                new Interop.Sys.NativeTcpConnectionInformation[infoCount];
             fixed (Interop.Sys.NativeTcpConnectionInformation* infosPtr = infos)
             {
                 if (Interop.Sys.GetActiveTcpConnectionInfos(infosPtr, &infoCount) == -1)
@@ -20,7 +21,9 @@ namespace System.Net.NetworkInformation
                 }
             }
 
-            TcpConnectionInformation[] connectionInformations = new TcpConnectionInformation[infoCount];
+            TcpConnectionInformation[] connectionInformations = new TcpConnectionInformation[
+                infoCount
+            ];
             int nextResultIndex = 0;
             for (int i = 0; i < infoCount; i++)
             {
@@ -32,15 +35,36 @@ namespace System.Net.NetworkInformation
                     continue;
                 }
 
-                IPAddress localIPAddress = new IPAddress(new ReadOnlySpan<byte>(nativeInfo.LocalEndPoint.AddressBytes, checked((int)nativeInfo.LocalEndPoint.NumAddressBytes)));
-                IPEndPoint local = new IPEndPoint(localIPAddress, (int)nativeInfo.LocalEndPoint.Port);
+                IPAddress localIPAddress = new IPAddress(
+                    new ReadOnlySpan<byte>(
+                        nativeInfo.LocalEndPoint.AddressBytes,
+                        checked((int)nativeInfo.LocalEndPoint.NumAddressBytes)
+                    )
+                );
+                IPEndPoint local = new IPEndPoint(
+                    localIPAddress,
+                    (int)nativeInfo.LocalEndPoint.Port
+                );
 
-                IPAddress remoteIPAddress = nativeInfo.RemoteEndPoint.NumAddressBytes == 0 ?
-                    IPAddress.Any :
-                    new IPAddress(new ReadOnlySpan<byte>(nativeInfo.RemoteEndPoint.AddressBytes, checked((int)nativeInfo.RemoteEndPoint.NumAddressBytes)));
+                IPAddress remoteIPAddress =
+                    nativeInfo.RemoteEndPoint.NumAddressBytes == 0
+                        ? IPAddress.Any
+                        : new IPAddress(
+                            new ReadOnlySpan<byte>(
+                                nativeInfo.RemoteEndPoint.AddressBytes,
+                                checked((int)nativeInfo.RemoteEndPoint.NumAddressBytes)
+                            )
+                        );
 
-                IPEndPoint remote = new IPEndPoint(remoteIPAddress, (int)nativeInfo.RemoteEndPoint.Port);
-                connectionInformations[nextResultIndex++] = new SimpleTcpConnectionInformation(local, remote, state);
+                IPEndPoint remote = new IPEndPoint(
+                    remoteIPAddress,
+                    (int)nativeInfo.RemoteEndPoint.Port
+                );
+                connectionInformations[nextResultIndex++] = new SimpleTcpConnectionInformation(
+                    local,
+                    remote,
+                    state
+                );
             }
 
             if (nextResultIndex != connectionInformations.Length)
@@ -53,12 +77,12 @@ namespace System.Net.NetworkInformation
 
         public override TcpConnectionInformation[] GetActiveTcpConnections()
         {
-            return GetTcpConnections(listeners:false);
+            return GetTcpConnections(listeners: false);
         }
 
         public override IPEndPoint[] GetActiveTcpListeners()
         {
-            TcpConnectionInformation[] allConnections = GetTcpConnections(listeners:true);
+            TcpConnectionInformation[] allConnections = GetTcpConnections(listeners: true);
             var endPoints = new IPEndPoint[allConnections.Length];
             for (int i = 0; i < allConnections.Length; i++)
             {
@@ -85,9 +109,15 @@ namespace System.Net.NetworkInformation
             {
                 Interop.Sys.IPEndPointInfo endPointInfo = infos[i];
                 int port = (int)endPointInfo.Port;
-                IPAddress ipAddress = endPointInfo.NumAddressBytes == 0 ?
-                    IPAddress.Any :
-                    new IPAddress(new ReadOnlySpan<byte>(endPointInfo.AddressBytes, checked((int)endPointInfo.NumAddressBytes)));
+                IPAddress ipAddress =
+                    endPointInfo.NumAddressBytes == 0
+                        ? IPAddress.Any
+                        : new IPAddress(
+                            new ReadOnlySpan<byte>(
+                                endPointInfo.AddressBytes,
+                                checked((int)endPointInfo.NumAddressBytes)
+                            )
+                        );
 
                 endPoints[i] = new IPEndPoint(ipAddress, port);
             }

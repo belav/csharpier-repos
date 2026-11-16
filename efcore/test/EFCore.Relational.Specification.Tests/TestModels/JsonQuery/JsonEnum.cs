@@ -7,5 +7,5 @@ public enum JsonEnum
 {
     One,
     Two,
-    Three
+    Three,
 }

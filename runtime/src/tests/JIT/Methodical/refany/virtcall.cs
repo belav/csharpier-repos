@@ -17,7 +17,7 @@ namespace JitTest_virtcall_cs
             {
                 if (__refvalue(_ref, ulong) == MAGIC)
                 {
-                    throw new ArgumentException();  //cleanup in an unusual way
+                    throw new ArgumentException(); //cleanup in an unusual way
                 }
                 else
                 {

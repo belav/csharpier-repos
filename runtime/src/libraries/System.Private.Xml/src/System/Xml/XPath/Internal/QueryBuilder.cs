@@ -21,9 +21,10 @@ namespace MS.Internal.Xml.XPath
         {
             None = 0x00,
             SmartDesc = 0x01,
-            PosFilter = 0x02,  // Node has this flag set when it has position predicate applied to it
-            Filter = 0x04,  // Subtree we compiling will be filtered. i.e. Flag not set on rightmost filter.
+            PosFilter = 0x02, // Node has this flag set when it has position predicate applied to it
+            Filter = 0x04, // Subtree we compiling will be filtered. i.e. Flag not set on rightmost filter.
         }
+
         // Output props. We return them Down->Up.
         // These are properties of Query tree we have built already.
         // These properties are closely related to QueryProps exposed by Query node itself.
@@ -33,10 +34,10 @@ namespace MS.Internal.Xml.XPath
         private enum Props
         {
             None = 0x00,
-            PosFilter = 0x01,  // This filter or inner filter was positional: foo[1] or foo[1][true()]
-            HasPosition = 0x02,  // Expression may ask position() of the context
-            HasLast = 0x04,  // Expression may ask last() of the context
-            NonFlat = 0x08,  // Some nodes may be descendent of others
+            PosFilter = 0x01, // This filter or inner filter was positional: foo[1] or foo[1][true()]
+            HasPosition = 0x02, // Expression may ask position() of the context
+            HasLast = 0x04, // Expression may ask last() of the context
+            NonFlat = 0x08, // Some nodes may be descendent of others
         }
 
         // comment are approximate. This is my best understanding:
@@ -72,21 +73,33 @@ namespace MS.Internal.Xml.XPath
                         if (input != null)
                         {
                             if (
-                                root.TypeOfAxis == Axis.AxisType.Child &&
-                                input.TypeOfAxis == Axis.AxisType.DescendantOrSelf && input.NodeType == XPathNodeType.All
+                                root.TypeOfAxis == Axis.AxisType.Child
+                                && input.TypeOfAxis == Axis.AxisType.DescendantOrSelf
+                                && input.NodeType == XPathNodeType.All
                             )
                             {
                                 Query qyGrandInput;
                                 if (input.Input != null)
                                 {
-                                    qyGrandInput = ProcessNode(input.Input, Flags.SmartDesc, out props);
+                                    qyGrandInput = ProcessNode(
+                                        input.Input,
+                                        Flags.SmartDesc,
+                                        out props
+                                    );
                                 }
                                 else
                                 {
                                     qyGrandInput = new ContextQuery();
                                     props = Props.None;
                                 }
-                                result = new DescendantQuery(qyGrandInput, root.Name, root.Prefix, root.NodeType, false, input.AbbrAxis);
+                                result = new DescendantQuery(
+                                    qyGrandInput,
+                                    root.Name,
+                                    root.Prefix,
+                                    root.NodeType,
+                                    false,
+                                    input.AbbrAxis
+                                );
                                 if ((props & Props.NonFlat) != 0)
                                 {
                                     result = new DocumentOrderQuery(result);
@@ -95,7 +108,10 @@ namespace MS.Internal.Xml.XPath
                                 return result;
                             }
                         }
-                        if (root.TypeOfAxis == Axis.AxisType.Descendant || root.TypeOfAxis == Axis.AxisType.DescendantOrSelf)
+                        if (
+                            root.TypeOfAxis == Axis.AxisType.Descendant
+                            || root.TypeOfAxis == Axis.AxisType.DescendantOrSelf
+                        )
                         {
                             inputFlags |= Flags.SmartDesc;
                         }
@@ -113,17 +129,34 @@ namespace MS.Internal.Xml.XPath
             switch (root.TypeOfAxis)
             {
                 case Axis.AxisType.Ancestor:
-                    result = new XPathAncestorQuery(qyInput, root.Name, root.Prefix, root.NodeType, false);
+                    result = new XPathAncestorQuery(
+                        qyInput,
+                        root.Name,
+                        root.Prefix,
+                        root.NodeType,
+                        false
+                    );
                     props |= Props.NonFlat;
                     break;
                 case Axis.AxisType.AncestorOrSelf:
-                    result = new XPathAncestorQuery(qyInput, root.Name, root.Prefix, root.NodeType, true);
+                    result = new XPathAncestorQuery(
+                        qyInput,
+                        root.Name,
+                        root.Prefix,
+                        root.NodeType,
+                        true
+                    );
                     props |= Props.NonFlat;
                     break;
                 case Axis.AxisType.Child:
                     if ((props & Props.NonFlat) != 0)
                     {
-                        result = new CacheChildrenQuery(qyInput, root.Name, root.Prefix, root.NodeType);
+                        result = new CacheChildrenQuery(
+                            qyInput,
+                            root.Name,
+                            root.Prefix,
+                            root.NodeType
+                        );
                     }
                     else
                     {
@@ -136,11 +169,25 @@ namespace MS.Internal.Xml.XPath
                 case Axis.AxisType.Descendant:
                     if ((flags & Flags.SmartDesc) != 0)
                     {
-                        result = new DescendantOverDescendantQuery(qyInput, false, root.Name, root.Prefix, root.NodeType, /*abbrAxis:*/false);
+                        result = new DescendantOverDescendantQuery(
+                            qyInput,
+                            false,
+                            root.Name,
+                            root.Prefix,
+                            root.NodeType, /*abbrAxis:*/
+                            false
+                        );
                     }
                     else
                     {
-                        result = new DescendantQuery(qyInput, root.Name, root.Prefix, root.NodeType, false, /*abbrAxis:*/false);
+                        result = new DescendantQuery(
+                            qyInput,
+                            root.Name,
+                            root.Prefix,
+                            root.NodeType,
+                            false, /*abbrAxis:*/
+                            false
+                        );
                         if ((props & Props.NonFlat) != 0)
                         {
                             result = new DocumentOrderQuery(result);
@@ -151,11 +198,25 @@ namespace MS.Internal.Xml.XPath
                 case Axis.AxisType.DescendantOrSelf:
                     if ((flags & Flags.SmartDesc) != 0)
                     {
-                        result = new DescendantOverDescendantQuery(qyInput, true, root.Name, root.Prefix, root.NodeType, root.AbbrAxis);
+                        result = new DescendantOverDescendantQuery(
+                            qyInput,
+                            true,
+                            root.Name,
+                            root.Prefix,
+                            root.NodeType,
+                            root.AbbrAxis
+                        );
                     }
                     else
                     {
-                        result = new DescendantQuery(qyInput, root.Name, root.Prefix, root.NodeType, true, root.AbbrAxis);
+                        result = new DescendantQuery(
+                            qyInput,
+                            root.Name,
+                            root.Prefix,
+                            root.NodeType,
+                            true,
+                            root.AbbrAxis
+                        );
                         if ((props & Props.NonFlat) != 0)
                         {
                             result = new DocumentOrderQuery(result);
@@ -188,7 +249,14 @@ namespace MS.Internal.Xml.XPath
                     result = new XPathSelfQuery(qyInput, root.Name, root.Prefix, root.NodeType);
                     break;
                 case Axis.AxisType.Namespace:
-                    if ((root.NodeType == XPathNodeType.All || root.NodeType == XPathNodeType.Element || root.NodeType == XPathNodeType.Attribute) && root.Prefix.Length == 0)
+                    if (
+                        (
+                            root.NodeType == XPathNodeType.All
+                            || root.NodeType == XPathNodeType.Element
+                            || root.NodeType == XPathNodeType.Attribute
+                        )
+                        && root.Prefix.Length == 0
+                    )
                     {
                         result = new NamespaceQuery(qyInput, root.Name, root.Prefix, root.NodeType);
                     }
@@ -206,10 +274,7 @@ namespace MS.Internal.Xml.XPath
 
         private static bool CanBeNumber(Query q)
         {
-            return (
-                q.StaticType == XPathResultType.Any ||
-                q.StaticType == XPathResultType.Number
-            );
+            return (q.StaticType == XPathResultType.Any || q.StaticType == XPathResultType.Number);
         }
 
         private Query ProcessFilter(Filter root, Flags flags, out Props props)
@@ -219,10 +284,7 @@ namespace MS.Internal.Xml.XPath
             Props propsCond;
             Query cond = ProcessNode(root.Condition, Flags.None, out propsCond);
 
-            if (
-                CanBeNumber(cond) ||
-                (propsCond & (Props.HasPosition | Props.HasLast)) != 0
-            )
+            if (CanBeNumber(cond) || (propsCond & (Props.HasPosition | Props.HasLast)) != 0)
             {
                 propsCond |= Props.HasPosition;
                 flags |= Flags.PosFilter;
@@ -253,12 +315,20 @@ namespace MS.Internal.Xml.XPath
             /*merging predicates*/
             {
                 FilterQuery? qyFilter = qyInput as FilterQuery;
-                if (qyFilter != null && (propsCond & Props.HasPosition) == 0 && qyFilter.Condition.StaticType != XPathResultType.Any)
+                if (
+                    qyFilter != null
+                    && (propsCond & Props.HasPosition) == 0
+                    && qyFilter.Condition.StaticType != XPathResultType.Any
+                )
                 {
                     Query prevCond = qyFilter.Condition;
                     if (prevCond.StaticType == XPathResultType.Number)
                     {
-                        prevCond = new LogicalExpr(Operator.Op.EQ, new NodeFunctions(FT.FuncPosition, null), prevCond);
+                        prevCond = new LogicalExpr(
+                            Operator.Op.EQ,
+                            new NodeFunctions(FT.FuncPosition, null),
+                            prevCond
+                        );
                     }
                     cond = new BooleanExpr(Operator.Op.AND, prevCond, cond);
                     qyInput = qyFilter.qyInput;
@@ -289,7 +359,11 @@ namespace MS.Internal.Xml.XPath
             {
                 if (merge && (props & Props.PosFilter) != 0)
                 {
-                    qyInput = new FilterQuery(qyInput, cond, /*noPosition:*/false);
+                    qyInput = new FilterQuery(
+                        qyInput,
+                        cond, /*noPosition:*/
+                        false
+                    );
                     Query parent = _firstInput.qyInput;
                     if (!(parent is ContextQuery))
                     { // we don't need to wrap filter with MergeFilterQuery when cardinality is parent <: ?
@@ -302,12 +376,17 @@ namespace MS.Internal.Xml.XPath
                 }
                 _firstInput = null;
             }
-            return new FilterQuery(qyInput, cond, /*noPosition:*/(propsCond & Props.HasPosition) == 0);
+            return new FilterQuery(
+                qyInput,
+                cond, /*noPosition:*/
+                (propsCond & Props.HasPosition) == 0
+            );
         }
 
         private Query? ProcessOperator(Operator root, out Props props)
         {
-            Props props1, props2;
+            Props props1,
+                props2;
             Query op1 = ProcessNode(root.Operand1, Flags.None, out props1);
             Query op2 = ProcessNode(root.Operand2, Flags.None, out props2);
             props = props1 | props2;
@@ -332,7 +411,8 @@ namespace MS.Internal.Xml.XPath
                 case Operator.Op.UNION:
                     props |= Props.NonFlat;
                     return new UnionExpr(op1, op2);
-                default: return null;
+                default:
+                    return null;
             }
         }
 
@@ -361,11 +441,14 @@ namespace MS.Internal.Xml.XPath
                     props |= Props.HasPosition;
                     return qy;
                 case FT.FuncCount:
-                    return new NodeFunctions(FT.FuncCount,
+                    return new NodeFunctions(
+                        FT.FuncCount,
                         ProcessNode((AstNode)(root.ArgumentList[0]), Flags.None, out props)
                     );
                 case FT.FuncID:
-                    qy = new IDQuery(ProcessNode((AstNode)(root.ArgumentList[0]), Flags.None, out props));
+                    qy = new IDQuery(
+                        ProcessNode((AstNode)(root.ArgumentList[0]), Flags.None, out props)
+                    );
                     props |= Props.NonFlat;
                     return qy;
                 case FT.FuncLocalName:
@@ -373,7 +456,8 @@ namespace MS.Internal.Xml.XPath
                 case FT.FuncName:
                     if (root.ArgumentList != null && root.ArgumentList.Count > 0)
                     {
-                        return new NodeFunctions(root.TypeOfFunction,
+                        return new NodeFunctions(
+                            root.TypeOfFunction,
                             ProcessNode((AstNode)(root.ArgumentList[0]), Flags.None, out props)
                         );
                     }
@@ -391,7 +475,10 @@ namespace MS.Internal.Xml.XPath
                 case FT.FuncStringLength:
                 case FT.FuncNormalize:
                 case FT.FuncTranslate:
-                    return new StringFunctions(root.TypeOfFunction, ProcessArguments(root.ArgumentList, out props));
+                    return new StringFunctions(
+                        root.TypeOfFunction,
+                        ProcessArguments(root.ArgumentList, out props)
+                    );
                 case FT.FuncNumber:
                 case FT.FuncSum:
                 case FT.FuncFloor:
@@ -399,7 +486,8 @@ namespace MS.Internal.Xml.XPath
                 case FT.FuncRound:
                     if (root.ArgumentList != null && root.ArgumentList.Count > 0)
                     {
-                        return new NumberFunctions(root.TypeOfFunction,
+                        return new NumberFunctions(
+                            root.TypeOfFunction,
                             ProcessNode((AstNode)root.ArgumentList[0], Flags.None, out props)
                         );
                     }
@@ -413,7 +501,8 @@ namespace MS.Internal.Xml.XPath
                 case FT.FuncNot:
                 case FT.FuncLang:
                 case FT.FuncBoolean:
-                    return new BooleanFunctions(root.TypeOfFunction,
+                    return new BooleanFunctions(
+                        root.TypeOfFunction,
                         ProcessNode((AstNode)root.ArgumentList[0], Flags.None, out props)
                     );
                 case FT.FuncUserDefined:
@@ -429,7 +518,11 @@ namespace MS.Internal.Xml.XPath
                     {
                         throw XPathException.Create(SR.Xp_InvalidKeyPattern, _query!);
                     }
-                    qy = new FunctionQuery(root.Prefix, root.Name, ProcessArguments(root.ArgumentList, out props));
+                    qy = new FunctionQuery(
+                        root.Prefix,
+                        root.Name,
+                        ProcessArguments(root.ArgumentList, out props)
+                    );
                     props |= Props.NonFlat;
                     return qy;
                 default:
@@ -485,7 +578,9 @@ namespace MS.Internal.Xml.XPath
                     result = ProcessFunction((Function)root, out props);
                     break;
                 case AstNode.AstType.Group:
-                    result = new GroupQuery(ProcessNode(((Group)root).GroupNode, Flags.None, out props));
+                    result = new GroupQuery(
+                        ProcessNode(((Group)root).GroupNode, Flags.None, out props)
+                    );
                     break;
                 case AstNode.AstType.Root:
                     result = new AbsoluteQuery();

@@ -13,7 +13,8 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {
-    internal abstract partial class AbstractLanguageService<TPackage, TLanguageService> : IVsContainedLanguageFactory
+    internal abstract partial class AbstractLanguageService<TPackage, TLanguageService>
+        : IVsContainedLanguageFactory
     {
         private ProjectSystemProject FindMatchingProject(IVsHierarchy hierarchy, uint itemid)
         {
@@ -26,16 +27,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             // item-specific answer given to us from Venus rather than the project-level answer
             // given, which are going to be different. This was changed for Dev10 bug 839428.
             string projectName = null;
-            if (this.SystemServiceProvider.GetService(typeof(SWebApplicationCtxSvc)) is IWebApplicationCtxSvc webApplicationCtxSvc)
+            if (
+                this.SystemServiceProvider.GetService(typeof(SWebApplicationCtxSvc))
+                is IWebApplicationCtxSvc webApplicationCtxSvc
+            )
             {
-                if (webApplicationCtxSvc.GetItemContext(hierarchy, itemid, out var webServiceProvider) >= 0)
+                if (
+                    webApplicationCtxSvc.GetItemContext(
+                        hierarchy,
+                        itemid,
+                        out var webServiceProvider
+                    ) >= 0
+                )
                 {
                     var webFileCtxServiceGuid = typeof(IWebFileCtxService).GUID;
-                    if (webServiceProvider.QueryService(ref webFileCtxServiceGuid, ref webFileCtxServiceGuid, out var service) >= 0)
+                    if (
+                        webServiceProvider.QueryService(
+                            ref webFileCtxServiceGuid,
+                            ref webFileCtxServiceGuid,
+                            out var service
+                        ) >= 0
+                    )
                     {
                         try
                         {
-                            var webFileCtxService = Marshal.GetObjectForIUnknown(service) as IWebFileCtxService;
+                            var webFileCtxService =
+                                Marshal.GetObjectForIUnknown(service) as IWebFileCtxService;
                             webFileCtxService.GetIntellisenseProjectName(out projectName);
                         }
                         finally
@@ -51,7 +68,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
             if (string.IsNullOrEmpty(projectName))
             {
-                if (hierarchy is IVsContainedLanguageProjectNameProvider containedLanguageProjectNameProvider)
+                if (
+                    hierarchy
+                    is IVsContainedLanguageProjectNameProvider containedLanguageProjectNameProvider
+                )
                 {
                     containedLanguageProjectNameProvider.GetProjectName(itemid, out projectName);
                 }
@@ -65,7 +85,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             return this.Workspace.GetProjectWithHierarchyAndName(hierarchy, projectName);
         }
 
-        public int GetLanguage(IVsHierarchy hierarchy, uint itemid, IVsTextBufferCoordinator bufferCoordinator, out IVsContainedLanguage language)
+        public int GetLanguage(
+            IVsHierarchy hierarchy,
+            uint itemid,
+            IVsTextBufferCoordinator bufferCoordinator,
+            out IVsContainedLanguage language
+        )
         {
             var project = FindMatchingProject(hierarchy, itemid);
             if (project == null)

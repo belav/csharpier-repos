@@ -20,9 +20,9 @@ namespace System.Xml
         private string? _nameWPrefix;
 
         private string _rawValue;
-        private string? _originalStringValue;  // Original value
+        private string? _originalStringValue; // Original value
         private int _depth;
-        private AttributePSVIInfo? _attributePSVIInfo;  //Used only for default attributes
+        private AttributePSVIInfo? _attributePSVIInfo; //Used only for default attributes
         private XmlNodeType _nodeType;
 
         private int _lineNo;
@@ -40,38 +40,20 @@ namespace System.Xml
 
         public string LocalName
         {
-            get
-            {
-                return _localName;
-            }
-            set
-            {
-                _localName = value;
-            }
+            get { return _localName; }
+            set { _localName = value; }
         }
 
         public string Namespace
         {
-            get
-            {
-                return _namespaceUri;
-            }
-            set
-            {
-                _namespaceUri = value;
-            }
+            get { return _namespaceUri; }
+            set { _namespaceUri = value; }
         }
 
         public string Prefix
         {
-            get
-            {
-                return _prefix;
-            }
-            set
-            {
-                _prefix = value;
-            }
+            get { return _prefix; }
+            set { _prefix = value; }
         }
 
         public string GetAtomizedNameWPrefix(XmlNameTable nameTable)
@@ -93,78 +75,42 @@ namespace System.Xml
 
         public int Depth
         {
-            get
-            {
-                return _depth;
-            }
-            set
-            {
-                _depth = value;
-            }
+            get { return _depth; }
+            set { _depth = value; }
         }
 
         public string RawValue
         {
-            get
-            {
-                return _rawValue;
-            }
-            set
-            {
-                _rawValue = value;
-            }
+            get { return _rawValue; }
+            set { _rawValue = value; }
         }
 
         public string? OriginalStringValue
         {
-            get
-            {
-                return _originalStringValue;
-            }
-            set
-            {
-                _originalStringValue = value;
-            }
+            get { return _originalStringValue; }
+            set { _originalStringValue = value; }
         }
 
         public XmlNodeType NodeType
         {
-            get
-            {
-                return _nodeType;
-            }
-            set
-            {
-                _nodeType = value;
-            }
+            get { return _nodeType; }
+            set { _nodeType = value; }
         }
 
         public AttributePSVIInfo? AttInfo
         {
-            get
-            {
-                return _attributePSVIInfo;
-            }
-            set
-            {
-                _attributePSVIInfo = value;
-            }
+            get { return _attributePSVIInfo; }
+            set { _attributePSVIInfo = value; }
         }
 
         public int LineNumber
         {
-            get
-            {
-                return _lineNo;
-            }
+            get { return _lineNo; }
         }
 
         public int LinePosition
         {
-            get
-            {
-                return _linePos;
-            }
+            get { return _linePos; }
         }
 
         [MemberNotNull(nameof(_localName))]

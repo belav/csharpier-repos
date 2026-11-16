@@ -25,8 +25,10 @@ namespace Internal.TypeSystem
         private TypeDesc _owningType;
         private MethodSignature _methodSignature;
 
-
-        public static ResolutionFailure GetTypeLoadResolutionFailure(string nestedTypeName, ModuleDesc module)
+        public static ResolutionFailure GetTypeLoadResolutionFailure(
+            string nestedTypeName,
+            ModuleDesc module
+        )
         {
             ResolutionFailure failure = new ResolutionFailure();
             failure._failureType = FailureType.TypeLoadException1;
@@ -35,7 +37,11 @@ namespace Internal.TypeSystem
             return failure;
         }
 
-        public static ResolutionFailure GetTypeLoadResolutionFailure(string @namespace, string name, ModuleDesc module)
+        public static ResolutionFailure GetTypeLoadResolutionFailure(
+            string @namespace,
+            string name,
+            ModuleDesc module
+        )
         {
             ResolutionFailure failure = new ResolutionFailure();
             failure._failureType = FailureType.TypeLoadException2;
@@ -45,7 +51,11 @@ namespace Internal.TypeSystem
             return failure;
         }
 
-        public static ResolutionFailure GetTypeLoadResolutionFailure(string @namespace, string name, string moduleName)
+        public static ResolutionFailure GetTypeLoadResolutionFailure(
+            string @namespace,
+            string name,
+            string moduleName
+        )
         {
             ResolutionFailure failure = new ResolutionFailure();
             failure._failureType = FailureType.TypeLoadException3;
@@ -55,7 +65,11 @@ namespace Internal.TypeSystem
             return failure;
         }
 
-        public static ResolutionFailure GetMissingMethodFailure(TypeDesc owningType, string methodName, MethodSignature signature)
+        public static ResolutionFailure GetMissingMethodFailure(
+            TypeDesc owningType,
+            string methodName,
+            MethodSignature signature
+        )
         {
             ResolutionFailure failure = new ResolutionFailure();
             failure._failureType = FailureType.MissingMethodException1;
@@ -65,7 +79,10 @@ namespace Internal.TypeSystem
             return failure;
         }
 
-        public static ResolutionFailure GetMissingFieldFailure(TypeDesc owningType, string fieldName)
+        public static ResolutionFailure GetMissingFieldFailure(
+            TypeDesc owningType,
+            string fieldName
+        )
         {
             ResolutionFailure failure = new ResolutionFailure();
             failure._failureType = FailureType.MissingMethodException1;
@@ -102,7 +119,10 @@ namespace Internal.TypeSystem
                     ThrowHelper.ThrowMissingFieldException(_owningType, _name);
                     break;
                 case FailureType.MissingAssemblyException1:
-                    ThrowHelper.ThrowFileNotFoundException(ExceptionStringID.FileLoadErrorGeneric, _name);
+                    ThrowHelper.ThrowFileNotFoundException(
+                        ExceptionStringID.FileLoadErrorGeneric,
+                        _name
+                    );
                     break;
             }
         }

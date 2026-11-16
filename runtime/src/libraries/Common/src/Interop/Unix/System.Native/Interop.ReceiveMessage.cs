@@ -10,6 +10,11 @@ internal static partial class Interop
     internal static partial class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_ReceiveMessage")]
-        internal static unsafe partial Error ReceiveMessage(SafeHandle socket, MessageHeader* messageHeader, SocketFlags flags, long* received);
+        internal static unsafe partial Error ReceiveMessage(
+            SafeHandle socket,
+            MessageHeader* messageHeader,
+            SocketFlags flags,
+            long* received
+        );
     }
 }

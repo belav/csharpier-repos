@@ -15,7 +15,10 @@ namespace System.Reflection.Runtime.ParameterInfos
     //
     internal sealed partial class RuntimePropertyIndexParameterInfo : RuntimeParameterInfo
     {
-        private RuntimePropertyIndexParameterInfo(RuntimePropertyInfo member, RuntimeParameterInfo backingParameter)
+        private RuntimePropertyIndexParameterInfo(
+            RuntimePropertyInfo member,
+            RuntimeParameterInfo backingParameter
+        )
             : base(member, backingParameter.Position)
         {
             _backingParameter = backingParameter;
@@ -23,34 +26,22 @@ namespace System.Reflection.Runtime.ParameterInfos
 
         public sealed override ParameterAttributes Attributes
         {
-            get
-            {
-                return _backingParameter.Attributes;
-            }
+            get { return _backingParameter.Attributes; }
         }
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
         {
-            get
-            {
-                return _backingParameter.CustomAttributes;
-            }
+            get { return _backingParameter.CustomAttributes; }
         }
 
         public sealed override object DefaultValue
         {
-            get
-            {
-                return _backingParameter.DefaultValue;
-            }
+            get { return _backingParameter.DefaultValue; }
         }
 
         public sealed override object RawDefaultValue
         {
-            get
-            {
-                return _backingParameter.RawDefaultValue;
-            }
+            get { return _backingParameter.RawDefaultValue; }
         }
 
         public sealed override Type[] GetOptionalCustomModifiers()
@@ -65,34 +56,22 @@ namespace System.Reflection.Runtime.ParameterInfos
 
         public sealed override bool HasDefaultValue
         {
-            get
-            {
-                return _backingParameter.HasDefaultValue;
-            }
+            get { return _backingParameter.HasDefaultValue; }
         }
 
         public sealed override string Name
         {
-            get
-            {
-                return _backingParameter.Name;
-            }
+            get { return _backingParameter.Name; }
         }
 
         public sealed override Type ParameterType
         {
-            get
-            {
-                return _backingParameter.ParameterType;
-            }
+            get { return _backingParameter.ParameterType; }
         }
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                return _backingParameter.MetadataToken;
-            }
+            get { return _backingParameter.MetadataToken; }
         }
 
         private readonly RuntimeParameterInfo _backingParameter;

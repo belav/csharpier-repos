@@ -4,22 +4,21 @@
 namespace System.ServiceModel.MsmqIntegration
 {
     using System;
-    using System.ComponentModel;
-    using System.ServiceModel;
-    using System.Text;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
     using System.Net;
     using System.Net.Security;
     using System.Runtime.Serialization;
     using System.Security.Principal;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using Config = System.ServiceModel.Configuration;
     using System.ServiceModel.Security;
-
+    using System.Text;
     using System.Xml;
+    using Config = System.ServiceModel.Configuration;
 
     public class MsmqIntegrationBinding : MsmqBindingBase
     {
@@ -40,7 +39,13 @@ namespace System.ServiceModel.MsmqIntegration
         public MsmqIntegrationBinding(MsmqIntegrationSecurityMode securityMode)
         {
             if (!MsmqIntegrationSecurityModeHelper.IsDefined(securityMode))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("securityMode", (int)securityMode, typeof(MsmqIntegrationSecurityMode)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "securityMode",
+                        (int)securityMode,
+                        typeof(MsmqIntegrationSecurityMode)
+                    )
+                );
             Initialize();
             this.security.Mode = securityMode;
         }
@@ -53,14 +58,8 @@ namespace System.ServiceModel.MsmqIntegration
 
         internal Type[] TargetSerializationTypes
         {
-            get
-            {
-                return (transport as MsmqIntegrationBindingElement).TargetSerializationTypes;
-            }
-            set
-            {
-                (transport as MsmqIntegrationBindingElement).TargetSerializationTypes = value;
-            }
+            get { return (transport as MsmqIntegrationBindingElement).TargetSerializationTypes; }
+            set { (transport as MsmqIntegrationBindingElement).TargetSerializationTypes = value; }
         }
 
         [DefaultValue(MsmqIntegrationDefaults.SerializationFormat)]
@@ -78,10 +77,15 @@ namespace System.ServiceModel.MsmqIntegration
                 return true;
             }
 
-            if (this.security.Transport.MsmqAuthenticationMode != MsmqDefaults.MsmqAuthenticationMode ||
-               this.security.Transport.MsmqEncryptionAlgorithm != MsmqDefaults.MsmqEncryptionAlgorithm ||
-               this.security.Transport.MsmqSecureHashAlgorithm != MsmqDefaults.MsmqSecureHashAlgorithm ||
-               this.security.Transport.MsmqProtectionLevel != MsmqDefaults.MsmqProtectionLevel)
+            if (
+                this.security.Transport.MsmqAuthenticationMode
+                    != MsmqDefaults.MsmqAuthenticationMode
+                || this.security.Transport.MsmqEncryptionAlgorithm
+                    != MsmqDefaults.MsmqEncryptionAlgorithm
+                || this.security.Transport.MsmqSecureHashAlgorithm
+                    != MsmqDefaults.MsmqSecureHashAlgorithm
+                || this.security.Transport.MsmqProtectionLevel != MsmqDefaults.MsmqProtectionLevel
+            )
             {
                 return true;
             }
@@ -95,14 +99,20 @@ namespace System.ServiceModel.MsmqIntegration
 
         void ApplyConfiguration(string configurationName)
         {
-            Config.MsmqIntegrationBindingCollectionElement section = Config.MsmqIntegrationBindingCollectionElement.GetBindingCollectionElement();
+            Config.MsmqIntegrationBindingCollectionElement section =
+                Config.MsmqIntegrationBindingCollectionElement.GetBindingCollectionElement();
             Config.MsmqIntegrationBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                    SR.GetString(SR.ConfigInvalidBindingConfigurationName,
-                                 configurationName,
-                                 Config.ConfigurationStrings.MsmqIntegrationBindingCollectionElementName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigInvalidBindingConfigurationName,
+                            configurationName,
+                            Config.ConfigurationStrings.MsmqIntegrationBindingCollectionElementName
+                        )
+                    )
+                );
             }
             else
             {
@@ -111,7 +121,7 @@ namespace System.ServiceModel.MsmqIntegration
         }
 
         public override BindingElementCollection CreateBindingElements()
-        {   // return collection of BindingElements
+        { // return collection of BindingElements
             BindingElementCollection bindingElements = new BindingElementCollection();
             // order of BindingElements is important
             // add transport

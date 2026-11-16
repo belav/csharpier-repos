@@ -17,7 +17,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 Assert.Equal(
                     "CN=Microsoft Code Signing PCA, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
-                    c.Issuer);
+                    c.Issuer
+                );
             }
         }
 
@@ -28,7 +29,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 Assert.Equal(
                     "CN=Microsoft Corporation, OU=MOPR, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
-                    c.Subject);
+                    c.Subject
+                );
             }
         }
 
@@ -48,7 +50,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 ReadOnlyMemory<byte> serial1 = c.SerialNumberBytes;
                 ReadOnlyMemory<byte> serial2 = c.SerialNumberBytes;
-                Assert.True(serial1.Span == serial2.Span, "Two calls to SerialNumberBytes return the same buffer");
+                Assert.True(
+                    serial1.Span == serial2.Span,
+                    "Two calls to SerialNumberBytes return the same buffer"
+                );
             }
         }
 
@@ -108,7 +113,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (var c = new X509Certificate2(TestData.MsCertificate))
             {
                 string format = c.GetFormat();
-                Assert.Equal("X509", format);  // Only one format is supported so this is very predictable api...
+                Assert.Equal("X509", format); // Only one format is supported so this is very predictable api...
             }
         }
 
@@ -141,15 +146,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void TestGetPublicKey()
         {
             byte[] expectedPublicKey = (
-                "3082010a0282010100e8af5ca2200df8287cbc057b7fadeeeb76ac28533f3adb" +
-                "407db38e33e6573fa551153454a5cfb48ba93fa837e12d50ed35164eef4d7adb" +
-                "137688b02cf0595ca9ebe1d72975e41b85279bf3f82d9e41362b0b40fbbe3bba" +
-                "b95c759316524bca33c537b0f3eb7ea8f541155c08651d2137f02cba220b10b1" +
-                "109d772285847c4fb91b90b0f5a3fe8bf40c9a4ea0f5c90a21e2aae3013647fd" +
-                "2f826a8103f5a935dc94579dfb4bd40e82db388f12fee3d67a748864e162c425" +
-                "2e2aae9d181f0e1eb6c2af24b40e50bcde1c935c49a679b5b6dbcef9707b2801" +
-                "84b82a29cfbfa90505e1e00f714dfdad5c238329ebc7c54ac8e82784d37ec643" +
-                "0b950005b14f6571c50203010001").HexToByteArray();
+                "3082010a0282010100e8af5ca2200df8287cbc057b7fadeeeb76ac28533f3adb"
+                + "407db38e33e6573fa551153454a5cfb48ba93fa837e12d50ed35164eef4d7adb"
+                + "137688b02cf0595ca9ebe1d72975e41b85279bf3f82d9e41362b0b40fbbe3bba"
+                + "b95c759316524bca33c537b0f3eb7ea8f541155c08651d2137f02cba220b10b1"
+                + "109d772285847c4fb91b90b0f5a3fe8bf40c9a4ea0f5c90a21e2aae3013647fd"
+                + "2f826a8103f5a935dc94579dfb4bd40e82db388f12fee3d67a748864e162c425"
+                + "2e2aae9d181f0e1eb6c2af24b40e50bcde1c935c49a679b5b6dbcef9707b2801"
+                + "84b82a29cfbfa90505e1e00f714dfdad5c238329ebc7c54ac8e82784d37ec643"
+                + "0b950005b14f6571c50203010001"
+            ).HexToByteArray();
 
             using (var c = new X509Certificate2(TestData.MsCertificate))
             {
@@ -172,7 +178,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             // This certificate has omitted the parameters section completely,
             // which while RFC compliant (it's labelled OPTIONAL) isn't what everyone
             // else does.  So this test ensures that we can read such a cert.
-            const string PemEncodedCert = @"
+            const string PemEncodedCert =
+                @"
 -----BEGIN CERTIFICATE-----
 MIIE4jCCAsygAwIBAgIEMTI0NjALBgkqhkiG9w0BAQUwgZgxCzAJBgNVBAYTAlVT
 MQswCQYDVQQIDAJOWTEbMBkGA1UECgwSUVogSW5kdXN0cmllcywgTExDMRswGQYD
@@ -215,7 +222,15 @@ Wry5FNNo
         [Fact]
         public static void TestNotBefore()
         {
-            DateTime expected = new DateTime(2013, 1, 24, 22, 33, 39, DateTimeKind.Utc).ToLocalTime();
+            DateTime expected = new DateTime(
+                2013,
+                1,
+                24,
+                22,
+                33,
+                39,
+                DateTimeKind.Utc
+            ).ToLocalTime();
 
             using (var c = new X509Certificate2(TestData.MsCertificate))
             {
@@ -226,7 +241,15 @@ Wry5FNNo
         [Fact]
         public static void TestNotAfter()
         {
-            DateTime expected = new DateTime(2014, 4, 24, 22, 33, 39, DateTimeKind.Utc).ToLocalTime();
+            DateTime expected = new DateTime(
+                2014,
+                4,
+                24,
+                22,
+                33,
+                39,
+                DateTimeKind.Utc
+            ).ToLocalTime();
 
             using (var c = new X509Certificate2(TestData.MsCertificate))
             {
@@ -287,7 +310,7 @@ Wry5FNNo
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // MsCertificate not supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // MsCertificate not supported on Unix
         public static void TestArchive_Windows()
         {
             using (var c = new X509Certificate2(TestData.MsCertificate))
@@ -303,7 +326,7 @@ Wry5FNNo
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // MsCertificate not supported on Unix
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // MsCertificate not supported on Unix
         public static void TestArchive_Unix()
         {
             using (var c = new X509Certificate2(TestData.MsCertificate))
@@ -319,7 +342,7 @@ Wry5FNNo
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // MsCertificate not supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // MsCertificate not supported on Unix
         public static void TestFriendlyName_Windows()
         {
             using (var c = new X509Certificate2(TestData.MsCertificate))
@@ -335,14 +358,16 @@ Wry5FNNo
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // MsCertificate not supported on Unix
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // MsCertificate not supported on Unix
         public static void TestFriendlyName_Unix()
         {
             using (var c = new X509Certificate2(TestData.MsCertificate))
             {
                 Assert.Equal(string.Empty, c.FriendlyName);
 
-                Assert.Throws<PlatformNotSupportedException>(() => c.FriendlyName = "This is a friendly name.");
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    c.FriendlyName = "This is a friendly name."
+                );
                 Assert.Equal(string.Empty, c.FriendlyName);
 
                 Assert.Throws<PlatformNotSupportedException>(() => c.FriendlyName = null);
@@ -360,7 +385,8 @@ Wry5FNNo
             {
                 Assert.Equal(
                     "CN=Microsoft Corporation, OU=MOPR, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
-                    c.SubjectName.Name);
+                    c.SubjectName.Name
+                );
             }
         }
 
@@ -371,8 +397,8 @@ Wry5FNNo
             {
                 Assert.Equal(
                     "CN=Microsoft Code Signing PCA, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
-                    c.IssuerName.Name);
-
+                    c.IssuerName.Name
+                );
             }
         }
 
@@ -475,13 +501,21 @@ Wry5FNNo
         [Fact]
         public static void ComplexGetNameInfo_DnsFromAlternativeName_Cert()
         {
-            TestComplexGetNameInfo("dns1.subject.example.org", X509NameType.DnsFromAlternativeName, false);
+            TestComplexGetNameInfo(
+                "dns1.subject.example.org",
+                X509NameType.DnsFromAlternativeName,
+                false
+            );
         }
 
         [Fact]
         public static void ComplexGetNameInfo_DnsFromAlternativeName_Issuer()
         {
-            TestComplexGetNameInfo("dns1.issuer.example.org", X509NameType.DnsFromAlternativeName, true);
+            TestComplexGetNameInfo(
+                "dns1.issuer.example.org",
+                X509NameType.DnsFromAlternativeName,
+                true
+            );
         }
 
         [Fact]
@@ -496,7 +530,11 @@ Wry5FNNo
             TestComplexGetNameInfo("http://uri1.issuer.example.org/", X509NameType.UrlName, true);
         }
 
-        private static void TestComplexGetNameInfo(string expected, X509NameType nameType, bool forIssuer)
+        private static void TestComplexGetNameInfo(
+            string expected,
+            X509NameType nameType,
+            bool forIssuer
+        )
         {
             // ComplexNameInfoCert has the following characteristics:
             //   Subject: E=subjectemail@example.org, CN=cn.subject.example.org, OU=ExampleOU, O=ExampleO, L=Locality, ST=State, C=Country

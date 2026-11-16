@@ -19,32 +19,22 @@ namespace System.Net.Sockets
         // Enables or disables lingering after close.
         public bool Enabled
         {
-            get
-            {
-                return _enabled;
-            }
-            set
-            {
-                _enabled = value;
-            }
+            get { return _enabled; }
+            set { _enabled = value; }
         }
 
         // The amount of time, in seconds, to remain connected after a close.
         public int LingerTime
         {
-            get
-            {
-                return _lingerTime;
-            }
-            set
-            {
-                _lingerTime = value;
-            }
+            get { return _lingerTime; }
+            set { _lingerTime = value; }
         }
 
         public override bool Equals(object? comparand)
         {
-            return comparand is LingerOption option && option.Enabled == _enabled && option.LingerTime == _lingerTime;
+            return comparand is LingerOption option
+                && option.Enabled == _enabled
+                && option.LingerTime == _lingerTime;
         }
 
         public override int GetHashCode() => HashCode.Combine(_enabled, _lingerTime);

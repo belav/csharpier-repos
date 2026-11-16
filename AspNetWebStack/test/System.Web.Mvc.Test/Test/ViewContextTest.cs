@@ -28,23 +28,23 @@ namespace System.Web.Mvc.Test
             Assert.ThrowsArgumentNull(
                 () => new ViewContext(null, view, viewData, tempData, writer),
                 "controllerContext"
-                );
+            );
             Assert.ThrowsArgumentNull(
                 () => new ViewContext(controllerContext, null, viewData, tempData, writer),
                 "view"
-                );
+            );
             Assert.ThrowsArgumentNull(
                 () => new ViewContext(controllerContext, view, null, tempData, writer),
                 "viewData"
-                );
+            );
             Assert.ThrowsArgumentNull(
                 () => new ViewContext(controllerContext, view, viewData, null, writer),
                 "tempData"
-                );
+            );
             Assert.ThrowsArgumentNull(
                 () => new ViewContext(controllerContext, view, viewData, tempData, null),
                 "writer"
-                );
+            );
         }
 
         [Fact]
@@ -53,10 +53,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             var mockHttpContext = new Mock<HttpContextBase>();
             mockHttpContext.Setup(o => o.Items).Returns(new Hashtable());
-            var viewContext = new ViewContext
-            {
-                HttpContext = mockHttpContext.Object
-            };
+            var viewContext = new ViewContext { HttpContext = mockHttpContext.Object };
 
             // Act
             string form0Name = viewContext.FormIdGenerator();
@@ -81,7 +78,13 @@ namespace System.Web.Mvc.Test
             var writer = new StringWriter();
 
             // Act
-            ViewContext viewContext = new ViewContext(mockControllerContext.Object, view, viewData, tempData, writer);
+            ViewContext viewContext = new ViewContext(
+                mockControllerContext.Object,
+                view,
+                viewData,
+                tempData,
+                writer
+            );
 
             // Setting FormContext to null will return the default one later
             viewContext.FormContext = null;
@@ -103,7 +106,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             var scope = new Dictionary<object, object>();
             var httpContext = new Mock<HttpContextBase>();
-            var viewContext = new ViewContext { ScopeThunk = () => scope, HttpContext = httpContext.Object };
+            var viewContext = new ViewContext
+            {
+                ScopeThunk = () => scope,
+                HttpContext = httpContext.Object,
+            };
             httpContext.Setup(c => c.Items).Returns(new Hashtable());
 
             // Act & Assert
@@ -122,7 +129,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             var scope = new Dictionary<object, object>();
             var httpContext = new Mock<HttpContextBase>();
-            var viewContext = new ViewContext { ScopeThunk = () => scope, HttpContext = httpContext.Object };
+            var viewContext = new ViewContext
+            {
+                ScopeThunk = () => scope,
+                HttpContext = httpContext.Object,
+            };
             httpContext.Setup(c => c.Items).Returns(new Hashtable());
 
             // Act & Assert
@@ -141,7 +152,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             var scope = new Dictionary<object, object>();
             var httpContext = new Mock<HttpContextBase>();
-            var viewContext = new ViewContext { ScopeThunk = () => scope, HttpContext = httpContext.Object };
+            var viewContext = new ViewContext
+            {
+                ScopeThunk = () => scope,
+                HttpContext = httpContext.Object,
+            };
             httpContext.Setup(c => c.Items).Returns(new Hashtable());
 
             // Act & Assert
@@ -160,7 +175,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             var scope = new Dictionary<object, object>();
             var httpContext = new Mock<HttpContextBase>();
-            var viewContext = new ViewContext { ScopeThunk = () => scope, HttpContext = httpContext.Object };
+            var viewContext = new ViewContext
+            {
+                ScopeThunk = () => scope,
+                HttpContext = httpContext.Object,
+            };
             httpContext.Setup(c => c.Items).Returns(new Hashtable());
 
             // Act & Assert
@@ -184,7 +203,7 @@ namespace System.Web.Mvc.Test
                 var globalViewContext = new ViewContext
                 {
                     ScopeThunk = () => ScopeStorage.GlobalScope,
-                    HttpContext = httpContext.Object
+                    HttpContext = httpContext.Object,
                 };
                 var localViewContext = new ViewContext
                 {
@@ -193,10 +212,11 @@ namespace System.Web.Mvc.Test
                         if (localScope == null)
                         {
                             localScope = new ScopeStorageDictionary(ScopeStorage.GlobalScope);
-                        };
+                        }
+                        ;
                         return localScope;
                     },
-                    HttpContext = httpContext.Object
+                    HttpContext = httpContext.Object,
                 };
                 // A ScopeCache object will be stored into the hash table but the ScopeCache class is private,
                 // so we cannot get the validation message element from it for Assert.
@@ -229,7 +249,7 @@ namespace System.Web.Mvc.Test
             var globalViewContext = new ViewContext
             {
                 ScopeThunk = () => ScopeStorage.GlobalScope,
-                HttpContext = httpContext.Object
+                HttpContext = httpContext.Object,
             };
             var localViewContext = new ViewContext
             {
@@ -241,7 +261,7 @@ namespace System.Web.Mvc.Test
                     }
                     return localScope;
                 },
-                HttpContext = httpContext.Object
+                HttpContext = httpContext.Object,
             };
             // A ScopeCache object will be stored into the hash table but the ScopeCache class is private,
             // so we cannot get the validation message element from it for Assert.
@@ -271,7 +291,13 @@ namespace System.Web.Mvc.Test
             var viewData = new ViewDataDictionary() { { "A", 1 } };
 
             // Act
-            ViewContext viewContext = new ViewContext(mockControllerContext.Object, view, viewData, new TempDataDictionary(), new StringWriter());
+            ViewContext viewContext = new ViewContext(
+                mockControllerContext.Object,
+                view,
+                viewData,
+                new TempDataDictionary(),
+                new StringWriter()
+            );
 
             // Assert
             Assert.Equal(1, viewContext.ViewBag.A);
@@ -285,7 +311,13 @@ namespace System.Web.Mvc.Test
             var view = new Mock<IView>().Object;
             var viewData = new ViewDataDictionary() { { "A", 1 } };
 
-            ViewContext viewContext = new ViewContext(mockControllerContext.Object, view, viewData, new TempDataDictionary(), new StringWriter());
+            ViewContext viewContext = new ViewContext(
+                mockControllerContext.Object,
+                view,
+                viewData,
+                new TempDataDictionary(),
+                new StringWriter()
+            );
 
             // Act
             viewContext.ViewData = new ViewDataDictionary() { { "A", "bar" } };
@@ -302,7 +334,13 @@ namespace System.Web.Mvc.Test
             var view = new Mock<IView>().Object;
             var viewData = new ViewDataDictionary() { { "A", 1 } };
 
-            ViewContext viewContext = new ViewContext(mockControllerContext.Object, view, viewData, new TempDataDictionary(), new StringWriter());
+            ViewContext viewContext = new ViewContext(
+                mockControllerContext.Object,
+                view,
+                viewData,
+                new TempDataDictionary(),
+                new StringWriter()
+            );
 
             // Act
             viewContext.ViewBag.A = "foo";

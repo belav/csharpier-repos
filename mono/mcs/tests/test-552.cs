@@ -1,18 +1,16 @@
 class C
 {
-	static void Test (C arg)
-	{
-	}
-	
-	public static void Main ()
-	{
-		object value = null;
-		C.Test(
+    static void Test(C arg) { }
+
+    public static void Main()
+    {
+        object value = null;
+        C.Test(
 #if true
-		(C)
+            (C)
 #else
 		no error here
 #endif
-		value);
-	}
+            value);
+    }
 }

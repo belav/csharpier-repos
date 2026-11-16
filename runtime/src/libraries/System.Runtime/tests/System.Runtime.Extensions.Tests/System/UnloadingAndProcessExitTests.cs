@@ -25,15 +25,15 @@ namespace System.Tests
 
                 File.AppendAllText(f, "s");
                 AppDomain.CurrentDomain.ProcessExit += (sender, e) => OnProcessExit(0);
-                System.Runtime.Loader.AssemblyLoadContext.Default.Unloading += acl => OnUnloading(0);
+                System.Runtime.Loader.AssemblyLoadContext.Default.Unloading += acl =>
+                    OnUnloading(0);
                 AppDomain.CurrentDomain.ProcessExit += (sender, e) => OnProcessExit(1);
-                System.Runtime.Loader.AssemblyLoadContext.Default.Unloading += acl => OnUnloading(1);
+                System.Runtime.Loader.AssemblyLoadContext.Default.Unloading += acl =>
+                    OnUnloading(1);
                 File.AppendAllText(f, "h");
             };
 
-            using (var remote = RemoteExecutor.Invoke(otherProcess, fileName))
-            {
-            }
+            using (var remote = RemoteExecutor.Invoke(otherProcess, fileName)) { }
 
             Assert.Equal("shu0u1e0e1", File.ReadAllText(fileName));
         }

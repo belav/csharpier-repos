@@ -20,15 +20,23 @@ namespace System.Diagnostics.Tracing
 
         public static TraceLoggingEventTypes Instance
         {
-            [RequiresUnreferencedCode("EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type")]
+            [RequiresUnreferencedCode(
+                "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
+            )]
             get { return instance ??= InitInstance(); }
         }
 
-        [RequiresUnreferencedCode("EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type")]
+        [RequiresUnreferencedCode(
+            "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
+        )]
         private static TraceLoggingEventTypes InitInstance()
         {
             var info = TraceLoggingTypeInfo.GetInstance(typeof(T), null);
-            var newInstance = new TraceLoggingEventTypes(info.Name, info.Tags, new TraceLoggingTypeInfo[] { info });
+            var newInstance = new TraceLoggingEventTypes(
+                info.Name,
+                info.Tags,
+                new TraceLoggingTypeInfo[] { info }
+            );
             Interlocked.CompareExchange(ref instance, newInstance, null);
             Debug.Assert(instance != null);
             return instance;

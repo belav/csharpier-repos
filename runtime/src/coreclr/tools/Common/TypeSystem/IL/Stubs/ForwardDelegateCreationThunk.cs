@@ -16,8 +16,11 @@ namespace Internal.IL.Stubs
         private readonly InteropStateManager _interopStateManager;
         private MethodSignature _signature;
 
-
-        public ForwardDelegateCreationThunk(MetadataType delegateType, TypeDesc owningType, InteropStateManager interopStateManager)
+        public ForwardDelegateCreationThunk(
+            MetadataType delegateType,
+            TypeDesc owningType,
+            InteropStateManager interopStateManager
+        )
         {
             _owningType = owningType;
             _delegateType = delegateType;
@@ -26,55 +29,41 @@ namespace Internal.IL.Stubs
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _owningType.Context;
-            }
+            get { return _owningType.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         public MetadataType DelegateType
         {
-            get
-            {
-                return _delegateType;
-            }
+            get { return _delegateType; }
         }
 
         public override MethodSignature Signature
         {
             get
             {
-                _signature ??= new MethodSignature(MethodSignatureFlags.Static, 0,
-                        DelegateType,
-                        new TypeDesc[] {
-                            Context.GetWellKnownType(WellKnownType.IntPtr)
-                            });
+                _signature ??= new MethodSignature(
+                    MethodSignatureFlags.Static,
+                    0,
+                    DelegateType,
+                    new TypeDesc[] { Context.GetWellKnownType(WellKnownType.IntPtr) }
+                );
                 return _signature;
             }
         }
 
         public override string Name
         {
-            get
-            {
-                return "ForwardDelegateCreationStub__" + DelegateType.Name;
-            }
+            get { return "ForwardDelegateCreationStub__" + DelegateType.Name; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return "ForwardDelegateCreationStub__" + DelegateType.DiagnosticName;
-            }
+            get { return "ForwardDelegateCreationStub__" + DelegateType.DiagnosticName; }
         }
 
         /// <summary>
@@ -99,24 +88,46 @@ namespace Internal.IL.Stubs
             ILCodeStream codeStream = emitter.NewCodeStream();
             codeStream.EmitLdArg(0);
 
-            codeStream.Emit(ILOpcode.newobj, emitter.NewToken(
-                _interopStateManager.GetPInvokeDelegateWrapper(DelegateType)
-                .GetPInvokeDelegateWrapperMethod(PInvokeDelegateWrapperMethodKind.Constructor)));
+            codeStream.Emit(
+                ILOpcode.newobj,
+                emitter.NewToken(
+                    _interopStateManager
+                        .GetPInvokeDelegateWrapper(DelegateType)
+                        .GetPInvokeDelegateWrapperMethod(
+                            PInvokeDelegateWrapperMethodKind.Constructor
+                        )
+                )
+            );
 
             codeStream.Emit(ILOpcode.dup);
 
-            codeStream.Emit(ILOpcode.ldvirtftn, emitter.NewToken(
-                _interopStateManager.GetPInvokeDelegateWrapper(DelegateType)
-                .GetPInvokeDelegateWrapperMethod(PInvokeDelegateWrapperMethodKind.Invoke)));
+            codeStream.Emit(
+                ILOpcode.ldvirtftn,
+                emitter.NewToken(
+                    _interopStateManager
+                        .GetPInvokeDelegateWrapper(DelegateType)
+                        .GetPInvokeDelegateWrapperMethod(PInvokeDelegateWrapperMethodKind.Invoke)
+                )
+            );
 
-            codeStream.Emit(ILOpcode.newobj, emitter.NewToken(
-                _delegateType.GetMethod(".ctor",
-                new MethodSignature(MethodSignatureFlags.None,
-                    genericParameterCount: 0,
-                    returnType: Context.GetWellKnownType(WellKnownType.Void),
-                    parameters: new TypeDesc[] { Context.GetWellKnownType(WellKnownType.Object),
-                        Context.GetWellKnownType(WellKnownType.IntPtr)}
-                ))));
+            codeStream.Emit(
+                ILOpcode.newobj,
+                emitter.NewToken(
+                    _delegateType.GetMethod(
+                        ".ctor",
+                        new MethodSignature(
+                            MethodSignatureFlags.None,
+                            genericParameterCount: 0,
+                            returnType: Context.GetWellKnownType(WellKnownType.Void),
+                            parameters: new TypeDesc[]
+                            {
+                                Context.GetWellKnownType(WellKnownType.Object),
+                                Context.GetWellKnownType(WellKnownType.IntPtr),
+                            }
+                        )
+                    )
+                )
+            );
 
             codeStream.Emit(ILOpcode.ret);
 

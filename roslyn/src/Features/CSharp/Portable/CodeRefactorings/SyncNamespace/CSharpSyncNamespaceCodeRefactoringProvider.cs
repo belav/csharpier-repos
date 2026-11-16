@@ -16,27 +16,48 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.SyncNamespace
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.SyncNamespace), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.SyncNamespace
+        ),
+        Shared
+    ]
     internal sealed class CSharpSyncNamespaceCodeRefactoringProvider
-        : AbstractSyncNamespaceCodeRefactoringProvider<BaseNamespaceDeclarationSyntax, CompilationUnitSyntax, MemberDeclarationSyntax>
+        : AbstractSyncNamespaceCodeRefactoringProvider<
+            BaseNamespaceDeclarationSyntax,
+            CompilationUnitSyntax,
+            MemberDeclarationSyntax
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpSyncNamespaceCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpSyncNamespaceCodeRefactoringProvider() { }
 
-        protected override async Task<SyntaxNode?> TryGetApplicableInvocationNodeAsync(Document document, TextSpan span, CancellationToken cancellationToken)
+        protected override async Task<SyntaxNode?> TryGetApplicableInvocationNodeAsync(
+            Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        )
         {
             if (!span.IsEmpty)
                 return null;
 
-            if (await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false) is not CompilationUnitSyntax compilationUnit)
+            if (
+                await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false)
+                is not CompilationUnitSyntax compilationUnit
+            )
                 return null;
 
             var position = span.Start;
-            var namespaceDecls = compilationUnit.DescendantNodes(n => n is CompilationUnitSyntax or BaseNamespaceDeclarationSyntax)
-                .OfType<BaseNamespaceDeclarationSyntax>().ToImmutableArray();
+            var namespaceDecls = compilationUnit
+                .DescendantNodes(n => n is CompilationUnitSyntax or BaseNamespaceDeclarationSyntax)
+                .OfType<BaseNamespaceDeclarationSyntax>()
+                .ToImmutableArray();
 
             if (namespaceDecls.Length == 1 && compilationUnit.Members.Count == 1)
             {
@@ -47,10 +68,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.SyncNamespace
 
             if (namespaceDecls.Length == 0)
             {
-                var firstMemberDeclarationName = compilationUnit.Members.FirstOrDefault().GetNameToken();
+                var firstMemberDeclarationName = compilationUnit
+                    .Members.FirstOrDefault()
+                    .GetNameToken();
 
-                if (firstMemberDeclarationName != default
-                    && firstMemberDeclarationName.Span.IntersectsWith(position))
+                if (
+                    firstMemberDeclarationName != default
+                    && firstMemberDeclarationName.Span.IntersectsWith(position)
+                )
                 {
                     return compilationUnit;
                 }
@@ -59,7 +84,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.SyncNamespace
             return null;
         }
 
-        protected override string EscapeIdentifier(string identifier)
-            => identifier.EscapeIdentifier();
+        protected override string EscapeIdentifier(string identifier) =>
+            identifier.EscapeIdentifier();
     }
 }

@@ -9,7 +9,7 @@ namespace System.Xml.XmlWriterApiTests
 {
     public enum ReaderType
     {
-        CoreReader
+        CoreReader,
     }
 
     public partial class ReaderParamTestCase
@@ -46,7 +46,9 @@ namespace System.Xml.XmlWriterApiTests
             fileName = Path.GetFileNameWithoutExtension(fileName);
 
             StreamReader sr = null;
-            sr = new StreamReader(FilePathUtil.getStream(XmlWriterUtils.FullPath(fileName + ".xml")));
+            sr = new StreamReader(
+                FilePathUtil.getStream(XmlWriterUtils.FullPath(fileName + ".xml"))
+            );
             return CreateReader(sr);
         }
 
@@ -103,7 +105,11 @@ namespace System.Xml.XmlWriterApiTests
             switch (readerType)
             {
                 case ReaderType.CoreReader:
-                    xr = ReaderHelper.Create(sr, readerSettings, (string)null /*baseUri*/);
+                    xr = ReaderHelper.Create(
+                        sr,
+                        readerSettings,
+                        (string)null /*baseUri*/
+                    );
                     break;
                 default:
                     CError.Compare(false, "Unknown reader type: " + readerType);

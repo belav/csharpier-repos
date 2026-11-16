@@ -26,9 +26,13 @@ namespace System.Diagnostics
             }
         }
 
-        private static void RefreshingConfiguration(object sender, EventArgs e) => DiagnosticsConfiguration.Refresh();
+        private static void RefreshingConfiguration(object sender, EventArgs e) =>
+            DiagnosticsConfiguration.Refresh();
 
-        private static void InitializingTraceSource(object sender, InitializingTraceSourceEventArgs e)
+        private static void InitializingTraceSource(
+            object sender,
+            InitializingTraceSourceEventArgs e
+        )
         {
             TraceSource traceSource = e.TraceSource;
 
@@ -55,7 +59,8 @@ namespace System.Diagnostics
 
                             if (!string.IsNullOrEmpty(sourceElement.SwitchValue))
                             {
-                                traceSource.Switch.Level = (SourceLevels)Enum.Parse(typeof(SourceLevels), sourceElement.SwitchValue);
+                                traceSource.Switch.Level = (SourceLevels)
+                                    Enum.Parse(typeof(SourceLevels), sourceElement.SwitchValue);
                             }
                         }
                     }
@@ -74,7 +79,8 @@ namespace System.Diagnostics
                         // The SwitchValue changed; just update our internalSwitch.
                         if (!string.IsNullOrEmpty(sourceElement.SwitchValue))
                         {
-                            traceSource.Switch.Level = (SourceLevels)Enum.Parse(typeof(SourceLevels), sourceElement.SwitchValue);
+                            traceSource.Switch.Level = (SourceLevels)
+                                Enum.Parse(typeof(SourceLevels), sourceElement.SwitchValue);
                         }
                         else
                         {
@@ -82,22 +88,29 @@ namespace System.Diagnostics
                         }
                     }
 
-                    TraceListener[] newListenerCollection = new TraceListener[sourceElement.Listeners.Count];
+                    TraceListener[] newListenerCollection = new TraceListener[
+                        sourceElement.Listeners.Count
+                    ];
                     int listnerOffset = 0;
                     foreach (ListenerElement listenerElement in sourceElement.Listeners)
                     {
                         TraceListener listener = traceSource.Listeners[listenerElement.Name];
                         if (listener != null)
                         {
-                            newListenerCollection[listnerOffset++] = listenerElement.RefreshRuntimeObject(listener);
+                            newListenerCollection[listnerOffset++] =
+                                listenerElement.RefreshRuntimeObject(listener);
                         }
                         else
                         {
-                            newListenerCollection[listnerOffset++] = listenerElement.GetRuntimeObject();
+                            newListenerCollection[listnerOffset++] =
+                                listenerElement.GetRuntimeObject();
                         }
                     }
 
-                    TraceUtils.CopyStringDictionary(sourceElement.Attributes, traceSource.Attributes);
+                    TraceUtils.CopyStringDictionary(
+                        sourceElement.Attributes,
+                        traceSource.Attributes
+                    );
 
                     traceSource.Listeners.Clear();
                     traceSource.Listeners.AddRange(newListenerCollection);
@@ -137,11 +150,15 @@ namespace System.Diagnostics
             {
                 if (!string.IsNullOrEmpty(typeName))
                 {
-                    traceSource.Switch = (SourceSwitch)TraceUtils.GetRuntimeObject(typeName, typeof(SourceSwitch), name);
+                    traceSource.Switch = (SourceSwitch)
+                        TraceUtils.GetRuntimeObject(typeName, typeof(SourceSwitch), name);
                 }
                 else
                 {
-                    traceSource.Switch = new SourceSwitch(name, traceSource.DefaultLevel.ToString());
+                    traceSource.Switch = new SourceSwitch(
+                        name,
+                        traceSource.DefaultLevel.ToString()
+                    );
                 }
             }
         }
@@ -158,7 +175,10 @@ namespace System.Diagnostics
                 Trace.AutoFlush = traceSection.AutoFlush;
                 Trace.IndentSize = traceSection.IndentSize;
 
-                ListenerElementsCollection listeners = DiagnosticsConfiguration.SystemDiagnosticsSection?.Trace.Listeners;
+                ListenerElementsCollection listeners = DiagnosticsConfiguration
+                    .SystemDiagnosticsSection
+                    ?.Trace
+                    .Listeners;
                 if (listeners != null)
                 {
                     // If listeners were configured, replace the defaults with these.

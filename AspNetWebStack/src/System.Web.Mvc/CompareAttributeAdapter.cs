@@ -8,9 +8,14 @@ using DataAnnotationsCompareAttribute = System.ComponentModel.DataAnnotations.Co
 
 namespace System.Web.Mvc
 {
-    internal class CompareAttributeAdapter : DataAnnotationsModelValidator<DataAnnotationsCompareAttribute>
+    internal class CompareAttributeAdapter
+        : DataAnnotationsModelValidator<DataAnnotationsCompareAttribute>
     {
-        public CompareAttributeAdapter(ModelMetadata metadata, ControllerContext context, DataAnnotationsCompareAttribute attribute)
+        public CompareAttributeAdapter(
+            ModelMetadata metadata,
+            ControllerContext context,
+            DataAnnotationsCompareAttribute attribute
+        )
             : base(metadata, context, new CompareAttributeWrapper(attribute, metadata))
         {
             Contract.Assert(attribute.GetType() == typeof(DataAnnotationsCompareAttribute));
@@ -18,7 +23,10 @@ namespace System.Web.Mvc
 
         public override IEnumerable<ModelClientValidationRule> GetClientValidationRules()
         {
-            yield return new ModelClientValidationEqualToRule(ErrorMessage, FormatPropertyForClientValidation(Attribute.OtherProperty));
+            yield return new ModelClientValidationEqualToRule(
+                ErrorMessage,
+                FormatPropertyForClientValidation(Attribute.OtherProperty)
+            );
         }
 
         private static string FormatPropertyForClientValidation(string property)
@@ -29,19 +37,28 @@ namespace System.Web.Mvc
         }
 
         // Wrapper for CompareAttribute that will eagerly get the OtherPropertyDisplayName and use it on the error message for client validation.
-        // The System.ComponentModel.DataAnnotations.CompareAttribute doesn't populate the OtherPropertyDisplayName until after IsValid() 
+        // The System.ComponentModel.DataAnnotations.CompareAttribute doesn't populate the OtherPropertyDisplayName until after IsValid()
         // is called. Therefore, by the time we get the error message for client validation, the display name is not populated and won't be used.
         private sealed class CompareAttributeWrapper : DataAnnotationsCompareAttribute
         {
             private readonly string _otherPropertyDisplayName;
 
-            public CompareAttributeWrapper(DataAnnotationsCompareAttribute attribute, ModelMetadata metadata)
+            public CompareAttributeWrapper(
+                DataAnnotationsCompareAttribute attribute,
+                ModelMetadata metadata
+            )
                 : base(attribute.OtherProperty)
             {
                 _otherPropertyDisplayName = attribute.OtherPropertyDisplayName;
                 if (_otherPropertyDisplayName == null && metadata.ContainerType != null)
                 {
-                    _otherPropertyDisplayName = ModelMetadataProviders.Current.GetMetadataForProperty(() => metadata.Model, metadata.ContainerType, attribute.OtherProperty).GetDisplayName();
+                    _otherPropertyDisplayName = ModelMetadataProviders
+                        .Current.GetMetadataForProperty(
+                            () => metadata.Model,
+                            metadata.ContainerType,
+                            attribute.OtherProperty
+                        )
+                        .GetDisplayName();
                 }
 
                 if (_otherPropertyDisplayName == null)
@@ -53,9 +70,11 @@ namespace System.Web.Mvc
                 // CompareAttribute constructor calls ValidationAttribute constructor) when all properties are null to
                 // preserve default error message. Reset the message accessor when just ErrorMessageResourceType is
                 // non-null to ensure correct InvalidOperationException.
-                if (!String.IsNullOrEmpty(attribute.ErrorMessage) ||
-                    !String.IsNullOrEmpty(attribute.ErrorMessageResourceName) ||
-                    attribute.ErrorMessageResourceType != null)
+                if (
+                    !String.IsNullOrEmpty(attribute.ErrorMessage)
+                    || !String.IsNullOrEmpty(attribute.ErrorMessageResourceName)
+                    || attribute.ErrorMessageResourceType != null
+                )
                 {
                     ErrorMessage = attribute.ErrorMessage;
                     ErrorMessageResourceName = attribute.ErrorMessageResourceName;
@@ -65,7 +84,12 @@ namespace System.Web.Mvc
 
             public override string FormatErrorMessage(string name)
             {
-                return String.Format(CultureInfo.CurrentCulture, ErrorMessageString, name, _otherPropertyDisplayName);
+                return String.Format(
+                    CultureInfo.CurrentCulture,
+                    ErrorMessageString,
+                    name,
+                    _otherPropertyDisplayName
+                );
             }
         }
     }

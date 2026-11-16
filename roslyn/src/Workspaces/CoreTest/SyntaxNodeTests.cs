@@ -30,11 +30,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var root = tree.GetRoot();
 
             var node = root.DescendantNodes().OfType<VariableDeclaratorSyntax>().Single();
-            var newRoot = await root.ReplaceNodesAsync(new[] { node }, (o, n, c) =>
-            {
-                var decl = (VariableDeclaratorSyntax)n;
-                return Task.FromResult<SyntaxNode>(decl.WithIdentifier(SyntaxFactory.Identifier("Y")));
-            }, CancellationToken.None);
+            var newRoot = await root.ReplaceNodesAsync(
+                new[] { node },
+                (o, n, c) =>
+                {
+                    var decl = (VariableDeclaratorSyntax)n;
+                    return Task.FromResult<SyntaxNode>(
+                        decl.WithIdentifier(SyntaxFactory.Identifier("Y"))
+                    );
+                },
+                CancellationToken.None
+            );
 
             var actual = newRoot.ToString();
 
@@ -50,25 +56,47 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var tree = SyntaxFactory.ParseSyntaxTree(text);
             var root = tree.GetRoot();
 
-            var nodes = root.DescendantNodes().Where(n => n is VariableDeclaratorSyntax or ClassDeclarationSyntax).ToList();
+            var nodes = root.DescendantNodes()
+                .Where(n => n is VariableDeclaratorSyntax or ClassDeclarationSyntax)
+                .ToList();
             var computations = 0;
-            var newRoot = await root.ReplaceNodesAsync(nodes, (o, n, c) =>
-            {
-                computations++;
-                if (n is ClassDeclarationSyntax classDecl)
+            var newRoot = await root.ReplaceNodesAsync(
+                nodes,
+                (o, n, c) =>
                 {
-                    var id = classDecl.Identifier;
-                    return Task.FromResult<SyntaxNode>(classDecl.WithIdentifier(SyntaxFactory.Identifier(id.LeadingTrivia, id.ToString() + "1", id.TrailingTrivia)));
-                }
+                    computations++;
+                    if (n is ClassDeclarationSyntax classDecl)
+                    {
+                        var id = classDecl.Identifier;
+                        return Task.FromResult<SyntaxNode>(
+                            classDecl.WithIdentifier(
+                                SyntaxFactory.Identifier(
+                                    id.LeadingTrivia,
+                                    id.ToString() + "1",
+                                    id.TrailingTrivia
+                                )
+                            )
+                        );
+                    }
 
-                if (n is VariableDeclaratorSyntax varDecl)
-                {
-                    var id = varDecl.Identifier;
-                    return Task.FromResult<SyntaxNode>(varDecl.WithIdentifier(SyntaxFactory.Identifier(id.LeadingTrivia, id.ToString() + "1", id.TrailingTrivia)));
-                }
+                    if (n is VariableDeclaratorSyntax varDecl)
+                    {
+                        var id = varDecl.Identifier;
+                        return Task.FromResult<SyntaxNode>(
+                            varDecl.WithIdentifier(
+                                SyntaxFactory.Identifier(
+                                    id.LeadingTrivia,
+                                    id.ToString() + "1",
+                                    id.TrailingTrivia
+                                )
+                            )
+                        );
+                    }
 
-                return Task.FromResult(n);
-            }, CancellationToken.None);
+                    return Task.FromResult(n);
+                },
+                CancellationToken.None
+            );
 
             var actual = newRoot.ToString();
 
@@ -84,8 +112,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var sourceText = @"public class C { void M() { } }";
 
-            var sol = new AdhocWorkspace().CurrentSolution
-                .AddProject(pid, "proj", "proj", LanguageNames.CSharp)
+            var sol = new AdhocWorkspace()
+                .CurrentSolution.AddProject(pid, "proj", "proj", LanguageNames.CSharp)
                 .AddDocument(did, "doc", sourceText);
 
             var doc = sol.GetDocument(did);
@@ -100,7 +128,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // use some fancy document centric rewrites
             var gen = SyntaxGenerator.GetGenerator(doc);
-            var cgenField = gen.FieldDeclaration("X", gen.TypeExpression(SpecialType.System_Int32), Accessibility.Private);
+            var cgenField = gen.FieldDeclaration(
+                "X",
+                gen.TypeExpression(SpecialType.System_Int32),
+                Accessibility.Private
+            );
 
             var currentClassDecl = trackedRoot.GetCurrentNodes(classDecl).First();
             var classDeclWithField = gen.InsertMembers(currentClassDecl, 0, new[] { cgenField });
@@ -121,7 +153,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // we can still find the tracked node in the new document
             var finalClassDecl = root2.GetCurrentNodes(classDecl).First();
-            Assert.Equal("public class C\r\n{\r\n    private int X;\r\n    void M()\r\n    {\r\n    }\r\n}", finalClassDecl.NormalizeWhitespace().ToString());
+            Assert.Equal(
+                "public class C\r\n{\r\n    private int X;\r\n    void M()\r\n    {\r\n    }\r\n}",
+                finalClassDecl.NormalizeWhitespace().ToString()
+            );
 
             // and other tracked nodes too
             var finalMethodDecl = root2.GetCurrentNodes(methodDecl).First();

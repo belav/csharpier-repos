@@ -53,7 +53,8 @@ namespace Newtonsoft.Json.Tests.Issues
             object[][] data = dt.Select().Select(r => r.ItemArray).ToArray();
 
             string json = JsonConvert.SerializeObject(data, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   [
     ""string1"",
     ""string2""
@@ -62,7 +63,9 @@ namespace Newtonsoft.Json.Tests.Issues
     ""string1"",
     null
   ]
-]", json);
+]",
+                json
+            );
         }
     }
 }

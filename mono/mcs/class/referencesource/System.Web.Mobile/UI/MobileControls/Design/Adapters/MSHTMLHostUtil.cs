@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="MSHTMLHostUtil.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -11,11 +11,13 @@ using System.Web.UI.Design.MobileControls.Util;
 
 namespace System.Web.UI.Design.MobileControls.Adapters
 {
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal static class MSHTMLHostUtil
     {
         private const int CONTROL_WIDTH = 64;
@@ -48,16 +50,20 @@ namespace System.Web.UI.Design.MobileControls.Adapters
         {
             MSHTMLHostUtil.CreateControl();
 
-            String bodyInnerHTML = "<div id=__divOuter nowrap style='width:1px; height:10px'>" +
-                                   enterStyle +
-                                   "<div id=__divInner" + cssStyle + "></div>" +
-                                   exitStyle +
-                                   "</div>";
+            String bodyInnerHTML =
+                "<div id=__divOuter nowrap style='width:1px; height:10px'>"
+                + enterStyle
+                + "<div id=__divInner"
+                + cssStyle
+                + "></div>"
+                + exitStyle
+                + "</div>";
 
             // MessageBox.Show("Body HTML for empty content: " + bodyInnerHTML);
             _htmlBody.SetInnerHTML(bodyInnerHTML);
 
-            NativeMethods.IHTMLDocument3 htmlDoc3 = (NativeMethods.IHTMLDocument3) _tridentControl.GetDocument();
+            NativeMethods.IHTMLDocument3 htmlDoc3 = (NativeMethods.IHTMLDocument3)
+                _tridentControl.GetDocument();
             Debug.Assert(null != htmlDoc3);
 
             _htmlDivInner = htmlDoc3.GetElementById("__divInner");
@@ -71,7 +77,7 @@ namespace System.Web.UI.Design.MobileControls.Adapters
             Debug.Assert(null != _htmlDivOuter && null != _htmlDivInner);
 
             _htmlDivInner.SetInnerText(text);
-            NativeMethods.IHTMLElement2 htmlElement2 = (NativeMethods.IHTMLElement2) _htmlDivOuter;
+            NativeMethods.IHTMLElement2 htmlElement2 = (NativeMethods.IHTMLElement2)_htmlDivOuter;
             Debug.Assert(null != htmlElement2);
             return htmlElement2.GetClientWidth();
         }
@@ -81,7 +87,7 @@ namespace System.Web.UI.Design.MobileControls.Adapters
         {
             Debug.Assert(null != _htmlDivOuter && null != _htmlDivInner);
             _htmlDivInner.SetInnerHTML(htmlFragment);
-            NativeMethods.IHTMLElement2 htmlElement2 = (NativeMethods.IHTMLElement2) _htmlDivOuter;
+            NativeMethods.IHTMLElement2 htmlElement2 = (NativeMethods.IHTMLElement2)_htmlDivOuter;
             Debug.Assert(null != htmlElement2);
             return htmlElement2.GetClientWidth();
         }
@@ -90,7 +96,7 @@ namespace System.Web.UI.Design.MobileControls.Adapters
         {
             Debug.Assert(null != _htmlDivOuter && null != _htmlDivInner);
             _htmlDivInner.SetInnerHTML(htmlFragment);
-            NativeMethods.IHTMLElement2 htmlElement2 = (NativeMethods.IHTMLElement2) _htmlDivOuter;
+            NativeMethods.IHTMLElement2 htmlElement2 = (NativeMethods.IHTMLElement2)_htmlDivOuter;
             Debug.Assert(null != htmlElement2);
             return htmlElement2.GetClientHeight();
         }

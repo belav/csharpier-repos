@@ -117,13 +117,11 @@ public class PropertyAsParameterInfoTests
         var attributes = parameterInfo.GetCustomAttributesData();
 
         // Assert
-        Assert.Single(
-            parameterInfo.GetCustomAttributesData(),
-            a => typeof(TestAttribute).IsAssignableFrom(a.AttributeType)
+        Assert.Single(parameterInfo.GetCustomAttributesData(), a =>
+            typeof(TestAttribute).IsAssignableFrom(a.AttributeType)
         );
-        Assert.Single(
-            parameterInfo.GetCustomAttributesData(),
-            a => typeof(SampleAttribute).IsAssignableFrom(a.AttributeType)
+        Assert.Single(parameterInfo.GetCustomAttributesData(), a =>
+            typeof(SampleAttribute).IsAssignableFrom(a.AttributeType)
         );
     }
 

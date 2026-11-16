@@ -55,8 +55,7 @@ internal sealed class DefaultPageFactoryProvider : IPageFactoryProvider
         }
 
         var activatorFactory = _pageActivator.CreateActivator(actionDescriptor);
-        var declaredModelType =
-            actionDescriptor.DeclaredModelTypeInfo?.AsType()
+        var declaredModelType = actionDescriptor.DeclaredModelTypeInfo?.AsType()
             ?? actionDescriptor.PageTypeInfo.AsType();
         var propertyActivator = new RazorPagePropertyActivator(
             actionDescriptor.PageTypeInfo.AsType(),

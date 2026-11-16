@@ -18,9 +18,7 @@ namespace System.Runtime.Diagnostics
         static EventTraceActivity empty;
 
         public EventTraceActivity(bool setOnThread = false)
-            : this(Guid.NewGuid(), setOnThread)
-        {
-        }
+            : this(Guid.NewGuid(), setOnThread) { }
 
         public EventTraceActivity(Guid guid, bool setOnThread = false)
         {
@@ -31,10 +29,9 @@ namespace System.Runtime.Diagnostics
             }
         }
 
-
         public static EventTraceActivity Empty
         {
-            get 
+            get
             {
                 if (empty == null)
                 {
@@ -50,8 +47,10 @@ namespace System.Runtime.Diagnostics
             get { return "E2EActivity"; }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Critical because the CorrelationManager property has a link demand on UnmanagedCode.",
-            Safe = "We do not leak security data.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because the CorrelationManager property has a link demand on UnmanagedCode.",
+            Safe = "We do not leak security data."
+        )]
         [SecuritySafeCritical]
         public static EventTraceActivity GetFromThreadOrCreate(bool clearIdOnThread = false)
         {
@@ -69,8 +68,10 @@ namespace System.Runtime.Diagnostics
             return new EventTraceActivity(guid);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Critical because the CorrelationManager property has a link demand on UnmanagedCode.",
-            Safe = "We do not leak security data.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because the CorrelationManager property has a link demand on UnmanagedCode.",
+            Safe = "We do not leak security data."
+        )]
         [SecuritySafeCritical]
         public static Guid GetActivityIdFromThread()
         {
@@ -82,8 +83,10 @@ namespace System.Runtime.Diagnostics
             this.ActivityId = guid;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Critical because the CorrelationManager property has a link demand on UnmanagedCode.",
-            Safe = "We do not leak security data.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because the CorrelationManager property has a link demand on UnmanagedCode.",
+            Safe = "We do not leak security data."
+        )]
         [SecuritySafeCritical]
         void SetActivityIdOnThread()
         {

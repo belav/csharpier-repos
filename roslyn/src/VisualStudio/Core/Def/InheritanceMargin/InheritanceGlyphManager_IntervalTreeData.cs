@@ -30,11 +30,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
 
         private readonly struct GlyphDataIntrospector : IIntervalIntrospector<GlyphData>
         {
-            public int GetStart(GlyphData data)
-                => data.SnapshotSpan.Start;
+            public int GetStart(GlyphData data) => data.SnapshotSpan.Start;
 
-            public int GetLength(GlyphData data)
-                => data.SnapshotSpan.Length;
+            public int GetLength(GlyphData data) => data.SnapshotSpan.Length;
         }
     }
 }

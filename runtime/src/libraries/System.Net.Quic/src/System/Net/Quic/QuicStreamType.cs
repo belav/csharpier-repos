@@ -17,5 +17,5 @@ public enum QuicStreamType
     /// <summary>
     /// For both peers, read and write capable.
     /// </summary>
-    Bidirectional
+    Bidirectional,
 }

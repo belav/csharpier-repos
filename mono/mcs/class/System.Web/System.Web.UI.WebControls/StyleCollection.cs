@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,69 +30,68 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	public class StyleCollection : StateManagedCollection
-	{
-		internal StyleCollection ()
-		{
-		}
-		
-		public Style this [int i] {
-			get { return (Style)((IList)this) [i]; }
-			set { ((IList)this) [i] = value; }
-		}
-		
-		public int Add (Style style)
-		{
-			return ((IList)this).Add (style);
-		}
+    public class StyleCollection : StateManagedCollection
+    {
+        internal StyleCollection() { }
 
-		public bool Contains (Style style)
-		{
-			return ((IList)this).Contains (style);
-		}
+        public Style this[int i]
+        {
+            get { return (Style)((IList)this)[i]; }
+            set { ((IList)this)[i] = value; }
+        }
 
-		public void CopyTo (Style[] styleArray, int index)
-		{
-			((IList)this).CopyTo (styleArray, index);
-		}
+        public int Add(Style style)
+        {
+            return ((IList)this).Add(style);
+        }
 
-		protected override object CreateKnownType (int index)
-		{
-			return new Style ();
-		}
+        public bool Contains(Style style)
+        {
+            return ((IList)this).Contains(style);
+        }
 
-		protected override Type[] GetKnownTypes ()
-		{
-			return new Type[] { typeof (Style) };
-		}
+        public void CopyTo(Style[] styleArray, int index)
+        {
+            ((IList)this).CopyTo(styleArray, index);
+        }
 
-		public int IndexOf (Style style)
-		{
-			return ((IList)this).IndexOf (style);
-		}
+        protected override object CreateKnownType(int index)
+        {
+            return new Style();
+        }
 
-		public void Insert (int index, Style style)
-		{
-			((IList)this).Insert (index, style);
-		}
+        protected override Type[] GetKnownTypes()
+        {
+            return new Type[] { typeof(Style) };
+        }
 
-		public void Remove (Style style)
-		{
-			((IList)this).Remove (style);
-		}
+        public int IndexOf(Style style)
+        {
+            return ((IList)this).IndexOf(style);
+        }
 
-		public void RemoveAt (int index)
-		{
-			((IList)this).RemoveAt (index);
-		}
+        public void Insert(int index, Style style)
+        {
+            ((IList)this).Insert(index, style);
+        }
 
-		protected override void SetDirtyObject (object o)
-		{
-			Style s = o as Style;
-			if (s == null)
-				return;
+        public void Remove(Style style)
+        {
+            ((IList)this).Remove(style);
+        }
 
-			s.SetDirty ();
-		}
-	}
+        public void RemoveAt(int index)
+        {
+            ((IList)this).RemoveAt(index);
+        }
+
+        protected override void SetDirtyObject(object o)
+        {
+            Style s = o as Style;
+            if (s == null)
+                return;
+
+            s.SetDirty();
+        }
+    }
 }

@@ -14,9 +14,7 @@ namespace System.Text.Json.SourceGeneration.Tests
     public partial class RequiredKeywordTests_SourceGen : RequiredKeywordTests
     {
         public RequiredKeywordTests_SourceGen()
-            : base(new StringSerializerWrapper(RequiredKeywordTestsContext.Default))
-        {
-        }
+            : base(new StringSerializerWrapper(RequiredKeywordTestsContext.Default)) { }
 
         [JsonSerializable(typeof(InheritedPersonWithRequiredMembers))]
         [JsonSerializable(typeof(InheritedPersonWithRequiredMembersWithAdditionalRequiredMembers))]
@@ -25,15 +23,17 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(PersonWithRequiredMembersAndSmallParametrizedCtor))]
         [JsonSerializable(typeof(PersonWithRequiredMembersAndLargeParametrizedCtor))]
         [JsonSerializable(typeof(PersonWithRequiredMembersAndSetsRequiredMembers))]
-        [JsonSerializable(typeof(PersonWithRequiredMembersAndSmallParametrizedCtorAndSetsRequiredMembers))]
-        [JsonSerializable(typeof(PersonWithRequiredMembersAndLargeParametrizedCtorAndSetsRequiredMembers))]
+        [JsonSerializable(
+            typeof(PersonWithRequiredMembersAndSmallParametrizedCtorAndSetsRequiredMembers)
+        )]
+        [JsonSerializable(
+            typeof(PersonWithRequiredMembersAndLargeParametrizedCtorAndSetsRequiredMembers)
+        )]
         [JsonSerializable(typeof(ClassWithInitOnlyRequiredProperty))]
         [JsonSerializable(typeof(ClassWithRequiredField))]
         [JsonSerializable(typeof(ClassWithRequiredExtensionDataProperty))]
         [JsonSerializable(typeof(ClassWithRequiredKeywordAndJsonRequiredCustomAttribute))]
         [JsonSerializable(typeof(ClassWithCustomRequiredPropertyName))]
-        internal sealed partial class RequiredKeywordTestsContext : JsonSerializerContext
-        {
-        }
+        internal sealed partial class RequiredKeywordTestsContext : JsonSerializerContext { }
     }
 }

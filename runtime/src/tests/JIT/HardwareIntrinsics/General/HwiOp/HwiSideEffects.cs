@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
-using System.Runtime.CompilerServices;
 using Xunit;
 
 // Tests that side effects induced by the HWI nodes are correctly accounted for.

@@ -13,6 +13,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.QuickInfo
 {
     internal interface IXamlQuickInfoService : ILanguageService
     {
-        Task<XamlQuickInfo> GetQuickInfoAsync(TextDocument document, int position, CancellationToken cancellationToken);
+        Task<XamlQuickInfo> GetQuickInfoAsync(
+            TextDocument document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

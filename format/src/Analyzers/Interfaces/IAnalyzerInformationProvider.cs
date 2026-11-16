@@ -13,6 +13,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             Workspace workspace,
             Solution solution,
             FormatOptions formatOptions,
-            ILogger logger);
+            ILogger logger
+        );
     }
 }

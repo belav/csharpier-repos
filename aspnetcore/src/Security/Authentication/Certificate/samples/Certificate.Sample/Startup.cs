@@ -63,13 +63,10 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.Map(
-                "{*url}",
-                context =>
-                {
-                    return context.Response.WriteAsync($"Hello {context.User.Identity.Name}");
-                }
-            );
+            endpoints.Map("{*url}", context =>
+            {
+                return context.Response.WriteAsync($"Hello {context.User.Identity.Name}");
+            });
         });
     }
 }

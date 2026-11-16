@@ -10,12 +10,12 @@ internal static partial class Interop
     {
         internal enum FileAdvice : int
         {
-            POSIX_FADV_NORMAL       = 0,    /* no special advice, the default value */
-            POSIX_FADV_RANDOM       = 1,    /* random I/O access */
-            POSIX_FADV_SEQUENTIAL   = 2,    /* sequential I/O access */
-            POSIX_FADV_WILLNEED     = 3,    /* will need specified pages */
-            POSIX_FADV_DONTNEED     = 4,    /* don't need the specified pages */
-            POSIX_FADV_NOREUSE      = 5,    /* data will only be accessed once */
+            POSIX_FADV_NORMAL = 0, /* no special advice, the default value */
+            POSIX_FADV_RANDOM = 1, /* random I/O access */
+            POSIX_FADV_SEQUENTIAL = 2, /* sequential I/O access */
+            POSIX_FADV_WILLNEED = 3, /* will need specified pages */
+            POSIX_FADV_DONTNEED = 4, /* don't need the specified pages */
+            POSIX_FADV_NOREUSE = 5, /* data will only be accessed once */
         }
 
         /// <summary>
@@ -29,7 +29,16 @@ internal static partial class Interop
         /// <returns>
         /// Returns 0 on success; otherwise, the error code is returned
         /// </returns>
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_PosixFAdvise", SetLastError = false /* this is explicitly called out in the man page */)]
-        internal static partial int PosixFAdvise(SafeFileHandle fd, long offset, long length, FileAdvice advice);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_PosixFAdvise",
+            SetLastError = false /* this is explicitly called out in the man page */
+        )]
+        internal static partial int PosixFAdvise(
+            SafeFileHandle fd,
+            long offset,
+            long length,
+            FileAdvice advice
+        );
     }
 }

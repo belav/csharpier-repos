@@ -25,8 +25,8 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-       CountResults(new RecurseTest().Run(),                   ref nSuccesses, ref nFailures);
-        
+        CountResults(new RecurseTest().Run(), ref nSuccesses, ref nFailures);
+
         if (0 == nFailures)
         {
             Console.WriteLine("OVERALL PASS: " + nSuccesses + " tests");
@@ -43,7 +43,7 @@ public class TestSet
 class RecurseTest
 {
     Trace _trace;
-    
+
     void DoTest(int level)
     {
         _trace.Write(level.ToString());
@@ -64,8 +64,8 @@ class RecurseTest
 
     public int Run()
     {
-        int     n = 8;
-        string  expected = "";
+        int n = 8;
+        string expected = "";
 
         // create expected result string
         for (int i = n; i >= 0; i--)
@@ -74,10 +74,9 @@ class RecurseTest
         }
 
         _trace = new Trace("RecurseTest", expected);
-        
+
         DoTest(n);
 
         return _trace.Match();
     }
 }
-

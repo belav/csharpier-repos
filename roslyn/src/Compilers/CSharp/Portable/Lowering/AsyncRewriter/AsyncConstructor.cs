@@ -9,16 +9,19 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed class AsyncConstructor : SynthesizedInstanceConstructor, ISynthesizedMethodBodyImplementationSymbol
+    internal sealed class AsyncConstructor
+        : SynthesizedInstanceConstructor,
+            ISynthesizedMethodBodyImplementationSymbol
     {
         internal AsyncConstructor(AsyncStateMachine stateMachineType)
-            : base(stateMachineType)
-        {
-        }
+            : base(stateMachineType) { }
 
         IMethodSymbolInternal ISynthesizedMethodBodyImplementationSymbol.Method
         {
-            get { return ((ISynthesizedMethodBodyImplementationSymbol)this.ContainingSymbol).Method; }
+            get
+            {
+                return ((ISynthesizedMethodBodyImplementationSymbol)this.ContainingSymbol).Method;
+            }
         }
 
         bool ISynthesizedMethodBodyImplementationSymbol.HasMethodBodyDependency

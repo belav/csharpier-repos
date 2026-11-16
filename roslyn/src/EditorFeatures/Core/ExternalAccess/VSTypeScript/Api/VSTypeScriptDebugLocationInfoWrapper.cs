@@ -8,7 +8,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal readonly struct VSTypeScriptDebugLocationInfoWrapper(string name, int lineOffset)
     {
-        internal readonly DebugLocationInfo UnderlyingObject = new DebugLocationInfo(name, lineOffset);
+        internal readonly DebugLocationInfo UnderlyingObject = new DebugLocationInfo(
+            name,
+            lineOffset
+        );
 
         public readonly string Name => UnderlyingObject.Name;
         public readonly int LineOffset => UnderlyingObject.LineOffset;

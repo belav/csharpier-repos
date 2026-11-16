@@ -15,9 +15,8 @@ namespace System.ServiceModel.Channels
     {
         XmlDictionaryReaderQuotas readerQuotas;
 
-        public ByteStreamMessageEncodingBindingElement() : this((XmlDictionaryReaderQuotas)null)
-        {
-        }
+        public ByteStreamMessageEncodingBindingElement()
+            : this((XmlDictionaryReaderQuotas)null) { }
 
         public ByteStreamMessageEncodingBindingElement(XmlDictionaryReaderQuotas quota)
         {
@@ -28,32 +27,29 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        ByteStreamMessageEncodingBindingElement(ByteStreamMessageEncodingBindingElement byteStreamEncoderBindingElement) 
-            : this(byteStreamEncoderBindingElement.readerQuotas)
-        {
-        }
+        ByteStreamMessageEncodingBindingElement(
+            ByteStreamMessageEncodingBindingElement byteStreamEncoderBindingElement
+        )
+            : this(byteStreamEncoderBindingElement.readerQuotas) { }
 
         public override MessageVersion MessageVersion
         {
-            get
-            {
-                return MessageVersion.None;
-            }
+            get { return MessageVersion.None; }
             set
             {
                 if (value != MessageVersion.None)
                 {
-                    throw FxTrace.Exception.Argument("MessageVersion", SR.ByteStreamMessageEncoderMessageVersionNotSupported(value));
+                    throw FxTrace.Exception.Argument(
+                        "MessageVersion",
+                        SR.ByteStreamMessageEncoderMessageVersionNotSupported(value)
+                    );
                 }
             }
         }
 
         public XmlDictionaryReaderQuotas ReaderQuotas
         {
-            get
-            {
-                return this.readerQuotas;
-            }
+            get { return this.readerQuotas; }
             set
             {
                 if (value == null)
@@ -67,7 +63,9 @@ namespace System.ServiceModel.Channels
             return InternalCanBuildChannelFactory<TChannel>(context);
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             return InternalBuildChannelFactory<TChannel>(context);
         }
@@ -77,7 +75,9 @@ namespace System.ServiceModel.Channels
             return InternalCanBuildChannelListener<TChannel>(context);
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             return InternalBuildChannelListener<TChannel>(context);
         }
@@ -91,12 +91,12 @@ namespace System.ServiceModel.Channels
         {
             return new ByteStreamMessageEncodingBindingElement(this);
         }
-     
+
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool ShouldSerializeMessageVersion()
         {
             // Always MessageVersion.None in ByteStreamMessageEncoder
-            return false; 
+            return false;
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -104,6 +104,5 @@ namespace System.ServiceModel.Channels
         {
             return (!EncoderDefaults.IsDefaultReaderQuotas(this.ReaderQuotas));
         }
-
     }
 }

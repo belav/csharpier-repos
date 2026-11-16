@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,104 +31,110 @@
 using System;
 using System.Collections;
 
-namespace Mono.Data.Tds {
-	public class TdsMetaParameterCollection : ICollection, IEnumerable
-	{
-		#region Fields
+namespace Mono.Data.Tds
+{
+    public class TdsMetaParameterCollection : ICollection, IEnumerable
+    {
+        #region Fields
 
-		ArrayList list;
+        ArrayList list;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		public TdsMetaParameterCollection ()
-		{
-			list = new ArrayList ();
-		}
+        public TdsMetaParameterCollection()
+        {
+            list = new ArrayList();
+        }
 
-		#region Properties
+        #region Properties
 
-		public int Count {
-			get { return list.Count; }
-		}
+        public int Count
+        {
+            get { return list.Count; }
+        }
 
-		public bool IsSynchronized {
-			get { return list.IsSynchronized; }
-		}
-		
-		public TdsMetaParameter this [int index] {
-			get { return (TdsMetaParameter) list [index]; }
-		}
+        public bool IsSynchronized
+        {
+            get { return list.IsSynchronized; }
+        }
 
-		public TdsMetaParameter this [string name] {
-			get { return (TdsMetaParameter) this [IndexOf (name)]; }
-		}
+        public TdsMetaParameter this[int index]
+        {
+            get { return (TdsMetaParameter)list[index]; }
+        }
 
-		public object SyncRoot {
-			get { return list.SyncRoot; }
-		}
+        public TdsMetaParameter this[string name]
+        {
+            get { return (TdsMetaParameter)this[IndexOf(name)]; }
+        }
 
-		#endregion // Properties
+        public object SyncRoot
+        {
+            get { return list.SyncRoot; }
+        }
 
-		#region Methods
+        #endregion // Properties
 
-		public int Add (TdsMetaParameter value)
-		{
-			return list.Add (value); 
-		}
+        #region Methods
 
-		public void Clear ()
-		{
-			list.Clear ();	
-		}
+        public int Add(TdsMetaParameter value)
+        {
+            return list.Add(value);
+        }
 
-		public bool Contains (TdsMetaParameter value)
-		{
-			return list.Contains (value);
-		}
+        public void Clear()
+        {
+            list.Clear();
+        }
 
-		public void CopyTo (Array array, int index) 
-		{
-			list.CopyTo (array, index);
-		}
+        public bool Contains(TdsMetaParameter value)
+        {
+            return list.Contains(value);
+        }
 
-		IEnumerator IEnumerable.GetEnumerator ()
-		{
-			return list.GetEnumerator ();
-		}
+        public void CopyTo(Array array, int index)
+        {
+            list.CopyTo(array, index);
+        }
 
-		public int IndexOf (TdsMetaParameter value)
-		{
-			return list.IndexOf (value);
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
 
-		public int IndexOf (string name)
-		{
-			for (int i = 0; i < Count; i += 1)
-				if (this [i].ParameterName.Equals (name))
-					return i;
-			return -1;
-		}
+        public int IndexOf(TdsMetaParameter value)
+        {
+            return list.IndexOf(value);
+        }
 
-		public void Insert (int index, TdsMetaParameter value)
-		{
-			list.Insert (index, value);
-		}
+        public int IndexOf(string name)
+        {
+            for (int i = 0; i < Count; i += 1)
+                if (this[i].ParameterName.Equals(name))
+                    return i;
+            return -1;
+        }
 
-		public void Remove (TdsMetaParameter value)
-		{
-			list.Remove (value);
-		}
+        public void Insert(int index, TdsMetaParameter value)
+        {
+            list.Insert(index, value);
+        }
 
-		public void Remove (string name)
-		{
-			RemoveAt (IndexOf (name));
-		}
+        public void Remove(TdsMetaParameter value)
+        {
+            list.Remove(value);
+        }
 
-		public void RemoveAt (int index)
-		{
-			list.RemoveAt (index);
-		}
+        public void Remove(string name)
+        {
+            RemoveAt(IndexOf(name));
+        }
 
-		#endregion // Methods
-	}
+        public void RemoveAt(int index)
+        {
+            list.RemoveAt(index);
+        }
+
+        #endregion // Methods
+    }
 }

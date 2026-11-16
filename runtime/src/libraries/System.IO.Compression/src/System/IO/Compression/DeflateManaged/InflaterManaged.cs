@@ -11,36 +11,150 @@ namespace System.IO.Compression
 
         // Extra bits for length code 257 - 285.
         private static ReadOnlySpan<byte> ExtraLengthBits =>
-        [
-            0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3,
-            3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 16
-        ];
+            [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                3,
+                3,
+                3,
+                3,
+                4,
+                4,
+                4,
+                4,
+                5,
+                5,
+                5,
+                5,
+                16,
+            ];
 
         // The base length for length code 257 - 285.
         // The formula to get the real length for a length code is lengthBase[code - 257] + (value stored in extraBits)
         private static ReadOnlySpan<byte> LengthBase =>
-        [
-            3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31, 35, 43, 51,
-            59, 67, 83, 99, 115, 131, 163, 195, 227, 3
-        ];
+            [
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                13,
+                15,
+                17,
+                19,
+                23,
+                27,
+                31,
+                35,
+                43,
+                51,
+                59,
+                67,
+                83,
+                99,
+                115,
+                131,
+                163,
+                195,
+                227,
+                3,
+            ];
 
         // The base distance for distance code 0 - 31
         // The real distance for a distance code is  distanceBasePosition[code] + (value stored in extraBits)
         private static ReadOnlySpan<ushort> DistanceBasePosition =>
-        [
-            1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193, 257, 385, 513,
-            769, 1025, 1537, 2049, 3073, 4097, 6145, 8193, 12289, 16385, 24577, 32769, 49153
-        ];
+            [
+                1,
+                2,
+                3,
+                4,
+                5,
+                7,
+                9,
+                13,
+                17,
+                25,
+                33,
+                49,
+                65,
+                97,
+                129,
+                193,
+                257,
+                385,
+                513,
+                769,
+                1025,
+                1537,
+                2049,
+                3073,
+                4097,
+                6145,
+                8193,
+                12289,
+                16385,
+                24577,
+                32769,
+                49153,
+            ];
 
         // code lengths for code length alphabet is stored in following order
-        private static ReadOnlySpan<byte> CodeOrder => [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15];
+        private static ReadOnlySpan<byte> CodeOrder =>
+            [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15];
 
         private static ReadOnlySpan<byte> StaticDistanceTreeTable =>
-        [
-            0x00, 0x10, 0x08, 0x18, 0x04, 0x14, 0x0c, 0x1c, 0x02, 0x12, 0x0a, 0x1a,
-            0x06, 0x16, 0x0e, 0x1e, 0x01, 0x11, 0x09, 0x19, 0x05, 0x15, 0x0d, 0x1d,
-            0x03, 0x13, 0x0b, 0x1b, 0x07, 0x17, 0x0f, 0x1f
-        ];
+            [
+                0x00,
+                0x10,
+                0x08,
+                0x18,
+                0x04,
+                0x14,
+                0x0c,
+                0x1c,
+                0x02,
+                0x12,
+                0x0a,
+                0x1a,
+                0x06,
+                0x16,
+                0x0e,
+                0x1e,
+                0x01,
+                0x11,
+                0x09,
+                0x19,
+                0x05,
+                0x15,
+                0x0d,
+                0x1d,
+                0x03,
+                0x13,
+                0x0b,
+                0x1b,
+                0x07,
+                0x17,
+                0x0f,
+                0x1f,
+            ];
 
         private readonly OutputWindow _output;
         private readonly InputBuffer _input;
@@ -79,7 +193,9 @@ namespace System.IO.Compression
             _output = new OutputWindow();
             _input = new InputBuffer();
 
-            _codeList = new byte[HuffmanTree.MaxLiteralTreeElements + HuffmanTree.MaxDistTreeElements];
+            _codeList = new byte[
+                HuffmanTree.MaxLiteralTreeElements + HuffmanTree.MaxDistTreeElements
+            ];
             _codeLengthTreeCodeLength = new byte[HuffmanTree.NumberOfCodeLengthTreeElements];
             _deflate64 = deflate64;
             _uncompressedSize = uncompressedSize;
@@ -91,7 +207,8 @@ namespace System.IO.Compression
         public void SetInput(byte[] inputBytes, int offset, int length) =>
             _input.SetInput(inputBytes, offset, length); // append the bytes
 
-        public bool Finished() => _state == InflaterState.Done || _state == InflaterState.VerifyingFooter;
+        public bool Finished() =>
+            _state == InflaterState.Done || _state == InflaterState.VerifyingFooter;
 
         public int AvailableOutput => _output.AvailableBytes;
 
@@ -112,7 +229,10 @@ namespace System.IO.Compression
                 {
                     if (_uncompressedSize > _currentInflatedCount)
                     {
-                        bytes = bytes.Slice(0, (int)Math.Min(bytes.Length, _uncompressedSize - _currentInflatedCount));
+                        bytes = bytes.Slice(
+                            0,
+                            (int)Math.Min(bytes.Length, _uncompressedSize - _currentInflatedCount)
+                        );
                         copied = _output.CopyTo(bytes);
                         _currentInflatedCount += copied;
                     }
@@ -139,7 +259,8 @@ namespace System.IO.Compression
             return count;
         }
 
-        public int Inflate(byte[] bytes, int offset, int length) => Inflate(bytes.AsSpan(offset, length));
+        public int Inflate(byte[] bytes, int offset, int length) =>
+            Inflate(bytes.AsSpan(offset, length));
 
         //Each block of compressed data begins with 3 header bits
         // containing the following data:
@@ -249,7 +370,6 @@ namespace System.IO.Compression
             return result;
         }
 
-
         // Format of Non-compressed blocks (BTYPE=00):
         //
         // Any bits of input up to the next byte boundary are ignored.
@@ -270,12 +390,12 @@ namespace System.IO.Compression
                 switch (_state)
                 {
                     case InflaterState.UncompressedAligning: // initial state when calling this function
-                                                             // we must skip to a byte boundary
+                        // we must skip to a byte boundary
                         _input.SkipToByteBoundary();
                         _state = InflaterState.UncompressedByte1;
                         goto case InflaterState.UncompressedByte1;
 
-                    case InflaterState.UncompressedByte1:   // decoding block length
+                    case InflaterState.UncompressedByte1: // decoding block length
                     case InflaterState.UncompressedByte2:
                     case InflaterState.UncompressedByte3:
                     case InflaterState.UncompressedByte4:
@@ -288,8 +408,10 @@ namespace System.IO.Compression
                         _blockLengthBuffer[_state - InflaterState.UncompressedByte1] = (byte)bits;
                         if (_state == InflaterState.UncompressedByte4)
                         {
-                            _blockLength = _blockLengthBuffer[0] + ((int)_blockLengthBuffer[1]) * 256;
-                            int blockLengthComplement = _blockLengthBuffer[2] + ((int)_blockLengthBuffer[3]) * 256;
+                            _blockLength =
+                                _blockLengthBuffer[0] + ((int)_blockLengthBuffer[1]) * 256;
+                            int blockLengthComplement =
+                                _blockLengthBuffer[2] + ((int)_blockLengthBuffer[3]) * 256;
 
                             // make sure complement matches
                             if ((ushort)_blockLength != (ushort)(~blockLengthComplement))
@@ -336,7 +458,7 @@ namespace System.IO.Compression
         {
             end_of_block_code_seen = false;
 
-            int freeBytes = _output.FreeBytes;   // it is a little bit faster than frequently accessing the property
+            int freeBytes = _output.FreeBytes; // it is a little bit faster than frequently accessing the property
             while (freeBytes > 65536)
             {
                 // With Deflate64 we can have up to a 64kb length, so we ensure at least that much space is available
@@ -374,16 +496,16 @@ namespace System.IO.Compression
                         else
                         {
                             // length/distance pair
-                            symbol -= 257;     // length code started at 257
+                            symbol -= 257; // length code started at 257
                             if (symbol < 8)
                             {
-                                symbol += 3;   // match length = 3,4,5,6,7,8,9,10
+                                symbol += 3; // match length = 3,4,5,6,7,8,9,10
                                 _extraBits = 0;
                             }
                             else if (!_deflate64 && symbol == 28)
                             {
                                 // extra bits for code 285 is 0
-                                symbol = 258;             // code 285 means length 258
+                                symbol = 258; // code 285 means length 258
                                 _extraBits = 0;
                             }
                             else
@@ -476,7 +598,6 @@ namespace System.IO.Compression
 
             return true;
         }
-
 
         // Format of the dynamic block header:
         //      5 Bits: HLIT, # of Literal/Length codes - 257 (257 - 286)
@@ -676,7 +797,13 @@ namespace System.IO.Compression
 
             // Create literal and distance tables
             Array.Copy(_codeList, literalTreeCodeLength, _literalLengthCodeCount);
-            Array.Copy(_codeList, _literalLengthCodeCount, distanceTreeCodeLength, 0, _distanceCodeCount);
+            Array.Copy(
+                _codeList,
+                _literalLengthCodeCount,
+                distanceTreeCodeLength,
+                0,
+                _distanceCodeCount
+            );
 
             // Make sure there is an end-of-block code, otherwise how could we ever end?
             if (literalTreeCodeLength[HuffmanTree.EndOfBlockCode] == 0)

@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,77 +26,88 @@
 
 using System.ComponentModel;
 
-namespace System.Windows.Forms {
-	[TypeConverter(typeof(SelectionRangeConverter))]
-	public sealed class SelectionRange {
-		#region local members 
-	
-		DateTime end;
-		DateTime start;	
+namespace System.Windows.Forms
+{
+    [TypeConverter(typeof(SelectionRangeConverter))]
+    public sealed class SelectionRange
+    {
+        #region local members
 
-		#endregion // local members 
+        DateTime end;
+        DateTime start;
 
-		#region public constructors
+        #endregion // local members
 
-		// default parameterless construcor, use default values
-		public SelectionRange () {
-			end = DateTime.MaxValue.Date;
-			start = DateTime.MinValue.Date;
-		}	
-	
-		// constructor that receives another range, copies it's Start and End values
-		public SelectionRange (SelectionRange range) {
-			end = range.End;
-			start = range.Start;
-		}
+        #region public constructors
 
-		// constructor that receives two dates, uses the lower of the two as start
-		public SelectionRange (DateTime lower, DateTime upper) {
-			if (lower <= upper) {
-				end = upper.Date;
-				start = lower.Date;
-			} else {
-				end = lower.Date;
-				start = upper.Date;
-			}
-		}
+        // default parameterless construcor, use default values
+        public SelectionRange()
+        {
+            end = DateTime.MaxValue.Date;
+            start = DateTime.MinValue.Date;
+        }
 
-		#endregion // public constructors
+        // constructor that receives another range, copies it's Start and End values
+        public SelectionRange(SelectionRange range)
+        {
+            end = range.End;
+            start = range.Start;
+        }
 
-		#region public properties
+        // constructor that receives two dates, uses the lower of the two as start
+        public SelectionRange(DateTime lower, DateTime upper)
+        {
+            if (lower <= upper)
+            {
+                end = upper.Date;
+                start = lower.Date;
+            }
+            else
+            {
+                end = lower.Date;
+                start = upper.Date;
+            }
+        }
 
-		// end date of this range
-		public DateTime End {
-			set {
-				if (end != value) {
-					end = value;
-				}
-			}
-			get {
-				return end;
-			}
-		}
+        #endregion // public constructors
 
-		// start date of this range
-		public DateTime Start {
-			set {
-				if (start != value) {
-					start = value;
-				}
-			}
-			get {
-				return start;
-			}
-		}
-			
-		#endregion // public properties
+        #region public properties
 
-		#region public methods
+        // end date of this range
+        public DateTime End
+        {
+            set
+            {
+                if (end != value)
+                {
+                    end = value;
+                }
+            }
+            get { return end; }
+        }
 
-		public override string ToString() {
-			return "SelectionRange: Start: " + Start.ToString() + ", End: " + End.ToString();
-		}
+        // start date of this range
+        public DateTime Start
+        {
+            set
+            {
+                if (start != value)
+                {
+                    start = value;
+                }
+            }
+            get { return start; }
+        }
 
-		#endregion // public methods
-	}
+        #endregion // public properties
+
+        #region public methods
+
+        public override string ToString()
+        {
+            return "SelectionRange: Start: " + Start.ToString() + ", End: " + End.ToString();
+        }
+
+        #endregion // public methods
+    }
 }

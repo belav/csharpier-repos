@@ -28,12 +28,19 @@ namespace System.Security.Cryptography.Asn1
             writer.PopSequence(tag);
         }
 
-        internal static SubjectPublicKeyInfoAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static SubjectPublicKeyInfoAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static SubjectPublicKeyInfoAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static SubjectPublicKeyInfoAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -49,12 +56,21 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out SubjectPublicKeyInfoAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out SubjectPublicKeyInfoAsn decoded
+        )
         {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out SubjectPublicKeyInfoAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out SubjectPublicKeyInfoAsn decoded
+        )
         {
             try
             {
@@ -66,7 +82,12 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out SubjectPublicKeyInfoAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out SubjectPublicKeyInfoAsn decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
@@ -74,17 +95,22 @@ namespace System.Security.Cryptography.Asn1
             int offset;
             ReadOnlySpan<byte> tmpSpan;
 
-            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(ref sequenceReader, rebind, out decoded.Algorithm);
+            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.Algorithm
+            );
 
             if (sequenceReader.TryReadPrimitiveBitString(out _, out tmpSpan))
             {
-                decoded.SubjectPublicKey = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                decoded.SubjectPublicKey = rebindSpan.Overlaps(tmpSpan, out offset)
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
             else
             {
                 decoded.SubjectPublicKey = sequenceReader.ReadBitString(out _);
             }
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

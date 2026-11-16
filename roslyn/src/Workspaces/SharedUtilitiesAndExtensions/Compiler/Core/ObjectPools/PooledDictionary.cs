@@ -6,7 +6,9 @@ namespace Microsoft.CodeAnalysis.PooledObjects
 {
     internal sealed partial class PooledDictionary<K, V> : IPooled
     {
-        public static PooledDisposer<PooledDictionary<K, V>> GetInstance(out PooledDictionary<K, V> instance)
+        public static PooledDisposer<PooledDictionary<K, V>> GetInstance(
+            out PooledDictionary<K, V> instance
+        )
         {
             instance = GetInstance();
             return new PooledDisposer<PooledDictionary<K, V>>(instance);

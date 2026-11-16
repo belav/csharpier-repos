@@ -13,11 +13,30 @@ namespace System.Reflection.Emit
 
         #region Constructor
 
-        internal RuntimeConstructorBuilder(string name, MethodAttributes attributes, CallingConventions callingConvention,
-            Type[]? parameterTypes, Type[][]? requiredCustomModifiers, Type[][]? optionalCustomModifiers, RuntimeModuleBuilder mod, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] RuntimeTypeBuilder type)
+        internal RuntimeConstructorBuilder(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type[]? parameterTypes,
+            Type[][]? requiredCustomModifiers,
+            Type[][]? optionalCustomModifiers,
+            RuntimeModuleBuilder mod,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] RuntimeTypeBuilder type
+        )
         {
-            m_methodBuilder = new RuntimeMethodBuilder(name, attributes, callingConvention, null, null, null,
-                parameterTypes, requiredCustomModifiers, optionalCustomModifiers, mod, type);
+            m_methodBuilder = new RuntimeMethodBuilder(
+                name,
+                attributes,
+                callingConvention,
+                null,
+                null,
+                null,
+                parameterTypes,
+                requiredCustomModifiers,
+                optionalCustomModifiers,
+                mod,
+                type
+            );
 
             type.m_listMethods!.Add(m_methodBuilder);
 
@@ -26,11 +45,15 @@ namespace System.Reflection.Emit
             _ = m_methodBuilder.MetadataToken; // Doubles as "CreateMethod" for MethodBuilder -- analogous to CreateType()
         }
 
-        internal RuntimeConstructorBuilder(string name, MethodAttributes attributes, CallingConventions callingConvention,
-            Type[]? parameterTypes, RuntimeModuleBuilder mod, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] RuntimeTypeBuilder type) :
-            this(name, attributes, callingConvention, parameterTypes, null, null, mod, type)
-        {
-        }
+        internal RuntimeConstructorBuilder(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type[]? parameterTypes,
+            RuntimeModuleBuilder mod,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] RuntimeTypeBuilder type
+        )
+            : this(name, attributes, callingConvention, parameterTypes, null, null, mod, type) { }
 
         #endregion
 
@@ -45,6 +68,7 @@ namespace System.Reflection.Emit
         {
             return m_methodBuilder.GetTypeBuilder();
         }
+
         internal SignatureHelper GetMethodSignature()
         {
             return m_methodBuilder.GetMethodSignature();
@@ -73,14 +97,21 @@ namespace System.Reflection.Emit
         #endregion
 
         #region MethodBase Overrides
-        public override object Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
         public override ParameterInfo[] GetParameters()
         {
-            ConstructorInfo rci = GetTypeBuilder().GetConstructor(m_methodBuilder.m_parameterTypes!)!;
+            ConstructorInfo rci = GetTypeBuilder()
+                .GetConstructor(m_methodBuilder.m_parameterTypes!)!;
             return rci.GetParameters();
         }
 
@@ -96,7 +127,12 @@ namespace System.Reflection.Emit
         #endregion
 
         #region ConstructorInfo Overrides
-        public override object Invoke(BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
@@ -122,7 +158,11 @@ namespace System.Reflection.Emit
         #endregion
 
         #region Public Members
-        protected override ParameterBuilder DefineParameterCore(int iSequence, ParameterAttributes attributes, string? strParamName)
+        protected override ParameterBuilder DefineParameterCore(
+            int iSequence,
+            ParameterAttributes attributes,
+            string? strParamName
+        )
         {
             // Theoretically we shouldn't allow iSequence to be 0 because in reflection ctors don't have
             // return parameters. But we'll allow it for backward compatibility with V2. The attributes
@@ -157,7 +197,10 @@ namespace System.Reflection.Emit
             return m_methodBuilder.ReturnType;
         }
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             m_methodBuilder.SetCustomAttribute(con, binaryAttribute);
         }

@@ -287,8 +287,8 @@ internal sealed class JsonTranscodingServerCallContext
         if (!HttpContext.Response.HasStarted)
         {
             HttpContext.Response.StatusCode = StatusCodes.Status200OK;
-            HttpContext.Response.ContentType =
-                contentType ?? MediaType.ReplaceEncoding("application/json", RequestEncoding);
+            HttpContext.Response.ContentType = contentType
+                ?? MediaType.ReplaceEncoding("application/json", RequestEncoding);
         }
     }
 }

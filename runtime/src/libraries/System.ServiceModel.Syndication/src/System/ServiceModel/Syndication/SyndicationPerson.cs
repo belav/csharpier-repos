@@ -12,13 +12,11 @@ namespace System.ServiceModel.Syndication
     {
         private ExtensibleSyndicationObject _extensions;
 
-        public SyndicationPerson() : this((string)null)
-        {
-        }
+        public SyndicationPerson()
+            : this((string)null) { }
 
-        public SyndicationPerson(string email) : this(email, null, null)
-        {
-        }
+        public SyndicationPerson(string email)
+            : this(email, null, null) { }
 
         public SyndicationPerson(string email, string name, string uri)
         {
@@ -40,9 +38,11 @@ namespace System.ServiceModel.Syndication
             _extensions = source._extensions.Clone();
         }
 
-        public Dictionary<XmlQualifiedName, string> AttributeExtensions => _extensions.AttributeExtensions;
+        public Dictionary<XmlQualifiedName, string> AttributeExtensions =>
+            _extensions.AttributeExtensions;
 
-        public SyndicationElementExtensionCollection ElementExtensions => _extensions.ElementExtensions;
+        public SyndicationElementExtensionCollection ElementExtensions =>
+            _extensions.ElementExtensions;
 
         public string Email { get; set; }
 
@@ -52,7 +52,12 @@ namespace System.ServiceModel.Syndication
 
         public virtual SyndicationPerson Clone() => new SyndicationPerson(this);
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             return false;
         }
@@ -72,7 +77,10 @@ namespace System.ServiceModel.Syndication
             _extensions.WriteElementExtensions(writer);
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        )
         {
             _extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }

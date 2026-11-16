@@ -13,46 +13,52 @@ using System.Text;
 namespace System.Xml.Schema
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class XmlSchemaInferenceException : XmlSchemaException
     {
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected XmlSchemaInferenceException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected XmlSchemaInferenceException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
         }
 
-        public XmlSchemaInferenceException() : base(null)
-        {
-        }
+        public XmlSchemaInferenceException()
+            : base(null) { }
 
-        public XmlSchemaInferenceException(string message) : base(message, ((Exception?)null), 0, 0)
-        {
-        }
+        public XmlSchemaInferenceException(string message)
+            : base(message, ((Exception?)null), 0, 0) { }
 
-        public XmlSchemaInferenceException(string message, Exception? innerException) : base(message, innerException, 0, 0)
-        {
-        }
+        public XmlSchemaInferenceException(string message, Exception? innerException)
+            : base(message, innerException, 0, 0) { }
 
-        public XmlSchemaInferenceException(string message, Exception? innerException, int lineNumber, int linePosition) :
-            base(message, innerException, lineNumber, linePosition)
-        {
-        }
+        public XmlSchemaInferenceException(
+            string message,
+            Exception? innerException,
+            int lineNumber,
+            int linePosition
+        )
+            : base(message, innerException, lineNumber, linePosition) { }
 
-        internal XmlSchemaInferenceException(string res, string arg) : base(res, new string[] { arg }, null, null, 0, 0, null)
-        {
-        }
+        internal XmlSchemaInferenceException(string res, string arg)
+            : base(res, new string[] { arg }, null, null, 0, 0, null) { }
 
-        internal XmlSchemaInferenceException(string res, int lineNumber, int linePosition) :
-            base(res, null, null, null, lineNumber, linePosition, null)
-        {
-        }
+        internal XmlSchemaInferenceException(string res, int lineNumber, int linePosition)
+            : base(res, null, null, null, lineNumber, linePosition, null) { }
     }
 }

@@ -11,6 +11,6 @@ namespace System.ServiceProcess
         Running = Interop.Advapi32.ServiceControlStatus.STATE_RUNNING,
         StartPending = Interop.Advapi32.ServiceControlStatus.STATE_START_PENDING,
         Stopped = Interop.Advapi32.ServiceControlStatus.STATE_STOPPED,
-        StopPending = Interop.Advapi32.ServiceControlStatus.STATE_STOP_PENDING
+        StopPending = Interop.Advapi32.ServiceControlStatus.STATE_STOP_PENDING,
     }
 }

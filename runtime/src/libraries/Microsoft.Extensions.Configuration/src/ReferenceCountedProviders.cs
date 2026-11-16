@@ -11,12 +11,15 @@ namespace Microsoft.Extensions.Configuration
     // ReferenceCountedProviders is used by ConfigurationManager to wait until all readers unreference it before disposing any providers.
     internal abstract class ReferenceCountedProviders : IDisposable
     {
-        public static ReferenceCountedProviders Create(List<IConfigurationProvider> providers) => new ActiveReferenceCountedProviders(providers);
+        public static ReferenceCountedProviders Create(List<IConfigurationProvider> providers) =>
+            new ActiveReferenceCountedProviders(providers);
 
         // If anything references DisposedReferenceCountedProviders, it indicates something is using the ConfigurationManager after it's been disposed.
         // We could preemptively throw an ODE from ReferenceCountedProviderManager.GetReference() instead of returning this type, but this might
         // break existing apps that are previously able to continue to read configuration after disposing an ConfigurationManager.
-        public static ReferenceCountedProviders CreateDisposed(List<IConfigurationProvider> providers) => new DisposedReferenceCountedProviders(providers);
+        public static ReferenceCountedProviders CreateDisposed(
+            List<IConfigurationProvider> providers
+        ) => new DisposedReferenceCountedProviders(providers);
 
         public abstract List<IConfigurationProvider> Providers { get; set; }
 
@@ -26,12 +29,14 @@ namespace Microsoft.Extensions.Configuration
         public abstract List<IConfigurationProvider> NonReferenceCountedProviders { get; }
 
         public abstract void AddReference();
+
         // This is Dispose() rather than RemoveReference() so we can conveniently release a reference at the end of a using block.
         public abstract void Dispose();
 
         private sealed class ActiveReferenceCountedProviders : ReferenceCountedProviders
         {
             private long _refCount = 1;
+
             // volatile is not strictly necessary because the runtime adds a barrier either way, but volatile indicates that this field has
             // unsynchronized readers meaning the all writes initializing the list must be published before updating the _providers reference.
             private volatile List<IConfigurationProvider> _providers;
@@ -87,6 +92,7 @@ namespace Microsoft.Extensions.Configuration
             public override List<IConfigurationProvider> NonReferenceCountedProviders => Providers;
 
             public override void AddReference() { }
+
             public override void Dispose() { }
         }
     }

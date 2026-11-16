@@ -18,7 +18,13 @@ namespace CoreFXTestLibrary.Internal
         public ClassInfo InstanceClass { get; set; }
         public ExpectedExceptionAttribute ExpectsException { get; set; }
 
-        public TestInfo(String Name, Action a, ExpectedExceptionAttribute expectsExceptionType, bool IsIgnored = false, string ignoredReason = "")
+        public TestInfo(
+            String Name,
+            Action a,
+            ExpectedExceptionAttribute expectsExceptionType,
+            bool IsIgnored = false,
+            string ignoredReason = ""
+        )
         {
             this.Name = Name;
             this.AsAction = a;
@@ -29,7 +35,13 @@ namespace CoreFXTestLibrary.Internal
             this.ExpectsException = expectsExceptionType;
         }
 
-        public TestInfo(String Name, Func<Task> t, ExpectedExceptionAttribute expectsExceptionType, bool IsIgnored = false, string ignoredReason = "")
+        public TestInfo(
+            String Name,
+            Func<Task> t,
+            ExpectedExceptionAttribute expectsExceptionType,
+            bool IsIgnored = false,
+            string ignoredReason = ""
+        )
         {
             this.Name = Name;
             this.AsFunc = t;

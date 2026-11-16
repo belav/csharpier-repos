@@ -29,9 +29,7 @@ internal sealed class SolutionSnapshotRegistry : ISolutionSnapshotRegistry
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public SolutionSnapshotRegistry()
-    {
-    }
+    public SolutionSnapshotRegistry() { }
 
     /// <summary>
     /// Called from LSP server.

@@ -28,7 +28,7 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        static TParentType FindParentDesigner<TParentType>(WorkflowViewElement wve) 
+        static TParentType FindParentDesigner<TParentType>(WorkflowViewElement wve)
             where TParentType : WorkflowViewElement
         {
             ModelItem parent = wve.ModelItem.Parent;

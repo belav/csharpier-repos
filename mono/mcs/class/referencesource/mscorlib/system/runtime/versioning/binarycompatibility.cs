@@ -1,22 +1,22 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  BinaryCompatibility
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
 ** Purpose: This class is used to determine which binary compatibility
-**  behaviors are enabled at runtime.  A type for 
-**  tracking which target Framework an app was built against, or an 
-**  appdomain-wide setting from the host telling us which .NET 
+**  behaviors are enabled at runtime.  A type for
+**  tracking which target Framework an app was built against, or an
+**  appdomain-wide setting from the host telling us which .NET
 **  Framework version we should emulate.
 **
-** 
+**
 ===========================================================*/
 using System;
 using System.Diagnostics.Contracts;
@@ -29,11 +29,11 @@ namespace System.Runtime.Versioning
     // flavors and versions, with the intent of allowing Framework developers to mimic behavior of older
     // Framework releases.  This allows us to make behavioral breaking changes in a binary compatible way,
     // for an application.  This works at the per-AppDomain level, not process nor per-Assembly.
-    // 
+    //
     // To opt into newer behavior, applications must specify a TargetFrameworkAttribute on their assembly
     // saying what version they targeted, or a host must set this when creating an AppDomain.  Note
     // that command line apps don't have this attribute!
-    // 
+    //
     // To use this class:
     // Developers need to figure out whether they're working on the phone, desktop, or Silverlight, and
     // what version they are introducing a breaking change in.  Pick one predicate below, and use that
@@ -49,12 +49,12 @@ namespace System.Runtime.Versioning
     // If you are making a breaking change in one specific branch that won't be integrated normally to
     // all other branches (ie, say you're making breaking changes to Windows Phone 8 after .NET Framework v4.5
     // has locked down for release), then add in specific predicates for each relevant platform.
-    // 
+    //
     // Maintainers of this class:
     // Revisit the table once per release, perhaps at the end of the last coding milestone, to verify a
     // default policy saying whether all quirks from a particular flavor & release should be enabled in
-    // other releases (ie, should all Windows Phone 8.0 quirks be enabled in .NET Framework v5)?  
-    // 
+    // other releases (ie, should all Windows Phone 8.0 quirks be enabled in .NET Framework v5)?
+    //
     // History:
     // Here is the order in which releases were made along with some basic integration information.  The idea
     // is to track what set of compatibility features are present in each other.
@@ -70,9 +70,9 @@ namespace System.Runtime.Versioning
     //      .NET Framework 4                                   Phone 8.0
     //      .NET Framework 4.5                                 Phone 8.1
     //      .NET Framework 4.5.1                               Phone 8.1
-    //           
+    //
     // (Note: Windows Phone 7.0 was built using the .NET Compact Framework, which forked around v1 or v1.1)
-    // 
+    //
     // Compatibility Policy decisions:
     //  If we cannot determine that an app was built for a newer .NET Framework (ie, the app has no
     //  TargetFrameworkAttribute), then quirks will be enabled to emulate older behavior.
@@ -83,39 +83,93 @@ namespace System.Runtime.Versioning
     {
         // Use this for new behavior introduced in the phone branch.  It will do the right thing for desktop & SL.
         [FriendAccessAllowed]
-        internal static bool TargetsAtLeast_Phone_V7_1 { [FriendAccessAllowed] get { return s_map.TargetsAtLeast_Phone_V7_1; } }
+        internal static bool TargetsAtLeast_Phone_V7_1
+        {
+            [FriendAccessAllowed]
+            get { return s_map.TargetsAtLeast_Phone_V7_1; }
+        }
 
         [FriendAccessAllowed]
-        internal static bool TargetsAtLeast_Phone_V8_0 { [FriendAccessAllowed] get { return s_map.TargetsAtLeast_Phone_V8_0; } }
+        internal static bool TargetsAtLeast_Phone_V8_0
+        {
+            [FriendAccessAllowed]
+            get { return s_map.TargetsAtLeast_Phone_V8_0; }
+        }
 
         // Use this for new behavior introduced in the Desktop branch.  It will do the right thing for Phone & SL.
         [FriendAccessAllowed]
-        internal static bool TargetsAtLeast_Desktop_V4_5 { [FriendAccessAllowed] get { return s_map.TargetsAtLeast_Desktop_V4_5; } }
-        [FriendAccessAllowed]
-        internal static bool TargetsAtLeast_Desktop_V4_5_1 { [FriendAccessAllowed] get { return s_map.TargetsAtLeast_Desktop_V4_5_1; } }
-        [FriendAccessAllowed]
-        internal static bool TargetsAtLeast_Desktop_V4_5_2 { [FriendAccessAllowed] get { return s_map.TargetsAtLeast_Desktop_V4_5_2; } }
-        [FriendAccessAllowed]
-        internal static bool TargetsAtLeast_Desktop_V4_5_3 { [FriendAccessAllowed] get { return s_map.TargetsAtLeast_Desktop_V4_5_3; } }
-        [FriendAccessAllowed]
-        internal static bool TargetsAtLeast_Desktop_V4_5_4 { [FriendAccessAllowed] get { return s_map.TargetsAtLeast_Desktop_V4_5_4; } }
+        internal static bool TargetsAtLeast_Desktop_V4_5
+        {
+            [FriendAccessAllowed]
+            get { return s_map.TargetsAtLeast_Desktop_V4_5; }
+        }
 
         [FriendAccessAllowed]
-        internal static bool TargetsAtLeast_Desktop_V5_0 { [FriendAccessAllowed] get { return s_map.TargetsAtLeast_Desktop_V5_0; } }
+        internal static bool TargetsAtLeast_Desktop_V4_5_1
+        {
+            [FriendAccessAllowed]
+            get { return s_map.TargetsAtLeast_Desktop_V4_5_1; }
+        }
+
+        [FriendAccessAllowed]
+        internal static bool TargetsAtLeast_Desktop_V4_5_2
+        {
+            [FriendAccessAllowed]
+            get { return s_map.TargetsAtLeast_Desktop_V4_5_2; }
+        }
+
+        [FriendAccessAllowed]
+        internal static bool TargetsAtLeast_Desktop_V4_5_3
+        {
+            [FriendAccessAllowed]
+            get { return s_map.TargetsAtLeast_Desktop_V4_5_3; }
+        }
+
+        [FriendAccessAllowed]
+        internal static bool TargetsAtLeast_Desktop_V4_5_4
+        {
+            [FriendAccessAllowed]
+            get { return s_map.TargetsAtLeast_Desktop_V4_5_4; }
+        }
+
+        [FriendAccessAllowed]
+        internal static bool TargetsAtLeast_Desktop_V5_0
+        {
+            [FriendAccessAllowed]
+            get { return s_map.TargetsAtLeast_Desktop_V5_0; }
+        }
 
         // Use this for new behavior introduced in the Silverlight branch.  It will do the right thing for desktop & Phone.
         [FriendAccessAllowed]
-        internal static bool TargetsAtLeast_Silverlight_V4 { [FriendAccessAllowed] get { return s_map.TargetsAtLeast_Silverlight_V4; } }
-        [FriendAccessAllowed]
-        internal static bool TargetsAtLeast_Silverlight_V5 { [FriendAccessAllowed] get { return s_map.TargetsAtLeast_Silverlight_V5; } }
-        [FriendAccessAllowed]
-        internal static bool TargetsAtLeast_Silverlight_V6 { [FriendAccessAllowed] get { return s_map.TargetsAtLeast_Silverlight_V6; } }
+        internal static bool TargetsAtLeast_Silverlight_V4
+        {
+            [FriendAccessAllowed]
+            get { return s_map.TargetsAtLeast_Silverlight_V4; }
+        }
 
         [FriendAccessAllowed]
-        internal static TargetFrameworkId AppWasBuiltForFramework {
+        internal static bool TargetsAtLeast_Silverlight_V5
+        {
             [FriendAccessAllowed]
-            get {
-                Contract.Ensures(Contract.Result<TargetFrameworkId>() > TargetFrameworkId.NotYetChecked);
+            get { return s_map.TargetsAtLeast_Silverlight_V5; }
+        }
+
+        [FriendAccessAllowed]
+        internal static bool TargetsAtLeast_Silverlight_V6
+        {
+            [FriendAccessAllowed]
+            get { return s_map.TargetsAtLeast_Silverlight_V6; }
+        }
+
+        [FriendAccessAllowed]
+        internal static TargetFrameworkId AppWasBuiltForFramework
+        {
+            [FriendAccessAllowed]
+            get
+            {
+                Contract.Ensures(
+                    Contract.Result<TargetFrameworkId>() > TargetFrameworkId.NotYetChecked
+                );
 
                 if (s_AppWasBuiltForFramework == TargetFrameworkId.NotYetChecked)
                     ReadTargetFrameworkId();
@@ -126,10 +180,15 @@ namespace System.Runtime.Versioning
 
         // Version number is major * 10000 + minor * 100 + build  (ie, 4.5.1.0 would be version 40501).
         [FriendAccessAllowed]
-        internal static int AppWasBuiltForVersion {
+        internal static int AppWasBuiltForVersion
+        {
             [FriendAccessAllowed]
-            get {
-                Contract.Ensures(Contract.Result<int>() > 0 || s_AppWasBuiltForFramework == TargetFrameworkId.Unspecified);
+            get
+            {
+                Contract.Ensures(
+                    Contract.Result<int>() > 0
+                        || s_AppWasBuiltForFramework == TargetFrameworkId.Unspecified
+                );
 
                 if (s_AppWasBuiltForFramework == TargetFrameworkId.NotYetChecked)
                     ReadTargetFrameworkId();
@@ -142,11 +201,12 @@ namespace System.Runtime.Versioning
 
         #region private
         private static TargetFrameworkId s_AppWasBuiltForFramework;
+
         // Version number is major * 10000 + minor * 100 + build (ie, 4.5.1.0 would be version 40501).
         private static int s_AppWasBuiltForVersion;
 
-        readonly static BinaryCompatibilityMap s_map = new BinaryCompatibilityMap();
-        
+        static readonly BinaryCompatibilityMap s_map = new BinaryCompatibilityMap();
+
         // For parsing a target Framework moniker, from the FrameworkName class
         private const char c_componentSeparator = ',';
         private const char c_keyValueSeparator = '=';
@@ -160,7 +220,7 @@ namespace System.Runtime.Versioning
         /// </summary>
         private sealed class BinaryCompatibilityMap
         {
-            // A bit for each property 
+            // A bit for each property
             internal bool TargetsAtLeast_Phone_V7_1;
             internal bool TargetsAtLeast_Phone_V8_0;
             internal bool TargetsAtLeast_Phone_V8_1;
@@ -183,14 +243,20 @@ namespace System.Runtime.Versioning
             // between our multiple different release vehicles.  IE, if a behavior shows up in Silverlight version 5,
             // does it show up in the .NET Framework version 4.5 and Windows Phone 8?
             // Version number is major * 10000 + minor * 100 + build (ie, 4.5.1.0 would be version 40501).
-            private void AddQuirksForFramework(TargetFrameworkId builtAgainstFramework, int buildAgainstVersion)
+            private void AddQuirksForFramework(
+                TargetFrameworkId builtAgainstFramework,
+                int buildAgainstVersion
+            )
             {
-                Contract.Requires(buildAgainstVersion > 0  || builtAgainstFramework == TargetFrameworkId.Unspecified);
+                Contract.Requires(
+                    buildAgainstVersion > 0
+                        || builtAgainstFramework == TargetFrameworkId.Unspecified
+                );
 
                 switch (builtAgainstFramework)
                 {
                     case TargetFrameworkId.NetFramework:
-                    case TargetFrameworkId.NetCore:   // Treat Windows 8 tailored apps as normal desktop apps - same product
+                    case TargetFrameworkId.NetCore: // Treat Windows 8 tailored apps as normal desktop apps - same product
                         if (buildAgainstVersion >= 50000)
                             TargetsAtLeast_Desktop_V5_0 = true;
 
@@ -207,7 +273,7 @@ namespace System.Runtime.Versioning
                         if (buildAgainstVersion >= 40500)
                         {
                             TargetsAtLeast_Desktop_V4_5 = true;
-                            // On XX/XX/XX we integrated all changes from the phone V7_1 into the branch from which contains Desktop V4_5, thus 
+                            // On XX/XX/XX we integrated all changes from the phone V7_1 into the branch from which contains Desktop V4_5, thus
                             // Any application built for V4_5 (or above) should have all the quirks for Phone V7_1 turned on.
                             AddQuirksForFramework(TargetFrameworkId.Phone, 70100);
                             // All Silverlight 5 behavior should be in the .NET Framework version 4.5
@@ -244,7 +310,6 @@ namespace System.Runtime.Versioning
                         {
                             TargetsAtLeast_Silverlight_V6 = true;
                             // @
-
                         }
                         break;
 
@@ -256,7 +321,10 @@ namespace System.Runtime.Versioning
                         Contract.Assert(false, "Bad framework kind");
                         break;
                     default:
-                        Contract.Assert(false, "Error: we introduced a new Target Framework but did not update our binary compatibility map");
+                        Contract.Assert(
+                            false,
+                            "Error: we introduced a new Target Framework but did not update our binary compatibility map"
+                        );
                         break;
                 }
             }
@@ -265,7 +333,11 @@ namespace System.Runtime.Versioning
         #region String Parsing
 
         // If this doesn't work, perhaps we could fall back to parsing the metadata version number.
-        private static bool ParseTargetFrameworkMonikerIntoEnum(String targetFrameworkMoniker, out TargetFrameworkId targetFramework, out int targetFrameworkVersion)
+        private static bool ParseTargetFrameworkMonikerIntoEnum(
+            String targetFrameworkMoniker,
+            out TargetFrameworkId targetFramework,
+            out int targetFrameworkVersion
+        )
         {
             Contract.Requires(!String.IsNullOrEmpty(targetFrameworkMoniker));
 
@@ -274,7 +346,12 @@ namespace System.Runtime.Versioning
 
             String identifier = null;
             String profile = null;
-            ParseFrameworkName(targetFrameworkMoniker, out identifier, out targetFrameworkVersion, out profile);
+            ParseFrameworkName(
+                targetFrameworkMoniker,
+                out identifier,
+                out targetFrameworkVersion,
+                out profile
+            );
 
             switch (identifier)
             {
@@ -299,7 +376,7 @@ namespace System.Runtime.Versioning
                     }
                     else
                     {
-                        // There is no TFM for Apollo or below and hence we assign the targetFramework to Unspecified. 
+                        // There is no TFM for Apollo or below and hence we assign the targetFramework to Unspecified.
                         targetFramework = TargetFrameworkId.Unspecified;
                     }
                     break;
@@ -324,27 +401,44 @@ namespace System.Runtime.Versioning
                             targetFramework = TargetFrameworkId.Phone;
                             targetFrameworkVersion = 70100;
                         }
-                        else if (profile == "WindowsPhone8")  // @
+                        else if (profile == "WindowsPhone8") // @
                         {
                             targetFramework = TargetFrameworkId.Phone;
                             targetFrameworkVersion = 80000;
                         }
                         else if (profile.StartsWith("WindowsPhone", StringComparison.Ordinal))
                         {
-                            Contract.Assert(false, "This is a phone app, but we can't tell what version this is!");
+                            Contract.Assert(
+                                false,
+                                "This is a phone app, but we can't tell what version this is!"
+                            );
                             targetFramework = TargetFrameworkId.Unrecognized;
                             targetFrameworkVersion = 70100;
                         }
                         else
                         {
-                            Contract.Assert(false, String.Format(CultureInfo.InvariantCulture, "Unrecognized Silverlight profile \"{0}\".  What is this, an XBox app?", profile));
+                            Contract.Assert(
+                                false,
+                                String.Format(
+                                    CultureInfo.InvariantCulture,
+                                    "Unrecognized Silverlight profile \"{0}\".  What is this, an XBox app?",
+                                    profile
+                                )
+                            );
                             targetFramework = TargetFrameworkId.Unrecognized;
                         }
                     }
                     break;
 
                 default:
-                    Contract.Assert(false, String.Format(CultureInfo.InvariantCulture, "Unrecognized Target Framework Moniker in our Binary Compatibility class.  Framework name: \"{0}\"", targetFrameworkMoniker));
+                    Contract.Assert(
+                        false,
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            "Unrecognized Target Framework Moniker in our Binary Compatibility class.  Framework name: \"{0}\"",
+                            targetFrameworkMoniker
+                        )
+                    );
                     targetFramework = TargetFrameworkId.Unrecognized;
                     break;
             }
@@ -357,7 +451,12 @@ namespace System.Runtime.Versioning
         //  - The identifier and version is required, profile is optional
         //  - Only three components are allowed.
         //  - The version string must be in the System.Version format; an optional "v" or "V" prefix is allowed
-        private static void ParseFrameworkName(String frameworkName, out String identifier, out int version, out String profile)
+        private static void ParseFrameworkName(
+            String frameworkName,
+            out String identifier,
+            out int version,
+            out String profile
+        )
         {
             if (frameworkName == null)
             {
@@ -365,7 +464,10 @@ namespace System.Runtime.Versioning
             }
             if (frameworkName.Length == 0)
             {
-                throw new ArgumentException(Environment.GetResourceString("Argument_StringZeroLength"), "frameworkName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_StringZeroLength"),
+                    "frameworkName"
+                );
             }
             Contract.EndContractBlock();
 
@@ -375,7 +477,10 @@ namespace System.Runtime.Versioning
             // Identifer and Version are required, Profile is optional.
             if (components.Length < 2 || components.Length > 3)
             {
-                throw new ArgumentException(Environment.GetResourceString("Argument_FrameworkNameTooShort"), "frameworkName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_FrameworkNameTooShort"),
+                    "frameworkName"
+                );
             }
 
             //
@@ -385,13 +490,16 @@ namespace System.Runtime.Versioning
 
             if (identifier.Length == 0)
             {
-                throw new ArgumentException(Environment.GetResourceString("Argument_FrameworkNameInvalid"), "frameworkName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_FrameworkNameInvalid"),
+                    "frameworkName"
+                );
             }
 
             bool versionFound = false;
             profile = null;
 
-            // 
+            //
             // The required "Version" and optional "Profile" component can be in any order
             //
             for (int i = 1; i < components.Length; i++)
@@ -401,7 +509,10 @@ namespace System.Runtime.Versioning
 
                 if (keyValuePair.Length != 2)
                 {
-                    throw new ArgumentException(Environment.GetResourceString("SR.Argument_FrameworkNameInvalid"), "frameworkName");
+                    throw new ArgumentException(
+                        Environment.GetResourceString("SR.Argument_FrameworkNameInvalid"),
+                        "frameworkName"
+                    );
                 }
 
                 // Get the key and value, trimming any whitespace
@@ -440,13 +551,19 @@ namespace System.Runtime.Versioning
                 }
                 else
                 {
-                    throw new ArgumentException(Environment.GetResourceString("Argument_FrameworkNameInvalid"), "frameworkName");
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Argument_FrameworkNameInvalid"),
+                        "frameworkName"
+                    );
                 }
             }
 
             if (!versionFound)
             {
-                throw new ArgumentException(Environment.GetResourceString("Argument_FrameworkNameMissingVersion"), "frameworkName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_FrameworkNameMissingVersion"),
+                    "frameworkName"
+                );
             }
         }
 
@@ -479,7 +596,7 @@ namespace System.Runtime.Versioning
 #if FEATURE_CORECLR
             if (IsAppUnderSL81CompatMode())
             {
-                // Since the SL does not have any Main() the reading of the TFM will not work and as a workaround we use the CompatibilitySwitch.IsAppSilverlight81 
+                // Since the SL does not have any Main() the reading of the TFM will not work and as a workaround we use the CompatibilitySwitch.IsAppSilverlight81
                 // to identify if the given app targets SL 8.1 and accordingly give it the value TargetFrameworkId.Phone;80100
 
                 // PS - This also means that the CompatMode set by AppDomain m_compatFlags with AppDomainCompatMode.APPDOMAINCOMPAT_APP_SL81
@@ -491,7 +608,9 @@ namespace System.Runtime.Versioning
 #endif //FEATURE_CORECLR
             String targetFrameworkName = AppDomain.CurrentDomain.GetTargetFrameworkName();
 
-            var overrideValue = System.Runtime.Versioning.CompatibilitySwitch.GetValueInternal("TargetFrameworkMoniker");
+            var overrideValue = System.Runtime.Versioning.CompatibilitySwitch.GetValueInternal(
+                "TargetFrameworkMoniker"
+            );
             if (!string.IsNullOrEmpty(overrideValue))
             {
                 targetFrameworkName = overrideValue;
@@ -513,7 +632,9 @@ namespace System.Runtime.Versioning
 #endif
                     fxId = TargetFrameworkId.Unspecified;
             }
-            else if (!ParseTargetFrameworkMonikerIntoEnum(targetFrameworkName, out fxId, out fxVersion))
+            else if (
+                !ParseTargetFrameworkMonikerIntoEnum(targetFrameworkName, out fxId, out fxVersion)
+            )
                 fxId = TargetFrameworkId.Unrecognized;
 
             s_AppWasBuiltForFramework = fxId;

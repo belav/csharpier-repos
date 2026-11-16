@@ -28,14 +28,16 @@ namespace System.Data.Common.EntitySql
         /// A value expression such as a literal, variable or a value-returning expression.
         /// </summary>
         Value,
+
         /// <summary>
         /// An expression returning an entity container.
         /// </summary>
         EntityContainer,
+
         /// <summary>
         /// An expression returning a metadata member such as a type, function group or namespace.
         /// </summary>
-        MetadataMember
+        MetadataMember,
     }
 
     /// <summary>
@@ -63,8 +65,14 @@ namespace System.Data.Common.EntitySql
             Value = value;
         }
 
-        internal override string ExpressionClassName { get { return ValueClassName; } }
-        internal static string ValueClassName { get { return Strings.LocalizedValueExpression; } }
+        internal override string ExpressionClassName
+        {
+            get { return ValueClassName; }
+        }
+        internal static string ValueClassName
+        {
+            get { return Strings.LocalizedValueExpression; }
+        }
 
         /// <summary>
         /// Null if <see cref="ValueExpression"/> represents the untyped null.
@@ -83,8 +91,14 @@ namespace System.Data.Common.EntitySql
             EntityContainer = entityContainer;
         }
 
-        internal override string ExpressionClassName { get { return EntityContainerClassName; } }
-        internal static string EntityContainerClassName { get { return Strings.LocalizedEntityContainerExpression; } }
+        internal override string ExpressionClassName
+        {
+            get { return EntityContainerClassName; }
+        }
+        internal static string EntityContainerClassName
+        {
+            get { return Strings.LocalizedEntityContainerExpression; }
+        }
 
         internal readonly EntityContainer EntityContainer;
     }
@@ -111,19 +125,22 @@ namespace System.Data.Common.EntitySql
         /// <summary>
         /// Creates new instance of <see cref="SemanticResolver"/>.
         /// </summary>
-        internal static SemanticResolver Create(Perspective perspective,
-                                                ParserOptions parserOptions,
-                                                IEnumerable<DbParameterReferenceExpression> parameters,
-                                                IEnumerable<DbVariableReferenceExpression> variables)
+        internal static SemanticResolver Create(
+            Perspective perspective,
+            ParserOptions parserOptions,
+            IEnumerable<DbParameterReferenceExpression> parameters,
+            IEnumerable<DbVariableReferenceExpression> variables
+        )
         {
             EntityUtil.CheckArgumentNull(perspective, "perspective");
             EntityUtil.CheckArgumentNull(parserOptions, "parserOptions");
 
             return new SemanticResolver(
-                parserOptions, 
-                ProcessParameters(parameters, parserOptions), 
-                ProcessVariables(variables, parserOptions), 
-                new TypeResolver(perspective, parserOptions));
+                parserOptions,
+                ProcessParameters(parameters, parserOptions),
+                ProcessVariables(variables, parserOptions),
+                new TypeResolver(perspective, parserOptions)
+            );
         }
 
         /// <summary>
@@ -131,17 +148,15 @@ namespace System.Data.Common.EntitySql
         /// </summary>
         internal SemanticResolver CloneForInlineFunctionConversion()
         {
-            return new SemanticResolver(
-                 _parserOptions,
-                 _parameters,
-                 _variables,
-                 _typeResolver);
+            return new SemanticResolver(_parserOptions, _parameters, _variables, _typeResolver);
         }
 
-        private SemanticResolver(ParserOptions parserOptions,
-                                 Dictionary<string, DbParameterReferenceExpression> parameters,
-                                 Dictionary<string, DbVariableReferenceExpression> variables,
-                                 TypeResolver typeResolver)
+        private SemanticResolver(
+            ParserOptions parserOptions,
+            Dictionary<string, DbParameterReferenceExpression> parameters,
+            Dictionary<string, DbVariableReferenceExpression> variables,
+            TypeResolver typeResolver
+        )
         {
             _parserOptions = parserOptions;
             _parameters = parameters;
@@ -172,9 +187,15 @@ namespace System.Data.Common.EntitySql
         /// </summary>
         /// <param name="paramDefs">The set of query parameters</param>
         /// <returns>A valid dictionary that maps parameter names to <see cref="DbParameterReferenceExpression"/>s using the current NameComparer</returns>
-        private static Dictionary<string, DbParameterReferenceExpression> ProcessParameters(IEnumerable<DbParameterReferenceExpression> paramDefs, ParserOptions parserOptions)
+        private static Dictionary<string, DbParameterReferenceExpression> ProcessParameters(
+            IEnumerable<DbParameterReferenceExpression> paramDefs,
+            ParserOptions parserOptions
+        )
         {
-            Dictionary<string, DbParameterReferenceExpression> retParams = new Dictionary<string, DbParameterReferenceExpression>(parserOptions.NameComparer);
+            Dictionary<string, DbParameterReferenceExpression> retParams = new Dictionary<
+                string,
+                DbParameterReferenceExpression
+            >(parserOptions.NameComparer);
 
             if (paramDefs != null)
             {
@@ -182,10 +203,15 @@ namespace System.Data.Common.EntitySql
                 {
                     if (retParams.ContainsKey(paramDef.ParameterName))
                     {
-                        throw EntityUtil.EntitySqlError(Strings.MultipleDefinitionsOfParameter(paramDef.ParameterName));
+                        throw EntityUtil.EntitySqlError(
+                            Strings.MultipleDefinitionsOfParameter(paramDef.ParameterName)
+                        );
                     }
 
-                    Debug.Assert(paramDef.ResultType.IsReadOnly, "paramDef.ResultType.IsReadOnly must be set");
+                    Debug.Assert(
+                        paramDef.ResultType.IsReadOnly,
+                        "paramDef.ResultType.IsReadOnly must be set"
+                    );
 
                     retParams.Add(paramDef.ParameterName, paramDef);
                 }
@@ -199,9 +225,15 @@ namespace System.Data.Common.EntitySql
         /// </summary>
         /// <param name="varDefs">The set of free variables</param>
         /// <returns>A valid dictionary that maps variable names to <see cref="DbVariableReferenceExpression"/>s using the current NameComparer</returns>
-        private static Dictionary<string, DbVariableReferenceExpression> ProcessVariables(IEnumerable<DbVariableReferenceExpression> varDefs, ParserOptions parserOptions)
+        private static Dictionary<string, DbVariableReferenceExpression> ProcessVariables(
+            IEnumerable<DbVariableReferenceExpression> varDefs,
+            ParserOptions parserOptions
+        )
         {
-            Dictionary<string, DbVariableReferenceExpression> retVars = new Dictionary<string, DbVariableReferenceExpression>(parserOptions.NameComparer);
+            Dictionary<string, DbVariableReferenceExpression> retVars = new Dictionary<
+                string,
+                DbVariableReferenceExpression
+            >(parserOptions.NameComparer);
 
             if (varDefs != null)
             {
@@ -209,10 +241,15 @@ namespace System.Data.Common.EntitySql
                 {
                     if (retVars.ContainsKey(varDef.VariableName))
                     {
-                        throw EntityUtil.EntitySqlError(Strings.MultipleDefinitionsOfVariable(varDef.VariableName));
+                        throw EntityUtil.EntitySqlError(
+                            Strings.MultipleDefinitionsOfVariable(varDef.VariableName)
+                        );
                     }
 
-                    Debug.Assert(varDef.ResultType.IsReadOnly, "varDef.ResultType.IsReadOnly must be set");
+                    Debug.Assert(
+                        varDef.ResultType.IsReadOnly,
+                        "varDef.ResultType.IsReadOnly must be set"
+                    );
 
                     retVars.Add(varDef.VariableName, varDef);
                 }
@@ -309,11 +346,16 @@ namespace System.Data.Common.EntitySql
         /// Returns the appropriate expression from a given scope entry.
         /// May return null for scope entries like <see cref="InvalidGroupInputRefScopeEntry"/>.
         /// </summary>
-        private DbExpression GetExpressionFromScopeEntry(ScopeEntry scopeEntry, int scopeIndex, string varName, ErrorContext errCtx)
+        private DbExpression GetExpressionFromScopeEntry(
+            ScopeEntry scopeEntry,
+            int scopeIndex,
+            string varName,
+            ErrorContext errCtx
+        )
         {
             //
             // If
-            //      1) we are in the context of a group aggregate or group key, 
+            //      1) we are in the context of a group aggregate or group key,
             //      2) and the scopeEntry can have multiple interpretations depending on the aggregation context,
             //      3) and the defining scope region of the scopeEntry is outer or equal to the defining scope region of the group aggregate,
             //      4) and the defining scope region of the scopeEntry is not performing conversion of a group key definition,
@@ -333,7 +375,7 @@ namespace System.Data.Common.EntitySql
             //                                       ^^^
             // Note that expressions obtained from aggregation-context-dependent scope entries outside of the three contexts mentioned above
             // will default to the value returned by the scopeEntry.GetExpression(...) call. This value is the same as in the group key definition context.
-            // These expressions have correct result types which enables partial expression validation. 
+            // These expressions have correct result types which enables partial expression validation.
             // However the contents of the expressions are invalid outside of the group key definitions, hence they can not appear in the final expression tree.
             // SemanticAnalyzer.ProcessGroupByClause(...) method guarantees that such expressions are only temporarily used during GROUP BY clause processing and
             // dropped afterwards.
@@ -343,20 +385,20 @@ namespace System.Data.Common.EntitySql
             //                         the ones obtained during SELECT clause processing are accepted.
             //
             // Explanation for #3 from the list above:
-            //      - An outer scope entry referenced inside of an aggregate may lift the aggregate to the outer scope region for evaluation, 
+            //      - An outer scope entry referenced inside of an aggregate may lift the aggregate to the outer scope region for evaluation,
             //        hence such a scope entry must be interpreted in the aggregation context. See explanation for #4 below for more info.
-            //        Example: 
+            //        Example:
             //
-            //          select 
-            //              (select max(x) from {1} as y) 
+            //          select
+            //              (select max(x) from {1} as y)
             //          from {0} as x
             //
-            //      - If a scope entry is defined inside of a group aggregate, then the scope entry is not affected by the aggregate, 
+            //      - If a scope entry is defined inside of a group aggregate, then the scope entry is not affected by the aggregate,
             //        hence such a scope entry is not interpreted in the aggregation context.
             //        Example:
             //
             //          select max(
-            //                       anyelement( select b from {1} as b )  
+            //                       anyelement( select b from {1} as b )
             //                    )
             //          from {0} as a group by a %2 as a1
             //
@@ -371,7 +413,7 @@ namespace System.Data.Common.EntitySql
             // Example:
             //
             //      select a1
-            //      from {0} as a group by 
+            //      from {0} as a group by
             //                                anyelement(select value max(a + b) from {1} as b)
             //                          as a1
             //
@@ -391,7 +433,10 @@ namespace System.Data.Common.EntitySql
                 // Outer scope region has smaller index value than the inner.
                 //
                 ScopeRegion definingScopeRegionOfScopeEntry = GetDefiningScopeRegion(scopeIndex);
-                if (definingScopeRegionOfScopeEntry.ScopeRegionIndex <= _currentGroupAggregateInfo.DefiningScopeRegion.ScopeRegionIndex)
+                if (
+                    definingScopeRegionOfScopeEntry.ScopeRegionIndex
+                    <= _currentGroupAggregateInfo.DefiningScopeRegion.ScopeRegionIndex
+                )
                 {
                     //
                     // Let the group aggregate know the scope of the scope entry it references.
@@ -399,7 +444,8 @@ namespace System.Data.Common.EntitySql
                     //
                     _currentGroupAggregateInfo.UpdateScopeIndex(scopeIndex, this);
 
-                    IGroupExpressionExtendedInfo iGroupExpressionExtendedInfo = scopeEntry as IGroupExpressionExtendedInfo;
+                    IGroupExpressionExtendedInfo iGroupExpressionExtendedInfo =
+                        scopeEntry as IGroupExpressionExtendedInfo;
                     if (iGroupExpressionExtendedInfo != null)
                     {
                         //
@@ -408,18 +454,30 @@ namespace System.Data.Common.EntitySql
                         // If there is no such aggregate, then the current containing aggregate controls interpretation.
                         //
                         GroupAggregateInfo expressionInterpretationContext;
-                        for (expressionInterpretationContext = _currentGroupAggregateInfo; 
-                             expressionInterpretationContext != null &&
-                             expressionInterpretationContext.DefiningScopeRegion.ScopeRegionIndex >= definingScopeRegionOfScopeEntry.ScopeRegionIndex;
-                             expressionInterpretationContext = expressionInterpretationContext.ContainingAggregate)
+                        for (
+                            expressionInterpretationContext = _currentGroupAggregateInfo;
+                            expressionInterpretationContext != null
+                                && expressionInterpretationContext
+                                    .DefiningScopeRegion
+                                    .ScopeRegionIndex
+                                    >= definingScopeRegionOfScopeEntry.ScopeRegionIndex;
+                            expressionInterpretationContext =
+                                    expressionInterpretationContext.ContainingAggregate
+                        )
                         {
-                            if (expressionInterpretationContext.DefiningScopeRegion.ScopeRegionIndex == definingScopeRegionOfScopeEntry.ScopeRegionIndex)
+                            if (
+                                expressionInterpretationContext.DefiningScopeRegion.ScopeRegionIndex
+                                == definingScopeRegionOfScopeEntry.ScopeRegionIndex
+                            )
                             {
                                 break;
                             }
                         }
-                        if (expressionInterpretationContext == null ||
-                            expressionInterpretationContext.DefiningScopeRegion.ScopeRegionIndex < definingScopeRegionOfScopeEntry.ScopeRegionIndex)
+                        if (
+                            expressionInterpretationContext == null
+                            || expressionInterpretationContext.DefiningScopeRegion.ScopeRegionIndex
+                                < definingScopeRegionOfScopeEntry.ScopeRegionIndex
+                        )
                         {
                             expressionInterpretationContext = _currentGroupAggregateInfo;
                         }
@@ -462,16 +520,28 @@ namespace System.Data.Common.EntitySql
         #region Resolve simple / metadata member name
         internal IDisposable EnterIgnoreEntityContainerNameResolution()
         {
-            Debug.Assert(!_ignoreEntityContainerNameResolution, "EnterIgnoreEntityContainerNameResolution() is not reentrant.");
+            Debug.Assert(
+                !_ignoreEntityContainerNameResolution,
+                "EnterIgnoreEntityContainerNameResolution() is not reentrant."
+            );
             _ignoreEntityContainerNameResolution = true;
-            return new Disposer(delegate
-            {
-                Debug.Assert(this._ignoreEntityContainerNameResolution, "_ignoreEntityContainerNameResolution must be true.");
-                this._ignoreEntityContainerNameResolution = false;
-            });
+            return new Disposer(
+                delegate
+                {
+                    Debug.Assert(
+                        this._ignoreEntityContainerNameResolution,
+                        "_ignoreEntityContainerNameResolution must be true."
+                    );
+                    this._ignoreEntityContainerNameResolution = false;
+                }
+            );
         }
 
-        internal ExpressionResolution ResolveSimpleName(string name, bool leftHandSideOfMemberAccess, ErrorContext errCtx)
+        internal ExpressionResolution ResolveSimpleName(
+            string name,
+            bool leftHandSideOfMemberAccess,
+            ErrorContext errCtx
+        )
         {
             Debug.Assert(!String.IsNullOrEmpty(name), "name must not be null or empty");
 
@@ -485,7 +555,10 @@ namespace System.Data.Common.EntitySql
                 //
                 // Check for invalid join left expression correlation.
                 //
-                if (scopeEntry.EntryKind == ScopeEntryKind.SourceVar && ((SourceScopeEntry)scopeEntry).IsJoinClauseLeftExpr)
+                if (
+                    scopeEntry.EntryKind == ScopeEntryKind.SourceVar
+                    && ((SourceScopeEntry)scopeEntry).IsJoinClauseLeftExpr
+                )
                 {
                     throw EntityUtil.EntitySqlError(errCtx, Strings.InvalidJoinLeftCorrelation);
                 }
@@ -495,35 +568,58 @@ namespace System.Data.Common.EntitySql
                 //
                 SetScopeRegionCorrelationFlag(scopeIndex);
 
-                return new ValueExpression(GetExpressionFromScopeEntry(scopeEntry, scopeIndex, name, errCtx));
+                return new ValueExpression(
+                    GetExpressionFromScopeEntry(scopeEntry, scopeIndex, name, errCtx)
+                );
             }
 
-            // 
+            //
             // Try resolving as a member of the default entity container.
             //
-            EntityContainer defaultEntityContainer = this.TypeResolver.Perspective.GetDefaultContainer();
+            EntityContainer defaultEntityContainer =
+                this.TypeResolver.Perspective.GetDefaultContainer();
             ExpressionResolution defaultEntityContainerResolution;
-            if (defaultEntityContainer != null && TryResolveEntityContainerMemberAccess(defaultEntityContainer, name, errCtx, out defaultEntityContainerResolution))
+            if (
+                defaultEntityContainer != null
+                && TryResolveEntityContainerMemberAccess(
+                    defaultEntityContainer,
+                    name,
+                    errCtx,
+                    out defaultEntityContainerResolution
+                )
+            )
             {
                 return defaultEntityContainerResolution;
             }
 
             if (!_ignoreEntityContainerNameResolution)
             {
-                // 
+                //
                 // Try resolving as an entity container.
                 //
                 EntityContainer entityContainer;
-                if (this.TypeResolver.Perspective.TryGetEntityContainer(name, _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/, out entityContainer))
+                if (
+                    this.TypeResolver.Perspective.TryGetEntityContainer(
+                        name,
+                        _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/
+                        ,
+                        out entityContainer
+                    )
+                )
                 {
                     return new EntityContainerExpression(entityContainer);
                 }
             }
 
             //
-            // Otherwise, resolve as an unqualified name. 
+            // Otherwise, resolve as an unqualified name.
             //
-            return this.TypeResolver.ResolveUnqualifiedName(name, leftHandSideOfMemberAccess /* partOfQualifiedName */, errCtx);
+            return this.TypeResolver.ResolveUnqualifiedName(
+                name,
+                leftHandSideOfMemberAccess /* partOfQualifiedName */
+                ,
+                errCtx
+            );
         }
 
         internal MetadataMember ResolveSimpleFunctionName(string name, ErrorContext errCtx)
@@ -533,24 +629,37 @@ namespace System.Data.Common.EntitySql
             // Note that calling type resolver directly will avoid resolution of the identifier as a local variable or entity container
             // (these resolutions are performed only by ResolveSimpleName(...)).
             //
-            var resolution = this.TypeResolver.ResolveUnqualifiedName(name, false /* partOfQualifiedName */, errCtx);
+            var resolution = this.TypeResolver.ResolveUnqualifiedName(
+                name,
+                false /* partOfQualifiedName */
+                ,
+                errCtx
+            );
             if (resolution.MetadataMemberClass == MetadataMemberClass.Namespace)
             {
-                // 
+                //
                 // Try resolving as a function import inside the default entity container.
                 //
-                EntityContainer defaultEntityContainer = this.TypeResolver.Perspective.GetDefaultContainer();
+                EntityContainer defaultEntityContainer =
+                    this.TypeResolver.Perspective.GetDefaultContainer();
                 ExpressionResolution defaultEntityContainerResolution;
-                if (defaultEntityContainer != null &&
-                    TryResolveEntityContainerMemberAccess(defaultEntityContainer, name, errCtx, out defaultEntityContainerResolution) &&
-                    defaultEntityContainerResolution.ExpressionClass == ExpressionResolutionClass.MetadataMember)
+                if (
+                    defaultEntityContainer != null
+                    && TryResolveEntityContainerMemberAccess(
+                        defaultEntityContainer,
+                        name,
+                        errCtx,
+                        out defaultEntityContainerResolution
+                    )
+                    && defaultEntityContainerResolution.ExpressionClass
+                        == ExpressionResolutionClass.MetadataMember
+                )
                 {
                     resolution = (MetadataMember)defaultEntityContainerResolution;
                 }
             }
             return resolution;
         }
-
 
         /// <summary>
         /// Performs scope lookup returning the scope entry and its index.
@@ -583,7 +692,11 @@ namespace System.Data.Common.EntitySql
         /// <summary>
         /// Resolve property <paramref name="name"/> off the <paramref name="valueExpr"/>.
         /// </summary>
-        internal ValueExpression ResolvePropertyAccess(DbExpression valueExpr, string name, ErrorContext errCtx)
+        internal ValueExpression ResolvePropertyAccess(
+            DbExpression valueExpr,
+            string name,
+            ErrorContext errCtx
+        )
         {
             DbExpression propertyExpr;
 
@@ -599,18 +712,29 @@ namespace System.Data.Common.EntitySql
 
             if (TypeSemantics.IsCollectionType(valueExpr.ResultType))
             {
-                throw EntityUtil.EntitySqlError(errCtx, Strings.NotAMemberOfCollection(name, valueExpr.ResultType.EdmType.FullName));
+                throw EntityUtil.EntitySqlError(
+                    errCtx,
+                    Strings.NotAMemberOfCollection(name, valueExpr.ResultType.EdmType.FullName)
+                );
             }
             else
             {
-                throw EntityUtil.EntitySqlError(errCtx, Strings.NotAMemberOfType(name, valueExpr.ResultType.EdmType.FullName));
+                throw EntityUtil.EntitySqlError(
+                    errCtx,
+                    Strings.NotAMemberOfType(name, valueExpr.ResultType.EdmType.FullName)
+                );
             }
         }
 
         /// <summary>
         /// Try resolving <paramref name="name"/> as a property of the value returned by the <paramref name="valueExpr"/>.
         /// </summary>
-        private bool TryResolveAsPropertyAccess(DbExpression valueExpr, string name, ErrorContext errCtx, out DbExpression propertyExpr)
+        private bool TryResolveAsPropertyAccess(
+            DbExpression valueExpr,
+            string name,
+            ErrorContext errCtx,
+            out DbExpression propertyExpr
+        )
         {
             Debug.Assert(valueExpr != null, "valueExpr != null");
 
@@ -619,11 +743,25 @@ namespace System.Data.Common.EntitySql
             if (Helper.IsStructuralType(valueExpr.ResultType.EdmType))
             {
                 EdmMember member;
-                if (TypeResolver.Perspective.TryGetMember((StructuralType)valueExpr.ResultType.EdmType, name, _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/, out member))
+                if (
+                    TypeResolver.Perspective.TryGetMember(
+                        (StructuralType)valueExpr.ResultType.EdmType,
+                        name,
+                        _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/
+                        ,
+                        out member
+                    )
+                )
                 {
                     Debug.Assert(member != null, "member != null");
-                    Debug.Assert(this.NameComparer.Equals(name, member.Name), "this.NameComparer.Equals(name, member.Name)");
-                    propertyExpr = DbExpressionBuilder.CreatePropertyExpressionFromMember(valueExpr, member);
+                    Debug.Assert(
+                        this.NameComparer.Equals(name, member.Name),
+                        "this.NameComparer.Equals(name, member.Name)"
+                    );
+                    propertyExpr = DbExpressionBuilder.CreatePropertyExpressionFromMember(
+                        valueExpr,
+                        member
+                    );
                     return true;
                 }
             }
@@ -634,7 +772,12 @@ namespace System.Data.Common.EntitySql
         /// <summary>
         /// If <paramref name="valueExpr"/> returns a reference, then deref and try resolving <paramref name="name"/> as a property of the dereferenced value.
         /// </summary>
-        private bool TryResolveAsRefPropertyAccess(DbExpression valueExpr, string name, ErrorContext errCtx, out DbExpression propertyExpr)
+        private bool TryResolveAsRefPropertyAccess(
+            DbExpression valueExpr,
+            string name,
+            ErrorContext errCtx,
+            out DbExpression propertyExpr
+        )
         {
             Debug.Assert(valueExpr != null, "valueExpr != null");
 
@@ -651,7 +794,14 @@ namespace System.Data.Common.EntitySql
                 }
                 else
                 {
-                    throw EntityUtil.EntitySqlError(errCtx, Strings.InvalidDeRefProperty(name, derefExprType.EdmType.FullName, valueExpr.ResultType.EdmType.FullName));
+                    throw EntityUtil.EntitySqlError(
+                        errCtx,
+                        Strings.InvalidDeRefProperty(
+                            name,
+                            derefExprType.EdmType.FullName,
+                            valueExpr.ResultType.EdmType.FullName
+                        )
+                    );
                 }
             }
 
@@ -663,31 +813,64 @@ namespace System.Data.Common.EntitySql
         /// <summary>
         /// Resolve entity set or function import <paramref name="name"/> in the <paramref name="entityContainer"/>
         /// </summary>
-        internal ExpressionResolution ResolveEntityContainerMemberAccess(EntityContainer entityContainer, string name, ErrorContext errCtx)
+        internal ExpressionResolution ResolveEntityContainerMemberAccess(
+            EntityContainer entityContainer,
+            string name,
+            ErrorContext errCtx
+        )
         {
             ExpressionResolution resolution;
-            if (TryResolveEntityContainerMemberAccess(entityContainer, name, errCtx, out resolution))
+            if (
+                TryResolveEntityContainerMemberAccess(entityContainer, name, errCtx, out resolution)
+            )
             {
                 return resolution;
             }
             else
             {
-                throw EntityUtil.EntitySqlError(errCtx, Strings.MemberDoesNotBelongToEntityContainer(name, entityContainer.Name));
+                throw EntityUtil.EntitySqlError(
+                    errCtx,
+                    Strings.MemberDoesNotBelongToEntityContainer(name, entityContainer.Name)
+                );
             }
         }
 
-        private bool TryResolveEntityContainerMemberAccess(EntityContainer entityContainer, string name, ErrorContext errCtx, out ExpressionResolution resolution)
+        private bool TryResolveEntityContainerMemberAccess(
+            EntityContainer entityContainer,
+            string name,
+            ErrorContext errCtx,
+            out ExpressionResolution resolution
+        )
         {
             EntitySetBase entitySetBase;
             EdmFunction functionImport;
-            if (this.TypeResolver.Perspective.TryGetExtent(entityContainer, name, _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/, out entitySetBase))
+            if (
+                this.TypeResolver.Perspective.TryGetExtent(
+                    entityContainer,
+                    name,
+                    _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/
+                    ,
+                    out entitySetBase
+                )
+            )
             {
                 resolution = new ValueExpression(entitySetBase.Scan());
                 return true;
             }
-            else if (this.TypeResolver.Perspective.TryGetFunctionImport(entityContainer, name, _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/, out functionImport))
+            else if (
+                this.TypeResolver.Perspective.TryGetFunctionImport(
+                    entityContainer,
+                    name,
+                    _parserOptions.NameComparisonCaseInsensitive /*ignoreCase*/
+                    ,
+                    out functionImport
+                )
+            )
             {
-                resolution = new MetadataFunctionGroup(functionImport.FullName, new EdmFunction[] { functionImport });
+                resolution = new MetadataFunctionGroup(
+                    functionImport.FullName,
+                    new EdmFunction[] { functionImport }
+                );
                 return true;
             }
             else
@@ -702,7 +885,11 @@ namespace System.Data.Common.EntitySql
         /// <summary>
         /// Resolve namespace, type or function <paramref name="name"/> in the <paramref name="metadataMember"/>
         /// </summary>
-        internal MetadataMember ResolveMetadataMemberAccess(MetadataMember metadataMember, string name, ErrorContext errCtx)
+        internal MetadataMember ResolveMetadataMemberAccess(
+            MetadataMember metadataMember,
+            string name,
+            ErrorContext errCtx
+        )
         {
             return this.TypeResolver.ResolveMetadataMemberAccess(metadataMember, name, errCtx);
         }
@@ -713,7 +900,11 @@ namespace System.Data.Common.EntitySql
         /// <summary>
         /// Try resolving an internal aggregate name.
         /// </summary>
-        internal bool TryResolveInternalAggregateName(string name, ErrorContext errCtx, out DbExpression dbExpression)
+        internal bool TryResolveInternalAggregateName(
+            string name,
+            ErrorContext errCtx,
+            out DbExpression dbExpression
+        )
         {
             ScopeEntry scopeEntry;
             int scopeIndex;
@@ -733,34 +924,50 @@ namespace System.Data.Common.EntitySql
                 return false;
             }
         }
+
         /// <summary>
         /// Try resolving multipart identifier as an alternative name of a group key (see SemanticAnalyzer.ProcessGroupByClause(...) for more info).
         /// </summary>
-        internal bool TryResolveDotExprAsGroupKeyAlternativeName(AST.DotExpr dotExpr, out ValueExpression groupKeyResolution)
+        internal bool TryResolveDotExprAsGroupKeyAlternativeName(
+            AST.DotExpr dotExpr,
+            out ValueExpression groupKeyResolution
+        )
         {
             groupKeyResolution = null;
 
             string[] names;
             ScopeEntry scopeEntry;
             int scopeIndex;
-            if (IsInAnyGroupScope() &&
-                dotExpr.IsMultipartIdentifier(out names) &&
-                TryScopeLookup(TypeResolver.GetFullName(names), out scopeEntry, out scopeIndex))
+            if (
+                IsInAnyGroupScope()
+                && dotExpr.IsMultipartIdentifier(out names)
+                && TryScopeLookup(TypeResolver.GetFullName(names), out scopeEntry, out scopeIndex)
+            )
             {
                 IGetAlternativeName iGetAlternativeName = scopeEntry as IGetAlternativeName;
 
                 //
                 // Accept only if names[] match alternative name part by part.
                 //
-                if (iGetAlternativeName != null && iGetAlternativeName.AlternativeName != null &&
-                    names.SequenceEqual(iGetAlternativeName.AlternativeName, this.NameComparer))
+                if (
+                    iGetAlternativeName != null
+                    && iGetAlternativeName.AlternativeName != null
+                    && names.SequenceEqual(iGetAlternativeName.AlternativeName, this.NameComparer)
+                )
                 {
                     //
                     // Set correlation flag
                     //
                     SetScopeRegionCorrelationFlag(scopeIndex);
 
-                    groupKeyResolution = new ValueExpression(GetExpressionFromScopeEntry(scopeEntry, scopeIndex, TypeResolver.GetFullName(names), dotExpr.ErrCtx));
+                    groupKeyResolution = new ValueExpression(
+                        GetExpressionFromScopeEntry(
+                            scopeEntry,
+                            scopeIndex,
+                            TypeResolver.GetFullName(names),
+                            dotExpr.ErrCtx
+                        )
+                    );
                     return true;
                 }
             }
@@ -776,7 +983,9 @@ namespace System.Data.Common.EntitySql
         internal string GenerateInternalName(string hint)
         {
             // string concat is much faster than String.Format
-            return "_##" + hint + unchecked(_namegenCounter++).ToString(CultureInfo.InvariantCulture);
+            return "_##"
+                + hint
+                + unchecked(_namegenCounter++).ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -809,7 +1018,10 @@ namespace System.Data.Common.EntitySql
         /// Returns alias name from <paramref name="aliasedExpr"/> ast node if it contains an alias,
         /// otherwise creates a new alias name based on the <paramref name="aliasedExpr"/>.Expr or <paramref name="convertedExpression"/> information.
         /// </summary>
-        internal string InferAliasName(AST.AliasedExpr aliasedExpr, DbExpression convertedExpression)
+        internal string InferAliasName(
+            AST.AliasedExpr aliasedExpr,
+            DbExpression convertedExpression
+        )
         {
             if (aliasedExpr.Alias != null)
             {
@@ -847,15 +1059,23 @@ namespace System.Data.Common.EntitySql
             //
             // Create new scope region and push it
             //
-            ScopeRegion scopeRegion = new ScopeRegion(_scopeManager, CurrentScopeIndex, _scopeRegions.Count);
+            ScopeRegion scopeRegion = new ScopeRegion(
+                _scopeManager,
+                CurrentScopeIndex,
+                _scopeRegions.Count
+            );
             _scopeRegions.Add(scopeRegion);
 
             //
             // Return scope region disposer that rolls back the scope.
             //
-            return new Disposer(delegate
+            return new Disposer(
+                delegate
                 {
-                    Debug.Assert(this.CurrentScopeRegion == scopeRegion, "Scope region stack is corrupted.");
+                    Debug.Assert(
+                        this.CurrentScopeRegion == scopeRegion,
+                        "Scope region stack is corrupted."
+                    );
 
                     //
                     // Root scope region is permanent.
@@ -865,7 +1085,9 @@ namespace System.Data.Common.EntitySql
                     //
                     // Reset aggregate info of AST nodes of aggregates resolved to the CurrentScopeRegion.
                     //
-                    this.CurrentScopeRegion.GroupAggregateInfos.ForEach(groupAggregateInfo => groupAggregateInfo.DetachFromAstNode());
+                    this.CurrentScopeRegion.GroupAggregateInfos.ForEach(groupAggregateInfo =>
+                        groupAggregateInfo.DetachFromAstNode()
+                    );
 
                     //
                     // Rollback scopes of the region.
@@ -876,7 +1098,8 @@ namespace System.Data.Common.EntitySql
                     // Remove the scope region.
                     //
                     this._scopeRegions.Remove(CurrentScopeRegion);
-                });
+                }
+            );
         }
 
         /// <summary>
@@ -947,39 +1170,70 @@ namespace System.Data.Common.EntitySql
         /// <summary>
         /// Enters processing of a function group aggregate.
         /// </summary>
-        internal IDisposable EnterFunctionAggregate(AST.MethodExpr methodExpr, ErrorContext errCtx, out FunctionAggregateInfo aggregateInfo)
+        internal IDisposable EnterFunctionAggregate(
+            AST.MethodExpr methodExpr,
+            ErrorContext errCtx,
+            out FunctionAggregateInfo aggregateInfo
+        )
         {
-            aggregateInfo = new FunctionAggregateInfo(methodExpr, errCtx, _currentGroupAggregateInfo, CurrentScopeRegion);
+            aggregateInfo = new FunctionAggregateInfo(
+                methodExpr,
+                errCtx,
+                _currentGroupAggregateInfo,
+                CurrentScopeRegion
+            );
             return EnterGroupAggregate(aggregateInfo);
         }
 
         /// <summary>
         /// Enters processing of a group partition aggregate.
         /// </summary>
-        internal IDisposable EnterGroupPartition(AST.GroupPartitionExpr groupPartitionExpr, ErrorContext errCtx, out GroupPartitionInfo aggregateInfo)
+        internal IDisposable EnterGroupPartition(
+            AST.GroupPartitionExpr groupPartitionExpr,
+            ErrorContext errCtx,
+            out GroupPartitionInfo aggregateInfo
+        )
         {
-            aggregateInfo = new GroupPartitionInfo(groupPartitionExpr, errCtx, _currentGroupAggregateInfo, CurrentScopeRegion);
+            aggregateInfo = new GroupPartitionInfo(
+                groupPartitionExpr,
+                errCtx,
+                _currentGroupAggregateInfo,
+                CurrentScopeRegion
+            );
             return EnterGroupAggregate(aggregateInfo);
         }
 
         /// <summary>
         /// Enters processing of a group partition aggregate.
         /// </summary>
-        internal IDisposable EnterGroupKeyDefinition(GroupAggregateKind aggregateKind, ErrorContext errCtx, out GroupKeyAggregateInfo aggregateInfo)
+        internal IDisposable EnterGroupKeyDefinition(
+            GroupAggregateKind aggregateKind,
+            ErrorContext errCtx,
+            out GroupKeyAggregateInfo aggregateInfo
+        )
         {
-            aggregateInfo = new GroupKeyAggregateInfo(aggregateKind, errCtx, _currentGroupAggregateInfo, CurrentScopeRegion);
+            aggregateInfo = new GroupKeyAggregateInfo(
+                aggregateKind,
+                errCtx,
+                _currentGroupAggregateInfo,
+                CurrentScopeRegion
+            );
             return EnterGroupAggregate(aggregateInfo);
         }
 
         private IDisposable EnterGroupAggregate(GroupAggregateInfo aggregateInfo)
         {
             _currentGroupAggregateInfo = aggregateInfo;
-            return new Disposer(delegate
+            return new Disposer(
+                delegate
                 {
                     //
                     // First, pop the element from the stack to keep the stack valid...
                     //
-                    Debug.Assert(this._currentGroupAggregateInfo == aggregateInfo, "Aggregare info stack is corrupted.");
+                    Debug.Assert(
+                        this._currentGroupAggregateInfo == aggregateInfo,
+                        "Aggregare info stack is corrupted."
+                    );
                     this._currentGroupAggregateInfo = aggregateInfo.ContainingAggregate;
 
                     //
@@ -987,15 +1241,18 @@ namespace System.Data.Common.EntitySql
                     // Note that this operation may throw an EntitySqlException.
                     //
                     aggregateInfo.ValidateAndComputeEvaluatingScopeRegion(this);
-                });
+                }
+            );
         }
         #endregion
 
         #region Function overload resolution (untyped null aware)
-        internal static EdmFunction ResolveFunctionOverloads(IList<EdmFunction> functionsMetadata,
-                                                             IList<TypeUsage> argTypes,
-                                                             bool isGroupAggregateFunction,
-                                                             out bool isAmbiguous)
+        internal static EdmFunction ResolveFunctionOverloads(
+            IList<EdmFunction> functionsMetadata,
+            IList<TypeUsage> argTypes,
+            bool isGroupAggregateFunction,
+            out bool isAmbiguous
+        )
         {
             return FunctionOverloadResolver.ResolveFunctionOverloads(
                 functionsMetadata,
@@ -1005,17 +1262,23 @@ namespace System.Data.Common.EntitySql
                 UntypedNullAwareIsPromotableTo,
                 UntypedNullAwareIsStructurallyEqual,
                 isGroupAggregateFunction,
-                out isAmbiguous);
+                out isAmbiguous
+            );
         }
 
-        internal static TFunctionMetadata ResolveFunctionOverloads<TFunctionMetadata, TFunctionParameterMetadata>(
+        internal static TFunctionMetadata ResolveFunctionOverloads<
+            TFunctionMetadata,
+            TFunctionParameterMetadata
+        >(
             IList<TFunctionMetadata> functionsMetadata,
             IList<TypeUsage> argTypes,
             Func<TFunctionMetadata, IList<TFunctionParameterMetadata>> getSignatureParams,
             Func<TFunctionParameterMetadata, TypeUsage> getParameterTypeUsage,
             Func<TFunctionParameterMetadata, ParameterMode> getParameterMode,
             bool isGroupAggregateFunction,
-            out bool isAmbiguous) where TFunctionMetadata : class
+            out bool isAmbiguous
+        )
+            where TFunctionMetadata : class
         {
             return FunctionOverloadResolver.ResolveFunctionOverloads(
                 functionsMetadata,
@@ -1028,17 +1291,25 @@ namespace System.Data.Common.EntitySql
                 UntypedNullAwareIsPromotableTo,
                 UntypedNullAwareIsStructurallyEqual,
                 isGroupAggregateFunction,
-                out isAmbiguous);
+                out isAmbiguous
+            );
         }
 
         private static IEnumerable<TypeUsage> UntypedNullAwareFlattenArgumentType(TypeUsage argType)
         {
             return argType != null ? TypeSemantics.FlattenType(argType) : new TypeUsage[] { null };
         }
-        private static IEnumerable<TypeUsage> UntypedNullAwareFlattenParameterType(TypeUsage paramType, TypeUsage argType)
+
+        private static IEnumerable<TypeUsage> UntypedNullAwareFlattenParameterType(
+            TypeUsage paramType,
+            TypeUsage argType
+        )
         {
-            return argType != null ? TypeSemantics.FlattenType(paramType) : new TypeUsage[] { paramType };
+            return argType != null
+                ? TypeSemantics.FlattenType(paramType)
+                : new TypeUsage[] { paramType };
         }
+
         private static bool UntypedNullAwareIsPromotableTo(TypeUsage fromType, TypeUsage toType)
         {
             if (fromType == null)
@@ -1053,7 +1324,11 @@ namespace System.Data.Common.EntitySql
                 return TypeSemantics.IsPromotableTo(fromType, toType);
             }
         }
-        private static bool UntypedNullAwareIsStructurallyEqual(TypeUsage fromType, TypeUsage toType)
+
+        private static bool UntypedNullAwareIsStructurallyEqual(
+            TypeUsage fromType,
+            TypeUsage toType
+        )
         {
             if (fromType == null)
             {
@@ -1090,21 +1365,24 @@ namespace System.Data.Common.EntitySql
     internal enum GroupAggregateKind
     {
         None,
+
         /// <summary>
         /// Inside of an aggregate function (Max, Min, etc).
         /// All range variables originating on the defining scope of this aggregate should yield <see cref="IGroupExpressionExtendedInfo.GroupVarBasedExpression"/>.
         /// </summary>
         Function,
+
         /// <summary>
         /// Inside of GROUPPARTITION expression.
         /// All range variables originating on the defining scope of this aggregate should yield <see cref="IGroupExpressionExtendedInfo.GroupAggBasedExpression"/>.
         /// </summary>
         Partition,
+
         /// <summary>
         /// Inside of a group key definition
         /// All range variables originating on the defining scope of this aggregate should yield <see cref="ScopeEntry.GetExpression"/>.
         /// </summary>
-        GroupKey
+        GroupKey,
     }
 
     /// <summary>
@@ -1113,13 +1391,17 @@ namespace System.Data.Common.EntitySql
     internal abstract class GroupAggregateInfo
     {
         protected GroupAggregateInfo(
-            GroupAggregateKind aggregateKind, 
+            GroupAggregateKind aggregateKind,
             AST.GroupAggregateExpr astNode,
             ErrorContext errCtx,
             GroupAggregateInfo containingAggregate,
-            ScopeRegion definingScopeRegion)
+            ScopeRegion definingScopeRegion
+        )
         {
-            Debug.Assert(aggregateKind != GroupAggregateKind.None, "aggregateKind != GroupAggregateKind.None");
+            Debug.Assert(
+                aggregateKind != GroupAggregateKind.None,
+                "aggregateKind != GroupAggregateKind.None"
+            );
             Debug.Assert(errCtx != null, "errCtx != null");
             Debug.Assert(definingScopeRegion != null, "definingScopeRegion != null");
 
@@ -1133,8 +1415,14 @@ namespace System.Data.Common.EntitySql
         protected void AttachToAstNode(string aggregateName, TypeUsage resultType)
         {
             Debug.Assert(AstNode != null, "AstNode must be set.");
-            Debug.Assert(aggregateName != null && resultType != null, "aggregateName and aggregateDefinition must not be null.");
-            Debug.Assert(AggregateName == null && AggregateStubExpression == null, "Cannot reattach.");
+            Debug.Assert(
+                aggregateName != null && resultType != null,
+                "aggregateName and aggregateDefinition must not be null."
+            );
+            Debug.Assert(
+                AggregateName == null && AggregateStubExpression == null,
+                "Cannot reattach."
+            );
 
             AggregateName = aggregateName;
             AggregateStubExpression = resultType.Null();
@@ -1155,12 +1443,18 @@ namespace System.Data.Common.EntitySql
         /// </summary>
         internal void UpdateScopeIndex(int referencedScopeIndex, SemanticResolver sr)
         {
-            Debug.Assert(_evaluatingScopeRegion == null, "Can not update referenced scope index after _evaluatingScopeRegion have been computed.");
+            Debug.Assert(
+                _evaluatingScopeRegion == null,
+                "Can not update referenced scope index after _evaluatingScopeRegion have been computed."
+            );
 
             ScopeRegion referencedScopeRegion = sr.GetDefiningScopeRegion(referencedScopeIndex);
 
-            if (_innermostReferencedScopeRegion == null ||
-                _innermostReferencedScopeRegion.ScopeRegionIndex < referencedScopeRegion.ScopeRegionIndex)
+            if (
+                _innermostReferencedScopeRegion == null
+                || _innermostReferencedScopeRegion.ScopeRegionIndex
+                    < referencedScopeRegion.ScopeRegionIndex
+            )
             {
                 _innermostReferencedScopeRegion = referencedScopeRegion;
             }
@@ -1177,7 +1471,10 @@ namespace System.Data.Common.EntitySql
             get { return _innermostReferencedScopeRegion; }
             set
             {
-                Debug.Assert(_evaluatingScopeRegion == null, "Can't change _innermostReferencedScopeRegion after _evaluatingScopeRegion has been initialized.");
+                Debug.Assert(
+                    _evaluatingScopeRegion == null,
+                    "Can't change _innermostReferencedScopeRegion after _evaluatingScopeRegion has been initialized."
+                );
                 _innermostReferencedScopeRegion = value;
             }
         }
@@ -1189,7 +1486,10 @@ namespace System.Data.Common.EntitySql
         /// </summary>
         internal void ValidateAndComputeEvaluatingScopeRegion(SemanticResolver sr)
         {
-            Debug.Assert(_evaluatingScopeRegion == null, "_evaluatingScopeRegion has already been initialized");
+            Debug.Assert(
+                _evaluatingScopeRegion == null,
+                "_evaluatingScopeRegion has already been initialized"
+            );
             //
             // If _innermostReferencedScopeRegion is null, it means the aggregate is not correlated (a constant value),
             // so resolve it to the DefiningScopeRegion.
@@ -1228,20 +1528,20 @@ namespace System.Data.Common.EntitySql
 
             //
             // Validate all the contained aggregates for violation of the containment rule:
-            // None of the nested (contained) aggregates must be evaluating on a scope region that is 
+            // None of the nested (contained) aggregates must be evaluating on a scope region that is
             //      a. equal or inner to the evaluating scope of the current aggregate and
             //      b. equal or outer to the defining scope of the current aggregate.
             //
             // Example of a disallowed query:
             //
-            //      select 
+            //      select
             //              (select max(x + max(y))
             //               from {1} as y)
             //      from {0} as x
             //
             // Example of an allowed query where the ESR of the nested aggregate is outer to the ESR of the outer aggregate:
             //
-            //      select 
+            //      select
             //              (select max(y + max(x))
             //               from {1} as y)
             //      from {0} as x
@@ -1251,53 +1551,82 @@ namespace System.Data.Common.EntitySql
             //      select max(x + anyelement(select value max(y) from {1} as y))
             //      from {0} as x
             //
-            Debug.Assert(_evaluatingScopeRegion.IsAggregating, "_evaluatingScopeRegion.IsAggregating must be true");
-            Debug.Assert(_evaluatingScopeRegion.ScopeRegionIndex <= DefiningScopeRegion.ScopeRegionIndex, "_evaluatingScopeRegion must outer to the DefiningScopeRegion");
-            ValidateContainedAggregates(_evaluatingScopeRegion.ScopeRegionIndex, DefiningScopeRegion.ScopeRegionIndex);
+            Debug.Assert(
+                _evaluatingScopeRegion.IsAggregating,
+                "_evaluatingScopeRegion.IsAggregating must be true"
+            );
+            Debug.Assert(
+                _evaluatingScopeRegion.ScopeRegionIndex <= DefiningScopeRegion.ScopeRegionIndex,
+                "_evaluatingScopeRegion must outer to the DefiningScopeRegion"
+            );
+            ValidateContainedAggregates(
+                _evaluatingScopeRegion.ScopeRegionIndex,
+                DefiningScopeRegion.ScopeRegionIndex
+            );
         }
 
         /// <summary>
-        /// Recursively validates that <see cref="GroupAggregateInfo.EvaluatingScopeRegion"/> of all contained aggregates 
+        /// Recursively validates that <see cref="GroupAggregateInfo.EvaluatingScopeRegion"/> of all contained aggregates
         /// is outside of the range of scope regions defined by <paramref name="outerBoundaryScopeRegionIndex"/> and <paramref name="innerBoundaryScopeRegionIndex"/>.
         /// Throws in the case of violation.
         /// </summary>
-        private void ValidateContainedAggregates(int outerBoundaryScopeRegionIndex, int innerBoundaryScopeRegionIndex)
+        private void ValidateContainedAggregates(
+            int outerBoundaryScopeRegionIndex,
+            int innerBoundaryScopeRegionIndex
+        )
         {
             if (_containedAggregates != null)
             {
                 foreach (GroupAggregateInfo containedAggregate in _containedAggregates)
                 {
-                    if (containedAggregate.EvaluatingScopeRegion.ScopeRegionIndex >= outerBoundaryScopeRegionIndex &&
-                        containedAggregate.EvaluatingScopeRegion.ScopeRegionIndex <= innerBoundaryScopeRegionIndex)
+                    if (
+                        containedAggregate.EvaluatingScopeRegion.ScopeRegionIndex
+                            >= outerBoundaryScopeRegionIndex
+                        && containedAggregate.EvaluatingScopeRegion.ScopeRegionIndex
+                            <= innerBoundaryScopeRegionIndex
+                    )
                     {
-                        int line, column;
+                        int line,
+                            column;
                         string currentAggregateInfo = EntitySqlException.FormatErrorContext(
                             ErrCtx.CommandText,
                             ErrCtx.InputPosition,
                             ErrCtx.ErrorContextInfo,
                             ErrCtx.UseContextInfoAsResourceIdentifier,
-                            out line, out column);
+                            out line,
+                            out column
+                        );
 
                         string nestedAggregateInfo = EntitySqlException.FormatErrorContext(
                             containedAggregate.ErrCtx.CommandText,
                             containedAggregate.ErrCtx.InputPosition,
                             containedAggregate.ErrCtx.ErrorContextInfo,
                             containedAggregate.ErrCtx.UseContextInfoAsResourceIdentifier,
-                            out line, out column);
+                            out line,
+                            out column
+                        );
 
-                        throw EntityUtil.EntitySqlError(Strings.NestedAggregateCannotBeUsedInAggregate(nestedAggregateInfo, currentAggregateInfo));
+                        throw EntityUtil.EntitySqlError(
+                            Strings.NestedAggregateCannotBeUsedInAggregate(
+                                nestedAggregateInfo,
+                                currentAggregateInfo
+                            )
+                        );
                     }
 
                     //
                     // We need to check the full subtree in order to catch this case:
                     //      select max(x +
-                    //                     anyelement(select max(y + 
+                    //                     anyelement(select max(y +
                     //                                               anyelement(select value max(x)
                     //                                               from {2} as z))
                     //                                from {1} as y))
                     //      from {0} as x
                     //
-                    containedAggregate.ValidateContainedAggregates(outerBoundaryScopeRegionIndex, innerBoundaryScopeRegionIndex);
+                    containedAggregate.ValidateContainedAggregates(
+                        outerBoundaryScopeRegionIndex,
+                        innerBoundaryScopeRegionIndex
+                    );
                 }
             }
         }
@@ -1309,9 +1638,9 @@ namespace System.Data.Common.EntitySql
                 //
                 // Aggregates in this query
                 //
-                //      select value max(anyelement(select value max(b + max(a + anyelement(select value c1 
-                //                                                                          from {2} as c group by c as c1))) 
-                //                                  from {1} as b group by b as b1)) 
+                //      select value max(anyelement(select value max(b + max(a + anyelement(select value c1
+                //                                                                          from {2} as c group by c as c1)))
+                //                                  from {1} as b group by b as b1))
                 //
                 //      from {0} as a group by a as a1
                 //
@@ -1324,7 +1653,7 @@ namespace System.Data.Common.EntitySql
                 //     evaluating scope region for max3 is the outermost scope region, to which it gets assigned;
                 //     max3 aggregate info object is attached to the corresponding AST node;
                 // 5.  max2 completes processing as a collection function and begins processing as an aggregate;
-                // 6.  max3 is reprocessed as an aggregate in the SemanticAnalyzer.TryConvertAsResolvedGroupAggregate(...) method, and 
+                // 6.  max3 is reprocessed as an aggregate in the SemanticAnalyzer.TryConvertAsResolvedGroupAggregate(...) method, and
                 //     wired up to max2 as contained/containing;
                 // 7.  max2 completes processing as an aggregate;
                 //     max2 is validated and sealed;
@@ -1334,7 +1663,7 @@ namespace System.Data.Common.EntitySql
                 //     max2 is detached from the corresponding AST node;
                 //     at this point max3 is still assigned to the outermost scope region and still wired to the dropped max2 as containing/contained;
                 // 7.  max1 completes processing as a collection function and begins processing as an aggregate;
-                // 8.  max2 is revisited and begins processing as a collection function (note that because the old aggregate info object for max2 was dropped 
+                // 8.  max2 is revisited and begins processing as a collection function (note that because the old aggregate info object for max2 was dropped
                 //     and detached from the AST node in step 6, SemanticAnalyzer.TryConvertAsResolvedGroupAggregate(...) does not recognize max2 as an aggregate);
                 // 9.  max3 is recognized as an aggregate in the SemanticAnalyzer.TryConvertAsResolvedGroupAggregate(...) method;
                 //     max3 is rewired from the dropped max2 (step 6) to max1 as contained/containing, now max1 and max3 are wired as containing/contained;
@@ -1369,53 +1698,63 @@ namespace System.Data.Common.EntitySql
         /// </summary>
         private void AddContainedAggregate(GroupAggregateInfo containedAggregate)
         {
-            Debug.Assert(_evaluatingScopeRegion == null, "Can not add contained aggregate after _evaluatingScopeRegion have been computed.");
+            Debug.Assert(
+                _evaluatingScopeRegion == null,
+                "Can not add contained aggregate after _evaluatingScopeRegion have been computed."
+            );
 
             if (_containedAggregates == null)
             {
                 _containedAggregates = new List<GroupAggregateInfo>();
             }
-            Debug.Assert(_containedAggregates.Contains(containedAggregate) == false, "containedAggregate is already registered");
+            Debug.Assert(
+                _containedAggregates.Contains(containedAggregate) == false,
+                "containedAggregate is already registered"
+            );
             _containedAggregates.Add(containedAggregate);
         }
+
         private List<GroupAggregateInfo> _containedAggregates;
 
         /// <summary>
         /// Function call is _allowed_ after <see cref="ValidateAndComputeEvaluatingScopeRegion"/> has been called.
         /// Removing contained aggregates cannot invalidate the current aggregate.
-        /// 
+        ///
         /// Consider the following query:
-        /// 
-        ///   select value max(a + anyelement(select value max(b + max(a + anyelement(select value c1 
-        ///                                                                           from {2} as c group by c as c1))) 
-        ///                                   from {1} as b group by b as b1)) 
+        ///
+        ///   select value max(a + anyelement(select value max(b + max(a + anyelement(select value c1
+        ///                                                                           from {2} as c group by c as c1)))
+        ///                                   from {1} as b group by b as b1))
         ///   from {0} as a group by a as a1
-        ///   
+        ///
         /// Outer aggregate - max1, middle aggregate - max2, inner aggregate - max3.
         /// In this query after max1 have been processed as a collection function, max2 and max3 are wired as containing/contained.
         /// There is a point later when max1 is processed as an aggregate, max2 is processed as a collection function and max3 is processed as
-        /// an aggregate. Note that at this point the "aggregate" version of max2 is dropped and detached from the AST node when the middle scope region 
-        /// completes processing; also note that because evaluating scope region of max3 is the outer scope region, max3 aggregate info is still attached to 
-        /// the AST node and it is still wired to the dropped aggregate info object of max2. At this point max3 does not see new max2 as a containing aggregate, 
+        /// an aggregate. Note that at this point the "aggregate" version of max2 is dropped and detached from the AST node when the middle scope region
+        /// completes processing; also note that because evaluating scope region of max3 is the outer scope region, max3 aggregate info is still attached to
+        /// the AST node and it is still wired to the dropped aggregate info object of max2. At this point max3 does not see new max2 as a containing aggregate,
         /// and it rewires to max1, during this rewiring it needs to to remove itself from the old max2 and add itself to max1.
         /// The old max2 at this point is sealed, so the removal is performed on the sealed object.
         /// </summary>
         private void RemoveContainedAggregate(GroupAggregateInfo containedAggregate)
         {
-            Debug.Assert(_containedAggregates != null && _containedAggregates.Contains(containedAggregate), "_containedAggregates.Contains(containedAggregate)");
+            Debug.Assert(
+                _containedAggregates != null && _containedAggregates.Contains(containedAggregate),
+                "_containedAggregates.Contains(containedAggregate)"
+            );
 
             _containedAggregates.Remove(containedAggregate);
         }
 
         internal readonly GroupAggregateKind AggregateKind;
-        
+
         /// <summary>
         /// Null when <see cref="GroupAggregateInfo"/> is created for a group key processing.
         /// </summary>
         internal readonly AST.GroupAggregateExpr AstNode;
-        
+
         internal readonly ErrorContext ErrCtx;
-        
+
         /// <summary>
         /// Scope region that contains the aggregate expression.
         /// </summary>
@@ -1431,7 +1770,10 @@ namespace System.Data.Common.EntitySql
                 //
                 // _evaluatingScopeRegion is initialized in the ValidateAndComputeEvaluatingScopeRegion(...) method.
                 //
-                Debug.Assert(_evaluatingScopeRegion != null, "_evaluatingScopeRegion is not initialized");
+                Debug.Assert(
+                    _evaluatingScopeRegion != null,
+                    "_evaluatingScopeRegion is not initialized"
+                );
                 return _evaluatingScopeRegion;
             }
         }
@@ -1453,8 +1795,19 @@ namespace System.Data.Common.EntitySql
 
     internal sealed class FunctionAggregateInfo : GroupAggregateInfo
     {
-        internal FunctionAggregateInfo(AST.MethodExpr methodExpr, ErrorContext errCtx, GroupAggregateInfo containingAggregate, ScopeRegion definingScopeRegion)
-            : base(GroupAggregateKind.Function, methodExpr, errCtx, containingAggregate, definingScopeRegion) 
+        internal FunctionAggregateInfo(
+            AST.MethodExpr methodExpr,
+            ErrorContext errCtx,
+            GroupAggregateInfo containingAggregate,
+            ScopeRegion definingScopeRegion
+        )
+            : base(
+                GroupAggregateKind.Function,
+                methodExpr,
+                errCtx,
+                containingAggregate,
+                definingScopeRegion
+            )
         {
             Debug.Assert(methodExpr != null, "methodExpr != null");
         }
@@ -1471,8 +1824,19 @@ namespace System.Data.Common.EntitySql
 
     internal sealed class GroupPartitionInfo : GroupAggregateInfo
     {
-        internal GroupPartitionInfo(AST.GroupPartitionExpr groupPartitionExpr, ErrorContext errCtx, GroupAggregateInfo containingAggregate, ScopeRegion definingScopeRegion)
-            : base(GroupAggregateKind.Partition, groupPartitionExpr, errCtx, containingAggregate, definingScopeRegion)
+        internal GroupPartitionInfo(
+            AST.GroupPartitionExpr groupPartitionExpr,
+            ErrorContext errCtx,
+            GroupAggregateInfo containingAggregate,
+            ScopeRegion definingScopeRegion
+        )
+            : base(
+                GroupAggregateKind.Partition,
+                groupPartitionExpr,
+                errCtx,
+                containingAggregate,
+                definingScopeRegion
+            )
         {
             Debug.Assert(groupPartitionExpr != null, "groupPartitionExpr != null");
         }
@@ -1489,14 +1853,28 @@ namespace System.Data.Common.EntitySql
 
     internal sealed class GroupKeyAggregateInfo : GroupAggregateInfo
     {
-        internal GroupKeyAggregateInfo(GroupAggregateKind aggregateKind, ErrorContext errCtx, GroupAggregateInfo containingAggregate, ScopeRegion definingScopeRegion)
-            : base(aggregateKind, null /* there is no AST.GroupAggregateExpression corresponding to the group key */, errCtx, containingAggregate, definingScopeRegion)
-        { }
+        internal GroupKeyAggregateInfo(
+            GroupAggregateKind aggregateKind,
+            ErrorContext errCtx,
+            GroupAggregateInfo containingAggregate,
+            ScopeRegion definingScopeRegion
+        )
+            : base(
+                aggregateKind,
+                null /* there is no AST.GroupAggregateExpression corresponding to the group key */
+                ,
+                errCtx,
+                containingAggregate,
+                definingScopeRegion
+            ) { }
     }
 
     internal abstract class InlineFunctionInfo
     {
-        internal InlineFunctionInfo(AST.FunctionDefinition functionDef, List<DbVariableReferenceExpression> parameters)
+        internal InlineFunctionInfo(
+            AST.FunctionDefinition functionDef,
+            List<DbVariableReferenceExpression> parameters
+        )
         {
             FunctionDefAst = functionDef;
             Parameters = parameters;
@@ -1529,7 +1907,7 @@ namespace System.Data.Common.EntitySql
         private readonly int _firstScopeIndex;
 
         /// <summary>
-        /// Index of the scope region. 
+        /// Index of the scope region.
         /// Outer scope regions have smaller index value than inner scope regions.
         /// </summary>
         internal int ScopeRegionIndex
@@ -1554,14 +1932,19 @@ namespace System.Data.Common.EntitySql
             Debug.Assert(!IsAggregating, "Scope region group operation is not reentrant.");
             _groupAggregateBinding = groupAggregateBinding;
         }
+
         /// <summary>
         /// Clears the <see cref="IsAggregating"/> flag on the group scope.
         /// </summary>
         internal void RollbackGroupOperation()
         {
-            Debug.Assert(IsAggregating, "Scope region must inside group operation in order to leave it.");
+            Debug.Assert(
+                IsAggregating,
+                "Scope region must inside group operation in order to leave it."
+            );
             _groupAggregateBinding = null;
         }
+
         /// <summary>
         /// True when the scope region performs group/folding operation.
         /// </summary>
@@ -1593,13 +1976,18 @@ namespace System.Data.Common.EntitySql
         /// </summary>
         internal void RegisterGroupAggregateName(string groupAggregateName)
         {
-            Debug.Assert(!_groupAggregateNames.Contains(groupAggregateName), "!_groupAggregateNames.ContainsKey(groupAggregateName)");
+            Debug.Assert(
+                !_groupAggregateNames.Contains(groupAggregateName),
+                "!_groupAggregateNames.ContainsKey(groupAggregateName)"
+            );
             _groupAggregateNames.Add(groupAggregateName);
         }
+
         internal bool ContainsGroupAggregate(string groupAggregateName)
         {
             return _groupAggregateNames.Contains(groupAggregateName);
         }
+
         private HashSet<string> _groupAggregateNames = new HashSet<string>();
 
         /// <summary>
@@ -1617,11 +2005,16 @@ namespace System.Data.Common.EntitySql
         /// </summary>
         internal void ApplyToScopeEntries(Action<ScopeEntry> action)
         {
-            Debug.Assert(FirstScopeIndex <= _scopeManager.CurrentScopeIndex, "FirstScopeIndex <= CurrentScopeIndex");
+            Debug.Assert(
+                FirstScopeIndex <= _scopeManager.CurrentScopeIndex,
+                "FirstScopeIndex <= CurrentScopeIndex"
+            );
 
             for (int i = FirstScopeIndex; i <= _scopeManager.CurrentScopeIndex; ++i)
             {
-                foreach (KeyValuePair<string, ScopeEntry> scopeEntry in _scopeManager.GetScopeByIndex(i))
+                foreach (
+                    KeyValuePair<string, ScopeEntry> scopeEntry in _scopeManager.GetScopeByIndex(i)
+                )
                 {
                     action(scopeEntry.Value);
                 }
@@ -1633,7 +2026,10 @@ namespace System.Data.Common.EntitySql
         /// </summary>
         internal void ApplyToScopeEntries(Func<ScopeEntry, ScopeEntry> action)
         {
-            Debug.Assert(FirstScopeIndex <= _scopeManager.CurrentScopeIndex, "FirstScopeIndex <= CurrentScopeIndex");
+            Debug.Assert(
+                FirstScopeIndex <= _scopeManager.CurrentScopeIndex,
+                "FirstScopeIndex <= CurrentScopeIndex"
+            );
 
             for (int i = FirstScopeIndex; i <= _scopeManager.CurrentScopeIndex; ++i)
             {
@@ -1649,12 +2045,17 @@ namespace System.Data.Common.EntitySql
                         {
                             updatedEntries = new List<KeyValuePair<string, ScopeEntry>>();
                         }
-                        updatedEntries.Add(new KeyValuePair<string, ScopeEntry>(scopeEntry.Key, newScopeEntry));
+                        updatedEntries.Add(
+                            new KeyValuePair<string, ScopeEntry>(scopeEntry.Key, newScopeEntry)
+                        );
                     }
                 }
                 if (updatedEntries != null)
                 {
-                    updatedEntries.ForEach((updatedScopeEntry) => scope.Replace(updatedScopeEntry.Key, updatedScopeEntry.Value));
+                    updatedEntries.ForEach(
+                        (updatedScopeEntry) =>
+                            scope.Replace(updatedScopeEntry.Key, updatedScopeEntry.Value)
+                    );
                 }
             }
         }

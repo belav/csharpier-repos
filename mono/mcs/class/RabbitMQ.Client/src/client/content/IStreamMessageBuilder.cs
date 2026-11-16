@@ -56,10 +56,12 @@
 //---------------------------------------------------------------------------
 using System;
 
-namespace RabbitMQ.Client.Content {
+namespace RabbitMQ.Client.Content
+{
     ///<summary>Interface for constructing messages binary-compatible
     ///with QPid's "StreamMessage" wire encoding.</summary>
-    public interface IStreamMessageBuilder: IMessageBuilder {
+    public interface IStreamMessageBuilder : IMessageBuilder
+    {
         ///<summary>Writes a bool value into the message body being assembled.</summary>
         IStreamMessageBuilder WriteBool(bool value);
 

@@ -1,13 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Versioning;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.Extensions.Options.Generators
 {
@@ -15,17 +15,26 @@ namespace Microsoft.Extensions.Options.Generators
     {
         public OptionsSourceGenContext(Compilation compilation)
         {
-            IsLangVersion11AndAbove = ((CSharpCompilation)compilation).LanguageVersion >= Microsoft.CodeAnalysis.CSharp.LanguageVersion.CSharp11;
+            IsLangVersion11AndAbove =
+                ((CSharpCompilation)compilation).LanguageVersion
+                >= Microsoft.CodeAnalysis.CSharp.LanguageVersion.CSharp11;
             ClassModifier = IsLangVersion11AndAbove ? "file" : "internal";
-            Suffix = IsLangVersion11AndAbove ? "" : $"_{GetNonRandomizedHashCode(compilation.SourceModule.Name):X8}";
+            Suffix = IsLangVersion11AndAbove
+                ? ""
+                : $"_{GetNonRandomizedHashCode(compilation.SourceModule.Name):X8}";
         }
 
         internal string Suffix { get; }
         internal string ClassModifier { get; }
         internal bool IsLangVersion11AndAbove { get; }
-        internal Dictionary<string, HashSet<object>?> AttributesToGenerate { get; set; } = new Dictionary<string, HashSet<object>?>();
+        internal Dictionary<string, HashSet<object>?> AttributesToGenerate { get; set; } =
+            new Dictionary<string, HashSet<object>?>();
 
-        internal void EnsureTrackingAttribute(string attributeName, bool createValue, out HashSet<object>? value)
+        internal void EnsureTrackingAttribute(
+            string attributeName,
+            bool createValue,
+            out HashSet<object>? value
+        )
         {
             bool exist = AttributesToGenerate.TryGetValue(attributeName, out value);
             if (value is null)

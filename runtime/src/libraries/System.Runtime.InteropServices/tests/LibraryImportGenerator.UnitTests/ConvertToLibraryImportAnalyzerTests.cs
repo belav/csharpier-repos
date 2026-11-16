@@ -5,45 +5,45 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-
 using Xunit;
-
 using static Microsoft.Interop.Analyzers.ConvertToLibraryImportAnalyzer;
-
 using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpAnalyzerVerifier<Microsoft.Interop.Analyzers.ConvertToLibraryImportAnalyzer>;
 
 namespace LibraryImportGenerator.UnitTests
 {
     public class ConvertToLibraryImportAnalyzerTests
     {
-        public static IEnumerable<object[]> MarshallingRequiredTypes() => new[]
-        {
-            new object[] { typeof(bool) },
-            new object[] { typeof(char) },
-            new object[] { typeof(string) },
-            new object[] { typeof(int[]) },
-            new object[] { typeof(string[]) },
-            new object[] { typeof(ConsoleKeyInfo) }, // struct
-        };
+        public static IEnumerable<object[]> MarshallingRequiredTypes() =>
+            new[]
+            {
+                new object[] { typeof(bool) },
+                new object[] { typeof(char) },
+                new object[] { typeof(string) },
+                new object[] { typeof(int[]) },
+                new object[] { typeof(string[]) },
+                new object[] { typeof(ConsoleKeyInfo) }, // struct
+            };
 
-        public static IEnumerable<object[]> NoMarshallingRequiredTypes() => new[]
-        {
-            new object[] { typeof(byte) },
-            new object[] { typeof(int) },
-            new object[] { typeof(byte*) },
-            new object[] { typeof(int*) },
-            new object[] { typeof(bool*) },
-            new object[] { typeof(char*) },
-            new object[] { typeof(IntPtr) },
-            new object[] { typeof(ConsoleKey) }, // enum
-        };
+        public static IEnumerable<object[]> NoMarshallingRequiredTypes() =>
+            new[]
+            {
+                new object[] { typeof(byte) },
+                new object[] { typeof(int) },
+                new object[] { typeof(byte*) },
+                new object[] { typeof(int*) },
+                new object[] { typeof(bool*) },
+                new object[] { typeof(char*) },
+                new object[] { typeof(IntPtr) },
+                new object[] { typeof(ConsoleKey) }, // enum
+            };
 
-        public static IEnumerable<object[]> UnsupportedTypes() => new[]
-        {
-            new object[] { typeof(System.Runtime.InteropServices.CriticalHandle) },
-            new object[] { typeof(System.Runtime.InteropServices.HandleRef) },
-            new object[] { typeof(System.Text.StringBuilder) },
-        };
+        public static IEnumerable<object[]> UnsupportedTypes() =>
+            new[]
+            {
+                new object[] { typeof(System.Runtime.InteropServices.CriticalHandle) },
+                new object[] { typeof(System.Runtime.InteropServices.HandleRef) },
+                new object[] { typeof(System.Text.StringBuilder) },
+            };
 
         [Theory]
         [MemberData(nameof(MarshallingRequiredTypes))]
@@ -53,12 +53,15 @@ namespace LibraryImportGenerator.UnitTests
             string source = DllImportWithType(type.FullName!);
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
+                VerifyCS
+                    .Diagnostic(ConvertToLibraryImport)
                     .WithLocation(0)
                     .WithArguments("Method_Parameter"),
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
+                VerifyCS
+                    .Diagnostic(ConvertToLibraryImport)
                     .WithLocation(1)
-                    .WithArguments("Method_Return"));
+                    .WithArguments("Method_Return")
+            );
         }
 
         [Fact]
@@ -67,12 +70,15 @@ namespace LibraryImportGenerator.UnitTests
             string source = DllImportWithType("delegate* unmanaged<void>");
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
+                VerifyCS
+                    .Diagnostic(ConvertToLibraryImport)
                     .WithLocation(0)
                     .WithArguments("Method_Parameter"),
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
+                VerifyCS
+                    .Diagnostic(ConvertToLibraryImport)
                     .WithLocation(1)
-                    .WithArguments("Method_Return"));
+                    .WithArguments("Method_Return")
+            );
         }
 
         [Theory]
@@ -97,15 +103,19 @@ namespace LibraryImportGenerator.UnitTests
                 """;
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
+                VerifyCS
+                    .Diagnostic(ConvertToLibraryImport)
                     .WithLocation(0)
                     .WithArguments("Method_In"),
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
+                VerifyCS
+                    .Diagnostic(ConvertToLibraryImport)
                     .WithLocation(1)
                     .WithArguments("Method_Out"),
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
+                VerifyCS
+                    .Diagnostic(ConvertToLibraryImport)
                     .WithLocation(2)
-                    .WithArguments("Method_Ref"));
+                    .WithArguments("Method_Ref")
+            );
         }
 
         [Fact]
@@ -125,12 +135,12 @@ namespace LibraryImportGenerator.UnitTests
                 """;
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
+                VerifyCS
+                    .Diagnostic(ConvertToLibraryImport)
                     .WithLocation(0)
                     .WithArguments("Method1"),
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
-                    .WithLocation(1)
-                    .WithArguments("Method2"));
+                VerifyCS.Diagnostic(ConvertToLibraryImport).WithLocation(1).WithArguments("Method2")
+            );
         }
 
         [Theory]
@@ -222,30 +232,31 @@ namespace LibraryImportGenerator.UnitTests
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
-        private static string DllImportWithType(string typeName) => $$"""
-            using System.Runtime.InteropServices;
-            unsafe partial class Test
-            {
-                [DllImport("DoesNotExist")]
-                public static extern void {|#0:Method_Parameter|}({{typeName}} p);
+        private static string DllImportWithType(string typeName) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                unsafe partial class Test
+                {
+                    [DllImport("DoesNotExist")]
+                    public static extern void {|#0:Method_Parameter|}({{typeName}} p);
 
-                [DllImport("DoesNotExist")]
-                public static extern {{typeName}} {|#1:Method_Return|}();
-            }
-            """;
+                    [DllImport("DoesNotExist")]
+                    public static extern {{typeName}} {|#1:Method_Return|}();
+                }
+                """;
 
         [Fact]
         public async Task BestFitMapping_True_NoDiagnostic()
         {
             string source = """
-                using System.Runtime.InteropServices;
-                partial class Test
-                {
-                    [DllImport("DoesNotExist", BestFitMapping = true)]
-                    public static extern void Method2();
-                }
+                 using System.Runtime.InteropServices;
+                 partial class Test
+                 {
+                     [DllImport("DoesNotExist", BestFitMapping = true)]
+                     public static extern void Method2();
+                 }
 
-               """;
+                """;
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
@@ -253,14 +264,14 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ThrowOnUnmappableChar_True_NoDiagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               partial class Test
-               {
-                   [DllImport("DoesNotExist", ThrowOnUnmappableChar = true)]
-                   public static extern void Method2();
-               }
+                using System.Runtime.InteropServices;
+                partial class Test
+                {
+                    [DllImport("DoesNotExist", ThrowOnUnmappableChar = true)]
+                    public static extern void Method2();
+                }
 
-               """;
+                """;
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
@@ -268,15 +279,15 @@ namespace LibraryImportGenerator.UnitTests
         public async Task BestFitMapping_Assembly_True_NoDiagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               [assembly:BestFitMapping(true)]
-               partial class Test
-               {
-                   [DllImport("DoesNotExist")]
-                   public static extern void Method2();
-               }
+                using System.Runtime.InteropServices;
+                [assembly:BestFitMapping(true)]
+                partial class Test
+                {
+                    [DllImport("DoesNotExist")]
+                    public static extern void Method2();
+                }
 
-               """;
+                """;
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
@@ -284,15 +295,15 @@ namespace LibraryImportGenerator.UnitTests
         public async Task BestFitMapping_Type_True_NoDiagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               [BestFitMapping(true)]
-               partial class Test
-               {
-                   [DllImport("DoesNotExist")]
-                   public static extern void Method2();
-               }
+                using System.Runtime.InteropServices;
+                [BestFitMapping(true)]
+                partial class Test
+                {
+                    [DllImport("DoesNotExist")]
+                    public static extern void Method2();
+                }
 
-               """;
+                """;
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
@@ -300,15 +311,15 @@ namespace LibraryImportGenerator.UnitTests
         public async Task BestFitMapping_Assembly_False_Diagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               [assembly:BestFitMapping(false)]
-               partial class Test
-               {
-                   [DllImport("DoesNotExist")]
-                   public static extern void [|Method2|]();
-               }
+                using System.Runtime.InteropServices;
+                [assembly:BestFitMapping(false)]
+                partial class Test
+                {
+                    [DllImport("DoesNotExist")]
+                    public static extern void [|Method2|]();
+                }
 
-               """;
+                """;
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
@@ -316,15 +327,15 @@ namespace LibraryImportGenerator.UnitTests
         public async Task BestFitMapping_Type_False_Diagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               [BestFitMapping(false)]
-               partial class Test
-               {
-                   [DllImport("DoesNotExist")]
-                   public static extern void [|Method2|]();
-               }
+                using System.Runtime.InteropServices;
+                [BestFitMapping(false)]
+                partial class Test
+                {
+                    [DllImport("DoesNotExist")]
+                    public static extern void [|Method2|]();
+                }
 
-               """;
+                """;
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
@@ -332,14 +343,14 @@ namespace LibraryImportGenerator.UnitTests
         public async Task Varargs_NoDiagnostic()
         {
             string source = """
-              using System.Runtime.InteropServices;
-              partial class Test
-              {
-                  [DllImport("DoesNotExist")]
-                  public static extern void Method2(__arglist);
-              }
+                using System.Runtime.InteropServices;
+                partial class Test
+                {
+                    [DllImport("DoesNotExist")]
+                    public static extern void Method2(__arglist);
+                }
 
-              """;
+                """;
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
     }

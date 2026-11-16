@@ -19,7 +19,6 @@ using System.Linq;
 
 namespace System.Data.Mapping.ViewGeneration
 {
-
     using System.Data.Entity;
     using BasicSchemaConstraints = SchemaConstraints<BasicKeyConstraint>;
     using ViewSchemaConstraints = SchemaConstraints<ViewKeyConstraint>;
@@ -27,7 +26,6 @@ namespace System.Data.Mapping.ViewGeneration
     // This class is responsible for validating the incoming cells for a schema
     class CellGroupValidator
     {
-
         #region Constructor
         // requires: cells are not normalized, i.e., no slot is null in the cell queries
         // effects: Constructs a validator object that is capable of
@@ -53,7 +51,6 @@ namespace System.Data.Mapping.ViewGeneration
         // an error log of all the errors/warnings that were discovered
         internal ErrorLog Validate()
         {
-
             // Check for errors not checked by "C-implies-S principle"
             if (m_config.IsValidationEnabled)
             {
@@ -63,8 +60,7 @@ namespace System.Data.Mapping.ViewGeneration
                 }
             }
             else //Note that Metadata loading guarantees that DISTINCT flag is not present
-            {    // when update views (and validation) is disabled
-
+            { // when update views (and validation) is disabled
                 if (CheckCellsWithDistinctFlag() == false)
                 {
                     return m_errorLog;
@@ -93,7 +89,12 @@ namespace System.Data.Mapping.ViewGeneration
             m_sViewConstraints = PropagateConstraints(sConstraints);
 
             // Make some basic checks on the view and basic cell constraints
-            CheckConstraintSanity(cConstraints, sConstraints, m_cViewConstraints, m_sViewConstraints);
+            CheckConstraintSanity(
+                cConstraints,
+                sConstraints,
+                m_cViewConstraints,
+                m_sViewConstraints
+            );
 
             if (m_config.IsVerboseTracing)
             {
@@ -120,10 +121,11 @@ namespace System.Data.Mapping.ViewGeneration
         // for each cellquery/cell. Also generates the C-Side and S-side
         // basic constraints and stores them into cConstraints and
         // sConstraints. Stores them in cConstraints and sConstraints
-        private void ConstructCellRelationsWithConstraints(BasicSchemaConstraints cConstraints,
-                                                           BasicSchemaConstraints sConstraints)
+        private void ConstructCellRelationsWithConstraints(
+            BasicSchemaConstraints cConstraints,
+            BasicSchemaConstraints sConstraints
+        )
         {
-
             // Populate single cell constraints
             int cellNumber = 0;
             foreach (Cell cell in m_cells)
@@ -155,8 +157,10 @@ namespace System.Data.Mapping.ViewGeneration
 
         // effects: Generates the single-cell key+domain constraints for
         // baseRelation and adds them to constraints
-        private static void PopulateBaseConstraints(BasicCellRelation baseRelation,
-                                                    BasicSchemaConstraints constraints)
+        private static void PopulateBaseConstraints(
+            BasicCellRelation baseRelation,
+            BasicSchemaConstraints constraints
+        )
         {
             // Populate key constraints
             baseRelation.PopulateKeyConstraints(constraints);
@@ -167,7 +171,9 @@ namespace System.Data.Mapping.ViewGeneration
         // effects: Propagates baseConstraints derived from the cellrelations
         // to the corresponding viewCellRelations and returns the list of
         // propagated constraints
-        private static ViewSchemaConstraints PropagateConstraints(BasicSchemaConstraints baseConstraints)
+        private static ViewSchemaConstraints PropagateConstraints(
+            BasicSchemaConstraints baseConstraints
+        )
         {
             ViewSchemaConstraints propagatedConstraints = new ViewSchemaConstraints();
 
@@ -188,23 +194,30 @@ namespace System.Data.Mapping.ViewGeneration
         // effects: Checks if all sViewConstraints are implied by the
         // constraints in cViewConstraints. If some S-level constraints are
         // not implied, adds errors/warnings to m_errorLog
-        private void CheckImplication(ViewSchemaConstraints cViewConstraints, ViewSchemaConstraints sViewConstraints)
+        private void CheckImplication(
+            ViewSchemaConstraints cViewConstraints,
+            ViewSchemaConstraints sViewConstraints
+        )
         {
-
             // Check key constraints
             // i.e., if S has a key <k1, k2>, C must have a key that is a subset of this
             CheckImplicationKeyConstraints(cViewConstraints, sViewConstraints);
-            
+
             // For updates, we need to ensure the following: for every
             // extent E, table T pair, some key of E is implied by T's key
 
             // Get all key constraints for each extent and each table
-            KeyToListMap<ExtentPair, ViewKeyConstraint> extentPairConstraints =
-                new KeyToListMap<ExtentPair, ViewKeyConstraint>(EqualityComparer<ExtentPair>.Default);
+            KeyToListMap<ExtentPair, ViewKeyConstraint> extentPairConstraints = new KeyToListMap<
+                ExtentPair,
+                ViewKeyConstraint
+            >(EqualityComparer<ExtentPair>.Default);
 
             foreach (ViewKeyConstraint cKeyConstraint in cViewConstraints.KeyConstraints)
             {
-                ExtentPair pair = new ExtentPair(cKeyConstraint.Cell.CQuery.Extent, cKeyConstraint.Cell.SQuery.Extent);
+                ExtentPair pair = new ExtentPair(
+                    cKeyConstraint.Cell.CQuery.Extent,
+                    cKeyConstraint.Cell.SQuery.Extent
+                );
                 extentPairConstraints.Add(pair, cKeyConstraint);
             }
 
@@ -212,7 +225,8 @@ namespace System.Data.Mapping.ViewGeneration
             // extent/table pair
             foreach (ExtentPair extentPair in extentPairConstraints.Keys)
             {
-                ReadOnlyCollection<ViewKeyConstraint> cKeyConstraints = extentPairConstraints.ListForKey(extentPair);
+                ReadOnlyCollection<ViewKeyConstraint> cKeyConstraints =
+                    extentPairConstraints.ListForKey(extentPair);
                 bool sImpliesSomeC = false;
                 // Go through all key constraints for the extent/table pair, and find one that S implies
                 foreach (ViewKeyConstraint cKeyConstraint in cKeyConstraints)
@@ -235,11 +249,12 @@ namespace System.Data.Mapping.ViewGeneration
         }
 
         // effects: Checks for key constraint implication problems from
-        // leftViewConstraints to rightViewConstraints. Adds errors/warning to m_errorLog 
-        private void CheckImplicationKeyConstraints(ViewSchemaConstraints leftViewConstraints,
-                                                    ViewSchemaConstraints rightViewConstraints)
+        // leftViewConstraints to rightViewConstraints. Adds errors/warning to m_errorLog
+        private void CheckImplicationKeyConstraints(
+            ViewSchemaConstraints leftViewConstraints,
+            ViewSchemaConstraints rightViewConstraints
+        )
         {
-
             // if cImpliesS is true, every rightKeyConstraint must be implied
             // if it is false, at least one key constraint for each C-level
             // extent must be implied
@@ -278,7 +293,6 @@ namespace System.Data.Mapping.ViewGeneration
         /// </summary>
         private bool CheckCellsWithDistinctFlag()
         {
-
             int errorLogSize = m_errorLog.Count;
             foreach (Cell cell in m_cells)
             {
@@ -288,14 +302,28 @@ namespace System.Data.Mapping.ViewGeneration
                     var sExtent = cell.SQuery.Extent;
 
                     //There should be no other fragments mapping cExtent to sExtent
-                    var mapepdFragments = m_cells.Where(otherCell => otherCell != cell)
-                                        .Where(otherCell => otherCell.CQuery.Extent == cExtent && otherCell.SQuery.Extent == sExtent);
+                    var mapepdFragments = m_cells
+                        .Where(otherCell => otherCell != cell)
+                        .Where(otherCell =>
+                            otherCell.CQuery.Extent == cExtent && otherCell.SQuery.Extent == sExtent
+                        );
 
                     if (mapepdFragments.Any())
                     {
-                        var cellsToReport = Enumerable.Union(Enumerable.Repeat(cell, 1), mapepdFragments);
-                        ErrorLog.Record record = new ErrorLog.Record(true, ViewGenErrorCode.MultipleFragmentsBetweenCandSExtentWithDistinct,
-                            Strings.Viewgen_MultipleFragmentsBetweenCandSExtentWithDistinct(cExtent.Name, sExtent.Name), cellsToReport, String.Empty);
+                        var cellsToReport = Enumerable.Union(
+                            Enumerable.Repeat(cell, 1),
+                            mapepdFragments
+                        );
+                        ErrorLog.Record record = new ErrorLog.Record(
+                            true,
+                            ViewGenErrorCode.MultipleFragmentsBetweenCandSExtentWithDistinct,
+                            Strings.Viewgen_MultipleFragmentsBetweenCandSExtentWithDistinct(
+                                cExtent.Name,
+                                sExtent.Name
+                            ),
+                            cellsToReport,
+                            String.Empty
+                        );
                         m_errorLog.AddEntry(record);
                     }
                 }
@@ -303,17 +331,13 @@ namespace System.Data.Mapping.ViewGeneration
 
             return m_errorLog.Count == errorLogSize;
         }
-        
-        
-        
-        
+
         // effects: Check for problems in each cell that are not detected by the
         // "C-constraints-imply-S-constraints" principle. If the check fails,
         // adds relevant error info to m_errorLog and returns false. Else
         // retrns true
         private bool PerformSingleCellChecks()
         {
-
             int errorLogSize = m_errorLog.Count;
             foreach (Cell cell in m_cells)
             {
@@ -332,15 +356,24 @@ namespace System.Data.Mapping.ViewGeneration
 
                 // Check that the EntityKey and the Table key are mapped
                 // (Key for association is all ends)
-                error = cell.CQuery.VerifyKeysPresent(cell, Strings.ViewGen_EntitySetKey_Missing,
-                    Strings.ViewGen_AssociationSetKey_Missing, ViewGenErrorCode.KeyNotMappedForCSideExtent);
+                error = cell.CQuery.VerifyKeysPresent(
+                    cell,
+                    Strings.ViewGen_EntitySetKey_Missing,
+                    Strings.ViewGen_AssociationSetKey_Missing,
+                    ViewGenErrorCode.KeyNotMappedForCSideExtent
+                );
 
                 if (error != null)
                 {
                     m_errorLog.AddEntry(error);
                 }
 
-                error = cell.SQuery.VerifyKeysPresent(cell, Strings.ViewGen_TableKey_Missing, null, ViewGenErrorCode.KeyNotMappedForTable);
+                error = cell.SQuery.VerifyKeysPresent(
+                    cell,
+                    Strings.ViewGen_TableKey_Missing,
+                    null,
+                    ViewGenErrorCode.KeyNotMappedForTable
+                );
                 if (error != null)
                 {
                     m_errorLog.AddEntry(error);
@@ -348,12 +381,18 @@ namespace System.Data.Mapping.ViewGeneration
 
                 // Check that if any side has a not-null constraint -- if so,
                 // we must project that slot
-                error = cell.CQuery.CheckForProjectedNotNullSlots(cell, m_cells.Where(c=> c.SQuery.Extent is AssociationSet));
+                error = cell.CQuery.CheckForProjectedNotNullSlots(
+                    cell,
+                    m_cells.Where(c => c.SQuery.Extent is AssociationSet)
+                );
                 if (error != null)
                 {
                     m_errorLog.AddEntry(error);
                 }
-                error = cell.SQuery.CheckForProjectedNotNullSlots(cell, m_cells.Where(c => c.CQuery.Extent is AssociationSet));
+                error = cell.SQuery.CheckForProjectedNotNullSlots(
+                    cell,
+                    m_cells.Where(c => c.CQuery.Extent is AssociationSet)
+                );
                 if (error != null)
                 {
                     m_errorLog.AddEntry(error);
@@ -364,13 +403,21 @@ namespace System.Data.Mapping.ViewGeneration
 
         // effects: Checks for some sanity issues between the basic and view constraints. Adds to m_errorLog if needed
         [Conditional("DEBUG")]
-        private static void CheckConstraintSanity(BasicSchemaConstraints cConstraints, BasicSchemaConstraints sConstraints,
-                                           ViewSchemaConstraints cViewConstraints, ViewSchemaConstraints sViewConstraints)
+        private static void CheckConstraintSanity(
+            BasicSchemaConstraints cConstraints,
+            BasicSchemaConstraints sConstraints,
+            ViewSchemaConstraints cViewConstraints,
+            ViewSchemaConstraints sViewConstraints
+        )
         {
-            Debug.Assert(cConstraints.KeyConstraints.Count() == cViewConstraints.KeyConstraints.Count(),
-                         "Mismatch in number of C basic and view key constraints");
-            Debug.Assert(sConstraints.KeyConstraints.Count() == sViewConstraints.KeyConstraints.Count(),
-                         "Mismatch in number of S basic and view key constraints");
+            Debug.Assert(
+                cConstraints.KeyConstraints.Count() == cViewConstraints.KeyConstraints.Count(),
+                "Mismatch in number of C basic and view key constraints"
+            );
+            Debug.Assert(
+                sConstraints.KeyConstraints.Count() == sViewConstraints.KeyConstraints.Count(),
+                "Mismatch in number of S basic and view key constraints"
+            );
         }
         #endregion
 
@@ -382,6 +429,7 @@ namespace System.Data.Mapping.ViewGeneration
                 cExtent = acExtent;
                 sExtent = asExtent;
             }
+
             internal EntitySetBase cExtent;
             internal EntitySetBase sExtent;
 
@@ -405,8 +453,5 @@ namespace System.Data.Mapping.ViewGeneration
                 return cExtent.GetHashCode() ^ sExtent.GetHashCode();
             }
         }
-
-
     }
-
 }

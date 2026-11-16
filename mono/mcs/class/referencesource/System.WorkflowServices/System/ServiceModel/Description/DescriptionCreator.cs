@@ -15,12 +15,17 @@ namespace System.ServiceModel.Description
         {
             if (workflowDefinitionContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("workflowDefinitionContext");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "workflowDefinitionContext"
+                );
             }
             this.workflowDefinitionContext = workflowDefinitionContext;
         }
 
-        public ServiceDescription BuildServiceDescription(out IDictionary<string, ContractDescription> implementedContracts, out IList<Type> reflectedContracts)
+        public ServiceDescription BuildServiceDescription(
+            out IDictionary<string, ContractDescription> implementedContracts,
+            out IList<Type> reflectedContracts
+        )
         {
             ServiceDescriptionContext context = new ServiceDescriptionContext();
 
@@ -32,7 +37,8 @@ namespace System.ServiceModel.Description
             Walker walker = new Walker(true);
             walker.FoundActivity += delegate(Walker w, WalkerEventArgs args)
             {
-                IServiceDescriptionBuilder activity = args.CurrentActivity as IServiceDescriptionBuilder;
+                IServiceDescriptionBuilder activity =
+                    args.CurrentActivity as IServiceDescriptionBuilder;
                 if (activity == null)
                 {
                     return;
@@ -45,7 +51,9 @@ namespace System.ServiceModel.Description
 
             if (context.Contracts == null || context.Contracts.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.NoContract)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR2.GetString(SR2.NoContract))
+                );
             }
 
             implementedContracts = context.Contracts;

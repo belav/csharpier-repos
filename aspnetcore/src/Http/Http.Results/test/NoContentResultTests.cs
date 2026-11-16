@@ -73,9 +73,8 @@ public class NoContentResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>(
-            "httpContext",
-            () => result.ExecuteAsync(httpContext)
+        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () =>
+            result.ExecuteAsync(httpContext)
         );
     }
 
@@ -83,27 +82,23 @@ public class NoContentResultTests
     public void PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>(
-            "method",
-            () =>
-                PopulateMetadata<NoContent>(
-                    null,
-                    new RouteEndpointBuilder(
-                        requestDelegate: null,
-                        RoutePatternFactory.Parse("/"),
-                        order: 0
-                    )
+        Assert.Throws<ArgumentNullException>("method", () =>
+            PopulateMetadata<NoContent>(
+                null,
+                new RouteEndpointBuilder(
+                    requestDelegate: null,
+                    RoutePatternFactory.Parse("/"),
+                    order: 0
                 )
+            )
         );
-        Assert.Throws<ArgumentNullException>(
-            "builder",
-            () =>
-                PopulateMetadata<NoContent>(
-                    (
-                        (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
-                    ).GetMethodInfo(),
-                    null
-                )
+        Assert.Throws<ArgumentNullException>("builder", () =>
+            PopulateMetadata<NoContent>(
+                (
+                    (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
+                ).GetMethodInfo(),
+                null
+            )
         );
     }
 

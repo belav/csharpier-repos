@@ -9,11 +9,11 @@ namespace System.ServiceModel
     using System.ComponentModel;
     using System.Globalization;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
     using System.Text;
     using System.Windows.Markup;
     using System.Xml;
     using System.Xml.Xsl;
-    using System.ServiceModel.Dispatcher;
 
     [ContentProperty("Expression")]
     public class XPathMessageQuery : MessageQuery
@@ -24,20 +24,14 @@ namespace System.ServiceModel
         bool needCompile;
         object thisLock;
 
-        public XPathMessageQuery() :
-            this(string.Empty, (XmlNamespaceManager)new XPathMessageContext())
-        {
-        }
+        public XPathMessageQuery()
+            : this(string.Empty, (XmlNamespaceManager)new XPathMessageContext()) { }
 
         public XPathMessageQuery(string expression)
-            : this(expression, (XmlNamespaceManager)new XPathMessageContext())
-        {
-        }
+            : this(expression, (XmlNamespaceManager)new XPathMessageContext()) { }
 
         public XPathMessageQuery(string expression, XsltContext context)
-            : this(expression, (XmlNamespaceManager)context)
-        {
-        }
+            : this(expression, (XmlNamespaceManager)context) { }
 
         public XPathMessageQuery(string expression, XmlNamespaceManager namespaces)
         {
@@ -55,11 +49,7 @@ namespace System.ServiceModel
         [DefaultValue("")]
         public string Expression
         {
-            get
-            {
-                return this.expression;
-            }
-
+            get { return this.expression; }
             set
             {
                 if (value == null)
@@ -75,11 +65,7 @@ namespace System.ServiceModel
         [DefaultValue(null)]
         public XmlNamespaceManager Namespaces
         {
-            get
-            {
-                return this.namespaces;
-            }
-
+            get { return this.namespaces; }
             set
             {
                 this.namespaces = value;
@@ -99,10 +85,12 @@ namespace System.ServiceModel
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message");
             }
 
-            if (typeof(TResult) == typeof(XPathResult) ||
-                typeof(TResult) == typeof(string) ||
-                typeof(TResult) == typeof(bool) ||
-                typeof(TResult) == typeof(object))
+            if (
+                typeof(TResult) == typeof(XPathResult)
+                || typeof(TResult) == typeof(string)
+                || typeof(TResult) == typeof(bool)
+                || typeof(TResult) == typeof(object)
+            )
             {
                 this.EnsureCompile();
 
@@ -111,8 +99,10 @@ namespace System.ServiceModel
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TResult",
-                    SR.GetString(SR.UnsupportedMessageQueryResultType, typeof(TResult)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TResult",
+                    SR.GetString(SR.UnsupportedMessageQueryResultType, typeof(TResult))
+                );
             }
         }
 
@@ -125,10 +115,12 @@ namespace System.ServiceModel
 
             this.EnsureCompile();
 
-            if (typeof(TResult) == typeof(XPathResult) ||
-                typeof(TResult) == typeof(string) ||
-                typeof(TResult) == typeof(bool) ||
-                typeof(TResult) == typeof(object))
+            if (
+                typeof(TResult) == typeof(XPathResult)
+                || typeof(TResult) == typeof(string)
+                || typeof(TResult) == typeof(bool)
+                || typeof(TResult) == typeof(object)
+            )
             {
                 this.EnsureCompile();
 
@@ -137,8 +129,10 @@ namespace System.ServiceModel
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TResult",
-                    SR.GetString(SR.UnsupportedMessageQueryResultType, typeof(TResult)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TResult",
+                    SR.GetString(SR.UnsupportedMessageQueryResultType, typeof(TResult))
+                );
             }
         }
 

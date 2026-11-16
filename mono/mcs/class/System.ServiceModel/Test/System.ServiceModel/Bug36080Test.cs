@@ -33,100 +33,116 @@ using System.Threading;
 using System.ServiceModel.Channels;
 using System.Text;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel
 {
-	[TestFixture]
-	public class Bug36080
-	{
-		[Test]
-		public void Bug36080Test ()
-		{
-			int port = NetworkHelpers.FindFreePort ();
-			var url = "http://localhost:" + port + "/HelloWorldService";
+    [TestFixture]
+    public class Bug36080
+    {
+        [Test]
+        public void Bug36080Test()
+        {
+            int port = NetworkHelpers.FindFreePort();
+            var url = "http://localhost:" + port + "/HelloWorldService";
 
-			TransportBindingElement element = new HttpTransportBindingElement { MaxBufferSize = int.MaxValue, MaxReceivedMessageSize = int.MaxValue };
-			Binding binding = new CustomBinding(new BindingElement[]
-				{
-					new TextMessageEncodingBindingElement (MessageVersion.Default, Encoding.UTF8),
-					element
-				});
+            TransportBindingElement element = new HttpTransportBindingElement
+            {
+                MaxBufferSize = int.MaxValue,
+                MaxReceivedMessageSize = int.MaxValue,
+            };
+            Binding binding = new CustomBinding(
+                new BindingElement[]
+                {
+                    new TextMessageEncodingBindingElement(MessageVersion.Default, Encoding.UTF8),
+                    element,
+                }
+            );
 
 #if !MOBILE && !XAMMAC_4_5
-			// Init service
-			ServiceHost serviceHost = new ServiceHost (typeof (HelloWorldServiceImpl), new Uri (url));
-			serviceHost.AddServiceEndpoint (typeof (IHelloWorldService), binding, string.Empty);
+            // Init service
+            ServiceHost serviceHost = new ServiceHost(typeof(HelloWorldServiceImpl), new Uri(url));
+            serviceHost.AddServiceEndpoint(typeof(IHelloWorldService), binding, string.Empty);
 
-			serviceHost.Open ();
+            serviceHost.Open();
 #endif
-			// In Mobile we still run this tests without any server.
-			// Issue reported in #36080 was occuring before the connections fails.
-			var wait = new ManualResetEvent (false);
+            // In Mobile we still run this tests without any server.
+            // Issue reported in #36080 was occuring before the connections fails.
+            var wait = new ManualResetEvent(false);
 
-			Exception error = null;
-			string result = null;
+            Exception error = null;
+            string result = null;
 
-			try {
-				var client = new HelloWorldServiceClient (binding, new EndpointAddress(url));
-				client.SayHelloToCompleted += delegate (object o, SayHelloToCompletedEventArgs e) {
-					try {
-						error = e.Error;
-						result = e.Error == null ? e.Result : null;
-					} finally {
-						wait.Set ();
-					}
-				};
+            try
+            {
+                var client = new HelloWorldServiceClient(binding, new EndpointAddress(url));
+                client.SayHelloToCompleted += delegate(object o, SayHelloToCompletedEventArgs e)
+                {
+                    try
+                    {
+                        error = e.Error;
+                        result = e.Error == null ? e.Result : null;
+                    }
+                    finally
+                    {
+                        wait.Set();
+                    }
+                };
 
-				var str = "Xamarin";
-				client.SayHelloToAsync(str);
+                var str = "Xamarin";
+                client.SayHelloToAsync(str);
 
-				Assert.IsTrue (wait.WaitOne (TimeSpan.FromSeconds (20)), "timeout");
+                Assert.IsTrue(wait.WaitOne(TimeSpan.FromSeconds(20)), "timeout");
 #if MOBILE || XAMMAC_4_5
-				if (error.GetType() == typeof(EndpointNotFoundException))
-					return;
+                if (error.GetType() == typeof(EndpointNotFoundException))
+                    return;
 #endif
 
-				Assert.IsNull (error, "#1, inner exception: {0}", error);
-				Assert.AreEqual (str, result, "#2");
-			}  finally {
+                Assert.IsNull(error, "#1, inner exception: {0}", error);
+                Assert.AreEqual(str, result, "#2");
+            }
+            finally
+            {
 #if !MOBILE && !XAMMAC_4_5
-				serviceHost.Close ();
+                serviceHost.Close();
 #endif
-			}
-		}
-	}
+            }
+        }
+    }
 
-	public class  HelloWorldServiceImpl : IHelloWorldService
-	{
-		Func<string, string> sayHelloToFunc = SayHelloTo;
+    public class HelloWorldServiceImpl : IHelloWorldService
+    {
+        Func<string, string> sayHelloToFunc = SayHelloTo;
 
-		static string SayHelloTo (string name)
-		{
-			return name;
-		}
+        static string SayHelloTo(string name)
+        {
+            return name;
+        }
 
-		public IAsyncResult BeginSayHelloTo(string name, AsyncCallback callback, object asyncState)
-		{
-			return sayHelloToFunc.BeginInvoke (name, callback, asyncState);
-		}
-		
-		public string EndSayHelloTo(IAsyncResult result) 
-		{
-			return sayHelloToFunc.EndInvoke(result);
-		}
-		
-		public IAsyncResult BeginGetHelloData(TestXamarin4WCFService.HelloWorldData helloWorldData, AsyncCallback callback, object asyncState)
-		{
-			return null;
-		}
+        public IAsyncResult BeginSayHelloTo(string name, AsyncCallback callback, object asyncState)
+        {
+            return sayHelloToFunc.BeginInvoke(name, callback, asyncState);
+        }
 
-		public TestXamarin4WCFService.HelloWorldData EndGetHelloData(IAsyncResult result)
-		{
-			return null;
-		}
-	}
+        public string EndSayHelloTo(IAsyncResult result)
+        {
+            return sayHelloToFunc.EndInvoke(result);
+        }
+
+        public IAsyncResult BeginGetHelloData(
+            TestXamarin4WCFService.HelloWorldData helloWorldData,
+            AsyncCallback callback,
+            object asyncState
+        )
+        {
+            return null;
+        }
+
+        public TestXamarin4WCFService.HelloWorldData EndGetHelloData(IAsyncResult result)
+        {
+            return null;
+        }
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -139,86 +155,94 @@ namespace MonoTests.System.ServiceModel
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// 
+//
 // This code was auto-generated by SlSvcUtil, version 5.0.61118.0
-// 
+//
 namespace TestXamarin4WCFService
 {
     using System.Runtime.Serialization;
-    
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "HelloWorldData", Namespace = "http://schemas.datacontract.org/2004/07/TestXamarin4WCFService")]
+    [System.Runtime.Serialization.DataContractAttribute(
+        Name = "HelloWorldData",
+        Namespace = "http://schemas.datacontract.org/2004/07/TestXamarin4WCFService"
+    )]
     public partial class HelloWorldData : object
     {
-        
         private string NameField;
-        
+
         private bool SayHelloField;
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Name
         {
-            get
-            {
-                return this.NameField;
-            }
-            set
-            {
-                this.NameField = value;
-            }
+            get { return this.NameField; }
+            set { this.NameField = value; }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
         public bool SayHello
         {
-            get
-            {
-                return this.SayHelloField;
-            }
-            set
-            {
-                this.SayHelloField = value;
-            }
+            get { return this.SayHelloField; }
+            set { this.SayHelloField = value; }
         }
     }
 }
 
-
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.ServiceContractAttribute(ConfigurationName="IHelloWorldService")]
+[System.ServiceModel.ServiceContractAttribute(ConfigurationName = "IHelloWorldService")]
 public interface IHelloWorldService
 {
-    
-    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IHelloWorldService/SayHelloTo", ReplyAction="http://tempuri.org/IHelloWorldService/SayHelloToResponse")]
-    System.IAsyncResult BeginSayHelloTo(string name, System.AsyncCallback callback, object asyncState);
-    
+    [System.ServiceModel.OperationContractAttribute(
+        AsyncPattern = true,
+        Action = "http://tempuri.org/IHelloWorldService/SayHelloTo",
+        ReplyAction = "http://tempuri.org/IHelloWorldService/SayHelloToResponse"
+    )]
+    System.IAsyncResult BeginSayHelloTo(
+        string name,
+        System.AsyncCallback callback,
+        object asyncState
+    );
+
     string EndSayHelloTo(System.IAsyncResult result);
-    
-    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IHelloWorldService/GetHelloData", ReplyAction="http://tempuri.org/IHelloWorldService/GetHelloDataResponse")]
-    System.IAsyncResult BeginGetHelloData(TestXamarin4WCFService.HelloWorldData helloWorldData, System.AsyncCallback callback, object asyncState);
+
+    [System.ServiceModel.OperationContractAttribute(
+        AsyncPattern = true,
+        Action = "http://tempuri.org/IHelloWorldService/GetHelloData",
+        ReplyAction = "http://tempuri.org/IHelloWorldService/GetHelloDataResponse"
+    )]
+    System.IAsyncResult BeginGetHelloData(
+        TestXamarin4WCFService.HelloWorldData helloWorldData,
+        System.AsyncCallback callback,
+        object asyncState
+    );
 
     TestXamarin4WCFService.HelloWorldData EndGetHelloData(System.IAsyncResult result);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-public interface IHelloWorldServiceChannel : IHelloWorldService, System.ServiceModel.IClientChannel
-{
-}
+public interface IHelloWorldServiceChannel
+    : IHelloWorldService,
+        System.ServiceModel.IClientChannel { }
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
 public partial class SayHelloToCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
 {
-    
     private object[] results;
-    
-    public SayHelloToCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-            base(exception, cancelled, userState)
+
+    public SayHelloToCompletedEventArgs(
+        object[] results,
+        System.Exception exception,
+        bool cancelled,
+        object userState
+    )
+        : base(exception, cancelled, userState)
     {
         this.results = results;
     }
-    
+
     public string Result
     {
         get
@@ -233,11 +257,15 @@ public partial class SayHelloToCompletedEventArgs : System.ComponentModel.AsyncC
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
 public partial class GetHelloDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
 {
-    
     private object[] results;
-    
-    public GetHelloDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-            base(exception, cancelled, userState)
+
+    public GetHelloDataCompletedEventArgs(
+        object[] results,
+        System.Exception exception,
+        bool cancelled,
+        object userState
+    )
+        : base(exception, cancelled, userState)
     {
         this.results = results;
     }
@@ -254,62 +282,60 @@ public partial class GetHelloDataCompletedEventArgs : System.ComponentModel.Asyn
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-public partial class HelloWorldServiceClient : System.ServiceModel.ClientBase<IHelloWorldService>, IHelloWorldService
+public partial class HelloWorldServiceClient
+    : System.ServiceModel.ClientBase<IHelloWorldService>,
+        IHelloWorldService
 {
-    
     private BeginOperationDelegate onBeginSayHelloToDelegate;
-    
+
     private EndOperationDelegate onEndSayHelloToDelegate;
-    
+
     private System.Threading.SendOrPostCallback onSayHelloToCompletedDelegate;
-    
+
     private BeginOperationDelegate onBeginGetHelloDataDelegate;
-    
+
     private EndOperationDelegate onEndGetHelloDataDelegate;
-    
+
     private System.Threading.SendOrPostCallback onGetHelloDataCompletedDelegate;
-    
+
     private BeginOperationDelegate onBeginOpenDelegate;
-    
+
     private EndOperationDelegate onEndOpenDelegate;
-    
+
     private System.Threading.SendOrPostCallback onOpenCompletedDelegate;
-    
+
     private BeginOperationDelegate onBeginCloseDelegate;
-    
+
     private EndOperationDelegate onEndCloseDelegate;
-    
+
     private System.Threading.SendOrPostCallback onCloseCompletedDelegate;
-    
-    public HelloWorldServiceClient()
-    {
-    }
-    
-    public HelloWorldServiceClient(string endpointConfigurationName) : 
-            base(endpointConfigurationName)
-    {
-    }
-    
-    public HelloWorldServiceClient(string endpointConfigurationName, string remoteAddress) : 
-            base(endpointConfigurationName, remoteAddress)
-    {
-    }
-    
-    public HelloWorldServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-            base(endpointConfigurationName, remoteAddress)
-    {
-    }
-    
-    public HelloWorldServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-            base(binding, remoteAddress)
-    {
-    }
-    
+
+    public HelloWorldServiceClient() { }
+
+    public HelloWorldServiceClient(string endpointConfigurationName)
+        : base(endpointConfigurationName) { }
+
+    public HelloWorldServiceClient(string endpointConfigurationName, string remoteAddress)
+        : base(endpointConfigurationName, remoteAddress) { }
+
+    public HelloWorldServiceClient(
+        string endpointConfigurationName,
+        System.ServiceModel.EndpointAddress remoteAddress
+    )
+        : base(endpointConfigurationName, remoteAddress) { }
+
+    public HelloWorldServiceClient(
+        System.ServiceModel.Channels.Binding binding,
+        System.ServiceModel.EndpointAddress remoteAddress
+    )
+        : base(binding, remoteAddress) { }
+
     public System.Net.CookieContainer CookieContainer
     {
         get
         {
-            System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager = this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
+            System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager =
+                this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
             if ((httpCookieContainerManager != null))
             {
                 return httpCookieContainerManager.CookieContainer;
@@ -321,66 +347,83 @@ public partial class HelloWorldServiceClient : System.ServiceModel.ClientBase<IH
         }
         set
         {
-            System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager = this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
+            System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager =
+                this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
             if ((httpCookieContainerManager != null))
             {
                 httpCookieContainerManager.CookieContainer = value;
             }
             else
             {
-                throw new System.InvalidOperationException("Unable to set the CookieContainer. Please make sure the binding contains an HttpC" +
-                        "ookieContainerBindingElement.");
+                throw new System.InvalidOperationException(
+                    "Unable to set the CookieContainer. Please make sure the binding contains an HttpC"
+                        + "ookieContainerBindingElement."
+                );
             }
         }
     }
-    
+
     public event System.EventHandler<SayHelloToCompletedEventArgs> SayHelloToCompleted;
-    
+
     public event System.EventHandler<GetHelloDataCompletedEventArgs> GetHelloDataCompleted;
-    
+
     public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
-    
+
     public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
-    
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    System.IAsyncResult IHelloWorldService.BeginSayHelloTo(string name, System.AsyncCallback callback, object asyncState)
+
+    [System.ComponentModel.EditorBrowsableAttribute(
+        System.ComponentModel.EditorBrowsableState.Advanced
+    )]
+    System.IAsyncResult IHelloWorldService.BeginSayHelloTo(
+        string name,
+        System.AsyncCallback callback,
+        object asyncState
+    )
     {
         return base.Channel.BeginSayHelloTo(name, callback, asyncState);
     }
-    
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+
+    [System.ComponentModel.EditorBrowsableAttribute(
+        System.ComponentModel.EditorBrowsableState.Advanced
+    )]
     string IHelloWorldService.EndSayHelloTo(System.IAsyncResult result)
     {
         return base.Channel.EndSayHelloTo(result);
     }
-    
-    private System.IAsyncResult OnBeginSayHelloTo(object[] inValues, System.AsyncCallback callback, object asyncState)
+
+    private System.IAsyncResult OnBeginSayHelloTo(
+        object[] inValues,
+        System.AsyncCallback callback,
+        object asyncState
+    )
     {
         string name = ((string)(inValues[0]));
         return ((IHelloWorldService)(this)).BeginSayHelloTo(name, callback, asyncState);
     }
-    
+
     private object[] OnEndSayHelloTo(System.IAsyncResult result)
     {
         string retVal = ((IHelloWorldService)(this)).EndSayHelloTo(result);
-        return new object[] {
-                retVal};
+        return new object[] { retVal };
     }
-    
+
     private void OnSayHelloToCompleted(object state)
     {
         if ((this.SayHelloToCompleted != null))
         {
             InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-            this.SayHelloToCompleted(this, new SayHelloToCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            this.SayHelloToCompleted(
+                this,
+                new SayHelloToCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState)
+            );
         }
     }
-    
+
     public void SayHelloToAsync(string name)
     {
         this.SayHelloToAsync(name, null);
     }
-    
+
     public void SayHelloToAsync(string name, object userState)
     {
         if ((this.onBeginSayHelloToDelegate == null))
@@ -393,43 +436,70 @@ public partial class HelloWorldServiceClient : System.ServiceModel.ClientBase<IH
         }
         if ((this.onSayHelloToCompletedDelegate == null))
         {
-            this.onSayHelloToCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSayHelloToCompleted);
+            this.onSayHelloToCompletedDelegate = new System.Threading.SendOrPostCallback(
+                this.OnSayHelloToCompleted
+            );
         }
-        base.InvokeAsync(this.onBeginSayHelloToDelegate, new object[] {
-                    name}, this.onEndSayHelloToDelegate, this.onSayHelloToCompletedDelegate, userState);
+        base.InvokeAsync(
+            this.onBeginSayHelloToDelegate,
+            new object[] { name },
+            this.onEndSayHelloToDelegate,
+            this.onSayHelloToCompletedDelegate,
+            userState
+        );
     }
-    
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    System.IAsyncResult IHelloWorldService.BeginGetHelloData(TestXamarin4WCFService.HelloWorldData helloWorldData, System.AsyncCallback callback, object asyncState)
+
+    [System.ComponentModel.EditorBrowsableAttribute(
+        System.ComponentModel.EditorBrowsableState.Advanced
+    )]
+    System.IAsyncResult IHelloWorldService.BeginGetHelloData(
+        TestXamarin4WCFService.HelloWorldData helloWorldData,
+        System.AsyncCallback callback,
+        object asyncState
+    )
     {
         return base.Channel.BeginGetHelloData(helloWorldData, callback, asyncState);
     }
-    
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    TestXamarin4WCFService.HelloWorldData IHelloWorldService.EndGetHelloData(System.IAsyncResult result)
+
+    [System.ComponentModel.EditorBrowsableAttribute(
+        System.ComponentModel.EditorBrowsableState.Advanced
+    )]
+    TestXamarin4WCFService.HelloWorldData IHelloWorldService.EndGetHelloData(
+        System.IAsyncResult result
+    )
     {
         return base.Channel.EndGetHelloData(result);
     }
-    
-    private System.IAsyncResult OnBeginGetHelloData(object[] inValues, System.AsyncCallback callback, object asyncState)
+
+    private System.IAsyncResult OnBeginGetHelloData(
+        object[] inValues,
+        System.AsyncCallback callback,
+        object asyncState
+    )
     {
-        TestXamarin4WCFService.HelloWorldData helloWorldData = ((TestXamarin4WCFService.HelloWorldData)(inValues[0]));
+        TestXamarin4WCFService.HelloWorldData helloWorldData = (
+            (TestXamarin4WCFService.HelloWorldData)(inValues[0])
+        );
         return ((IHelloWorldService)(this)).BeginGetHelloData(helloWorldData, callback, asyncState);
     }
-    
+
     private object[] OnEndGetHelloData(System.IAsyncResult result)
     {
-        TestXamarin4WCFService.HelloWorldData retVal = ((IHelloWorldService)(this)).EndGetHelloData(result);
-        return new object[] {
-                retVal};
+        TestXamarin4WCFService.HelloWorldData retVal = ((IHelloWorldService)(this)).EndGetHelloData(
+            result
+        );
+        return new object[] { retVal };
     }
-    
+
     private void OnGetHelloDataCompleted(object state)
     {
         if ((this.GetHelloDataCompleted != null))
         {
             InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-            this.GetHelloDataCompleted(this, new GetHelloDataCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            this.GetHelloDataCompleted(
+                this,
+                new GetHelloDataCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState)
+            );
         }
     }
 
@@ -438,7 +508,10 @@ public partial class HelloWorldServiceClient : System.ServiceModel.ClientBase<IH
         this.GetHelloDataAsync(helloWorldData, null);
     }
 
-    public void GetHelloDataAsync(TestXamarin4WCFService.HelloWorldData helloWorldData, object userState)
+    public void GetHelloDataAsync(
+        TestXamarin4WCFService.HelloWorldData helloWorldData,
+        object userState
+    )
     {
         if ((this.onBeginGetHelloDataDelegate == null))
         {
@@ -450,37 +523,51 @@ public partial class HelloWorldServiceClient : System.ServiceModel.ClientBase<IH
         }
         if ((this.onGetHelloDataCompletedDelegate == null))
         {
-            this.onGetHelloDataCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetHelloDataCompleted);
+            this.onGetHelloDataCompletedDelegate = new System.Threading.SendOrPostCallback(
+                this.OnGetHelloDataCompleted
+            );
         }
-        base.InvokeAsync(this.onBeginGetHelloDataDelegate, new object[] {
-                    helloWorldData}, this.onEndGetHelloDataDelegate, this.onGetHelloDataCompletedDelegate, userState);
+        base.InvokeAsync(
+            this.onBeginGetHelloDataDelegate,
+            new object[] { helloWorldData },
+            this.onEndGetHelloDataDelegate,
+            this.onGetHelloDataCompletedDelegate,
+            userState
+        );
     }
-    
-    private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState)
+
+    private System.IAsyncResult OnBeginOpen(
+        object[] inValues,
+        System.AsyncCallback callback,
+        object asyncState
+    )
     {
         return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
     }
-    
+
     private object[] OnEndOpen(System.IAsyncResult result)
     {
         ((System.ServiceModel.ICommunicationObject)(this)).EndOpen(result);
         return null;
     }
-    
+
     private void OnOpenCompleted(object state)
     {
         if ((this.OpenCompleted != null))
         {
             InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-            this.OpenCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            this.OpenCompleted(
+                this,
+                new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState)
+            );
         }
     }
-    
+
     public void OpenAsync()
     {
         this.OpenAsync(null);
     }
-    
+
     public void OpenAsync(object userState)
     {
         if ((this.onBeginOpenDelegate == null))
@@ -493,36 +580,51 @@ public partial class HelloWorldServiceClient : System.ServiceModel.ClientBase<IH
         }
         if ((this.onOpenCompletedDelegate == null))
         {
-            this.onOpenCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnOpenCompleted);
+            this.onOpenCompletedDelegate = new System.Threading.SendOrPostCallback(
+                this.OnOpenCompleted
+            );
         }
-        base.InvokeAsync(this.onBeginOpenDelegate, null, this.onEndOpenDelegate, this.onOpenCompletedDelegate, userState);
+        base.InvokeAsync(
+            this.onBeginOpenDelegate,
+            null,
+            this.onEndOpenDelegate,
+            this.onOpenCompletedDelegate,
+            userState
+        );
     }
-    
-    private System.IAsyncResult OnBeginClose(object[] inValues, System.AsyncCallback callback, object asyncState)
+
+    private System.IAsyncResult OnBeginClose(
+        object[] inValues,
+        System.AsyncCallback callback,
+        object asyncState
+    )
     {
         return ((System.ServiceModel.ICommunicationObject)(this)).BeginClose(callback, asyncState);
     }
-    
+
     private object[] OnEndClose(System.IAsyncResult result)
     {
         ((System.ServiceModel.ICommunicationObject)(this)).EndClose(result);
         return null;
     }
-    
+
     private void OnCloseCompleted(object state)
     {
         if ((this.CloseCompleted != null))
         {
             InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-            this.CloseCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            this.CloseCompleted(
+                this,
+                new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState)
+            );
         }
     }
-    
+
     public void CloseAsync()
     {
         this.CloseAsync(null);
     }
-    
+
     public void CloseAsync(object userState)
     {
         if ((this.onBeginCloseDelegate == null))
@@ -535,32 +637,50 @@ public partial class HelloWorldServiceClient : System.ServiceModel.ClientBase<IH
         }
         if ((this.onCloseCompletedDelegate == null))
         {
-            this.onCloseCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCloseCompleted);
+            this.onCloseCompletedDelegate = new System.Threading.SendOrPostCallback(
+                this.OnCloseCompleted
+            );
         }
-        base.InvokeAsync(this.onBeginCloseDelegate, null, this.onEndCloseDelegate, this.onCloseCompletedDelegate, userState);
+        base.InvokeAsync(
+            this.onBeginCloseDelegate,
+            null,
+            this.onEndCloseDelegate,
+            this.onCloseCompletedDelegate,
+            userState
+        );
     }
-    
+
     protected override IHelloWorldService CreateChannel()
     {
         return new HelloWorldServiceClientChannel(this);
     }
-    
-    private class HelloWorldServiceClientChannel : ChannelBase<IHelloWorldService>, IHelloWorldService
+
+    private class HelloWorldServiceClientChannel
+        : ChannelBase<IHelloWorldService>,
+            IHelloWorldService
     {
-        
-        public HelloWorldServiceClientChannel(System.ServiceModel.ClientBase<IHelloWorldService> client) : 
-                base(client)
-        {
-        }
-        
-        public System.IAsyncResult BeginSayHelloTo(string name, System.AsyncCallback callback, object asyncState)
+        public HelloWorldServiceClientChannel(
+            System.ServiceModel.ClientBase<IHelloWorldService> client
+        )
+            : base(client) { }
+
+        public System.IAsyncResult BeginSayHelloTo(
+            string name,
+            System.AsyncCallback callback,
+            object asyncState
+        )
         {
             object[] _args = new object[1];
             _args[0] = name;
-            System.IAsyncResult _result = base.BeginInvoke("SayHelloTo", _args, callback, asyncState);
+            System.IAsyncResult _result = base.BeginInvoke(
+                "SayHelloTo",
+                _args,
+                callback,
+                asyncState
+            );
             return _result;
         }
-        
+
         public string EndSayHelloTo(System.IAsyncResult result)
         {
             object[] _args = new object[0];
@@ -568,18 +688,31 @@ public partial class HelloWorldServiceClient : System.ServiceModel.ClientBase<IH
             return _result;
         }
 
-        public System.IAsyncResult BeginGetHelloData(TestXamarin4WCFService.HelloWorldData helloWorldData, System.AsyncCallback callback, object asyncState)
+        public System.IAsyncResult BeginGetHelloData(
+            TestXamarin4WCFService.HelloWorldData helloWorldData,
+            System.AsyncCallback callback,
+            object asyncState
+        )
         {
             object[] _args = new object[1];
             _args[0] = helloWorldData;
-            System.IAsyncResult _result = base.BeginInvoke("GetHelloData", _args, callback, asyncState);
+            System.IAsyncResult _result = base.BeginInvoke(
+                "GetHelloData",
+                _args,
+                callback,
+                asyncState
+            );
             return _result;
         }
 
         public TestXamarin4WCFService.HelloWorldData EndGetHelloData(System.IAsyncResult result)
         {
             object[] _args = new object[0];
-            TestXamarin4WCFService.HelloWorldData _result = ((TestXamarin4WCFService.HelloWorldData)(base.EndInvoke("GetHelloData", _args, result)));
+            TestXamarin4WCFService.HelloWorldData _result = (
+                (TestXamarin4WCFService.HelloWorldData)(
+                    base.EndInvoke("GetHelloData", _args, result)
+                )
+            );
             return _result;
         }
     }

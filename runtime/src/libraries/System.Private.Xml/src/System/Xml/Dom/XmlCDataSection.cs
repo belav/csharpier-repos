@@ -10,35 +10,25 @@ namespace System.Xml
     // interpreted as markup language.
     public class XmlCDataSection : XmlCharacterData
     {
-        protected internal XmlCDataSection(string? data, XmlDocument doc) : base(data, doc)
-        {
-        }
+        protected internal XmlCDataSection(string? data, XmlDocument doc)
+            : base(data, doc) { }
 
         // Gets the name of the node.
         public override string Name
         {
-            get
-            {
-                return OwnerDocument!.strCDataSectionName;
-            }
+            get { return OwnerDocument!.strCDataSectionName; }
         }
 
         // Gets the name of the node without the namespace prefix.
         public override string LocalName
         {
-            get
-            {
-                return OwnerDocument!.strCDataSectionName;
-            }
+            get { return OwnerDocument!.strCDataSectionName; }
         }
 
         // Gets the type of the current node.
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return XmlNodeType.CDATA;
-            }
+            get { return XmlNodeType.CDATA; }
         }
 
         public override XmlNode? ParentNode
@@ -87,18 +77,12 @@ namespace System.Xml
 
         internal override XPathNodeType XPNodeType
         {
-            get
-            {
-                return XPathNodeType.Text;
-            }
+            get { return XPathNodeType.Text; }
         }
 
         internal override bool IsText
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override XmlNode? PreviousText

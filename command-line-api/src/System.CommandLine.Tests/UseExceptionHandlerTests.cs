@@ -16,10 +16,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("the-command");
             command.SetAction((_, __) => Task.FromException<int>(new Exception("oops!")));
 
-            CliConfiguration config = new(command)
-            {
-                Error = new StringWriter(),
-            };
+            CliConfiguration config = new(command) { Error = new StringWriter() };
 
             var resultCode = await config.InvokeAsync("the-command");
 
@@ -32,10 +29,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("the-command");
             command.SetAction((_, __) => Task.FromException<int>(new Exception("oops!")));
 
-            CliConfiguration config = new(command)
-            {
-                Error = new StringWriter(),
-            };
+            CliConfiguration config = new(command) { Error = new StringWriter() };
 
             await config.InvokeAsync("the-command");
 
@@ -51,11 +45,10 @@ namespace System.CommandLine.Tests
             CliConfiguration config = new(command)
             {
                 Output = new StringWriter(),
-                Error = new StringWriter()
+                Error = new StringWriter(),
             };
 
-            int resultCode = await config
-                                   .InvokeAsync("the-command");
+            int resultCode = await config.InvokeAsync("the-command");
 
             config.Output.ToString().Should().BeEmpty();
             resultCode.Should().NotBe(0);
@@ -66,14 +59,14 @@ namespace System.CommandLine.Tests
         [InlineData(false)]
         public async Task Exception_output_can_be_customized(bool async)
         {
-            Exception expectedException = new ("oops!");
+            Exception expectedException = new("oops!");
             CliCommand command = new("the-command");
             command.SetAction((_, __) => throw expectedException);
 
             CliConfiguration config = new(command)
             {
                 Error = new StringWriter(),
-                EnableDefaultExceptionHandler = false
+                EnableDefaultExceptionHandler = false,
             };
 
             ParseResult parseResult = command.Parse("the-command", config);

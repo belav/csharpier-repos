@@ -7,7 +7,8 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        private sealed partial class SelectManySingleSelectorIterator<TSource, TResult> : IIListProvider<TResult>
+        private sealed partial class SelectManySingleSelectorIterator<TSource, TResult>
+            : IIListProvider<TResult>
         {
             public int GetCount(bool onlyIfCheap)
             {

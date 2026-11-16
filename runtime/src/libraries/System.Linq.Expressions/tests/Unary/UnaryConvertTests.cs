@@ -80,9 +80,20 @@ namespace System.Linq.Expressions.Tests
             DayOfWeek enumValue = DayOfWeek.Monday;
             var value = (int)enumValue;
 
-            foreach (var o in new[] { Expression.Constant(value, typeof(int)), Expression.Constant(value, typeof(ValueType)), Expression.Constant(value, typeof(object)) })
+            foreach (
+                var o in new[]
+                {
+                    Expression.Constant(value, typeof(int)),
+                    Expression.Constant(value, typeof(ValueType)),
+                    Expression.Constant(value, typeof(object)),
+                }
+            )
             {
-                VerifyUnaryConvert(Expression.Convert(o, typeof(DayOfWeek)), enumValue, useInterpreter);
+                VerifyUnaryConvert(
+                    Expression.Convert(o, typeof(DayOfWeek)),
+                    enumValue,
+                    useInterpreter
+                );
             }
         }
 
@@ -93,10 +104,17 @@ namespace System.Linq.Expressions.Tests
             var value = (int)enumValue;
 
             ConstantExpression cInt = Expression.Constant(value, typeof(int));
-            VerifyUnaryConvert(Expression.Convert(cInt, typeof(DayOfWeek?)), enumValue, useInterpreter);
+            VerifyUnaryConvert(
+                Expression.Convert(cInt, typeof(DayOfWeek?)),
+                enumValue,
+                useInterpreter
+            );
 
             ConstantExpression cObj = Expression.Constant(value, typeof(object));
-            VerifyUnaryConvertThrows<InvalidCastException>(Expression.Convert(cObj, typeof(DayOfWeek?)), useInterpreter);
+            VerifyUnaryConvertThrows<InvalidCastException>(
+                Expression.Convert(cObj, typeof(DayOfWeek?)),
+                useInterpreter
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -106,7 +124,10 @@ namespace System.Linq.Expressions.Tests
 
             foreach (var t in new[] { typeof(string[]), typeof(IEnumerable<char>[]) })
             {
-                VerifyUnaryConvertThrows<InvalidCastException>(Expression.Convert(Expression.Constant(arr), t), useInterpreter);
+                VerifyUnaryConvertThrows<InvalidCastException>(
+                    Expression.Convert(Expression.Constant(arr), t),
+                    useInterpreter
+                );
             }
         }
 
@@ -115,10 +136,16 @@ namespace System.Linq.Expressions.Tests
         {
             // NB: Unlike TypeAs, the output does not include the type we're converting to
 
-            UnaryExpression e1 = Expression.Convert(Expression.Parameter(typeof(object), "o"), typeof(int));
+            UnaryExpression e1 = Expression.Convert(
+                Expression.Parameter(typeof(object), "o"),
+                typeof(int)
+            );
             Assert.Equal("Convert(o, Int32)", e1.ToString());
 
-            UnaryExpression e2 = Expression.ConvertChecked(Expression.Parameter(typeof(long), "x"), typeof(int));
+            UnaryExpression e2 = Expression.ConvertChecked(
+                Expression.Parameter(typeof(long), "x"),
+                typeof(int)
+            );
             Assert.Equal("ConvertChecked(x, Int32)", e2.ToString());
         }
 
@@ -127,23 +154,60 @@ namespace System.Linq.Expressions.Tests
             ConstantExpression boolF = Expression.Constant(false);
             ConstantExpression boolT = Expression.Constant(true);
 
-            var factories = new Func<Expression, Type, Expression>[] { Expression.Convert, Expression.ConvertChecked };
+            var factories = new Func<Expression, Type, Expression>[]
+            {
+                Expression.Convert,
+                Expression.ConvertChecked,
+            };
 
             foreach (var factory in factories)
             {
                 foreach (var b in new[] { false, true })
                 {
-                    yield return new KeyValuePair<Expression, object>(factory(b ? boolT : boolF, typeof(byte)), (byte)(b ? 1 : 0));
-                    yield return new KeyValuePair<Expression, object>(factory(b ? boolT : boolF, typeof(sbyte)), (sbyte)(b ? 1 : 0));
-                    yield return new KeyValuePair<Expression, object>(factory(b ? boolT : boolF, typeof(ushort)), (ushort)(b ? 1 : 0));
-                    yield return new KeyValuePair<Expression, object>(factory(b ? boolT : boolF, typeof(short)), (short)(b ? 1 : 0));
-                    yield return new KeyValuePair<Expression, object>(factory(b ? boolT : boolF, typeof(uint)), (uint)(b ? 1 : 0));
-                    yield return new KeyValuePair<Expression, object>(factory(b ? boolT : boolF, typeof(int)), (int)(b ? 1 : 0));
-                    yield return new KeyValuePair<Expression, object>(factory(b ? boolT : boolF, typeof(ulong)), (ulong)(b ? 1 : 0));
-                    yield return new KeyValuePair<Expression, object>(factory(b ? boolT : boolF, typeof(long)), (long)(b ? 1 : 0));
-                    yield return new KeyValuePair<Expression, object>(factory(b ? boolT : boolF, typeof(float)), (float)(b ? 1 : 0));
-                    yield return new KeyValuePair<Expression, object>(factory(b ? boolT : boolF, typeof(double)), (double)(b ? 1 : 0));
-                    yield return new KeyValuePair<Expression, object>(factory(b ? boolT : boolF, typeof(char)), (char)(b ? 1 : 0));
+                    yield return new KeyValuePair<Expression, object>(
+                        factory(b ? boolT : boolF, typeof(byte)),
+                        (byte)(b ? 1 : 0)
+                    );
+                    yield return new KeyValuePair<Expression, object>(
+                        factory(b ? boolT : boolF, typeof(sbyte)),
+                        (sbyte)(b ? 1 : 0)
+                    );
+                    yield return new KeyValuePair<Expression, object>(
+                        factory(b ? boolT : boolF, typeof(ushort)),
+                        (ushort)(b ? 1 : 0)
+                    );
+                    yield return new KeyValuePair<Expression, object>(
+                        factory(b ? boolT : boolF, typeof(short)),
+                        (short)(b ? 1 : 0)
+                    );
+                    yield return new KeyValuePair<Expression, object>(
+                        factory(b ? boolT : boolF, typeof(uint)),
+                        (uint)(b ? 1 : 0)
+                    );
+                    yield return new KeyValuePair<Expression, object>(
+                        factory(b ? boolT : boolF, typeof(int)),
+                        (int)(b ? 1 : 0)
+                    );
+                    yield return new KeyValuePair<Expression, object>(
+                        factory(b ? boolT : boolF, typeof(ulong)),
+                        (ulong)(b ? 1 : 0)
+                    );
+                    yield return new KeyValuePair<Expression, object>(
+                        factory(b ? boolT : boolF, typeof(long)),
+                        (long)(b ? 1 : 0)
+                    );
+                    yield return new KeyValuePair<Expression, object>(
+                        factory(b ? boolT : boolF, typeof(float)),
+                        (float)(b ? 1 : 0)
+                    );
+                    yield return new KeyValuePair<Expression, object>(
+                        factory(b ? boolT : boolF, typeof(double)),
+                        (double)(b ? 1 : 0)
+                    );
+                    yield return new KeyValuePair<Expression, object>(
+                        factory(b ? boolT : boolF, typeof(char)),
+                        (char)(b ? 1 : 0)
+                    );
                 }
             }
         }
@@ -152,7 +216,11 @@ namespace System.Linq.Expressions.Tests
         {
             ConstantExpression nullC = Expression.Constant(null);
 
-            var factories = new Func<Expression, Type, Expression>[] { Expression.Convert, Expression.ConvertChecked };
+            var factories = new Func<Expression, Type, Expression>[]
+            {
+                Expression.Convert,
+                Expression.ConvertChecked,
+            };
 
             foreach (var factory in factories)
             {
@@ -179,7 +247,11 @@ namespace System.Linq.Expressions.Tests
         {
             ConstantExpression nullC = Expression.Constant(null);
 
-            var factories = new Func<Expression, Type, Expression>[] { Expression.Convert, Expression.ConvertChecked };
+            var factories = new Func<Expression, Type, Expression>[]
+            {
+                Expression.Convert,
+                Expression.ConvertChecked,
+            };
 
             foreach (var factory in factories)
             {
@@ -207,7 +279,11 @@ namespace System.Linq.Expressions.Tests
             // C# Language Specification - 4.3.1 Boxing conversions
             // ----------------------------------------------------
 
-            var factories = new Func<Expression, Type, Expression>[] { Expression.Convert, Expression.ConvertChecked };
+            var factories = new Func<Expression, Type, Expression>[]
+            {
+                Expression.Convert,
+                Expression.ConvertChecked,
+            };
 
             foreach (var factory in factories)
             {
@@ -216,12 +292,24 @@ namespace System.Linq.Expressions.Tests
                 foreach (var t in new[] { typeof(object), typeof(ValueType) })
                 {
                     yield return factory(Expression.Constant(1, typeof(int)), t);
-                    yield return factory(Expression.Constant(DayOfWeek.Monday, typeof(DayOfWeek)), t);
-                    yield return factory(Expression.Constant(new TimeSpan(3, 14, 15), typeof(TimeSpan)), t);
+                    yield return factory(
+                        Expression.Constant(DayOfWeek.Monday, typeof(DayOfWeek)),
+                        t
+                    );
+                    yield return factory(
+                        Expression.Constant(new TimeSpan(3, 14, 15), typeof(TimeSpan)),
+                        t
+                    );
 
                     yield return factory(Expression.Constant(1, typeof(int?)), t);
-                    yield return factory(Expression.Constant(DayOfWeek.Monday, typeof(DayOfWeek?)), t);
-                    yield return factory(Expression.Constant(new TimeSpan(3, 14, 15), typeof(TimeSpan?)), t);
+                    yield return factory(
+                        Expression.Constant(DayOfWeek.Monday, typeof(DayOfWeek?)),
+                        t
+                    );
+                    yield return factory(
+                        Expression.Constant(new TimeSpan(3, 14, 15), typeof(TimeSpan?)),
+                        t
+                    );
 
                     yield return factory(Expression.Constant(null, typeof(int?)), t);
                     yield return factory(Expression.Constant(null, typeof(DayOfWeek?)), t);
@@ -241,12 +329,21 @@ namespace System.Linq.Expressions.Tests
                 }
 
                 // >>> From any nullable-type to any interface-type implemented by the underlying type of the nullable-type.
-                foreach (var o in new object[] { (int?)1, (DayOfWeek?)DayOfWeek.Monday, (TimeSpan?)new TimeSpan(3, 14, 15) })
+                foreach (
+                    var o in new object[]
+                    {
+                        (int?)1,
+                        (DayOfWeek?)DayOfWeek.Monday,
+                        (TimeSpan?)new TimeSpan(3, 14, 15),
+                    }
+                )
                 {
                     Type t = o.GetType();
                     Type n = typeof(Nullable<>).MakeGenericType(t);
 
-                    foreach (var c in new[] { Expression.Constant(o, n), Expression.Constant(null, n) })
+                    foreach (
+                        var c in new[] { Expression.Constant(o, n), Expression.Constant(null, n) }
+                    )
                     {
                         foreach (var i in t.GetTypeInfo().ImplementedInterfaces)
                         {
@@ -257,13 +354,22 @@ namespace System.Linq.Expressions.Tests
 
                 // >>> From any enum-type to the type System.Enum.
                 {
-                    yield return factory(Expression.Constant(DayOfWeek.Monday, typeof(DayOfWeek)), typeof(Enum));
+                    yield return factory(
+                        Expression.Constant(DayOfWeek.Monday, typeof(DayOfWeek)),
+                        typeof(Enum)
+                    );
                 }
 
                 // >>> From any nullable-type with an underlying enum-type to the type System.Enum.
                 {
-                    yield return factory(Expression.Constant(DayOfWeek.Monday, typeof(DayOfWeek?)), typeof(Enum));
-                    yield return factory(Expression.Constant(null, typeof(DayOfWeek?)), typeof(Enum));
+                    yield return factory(
+                        Expression.Constant(DayOfWeek.Monday, typeof(DayOfWeek?)),
+                        typeof(Enum)
+                    );
+                    yield return factory(
+                        Expression.Constant(null, typeof(DayOfWeek?)),
+                        typeof(Enum)
+                    );
                 }
             }
         }
@@ -273,7 +379,11 @@ namespace System.Linq.Expressions.Tests
             // C# Language Specification - 4.3.2 Unboxing conversions
             // ------------------------------------------------------
 
-            var factories = new Func<Expression, Type, Expression>[] { Expression.Convert, Expression.ConvertChecked };
+            var factories = new Func<Expression, Type, Expression>[]
+            {
+                Expression.Convert,
+                Expression.ConvertChecked,
+            };
 
             foreach (var factory in factories)
             {
@@ -316,38 +426,81 @@ namespace System.Linq.Expressions.Tests
 
                 // >>> From the type System.Enum to any enum-type.
                 {
-                    yield return factory(Expression.Constant(DayOfWeek.Monday, typeof(Enum)), typeof(DayOfWeek));
+                    yield return factory(
+                        Expression.Constant(DayOfWeek.Monday, typeof(Enum)),
+                        typeof(DayOfWeek)
+                    );
                 }
 
                 // >>> From the type System.Enum to any nullable-type with an underlying enum-type.
                 {
-                    yield return factory(Expression.Constant(DayOfWeek.Monday, typeof(Enum)), typeof(DayOfWeek?));
-                    yield return factory(Expression.Constant(null, typeof(Enum)), typeof(DayOfWeek?));
+                    yield return factory(
+                        Expression.Constant(DayOfWeek.Monday, typeof(Enum)),
+                        typeof(DayOfWeek?)
+                    );
+                    yield return factory(
+                        Expression.Constant(null, typeof(Enum)),
+                        typeof(DayOfWeek?)
+                    );
                 }
             }
         }
 
         private static IEnumerable<Expression> ConvertDelegates()
         {
-            var factories = new Func<Expression, Type, Expression>[] { Expression.Convert, Expression.ConvertChecked };
+            var factories = new Func<Expression, Type, Expression>[]
+            {
+                Expression.Convert,
+                Expression.ConvertChecked,
+            };
 
             foreach (var factory in factories)
             {
                 yield return factory(Expression.Constant((Action)(() => { })), typeof(Action));
 
-                yield return factory(Expression.Constant((Action<int>)(x => { })), typeof(Action<int>));
-                yield return factory(Expression.Constant((Action<int, object>)((x, o) => { })), typeof(Action<int, object>));
-                yield return factory(Expression.Constant((Action<int, object>)((x, o) => { })), typeof(Action<int, string>)); // contravariant
-                yield return factory(Expression.Constant((Action<object, int>)((o, x) => { })), typeof(Action<string, int>)); // contravariant
+                yield return factory(
+                    Expression.Constant((Action<int>)(x => { })),
+                    typeof(Action<int>)
+                );
+                yield return factory(
+                    Expression.Constant((Action<int, object>)((x, o) => { })),
+                    typeof(Action<int, object>)
+                );
+                yield return factory(
+                    Expression.Constant((Action<int, object>)((x, o) => { })),
+                    typeof(Action<int, string>)
+                ); // contravariant
+                yield return factory(
+                    Expression.Constant((Action<object, int>)((o, x) => { })),
+                    typeof(Action<string, int>)
+                ); // contravariant
 
                 yield return factory(Expression.Constant((Func<int>)(() => 42)), typeof(Func<int>));
-                yield return factory(Expression.Constant((Func<string>)(() => "bar")), typeof(Func<string>));
-                yield return factory(Expression.Constant((Func<string>)(() => "bar")), typeof(Func<object>)); // covariant
-                yield return factory(Expression.Constant((Func<int, string>)(x => "bar")), typeof(Func<int, object>)); // covariant
+                yield return factory(
+                    Expression.Constant((Func<string>)(() => "bar")),
+                    typeof(Func<string>)
+                );
+                yield return factory(
+                    Expression.Constant((Func<string>)(() => "bar")),
+                    typeof(Func<object>)
+                ); // covariant
+                yield return factory(
+                    Expression.Constant((Func<int, string>)(x => "bar")),
+                    typeof(Func<int, object>)
+                ); // covariant
 
-                yield return factory(Expression.Constant((Func<object, string>)(o => "bar")), typeof(Func<string, object>)); // contravariant and covariant
-                yield return factory(Expression.Constant((Func<object, int, string>)((o, x) => "bar")), typeof(Func<string, int, object>)); // contravariant and covariant
-                yield return factory(Expression.Constant((Func<int, object, string>)((x, o) => "bar")), typeof(Func<int, string, object>)); // contravariant and covariant
+                yield return factory(
+                    Expression.Constant((Func<object, string>)(o => "bar")),
+                    typeof(Func<string, object>)
+                ); // contravariant and covariant
+                yield return factory(
+                    Expression.Constant((Func<object, int, string>)((o, x) => "bar")),
+                    typeof(Func<string, int, object>)
+                ); // contravariant and covariant
+                yield return factory(
+                    Expression.Constant((Func<int, object, string>)((x, o) => "bar")),
+                    typeof(Func<int, string, object>)
+                ); // contravariant and covariant
             }
         }
 
@@ -382,9 +535,9 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUnaryConvert(Expression e, object o, bool useInterpreter)
         {
-            Expression<Func<object>> f =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(e, typeof(object)));
+            Expression<Func<object>> f = Expression.Lambda<Func<object>>(
+                Expression.Convert(e, typeof(object))
+            );
 
             Func<object> c = f.Compile(useInterpreter);
             Assert.Equal(o, c());
@@ -393,9 +546,9 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyUnaryConvertThrows<T>(Expression e, bool useInterpreter)
             where T : Exception
         {
-            Expression<Func<object>> f =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(e, typeof(object)));
+            Expression<Func<object>> f = Expression.Lambda<Func<object>>(
+                Expression.Convert(e, typeof(object))
+            );
 
             Func<object> c = f.Compile(useInterpreter);
             Assert.Throws<T>(() => c());
@@ -403,9 +556,9 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUnaryConvert(Expression e, bool useInterpreter)
         {
-            Expression<Func<object>> f =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(e, typeof(object)));
+            Expression<Func<object>> f = Expression.Lambda<Func<object>>(
+                Expression.Convert(e, typeof(object))
+            );
 
             Func<object> c = f.Compile(useInterpreter);
             c(); // should not throw

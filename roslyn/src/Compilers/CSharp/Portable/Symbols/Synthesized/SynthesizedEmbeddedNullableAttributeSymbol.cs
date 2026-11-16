@@ -13,7 +13,8 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed class SynthesizedEmbeddedNullableAttributeSymbol : SynthesizedEmbeddedAttributeSymbolBase
+    internal sealed class SynthesizedEmbeddedNullableAttributeSymbol
+        : SynthesizedEmbeddedAttributeSymbolBase
     {
         private readonly ImmutableArray<FieldSymbol> _fields;
         private readonly ImmutableArray<MethodSymbol> _constructors;
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceSymbol containingNamespace,
             ModuleSymbol containingModule,
             NamedTypeSymbol systemAttributeType,
-            TypeSymbol systemByteType)
+            TypeSymbol systemByteType
+        )
             : base(name, containingNamespace, containingModule, baseType: systemAttributeType)
         {
             _byteTypeSymbol = systemByteType;
@@ -34,9 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var annotatedByteType = TypeWithAnnotations.Create(systemByteType);
 
             var byteArrayType = TypeWithAnnotations.Create(
-                ArrayTypeSymbol.CreateSZArray(
-                    systemByteType.ContainingAssembly,
-                    annotatedByteType));
+                ArrayTypeSymbol.CreateSZArray(systemByteType.ContainingAssembly, annotatedByteType)
+            );
 
             _fields = ImmutableArray.Create<FieldSymbol>(
                 new SynthesizedFieldSymbol(
@@ -45,20 +46,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     NullableFlagsFieldName,
                     isPublic: true,
                     isReadOnly: true,
-                    isStatic: false));
+                    isStatic: false
+                )
+            );
 
             _constructors = ImmutableArray.Create<MethodSymbol>(
                 new SynthesizedEmbeddedAttributeConstructorWithBodySymbol(
                     this,
-                    m => ImmutableArray.Create(SynthesizedParameterSymbol.Create(m, annotatedByteType, 0, RefKind.None)),
-                    GenerateSingleByteConstructorBody),
+                    m =>
+                        ImmutableArray.Create(
+                            SynthesizedParameterSymbol.Create(m, annotatedByteType, 0, RefKind.None)
+                        ),
+                    GenerateSingleByteConstructorBody
+                ),
                 new SynthesizedEmbeddedAttributeConstructorWithBodySymbol(
                     this,
-                    m => ImmutableArray.Create(SynthesizedParameterSymbol.Create(m, byteArrayType, 0, RefKind.None)),
-                    GenerateByteArrayConstructorBody));
+                    m =>
+                        ImmutableArray.Create(
+                            SynthesizedParameterSymbol.Create(m, byteArrayType, 0, RefKind.None)
+                        ),
+                    GenerateByteArrayConstructorBody
+                )
+            );
 
             // Ensure we never get out of sync with the description
-            Debug.Assert(_constructors.Length == AttributeDescription.NullableAttribute.Signatures.Length);
+            Debug.Assert(
+                _constructors.Length == AttributeDescription.NullableAttribute.Signatures.Length
+            );
         }
 
         internal override IEnumerable<FieldSymbol> GetFieldsToEmit() => _fields;
@@ -68,33 +82,44 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override AttributeUsageInfo GetAttributeUsageInfo()
         {
             return new AttributeUsageInfo(
-                AttributeTargets.Class | AttributeTargets.Event | AttributeTargets.Field | AttributeTargets.GenericParameter | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue,
+                AttributeTargets.Class
+                    | AttributeTargets.Event
+                    | AttributeTargets.Field
+                    | AttributeTargets.GenericParameter
+                    | AttributeTargets.Parameter
+                    | AttributeTargets.Property
+                    | AttributeTargets.ReturnValue,
                 allowMultiple: false,
-                inherited: false);
+                inherited: false
+            );
         }
 
-        private void GenerateByteArrayConstructorBody(SyntheticBoundNodeFactory factory, ArrayBuilder<BoundStatement> statements, ImmutableArray<ParameterSymbol> parameters)
+        private void GenerateByteArrayConstructorBody(
+            SyntheticBoundNodeFactory factory,
+            ArrayBuilder<BoundStatement> statements,
+            ImmutableArray<ParameterSymbol> parameters
+        )
         {
             statements.Add(
                 factory.ExpressionStatement(
                     factory.AssignmentExpression(
-                        factory.Field(
-                            factory.This(),
-                            _fields.Single()),
+                        factory.Field(factory.This(), _fields.Single()),
                         factory.Parameter(parameters.Single())
                     )
                 )
             );
         }
 
-        private void GenerateSingleByteConstructorBody(SyntheticBoundNodeFactory factory, ArrayBuilder<BoundStatement> statements, ImmutableArray<ParameterSymbol> parameters)
+        private void GenerateSingleByteConstructorBody(
+            SyntheticBoundNodeFactory factory,
+            ArrayBuilder<BoundStatement> statements,
+            ImmutableArray<ParameterSymbol> parameters
+        )
         {
             statements.Add(
                 factory.ExpressionStatement(
                     factory.AssignmentExpression(
-                        factory.Field(
-                            factory.This(),
-                            _fields.Single()),
+                        factory.Field(factory.This(), _fields.Single()),
                         factory.Array(
                             _byteTypeSymbol,
                             ImmutableArray.Create<BoundExpression>(
@@ -107,17 +132,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 
-    internal sealed class SynthesizedEmbeddedAttributeConstructorWithBodySymbol : SynthesizedInstanceConstructor
+    internal sealed class SynthesizedEmbeddedAttributeConstructorWithBodySymbol
+        : SynthesizedInstanceConstructor
     {
         private readonly ImmutableArray<ParameterSymbol> _parameters;
 
-        private readonly Action<SyntheticBoundNodeFactory, ArrayBuilder<BoundStatement>, ImmutableArray<ParameterSymbol>> _getConstructorBody;
+        private readonly Action<
+            SyntheticBoundNodeFactory,
+            ArrayBuilder<BoundStatement>,
+            ImmutableArray<ParameterSymbol>
+        > _getConstructorBody;
 
         internal SynthesizedEmbeddedAttributeConstructorWithBodySymbol(
             NamedTypeSymbol containingType,
             Func<MethodSymbol, ImmutableArray<ParameterSymbol>> getParameters,
-            Action<SyntheticBoundNodeFactory, ArrayBuilder<BoundStatement>, ImmutableArray<ParameterSymbol>> getConstructorBody) :
-            base(containingType)
+            Action<
+                SyntheticBoundNodeFactory,
+                ArrayBuilder<BoundStatement>,
+                ImmutableArray<ParameterSymbol>
+            > getConstructorBody
+        )
+            : base(containingType)
         {
             _parameters = getParameters(this);
             _getConstructorBody = getConstructorBody;
@@ -125,12 +160,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<ParameterSymbol> Parameters => _parameters;
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
             GenerateMethodBodyCore(compilationState, diagnostics);
         }
 
-        internal override void GenerateMethodBodyStatements(SyntheticBoundNodeFactory factory, ArrayBuilder<BoundStatement> statements, BindingDiagnosticBag diagnostics) => _getConstructorBody(factory, statements, _parameters);
+        internal override void GenerateMethodBodyStatements(
+            SyntheticBoundNodeFactory factory,
+            ArrayBuilder<BoundStatement> statements,
+            BindingDiagnosticBag diagnostics
+        ) => _getConstructorBody(factory, statements, _parameters);
     }
 }
-

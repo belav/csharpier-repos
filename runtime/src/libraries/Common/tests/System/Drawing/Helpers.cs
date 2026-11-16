@@ -12,12 +12,17 @@ namespace System.Drawing
 {
     public static class Helpers
     {
-        public const string IsDrawingSupported = nameof(Helpers) + "." + nameof(GetIsDrawingSupported);
-        public const string IsWindowsOrAtLeastLibgdiplus6 = nameof(Helpers) + "." + nameof(GetIsWindowsOrAtLeastLibgdiplus6);
+        public const string IsDrawingSupported =
+            nameof(Helpers) + "." + nameof(GetIsDrawingSupported);
+        public const string IsWindowsOrAtLeastLibgdiplus6 =
+            nameof(Helpers) + "." + nameof(GetIsWindowsOrAtLeastLibgdiplus6);
         public const string RecentGdiplusIsAvailable = IsWindowsOrAtLeastLibgdiplus6;
-        public const string GdiPlusIsAvailableNotWindows7 = nameof(Helpers) + "." + nameof(GetGdiPlusIsAvailableNotWindows7);
-        public const string AnyInstalledPrinters = nameof(Helpers) + "." + nameof(IsAnyInstalledPrinters);
-        public const string WindowsRS3OrEarlier = nameof(Helpers) + "." + nameof(IsWindowsRS3OrEarlier);
+        public const string GdiPlusIsAvailableNotWindows7 =
+            nameof(Helpers) + "." + nameof(GetGdiPlusIsAvailableNotWindows7);
+        public const string AnyInstalledPrinters =
+            nameof(Helpers) + "." + nameof(IsAnyInstalledPrinters);
+        public const string WindowsRS3OrEarlier =
+            nameof(Helpers) + "." + nameof(IsWindowsRS3OrEarlier);
         public const string IsWindows = nameof(Helpers) + "." + nameof(GetIsWindows);
 
         public static bool GetIsDrawingSupported() => PlatformDetection.IsDrawingSupported;
@@ -52,11 +57,13 @@ namespace System.Drawing
             return installedVersion.Major >= 6;
         }
 
-        public static bool GetIsWindows() => PlatformDetection.IsDrawingSupported && PlatformDetection.IsWindows;
+        public static bool GetIsWindows() =>
+            PlatformDetection.IsDrawingSupported && PlatformDetection.IsWindows;
 
         public static bool IsNotUnix => PlatformDetection.IsWindows;
 
-        public static bool IsWindowsRS3OrEarlier => !PlatformDetection.IsWindows10Version1803OrGreater;
+        public static bool IsWindowsRS3OrEarlier =>
+            !PlatformDetection.IsWindows10Version1803OrGreater;
 
         public static bool GetGdiPlusIsAvailableNotWindows7()
         {
@@ -74,10 +81,14 @@ namespace System.Drawing
         }
 
         public static string GetTestBitmapPath(string fileName) => GetTestPath("bitmaps", fileName);
-        public static string GetTestFontPath(string fileName) => GetTestPath("fonts", fileName);
-        public static string GetTestColorProfilePath(string fileName) => GetTestPath("colorProfiles", fileName);
 
-        private static string GetTestPath(string directoryName, string fileName) => Path.Combine(AppContext.BaseDirectory, directoryName, fileName);
+        public static string GetTestFontPath(string fileName) => GetTestPath("fonts", fileName);
+
+        public static string GetTestColorProfilePath(string fileName) =>
+            GetTestPath("colorProfiles", fileName);
+
+        private static string GetTestPath(string directoryName, string fileName) =>
+            Path.Combine(AppContext.BaseDirectory, directoryName, fileName);
 
         public static void VerifyBitmap(Bitmap bitmap, Color[][] colors)
         {
@@ -96,7 +107,12 @@ namespace System.Drawing
             }
         }
 
-        private static Exception GetBitmapEqualFailureException(Bitmap bitmap, Color[][] colors, int firstFailureX, int firstFailureY)
+        private static Exception GetBitmapEqualFailureException(
+            Bitmap bitmap,
+            Color[][] colors,
+            int firstFailureX,
+            int firstFailureY
+        )
         {
             // Print out the whole bitmap to provide a view of the whole image, rather than just the difference between
             // a single pixel.
@@ -122,7 +138,11 @@ namespace System.Drawing
                 expectedStringBuilder.AppendLine();
             }
 
-            return EqualException.ForMismatchedValues(expectedStringBuilder.ToString(), actualStringBuilder.ToString(), $"Bitmaps were different at {firstFailureX}, {firstFailureY}.");
+            return EqualException.ForMismatchedValues(
+                expectedStringBuilder.ToString(),
+                actualStringBuilder.ToString(),
+                $"Bitmaps were different at {firstFailureX}, {firstFailureY}."
+            );
         }
 
         private static void PrintColor(StringBuilder stringBuilder, Color color)
@@ -134,7 +154,12 @@ namespace System.Drawing
 
         private static Rectangle GetRectangle(RECT rect)
         {
-            return new Rectangle(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top);
+            return new Rectangle(
+                rect.Left,
+                rect.Top,
+                rect.Right - rect.Left,
+                rect.Bottom - rect.Top
+            );
         }
 
         private const int MONITOR_DEFAULTTOPRIMARY = 1;

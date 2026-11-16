@@ -34,9 +34,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
             {
                 File.Delete(filePath);
             }
-            catch (System.IO.IOException)
-            {
-            }
+            catch (System.IO.IOException) { }
         }
 
         /// <summary>
@@ -48,9 +46,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
         /// </summary>
         public static void CopyIntoDirectory(string filePath, string directoryPath)
         {
-            File.Copy(
-                filePath,
-                Path.Combine(directoryPath, Path.GetFileName(filePath)));
+            File.Copy(filePath, Path.Combine(directoryPath, Path.GetFileName(filePath)));
         }
     }
 }

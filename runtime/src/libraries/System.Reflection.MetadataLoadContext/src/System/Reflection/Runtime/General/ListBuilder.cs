@@ -8,7 +8,8 @@ namespace System.Reflection.Runtime.General
     //
     // Struct-based list builder that's special cased to avoid allocations for lists of one element.
     //
-    internal struct ListBuilder<T> where T : class
+    internal struct ListBuilder<T>
+        where T : class
     {
         public ListBuilder(int capacity)
         {
@@ -35,7 +36,10 @@ namespace System.Reflection.Runtime.General
 #if DEBUG
             // ListBuilder does not always allocate a new array, though the ToArray() name connotates that it does (and in fact, we do pass the results
             // of this method across api boundaries.) The minimizing of allocations is desirable, however, so instead, we restrict you to one call per ListBuilder.
-            Debug.Assert(!_toArrayAlreadyCalled, "Cannot call ListBuilder.ToArray() a second time. Copy the one you already got.");
+            Debug.Assert(
+                !_toArrayAlreadyCalled,
+                "Cannot call ListBuilder.ToArray() a second time. Copy the one you already got."
+            );
 #endif // DEBUG
             if (_count == 0)
                 return Array.Empty<T>();
@@ -67,10 +71,7 @@ namespace System.Reflection.Runtime.General
 
         public int Count
         {
-            get
-            {
-                return _count;
-            }
+            get { return _count; }
         }
 
         public void Add(T item)

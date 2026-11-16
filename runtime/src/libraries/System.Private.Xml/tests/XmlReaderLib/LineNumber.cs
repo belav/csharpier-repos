@@ -40,9 +40,7 @@ namespace System.Xml.Tests
 
         public void PositionOnNodeType2(XmlNodeType nodeType)
         {
-            while (DataReader.Read() && DataReader.NodeType != nodeType)
-            {
-            }
+            while (DataReader.Read() && DataReader.NodeType != nodeType) { }
             if (DataReader.EOF)
             {
                 throw new CTestFailedException("Couldn't find XmlNodeType " + nodeType);
@@ -85,7 +83,10 @@ namespace System.Xml.Tests
             return TEST_PASS;
         }
 
-        [Variation("LineNumber/LinePos after Read and NodeType = EntityReference, not expanded", Priority = 0)]
+        [Variation(
+            "LineNumber/LinePos after Read and NodeType = EntityReference, not expanded",
+            Priority = 0
+        )]
         public int TestLinePos7()
         {
             CError.Skip("Skipped");
@@ -109,7 +110,10 @@ namespace System.Xml.Tests
             return TEST_PASS;
         }
 
-        [Variation("LineNumber/LinePos after Read and NodeType = ProcessingInstruction", Priority = 0)]
+        [Variation(
+            "LineNumber/LinePos after Read and NodeType = ProcessingInstruction",
+            Priority = 0
+        )]
         public int TestLinePos9()
         {
             ReloadSource(Path.Combine(TestData, "Common", "LineNumber.xml"));
@@ -122,7 +126,10 @@ namespace System.Xml.Tests
             return TEST_PASS;
         }
 
-        [Variation("LineNumber/LinePos after Read and NodeType = SignificantWhitespace", Priority = 0)]
+        [Variation(
+            "LineNumber/LinePos after Read and NodeType = SignificantWhitespace",
+            Priority = 0
+        )]
         public int TestLinePos10()
         {
             ReloadSource(Path.Combine(TestData, "Common", "LineNumber.xml"));
@@ -156,7 +163,8 @@ namespace System.Xml.Tests
         [Variation("LineNumber/LinePos after Read and NodeType = XmlDeclaration", Priority = 0)]
         public int TestLinePos13()
         {
-            if (IsSubtreeReader()) CError.Skip("Skipped");
+            if (IsSubtreeReader())
+                CError.Skip("Skipped");
             ReloadSource(Path.Combine(TestData, "Common", "LineNumber.xml"));
             PositionOnNodeType2(XmlNodeType.XmlDeclaration);
             CheckPos(0, 0);
@@ -243,7 +251,8 @@ namespace System.Xml.Tests
         [Variation("LineNumber/LinePos after MoveToContent")]
         public int TestLinePos20()
         {
-            if (IsSubtreeReader()) CError.Skip("Skipped");
+            if (IsSubtreeReader())
+                CError.Skip("Skipped");
 
             ReloadSource(Path.Combine(TestData, "Common", "LineNumber.xml"));
 
@@ -264,7 +273,8 @@ namespace System.Xml.Tests
         [Variation("LineNumber/LinePos after ReadBase64 successive calls")]
         public int TestLinePos21()
         {
-            if (IsCustomReader()) CError.Skip("Skipped");
+            if (IsCustomReader())
+                CError.Skip("Skipped");
 
             ReloadSource(Path.Combine(TestData, "Common", "LineNumber.xml"));
             DataReader.PositionOnElement(ST_BASE64);
@@ -284,7 +294,8 @@ namespace System.Xml.Tests
         [Variation("LineNumber/LinePos after ReadBinHex successive calls")]
         public int TestLinePos22()
         {
-            if (IsCustomReader()) CError.Skip("Skipped");
+            if (IsCustomReader())
+                CError.Skip("Skipped");
 
             ReloadSource(Path.Combine(TestData, "Common", "LineNumber.xml"));
             DataReader.PositionOnElement(ST_BINHEX);
@@ -354,12 +365,15 @@ namespace System.Xml.Tests
         public int TestLinePos40()
         {
             ReloadSource(Path.Combine(TestData, "Common", "LineNumber.xml"));
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             CheckPos(0, 0);
             return TEST_PASS;
         }
 
-        [Variation("XmlTextReader:LineNumber and LinePos don't return the right position after ReadInnerXml is called")]
+        [Variation(
+            "XmlTextReader:LineNumber and LinePos don't return the right position after ReadInnerXml is called"
+        )]
         public int TestLinePos41()
         {
             string strXml = "<ROOT><CHARS2>\nxxx<MARKUP/>yyy\n</CHARS2></ROOT>";
@@ -379,7 +393,9 @@ namespace System.Xml.Tests
             return TEST_PASS;
         }
 
-        [Variation("XmlTextReader: LineNum and LinePosition incorrect for EndTag token and text element")]
+        [Variation(
+            "XmlTextReader: LineNum and LinePosition incorrect for EndTag token and text element"
+        )]
         public int TestLinePos42()
         {
             string strXml = "<foo>\n       fooooooo\n</foo>";
@@ -436,7 +452,10 @@ namespace System.Xml.Tests
             CError.Compare(DataReader.Read(), true, "Read");
             CError.Compare(DataReader.MoveToNextAttribute(), true, "MoveToNextAttribute");
             CError.Compare(DataReader.Value, "abc", "MoveToNextAttribute");
-            CError.Compare(DataReader.VerifyNode(XmlNodeType.Attribute, "xmlns:a", "abc"), "xmlns:a");
+            CError.Compare(
+                DataReader.VerifyNode(XmlNodeType.Attribute, "xmlns:a", "abc"),
+                "xmlns:a"
+            );
             CheckPos(0, 0);
             return TEST_PASS;
         }
@@ -462,7 +481,8 @@ namespace System.Xml.Tests
 
             try
             {
-                while (DataReader.Read()) ;
+                while (DataReader.Read())
+                    ;
             }
             catch (XmlException e)
             {
@@ -482,11 +502,16 @@ namespace System.Xml.Tests
                 ReloadSource(filename);
                 DataReader.Read();
             }
-            catch (XmlException) { return TEST_PASS; }
+            catch (XmlException)
+            {
+                return TEST_PASS;
+            }
             return TEST_FAIL;
         }
 
-        [Variation("When an XmlException is thrown both XmlException.LineNumber and XmlTextReader.LineNumber should be same")]
+        [Variation(
+            "When an XmlException is thrown both XmlException.LineNumber and XmlTextReader.LineNumber should be same"
+        )]
         public int XmlExceptionAndXmlTextReaderLineNumberShouldBeSameAfterExceptionIsThrown()
         {
             string filename = Path.Combine(TestData, "Common", "invalid-ucs4.xml");
@@ -495,24 +520,43 @@ namespace System.Xml.Tests
                 try
                 {
                     ReloadSource(filename);
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     return TEST_FAIL;
                 }
                 catch (XmlException e)
                 {
                     CError.WriteLine(e.Message);
-                    CError.WriteLine("Reader Line : {0}, Exception Line {1}", DataReader.LineNumber, e.LinePosition);
-                    CError.Equals(DataReader.LineNumber, IsSubtreeReader() ? 0 : e.LineNumber, "Reader line number and Exception line number must be same");
+                    CError.WriteLine(
+                        "Reader Line : {0}, Exception Line {1}",
+                        DataReader.LineNumber,
+                        e.LinePosition
+                    );
+                    CError.Equals(
+                        DataReader.LineNumber,
+                        IsSubtreeReader() ? 0 : e.LineNumber,
+                        "Reader line number and Exception line number must be same"
+                    );
 
-                    CError.WriteLine("Reader Position : {0}, Exception Position {1}", DataReader.LinePosition, e.LinePosition);
-                    CError.Equals(DataReader.LinePosition, IsSubtreeReader() ? 0 : e.LinePosition, "Reader line position and Exception line position must be same");
+                    CError.WriteLine(
+                        "Reader Position : {0}, Exception Position {1}",
+                        DataReader.LinePosition,
+                        e.LinePosition
+                    );
+                    CError.Equals(
+                        DataReader.LinePosition,
+                        IsSubtreeReader() ? 0 : e.LinePosition,
+                        "Reader line position and Exception line position must be same"
+                    );
                     return TEST_PASS;
                 }
             }
             return TEST_PASS;
         }
 
-        [Variation("Xml(Text)Reader does not increase line number for a new line in element end tag")]
+        [Variation(
+            "Xml(Text)Reader does not increase line number for a new line in element end tag"
+        )]
         public int XmlReaderShouldIncreaseLineNumberAfterNewLineInElementTag()
         {
             string fileName = Path.Combine(TestData, "Common", "Bug411697.xml");
@@ -536,26 +580,50 @@ namespace System.Xml.Tests
             XmlReaderSettings rs = new XmlReaderSettings();
             Stream fs = FilePathUtil.getStream(Path.Combine(TestData, "Common", "Bug297091.xsl"));
             {
-                XmlReader DataReader = ReaderHelper.Create(fs, rs, Path.Combine(TestData, "Common", "Bug297091.xsl"));
+                XmlReader DataReader = ReaderHelper.Create(
+                    fs,
+                    rs,
+                    Path.Combine(TestData, "Common", "Bug297091.xsl")
+                );
 
                 DataReader.Read();
-                if (DataReader.NodeType != XmlNodeType.Element || ((IXmlLineInfo)DataReader).LineNumber != 1 || ((IXmlLineInfo)DataReader).LinePosition != 2)
+                if (
+                    DataReader.NodeType != XmlNodeType.Element
+                    || ((IXmlLineInfo)DataReader).LineNumber != 1
+                    || ((IXmlLineInfo)DataReader).LinePosition != 2
+                )
                     CError.Compare(false, "Failed");
 
                 DataReader.Read();
-                if (DataReader.NodeType != XmlNodeType.Whitespace || ((IXmlLineInfo)DataReader).LineNumber != 4 || ((IXmlLineInfo)DataReader).LinePosition != 2)
+                if (
+                    DataReader.NodeType != XmlNodeType.Whitespace
+                    || ((IXmlLineInfo)DataReader).LineNumber != 4
+                    || ((IXmlLineInfo)DataReader).LinePosition != 2
+                )
                     CError.Compare(false, "Failed");
 
                 DataReader.Read();
-                if (DataReader.NodeType != XmlNodeType.Element || ((IXmlLineInfo)DataReader).LineNumber != 5 || ((IXmlLineInfo)DataReader).LinePosition != 3)
+                if (
+                    DataReader.NodeType != XmlNodeType.Element
+                    || ((IXmlLineInfo)DataReader).LineNumber != 5
+                    || ((IXmlLineInfo)DataReader).LinePosition != 3
+                )
                     CError.Compare(false, "Failed");
 
                 DataReader.Read();
-                if (DataReader.NodeType != XmlNodeType.Whitespace || ((IXmlLineInfo)DataReader).LineNumber != 5 || ((IXmlLineInfo)DataReader).LinePosition != 28)
+                if (
+                    DataReader.NodeType != XmlNodeType.Whitespace
+                    || ((IXmlLineInfo)DataReader).LineNumber != 5
+                    || ((IXmlLineInfo)DataReader).LinePosition != 28
+                )
                     CError.Compare(false, "Failed");
 
                 DataReader.Read();
-                if (DataReader.NodeType != XmlNodeType.EndElement || ((IXmlLineInfo)DataReader).LineNumber != 6 || ((IXmlLineInfo)DataReader).LinePosition != 3)
+                if (
+                    DataReader.NodeType != XmlNodeType.EndElement
+                    || ((IXmlLineInfo)DataReader).LineNumber != 6
+                    || ((IXmlLineInfo)DataReader).LinePosition != 3
+                )
                     CError.Compare(false, "Failed");
             }
             return TEST_PASS;

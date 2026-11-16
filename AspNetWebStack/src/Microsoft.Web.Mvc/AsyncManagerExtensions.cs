@@ -9,10 +9,21 @@ namespace Microsoft.Web.Mvc
 {
     public static class AsyncManagerExtensions
     {
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "An unhandled exception here will bring down the worker process.")]
-        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1409:RemoveUnnecessaryCode",
-            Justification = "The empty lock statement is required for synchronization.")]
-        public static void RegisterTask(this AsyncManager asyncManager, Func<AsyncCallback, IAsyncResult> beginDelegate, Action<IAsyncResult> endDelegate)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "An unhandled exception here will bring down the worker process."
+        )]
+        [SuppressMessage(
+            "StyleCop.CSharp.MaintainabilityRules",
+            "SA1409:RemoveUnnecessaryCode",
+            Justification = "The empty lock statement is required for synchronization."
+        )]
+        public static void RegisterTask(
+            this AsyncManager asyncManager,
+            Func<AsyncCallback, IAsyncResult> beginDelegate,
+            Action<IAsyncResult> endDelegate
+        )
         {
             if (asyncManager == null)
             {

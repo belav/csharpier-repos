@@ -27,7 +27,10 @@ public class SqliteMathTranslator : IMethodCallTranslator
         { typeof(Math).GetMethod(nameof(Math.Asin), new[] { typeof(double) })!, "asin" },
         { typeof(Math).GetMethod(nameof(Math.Asinh), new[] { typeof(double) })!, "asinh" },
         { typeof(Math).GetMethod(nameof(Math.Atan), new[] { typeof(double) })!, "atan" },
-        { typeof(Math).GetMethod(nameof(Math.Atan2), new[] { typeof(double), typeof(double) })!, "atan2" },
+        {
+            typeof(Math).GetMethod(nameof(Math.Atan2), new[] { typeof(double), typeof(double) })!,
+            "atan2"
+        },
         { typeof(Math).GetMethod(nameof(Math.Atanh), new[] { typeof(double) })!, "atanh" },
         { typeof(Math).GetMethod(nameof(Math.Ceiling), new[] { typeof(double) })!, "ceiling" },
         { typeof(Math).GetMethod(nameof(Math.Cos), new[] { typeof(double) })!, "cos" },
@@ -37,7 +40,10 @@ public class SqliteMathTranslator : IMethodCallTranslator
         { typeof(Math).GetMethod(nameof(Math.Log), new[] { typeof(double) })!, "ln" },
         { typeof(Math).GetMethod(nameof(Math.Log2), new[] { typeof(double) })!, "log2" },
         { typeof(Math).GetMethod(nameof(Math.Log10), new[] { typeof(double) })!, "log10" },
-        { typeof(Math).GetMethod(nameof(Math.Pow), new[] { typeof(double), typeof(double) })!, "pow" },
+        {
+            typeof(Math).GetMethod(nameof(Math.Pow), new[] { typeof(double), typeof(double) })!,
+            "pow"
+        },
         { typeof(Math).GetMethod(nameof(Math.Round), new[] { typeof(double) })!, "round" },
         { typeof(Math).GetMethod(nameof(Math.Sign), new[] { typeof(double) })!, "sign" },
         { typeof(Math).GetMethod(nameof(Math.Sign), new[] { typeof(float) })!, "sign" },
@@ -50,14 +56,29 @@ public class SqliteMathTranslator : IMethodCallTranslator
         { typeof(Math).GetMethod(nameof(Math.Tan), new[] { typeof(double) })!, "tan" },
         { typeof(Math).GetMethod(nameof(Math.Tanh), new[] { typeof(double) })!, "tanh" },
         { typeof(Math).GetMethod(nameof(Math.Truncate), new[] { typeof(double) })!, "trunc" },
-        { typeof(double).GetRuntimeMethod(nameof(double.DegreesToRadians), new[] { typeof(double) })!, "radians" },
-        { typeof(double).GetRuntimeMethod(nameof(double.RadiansToDegrees), new[] { typeof(double) })!, "degrees" },
+        {
+            typeof(double).GetRuntimeMethod(
+                nameof(double.DegreesToRadians),
+                new[] { typeof(double) }
+            )!,
+            "radians"
+        },
+        {
+            typeof(double).GetRuntimeMethod(
+                nameof(double.RadiansToDegrees),
+                new[] { typeof(double) }
+            )!,
+            "degrees"
+        },
         { typeof(MathF).GetMethod(nameof(MathF.Acos), new[] { typeof(float) })!, "acos" },
         { typeof(MathF).GetMethod(nameof(MathF.Acosh), new[] { typeof(float) })!, "acosh" },
         { typeof(MathF).GetMethod(nameof(MathF.Asin), new[] { typeof(float) })!, "asin" },
         { typeof(MathF).GetMethod(nameof(MathF.Asinh), new[] { typeof(float) })!, "asinh" },
         { typeof(MathF).GetMethod(nameof(MathF.Atan), new[] { typeof(float) })!, "atan" },
-        { typeof(MathF).GetMethod(nameof(MathF.Atan2), new[] { typeof(float), typeof(float) })!, "atan2" },
+        {
+            typeof(MathF).GetMethod(nameof(MathF.Atan2), new[] { typeof(float), typeof(float) })!,
+            "atan2"
+        },
         { typeof(MathF).GetMethod(nameof(MathF.Atanh), new[] { typeof(float) })!, "atanh" },
         { typeof(MathF).GetMethod(nameof(MathF.Ceiling), new[] { typeof(float) })!, "ceiling" },
         { typeof(MathF).GetMethod(nameof(MathF.Cos), new[] { typeof(float) })!, "cos" },
@@ -67,7 +88,10 @@ public class SqliteMathTranslator : IMethodCallTranslator
         { typeof(MathF).GetMethod(nameof(MathF.Log), new[] { typeof(float) })!, "ln" },
         { typeof(MathF).GetMethod(nameof(MathF.Log10), new[] { typeof(float) })!, "log10" },
         { typeof(MathF).GetMethod(nameof(MathF.Log2), new[] { typeof(float) })!, "log2" },
-        { typeof(MathF).GetMethod(nameof(MathF.Pow), new[] { typeof(float), typeof(float) })!, "pow" },
+        {
+            typeof(MathF).GetMethod(nameof(MathF.Pow), new[] { typeof(float), typeof(float) })!,
+            "pow"
+        },
         { typeof(MathF).GetMethod(nameof(MathF.Round), new[] { typeof(float) })!, "round" },
         { typeof(MathF).GetMethod(nameof(MathF.Sin), new[] { typeof(float) })!, "sin" },
         { typeof(MathF).GetMethod(nameof(MathF.Sinh), new[] { typeof(float) })!, "sinh" },
@@ -75,20 +99,32 @@ public class SqliteMathTranslator : IMethodCallTranslator
         { typeof(MathF).GetMethod(nameof(MathF.Tan), new[] { typeof(float) })!, "tan" },
         { typeof(MathF).GetMethod(nameof(MathF.Tanh), new[] { typeof(float) })!, "tanh" },
         { typeof(MathF).GetMethod(nameof(MathF.Truncate), new[] { typeof(float) })!, "trunc" },
-        { typeof(float).GetRuntimeMethod(nameof(float.DegreesToRadians), new[] { typeof(float) })!, "radians" },
-        { typeof(float).GetRuntimeMethod(nameof(float.RadiansToDegrees), new[] { typeof(float) })!, "degrees" }
+        {
+            typeof(float).GetRuntimeMethod(
+                nameof(float.DegreesToRadians),
+                new[] { typeof(float) }
+            )!,
+            "radians"
+        },
+        {
+            typeof(float).GetRuntimeMethod(
+                nameof(float.RadiansToDegrees),
+                new[] { typeof(float) }
+            )!,
+            "degrees"
+        },
     };
 
     private static readonly List<MethodInfo> _roundWithDecimalMethods = new()
     {
         typeof(Math).GetMethod(nameof(Math.Round), new[] { typeof(double), typeof(int) })!,
-        typeof(MathF).GetMethod(nameof(MathF.Round), new[] { typeof(float), typeof(int) })!
+        typeof(MathF).GetMethod(nameof(MathF.Round), new[] { typeof(float), typeof(int) })!,
     };
 
     private static readonly List<MethodInfo> _logWithBaseMethods = new()
     {
         typeof(Math).GetMethod(nameof(Math.Log), new[] { typeof(double), typeof(double) })!,
-        typeof(MathF).GetMethod(nameof(MathF.Log), new[] { typeof(float), typeof(float) })!
+        typeof(MathF).GetMethod(nameof(MathF.Log), new[] { typeof(float), typeof(float) })!,
     };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -114,7 +150,8 @@ public class SqliteMathTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (SupportedMethods.TryGetValue(method, out var sqlFunctionName))
         {
@@ -129,7 +166,8 @@ public class SqliteMathTranslator : IMethodCallTranslator
                 nullable: true,
                 argumentsPropagateNullability: newArguments.Select(_ => true).ToList(),
                 method.ReturnType,
-                typeMapping);
+                typeMapping
+            );
         }
 
         if (_roundWithDecimalMethods.Contains(method))
@@ -140,7 +178,8 @@ public class SqliteMathTranslator : IMethodCallTranslator
                 nullable: true,
                 argumentsPropagateNullability: new[] { true, true },
                 method.ReturnType,
-                arguments[0].TypeMapping);
+                arguments[0].TypeMapping
+            );
         }
 
         if (_logWithBaseMethods.Contains(method))
@@ -153,12 +192,14 @@ public class SqliteMathTranslator : IMethodCallTranslator
                 "log",
                 new[]
                 {
-                    _sqlExpressionFactory.ApplyTypeMapping(newBase, typeMapping), _sqlExpressionFactory.ApplyTypeMapping(a, typeMapping)
+                    _sqlExpressionFactory.ApplyTypeMapping(newBase, typeMapping),
+                    _sqlExpressionFactory.ApplyTypeMapping(a, typeMapping),
                 },
                 nullable: true,
                 argumentsPropagateNullability: new[] { true, true },
                 method.ReturnType,
-                typeMapping);
+                typeMapping
+            );
         }
 
         if (method.DeclaringType == typeof(Math))
@@ -166,7 +207,10 @@ public class SqliteMathTranslator : IMethodCallTranslator
             if (method.Name == nameof(Math.Min))
             {
                 var success = _sqlExpressionFactory.TryCreateLeast(
-                    new[] { arguments[0], arguments[1] }, method.ReturnType, out var leastExpression);
+                    new[] { arguments[0], arguments[1] },
+                    method.ReturnType,
+                    out var leastExpression
+                );
                 Check.DebugAssert(success, "Couldn't generate min");
                 return leastExpression;
             }
@@ -174,7 +218,10 @@ public class SqliteMathTranslator : IMethodCallTranslator
             if (method.Name == nameof(Math.Max))
             {
                 var success = _sqlExpressionFactory.TryCreateGreatest(
-                    new[] { arguments[0], arguments[1] }, method.ReturnType, out var leastExpression);
+                    new[] { arguments[0], arguments[1] },
+                    method.ReturnType,
+                    out var leastExpression
+                );
                 Check.DebugAssert(success, "Couldn't generate max");
                 return leastExpression;
             }

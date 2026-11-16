@@ -52,7 +52,10 @@ internal static partial class Interop
 {
     internal static partial class AndroidCrypto
     {
-        [DllImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_EcKeyCreateByOid")]
+        [DllImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_EcKeyCreateByOid"
+        )]
         internal static extern System.IntPtr EcKeyCreateByOid(string oid);
 
         [DllImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_EcKeyDestroy")]

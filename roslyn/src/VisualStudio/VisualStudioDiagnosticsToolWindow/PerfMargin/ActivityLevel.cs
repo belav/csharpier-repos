@@ -12,7 +12,7 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
 {
     /// <summary>
     /// Represents whether each feature is active or inactive.
-    /// 
+    ///
     /// The IsActive property indicates whether a given feature is currently in the
     /// middle of an operation.  Features can be grouped into a parent ActivityLevel
     /// which is active when any of its children are active.
@@ -45,8 +45,7 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
 
         public string Name { get; }
 
-        public bool IsActive
-            => _isActive > 0;
+        public bool IsActive => _isActive > 0;
 
         public void Start()
         {
@@ -74,7 +73,9 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
         {
             if (_children != null)
             {
-                _children.Sort(new Comparison<ActivityLevel>((a, b) => string.CompareOrdinal(a.Name, b.Name)));
+                _children.Sort(
+                    new Comparison<ActivityLevel>((a, b) => string.CompareOrdinal(a.Name, b.Name))
+                );
                 foreach (var child in _children)
                 {
                     child.SortChildren();
@@ -87,7 +88,6 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
             IsActiveChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        public IReadOnlyCollection<ActivityLevel> Children
-            => _children;
+        public IReadOnlyCollection<ActivityLevel> Children => _children;
     }
 }

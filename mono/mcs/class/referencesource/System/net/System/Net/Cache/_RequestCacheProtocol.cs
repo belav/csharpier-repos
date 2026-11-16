@@ -22,80 +22,110 @@ Revision History:
     Aug 25 2003 - moved into separate file and revised as per Whidbey-M3 spec.
 
 --*/
-namespace System.Net.Cache {
+namespace System.Net.Cache
+{
     using System;
-    using System.Diagnostics;
-    using System.Text;
-    using System.IO;
     using System.Collections.Specialized;
-    using System.Threading;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
+    using System.Text;
+    using System.Threading;
 
     //
     //
     //
-    internal class RequestCacheProtocol {
-
+    internal class RequestCacheProtocol
+    {
         private CacheValidationStatus _ProtocolStatus;
-        private Exception            _ProtocolException;
-        private Stream               _ResponseStream;
-        private long                 _ResponseStreamLength;
+        private Exception _ProtocolException;
+        private Stream _ResponseStream;
+        private long _ResponseStreamLength;
         private RequestCacheValidator _Validator;
-        private RequestCache         _RequestCache;
-        private bool                 _IsCacheFresh;
-        private bool                 _CanTakeNewRequest;
+        private RequestCache _RequestCache;
+        private bool _IsCacheFresh;
+        private bool _CanTakeNewRequest;
 
-//      private string[]             _ResponseMetadata;
-//      private string               _CacheRetrieveKey;
-//      private string               _CacheStoreKey;
+        //      private string[]             _ResponseMetadata;
+        //      private string               _CacheRetrieveKey;
+        //      private string               _CacheStoreKey;
 
         //
         // Public properties
         //
-        internal CacheValidationStatus    ProtocolStatus          {get {return _ProtocolStatus;}}
-        internal Exception                ProtocolException       {get {return _ProtocolException;}}
-        internal Stream                   ResponseStream          {get {return _ResponseStream;}}
-        internal long                     ResponseStreamLength     {get {return _ResponseStreamLength;}}
-        internal RequestCacheValidator    Validator               {get {return _Validator;}}
-        internal bool                     IsCacheFresh            {get {return _Validator != null && _Validator.CacheFreshnessStatus == CacheFreshnessStatus.Fresh;}}
+        internal CacheValidationStatus ProtocolStatus
+        {
+            get { return _ProtocolStatus; }
+        }
+        internal Exception ProtocolException
+        {
+            get { return _ProtocolException; }
+        }
+        internal Stream ResponseStream
+        {
+            get { return _ResponseStream; }
+        }
+        internal long ResponseStreamLength
+        {
+            get { return _ResponseStreamLength; }
+        }
+        internal RequestCacheValidator Validator
+        {
+            get { return _Validator; }
+        }
+        internal bool IsCacheFresh
+        {
+            get
+            {
+                return _Validator != null
+                    && _Validator.CacheFreshnessStatus == CacheFreshnessStatus.Fresh;
+            }
+        }
 
-//      internal string[]                 ResponseMetadata        {get {return _ResponseMetadata;}}
-//      internal string                   CacheRetrieveKey        {get {return _CacheRetrieveKey;}}
-//      internal string                   CacheStoreKey           {get {return _CacheStoreKey;}}
+        //      internal string[]                 ResponseMetadata        {get {return _ResponseMetadata;}}
+        //      internal string                   CacheRetrieveKey        {get {return _CacheRetrieveKey;}}
+        //      internal string                   CacheStoreKey           {get {return _CacheStoreKey;}}
 
         //
         // Public methods
         //
         internal RequestCacheProtocol(RequestCache cache, RequestCacheValidator defaultValidator)
         {
-            _RequestCache   = cache;
-            _Validator      = defaultValidator;
+            _RequestCache = cache;
+            _Validator = defaultValidator;
             _CanTakeNewRequest = true;
         }
-        //
-        internal CacheValidationStatus  GetRetrieveStatus (Uri cacheUri, WebRequest request)
-        {
 
+        //
+        internal CacheValidationStatus GetRetrieveStatus(Uri cacheUri, WebRequest request)
+        {
             if (cacheUri == null)
                 throw new ArgumentNullException("cacheUri");
 
             if (request == null)
-               throw new ArgumentNullException("request");
+                throw new ArgumentNullException("request");
 
-            if (!_CanTakeNewRequest || _ProtocolStatus == CacheValidationStatus.RetryResponseFromServer)
+            if (
+                !_CanTakeNewRequest
+                || _ProtocolStatus == CacheValidationStatus.RetryResponseFromServer
+            )
                 return CacheValidationStatus.Continue;
             _CanTakeNewRequest = false;
 
-
             // Reset protocol state
-            _ResponseStream       = null;
+            _ResponseStream = null;
             _ResponseStreamLength = 0L;
-            _ProtocolStatus       = CacheValidationStatus.Continue;
-            _ProtocolException    = null;
+            _ProtocolStatus = CacheValidationStatus.Continue;
+            _ProtocolException = null;
 
-            if(Logging.On) Logging.Enter(Logging.RequestCache, this, "GetRetrieveStatus", request);
-            try {
-                if (request.CachePolicy == null || request.CachePolicy.Level == RequestCacheLevel.BypassCache)
+            if (Logging.On)
+                Logging.Enter(Logging.RequestCache, this, "GetRetrieveStatus", request);
+            try
+            {
+                if (
+                    request.CachePolicy == null
+                    || request.CachePolicy.Level == RequestCacheLevel.BypassCache
+                )
                 {
                     _ProtocolStatus = CacheValidationStatus.DoNotUseCache;
                     return _ProtocolStatus;
@@ -109,24 +139,40 @@ namespace System.Net.Cache {
 
                 _Validator.FetchRequest(cacheUri, request);
 
-                switch(_ProtocolStatus = ValidateRequest())
+                switch (_ProtocolStatus = ValidateRequest())
                 {
-                case CacheValidationStatus.Continue:            // This is a green light for cache protocol
-                    break;
+                    case CacheValidationStatus.Continue: // This is a green light for cache protocol
+                        break;
 
-                case CacheValidationStatus.DoNotTakeFromCache:  // no cache but response can be cached
-                case CacheValidationStatus.DoNotUseCache:       // ignore cache entirely
-                    break;
+                    case CacheValidationStatus.DoNotTakeFromCache: // no cache but response can be cached
+                    case CacheValidationStatus.DoNotUseCache: // ignore cache entirely
+                        break;
 
-                case CacheValidationStatus.Fail:
-                    _ProtocolException = new InvalidOperationException(SR.GetString(SR.net_cache_validator_fail, "ValidateRequest"));
-                    break;
+                    case CacheValidationStatus.Fail:
+                        _ProtocolException = new InvalidOperationException(
+                            SR.GetString(SR.net_cache_validator_fail, "ValidateRequest")
+                        );
+                        break;
 
-                default:
-                    _ProtocolStatus = CacheValidationStatus.Fail;
-                    _ProtocolException = new InvalidOperationException(SR.GetString(SR.net_cache_validator_result, "ValidateRequest", _Validator.ValidationStatus.ToString()));
-                    if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_unexpected_status, "ValidateRequest()", _Validator.ValidationStatus.ToString()));
-                    break;
+                    default:
+                        _ProtocolStatus = CacheValidationStatus.Fail;
+                        _ProtocolException = new InvalidOperationException(
+                            SR.GetString(
+                                SR.net_cache_validator_result,
+                                "ValidateRequest",
+                                _Validator.ValidationStatus.ToString()
+                            )
+                        );
+                        if (Logging.On)
+                            Logging.PrintError(
+                                Logging.RequestCache,
+                                SR.GetString(
+                                    SR.net_log_cache_unexpected_status,
+                                    "ValidateRequest()",
+                                    _Validator.ValidationStatus.ToString()
+                                )
+                            );
+                        break;
                 }
 
                 if (_ProtocolStatus != CacheValidationStatus.Continue)
@@ -137,24 +183,49 @@ namespace System.Net.Cache {
                 //
                 CheckRetrieveBeforeSubmit();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 _ProtocolException = e;
                 _ProtocolStatus = CacheValidationStatus.Fail;
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException)
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
                     throw;
 
-                if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_object_and_exception, "CacheProtocol#" + this.GetHashCode().ToString(NumberFormatInfo.InvariantInfo), (e is WebException? e.Message: e.ToString())));
+                if (Logging.On)
+                    Logging.PrintError(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_object_and_exception,
+                            "CacheProtocol#"
+                                + this.GetHashCode().ToString(NumberFormatInfo.InvariantInfo),
+                            (e is WebException ? e.Message : e.ToString())
+                        )
+                    );
             }
-            finally {
-                if(Logging.On) Logging.Exit(Logging.RequestCache, this, "GetRetrieveStatus", "result = " + _ProtocolStatus.ToString());
+            finally
+            {
+                if (Logging.On)
+                    Logging.Exit(
+                        Logging.RequestCache,
+                        this,
+                        "GetRetrieveStatus",
+                        "result = " + _ProtocolStatus.ToString()
+                    );
             }
             return _ProtocolStatus;
         }
+
         //
         // This optional method is only for protocols supporting a revalidation concept
         // For a retried request this method must be called again.
         //
-        internal CacheValidationStatus GetRevalidateStatus (WebResponse response, Stream responseStream)
+        internal CacheValidationStatus GetRevalidateStatus(
+            WebResponse response,
+            Stream responseStream
+        )
         {
             if (response == null)
                 throw new ArgumentNullException("response");
@@ -169,29 +240,54 @@ namespace System.Net.Cache {
                 return _ProtocolStatus;
             }
 
-            try {
-                if(Logging.On) Logging.Enter(Logging.RequestCache, this, "GetRevalidateStatus", (_Validator == null? null: _Validator.Request));
+            try
+            {
+                if (Logging.On)
+                    Logging.Enter(
+                        Logging.RequestCache,
+                        this,
+                        "GetRevalidateStatus",
+                        (_Validator == null ? null : _Validator.Request)
+                    );
 
                 _Validator.FetchResponse(response);
 
-                if (_ProtocolStatus != CacheValidationStatus.Continue && _ProtocolStatus != CacheValidationStatus.RetryResponseFromServer)
+                if (
+                    _ProtocolStatus != CacheValidationStatus.Continue
+                    && _ProtocolStatus != CacheValidationStatus.RetryResponseFromServer
+                )
                 {
-                    if(Logging.On) Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_revalidation_not_needed, "GetRevalidateStatus()"));
+                    if (Logging.On)
+                        Logging.PrintInfo(
+                            Logging.RequestCache,
+                            SR.GetString(
+                                SR.net_log_cache_revalidation_not_needed,
+                                "GetRevalidateStatus()"
+                            )
+                        );
                     return _ProtocolStatus;
                 }
                 CheckRetrieveOnResponse(responseStream);
             }
-            finally {
-                if(Logging.On) Logging.Exit(Logging.RequestCache, this, "GetRevalidateStatus", "result = " + _ProtocolStatus.ToString());
+            finally
+            {
+                if (Logging.On)
+                    Logging.Exit(
+                        Logging.RequestCache,
+                        this,
+                        "GetRevalidateStatus",
+                        "result = " + _ProtocolStatus.ToString()
+                    );
             }
             return _ProtocolStatus;
         }
+
         //
         // Returns UpdateResponseInformation if passed response stream has to be replaced (cache is updated in some way)
         // Returns Fail if request is to fail
         // Any other return value should be ignored
         //
-        internal CacheValidationStatus GetUpdateStatus (WebResponse response, Stream responseStream)
+        internal CacheValidationStatus GetUpdateStatus(WebResponse response, Stream responseStream)
         {
             if (response == null)
                 throw new ArgumentNullException("response");
@@ -199,8 +295,10 @@ namespace System.Net.Cache {
             if (_ProtocolStatus == CacheValidationStatus.DoNotUseCache)
                 return CacheValidationStatus.DoNotUseCache;
 
-            try {
-                if(Logging.On) Logging.Enter(Logging.RequestCache, this, "GetUpdateStatus", null);
+            try
+            {
+                if (Logging.On)
+                    Logging.Enter(Logging.RequestCache, this, "GetUpdateStatus", null);
 
                 if (_Validator.Response == null)
                     _Validator.FetchResponse(response);
@@ -211,29 +309,62 @@ namespace System.Net.Cache {
                     return _ProtocolStatus;
                 }
 
-                if (_ProtocolStatus != CacheValidationStatus.DoNotTakeFromCache &&
-                    _ProtocolStatus != CacheValidationStatus.ReturnCachedResponse &&
-                    _ProtocolStatus != CacheValidationStatus.CombineCachedAndServerResponse)
+                if (
+                    _ProtocolStatus != CacheValidationStatus.DoNotTakeFromCache
+                    && _ProtocolStatus != CacheValidationStatus.ReturnCachedResponse
+                    && _ProtocolStatus != CacheValidationStatus.CombineCachedAndServerResponse
+                )
                 {
-                    if(Logging.On) Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_not_updated_based_on_cache_protocol_status, "GetUpdateStatus()", _ProtocolStatus.ToString()));
+                    if (Logging.On)
+                        Logging.PrintInfo(
+                            Logging.RequestCache,
+                            SR.GetString(
+                                SR.net_log_cache_not_updated_based_on_cache_protocol_status,
+                                "GetUpdateStatus()",
+                                _ProtocolStatus.ToString()
+                            )
+                        );
                     return _ProtocolStatus;
                 }
 
                 CheckUpdateOnResponse(responseStream);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 _ProtocolException = e;
                 _ProtocolStatus = CacheValidationStatus.Fail;
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
+                {
                     throw;
                 }
-                if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_object_and_exception, "CacheProtocol#" + this.GetHashCode().ToString(NumberFormatInfo.InvariantInfo), (e is WebException? e.Message: e.ToString())));
+                if (Logging.On)
+                    Logging.PrintError(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_object_and_exception,
+                            "CacheProtocol#"
+                                + this.GetHashCode().ToString(NumberFormatInfo.InvariantInfo),
+                            (e is WebException ? e.Message : e.ToString())
+                        )
+                    );
             }
-            finally {
-                if(Logging.On)Logging.Exit(Logging.RequestCache, this, "GetUpdateStatus", "result = " + _ProtocolStatus.ToString());
+            finally
+            {
+                if (Logging.On)
+                    Logging.Exit(
+                        Logging.RequestCache,
+                        this,
+                        "GetUpdateStatus",
+                        "result = " + _ProtocolStatus.ToString()
+                    );
             }
             return _ProtocolStatus;
         }
+
         //
         // This must be the last call before starting a new request on this protocol instance
         //
@@ -254,19 +385,42 @@ namespace System.Net.Cache {
             Stream stream = _ResponseStream;
             if (stream != null)
             {
-                try {
-                    if(Logging.On) Logging.PrintWarning(Logging.RequestCache, SR.GetString(SR.net_log_cache_closing_cache_stream, "CacheProtocol#" + this.GetHashCode().ToString(NumberFormatInfo.InvariantInfo), "Abort()", stream.GetType().FullName, _Validator.CacheKey));
+                try
+                {
+                    if (Logging.On)
+                        Logging.PrintWarning(
+                            Logging.RequestCache,
+                            SR.GetString(
+                                SR.net_log_cache_closing_cache_stream,
+                                "CacheProtocol#"
+                                    + this.GetHashCode().ToString(NumberFormatInfo.InvariantInfo),
+                                "Abort()",
+                                stream.GetType().FullName,
+                                _Validator.CacheKey
+                            )
+                        );
                     ICloseEx closeEx = stream as ICloseEx;
                     if (closeEx != null)
                         closeEx.CloseEx(CloseExState.Abort | CloseExState.Silent);
                     else
                         stream.Close();
                 }
-                catch(Exception e) {
+                catch (Exception e)
+                {
+                    if (NclUtilities.IsFatal(e))
+                        throw;
 
-                    if (NclUtilities.IsFatal(e)) throw;
-
-                    if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_exception_ignored, "CacheProtocol#" + this.GetHashCode().ToString(NumberFormatInfo.InvariantInfo), "stream.Close()", e.ToString()));
+                    if (Logging.On)
+                        Logging.PrintError(
+                            Logging.RequestCache,
+                            SR.GetString(
+                                SR.net_log_cache_exception_ignored,
+                                "CacheProtocol#"
+                                    + this.GetHashCode().ToString(NumberFormatInfo.InvariantInfo),
+                                "stream.Close()",
+                                e.ToString()
+                            )
+                        );
                 }
             }
             Reset();
@@ -279,12 +433,16 @@ namespace System.Net.Cache {
         //
         // This method may be invoked as part of the request submission but before issuing a live request
         //
-        private void CheckRetrieveBeforeSubmit() {
+        private void CheckRetrieveBeforeSubmit()
+        {
+            GlobalLog.Assert(
+                _ProtocolStatus == CacheValidationStatus.Continue,
+                "CheckRetrieveBeforeSubmit()|Unexpected _ProtocolStatus = {0}",
+                _ProtocolStatus
+            );
 
-            GlobalLog.Assert(_ProtocolStatus == CacheValidationStatus.Continue, "CheckRetrieveBeforeSubmit()|Unexpected _ProtocolStatus = {0}", _ProtocolStatus);
-
-            try {
-
+            try
+            {
                 while (true)
                 {
                     RequestCacheEntry cacheEntry;
@@ -298,7 +456,10 @@ namespace System.Net.Cache {
 
                     if (_Validator.StrictCacheErrors)
                     {
-                        _Validator.CacheStream = _RequestCache.Retrieve(_Validator.CacheKey, out cacheEntry);
+                        _Validator.CacheStream = _RequestCache.Retrieve(
+                            _Validator.CacheKey,
+                            out cacheEntry
+                        );
                     }
                     else
                     {
@@ -326,14 +487,26 @@ namespace System.Net.Cache {
                     _ProtocolStatus = ValidateCache();
 
                     // This will tell us what to do next
-                    switch (_ProtocolStatus) {
-
-                    case CacheValidationStatus.ReturnCachedResponse:
-                            if (_Validator.CacheStream == null || _Validator.CacheStream == Stream.Null)
+                    switch (_ProtocolStatus)
+                    {
+                        case CacheValidationStatus.ReturnCachedResponse:
+                            if (
+                                _Validator.CacheStream == null
+                                || _Validator.CacheStream == Stream.Null
+                            )
                             {
-                                if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_no_cache_entry, "ValidateCache()"));
+                                if (Logging.On)
+                                    Logging.PrintError(
+                                        Logging.RequestCache,
+                                        SR.GetString(
+                                            SR.net_log_cache_no_cache_entry,
+                                            "ValidateCache()"
+                                        )
+                                    );
                                 _ProtocolStatus = CacheValidationStatus.Fail;
-                                _ProtocolException = new InvalidOperationException(SR.GetString(SR.net_cache_no_stream, _Validator.CacheKey));
+                                _ProtocolException = new InvalidOperationException(
+                                    SR.GetString(SR.net_cache_no_stream, _Validator.CacheKey)
+                                );
                                 break;
                             }
 
@@ -342,105 +515,195 @@ namespace System.Net.Cache {
                             // The entry can now be replaced as we are not going for cache entry metadata-only  update
                             _RequestCache.UnlockEntry(_Validator.CacheStream);
 
-                            if (_Validator.CacheStreamOffset != 0L || _Validator.CacheStreamLength != _Validator.CacheEntry.StreamSize)
+                            if (
+                                _Validator.CacheStreamOffset != 0L
+                                || _Validator.CacheStreamLength != _Validator.CacheEntry.StreamSize
+                            )
                             {
-                                stream =  new RangeStream(stream, _Validator.CacheStreamOffset, _Validator.CacheStreamLength);
-                                if(Logging.On) Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_returned_range_cache, "ValidateCache()", _Validator.CacheStreamOffset, _Validator.CacheStreamLength));
+                                stream = new RangeStream(
+                                    stream,
+                                    _Validator.CacheStreamOffset,
+                                    _Validator.CacheStreamLength
+                                );
+                                if (Logging.On)
+                                    Logging.PrintInfo(
+                                        Logging.RequestCache,
+                                        SR.GetString(
+                                            SR.net_log_cache_returned_range_cache,
+                                            "ValidateCache()",
+                                            _Validator.CacheStreamOffset,
+                                            _Validator.CacheStreamLength
+                                        )
+                                    );
                             }
                             _ResponseStream = stream;
                             _ResponseStreamLength = _Validator.CacheStreamLength;
                             break;
 
-                    case CacheValidationStatus.Continue:
+                        case CacheValidationStatus.Continue:
                             // copy a cache stream ref
                             _ResponseStream = _Validator.CacheStream;
                             break;
 
-                    case CacheValidationStatus.RetryResponseFromCache:
+                        case CacheValidationStatus.RetryResponseFromCache:
                             // loop thought cache retrieve
                             continue;
 
-                    case CacheValidationStatus.DoNotTakeFromCache:
-                    case CacheValidationStatus.DoNotUseCache:
+                        case CacheValidationStatus.DoNotTakeFromCache:
+                        case CacheValidationStatus.DoNotUseCache:
                             break;
 
-                    case CacheValidationStatus.Fail:
-                            _ProtocolException = new InvalidOperationException(SR.GetString(SR.net_cache_validator_fail, "ValidateCache"));
+                        case CacheValidationStatus.Fail:
+                            _ProtocolException = new InvalidOperationException(
+                                SR.GetString(SR.net_cache_validator_fail, "ValidateCache")
+                            );
                             break;
 
-                    default:
-                        _ProtocolStatus = CacheValidationStatus.Fail;
-                        _ProtocolException = new InvalidOperationException(SR.GetString(SR.net_cache_validator_result, "ValidateCache", _Validator.ValidationStatus.ToString()));
-                            if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_unexpected_status, "ValidateCache()", _Validator.ValidationStatus.ToString()));
+                        default:
+                            _ProtocolStatus = CacheValidationStatus.Fail;
+                            _ProtocolException = new InvalidOperationException(
+                                SR.GetString(
+                                    SR.net_cache_validator_result,
+                                    "ValidateCache",
+                                    _Validator.ValidationStatus.ToString()
+                                )
+                            );
+                            if (Logging.On)
+                                Logging.PrintError(
+                                    Logging.RequestCache,
+                                    SR.GetString(
+                                        SR.net_log_cache_unexpected_status,
+                                        "ValidateCache()",
+                                        _Validator.ValidationStatus.ToString()
+                                    )
+                                );
                             break;
                     }
                     break;
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 _ProtocolStatus = CacheValidationStatus.Fail;
                 _ProtocolException = e;
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
+                {
                     throw;
                 }
-                if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_object_and_exception, "CacheProtocol#" + this.GetHashCode().ToString(NumberFormatInfo.InvariantInfo), (e is WebException? e.Message: e.ToString())));
+                if (Logging.On)
+                    Logging.PrintError(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_object_and_exception,
+                            "CacheProtocol#"
+                                + this.GetHashCode().ToString(NumberFormatInfo.InvariantInfo),
+                            (e is WebException ? e.Message : e.ToString())
+                        )
+                    );
             }
-            finally {
+            finally
+            {
                 // This is to release cache entry on error
-                if (_ResponseStream == null && _Validator.CacheStream != null && _Validator.CacheStream != Stream.Null)
+                if (
+                    _ResponseStream == null
+                    && _Validator.CacheStream != null
+                    && _Validator.CacheStream != Stream.Null
+                )
                 {
                     _Validator.CacheStream.Close();
                     _Validator.CacheStream = Stream.Null;
                 }
             }
         }
-        //
-        private void CheckRetrieveOnResponse(Stream responseStream) {
 
-            GlobalLog.Assert(_ProtocolStatus == CacheValidationStatus.Continue || _ProtocolStatus == CacheValidationStatus.RetryResponseFromServer, "CheckRetrieveOnResponse()|Unexpected _ProtocolStatus = ", _ProtocolStatus);
+        //
+        private void CheckRetrieveOnResponse(Stream responseStream)
+        {
+            GlobalLog.Assert(
+                _ProtocolStatus == CacheValidationStatus.Continue
+                    || _ProtocolStatus == CacheValidationStatus.RetryResponseFromServer,
+                "CheckRetrieveOnResponse()|Unexpected _ProtocolStatus = ",
+                _ProtocolStatus
+            );
             // if something goes wrong we release cache stream if any exists
             bool closeCacheStream = true;
 
-            try {
+            try
+            {
                 // This will inspect the live response on the correctness matter
-                switch (_ProtocolStatus = ValidateResponse()) {
-
-                case CacheValidationStatus.Continue:
+                switch (_ProtocolStatus = ValidateResponse())
+                {
+                    case CacheValidationStatus.Continue:
                         closeCacheStream = false;
                         // The response looks good
                         break;
 
-                case CacheValidationStatus.RetryResponseFromServer:
+                    case CacheValidationStatus.RetryResponseFromServer:
                         // The response is broken will need to retry or give up
                         closeCacheStream = false;
                         break;
 
-                case CacheValidationStatus.Fail:
+                    case CacheValidationStatus.Fail:
                         _ProtocolStatus = CacheValidationStatus.Fail;
-                        _ProtocolException = new InvalidOperationException(SR.GetString(SR.net_cache_validator_fail, "ValidateResponse"));
+                        _ProtocolException = new InvalidOperationException(
+                            SR.GetString(SR.net_cache_validator_fail, "ValidateResponse")
+                        );
                         break;
 
-                case CacheValidationStatus.DoNotUseCache:
+                    case CacheValidationStatus.DoNotUseCache:
                         break;
 
-                default:
-                    _ProtocolStatus = CacheValidationStatus.Fail;
-                    _ProtocolException = new InvalidOperationException(SR.GetString(SR.net_cache_validator_result, "ValidateResponse", _Validator.ValidationStatus.ToString()));
-                    if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_unexpected_status, "ValidateResponse()", _Validator.ValidationStatus.ToString()));
-                    break;
+                    default:
+                        _ProtocolStatus = CacheValidationStatus.Fail;
+                        _ProtocolException = new InvalidOperationException(
+                            SR.GetString(
+                                SR.net_cache_validator_result,
+                                "ValidateResponse",
+                                _Validator.ValidationStatus.ToString()
+                            )
+                        );
+                        if (Logging.On)
+                            Logging.PrintError(
+                                Logging.RequestCache,
+                                SR.GetString(
+                                    SR.net_log_cache_unexpected_status,
+                                    "ValidateResponse()",
+                                    _Validator.ValidationStatus.ToString()
+                                )
+                            );
+                        break;
                 }
-
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 closeCacheStream = true;
                 _ProtocolException = e;
                 _ProtocolStatus = CacheValidationStatus.Fail;
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
+                {
                     throw;
                 }
-                if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_object_and_exception, "CacheProtocol#" + this.GetHashCode().ToString(NumberFormatInfo.InvariantInfo), (e is WebException? e.Message: e.ToString())));
+                if (Logging.On)
+                    Logging.PrintError(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_object_and_exception,
+                            "CacheProtocol#"
+                                + this.GetHashCode().ToString(NumberFormatInfo.InvariantInfo),
+                            (e is WebException ? e.Message : e.ToString())
+                        )
+                    );
             }
-            finally {
+            finally
+            {
                 // This is to release cache entry in case we are not interested in it
                 if (closeCacheStream && _ResponseStream != null)
                 {
@@ -450,7 +713,8 @@ namespace System.Net.Cache {
                 }
             }
 
-            if (_ProtocolStatus != CacheValidationStatus.Continue) {
+            if (_ProtocolStatus != CacheValidationStatus.Continue)
+            {
                 return;
             }
 
@@ -458,48 +722,83 @@ namespace System.Net.Cache {
             // only CacheValidationStatus.Continue goes here with closeCacheStream == false
             //
 
-            try {
+            try
+            {
                 // This will tell us what to do next
                 // Note this is a second time question to the caching protocol about a cached entry
                 // Except that we now have live response to consider
                 //
                 // The validator can at any time replace the  cache stream and update cache Metadata (aka headers).
                 //
-                switch (_ProtocolStatus = RevalidateCache()) {
-
-                case CacheValidationStatus.DoNotUseCache:
-                case CacheValidationStatus.RemoveFromCache:
-                case CacheValidationStatus.DoNotTakeFromCache:
+                switch (_ProtocolStatus = RevalidateCache())
+                {
+                    case CacheValidationStatus.DoNotUseCache:
+                    case CacheValidationStatus.RemoveFromCache:
+                    case CacheValidationStatus.DoNotTakeFromCache:
                         closeCacheStream = true;
                         break;
 
-                case CacheValidationStatus.ReturnCachedResponse:
+                    case CacheValidationStatus.ReturnCachedResponse:
                         if (_Validator.CacheStream == null || _Validator.CacheStream == Stream.Null)
                         {
                             _ProtocolStatus = CacheValidationStatus.Fail;
-                            _ProtocolException = new InvalidOperationException(SR.GetString(SR.net_cache_no_stream, _Validator.CacheKey));
-                            if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_null_cached_stream, "RevalidateCache()"));
+                            _ProtocolException = new InvalidOperationException(
+                                SR.GetString(SR.net_cache_no_stream, _Validator.CacheKey)
+                            );
+                            if (Logging.On)
+                                Logging.PrintError(
+                                    Logging.RequestCache,
+                                    SR.GetString(
+                                        SR.net_log_cache_null_cached_stream,
+                                        "RevalidateCache()"
+                                    )
+                                );
                             break;
                         }
 
                         Stream stream = _Validator.CacheStream;
 
-                        if (_Validator.CacheStreamOffset != 0L || _Validator.CacheStreamLength != _Validator.CacheEntry.StreamSize)
+                        if (
+                            _Validator.CacheStreamOffset != 0L
+                            || _Validator.CacheStreamLength != _Validator.CacheEntry.StreamSize
+                        )
                         {
-                            stream =  new RangeStream(stream, _Validator.CacheStreamOffset, _Validator.CacheStreamLength);
-                            if(Logging.On) Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_returned_range_cache, "RevalidateCache()", _Validator.CacheStreamOffset, _Validator.CacheStreamLength));
+                            stream = new RangeStream(
+                                stream,
+                                _Validator.CacheStreamOffset,
+                                _Validator.CacheStreamLength
+                            );
+                            if (Logging.On)
+                                Logging.PrintInfo(
+                                    Logging.RequestCache,
+                                    SR.GetString(
+                                        SR.net_log_cache_returned_range_cache,
+                                        "RevalidateCache()",
+                                        _Validator.CacheStreamOffset,
+                                        _Validator.CacheStreamLength
+                                    )
+                                );
                         }
                         _ResponseStream = stream;
                         _ResponseStreamLength = _Validator.CacheStreamLength;
                         break;
 
-                case CacheValidationStatus.CombineCachedAndServerResponse:
+                    case CacheValidationStatus.CombineCachedAndServerResponse:
 
                         if (_Validator.CacheStream == null || _Validator.CacheStream == Stream.Null)
                         {
                             _ProtocolStatus = CacheValidationStatus.Fail;
-                            _ProtocolException = new InvalidOperationException(SR.GetString(SR.net_cache_no_stream, _Validator.CacheKey));
-                            if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_requested_combined_but_null_cached_stream, "RevalidateCache()"));
+                            _ProtocolException = new InvalidOperationException(
+                                SR.GetString(SR.net_cache_no_stream, _Validator.CacheKey)
+                            );
+                            if (Logging.On)
+                                Logging.PrintError(
+                                    Logging.RequestCache,
+                                    SR.GetString(
+                                        SR.net_log_cache_requested_combined_but_null_cached_stream,
+                                        "RevalidateCache()"
+                                    )
+                                );
                             break;
                         }
                         //
@@ -518,30 +817,61 @@ namespace System.Net.Cache {
                         _ResponseStreamLength = _Validator.CacheStreamLength;
                         break;
 
-
-                case CacheValidationStatus.Fail:
+                    case CacheValidationStatus.Fail:
                         closeCacheStream = true;
-                        _ProtocolException = new InvalidOperationException(SR.GetString(SR.net_cache_validator_fail, "RevalidateCache"));
+                        _ProtocolException = new InvalidOperationException(
+                            SR.GetString(SR.net_cache_validator_fail, "RevalidateCache")
+                        );
                         break;
 
-                default:
+                    default:
                         closeCacheStream = true;
                         _ProtocolStatus = CacheValidationStatus.Fail;
-                        _ProtocolException = new InvalidOperationException(SR.GetString(SR.net_cache_validator_result, "RevalidateCache", _Validator.ValidationStatus.ToString()));
-                        if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_unexpected_status, "RevalidateCache()", _Validator.ValidationStatus.ToString()));
+                        _ProtocolException = new InvalidOperationException(
+                            SR.GetString(
+                                SR.net_cache_validator_result,
+                                "RevalidateCache",
+                                _Validator.ValidationStatus.ToString()
+                            )
+                        );
+                        if (Logging.On)
+                            Logging.PrintError(
+                                Logging.RequestCache,
+                                SR.GetString(
+                                    SR.net_log_cache_unexpected_status,
+                                    "RevalidateCache()",
+                                    _Validator.ValidationStatus.ToString()
+                                )
+                            );
                         break;
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 closeCacheStream = true;
                 _ProtocolException = e;
                 _ProtocolStatus = CacheValidationStatus.Fail;
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
+                {
                     throw;
                 }
-                if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_object_and_exception, "CacheProtocol#" + this.GetHashCode().ToString(NumberFormatInfo.InvariantInfo), (e is WebException? e.Message: e.ToString())));
+                if (Logging.On)
+                    Logging.PrintError(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_object_and_exception,
+                            "CacheProtocol#"
+                                + this.GetHashCode().ToString(NumberFormatInfo.InvariantInfo),
+                            (e is WebException ? e.Message : e.ToString())
+                        )
+                    );
             }
-            finally {
+            finally
+            {
                 // This is to release cache entry in case we are not interested in it
                 if (closeCacheStream && _ResponseStream != null)
                 {
@@ -551,13 +881,13 @@ namespace System.Net.Cache {
                 }
             }
         }
+
         //
         // This will decide on cache update and construct the effective response stream
         //
         private void CheckUpdateOnResponse(Stream responseStream)
         {
-
-            if  (_Validator.CacheEntry == null)
+            if (_Validator.CacheEntry == null)
             {
                 // There was no chance to create an empty entry yet
                 RequestCacheEntry cacheEntry = new RequestCacheEntry();
@@ -573,29 +903,31 @@ namespace System.Net.Cache {
             string retrieveKey = _Validator.CacheKey;
 
             bool unlockEntry = true;
-            try {
-                switch (_ProtocolStatus=UpdateCache()) {
-
-                case CacheValidationStatus.RemoveFromCache:
+            try
+            {
+                switch (_ProtocolStatus = UpdateCache())
+                {
+                    case CacheValidationStatus.RemoveFromCache:
                         EnsureCacheRemoval(retrieveKey);
                         unlockEntry = false;
                         break;
 
-                case CacheValidationStatus.UpdateResponseInformation:
+                    case CacheValidationStatus.UpdateResponseInformation:
                         // NB: Just invoked validator must have updated CacheEntry and transferred
                         //     ONLY allowed headers from the response to the Context.xxxMetadata member
 
                         _ResponseStream = new MetadataUpdateStream(
-                                                                    responseStream,
-                                                                    _RequestCache,
-                                                                    _Validator.CacheKey,
-                                                                    _Validator.CacheEntry.ExpiresUtc,
-                                                                    _Validator.CacheEntry.LastModifiedUtc,
-                                                                    _Validator.CacheEntry.LastSynchronizedUtc,
-                                                                    _Validator.CacheEntry.MaxStale,
-                                                                    _Validator.CacheEntry.EntryMetadata,
-                                                                    _Validator.CacheEntry.SystemMetadata,
-                                                                    _Validator.StrictCacheErrors);
+                            responseStream,
+                            _RequestCache,
+                            _Validator.CacheKey,
+                            _Validator.CacheEntry.ExpiresUtc,
+                            _Validator.CacheEntry.LastModifiedUtc,
+                            _Validator.CacheEntry.LastSynchronizedUtc,
+                            _Validator.CacheEntry.MaxStale,
+                            _Validator.CacheEntry.EntryMetadata,
+                            _Validator.CacheEntry.SystemMetadata,
+                            _Validator.StrictCacheErrors
+                        );
                         //
                         // This can be looked as a design hole since we have to keep the entry
                         // locked for the case when we want to update that previously retrieved entry.
@@ -606,41 +938,86 @@ namespace System.Net.Cache {
                         _ProtocolStatus = CacheValidationStatus.UpdateResponseInformation;
                         break;
 
-                case CacheValidationStatus.CacheResponse:
+                    case CacheValidationStatus.CacheResponse:
                         // NB: Just invoked validator must have updated CacheEntry and transferred
                         //     ONLY allowed headers from the response to the Context.xxxMetadata member
 
                         Stream stream;
                         if (_Validator.StrictCacheErrors)
-                            {stream = _RequestCache.Store(_Validator.CacheKey, _Validator.CacheEntry.StreamSize, _Validator.CacheEntry.ExpiresUtc, _Validator.CacheEntry.LastModifiedUtc, _Validator.CacheEntry.MaxStale, _Validator.CacheEntry.EntryMetadata, _Validator.CacheEntry.SystemMetadata);}
+                        {
+                            stream = _RequestCache.Store(
+                                _Validator.CacheKey,
+                                _Validator.CacheEntry.StreamSize,
+                                _Validator.CacheEntry.ExpiresUtc,
+                                _Validator.CacheEntry.LastModifiedUtc,
+                                _Validator.CacheEntry.MaxStale,
+                                _Validator.CacheEntry.EntryMetadata,
+                                _Validator.CacheEntry.SystemMetadata
+                            );
+                        }
                         else
-                            {_RequestCache.TryStore(_Validator.CacheKey, _Validator.CacheEntry.StreamSize, _Validator.CacheEntry.ExpiresUtc, _Validator.CacheEntry.LastModifiedUtc, _Validator.CacheEntry.MaxStale, _Validator.CacheEntry.EntryMetadata, _Validator.CacheEntry.SystemMetadata, out stream);}
+                        {
+                            _RequestCache.TryStore(
+                                _Validator.CacheKey,
+                                _Validator.CacheEntry.StreamSize,
+                                _Validator.CacheEntry.ExpiresUtc,
+                                _Validator.CacheEntry.LastModifiedUtc,
+                                _Validator.CacheEntry.MaxStale,
+                                _Validator.CacheEntry.EntryMetadata,
+                                _Validator.CacheEntry.SystemMetadata,
+                                out stream
+                            );
+                        }
 
                         // Wrap the response stream into forwarding one
-                        if (stream == null) {
+                        if (stream == null)
+                        {
                             _ProtocolStatus = CacheValidationStatus.DoNotUpdateCache;
                         }
-                        else {
-                            _ResponseStream = new ForwardingReadStream(responseStream, stream, _Validator.CacheStreamOffset, _Validator.StrictCacheErrors);
+                        else
+                        {
+                            _ResponseStream = new ForwardingReadStream(
+                                responseStream,
+                                stream,
+                                _Validator.CacheStreamOffset,
+                                _Validator.StrictCacheErrors
+                            );
                             _ProtocolStatus = CacheValidationStatus.UpdateResponseInformation;
                         }
                         break;
 
-                case CacheValidationStatus.DoNotUseCache:
-                case CacheValidationStatus.DoNotUpdateCache:
+                    case CacheValidationStatus.DoNotUseCache:
+                    case CacheValidationStatus.DoNotUpdateCache:
                         break;
 
-                case CacheValidationStatus.Fail:
-                        _ProtocolException = new InvalidOperationException(SR.GetString(SR.net_cache_validator_fail, "UpdateCache"));
+                    case CacheValidationStatus.Fail:
+                        _ProtocolException = new InvalidOperationException(
+                            SR.GetString(SR.net_cache_validator_fail, "UpdateCache")
+                        );
                         break;
-                default:
+                    default:
                         _ProtocolStatus = CacheValidationStatus.Fail;
-                        _ProtocolException = new InvalidOperationException(SR.GetString(SR.net_cache_validator_result, "UpdateCache", _Validator.ValidationStatus.ToString()));
-                        if(Logging.On) Logging.PrintError(Logging.RequestCache, SR.GetString(SR.net_log_cache_unexpected_status, "UpdateCache()", _Validator.ValidationStatus.ToString()));
+                        _ProtocolException = new InvalidOperationException(
+                            SR.GetString(
+                                SR.net_cache_validator_result,
+                                "UpdateCache",
+                                _Validator.ValidationStatus.ToString()
+                            )
+                        );
+                        if (Logging.On)
+                            Logging.PrintError(
+                                Logging.RequestCache,
+                                SR.GetString(
+                                    SR.net_log_cache_unexpected_status,
+                                    "UpdateCache()",
+                                    _Validator.ValidationStatus.ToString()
+                                )
+                            );
                         break;
                 }
             }
-            finally {
+            finally
+            {
                 if (unlockEntry)
                 {
                     // The entry can now be replaced as we are not going for cache entry metadata-only  update
@@ -648,45 +1025,76 @@ namespace System.Net.Cache {
                 }
             }
         }
-        //
-        private CacheValidationStatus ValidateRequest() {
 
-            if(Logging.On) Logging.PrintInfo(Logging.RequestCache,
-                                        "Request#" + _Validator.Request.GetHashCode().ToString(NumberFormatInfo.InvariantInfo) +
-                                        ", Policy = " + _Validator.Request.CachePolicy.ToString() +
-                                        ", Cache Uri = " + _Validator.Uri);
+        //
+        private CacheValidationStatus ValidateRequest()
+        {
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.RequestCache,
+                    "Request#"
+                        + _Validator.Request.GetHashCode().ToString(NumberFormatInfo.InvariantInfo)
+                        + ", Policy = "
+                        + _Validator.Request.CachePolicy.ToString()
+                        + ", Cache Uri = "
+                        + _Validator.Uri
+                );
 
             CacheValidationStatus result = _Validator.ValidateRequest();
             _Validator.SetValidationStatus(result);
 
-            if(Logging.On) Logging.PrintInfo(Logging.RequestCache, "Selected cache Key = " + _Validator.CacheKey);
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.RequestCache,
+                    "Selected cache Key = " + _Validator.CacheKey
+                );
             return result;
         }
-        //
-        //
-        //
-        private void ValidateFreshness(RequestCacheEntry fetchEntry) {
 
+        //
+        //
+        //
+        private void ValidateFreshness(RequestCacheEntry fetchEntry)
+        {
             _Validator.FetchCacheEntry(fetchEntry);
 
-            if (_Validator.CacheStream == null || _Validator.CacheStream == Stream.Null) {
-                if(Logging.On) Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_entry_not_found_freshness_undefined, "ValidateFreshness()"));
+            if (_Validator.CacheStream == null || _Validator.CacheStream == Stream.Null)
+            {
+                if (Logging.On)
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(
+                            SR.net_log_cache_entry_not_found_freshness_undefined,
+                            "ValidateFreshness()"
+                        )
+                    );
                 _Validator.SetFreshnessStatus(CacheFreshnessStatus.Undefined);
                 return;
             }
 
-            if(Logging.On) {
-                if (Logging.IsVerbose(Logging.RequestCache)) {
-                    Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_dumping_cache_context));
+            if (Logging.On)
+            {
+                if (Logging.IsVerbose(Logging.RequestCache))
+                {
+                    Logging.PrintInfo(
+                        Logging.RequestCache,
+                        SR.GetString(SR.net_log_cache_dumping_cache_context)
+                    );
 
-                    if (fetchEntry == null) {
+                    if (fetchEntry == null)
+                    {
                         Logging.PrintInfo(Logging.RequestCache, "<null>");
                     }
-                    else {
-                        string[] context = fetchEntry.ToString(Logging.IsVerbose(Logging.RequestCache)).Split(RequestCache.LineSplits);
+                    else
+                    {
+                        string[] context = fetchEntry
+                            .ToString(Logging.IsVerbose(Logging.RequestCache))
+                            .Split(RequestCache.LineSplits);
 
-                        for (int i = 0; i< context.Length; ++i) {
-                            if (context[i].Length != 0) {
+                        for (int i = 0; i < context.Length; ++i)
+                        {
+                            if (context[i].Length != 0)
+                            {
                                 Logging.PrintInfo(Logging.RequestCache, context[i]);
                             }
                         }
@@ -698,38 +1106,57 @@ namespace System.Net.Cache {
             _Validator.SetFreshnessStatus(result);
             _IsCacheFresh = result == CacheFreshnessStatus.Fresh;
 
-            if(Logging.On) Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_result, "ValidateFreshness()", result.ToString()));
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.RequestCache,
+                    SR.GetString(SR.net_log_cache_result, "ValidateFreshness()", result.ToString())
+                );
         }
 
         //
         //
         //
-        private CacheValidationStatus ValidateCache() {
+        private CacheValidationStatus ValidateCache()
+        {
             CacheValidationStatus result = _Validator.ValidateCache();
             _Validator.SetValidationStatus(result);
 
-            if(Logging.On) Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_result, "ValidateCache()", result.ToString()));
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.RequestCache,
+                    SR.GetString(SR.net_log_cache_result, "ValidateCache()", result.ToString())
+                );
             return result;
         }
-        //
-        private CacheValidationStatus RevalidateCache() {
 
+        //
+        private CacheValidationStatus RevalidateCache()
+        {
             CacheValidationStatus result = _Validator.RevalidateCache();
             _Validator.SetValidationStatus(result);
 
-            if(Logging.On) Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_result, "RevalidateCache()", result.ToString()));
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.RequestCache,
+                    SR.GetString(SR.net_log_cache_result, "RevalidateCache()", result.ToString())
+                );
             return result;
         }
+
         //
         private CacheValidationStatus ValidateResponse()
         {
-
             CacheValidationStatus result = _Validator.ValidateResponse();
             _Validator.SetValidationStatus(result);
 
-            if(Logging.On) Logging.PrintInfo(Logging.RequestCache, SR.GetString(SR.net_log_cache_result, "ValidateResponse()", result.ToString()));
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.RequestCache,
+                    SR.GetString(SR.net_log_cache_result, "ValidateResponse()", result.ToString())
+                );
             return result;
         }
+
         //
         private CacheValidationStatus UpdateCache()
         {
@@ -738,6 +1165,7 @@ namespace System.Net.Cache {
 
             return result;
         }
+
         //
         private void EnsureCacheRemoval(string retrieveKey)
         {
@@ -745,19 +1173,26 @@ namespace System.Net.Cache {
             _RequestCache.UnlockEntry(_Validator.CacheStream);
 
             if (_Validator.StrictCacheErrors)
-                {_RequestCache.Remove(retrieveKey);}
+            {
+                _RequestCache.Remove(retrieveKey);
+            }
             else
-                {_RequestCache.TryRemove(retrieveKey);}
+            {
+                _RequestCache.TryRemove(retrieveKey);
+            }
 
             // We may need to remove yet another reference from the cache
             if (retrieveKey != _Validator.CacheKey)
             {
                 if (_Validator.StrictCacheErrors)
-                    {_RequestCache.Remove(_Validator.CacheKey);}
+                {
+                    _RequestCache.Remove(_Validator.CacheKey);
+                }
                 else
-                    {_RequestCache.TryRemove(_Validator.CacheKey);}
+                {
+                    _RequestCache.TryRemove(_Validator.CacheKey);
+                }
             }
         }
-
     }
 }

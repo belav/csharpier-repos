@@ -12,13 +12,17 @@ namespace System.Net.Http.Headers
         [MemberNotNull(nameof(Http3EncodedName))]
         partial void Initialize(int? http2StaticTableIndex, int? http3StaticTableIndex)
         {
-            Http2EncodedName = http2StaticTableIndex.HasValue ?
-                HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingToAllocatedArray(http2StaticTableIndex.GetValueOrDefault()) :
-                HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewNameToAllocatedArray(Name);
+            Http2EncodedName = http2StaticTableIndex.HasValue
+                ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingToAllocatedArray(
+                    http2StaticTableIndex.GetValueOrDefault()
+                )
+                : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewNameToAllocatedArray(Name);
 
-            Http3EncodedName = http3StaticTableIndex.HasValue ?
-                QPack.QPackEncoder.EncodeLiteralHeaderFieldWithStaticNameReferenceToArray(http3StaticTableIndex.GetValueOrDefault()) :
-                QPack.QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReferenceToArray(Name);
+            Http3EncodedName = http3StaticTableIndex.HasValue
+                ? QPack.QPackEncoder.EncodeLiteralHeaderFieldWithStaticNameReferenceToArray(
+                    http3StaticTableIndex.GetValueOrDefault()
+                )
+                : QPack.QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReferenceToArray(Name);
         }
 
         public byte[] Http2EncodedName { get; private set; }

@@ -9,8 +9,8 @@ using System.IdentityModel;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
-using System.Security.Claims;
 using System.Runtime;
+using System.Security.Claims;
 using System.ServiceModel;
 using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;
@@ -19,7 +19,7 @@ using System.Xml;
 namespace System.ServiceModel.Security
 {
     /// <summary>
-    /// This class derives from System.ServiceModel.Security.WSSecurityTokenSerializer and wraps a collection of SecurityTokenHandlers. 
+    /// This class derives from System.ServiceModel.Security.WSSecurityTokenSerializer and wraps a collection of SecurityTokenHandlers.
     /// Any call to this serilaizer is delegated to the token handler and delegated to the base class if no token handler
     /// is registered to handle this particular token or KeyIdentifier.
     /// </summary>
@@ -37,10 +37,11 @@ namespace System.ServiceModel.Security
         /// The <see cref="SecurityTokenHandlerCollection" /> containing the set of <see cref="SecurityTokenHandler" />
         /// objects used for serializing and validating tokens found in WS-Trust messages.
         /// </param>
-        public WsSecurityTokenSerializerAdapter( SecurityTokenHandlerCollection securityTokenHandlerCollection )
-            : this( securityTokenHandlerCollection, MessageSecurityVersion.Default.SecurityVersion )
-        {
-        }
+        public WsSecurityTokenSerializerAdapter(
+            SecurityTokenHandlerCollection securityTokenHandlerCollection
+        )
+            : this(securityTokenHandlerCollection, MessageSecurityVersion.Default.SecurityVersion)
+        { }
 
         /// <summary>
         /// Initializes an instance of <see cref="WsSecurityTokenSerializerAdapter"/>
@@ -50,10 +51,18 @@ namespace System.ServiceModel.Security
         /// objects used for serializing and validating tokens found in WS-Trust messages.
         /// </param>
         /// <param name="securityVersion">The SecurityTokenVersion of the base WSSecurityTokenSerializer.</param>
-        public WsSecurityTokenSerializerAdapter( SecurityTokenHandlerCollection securityTokenHandlerCollection, SecurityVersion securityVersion )
-            : this( securityTokenHandlerCollection, securityVersion, true, new SamlSerializer(), null, null )
-        {
-        }
+        public WsSecurityTokenSerializerAdapter(
+            SecurityTokenHandlerCollection securityTokenHandlerCollection,
+            SecurityVersion securityVersion
+        )
+            : this(
+                securityTokenHandlerCollection,
+                securityVersion,
+                true,
+                new SamlSerializer(),
+                null,
+                null
+            ) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="WsSecurityTokenSerializerAdapter"/>
@@ -67,10 +76,24 @@ namespace System.ServiceModel.Security
         /// <param name="samlSerializer">Serializer for SAML 1.1 tokens.</param>
         /// <param name="stateEncoder">SecurityStateEncoder used for resolving SCT.</param>
         /// <param name="knownTypes">The collection of known claim types.</param>
-        public WsSecurityTokenSerializerAdapter( SecurityTokenHandlerCollection securityTokenHandlerCollection, SecurityVersion securityVersion, bool emitBspAttributes, SamlSerializer samlSerializer, SecurityStateEncoder stateEncoder, IEnumerable<Type> knownTypes )
-            : this( securityTokenHandlerCollection, securityVersion, TrustVersion.WSTrust13, SecureConversationVersion.WSSecureConversation13, emitBspAttributes, samlSerializer, stateEncoder, knownTypes )
-        {
-        }
+        public WsSecurityTokenSerializerAdapter(
+            SecurityTokenHandlerCollection securityTokenHandlerCollection,
+            SecurityVersion securityVersion,
+            bool emitBspAttributes,
+            SamlSerializer samlSerializer,
+            SecurityStateEncoder stateEncoder,
+            IEnumerable<Type> knownTypes
+        )
+            : this(
+                securityTokenHandlerCollection,
+                securityVersion,
+                TrustVersion.WSTrust13,
+                SecureConversationVersion.WSSecureConversation13,
+                emitBspAttributes,
+                samlSerializer,
+                stateEncoder,
+                knownTypes
+            ) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="WsSecurityTokenSerializerAdapter"/>
@@ -86,12 +109,31 @@ namespace System.ServiceModel.Security
         /// <param name="samlSerializer">Serializer for SAML 1.1 tokens.</param>
         /// <param name="stateEncoder">SecurityStateEncoder used for resolving SCT.</param>
         /// <param name="knownTypes">The collection of known claim types.</param>
-        public WsSecurityTokenSerializerAdapter( SecurityTokenHandlerCollection securityTokenHandlerCollection, SecurityVersion securityVersion, TrustVersion trustVersion, SecureConversationVersion secureConversationVersion, bool emitBspAttributes, SamlSerializer samlSerializer, SecurityStateEncoder stateEncoder, IEnumerable<Type> knownTypes )
-            : base( securityVersion, trustVersion, secureConversationVersion, emitBspAttributes, samlSerializer, stateEncoder, knownTypes )
+        public WsSecurityTokenSerializerAdapter(
+            SecurityTokenHandlerCollection securityTokenHandlerCollection,
+            SecurityVersion securityVersion,
+            TrustVersion trustVersion,
+            SecureConversationVersion secureConversationVersion,
+            bool emitBspAttributes,
+            SamlSerializer samlSerializer,
+            SecurityStateEncoder stateEncoder,
+            IEnumerable<Type> knownTypes
+        )
+            : base(
+                securityVersion,
+                trustVersion,
+                secureConversationVersion,
+                emitBspAttributes,
+                samlSerializer,
+                stateEncoder,
+                knownTypes
+            )
         {
-            if ( securityTokenHandlerCollection == null )
+            if (securityTokenHandlerCollection == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "securityTokenHandlerCollection" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenHandlerCollection"
+                );
             }
 
             _scVersion = secureConversationVersion;
@@ -104,14 +146,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         public bool MapExceptionsToSoapFaults
         {
-            get
-            {
-                return _mapExceptionsToSoapFaults;
-            }
-            set
-            {
-                _mapExceptionsToSoapFaults = value;
-            }
+            get { return _mapExceptionsToSoapFaults; }
+            set { _mapExceptionsToSoapFaults = value; }
         }
 
         /// <summary>
@@ -119,10 +155,7 @@ namespace System.ServiceModel.Security
         /// </summary>
         public SecurityTokenHandlerCollection SecurityTokenHandlers
         {
-            get
-            {
-                return _securityTokenHandlers;
-            }
+            get { return _securityTokenHandlers; }
         }
 
         /// <summary>
@@ -130,15 +163,12 @@ namespace System.ServiceModel.Security
         /// </summary>
         public ExceptionMapper ExceptionMapper
         {
-            get
-            {
-                return _exceptionMapper;
-            }
+            get { return _exceptionMapper; }
             set
             {
-                if ( value == null )
+                if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "value" );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
                 }
                 _exceptionMapper = value;
             }
@@ -151,19 +181,19 @@ namespace System.ServiceModel.Security
         /// <param name="reader">Reader to a Security token.</param>
         /// <returns>'True' if the serializer can read the given Security Token.</returns>
         /// <exception cref="ArgumentNullException">The input parameter 'reader' is null.</exception>
-        protected override bool CanReadTokenCore( XmlReader reader )
+        protected override bool CanReadTokenCore(XmlReader reader)
         {
-            if ( reader == null )
+            if (reader == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "reader" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            if ( _securityTokenHandlers.CanReadToken( reader ) )
+            if (_securityTokenHandlers.CanReadToken(reader))
             {
                 return true;
             }
 
-            return base.CanReadTokenCore( reader );
+            return base.CanReadTokenCore(reader);
         }
 
         /// <summary>
@@ -173,19 +203,19 @@ namespace System.ServiceModel.Security
         /// <param name="token">SecurityToken instance.</param>
         /// <returns>'True' if the serializer can write the given security token.</returns>
         /// <exception cref="ArgumentNullException">The input parameter 'token' is null.</exception>
-        protected override bool CanWriteTokenCore( SecurityToken token )
+        protected override bool CanWriteTokenCore(SecurityToken token)
         {
-            if ( token == null )
+            if (token == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "token" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("token");
             }
 
-            if ( _securityTokenHandlers.CanWriteToken( token ) )
+            if (_securityTokenHandlers.CanWriteToken(token))
             {
                 return true;
             }
 
-            return base.CanWriteTokenCore( token );
+            return base.CanWriteTokenCore(token);
         }
 
         /// <summary>
@@ -195,30 +225,44 @@ namespace System.ServiceModel.Security
         /// <param name="tokenResolver">Instance of SecurityTokenResolver.</param>
         /// <returns>'True' if the serializer can read the given Security Token.</returns>
         /// <exception cref="ArgumentNullException">The input parameter 'reader' is null.</exception>
-        protected override SecurityToken ReadTokenCore( XmlReader reader, SecurityTokenResolver tokenResolver )
+        protected override SecurityToken ReadTokenCore(
+            XmlReader reader,
+            SecurityTokenResolver tokenResolver
+        )
         {
-            if ( reader == null )
+            if (reader == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "reader" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
             try
             {
-                foreach ( SecurityTokenHandler securityTokenHandler in _securityTokenHandlers )
+                foreach (SecurityTokenHandler securityTokenHandler in _securityTokenHandlers)
                 {
-                    if ( securityTokenHandler.CanReadToken( reader ) )
+                    if (securityTokenHandler.CanReadToken(reader))
                     {
-                        SecurityToken token = securityTokenHandler.ReadToken( reader, tokenResolver );
+                        SecurityToken token = securityTokenHandler.ReadToken(reader, tokenResolver);
                         SessionSecurityToken sessionToken = token as SessionSecurityToken;
 
-                        if ( sessionToken != null )
+                        if (sessionToken != null)
                         {
-                            if ( sessionToken.SecureConversationVersion.AbsoluteUri != _scVersion.Namespace.Value )
+                            if (
+                                sessionToken.SecureConversationVersion.AbsoluteUri
+                                != _scVersion.Namespace.Value
+                            )
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation( SR.GetString( SR.ID4053, sessionToken.SecureConversationVersion, _scVersion ) );
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
+                                    SR.GetString(
+                                        SR.ID4053,
+                                        sessionToken.SecureConversationVersion,
+                                        _scVersion
+                                    )
+                                );
                             }
 
-                            return SecurityContextSecurityTokenHelper.ConvertSessionTokenToSecurityContextSecurityToken(sessionToken);
+                            return SecurityContextSecurityTokenHelper.ConvertSessionTokenToSecurityContextSecurityToken(
+                                sessionToken
+                            );
                         }
                         else
                         {
@@ -227,38 +271,43 @@ namespace System.ServiceModel.Security
                     }
                 }
 
-                return base.ReadTokenCore( reader, tokenResolver );
+                return base.ReadTokenCore(reader, tokenResolver);
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
-                if ( !( MapExceptionsToSoapFaults && _exceptionMapper.HandleSecurityTokenProcessingException( ex ) ) )
+                if (
+                    !(
+                        MapExceptionsToSoapFaults
+                        && _exceptionMapper.HandleSecurityTokenProcessingException(ex)
+                    )
+                )
                 {
                     throw;
                 }
-                Fx.Assert( false, "ExceptionMapper did not handle an exception correctly." );
+                Fx.Assert(false, "ExceptionMapper did not handle an exception correctly.");
                 // This should never happen. ExceptionMapper will handle the exception, in which case,
                 // a fault exception is thrown or the original exception gets thrown.
             }
 
             return null;
         }
-        
+
         /// <summary>
         /// Serializes the SecurityToken to the XmlWriter.
         /// </summary>
         /// <param name="writer">XmlWriter to write to.</param>
         /// <param name="token">The SecurityToken to serializer.</param>
         /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'token' is null.</exception>
-        protected override void WriteTokenCore( XmlWriter writer, SecurityToken token )
+        protected override void WriteTokenCore(XmlWriter writer, SecurityToken token)
         {
-            if ( writer == null )
+            if (writer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "writer" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writer");
             }
 
-            if ( token == null )
+            if (token == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "token" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("token");
             }
 
             try
@@ -267,33 +316,41 @@ namespace System.ServiceModel.Security
                 // Wire the session handler for SCT
                 //
                 SecurityContextSecurityToken sct = token as SecurityContextSecurityToken;
-                if ( sct != null )
+                if (sct != null)
                 {
                     //
                     // Bare SCT tokens are wrapped with a SessionSecurityToken.
                     // The property SessionSecurityToken.IsSecurityContextSecurityTokenWrapper will be true.
                     //
-                    token = SecurityContextSecurityTokenHelper.ConvertSctToSessionToken( sct, _scVersion );
+                    token = SecurityContextSecurityTokenHelper.ConvertSctToSessionToken(
+                        sct,
+                        _scVersion
+                    );
                 }
 
                 SecurityTokenHandler securityTokenHandler = _securityTokenHandlers[token];
 
-                if ( ( securityTokenHandler != null ) && ( securityTokenHandler.CanWriteToken ) )
+                if ((securityTokenHandler != null) && (securityTokenHandler.CanWriteToken))
                 {
-                    securityTokenHandler.WriteToken( writer, token );
+                    securityTokenHandler.WriteToken(writer, token);
 
                     return;
                 }
 
-                base.WriteTokenCore( writer, token );
+                base.WriteTokenCore(writer, token);
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
-                if ( !( MapExceptionsToSoapFaults && _exceptionMapper.HandleSecurityTokenProcessingException( ex ) ) )
+                if (
+                    !(
+                        MapExceptionsToSoapFaults
+                        && _exceptionMapper.HandleSecurityTokenProcessingException(ex)
+                    )
+                )
                 {
                     throw;
                 }
-                Fx.Assert( false, "ExceptionMapper did not handle an exception correctly." );
+                Fx.Assert(false, "ExceptionMapper did not handle an exception correctly.");
                 // This should never happen. ExceptionMapper will handle the exception, in which case,
                 // a fault exception is thrown or the original exception gets thrown.
             }
@@ -306,20 +363,25 @@ namespace System.ServiceModel.Security
         /// <param name="reader">Reader pointing at a Security Key Identifier {ds:Keyinfo}.</param>
         /// <returns>'True' if the serializer can read the given Security Key Identifier.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is null.</exception>
-        protected override bool CanReadKeyIdentifierCore( XmlReader reader )
+        protected override bool CanReadKeyIdentifierCore(XmlReader reader)
         {
-            if ( reader == null )
+            if (reader == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "reader" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            if ( reader.IsStartElement( XmlSignatureConstants.Elements.KeyInfo, XmlSignatureConstants.Namespace ) )
+            if (
+                reader.IsStartElement(
+                    XmlSignatureConstants.Elements.KeyInfo,
+                    XmlSignatureConstants.Namespace
+                )
+            )
             {
                 return true;
             }
             else
             {
-                return base.CanReadKeyIdentifierCore( reader );
+                return base.CanReadKeyIdentifierCore(reader);
             }
         }
 
@@ -330,48 +392,56 @@ namespace System.ServiceModel.Security
         /// <returns>SecurityKeyIdentifier.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is null.</exception>
         /// <exception cref="InvalidOperationException">If the <paramref name="reader"/> is not positioned at KeyInfo element.</exception>
-        protected override SecurityKeyIdentifier ReadKeyIdentifierCore( XmlReader reader )
+        protected override SecurityKeyIdentifier ReadKeyIdentifierCore(XmlReader reader)
         {
-            if ( reader == null )
+            if (reader == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "reader" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            if ( reader.IsStartElement( XmlSignatureConstants.Elements.KeyInfo, XmlSignatureConstants.Namespace ) )
+            if (
+                reader.IsStartElement(
+                    XmlSignatureConstants.Elements.KeyInfo,
+                    XmlSignatureConstants.Namespace
+                )
+            )
             {
-                KeyInfo keyInfo = new KeyInfo( this );
-                keyInfo.ReadXml( XmlDictionaryReader.CreateDictionaryReader( reader ) );
+                KeyInfo keyInfo = new KeyInfo(this);
+                keyInfo.ReadXml(XmlDictionaryReader.CreateDictionaryReader(reader));
                 return keyInfo.KeyIdentifier;
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperXml( reader, SR.GetString( SR.ID4192 ) );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperXml(
+                    reader,
+                    SR.GetString(SR.ID4192)
+                );
             }
         }
 
         /// <summary>
-        /// Checks if the wrapped SecurityTokenHandler or the base WSSecurityTokenSerializer can read the 
+        /// Checks if the wrapped SecurityTokenHandler or the base WSSecurityTokenSerializer can read the
         /// SecurityKeyIdentifierClause.
         /// </summary>
         /// <param name="reader">Reader to a SecurityKeyIdentifierClause.</param>
         /// <returns>'True' if the SecurityKeyIdentifierCause can be read.</returns>
         /// <exception cref="ArgumentNullException">The input parameter 'reader' is null.</exception>
-        protected override bool CanReadKeyIdentifierClauseCore( XmlReader reader )
+        protected override bool CanReadKeyIdentifierClauseCore(XmlReader reader)
         {
-            if ( reader == null )
+            if (reader == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "reader" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            foreach ( SecurityTokenHandler securityTokenHandler in _securityTokenHandlers )
+            foreach (SecurityTokenHandler securityTokenHandler in _securityTokenHandlers)
             {
-                if ( securityTokenHandler.CanReadKeyIdentifierClause( reader ) )
+                if (securityTokenHandler.CanReadKeyIdentifierClause(reader))
                 {
                     return true;
                 }
             }
 
-            return base.CanReadKeyIdentifierClauseCore( reader );
+            return base.CanReadKeyIdentifierClauseCore(reader);
         }
 
         /// <summary>
@@ -381,22 +451,26 @@ namespace System.ServiceModel.Security
         /// <param name="keyIdentifierClause">SecurityKeyIdentifierClause to be checked.</param>
         /// <returns>'True' if the SecurityTokenKeyIdentifierClause can be written.</returns>
         /// <exception cref="ArgumentNullException">The input parameter 'keyIdentifierClause' is null.</exception>
-        protected override bool CanWriteKeyIdentifierClauseCore( SecurityKeyIdentifierClause keyIdentifierClause )
+        protected override bool CanWriteKeyIdentifierClauseCore(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
-            if ( keyIdentifierClause == null )
+            if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "keyIdentifierClause" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
 
-            foreach ( SecurityTokenHandler securityTokenHandler in _securityTokenHandlers )
+            foreach (SecurityTokenHandler securityTokenHandler in _securityTokenHandlers)
             {
-                if ( securityTokenHandler.CanWriteKeyIdentifierClause( keyIdentifierClause ) )
+                if (securityTokenHandler.CanWriteKeyIdentifierClause(keyIdentifierClause))
                 {
                     return true;
                 }
             }
 
-            return base.CanWriteKeyIdentifierClauseCore( keyIdentifierClause );
+            return base.CanWriteKeyIdentifierClauseCore(keyIdentifierClause);
         }
 
         /// <summary>
@@ -405,32 +479,37 @@ namespace System.ServiceModel.Security
         /// <param name="reader">XmlReader to a SecurityKeyIdentifierClause.</param>
         /// <returns>The deserialized SecurityKeyIdentifierClause.</returns>
         /// <exception cref="ArgumentNullException">The input parameter 'reader' is null.</exception>
-        protected override SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore( XmlReader reader )
+        protected override SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore(XmlReader reader)
         {
-            if ( reader == null )
+            if (reader == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "reader" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
             try
             {
-                foreach ( SecurityTokenHandler securityTokenHandler in _securityTokenHandlers )
+                foreach (SecurityTokenHandler securityTokenHandler in _securityTokenHandlers)
                 {
-                    if ( securityTokenHandler.CanReadKeyIdentifierClause( reader ) )
+                    if (securityTokenHandler.CanReadKeyIdentifierClause(reader))
                     {
-                        return securityTokenHandler.ReadKeyIdentifierClause( reader );
+                        return securityTokenHandler.ReadKeyIdentifierClause(reader);
                     }
                 }
 
-                return base.ReadKeyIdentifierClauseCore( reader );
+                return base.ReadKeyIdentifierClauseCore(reader);
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
-                if ( !( MapExceptionsToSoapFaults && _exceptionMapper.HandleSecurityTokenProcessingException( ex ) ) )
+                if (
+                    !(
+                        MapExceptionsToSoapFaults
+                        && _exceptionMapper.HandleSecurityTokenProcessingException(ex)
+                    )
+                )
                 {
                     throw;
                 }
-                Fx.Assert( false, "ExceptionMapper did not handle an exception correctly." );
+                Fx.Assert(false, "ExceptionMapper did not handle an exception correctly.");
                 // This should never happen. ExceptionMapper will handle the exception, in which case,
                 // a fault exception is thrown or the original exception gets thrown.
             }
@@ -444,44 +523,51 @@ namespace System.ServiceModel.Security
         /// <param name="writer">XmlWriter to write into.</param>
         /// <param name="keyIdentifierClause">SecurityKeyIdentifierClause to be written.</param>
         /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'keyIdentifierClause' is null.</exception>
-        protected override void WriteKeyIdentifierClauseCore( XmlWriter writer, SecurityKeyIdentifierClause keyIdentifierClause )
+        protected override void WriteKeyIdentifierClauseCore(
+            XmlWriter writer,
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
-            if ( writer == null )
+            if (writer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "writer" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writer");
             }
 
-            if ( keyIdentifierClause == null )
+            if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "keyIdentifierClause" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
 
             try
             {
-                foreach ( SecurityTokenHandler securityTokenHandler in _securityTokenHandlers )
+                foreach (SecurityTokenHandler securityTokenHandler in _securityTokenHandlers)
                 {
-                    if ( securityTokenHandler.CanWriteKeyIdentifierClause( keyIdentifierClause ) )
+                    if (securityTokenHandler.CanWriteKeyIdentifierClause(keyIdentifierClause))
                     {
-                        securityTokenHandler.WriteKeyIdentifierClause( writer, keyIdentifierClause );
+                        securityTokenHandler.WriteKeyIdentifierClause(writer, keyIdentifierClause);
                         return;
                     }
                 }
 
-                base.WriteKeyIdentifierClauseCore( writer, keyIdentifierClause );
+                base.WriteKeyIdentifierClauseCore(writer, keyIdentifierClause);
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
-                if ( !( MapExceptionsToSoapFaults && _exceptionMapper.HandleSecurityTokenProcessingException( ex ) ) )
+                if (
+                    !(
+                        MapExceptionsToSoapFaults
+                        && _exceptionMapper.HandleSecurityTokenProcessingException(ex)
+                    )
+                )
                 {
                     throw;
                 }
-                Fx.Assert( false, "ExceptionMapper did not handle an exception correctly." );
+                Fx.Assert(false, "ExceptionMapper did not handle an exception correctly.");
                 // This should never happen. ExceptionMapper will handle the exception, in which case,
                 // a fault exception is thrown or the original exception gets thrown.
             }
-
         }
-
-
     }
 }

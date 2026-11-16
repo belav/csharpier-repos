@@ -13,22 +13,47 @@ namespace Wasm.Build.Tests
 {
     public class MainWithArgsTests : TestMainJsTestBase
     {
-        public MainWithArgsTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext)
-        {
-        }
+        public MainWithArgsTests(
+            ITestOutputHelper output,
+            SharedBuildPerTestClassFixture buildContext
+        )
+            : base(output, buildContext) { }
 
-        public static IEnumerable<object?[]> MainWithArgsTestData(bool aot, RunHost host)
-            => ConfigWithAOTData(aot).Multiply(
-                        new object?[] { new object?[] { "abc", "foobar"} },
-                        new object?[] { new object?[0] }
-            ).WithRunHosts(host).UnwrapItemsAsArrays();
+        public static IEnumerable<object?[]> MainWithArgsTestData(bool aot, RunHost host) =>
+            ConfigWithAOTData(aot)
+                .Multiply(
+                    new object?[] { new object?[] { "abc", "foobar" } },
+                    new object?[] { new object?[0] }
+                )
+                .WithRunHosts(host)
+                .UnwrapItemsAsArrays();
 
         [Theory]
-        [MemberData(nameof(MainWithArgsTestData), parameters: new object[] { /*aot*/ false, RunHost.All })]
-        [MemberData(nameof(MainWithArgsTestData), parameters: new object[] { /*aot*/ true, RunHost.All })]
-        public void AsyncMainWithArgs(BuildArgs buildArgs, string[] args, RunHost host, string id)
-            => TestMainWithArgs("async_main_with_args", @"
+        [MemberData(
+            nameof(MainWithArgsTestData),
+            parameters: new object[]
+            { /*aot*/
+                false,
+                RunHost.All,
+            }
+        )]
+        [MemberData(
+            nameof(MainWithArgsTestData),
+            parameters: new object[]
+            { /*aot*/
+                true,
+                RunHost.All,
+            }
+        )]
+        public void AsyncMainWithArgs(
+            BuildArgs buildArgs,
+            string[] args,
+            RunHost host,
+            string id
+        ) =>
+            TestMainWithArgs(
+                "async_main_with_args",
+                @"
                 public class TestClass {
                     public static async System.Threading.Tasks.Task<int> Main(string[] args)
                     {
@@ -36,39 +61,91 @@ namespace Wasm.Build.Tests
                         return await System.Threading.Tasks.Task.FromResult(42 + count);
                     }
                 }",
-                buildArgs, args, host, id);
+                buildArgs,
+                args,
+                host,
+                id
+            );
 
         [Theory]
-        [MemberData(nameof(MainWithArgsTestData), parameters: new object[] { /*aot*/ false, RunHost.All })]
-        [MemberData(nameof(MainWithArgsTestData), parameters: new object[] { /*aot*/ true, RunHost.All })]
-        public void TopLevelWithArgs(BuildArgs buildArgs, string[] args, RunHost host, string id)
-            => TestMainWithArgs("top_level_args",
-                                @"##CODE## return await System.Threading.Tasks.Task.FromResult(42 + count);",
-                                buildArgs, args, host, id);
+        [MemberData(
+            nameof(MainWithArgsTestData),
+            parameters: new object[]
+            { /*aot*/
+                false,
+                RunHost.All,
+            }
+        )]
+        [MemberData(
+            nameof(MainWithArgsTestData),
+            parameters: new object[]
+            { /*aot*/
+                true,
+                RunHost.All,
+            }
+        )]
+        public void TopLevelWithArgs(BuildArgs buildArgs, string[] args, RunHost host, string id) =>
+            TestMainWithArgs(
+                "top_level_args",
+                @"##CODE## return await System.Threading.Tasks.Task.FromResult(42 + count);",
+                buildArgs,
+                args,
+                host,
+                id
+            );
 
         [Theory]
-        [MemberData(nameof(MainWithArgsTestData), parameters: new object[] { /*aot*/ false, RunHost.All })]
-        [MemberData(nameof(MainWithArgsTestData), parameters: new object[] { /*aot*/ true, RunHost.All })]
-        public void NonAsyncMainWithArgs(BuildArgs buildArgs, string[] args, RunHost host, string id)
-            => TestMainWithArgs("non_async_main_args", @"
+        [MemberData(
+            nameof(MainWithArgsTestData),
+            parameters: new object[]
+            { /*aot*/
+                false,
+                RunHost.All,
+            }
+        )]
+        [MemberData(
+            nameof(MainWithArgsTestData),
+            parameters: new object[]
+            { /*aot*/
+                true,
+                RunHost.All,
+            }
+        )]
+        public void NonAsyncMainWithArgs(
+            BuildArgs buildArgs,
+            string[] args,
+            RunHost host,
+            string id
+        ) =>
+            TestMainWithArgs(
+                "non_async_main_args",
+                @"
                 public class TestClass {
                     public static int Main(string[] args)
                     {
                         ##CODE##
                         return 42 + count;
                     }
-                }", buildArgs, args, host, id);
+                }",
+                buildArgs,
+                args,
+                host,
+                id
+            );
 
-        void TestMainWithArgs(string projectNamePrefix,
-                              string projectContents,
-                              BuildArgs buildArgs,
-                              string[] args,
-                              RunHost host,
-                              string id,
-                              bool? dotnetWasmFromRuntimePack=null)
+        void TestMainWithArgs(
+            string projectNamePrefix,
+            string projectContents,
+            BuildArgs buildArgs,
+            string[] args,
+            RunHost host,
+            string id,
+            bool? dotnetWasmFromRuntimePack = null
+        )
         {
             string projectName = $"{projectNamePrefix}_{buildArgs.Config}_{buildArgs.AOT}";
-            string code = @"
+            string code =
+                @"
                     int count = args == null ? 0 : args.Length;
                     System.Console.WriteLine($""args#: {args?.Length}"");
                     foreach (var arg in args ?? System.Array.Empty<string>())
@@ -76,26 +153,41 @@ namespace Wasm.Build.Tests
                     ";
             string programText = projectContents.Replace("##CODE##", code);
 
-            buildArgs = buildArgs with { ProjectName = projectName, ProjectFileContents = programText };
+            buildArgs = buildArgs with
+            {
+                ProjectName = projectName,
+                ProjectFileContents = programText,
+            };
             buildArgs = ExpandBuildArgs(buildArgs);
             if (dotnetWasmFromRuntimePack == null)
                 dotnetWasmFromRuntimePack = !(buildArgs.AOT || buildArgs.Config == "Release");
 
-            _testOutput.WriteLine ($"-- args: {buildArgs}, name: {projectName}");
+            _testOutput.WriteLine($"-- args: {buildArgs}, name: {projectName}");
 
-            BuildProject(buildArgs,
-                            id: id,
-                            new BuildProjectOptions(
-                                InitProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText),
-                                DotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    InitProject: () =>
+                        File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText),
+                    DotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack
+                )
+            );
 
-            RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 42 + args.Length, args: string.Join(' ', args),
+            RunAndTestWasmApp(
+                buildArgs,
+                buildDir: _projectDir,
+                expectedExitCode: 42 + args.Length,
+                args: string.Join(' ', args),
                 test: output =>
                 {
                     Assert.Contains($"args#: {args.Length}", output);
                     foreach (var arg in args)
                         Assert.Contains($"arg: {arg}", output);
-                }, host: host, id: id);
+                },
+                host: host,
+                id: id
+            );
         }
     }
 }

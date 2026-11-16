@@ -25,8 +25,8 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-        CountResults(new GoryNativePastTest().Run(),            ref nSuccesses, ref nFailures);
-        
+        CountResults(new GoryNativePastTest().Run(), ref nSuccesses, ref nFailures);
+
         if (0 == nFailures)
         {
             Console.WriteLine("OVERALL PASS: " + nSuccesses + " tests");
@@ -43,7 +43,7 @@ public class TestSet
 class GoryNativePastTest
 {
     Trace _trace;
-    
+
     void bar()
     {
         _trace.Write("2");
@@ -66,22 +66,22 @@ class GoryNativePastTest
     public int Run()
     {
         _trace = new Trace("GoryNativePastTest", "0123456");
-        
+
         _trace.Write("0");
         try
         {
-            try 
+            try
             {
                 foo();
-            } 
-            catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e);
                 _trace.Write("4");
                 throw;
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             _trace.Write("5");
             _trace.Write(e.Message);
@@ -89,4 +89,3 @@ class GoryNativePastTest
         return _trace.Match();
     }
 }
-

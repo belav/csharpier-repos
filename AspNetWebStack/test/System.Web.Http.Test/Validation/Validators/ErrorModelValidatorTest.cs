@@ -10,18 +10,26 @@ namespace System.Web.Http.Validation.Validators
 {
     public class ErrorModelValidatorTest
     {
-        private static DataAnnotationsModelMetadataProvider _metadataProvider = new DataAnnotationsModelMetadataProvider();
-        private static IEnumerable<ModelValidatorProvider> _noValidatorProviders = Enumerable.Empty<ModelValidatorProvider>();
+        private static DataAnnotationsModelMetadataProvider _metadataProvider =
+            new DataAnnotationsModelMetadataProvider();
+        private static IEnumerable<ModelValidatorProvider> _noValidatorProviders =
+            Enumerable.Empty<ModelValidatorProvider>();
 
         [Fact]
         public void ConstructorGuards()
         {
             Assert.ThrowsArgumentNull(
                 () => new ErrorModelValidator(validatorProviders: null, errorMessage: "error"),
-                "validatorProviders");
+                "validatorProviders"
+            );
             Assert.ThrowsArgumentNull(
-                () => new ErrorModelValidator(validatorProviders: _noValidatorProviders, errorMessage: null),
-                "errorMessage");
+                () =>
+                    new ErrorModelValidator(
+                        validatorProviders: _noValidatorProviders,
+                        errorMessage: null
+                    ),
+                "errorMessage"
+            );
         }
 
         [Fact]

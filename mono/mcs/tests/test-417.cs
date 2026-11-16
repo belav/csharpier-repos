@@ -5,22 +5,20 @@ using blah;
 
 namespace blah2
 {
-
-public class MyClass
-{
-    public event MyFunnyDelegate DoSomething;
-
-    public void DoSomethingFunny()
+    public class MyClass
     {
-        if (DoSomething != null) DoSomething(this, "hello there", "my friend");
+        public event MyFunnyDelegate DoSomething;
+
+        public void DoSomethingFunny()
+        {
+            if (DoSomething != null)
+                DoSomething(this, "hello there", "my friend");
+        }
+
+        public static void Main(string[] args)
+        {
+            MyClass mc = new MyClass();
+            mc.DoSomethingFunny();
+        }
     }
-
-	public static void Main(string[] args)
-	{
-		MyClass mc = new MyClass();
-		mc.DoSomethingFunny();
-
-	}
-}
-
 }

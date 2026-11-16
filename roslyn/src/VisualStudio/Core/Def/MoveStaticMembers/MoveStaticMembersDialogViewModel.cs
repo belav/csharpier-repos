@@ -25,20 +25,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
             string defaultType,
             ImmutableArray<TypeNameItem> availableTypes,
             string prependedNamespace,
-            ISyntaxFacts syntaxFacts)
+            ISyntaxFacts syntaxFacts
+        )
         {
             MemberSelectionViewModel = memberSelectionViewModel;
             _syntaxFacts = syntaxFacts ?? throw new ArgumentNullException(nameof(syntaxFacts));
             _searchText = defaultType;
             _destinationName = new TypeNameItem(defaultType);
             AvailableTypes = availableTypes;
-            PrependedNamespace = string.IsNullOrEmpty(prependedNamespace) ? prependedNamespace : prependedNamespace + ".";
+            PrependedNamespace = string.IsNullOrEmpty(prependedNamespace)
+                ? prependedNamespace
+                : prependedNamespace + ".";
 
             PropertyChanged += MoveMembersToTypeDialogViewModel_PropertyChanged;
             OnDestinationUpdated();
         }
 
-        private void MoveMembersToTypeDialogViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void MoveMembersToTypeDialogViewModel_PropertyChanged(
+            object sender,
+            PropertyChangedEventArgs e
+        )
         {
             switch (e.PropertyName)
             {

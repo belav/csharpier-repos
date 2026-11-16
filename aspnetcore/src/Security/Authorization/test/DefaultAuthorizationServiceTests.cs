@@ -31,12 +31,11 @@ public class DefaultAuthorizationServiceTests
         );
 
         // Act
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            () =>
-                AuthorizationPolicy.CombineAsync(
-                    provider,
-                    new AuthorizeAttribute[] { new AuthorizeAttribute { Policy = "Wut" } }
-                )
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            AuthorizationPolicy.CombineAsync(
+                provider,
+                new AuthorizeAttribute[] { new AuthorizeAttribute { Policy = "Wut" } }
+            )
         );
     }
 
@@ -68,14 +67,11 @@ public class DefaultAuthorizationServiceTests
         {
             services
                 .AddAuthorizationBuilder()
-                .AddPolicy(
-                    "Basic",
-                    policy =>
-                    {
-                        policy.AddAuthenticationSchemes("Basic");
-                        policy.RequireClaim("Permission", "CanViewPage");
-                    }
-                );
+                .AddPolicy("Basic", policy =>
+                {
+                    policy.AddAuthenticationSchemes("Basic");
+                    policy.RequireClaim("Permission", "CanViewPage");
+                });
         });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(new Claim[] { new Claim("Permission", "CanViewPage") }, "Basic")
@@ -95,9 +91,8 @@ public class DefaultAuthorizationServiceTests
         var authorizationService = BuildAuthorizationService(services =>
             services
                 .AddAuthorizationBuilder()
-                .AddPolicy(
-                    "Basic",
-                    policy => policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")
+                .AddPolicy("Basic", policy =>
+                    policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")
                 )
         );
         var user = new ClaimsPrincipal(
@@ -236,9 +231,8 @@ public class DefaultAuthorizationServiceTests
         var authorizationService = BuildAuthorizationService(services =>
             services
                 .AddAuthorizationBuilder()
-                .AddPolicy(
-                    "Basic",
-                    policy => policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")
+                .AddPolicy("Basic", policy =>
+                    policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")
                 )
         );
         var user = new ClaimsPrincipal(
@@ -260,9 +254,8 @@ public class DefaultAuthorizationServiceTests
         var authorizationService = BuildAuthorizationService(services =>
             services
                 .AddAuthorizationBuilder()
-                .AddPolicy(
-                    "Basic",
-                    policy => policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")
+                .AddPolicy("Basic", policy =>
+                    policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")
                 )
         );
         var user = new ClaimsPrincipal(
@@ -377,13 +370,8 @@ public class DefaultAuthorizationServiceTests
 
         // Act
         // Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () =>
-                authorizationService.AuthorizeAsync(
-                    new ClaimsPrincipal(),
-                    "whatever",
-                    "BogusPolicy"
-                )
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            authorizationService.AuthorizeAsync(new ClaimsPrincipal(), "whatever", "BogusPolicy")
         );
         Assert.Equal("No policy found: BogusPolicy.", exception.Message);
     }
@@ -520,11 +508,10 @@ public class DefaultAuthorizationServiceTests
     [Fact]
     public void PolicyThrowsWithNoRequirements()
     {
-        Assert.Throws<InvalidOperationException>(
-            () =>
-                BuildAuthorizationService(services =>
-                    services.AddAuthorizationBuilder().AddPolicy("Basic", policy => { })
-                )
+        Assert.Throws<InvalidOperationException>(() =>
+            BuildAuthorizationService(services =>
+                services.AddAuthorizationBuilder().AddPolicy("Basic", policy => { })
+            )
         );
     }
 
@@ -682,9 +669,8 @@ public class DefaultAuthorizationServiceTests
         {
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(
-                    "Custom",
-                    policy => policy.Requirements.Add(new CustomRequirement())
+                options.AddPolicy("Custom", policy =>
+                    policy.Requirements.Add(new CustomRequirement())
                 );
             });
         });
@@ -706,9 +692,8 @@ public class DefaultAuthorizationServiceTests
             services.AddTransient<IAuthorizationHandler, CustomHandler>();
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(
-                    "Custom",
-                    policy => policy.Requirements.Add(new CustomRequirement())
+                options.AddPolicy("Custom", policy =>
+                    policy.Requirements.Add(new CustomRequirement())
                 );
             });
         });
@@ -755,9 +740,8 @@ public class DefaultAuthorizationServiceTests
         {
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(
-                    "Passthrough",
-                    policy => policy.Requirements.Add(new PassThroughRequirement(shouldSucceed))
+                options.AddPolicy("Passthrough", policy =>
+                    policy.Requirements.Add(new PassThroughRequirement(shouldSucceed))
                 );
             });
         });
@@ -781,9 +765,8 @@ public class DefaultAuthorizationServiceTests
                 var basePolicy = new AuthorizationPolicyBuilder()
                     .RequireClaim("Base", "Value")
                     .Build();
-                options.AddPolicy(
-                    "Combined",
-                    policy => policy.Combine(basePolicy).RequireClaim("Claim", "Exists")
+                options.AddPolicy("Combined", policy =>
+                    policy.Combine(basePolicy).RequireClaim("Claim", "Exists")
                 );
             });
         });
@@ -812,9 +795,8 @@ public class DefaultAuthorizationServiceTests
                 var basePolicy = new AuthorizationPolicyBuilder()
                     .RequireClaim("Base", "Value")
                     .Build();
-                options.AddPolicy(
-                    "Combined",
-                    policy => policy.Combine(basePolicy).RequireClaim("Claim", "Exists")
+                options.AddPolicy("Combined", policy =>
+                    policy.Combine(basePolicy).RequireClaim("Claim", "Exists")
                 );
             });
         });
@@ -840,9 +822,8 @@ public class DefaultAuthorizationServiceTests
                 var basePolicy = new AuthorizationPolicyBuilder()
                     .RequireClaim("Base", "Value")
                     .Build();
-                options.AddPolicy(
-                    "Combined",
-                    policy => policy.Combine(basePolicy).RequireClaim("Claim", "Exists")
+                options.AddPolicy("Combined", policy =>
+                    policy.Combine(basePolicy).RequireClaim("Claim", "Exists")
                 );
             });
         });
@@ -1101,9 +1082,8 @@ public class DefaultAuthorizationServiceTests
         {
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(
-                    "Basic",
-                    policy => policy.RequireAssertion(context => Task.FromResult(true))
+                options.AddPolicy("Basic", policy =>
+                    policy.RequireAssertion(context => Task.FromResult(true))
                 );
             });
         });
@@ -1332,12 +1312,8 @@ public class DefaultAuthorizationServiceTests
             Func<TState, Exception, string> formatter
         )
         {
-            _assertion(
-                logLevel,
-                eventId,
-                state,
-                exception,
-                (s, e) => formatter?.Invoke((TState)s, e)
+            _assertion(logLevel, eventId, state, exception, (s, e) =>
+                formatter?.Invoke((TState)s, e)
             );
         }
     }
@@ -1375,16 +1351,11 @@ public class DefaultAuthorizationServiceTests
             services.AddSingleton<ILogger<DefaultAuthorizationService>>(
                 new DefaultAuthorizationServiceTestLogger(Assertion)
             );
-            services.AddAuthorization(options =>
-                options.AddPolicy(
-                    "Log",
-                    p =>
-                    {
-                        p.Requirements.Add(new LogRequirement());
-                        p.Requirements.Add(new LogRequirement());
-                    }
-                )
-            );
+            services.AddAuthorization(options => options.AddPolicy("Log", p =>
+                {
+                    p.Requirements.Add(new LogRequirement());
+                    p.Requirements.Add(new LogRequirement());
+                }));
         });
 
         var user = new ClaimsPrincipal();
@@ -1422,16 +1393,11 @@ public class DefaultAuthorizationServiceTests
             services.AddSingleton<ILogger<DefaultAuthorizationService>>(
                 new DefaultAuthorizationServiceTestLogger(Assertion)
             );
-            services.AddAuthorization(options =>
-                options.AddPolicy(
-                    "Log",
-                    p =>
-                    {
-                        p.Requirements.Add(new LogRequirement());
-                        p.Requirements.Add(new LogRequirement());
-                    }
-                )
-            );
+            services.AddAuthorization(options => options.AddPolicy("Log", p =>
+                {
+                    p.Requirements.Add(new LogRequirement());
+                    p.Requirements.Add(new LogRequirement());
+                }));
         });
 
         var user = new ClaimsPrincipal();

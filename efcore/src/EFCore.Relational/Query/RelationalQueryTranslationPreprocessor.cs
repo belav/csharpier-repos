@@ -19,11 +19,13 @@ public class RelationalQueryTranslationPreprocessor : QueryTranslationPreprocess
     public RelationalQueryTranslationPreprocessor(
         QueryTranslationPreprocessorDependencies dependencies,
         RelationalQueryTranslationPreprocessorDependencies relationalDependencies,
-        QueryCompilationContext queryCompilationContext)
+        QueryCompilationContext queryCompilationContext
+    )
         : base(dependencies, queryCompilationContext)
     {
         RelationalDependencies = relationalDependencies;
-        _relationalQueryCompilationContext = (RelationalQueryCompilationContext)queryCompilationContext;
+        _relationalQueryCompilationContext =
+            (RelationalQueryCompilationContext)queryCompilationContext;
     }
 
     /// <summary>
@@ -34,13 +36,19 @@ public class RelationalQueryTranslationPreprocessor : QueryTranslationPreprocess
     /// <inheritdoc />
     public override Expression NormalizeQueryableMethod(Expression expression)
     {
-        expression = new RelationalQueryMetadataExtractingExpressionVisitor(_relationalQueryCompilationContext).Visit(expression);
+        expression = new RelationalQueryMetadataExtractingExpressionVisitor(
+            _relationalQueryCompilationContext
+        ).Visit(expression);
         expression = base.NormalizeQueryableMethod(expression);
 
         return expression;
     }
 
     /// <inheritdoc />
-    protected override Expression ProcessQueryRoots(Expression expression)
-        => new RelationalQueryRootProcessor(Dependencies, RelationalDependencies, QueryCompilationContext).Visit(expression);
+    protected override Expression ProcessQueryRoots(Expression expression) =>
+        new RelationalQueryRootProcessor(
+            Dependencies,
+            RelationalDependencies,
+            QueryCompilationContext
+        ).Visit(expression);
 }

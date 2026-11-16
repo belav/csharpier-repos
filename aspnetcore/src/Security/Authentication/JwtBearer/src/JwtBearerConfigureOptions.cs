@@ -70,18 +70,18 @@ internal sealed class JwtBearerConfigureOptions : IConfigureNamedOptions<JwtBear
             options.BackchannelTimeout
         );
         options.Challenge = configSection[nameof(options.Challenge)] ?? options.Challenge;
-        options.ForwardAuthenticate =
-            configSection[nameof(options.ForwardAuthenticate)] ?? options.ForwardAuthenticate;
-        options.ForwardChallenge =
-            configSection[nameof(options.ForwardChallenge)] ?? options.ForwardChallenge;
-        options.ForwardDefault =
-            configSection[nameof(options.ForwardDefault)] ?? options.ForwardDefault;
-        options.ForwardForbid =
-            configSection[nameof(options.ForwardForbid)] ?? options.ForwardForbid;
-        options.ForwardSignIn =
-            configSection[nameof(options.ForwardSignIn)] ?? options.ForwardSignIn;
-        options.ForwardSignOut =
-            configSection[nameof(options.ForwardSignOut)] ?? options.ForwardSignOut;
+        options.ForwardAuthenticate = configSection[nameof(options.ForwardAuthenticate)]
+            ?? options.ForwardAuthenticate;
+        options.ForwardChallenge = configSection[nameof(options.ForwardChallenge)]
+            ?? options.ForwardChallenge;
+        options.ForwardDefault = configSection[nameof(options.ForwardDefault)]
+            ?? options.ForwardDefault;
+        options.ForwardForbid = configSection[nameof(options.ForwardForbid)]
+            ?? options.ForwardForbid;
+        options.ForwardSignIn = configSection[nameof(options.ForwardSignIn)]
+            ?? options.ForwardSignIn;
+        options.ForwardSignOut = configSection[nameof(options.ForwardSignOut)]
+            ?? options.ForwardSignOut;
         options.IncludeErrorDetails = StringHelpers.ParseValueOrDefault(
             configSection[nameof(options.IncludeErrorDetails)],
             bool.Parse,
@@ -92,8 +92,8 @@ internal sealed class JwtBearerConfigureOptions : IConfigureNamedOptions<JwtBear
             bool.Parse,
             options.MapInboundClaims
         );
-        options.MetadataAddress =
-            configSection[nameof(options.MetadataAddress)] ?? options.MetadataAddress;
+        options.MetadataAddress = configSection[nameof(options.MetadataAddress)]
+            ?? options.MetadataAddress;
         options.RefreshInterval = StringHelpers.ParseValueOrDefault(
             configSection[nameof(options.RefreshInterval)],
             _invariantTimeSpanParse,

@@ -7,12 +7,11 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
 
     [ConfigurationCollection(typeof(DefaultPortElement), AddItemName = ConfigurationStrings.Add)]
-    public sealed partial class DefaultPortElementCollection : ServiceModelEnhancedConfigurationElementCollection<DefaultPortElement>
+    public sealed partial class DefaultPortElementCollection
+        : ServiceModelEnhancedConfigurationElementCollection<DefaultPortElement>
     {
         public DefaultPortElementCollection()
-            : base(ConfigurationStrings.Add)
-        {
-        }
+            : base(ConfigurationStrings.Add) { }
 
         protected override object GetElementKey(ConfigurationElement element)
         {

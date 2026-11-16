@@ -14,7 +14,7 @@ namespace System.Data.Entity.Design
         {
             Normal,
             ReadOnly,
-            Invalid
+            Invalid,
         }
     }
 }

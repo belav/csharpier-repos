@@ -4,10 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-    public partial class Menu {
-        internal abstract class MenuRenderer {
-            protected MenuRenderer(Menu menu) {
+namespace System.Web.UI.WebControls
+{
+    public partial class Menu
+    {
+        internal abstract class MenuRenderer
+        {
+            protected MenuRenderer(Menu menu)
+            {
                 Menu = menu;
             }
 
@@ -18,7 +22,8 @@ namespace System.Web.UI.WebControls {
             public abstract void RenderContents(HtmlTextWriter writer, bool staticOnly);
             public abstract void RenderEndTag(HtmlTextWriter writer, bool staticOnly);
 
-            public virtual void Render(HtmlTextWriter writer, bool staticOnly) {
+            public virtual void Render(HtmlTextWriter writer, bool staticOnly)
+            {
                 RenderBeginTag(writer, staticOnly);
                 RenderContents(writer, staticOnly);
                 RenderEndTag(writer, staticOnly);

@@ -2,34 +2,34 @@ using System;
 
 public interface I<out T>
 {
-	int Count{ get; }
+    int Count { get; }
 }
 
-class Foo {}
+class Foo { }
 
 public class Test : I<string>, I<Foo>
 {
-	int I<string>.Count
-	{
-		get { return 1; }
-	}
-	
-	int I<Foo>.Count
-	{
-		get { return 2; }
-	}
+    int I<string>.Count
+    {
+        get { return 1; }
+    }
+
+    int I<Foo>.Count
+    {
+        get { return 2; }
+    }
 }
 
 public static class Program
 {
-	public static int Main ()
-	{
-		var col = new Test();
+    public static int Main()
+    {
+        var col = new Test();
 
-		var test = (I<object>)(object) col;
-		if (test.Count != 1)
-			return 1;
-		
-		return 0;
-	}
+        var test = (I<object>)(object)col;
+        if (test.Count != 1)
+            return 1;
+
+        return 0;
+    }
 }

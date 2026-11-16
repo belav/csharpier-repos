@@ -4,10 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using System.Runtime.InteropServices;
-using System.Runtime;
 
 namespace LOHPin
 {
@@ -21,16 +21,16 @@ namespace LOHPin
          *   - pin some of the large objects
          *   - compact LOH then check the address of the objects
          * */
- 
+
         static int Main()
         {
             List<GCHandle> GCHandleList = new List<GCHandle>();
             int ListSize = 300;
             List<byte[]> shortLivedList = new List<byte[]>(ListSize);
-            List<byte[]> LongLivedList = new List<byte[]>(ListSize-ListSize/10);
-             List<IntPtr> LongLivedAddress = new List<IntPtr>(ListSize-ListSize/10);  //addresses of objects in LongLivedList
-            List<byte[]> PinList = new List<byte[]>(ListSize/10);
-            List<IntPtr> PinAddress = new List<IntPtr>(ListSize/10); //addresses of objects in PinList
+            List<byte[]> LongLivedList = new List<byte[]>(ListSize - ListSize / 10);
+            List<IntPtr> LongLivedAddress = new List<IntPtr>(ListSize - ListSize / 10); //addresses of objects in LongLivedList
+            List<byte[]> PinList = new List<byte[]>(ListSize / 10);
+            List<IntPtr> PinAddress = new List<IntPtr>(ListSize / 10); //addresses of objects in PinList
             //Create fragmentation in the Large Object Heap
             System.Random rnd = new Random(12345);
             for (int i = 0; i < ListSize; i++)
@@ -38,31 +38,28 @@ namespace LOHPin
                 shortLivedList.Add(new byte[rnd.Next(85001, 100000)]);
 
                 byte[] bt = new byte[rnd.Next(85001, 100000)];
-                if (i % 10 == 0)  //object pinned
+                if (i % 10 == 0) //object pinned
                 {
                     PinList.Add(bt);
-                    GCHandle gch = GCHandle.Alloc(bt,GCHandleType.Pinned);
+                    GCHandle gch = GCHandle.Alloc(bt, GCHandleType.Pinned);
                     GCHandleList.Add(gch);
                     PinAddress.Add(gch.AddrOfPinnedObject());
-
                 }
-                else  //object not pinned
+                else //object not pinned
                 {
                     LongLivedList.Add(bt);
                     GCHandle gch = GCHandle.Alloc(bt, GCHandleType.Pinned);
                     LongLivedAddress.Add(gch.AddrOfPinnedObject());
                     gch.Free();
                 }
-
             }
             shortLivedList.Clear();
-            GC.Collect();  //LOH should be fragmented 40-50% after this GC - can observe this with perfview
+            GC.Collect(); //LOH should be fragmented 40-50% after this GC - can observe this with perfview
             GC.WaitForPendingFinalizers();
             GC.Collect();
 
-           GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
             GC.Collect();
-        
 
             //check the addresses of objects; pinned and not pinned
             Console.WriteLine("Check the pinned list");
@@ -86,7 +83,11 @@ namespace LOHPin
             {
                 GCHandle gch = GCHandle.Alloc(LongLivedList[i], GCHandleType.Pinned);
                 IntPtr newAddress = gch.AddrOfPinnedObject();
-                Console.WriteLine("OldAddress={0}, NewAddress={1}", LongLivedAddress[i], newAddress);
+                Console.WriteLine(
+                    "OldAddress={0}, NewAddress={1}",
+                    LongLivedAddress[i],
+                    newAddress
+                );
                 gch.Free();
                 if (!(LongLivedAddress[i] == newAddress))
                 {
@@ -94,7 +95,7 @@ namespace LOHPin
                 }
             }
             Console.WriteLine(moved + " objects have moved out of " + LongLivedList.Count);
-            if (moved < LongLivedList.Count/2)
+            if (moved < LongLivedList.Count / 2)
             {
                 Console.WriteLine("Test failed. Too few objects have moved during compaction");
                 return 2;
@@ -102,12 +103,6 @@ namespace LOHPin
 
             Console.WriteLine("Test passed");
             return 100;
-         
         }
-
-      
-      
     }
-
-   
 }

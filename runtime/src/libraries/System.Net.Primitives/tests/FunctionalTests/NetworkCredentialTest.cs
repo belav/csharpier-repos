@@ -75,7 +75,10 @@ namespace System.Net.Primitives.Functional.Tests
         {
             NetworkCredential nc = new NetworkCredential();
 
-            Assert.Equal(nc, nc.GetCredential(new Uri("http://microsoft.com"), "authenticationType"));
+            Assert.Equal(
+                nc,
+                nc.GetCredential(new Uri("http://microsoft.com"), "authenticationType")
+            );
         }
 
         [Fact]
@@ -123,7 +126,11 @@ namespace System.Net.Primitives.Functional.Tests
 
             using (SecureString expectedSecurePassword = AsSecureString("password"))
             {
-                NetworkCredential nc = new NetworkCredential(expectedUser, expectedSecurePassword, expectedDomain);
+                NetworkCredential nc = new NetworkCredential(
+                    expectedUser,
+                    expectedSecurePassword,
+                    expectedDomain
+                );
                 Assert.Equal(expectedUser, nc.UserName);
                 Assert.Equal(expectedDomain, nc.Domain);
                 Assert.True(expectedSecurePassword.CompareSecureString(nc.SecurePassword));
@@ -144,7 +151,10 @@ namespace System.Net.Primitives.Functional.Tests
 
         [Theory]
         [MemberData(nameof(Password_RoundTestData))]
-        public static void SecurePassword_Password_RoundData_Test(string expectedSecurePassword, string expectedPassword)
+        public static void SecurePassword_Password_RoundData_Test(
+            string expectedSecurePassword,
+            string expectedPassword
+        )
         {
             NetworkCredential nc = new NetworkCredential();
             using (SecureString securePassword = AsSecureString(expectedSecurePassword))
@@ -153,7 +163,9 @@ namespace System.Net.Primitives.Functional.Tests
                 Assert.Equal(expectedSecurePassword ?? string.Empty, nc.Password);
 
                 nc.Password = expectedPassword;
-                Assert.True(AsSecureString(expectedPassword).CompareSecureString(nc.SecurePassword));
+                Assert.True(
+                    AsSecureString(expectedPassword).CompareSecureString(nc.SecurePassword)
+                );
             }
         }
 

@@ -13,8 +13,8 @@ namespace System
         /// </summary>
         /// <param name="timeout">The timeout on waiting for a full GC approach</param>
         /// <returns>The status of a registered full GC notification</returns>
-        public static GCNotificationStatus WaitForFullGCApproach(TimeSpan timeout)
-            => WaitForFullGCApproach(WaitHandle.ToTimeoutMilliseconds(timeout));
+        public static GCNotificationStatus WaitForFullGCApproach(TimeSpan timeout) =>
+            WaitForFullGCApproach(WaitHandle.ToTimeoutMilliseconds(timeout));
 
         /// <summary>
         /// Returns the status of a registered notification about whether a blocking garbage collection
@@ -22,7 +22,7 @@ namespace System
         /// </summary>
         /// <param name="timeout">The timeout on waiting for a full collection</param>
         /// <returns>The status of a registered full GC notification</returns>
-        public static GCNotificationStatus WaitForFullGCComplete(TimeSpan timeout)
-            => WaitForFullGCComplete(WaitHandle.ToTimeoutMilliseconds(timeout));
+        public static GCNotificationStatus WaitForFullGCComplete(TimeSpan timeout) =>
+            WaitForFullGCComplete(WaitHandle.ToTimeoutMilliseconds(timeout));
     }
 }

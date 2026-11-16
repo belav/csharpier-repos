@@ -6,13 +6,18 @@ using System.Globalization;
 namespace System.Security.Authentication.ExtendedProtection
 {
     // derived from ReadOnlyCollectionBase because it needs to be back ported to .Net 1.x
-    [SuppressMessage("Microsoft.Design","CA1058:TypesShouldNotExtendCertainBaseTypes", Justification="changing this would be a breaking change; this code has already shipped")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1058:TypesShouldNotExtendCertainBaseTypes",
+        Justification = "changing this would be a breaking change; this code has already shipped"
+    )]
     [Serializable]
     public class ServiceNameCollection : ReadOnlyCollectionBase
     {
         public ServiceNameCollection(ICollection items)
         {
-            if (items == null) {
+            if (items == null)
+            {
                 throw new ArgumentNullException("items");
             }
 
@@ -38,10 +43,11 @@ namespace System.Security.Authentication.ExtendedProtection
         {
             ArrayList newServiceNames = new ArrayList(); // be compatible with .Net 1.x; no generics
             newServiceNames.AddRange(this.InnerList);
-            
-            // we have a pretty bad performance here: O(n^2), but since service name lists should 
+
+            // we have a pretty bad performance here: O(n^2), but since service name lists should
             // be small (<<50) and Merge() should not be called frequently, this shouldn't be an issue
-            foreach (object item in serviceNames) {
+            foreach (object item in serviceNames)
+            {
                 AddIfNew(newServiceNames, item as string);
             }
 
@@ -52,13 +58,17 @@ namespace System.Security.Authentication.ExtendedProtection
         // Normalize, check for duplicates, and add if the value is unique
         private static void AddIfNew(ArrayList newServiceNames, string serviceName)
         {
-            if (String.IsNullOrEmpty(serviceName)) {
-                throw new ArgumentException(SR.GetString(SR.security_ServiceNameCollection_EmptyServiceName));
+            if (String.IsNullOrEmpty(serviceName))
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.security_ServiceNameCollection_EmptyServiceName)
+                );
             }
 
             serviceName = NormalizeServiceName(serviceName);
 
-            if (!Contains(serviceName, newServiceNames)) {
+            if (!Contains(serviceName, newServiceNames))
+            {
                 newServiceNames.Add(serviceName);
             }
         }
@@ -69,8 +79,10 @@ namespace System.Security.Authentication.ExtendedProtection
             Debug.Assert(serviceNames != null);
             Debug.Assert(!String.IsNullOrEmpty(searchServiceName));
 
-            foreach (string serviceName in serviceNames) {
-                if (Match(serviceName, searchServiceName))  {
+            foreach (string serviceName in serviceNames)
+            {
+                if (Match(serviceName, searchServiceName))
+                {
                     return true;
                 }
             }
@@ -84,7 +96,7 @@ namespace System.Security.Authentication.ExtendedProtection
 
             return Contains(searchName, InnerList);
         }
-        
+
         // Normalizes any punycode to unicode in an Service Name (SPN) host.
         // If the algorithm fails at any point then the original input is returned.
         // ServiceName is in one of the following forms:
@@ -140,12 +152,19 @@ namespace System.Security.Authentication.ExtendedProtection
                 if (colonIndex >= 0)
                 {
                     // host:port
-                    host = hostAndPort.Substring(0, colonIndex); // Excludes colon 
-                    port = hostAndPort.Substring(colonIndex + 1); // Excludes colon 
+                    host = hostAndPort.Substring(0, colonIndex); // Excludes colon
+                    port = hostAndPort.Substring(colonIndex + 1); // Excludes colon
 
                     // Loosely validate the port just to make sure it was a port and not something else
                     UInt16 portValue;
-                    if (!UInt16.TryParse(port, NumberStyles.Integer, CultureInfo.InvariantCulture, out portValue))
+                    if (
+                        !UInt16.TryParse(
+                            port,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out portValue
+                        )
+                    )
                     {
                         return inputServiceName;
                     }
@@ -156,13 +175,13 @@ namespace System.Security.Authentication.ExtendedProtection
 
                 hostType = Uri.CheckHostName(host); // Revaidate the host
             }
-            
+
             if (hostType != UriHostNameType.Dns)
             {
                 // UriHostNameType.IPv4, UriHostNameType.IPv6: Do not normalize IPv4/6 hosts.
                 // UriHostNameType.Basic: This is never returned by CheckHostName today
                 // UriHostNameType.Unknown: Nothing recognizable to normalize
-                // default Some new UriHostNameType?                       
+                // default Some new UriHostNameType?
                 return inputServiceName;
             }
 
@@ -170,21 +189,35 @@ namespace System.Security.Authentication.ExtendedProtection
 
             Uri constructedUri;
             // This shouldn't fail, but we need to avoid any unexpected exceptions on this code path.
-            if (!Uri.TryCreate(Uri.UriSchemeHttp + Uri.SchemeDelimiter + host, UriKind.Absolute, out constructedUri))
+            if (
+                !Uri.TryCreate(
+                    Uri.UriSchemeHttp + Uri.SchemeDelimiter + host,
+                    UriKind.Absolute,
+                    out constructedUri
+                )
+            )
             {
                 return inputServiceName;
             }
 
             string normalizedHost = constructedUri.GetComponents(
-                UriComponents.NormalizedHost, UriFormat.SafeUnescaped);
+                UriComponents.NormalizedHost,
+                UriFormat.SafeUnescaped
+            );
 
-            string normalizedServiceName = string.Format(CultureInfo.InvariantCulture, 
-                "{0}{1}{2}{3}", prefix, normalizedHost, port, distinguisher);
+            string normalizedServiceName = string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}{1}{2}{3}",
+                prefix,
+                normalizedHost,
+                port,
+                distinguisher
+            );
 
             // Don't return the new one unless we absolutely have to.  It may have only changed casing.
             if (Match(inputServiceName, normalizedServiceName))
             {
-                return inputServiceName; 
+                return inputServiceName;
             }
 
             return normalizedServiceName;
@@ -193,7 +226,9 @@ namespace System.Security.Authentication.ExtendedProtection
         // Assumes already normalized
         internal static bool Match(string serviceName1, string serviceName2)
         {
-            return (String.Compare(serviceName1, serviceName2, StringComparison.OrdinalIgnoreCase) == 0);
+            return (
+                String.Compare(serviceName1, serviceName2, StringComparison.OrdinalIgnoreCase) == 0
+            );
         }
     }
 }

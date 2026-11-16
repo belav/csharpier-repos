@@ -1,4 +1,4 @@
-// 
+//
 // System.IO.InternalBufferOverflowException.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,32 +31,25 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace System.IO {
-	[Serializable]
-	public class InternalBufferOverflowException : SystemException {
+namespace System.IO
+{
+    [Serializable]
+    public class InternalBufferOverflowException : SystemException
+    {
+        #region Constructors
 
-		#region Constructors
+        public InternalBufferOverflowException()
+            : base("Internal buffer overflow occurred.") { }
 
-		public InternalBufferOverflowException ()
-			: base ("Internal buffer overflow occurred.")
-		{
-		}
+        public InternalBufferOverflowException(string message)
+            : base(message) { }
 
-		public InternalBufferOverflowException (string message)
-			: base (message)
-		{
-		}
+        protected InternalBufferOverflowException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-		protected InternalBufferOverflowException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
+        public InternalBufferOverflowException(string message, Exception inner)
+            : base(message, inner) { }
 
-		public InternalBufferOverflowException (string message, Exception inner)
-			: base (message, inner)
-		{
-		}
-
-		#endregion // Constructors
-	}
+        #endregion // Constructors
+    }
 }

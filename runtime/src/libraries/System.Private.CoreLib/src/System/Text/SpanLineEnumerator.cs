@@ -54,7 +54,11 @@ namespace System.Text
             {
                 int stride = 1;
 
-                if (remaining[idx] == '\r' && (uint)(idx + 1) < (uint)remaining.Length && remaining[idx + 1] == '\n')
+                if (
+                    remaining[idx] == '\r'
+                    && (uint)(idx + 1) < (uint)remaining.Length
+                    && remaining[idx + 1] == '\n'
+                )
                 {
                     stride = 2;
                 }

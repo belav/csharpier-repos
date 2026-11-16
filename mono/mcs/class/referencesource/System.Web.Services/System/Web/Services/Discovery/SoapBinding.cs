@@ -1,23 +1,23 @@
 //------------------------------------------------------------------------------
 // <copyright file="SoapBinding.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Discovery {
-
+namespace System.Web.Services.Discovery
+{
     using System;
+    using System.Diagnostics;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Diagnostics;
 
     /// <include file='doc\SoapBinding.uex' path='docs/doc[@for="SoapBinding"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlRoot("soap", Namespace = SoapBinding.Namespace)]
-    public sealed class SoapBinding {
-
+    public sealed class SoapBinding
+    {
         /// <include file='doc\SoapBinding.uex' path='docs/doc[@for="SoapBinding.Namespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -32,9 +32,11 @@ namespace System.Web.Services.Discovery {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("address")]
-        public string Address {
+        public string Address
+        {
             get { return address; }
-            set {
+            set
+            {
                 if (value == null)
                     address = "";
                 else
@@ -47,11 +49,10 @@ namespace System.Web.Services.Discovery {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("binding")]
-        public XmlQualifiedName Binding {
+        public XmlQualifiedName Binding
+        {
             get { return binding; }
             set { binding = value; }
         }
-
     }
-
 }

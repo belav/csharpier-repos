@@ -11,7 +11,10 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
 {
-    using VerifyCS = CSharpCodeFixVerifier<CSharpRemoveConfusingSuppressionDiagnosticAnalyzer, CSharpRemoveConfusingSuppressionCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        CSharpRemoveConfusingSuppressionDiagnosticAnalyzer,
+        CSharpRemoveConfusingSuppressionCodeFixProvider
+    >;
 
     public class RemoveConfusingSuppressionTests
     {
@@ -40,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44872")]
@@ -68,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44872")]
@@ -76,32 +81,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                class C
-                {
-                    void M(object o)
+                TestCode = """
+                    class C
                     {
-                        if (o [|!|]is string)
+                        void M(object o)
                         {
+                            if (o [|!|]is string)
+                            {
+                            }
                         }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                class C
-                {
-                    void M(object o)
+                    """,
+                FixedCode = """
+                    class C
                     {
-                        if (!(o is string))
+                        void M(object o)
                         {
+                            if (!(o is string))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 CodeActionIndex = 1,
-                LanguageVersion = LanguageVersion.CSharp8
+                LanguageVersion = LanguageVersion.CSharp8,
             }.RunAsync();
         }
 
@@ -110,30 +113,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                class C
-                {
-                    void M(object o)
+                TestCode = """
+                    class C
                     {
-                        if (o [|!|]is string s)
+                        void M(object o)
                         {
+                            if (o [|!|]is string s)
+                            {
+                            }
                         }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                class C
-                {
-                    void M(object o)
+                    """,
+                FixedCode = """
+                    class C
                     {
-                        if (!(o is string s))
+                        void M(object o)
                         {
+                            if (!(o is string s))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 CodeActionIndex = 1,
                 LanguageVersion = LanguageVersion.CSharp8,
             }.RunAsync();
@@ -144,30 +145,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                class C
-                {
-                    void M(object o)
+                TestCode = """
+                    class C
                     {
-                        if (o [|!|]is string)
+                        void M(object o)
                         {
+                            if (o [|!|]is string)
+                            {
+                            }
                         }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                class C
-                {
-                    void M(object o)
+                    """,
+                FixedCode = """
+                    class C
                     {
-                        if (o is not string)
+                        void M(object o)
                         {
+                            if (o is not string)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 CodeActionIndex = 1,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
@@ -178,33 +177,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                class C
-                {
-                    void M(object o)
+                TestCode = """
+                    class C
                     {
-                        if (o [|!|]is string s)
+                        void M(object o)
                         {
+                            if (o [|!|]is string s)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 FixedState =
                 {
                     Sources =
                     {
                         """
-                        class C
-                        {
-                            void M(object o)
+                            class C
                             {
-                                if (o is not string s)
+                                void M(object o)
                                 {
+                                    if (o is not string s)
+                                    {
+                                    }
                                 }
                             }
-                        }
-                        """
+                            """,
                     },
                 },
                 CodeActionIndex = 1,
@@ -217,38 +215,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                class C
-                {
-                    void M(object o)
+                TestCode = """
+                    class C
                     {
-                        if (o [|!|]is string)
+                        void M(object o)
                         {
-                        }
-                        if (o [|!|]is string)
-                        {
+                            if (o [|!|]is string)
+                            {
+                            }
+                            if (o [|!|]is string)
+                            {
+                            }
                         }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                class C
-                {
-                    void M(object o)
+                    """,
+                FixedCode = """
+                    class C
                     {
-                        if (o is string)
+                        void M(object o)
                         {
-                        }
-                        if (o is string)
-                        {
+                            if (o is string)
+                            {
+                            }
+                            if (o is string)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 NumberOfFixAllIterations = 1,
-                CodeActionEquivalenceKey = CSharpRemoveConfusingSuppressionCodeFixProvider.RemoveOperator,
+                CodeActionEquivalenceKey =
+                    CSharpRemoveConfusingSuppressionCodeFixProvider.RemoveOperator,
             }.RunAsync();
         }
 
@@ -257,38 +254,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                class C
-                {
-                    void M(object o)
+                TestCode = """
+                    class C
                     {
-                        if (o [|!|]is string)
+                        void M(object o)
                         {
-                        }
-                        if (o [|!|]is string)
-                        {
+                            if (o [|!|]is string)
+                            {
+                            }
+                            if (o [|!|]is string)
+                            {
+                            }
                         }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                class C
-                {
-                    void M(object o)
+                    """,
+                FixedCode = """
+                    class C
                     {
-                        if (!(o is string))
+                        void M(object o)
                         {
-                        }
-                        if (!(o is string))
-                        {
+                            if (!(o is string))
+                            {
+                            }
+                            if (!(o is string))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = CSharpRemoveConfusingSuppressionCodeFixProvider.NegateExpression,
+                CodeActionEquivalenceKey =
+                    CSharpRemoveConfusingSuppressionCodeFixProvider.NegateExpression,
                 NumberOfFixAllIterations = 1,
             }.RunAsync();
         }
@@ -298,38 +294,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                class C
-                {
-                    void M(object o)
+                TestCode = """
+                    class C
                     {
-                        if (o [|!|]is string s)
+                        void M(object o)
                         {
-                        }
-                        if (o [|!|]is string t)
-                        {
+                            if (o [|!|]is string s)
+                            {
+                            }
+                            if (o [|!|]is string t)
+                            {
+                            }
                         }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                class C
-                {
-                    void M(object o)
+                    """,
+                FixedCode = """
+                    class C
                     {
-                        if (o is string s)
+                        void M(object o)
                         {
-                        }
-                        if (o is string t)
-                        {
+                            if (o is string s)
+                            {
+                            }
+                            if (o is string t)
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 NumberOfFixAllIterations = 1,
-                CodeActionEquivalenceKey = CSharpRemoveConfusingSuppressionCodeFixProvider.RemoveOperator,
+                CodeActionEquivalenceKey =
+                    CSharpRemoveConfusingSuppressionCodeFixProvider.RemoveOperator,
             }.RunAsync();
         }
 
@@ -338,39 +333,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
-                class C
-                {
-                    void M(object o)
+                TestCode = """
+                    class C
                     {
-                        if (o [|!|]is string s)
+                        void M(object o)
                         {
-                        }
-                        if (o [|!|]is string t)
-                        {
+                            if (o [|!|]is string s)
+                            {
+                            }
+                            if (o [|!|]is string t)
+                            {
+                            }
                         }
                     }
-                }
-                """,
-                FixedCode =
-                """
-                class C
-                {
-                    void M(object o)
+                    """,
+                FixedCode = """
+                    class C
                     {
-                        if (!(o is string s))
+                        void M(object o)
                         {
-                        }
-                        if (!(o is string t))
-                        {
+                            if (!(o is string s))
+                            {
+                            }
+                            if (!(o is string t))
+                            {
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 NumberOfFixAllIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = CSharpRemoveConfusingSuppressionCodeFixProvider.NegateExpression,
+                CodeActionEquivalenceKey =
+                    CSharpRemoveConfusingSuppressionCodeFixProvider.NegateExpression,
             }.RunAsync();
         }
     }

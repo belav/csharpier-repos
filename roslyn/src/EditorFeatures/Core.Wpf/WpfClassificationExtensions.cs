@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 {
     internal static partial class WpfClassificationExtensions
     {
-        public static Run ToRun(this ClassifiedText part, IClassificationFormatMap formatMap, ClassificationTypeMap typeMap)
+        public static Run ToRun(
+            this ClassifiedText part,
+            IClassificationFormatMap formatMap,
+            ClassificationTypeMap typeMap
+        )
         {
             var run = new Run(part.Text);
 
@@ -32,10 +36,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         }
 
         public static IList<Inline> ToInlines(
-           this IEnumerable<ClassifiedText> parts,
-           IClassificationFormatMap formatMap,
-           ClassificationTypeMap typeMap,
-           Action<Run, ClassifiedText, int> runCallback = null)
+            this IEnumerable<ClassifiedText> parts,
+            IClassificationFormatMap formatMap,
+            ClassificationTypeMap typeMap,
+            Action<Run, ClassifiedText, int> runCallback = null
+        )
         {
             var inlines = new List<Inline>();
 
@@ -55,42 +60,47 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static IList<Inline> ToInlines(
             this IEnumerable<TaggedText> parts,
             IClassificationFormatMap formatMap,
-            ClassificationTypeMap typeMap)
+            ClassificationTypeMap typeMap
+        )
         {
-            var classifiedTexts = parts.Select(p =>
-                new ClassifiedText(
-                    p.Tag.ToClassificationTypeName(),
-                    p.ToVisibleDisplayString(includeLeftToRightMarker: true)));
+            var classifiedTexts = parts.Select(p => new ClassifiedText(
+                p.Tag.ToClassificationTypeName(),
+                p.ToVisibleDisplayString(includeLeftToRightMarker: true)
+            ));
             return classifiedTexts.ToInlines(formatMap, typeMap);
         }
 
         public static TextBlock ToTextBlock(
             this IEnumerable<TaggedText> parts,
             IClassificationFormatMap formatMap,
-            ClassificationTypeMap typeMap)
+            ClassificationTypeMap typeMap
+        )
         {
             var inlines = parts.ToInlines(formatMap, typeMap);
             return inlines.ToTextBlock(formatMap);
         }
 
-        [Obsolete("Use 'public static TextBlock ToTextBlock(this IEnumerable <Inline> inlines, IClassificationFormatMap formatMap, bool wrap = true)' instead")]
+        [Obsolete(
+            "Use 'public static TextBlock ToTextBlock(this IEnumerable <Inline> inlines, IClassificationFormatMap formatMap, bool wrap = true)' instead"
+        )]
         public static TextBlock ToTextBlock(
             this IEnumerable<Inline> inlines,
             IClassificationFormatMap formatMap,
             ClassificationTypeMap typeMap,
             string classificationFormatMap = null,
-            bool wrap = true)
-            => inlines.ToTextBlock(formatMap, wrap);
+            bool wrap = true
+        ) => inlines.ToTextBlock(formatMap, wrap);
 
         public static TextBlock ToTextBlock(
             this IEnumerable<Inline> inlines,
             IClassificationFormatMap formatMap,
-            bool wrap = true)
+            bool wrap = true
+        )
         {
             var textBlock = new TextBlock
             {
                 TextWrapping = wrap ? TextWrapping.Wrap : TextWrapping.NoWrap,
-                TextTrimming = wrap ? TextTrimming.None : TextTrimming.CharacterEllipsis
+                TextTrimming = wrap ? TextTrimming.None : TextTrimming.CharacterEllipsis,
             };
 
             textBlock.SetDefaultTextProperties(formatMap);
@@ -99,7 +109,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             return textBlock;
         }
 
-        public static TextBlock ToTextBlock(this TaggedText part, IClassificationFormatMap formatMap, ClassificationTypeMap typeMap)
-            => SpecializedCollections.SingletonEnumerable(part).ToTextBlock(formatMap, typeMap);
+        public static TextBlock ToTextBlock(
+            this TaggedText part,
+            IClassificationFormatMap formatMap,
+            ClassificationTypeMap typeMap
+        ) => SpecializedCollections.SingletonEnumerable(part).ToTextBlock(formatMap, typeMap);
     }
 }

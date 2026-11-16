@@ -5,17 +5,14 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
 public class AppendSelectPropertyExpressionMutator : ExpressionMutator
 {
-    private bool HasValidPropertyToSelect(Expression expression)
-        => expression.Type.GetGenericArguments()[0].GetProperties().Any(p => !p.GetMethod.IsStatic);
+    private bool HasValidPropertyToSelect(Expression expression) =>
+        expression.Type.GetGenericArguments()[0].GetProperties().Any(p => !p.GetMethod.IsStatic);
 
     public AppendSelectPropertyExpressionMutator(DbContext context)
-        : base(context)
-    {
-    }
+        : base(context) { }
 
-    public override bool IsValid(Expression expression)
-        => IsQueryableResult(expression)
-            && HasValidPropertyToSelect(expression);
+    public override bool IsValid(Expression expression) =>
+        IsQueryableResult(expression) && HasValidPropertyToSelect(expression);
 
     public override Expression Apply(Expression expression, Random random)
     {
@@ -25,16 +22,25 @@ public class AppendSelectPropertyExpressionMutator : ExpressionMutator
 
         var i = random.Next(properties.Count);
 
-        var select = QueryableMethods.Select.MakeGenericMethod(typeArgument, properties[i].PropertyType);
+        var select = QueryableMethods.Select.MakeGenericMethod(
+            typeArgument,
+            properties[i].PropertyType
+        );
         var prm = Expression.Parameter(typeArgument, "prm");
 
         var lambdaBody = (Expression)Expression.Property(prm, properties[i]);
 
-        if (properties[i].PropertyType.IsValueType
-            && !(properties[i].PropertyType.IsGenericType
-                && properties[i].PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)))
+        if (
+            properties[i].PropertyType.IsValueType
+            && !(
+                properties[i].PropertyType.IsGenericType
+                && properties[i].PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
+            )
+        )
         {
-            var nullablePropertyType = typeof(Nullable<>).MakeGenericType(properties[i].PropertyType);
+            var nullablePropertyType = typeof(Nullable<>).MakeGenericType(
+                properties[i].PropertyType
+            );
             select = QueryableMethods.Select.MakeGenericMethod(typeArgument, nullablePropertyType);
             lambdaBody = Expression.Convert(lambdaBody, nullablePropertyType);
         }

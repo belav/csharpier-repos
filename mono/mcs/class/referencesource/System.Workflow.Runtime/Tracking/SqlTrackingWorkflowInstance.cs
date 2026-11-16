@@ -1,24 +1,25 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Reflection;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.ComponentModel.Design.Serialization;
-
-using System.Workflow.Runtime;
+using System.Text;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Serialization;
+using System.Workflow.Runtime;
 using System.Workflow.Runtime.Hosting;
+using System.Xml;
 
 namespace System.Workflow.Runtime.Tracking
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class SqlTrackingWorkflowInstance
     {
         #region Private Members
@@ -192,7 +193,10 @@ namespace System.Workflow.Runtime.Tracking
 
         private void LoadActivityEvents()
         {
-            SqlCommand cmd = CreateInternalIdDateTimeCommand("[dbo].[GetActivityEventsWithDetails]", _actMinDT);
+            SqlCommand cmd = CreateInternalIdDateTimeCommand(
+                "[dbo].[GetActivityEventsWithDetails]",
+                _actMinDT
+            );
 
             ExecuteRetried(cmd, LoadActivityEventsFromReader);
         }
@@ -206,9 +210,10 @@ namespace System.Workflow.Runtime.Tracking
             // There should always be 4 recordsets in this reader!
             //
 
-            Dictionary<long, ActivityTrackingRecord> activities = new Dictionary<long, ActivityTrackingRecord>();
+            Dictionary<long, ActivityTrackingRecord> activities =
+                new Dictionary<long, ActivityTrackingRecord>();
             //
-            // Build a dictionary of activity records so that we can match 
+            // Build a dictionary of activity records so that we can match
             // annotation and artifact records from subsequent recordsets
             DateTime tmpMin = SqlDateTime.MinValue.Value;
             while (reader.Read())
@@ -216,18 +221,41 @@ namespace System.Workflow.Runtime.Tracking
                 string qId = reader.GetString(0);
                 ActivityExecutionStatus status = (ActivityExecutionStatus)reader[1];
                 DateTime dt = reader.GetDateTime(2);
-                Guid context = reader.GetGuid(3), parentContext = reader.GetGuid(4);
+                Guid context = reader.GetGuid(3),
+                    parentContext = reader.GetGuid(4);
                 int order = reader.GetInt32(5);
 
                 if (reader.IsDBNull(6) || reader.IsDBNull(7))
-                    throw new InvalidOperationException(String.Format(System.Globalization.CultureInfo.CurrentCulture, ExecutionStringManager.SqlTrackingTypeNotFound, qId));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            System.Globalization.CultureInfo.CurrentCulture,
+                            ExecutionStringManager.SqlTrackingTypeNotFound,
+                            qId
+                        )
+                    );
 
-                Type type = Type.GetType(reader.GetString(6) + ", " + reader.GetString(7), true, false);
+                Type type = Type.GetType(
+                    reader.GetString(6) + ", " + reader.GetString(7),
+                    true,
+                    false
+                );
                 long eventId = reader.GetInt64(8);
 
                 DateTime dbDt = reader.GetDateTime(9);
 
-                activities.Add(eventId, new ActivityTrackingRecord(type, qId, context, parentContext, status, dt, order, null));
+                activities.Add(
+                    eventId,
+                    new ActivityTrackingRecord(
+                        type,
+                        qId,
+                        context,
+                        parentContext,
+                        status,
+                        dt,
+                        order,
+                        null
+                    )
+                );
                 if (dbDt > tmpMin)
                     tmpMin = dbDt;
             }
@@ -257,7 +285,7 @@ namespace System.Workflow.Runtime.Tracking
                 throw new ArgumentException(ExecutionStringManager.InvalidActivityEventReader);
 
             //
-            // Build a dictionary of artifact records so that we can match 
+            // Build a dictionary of artifact records so that we can match
             // annotation records from subsequent recordsets
             BinaryFormatter formatter = new BinaryFormatter();
             Dictionary<long, TrackingDataItem> artifacts = new Dictionary<long, TrackingDataItem>();
@@ -265,7 +293,8 @@ namespace System.Workflow.Runtime.Tracking
             {
                 long eventId = reader.GetInt64(0);
                 long artId = reader.GetInt64(1);
-                string name = reader.GetString(2), strData = null;
+                string name = reader.GetString(2),
+                    strData = null;
                 object data = null;
                 //
                 // These may both be null
@@ -327,7 +356,10 @@ namespace System.Workflow.Runtime.Tracking
 
         private void LoadUserEvents()
         {
-            SqlCommand cmd = CreateInternalIdDateTimeCommand("[dbo].[GetUserEventsWithDetails]", _userMinDT);
+            SqlCommand cmd = CreateInternalIdDateTimeCommand(
+                "[dbo].[GetUserEventsWithDetails]",
+                _userMinDT
+            );
 
             ExecuteRetried(cmd, LoadUserEventsFromReader);
         }
@@ -342,16 +374,18 @@ namespace System.Workflow.Runtime.Tracking
             //
 
             BinaryFormatter formatter = new BinaryFormatter();
-            Dictionary<long, UserTrackingRecord> userEvents = new Dictionary<long, UserTrackingRecord>();
+            Dictionary<long, UserTrackingRecord> userEvents =
+                new Dictionary<long, UserTrackingRecord>();
             //
-            // Build a dictionary of activity records so that we can match 
+            // Build a dictionary of activity records so that we can match
             // annotation and artifact records from subsequent recordsets
             DateTime tmpMin = SqlDateTime.MinValue.Value;
             while (reader.Read())
             {
                 string qId = reader.GetString(0);
                 DateTime dt = reader.GetDateTime(1);
-                Guid context = reader.GetGuid(2), parentContext = reader.GetGuid(3);
+                Guid context = reader.GetGuid(2),
+                    parentContext = reader.GetGuid(3);
                 int order = reader.GetInt32(4);
                 string key = null;
                 if (!reader.IsDBNull(5))
@@ -367,14 +401,36 @@ namespace System.Workflow.Runtime.Tracking
                     userData = reader.GetString(6);
 
                 if (reader.IsDBNull(8) || reader.IsDBNull(9))
-                    throw new InvalidOperationException(String.Format(System.Globalization.CultureInfo.CurrentCulture, ExecutionStringManager.SqlTrackingTypeNotFound, qId));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            System.Globalization.CultureInfo.CurrentCulture,
+                            ExecutionStringManager.SqlTrackingTypeNotFound,
+                            qId
+                        )
+                    );
 
-                Type type = Type.GetType(reader.GetString(8) + ", " + reader.GetString(9), true, false);
+                Type type = Type.GetType(
+                    reader.GetString(8) + ", " + reader.GetString(9),
+                    true,
+                    false
+                );
                 long eventId = reader.GetInt64(10);
 
                 DateTime dbDt = reader.GetDateTime(11);
 
-                userEvents.Add(eventId, new UserTrackingRecord(type, qId, context, parentContext, dt, order, key, userData));
+                userEvents.Add(
+                    eventId,
+                    new UserTrackingRecord(
+                        type,
+                        qId,
+                        context,
+                        parentContext,
+                        dt,
+                        order,
+                        key,
+                        userData
+                    )
+                );
 
                 if (dbDt > tmpMin)
                     tmpMin = dbDt;
@@ -405,14 +461,15 @@ namespace System.Workflow.Runtime.Tracking
                 throw new ArgumentException(ExecutionStringManager.InvalidUserEventReader);
 
             //
-            // Build a dictionary of artifact records so that we can match 
+            // Build a dictionary of artifact records so that we can match
             // annotation records from subsequent recordsets
             Dictionary<long, TrackingDataItem> artifacts = new Dictionary<long, TrackingDataItem>();
             while (reader.Read())
             {
                 long eventId = reader.GetInt64(0);
                 long artId = reader.GetInt64(1);
-                string name = reader.GetString(2), strData = null;
+                string name = reader.GetString(2),
+                    strData = null;
                 object data = null;
                 //
                 // These may both be null
@@ -473,7 +530,10 @@ namespace System.Workflow.Runtime.Tracking
 
         private void LoadWorkflowEvents()
         {
-            SqlCommand cmd = CreateInternalIdDateTimeCommand("[dbo].[GetWorkflowInstanceEventsWithDetails]", _instMinDT);
+            SqlCommand cmd = CreateInternalIdDateTimeCommand(
+                "[dbo].[GetWorkflowInstanceEventsWithDetails]",
+                _instMinDT
+            );
 
             ExecuteRetried(cmd, LoadWorkflowEventsFromReader);
         }
@@ -489,7 +549,8 @@ namespace System.Workflow.Runtime.Tracking
 
             DateTime tmpMin = SqlDateTime.MinValue.Value;
 
-            Dictionary<long, WorkflowTrackingRecord> inst = new Dictionary<long, WorkflowTrackingRecord>();
+            Dictionary<long, WorkflowTrackingRecord> inst =
+                new Dictionary<long, WorkflowTrackingRecord>();
             while (reader.Read())
             {
                 TrackingWorkflowEvent evt = (TrackingWorkflowEvent)reader[0];
@@ -516,7 +577,9 @@ namespace System.Workflow.Runtime.Tracking
             }
 
             if (!reader.NextResult())
-                throw new ArgumentException(ExecutionStringManager.InvalidWorkflowInstanceEventReader);
+                throw new ArgumentException(
+                    ExecutionStringManager.InvalidWorkflowInstanceEventReader
+                );
 
             //
             // Add any annotations
@@ -576,10 +639,15 @@ namespace System.Workflow.Runtime.Tracking
             WorkflowTrackingRecord record = parameter as WorkflowTrackingRecord;
 
             if (null == record)
-                throw new ArgumentException(ExecutionStringManager.InvalidWorkflowChangeEventArgsParameter, "parameter");
+                throw new ArgumentException(
+                    ExecutionStringManager.InvalidWorkflowChangeEventArgsParameter,
+                    "parameter"
+                );
 
             if (!reader.Read())
-                throw new ArgumentException(ExecutionStringManager.InvalidWorkflowChangeEventArgsReader);
+                throw new ArgumentException(
+                    ExecutionStringManager.InvalidWorkflowChangeEventArgsReader
+                );
 
             StringReader sr = new StringReader(reader.GetString(0));
 
@@ -605,14 +673,20 @@ namespace System.Workflow.Runtime.Tracking
             }
 
             if ((null == def) || ((null != errors) && (errors.Count > 0)))
-                throw new WorkflowMarkupSerializationException(ExecutionStringManager.WorkflowMarkupDeserializationError);
+                throw new WorkflowMarkupSerializationException(
+                    ExecutionStringManager.WorkflowMarkupDeserializationError
+                );
 
             if (!reader.NextResult())
-                throw new ArgumentException(ExecutionStringManager.InvalidWorkflowChangeEventArgsReader);
+                throw new ArgumentException(
+                    ExecutionStringManager.InvalidWorkflowChangeEventArgsReader
+                );
             //
             // There is a result set that we don't care about for this scenario, skip it
             if (!reader.NextResult())
-                throw new ArgumentException(ExecutionStringManager.InvalidWorkflowChangeEventArgsReader);
+                throw new ArgumentException(
+                    ExecutionStringManager.InvalidWorkflowChangeEventArgsReader
+                );
 
             List<WorkflowChangeAction> actions = new List<WorkflowChangeAction>();
             DateTime currDT = DateTime.MinValue;
@@ -641,11 +715,15 @@ namespace System.Workflow.Runtime.Tracking
                     {
                         using (XmlReader xmlReader = XmlReader.Create(sr))
                         {
-                            ActivityChangeAction aAction = serializer.Deserialize(serializationManager, xmlReader) as ActivityChangeAction;
+                            ActivityChangeAction aAction =
+                                serializer.Deserialize(serializationManager, xmlReader)
+                                as ActivityChangeAction;
 
                             errors = serializationManager.Errors;
                             if (null == aAction)
-                                throw new WorkflowMarkupSerializationException(ExecutionStringManager.WorkflowMarkupDeserializationError);
+                                throw new WorkflowMarkupSerializationException(
+                                    ExecutionStringManager.WorkflowMarkupDeserializationError
+                                );
 
                             actions.Add(aAction);
                             aAction.ApplyTo(def);
@@ -709,7 +787,9 @@ namespace System.Workflow.Runtime.Tracking
             }
 
             if ((null == _def) || ((null != errors) && (errors.Count > 0)))
-                throw new WorkflowMarkupSerializationException(ExecutionStringManager.WorkflowMarkupDeserializationError);
+                throw new WorkflowMarkupSerializationException(
+                    ExecutionStringManager.WorkflowMarkupDeserializationError
+                );
         }
 
         private void LoadChangesFromReader(SqlDataReader reader, object parameter)
@@ -725,7 +805,8 @@ namespace System.Workflow.Runtime.Tracking
             if (reader.NextResult())
             {
                 WorkflowMarkupSerializer serializer = new WorkflowMarkupSerializer();
-                DesignerSerializationManager serializationManager = new DesignerSerializationManager();
+                DesignerSerializationManager serializationManager =
+                    new DesignerSerializationManager();
                 while (reader.Read())
                 {
                     IList errors = null;
@@ -735,13 +816,17 @@ namespace System.Workflow.Runtime.Tracking
                         {
                             using (XmlReader xmlReader = XmlReader.Create(sr))
                             {
-                                ActivityChangeAction aAction = serializer.Deserialize(serializationManager, xmlReader) as ActivityChangeAction;
+                                ActivityChangeAction aAction =
+                                    serializer.Deserialize(serializationManager, xmlReader)
+                                    as ActivityChangeAction;
 
                                 errors = serializationManager.Errors;
                                 if (null != aAction)
                                     aAction.ApplyTo(_def);
                                 else
-                                    throw new WorkflowMarkupSerializationException(ExecutionStringManager.WorkflowMarkupDeserializationError);
+                                    throw new WorkflowMarkupSerializationException(
+                                        ExecutionStringManager.WorkflowMarkupDeserializationError
+                                    );
                             }
                         }
                     }
@@ -762,7 +847,10 @@ namespace System.Workflow.Runtime.Tracking
             cmd.CommandText = "[dbo].[GetInvokedWorkflows]";
             cmd.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter param = new SqlParameter("@WorkflowInstanceId", SqlDbType.UniqueIdentifier);
+            SqlParameter param = new SqlParameter(
+                "@WorkflowInstanceId",
+                SqlDbType.UniqueIdentifier
+            );
             param.Value = _id;
             cmd.Parameters.Add(param);
 
@@ -785,7 +873,10 @@ namespace System.Workflow.Runtime.Tracking
             DateTime tmpMin = SqlDateTime.MinValue.Value;
             while (reader.Read())
             {
-                SqlTrackingWorkflowInstance inst = SqlTrackingQuery.BuildInstance(reader, _connectionString);
+                SqlTrackingWorkflowInstance inst = SqlTrackingQuery.BuildInstance(
+                    reader,
+                    _connectionString
+                );
 
                 if (inst.Initialized > tmpMin)
                     tmpMin = inst.Initialized;
@@ -804,7 +895,11 @@ namespace System.Workflow.Runtime.Tracking
             ExecuteRetried(cmd, loader, null);
         }
 
-        private void ExecuteRetried(SqlCommand cmd, LoadFromReader loader, object loadFromReaderParam)
+        private void ExecuteRetried(
+            SqlCommand cmd,
+            LoadFromReader loader,
+            object loadFromReaderParam
+        )
         {
             SqlDataReader reader = null;
             short count = 0;
@@ -844,7 +939,11 @@ namespace System.Workflow.Runtime.Tracking
             return CreateInternalIdDateTimeCommand(commandText, minDT, _currDT);
         }
 
-        private SqlCommand CreateInternalIdDateTimeCommand(string commandText, DateTime minDT, DateTime maxDT)
+        private SqlCommand CreateInternalIdDateTimeCommand(
+            string commandText,
+            DateTime minDT,
+            DateTime maxDT
+        )
         {
             if (null == commandText)
                 throw new ArgumentNullException("commandText");
@@ -868,6 +967,5 @@ namespace System.Workflow.Runtime.Tracking
 
             return cmd;
         }
-
     }
 }

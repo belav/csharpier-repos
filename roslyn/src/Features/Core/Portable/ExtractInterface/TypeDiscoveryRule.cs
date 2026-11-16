@@ -9,6 +9,6 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
     internal enum TypeDiscoveryRule
     {
         TypeDeclaration,
-        TypeNameOnly
+        TypeNameOnly,
     }
 }

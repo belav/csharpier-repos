@@ -11,7 +11,11 @@ namespace System.Web.Mvc.Test
         public void ModelClientValidationStringLengthRuleTestDoesNotAddMinLengthParameterIfSpecifiedValueIs0()
         {
             // Arrange
-            var clientValidationRule = new ModelClientValidationStringLengthRule("Test message", 0, 10);
+            var clientValidationRule = new ModelClientValidationStringLengthRule(
+                "Test message",
+                0,
+                10
+            );
 
             // Assert
             Assert.Equal(1, clientValidationRule.ValidationParameters.Count);
@@ -22,7 +26,11 @@ namespace System.Web.Mvc.Test
         public void ModelClientValidationStringLengthRuleTestDoesNotAddMaxLengthIfSpecifiedValueIsMaxValue()
         {
             // Arrange
-            var clientValidationRule = new ModelClientValidationStringLengthRule("Test message", 3, Int32.MaxValue);
+            var clientValidationRule = new ModelClientValidationStringLengthRule(
+                "Test message",
+                3,
+                Int32.MaxValue
+            );
 
             // Assert
             Assert.Equal(1, clientValidationRule.ValidationParameters.Count);
@@ -33,7 +41,8 @@ namespace System.Web.Mvc.Test
         public void ModelClientValidationStringLengthRuleTestAddsMinLengthParameter()
         {
             // Arrange
-            string message = "Password must contain only letters and must be between 3-8 characters long";
+            string message =
+                "Password must contain only letters and must be between 3-8 characters long";
             var clientValidationRule = new ModelClientValidationStringLengthRule(message, 3, 8);
 
             // Assert
@@ -42,6 +51,5 @@ namespace System.Web.Mvc.Test
             Assert.Equal(3, clientValidationRule.ValidationParameters["min"]);
             Assert.Equal(8, clientValidationRule.ValidationParameters["max"]);
         }
-
     }
 }

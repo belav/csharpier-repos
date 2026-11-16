@@ -20,18 +20,14 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Creates an instance of Saml2AttributeStatement.
         /// </summary>
-        public Saml2AttributeStatement()
-        {
-        }
+        public Saml2AttributeStatement() { }
 
         /// <summary>
         /// Creates an instance of Saml2AttributeStatement.
         /// </summary>
         /// <param name="attribute">The <see cref="Saml2Attribute"/> contained in this statement.</param>
         public Saml2AttributeStatement(Saml2Attribute attribute)
-            : this(new Saml2Attribute[] { attribute })
-        {
-        }
+            : this(new Saml2Attribute[] { attribute }) { }
 
         /// <summary>
         /// Creates an instance of Saml2AttributeStatement.

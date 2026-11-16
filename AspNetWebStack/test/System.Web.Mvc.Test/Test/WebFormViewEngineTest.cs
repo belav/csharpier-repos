@@ -42,7 +42,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<IViewPageActivator> viewPageActivator = new Mock<IViewPageActivator>();
-            TestableWebFormViewEngine viewEngine = new TestableWebFormViewEngine(viewPageActivator.Object);
+            TestableWebFormViewEngine viewEngine = new TestableWebFormViewEngine(
+                viewPageActivator.Object
+            );
 
             //Act & Assert
             Assert.Equal(viewPageActivator.Object, viewEngine.ViewPageActivator);
@@ -53,7 +55,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<IViewPageActivator> viewPageActivator = new Mock<IViewPageActivator>();
-            TestableWebFormViewEngine viewEngine = new TestableWebFormViewEngine(viewPageActivator.Object);
+            TestableWebFormViewEngine viewEngine = new TestableWebFormViewEngine(
+                viewPageActivator.Object
+            );
 
             // Act
             WebFormView result = (WebFormView)viewEngine.CreatePartialView("partial path");
@@ -67,7 +71,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<IViewPageActivator> viewPageActivator = new Mock<IViewPageActivator>();
-            TestableWebFormViewEngine viewEngine = new TestableWebFormViewEngine(viewPageActivator.Object);
+            TestableWebFormViewEngine viewEngine = new TestableWebFormViewEngine(
+                viewPageActivator.Object
+            );
 
             // Act
             WebFormView result = (WebFormView)viewEngine.CreateView("partial path", "master path");
@@ -83,7 +89,7 @@ namespace System.Web.Mvc.Test
             string[] expected = new string[]
             {
                 "~/Views/{1}/{0}.master",
-                "~/Views/Shared/{0}.master"
+                "~/Views/Shared/{0}.master",
             };
 
             // Act
@@ -119,7 +125,7 @@ namespace System.Web.Mvc.Test
                 "~/Views/{1}/{0}.aspx",
                 "~/Views/{1}/{0}.ascx",
                 "~/Views/Shared/{0}.aspx",
-                "~/Views/Shared/{0}.ascx"
+                "~/Views/Shared/{0}.ascx",
             };
 
             // Act
@@ -157,7 +163,7 @@ namespace System.Web.Mvc.Test
                 "~/Views/{1}/{0}.aspx",
                 "~/Views/{1}/{0}.ascx",
                 "~/Views/Shared/{0}.aspx",
-                "~/Views/Shared/{0}.ascx"
+                "~/Views/Shared/{0}.ascx",
             };
 
             // Act
@@ -190,12 +196,7 @@ namespace System.Web.Mvc.Test
         public void FileExtensionsProperty()
         {
             // Arrange
-            string[] expected = new string[]
-            {
-                "aspx",
-                "ascx",
-                "master",
-            };
+            string[] expected = new string[] { "aspx", "ascx", "master" };
 
             // Act
             TestableWebFormViewEngine engine = new TestableWebFormViewEngine();
@@ -207,14 +208,10 @@ namespace System.Web.Mvc.Test
         private sealed class TestableWebFormViewEngine : WebFormViewEngine
         {
             public TestableWebFormViewEngine()
-                : base()
-            {
-            }
+                : base() { }
 
             public TestableWebFormViewEngine(IViewPageActivator viewPageActivator)
-                : base(viewPageActivator)
-            {
-            }
+                : base(viewPageActivator) { }
 
             public new IViewPageActivator ViewPageActivator
             {
@@ -238,7 +235,10 @@ namespace System.Web.Mvc.Test
             }
 
             // This method should remain overridable in derived view engines
-            protected override bool FileExists(ControllerContext controllerContext, string virtualPath)
+            protected override bool FileExists(
+                ControllerContext controllerContext,
+                string virtualPath
+            )
             {
                 return base.FileExists(controllerContext, virtualPath);
             }

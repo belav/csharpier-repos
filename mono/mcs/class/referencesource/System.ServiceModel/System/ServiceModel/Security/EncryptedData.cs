@@ -10,7 +10,8 @@ namespace System.ServiceModel.Security
 
     class EncryptedData : EncryptedType
     {
-        internal static readonly XmlDictionaryString ElementName = XD.XmlEncryptionDictionary.EncryptedData;
+        internal static readonly XmlDictionaryString ElementName =
+            XD.XmlEncryptionDictionary.EncryptedData;
         internal static readonly string ElementType = XmlEncryptionStrings.ElementType;
         internal static readonly string ContentType = XmlEncryptionStrings.ContentType;
         SymmetricAlgorithm algorithm;
@@ -32,13 +33,20 @@ namespace System.ServiceModel.Security
             }
             else if (this.State != EncryptionState.Decrypted)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.BadEncryptionState)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(SR.GetString(SR.BadEncryptionState))
+                );
             }
         }
 
         protected override void ForceEncryption()
         {
-            CryptoHelper.GenerateIVAndEncrypt(this.algorithm, this.buffer, out this.iv, out this.cipherText);
+            CryptoHelper.GenerateIVAndEncrypt(
+                this.algorithm,
+                this.buffer,
+                out this.iv,
+                out this.cipherText
+            );
             this.State = EncryptionState.Encrypted;
             this.buffer = new ArraySegment<byte>(CryptoHelper.EmptyBuffer);
         }
@@ -61,7 +69,12 @@ namespace System.ServiceModel.Security
 
         void SetPlainText()
         {
-            this.decryptedBuffer = CryptoHelper.ExtractIVAndDecrypt(this.algorithm, this.cipherText, 0, this.cipherText.Length);
+            this.decryptedBuffer = CryptoHelper.ExtractIVAndDecrypt(
+                this.algorithm,
+                this.cipherText,
+                0,
+                this.cipherText.Length
+            );
             this.State = EncryptionState.Decrypted;
         }
 
@@ -69,7 +82,9 @@ namespace System.ServiceModel.Security
         {
             if (this.State != EncryptionState.Read)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.BadEncryptionState)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(SR.GetString(SR.BadEncryptionState))
+                );
             }
             if (algorithm == null)
             {
@@ -83,7 +98,9 @@ namespace System.ServiceModel.Security
         {
             if (this.State != EncryptionState.New)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.BadEncryptionState)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(SR.GetString(SR.BadEncryptionState))
+                );
             }
             if (algorithm == null)
             {

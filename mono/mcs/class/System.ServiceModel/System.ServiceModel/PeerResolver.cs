@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,36 +27,45 @@
 //
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.ServiceModel.Security.Tokens;
 using System.ServiceModel.PeerResolvers;
-using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel
 {
-	public abstract class PeerResolver
-	{
-		protected PeerResolver ()
-		{
-		}
+    public abstract class PeerResolver
+    {
+        protected PeerResolver() { }
 
-		public abstract bool CanShareReferrals { get; }
+        public abstract bool CanShareReferrals { get; }
 
-		public virtual void Initialize (EndpointAddress address, Binding binding, ClientCredentials credentials, PeerReferralPolicy referralPolicy)
-		{
-		}
+        public virtual void Initialize(
+            EndpointAddress address,
+            Binding binding,
+            ClientCredentials credentials,
+            PeerReferralPolicy referralPolicy
+        ) { }
 
-		public abstract object Register (string meshId,
-			PeerNodeAddress nodeAddress, TimeSpan timeout);
+        public abstract object Register(
+            string meshId,
+            PeerNodeAddress nodeAddress,
+            TimeSpan timeout
+        );
 
-		public abstract ReadOnlyCollection<PeerNodeAddress> Resolve (
-			string meshId, int maxAddresses, TimeSpan timeout);
+        public abstract ReadOnlyCollection<PeerNodeAddress> Resolve(
+            string meshId,
+            int maxAddresses,
+            TimeSpan timeout
+        );
 
-		public abstract void Unregister (object registrationId,
-			TimeSpan timeout);
+        public abstract void Unregister(object registrationId, TimeSpan timeout);
 
-		public abstract void Update (object registrationId,
-			PeerNodeAddress updatedNodeAddress, TimeSpan timeout);
-	}
+        public abstract void Update(
+            object registrationId,
+            PeerNodeAddress updatedNodeAddress,
+            TimeSpan timeout
+        );
+    }
 }

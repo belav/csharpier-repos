@@ -8,10 +8,15 @@ namespace System.Net.Sockets
 {
     internal static partial class SocketAddressExtensions
     {
-        public static IPAddress GetIPAddress(this SocketAddress socketAddress) => IPEndPointExtensions.GetIPAddress(socketAddress.Buffer.Span);
+        public static IPAddress GetIPAddress(this SocketAddress socketAddress) =>
+            IPEndPointExtensions.GetIPAddress(socketAddress.Buffer.Span);
+
         public static int GetPort(this SocketAddress socketAddress)
         {
-            Debug.Assert(socketAddress.Family == AddressFamily.InterNetwork || socketAddress.Family == AddressFamily.InterNetworkV6);
+            Debug.Assert(
+                socketAddress.Family == AddressFamily.InterNetwork
+                    || socketAddress.Family == AddressFamily.InterNetworkV6
+            );
             return (int)SocketAddressPal.GetPort(socketAddress.Buffer.Span);
         }
 

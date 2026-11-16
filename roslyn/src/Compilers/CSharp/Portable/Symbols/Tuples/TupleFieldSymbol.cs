@@ -2,10 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Roslyn.Utilities;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Threading;
+using Roslyn.Utilities;
+
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
@@ -39,12 +40,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int tupleElementIndex,
             ImmutableArray<Location> locations,
             bool isImplicitlyDeclared,
-            FieldSymbol? correspondingDefaultFieldOpt = null)
+            FieldSymbol? correspondingDefaultFieldOpt = null
+        )
             : base(underlyingField)
         {
             Debug.Assert(tupleElementIndex >= 0);
-            Debug.Assert(container.Equals(underlyingField.ContainingType, TypeCompareKind.IgnoreDynamicAndTupleNames) || this is TupleVirtualElementFieldSymbol,
-                                            "virtual fields should be represented by " + nameof(TupleVirtualElementFieldSymbol));
+            Debug.Assert(
+                container.Equals(
+                    underlyingField.ContainingType,
+                    TypeCompareKind.IgnoreDynamicAndTupleNames
+                )
+                    || this is TupleVirtualElementFieldSymbol,
+                "virtual fields should be represented by " + nameof(TupleVirtualElementFieldSymbol)
+            );
             Debug.Assert(!(underlyingField is TupleElementFieldSymbol));
 
             // The fields on definition of ValueTuple<...> types don't need to be wrapped
@@ -52,7 +60,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             Debug.Assert(container.IsTupleType);
             _containingTuple = container;
-            _tupleElementIndex = correspondingDefaultFieldOpt is null ? tupleElementIndex << 1 : (tupleElementIndex << 1) + 1;
+            _tupleElementIndex = correspondingDefaultFieldOpt is null
+                ? tupleElementIndex << 1
+                : (tupleElementIndex << 1) + 1;
             Debug.Assert(!locations.IsDefault);
             _locations = locations;
             _isImplicitlyDeclared = isImplicitlyDeclared;
@@ -64,8 +74,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// returns the index of the element (zero-based).
         /// Otherwise returns -1
         /// </summary>
-        public sealed override int TupleElementIndex
-            => _tupleElementIndex >> 1;
+        public sealed override int TupleElementIndex => _tupleElementIndex >> 1;
 
         public sealed override bool IsDefaultTupleElement
         {
@@ -78,26 +87,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override bool IsExplicitlyNamedTupleElement
         {
-            get
-            {
-                return !_isImplicitlyDeclared;
-            }
+            get { return !_isImplicitlyDeclared; }
         }
 
         public sealed override FieldSymbol TupleUnderlyingField
         {
-            get
-            {
-                return _underlyingField;
-            }
+            get { return _underlyingField; }
         }
 
         public sealed override Symbol? AssociatedSymbol
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override FieldSymbol OriginalDefinition
@@ -109,21 +109,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     return this;
                 }
-                return originalContainer.GetTupleMemberSymbolForUnderlyingMember(_underlyingField.OriginalDefinition)!;
+                return originalContainer.GetTupleMemberSymbolForUnderlyingMember(
+                    _underlyingField.OriginalDefinition
+                )!;
             }
         }
 
         public sealed override Symbol ContainingSymbol
         {
-            get
-            {
-                return _containingTuple;
-            }
+            get { return _containingTuple; }
         }
 
         public sealed override RefKind RefKind => _underlyingField.RefKind;
 
-        public sealed override ImmutableArray<CustomModifier> RefCustomModifiers => _underlyingField.RefCustomModifiers;
+        public sealed override ImmutableArray<CustomModifier> RefCustomModifiers =>
+            _underlyingField.RefCustomModifiers;
 
         internal override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound)
         {
@@ -142,9 +142,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool RequiresCompletion => _underlyingField.RequiresCompletion;
 
-        internal override bool HasComplete(CompletionPart part) => _underlyingField.HasComplete(part);
+        internal override bool HasComplete(CompletionPart part) =>
+            _underlyingField.HasComplete(part);
 
-        internal override void ForceComplete(SourceLocation locationOpt, CancellationToken cancellationToken)
+        internal override void ForceComplete(
+            SourceLocation locationOpt,
+            CancellationToken cancellationToken
+        )
         {
             _underlyingField.ForceComplete(locationOpt, cancellationToken);
         }
@@ -166,43 +170,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // note we have to compare both index and name because
             // in nameless tuple there could be fields that differ only by index
             // and in named tuples there could be fields that differ only by name
-            return (object?)other != null &&
-                _tupleElementIndex == other._tupleElementIndex &&
-                TypeSymbol.Equals(_containingTuple, other._containingTuple, compareKind);
+            return (object?)other != null
+                && _tupleElementIndex == other._tupleElementIndex
+                && TypeSymbol.Equals(_containingTuple, other._containingTuple, compareKind);
         }
 
         public sealed override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return _locations;
-            }
+            get { return _locations; }
         }
 
         public sealed override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
             get
             {
-                return _isImplicitlyDeclared ?
-                    ImmutableArray<SyntaxReference>.Empty :
-                    GetDeclaringSyntaxReferenceHelper<CSharpSyntaxNode>(_locations);
+                return _isImplicitlyDeclared
+                    ? ImmutableArray<SyntaxReference>.Empty
+                    : GetDeclaringSyntaxReferenceHelper<CSharpSyntaxNode>(_locations);
             }
         }
 
         public sealed override bool IsImplicitlyDeclared
         {
-            get
-            {
-                return _isImplicitlyDeclared;
-            }
+            get { return _isImplicitlyDeclared; }
         }
 
         public sealed override FieldSymbol CorrespondingTupleField
         {
-            get
-            {
-                return _correspondingDefaultField;
-            }
+            get { return _correspondingDefaultField; }
         }
 
         internal override FieldSymbol AsMember(NamedTypeSymbol newOwner)
@@ -210,7 +205,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(newOwner.IsTupleType);
 
             NamedTypeSymbol newUnderlyingOwner = GetNewUnderlyingOwner(newOwner);
-            return new TupleElementFieldSymbol(newOwner, _underlyingField.OriginalDefinition.AsMember(newUnderlyingOwner), TupleElementIndex, Locations, IsImplicitlyDeclared);
+            return new TupleElementFieldSymbol(
+                newOwner,
+                _underlyingField.OriginalDefinition.AsMember(newUnderlyingOwner),
+                TupleElementIndex,
+                Locations,
+                IsImplicitlyDeclared
+            );
         }
 
         protected NamedTypeSymbol GetNewUnderlyingOwner(NamedTypeSymbol newOwner)
@@ -219,7 +220,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol newUnderlyingOwner = newOwner;
             while (currentIndex >= NamedTypeSymbol.ValueTupleRestIndex)
             {
-                newUnderlyingOwner = (NamedTypeSymbol)newUnderlyingOwner.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[NamedTypeSymbol.ValueTupleRestIndex].Type;
+                newUnderlyingOwner = (NamedTypeSymbol)
+                    newUnderlyingOwner
+                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                            NamedTypeSymbol.ValueTupleRestIndex
+                        ]
+                        .Type;
                 currentIndex -= NamedTypeSymbol.ValueTupleRestIndex;
             }
 
@@ -258,17 +264,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<Location> locations,
             bool cannotUse,
             bool isImplicitlyDeclared,
-            FieldSymbol? correspondingDefaultFieldOpt)
-            : base(container, underlyingField, tupleElementIndex, locations, isImplicitlyDeclared, correspondingDefaultFieldOpt)
+            FieldSymbol? correspondingDefaultFieldOpt
+        )
+            : base(
+                container,
+                underlyingField,
+                tupleElementIndex,
+                locations,
+                isImplicitlyDeclared,
+                correspondingDefaultFieldOpt
+            )
         {
             // The underlying field for 'Hanna' (an 8-th named element) in a long tuple is Item1. The corresponding field is Item8.
 
             Debug.Assert(container.IsTupleType);
             Debug.Assert(underlyingField.ContainingType.IsTupleType);
             Debug.Assert(name != null);
-            Debug.Assert(name != underlyingField.Name || !container.Equals(underlyingField.ContainingType, TypeCompareKind.IgnoreDynamicAndTupleNames),
-                                "fields that map directly to underlying should not be represented by " + nameof(TupleVirtualElementFieldSymbol));
-            Debug.Assert((correspondingDefaultFieldOpt is null) == (NamedTypeSymbol.TupleMemberName(tupleElementIndex + 1) == name));
+            Debug.Assert(
+                name != underlyingField.Name
+                    || !container.Equals(
+                        underlyingField.ContainingType,
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                    ),
+                "fields that map directly to underlying should not be represented by "
+                    + nameof(TupleVirtualElementFieldSymbol)
+            );
+            Debug.Assert(
+                (correspondingDefaultFieldOpt is null)
+                    == (NamedTypeSymbol.TupleMemberName(tupleElementIndex + 1) == name)
+            );
             Debug.Assert(!(correspondingDefaultFieldOpt is TupleErrorFieldSymbol));
 
             _name = name;
@@ -279,8 +303,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (_cannotUse)
             {
-                return new UseSiteInfo<AssemblySymbol>(new CSDiagnosticInfo(ErrorCode.ERR_TupleInferredNamesNotAvailable, _name,
-                    new CSharpRequiredLanguageVersion(MessageID.IDS_FeatureInferredTupleNames.RequiredVersion())));
+                return new UseSiteInfo<AssemblySymbol>(
+                    new CSDiagnosticInfo(
+                        ErrorCode.ERR_TupleInferredNamesNotAvailable,
+                        _name,
+                        new CSharpRequiredLanguageVersion(
+                            MessageID.IDS_FeatureInferredTupleNames.RequiredVersion()
+                        )
+                    )
+                );
             }
 
             return base.GetUseSiteInfo();
@@ -288,38 +319,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         internal override int? TypeLayoutOffset
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override FieldSymbol OriginalDefinition
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         public override bool IsVirtualTupleField
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
-        internal override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound)
-            => _underlyingField.GetFieldType(fieldsBeingBound);
+        internal override TypeWithAnnotations GetFieldType(
+            ConsList<FieldSymbol> fieldsBeingBound
+        ) => _underlyingField.GetFieldType(fieldsBeingBound);
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
@@ -329,17 +349,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override FieldSymbol AsMember(NamedTypeSymbol newOwner)
         {
             Debug.Assert(newOwner.IsTupleType);
-            Debug.Assert(newOwner.TupleElements.Length == this._containingTuple.TupleElements.Length);
+            Debug.Assert(
+                newOwner.TupleElements.Length == this._containingTuple.TupleElements.Length
+            );
 
             NamedTypeSymbol newUnderlyingOwner = GetNewUnderlyingOwner(newOwner);
 
             FieldSymbol? newCorrespondingDefaultFieldOpt = null;
             if ((object)_correspondingDefaultField != this)
             {
-                newCorrespondingDefaultFieldOpt = _correspondingDefaultField.OriginalDefinition.AsMember(newOwner);
+                newCorrespondingDefaultFieldOpt =
+                    _correspondingDefaultField.OriginalDefinition.AsMember(newOwner);
             }
 
-            return new TupleVirtualElementFieldSymbol(newOwner, _underlyingField.OriginalDefinition.AsMember(newUnderlyingOwner), _name, TupleElementIndex, Locations, _cannotUse, IsImplicitlyDeclared, newCorrespondingDefaultFieldOpt);
+            return new TupleVirtualElementFieldSymbol(
+                newOwner,
+                _underlyingField.OriginalDefinition.AsMember(newUnderlyingOwner),
+                _name,
+                TupleElementIndex,
+                Locations,
+                _cannotUse,
+                IsImplicitlyDeclared,
+                newCorrespondingDefaultFieldOpt
+            );
         }
     }
 }

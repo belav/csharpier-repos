@@ -13,12 +13,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class IOperationTests_IThrowOperation : SemanticModelTestBase
     {
-
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ThrowFlow_01()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F()
@@ -33,9 +33,10 @@ class C
                 // (6,9): error CS0156: A throw statement with no arguments is not allowed outside of a catch clause
                 //         throw;
                 Diagnostic(ErrorCode.ERR_BadEmptyThrow, "throw").WithLocation(6, 9)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -54,7 +55,8 @@ Block[B2] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_02()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int x)
@@ -74,9 +76,10 @@ class C
                 // (8,9): warning CS0162: Unreachable code detected
                 //         x = 2;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(8, 9)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -115,7 +118,8 @@ Block[B3] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_03()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(System.Exception ex)
@@ -128,7 +132,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -148,7 +153,8 @@ Block[B2] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_04()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(System.Exception ex)
@@ -167,10 +173,13 @@ class C
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(8, 9),
                 // (6,13): warning CS0219: The variable 'x' is assigned but its value is never used
                 //         int x = 1;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x").WithArguments("x").WithLocation(6, 13)
-                );
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x")
+                    .WithArguments("x")
+                    .WithLocation(6, 13)
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -216,7 +225,8 @@ Block[B3] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_05()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int x, System.Exception ex)
@@ -233,10 +243,13 @@ class C
                 Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(6, 13),
                 // (6,19): error CS0019: Operator '+' cannot be applied to operands of type 'Exception' and 'int'
                 //         x = throw ex + x;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "ex + x").WithArguments("+", "System.Exception", "int").WithLocation(6, 19)
-                );
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "ex + x")
+                    .WithArguments("+", "System.Exception", "int")
+                    .WithLocation(6, 19)
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -290,7 +303,8 @@ class C
         [Fact]
         public void ThrowFlow_06()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int x, System.Exception ex)
@@ -305,9 +319,10 @@ class C
                 // (6,14): error CS8115: A throw expression is not allowed in this context.
                 //         x = (throw ex) + x;
                 Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(6, 14)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -361,7 +376,8 @@ Block[B3] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_07()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int x, System.Exception ex)
@@ -375,10 +391,13 @@ class C
             compilation.VerifyDiagnostics(
                 // (6,17): error CS1525: Invalid expression term 'throw'
                 //         x = x + throw ex;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "throw ex").WithArguments("throw").WithLocation(6, 17)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "throw ex")
+                    .WithArguments("throw")
+                    .WithLocation(6, 17)
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -436,7 +455,8 @@ Block[B3] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_08()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int x, System.Exception ex)
@@ -451,9 +471,10 @@ class C
                 // (6,18): error CS8115: A throw expression is not allowed in this context.
                 //         x = x + (throw ex);
                 Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(6, 18)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -511,7 +532,8 @@ Block[B3] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_09()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(object x, object y, System.Exception ex)
@@ -524,7 +546,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -581,7 +604,8 @@ Block[B4] - Exit
         [Fact]
         public void ThrowFlow_10()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(object x, object y, object z, System.Exception ex)
@@ -596,7 +620,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -664,7 +689,8 @@ Block[B4] - Exit
         [Fact]
         public void ThrowFlow_11()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int u)
@@ -686,7 +712,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -727,7 +754,8 @@ Block[B3] - Exit
         [Fact]
         public void ThrowFlow_12()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int u)
@@ -753,9 +781,10 @@ class C
                 // (14,13): warning CS0162: Unreachable code detected
                 //             u = 3;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "u").WithLocation(14, 13)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -817,7 +846,8 @@ Block[B4] - Exit
         [Fact]
         public void ThrowFlow_13()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(object x, object y, object z, int u)
@@ -841,10 +871,13 @@ class C
             compilation.VerifyDiagnostics(
                 // (12,29): error CS1525: Invalid expression term ')'
                 //             M(x, (y ?? throw), z);
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(12, 29)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(12, 29)
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -951,7 +984,8 @@ Block[B8] - Exit
         [Fact]
         public void ThrowFlow_14()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(System.Exception ex)
@@ -967,7 +1001,8 @@ label1:
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -999,7 +1034,8 @@ Block[B2] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_15()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int x)
@@ -1022,7 +1058,8 @@ label1:
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1071,7 +1108,8 @@ Block[B3] - Exit
         [Fact]
         public void ThrowFlow_16()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(System.Exception ex, bool a)
@@ -1086,7 +1124,8 @@ label1:
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1113,7 +1152,8 @@ Block[B3] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_17()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int x, bool a)
@@ -1135,7 +1175,8 @@ label1:
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1179,7 +1220,8 @@ Block[B3] - Exit
         [Fact]
         public void ThrowFlow_18()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -1198,7 +1240,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1236,7 +1279,8 @@ Block[B3] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_19()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -1262,7 +1306,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1319,7 +1364,8 @@ Block[B4] - Exit
         [Fact]
         public void ThrowFlow_20()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(System.Exception ex, int x)
@@ -1344,9 +1390,10 @@ label1:
                 // (14,13): warning CS0162: Unreachable code detected
                 //             x = 2;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(14, 13)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1400,7 +1447,8 @@ Block[B4] - Exit
         [Fact]
         public void ThrowFlow_21()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int x)
@@ -1425,9 +1473,10 @@ label1:
                 // (14,13): warning CS0162: Unreachable code detected
                 //             x = 2;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "x").WithLocation(14, 13)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1480,7 +1529,8 @@ Block[B4] - Exit
         [Fact]
         public void ThrowFlow_22()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int F(bool a, System.Exception ex1, System.Exception ex2)
@@ -1499,7 +1549,8 @@ label2:
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1531,7 +1582,8 @@ Block[B4] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_23()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int x, System.Exception ex1, System.Exception ex2, bool a)
@@ -1550,7 +1602,8 @@ label2:
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1590,7 +1643,8 @@ Block[B4] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_24()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int x, bool a)
@@ -1616,7 +1670,8 @@ label2:
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1668,7 +1723,8 @@ Block[B3] - Exit
         [Fact]
         public void ThrowFlow_25()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int x, bool a)
@@ -1694,7 +1750,8 @@ label2:
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1747,7 +1804,8 @@ Block[B3] - Exit
         [Fact]
         public void ThrowFlow_26()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int x, bool a)
@@ -1773,7 +1831,8 @@ label2:
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1826,7 +1885,8 @@ Block[B3] - Exit
         [Fact]
         public void ThrowFlow_27()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int u)
@@ -1848,9 +1908,10 @@ class C
                 // (12,13): error CS0156: A throw statement with no arguments is not allowed outside of a catch clause
                 //             throw;
                 Diagnostic(ErrorCode.ERR_BadEmptyThrow, "throw").WithLocation(12, 13)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1892,7 +1953,8 @@ Block[B3] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_28()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int u, System.Exception ex)
@@ -1912,7 +1974,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1955,7 +2018,8 @@ Block[B3] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_29()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(System.Exception a, System.Exception b)
@@ -1968,7 +2032,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2031,7 +2096,8 @@ Block[B5] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_30()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(bool x, bool y, bool z, System.Exception ex)
@@ -2044,7 +2110,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2095,7 +2162,8 @@ Block[B4] - Exit
         [Fact]
         public void ThrowFlow_31()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(bool x, bool y, bool z, System.Exception ex)
@@ -2108,7 +2176,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2159,7 +2228,8 @@ Block[B4] - Exit
         [Fact]
         public void ThrowFlow_32_Regular8()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(bool x, bool y, System.Exception ex1, System.Exception ex2)
@@ -2173,10 +2243,16 @@ class C
             compilation.VerifyDiagnostics(
                 // (6,13): error CS8957: Conditional expression is not valid in language version 8.0 because a common type was not found between '<throw expression>' and '<throw expression>'. To use a target-typed conversion, upgrade to language version 9.0 or greater.
                 //         x = y ? throw ex1 : throw ex2;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvTargetTypedConditional, "y ? throw ex1 : throw ex2").WithArguments("8.0", "<throw expression>", "<throw expression>", "9.0").WithLocation(6, 13)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_NoImplicitConvTargetTypedConditional,
+                        "y ? throw ex1 : throw ex2"
+                    )
+                    .WithArguments("8.0", "<throw expression>", "<throw expression>", "9.0")
+                    .WithLocation(6, 13)
+            );
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null, IsInvalid) (Syntax: 'x = y ? thr ...  throw ex2;')
     Expression: 
@@ -2205,7 +2281,8 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
 ";
             VerifyOperationTreeForTest<BlockSyntax>(compilation, expectedOperationTree);
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2264,7 +2341,8 @@ Block[B5] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_32_TargetTypedConditional()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(bool x, bool y, System.Exception ex1, System.Exception ex2)
@@ -2273,9 +2351,15 @@ class C
     }/*</bind>*/
 }";
 
-            var compilation = CreateCompilation(source, parseOptions: TestOptions.Regular.WithLanguageVersion(MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()));
+            var compilation = CreateCompilation(
+                source,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(
+                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                )
+            );
             compilation.VerifyDiagnostics();
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'x = y ? thr ...  throw ex2;')
     Expression: 
@@ -2304,7 +2388,8 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
 ";
             VerifyOperationTreeForTest<BlockSyntax>(compilation, expectedOperationTree);
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2363,7 +2448,8 @@ Block[B5] - Exit [UnReachable]
         [Fact]
         public void ThrowFlow_33()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(object x, bool y, object u, object v, System.Exception ex)
@@ -2376,7 +2462,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2465,7 +2552,8 @@ Block[B7] - Exit
         [Fact]
         public void ThrowFlow_34()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(object x, bool y, object u, object v, System.Exception ex)
@@ -2478,7 +2566,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]

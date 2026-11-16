@@ -10,39 +10,40 @@ namespace System.Text.Unicode
     // Represents an entry from UnicodeData.txt.
     internal sealed class UnicodeDataFileEntry
     {
-        private static readonly Dictionary<string, UnicodeCategory> UnicodeCategoryMap = new Dictionary<string, UnicodeCategory>
-        {
-            ["Lu"] = UnicodeCategory.UppercaseLetter,
-            ["Ll"] = UnicodeCategory.LowercaseLetter,
-            ["Lt"] = UnicodeCategory.TitlecaseLetter,
-            ["Lm"] = UnicodeCategory.ModifierLetter,
-            ["Lo"] = UnicodeCategory.OtherLetter,
-            ["Mn"] = UnicodeCategory.NonSpacingMark,
-            ["Mc"] = UnicodeCategory.SpacingCombiningMark,
-            ["Me"] = UnicodeCategory.EnclosingMark,
-            ["Nd"] = UnicodeCategory.DecimalDigitNumber,
-            ["Nl"] = UnicodeCategory.LetterNumber,
-            ["No"] = UnicodeCategory.OtherNumber,
-            ["Zs"] = UnicodeCategory.SpaceSeparator,
-            ["Zl"] = UnicodeCategory.LineSeparator,
-            ["Zp"] = UnicodeCategory.ParagraphSeparator,
-            ["Cc"] = UnicodeCategory.Control,
-            ["Cf"] = UnicodeCategory.Format,
-            ["Cs"] = UnicodeCategory.Surrogate,
-            ["Co"] = UnicodeCategory.PrivateUse,
-            ["Pc"] = UnicodeCategory.ConnectorPunctuation,
-            ["Pd"] = UnicodeCategory.DashPunctuation,
-            ["Ps"] = UnicodeCategory.OpenPunctuation,
-            ["Pe"] = UnicodeCategory.ClosePunctuation,
-            ["Pi"] = UnicodeCategory.InitialQuotePunctuation,
-            ["Pf"] = UnicodeCategory.FinalQuotePunctuation,
-            ["Po"] = UnicodeCategory.OtherPunctuation,
-            ["Sm"] = UnicodeCategory.MathSymbol,
-            ["Sc"] = UnicodeCategory.CurrencySymbol,
-            ["Sk"] = UnicodeCategory.ModifierSymbol,
-            ["So"] = UnicodeCategory.OtherSymbol,
-            ["Cn"] = UnicodeCategory.OtherNotAssigned,
-        };
+        private static readonly Dictionary<string, UnicodeCategory> UnicodeCategoryMap =
+            new Dictionary<string, UnicodeCategory>
+            {
+                ["Lu"] = UnicodeCategory.UppercaseLetter,
+                ["Ll"] = UnicodeCategory.LowercaseLetter,
+                ["Lt"] = UnicodeCategory.TitlecaseLetter,
+                ["Lm"] = UnicodeCategory.ModifierLetter,
+                ["Lo"] = UnicodeCategory.OtherLetter,
+                ["Mn"] = UnicodeCategory.NonSpacingMark,
+                ["Mc"] = UnicodeCategory.SpacingCombiningMark,
+                ["Me"] = UnicodeCategory.EnclosingMark,
+                ["Nd"] = UnicodeCategory.DecimalDigitNumber,
+                ["Nl"] = UnicodeCategory.LetterNumber,
+                ["No"] = UnicodeCategory.OtherNumber,
+                ["Zs"] = UnicodeCategory.SpaceSeparator,
+                ["Zl"] = UnicodeCategory.LineSeparator,
+                ["Zp"] = UnicodeCategory.ParagraphSeparator,
+                ["Cc"] = UnicodeCategory.Control,
+                ["Cf"] = UnicodeCategory.Format,
+                ["Cs"] = UnicodeCategory.Surrogate,
+                ["Co"] = UnicodeCategory.PrivateUse,
+                ["Pc"] = UnicodeCategory.ConnectorPunctuation,
+                ["Pd"] = UnicodeCategory.DashPunctuation,
+                ["Ps"] = UnicodeCategory.OpenPunctuation,
+                ["Pe"] = UnicodeCategory.ClosePunctuation,
+                ["Pi"] = UnicodeCategory.InitialQuotePunctuation,
+                ["Pf"] = UnicodeCategory.FinalQuotePunctuation,
+                ["Po"] = UnicodeCategory.OtherPunctuation,
+                ["Sm"] = UnicodeCategory.MathSymbol,
+                ["Sc"] = UnicodeCategory.CurrencySymbol,
+                ["Sk"] = UnicodeCategory.ModifierSymbol,
+                ["So"] = UnicodeCategory.OtherSymbol,
+                ["Cn"] = UnicodeCategory.OtherNotAssigned,
+            };
 
         public readonly int CodePoint;
         public readonly string Name;
@@ -78,16 +79,31 @@ namespace System.Text.Unicode
             string[] split = line.Split(';');
             Assert.Equal(15, split.Length);
 
-            CodePoint = (int)uint.Parse(split[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+            CodePoint = (int)
+                uint.Parse(split[0], NumberStyles.HexNumber, CultureInfo.InvariantCulture);
             Name = split[1];
             GeneralCategory = UnicodeCategoryMap[split[2]];
 
-            if (!int.TryParse(split[6], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out DecimalDigitValue))
+            if (
+                !int.TryParse(
+                    split[6],
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out DecimalDigitValue
+                )
+            )
             {
                 DecimalDigitValue = -1;
             }
 
-            if (!int.TryParse(split[7], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out DigitValue))
+            if (
+                !int.TryParse(
+                    split[7],
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out DigitValue
+                )
+            )
             {
                 DigitValue = -1;
             }
@@ -102,27 +118,60 @@ namespace System.Text.Unicode
 
                 if (indexOfSlash < 0)
                 {
-                    NumericValue = double.Parse(numericValue, NumberStyles.Integer, CultureInfo.InvariantCulture);
+                    NumericValue = double.Parse(
+                        numericValue,
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture
+                    );
                 }
                 else
                 {
-                    double numerator = double.Parse(numericValue.AsSpan(0, indexOfSlash), NumberStyles.Integer, CultureInfo.InvariantCulture);
-                    double denominator = double.Parse(numericValue.AsSpan(indexOfSlash + 1), NumberStyles.Integer, CultureInfo.InvariantCulture);
+                    double numerator = double.Parse(
+                        numericValue.AsSpan(0, indexOfSlash),
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture
+                    );
+                    double denominator = double.Parse(
+                        numericValue.AsSpan(indexOfSlash + 1),
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture
+                    );
                     NumericValue = numerator / denominator;
                 }
             }
 
-            if (!int.TryParse(split[12], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out SimpleUppercaseMapping))
+            if (
+                !int.TryParse(
+                    split[12],
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out SimpleUppercaseMapping
+                )
+            )
             {
                 SimpleUppercaseMapping = CodePoint;
             }
 
-            if (!int.TryParse(split[13], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out SimpleLowercaseMapping))
+            if (
+                !int.TryParse(
+                    split[13],
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out SimpleLowercaseMapping
+                )
+            )
             {
                 SimpleLowercaseMapping = CodePoint;
             }
 
-            if (!int.TryParse(split[14], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out SimpleTitlecaseMapping))
+            if (
+                !int.TryParse(
+                    split[14],
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out SimpleTitlecaseMapping
+                )
+            )
             {
                 SimpleTitlecaseMapping = CodePoint;
             }

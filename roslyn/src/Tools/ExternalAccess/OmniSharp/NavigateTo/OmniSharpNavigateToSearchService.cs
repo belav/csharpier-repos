@@ -13,14 +13,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.NavigateTo;
 
 internal static class OmniSharpNavigateToSearcher
 {
-    public delegate Task OmniSharpNavigateToCallback(Project project, in OmniSharpNavigateToSearchResult result, CancellationToken cancellationToken);
+    public delegate Task OmniSharpNavigateToCallback(
+        Project project,
+        in OmniSharpNavigateToSearchResult result,
+        CancellationToken cancellationToken
+    );
 
     public static Task SearchAsync(
         Solution solution,
         OmniSharpNavigateToCallback callback,
         string searchPattern,
         IImmutableSet<string> kinds,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var searcher = NavigateToSearcher.Create(
             solution,
@@ -28,7 +33,8 @@ internal static class OmniSharpNavigateToSearcher
             new OmniSharpNavigateToCallbackImpl(callback),
             searchPattern,
             kinds,
-            disposalToken: CancellationToken.None);
+            disposalToken: CancellationToken.None
+        );
 
         return searcher.SearchAsync(searchCurrentDocument: false, cancellationToken);
     }
@@ -42,9 +48,18 @@ internal static class OmniSharpNavigateToSearcher
             _callback = callback;
         }
 
-        public async Task AddItemAsync(Project project, INavigateToSearchResult result, CancellationToken cancellationToken)
+        public async Task AddItemAsync(
+            Project project,
+            INavigateToSearchResult result,
+            CancellationToken cancellationToken
+        )
         {
-            var document = await result.NavigableItem.Document.GetRequiredDocumentAsync(project.Solution, cancellationToken).ConfigureAwait(false);
+            var document = await result
+                .NavigableItem.Document.GetRequiredDocumentAsync(
+                    project.Solution,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var omniSharpResult = new OmniSharpNavigateToSearchResult(
                 result.AdditionalInformation,
                 result.Kind,
@@ -54,21 +69,20 @@ internal static class OmniSharpNavigateToSearcher
                 result.NameMatchSpans,
                 result.SecondarySort,
                 result.Summary!,
-                new OmniSharpNavigableItem(result.NavigableItem.DisplayTaggedParts, document, result.NavigableItem.SourceSpan));
+                new OmniSharpNavigableItem(
+                    result.NavigableItem.DisplayTaggedParts,
+                    document,
+                    result.NavigableItem.SourceSpan
+                )
+            );
 
             await _callback(project, omniSharpResult, cancellationToken).ConfigureAwait(false);
         }
 
-        public void Done(bool isFullyLoaded)
-        {
-        }
+        public void Done(bool isFullyLoaded) { }
 
-        public void ReportProgress(int current, int maximum)
-        {
-        }
+        public void ReportProgress(int current, int maximum) { }
 
-        public void ReportIncomplete()
-        {
-        }
+        public void ReportIncomplete() { }
     }
 }

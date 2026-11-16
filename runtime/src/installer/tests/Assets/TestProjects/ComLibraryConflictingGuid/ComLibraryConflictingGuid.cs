@@ -17,7 +17,7 @@ namespace ComLibrary
             Console.WriteLine($"New instance of {nameof(Server)} created");
         }
     }
-    
+
     [ComVisible(true)]
     [Guid("cc6e9910-18d5-484a-a2d2-fa8910fd0261")]
     public class Server2

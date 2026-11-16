@@ -43,32 +43,35 @@ namespace System.Text.Json
         /// <paramref name="lowerBound"/> and <paramref name="upperBound"/>, inclusive.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInRangeInclusive(uint value, uint lowerBound, uint upperBound)
-            => (value - lowerBound) <= (upperBound - lowerBound);
+        public static bool IsInRangeInclusive(uint value, uint lowerBound, uint upperBound) =>
+            (value - lowerBound) <= (upperBound - lowerBound);
 
         /// <summary>
         /// Returns <see langword="true"/> if <paramref name="value"/> is between
         /// <paramref name="lowerBound"/> and <paramref name="upperBound"/>, inclusive.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInRangeInclusive(int value, int lowerBound, int upperBound)
-            => (uint)(value - lowerBound) <= (uint)(upperBound - lowerBound);
+        public static bool IsInRangeInclusive(int value, int lowerBound, int upperBound) =>
+            (uint)(value - lowerBound) <= (uint)(upperBound - lowerBound);
 
         /// <summary>
         /// Returns <see langword="true"/> if <paramref name="value"/> is between
         /// <paramref name="lowerBound"/> and <paramref name="upperBound"/>, inclusive.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInRangeInclusive(long value, long lowerBound, long upperBound)
-            => (ulong)(value - lowerBound) <= (ulong)(upperBound - lowerBound);
+        public static bool IsInRangeInclusive(long value, long lowerBound, long upperBound) =>
+            (ulong)(value - lowerBound) <= (ulong)(upperBound - lowerBound);
 
         /// <summary>
         /// Returns <see langword="true"/> if <paramref name="value"/> is between
         /// <paramref name="lowerBound"/> and <paramref name="upperBound"/>, inclusive.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInRangeInclusive(JsonTokenType value, JsonTokenType lowerBound, JsonTokenType upperBound)
-            => (value - lowerBound) <= (upperBound - lowerBound);
+        public static bool IsInRangeInclusive(
+            JsonTokenType value,
+            JsonTokenType lowerBound,
+            JsonTokenType upperBound
+        ) => (value - lowerBound) <= (upperBound - lowerBound);
 
         /// <summary>
         /// Returns <see langword="true"/> if <paramref name="value"/> is in the range [0..9].
@@ -117,7 +120,8 @@ namespace System.Text.Json
         /// </summary>
         public static Dictionary<TKey, TValue> CreateDictionaryFromCollection<TKey, TValue>(
             IEnumerable<KeyValuePair<TKey, TValue>> collection,
-            IEqualityComparer<TKey> comparer)
+            IEqualityComparer<TKey> comparer
+        )
             where TKey : notnull
         {
 #if !NETCOREAPP
@@ -184,10 +188,19 @@ namespace System.Text.Json
         private const int IntegerRegexTimeoutMs = 200;
 
 #if NETCOREAPP
-        [GeneratedRegex(IntegerRegexPattern, RegexOptions.None, matchTimeoutMilliseconds: IntegerRegexTimeoutMs)]
+        [GeneratedRegex(
+            IntegerRegexPattern,
+            RegexOptions.None,
+            matchTimeoutMilliseconds: IntegerRegexTimeoutMs
+        )]
         private static partial Regex CreateIntegerRegex();
 #else
-        private static Regex CreateIntegerRegex() => new(IntegerRegexPattern, RegexOptions.Compiled, TimeSpan.FromMilliseconds(IntegerRegexTimeoutMs));
+        private static Regex CreateIntegerRegex() =>
+            new(
+                IntegerRegexPattern,
+                RegexOptions.Compiled,
+                TimeSpan.FromMilliseconds(IntegerRegexTimeoutMs)
+            );
 #endif
     }
 }

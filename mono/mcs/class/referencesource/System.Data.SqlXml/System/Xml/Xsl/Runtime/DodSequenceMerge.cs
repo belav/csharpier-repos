@@ -1,23 +1,24 @@
 //------------------------------------------------------------------------------
 // <copyright file="DodSequenceMerge.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Xml.XPath;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.ComponentModel;
+using System.Xml.XPath;
 
-namespace System.Xml.Xsl.Runtime {
-
+namespace System.Xml.Xsl.Runtime
+{
     /// <summary>
     /// Merges several doc-order-distinct sequences into a single doc-order-distinct sequence.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public struct DodSequenceMerge {
+    public struct DodSequenceMerge
+    {
         private IList<XPathNavigator> firstSequence;
         private List<IEnumerator<XPathNavigator>> sequencesToMerge;
         private int nodeCount;
@@ -26,7 +27,8 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Initialize this instance of DodSequenceMerge.
         /// </summary>
-        public void Create(XmlQueryRuntime runtime) {
+        public void Create(XmlQueryRuntime runtime)
+        {
             this.firstSequence = null;
             this.sequencesToMerge = null;
             this.nodeCount = 0;
@@ -36,16 +38,20 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Add a new sequence to the list of sequences to merge.
         /// </summary>
-        public void AddSequence(IList<XPathNavigator> sequence) {
+        public void AddSequence(IList<XPathNavigator> sequence)
+        {
             // Ignore empty sequences
             if (sequence.Count == 0)
                 return;
 
-            if (this.firstSequence == null) {
+            if (this.firstSequence == null)
+            {
                 this.firstSequence = sequence;
             }
-            else {
-                if (this.sequencesToMerge == null) {
+            else
+            {
+                if (this.sequencesToMerge == null)
+                {
                     this.sequencesToMerge = new List<IEnumerator<XPathNavigator>>();
                     MoveAndInsertSequence(this.firstSequence.GetEnumerator());
                     this.nodeCount = this.firstSequence.Count;
@@ -59,7 +65,8 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Return the fully merged sequence.
         /// </summary>
-        public IList<XPathNavigator> MergeSequences() {
+        public IList<XPathNavigator> MergeSequences()
+        {
             XmlQueryNodeSequence newSequence;
 
             // Zero sequences to merge
@@ -73,9 +80,12 @@ namespace System.Xml.Xsl.Runtime {
             // Two or more sequences to merge
             newSequence = new XmlQueryNodeSequence(this.nodeCount);
 
-            while (this.sequencesToMerge.Count != 1) {
+            while (this.sequencesToMerge.Count != 1)
+            {
                 // Save last item in list in temp variable, and remove it from list
-                IEnumerator<XPathNavigator> sequence = this.sequencesToMerge[this.sequencesToMerge.Count - 1];
+                IEnumerator<XPathNavigator> sequence = this.sequencesToMerge[
+                    this.sequencesToMerge.Count - 1
+                ];
                 this.sequencesToMerge.RemoveAt(this.sequencesToMerge.Count - 1);
 
                 // Add current node to merged sequence
@@ -86,11 +96,14 @@ namespace System.Xml.Xsl.Runtime {
             }
 
             // Add nodes in remaining sequence to end of list
-            Debug.Assert(this.sequencesToMerge.Count == 1, "While loop should terminate when count == 1");
-            do {
+            Debug.Assert(
+                this.sequencesToMerge.Count == 1,
+                "While loop should terminate when count == 1"
+            );
+            do
+            {
                 newSequence.Add(this.sequencesToMerge[0].Current);
-            }
-            while (this.sequencesToMerge[0].MoveNext());
+            } while (this.sequencesToMerge[0].MoveNext());
 
             return newSequence;
         }
@@ -99,7 +112,8 @@ namespace System.Xml.Xsl.Runtime {
         /// Move to the next item in the sequence.  If there is no next item, then do not
         /// insert the sequence.  Otherwise, call InsertSequence.
         /// </summary>
-        private void MoveAndInsertSequence(IEnumerator<XPathNavigator> sequence) {
+        private void MoveAndInsertSequence(IEnumerator<XPathNavigator> sequence)
+        {
             if (sequence.MoveNext())
                 InsertSequence(sequence);
         }
@@ -108,18 +122,26 @@ namespace System.Xml.Xsl.Runtime {
         /// Insert the specified sequence into the list of sequences to be merged.
         /// Insert it in reverse document order with respect to the current nodes in other sequences.
         /// </summary>
-        private void InsertSequence(IEnumerator<XPathNavigator> sequence) {
-            for (int i = this.sequencesToMerge.Count - 1; i >= 0; i--) {
-                int cmp = this.runtime.ComparePosition(sequence.Current, this.sequencesToMerge[i].Current);
+        private void InsertSequence(IEnumerator<XPathNavigator> sequence)
+        {
+            for (int i = this.sequencesToMerge.Count - 1; i >= 0; i--)
+            {
+                int cmp = this.runtime.ComparePosition(
+                    sequence.Current,
+                    this.sequencesToMerge[i].Current
+                );
 
-                if (cmp == -1) {
+                if (cmp == -1)
+                {
                     // Insert after current item
                     this.sequencesToMerge.Insert(i + 1, sequence);
                     return;
                 }
-                else if (cmp == 0) {
+                else if (cmp == 0)
+                {
                     // Found duplicate, so skip the duplicate
-                    if (!sequence.MoveNext()) {
+                    if (!sequence.MoveNext())
+                    {
                         // No more nodes, so don't insert anything
                         return;
                     }
@@ -133,4 +155,3 @@ namespace System.Xml.Xsl.Runtime {
         }
     }
 }
-

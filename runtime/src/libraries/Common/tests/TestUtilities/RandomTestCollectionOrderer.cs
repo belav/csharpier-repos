@@ -15,13 +15,22 @@ public class RandomTestCollectionOrderer : ITestCollectionOrderer
 
     public RandomTestCollectionOrderer(IMessageSink diagnosticMessageSink)
     {
-        diagnosticMessageSink.OnMessage(new DiagnosticMessage(
-                                                $"Using random seed for collections: {RandomTestCaseOrderer.LazySeed.Value}"));
+        diagnosticMessageSink.OnMessage(
+            new DiagnosticMessage(
+                $"Using random seed for collections: {RandomTestCaseOrderer.LazySeed.Value}"
+            )
+        );
         _diagnosticMessageSink = diagnosticMessageSink;
     }
 
-    public IEnumerable<ITestCollection> OrderTestCollections(IEnumerable<ITestCollection> testCollections)
-        => RandomTestCaseOrderer.TryRandomize(testCollections.ToList(), _diagnosticMessageSink, out List<ITestCollection>? randomizedTests)
-                    ? randomizedTests
-                    : testCollections;
+    public IEnumerable<ITestCollection> OrderTestCollections(
+        IEnumerable<ITestCollection> testCollections
+    ) =>
+        RandomTestCaseOrderer.TryRandomize(
+            testCollections.ToList(),
+            _diagnosticMessageSink,
+            out List<ITestCollection>? randomizedTests
+        )
+            ? randomizedTests
+            : testCollections;
 }

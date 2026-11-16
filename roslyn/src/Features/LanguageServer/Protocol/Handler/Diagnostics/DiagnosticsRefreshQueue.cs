@@ -26,19 +26,30 @@ internal sealed class DiagnosticsRefreshQueue : AbstractRefreshQueue
         public Factory(
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
-            Refresher refresher)
+            Refresher refresher
+        )
         {
             _asyncListenerProvider = asynchronousOperationListenerProvider;
             _lspWorkspaceRegistrationService = lspWorkspaceRegistrationService;
             _refresher = refresher;
         }
 
-        public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+        public ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        )
         {
-            var notificationManager = lspServices.GetRequiredService<IClientLanguageServerManager>();
+            var notificationManager =
+                lspServices.GetRequiredService<IClientLanguageServerManager>();
             var lspWorkspaceManager = lspServices.GetRequiredService<LspWorkspaceManager>();
 
-            return new DiagnosticsRefreshQueue(_asyncListenerProvider, _lspWorkspaceRegistrationService, lspWorkspaceManager, notificationManager, _refresher);
+            return new DiagnosticsRefreshQueue(
+                _asyncListenerProvider,
+                _lspWorkspaceRegistrationService,
+                lspWorkspaceManager,
+                notificationManager,
+                _refresher
+            );
         }
     }
 
@@ -56,9 +67,7 @@ internal sealed class DiagnosticsRefreshQueue : AbstractRefreshQueue
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public Refresher()
-        {
-        }
+        public Refresher() { }
 
         public void RequestWorkspaceRefresh()
         {
@@ -68,8 +77,7 @@ internal sealed class DiagnosticsRefreshQueue : AbstractRefreshQueue
             WorkspaceRefreshRequested?.Invoke();
         }
 
-        public int GlobalStateVersion
-            => _globalStateVersion;
+        public int GlobalStateVersion => _globalStateVersion;
     }
 
     private readonly Refresher _refresher;
@@ -79,8 +87,14 @@ internal sealed class DiagnosticsRefreshQueue : AbstractRefreshQueue
         LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
         LspWorkspaceManager lspWorkspaceManager,
         IClientLanguageServerManager notificationManager,
-        Refresher refresher)
-        : base(asynchronousOperationListenerProvider, lspWorkspaceRegistrationService, lspWorkspaceManager, notificationManager)
+        Refresher refresher
+    )
+        : base(
+            asynchronousOperationListenerProvider,
+            lspWorkspaceRegistrationService,
+            lspWorkspaceManager,
+            notificationManager
+        )
     {
         _refresher = refresher;
 
@@ -93,15 +107,12 @@ internal sealed class DiagnosticsRefreshQueue : AbstractRefreshQueue
         _refresher.WorkspaceRefreshRequested -= WorkspaceRefreshRequested;
     }
 
-    private void WorkspaceRefreshRequested()
-        => EnqueueRefreshNotification(documentUri: null);
+    private void WorkspaceRefreshRequested() => EnqueueRefreshNotification(documentUri: null);
 
-    protected override string GetFeatureAttribute()
-        => FeatureAttribute.DiagnosticService;
+    protected override string GetFeatureAttribute() => FeatureAttribute.DiagnosticService;
 
-    protected override bool? GetRefreshSupport(ClientCapabilities clientCapabilities)
-        => clientCapabilities.Workspace?.Diagnostics?.RefreshSupport;
+    protected override bool? GetRefreshSupport(ClientCapabilities clientCapabilities) =>
+        clientCapabilities.Workspace?.Diagnostics?.RefreshSupport;
 
-    protected override string GetWorkspaceRefreshName()
-        => Methods.WorkspaceDiagnosticRefreshName;
+    protected override string GetWorkspaceRefreshName() => Methods.WorkspaceDiagnosticRefreshName;
 }

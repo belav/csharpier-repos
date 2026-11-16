@@ -6,12 +6,19 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.AddParameter
 {
-    internal class RegisterFixData<TArgumentSyntax>(SeparatedSyntaxList<TArgumentSyntax> arguments, ImmutableArray<IMethodSymbol> methodCandidates, bool isConstructorInitializer)
+    internal class RegisterFixData<TArgumentSyntax>(
+        SeparatedSyntaxList<TArgumentSyntax> arguments,
+        ImmutableArray<IMethodSymbol> methodCandidates,
+        bool isConstructorInitializer
+    )
         where TArgumentSyntax : SyntaxNode
     {
-        public RegisterFixData() : this(new SeparatedSyntaxList<TArgumentSyntax>(), ImmutableArray<IMethodSymbol>.Empty, false)
-        {
-        }
+        public RegisterFixData()
+            : this(
+                new SeparatedSyntaxList<TArgumentSyntax>(),
+                ImmutableArray<IMethodSymbol>.Empty,
+                false
+            ) { }
 
         public SeparatedSyntaxList<TArgumentSyntax> Arguments { get; } = arguments;
         public ImmutableArray<IMethodSymbol> MethodCandidates { get; } = methodCandidates;

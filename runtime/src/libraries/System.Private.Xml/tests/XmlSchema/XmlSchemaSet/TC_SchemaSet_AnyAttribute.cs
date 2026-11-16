@@ -45,7 +45,12 @@ namespace System.Xml.XmlSchemaTests
 
         public XmlSchema GetUnionSchema(string ns1, string ns2, string attrNs)
         {
-            var xsd = @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='" + attrNs + @"' xmlns='" + attrNs + @"'>
+            var xsd =
+                @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='"
+                + attrNs
+                + @"' xmlns='"
+                + attrNs
+                + @"'>
                         <xs:attribute name='baseattribute'>
                           <xs:simpleType >
                           <xs:restriction base = 'xs:int' >
@@ -57,7 +62,9 @@ namespace System.Xml.XmlSchemaTests
                             <xs:sequence >
                             <xs:element name = 'e1' type = 'xs:string' />
                             </xs:sequence >
-                            <xs:anyAttribute namespace='" + ns2 + @"'/>
+                            <xs:anyAttribute namespace='"
+                + ns2
+                + @"'/>
                         </xs:complexType>
                         <xs:complexType name = 't1'>
                           <xs:complexContent>
@@ -65,7 +72,9 @@ namespace System.Xml.XmlSchemaTests
                             <xs:sequence >
                              <xs:element name = 'e2' type = 'xs:string' />
                             </xs:sequence>
-                            <xs:anyAttribute namespace='" + ns1 + @"'/>
+                            <xs:anyAttribute namespace='"
+                + ns1
+                + @"'/>
                            </xs:extension>
                          </xs:complexContent>
                         </xs:complexType>
@@ -87,7 +96,12 @@ namespace System.Xml.XmlSchemaTests
 
         public XmlSchema GetIntersectionSchema(string ns1, string ns2, string attrNs)
         {
-            var xsd = @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='" + attrNs + @"' xmlns='" + attrNs + @"'>
+            var xsd =
+                @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='"
+                + attrNs
+                + @"' xmlns='"
+                + attrNs
+                + @"'>
                         <xs:attribute name='baseattribute'>
                           <xs:simpleType >
                           <xs:restriction base = 'xs:int' >
@@ -97,14 +111,18 @@ namespace System.Xml.XmlSchemaTests
                         </xs:attribute >
                         <xs:attributeGroup name = 'attr-gr' >
                             <xs:attribute name = 'a1' type = 'xs:int' />
-                            <xs:anyAttribute namespace='" + ns2 + @"'/>
+                            <xs:anyAttribute namespace='"
+                + ns2
+                + @"'/>
                         </xs:attributeGroup >
                         <xs:complexType name = 't'>
                             <xs:sequence >
                             <xs:element name = 'e1' type = 'xs:string' />
                             </xs:sequence >
                             <xs:attributeGroup ref='attr-gr' />
-                            <xs:anyAttribute namespace='" + ns1 + @"'/>
+                            <xs:anyAttribute namespace='"
+                + ns1
+                + @"'/>
                         </xs:complexType>
                         <xs:complexType name = 't1'>
                            <xs:complexContent>
@@ -121,19 +139,26 @@ namespace System.Xml.XmlSchemaTests
             return XmlSchema.Read(new StringReader(xsd), null);
         }
 
-            public XmlSchema GetSimpleSchema(string ns, string attrNs)
-            {
-                var xsd = @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='" + attrNs + @"' xmlns='" + attrNs + @"'>
+        public XmlSchema GetSimpleSchema(string ns, string attrNs)
+        {
+            var xsd =
+                @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='"
+                + attrNs
+                + @"' xmlns='"
+                + attrNs
+                + @"'>
                         <xs:complexType name = 't'>
                             <xs:sequence >
                             <xs:element name = 'e1' type = 'xs:string' />
                             </xs:sequence >
-                            <xs:anyAttribute namespace='" + ns + @"'/>
+                            <xs:anyAttribute namespace='"
+                + ns
+                + @"'/>
                         </xs:complexType>
                         </xs:schema>";
 
-                return XmlSchema.Read(new StringReader(xsd), null);
-            }
+            return XmlSchema.Read(new StringReader(xsd), null);
+        }
 
         //Intersection namespaces
         [Theory]
@@ -165,7 +190,13 @@ namespace System.Xml.XmlSchemaTests
         [InlineData("ns1 ns3", "ns1 ns2", "ns1", 0, "ns1")]
         //[Variation(Desc = "complextype Any ns - ##other, attrgroup Any ##other, not allow ns1 attribute")]
         [InlineData("##other", "##other", "ns1", 1)]
-        public void v1(string ns1, string ns2, string attrNs, int expectedError, string expectedNs = null)
+        public void v1(
+            string ns1,
+            string ns2,
+            string attrNs,
+            int expectedError,
+            string expectedNs = null
+        )
         {
             XmlSchemaSet xss = new XmlSchemaSet();
             xss.XmlResolver = new XmlUrlResolver();
@@ -178,7 +209,9 @@ namespace System.Xml.XmlSchemaTests
             // .NET Framework does not set the namespace property for intersections and unions
             if (!PlatformDetection.IsNetFramework && expectedNs != null)
             {
-                XmlSchemaAnyAttribute attributeWildcard = ((XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t", attrNs)]).AttributeWildcard;
+                XmlSchemaAnyAttribute attributeWildcard = (
+                    (XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t", attrNs)]
+                ).AttributeWildcard;
                 CompareWildcardNamespaces(expectedNs, attributeWildcard.Namespace);
             }
         }
@@ -200,7 +233,13 @@ namespace System.Xml.XmlSchemaTests
         [InlineData("##other", "ns1 ns2", "ns1", 0, "##other")]
         //[Variation(Desc = "basetype Any ns - ##other, derivedType Any ns - ns1 ns2 , allow ns2")]
         [InlineData("##other", "ns1 ns2", "ns2", 0, "##other")]
-        public void v2(string ns1, string ns2, string attrNs, int expectedError, string expectedNs = null)
+        public void v2(
+            string ns1,
+            string ns2,
+            string attrNs,
+            int expectedError,
+            string expectedNs = null
+        )
         {
             XmlSchemaSet xss = new XmlSchemaSet();
             xss.XmlResolver = new XmlUrlResolver();
@@ -213,7 +252,9 @@ namespace System.Xml.XmlSchemaTests
             // .NET Framework does not set the namespace property for intersections and unions
             if (!PlatformDetection.IsNetFramework && expectedNs != null)
             {
-                XmlSchemaAnyAttribute attributeWildcard = ((XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t1", attrNs)]).AttributeWildcard;
+                XmlSchemaAnyAttribute attributeWildcard = (
+                    (XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t1", attrNs)]
+                ).AttributeWildcard;
                 CompareWildcardNamespaces(expectedNs, attributeWildcard.Namespace);
             }
         }
@@ -235,7 +276,9 @@ namespace System.Xml.XmlSchemaTests
             xss.Add(GetSimpleSchema(ns, attrNs));
             xss.Compile();
 
-            XmlSchemaAnyAttribute attributeWildcard = ((XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t", attrNs)]).AttributeWildcard;
+            XmlSchemaAnyAttribute attributeWildcard = (
+                (XmlSchemaComplexType)xss.GlobalTypes[new XmlQualifiedName("t", attrNs)]
+            ).AttributeWildcard;
             CompareWildcardNamespaces(expectedNs, attributeWildcard.Namespace);
         }
 
@@ -249,7 +292,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void ReadFromFileWithoutNamespaceReturnsNull()
         {
-            var xsd = @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='ns'>
+            var xsd =
+                @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='ns'>
                         <xs:complexType name = 't'>
                             <xs:anyAttribute/>
                         </xs:complexType>

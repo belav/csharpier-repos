@@ -12,7 +12,10 @@ namespace System.IO.Compression
         public static IEnumerable<object[]> UncompressedTestFiles()
         {
             yield return new object[] { Path.Combine("UncompressedTestFiles", "TestDocument.doc") };
-            yield return new object[] { Path.Combine("UncompressedTestFiles", "TestDocument.docx") };
+            yield return new object[]
+            {
+                Path.Combine("UncompressedTestFiles", "TestDocument.docx"),
+            };
             yield return new object[] { Path.Combine("UncompressedTestFiles", "TestDocument.pdf") };
             yield return new object[] { Path.Combine("UncompressedTestFiles", "TestDocument.txt") };
             yield return new object[] { Path.Combine("UncompressedTestFiles", "alice29.txt") };
@@ -27,7 +30,10 @@ namespace System.IO.Compression
             yield return new object[] { Path.Combine("UncompressedTestFiles", "sum") };
             yield return new object[] { Path.Combine("UncompressedTestFiles", "xargs.1") };
         }
-        protected virtual string UncompressedTestFile() => Path.Combine("UncompressedTestFiles", "TestDocument.pdf");
+
+        protected virtual string UncompressedTestFile() =>
+            Path.Combine("UncompressedTestFiles", "TestDocument.pdf");
+
         protected abstract string CompressedTestFile(string uncompressedPath);
     }
 
@@ -38,20 +44,40 @@ namespace System.IO.Compression
         public abstract Stream CreateStream(Stream stream, CompressionLevel level);
         public abstract Stream CreateStream(Stream stream, CompressionLevel level, bool leaveOpen);
         public abstract Stream BaseStream(Stream stream);
-        public virtual int BufferSize { get => 8192; }
+        public virtual int BufferSize
+        {
+            get => 8192;
+        }
 
         protected override Task<StreamPair> CreateConnectedStreamsAsync()
         {
-            (Stream stream1, Stream stream2) = ConnectedStreams.CreateBidirectional(4 * 1024, 16 * 1024);
-            return Task.FromResult<StreamPair>((CreateStream(stream1, CompressionMode.Compress), CreateStream(stream2, CompressionMode.Decompress)));
+            (Stream stream1, Stream stream2) = ConnectedStreams.CreateBidirectional(
+                4 * 1024,
+                16 * 1024
+            );
+            return Task.FromResult<StreamPair>(
+                (
+                    CreateStream(stream1, CompressionMode.Compress),
+                    CreateStream(stream2, CompressionMode.Decompress)
+                )
+            );
         }
 
-        protected override Task<StreamPair> CreateWrappedConnectedStreamsAsync(StreamPair wrapped, bool leaveOpen) =>
-            Task.FromResult<StreamPair>((CreateStream(wrapped.Stream1, CompressionMode.Compress, leaveOpen), CreateStream(wrapped.Stream2, CompressionMode.Decompress, leaveOpen)));
+        protected override Task<StreamPair> CreateWrappedConnectedStreamsAsync(
+            StreamPair wrapped,
+            bool leaveOpen
+        ) =>
+            Task.FromResult<StreamPair>(
+                (
+                    CreateStream(wrapped.Stream1, CompressionMode.Compress, leaveOpen),
+                    CreateStream(wrapped.Stream2, CompressionMode.Decompress, leaveOpen)
+                )
+            );
 
         protected override int BufferedSize => 16 * 1024 + BufferSize;
         protected override bool UsableAfterCanceledReads => false;
-        protected override Type UnsupportedReadWriteExceptionType => typeof(InvalidOperationException);
+        protected override Type UnsupportedReadWriteExceptionType =>
+            typeof(InvalidOperationException);
         protected override bool WrappedUsableAfterClose => false;
         protected override bool FlushRequiredToWriteData => true;
         protected override bool BlocksOnZeroByteReads => true;

@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
             SemanticModel semanticModel,
             SyntaxToken token,
             int position,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 
     internal enum AspNetCoreHighlightSpanKind
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
         [DataMember(Order = 1)]
         public AspNetCoreHighlightSpanKind Kind { get; }
 
-        public AspNetCoreHighlightSpan(TextSpan textSpan, AspNetCoreHighlightSpanKind kind) : this()
+        public AspNetCoreHighlightSpan(TextSpan textSpan, AspNetCoreHighlightSpanKind kind)
+            : this()
         {
             TextSpan = textSpan;
             Kind = kind;

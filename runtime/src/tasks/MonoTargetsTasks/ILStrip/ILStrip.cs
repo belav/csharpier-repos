@@ -2,21 +2,21 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
+using System.Buffers;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
+using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
-using Microsoft.Build.Framework;
-using Microsoft.Build.Utilities;
 using CilStrip.Mono.Cecil;
 using CilStrip.Mono.Cecil.Binary;
 using CilStrip.Mono.Cecil.Cil;
 using CilStrip.Mono.Cecil.Metadata;
-using System.Reflection.Metadata;
-using System.Reflection.Metadata.Ecma335;
-using System.Reflection.PortableExecutable;
-using System.Buffers;
-using System.Collections.Concurrent;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
 
 public class ILStrip : Microsoft.Build.Utilities.Task
 {
@@ -65,7 +65,9 @@ public class ILStrip : Microsoft.Build.Utilities.Task
         string trimmedAssemblyFolder = string.Empty;
         if (TrimIndividualMethods)
         {
-            trimmedAssemblyFolder = string.IsNullOrEmpty(IntermediateOutputPath) ? "stripped" : Path.Combine(IntermediateOutputPath, "stripped");
+            trimmedAssemblyFolder = string.IsNullOrEmpty(IntermediateOutputPath)
+                ? "stripped"
+                : Path.Combine(IntermediateOutputPath, "stripped");
             if (!Directory.Exists(trimmedAssemblyFolder))
             {
                 Directory.CreateDirectory(trimmedAssemblyFolder);
@@ -74,33 +76,40 @@ public class ILStrip : Microsoft.Build.Utilities.Task
 
         Log.LogMessage(MessageImportance.High, "IL stripping assemblies");
 
-        int allowedParallelism = DisableParallelStripping ? 1 : Math.Min(Assemblies.Length, Environment.ProcessorCount);
+        int allowedParallelism = DisableParallelStripping
+            ? 1
+            : Math.Min(Assemblies.Length, Environment.ProcessorCount);
         if (BuildEngine is IBuildEngine9 be9)
             allowedParallelism = be9.RequestCores(allowedParallelism);
-        ParallelLoopResult result = Parallel.ForEach(Assemblies,
-                                                    new ParallelOptions { MaxDegreeOfParallelism = allowedParallelism },
-                                                    (assemblyItem, state) =>
-                                                    {
-                                                        if (!TrimIndividualMethods)
-                                                        {
-                                                            if (!StripAssembly(assemblyItem))
-                                                                state.Stop();
-                                                        }
-                                                        else
-                                                        {
-                                                            if (!TrimMethods(assemblyItem, trimmedAssemblyFolder))
-                                                                state.Stop();
-                                                        }
-                                                    });
+        ParallelLoopResult result = Parallel.ForEach(
+            Assemblies,
+            new ParallelOptions { MaxDegreeOfParallelism = allowedParallelism },
+            (assemblyItem, state) =>
+            {
+                if (!TrimIndividualMethods)
+                {
+                    if (!StripAssembly(assemblyItem))
+                        state.Stop();
+                }
+                else
+                {
+                    if (!TrimMethods(assemblyItem, trimmedAssemblyFolder))
+                        state.Stop();
+                }
+            }
+        );
 
         if (TrimIndividualMethods)
         {
-            UpdatedAssemblies = ConvertAssembliesDictToOrderedList(_processedAssemblies, Assemblies).ToArray();
+            UpdatedAssemblies = ConvertAssembliesDictToOrderedList(_processedAssemblies, Assemblies)
+                .ToArray();
         }
 
         if (!result.IsCompleted && !Log.HasLoggedErrors)
         {
-            Log.LogError("Unknown failure occurred while IL stripping assemblies. Check logs to get more details.");
+            Log.LogError(
+                "Unknown failure occurred while IL stripping assemblies. Check logs to get more details."
+            );
         }
 
         return !Log.HasLoggedErrors;
@@ -122,7 +131,7 @@ public class ILStrip : Microsoft.Build.Utilities.Task
 
         try
         {
-            AssemblyStripper.AssemblyStripper.StripAssembly (assemblyFile, outputPath);
+            AssemblyStripper.AssemblyStripper.StripAssembly(assemblyFile, outputPath);
         }
         catch (Exception ex)
         {
@@ -163,19 +172,35 @@ public class ILStrip : Microsoft.Build.Utilities.Task
             return true;
         }
 
-        string trimmedAssemblyFilePath = ComputeTrimmedAssemblyPath(trimmedAssemblyFolder, assemblyFilePath);
+        string trimmedAssemblyFilePath = ComputeTrimmedAssemblyPath(
+            trimmedAssemblyFolder,
+            assemblyFilePath
+        );
         if (File.Exists(trimmedAssemblyFilePath))
         {
             if (IsInputNewerThanOutput(assemblyFilePath, trimmedAssemblyFilePath))
             {
-                Log.LogMessage(MessageImportance.Low, $"Re-trimming {assemblyFilePath} because {trimmedAssemblyFilePath} is older than {assemblyFilePath} .");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"Re-trimming {assemblyFilePath} because {trimmedAssemblyFilePath} is older than {assemblyFilePath} ."
+                );
                 Log.LogMessage(MessageImportance.Low, $"Deleting {trimmedAssemblyFilePath} .");
                 File.Delete(trimmedAssemblyFilePath);
             }
             else
             {
-                Log.LogMessage(MessageImportance.Low, $"Skip trimming {assemblyFilePath} because {trimmedAssemblyFilePath} is newer than {assemblyFilePath} .");
-                _processedAssemblies.GetOrAdd(assemblyItem.ItemSpec, GetTrimmedAssemblyItem(assemblyItem, trimmedAssemblyFilePath, assemblyFilePathArg));
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"Skip trimming {assemblyFilePath} because {trimmedAssemblyFilePath} is newer than {assemblyFilePath} ."
+                );
+                _processedAssemblies.GetOrAdd(
+                    assemblyItem.ItemSpec,
+                    GetTrimmedAssemblyItem(
+                        assemblyItem,
+                        trimmedAssemblyFilePath,
+                        assemblyFilePathArg
+                    )
+                );
                 return true;
             }
         }
@@ -192,7 +217,9 @@ public class ILStrip : Microsoft.Build.Utilities.Task
         string? expectedGuidValue = sr.ReadLine();
         if (!string.Equals(actualGuidValue, expectedGuidValue, StringComparison.OrdinalIgnoreCase))
         {
-            Log.LogError($"[ILStrip] GUID value of {assemblyFilePath} doesn't match the value listed in {methodTokenFile}.");
+            Log.LogError(
+                $"[ILStrip] GUID value of {assemblyFilePath} doesn't match the value listed in {methodTokenFile}."
+            );
             return true;
         }
 
@@ -200,26 +227,39 @@ public class ILStrip : Microsoft.Build.Utilities.Task
         if (!string.IsNullOrEmpty(line))
         {
             isTrimmed = true;
-            Dictionary<int, int> methodBodyUses = ComputeMethodBodyUsage(mr, sr, line, methodTokenFile);
+            Dictionary<int, int> methodBodyUses = ComputeMethodBodyUsage(
+                mr,
+                sr,
+                line,
+                methodTokenFile
+            );
             CreateTrimmedAssembly(peReader, trimmedAssemblyFilePath, fs, methodBodyUses);
         }
 
-        var outAssemblyItem = isTrimmed ? GetTrimmedAssemblyItem(assemblyItem, trimmedAssemblyFilePath, assemblyFilePathArg) : assemblyItem;
+        var outAssemblyItem = isTrimmed
+            ? GetTrimmedAssemblyItem(assemblyItem, trimmedAssemblyFilePath, assemblyFilePathArg)
+            : assemblyItem;
         _processedAssemblies.GetOrAdd(assemblyItem.ItemSpec, outAssemblyItem);
 
         return true;
     }
 
-    private static string ComputeTrimmedAssemblyPath(string trimmedAssemblyFolder, string assemblyFilePath)
+    private static string ComputeTrimmedAssemblyPath(
+        string trimmedAssemblyFolder,
+        string assemblyFilePath
+    )
     {
         string? assemblyName = Path.GetFileName(assemblyFilePath);
         return Path.Combine(trimmedAssemblyFolder, assemblyName);
     }
 
-    private static bool IsInputNewerThanOutput(string inFile, string outFile)
-        => File.GetLastWriteTimeUtc(inFile) > File.GetLastWriteTimeUtc(outFile);
+    private static bool IsInputNewerThanOutput(string inFile, string outFile) =>
+        File.GetLastWriteTimeUtc(inFile) > File.GetLastWriteTimeUtc(outFile);
 
-    private static List<ITaskItem> ConvertAssembliesDictToOrderedList(ConcurrentDictionary<string, ITaskItem> dict, IList<ITaskItem> originalAssemblies)
+    private static List<ITaskItem> ConvertAssembliesDictToOrderedList(
+        ConcurrentDictionary<string, ITaskItem> dict,
+        IList<ITaskItem> originalAssemblies
+    )
     {
         List<ITaskItem> outItems = new(originalAssemblies.Count);
         foreach (ITaskItem item in originalAssemblies)
@@ -237,7 +277,12 @@ public class ILStrip : Microsoft.Build.Utilities.Task
         return mvid.ToString();
     }
 
-    private Dictionary<int, int> ComputeMethodBodyUsage(MetadataReader mr, StreamReader sr, string? line, string methodTokenFile)
+    private Dictionary<int, int> ComputeMethodBodyUsage(
+        MetadataReader mr,
+        StreamReader sr,
+        string? line,
+        string methodTokenFile
+    )
     {
         Dictionary<int, int> tokenToRva = new();
         Dictionary<int, int> methodBodyUses = new();
@@ -265,7 +310,9 @@ public class ILStrip : Microsoft.Build.Utilities.Task
             int methodToken2Trim = Convert.ToInt32(line, 16);
             if (methodToken2Trim <= 0)
             {
-                Log.LogError($"Method token: {line} in {methodTokenFile} is not a valid hex value.");
+                Log.LogError(
+                    $"Method token: {line} in {methodTokenFile} is not a valid hex value."
+                );
             }
             if (tokenToRva.TryGetValue(methodToken2Trim, out int rva2Trim))
             {
@@ -273,14 +320,21 @@ public class ILStrip : Microsoft.Build.Utilities.Task
             }
             else
             {
-                Log.LogError($"Method token: {line} in {methodTokenFile} can't be found within the assembly.");
+                Log.LogError(
+                    $"Method token: {line} in {methodTokenFile} can't be found within the assembly."
+                );
             }
         } while ((line = sr.ReadLine()) != null);
 
         return methodBodyUses;
     }
 
-    private void CreateTrimmedAssembly(PEReader peReader, string trimmedAssemblyFilePath, FileStream fs, Dictionary<int, int> methodBodyUses)
+    private void CreateTrimmedAssembly(
+        PEReader peReader,
+        string trimmedAssemblyFilePath,
+        FileStream fs,
+        Dictionary<int, int> methodBodyUses
+    )
     {
         using FileStream os = File.Open(trimmedAssemblyFilePath, FileMode.Create);
         {
@@ -312,7 +366,8 @@ public class ILStrip : Microsoft.Build.Utilities.Task
         }
     }
 
-    private static int ComputeMethodSize(PEReader peReader, int rva) => peReader.GetMethodBody(rva).Size;
+    private static int ComputeMethodSize(PEReader peReader, int rva) =>
+        peReader.GetMethodBody(rva).Size;
 
     private static int ComputeMethodHash(PEReader peReader, int rva)
     {
@@ -332,11 +387,16 @@ public class ILStrip : Microsoft.Build.Utilities.Task
     private static void SetCodeSizeToZeroForTiny(ref MemoryStream memStream, int actualLoc)
     {
         memStream.Position = actualLoc;
-        byte[] header = {0b10};
+        byte[] header = { 0b10 };
         memStream.Write(header, 0, 1);
     }
 
-    private static void ZeroOutMethodBody(ref MemoryStream memStream, int methodSize, int actualLoc, int headerSize)
+    private static void ZeroOutMethodBody(
+        ref MemoryStream memStream,
+        int methodSize,
+        int actualLoc,
+        int headerSize
+    )
     {
         memStream.Position = actualLoc + headerSize;
 
@@ -347,7 +407,11 @@ public class ILStrip : Microsoft.Build.Utilities.Task
         ArrayPool<byte>.Shared.Return(zeroBuffer);
     }
 
-    private static TaskItem GetTrimmedAssemblyItem(ITaskItem assemblyItem, string trimmedAssemblyFilePath, string originAssemblyFilePath)
+    private static TaskItem GetTrimmedAssemblyItem(
+        ITaskItem assemblyItem,
+        string trimmedAssemblyFilePath,
+        string originAssemblyFilePath
+    )
     {
         TaskItem newAssemblyItem = new(assemblyItem);
         newAssemblyItem.ItemSpec = trimmedAssemblyFilePath;

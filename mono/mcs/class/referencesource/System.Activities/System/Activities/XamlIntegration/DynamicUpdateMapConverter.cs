@@ -17,7 +17,12 @@ namespace System.Activities.XamlIntegration
             return destinationType == typeof(MarkupExtension);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             DynamicUpdateMap map = value as DynamicUpdateMap;
             if (destinationType == typeof(MarkupExtension) && map != null)

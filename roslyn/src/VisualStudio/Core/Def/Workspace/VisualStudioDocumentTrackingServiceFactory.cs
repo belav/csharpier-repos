@@ -18,18 +18,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioDocumentTrackingServiceFactory(VisualStudioActiveDocumentTracker activeDocumentTracker)
-            => _activeDocumentTracker = activeDocumentTracker;
+        public VisualStudioDocumentTrackingServiceFactory(
+            VisualStudioActiveDocumentTracker activeDocumentTracker
+        ) => _activeDocumentTracker = activeDocumentTracker;
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new VisualStudioDocumentTrackingService(_activeDocumentTracker, workspaceServices.Workspace);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new VisualStudioDocumentTrackingService(
+                _activeDocumentTracker,
+                workspaceServices.Workspace
+            );
 
         private class VisualStudioDocumentTrackingService : IDocumentTrackingService
         {
             private readonly VisualStudioActiveDocumentTracker _activeDocumentTracker;
             private readonly Workspace _workspace;
 
-            public VisualStudioDocumentTrackingService(VisualStudioActiveDocumentTracker activeDocumentTracker, Workspace workspace)
+            public VisualStudioDocumentTrackingService(
+                VisualStudioActiveDocumentTracker activeDocumentTracker,
+                Workspace workspace
+            )
             {
                 _activeDocumentTracker = activeDocumentTracker;
                 _workspace = workspace;
@@ -51,13 +58,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                         if (_subscriptions == 1)
                         {
-                            _activeDocumentTracker.DocumentsChanged += ActiveDocumentTracker_DocumentsChanged;
+                            _activeDocumentTracker.DocumentsChanged +=
+                                ActiveDocumentTracker_DocumentsChanged;
                         }
 
                         _activeDocumentChangedEventHandler += value;
                     }
                 }
-
                 remove
                 {
                     lock (_gate)
@@ -68,33 +75,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                         if (_subscriptions == 0)
                         {
-                            _activeDocumentTracker.DocumentsChanged -= ActiveDocumentTracker_DocumentsChanged;
+                            _activeDocumentTracker.DocumentsChanged -=
+                                ActiveDocumentTracker_DocumentsChanged;
                         }
                     }
                 }
             }
 
-            private void ActiveDocumentTracker_DocumentsChanged(object? sender, EventArgs e)
-                => _activeDocumentChangedEventHandler?.Invoke(this, TryGetActiveDocument());
+            private void ActiveDocumentTracker_DocumentsChanged(object? sender, EventArgs e) =>
+                _activeDocumentChangedEventHandler?.Invoke(this, TryGetActiveDocument());
 
             public event EventHandler<EventArgs> NonRoslynBufferTextChanged
             {
-                add
-                {
-                    _activeDocumentTracker.NonRoslynBufferTextChanged += value;
-                }
-
-                remove
-                {
-                    _activeDocumentTracker.NonRoslynBufferTextChanged -= value;
-                }
+                add { _activeDocumentTracker.NonRoslynBufferTextChanged += value; }
+                remove { _activeDocumentTracker.NonRoslynBufferTextChanged -= value; }
             }
 
-            public DocumentId? TryGetActiveDocument()
-                => _activeDocumentTracker.TryGetActiveDocument(_workspace);
+            public DocumentId? TryGetActiveDocument() =>
+                _activeDocumentTracker.TryGetActiveDocument(_workspace);
 
-            public ImmutableArray<DocumentId> GetVisibleDocuments()
-                => _activeDocumentTracker.GetVisibleDocuments(_workspace);
+            public ImmutableArray<DocumentId> GetVisibleDocuments() =>
+                _activeDocumentTracker.GetVisibleDocuments(_workspace);
         }
     }
 }

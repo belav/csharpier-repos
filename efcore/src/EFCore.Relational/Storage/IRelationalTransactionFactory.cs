@@ -40,5 +40,6 @@ public interface IRelationalTransactionFactory
         DbTransaction transaction,
         Guid transactionId,
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
-        bool transactionOwned);
+        bool transactionOwned
+    );
 }

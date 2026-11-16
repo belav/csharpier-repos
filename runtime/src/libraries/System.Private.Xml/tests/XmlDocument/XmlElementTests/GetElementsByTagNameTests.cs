@@ -11,7 +11,9 @@ namespace System.Xml.XmlDocumentTests
         public static void GetElements()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<root><elem1 /> <elem2 /> <elem3 /> <elem2 attr='test' /> </root>");
+            xmlDocument.LoadXml(
+                "<root><elem1 /> <elem2 /> <elem3 /> <elem2 attr='test' /> </root>"
+            );
 
             var xmlNodeList = xmlDocument.DocumentElement.GetElementsByTagName("elem2");
 
@@ -24,7 +26,9 @@ namespace System.Xml.XmlDocumentTests
         public static void GetCaseSensitiveElements()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<root><elem1 /> <elEm2 /> <elem2 /> <elem2 attr='test' /> </root>");
+            xmlDocument.LoadXml(
+                "<root><elem1 /> <elEm2 /> <elem2 /> <elem2 attr='test' /> </root>"
+            );
 
             var xmlNodeList = xmlDocument.DocumentElement.GetElementsByTagName("elem2");
 
@@ -41,7 +45,9 @@ namespace System.Xml.XmlDocumentTests
         public static void GetElementWhenBelongsToNamespace()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<root xmlns:ns='test'><ns:elem1 /> <elem2 /> <elem3 /> <elem2 attr='test' /> </root>");
+            xmlDocument.LoadXml(
+                "<root xmlns:ns='test'><ns:elem1 /> <elem2 /> <elem3 /> <elem2 attr='test' /> </root>"
+            );
 
             var xmlNodeList = xmlDocument.DocumentElement.GetElementsByTagName("ns:elem1");
 
@@ -68,7 +74,9 @@ namespace System.Xml.XmlDocumentTests
         public static void GetElementsWhenNoneExist()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<root><elem1 /> <elem2 /> <elem3 /> <elem2 attr='test' /> </root>");
+            xmlDocument.LoadXml(
+                "<root><elem1 /> <elem2 /> <elem3 /> <elem2 attr='test' /> </root>"
+            );
 
             var xmlNodeList = xmlDocument.DocumentElement.GetElementsByTagName("test");
 
@@ -79,7 +87,9 @@ namespace System.Xml.XmlDocumentTests
         public static void RemoveOneElementFrom2SiblingElementsWithSameName()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<doc> <elem1 attr1=\"value1\">This is a test</elem1><elem1 attr2=\"value2\">this is also a test</elem1> text after </doc>");
+            xmlDocument.LoadXml(
+                "<doc> <elem1 attr1=\"value1\">This is a test</elem1><elem1 attr2=\"value2\">this is also a test</elem1> text after </doc>"
+            );
 
             xmlDocument.DocumentElement.RemoveChild(xmlDocument.DocumentElement.FirstChild);
 
@@ -90,7 +100,9 @@ namespace System.Xml.XmlDocumentTests
         public static void GetByFirstAttributeNameOfElement()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<doc> <elem1 attr1=\"value1\">This is a test</elem1><elem1 attr2=\"value2\">this is also a test</elem1> text after </doc>");
+            xmlDocument.LoadXml(
+                "<doc> <elem1 attr1=\"value1\">This is a test</elem1><elem1 attr2=\"value2\">this is also a test</elem1> text after </doc>"
+            );
 
             Assert.Equal(0, xmlDocument.DocumentElement.GetElementsByTagName("attr1").Count);
         }
@@ -99,7 +111,9 @@ namespace System.Xml.XmlDocumentTests
         public static void GetByTagnameEqualsAsterisk()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<doc> <elem1 attr1=\"value1\">This is a test</elem1><elem1 attr2=\"value2\">this is also a test</elem1> text after </doc>");
+            xmlDocument.LoadXml(
+                "<doc> <elem1 attr1=\"value1\">This is a test</elem1><elem1 attr2=\"value2\">this is also a test</elem1> text after </doc>"
+            );
             var elementList = xmlDocument.DocumentElement.GetElementsByTagName("*");
 
             Assert.Equal(2, elementList.Count);
@@ -111,7 +125,9 @@ namespace System.Xml.XmlDocumentTests
         public static void GetByTagnameEqualsRootNodeName()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<doc> <elem1 attr1=\"value1\">This is a test</elem1><elem1 attr2=\"value2\">this is also a test</elem1> text after </doc>");
+            xmlDocument.LoadXml(
+                "<doc> <elem1 attr1=\"value1\">This is a test</elem1><elem1 attr2=\"value2\">this is also a test</elem1> text after </doc>"
+            );
             var elementList = xmlDocument.DocumentElement.GetElementsByTagName("doc");
 
             Assert.Equal(0, elementList.Count);

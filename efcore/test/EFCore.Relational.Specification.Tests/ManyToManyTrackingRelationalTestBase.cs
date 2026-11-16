@@ -5,13 +5,12 @@ using Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-public abstract class ManyToManyTrackingRelationalTestBase<TFixture> : ManyToManyTrackingTestBase<TFixture>
+public abstract class ManyToManyTrackingRelationalTestBase<TFixture>
+    : ManyToManyTrackingTestBase<TFixture>
     where TFixture : ManyToManyTrackingRelationalTestBase<TFixture>.ManyToManyTrackingRelationalFixture
 {
     protected ManyToManyTrackingRelationalTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalFact]
     public void Many_to_many_delete_behaviors_are_set()
@@ -19,32 +18,44 @@ public abstract class ManyToManyTrackingRelationalTestBase<TFixture> : ManyToMan
         using var context = CreateContext();
         var model = context.Model;
 
-        var navigations = model.GetEntityTypes().SelectMany(e => e.GetDeclaredSkipNavigations())
-            .Where(e => e.ForeignKey.DeleteBehavior != DeleteBehavior.Cascade).ToList();
+        var navigations = model
+            .GetEntityTypes()
+            .SelectMany(e => e.GetDeclaredSkipNavigations())
+            .Where(e => e.ForeignKey.DeleteBehavior != DeleteBehavior.Cascade)
+            .ToList();
 
         var builder = new StringBuilder();
         foreach (var navigation in navigations)
         {
-            builder.AppendLine($"{{ \"{navigation.DeclaringEntityType.ShortName()}.{navigation.Name}\", DeleteBehavior.ClientCascade }},");
+            builder.AppendLine(
+                $"{{ \"{navigation.DeclaringEntityType.ShortName()}.{navigation.Name}\", DeleteBehavior.ClientCascade }},"
+            );
         }
 
         var x = builder.ToString();
 
-        foreach (var skipNavigation in model.GetEntityTypes().SelectMany(e => e.GetSkipNavigations()))
+        foreach (
+            var skipNavigation in model.GetEntityTypes().SelectMany(e => e.GetSkipNavigations())
+        )
         {
             Assert.Equal(
                 CustomDeleteBehaviors.TryGetValue(
-                    $"{skipNavigation.DeclaringEntityType.ShortName()}.{skipNavigation.Name}", out var deleteBehavior)
+                    $"{skipNavigation.DeclaringEntityType.ShortName()}.{skipNavigation.Name}",
+                    out var deleteBehavior
+                )
                     ? deleteBehavior
                     : DeleteBehavior.Cascade,
-                skipNavigation.ForeignKey.DeleteBehavior);
+                skipNavigation.ForeignKey.DeleteBehavior
+            );
         }
     }
 
     protected virtual Dictionary<string, DeleteBehavior> CustomDeleteBehaviors { get; } = new();
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
     public abstract class ManyToManyTrackingRelationalFixture : ManyToManyTrackingFixtureBase
     {
@@ -53,12 +64,13 @@ public abstract class ManyToManyTrackingRelationalTestBase<TFixture> : ManyToMan
             base.OnModelCreating(modelBuilder, context);
 
             modelBuilder.Entity<EntityTableSharing1>().ToTable("TableSharing");
-            modelBuilder.Entity<EntityTableSharing2>(
-                b =>
-                {
-                    b.HasOne<EntityTableSharing1>().WithOne().HasForeignKey<EntityTableSharing2>(e => e.Id);
-                    b.ToTable("TableSharing");
-                });
+            modelBuilder.Entity<EntityTableSharing2>(b =>
+            {
+                b.HasOne<EntityTableSharing1>()
+                    .WithOne()
+                    .HasForeignKey<EntityTableSharing2>(e => e.Id);
+                b.ToTable("TableSharing");
+            });
         }
     }
 }

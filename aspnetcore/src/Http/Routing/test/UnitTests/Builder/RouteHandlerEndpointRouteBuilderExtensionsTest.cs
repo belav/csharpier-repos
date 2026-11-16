@@ -194,16 +194,13 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapGet(
-            "/{id}",
-            (int? id, HttpContext httpContext) =>
+        _ = builder.MapGet("/{id}", (int? id, HttpContext httpContext) =>
+        {
+            if (id is not null)
             {
-                if (id is not null)
-                {
-                    httpContext.Items["input"] = id;
-                }
+                httpContext.Items["input"] = id;
             }
-        );
+        });
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -236,16 +233,13 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        _ = builder.MapGet(
-            "/",
-            (int? id, HttpContext httpContext) =>
+        _ = builder.MapGet("/", (int? id, HttpContext httpContext) =>
+        {
+            if (id is not null)
             {
-                if (id is not null)
-                {
-                    httpContext.Items["input"] = id;
-                }
+                httpContext.Items["input"] = id;
             }
-        );
+        });
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -629,11 +623,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
             Assert.Equal(expectedMethod, method);
         }
 
-        Assert.Throws<InvalidOperationException>(
-            () => endpointBuilder.WithMetadata(new RouteNameMetadata("Foo"))
+        Assert.Throws<InvalidOperationException>(() =>
+            endpointBuilder.WithMetadata(new RouteNameMetadata("Foo"))
         );
-        Assert.Throws<InvalidOperationException>(
-            () => endpointBuilder.Finally(b => b.Metadata.Add(new RouteNameMetadata("Foo")))
+        Assert.Throws<InvalidOperationException>(() =>
+            endpointBuilder.Finally(b => b.Metadata.Add(new RouteNameMetadata("Foo")))
         );
     }
 
@@ -648,17 +642,13 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
             new ApplicationBuilder(new EmptyServiceProvider())
         );
 
-        map(
-            builder,
-            "/{ID}",
-            ([FromRoute] int? id, HttpContext httpContext) =>
+        map(builder, "/{ID}", ([FromRoute] int? id, HttpContext httpContext) =>
+        {
+            if (id is not null)
             {
-                if (id is not null)
-                {
-                    httpContext.Items["input"] = id;
-                }
+                httpContext.Items["input"] = id;
             }
-        );
+        });
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -699,17 +689,13 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
             new ApplicationBuilder(new EmptyServiceProvider())
         );
 
-        map(
-            builder,
-            "/{ID}",
-            (int? id, HttpContext httpContext) =>
+        map(builder, "/{ID}", (int? id, HttpContext httpContext) =>
+        {
+            if (id is not null)
             {
-                if (id is not null)
-                {
-                    httpContext.Items["input"] = id;
-                }
+                httpContext.Items["input"] = id;
             }
-        );
+        });
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -1014,8 +1000,8 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
 
         if (throwOnBadRequest)
         {
-            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(
-                () => endpoint.RequestDelegate!(httpContext)
+            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+                endpoint.RequestDelegate!(httpContext)
             );
             Assert.Equal(400, ex.StatusCode);
         }

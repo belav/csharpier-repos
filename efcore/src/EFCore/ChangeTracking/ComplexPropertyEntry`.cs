@@ -32,9 +32,7 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
     /// </summary>
     [EntityFrameworkInternal]
     public ComplexPropertyEntry(InternalEntityEntry internalEntry, IComplexProperty complexProperty)
-        : base(internalEntry, complexProperty)
-    {
-    }
+        : base(internalEntry, complexProperty) { }
 
     /// <summary>
     ///     The <see cref="EntityEntry{TEntity}" /> to which this member belongs.
@@ -44,8 +42,7 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
     ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
     ///     examples.
     /// </remarks>
-    public new virtual EntityEntry<TEntity> EntityEntry
-        => new(InternalEntry);
+    public new virtual EntityEntry<TEntity> EntityEntry => new(InternalEntry);
 
     /// <summary>
     ///     Gets or sets the value currently assigned to this property. If the current value is set using this property,
@@ -74,13 +71,17 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
     /// </param>
     /// <returns>An object that exposes change tracking information and operations for the given property.</returns>
     public virtual PropertyEntry<TEntity, TProperty> Property<TProperty>(
-        Expression<Func<TComplexProperty, TProperty>> propertyExpression)
+        Expression<Func<TComplexProperty, TProperty>> propertyExpression
+    )
     {
         Check.NotNull(propertyExpression, nameof(propertyExpression));
 
         return new PropertyEntry<TEntity, TProperty>(
             InternalEntry,
-            Metadata.ComplexType.GetProperty(propertyExpression.GetMemberAccess().GetSimpleMemberName()));
+            Metadata.ComplexType.GetProperty(
+                propertyExpression.GetMemberAccess().GetSimpleMemberName()
+            )
+        );
     }
 
     /// <summary>
@@ -94,14 +95,21 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
     ///     A lambda expression representing the property to access information and operations for.
     /// </param>
     /// <returns>An object that exposes change tracking information and operations for the given property.</returns>
-    public virtual ComplexPropertyEntry<TEntity, TNestedComplexProperty> ComplexProperty<TNestedComplexProperty>(
-        Expression<Func<TComplexProperty, TNestedComplexProperty>> propertyExpression)
+    public virtual ComplexPropertyEntry<
+        TEntity,
+        TNestedComplexProperty
+    > ComplexProperty<TNestedComplexProperty>(
+        Expression<Func<TComplexProperty, TNestedComplexProperty>> propertyExpression
+    )
     {
         Check.NotNull(propertyExpression, nameof(propertyExpression));
 
         return new ComplexPropertyEntry<TEntity, TNestedComplexProperty>(
             InternalEntry,
-            Metadata.ComplexType.GetComplexProperty(propertyExpression.GetMemberAccess().GetSimpleMemberName()));
+            Metadata.ComplexType.GetComplexProperty(
+                propertyExpression.GetMemberAccess().GetSimpleMemberName()
+            )
+        );
     }
 
     /// <summary>
@@ -133,14 +141,19 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
     /// <typeparam name="TNestedComplexProperty">The type of the property.</typeparam>
     /// <param name="complexProperty">The property to access information and operations for.</param>
     /// <returns>An object that exposes change tracking information and operations for the given property.</returns>
-    public virtual ComplexPropertyEntry<TEntity, TNestedComplexProperty> ComplexProperty<TNestedComplexProperty>(
-        IComplexProperty complexProperty)
+    public virtual ComplexPropertyEntry<
+        TEntity,
+        TNestedComplexProperty
+    > ComplexProperty<TNestedComplexProperty>(IComplexProperty complexProperty)
     {
         Check.NotNull(complexProperty, nameof(complexProperty));
 
         ValidateType<TNestedComplexProperty>(complexProperty);
 
-        return new ComplexPropertyEntry<TEntity, TNestedComplexProperty>(InternalEntry, complexProperty);
+        return new ComplexPropertyEntry<TEntity, TNestedComplexProperty>(
+            InternalEntry,
+            complexProperty
+        );
     }
 
     /// <summary>
@@ -159,7 +172,10 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
 
         ValidateType<TProperty>(Metadata.ComplexType.FindProperty(propertyName));
 
-        return new PropertyEntry<TEntity, TProperty>(InternalEntry, Metadata.ComplexType.GetProperty(propertyName));
+        return new PropertyEntry<TEntity, TProperty>(
+            InternalEntry,
+            Metadata.ComplexType.GetProperty(propertyName)
+        );
     }
 
     /// <summary>
@@ -172,27 +188,35 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
     /// <typeparam name="TNestedComplexProperty">The type of the property.</typeparam>
     /// <param name="propertyName">The property to access information and operations for.</param>
     /// <returns>An object that exposes change tracking information and operations for the given property.</returns>
-    public virtual ComplexPropertyEntry<TEntity, TNestedComplexProperty> ComplexProperty<TNestedComplexProperty>(string propertyName)
+    public virtual ComplexPropertyEntry<
+        TEntity,
+        TNestedComplexProperty
+    > ComplexProperty<TNestedComplexProperty>(string propertyName)
     {
         Check.NotEmpty(propertyName, nameof(propertyName));
 
-        ValidateType<TNestedComplexProperty>(Metadata.ComplexType.FindComplexProperty(propertyName));
+        ValidateType<TNestedComplexProperty>(
+            Metadata.ComplexType.FindComplexProperty(propertyName)
+        );
 
         return new ComplexPropertyEntry<TEntity, TNestedComplexProperty>(
-            InternalEntry, Metadata.ComplexType.GetComplexProperty(propertyName));
+            InternalEntry,
+            Metadata.ComplexType.GetComplexProperty(propertyName)
+        );
     }
 
     private static void ValidateType<TProperty>(IPropertyBase? property)
     {
-        if (property != null
-            && property.ClrType != typeof(TProperty))
+        if (property != null && property.ClrType != typeof(TProperty))
         {
             throw new ArgumentException(
                 CoreStrings.WrongGenericPropertyType(
                     property.Name,
                     property.DeclaringType.ClrType.ShortDisplayName(),
                     property.ClrType.ShortDisplayName(),
-                    typeof(TProperty).ShortDisplayName()));
+                    typeof(TProperty).ShortDisplayName()
+                )
+            );
         }
     }
 }

@@ -4,21 +4,20 @@ using System;
 
 ref struct ValueStringBuilder
 {
-	public override string ToString ()
-	{
-		return "aaa";
-	}
+    public override string ToString()
+    {
+        return "aaa";
+    }
 }
-
 
 class X
 {
-	public static int Main ()
-	{
-		var s = new ValueStringBuilder ();
-		if (s.ToString () != "aaa")
-			return 1;
+    public static int Main()
+    {
+        var s = new ValueStringBuilder();
+        if (s.ToString() != "aaa")
+            return 1;
 
-		return 0;
-	}
+        return 0;
+    }
 }

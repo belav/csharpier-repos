@@ -10,8 +10,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Metadata.Edm;
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace System.Data.Query.InternalTrees
 {
@@ -30,8 +30,8 @@ namespace System.Data.Query.InternalTrees
 
         #region constructors
         /// <summary>
-        /// Basic constructor. 
-        /// 
+        /// Basic constructor.
+        ///
         /// NEVER call this routine directly - you should always use the Command.CreateNode
         /// factory methods.
         /// </summary>
@@ -46,67 +46,107 @@ namespace System.Data.Query.InternalTrees
         }
 
         /// <summary>
-        /// This routine is only used for building up rule patterns. 
+        /// This routine is only used for building up rule patterns.
         /// NEVER use this routine for building up nodes in a user command tree.
         /// </summary>
         /// <param name="op"></param>
         /// <param name="children"></param>
         internal Node(Op op, params Node[] children)
-            : this(-1, op, new List<Node>(children))
-        {
-        }
+            : this(-1, op, new List<Node>(children)) { }
         #endregion
 
         #region public properties and methods
 
 #if DEBUG
-        internal int Id { get { return m_id; } }
+        internal int Id
+        {
+            get { return m_id; }
+        }
 #endif
 
         /// <summary>
         /// Get the list of children
         /// </summary>
-        internal List<Node> Children { get { return m_children; } }
+        internal List<Node> Children
+        {
+            get { return m_children; }
+        }
 
         /// <summary>
         /// Gets or sets the node's operator
         /// </summary>
-        internal Op Op { get { return m_op; } set { m_op = value; } }
+        internal Op Op
+        {
+            get { return m_op; }
+            set { m_op = value; }
+        }
 
         /// <summary>
         /// Simpler (?) getter/setter routines
         /// </summary>
-        internal Node Child0 { get { return m_children[0]; } set { m_children[0] = value; } }
+        internal Node Child0
+        {
+            get { return m_children[0]; }
+            set { m_children[0] = value; }
+        }
+
         /// <summary>
         /// Do I have a zeroth child?
         /// </summary>
-        internal bool HasChild0 { get { return m_children.Count > 0; } }
+        internal bool HasChild0
+        {
+            get { return m_children.Count > 0; }
+        }
 
         /// <summary>
         /// Get/set first child
         /// </summary>
-        internal Node Child1 { get { return m_children[1]; } set { m_children[1] = value; } }
+        internal Node Child1
+        {
+            get { return m_children[1]; }
+            set { m_children[1] = value; }
+        }
+
         /// <summary>
         /// Do I have a child1?
         /// </summary>
-        internal bool HasChild1 { get { return m_children.Count > 1; } }
+        internal bool HasChild1
+        {
+            get { return m_children.Count > 1; }
+        }
 
         /// <summary>
         /// get/set second child
         /// </summary>
-        internal Node Child2 { get { return m_children[2]; } set { m_children[2] = value; } }
+        internal Node Child2
+        {
+            get { return m_children[2]; }
+            set { m_children[2] = value; }
+        }
+
         /// <summary>
         /// get/set second child
         /// </summary>
-        internal Node Child3 { get { return m_children[3]; } /* commented out because of fxcop - there are no upstream callers -- set { m_children[3] = value; }*/ }
+        internal Node Child3
+        {
+            get { return m_children[3]; } /* commented out because of fxcop - there are no upstream callers -- set { m_children[3] = value; }*/
+        }
+
         /// <summary>
         /// Do I have a child2 (third child really)
         /// </summary>
-        internal bool HasChild2 { get { return m_children.Count > 2; } }
+        internal bool HasChild2
+        {
+            get { return m_children.Count > 2; }
+        }
+
         /// <summary>
         /// Do I have a child3 (fourth child really)
         /// </summary>
-        internal bool HasChild3 { get { return m_children.Count > 3; } }
+        internal bool HasChild3
+        {
+            get { return m_children.Count > 3; }
+        }
 
         #region equivalence functions
         /// <summary>
@@ -140,7 +180,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Has the node info been initialized, i.e. previously computed
         /// </summary>
-        internal bool IsNodeInfoInitialized { get { return (m_nodeInfo != null);  } }
+        internal bool IsNodeInfoInitialized
+        {
+            get { return (m_nodeInfo != null); }
+        }
 
         /// <summary>
         /// Get the nodeInfo for a node. Initializes it, if it has not yet been initialized
@@ -155,6 +198,7 @@ namespace System.Data.Query.InternalTrees
             }
             return m_nodeInfo;
         }
+
         /// <summary>
         /// Gets the "extended" nodeinfo for a node; if it has not yet been initialized, then it will be
         /// </summary>

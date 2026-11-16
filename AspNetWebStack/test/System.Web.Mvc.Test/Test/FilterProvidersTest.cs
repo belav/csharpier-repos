@@ -13,8 +13,12 @@ namespace System.Web.Mvc.Test
         {
             // Assert
             Assert.NotNull(FilterProviders.Providers.Single(fp => fp is GlobalFilterCollection));
-            Assert.NotNull(FilterProviders.Providers.Single(fp => fp is FilterAttributeFilterProvider));
-            Assert.NotNull(FilterProviders.Providers.Single(fp => fp is ControllerInstanceFilterProvider));
+            Assert.NotNull(
+                FilterProviders.Providers.Single(fp => fp is FilterAttributeFilterProvider)
+            );
+            Assert.NotNull(
+                FilterProviders.Providers.Single(fp => fp is ControllerInstanceFilterProvider)
+            );
         }
     }
 }

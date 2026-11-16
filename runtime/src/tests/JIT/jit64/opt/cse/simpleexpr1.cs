@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 //((a+b)+c)
 
 //permutations for  ((a+b)+c)
@@ -35,10 +36,8 @@ namespace CseTest
 {
     using System;
 
-
     public class Test_Main
     {
-
         [Fact]
         public static int TestEntryPoint()
         {
@@ -177,4 +176,3 @@ namespace CseTest
         }
     }
 }
-

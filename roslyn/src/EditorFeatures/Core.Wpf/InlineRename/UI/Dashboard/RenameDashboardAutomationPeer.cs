@@ -16,19 +16,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
     {
         private readonly string _identifier;
 
-        public RenameDashboardAutomationPeer(UserControl owner, string identifier) : base(owner)
-            => _identifier = identifier;
+        public RenameDashboardAutomationPeer(UserControl owner, string identifier)
+            : base(owner) => _identifier = identifier;
 
-        protected override bool HasKeyboardFocusCore()
-            => true;
+        protected override bool HasKeyboardFocusCore() => true;
 
-        protected override bool IsKeyboardFocusableCore()
-            => true;
+        protected override bool IsKeyboardFocusableCore() => true;
 
-        protected override string GetNameCore()
-            => string.Format(EditorFeaturesResources.An_inline_rename_session_is_active_for_identifier_0, _identifier);
+        protected override string GetNameCore() =>
+            string.Format(
+                EditorFeaturesResources.An_inline_rename_session_is_active_for_identifier_0,
+                _identifier
+            );
 
-        protected override AutomationControlType GetAutomationControlTypeCore()
-            => AutomationControlType.Custom;
+        protected override AutomationControlType GetAutomationControlTypeCore() =>
+            AutomationControlType.Custom;
     }
 }

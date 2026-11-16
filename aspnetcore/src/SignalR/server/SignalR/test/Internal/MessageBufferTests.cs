@@ -279,8 +279,8 @@ public class MessageBufferTests
 
         pipes.Application.Input.AdvanceTo(buffer.Start);
 
-        Assert.Throws<InvalidOperationException>(
-            () => messageBuffer.ShouldProcessMessage(new SequenceMessage(2))
+        Assert.Throws<InvalidOperationException>(() =>
+            messageBuffer.ShouldProcessMessage(new SequenceMessage(2))
         );
     }
 

@@ -19,7 +19,11 @@ using Xunit.Harness;
 
 namespace Roslyn.VisualStudio.IntegrationTests
 {
-    [IdeSettings(MinVersion = VisualStudioVersion.VS2022, RootSuffix = "RoslynDev", MaxAttempts = 2)]
+    [IdeSettings(
+        MinVersion = VisualStudioVersion.VS2022,
+        RootSuffix = "RoslynDev",
+        MaxAttempts = 2
+    )]
     public abstract class AbstractIntegrationTest : AbstractIdeIntegrationTest
     {
         private static AsynchronousOperationListenerProvider? s_listenerProvider;
@@ -35,66 +39,66 @@ namespace Roslyn.VisualStudio.IntegrationTests
             RuntimeHelpers.RunModuleConstructor(typeof(TestBase).Module.ModuleHandle);
             TestTraceListener.Install();
 
-            IdeStateCollector.RegisterCustomState(
-                "Pending asynchronous operations",
-                static () =>
-                {
-                    if (s_listenerProvider is null)
-                        return "Unknown";
+            IdeStateCollector.RegisterCustomState("Pending asynchronous operations", static () =>
+            {
+                if (s_listenerProvider is null)
+                    return "Unknown";
 
-                    var messageBuilder = new StringBuilder();
-                    foreach (var group in s_listenerProvider.GetTokens().GroupBy(token => token.Listener.FeatureName))
+                var messageBuilder = new StringBuilder();
+                foreach (
+                    var group in s_listenerProvider
+                        .GetTokens()
+                        .GroupBy(token => token.Listener.FeatureName)
+                )
+                {
+                    messageBuilder.AppendLine($"Feature '{group.Key}'");
+                    foreach (var token in group)
                     {
-                        messageBuilder.AppendLine($"Feature '{group.Key}'");
-                        foreach (var token in group)
-                        {
-                            messageBuilder.AppendLine($"  {token}");
-                        }
+                        messageBuilder.AppendLine($"  {token}");
+                    }
+                }
+
+                return messageBuilder.ToString();
+            });
+
+            IdeStateCollector.RegisterCustomState("Solution state", static () =>
+            {
+                if (s_workspace is null)
+                    return "Unknown";
+
+                var messageBuilder = new StringBuilder();
+                foreach (var project in s_workspace.CurrentSolution.Projects)
+                {
+                    messageBuilder.AppendLine($"Project '{project.Name}'");
+                    messageBuilder.AppendLine($"  Metadata References");
+                    foreach (var reference in project.MetadataReferences)
+                    {
+                        messageBuilder.AppendLine($"    {reference.Display}");
                     }
 
-                    return messageBuilder.ToString();
-                });
-
-            IdeStateCollector.RegisterCustomState(
-                "Solution state",
-                static () =>
-                {
-                    if (s_workspace is null)
-                        return "Unknown";
-
-                    var messageBuilder = new StringBuilder();
-                    foreach (var project in s_workspace.CurrentSolution.Projects)
+                    messageBuilder.AppendLine($"  Project References");
+                    foreach (var reference in project.ProjectReferences)
                     {
-                        messageBuilder.AppendLine($"Project '{project.Name}'");
-                        messageBuilder.AppendLine($"  Metadata References");
-                        foreach (var reference in project.MetadataReferences)
-                        {
-                            messageBuilder.AppendLine($"    {reference.Display}");
-                        }
-
-                        messageBuilder.AppendLine($"  Project References");
-                        foreach (var reference in project.ProjectReferences)
-                        {
-                            messageBuilder.AppendLine($"    {reference.ProjectId}");
-                        }
-
-                        messageBuilder.AppendLine($"  Analyzer References");
-                        foreach (var reference in project.AnalyzerReferences)
-                        {
-                            messageBuilder.AppendLine($"    {reference.FullPath}");
-                        }
-
-                        messageBuilder.AppendLine($"  Documents");
-                        foreach (var document in project.Documents)
-                        {
-                            var path = string.Join("/", document.Folders);
-                            path = path == "" ? document.Name : $"{path}/{document.Name}";
-                            messageBuilder.AppendLine($"    {path}");
-                        }
+                        messageBuilder.AppendLine($"    {reference.ProjectId}");
                     }
 
-                    return messageBuilder.ToString();
-                });
+                    messageBuilder.AppendLine($"  Analyzer References");
+                    foreach (var reference in project.AnalyzerReferences)
+                    {
+                        messageBuilder.AppendLine($"    {reference.FullPath}");
+                    }
+
+                    messageBuilder.AppendLine($"  Documents");
+                    foreach (var document in project.Documents)
+                    {
+                        var path = string.Join("/", document.Folders);
+                        path = path == "" ? document.Name : $"{path}/{document.Name}";
+                        messageBuilder.AppendLine($"    {path}");
+                    }
+                }
+
+                return messageBuilder.ToString();
+            });
         }
 
         protected AbstractIntegrationTest()
@@ -106,44 +110,64 @@ namespace Roslyn.VisualStudio.IntegrationTests
         {
             await base.InitializeAsync();
 
-            s_listenerProvider ??= await TestServices.Shell.GetComponentModelServiceAsync<AsynchronousOperationListenerProvider>(HangMitigatingCancellationToken);
-            s_workspace ??= await TestServices.Shell.GetComponentModelServiceAsync<VisualStudioWorkspace>(HangMitigatingCancellationToken);
+            s_listenerProvider ??=
+                await TestServices.Shell.GetComponentModelServiceAsync<AsynchronousOperationListenerProvider>(
+                    HangMitigatingCancellationToken
+                );
+            s_workspace ??=
+                await TestServices.Shell.GetComponentModelServiceAsync<VisualStudioWorkspace>(
+                    HangMitigatingCancellationToken
+                );
 
-            if (await TestServices.SolutionExplorer.IsSolutionOpenAsync(HangMitigatingCancellationToken))
+            if (
+                await TestServices.SolutionExplorer.IsSolutionOpenAsync(
+                    HangMitigatingCancellationToken
+                )
+            )
             {
-                var dte = await TestServices.Shell.GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(HangMitigatingCancellationToken);
+                var dte = await TestServices.Shell.GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(
+                    HangMitigatingCancellationToken
+                );
                 if (dte.Debugger.CurrentMode != EnvDTE.dbgDebugMode.dbgDesignMode)
                 {
                     dte.Debugger.TerminateAll();
                 }
 
-                await TestServices.SolutionExplorer.CloseSolutionAsync(HangMitigatingCancellationToken);
+                await TestServices.SolutionExplorer.CloseSolutionAsync(
+                    HangMitigatingCancellationToken
+                );
             }
 
-            await TestServices.Workarounds.RemoveConflictingKeyBindingsAsync(HangMitigatingCancellationToken);
+            await TestServices.Workarounds.RemoveConflictingKeyBindingsAsync(
+                HangMitigatingCancellationToken
+            );
             await TestServices.StateReset.ResetGlobalOptionsAsync(HangMitigatingCancellationToken);
             await TestServices.StateReset.ResetHostSettingsAsync(HangMitigatingCancellationToken);
 
-            await TestServices.Workarounds.WaitForGitHubCoPilotAsync(HangMitigatingCancellationToken);
+            await TestServices.Workarounds.WaitForGitHubCoPilotAsync(
+                HangMitigatingCancellationToken
+            );
         }
 
         public override async Task DisposeAsync()
         {
-            using var cleanupCancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(2));
+            using var cleanupCancellationTokenSource = new CancellationTokenSource(
+                TimeSpan.FromMinutes(2)
+            );
             var cleanupCancellationToken = cleanupCancellationTokenSource.Token;
 
             await TestServices.StateReset.CloseActiveWindowsAsync(cleanupCancellationToken);
 
-            var dte = await TestServices.Shell.GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(cleanupCancellationToken);
+            var dte = await TestServices.Shell.GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(
+                cleanupCancellationToken
+            );
             if (dte.Debugger.CurrentMode != EnvDTE.dbgDebugMode.dbgDesignMode)
             {
                 dte.Debugger.TerminateAll();
                 await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                    [
-                        FeatureAttribute.Workspace,
-                        FeatureAttribute.EditAndContinue,
-                    ],
-                    cleanupCancellationToken);
+                    [FeatureAttribute.Workspace, FeatureAttribute.EditAndContinue],
+                    cleanupCancellationToken
+                );
             }
 
             await base.DisposeAsync();

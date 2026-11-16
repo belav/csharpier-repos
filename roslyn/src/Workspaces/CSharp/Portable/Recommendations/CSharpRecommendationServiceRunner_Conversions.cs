@@ -17,111 +17,132 @@ internal partial class CSharpRecommendationService
     /// </summary>
     private sealed partial class CSharpRecommendationServiceRunner
     {
-        private static readonly ImmutableArray<SpecialType> s_predefinedEnumConversionTargets = ImmutableArray.Create(
-            SpecialType.System_Byte,
-            SpecialType.System_Char,
-            SpecialType.System_Decimal,
-            SpecialType.System_Double,
-            SpecialType.System_Single,
-            SpecialType.System_Int32,
-            SpecialType.System_Int64,
-            SpecialType.System_SByte,
-            SpecialType.System_Int16,
-            SpecialType.System_UInt32,
-            SpecialType.System_UInt64,
-            SpecialType.System_UInt16);
+        private static readonly ImmutableArray<SpecialType> s_predefinedEnumConversionTargets =
+            ImmutableArray.Create(
+                SpecialType.System_Byte,
+                SpecialType.System_Char,
+                SpecialType.System_Decimal,
+                SpecialType.System_Double,
+                SpecialType.System_Single,
+                SpecialType.System_Int32,
+                SpecialType.System_Int64,
+                SpecialType.System_SByte,
+                SpecialType.System_Int16,
+                SpecialType.System_UInt32,
+                SpecialType.System_UInt64,
+                SpecialType.System_UInt16
+            );
 
-        private static readonly ImmutableArray<SpecialType> s_sbyteConversions = ImmutableArray.Create(
-            SpecialType.System_Byte,
-            SpecialType.System_Char,
-            SpecialType.System_UInt32,
-            SpecialType.System_UInt64,
-            SpecialType.System_UInt16);
+        private static readonly ImmutableArray<SpecialType> s_sbyteConversions =
+            ImmutableArray.Create(
+                SpecialType.System_Byte,
+                SpecialType.System_Char,
+                SpecialType.System_UInt32,
+                SpecialType.System_UInt64,
+                SpecialType.System_UInt16
+            );
 
-        private static readonly ImmutableArray<SpecialType> s_byteConversions = ImmutableArray.Create(
-            SpecialType.System_Char,
-            SpecialType.System_SByte);
+        private static readonly ImmutableArray<SpecialType> s_byteConversions =
+            ImmutableArray.Create(SpecialType.System_Char, SpecialType.System_SByte);
 
-        private static readonly ImmutableArray<SpecialType> s_int16Conversions = ImmutableArray.Create(
-            SpecialType.System_Byte,
-            SpecialType.System_Char,
-            SpecialType.System_UInt32,
-            SpecialType.System_UInt64,
-            SpecialType.System_UInt16,
-            SpecialType.System_SByte);
+        private static readonly ImmutableArray<SpecialType> s_int16Conversions =
+            ImmutableArray.Create(
+                SpecialType.System_Byte,
+                SpecialType.System_Char,
+                SpecialType.System_UInt32,
+                SpecialType.System_UInt64,
+                SpecialType.System_UInt16,
+                SpecialType.System_SByte
+            );
 
-        private static readonly ImmutableArray<SpecialType> s_uint16Conversions = ImmutableArray.Create(
-            SpecialType.System_Byte,
-            SpecialType.System_Char,
-            SpecialType.System_SByte,
-            SpecialType.System_Int16);
+        private static readonly ImmutableArray<SpecialType> s_uint16Conversions =
+            ImmutableArray.Create(
+                SpecialType.System_Byte,
+                SpecialType.System_Char,
+                SpecialType.System_SByte,
+                SpecialType.System_Int16
+            );
 
-        private static readonly ImmutableArray<SpecialType> s_int32Conversions = ImmutableArray.Create(
-            SpecialType.System_Byte,
-            SpecialType.System_Char,
-            SpecialType.System_SByte,
-            SpecialType.System_Int16,
-            SpecialType.System_UInt32,
-            SpecialType.System_UInt16,
-            SpecialType.System_UInt64);
+        private static readonly ImmutableArray<SpecialType> s_int32Conversions =
+            ImmutableArray.Create(
+                SpecialType.System_Byte,
+                SpecialType.System_Char,
+                SpecialType.System_SByte,
+                SpecialType.System_Int16,
+                SpecialType.System_UInt32,
+                SpecialType.System_UInt16,
+                SpecialType.System_UInt64
+            );
 
-        private static readonly ImmutableArray<SpecialType> s_uint32Conversions = ImmutableArray.Create(
-            SpecialType.System_Byte,
-            SpecialType.System_Char,
-            SpecialType.System_Int32,
-            SpecialType.System_SByte,
-            SpecialType.System_Int16,
-            SpecialType.System_UInt16);
+        private static readonly ImmutableArray<SpecialType> s_uint32Conversions =
+            ImmutableArray.Create(
+                SpecialType.System_Byte,
+                SpecialType.System_Char,
+                SpecialType.System_Int32,
+                SpecialType.System_SByte,
+                SpecialType.System_Int16,
+                SpecialType.System_UInt16
+            );
 
-        private static readonly ImmutableArray<SpecialType> s_int64Conversions = ImmutableArray.Create(
-            SpecialType.System_Byte,
-            SpecialType.System_Char,
-            SpecialType.System_Int32,
-            SpecialType.System_UInt32,
-            SpecialType.System_UInt64,
-            SpecialType.System_UInt16,
-            SpecialType.System_SByte,
-            SpecialType.System_Int16);
+        private static readonly ImmutableArray<SpecialType> s_int64Conversions =
+            ImmutableArray.Create(
+                SpecialType.System_Byte,
+                SpecialType.System_Char,
+                SpecialType.System_Int32,
+                SpecialType.System_UInt32,
+                SpecialType.System_UInt64,
+                SpecialType.System_UInt16,
+                SpecialType.System_SByte,
+                SpecialType.System_Int16
+            );
 
-        private static readonly ImmutableArray<SpecialType> s_uint64Conversions = ImmutableArray.Create(
-            SpecialType.System_Byte,
-            SpecialType.System_Char,
-            SpecialType.System_Int32,
-            SpecialType.System_Int64,
-            SpecialType.System_UInt32,
-            SpecialType.System_UInt16,
-            SpecialType.System_SByte,
-            SpecialType.System_Int16);
+        private static readonly ImmutableArray<SpecialType> s_uint64Conversions =
+            ImmutableArray.Create(
+                SpecialType.System_Byte,
+                SpecialType.System_Char,
+                SpecialType.System_Int32,
+                SpecialType.System_Int64,
+                SpecialType.System_UInt32,
+                SpecialType.System_UInt16,
+                SpecialType.System_SByte,
+                SpecialType.System_Int16
+            );
 
-        private static readonly ImmutableArray<SpecialType> s_charConversions = ImmutableArray.Create(
-            SpecialType.System_Byte,
-            SpecialType.System_SByte,
-            SpecialType.System_Int16);
+        private static readonly ImmutableArray<SpecialType> s_charConversions =
+            ImmutableArray.Create(
+                SpecialType.System_Byte,
+                SpecialType.System_SByte,
+                SpecialType.System_Int16
+            );
 
-        private static readonly ImmutableArray<SpecialType> s_singleConversions = ImmutableArray.Create(
-            SpecialType.System_Byte,
-            SpecialType.System_Char,
-            SpecialType.System_Decimal,
-            SpecialType.System_Int32,
-            SpecialType.System_Int64,
-            SpecialType.System_UInt32,
-            SpecialType.System_UInt64,
-            SpecialType.System_UInt16,
-            SpecialType.System_SByte,
-            SpecialType.System_Int16);
+        private static readonly ImmutableArray<SpecialType> s_singleConversions =
+            ImmutableArray.Create(
+                SpecialType.System_Byte,
+                SpecialType.System_Char,
+                SpecialType.System_Decimal,
+                SpecialType.System_Int32,
+                SpecialType.System_Int64,
+                SpecialType.System_UInt32,
+                SpecialType.System_UInt64,
+                SpecialType.System_UInt16,
+                SpecialType.System_SByte,
+                SpecialType.System_Int16
+            );
 
-        private static readonly ImmutableArray<SpecialType> s_doubleConversions = ImmutableArray.Create(
-            SpecialType.System_Byte,
-            SpecialType.System_Char,
-            SpecialType.System_Decimal,
-            SpecialType.System_Single,
-            SpecialType.System_Int32,
-            SpecialType.System_Int64,
-            SpecialType.System_UInt32,
-            SpecialType.System_UInt64,
-            SpecialType.System_UInt16,
-            SpecialType.System_SByte,
-            SpecialType.System_Int16);
+        private static readonly ImmutableArray<SpecialType> s_doubleConversions =
+            ImmutableArray.Create(
+                SpecialType.System_Byte,
+                SpecialType.System_Char,
+                SpecialType.System_Decimal,
+                SpecialType.System_Single,
+                SpecialType.System_Int32,
+                SpecialType.System_Int64,
+                SpecialType.System_UInt32,
+                SpecialType.System_UInt64,
+                SpecialType.System_UInt16,
+                SpecialType.System_SByte,
+                SpecialType.System_Int16
+            );
 
         private void AddConversions(ITypeSymbol container, ArrayBuilder<ISymbol> symbols)
         {
@@ -141,7 +162,10 @@ internal partial class CSharpRecommendationService
         }
 
         private void AddUserDefinedConversionsOfType(
-            ITypeSymbol container, INamedTypeSymbol containerWithoutNullable, ArrayBuilder<ISymbol> symbols)
+            ITypeSymbol container,
+            INamedTypeSymbol containerWithoutNullable,
+            ArrayBuilder<ISymbol> symbols
+        )
         {
             var compilation = _context.SemanticModel.Compilation;
             var containerIsNullable = container.IsNullable();
@@ -165,41 +189,55 @@ internal partial class CSharpRecommendationService
 
                     // If this is a nullable context, then 'lift' the conversion so we offer the nullable form of it to
                     // the user instead.
-                    symbols.Add(containerIsNullable && IsLiftableConversion(method)
-                        ? LiftConversion(compilation, method)
-                        : method);
+                    symbols.Add(
+                        containerIsNullable && IsLiftableConversion(method)
+                            ? LiftConversion(compilation, method)
+                            : method
+                    );
                 }
             }
 
             return;
 
-            // https://github.com/dotnet/csharplang/blob/main/spec/conversions.md#lifted-conversion-operators      
+            // https://github.com/dotnet/csharplang/blob/main/spec/conversions.md#lifted-conversion-operators
             //
             // Given a user-defined conversion operator that converts from a non-nullable value type S to a non-nullable
             // value type T, a lifted conversion operator exists that converts from S? to T?
-            static bool IsLiftableConversion(IMethodSymbol method)
-                => method.ReturnType.IsNonNullableValueType() && method.Parameters.Single().Type.IsNonNullableValueType();
+            static bool IsLiftableConversion(IMethodSymbol method) =>
+                method.ReturnType.IsNonNullableValueType()
+                && method.Parameters.Single().Type.IsNonNullableValueType();
         }
 
-        private IMethodSymbol LiftConversion(Compilation compilation, IMethodSymbol method)
-            => CreateConversion(
+        private IMethodSymbol LiftConversion(Compilation compilation, IMethodSymbol method) =>
+            CreateConversion(
                 method.ContainingType,
                 TryMakeNullable(compilation, method.Parameters.Single().Type),
                 TryMakeNullable(compilation, method.ReturnType),
-                method.GetDocumentationCommentXml(cancellationToken: _cancellationToken));
+                method.GetDocumentationCommentXml(cancellationToken: _cancellationToken)
+            );
 
         private void AddBuiltInNumericConversions(
-            ITypeSymbol container, INamedTypeSymbol containerWithoutNullable, ArrayBuilder<ISymbol> symbols)
+            ITypeSymbol container,
+            INamedTypeSymbol containerWithoutNullable,
+            ArrayBuilder<ISymbol> symbols
+        )
         {
             var conversions = GetPredefinedNumericConversions(containerWithoutNullable);
             if (!conversions.HasValue)
                 return;
 
-            AddCompletionItemsForSpecialTypes(container, containerWithoutNullable, symbols, conversions.Value);
+            AddCompletionItemsForSpecialTypes(
+                container,
+                containerWithoutNullable,
+                symbols,
+                conversions.Value
+            );
         }
 
-        public static ImmutableArray<SpecialType>? GetPredefinedNumericConversions(ITypeSymbol container)
-            => container.SpecialType switch
+        public static ImmutableArray<SpecialType>? GetPredefinedNumericConversions(
+            ITypeSymbol container
+        ) =>
+            container.SpecialType switch
             {
                 SpecialType.System_SByte => s_sbyteConversions,
                 SpecialType.System_Byte => s_byteConversions,
@@ -217,44 +255,71 @@ internal partial class CSharpRecommendationService
             };
 
         private void AddCompletionItemsForSpecialTypes(
-            ITypeSymbol container, INamedTypeSymbol containerWithoutNullable, ArrayBuilder<ISymbol> symbols, ImmutableArray<SpecialType> specialTypes)
+            ITypeSymbol container,
+            INamedTypeSymbol containerWithoutNullable,
+            ArrayBuilder<ISymbol> symbols,
+            ImmutableArray<SpecialType> specialTypes
+        )
         {
             var compilation = _context.SemanticModel.Compilation;
 
             foreach (var specialType in specialTypes)
             {
-                var targetTypeSymbol = _context.SemanticModel.Compilation.GetSpecialType(specialType);
+                var targetTypeSymbol = _context.SemanticModel.Compilation.GetSpecialType(
+                    specialType
+                );
                 var conversion = CreateConversion(
-                    containerWithoutNullable, fromType: containerWithoutNullable, toType: targetTypeSymbol,
-                    CreateConversionDocumentationCommentXml(containerWithoutNullable, targetTypeSymbol));
+                    containerWithoutNullable,
+                    fromType: containerWithoutNullable,
+                    toType: targetTypeSymbol,
+                    CreateConversionDocumentationCommentXml(
+                        containerWithoutNullable,
+                        targetTypeSymbol
+                    )
+                );
 
-                symbols.Add(container.IsNullable() ? LiftConversion(compilation, conversion) : conversion);
+                symbols.Add(
+                    container.IsNullable() ? LiftConversion(compilation, conversion) : conversion
+                );
             }
 
             return;
 
-            static string CreateConversionDocumentationCommentXml(ITypeSymbol fromType, ITypeSymbol toType)
+            static string CreateConversionDocumentationCommentXml(
+                ITypeSymbol fromType,
+                ITypeSymbol toType
+            )
             {
-                var summary = string.Format(WorkspacesResources.Predefined_conversion_from_0_to_1,
+                var summary = string.Format(
+                    WorkspacesResources.Predefined_conversion_from_0_to_1,
                     SeeTag(fromType.GetDocumentationCommentId()),
-                    SeeTag(toType.GetDocumentationCommentId()));
+                    SeeTag(toType.GetDocumentationCommentId())
+                );
 
                 return $"<summary>{summary}</summary>";
 
-                static string SeeTag(string? id)
-                    => $@"<see cref=""{id}""/>";
+                static string SeeTag(string? id) => $@"<see cref=""{id}""/>";
             }
         }
 
-        private static IMethodSymbol CreateConversion(INamedTypeSymbol containingType, ITypeSymbol fromType, ITypeSymbol toType, string? documentationCommentXml)
-            => CodeGenerationSymbolFactory.CreateConversionSymbol(
+        private static IMethodSymbol CreateConversion(
+            INamedTypeSymbol containingType,
+            ITypeSymbol fromType,
+            ITypeSymbol toType,
+            string? documentationCommentXml
+        ) =>
+            CodeGenerationSymbolFactory.CreateConversionSymbol(
                 toType: toType,
                 fromType: CodeGenerationSymbolFactory.CreateParameterSymbol(fromType, "value"),
                 containingType: containingType,
-                documentationCommentXml: documentationCommentXml);
+                documentationCommentXml: documentationCommentXml
+            );
 
         private void AddBuiltInEnumConversions(
-            ITypeSymbol container, INamedTypeSymbol containerWithoutNullable, ArrayBuilder<ISymbol> symbols)
+            ITypeSymbol container,
+            INamedTypeSymbol containerWithoutNullable,
+            ArrayBuilder<ISymbol> symbols
+        )
         {
             // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions#explicit-enumeration-conversions
             // Three kinds of conversions are defined in the spec.
@@ -265,7 +330,12 @@ internal partial class CSharpRecommendationService
             // * From any enum_type to any other enum_type.
 
             if (containerWithoutNullable.IsEnumType())
-                AddCompletionItemsForSpecialTypes(container, containerWithoutNullable, symbols, s_predefinedEnumConversionTargets);
+                AddCompletionItemsForSpecialTypes(
+                    container,
+                    containerWithoutNullable,
+                    symbols,
+                    s_predefinedEnumConversionTargets
+                );
         }
     }
 }

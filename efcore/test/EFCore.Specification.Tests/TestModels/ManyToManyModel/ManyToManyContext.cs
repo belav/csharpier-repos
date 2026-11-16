@@ -8,9 +8,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 public class ManyToManyContext : PoolableDbContext
 {
     public ManyToManyContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public DbSet<EntityOne> EntityOnes { get; set; }
     public DbSet<EntityTwo> EntityTwos { get; set; }
@@ -34,10 +32,16 @@ public class ManyToManyContext : PoolableDbContext
 
 public static class ManyToManyContextExtensions
 {
-    public static TEntity CreateInstance<TEntity>(this DbSet<TEntity> set, Action<TEntity, bool> configureEntity = null)
+    public static TEntity CreateInstance<TEntity>(
+        this DbSet<TEntity> set,
+        Action<TEntity, bool> configureEntity = null
+    )
         where TEntity : class, new()
     {
-        var isProxy = set.GetService<IDbContextOptions>().FindExtension<ProxiesOptionsExtension>()?.UseChangeTrackingProxies == true;
+        var isProxy =
+            set.GetService<IDbContextOptions>()
+                .FindExtension<ProxiesOptionsExtension>()
+                ?.UseChangeTrackingProxies == true;
 
         var entity = isProxy ? set.CreateProxy() : new TEntity();
 

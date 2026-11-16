@@ -21,6 +21,6 @@ namespace System.Reflection.Metadata
         /// <summary>
         /// Windows Runtime projections are enabled (on by default).
         /// </summary>
-        ApplyWindowsRuntimeProjections = 0x1
+        ApplyWindowsRuntimeProjections = 0x1,
     }
 }

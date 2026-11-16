@@ -19,11 +19,20 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
     internal abstract class EvaluationContextBase
     {
         internal static readonly AssemblyIdentity SystemIdentity = new AssemblyIdentity("System");
-        internal static readonly AssemblyIdentity SystemCoreIdentity = new AssemblyIdentity("System.Core");
-        internal static readonly AssemblyIdentity SystemLinqIdentity = new AssemblyIdentity("System.Linq");
-        internal static readonly AssemblyIdentity SystemXmlIdentity = new AssemblyIdentity("System.Xml");
-        internal static readonly AssemblyIdentity SystemXmlLinqIdentity = new AssemblyIdentity("System.Xml.Linq");
-        internal static readonly AssemblyIdentity MicrosoftVisualBasicIdentity = new AssemblyIdentity("Microsoft.VisualBasic");
+        internal static readonly AssemblyIdentity SystemCoreIdentity = new AssemblyIdentity(
+            "System.Core"
+        );
+        internal static readonly AssemblyIdentity SystemLinqIdentity = new AssemblyIdentity(
+            "System.Linq"
+        );
+        internal static readonly AssemblyIdentity SystemXmlIdentity = new AssemblyIdentity(
+            "System.Xml"
+        );
+        internal static readonly AssemblyIdentity SystemXmlLinqIdentity = new AssemblyIdentity(
+            "System.Xml.Linq"
+        );
+        internal static readonly AssemblyIdentity MicrosoftVisualBasicIdentity =
+            new AssemblyIdentity("Microsoft.VisualBasic");
 
         internal abstract CompileResult? CompileExpression(
             string expr,
@@ -31,7 +40,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ImmutableArray<Alias> aliases,
             DiagnosticBag diagnostics,
             out ResultProperties resultProperties,
-            CompilationTestData? testData);
+            CompilationTestData? testData
+        );
 
         internal abstract CompileResult? CompileAssignment(
             string target,
@@ -39,7 +49,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ImmutableArray<Alias> aliases,
             DiagnosticBag diagnostics,
             out ResultProperties resultProperties,
-            CompilationTestData? testData);
+            CompilationTestData? testData
+        );
 
         internal abstract ReadOnlyCollection<byte> CompileGetLocals(
             ArrayBuilder<LocalAndMethod> locals,
@@ -47,7 +58,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ImmutableArray<Alias> aliases,
             DiagnosticBag diagnostics,
             out string typeName,
-            CompilationTestData? testData);
+            CompilationTestData? testData
+        );
 
         internal string GetErrorMessageAndMissingAssemblyIdentities(
             DiagnosticBag diagnostics,
@@ -55,9 +67,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             CultureInfo? preferredUICulture,
             AssemblyIdentity linqLibrary,
             out bool useReferencedModulesOnly,
-            out ImmutableArray<AssemblyIdentity> missingAssemblyIdentities)
+            out ImmutableArray<AssemblyIdentity> missingAssemblyIdentities
+        )
         {
-            var errors = diagnostics.AsEnumerable().Where(d => d.Severity == DiagnosticSeverity.Error);
+            var errors = diagnostics
+                .AsEnumerable()
+                .Where(d => d.Severity == DiagnosticSeverity.Error);
             missingAssemblyIdentities = default;
             foreach (var error in errors)
             {
@@ -81,7 +96,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal static string GetErrorMessage(
             Diagnostic error,
             DiagnosticFormatter formatter,
-            CultureInfo? preferredUICulture)
+            CultureInfo? preferredUICulture
+        )
         {
             return (error is SimpleMessageDiagnostic simpleMessage)
                 ? simpleMessage.GetMessage()
@@ -90,7 +106,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         internal abstract bool HasDuplicateTypesOrAssemblies(Diagnostic diagnostic);
 
-        internal abstract ImmutableArray<AssemblyIdentity> GetMissingAssemblyIdentities(Diagnostic diagnostic, AssemblyIdentity linqLibrary);
+        internal abstract ImmutableArray<AssemblyIdentity> GetMissingAssemblyIdentities(
+            Diagnostic diagnostic,
+            AssemblyIdentity linqLibrary
+        );
 
         // ILOffset == 0xffffffff indicates an instruction outside of IL.
         // Treat such values as the beginning of the IL.

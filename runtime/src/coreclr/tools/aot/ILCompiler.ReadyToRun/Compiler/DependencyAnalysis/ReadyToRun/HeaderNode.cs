@@ -3,14 +3,13 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-
+using System.Threading.Tasks;
+using ILCompiler.DependencyAnalysisFramework;
+using Internal.ReadyToRunConstants;
 using Internal.Runtime;
 using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-using Internal.ReadyToRunConstants;
-using ILCompiler.DependencyAnalysisFramework;
-using System.Threading.Tasks;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -22,7 +21,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override bool IsShareable => false;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override bool StaticDependenciesAreComputed => true;
 
@@ -46,7 +46,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public sealed override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
-            ModuleSpecificHeaderTableNode otherModuleSpecificHeaderTableNode = (ModuleSpecificHeaderTableNode)other;
+            ModuleSpecificHeaderTableNode otherModuleSpecificHeaderTableNode =
+                (ModuleSpecificHeaderTableNode)other;
 
             if (_module == null)
             {
@@ -58,7 +59,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return 1;
             }
 
-            return _module.Assembly.GetName().Name.CompareTo(otherModuleSpecificHeaderTableNode._module.Assembly.GetName().Name);
+            return _module
+                .Assembly.GetName()
+                .Name.CompareTo(otherModuleSpecificHeaderTableNode._module.Assembly.GetName().Name);
         }
 
         protected abstract string ModuleSpecificName { get; }
@@ -75,7 +78,6 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 sb.Append(ModuleSpecificName);
             }
-
         }
     }
 
@@ -83,7 +85,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     {
         struct HeaderItem
         {
-            public HeaderItem(ReadyToRunSectionType id, DependencyNodeCore<NodeFactory> node, ISymbolNode startSymbol)
+            public HeaderItem(
+                ReadyToRunSectionType id,
+                DependencyNodeCore<NodeFactory> node,
+                ISymbolNode startSymbol
+            )
             {
                 Id = id;
                 Node = node;
@@ -97,14 +103,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         private readonly List<HeaderItem> _items = new List<HeaderItem>();
         private readonly ReadyToRunFlags _flags;
-        private readonly Task<(bool canSkipValidation, string[] reasons)> _shouldAddSkipTypeValidationFlag;
+        private readonly Task<(
+            bool canSkipValidation,
+            string[] reasons
+        )> _shouldAddSkipTypeValidationFlag;
 
         public HeaderNode(ReadyToRunFlags flags, EcmaModule moduleToCheckForSkipTypeValidation)
         {
-
             if (moduleToCheckForSkipTypeValidation != null)
             {
-                _shouldAddSkipTypeValidationFlag = TypeValidationChecker.CanSkipValidation(moduleToCheckForSkipTypeValidation);
+                _shouldAddSkipTypeValidationFlag = TypeValidationChecker.CanSkipValidation(
+                    moduleToCheckForSkipTypeValidation
+                );
             }
             else
             {
@@ -113,7 +123,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _flags = flags;
         }
 
-        public void Add(ReadyToRunSectionType id, DependencyNodeCore<NodeFactory> node, ISymbolNode startSymbol)
+        public void Add(
+            ReadyToRunSectionType id,
+            DependencyNodeCore<NodeFactory> node,
+            ISymbolNode startSymbol
+        )
         {
             _items.Add(new HeaderItem(id, node, startSymbol));
         }
@@ -121,11 +135,16 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public int Offset => 0;
         public override bool IsShareable => false;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
-        protected abstract void AppendMangledHeaderName(NameMangler nameMangler, Utf8StringBuilder sb);
+        protected abstract void AppendMangledHeaderName(
+            NameMangler nameMangler,
+            Utf8StringBuilder sb
+        );
 
-        public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb) => AppendMangledHeaderName(nameMangler, sb);
+        public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb) =>
+            AppendMangledHeaderName(nameMangler, sb);
 
         public override bool StaticDependenciesAreComputed => true;
 
@@ -159,7 +178,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 }
                 else
                 {
-                    if (factory.OptimizationFlags.TypeValidation == TypeValidationRule.AutomaticWithLogging)
+                    if (
+                        factory.OptimizationFlags.TypeValidation
+                        == TypeValidationRule.AutomaticWithLogging
+                    )
                     {
                         // If we are in automatic with logging mode, we reach here when we are unable to enable
                         // skip validation. When logging is enabled, write out the reasons we found for
@@ -178,7 +200,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             foreach (var item in _items)
             {
                 // Skip empty entries
-                if (!relocsOnly && item.Node is ObjectNode on && on.ShouldSkipEmittingObjectNode(factory))
+                if (
+                    !relocsOnly
+                    && item.Node is ObjectNode on
+                    && on.ShouldSkipEmittingObjectNode(factory)
+                )
                     continue;
 
                 // Unmarked nodes are not part of the graph
@@ -194,7 +220,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                 // The header entry for the runtime functions table should not include the 4 byte 0xffffffff sentinel
                 // value in the covered range.
-                int delta = item.Id == ReadyToRunSectionType.RuntimeFunctions ? RuntimeFunctionsTableNode.SentinelSizeAdjustment : 0;
+                int delta =
+                    item.Id == ReadyToRunSectionType.RuntimeFunctions
+                        ? RuntimeFunctionsTableNode.SentinelSizeAdjustment
+                        : 0;
                 builder.EmitReloc(item.StartSymbol, RelocType.IMAGE_REL_SYMBOL_SIZE, delta);
 
                 count++;
@@ -213,11 +242,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     public class GlobalHeaderNode : HeaderNode
     {
         public GlobalHeaderNode(ReadyToRunFlags flags, EcmaModule moduleToCheckForSkipValidation)
-            : base(flags, moduleToCheckForSkipValidation)
-        {
-        }
+            : base(flags, moduleToCheckForSkipValidation) { }
 
-        protected override void AppendMangledHeaderName(NameMangler nameMangler, Utf8StringBuilder sb)
+        protected override void AppendMangledHeaderName(
+            NameMangler nameMangler,
+            Utf8StringBuilder sb
+        )
         {
             sb.Append(nameMangler.CompilationUnitPrefix);
             sb.Append("__ReadyToRunHeader");
@@ -246,16 +276,17 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _index = index;
         }
 
-        protected override void EmitHeaderPrefix(ref ObjectDataBuilder builder)
-        {
-        }
+        protected override void EmitHeaderPrefix(ref ObjectDataBuilder builder) { }
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
             return _index - ((AssemblyHeaderNode)other)._index;
         }
 
-        protected override void AppendMangledHeaderName(NameMangler nameMangler, Utf8StringBuilder sb)
+        protected override void AppendMangledHeaderName(
+            NameMangler nameMangler,
+            Utf8StringBuilder sb
+        )
         {
             sb.Append(nameMangler.CompilationUnitPrefix);
             sb.Append("__ReadyToRunAssemblyHeader__");

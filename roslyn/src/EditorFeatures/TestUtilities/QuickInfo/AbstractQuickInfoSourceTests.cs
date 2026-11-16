@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
     public abstract class AbstractQuickInfoSourceTests
     {
         [System.Diagnostics.DebuggerStepThrough]
-        protected static string ExpectedContent(params string[] expectedContent)
-            => expectedContent.Join("\r\n");
+        protected static string ExpectedContent(params string[] expectedContent) =>
+            expectedContent.Join("\r\n");
 
         protected static string FormatCodeWithDocComments(params string[] code)
         {
@@ -27,34 +27,53 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.QuickInfo
             return string.Concat(System.Environment.NewLine, formattedCode);
         }
 
-        protected async Task TestInMethodAndScriptAsync(string code, string expectedContent, string expectedDocumentationComment = null)
+        protected async Task TestInMethodAndScriptAsync(
+            string code,
+            string expectedContent,
+            string expectedDocumentationComment = null
+        )
         {
             await TestInMethodAsync(code, expectedContent, expectedDocumentationComment);
             await TestInScriptAsync(code, expectedContent, expectedDocumentationComment);
         }
 
-        protected abstract Task TestInClassAsync(string code, string expectedContent, string expectedDocumentationComment = null);
+        protected abstract Task TestInClassAsync(
+            string code,
+            string expectedContent,
+            string expectedDocumentationComment = null
+        );
 
-        protected abstract Task TestInMethodAsync(string code, string expectedContent, string expectedDocumentationComment = null);
+        protected abstract Task TestInMethodAsync(
+            string code,
+            string expectedContent,
+            string expectedDocumentationComment = null
+        );
 
-        protected abstract Task TestInScriptAsync(string code, string expectedContent, string expectedDocumentationComment = null);
+        protected abstract Task TestInScriptAsync(
+            string code,
+            string expectedContent,
+            string expectedDocumentationComment = null
+        );
 
         protected abstract Task TestAsync(
             string code,
             string expectedContent,
             string expectedDocumentationComment = null,
-            CSharpParseOptions parseOptions = null);
+            CSharpParseOptions parseOptions = null
+        );
 
         protected abstract Task AssertNoContentAsync(
             TestWorkspace workspace,
             Document document,
-            int position);
+            int position
+        );
 
         protected abstract Task AssertContentIsAsync(
             TestWorkspace workspace,
             Document document,
             int position,
             string expectedContent,
-            string expectedDocumentationComment = null);
+            string expectedDocumentationComment = null
+        );
     }
 }

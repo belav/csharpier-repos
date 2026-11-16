@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 
@@ -44,7 +43,9 @@ namespace System.Net.Http.Functional.Tests
         {
             const string Key = "test";
             var value = new string(c, length);
-            var content = new FormUrlEncodedContent(new Dictionary<string, string> { { Key, value } });
+            var content = new FormUrlEncodedContent(
+                new Dictionary<string, string> { { Key, value } }
+            );
             Assert.Equal($"{Key}={Uri.EscapeDataString(value)}", await content.ReadAsStringAsync());
         }
 
@@ -133,9 +134,10 @@ namespace System.Net.Http.Functional.Tests
             // string expectedResult = "key=" + HttpUtility.UrlEncode(testString).ToLowerInvariant();
             // HttpUtility is not part of ProjectK.
 
-            string expectedResult = "key=%00%01%02%03%04%05%06%07%08%09%0a%0b%0c%0d%0e%0f%10%11%12%13%14%15%16%17%18" +
-                "%19%1a%1b%1c%1d%1e%1f+!%22%23%24%25%26%27()*%2b%2c-.%2f0123456789%3a%3b%3c%3d%3e%3f%40abcdefghijklm" +
-                "nopqrstuvwxyz%5b%5c%5d%5e_%60abcdefghijklmnopqrstuvwxyz%7b%7c%7d%7e%7f";
+            string expectedResult =
+                "key=%00%01%02%03%04%05%06%07%08%09%0a%0b%0c%0d%0e%0f%10%11%12%13%14%15%16%17%18"
+                + "%19%1a%1b%1c%1d%1e%1f+!%22%23%24%25%26%27()*%2b%2c-.%2f0123456789%3a%3b%3c%3d%3e%3f%40abcdefghijklm"
+                + "nopqrstuvwxyz%5b%5c%5d%5e_%60abcdefghijklmnopqrstuvwxyz%7b%7c%7d%7e%7f";
 
             string knownDiscrepancies = "~!*()";
 
@@ -147,20 +149,29 @@ namespace System.Net.Http.Functional.Tests
             {
                 if (result[i] != expectedResult[i])
                 {
-                    Assert.True((result[i] == '%' || expectedResult[i] == '%'),
-                        "Non-Escaping mis-match at position: " + i);
+                    Assert.True(
+                        (result[i] == '%' || expectedResult[i] == '%'),
+                        "Non-Escaping mis-match at position: " + i
+                    );
 
                     if (result[i] == '%')
                     {
-                        Assert.True(knownDiscrepancies.Contains(expectedResult[i]),
-                            "Escaped when it shouldn't be: " + expectedResult[i] + " at position " + i);
+                        Assert.True(
+                            knownDiscrepancies.Contains(expectedResult[i]),
+                            "Escaped when it shouldn't be: "
+                                + expectedResult[i]
+                                + " at position "
+                                + i
+                        );
                         result = result.Substring(i + 3);
                         expectedResult = expectedResult.Substring(i + 1);
                     }
                     else
                     {
-                        Assert.True(knownDiscrepancies.Contains(result[i]),
-                            "Not escaped when it should be : " + result[i] + " at position " + i);
+                        Assert.True(
+                            knownDiscrepancies.Contains(result[i]),
+                            "Not escaped when it should be : " + result[i] + " at position " + i
+                        );
                         result = result.Substring(i + 1);
                         expectedResult = expectedResult.Substring(i + 3);
                     }

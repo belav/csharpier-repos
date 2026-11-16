@@ -10,8 +10,8 @@ namespace System.Activities.Statements
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Windows.Markup;
     using System.Runtime.Collections;
+    using System.Windows.Markup;
 
     [ContentProperty("Branches")]
     public sealed class Parallel : NativeActivity
@@ -23,9 +23,7 @@ namespace System.Activities.Statements
         Variable<bool> hasCompleted;
 
         public Parallel()
-            : base()
-        {
-        }
+            : base() { }
 
         public Collection<Variable> Variables
         {
@@ -42,7 +40,7 @@ namespace System.Activities.Statements
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.variables;
@@ -51,11 +49,7 @@ namespace System.Activities.Statements
 
         [DefaultValue(null)]
         [DependsOn("Variables")]
-        public Activity<bool> CompletionCondition
-        {
-            get;
-            set;
-        }
+        public Activity<bool> CompletionCondition { get; set; }
 
         [DependsOn("CompletionCondition")]
         public Collection<Activity> Branches
@@ -73,14 +67,17 @@ namespace System.Activities.Statements
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.branches;
             }
         }
-        
-        protected override void OnCreateDynamicUpdateMap(NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+
+        protected override void OnCreateDynamicUpdateMap(
+            NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             metadata.AllowUpdateInsideThisActivity();
         }
@@ -96,7 +93,7 @@ namespace System.Activities.Statements
             {
                 // when CompletionCondition exists, schedule newly added branches only if "hasCompleted" variable evaluates to false
                 return;
-            }           
+            }
 
             CompletionCallback onBranchComplete = new CompletionCallback(OnBranchComplete);
 
@@ -171,7 +168,10 @@ namespace System.Activities.Statements
             {
                 // If we haven't completed, we've been requested to cancel, and we've had a child
                 // end in a non-Closed state then we should cancel ourselves.
-                if (completedInstance.State != ActivityInstanceState.Closed && context.IsCancellationRequested)
+                if (
+                    completedInstance.State != ActivityInstanceState.Closed
+                    && context.IsCancellationRequested
+                )
                 {
                     context.MarkCanceled();
                     this.hasCompleted.Set(context, true);
@@ -187,7 +187,11 @@ namespace System.Activities.Statements
             }
         }
 
-        void OnConditionComplete(NativeActivityContext context, ActivityInstance completedInstance, bool result)
+        void OnConditionComplete(
+            NativeActivityContext context,
+            ActivityInstance completedInstance,
+            bool result
+        )
         {
             if (result)
             {

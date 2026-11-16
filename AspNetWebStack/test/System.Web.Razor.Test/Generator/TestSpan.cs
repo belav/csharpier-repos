@@ -22,11 +22,7 @@ namespace System.Web.Razor.Test.Generator
         }
 
         public TestSpan(Span span)
-            : this(span.Kind,
-                   span.Start.AbsoluteIndex,
-                   span.Start.AbsoluteIndex + span.Length)
-        {
-        }
+            : this(span.Kind, span.Start.AbsoluteIndex, span.Start.AbsoluteIndex + span.Length) { }
 
         public SpanKind Kind { get; private set; }
         public int Start { get; private set; }
@@ -43,9 +39,7 @@ namespace System.Web.Razor.Test.Generator
 
             if (other != null)
             {
-                return (Kind == other.Kind) &&
-                       (Start == other.Start) &&
-                       (End == other.End);
+                return (Kind == other.Kind) && (Start == other.Start) && (End == other.End);
             }
 
             return false;

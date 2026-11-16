@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net.Sockets {
+namespace System.Net.Sockets
+{
     using System;
 
     //
@@ -17,8 +18,8 @@ namespace System.Net.Sockets {
     ///    </para>
     /// </devdoc>
     //UEUE
-    public enum SocketOptionName {
-
+    public enum SocketOptionName
+    {
         //
         // good for SocketOptionLevel.Socket
         //
@@ -26,127 +27,146 @@ namespace System.Net.Sockets {
         /// <devdoc>
         ///    <para>Record debugging information.</para>
         /// </devdoc>
-        Debug                   = 0x0001,           // turn on debugging info recording
+        Debug = 0x0001, // turn on debugging info recording
+
         /// <devdoc>
         ///    <para>Socket is listening.</para>
         /// </devdoc>
-        AcceptConnection        = 0x0002,           // socket has had listen()
+        AcceptConnection = 0x0002, // socket has had listen()
+
         /// <devdoc>
         ///    <para>
         ///       Allows the socket to be bound to an address that is already in use.
         ///    </para>
         /// </devdoc>
-        ReuseAddress            = 0x0004,           // allow local address reuse
+        ReuseAddress = 0x0004, // allow local address reuse
+
         /// <devdoc>
         ///    <para>
         ///       Send keep-alives.
         ///    </para>
         /// </devdoc>
-        KeepAlive               = 0x0008,           // keep connections alive
+        KeepAlive = 0x0008, // keep connections alive
+
         /// <devdoc>
         ///    <para>
         ///       Do not route, send directly to interface addresses.
         ///    </para>
         /// </devdoc>
-        DontRoute               = 0x0010,           // just use interface addresses
+        DontRoute = 0x0010, // just use interface addresses
+
         /// <devdoc>
         ///    <para>
         ///       Permit sending broadcast messages on the socket.
         ///    </para>
         /// </devdoc>
-        Broadcast               = 0x0020,           // permit sending of broadcast msgs
+        Broadcast = 0x0020, // permit sending of broadcast msgs
+
         /// <devdoc>
         ///    <para>
         ///       Bypass hardware when possible.
         ///    </para>
         /// </devdoc>
-        UseLoopback             = 0x0040,           // bypass hardware when possible
+        UseLoopback = 0x0040, // bypass hardware when possible
+
         /// <devdoc>
         ///    <para>
         ///       Linger on close if unsent data is present.
         ///    </para>
         /// </devdoc>
-        Linger                  = 0x0080,           // linger on close if data present
+        Linger = 0x0080, // linger on close if data present
+
         /// <devdoc>
         ///    <para>
         ///       Receives out-of-band data in the normal data stream.
         ///    </para>
         /// </devdoc>
-        OutOfBandInline         = 0x0100,           // leave received OOB data in line
+        OutOfBandInline = 0x0100, // leave received OOB data in line
+
         /// <devdoc>
         ///    <para>
         ///       Close socket gracefully without lingering.
         ///    </para>
         /// </devdoc>
-        DontLinger              = ~Linger,
+        DontLinger = ~Linger,
+
         /// <devdoc>
         ///    <para>
         ///       Enables a socket to be bound for exclusive access.
         ///    </para>
         /// </devdoc>
-        ExclusiveAddressUse     = ~ReuseAddress,    // disallow local address reuse
+        ExclusiveAddressUse = ~ReuseAddress, // disallow local address reuse
+
         /// <devdoc>
         ///    <para>
         ///       Specifies the total per-socket buffer space reserved for sends. This is
         ///       unrelated to the maximum message size or the size of a TCP window.
         ///    </para>
         /// </devdoc>
-        SendBuffer              = 0x1001,           // send buffer size
+        SendBuffer = 0x1001, // send buffer size
+
         /// <devdoc>
         ///    <para>
         ///       Send low water mark.
         ///    </para>
         /// </devdoc>
-        ReceiveBuffer           = 0x1002,           // receive buffer size
+        ReceiveBuffer = 0x1002, // receive buffer size
+
         /// <devdoc>
         ///    <para>
         ///       Specifies the total per-socket buffer space reserved for receives. This is unrelated to the maximum message size or the size of a TCP window.
         ///    </para>
         /// </devdoc>
-        SendLowWater            = 0x1003,           // send low-water mark
+        SendLowWater = 0x1003, // send low-water mark
+
         /// <devdoc>
         ///    <para>
         ///       Receive low water mark.
         ///    </para>
         /// </devdoc>
-        ReceiveLowWater         = 0x1004,           // receive low-water mark
+        ReceiveLowWater = 0x1004, // receive low-water mark
+
         /// <devdoc>
         ///    <para>
         ///       Send timeout.
         ///    </para>
         /// </devdoc>
-        SendTimeout             = 0x1005,           // send timeout
+        SendTimeout = 0x1005, // send timeout
+
         /// <devdoc>
         ///    <para>
         ///       Receive timeout.
         ///    </para>
         /// </devdoc>
-        ReceiveTimeout         = 0x1006,           // receive timeout
+        ReceiveTimeout = 0x1006, // receive timeout
+
         /// <devdoc>
         ///    <para>
         ///       Get error status and clear.
         ///    </para>
         /// </devdoc>
-        Error                   = 0x1007,          // get error status and clear
+        Error = 0x1007, // get error status and clear
+
         /// <devdoc>
         ///    <para>
         ///       Get socket type.
         ///    </para>
         /// </devdoc>
-        Type                    = 0x1008,           // get socket type
+        Type = 0x1008, // get socket type
+
         /// <devdoc>
         ///    <para>
         ///       Get socket type.
         ///    </para>
         /// </devdoc>
-        ReuseUnicastPort        = 0x3007,           // defer ephemeral port allocation for outbound connections        
+        ReuseUnicastPort = 0x3007, // defer ephemeral port allocation for outbound connections
+
         /// <devdoc>
         ///    <para>
         ///       Defer ephemeral port allocation for outbound connections.
         ///    </para>
         /// </devdoc>
-        MaxConnections          = 0x7fffffff,       // Maximum queue length specifiable by listen.
-
+        MaxConnections = 0x7fffffff, // Maximum queue length specifiable by listen.
 
         //
         // the following values are taken from ws2tcpip.h,
@@ -163,25 +183,29 @@ namespace System.Net.Sockets {
         ///       IP options.
         ///    </para>
         /// </devdoc>
-        IPOptions               = 1,
+        IPOptions = 1,
+
         /// <devdoc>
         ///    <para>
         ///       Header is included with data.
         ///    </para>
         /// </devdoc>
-        HeaderIncluded          = 2,
+        HeaderIncluded = 2,
+
         /// <devdoc>
         ///    <para>
         ///       IP type of service and preced.
         ///    </para>
         /// </devdoc>
-        TypeOfService           = 3,
+        TypeOfService = 3,
+
         /// <devdoc>
         ///    <para>
         ///       IP time to live.
         ///    </para>
         /// </devdoc>
-        IpTimeToLive            = 4,
+        IpTimeToLive = 4,
+
         /// <devdoc>
         ///    <para>
         ///       IP multicast interface.
@@ -195,78 +219,87 @@ namespace System.Net.Sockets {
         ///         from your machine.
         ///    </para>
         /// </devdoc>
-        MulticastInterface      = 9,
+        MulticastInterface = 9,
+
         /// <devdoc>
         ///    <para>
         ///       IP multicast time to live.
         ///    </para>
         /// </devdoc>
-        MulticastTimeToLive     = 10,
+        MulticastTimeToLive = 10,
+
         /// <devdoc>
         ///    <para>
         ///       IP Multicast loopback.
         ///    </para>
         /// </devdoc>
-        MulticastLoopback       = 11,
+        MulticastLoopback = 11,
+
         /// <devdoc>
         ///    <para>
         ///       Add an IP group membership.
         ///    </para>
         /// </devdoc>
-        AddMembership           = 12,
+        AddMembership = 12,
+
         /// <devdoc>
         ///    <para>
         ///       Drop an IP group membership.
         ///    </para>
         /// </devdoc>
-        DropMembership          = 13,
+        DropMembership = 13,
+
         /// <devdoc>
         ///    <para>
         ///       Don't fragment IP datagrams.
         ///    </para>
         /// </devdoc>
-        DontFragment            = 14,
+        DontFragment = 14,
+
         /// <devdoc>
         ///    <para>
         ///       Join IP group/source.
         ///    </para>
         /// </devdoc>
-        AddSourceMembership     = 15,
+        AddSourceMembership = 15,
+
         /// <devdoc>
         ///    <para>
         ///       Leave IP group/source.
         ///    </para>
         /// </devdoc>
-        DropSourceMembership    = 16,
+        DropSourceMembership = 16,
+
         /// <devdoc>
         ///    <para>
         ///       Block IP group/source.
         ///    </para>
         /// </devdoc>
-        BlockSource             = 17,
+        BlockSource = 17,
+
         /// <devdoc>
         ///    <para>
         ///       Unblock IP group/source.
         ///    </para>
         /// </devdoc>
-        UnblockSource           = 18,
+        UnblockSource = 18,
+
         /// <devdoc>
         ///    <para>
         ///       Receive packet information for ipv4.
         ///    </para>
         /// </devdoc>
-        PacketInformation       = 19,
-
+        PacketInformation = 19,
 
         //
         //good for ipv6
         //
 
-        HopLimit = 21,            //IPV6_HOPLIMIT
+        HopLimit = 21, //IPV6_HOPLIMIT
 
-        IPProtectionLevel = 23,     //IP_PROTECTION_LEVEL
+        IPProtectionLevel = 23, //IP_PROTECTION_LEVEL
 
-        IPv6Only = 27,              //IPV6_V6ONLY
+        IPv6Only = 27, //IPV6_V6ONLY
 
         //
         // good for SocketOptionLevel.Tcp
@@ -277,13 +310,13 @@ namespace System.Net.Sockets {
         ///       Disables the Nagle algorithm for send coalescing.
         ///    </para>
         /// </devdoc>
-        NoDelay                 = 1,
+        NoDelay = 1,
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        BsdUrgent               = 2,
-        Expedited               = 2,
-
+        BsdUrgent = 2,
+        Expedited = 2,
 
         //
         // good for SocketOptionLevel.Udp
@@ -292,19 +325,17 @@ namespace System.Net.Sockets {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        NoChecksum              = 1,
+        NoChecksum = 1,
+
         /// <devdoc>
         ///    <para>
         ///       Udp-Lite checksum coverage.
         ///    </para>
         /// </devdoc>
-        ChecksumCoverage        = 20,
+        ChecksumCoverage = 20,
 
         UpdateAcceptContext = 0x700B,
 
         UpdateConnectContext = 0x7010,
-
     }; // enum SocketOptionName
-
-
 } // namespace System.Net.Sockets

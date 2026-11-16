@@ -44,7 +44,8 @@ namespace System.Text.Json
         public static ValueTask<TValue?> DeserializeAsync<TValue>(
             Stream utf8Json,
             JsonSerializerOptions? options = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json is null)
             {
@@ -79,7 +80,8 @@ namespace System.Text.Json
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
         public static TValue? Deserialize<TValue>(
             Stream utf8Json,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             if (utf8Json is null)
             {
@@ -119,7 +121,8 @@ namespace System.Text.Json
             Stream utf8Json,
             Type returnType,
             JsonSerializerOptions? options = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json is null)
             {
@@ -159,7 +162,8 @@ namespace System.Text.Json
         public static object? Deserialize(
             Stream utf8Json,
             Type returnType,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             if (utf8Json is null)
             {
@@ -196,7 +200,8 @@ namespace System.Text.Json
         public static ValueTask<TValue?> DeserializeAsync<TValue>(
             Stream utf8Json,
             JsonTypeInfo<TValue> jsonTypeInfo,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json is null)
             {
@@ -231,7 +236,8 @@ namespace System.Text.Json
         public static ValueTask<object?> DeserializeAsync(
             Stream utf8Json,
             JsonTypeInfo jsonTypeInfo,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json is null)
             {
@@ -264,7 +270,8 @@ namespace System.Text.Json
         /// </exception>
         public static TValue? Deserialize<TValue>(
             Stream utf8Json,
-            JsonTypeInfo<TValue> jsonTypeInfo)
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (utf8Json is null)
             {
@@ -293,9 +300,7 @@ namespace System.Text.Json
         /// The JSON is invalid,
         /// or when there is remaining data in the Stream.
         /// </exception>
-        public static object? Deserialize(
-            Stream utf8Json,
-            JsonTypeInfo jsonTypeInfo)
+        public static object? Deserialize(Stream utf8Json, JsonTypeInfo jsonTypeInfo)
         {
             if (utf8Json is null)
             {
@@ -341,7 +346,8 @@ namespace System.Text.Json
             Stream utf8Json,
             Type returnType,
             JsonSerializerContext context,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json is null)
             {
@@ -387,7 +393,8 @@ namespace System.Text.Json
         public static object? Deserialize(
             Stream utf8Json,
             Type returnType,
-            JsonSerializerContext context)
+            JsonSerializerContext context
+        )
         {
             if (utf8Json is null)
             {
@@ -423,7 +430,8 @@ namespace System.Text.Json
         public static IAsyncEnumerable<TValue?> DeserializeAsyncEnumerable<TValue>(
             Stream utf8Json,
             JsonSerializerOptions? options = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json is null)
             {
@@ -449,7 +457,8 @@ namespace System.Text.Json
         public static IAsyncEnumerable<TValue?> DeserializeAsyncEnumerable<TValue>(
             Stream utf8Json,
             JsonTypeInfo<TValue> jsonTypeInfo,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json is null)
             {
@@ -465,17 +474,26 @@ namespace System.Text.Json
             return DeserializeAsyncEnumerableCore(utf8Json, jsonTypeInfo, cancellationToken);
         }
 
-        private static IAsyncEnumerable<T> DeserializeAsyncEnumerableCore<T>(Stream utf8Json, JsonTypeInfo<T> jsonTypeInfo, CancellationToken cancellationToken)
+        private static IAsyncEnumerable<T> DeserializeAsyncEnumerableCore<T>(
+            Stream utf8Json,
+            JsonTypeInfo<T> jsonTypeInfo,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(jsonTypeInfo.IsConfigured);
 
-            JsonTypeInfo<Queue<T>> queueTypeInfo = jsonTypeInfo._asyncEnumerableQueueTypeInfo is { } cachedQueueTypeInfo
+            JsonTypeInfo<Queue<T>> queueTypeInfo = jsonTypeInfo._asyncEnumerableQueueTypeInfo
+                is { } cachedQueueTypeInfo
                 ? (JsonTypeInfo<Queue<T>>)cachedQueueTypeInfo
                 : CreateQueueTypeInfo(jsonTypeInfo);
 
             return CreateAsyncEnumerable(utf8Json, queueTypeInfo, cancellationToken);
 
-            static async IAsyncEnumerable<T> CreateAsyncEnumerable(Stream utf8Json, JsonTypeInfo<Queue<T>> queueTypeInfo, [EnumeratorCancellation] CancellationToken cancellationToken)
+            static async IAsyncEnumerable<T> CreateAsyncEnumerable(
+                Stream utf8Json,
+                JsonTypeInfo<Queue<T>> queueTypeInfo,
+                [EnumeratorCancellation] CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(queueTypeInfo.IsConfigured);
                 JsonSerializerOptions options = queueTypeInfo.Options;
@@ -489,11 +507,14 @@ namespace System.Text.Json
                 {
                     do
                     {
-                        bufferState = await bufferState.ReadFromStreamAsync(utf8Json, cancellationToken, fillBuffer: false).ConfigureAwait(false);
+                        bufferState = await bufferState
+                            .ReadFromStreamAsync(utf8Json, cancellationToken, fillBuffer: false)
+                            .ConfigureAwait(false);
                         queueTypeInfo.ContinueDeserialize(
                             ref bufferState,
                             ref jsonReaderState,
-                            ref readStack);
+                            ref readStack
+                        );
 
                         if (readStack.Current.ReturnValue is { } returnValue)
                         {
@@ -503,8 +524,7 @@ namespace System.Text.Json
                                 yield return element;
                             }
                         }
-                    }
-                    while (!bufferState.IsFinalBlock);
+                    } while (!bufferState.IsFinalBlock);
                 }
                 finally
                 {

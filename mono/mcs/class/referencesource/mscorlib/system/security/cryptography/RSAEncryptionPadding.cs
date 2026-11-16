@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 namespace System.Security.Cryptography
@@ -11,55 +11,87 @@ namespace System.Security.Cryptography
     /// </summary>
     public sealed class RSAEncryptionPadding : IEquatable<RSAEncryptionPadding>
     {
-        private static readonly RSAEncryptionPadding s_pkcs1 = new RSAEncryptionPadding(RSAEncryptionPaddingMode.Pkcs1, default(HashAlgorithmName));
-        private static readonly RSAEncryptionPadding s_oaepSHA1 = CreateOaep(HashAlgorithmName.SHA1);
-        private static readonly RSAEncryptionPadding s_oaepSHA256 = CreateOaep(HashAlgorithmName.SHA256);
-        private static readonly RSAEncryptionPadding s_oaepSHA384 = CreateOaep(HashAlgorithmName.SHA384);
-        private static readonly RSAEncryptionPadding s_oaepSHA512 = CreateOaep(HashAlgorithmName.SHA512);
+        private static readonly RSAEncryptionPadding s_pkcs1 = new RSAEncryptionPadding(
+            RSAEncryptionPaddingMode.Pkcs1,
+            default(HashAlgorithmName)
+        );
+        private static readonly RSAEncryptionPadding s_oaepSHA1 = CreateOaep(
+            HashAlgorithmName.SHA1
+        );
+        private static readonly RSAEncryptionPadding s_oaepSHA256 = CreateOaep(
+            HashAlgorithmName.SHA256
+        );
+        private static readonly RSAEncryptionPadding s_oaepSHA384 = CreateOaep(
+            HashAlgorithmName.SHA384
+        );
+        private static readonly RSAEncryptionPadding s_oaepSHA512 = CreateOaep(
+            HashAlgorithmName.SHA512
+        );
 
         /// <summary>
         /// <see cref="RSAEncryptionPaddingMode.Pkcs1"/> mode.
         /// </summary>
-        public static RSAEncryptionPadding Pkcs1 { get { return s_pkcs1; } }
+        public static RSAEncryptionPadding Pkcs1
+        {
+            get { return s_pkcs1; }
+        }
 
         /// <summary>
         /// <see cref="RSAEncryptionPaddingMode.Oaep"/> mode with SHA1 hash algorithm.
         /// </summary>
-        public static RSAEncryptionPadding OaepSHA1 { get { return s_oaepSHA1; } }
+        public static RSAEncryptionPadding OaepSHA1
+        {
+            get { return s_oaepSHA1; }
+        }
 
         /// <summary>
         /// <see cref="RSAEncrytpionPaddingMode.Oaep"/> mode with SHA256 hash algorithm.
         /// </summary>
-        public static RSAEncryptionPadding OaepSHA256 { get { return s_oaepSHA256; } }
+        public static RSAEncryptionPadding OaepSHA256
+        {
+            get { return s_oaepSHA256; }
+        }
 
         /// <summary>
         /// <see cref="RSAEncrytpionPaddingMode.Oaep"/> mode with SHA384 hash algorithm.
         /// </summary>
-        public static RSAEncryptionPadding OaepSHA384 { get { return s_oaepSHA384; } }
+        public static RSAEncryptionPadding OaepSHA384
+        {
+            get { return s_oaepSHA384; }
+        }
 
         /// <summary>
         /// <see cref="RSAEncrytpionPaddingMode.Oaep"/> mode with SHA512 hash algorithm.
         /// </summary>
-        public static RSAEncryptionPadding OaepSHA512 { get { return s_oaepSHA512; } }
+        public static RSAEncryptionPadding OaepSHA512
+        {
+            get { return s_oaepSHA512; }
+        }
 
         private RSAEncryptionPaddingMode _mode;
         private HashAlgorithmName _oaepHashAlgorithm;
 
-        private RSAEncryptionPadding(RSAEncryptionPaddingMode mode, HashAlgorithmName oaepHashAlgorithm)
+        private RSAEncryptionPadding(
+            RSAEncryptionPaddingMode mode,
+            HashAlgorithmName oaepHashAlgorithm
+        )
         {
             _mode = mode;
             _oaepHashAlgorithm = oaepHashAlgorithm;
         }
 
         /// <summary>
-        /// Creates a new instance instance representing <see cref="RSAEncryptionPaddingMode.Oaep"/> 
+        /// Creates a new instance instance representing <see cref="RSAEncryptionPaddingMode.Oaep"/>
         /// with the given hash algorithm.
         /// </summary>
         public static RSAEncryptionPadding CreateOaep(HashAlgorithmName hashAlgorithm)
         {
             if (String.IsNullOrEmpty(hashAlgorithm.Name))
             {
-                throw new ArgumentException(Environment.GetResourceString("Cryptography_HashAlgorithmNameNullOrEmpty"), "hashAlgorithm");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Cryptography_HashAlgorithmNameNullOrEmpty"),
+                    "hashAlgorithm"
+                );
             }
 
             return new RSAEncryptionPadding(RSAEncryptionPaddingMode.Oaep, hashAlgorithm);

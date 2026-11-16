@@ -7,7 +7,7 @@ namespace System.Reflection.Metadata.ApplyUpdate.Test
 {
     public class AsyncMethodChange
     {
-        public AsyncMethodChange () {}
+        public AsyncMethodChange() { }
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public static async Task<string> TestTaskMethod()

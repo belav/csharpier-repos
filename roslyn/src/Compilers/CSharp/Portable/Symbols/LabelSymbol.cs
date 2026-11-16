@@ -20,10 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsExtern
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -31,10 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsSealed
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -42,10 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -53,10 +44,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsOverride
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -64,10 +52,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsVirtual
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -75,10 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool IsStatic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -95,10 +77,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return Accessibility.NotApplicable;
-            }
+            get { return Accessibility.NotApplicable; }
         }
 
         /// <summary>
@@ -108,10 +87,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                throw new NotSupportedException();
-            }
+            get { throw new NotSupportedException(); }
         }
 
         internal virtual SyntaxNodeOrToken IdentifierNodeOrToken
@@ -119,7 +95,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return default(SyntaxNodeOrToken); }
         }
 
-        internal override TResult Accept<TArgument, TResult>(CSharpSymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        internal override TResult Accept<TArgument, TResult>(
+            CSharpSymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitLabel(this, argument);
         }
@@ -140,10 +119,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public virtual MethodSymbol ContainingMethod
         {
-            get
-            {
-                throw new NotSupportedException();
-            }
+            get { throw new NotSupportedException(); }
         }
 
         /// <summary>
@@ -152,10 +128,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                throw new NotSupportedException();
-            }
+            get { throw new NotSupportedException(); }
         }
 
         /// <summary>
@@ -163,10 +136,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override SymbolKind Kind
         {
-            get
-            {
-                return SymbolKind.Label;
-            }
+            get { return SymbolKind.Label; }
         }
 
         protected sealed override ISymbol CreateISymbol()

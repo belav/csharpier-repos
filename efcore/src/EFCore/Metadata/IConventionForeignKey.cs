@@ -74,7 +74,8 @@ public interface IConventionForeignKey : IReadOnlyForeignKey, IConventionAnnotat
     IReadOnlyList<IConventionProperty> SetProperties(
         IReadOnlyList<IConventionProperty> properties,
         IConventionKey principalKey,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyForeignKey.Properties" />.
@@ -163,7 +164,10 @@ public interface IConventionForeignKey : IReadOnlyForeignKey, IConventionAnnotat
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured behavior.</returns>
-    DeleteBehavior? SetDeleteBehavior(DeleteBehavior? deleteBehavior, bool fromDataAnnotation = false);
+    DeleteBehavior? SetDeleteBehavior(
+        DeleteBehavior? deleteBehavior,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyForeignKey.DeleteBehavior" />.
@@ -191,7 +195,10 @@ public interface IConventionForeignKey : IReadOnlyForeignKey, IConventionAnnotat
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The newly created navigation property.</returns>
-    IConventionNavigation? SetDependentToPrincipal(MemberInfo? property, bool fromDataAnnotation = false);
+    IConventionNavigation? SetDependentToPrincipal(
+        MemberInfo? property,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyForeignKey.DependentToPrincipal" />.
@@ -219,7 +226,10 @@ public interface IConventionForeignKey : IReadOnlyForeignKey, IConventionAnnotat
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The newly created navigation property.</returns>
-    IConventionNavigation? SetPrincipalToDependent(MemberInfo? property, bool fromDataAnnotation = false);
+    IConventionNavigation? SetPrincipalToDependent(
+        MemberInfo? property,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyForeignKey.PrincipalToDependent" />.
@@ -231,16 +241,18 @@ public interface IConventionForeignKey : IReadOnlyForeignKey, IConventionAnnotat
     ///     Gets all skip navigations using this foreign key.
     /// </summary>
     /// <returns>The skip navigations using this foreign key.</returns>
-    new IEnumerable<IConventionSkipNavigation> GetReferencingSkipNavigations()
-        => ((IReadOnlyForeignKey)this).GetReferencingSkipNavigations().Cast<IConventionSkipNavigation>();
+    new IEnumerable<IConventionSkipNavigation> GetReferencingSkipNavigations() =>
+        ((IReadOnlyForeignKey)this)
+            .GetReferencingSkipNavigations()
+            .Cast<IConventionSkipNavigation>();
 
     /// <summary>
     ///     Gets the entity type related to the given one.
     /// </summary>
     /// <param name="entityType">One of the entity types related by the foreign key.</param>
     /// <returns>The entity type related to the given one.</returns>
-    new IConventionEntityType GetRelatedEntityType(IReadOnlyEntityType entityType)
-        => (IConventionEntityType)((IReadOnlyForeignKey)this).GetRelatedEntityType(entityType);
+    new IConventionEntityType GetRelatedEntityType(IReadOnlyEntityType entityType) =>
+        (IConventionEntityType)((IReadOnlyForeignKey)this).GetRelatedEntityType(entityType);
 
     /// <summary>
     ///     Returns a navigation associated with this foreign key.
@@ -251,6 +263,6 @@ public interface IConventionForeignKey : IReadOnlyForeignKey, IConventionAnnotat
     /// <returns>
     ///     A navigation associated with this foreign key or <see langword="null" />.
     /// </returns>
-    new IConventionNavigation? GetNavigation(bool pointsToPrincipal)
-        => pointsToPrincipal ? DependentToPrincipal : PrincipalToDependent;
+    new IConventionNavigation? GetNavigation(bool pointsToPrincipal) =>
+        pointsToPrincipal ? DependentToPrincipal : PrincipalToDependent;
 }

@@ -13,6 +13,7 @@ namespace System.IdentityModel.Claims
     {
         [DataMember(Name = "Issuer")]
         ClaimSet issuer;
+
         [DataMember(Name = "Claims")]
         IList<Claim> claims;
 
@@ -36,7 +37,7 @@ namespace System.IdentityModel.Claims
             Initialize(issuer, claims);
         }
 
-        public override Claim this[int index] 
+        public override Claim this[int index]
         {
             get { return this.claims[index]; }
         }
@@ -74,9 +75,11 @@ namespace System.IdentityModel.Claims
             for (int i = 0; i < this.claims.Count; ++i)
             {
                 Claim claim = this.claims[i];
-                if ((claim != null) &&
-                    (anyClaimType || claimType == claim.ClaimType) &&
-                    (anyRight || right == claim.Right))
+                if (
+                    (claim != null)
+                    && (anyClaimType || claimType == claim.ClaimType)
+                    && (anyRight || right == claim.Right)
+                )
                 {
                     yield return claim;
                 }

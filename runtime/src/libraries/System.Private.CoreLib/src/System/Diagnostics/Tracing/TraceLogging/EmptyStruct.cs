@@ -6,7 +6,5 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Empty struct indicating no payload data.
     /// </summary>
-    internal readonly struct EmptyStruct
-    {
-    }
+    internal readonly struct EmptyStruct { }
 }

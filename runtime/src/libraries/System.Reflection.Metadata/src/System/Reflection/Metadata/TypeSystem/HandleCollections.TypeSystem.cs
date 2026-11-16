@@ -25,10 +25,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _count;
-            }
+            get { return _count; }
         }
 
         public GenericParameterHandle this[int index]
@@ -81,7 +78,9 @@ namespace System.Reflection.Metadata
                 get
                 {
                     // PERF: keep this code small to enable inlining.
-                    return GenericParameterHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return GenericParameterHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -111,16 +110,15 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
     /// <summary>
     /// Represents constraints of a generic type parameter.
     /// </summary>
-    public readonly struct GenericParameterConstraintHandleCollection : IReadOnlyList<GenericParameterConstraintHandle>
+    public readonly struct GenericParameterConstraintHandleCollection
+        : IReadOnlyList<GenericParameterConstraintHandle>
     {
         private readonly int _firstRowId;
         private readonly ushort _count;
@@ -133,10 +131,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _count;
-            }
+            get { return _count; }
         }
 
         public GenericParameterConstraintHandle this[int index]
@@ -189,7 +184,9 @@ namespace System.Reflection.Metadata
                 get
                 {
                     // PERF: keep this code small to enable inlining.
-                    return GenericParameterConstraintHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return GenericParameterConstraintHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -219,13 +216,12 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
-    public readonly struct CustomAttributeHandleCollection : IReadOnlyCollection<CustomAttributeHandle>
+    public readonly struct CustomAttributeHandleCollection
+        : IReadOnlyCollection<CustomAttributeHandle>
     {
         private readonly MetadataReader _reader;
 
@@ -250,10 +246,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -302,7 +295,9 @@ namespace System.Reflection.Metadata
                     }
                     else
                     {
-                        return CustomAttributeHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                        return CustomAttributeHandle.FromRowId(
+                            (int)(_currentRowId & TokenTypeIds.RIDMask)
+                        );
                     }
                 }
             }
@@ -310,7 +305,10 @@ namespace System.Reflection.Metadata
             private CustomAttributeHandle GetCurrentCustomAttributeIndirect()
             {
                 return CustomAttributeHandle.FromRowId(
-                    _reader.CustomAttributeTable.PtrTable![(_currentRowId & (int)TokenTypeIds.RIDMask) - 1]);
+                    _reader.CustomAttributeTable.PtrTable![
+                        (_currentRowId & (int)TokenTypeIds.RIDMask) - 1
+                    ]
+                );
             }
 
             public bool MoveNext()
@@ -339,13 +337,12 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
-    public readonly struct DeclarativeSecurityAttributeHandleCollection : IReadOnlyCollection<DeclarativeSecurityAttributeHandle>
+    public readonly struct DeclarativeSecurityAttributeHandleCollection
+        : IReadOnlyCollection<DeclarativeSecurityAttributeHandle>
     {
         private readonly MetadataReader _reader;
 
@@ -360,7 +357,10 @@ namespace System.Reflection.Metadata
             _lastRowId = reader.DeclSecurityTable.NumberOfRows;
         }
 
-        internal DeclarativeSecurityAttributeHandleCollection(MetadataReader reader, EntityHandle handle)
+        internal DeclarativeSecurityAttributeHandleCollection(
+            MetadataReader reader,
+            EntityHandle handle
+        )
         {
             Debug.Assert(reader != null);
             Debug.Assert(!handle.IsNil);
@@ -371,10 +371,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -416,7 +413,9 @@ namespace System.Reflection.Metadata
                 get
                 {
                     // PERF: keep this code small to enable inlining.
-                    return DeclarativeSecurityAttributeHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return DeclarativeSecurityAttributeHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -446,13 +445,12 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
-    public readonly struct MethodDefinitionHandleCollection : IReadOnlyCollection<MethodDefinitionHandle>
+    public readonly struct MethodDefinitionHandleCollection
+        : IReadOnlyCollection<MethodDefinitionHandle>
     {
         private readonly MetadataReader _reader;
 
@@ -467,7 +465,10 @@ namespace System.Reflection.Metadata
             _lastRowId = reader.MethodDefTable.NumberOfRows;
         }
 
-        internal MethodDefinitionHandleCollection(MetadataReader reader, TypeDefinitionHandle containingType)
+        internal MethodDefinitionHandleCollection(
+            MetadataReader reader,
+            TypeDefinitionHandle containingType
+        )
         {
             Debug.Assert(reader != null);
             Debug.Assert(!containingType.IsNil);
@@ -478,10 +479,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -530,14 +528,18 @@ namespace System.Reflection.Metadata
                     }
                     else
                     {
-                        return MethodDefinitionHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                        return MethodDefinitionHandle.FromRowId(
+                            (int)(_currentRowId & TokenTypeIds.RIDMask)
+                        );
                     }
                 }
             }
 
             private MethodDefinitionHandle GetCurrentMethodIndirect()
             {
-                return _reader.MethodPtrTable.GetMethodFor(_currentRowId & (int)TokenTypeIds.RIDMask);
+                return _reader.MethodPtrTable.GetMethodFor(
+                    _currentRowId & (int)TokenTypeIds.RIDMask
+                );
             }
 
             public bool MoveNext()
@@ -566,13 +568,12 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
-    public readonly struct FieldDefinitionHandleCollection : IReadOnlyCollection<FieldDefinitionHandle>
+    public readonly struct FieldDefinitionHandleCollection
+        : IReadOnlyCollection<FieldDefinitionHandle>
     {
         private readonly MetadataReader _reader;
 
@@ -587,7 +588,10 @@ namespace System.Reflection.Metadata
             _lastRowId = reader.FieldTable.NumberOfRows;
         }
 
-        internal FieldDefinitionHandleCollection(MetadataReader reader, TypeDefinitionHandle containingType)
+        internal FieldDefinitionHandleCollection(
+            MetadataReader reader,
+            TypeDefinitionHandle containingType
+        )
         {
             Debug.Assert(reader != null);
             Debug.Assert(!containingType.IsNil);
@@ -598,10 +602,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -650,7 +651,9 @@ namespace System.Reflection.Metadata
                     }
                     else
                     {
-                        return FieldDefinitionHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                        return FieldDefinitionHandle.FromRowId(
+                            (int)(_currentRowId & TokenTypeIds.RIDMask)
+                        );
                     }
                 }
             }
@@ -686,13 +689,12 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
-    public readonly struct PropertyDefinitionHandleCollection : IReadOnlyCollection<PropertyDefinitionHandle>
+    public readonly struct PropertyDefinitionHandleCollection
+        : IReadOnlyCollection<PropertyDefinitionHandle>
     {
         private readonly MetadataReader _reader;
 
@@ -707,7 +709,10 @@ namespace System.Reflection.Metadata
             _lastRowId = reader.PropertyTable.NumberOfRows;
         }
 
-        internal PropertyDefinitionHandleCollection(MetadataReader reader, TypeDefinitionHandle containingType)
+        internal PropertyDefinitionHandleCollection(
+            MetadataReader reader,
+            TypeDefinitionHandle containingType
+        )
         {
             Debug.Assert(reader != null);
             Debug.Assert(!containingType.IsNil);
@@ -718,10 +723,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -770,14 +772,18 @@ namespace System.Reflection.Metadata
                     }
                     else
                     {
-                        return PropertyDefinitionHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                        return PropertyDefinitionHandle.FromRowId(
+                            (int)(_currentRowId & TokenTypeIds.RIDMask)
+                        );
                     }
                 }
             }
 
             private PropertyDefinitionHandle GetCurrentPropertyIndirect()
             {
-                return _reader.PropertyPtrTable.GetPropertyFor(_currentRowId & (int)TokenTypeIds.RIDMask);
+                return _reader.PropertyPtrTable.GetPropertyFor(
+                    _currentRowId & (int)TokenTypeIds.RIDMask
+                );
             }
 
             public bool MoveNext()
@@ -806,13 +812,12 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
-    public readonly struct EventDefinitionHandleCollection : IReadOnlyCollection<EventDefinitionHandle>
+    public readonly struct EventDefinitionHandleCollection
+        : IReadOnlyCollection<EventDefinitionHandle>
     {
         private readonly MetadataReader _reader;
 
@@ -827,7 +832,10 @@ namespace System.Reflection.Metadata
             _lastRowId = reader.EventTable.NumberOfRows;
         }
 
-        internal EventDefinitionHandleCollection(MetadataReader reader, TypeDefinitionHandle containingType)
+        internal EventDefinitionHandleCollection(
+            MetadataReader reader,
+            TypeDefinitionHandle containingType
+        )
         {
             Debug.Assert(reader != null);
             Debug.Assert(!containingType.IsNil);
@@ -838,10 +846,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -890,7 +895,9 @@ namespace System.Reflection.Metadata
                     }
                     else
                     {
-                        return EventDefinitionHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                        return EventDefinitionHandle.FromRowId(
+                            (int)(_currentRowId & TokenTypeIds.RIDMask)
+                        );
                     }
                 }
             }
@@ -926,18 +933,20 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
-    public readonly struct MethodImplementationHandleCollection : IReadOnlyCollection<MethodImplementationHandle>
+    public readonly struct MethodImplementationHandleCollection
+        : IReadOnlyCollection<MethodImplementationHandle>
     {
         private readonly int _firstRowId;
         private readonly int _lastRowId;
 
-        internal MethodImplementationHandleCollection(MetadataReader reader, TypeDefinitionHandle containingType)
+        internal MethodImplementationHandleCollection(
+            MetadataReader reader,
+            TypeDefinitionHandle containingType
+        )
         {
             Debug.Assert(reader != null);
 
@@ -948,16 +957,17 @@ namespace System.Reflection.Metadata
             }
             else
             {
-                reader.MethodImplTable.GetMethodImplRange(containingType, out _firstRowId, out _lastRowId);
+                reader.MethodImplTable.GetMethodImplRange(
+                    containingType,
+                    out _firstRowId,
+                    out _lastRowId
+                );
             }
         }
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -996,7 +1006,9 @@ namespace System.Reflection.Metadata
             {
                 get
                 {
-                    return MethodImplementationHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return MethodImplementationHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -1026,9 +1038,7 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
@@ -1042,7 +1052,10 @@ namespace System.Reflection.Metadata
         private readonly int _firstRowId;
         private readonly int _lastRowId;
 
-        internal ParameterHandleCollection(MetadataReader reader, MethodDefinitionHandle containingMethod)
+        internal ParameterHandleCollection(
+            MetadataReader reader,
+            MethodDefinitionHandle containingMethod
+        )
         {
             Debug.Assert(reader != null);
             Debug.Assert(!containingMethod.IsNil);
@@ -1053,10 +1066,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -1105,7 +1115,9 @@ namespace System.Reflection.Metadata
                     }
                     else
                     {
-                        return ParameterHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                        return ParameterHandle.FromRowId(
+                            (int)(_currentRowId & TokenTypeIds.RIDMask)
+                        );
                     }
                 }
             }
@@ -1141,34 +1153,37 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
-    public readonly struct InterfaceImplementationHandleCollection : IReadOnlyCollection<InterfaceImplementationHandle>
+    public readonly struct InterfaceImplementationHandleCollection
+        : IReadOnlyCollection<InterfaceImplementationHandle>
     {
         private readonly MetadataReader _reader;
 
         private readonly int _firstRowId;
         private readonly int _lastRowId;
 
-        internal InterfaceImplementationHandleCollection(MetadataReader reader, TypeDefinitionHandle implementingType)
+        internal InterfaceImplementationHandleCollection(
+            MetadataReader reader,
+            TypeDefinitionHandle implementingType
+        )
         {
             Debug.Assert(reader != null);
             Debug.Assert(!implementingType.IsNil);
             _reader = reader;
 
-            reader.InterfaceImplTable.GetInterfaceImplRange(implementingType, out _firstRowId, out _lastRowId);
+            reader.InterfaceImplTable.GetInterfaceImplRange(
+                implementingType,
+                out _firstRowId,
+                out _lastRowId
+            );
         }
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -1209,7 +1224,9 @@ namespace System.Reflection.Metadata
             {
                 get
                 {
-                    return InterfaceImplementationHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return InterfaceImplementationHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -1239,16 +1256,15 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
     /// <summary>
     /// Represents a collection of <see cref="TypeDefinitionHandle"/>.
     /// </summary>
-    public readonly struct TypeDefinitionHandleCollection : IReadOnlyCollection<TypeDefinitionHandle>
+    public readonly struct TypeDefinitionHandleCollection
+        : IReadOnlyCollection<TypeDefinitionHandle>
     {
         private readonly int _lastRowId;
 
@@ -1299,7 +1315,9 @@ namespace System.Reflection.Metadata
             {
                 get
                 {
-                    return TypeDefinitionHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return TypeDefinitionHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -1329,9 +1347,7 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
@@ -1389,7 +1405,9 @@ namespace System.Reflection.Metadata
             {
                 get
                 {
-                    return TypeReferenceHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return TypeReferenceHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -1419,9 +1437,7 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
@@ -1479,7 +1495,9 @@ namespace System.Reflection.Metadata
             {
                 get
                 {
-                    return ExportedTypeHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return ExportedTypeHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -1509,16 +1527,15 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
     /// <summary>
     /// Represents a collection of <see cref="MemberReferenceHandle"/>.
     /// </summary>
-    public readonly struct MemberReferenceHandleCollection : IReadOnlyCollection<MemberReferenceHandle>
+    public readonly struct MemberReferenceHandleCollection
+        : IReadOnlyCollection<MemberReferenceHandle>
     {
         private readonly int _lastRowId;
 
@@ -1569,7 +1586,9 @@ namespace System.Reflection.Metadata
             {
                 get
                 {
-                    return MemberReferenceHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return MemberReferenceHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -1599,9 +1618,7 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
@@ -1613,11 +1630,24 @@ namespace System.Reflection.Metadata
         private readonly int _setterRowId;
         private readonly ImmutableArray<MethodDefinitionHandle> _others;
 
-        public MethodDefinitionHandle Getter { get { return MethodDefinitionHandle.FromRowId(_getterRowId); } }
-        public MethodDefinitionHandle Setter { get { return MethodDefinitionHandle.FromRowId(_setterRowId); } }
-        public ImmutableArray<MethodDefinitionHandle> Others { get { return _others; } }
+        public MethodDefinitionHandle Getter
+        {
+            get { return MethodDefinitionHandle.FromRowId(_getterRowId); }
+        }
+        public MethodDefinitionHandle Setter
+        {
+            get { return MethodDefinitionHandle.FromRowId(_setterRowId); }
+        }
+        public ImmutableArray<MethodDefinitionHandle> Others
+        {
+            get { return _others; }
+        }
 
-        internal PropertyAccessors(int getterRowId, int setterRowId, ImmutableArray<MethodDefinitionHandle> others)
+        internal PropertyAccessors(
+            int getterRowId,
+            int setterRowId,
+            ImmutableArray<MethodDefinitionHandle> others
+        )
         {
             _getterRowId = getterRowId;
             _setterRowId = setterRowId;
@@ -1634,12 +1664,29 @@ namespace System.Reflection.Metadata
         private readonly int _raiserRowId;
         private readonly ImmutableArray<MethodDefinitionHandle> _others;
 
-        public MethodDefinitionHandle Adder { get { return MethodDefinitionHandle.FromRowId(_adderRowId); } }
-        public MethodDefinitionHandle Remover { get { return MethodDefinitionHandle.FromRowId(_removerRowId); } }
-        public MethodDefinitionHandle Raiser { get { return MethodDefinitionHandle.FromRowId(_raiserRowId); } }
-        public ImmutableArray<MethodDefinitionHandle> Others { get { return _others; } }
+        public MethodDefinitionHandle Adder
+        {
+            get { return MethodDefinitionHandle.FromRowId(_adderRowId); }
+        }
+        public MethodDefinitionHandle Remover
+        {
+            get { return MethodDefinitionHandle.FromRowId(_removerRowId); }
+        }
+        public MethodDefinitionHandle Raiser
+        {
+            get { return MethodDefinitionHandle.FromRowId(_raiserRowId); }
+        }
+        public ImmutableArray<MethodDefinitionHandle> Others
+        {
+            get { return _others; }
+        }
 
-        internal EventAccessors(int adderRowId, int removerRowId, int raiserRowId, ImmutableArray<MethodDefinitionHandle> others)
+        internal EventAccessors(
+            int adderRowId,
+            int removerRowId,
+            int raiserRowId,
+            ImmutableArray<MethodDefinitionHandle> others
+        )
         {
             _adderRowId = adderRowId;
             _removerRowId = removerRowId;
@@ -1651,7 +1698,8 @@ namespace System.Reflection.Metadata
     /// <summary>
     /// Collection of assembly references.
     /// </summary>
-    public readonly struct AssemblyReferenceHandleCollection : IReadOnlyCollection<AssemblyReferenceHandle>
+    public readonly struct AssemblyReferenceHandleCollection
+        : IReadOnlyCollection<AssemblyReferenceHandle>
     {
         private readonly MetadataReader _reader;
 
@@ -1665,7 +1713,8 @@ namespace System.Reflection.Metadata
         {
             get
             {
-                return _reader.AssemblyRefTable.NumberOfNonVirtualRows + _reader.AssemblyRefTable.NumberOfVirtualRows;
+                return _reader.AssemblyRefTable.NumberOfNonVirtualRows
+                    + _reader.AssemblyRefTable.NumberOfVirtualRows;
             }
         }
 
@@ -1715,11 +1764,15 @@ namespace System.Reflection.Metadata
                             return default(AssemblyReferenceHandle);
                         }
 
-                        return AssemblyReferenceHandle.FromVirtualIndex((AssemblyReferenceHandle.VirtualIndex)((uint)_virtualRowId));
+                        return AssemblyReferenceHandle.FromVirtualIndex(
+                            (AssemblyReferenceHandle.VirtualIndex)((uint)_virtualRowId)
+                        );
                     }
                     else
                     {
-                        return AssemblyReferenceHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                        return AssemblyReferenceHandle.FromRowId(
+                            (int)(_currentRowId & TokenTypeIds.RIDMask)
+                        );
                     }
                 }
             }
@@ -1753,16 +1806,15 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
     /// <summary>
     /// Represents a collection of <see cref="ManifestResourceHandle"/>.
     /// </summary>
-    public readonly struct ManifestResourceHandleCollection : IReadOnlyCollection<ManifestResourceHandle>
+    public readonly struct ManifestResourceHandleCollection
+        : IReadOnlyCollection<ManifestResourceHandle>
     {
         private readonly int _lastRowId;
 
@@ -1813,7 +1865,9 @@ namespace System.Reflection.Metadata
             {
                 get
                 {
-                    return ManifestResourceHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return ManifestResourceHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -1843,9 +1897,7 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
@@ -1903,7 +1955,9 @@ namespace System.Reflection.Metadata
             {
                 get
                 {
-                    return AssemblyFileHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return AssemblyFileHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -1933,9 +1987,7 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 }

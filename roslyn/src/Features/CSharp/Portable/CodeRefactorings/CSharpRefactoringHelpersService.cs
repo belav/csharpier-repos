@@ -20,17 +20,25 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
 {
     [ExportLanguageService(typeof(IRefactoringHelpersService), LanguageNames.CSharp), Shared]
-    internal class CSharpRefactoringHelpersService : AbstractRefactoringHelpersService<ExpressionSyntax, ArgumentSyntax, ExpressionStatementSyntax>
+    internal class CSharpRefactoringHelpersService
+        : AbstractRefactoringHelpersService<
+            ExpressionSyntax,
+            ArgumentSyntax,
+            ExpressionStatementSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRefactoringHelpersService()
-        {
-        }
+        public CSharpRefactoringHelpersService() { }
 
         protected override IHeaderFacts HeaderFacts => CSharpHeaderFacts.Instance;
 
-        public override bool IsBetweenTypeMembers(SourceText sourceText, SyntaxNode root, int position, [NotNullWhen(true)] out SyntaxNode? typeDeclaration)
+        public override bool IsBetweenTypeMembers(
+            SourceText sourceText,
+            SyntaxNode root,
+            int position,
+            [NotNullWhen(true)] out SyntaxNode? typeDeclaration
+        )
         {
             var token = root.FindToken(position);
             var typeDecl = token.GetAncestor<TypeDeclarationSyntax>();
@@ -40,8 +48,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
                 return false;
 
             RoslynDebug.AssertNotNull(typeDeclaration);
-            if (position < typeDecl.OpenBraceToken.Span.End ||
-                position > typeDecl.CloseBraceToken.Span.Start)
+            if (
+                position < typeDecl.OpenBraceToken.Span.End
+                || position > typeDecl.CloseBraceToken.Span.Start
+            )
             {
                 return false;
             }
@@ -76,7 +86,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
             return false;
         }
 
-        protected override IEnumerable<SyntaxNode> ExtractNodesSimple(SyntaxNode? node, ISyntaxFactsService syntaxFacts)
+        protected override IEnumerable<SyntaxNode> ExtractNodesSimple(
+            SyntaxNode? node,
+            ISyntaxFactsService syntaxFacts
+        )
         {
             if (node == null)
             {
@@ -99,9 +112,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
             if (node is VariableDeclaratorSyntax declarator)
             {
                 var declaration = declarator.Parent;
-                if (declaration?.Parent is LocalDeclarationStatementSyntax localDeclarationStatement)
+                if (
+                    declaration?.Parent is LocalDeclarationStatementSyntax localDeclarationStatement
+                )
                 {
-                    var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(localDeclarationStatement);
+                    var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(
+                        localDeclarationStatement
+                    );
                     if (variables.Count == 1)
                     {
                         // -> `var a = b`;

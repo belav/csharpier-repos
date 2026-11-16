@@ -23,9 +23,14 @@ namespace System.Web.Helpers
             // initialize the dependency chain
 
             IAntiForgeryConfig config = new AntiForgeryConfigWrapper();
-            IAntiForgeryTokenSerializer serializer = new AntiForgeryTokenSerializer(MachineKey45CryptoSystem.Instance);
+            IAntiForgeryTokenSerializer serializer = new AntiForgeryTokenSerializer(
+                MachineKey45CryptoSystem.Instance
+            );
             ITokenStore tokenStore = new AntiForgeryTokenStore(config, serializer);
-            IClaimUidExtractor claimUidExtractor = new ClaimUidExtractor(config, ClaimsIdentityConverter.Default);
+            IClaimUidExtractor claimUidExtractor = new ClaimUidExtractor(
+                config,
+                ClaimsIdentityConverter.Default
+            );
             ITokenValidator tokenValidator = new TokenValidator(config, claimUidExtractor);
 
             return new AntiForgeryWorker(serializer, config, tokenStore, tokenValidator);
@@ -47,7 +52,9 @@ namespace System.Web.Helpers
                 throw new ArgumentException(WebPageResources.HttpContextUnavailable);
             }
 
-            TagBuilder retVal = _worker.GetFormInputElement(new HttpContextWrapper(HttpContext.Current));
+            TagBuilder retVal = _worker.GetFormInputElement(
+                new HttpContextWrapper(HttpContext.Current)
+            );
             return retVal.ToHtmlString(TagRenderMode.SelfClosing);
         }
 
@@ -72,35 +79,88 @@ namespace System.Web.Helpers
         /// is responsible for setting the response cookie and injecting the returned
         /// form token as appropriate.
         /// </remarks>
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "Method is intended for advanced audiences.")]
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "Method is intended for advanced audiences.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1021:AvoidOutParameters",
+            MessageId = "1#",
+            Justification = "Method is intended for advanced audiences."
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1021:AvoidOutParameters",
+            MessageId = "2#",
+            Justification = "Method is intended for advanced audiences."
+        )]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public static void GetTokens(string oldCookieToken, out string newCookieToken, out string formToken)
+        public static void GetTokens(
+            string oldCookieToken,
+            out string newCookieToken,
+            out string formToken
+        )
         {
             if (HttpContext.Current == null)
             {
                 throw new ArgumentException(WebPageResources.HttpContextUnavailable);
             }
 
-            _worker.GetTokens(new HttpContextWrapper(HttpContext.Current), oldCookieToken, out newCookieToken, out formToken);
+            _worker.GetTokens(
+                new HttpContextWrapper(HttpContext.Current),
+                oldCookieToken,
+                out newCookieToken,
+                out formToken
+            );
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "AdditionalDataProvider", Justification = "API name.")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "AntiForgeryConfig", Justification = "API name.")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "GetHtml", Justification = "API name.")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "httpCookies", Justification = "API name.")]
-        [Obsolete("This method is deprecated. Use the GetHtml() method instead. To specify a custom domain for the generated cookie, use the <httpCookies> configuration element. To specify custom data to be embedded within the token, use the static AntiForgeryConfig.AdditionalDataProvider property.", error: true)]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "AdditionalDataProvider",
+            Justification = "API name."
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "AntiForgeryConfig",
+            Justification = "API name."
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "GetHtml",
+            Justification = "API name."
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "httpCookies",
+            Justification = "API name."
+        )]
+        [Obsolete(
+            "This method is deprecated. Use the GetHtml() method instead. To specify a custom domain for the generated cookie, use the <httpCookies> configuration element. To specify custom data to be embedded within the token, use the static AntiForgeryConfig.AdditionalDataProvider property.",
+            error: true
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static HtmlString GetHtml(HttpContextBase httpContext, string salt, string domain, string path)
+        public static HtmlString GetHtml(
+            HttpContextBase httpContext,
+            string salt,
+            string domain,
+            string path
+        )
         {
             if (httpContext == null)
             {
                 throw new ArgumentNullException("httpContext");
             }
 
-            if (!String.IsNullOrEmpty(salt) || !String.IsNullOrEmpty(domain) || !String.IsNullOrEmpty(path))
+            if (
+                !String.IsNullOrEmpty(salt)
+                || !String.IsNullOrEmpty(domain)
+                || !String.IsNullOrEmpty(path)
+            )
             {
-                throw new NotSupportedException("This method is deprecated. Use the GetHtml() method instead. To specify a custom domain for the generated cookie, use the <httpCookies> configuration element. To specify custom data to be embedded within the token, use the static AntiForgeryConfig.AdditionalDataProvider property.");
+                throw new NotSupportedException(
+                    "This method is deprecated. Use the GetHtml() method instead. To specify a custom domain for the generated cookie, use the <httpCookies> configuration element. To specify custom data to be embedded within the token, use the static AntiForgeryConfig.AdditionalDataProvider property."
+                );
             }
 
             TagBuilder retVal = _worker.GetFormInputElement(httpContext);
@@ -154,7 +214,9 @@ namespace System.Web.Helpers
 
             if (!String.IsNullOrEmpty(salt))
             {
-                throw new NotSupportedException("This method is deprecated. Use the Validate() method instead.");
+                throw new NotSupportedException(
+                    "This method is deprecated. Use the Validate() method instead."
+                );
             }
 
             _worker.Validate(httpContext);

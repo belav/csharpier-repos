@@ -7,24 +7,27 @@ using System;
 using System.Collections;
 using System.Reflection;
 
-public class CustomDict {
-	ArrayList data;
+public class CustomDict
+{
+    ArrayList data;
 
-	public CustomDict() { 
-		foreach (object o in this)
-			Console.WriteLine (o);
-	}
+    public CustomDict()
+    {
+        foreach (object o in this)
+            Console.WriteLine(o);
+    }
 
-	public IEnumerator GetEnumerator() {
-		if (data != null)
-			yield return 1;
-	}
+    public IEnumerator GetEnumerator()
+    {
+        if (data != null)
+            yield return 1;
+    }
 }
 
 public class Tests
 {
-
-	public static void Main () {
-		new CustomDict ();
-	}
+    public static void Main()
+    {
+        new CustomDict();
+    }
 }

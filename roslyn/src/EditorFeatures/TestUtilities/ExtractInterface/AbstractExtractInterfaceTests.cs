@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             string expectedNamespaceName = null,
             string expectedTypeParameterSuffix = null,
             string expectedUpdatedOriginalDocumentCode = null,
-            string expectedInterfaceCode = null)
+            string expectedInterfaceCode = null
+        )
         {
             await TestExtractInterfaceCommandAsync(
                 markup,
@@ -36,17 +37,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
                 expectedNamespaceName,
                 expectedTypeParameterSuffix,
                 expectedUpdatedOriginalDocumentCode,
-                expectedInterfaceCode);
+                expectedInterfaceCode
+            );
         }
 
         public static async Task TestExtractInterfaceCodeActionCSharpAsync(
             string markup,
-            string expectedMarkup)
+            string expectedMarkup
+        )
         {
-            await TestExtractInterfaceCodeActionAsync(
-                markup,
-                LanguageNames.CSharp,
-                expectedMarkup);
+            await TestExtractInterfaceCodeActionAsync(markup, LanguageNames.CSharp, expectedMarkup);
         }
 
         public static async Task TestExtractInterfaceCommandVisualBasicAsync(
@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             string expectedTypeParameterSuffix = null,
             string expectedUpdatedOriginalDocumentCode = null,
             string expectedInterfaceCode = null,
-            string rootNamespace = null)
+            string rootNamespace = null
+        )
         {
             await TestExtractInterfaceCommandAsync(
                 markup,
@@ -70,17 +71,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
                 expectedTypeParameterSuffix,
                 expectedUpdatedOriginalDocumentCode,
                 expectedInterfaceCode,
-                new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, rootNamespace: rootNamespace));
+                new VisualBasicCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary,
+                    rootNamespace: rootNamespace
+                )
+            );
         }
 
         public static async Task TestExtractInterfaceCodeActionVisualBasicAsync(
             string markup,
-            string expectedMarkup)
+            string expectedMarkup
+        )
         {
             await TestExtractInterfaceCodeActionAsync(
                 markup,
                 LanguageNames.VisualBasic,
-                expectedMarkup);
+                expectedMarkup
+            );
         }
 
         private static async Task TestExtractInterfaceCommandAsync(
@@ -93,53 +100,89 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             string expectedTypeParameterSuffix = null,
             string expectedUpdatedOriginalDocumentCode = null,
             string expectedInterfaceCode = null,
-            CompilationOptions compilationOptions = null)
+            CompilationOptions compilationOptions = null
+        )
         {
-            using var testState = ExtractInterfaceTestState.Create(markup, languageName, compilationOptions,
+            using var testState = ExtractInterfaceTestState.Create(
+                markup,
+                languageName,
+                compilationOptions,
                 options: new OptionsCollection(languageName)
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.Never, NotificationOption2.Silent }
-                });
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.Never,
+                        NotificationOption2.Silent
+                    },
+                }
+            );
 
             var result = await testState.ExtractViaCommandAsync();
 
             if (expectedSuccess)
             {
                 Assert.True(result.Succeeded);
-                Assert.False(testState.Workspace.Documents.Select(d => d.Id).Contains(result.NavigationDocumentId));
+                Assert.False(
+                    testState
+                        .Workspace.Documents.Select(d => d.Id)
+                        .Contains(result.NavigationDocumentId)
+                );
                 Assert.NotNull(result.UpdatedSolution.GetDocument(result.NavigationDocumentId));
 
                 if (expectedMemberName != null)
                 {
-                    Assert.Equal(1, testState.TestExtractInterfaceOptionsService.AllExtractableMembers.Count());
-                    Assert.Equal(expectedMemberName, testState.TestExtractInterfaceOptionsService.AllExtractableMembers.Single().Name);
+                    Assert.Equal(
+                        1,
+                        testState.TestExtractInterfaceOptionsService.AllExtractableMembers.Count()
+                    );
+                    Assert.Equal(
+                        expectedMemberName,
+                        testState
+                            .TestExtractInterfaceOptionsService.AllExtractableMembers.Single()
+                            .Name
+                    );
                 }
 
                 if (expectedInterfaceName != null)
                 {
-                    Assert.Equal(expectedInterfaceName, testState.TestExtractInterfaceOptionsService.DefaultInterfaceName);
+                    Assert.Equal(
+                        expectedInterfaceName,
+                        testState.TestExtractInterfaceOptionsService.DefaultInterfaceName
+                    );
                 }
 
                 if (expectedNamespaceName != null)
                 {
-                    Assert.Equal(expectedNamespaceName, testState.TestExtractInterfaceOptionsService.DefaultNamespace);
+                    Assert.Equal(
+                        expectedNamespaceName,
+                        testState.TestExtractInterfaceOptionsService.DefaultNamespace
+                    );
                 }
 
                 if (expectedTypeParameterSuffix != null)
                 {
-                    Assert.Equal(expectedTypeParameterSuffix, testState.TestExtractInterfaceOptionsService.GeneratedNameTypeParameterSuffix);
+                    Assert.Equal(
+                        expectedTypeParameterSuffix,
+                        testState
+                            .TestExtractInterfaceOptionsService
+                            .GeneratedNameTypeParameterSuffix
+                    );
                 }
 
                 if (expectedUpdatedOriginalDocumentCode != null)
                 {
-                    var updatedOriginalDocument = result.UpdatedSolution.GetDocument(testState.ExtractFromDocument.Id);
+                    var updatedOriginalDocument = result.UpdatedSolution.GetDocument(
+                        testState.ExtractFromDocument.Id
+                    );
                     var updatedCode = (await updatedOriginalDocument.GetTextAsync()).ToString();
                     Assert.Equal(expectedUpdatedOriginalDocumentCode, updatedCode);
                 }
 
                 if (expectedInterfaceCode != null)
                 {
-                    var interfaceDocument = result.UpdatedSolution.GetDocument(result.NavigationDocumentId);
+                    var interfaceDocument = result.UpdatedSolution.GetDocument(
+                        result.NavigationDocumentId
+                    );
                     var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
                     Assert.Equal(expectedInterfaceCode, interfaceCode);
                 }
@@ -154,9 +197,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             string markup,
             string languageName,
             string expectedMarkup,
-            CompilationOptions compilationOptions = null)
+            CompilationOptions compilationOptions = null
+        )
         {
-            using var testState = ExtractInterfaceTestState.Create(markup, languageName, compilationOptions);
+            using var testState = ExtractInterfaceTestState.Create(
+                markup,
+                languageName,
+                compilationOptions
+            );
 
             var updatedSolution = await testState.ExtractViaCodeAction();
             var updatedDocument = updatedSolution.GetDocument(testState.ExtractFromDocument.Id);

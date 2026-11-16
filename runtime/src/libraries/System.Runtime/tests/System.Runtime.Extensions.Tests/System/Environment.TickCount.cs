@@ -23,7 +23,8 @@ namespace System.Tests
             };
             Assert.True(
                 SpinWait.SpinUntil(test, TimeSpan.FromSeconds(1)) || test(),
-                $"TickCount did not increase after one second. start: {start}, values tested: {string.Join(", ", times.ToArray())}.");
+                $"TickCount did not increase after one second. start: {start}, values tested: {string.Join(", ", times.ToArray())}."
+            );
         }
 
         [Fact]
@@ -39,7 +40,8 @@ namespace System.Tests
             };
             Assert.True(
                 SpinWait.SpinUntil(test, TimeSpan.FromSeconds(1)) || test(),
-                $"TickCount did not increase after one second. start: {start}, values tested: {string.Join(", ", times.ToArray())}.");
+                $"TickCount did not increase after one second. start: {start}, values tested: {string.Join(", ", times.ToArray())}."
+            );
         }
     }
 }

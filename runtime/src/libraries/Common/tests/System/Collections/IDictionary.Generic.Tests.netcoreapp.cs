@@ -10,14 +10,16 @@ namespace System.Collections.Tests
     /// Contains tests that ensure the correctness of any class that implements the generic
     /// IDictionary interface
     /// </summary>
-    public abstract partial class IDictionary_Generic_Tests<TKey, TValue> : ICollection_Generic_Tests<KeyValuePair<TKey, TValue>>
+    public abstract partial class IDictionary_Generic_Tests<TKey, TValue>
+        : ICollection_Generic_Tests<KeyValuePair<TKey, TValue>>
     {
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
         public void KeyValuePair_Deconstruct(int size)
         {
             IDictionary<TKey, TValue> dictionary = GenericIDictionaryFactory(size);
-            Assert.All(dictionary, (entry) => {
+            Assert.All(dictionary, (entry) =>
+            {
                 TKey key;
                 TValue value;
                 entry.Deconstruct(out key, out value);

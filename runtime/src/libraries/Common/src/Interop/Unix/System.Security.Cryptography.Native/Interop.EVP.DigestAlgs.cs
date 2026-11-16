@@ -129,10 +129,14 @@ internal static partial class Interop
         {
             switch (hashAlgorithmId)
             {
-                case HashAlgorithmNames.SHA1: return EvpSha1();
-                case HashAlgorithmNames.SHA256: return EvpSha256();
-                case HashAlgorithmNames.SHA384: return EvpSha384();
-                case HashAlgorithmNames.SHA512: return EvpSha512();
+                case HashAlgorithmNames.SHA1:
+                    return EvpSha1();
+                case HashAlgorithmNames.SHA256:
+                    return EvpSha256();
+                case HashAlgorithmNames.SHA384:
+                    return EvpSha384();
+                case HashAlgorithmNames.SHA512:
+                    return EvpSha512();
                 case HashAlgorithmNames.SHA3_256:
                     IntPtr sha3_256 = EvpSha3_256();
                     return sha3_256 != 0 ? sha3_256 : throw new PlatformNotSupportedException();
@@ -148,10 +152,14 @@ internal static partial class Interop
                 case HashAlgorithmNames.SHAKE256:
                     IntPtr shake256 = EvpShake256();
                     return shake256 != 0 ? shake256 : throw new PlatformNotSupportedException();
-                case nameof(HashAlgorithmName.MD5): return EvpMd5();
+                case nameof(HashAlgorithmName.MD5):
+                    return EvpMd5();
                 default:
-                    throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId));
-            };
+                    throw new CryptographicException(
+                        SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)
+                    );
+            }
+            ;
         }
 
         internal static bool HashAlgorithmSupported(string hashAlgorithmId)
@@ -175,7 +183,9 @@ internal static partial class Interop
                 case HashAlgorithmNames.SHAKE256:
                     return EvpShake256() != 0;
                 default:
-                    throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId));
+                    throw new CryptographicException(
+                        SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)
+                    );
             }
         }
     }

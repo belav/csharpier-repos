@@ -13,19 +13,18 @@ namespace System.ServiceModel.Discovery.Configuration
     {
         ConfigurationPropertyCollection properties;
 
-        [ConfigurationProperty(ConfigurationStrings.Scope, Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        [CallbackValidator(CallbackMethodName = "ScopeValidatorCallback", Type = typeof(ScopeElement))]
+        [ConfigurationProperty(
+            ConfigurationStrings.Scope,
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        [CallbackValidator(
+            CallbackMethodName = "ScopeValidatorCallback",
+            Type = typeof(ScopeElement)
+        )]
         public Uri Scope
         {
-            get
-            {
-                return (Uri)base[ConfigurationStrings.Scope];
-            }
-
-            set
-            {
-                base[ConfigurationStrings.Scope] = value;
-            }
+            get { return (Uri)base[ConfigurationStrings.Scope]; }
+            set { base[ConfigurationStrings.Scope] = value; }
         }
 
         protected override ConfigurationPropertyCollection Properties
@@ -34,16 +33,23 @@ namespace System.ServiceModel.Discovery.Configuration
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.Scope, 
-                        typeof(Uri), 
-                        null, 
-                        null, 
-                        new CallbackValidator(typeof(Uri), new ValidatorCallback(ScopeElement.ScopeValidatorCallback)), 
-                        System.Configuration.ConfigurationPropertyOptions.IsRequired | System.Configuration.ConfigurationPropertyOptions.IsKey));
+                            ConfigurationStrings.Scope,
+                            typeof(Uri),
+                            null,
+                            null,
+                            new CallbackValidator(
+                                typeof(Uri),
+                                new ValidatorCallback(ScopeElement.ScopeValidatorCallback)
+                            ),
+                            System.Configuration.ConfigurationPropertyOptions.IsRequired
+                                | System.Configuration.ConfigurationPropertyOptions.IsKey
+                        )
+                    );
 
                     this.properties = properties;
                 }
@@ -55,7 +61,9 @@ namespace System.ServiceModel.Discovery.Configuration
         {
             if ((scope != null) && !((Uri)scope).IsAbsoluteUri)
             {
-                throw FxTrace.Exception.AsError(new ArgumentException(SR2.DiscoveryConfigInvalidScopeUri(scope)));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentException(SR2.DiscoveryConfigInvalidScopeUri(scope))
+                );
             }
         }
     }

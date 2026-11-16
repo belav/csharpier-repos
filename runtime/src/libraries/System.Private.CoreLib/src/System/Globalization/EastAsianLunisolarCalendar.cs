@@ -11,10 +11,13 @@ namespace System.Globalization
         private const int nDaysPerMonth = 3;
 
         // # of days so far in the solar year
-        private static ReadOnlySpan<int> DaysToMonth365 => [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
-        private static ReadOnlySpan<int> DaysToMonth366 => [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335];
+        private static ReadOnlySpan<int> DaysToMonth365 =>
+            [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+        private static ReadOnlySpan<int> DaysToMonth366 =>
+            [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335];
 
-        public override CalendarAlgorithmType AlgorithmType => CalendarAlgorithmType.LunisolarCalendar;
+        public override CalendarAlgorithmType AlgorithmType =>
+            CalendarAlgorithmType.LunisolarCalendar;
 
         /// <summary>
         /// Return the year number in the 60-year cycle.
@@ -38,7 +41,8 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(
                     nameof(sexagenaryYear),
                     sexagenaryYear,
-                    SR.Format(SR.ArgumentOutOfRange_Range, 1, 60));
+                    SR.Format(SR.ArgumentOutOfRange_Range, 1, 60)
+                );
             }
 
             return ((sexagenaryYear - 1) % 10) + 1;
@@ -55,7 +59,8 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(
                     nameof(sexagenaryYear),
                     sexagenaryYear,
-                    SR.Format(SR.ArgumentOutOfRange_Range, 1, 60));
+                    SR.Format(SR.ArgumentOutOfRange_Range, 1, 60)
+                );
             }
 
             return ((sexagenaryYear - 1) % 12) + 1;
@@ -101,7 +106,11 @@ namespace System.Globalization
                 }
             }
 
-            throw new ArgumentOutOfRangeException(nameof(era), era, SR.ArgumentOutOfRange_InvalidEraValue);
+            throw new ArgumentOutOfRangeException(
+                nameof(era),
+                era,
+                SR.ArgumentOutOfRange_InvalidEraValue
+            );
         }
 
         internal int MaxEraCalendarYear(int era)
@@ -131,22 +140,29 @@ namespace System.Globalization
                 }
             }
 
-            throw new ArgumentOutOfRangeException(nameof(era), era, SR.ArgumentOutOfRange_InvalidEraValue);
+            throw new ArgumentOutOfRangeException(
+                nameof(era),
+                era,
+                SR.ArgumentOutOfRange_InvalidEraValue
+            );
         }
 
-        internal EastAsianLunisolarCalendar()
-        {
-        }
+        internal EastAsianLunisolarCalendar() { }
 
         internal void CheckTicksRange(long ticks)
         {
             if (ticks < MinSupportedDateTime.Ticks || ticks > MaxSupportedDateTime.Ticks)
             {
                 throw new ArgumentOutOfRangeException(
-                                "time",
-                                ticks,
-                                SR.Format(CultureInfo.InvariantCulture, SR.ArgumentOutOfRange_CalendarRange,
-                                MinSupportedDateTime, MaxSupportedDateTime));
+                    "time",
+                    ticks,
+                    SR.Format(
+                        CultureInfo.InvariantCulture,
+                        SR.ArgumentOutOfRange_CalendarRange,
+                        MinSupportedDateTime,
+                        MaxSupportedDateTime
+                    )
+                );
             }
         }
 
@@ -159,7 +175,11 @@ namespace System.Globalization
 
             if (era < GetEra(MinDate) || era > GetEra(MaxDate))
             {
-                throw new ArgumentOutOfRangeException(nameof(era), era, SR.ArgumentOutOfRange_InvalidEraValue);
+                throw new ArgumentOutOfRangeException(
+                    nameof(era),
+                    era,
+                    SR.ArgumentOutOfRange_InvalidEraValue
+                );
             }
         }
 
@@ -173,7 +193,12 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(
                     nameof(year),
                     year,
-                    SR.Format(SR.ArgumentOutOfRange_Range, MinEraCalendarYear(era), MaxEraCalendarYear(era)));
+                    SR.Format(
+                        SR.ArgumentOutOfRange_Range,
+                        MinEraCalendarYear(era),
+                        MaxEraCalendarYear(era)
+                    )
+                );
             }
             return year;
         }
@@ -241,7 +266,16 @@ namespace System.Globalization
         /// Returns the date and time converted to a DateTime value.
         /// Throws an exception if the n-tuple is invalid.
         /// </summary>
-        public override DateTime ToDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond, int era)
+        public override DateTime ToDateTime(
+            int year,
+            int month,
+            int day,
+            int hour,
+            int minute,
+            int second,
+            int millisecond,
+            int era
+        )
         {
             year = CheckYearMonthRange(year, month, era);
             int daysInMonth = InternalGetDaysInMonth(year, month);
@@ -250,7 +284,8 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(
                     nameof(day),
                     day,
-                    SR.Format(SR.ArgumentOutOfRange_Day, daysInMonth, month));
+                    SR.Format(SR.ArgumentOutOfRange_Day, daysInMonth, month)
+                );
             }
 
             if (!LunarToGregorian(year, month, day, out int gy, out int gm, out int gd))
@@ -265,14 +300,23 @@ namespace System.Globalization
         /// Calculates lunar calendar info for the given gregorian year, month, date.
         /// The input date should be validated before calling this method.
         /// </summary>
-        private void GregorianToLunar(int solarYear, int solarMonth, int solarDate, out int lunarYear, out int lunarMonth, out int lunarDate)
+        private void GregorianToLunar(
+            int solarYear,
+            int solarMonth,
+            int solarDate,
+            out int lunarYear,
+            out int lunarMonth,
+            out int lunarDate
+        )
         {
             bool isLeapYear = GregorianIsLeapYear(solarYear);
             int jan1Month;
             int jan1Date;
 
             // Calculate the day number in the solar year.
-            int solarDay = isLeapYear ? DaysToMonth366[solarMonth - 1] : DaysToMonth365[solarMonth - 1];
+            int solarDay = isLeapYear
+                ? DaysToMonth366[solarMonth - 1]
+                : DaysToMonth365[solarMonth - 1];
             solarDay += solarDate;
 
             // Calculate the day number in the lunar year.
@@ -292,8 +336,7 @@ namespace System.Globalization
 
                 // check if this solar date is actually part of the previous
                 // lunar year
-                if ((solarMonth < jan1Month) ||
-                    (solarMonth == jan1Month && solarDate < jan1Date))
+                if ((solarMonth < jan1Month) || (solarMonth == jan1Month && solarDate < jan1Date))
                 {
                     // the corresponding lunar day is actually part of the previous
                     // lunar year
@@ -337,7 +380,14 @@ namespace System.Globalization
         /// <remarks>
         /// Highly inefficient, but it works based on the forward conversion
         /// </remarks>
-        private bool LunarToGregorian(int lunarYear, int lunarMonth, int lunarDate, out int solarYear, out int solarMonth, out int solarDay)
+        private bool LunarToGregorian(
+            int lunarYear,
+            int lunarMonth,
+            int lunarDate,
+            out int solarYear,
+            out int solarMonth,
+            out int solarDay
+        )
         {
             if (lunarDate < 1 || lunarDate > 30)
             {
@@ -399,7 +449,9 @@ namespace System.Globalization
         {
             LunarToGregorian(year, month, day, out int gy, out int gm, out int gd);
             time.GetTime(out int hour, out int minute, out int second, out int millisecond);
-            return GregorianCalendar.GetDefaultInstance().ToDateTime(gy, gm, gd, hour, minute, second, millisecond);
+            return GregorianCalendar
+                .GetDefaultInstance()
+                .ToDateTime(gy, gm, gd, hour, minute, second, millisecond);
         }
 
         private void TimeToLunar(DateTime time, out int year, out int month, out int day)
@@ -428,7 +480,8 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(
                     nameof(months),
                     months,
-                    SR.Format(SR.ArgumentOutOfRange_Range, -120000, 120000));
+                    SR.Format(SR.ArgumentOutOfRange_Range, -120000, 120000)
+                );
             }
 
             CheckTicksRange(time.Ticks);
@@ -601,7 +654,8 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(
                     nameof(day),
                     day,
-                    SR.Format(SR.ArgumentOutOfRange_Day, daysInMonth, month));
+                    SR.Format(SR.ArgumentOutOfRange_Day, daysInMonth, month)
+                );
             }
 
             int m = GetYearInfo(year, LeapMonth);
@@ -653,7 +707,10 @@ namespace System.Globalization
             {
                 if (_twoDigitYearMax == -1)
                 {
-                    _twoDigitYearMax = GetSystemTwoDigitYearSetting(BaseCalendarID, GetYear(new DateTime(DefaultGregorianTwoDigitYearMax, 1, 1)));
+                    _twoDigitYearMax = GetSystemTwoDigitYearSetting(
+                        BaseCalendarID,
+                        GetYear(new DateTime(DefaultGregorianTwoDigitYearMax, 1, 1))
+                    );
                 }
 
                 return _twoDigitYearMax;
@@ -666,7 +723,8 @@ namespace System.Globalization
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        SR.Format(SR.ArgumentOutOfRange_Range, 99, MaxCalendarYear));
+                        SR.Format(SR.ArgumentOutOfRange_Range, 99, MaxCalendarYear)
+                    );
                 }
 
                 _twoDigitYearMax = value;

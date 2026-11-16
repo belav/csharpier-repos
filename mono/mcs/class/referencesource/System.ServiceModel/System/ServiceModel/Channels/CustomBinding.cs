@@ -9,8 +9,8 @@ namespace System.ServiceModel.Channels
     using System.Collections.ObjectModel;
     using System.Configuration;
     using System.Globalization;
-    using System.ServiceModel.Configuration;
     using System.Net.Security;
+    using System.ServiceModel.Configuration;
     using System.ServiceModel.Security;
     using System.Windows.Markup;
 
@@ -20,9 +20,7 @@ namespace System.ServiceModel.Channels
         BindingElementCollection bindingElements = new BindingElementCollection();
 
         public CustomBinding()
-            : base()
-        {
-        }
+            : base() { }
 
         public CustomBinding(string configurationName)
         {
@@ -43,7 +41,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public CustomBinding(string name, string ns, params BindingElement[] bindingElementsInTopDownChannelStackOrder)
+        public CustomBinding(
+            string name,
+            string ns,
+            params BindingElement[] bindingElementsInTopDownChannelStackOrder
+        )
             : base(name, ns)
         {
             if (bindingElementsInTopDownChannelStackOrder == null)
@@ -85,9 +87,7 @@ namespace System.ServiceModel.Channels
         }
 
         public CustomBinding(Binding binding)
-            : this(binding, SafeCreateBindingElements(binding))
-        {
-        }
+            : this(binding, SafeCreateBindingElements(binding)) { }
 
         static BindingElementCollection SafeCreateBindingElements(Binding binding)
         {
@@ -124,10 +124,7 @@ namespace System.ServiceModel.Channels
 
         public BindingElementCollection Elements
         {
-            get
-            {
-                return bindingElements;
-            }
+            get { return bindingElements; }
         }
 
         public override BindingElementCollection CreateBindingElements()
@@ -137,14 +134,20 @@ namespace System.ServiceModel.Channels
 
         void ApplyConfiguration(string configurationName)
         {
-            CustomBindingCollectionElement section = CustomBindingCollectionElement.GetBindingCollectionElement();
+            CustomBindingCollectionElement section =
+                CustomBindingCollectionElement.GetBindingCollectionElement();
             CustomBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                    SR.GetString(SR.ConfigInvalidBindingConfigurationName,
-                                 configurationName,
-                                 ConfigurationStrings.CustomBindingCollectionElementName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigInvalidBindingConfigurationName,
+                            configurationName,
+                            ConfigurationStrings.CustomBindingCollectionElementName
+                        )
+                    )
+                );
             }
             else
             {
@@ -167,4 +170,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-

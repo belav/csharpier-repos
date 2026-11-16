@@ -22,15 +22,25 @@ namespace WebMatrix.WebData
             if (String.IsNullOrEmpty(provider))
             {
                 throw new ArgumentException(
-                    String.Format(CultureInfo.CurrentCulture, CommonResources.Argument_Cannot_Be_Null_Or_Empty, "provider"),
-                    "provider");
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "provider"
+                    ),
+                    "provider"
+                );
             }
 
             if (String.IsNullOrEmpty(providerUserId))
             {
                 throw new ArgumentException(
-                    String.Format(CultureInfo.CurrentCulture, CommonResources.Argument_Cannot_Be_Null_Or_Empty, "providerUserId"),
-                    "providerUserId");
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "providerUserId"
+                    ),
+                    "providerUserId"
+                );
             }
 
             Provider = provider;

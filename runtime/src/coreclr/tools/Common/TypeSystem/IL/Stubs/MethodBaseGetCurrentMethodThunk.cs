@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
@@ -19,51 +18,37 @@ namespace Internal.IL.Stubs
             Debug.Assert(method.IsTypicalMethodDefinition);
 
             Method = method;
-            Signature = new MethodSignature(MethodSignatureFlags.Static, 0,
-                Context.SystemModule.GetKnownType("System.Reflection", "MethodBase"), TypeDesc.EmptyTypes);
+            Signature = new MethodSignature(
+                MethodSignatureFlags.Static,
+                0,
+                Context.SystemModule.GetKnownType("System.Reflection", "MethodBase"),
+                TypeDesc.EmptyTypes
+            );
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return Method.Context;
-            }
+            get { return Method.Context; }
         }
 
-        public MethodDesc Method
-        {
-            get;
-        }
+        public MethodDesc Method { get; }
 
         public override string Name
         {
-            get
-            {
-                return Method.Name;
-            }
+            get { return Method.Name; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return Method.DiagnosticName;
-            }
+            get { return Method.DiagnosticName; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return Method.OwningType;
-            }
+            get { return Method.OwningType; }
         }
 
-        public override MethodSignature Signature
-        {
-            get;
-        }
+        public override MethodSignature Signature { get; }
 
         public override MethodIL EmitIL()
         {
@@ -81,7 +66,10 @@ namespace Internal.IL.Stubs
             else
                 helperName = "GetCurrentMethodNonGeneric";
 
-            MethodDesc classlibHelper = Context.GetHelperEntryPoint("ReflectionHelpers", helperName);
+            MethodDesc classlibHelper = Context.GetHelperEntryPoint(
+                "ReflectionHelpers",
+                helperName
+            );
 
             codeStream.Emit(ILOpcode.call, emit.NewToken(classlibHelper));
             codeStream.Emit(ILOpcode.ret);
@@ -104,24 +92,35 @@ namespace Internal.IL.Stubs
             return _cache.GetOrCreateValue(currentMethod.GetTypicalMethodDefinition());
         }
 
-        private sealed class Unifier : LockFreeReaderHashtable<MethodDesc, MethodBaseGetCurrentMethodThunk>
+        private sealed class Unifier
+            : LockFreeReaderHashtable<MethodDesc, MethodBaseGetCurrentMethodThunk>
         {
             protected override int GetKeyHashCode(MethodDesc key)
             {
                 return key.GetHashCode();
             }
+
             protected override int GetValueHashCode(MethodBaseGetCurrentMethodThunk value)
             {
                 return value.Method.GetHashCode();
             }
-            protected override bool CompareKeyToValue(MethodDesc key, MethodBaseGetCurrentMethodThunk value)
+
+            protected override bool CompareKeyToValue(
+                MethodDesc key,
+                MethodBaseGetCurrentMethodThunk value
+            )
             {
                 return key == value.Method;
             }
-            protected override bool CompareValueToValue(MethodBaseGetCurrentMethodThunk value1, MethodBaseGetCurrentMethodThunk value2)
+
+            protected override bool CompareValueToValue(
+                MethodBaseGetCurrentMethodThunk value1,
+                MethodBaseGetCurrentMethodThunk value2
+            )
             {
                 return value1.Method == value2.Method;
             }
+
             protected override MethodBaseGetCurrentMethodThunk CreateValueFromKey(MethodDesc key)
             {
                 return new MethodBaseGetCurrentMethodThunk(key);

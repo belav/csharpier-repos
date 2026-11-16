@@ -10,7 +10,10 @@ namespace System.Runtime.Serialization
     using System.Runtime.Serialization.Diagnostics.Application;
     using System.Security;
     using System.Xml;
-    using DataContractDictionary = System.Collections.Generic.Dictionary<System.Xml.XmlQualifiedName, DataContract>;
+    using DataContractDictionary = System.Collections.Generic.Dictionary<
+        System.Xml.XmlQualifiedName,
+        DataContract
+    >;
 
 #if USE_REFEMIT
     public class XmlObjectSerializerContext
@@ -25,11 +28,15 @@ namespace System.Runtime.Serialization
         bool isSerializerKnownDataContractsSetExplicit;
         protected IList<Type> serializerKnownTypeList;
 
-        [Fx.Tag.SecurityNote(Critical = "We base the decision whether to Demand SerializationFormatterPermission on this value.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "We base the decision whether to Demand SerializationFormatterPermission on this value."
+        )]
         [SecurityCritical]
         bool demandedSerializationFormatterPermission;
 
-        [Fx.Tag.SecurityNote(Critical = "We base the decision whether to Demand MemberAccess on this value.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "We base the decision whether to Demand MemberAccess on this value."
+        )]
         [SecurityCritical]
         bool demandedMemberAccessPermission;
         int itemCount;
@@ -39,7 +46,13 @@ namespace System.Runtime.Serialization
         DataContractResolver dataContractResolver;
         KnownTypeDataContractResolver knownTypeResolver;
 
-        internal XmlObjectSerializerContext(XmlObjectSerializer serializer, int maxItemsInObjectGraph, StreamingContext streamingContext, bool ignoreExtensionDataObject, DataContractResolver dataContractResolver)
+        internal XmlObjectSerializerContext(
+            XmlObjectSerializer serializer,
+            int maxItemsInObjectGraph,
+            StreamingContext streamingContext,
+            bool ignoreExtensionDataObject,
+            DataContractResolver dataContractResolver
+        )
         {
             this.serializer = serializer;
             this.itemCount = 1;
@@ -49,29 +62,44 @@ namespace System.Runtime.Serialization
             this.dataContractResolver = dataContractResolver;
         }
 
-        internal XmlObjectSerializerContext(XmlObjectSerializer serializer, int maxItemsInObjectGraph, StreamingContext streamingContext, bool ignoreExtensionDataObject)
-            : this(serializer, maxItemsInObjectGraph, streamingContext, ignoreExtensionDataObject, null)
-        {
-        }
+        internal XmlObjectSerializerContext(
+            XmlObjectSerializer serializer,
+            int maxItemsInObjectGraph,
+            StreamingContext streamingContext,
+            bool ignoreExtensionDataObject
+        )
+            : this(
+                serializer,
+                maxItemsInObjectGraph,
+                streamingContext,
+                ignoreExtensionDataObject,
+                null
+            ) { }
 
-        internal XmlObjectSerializerContext(DataContractSerializer serializer, DataContract rootTypeDataContract, DataContractResolver dataContractResolver)
-            : this(serializer,
-            serializer.MaxItemsInObjectGraph,
-            new StreamingContext(StreamingContextStates.All),
-            serializer.IgnoreExtensionDataObject,
-            dataContractResolver)
+        internal XmlObjectSerializerContext(
+            DataContractSerializer serializer,
+            DataContract rootTypeDataContract,
+            DataContractResolver dataContractResolver
+        )
+            : this(
+                serializer,
+                serializer.MaxItemsInObjectGraph,
+                new StreamingContext(StreamingContextStates.All),
+                serializer.IgnoreExtensionDataObject,
+                dataContractResolver
+            )
         {
             this.rootTypeDataContract = rootTypeDataContract;
             this.serializerKnownTypeList = serializer.knownTypeList;
         }
 
         internal XmlObjectSerializerContext(NetDataContractSerializer serializer)
-            : this(serializer,
-            serializer.MaxItemsInObjectGraph,
-            serializer.Context,
-            serializer.IgnoreExtensionDataObject)
-        {
-        }
+            : this(
+                serializer,
+                serializer.MaxItemsInObjectGraph,
+                serializer.Context,
+                serializer.IgnoreExtensionDataObject
+            ) { }
 
         internal virtual SerializationMode Mode
         {
@@ -84,8 +112,10 @@ namespace System.Runtime.Serialization
             set { }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Demands SerializationFormatter permission. demanding the right permission is critical.",
-            Safe = "No data or control leaks in or out, must be callable from transparent generated IL.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Demands SerializationFormatter permission. demanding the right permission is critical.",
+            Safe = "No data or control leaks in or out, must be callable from transparent generated IL."
+        )]
         [SecuritySafeCritical]
         public void DemandSerializationFormatterPermission()
         {
@@ -98,8 +128,10 @@ namespace System.Runtime.Serialization
 #endif
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Demands MemberAccess permission. demanding the right permission is critical.",
-            Safe = "No data or control leaks in or out, must be callable from transparent generated IL.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Demands MemberAccess permission. demanding the right permission is critical.",
+            Safe = "No data or control leaks in or out, must be callable from transparent generated IL."
+        )]
         [SecuritySafeCritical]
         public void DemandMemberAccessPermission()
         {
@@ -109,7 +141,7 @@ namespace System.Runtime.Serialization
                 Globals.MemberAccessPermission.Demand();
                 demandedMemberAccessPermission = true;
             }
- #endif
+#endif
         }
 
         public StreamingContext GetStreamingContext()
@@ -123,14 +155,22 @@ namespace System.Runtime.Serialization
             get
             {
                 if (incrementItemCountMethod == null)
-                    incrementItemCountMethod = typeof(XmlObjectSerializerContext).GetMethod("IncrementItemCount", Globals.ScanAllMembers);
+                    incrementItemCountMethod = typeof(XmlObjectSerializerContext).GetMethod(
+                        "IncrementItemCount",
+                        Globals.ScanAllMembers
+                    );
                 return incrementItemCountMethod;
             }
         }
+
         public void IncrementItemCount(int count)
         {
             if (count > maxItemsInObjectGraph - itemCount)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.ExceededMaxItemsQuota, maxItemsInObjectGraph)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.ExceededMaxItemsQuota, maxItemsInObjectGraph)
+                    )
+                );
             itemCount += count;
         }
 
@@ -170,7 +210,12 @@ namespace System.Runtime.Serialization
         {
             if (IsGetOnlyCollection)
             {
-                return DataContract.GetGetOnlyCollectionDataContract(DataContract.GetId(typeHandle), typeHandle, type, Mode);
+                return DataContract.GetGetOnlyCollectionDataContract(
+                    DataContract.GetId(typeHandle),
+                    typeHandle,
+                    type,
+                    Mode
+                );
             }
             else
             {
@@ -178,11 +223,19 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal virtual DataContract GetDataContractSkipValidation(int typeId, RuntimeTypeHandle typeHandle, Type type)
+        internal virtual DataContract GetDataContractSkipValidation(
+            int typeId,
+            RuntimeTypeHandle typeHandle,
+            Type type
+        )
         {
             if (IsGetOnlyCollection)
             {
-                return DataContract.GetGetOnlyCollectionDataContractSkipValidation(typeId, typeHandle, type);
+                return DataContract.GetGetOnlyCollectionDataContractSkipValidation(
+                    typeId,
+                    typeHandle,
+                    type
+                );
             }
             else
             {
@@ -190,12 +243,17 @@ namespace System.Runtime.Serialization
             }
         }
 
-
         internal virtual DataContract GetDataContract(int id, RuntimeTypeHandle typeHandle)
         {
             if (IsGetOnlyCollection)
             {
-                return DataContract.GetGetOnlyCollectionDataContract(id, typeHandle, null /*type*/, Mode);
+                return DataContract.GetGetOnlyCollectionDataContract(
+                    id,
+                    typeHandle,
+                    null /*type*/
+                    ,
+                    Mode
+                );
             }
             else
             {
@@ -203,10 +261,17 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal virtual void CheckIfTypeSerializable(Type memberType, bool isMemberTypeSerializable)
+        internal virtual void CheckIfTypeSerializable(
+            Type memberType,
+            bool isMemberTypeSerializable
+        )
         {
             if (!isMemberTypeSerializable)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.TypeNotSerializable, memberType)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidDataContractException(
+                        SR.GetString(SR.TypeNotSerializable, memberType)
+                    )
+                );
         }
 
         internal virtual Type GetSurrogatedType(Type type)
@@ -234,26 +299,37 @@ namespace System.Runtime.Serialization
             if (serializerKnownDataContracts == null)
                 return null;
             DataContract outDataContract;
-            return serializerKnownDataContracts.TryGetValue(qname, out outDataContract) ? outDataContract : null;
+            return serializerKnownDataContracts.TryGetValue(qname, out outDataContract)
+                ? outDataContract
+                : null;
         }
 
-        internal static DataContractDictionary GetDataContractsForKnownTypes(IList<Type> knownTypeList)
+        internal static DataContractDictionary GetDataContractsForKnownTypes(
+            IList<Type> knownTypeList
+        )
         {
-            if (knownTypeList == null) return null;
+            if (knownTypeList == null)
+                return null;
             DataContractDictionary dataContracts = new DataContractDictionary();
             Dictionary<Type, Type> typesChecked = new Dictionary<Type, Type>();
             for (int i = 0; i < knownTypeList.Count; i++)
             {
                 Type knownType = knownTypeList[i];
                 if (knownType == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.NullKnownType, "knownTypes")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.NullKnownType, "knownTypes"))
+                    );
 
                 DataContract.CheckAndAdd(knownType, typesChecked, ref dataContracts);
             }
             return dataContracts;
         }
 
-        internal bool IsKnownType(DataContract dataContract, DataContractDictionary knownDataContracts, Type declaredType)
+        internal bool IsKnownType(
+            DataContract dataContract,
+            DataContractDictionary knownDataContracts,
+            Type declaredType
+        )
         {
             bool knownTypesAddedInCurrentScope = false;
             if (knownDataContracts != null)
@@ -273,13 +349,23 @@ namespace System.Runtime.Serialization
 
         internal bool IsKnownType(DataContract dataContract, Type declaredType)
         {
-            DataContract knownContract = ResolveDataContractFromKnownTypes(dataContract.StableName.Name, dataContract.StableName.Namespace, null /*memberTypeContract*/, declaredType);
-            return knownContract != null && knownContract.UnderlyingType == dataContract.UnderlyingType;
+            DataContract knownContract = ResolveDataContractFromKnownTypes(
+                dataContract.StableName.Name,
+                dataContract.StableName.Namespace,
+                null /*memberTypeContract*/
+                ,
+                declaredType
+            );
+            return knownContract != null
+                && knownContract.UnderlyingType == dataContract.UnderlyingType;
         }
 
         DataContract ResolveDataContractFromKnownTypes(XmlQualifiedName typeName)
         {
-            DataContract dataContract = PrimitiveDataContract.GetPrimitiveDataContract(typeName.Name, typeName.Namespace);
+            DataContract dataContract = PrimitiveDataContract.GetPrimitiveDataContract(
+                typeName.Name,
+                typeName.Namespace
+            );
             if (dataContract == null)
             {
                 dataContract = scopedKnownTypes.GetDataContract(typeName);
@@ -291,14 +377,22 @@ namespace System.Runtime.Serialization
             return dataContract;
         }
 
-        DataContract ResolveDataContractFromDataContractResolver(XmlQualifiedName typeName, Type declaredType)
+        DataContract ResolveDataContractFromDataContractResolver(
+            XmlQualifiedName typeName,
+            Type declaredType
+        )
         {
             if (TD.DCResolverResolveIsEnabled())
             {
                 TD.DCResolverResolve(typeName.Name + ":" + typeName.Namespace);
             }
 
-            Type dataContractType = DataContractResolver.ResolveName(typeName.Name, typeName.Namespace, declaredType, KnownTypeResolver);
+            Type dataContractType = DataContractResolver.ResolveName(
+                typeName.Name,
+                typeName.Namespace,
+                declaredType,
+                KnownTypeResolver
+            );
             if (dataContractType == null)
             {
                 return null;
@@ -322,7 +416,12 @@ namespace System.Runtime.Serialization
             }
         }
 
-        protected DataContract ResolveDataContractFromKnownTypes(string typeName, string typeNs, DataContract memberTypeContract, Type declaredType)
+        protected DataContract ResolveDataContractFromKnownTypes(
+            string typeName,
+            string typeNs,
+            DataContract memberTypeContract,
+            Type declaredType
+        )
         {
             XmlQualifiedName qname = new XmlQualifiedName(typeName, typeNs);
             DataContract dataContract;
@@ -336,9 +435,11 @@ namespace System.Runtime.Serialization
             }
             if (dataContract == null)
             {
-                if (memberTypeContract != null
+                if (
+                    memberTypeContract != null
                     && !memberTypeContract.UnderlyingType.IsInterface
-                    && memberTypeContract.StableName == qname)
+                    && memberTypeContract.StableName == qname
+                )
                 {
                     dataContract = memberTypeContract;
                 }
@@ -350,15 +451,20 @@ namespace System.Runtime.Serialization
             return dataContract;
         }
 
-        protected virtual DataContract ResolveDataContractFromRootDataContract(XmlQualifiedName typeQName)
+        protected virtual DataContract ResolveDataContractFromRootDataContract(
+            XmlQualifiedName typeQName
+        )
         {
             if (rootTypeDataContract.StableName == typeQName)
                 return rootTypeDataContract;
 
-            CollectionDataContract collectionContract = rootTypeDataContract as CollectionDataContract;
+            CollectionDataContract collectionContract =
+                rootTypeDataContract as CollectionDataContract;
             while (collectionContract != null)
             {
-                DataContract itemContract = GetDataContract(GetSurrogatedType(collectionContract.ItemType));
+                DataContract itemContract = GetDataContract(
+                    GetSurrogatedType(collectionContract.ItemType)
+                );
                 if (itemContract.StableName == typeQName)
                 {
                     return itemContract;
@@ -367,7 +473,5 @@ namespace System.Runtime.Serialization
             }
             return null;
         }
-
     }
-
 }

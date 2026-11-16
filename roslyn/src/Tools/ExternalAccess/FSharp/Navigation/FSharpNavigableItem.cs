@@ -11,7 +11,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
 {
     internal class FSharpNavigableItem
     {
-        public FSharpNavigableItem(FSharpGlyph glyph, ImmutableArray<TaggedText> displayTaggedParts, Document document, TextSpan sourceSpan)
+        public FSharpNavigableItem(
+            FSharpGlyph glyph,
+            ImmutableArray<TaggedText> displayTaggedParts,
+            Document document,
+            TextSpan sourceSpan
+        )
         {
             Glyph = glyph;
             DisplayTaggedParts = displayTaggedParts;

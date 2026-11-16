@@ -7,7 +7,7 @@ using System;
 namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 {
     /// <summary>
-    /// Attribute added to the test assembly during build. 
+    /// Attribute added to the test assembly during build.
     /// Captures the version of dotnet SDK the build is targeting.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly)]

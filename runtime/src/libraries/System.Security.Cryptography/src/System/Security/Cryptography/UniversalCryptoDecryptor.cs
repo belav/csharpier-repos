@@ -18,12 +18,16 @@ namespace System.Security.Cryptography
     //
     internal sealed class UniversalCryptoDecryptor : UniversalCryptoTransform
     {
-        public UniversalCryptoDecryptor(PaddingMode paddingMode, BasicSymmetricCipher basicSymmetricCipher)
-            : base(paddingMode, basicSymmetricCipher)
-        {
-        }
+        public UniversalCryptoDecryptor(
+            PaddingMode paddingMode,
+            BasicSymmetricCipher basicSymmetricCipher
+        )
+            : base(paddingMode, basicSymmetricCipher) { }
 
-        protected override int UncheckedTransformBlock(ReadOnlySpan<byte> inputBuffer, Span<byte> outputBuffer)
+        protected override int UncheckedTransformBlock(
+            ReadOnlySpan<byte> inputBuffer,
+            Span<byte> outputBuffer
+        )
         {
             //
             // If we're decrypting, it's possible to be called with the last blocks of the data, and then
@@ -41,7 +45,10 @@ namespace System.Security.Cryptography
                 // If we have data saved from a previous call, decrypt that into the output first
                 if (_heldoverCipher != null)
                 {
-                    int depadDecryptLength = BasicSymmetricCipher.Transform(_heldoverCipher, outputBuffer);
+                    int depadDecryptLength = BasicSymmetricCipher.Transform(
+                        _heldoverCipher,
+                        outputBuffer
+                    );
                     outputBuffer = outputBuffer.Slice(depadDecryptLength);
                     decryptedBytes += depadDecryptLength;
                 }
@@ -51,10 +58,18 @@ namespace System.Security.Cryptography
                 }
 
                 // Postpone the last block to the next round.
-                Debug.Assert(inputBuffer.Length >= _heldoverCipher.Length, "inputBuffer.Length >= _heldoverCipher.Length");
-                inputBuffer.Slice(inputBuffer.Length - _heldoverCipher.Length).CopyTo(_heldoverCipher);
+                Debug.Assert(
+                    inputBuffer.Length >= _heldoverCipher.Length,
+                    "inputBuffer.Length >= _heldoverCipher.Length"
+                );
+                inputBuffer
+                    .Slice(inputBuffer.Length - _heldoverCipher.Length)
+                    .CopyTo(_heldoverCipher);
                 inputBuffer = inputBuffer.Slice(0, inputBuffer.Length - _heldoverCipher.Length);
-                Debug.Assert(inputBuffer.Length % InputBlockSize == 0, "Did not remove whole blocks for depadding");
+                Debug.Assert(
+                    inputBuffer.Length % InputBlockSize == 0,
+                    "Did not remove whole blocks for depadding"
+                );
             }
 
             if (inputBuffer.Length > 0)
@@ -65,7 +80,10 @@ namespace System.Security.Cryptography
             return decryptedBytes;
         }
 
-        protected override unsafe int UncheckedTransformFinalBlock(ReadOnlySpan<byte> inputBuffer, Span<byte> outputBuffer)
+        protected override unsafe int UncheckedTransformFinalBlock(
+            ReadOnlySpan<byte> inputBuffer,
+            Span<byte> outputBuffer
+        )
         {
             // We can't complete decryption on a partial block
             if (inputBuffer.Length % PaddingSizeBytes != 0)
@@ -108,12 +126,19 @@ namespace System.Security.Cryptography
                 {
                     // Decrypt the data, then strip the padding to get the final decrypted data. Note that even if the cipherText length is 0, we must
                     // invoke TransformFinal() so that the cipher object knows to reset for the next cipher operation.
-                    int decryptWritten = BasicSymmetricCipher.TransformFinal(inputCiphertext, ciphertext);
+                    int decryptWritten = BasicSymmetricCipher.TransformFinal(
+                        inputCiphertext,
+                        ciphertext
+                    );
                     Span<byte> decryptedBytes = ciphertext.Slice(0, decryptWritten);
 
                     if (decryptedBytes.Length > 0)
                     {
-                        unpaddedLength = SymmetricPadding.GetPaddingLength(decryptedBytes, PaddingMode, InputBlockSize);
+                        unpaddedLength = SymmetricPadding.GetPaddingLength(
+                            decryptedBytes,
+                            PaddingMode,
+                            InputBlockSize
+                        );
                         decryptedBytes.Slice(0, unpaddedLength).CopyTo(outputBuffer);
                     }
                 }
@@ -130,7 +155,11 @@ namespace System.Security.Cryptography
             }
         }
 
-        protected override unsafe byte[] UncheckedTransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount)
+        protected override unsafe byte[] UncheckedTransformFinalBlock(
+            byte[] inputBuffer,
+            int inputOffset,
+            int inputCount
+        )
         {
             if (SymmetricPadding.DepaddingRequired(PaddingMode))
             {
@@ -141,7 +170,10 @@ namespace System.Security.Cryptography
                 {
                     try
                     {
-                        written = UncheckedTransformFinalBlock(inputBuffer.AsSpan(inputOffset, inputCount), rented);
+                        written = UncheckedTransformFinalBlock(
+                            inputBuffer.AsSpan(inputOffset, inputCount),
+                            rented
+                        );
                         return rented.AsSpan(0, written).ToArray();
                     }
                     finally
@@ -153,7 +185,10 @@ namespace System.Security.Cryptography
             else
             {
                 byte[] buffer = GC.AllocateUninitializedArray<byte>(inputCount);
-                int written = UncheckedTransformFinalBlock(inputBuffer.AsSpan(inputOffset, inputCount), buffer);
+                int written = UncheckedTransformFinalBlock(
+                    inputBuffer.AsSpan(inputOffset, inputCount),
+                    buffer
+                );
                 Debug.Assert(written == buffer.Length);
                 return buffer;
             }

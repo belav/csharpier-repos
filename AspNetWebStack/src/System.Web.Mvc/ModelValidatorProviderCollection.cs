@@ -12,16 +12,15 @@ namespace System.Web.Mvc
         private ModelValidatorProvider[] _combinedItems;
         private IDependencyResolver _dependencyResolver;
 
-        public ModelValidatorProviderCollection()
-        {
-        }
+        public ModelValidatorProviderCollection() { }
 
         public ModelValidatorProviderCollection(IList<ModelValidatorProvider> list)
-            : base(list)
-        {
-        }
+            : base(list) { }
 
-        internal ModelValidatorProviderCollection(IList<ModelValidatorProvider> list, IDependencyResolver dependencyResolver)
+        internal ModelValidatorProviderCollection(
+            IList<ModelValidatorProvider> list,
+            IDependencyResolver dependencyResolver
+        )
             : base(list)
         {
             _dependencyResolver = dependencyResolver;
@@ -29,12 +28,15 @@ namespace System.Web.Mvc
 
         internal ModelValidatorProvider[] CombinedItems
         {
-            get 
+            get
             {
                 ModelValidatorProvider[] combinedItems = _combinedItems;
                 if (combinedItems == null)
                 {
-                    combinedItems = MultiServiceResolver.GetCombined<ModelValidatorProvider>(Items, _dependencyResolver);
+                    combinedItems = MultiServiceResolver.GetCombined<ModelValidatorProvider>(
+                        Items,
+                        _dependencyResolver
+                    );
                     _combinedItems = combinedItems;
                 }
                 return combinedItems;
@@ -73,7 +75,10 @@ namespace System.Web.Mvc
             base.SetItem(index, item);
         }
 
-        public IEnumerable<ModelValidator> GetValidators(ModelMetadata metadata, ControllerContext context)
+        public IEnumerable<ModelValidator> GetValidators(
+            ModelMetadata metadata,
+            ControllerContext context
+        )
         {
             ModelValidatorProvider[] combined = CombinedItems;
             for (int i = 0; i < combined.Length; i++)

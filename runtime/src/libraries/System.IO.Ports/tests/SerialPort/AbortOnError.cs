@@ -37,20 +37,29 @@ namespace System.IO.Ports.Tests
             // Open the port, set the fAbortOnError flag and then close the port
             SetAbortOnError(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
 
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
 
-                Assert.False(ReadAbortOnErrorFlag(com), "fAbortOnError should be clear when port is opened");
+                Assert.False(
+                    ReadAbortOnErrorFlag(com),
+                    "fAbortOnError should be clear when port is opened"
+                );
             }
         }
 
         private static bool ReadAbortOnErrorFlag(SerialPort com)
         {
             Stream baseStream = com.BaseStream;
-            int flagValue = (int)baseStream.GetType()
-                .GetMethod("GetDcbFlag", BindingFlags.NonPublic | BindingFlags.Instance)
-                .Invoke(baseStream, new object[] {14});
+            int flagValue = (int)
+                baseStream
+                    .GetType()
+                    .GetMethod("GetDcbFlag", BindingFlags.NonPublic | BindingFlags.Instance)
+                    .Invoke(baseStream, new object[] { 14 });
             return flagValue != 0;
         }
 
@@ -63,7 +72,9 @@ namespace System.IO.Ports.Tests
 
                 // Invoke the private method SetDcbFlag to set bit 14 in the DCB flags
                 // This just updates the _dcb.Flags member of SerialStream
-                baseStream.GetType().GetMethod("SetDcbFlag", BindingFlags.NonPublic | BindingFlags.Instance)
+                baseStream
+                    .GetType()
+                    .GetMethod("SetDcbFlag", BindingFlags.NonPublic | BindingFlags.Instance)
                     .Invoke(baseStream, new object[] { 14, 1 });
 
                 // Force the DCB to get written to the driver

@@ -4,14 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
-
+namespace System.Net
+{
     using System;
-    using System.Runtime.InteropServices;
-    using System.Net.Sockets;
-    using System.Text;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Net.Sockets;
+    using System.Runtime.InteropServices;
+    using System.Text;
 
     // a little perf app measured these times when comparing the internal
     // buffer implemented as a managed byte[] or unmanaged memory IntPtr
@@ -25,8 +25,8 @@ namespace System.Net {
     ///       on how to format the memeory buffers that winsock uses for network addresses.
     ///    </para>
     /// </devdoc>
-    public class SocketAddress {
-
+    public class SocketAddress
+    {
         internal const int IPv6AddressSize = 28;
         internal const int IPv4AddressSize = 16;
 
@@ -44,27 +44,29 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public AddressFamily Family {
-            get {
+        public AddressFamily Family
+        {
+            get
+            {
                 int family;
 #if BIGENDIAN
-                family = ((int)m_Buffer[0]<<8) | m_Buffer[1];
+                family = ((int)m_Buffer[0] << 8) | m_Buffer[1];
 #else
-                family = m_Buffer[0] | ((int)m_Buffer[1]<<8);
+                family = m_Buffer[0] | ((int)m_Buffer[1] << 8);
 #endif
                 return (AddressFamily)family;
             }
         }
+
         //
         // Size of this SocketAddress
         //
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Size {
-            get {
-                return m_Size;
-            }
+        public int Size
+        {
+            get { return m_Size; }
         }
 
         //
@@ -81,21 +83,27 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public byte this[int offset] {
-            get {
+        public byte this[int offset]
+        {
+            get
+            {
                 //
                 // access
                 //
-                if (offset<0 || offset>=Size) {
+                if (offset < 0 || offset >= Size)
+                {
                     throw new IndexOutOfRangeException();
                 }
                 return m_Buffer[offset];
             }
-            set {
-                if (offset<0 || offset>=Size) {
+            set
+            {
+                if (offset < 0 || offset >= Size)
+                {
                     throw new IndexOutOfRangeException();
                 }
-                if (m_Buffer[offset] != value) {
+                if (m_Buffer[offset] != value)
+                {
                     m_changed = true;
                 }
                 m_Buffer[offset] = value;
@@ -105,14 +113,16 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SocketAddress(AddressFamily family) : this(family, MaxSize) {
-        }
+        public SocketAddress(AddressFamily family)
+            : this(family, MaxSize) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SocketAddress(AddressFamily family, int size) {
-            if (size<WriteableOffset) {
+        public SocketAddress(AddressFamily family, int size)
+        {
+            if (size < WriteableOffset)
+            {
                 //
                 // it doesn't make sense to create a socket address with less tha
                 // 2 bytes, that's where we store the address family.
@@ -120,26 +130,32 @@ namespace System.Net {
                 throw new ArgumentOutOfRangeException("size");
             }
             m_Size = size;
-            m_Buffer = new byte[(size/IntPtr.Size+2)*IntPtr.Size];//sizeof DWORD
-
+            m_Buffer = new byte[(size / IntPtr.Size + 2) * IntPtr.Size]; //sizeof DWORD
 #if BIGENDIAN
-            m_Buffer[0] = unchecked((byte)((int)family>>8));
-            m_Buffer[1] = unchecked((byte)((int)family   ));
+            m_Buffer[0] = unchecked((byte)((int)family >> 8));
+            m_Buffer[1] = unchecked((byte)((int)family));
 #else
-            m_Buffer[0] = unchecked((byte)((int)family   ));
-            m_Buffer[1] = unchecked((byte)((int)family>>8));
+            m_Buffer[0] = unchecked((byte)((int)family));
+            m_Buffer[1] = unchecked((byte)((int)family >> 8));
 #endif
         }
-        
-        internal SocketAddress(IPAddress ipAddress)
-            : this(ipAddress.AddressFamily, 
-                ((ipAddress.AddressFamily == AddressFamily.InterNetwork) ? IPv4AddressSize : IPv6AddressSize)) {
 
+        internal SocketAddress(IPAddress ipAddress)
+            : this(
+                ipAddress.AddressFamily,
+                (
+                    (ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                        ? IPv4AddressSize
+                        : IPv6AddressSize
+                )
+            )
+        {
             // No Port
             m_Buffer[2] = (byte)0;
             m_Buffer[3] = (byte)0;
 
-            if (ipAddress.AddressFamily == AddressFamily.InterNetworkV6) {
+            if (ipAddress.AddressFamily == AddressFamily.InterNetworkV6)
+            {
                 // No handling for Flow Information
                 m_Buffer[4] = (byte)0;
                 m_Buffer[5] = (byte)0;
@@ -155,10 +171,13 @@ namespace System.Net {
 
                 // Address serialization
                 byte[] addressBytes = ipAddress.GetAddressBytes();
-                for (int i = 0; i < addressBytes.Length; i++) {
+                for (int i = 0; i < addressBytes.Length; i++)
+                {
                     m_Buffer[8 + i] = addressBytes[i];
                 }
-            } else {
+            }
+            else
+            {
                 // IPv4 Address serialization
 #if MONO
                 ipAddress.TryWriteBytes(m_Buffer.AsSpan(4), out int bytesWritten);
@@ -172,13 +191,16 @@ namespace System.Net {
         }
 
         internal SocketAddress(IPAddress ipaddress, int port)
-            : this (ipaddress) {
+            : this(ipaddress)
+        {
             m_Buffer[2] = (byte)(port >> 8);
             m_Buffer[3] = (byte)port;
         }
-        
-        internal IPAddress GetIPAddress() {
-            if (Family == AddressFamily.InterNetworkV6) {
+
+        internal IPAddress GetIPAddress()
+        {
+            if (Family == AddressFamily.InterNetworkV6)
+            {
                 Contract.Assert(Size >= IPv6AddressSize);
 
 #if MONO
@@ -186,35 +208,42 @@ namespace System.Net {
 #else
                 byte[] address = new byte[IPAddress.IPv6AddressBytes];
 #endif
-                for (int i = 0; i < address.Length; i++) {
+                for (int i = 0; i < address.Length; i++)
+                {
                     address[i] = m_Buffer[i + 8];
                 }
 
-                long scope = (long)((m_Buffer[27] << 24) +
-                                    (m_Buffer[26] << 16) +
-                                    (m_Buffer[25] << 8) +
-                                    (m_Buffer[24]));
+                long scope = (long)(
+                    (m_Buffer[27] << 24)
+                    + (m_Buffer[26] << 16)
+                    + (m_Buffer[25] << 8)
+                    + (m_Buffer[24])
+                );
 
                 return new IPAddress(address, scope);
-
-            } else if (Family == AddressFamily.InterNetwork) {
+            }
+            else if (Family == AddressFamily.InterNetwork)
+            {
                 Contract.Assert(Size >= IPv4AddressSize);
 
-                long address = (long)(
-                        (m_Buffer[4] & 0x000000FF) |
-                        (m_Buffer[5] << 8 & 0x0000FF00) |
-                        (m_Buffer[6] << 16 & 0x00FF0000) |
-                        (m_Buffer[7] << 24)
-                        ) & 0x00000000FFFFFFFF;
+                long address =
+                    (long)(
+                        (m_Buffer[4] & 0x000000FF)
+                        | (m_Buffer[5] << 8 & 0x0000FF00)
+                        | (m_Buffer[6] << 16 & 0x00FF0000)
+                        | (m_Buffer[7] << 24)
+                    ) & 0x00000000FFFFFFFF;
 
                 return new IPAddress(address);
-
-            } else {
+            }
+            else
+            {
                 throw new SocketException(SocketError.AddressFamilyNotSupported);
             }
         }
 
-        internal IPEndPoint GetIPEndPoint() {
+        internal IPEndPoint GetIPEndPoint()
+        {
             IPAddress address = GetIPAddress();
             int port = (int)((m_Buffer[2] << 8 & 0xFF00) | (m_Buffer[3]));
             return new IPEndPoint(address, port);
@@ -225,18 +254,20 @@ namespace System.Net {
         //
         internal void CopyAddressSizeIntoBuffer()
         {
-            m_Buffer[m_Buffer.Length-IntPtr.Size]   = unchecked((byte)(m_Size));
-            m_Buffer[m_Buffer.Length-IntPtr.Size+1] = unchecked((byte)(m_Size >> 8));
-            m_Buffer[m_Buffer.Length-IntPtr.Size+2] = unchecked((byte)(m_Size >> 16));
-            m_Buffer[m_Buffer.Length-IntPtr.Size+3] = unchecked((byte)(m_Size >> 24));
+            m_Buffer[m_Buffer.Length - IntPtr.Size] = unchecked((byte)(m_Size));
+            m_Buffer[m_Buffer.Length - IntPtr.Size + 1] = unchecked((byte)(m_Size >> 8));
+            m_Buffer[m_Buffer.Length - IntPtr.Size + 2] = unchecked((byte)(m_Size >> 16));
+            m_Buffer[m_Buffer.Length - IntPtr.Size + 3] = unchecked((byte)(m_Size >> 24));
         }
+
         //
         // Can be called after the above method did work
         //
         internal int GetAddressSizeOffset()
         {
-            return m_Buffer.Length-IntPtr.Size;
+            return m_Buffer.Length - IntPtr.Size;
         }
+
         //
         //
         // For ReceiveFrom we need to update the address size upon IO return
@@ -246,39 +277,49 @@ namespace System.Net {
             // Apparently it must be less or equal the original value since ReceiveFrom cannot reallocate the address buffer
             m_Size = *(int*)ptr;
         }
-        public override bool Equals(object comparand) {
+
+        public override bool Equals(object comparand)
+        {
             SocketAddress castedComparand = comparand as SocketAddress;
-            if (castedComparand == null || this.Size != castedComparand.Size) {
+            if (castedComparand == null || this.Size != castedComparand.Size)
+            {
                 return false;
             }
-            for(int i=0; i<this.Size; i++) {
-                if(this[i]!=castedComparand[i]) {
+            for (int i = 0; i < this.Size; i++)
+            {
+                if (this[i] != castedComparand[i])
+                {
                     return false;
                 }
             }
             return true;
         }
 
-        public override int GetHashCode() {
-            if (m_changed) {
+        public override int GetHashCode()
+        {
+            if (m_changed)
+            {
                 m_changed = false;
                 m_hash = 0;
 
                 int i;
                 int size = Size & ~3;
 
-                for (i = 0; i < size; i += 4) {
-                    m_hash ^= (int)m_Buffer[i]
-                            | ((int)m_Buffer[i+1] << 8)
-                            | ((int)m_Buffer[i+2] << 16)
-                            | ((int)m_Buffer[i+3] << 24);
+                for (i = 0; i < size; i += 4)
+                {
+                    m_hash ^=
+                        (int)m_Buffer[i]
+                        | ((int)m_Buffer[i + 1] << 8)
+                        | ((int)m_Buffer[i + 2] << 16)
+                        | ((int)m_Buffer[i + 3] << 24);
                 }
-                if ((Size & 3) != 0) {
-
+                if ((Size & 3) != 0)
+                {
                     int remnant = 0;
                     int shift = 0;
 
-                    for (; i < Size; ++i) {
+                    for (; i < Size; ++i)
+                    {
                         remnant |= ((int)m_Buffer[i]) << shift;
                         shift += 8;
                     }
@@ -288,18 +329,23 @@ namespace System.Net {
             return m_hash;
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             StringBuilder bytes = new StringBuilder();
-            for(int i=WriteableOffset; i<this.Size; i++) {
-                if (i>WriteableOffset) {
+            for (int i = WriteableOffset; i < this.Size; i++)
+            {
+                if (i > WriteableOffset)
+                {
                     bytes.Append(",");
                 }
                 bytes.Append(this[i].ToString(NumberFormatInfo.InvariantInfo));
             }
-            return Family.ToString() + ":" + Size.ToString(NumberFormatInfo.InvariantInfo) + ":{" + bytes.ToString() + "}";
+            return Family.ToString()
+                + ":"
+                + Size.ToString(NumberFormatInfo.InvariantInfo)
+                + ":{"
+                + bytes.ToString()
+                + "}";
         }
-
     } // class SocketAddress
-
-
 } // namespace System.Net

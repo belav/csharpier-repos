@@ -1,5 +1,5 @@
 //
-// AppDomainFactoryCas.cs 
+// AppDomainFactoryCas.cs
 //	- CAS unit tests for System.Web.Hosting.AppDomainFactory
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,102 +27,111 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Security;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.Hosting;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.Hosting {
+namespace MonoCasTests.System.Web.Hosting
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class AppDomainFactoryCas : AspNetHostingMinimal
+    {
+        private AppDomainFactory adf;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class AppDomainFactoryCas : AspNetHostingMinimal {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            // we're at full trust here
+            adf = new AppDomainFactory();
+        }
 
-		private AppDomainFactory adf;
+        // test ctor
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			// we're at full trust here
-			adf = new AppDomainFactory ();
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Constructor_Deny_UnmanagedCode()
+        {
+            new AppDomainFactory();
+        }
 
-		// test ctor
+        [Test]
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Constructor_Deny_AspNetHostingPermission()
+        {
+            new AppDomainFactory();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Constructor_Deny_UnmanagedCode ()
-		{
-			new AppDomainFactory ();
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.Minimal
+        )]
+        public void Constructor_PermitOnly_UnmanagedCode()
+        {
+            new AppDomainFactory();
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Constructor_Deny_AspNetHostingPermission ()
-		{
-			new AppDomainFactory ();
-		}
+        // Create isn't protected (so the Demands aren't on the class)
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
-		public void Constructor_PermitOnly_UnmanagedCode ()
-		{
-			new AppDomainFactory ();
-		}
+        private void Create()
+        {
+            try
+            {
+                adf.Create(null, null, null, null, null, 0);
+            }
+            catch (NullReferenceException)
+            {
+                // MS
+            }
+            catch (NotImplementedException)
+            {
+                // Mono
+            }
+        }
 
-		// Create isn't protected (so the Demands aren't on the class)
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        public void Create_Deny_UnmanagedCode()
+        {
+            Create();
+        }
 
-		private void Create ()
-		{
-			try {
-				adf.Create (null, null, null, null, null, 0);
-			}
-			catch (NullReferenceException) {
-				// MS
-			}
-			catch (NotImplementedException) {
-				// Mono
-			}
-		}
+        [Test]
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
+        public void Create_Deny_AspNetHostingPermission()
+        {
+            Create();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		public void Create_Deny_UnmanagedCode ()
-		{
-			Create ();
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Create_Deny_Unrestricted()
+        {
+            Create();
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
-		public void Create_Deny_AspNetHostingPermission ()
-		{
-			Create ();
-		}
+        // test for LinkDemand on class
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Create_Deny_Unrestricted ()
-		{
-			Create ();
-		}
+        [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            // don't let UnmanagedCode mess up the results
+            return base.CreateControl(action, level);
+        }
 
-		// test for LinkDemand on class
-
-		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			// don't let UnmanagedCode mess up the results
-			return base.CreateControl (action, level);
-		}
-
-		public override Type Type {
-			get { return typeof (AppDomainFactory); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(AppDomainFactory); }
+        }
+    }
 }

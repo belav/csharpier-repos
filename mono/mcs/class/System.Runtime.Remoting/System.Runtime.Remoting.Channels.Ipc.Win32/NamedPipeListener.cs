@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,7 +25,6 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -40,7 +39,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         const uint DefaultBufferSize = 4096;
         readonly string pipeName;
 
-        public string Name 
+        public string Name
         {
             get { return pipeName; }
         }
@@ -49,10 +48,8 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// Creates a new listener with the local local Named Pipe name obtained form the specified UID.
         /// </summary>
         /// <param name="uid">The UID.</param>
-        public NamedPipeListener(Guid uid) 
-            : this(uid.ToString("N"))
-        {
-        }
+        public NamedPipeListener(Guid uid)
+            : this(uid.ToString("N")) { }
 
         /// <summary>
         /// Creates a new listener with the specified name.
@@ -67,61 +64,78 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// Accepts a pending connection request
         /// </summary>
         /// <remarks>
-        /// Accept is a blocking method that returns a NamedPipeSocket you can use to send and receive data. 
+        /// Accept is a blocking method that returns a NamedPipeSocket you can use to send and receive data.
         /// </remarks>
         /// <returns>The NamedPipeSocket.</returns>
-        public NamedPipeSocket Accept() 
+        public NamedPipeSocket Accept()
         {
             IntPtr hPipe = NamedPipeHelper.CreateNamedPipe(
                 pipeName,
                 NamedPipeHelper.PIPE_ACCESS_DUPLEX | NamedPipeHelper.FILE_FLAG_OVERLAPPED,
                 NamedPipeHelper.PIPE_TYPE_MESSAGE
-                | NamedPipeHelper.PIPE_READMODE_MESSAGE
-                | NamedPipeHelper.PIPE_WAIT,
+                    | NamedPipeHelper.PIPE_READMODE_MESSAGE
+                    | NamedPipeHelper.PIPE_WAIT,
                 NamedPipeHelper.PIPE_UNLIMITED_INSTANCES,
                 DefaultBufferSize,
                 DefaultBufferSize,
                 NamedPipeHelper.NMPWAIT_USE_DEFAULT_WAIT,
                 IntPtr.Zero
-                );
+            );
 
-            if (hPipe.ToInt32 () == NamedPipeHelper.INVALID_HANDLE_VALUE) {
-                throw new NamedPipeException (Marshal.GetLastWin32Error ());
+            if (hPipe.ToInt32() == NamedPipeHelper.INVALID_HANDLE_VALUE)
+            {
+                throw new NamedPipeException(Marshal.GetLastWin32Error());
             }
 
-			// Connect the named pipe with overlapped structure
-			// in order to make it altertable. This way we will
-			// wake up when someone aborts a thread waiting 
-			// for this pipe.
-			NativeOverlapped overlapped = new NativeOverlapped ();
-            bool canConnect = NamedPipeHelper.ConnectNamedPipe (hPipe, ref overlapped);
+            // Connect the named pipe with overlapped structure
+            // in order to make it altertable. This way we will
+            // wake up when someone aborts a thread waiting
+            // for this pipe.
+            NativeOverlapped overlapped = new NativeOverlapped();
+            bool canConnect = NamedPipeHelper.ConnectNamedPipe(hPipe, ref overlapped);
 
-            int lastError = Marshal.GetLastWin32Error ();
-			if (!canConnect) {
-				if (lastError == NamedPipeHelper.ERROR_IO_PENDING) {
-					uint bytesTransferred = 0;
-					if (!GetOverlappedResultEx (hPipe, ref overlapped, out bytesTransferred, Timeout.Infinite, true)) {
-						lastError = Marshal.GetLastWin32Error ();
-						NamedPipeHelper.CloseHandle (hPipe);
-						throw new NamedPipeException (lastError);
-					}
-					canConnect = true;
-				} else if (lastError == NamedPipeHelper.ERROR_PIPE_CONNECTED)
-					canConnect = true;
-			}
+            int lastError = Marshal.GetLastWin32Error();
+            if (!canConnect)
+            {
+                if (lastError == NamedPipeHelper.ERROR_IO_PENDING)
+                {
+                    uint bytesTransferred = 0;
+                    if (
+                        !GetOverlappedResultEx(
+                            hPipe,
+                            ref overlapped,
+                            out bytesTransferred,
+                            Timeout.Infinite,
+                            true
+                        )
+                    )
+                    {
+                        lastError = Marshal.GetLastWin32Error();
+                        NamedPipeHelper.CloseHandle(hPipe);
+                        throw new NamedPipeException(lastError);
+                    }
+                    canConnect = true;
+                }
+                else if (lastError == NamedPipeHelper.ERROR_PIPE_CONNECTED)
+                    canConnect = true;
+            }
 
-			if (!canConnect) {
-				NamedPipeHelper.CloseHandle (hPipe);
-				throw new NamedPipeException (lastError);
-			}
+            if (!canConnect)
+            {
+                NamedPipeHelper.CloseHandle(hPipe);
+                throw new NamedPipeException(lastError);
+            }
 
-			return new NamedPipeSocket (hPipe);
+            return new NamedPipeSocket(hPipe);
         }
 
-		[DllImport("kernel32.dll", SetLastError = true)]
-		static extern bool GetOverlappedResultEx (IntPtr hFile, [In] ref System.Threading.NativeOverlapped lpOverlapped,
-												  out uint lpNumberOfBytesTransferred, int dwMilliseconds, bool bAltertable);
-
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool GetOverlappedResultEx(
+            IntPtr hFile,
+            [In] ref System.Threading.NativeOverlapped lpOverlapped,
+            out uint lpNumberOfBytesTransferred,
+            int dwMilliseconds,
+            bool bAltertable
+        );
     }
 }
-

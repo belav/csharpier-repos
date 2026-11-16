@@ -13,17 +13,27 @@ namespace Internal.Runtime.InteropServices
 {
     internal static partial class ComponentActivator
     {
-        private const string TrimIncompatibleWarningMessage = "Native hosting is not trim compatible and this warning will be seen if trimming is enabled.";
-        private const string NativeAOTIncompatibleWarningMessage = "The native code for the method requested might not be available at runtime.";
+        private const string TrimIncompatibleWarningMessage =
+            "Native hosting is not trim compatible and this warning will be seen if trimming is enabled.";
+        private const string NativeAOTIncompatibleWarningMessage =
+            "The native code for the method requested might not be available at runtime.";
 
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("maccatalyst")]
         [UnsupportedOSPlatform("tvos")]
-        private static readonly Dictionary<string, IsolatedComponentLoadContext> s_assemblyLoadContexts = new Dictionary<string, IsolatedComponentLoadContext>(StringComparer.InvariantCulture);
-        private static readonly Dictionary<IntPtr, Delegate> s_delegates = new Dictionary<IntPtr, Delegate>();
-        private static readonly HashSet<string> s_loadedInDefaultContext = new HashSet<string>(StringComparer.InvariantCulture);
+        private static readonly Dictionary<
+            string,
+            IsolatedComponentLoadContext
+        > s_assemblyLoadContexts = new Dictionary<string, IsolatedComponentLoadContext>(
+            StringComparer.InvariantCulture
+        );
+        private static readonly Dictionary<IntPtr, Delegate> s_delegates =
+            new Dictionary<IntPtr, Delegate>();
+        private static readonly HashSet<string> s_loadedInDefaultContext = new HashSet<string>(
+            StringComparer.InvariantCulture
+        );
 
         // Use a value defined in https://github.com/dotnet/runtime/blob/main/docs/design/features/host-error-codes.md
         // To indicate the specific error when IsSupported is false
@@ -31,7 +41,13 @@ namespace Internal.Runtime.InteropServices
 
         private static bool IsSupported { get; } = InitializeIsSupported();
 
-        private static bool InitializeIsSupported() => AppContext.TryGetSwitch("System.Runtime.InteropServices.EnableConsumingManagedCodeFromNativeHosting", out bool isSupported) ? isSupported : true;
+        private static bool InitializeIsSupported() =>
+            AppContext.TryGetSwitch(
+                "System.Runtime.InteropServices.EnableConsumingManagedCodeFromNativeHosting",
+                out bool isSupported
+            )
+                ? isSupported
+                : true;
 
         public delegate int ComponentEntryPoint(IntPtr args, int sizeBytes);
 
@@ -52,19 +68,24 @@ namespace Internal.Runtime.InteropServices
         /// <param name="reserved">Extensibility parameter (currently unused)</param>
         /// <param name="functionHandle">Pointer where to store the function pointer result</param>
         [RequiresDynamicCode(NativeAOTIncompatibleWarningMessage)]
-        [RequiresUnreferencedCode(TrimIncompatibleWarningMessage, Url = "https://aka.ms/dotnet-illink/nativehost")]
+        [RequiresUnreferencedCode(
+            TrimIncompatibleWarningMessage,
+            Url = "https://aka.ms/dotnet-illink/nativehost"
+        )]
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("maccatalyst")]
         [UnsupportedOSPlatform("tvos")]
         [UnmanagedCallersOnly]
-        public static unsafe int LoadAssemblyAndGetFunctionPointer(IntPtr assemblyPathNative,
-                                                                   IntPtr typeNameNative,
-                                                                   IntPtr methodNameNative,
-                                                                   IntPtr delegateTypeNative,
-                                                                   IntPtr reserved,
-                                                                   IntPtr functionHandle)
+        public static unsafe int LoadAssemblyAndGetFunctionPointer(
+            IntPtr assemblyPathNative,
+            IntPtr typeNameNative,
+            IntPtr methodNameNative,
+            IntPtr delegateTypeNative,
+            IntPtr reserved,
+            IntPtr functionHandle
+        )
         {
             if (!IsSupported)
                 return HostFeatureDisabled;
@@ -72,7 +93,10 @@ namespace Internal.Runtime.InteropServices
             try
             {
                 // Validate all parameters first.
-                string assemblyPath = MarshalToString(assemblyPathNative, nameof(assemblyPathNative));
+                string assemblyPath = MarshalToString(
+                    assemblyPathNative,
+                    nameof(assemblyPathNative)
+                );
                 string typeName = MarshalToString(typeNameNative, nameof(typeNameNative));
                 string methodName = MarshalToString(methodNameNative, nameof(methodNameNative));
 
@@ -83,7 +107,12 @@ namespace Internal.Runtime.InteropServices
                 AssemblyLoadContext alc = GetIsolatedComponentLoadContext(assemblyPath);
 
                 // Create the function pointer.
-                *(IntPtr*)functionHandle = InternalGetFunctionPointer(alc, typeName, methodName, delegateTypeNative);
+                *(IntPtr*)functionHandle = InternalGetFunctionPointer(
+                    alc,
+                    typeName,
+                    methodName,
+                    delegateTypeNative
+                );
             }
             catch (Exception e)
             {
@@ -106,14 +135,21 @@ namespace Internal.Runtime.InteropServices
         [UnsupportedOSPlatform("maccatalyst")]
         [UnsupportedOSPlatform("tvos")]
         [UnmanagedCallersOnly]
-        public static unsafe int LoadAssembly(IntPtr assemblyPathNative, IntPtr loadContext, IntPtr reserved)
+        public static unsafe int LoadAssembly(
+            IntPtr assemblyPathNative,
+            IntPtr loadContext,
+            IntPtr reserved
+        )
         {
             if (!IsSupported)
                 return HostFeatureDisabled;
 
             try
             {
-                string assemblyPath = MarshalToString(assemblyPathNative, nameof(assemblyPathNative));
+                string assemblyPath = MarshalToString(
+                    assemblyPathNative,
+                    nameof(assemblyPathNative)
+                );
 
                 ArgumentOutOfRangeException.ThrowIfNotEqual(loadContext, IntPtr.Zero);
                 ArgumentOutOfRangeException.ThrowIfNotEqual(reserved, IntPtr.Zero);
@@ -127,12 +163,18 @@ namespace Internal.Runtime.InteropServices
 
             return 0;
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "The same feature switch applies to GetFunctionPointer and this function. We rely on the warning from GetFunctionPointer.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "The same feature switch applies to GetFunctionPointer and this function. We rely on the warning from GetFunctionPointer."
+            )]
             static void LoadAssemblyLocal(string assemblyPath) => LoadAssemblyImpl(assemblyPath);
         }
 
-        [RequiresUnreferencedCode(TrimIncompatibleWarningMessage, Url = "https://aka.ms/dotnet-illink/nativehost")]
+        [RequiresUnreferencedCode(
+            TrimIncompatibleWarningMessage,
+            Url = "https://aka.ms/dotnet-illink/nativehost"
+        )]
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
         [UnsupportedOSPlatform("ios")]
@@ -140,20 +182,17 @@ namespace Internal.Runtime.InteropServices
         [UnsupportedOSPlatform("tvos")]
         private static void LoadAssemblyImpl(string assemblyPath)
         {
-            lock(s_loadedInDefaultContext)
+            lock (s_loadedInDefaultContext)
             {
                 if (s_loadedInDefaultContext.Contains(assemblyPath))
                     return;
 
                 var resolver = new AssemblyDependencyResolver(assemblyPath);
-                AssemblyLoadContext.Default.Resolving +=
-                    (context, assemblyName) =>
-                    {
-                        string? assemblyPath = resolver.ResolveAssemblyToPath(assemblyName);
-                        return assemblyPath != null
-                            ? context.LoadFromAssemblyPath(assemblyPath)
-                            : null;
-                    };
+                AssemblyLoadContext.Default.Resolving += (context, assemblyName) =>
+                {
+                    string? assemblyPath = resolver.ResolveAssemblyToPath(assemblyName);
+                    return assemblyPath != null ? context.LoadFromAssemblyPath(assemblyPath) : null;
+                };
 
                 AssemblyLoadContext.Default.LoadFromAssemblyPath(assemblyPath);
                 s_loadedInDefaultContext.Add(assemblyPath);
@@ -176,7 +215,14 @@ namespace Internal.Runtime.InteropServices
         [UnsupportedOSPlatform("maccatalyst")]
         [UnsupportedOSPlatform("tvos")]
         [UnmanagedCallersOnly]
-        public static unsafe int LoadAssemblyBytes(byte* assembly, nint assemblyByteLength, byte* symbols, nint symbolsByteLength, IntPtr loadContext, IntPtr reserved)
+        public static unsafe int LoadAssemblyBytes(
+            byte* assembly,
+            nint assemblyByteLength,
+            byte* symbols,
+            nint symbolsByteLength,
+            IntPtr loadContext,
+            IntPtr reserved
+        )
         {
             if (!IsSupported)
                 return HostFeatureDisabled;
@@ -189,7 +235,10 @@ namespace Internal.Runtime.InteropServices
                 ArgumentOutOfRangeException.ThrowIfNotEqual(loadContext, IntPtr.Zero);
                 ArgumentOutOfRangeException.ThrowIfNotEqual(reserved, IntPtr.Zero);
 
-                ReadOnlySpan<byte> assemblySpan = new ReadOnlySpan<byte>(assembly, (int)assemblyByteLength);
+                ReadOnlySpan<byte> assemblySpan = new ReadOnlySpan<byte>(
+                    assembly,
+                    (int)assemblyByteLength
+                );
                 ReadOnlySpan<byte> symbolsSpan = default;
                 if (symbols != null && symbolsByteLength > 0)
                 {
@@ -205,9 +254,15 @@ namespace Internal.Runtime.InteropServices
 
             return 0;
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "The same feature switch applies to GetFunctionPointer and this function. We rely on the warning from GetFunctionPointer.")]
-            static void LoadAssemblyBytesLocal(ReadOnlySpan<byte> assemblyBytes, ReadOnlySpan<byte> symbolsBytes) => AssemblyLoadContext.Default.InternalLoad(assemblyBytes, symbolsBytes);
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "The same feature switch applies to GetFunctionPointer and this function. We rely on the warning from GetFunctionPointer."
+            )]
+            static void LoadAssemblyBytesLocal(
+                ReadOnlySpan<byte> assemblyBytes,
+                ReadOnlySpan<byte> symbolsBytes
+            ) => AssemblyLoadContext.Default.InternalLoad(assemblyBytes, symbolsBytes);
         }
 
         /// <summary>
@@ -221,12 +276,14 @@ namespace Internal.Runtime.InteropServices
         /// <param name="functionHandle">Pointer where to store the function pointer result</param>
         [RequiresDynamicCode(NativeAOTIncompatibleWarningMessage)]
         [UnmanagedCallersOnly]
-        public static unsafe int GetFunctionPointer(IntPtr typeNameNative,
-                                                    IntPtr methodNameNative,
-                                                    IntPtr delegateTypeNative,
-                                                    IntPtr loadContext,
-                                                    IntPtr reserved,
-                                                    IntPtr functionHandle)
+        public static unsafe int GetFunctionPointer(
+            IntPtr typeNameNative,
+            IntPtr methodNameNative,
+            IntPtr delegateTypeNative,
+            IntPtr loadContext,
+            IntPtr reserved,
+            IntPtr functionHandle
+        )
         {
             if (!IsSupported)
             {
@@ -260,7 +317,12 @@ namespace Internal.Runtime.InteropServices
 
 #pragma warning disable IL2026 // suppressed in ILLink.Suppressions.LibraryBuild.xml
                 // Create the function pointer.
-                *(IntPtr*)functionHandle = InternalGetFunctionPointer(AssemblyLoadContext.Default, typeName, methodName, delegateTypeNative);
+                *(IntPtr*)functionHandle = InternalGetFunctionPointer(
+                    AssemblyLoadContext.Default,
+                    typeName,
+                    methodName,
+                    delegateTypeNative
+                );
 #pragma warning restore IL2026
             }
             catch (Exception e)
@@ -271,12 +333,17 @@ namespace Internal.Runtime.InteropServices
             return 0;
         }
 
-        [RequiresUnreferencedCode(TrimIncompatibleWarningMessage, Url = "https://aka.ms/dotnet-illink/nativehost")]
+        [RequiresUnreferencedCode(
+            TrimIncompatibleWarningMessage,
+            Url = "https://aka.ms/dotnet-illink/nativehost"
+        )]
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
-        private static IsolatedComponentLoadContext GetIsolatedComponentLoadContext(string assemblyPath)
+        private static IsolatedComponentLoadContext GetIsolatedComponentLoadContext(
+            string assemblyPath
+        )
         {
             IsolatedComponentLoadContext? alc;
 
@@ -293,11 +360,16 @@ namespace Internal.Runtime.InteropServices
         }
 
         [RequiresDynamicCode(NativeAOTIncompatibleWarningMessage)]
-        [RequiresUnreferencedCode(TrimIncompatibleWarningMessage, Url = "https://aka.ms/dotnet-illink/nativehost")]
-        private static IntPtr InternalGetFunctionPointer(AssemblyLoadContext alc,
-                                                         string typeName,
-                                                         string methodName,
-                                                         IntPtr delegateTypeNative)
+        [RequiresUnreferencedCode(
+            TrimIncompatibleWarningMessage,
+            Url = "https://aka.ms/dotnet-illink/nativehost"
+        )]
+        private static IntPtr InternalGetFunctionPointer(
+            AssemblyLoadContext alc,
+            string typeName,
+            string methodName,
+            IntPtr delegateTypeNative
+        )
         {
             // Create a resolver callback for types.
             Func<AssemblyName, Assembly> resolver = alc.LoadFromAssemblyName;
@@ -318,7 +390,10 @@ namespace Internal.Runtime.InteropServices
             }
             else
             {
-                string delegateTypeName = MarshalToString(delegateTypeNative, nameof(delegateTypeNative));
+                string delegateTypeName = MarshalToString(
+                    delegateTypeNative,
+                    nameof(delegateTypeNative)
+                );
                 delegateType = Type.GetType(delegateTypeName, resolver, null, throwOnError: true)!;
             }
 
@@ -329,14 +404,17 @@ namespace Internal.Runtime.InteropServices
             if (delegateType == null)
             {
                 // Match search semantics of the CreateDelegate() function below.
-                BindingFlags bindingFlags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+                BindingFlags bindingFlags =
+                    BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
                 MethodInfo? methodInfo = type.GetMethod(methodName, bindingFlags);
                 if (methodInfo == null)
                     throw new MissingMethodException(typeName, methodName);
 
                 // Verify the function is properly marked.
                 if (null == methodInfo.GetCustomAttribute<UnmanagedCallersOnlyAttribute>())
-                    throw new InvalidOperationException(SR.InvalidOperation_FunctionMissingUnmanagedCallersOnly);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_FunctionMissingUnmanagedCallersOnly
+                    );
 
                 functionPtr = methodInfo.MethodHandle.GetFunctionPointer();
             }

@@ -31,14 +31,25 @@ namespace NativeExports.ComInterfaceGenerator
                 {
                     if (_s_comInterfaceVTable != null)
                         return _s_comInterfaceVTable;
-                    void** vtable = (void**)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(GetAndSetInt), sizeof(void*) * 6);
-                    GetIUnknownImpl(out var fpQueryInterface, out var fpAddReference, out var fpRelease);
+                    void** vtable = (void**)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(GetAndSetInt),
+                            sizeof(void*) * 6
+                        );
+                    GetIUnknownImpl(
+                        out var fpQueryInterface,
+                        out var fpAddReference,
+                        out var fpRelease
+                    );
                     vtable[0] = (void*)fpQueryInterface;
                     vtable[1] = (void*)fpAddReference;
                     vtable[2] = (void*)fpRelease;
-                    vtable[3] = (delegate* unmanaged<void*, byte*, byte**, int>)&Implementation.ABI.StringMarshallingUtf8;
-                    vtable[4] = (delegate* unmanaged<void*, ushort*, ushort**, int>)&Implementation.ABI.MarshalAsLPWStr;
-                    vtable[5] = (delegate* unmanaged<void*, ushort*, ushort**, int>)&Implementation.ABI.MarshalUsingUtf16;
+                    vtable[3] = (delegate* unmanaged<void*, byte*, byte**, int>)
+                        &Implementation.ABI.StringMarshallingUtf8;
+                    vtable[4] = (delegate* unmanaged<void*, ushort*, ushort**, int>)
+                        &Implementation.ABI.MarshalAsLPWStr;
+                    vtable[5] = (delegate* unmanaged<void*, ushort*, ushort**, int>)
+                        &Implementation.ABI.MarshalUsingUtf16;
                     _s_comInterfaceVTable = vtable;
                     return _s_comInterfaceVTable;
                 }
@@ -51,27 +62,49 @@ namespace NativeExports.ComInterfaceGenerator
                 {
                     if (_s_comInterfaceVTable != null)
                         return _s_comInterfaceVTable;
-                    void** vtable = (void**)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(GetAndSetInt), sizeof(void*) * 9);
-                    GetIUnknownImpl(out var fpQueryInterface, out var fpAddReference, out var fpRelease);
+                    void** vtable = (void**)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(GetAndSetInt),
+                            sizeof(void*) * 9
+                        );
+                    GetIUnknownImpl(
+                        out var fpQueryInterface,
+                        out var fpAddReference,
+                        out var fpRelease
+                    );
                     vtable[0] = (void*)fpQueryInterface;
                     vtable[1] = (void*)fpAddReference;
                     vtable[2] = (void*)fpRelease;
-                    vtable[3] = (delegate* unmanaged<void*, byte*, byte**, int>)&Implementation.ABI.StringMarshallingUtf8;
-                    vtable[4] = (delegate* unmanaged<void*, ushort*, ushort**, int>)&Implementation.ABI.MarshalAsLPWStr;
-                    vtable[5] = (delegate* unmanaged<void*, ushort*, ushort**, int>)&Implementation.ABI.MarshalUsingUtf16;
-                    vtable[6] = (delegate* unmanaged<void*, byte*, byte**, int>)&Implementation.ABI.StringMarshallingUtf8_2;
-                    vtable[7] = (delegate* unmanaged<void*, ushort*, ushort**, int>)&Implementation.ABI.MarshalAsLPWStr_2;
-                    vtable[8] = (delegate* unmanaged<void*, ushort*, ushort**, int>)&Implementation.ABI.MarshalUsingUtf16_2;
+                    vtable[3] = (delegate* unmanaged<void*, byte*, byte**, int>)
+                        &Implementation.ABI.StringMarshallingUtf8;
+                    vtable[4] = (delegate* unmanaged<void*, ushort*, ushort**, int>)
+                        &Implementation.ABI.MarshalAsLPWStr;
+                    vtable[5] = (delegate* unmanaged<void*, ushort*, ushort**, int>)
+                        &Implementation.ABI.MarshalUsingUtf16;
+                    vtable[6] = (delegate* unmanaged<void*, byte*, byte**, int>)
+                        &Implementation.ABI.StringMarshallingUtf8_2;
+                    vtable[7] = (delegate* unmanaged<void*, ushort*, ushort**, int>)
+                        &Implementation.ABI.MarshalAsLPWStr_2;
+                    vtable[8] = (delegate* unmanaged<void*, ushort*, ushort**, int>)
+                        &Implementation.ABI.MarshalUsingUtf16_2;
                     _s_comInterfaceVTable = vtable;
                     return _s_comInterfaceVTable;
                 }
             }
 
-            protected override ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+            protected override ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            )
             {
                 if (obj is IStringMarshallingOverrideDerived)
                 {
-                    ComInterfaceEntry* comInterfaceEntry = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(Implementation), sizeof(ComInterfaceEntry) * 2);
+                    ComInterfaceEntry* comInterfaceEntry = (ComInterfaceEntry*)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(Implementation),
+                            sizeof(ComInterfaceEntry) * 2
+                        );
                     comInterfaceEntry[0].IID = new Guid(IStringMarshallingOverrideDerived.IID);
                     comInterfaceEntry[0].Vtable = (nint)S_DerivedVTable;
                     comInterfaceEntry[1].IID = new Guid(IStringMarshallingOverride.IID);
@@ -81,7 +114,11 @@ namespace NativeExports.ComInterfaceGenerator
                 }
                 if (obj is IStringMarshallingOverride)
                 {
-                    ComInterfaceEntry* comInterfaceEntry = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(Implementation), sizeof(ComInterfaceEntry));
+                    ComInterfaceEntry* comInterfaceEntry = (ComInterfaceEntry*)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(Implementation),
+                            sizeof(ComInterfaceEntry)
+                        );
                     comInterfaceEntry->IID = new Guid(IStringMarshallingOverride.IID);
                     comInterfaceEntry->Vtable = (nint)S_VTable;
                     count = 1;
@@ -91,21 +128,35 @@ namespace NativeExports.ComInterfaceGenerator
                 return null;
             }
 
-            protected override object? CreateObject(nint externalComObject, CreateObjectFlags flags) => throw new NotImplementedException();
-            protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
+            protected override object? CreateObject(
+                nint externalComObject,
+                CreateObjectFlags flags
+            ) => throw new NotImplementedException();
+
+            protected override void ReleaseObjects(IEnumerable objects) =>
+                throw new NotImplementedException();
         }
 
         partial class Implementation : IStringMarshallingOverride, IStringMarshallingOverrideDerived
         {
             string _data = "Your string: ";
+
             string IStringMarshallingOverride.StringMarshallingUtf8(string input) => _data + input;
+
             string IStringMarshallingOverride.MarshalAsLPWString(string input) => _data + input;
+
             string IStringMarshallingOverride.MarshalUsingUtf16(string input) => _data + input;
 
             string _data2 = "Your string 2: ";
-            string IStringMarshallingOverrideDerived.StringMarshallingUtf8_2(string input) => _data2 + input;
-            string IStringMarshallingOverrideDerived.MarshalAsLPWString_2(string input) => _data2 + input;
-            string IStringMarshallingOverrideDerived.MarshalUsingUtf16_2(string input) => _data2 + input;
+
+            string IStringMarshallingOverrideDerived.StringMarshallingUtf8_2(string input) =>
+                _data2 + input;
+
+            string IStringMarshallingOverrideDerived.MarshalAsLPWString_2(string input) =>
+                _data2 + input;
+
+            string IStringMarshallingOverrideDerived.MarshalUsingUtf16_2(string input) =>
+                _data2 + input;
 
             // Provides function pointers in the COM format to use in COM VTables
             public static class ABI
@@ -116,7 +167,9 @@ namespace NativeExports.ComInterfaceGenerator
                     try
                     {
                         string inputStr = Utf8StringMarshaller.ConvertToManaged(input);
-                        string currValue = ComInterfaceDispatch.GetInstance<IStringMarshallingOverride>((ComInterfaceDispatch*)@this).StringMarshallingUtf8(inputStr);
+                        string currValue = ComInterfaceDispatch
+                            .GetInstance<IStringMarshallingOverride>((ComInterfaceDispatch*)@this)
+                            .StringMarshallingUtf8(inputStr);
                         *output = Utf8StringMarshaller.ConvertToUnmanaged(currValue);
                         return 0;
                     }
@@ -132,7 +185,9 @@ namespace NativeExports.ComInterfaceGenerator
                     try
                     {
                         string inputStr = Utf16StringMarshaller.ConvertToManaged(input);
-                        string currValue = ComInterfaceDispatch.GetInstance<IStringMarshallingOverride>((ComInterfaceDispatch*)@this).MarshalAsLPWString(inputStr);
+                        string currValue = ComInterfaceDispatch
+                            .GetInstance<IStringMarshallingOverride>((ComInterfaceDispatch*)@this)
+                            .MarshalAsLPWString(inputStr);
                         *output = Utf16StringMarshaller.ConvertToUnmanaged(currValue);
                         return 0;
                     }
@@ -148,7 +203,9 @@ namespace NativeExports.ComInterfaceGenerator
                     try
                     {
                         string inputStr = Utf16StringMarshaller.ConvertToManaged(input);
-                        string currValue = ComInterfaceDispatch.GetInstance<IStringMarshallingOverride>((ComInterfaceDispatch*)@this).MarshalUsingUtf16(inputStr);
+                        string currValue = ComInterfaceDispatch
+                            .GetInstance<IStringMarshallingOverride>((ComInterfaceDispatch*)@this)
+                            .MarshalUsingUtf16(inputStr);
                         *output = Utf16StringMarshaller.ConvertToUnmanaged(currValue);
                         return 0;
                     }
@@ -164,7 +221,11 @@ namespace NativeExports.ComInterfaceGenerator
                     try
                     {
                         string inputStr = Utf8StringMarshaller.ConvertToManaged(input);
-                        string currValue = ComInterfaceDispatch.GetInstance<IStringMarshallingOverrideDerived>((ComInterfaceDispatch*)@this).StringMarshallingUtf8_2(inputStr);
+                        string currValue = ComInterfaceDispatch
+                            .GetInstance<IStringMarshallingOverrideDerived>(
+                                (ComInterfaceDispatch*)@this
+                            )
+                            .StringMarshallingUtf8_2(inputStr);
                         *output = Utf8StringMarshaller.ConvertToUnmanaged(currValue);
                         return 0;
                     }
@@ -180,7 +241,11 @@ namespace NativeExports.ComInterfaceGenerator
                     try
                     {
                         string inputStr = Utf16StringMarshaller.ConvertToManaged(input);
-                        string currValue = ComInterfaceDispatch.GetInstance<IStringMarshallingOverrideDerived>((ComInterfaceDispatch*)@this).MarshalAsLPWString_2(inputStr);
+                        string currValue = ComInterfaceDispatch
+                            .GetInstance<IStringMarshallingOverrideDerived>(
+                                (ComInterfaceDispatch*)@this
+                            )
+                            .MarshalAsLPWString_2(inputStr);
                         *output = Utf16StringMarshaller.ConvertToUnmanaged(currValue);
                         return 0;
                     }
@@ -196,7 +261,11 @@ namespace NativeExports.ComInterfaceGenerator
                     try
                     {
                         string inputStr = Utf16StringMarshaller.ConvertToManaged(input);
-                        string currValue = ComInterfaceDispatch.GetInstance<IStringMarshallingOverrideDerived>((ComInterfaceDispatch*)@this).MarshalUsingUtf16_2(inputStr);
+                        string currValue = ComInterfaceDispatch
+                            .GetInstance<IStringMarshallingOverrideDerived>(
+                                (ComInterfaceDispatch*)@this
+                            )
+                            .MarshalUsingUtf16_2(inputStr);
                         *output = Utf16StringMarshaller.ConvertToUnmanaged(currValue);
                         return 0;
                     }

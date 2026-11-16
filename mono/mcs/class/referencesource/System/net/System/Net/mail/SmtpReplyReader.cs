@@ -3,7 +3,6 @@ namespace System.Net.Mail
     using System;
     using System.IO;
 
-
     //streams are read only; return of 0 means end of server's reply
     class SmtpReplyReader
     {
@@ -24,13 +23,11 @@ namespace System.Net.Mail
             return reader.BeginReadLine(this, callback, state);
         }
 
-
         public void Close()
         {
             reader.Close(this);
         }
 
-        
         internal LineInfo[] EndReadLines(IAsyncResult result)
         {
             return reader.EndReadLines(result);
@@ -40,7 +37,7 @@ namespace System.Net.Mail
         {
             return reader.EndReadLine(result);
         }
-        
+
         internal LineInfo[] ReadLines()
         {
             return reader.ReadLines(this);
@@ -52,5 +49,3 @@ namespace System.Net.Mail
         }
     }
 }
-
-

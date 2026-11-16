@@ -261,7 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(463, "https://github.com/dotnet/roslyn/issues/463")]
         public void TestQualifyWithThis()
         {
-            var original = @"
+            var original =
+                @"
 class C
 {
     int Sign;
@@ -285,7 +286,7 @@ class C
 
             var indexText = "Sign +";
 
-            // Expected behavior: Qualifying identifier 'Sign' with 'this.' and doing a diff between trees 
+            // Expected behavior: Qualifying identifier 'Sign' with 'this.' and doing a diff between trees
             // should return a single text change with 'this.' as added text.
 
             // Works as expected for last index
@@ -293,7 +294,7 @@ class C
             TestQualifyWithThisCore(root, index);
 
             // Doesn't work as expected for first index.
-            // It returns 2 changes with add followed by delete, 
+            // It returns 2 changes with add followed by delete,
             // causing the 2 isolated edits of adding "this." to seem conflicting edits, even though they are not.
             // See https://github.com/dotnet/roslyn/issues/320 for details.
             index = original.IndexOf(indexText, StringComparison.Ordinal);
@@ -310,10 +311,12 @@ class C
             Assert.Equal("Sign", node.Identifier.ValueText);
 
             var leadingTrivia = node.GetLeadingTrivia();
-            var newNode = SyntaxFactory.MemberAccessExpression(
-                SyntaxKind.SimpleMemberAccessExpression,
-                SyntaxFactory.ThisExpression(),
-                node.WithoutLeadingTrivia())
+            var newNode = SyntaxFactory
+                .MemberAccessExpression(
+                    SyntaxKind.SimpleMemberAccessExpression,
+                    SyntaxFactory.ThisExpression(),
+                    node.WithoutLeadingTrivia()
+                )
                 .WithLeadingTrivia(leadingTrivia);
 
             var newRoot = root.ReplaceNode(node, newNode);
@@ -328,7 +331,8 @@ class C
         [Fact, WorkItem(463, "https://github.com/dotnet/roslyn/issues/463")]
         public void TestReplaceWithBuiltInType()
         {
-            var original = @"
+            var original =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -345,7 +349,7 @@ public class TestClass
 
             var indexText = "Object";
 
-            // Expected behavior: Replacing identifier 'Object' with 'object' and doing a diff between trees 
+            // Expected behavior: Replacing identifier 'Object' with 'object' and doing a diff between trees
             // should return a single text change for character replace.
 
             // Works as expected for first index
@@ -357,7 +361,7 @@ public class TestClass
             TestReplaceWithBuiltInTypeCore(root, index);
 
             // Doesn't work as expected for the third index.
-            // It returns 2 changes with add followed by delete, 
+            // It returns 2 changes with add followed by delete,
             // causing the 2 isolated edits to seem conflicting edits, even though they are not.
             // See https://github.com/dotnet/roslyn/issues/320 for details.
             indexText = "Object()";
@@ -375,7 +379,8 @@ public class TestClass
             Assert.Equal("Object", node.Identifier.ValueText);
 
             var leadingTrivia = node.GetLeadingTrivia();
-            var newNode = SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ObjectKeyword))
+            var newNode = SyntaxFactory
+                .PredefinedType(SyntaxFactory.Token(SyntaxKind.ObjectKeyword))
                 .WithLeadingTrivia(leadingTrivia);
 
             var newRoot = root.ReplaceNode(node, newNode);

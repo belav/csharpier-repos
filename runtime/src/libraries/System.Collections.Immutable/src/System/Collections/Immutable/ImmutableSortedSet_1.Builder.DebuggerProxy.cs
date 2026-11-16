@@ -31,10 +31,7 @@ namespace System.Collections.Immutable
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
         public T[] Contents
         {
-            get
-            {
-                return _set.ToArray(_set.Count);
-            }
+            get { return _set.ToArray(_set.Count); }
         }
     }
 }

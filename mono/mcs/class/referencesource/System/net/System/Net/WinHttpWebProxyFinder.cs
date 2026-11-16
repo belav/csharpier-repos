@@ -1,9 +1,9 @@
-using System.Text;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Microsoft.Win32;
-using System.Runtime.CompilerServices;
 using System.Net.Configuration;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
+using Microsoft.Win32;
 
 namespace System.Net
 {
@@ -18,15 +18,24 @@ namespace System.Net
         {
             // Don't specify a user agent and dont' specify proxy settings. This is the same behavior WinHttp
             // uses when downloading the PAC file.
-            session = UnsafeNclNativeMethods.WinHttp.WinHttpOpen(null,
-                UnsafeNclNativeMethods.WinHttp.AccessType.NoProxy, null, null, 0);
+            session = UnsafeNclNativeMethods.WinHttp.WinHttpOpen(
+                null,
+                UnsafeNclNativeMethods.WinHttp.AccessType.NoProxy,
+                null,
+                null,
+                0
+            );
 
             // Don't throw on error, just log the error information. This is consistent with how auto-proxy
             // works: we never throw on error (discovery, download, execution errors).
             if (session == null || session.IsInvalid)
             {
                 int errorCode = GetLastWin32Error();
-                if (Logging.On) Logging.PrintError(Logging.Web, SR.GetString(SR.net_log_proxy_winhttp_cant_open_session, errorCode));
+                if (Logging.On)
+                    Logging.PrintError(
+                        Logging.Web,
+                        SR.GetString(SR.net_log_proxy_winhttp_cant_open_session, errorCode)
+                    );
             }
             else
             {
@@ -37,11 +46,23 @@ namespace System.Net
                 // we simply apply the configured timeout to all four WinHttp timeouts.
                 int timeout = SettingsSectionInternal.Section.DownloadTimeout;
 
-                if (!UnsafeNclNativeMethods.WinHttp.WinHttpSetTimeouts(session, timeout, timeout, timeout, timeout))
+                if (
+                    !UnsafeNclNativeMethods.WinHttp.WinHttpSetTimeouts(
+                        session,
+                        timeout,
+                        timeout,
+                        timeout,
+                        timeout
+                    )
+                )
                 {
                     // We weren't able to set the timeouts. Just log and continue.
                     int errorCode = GetLastWin32Error();
-                    if (Logging.On) Logging.PrintError(Logging.Web, SR.GetString(SR.net_log_proxy_winhttp_timeout_error, errorCode));
+                    if (Logging.On)
+                        Logging.PrintError(
+                            Logging.Web,
+                            SR.GetString(SR.net_log_proxy_winhttp_timeout_error, errorCode)
+                        );
                 }
             }
         }
@@ -71,7 +92,7 @@ namespace System.Net
             if (Engine.AutomaticallyDetectSettings && !autoDetectFailed)
             {
                 errorCode = GetProxies(destination, null, out proxyListString);
-                
+
                 // Remember if auto-detect failed. If config-script works, then the next time GetProxies() is
                 // called, we'll not try auto-detect but jump right to config-script.
                 autoDetectFailed = IsErrorFatalForAutoDetect(errorCode);
@@ -88,10 +109,16 @@ namespace System.Net
 
             // If auto-detect failed or was turned off, and a config-script location is available, download
             // the script from that location and execute it.
-            if ((Engine.AutomaticConfigurationScript != null) && (IsRecoverableAutoProxyError(errorCode)))
+            if (
+                (Engine.AutomaticConfigurationScript != null)
+                && (IsRecoverableAutoProxyError(errorCode))
+            )
             {
-                errorCode = GetProxies(destination, Engine.AutomaticConfigurationScript,
-                    out proxyListString);
+                errorCode = GetProxies(
+                    destination,
+                    Engine.AutomaticConfigurationScript,
+                    out proxyListString
+                );
             }
 
             State = GetStateFromErrorCode(errorCode);
@@ -133,7 +160,7 @@ namespace System.Net
         public override void Reset()
         {
             base.Reset();
-            
+
             // Reset auto-detect failure: If the connection changes, we may be able to do auto-detect again.
             autoDetectFailed = false;
         }
@@ -167,18 +194,31 @@ namespace System.Net
                 // Use auto-discovery to find the script location.
                 autoProxyOptions.Flags = UnsafeNclNativeMethods.WinHttp.AutoProxyFlags.AutoDetect;
                 autoProxyOptions.AutoConfigUrl = null;
-                autoProxyOptions.AutoDetectFlags = UnsafeNclNativeMethods.WinHttp.AutoDetectType.Dhcp |
-                    UnsafeNclNativeMethods.WinHttp.AutoDetectType.DnsA;
+                autoProxyOptions.AutoDetectFlags =
+                    UnsafeNclNativeMethods.WinHttp.AutoDetectType.Dhcp
+                    | UnsafeNclNativeMethods.WinHttp.AutoDetectType.DnsA;
             }
             else
             {
                 // Use the provided script location for the PAC file.
-                autoProxyOptions.Flags = UnsafeNclNativeMethods.WinHttp.AutoProxyFlags.AutoProxyConfigUrl;
+                autoProxyOptions.Flags = UnsafeNclNativeMethods
+                    .WinHttp
+                    .AutoProxyFlags
+                    .AutoProxyConfigUrl;
                 autoProxyOptions.AutoConfigUrl = scriptLocation.ToString();
-                autoProxyOptions.AutoDetectFlags = UnsafeNclNativeMethods.WinHttp.AutoDetectType.None;
+                autoProxyOptions.AutoDetectFlags = UnsafeNclNativeMethods
+                    .WinHttp
+                    .AutoDetectType
+                    .None;
             }
 
-            if (!WinHttpGetProxyForUrl(destination.ToString(), ref autoProxyOptions, out proxyListString))
+            if (
+                !WinHttpGetProxyForUrl(
+                    destination.ToString(),
+                    ref autoProxyOptions,
+                    out proxyListString
+                )
+            )
             {
                 errorCode = GetLastWin32Error();
 
@@ -187,28 +227,45 @@ namespace System.Net
                 // Note that by default webProxy.Credentials will be null. The user needs to set
                 // <defaultProxy useDefaultCredentials="true"> in the config file, in order for
                 // webProxy.Credentials to be set to DefaultNetworkCredentials.
-                if ((errorCode == (int)UnsafeNclNativeMethods.WinHttp.ErrorCodes.LoginFailure) &&
-                    (Engine.Credentials != null))
+                if (
+                    (errorCode == (int)UnsafeNclNativeMethods.WinHttp.ErrorCodes.LoginFailure)
+                    && (Engine.Credentials != null)
+                )
                 {
                     // Now we need to try again, this time by enabling auto-logon.
                     autoProxyOptions.AutoLogonIfChallenged = true;
 
-                    if (!WinHttpGetProxyForUrl(destination.ToString(), ref autoProxyOptions,
-                        out proxyListString))
+                    if (
+                        !WinHttpGetProxyForUrl(
+                            destination.ToString(),
+                            ref autoProxyOptions,
+                            out proxyListString
+                        )
+                    )
                     {
                         errorCode = GetLastWin32Error();
                     }
                 }
 
-                if (Logging.On) Logging.PrintError(Logging.Web, SR.GetString(SR.net_log_proxy_winhttp_getproxy_failed, destination, errorCode));
+                if (Logging.On)
+                    Logging.PrintError(
+                        Logging.Web,
+                        SR.GetString(
+                            SR.net_log_proxy_winhttp_getproxy_failed,
+                            destination,
+                            errorCode
+                        )
+                    );
             }
 
             return errorCode;
         }
 
-        private bool WinHttpGetProxyForUrl(string destination,
+        private bool WinHttpGetProxyForUrl(
+            string destination,
             ref UnsafeNclNativeMethods.WinHttp.WINHTTP_AUTOPROXY_OPTIONS autoProxyOptions,
-            out string proxyListString)
+            out string proxyListString
+        )
         {
             proxyListString = null;
 
@@ -222,8 +279,12 @@ namespace System.Net
             RuntimeHelpers.PrepareConstrainedRegions();
             try
             {
-                success = UnsafeNclNativeMethods.WinHttp.WinHttpGetProxyForUrl(session,
-                    destination, ref autoProxyOptions, out proxyInfo);
+                success = UnsafeNclNativeMethods.WinHttp.WinHttpGetProxyForUrl(
+                    session,
+                    destination,
+                    ref autoProxyOptions,
+                    out proxyInfo
+                );
 
                 if (success)
                 {
@@ -253,8 +314,10 @@ namespace System.Net
 
         private static bool IsRecoverableAutoProxyError(int errorCode)
         {
-            GlobalLog.Assert(errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_INVALID_PARAMETER,
-                "WinHttpGetProxyForUrl() call: Error code 'Invalid parameter' should not be returned.");
+            GlobalLog.Assert(
+                errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_INVALID_PARAMETER,
+                "WinHttpGetProxyForUrl() call: Error code 'Invalid parameter' should not be returned."
+            );
 
             // According to WinHttp the following states can be considered "recoverable", i.e.
             // we should continue trying WinHttpGetProxyForUrl() with the provided script-location
@@ -297,7 +360,7 @@ namespace System.Net
                 case UnsafeNclNativeMethods.WinHttp.ErrorCodes.InvalidUrl:
                 case UnsafeNclNativeMethods.WinHttp.ErrorCodes.AutoProxyServiceError:
                     // AutoProxy succeeded, but no proxy could be found for this request
-                    return AutoWebProxyState.Completed; 
+                    return AutoWebProxyState.Completed;
 
                 default:
                     // We don't know the exact cause of the failure. Set the state to compilation failure to
@@ -328,11 +391,11 @@ namespace System.Net
             {
                 case UnsafeNclNativeMethods.WinHttp.ErrorCodes.Success:
                 case UnsafeNclNativeMethods.WinHttp.ErrorCodes.InvalidUrl:
-                    // Some URIs are not supported (like Unicode hosts on Win7 and lower), 
-                    // but our proxy is still valid
+                // Some URIs are not supported (like Unicode hosts on Win7 and lower),
+                // but our proxy is still valid
                 case UnsafeNclNativeMethods.WinHttp.ErrorCodes.BadAutoProxyScript:
-                    // Got the script, but something went wrong in execution.  For example, 
-                    // the request was for an unresolvable single label name.
+                // Got the script, but something went wrong in execution.  For example,
+                // the request was for an unresolvable single label name.
                 case UnsafeNclNativeMethods.WinHttp.ErrorCodes.AutoProxyServiceError:
                     // Returned when a proxy for the specified URL cannot be located.
                     return false;

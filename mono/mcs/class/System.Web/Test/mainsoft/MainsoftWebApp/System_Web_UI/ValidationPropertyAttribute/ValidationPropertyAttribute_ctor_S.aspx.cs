@@ -30,73 +30,72 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI
 {
-	public class ValidationPropertyAttribute_ctor_S
-		: GHTBaseWeb 
-	{
-		protected System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class ValidationPropertyAttribute_ctor_S : GHTBaseWeb
+    {
+        protected System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
 
-		}
-		#endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
-			GHTTestBegin(frm);
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			GHTSubTestBegin("ValidationPropertyAttribute inherited into Custom Control"); 
-			try 
-			{ 
-				MyTextBox2 myTextBox2 = new MyTextBox2(); 
-				myTextBox2.ID = "MyTextBox2"; 
-				GHTActiveSubTest.Controls.Add(myTextBox2); 
-				MyControl MyControl1 = new MyControl(); 
-				GHTActiveSubTest.Controls.Add(MyControl1); 
-				RegularExpressionValidator1.ControlToValidate = "MyTextBox2"; 
-				GHTSubTestAddResult(GHTActiveSubTest.ID); 
-			} 
-			catch (Exception ex) 
-			{ 
-				GHTSubTestUnexpectedExceptionCaught(ex); 
-			} 
-			GHTSubTestEnd();
-			GHTTestEnd();
-		}
-	}
-	public class MyTextBox2		: TextBox
-	{
-		public MyTextBox2()
-		{
-		}
-	}
-	[System.Web.UI.ValidationPropertyAttribute("Message")]
-	public class MyControl        : System.Web.UI.Control
-	{
-		public MyControl()
-		{
-			MyTextBox2 myTextBox2 = new MyTextBox2(); 
-			this.Controls.Add(myTextBox2);
-		}
-	}
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(frm);
+
+            GHTSubTestBegin("ValidationPropertyAttribute inherited into Custom Control");
+            try
+            {
+                MyTextBox2 myTextBox2 = new MyTextBox2();
+                myTextBox2.ID = "MyTextBox2";
+                GHTActiveSubTest.Controls.Add(myTextBox2);
+                MyControl MyControl1 = new MyControl();
+                GHTActiveSubTest.Controls.Add(MyControl1);
+                RegularExpressionValidator1.ControlToValidate = "MyTextBox2";
+                GHTSubTestAddResult(GHTActiveSubTest.ID);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
+            GHTTestEnd();
+        }
+    }
+
+    public class MyTextBox2 : TextBox
+    {
+        public MyTextBox2() { }
+    }
+
+    [System.Web.UI.ValidationPropertyAttribute("Message")]
+    public class MyControl : System.Web.UI.Control
+    {
+        public MyControl()
+        {
+            MyTextBox2 myTextBox2 = new MyTextBox2();
+            this.Controls.Add(myTextBox2);
+        }
+    }
 }

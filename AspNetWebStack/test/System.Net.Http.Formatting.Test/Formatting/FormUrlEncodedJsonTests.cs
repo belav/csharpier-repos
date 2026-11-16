@@ -12,7 +12,10 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties(typeof(FormUrlEncodedJson), TypeAssert.TypeProperties.IsClass | TypeAssert.TypeProperties.IsStatic);
+            Assert.Type.HasProperties(
+                typeof(FormUrlEncodedJson),
+                TypeAssert.TypeProperties.IsClass | TypeAssert.TypeProperties.IsStatic
+            );
         }
 
         [Fact]
@@ -24,16 +27,34 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void ParseThrowsInvalidMaxDepth()
         {
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(() => FormUrlEncodedJson.Parse(CreateQuery(), -1), "maxDepth", "1", -1);
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(() => FormUrlEncodedJson.Parse(CreateQuery(), 0), "maxDepth", "1", 0);
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(
+                () => FormUrlEncodedJson.Parse(CreateQuery(), -1),
+                "maxDepth",
+                "1",
+                -1
+            );
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(
+                () => FormUrlEncodedJson.Parse(CreateQuery(), 0),
+                "maxDepth",
+                "1",
+                0
+            );
         }
 
         [Fact]
         public void ParseThrowsMaxDepthExceeded()
         {
             // Depth of 'a[b]=1' is 3
-            IEnumerable<KeyValuePair<string, string>> query = CreateQuery(new KeyValuePair<string, string>("a[b]", "1"));
-            Assert.ThrowsArgument(() => { FormUrlEncodedJson.Parse(query, 2); }, null);
+            IEnumerable<KeyValuePair<string, string>> query = CreateQuery(
+                new KeyValuePair<string, string>("a[b]", "1")
+            );
+            Assert.ThrowsArgument(
+                () =>
+                {
+                    FormUrlEncodedJson.Parse(query, 2);
+                },
+                null
+            );
 
             // This should succeed
             Assert.NotNull(FormUrlEncodedJson.Parse(query, 3));
@@ -50,8 +71,18 @@ namespace System.Net.Http.Formatting
         public void TryParseThrowsInvalidMaxDepth()
         {
             JObject value;
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(() => FormUrlEncodedJson.TryParse(CreateQuery(), -1, out value), "maxDepth", "1", -1);
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(() => FormUrlEncodedJson.TryParse(CreateQuery(), 0, out value), "maxDepth", "1", 0);
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(
+                () => FormUrlEncodedJson.TryParse(CreateQuery(), -1, out value),
+                "maxDepth",
+                "1",
+                -1
+            );
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(
+                () => FormUrlEncodedJson.TryParse(CreateQuery(), 0, out value),
+                "maxDepth",
+                "1",
+                0
+            );
         }
 
         [Fact]
@@ -60,15 +91,25 @@ namespace System.Net.Http.Formatting
             JObject value;
 
             // Depth of 'a[b]=1' is 3
-            IEnumerable<KeyValuePair<string, string>> query = CreateQuery(new KeyValuePair<string, string>("a[b]", "1"));
-            Assert.False(FormUrlEncodedJson.TryParse(query, 2, out value), "Parse should have failed due to too high depth.");
+            IEnumerable<KeyValuePair<string, string>> query = CreateQuery(
+                new KeyValuePair<string, string>("a[b]", "1")
+            );
+            Assert.False(
+                FormUrlEncodedJson.TryParse(query, 2, out value),
+                "Parse should have failed due to too high depth."
+            );
 
             // This should succeed
-            Assert.True(FormUrlEncodedJson.TryParse(query, 3, out value), "Expected non-null JsonObject instance");
+            Assert.True(
+                FormUrlEncodedJson.TryParse(query, 3, out value),
+                "Expected non-null JsonObject instance"
+            );
             Assert.NotNull(value);
         }
 
-        private static IEnumerable<KeyValuePair<string, string>> CreateQuery(params KeyValuePair<string, string>[] namevaluepairs)
+        private static IEnumerable<KeyValuePair<string, string>> CreateQuery(
+            params KeyValuePair<string, string>[] namevaluepairs
+        )
         {
             return new List<KeyValuePair<string, string>>(namevaluepairs);
         }

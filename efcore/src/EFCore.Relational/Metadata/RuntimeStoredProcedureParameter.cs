@@ -30,7 +30,8 @@ public class RuntimeStoredProcedureParameter : AnnotatableBase, IRuntimeStoredPr
         ParameterDirection direction,
         bool forRowsAffected,
         string? propertyName,
-        bool? forOriginalValue)
+        bool? forOriginalValue
+    )
     {
         StoredProcedure = storedProcedure;
         _propertyName = propertyName;
@@ -51,8 +52,10 @@ public class RuntimeStoredProcedureParameter : AnnotatableBase, IRuntimeStoredPr
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IStoredProcedureParameter)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IStoredProcedureParameter)this).ToDebugString(
+            MetadataDebugStringOptions.SingleLineDefault
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,10 +64,14 @@ public class RuntimeStoredProcedureParameter : AnnotatableBase, IRuntimeStoredPr
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IStoredProcedureParameter)this).ToDebugString(),
-            () => ((IStoredProcedureParameter)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () =>
+                ((IStoredProcedureParameter)this).ToDebugString(
+                    MetadataDebugStringOptions.LongDefault
+                )
+        );
 
     /// <inheritdoc />
     IReadOnlyStoredProcedure IReadOnlyStoredProcedureParameter.StoredProcedure

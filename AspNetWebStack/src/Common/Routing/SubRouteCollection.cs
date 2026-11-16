@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
-
 #if ASPNETWEBAPI
 using System.Web.Http.Properties;
 using TRoute = System.Web.Http.Routing.IHttpRoute;
@@ -83,22 +82,32 @@ namespace System.Web.Mvc.Routing
             get { return _entries; }
         }
 
-        private static void ThrowExceptionForDuplicateRouteNames(string name, TRoute route1, TRoute route2)
+        private static void ThrowExceptionForDuplicateRouteNames(
+            string name,
+            TRoute route1,
+            TRoute route2
+        )
         {
 #if ASPNETWEBAPI
-            throw new InvalidOperationException(String.Format(
-                CultureInfo.CurrentCulture,
-                SRResources.SubRouteCollection_DuplicateRouteName,
-                name,
-                route1.RouteTemplate,
-                route2.RouteTemplate));
+            throw new InvalidOperationException(
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    SRResources.SubRouteCollection_DuplicateRouteName,
+                    name,
+                    route1.RouteTemplate,
+                    route2.RouteTemplate
+                )
+            );
 #else
-            throw new InvalidOperationException(String.Format(
-                CultureInfo.CurrentCulture,
-                MvcResources.SubRouteCollection_DuplicateRouteName,
-                name,
-                route1.Url,
-                route2.Url));
+            throw new InvalidOperationException(
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    MvcResources.SubRouteCollection_DuplicateRouteName,
+                    name,
+                    route1.Url,
+                    route2.Url
+                )
+            );
 #endif
         }
     }

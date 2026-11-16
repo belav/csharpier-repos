@@ -5,38 +5,39 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.IO;
     using System.Collections.Specialized;
     using System.Globalization;
+    using System.IO;
     using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Json;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.Text;
     using System.Web;
     using System.Xml;
-    using System.Runtime.Serialization;
-    using System.Runtime.Serialization.Json;
 
     public class JsonQueryStringConverter : QueryStringConverter
     {
         DataContractSerializerOperationBehavior dataContractSerializerOperationBehavior = null;
         OperationDescription operationDescription = null;
 
-
-        public JsonQueryStringConverter() : base()
-        {
-        }
+        public JsonQueryStringConverter()
+            : base() { }
 
         internal JsonQueryStringConverter(OperationDescription operationDescription)
             : base()
         {
             if (operationDescription == null)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("operationDescription");
+                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "operationDescription"
+                );
             }
             this.operationDescription = operationDescription;
-            this.dataContractSerializerOperationBehavior = this.operationDescription.Behaviors.Find<DataContractSerializerOperationBehavior>();
+            this.dataContractSerializerOperationBehavior =
+                this.operationDescription.Behaviors.Find<DataContractSerializerOperationBehavior>();
         }
 
         public override bool CanConvert(Type type)
@@ -49,7 +50,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (parameterType == null)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("parameterType");
+                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "parameterType"
+                );
             }
             switch (Type.GetTypeCode(parameterType))
             {
@@ -65,12 +68,12 @@ namespace System.ServiceModel.Dispatcher
                 case TypeCode.Double:
                 case TypeCode.Decimal:
                 case TypeCode.Boolean:
-                    // base.ConvertStringToValue handles parameter == null case. 
+                    // base.ConvertStringToValue handles parameter == null case.
                     return base.ConvertStringToValue(parameter, parameterType);
                 case TypeCode.Char:
                 case TypeCode.String:
                 case TypeCode.DateTime:
-                    // base.ConvertStringToValue handles parameter == null case. 
+                    // base.ConvertStringToValue handles parameter == null case.
                     // IsFirstCharacterReservedCharacter returns false for null strings.
                     if (IsFirstCharacterReservedCharacter(parameter, '"'))
                     {
@@ -78,86 +81,86 @@ namespace System.ServiceModel.Dispatcher
                     }
                     return base.ConvertStringToValue(parameter, parameterType);
                 default:
+                {
+                    if (parameterType == typeof(Guid))
                     {
-                        if (parameterType == typeof(Guid))
-                        {
-                            if (parameter == null)
-                            {
-                                return default(Guid);
-                            }
-                            if (IsFirstCharacterReservedCharacter(parameter, '"'))
-                            {
-                                return CreateJsonDeserializedObject(parameter.Trim(), parameterType);
-                            }
-                            return base.ConvertStringToValue(parameter, parameterType);
-                        }
-                        else if (parameterType == typeof(Uri))
-                        {
-                            if (parameter == null)
-                            {
-                                return default(Uri);
-                            }
-                            if (IsFirstCharacterReservedCharacter(parameter, '"'))
-                            {
-                                return CreateJsonDeserializedObject(parameter.Trim(), parameterType);
-                            }
-                            return base.ConvertStringToValue(parameter, parameterType);
-                        }
-                        else if (parameterType == typeof(TimeSpan))
-                        {
-                            if (parameter == null)
-                            {
-                                return default(TimeSpan);
-                            }
-                            if (IsFirstCharacterReservedCharacter(parameter, '"'))
-                            {
-                                return CreateJsonDeserializedObject(parameter.Trim(), parameterType);
-                            }
-                            return base.ConvertStringToValue(parameter, parameterType);
-                        }
-                        else if (parameterType == typeof(byte[]))
-                        {
-                            if (parameter == null)
-                            {
-                                return default(byte[]);
-                            }
-                            if (IsFirstCharacterReservedCharacter(parameter, '['))
-                            {
-                                return CreateJsonDeserializedObject(parameter.Trim(), parameterType);
-                            }
-                            return base.ConvertStringToValue(parameter, parameterType);
-                        }
-                        else if (parameterType == typeof(DateTimeOffset))
-                        {
-                            if (parameter == null)
-                            {
-                                return default(DateTimeOffset);
-                            }
-                            if (IsFirstCharacterReservedCharacter(parameter, '{'))
-                            {
-                                return CreateJsonDeserializedObject(parameter.Trim(), parameterType);
-                            }
-                            return base.ConvertStringToValue(parameter, parameterType);
-                        }
-                        else if (parameterType == typeof(object))
-                        {
-                            if (parameter == null)
-                            {
-                                return default(object);
-                            }
-                            if (IsFirstCharacterReservedCharacter(parameter, '{'))
-                            {
-                                return CreateJsonDeserializedObject(parameter.Trim(), parameterType);
-                            }
-                            return base.ConvertStringToValue(parameter, parameterType);
-                        }
-
                         if (parameter == null)
                         {
-                            return null;
+                            return default(Guid);
                         }
-                        return CreateJsonDeserializedObject(parameter.Trim(), parameterType);
+                        if (IsFirstCharacterReservedCharacter(parameter, '"'))
+                        {
+                            return CreateJsonDeserializedObject(parameter.Trim(), parameterType);
+                        }
+                        return base.ConvertStringToValue(parameter, parameterType);
                     }
+                    else if (parameterType == typeof(Uri))
+                    {
+                        if (parameter == null)
+                        {
+                            return default(Uri);
+                        }
+                        if (IsFirstCharacterReservedCharacter(parameter, '"'))
+                        {
+                            return CreateJsonDeserializedObject(parameter.Trim(), parameterType);
+                        }
+                        return base.ConvertStringToValue(parameter, parameterType);
+                    }
+                    else if (parameterType == typeof(TimeSpan))
+                    {
+                        if (parameter == null)
+                        {
+                            return default(TimeSpan);
+                        }
+                        if (IsFirstCharacterReservedCharacter(parameter, '"'))
+                        {
+                            return CreateJsonDeserializedObject(parameter.Trim(), parameterType);
+                        }
+                        return base.ConvertStringToValue(parameter, parameterType);
+                    }
+                    else if (parameterType == typeof(byte[]))
+                    {
+                        if (parameter == null)
+                        {
+                            return default(byte[]);
+                        }
+                        if (IsFirstCharacterReservedCharacter(parameter, '['))
+                        {
+                            return CreateJsonDeserializedObject(parameter.Trim(), parameterType);
+                        }
+                        return base.ConvertStringToValue(parameter, parameterType);
+                    }
+                    else if (parameterType == typeof(DateTimeOffset))
+                    {
+                        if (parameter == null)
+                        {
+                            return default(DateTimeOffset);
+                        }
+                        if (IsFirstCharacterReservedCharacter(parameter, '{'))
+                        {
+                            return CreateJsonDeserializedObject(parameter.Trim(), parameterType);
+                        }
+                        return base.ConvertStringToValue(parameter, parameterType);
+                    }
+                    else if (parameterType == typeof(object))
+                    {
+                        if (parameter == null)
+                        {
+                            return default(object);
+                        }
+                        if (IsFirstCharacterReservedCharacter(parameter, '{'))
+                        {
+                            return CreateJsonDeserializedObject(parameter.Trim(), parameterType);
+                        }
+                        return base.ConvertStringToValue(parameter, parameterType);
+                    }
+
+                    if (parameter == null)
+                    {
+                        return null;
+                    }
+                    return CreateJsonDeserializedObject(parameter.Trim(), parameterType);
+                }
             }
         }
 
@@ -168,18 +171,31 @@ namespace System.ServiceModel.Dispatcher
                 return null;
             }
             MemoryStream memoryStream = new MemoryStream();
-            XmlDictionaryWriter jsonWriter = JsonReaderWriterFactory.CreateJsonWriter(memoryStream, Encoding.UTF8);
+            XmlDictionaryWriter jsonWriter = JsonReaderWriterFactory.CreateJsonWriter(
+                memoryStream,
+                Encoding.UTF8
+            );
             GetDataContractJsonSerializer(parameterType).WriteObject(jsonWriter, parameter);
             jsonWriter.Flush();
             memoryStream.Seek(0, SeekOrigin.Begin);
-            return Encoding.UTF8.GetString(memoryStream.GetBuffer(), (int) memoryStream.Position, (int) memoryStream.Length);
+            return Encoding.UTF8.GetString(
+                memoryStream.GetBuffer(),
+                (int)memoryStream.Position,
+                (int)memoryStream.Length
+            );
         }
 
         object CreateJsonDeserializedObject(string parameter, Type parameterType)
         {
             byte[] byteArray = Encoding.UTF8.GetBytes(parameter);
-            XmlDictionaryReader jsonReader = JsonReaderWriterFactory.CreateJsonReader
-                (byteArray, 0, byteArray.Length, Encoding.UTF8, XmlDictionaryReaderQuotas.Max, null);
+            XmlDictionaryReader jsonReader = JsonReaderWriterFactory.CreateJsonReader(
+                byteArray,
+                0,
+                byteArray.Length,
+                Encoding.UTF8,
+                XmlDictionaryReaderQuotas.Max,
+                null
+            );
             return GetDataContractJsonSerializer(parameterType).ReadObject(jsonReader);
         }
 
@@ -191,12 +207,21 @@ namespace System.ServiceModel.Dispatcher
             }
             else if (this.dataContractSerializerOperationBehavior == null)
             {
-                return new DataContractJsonSerializer(parameterType, operationDescription.KnownTypes);
+                return new DataContractJsonSerializer(
+                    parameterType,
+                    operationDescription.KnownTypes
+                );
             }
             else
             {
-                return new DataContractJsonSerializer(parameterType, this.operationDescription.KnownTypes, this.dataContractSerializerOperationBehavior.maxItemsInObjectGraph,
-                    this.dataContractSerializerOperationBehavior.IgnoreExtensionDataObject, this.dataContractSerializerOperationBehavior.DataContractSurrogate, false); //alwaysEmitTypeInformation
+                return new DataContractJsonSerializer(
+                    parameterType,
+                    this.operationDescription.KnownTypes,
+                    this.dataContractSerializerOperationBehavior.maxItemsInObjectGraph,
+                    this.dataContractSerializerOperationBehavior.IgnoreExtensionDataObject,
+                    this.dataContractSerializerOperationBehavior.DataContractSurrogate,
+                    false
+                ); //alwaysEmitTypeInformation
             }
         }
 

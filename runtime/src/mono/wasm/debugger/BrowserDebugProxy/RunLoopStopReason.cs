@@ -8,5 +8,5 @@ public enum RunLoopStopReason
     Shutdown,
     Cancelled,
     Exception,
-    ConnectionClosed
+    ConnectionClosed,
 }

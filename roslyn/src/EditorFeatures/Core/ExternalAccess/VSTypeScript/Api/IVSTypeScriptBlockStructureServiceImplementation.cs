@@ -9,6 +9,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal interface IVSTypeScriptBlockStructureServiceImplementation
     {
-        Task<VSTypeScriptBlockStructure> GetBlockStructureAsync(Document document, CancellationToken cancellationToken);
+        Task<VSTypeScriptBlockStructure> GetBlockStructureAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
     }
 }

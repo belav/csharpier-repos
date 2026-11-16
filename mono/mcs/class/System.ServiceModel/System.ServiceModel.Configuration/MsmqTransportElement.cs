@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,97 +49,130 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class MsmqTransportElement
-		 : MsmqElementBase
-	{
-		ConfigurationPropertyCollection _properties;
+    public sealed class MsmqTransportElement : MsmqElementBase
+    {
+        ConfigurationPropertyCollection _properties;
 
-		public MsmqTransportElement () {
-		}
+        public MsmqTransportElement() { }
 
+        // Properties
 
-		// Properties
+        public override Type BindingElementType
+        {
+            get { return typeof(MsmqTransportBindingElement); }
+        }
 
-		public override Type BindingElementType {
-			get { return typeof (MsmqTransportBindingElement); }
-		}
+        [IntegerValidator(MinValue = 0, MaxValue = int.MaxValue, ExcludeRange = false)]
+        [ConfigurationProperty(
+            "maxPoolSize",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "8"
+        )]
+        public int MaxPoolSize
+        {
+            get { return (int)base["maxPoolSize"]; }
+            set { base["maxPoolSize"] = value; }
+        }
 
-		[IntegerValidator (MinValue = 0,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		[ConfigurationProperty ("maxPoolSize",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "8")]
-		public int MaxPoolSize {
-			get { return (int) base ["maxPoolSize"]; }
-			set { base ["maxPoolSize"] = value; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
+                    _properties = base.Properties;
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "maxPoolSize",
+                            typeof(int),
+                            "8",
+                            null,
+                            new IntegerValidator(0, int.MaxValue, false),
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "queueTransferProtocol",
+                            typeof(QueueTransferProtocol),
+                            "Native",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "useActiveDirectory",
+                            typeof(bool),
+                            "false",
+                            new BooleanConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                }
+                return _properties;
+            }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get {
-				if (_properties == null) {
-					_properties = base.Properties;
-					_properties.Add (new ConfigurationProperty ("maxPoolSize", typeof (int), "8", null, new IntegerValidator (0, int.MaxValue, false), ConfigurationPropertyOptions.None));
-					_properties.Add (new ConfigurationProperty ("queueTransferProtocol", typeof (QueueTransferProtocol), "Native", null, null, ConfigurationPropertyOptions.None));
-					_properties.Add (new ConfigurationProperty ("useActiveDirectory", typeof (bool), "false", new BooleanConverter (), null, ConfigurationPropertyOptions.None));
-				}
-				return _properties;
-			}
-		}
+        [ConfigurationProperty(
+            "queueTransferProtocol",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "Native"
+        )]
+        public QueueTransferProtocol QueueTransferProtocol
+        {
+            get { return (QueueTransferProtocol)base["queueTransferProtocol"]; }
+            set { base["queueTransferProtocol"] = value; }
+        }
 
-		[ConfigurationProperty ("queueTransferProtocol",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "Native")]
-		public QueueTransferProtocol QueueTransferProtocol {
-			get { return (QueueTransferProtocol) base ["queueTransferProtocol"]; }
-			set { base ["queueTransferProtocol"] = value; }
-		}
+        [ConfigurationProperty(
+            "useActiveDirectory",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = false
+        )]
+        public bool UseActiveDirectory
+        {
+            get { return (bool)base["useActiveDirectory"]; }
+            set { base["useActiveDirectory"] = value; }
+        }
 
-		[ConfigurationProperty ("useActiveDirectory",
-			 Options = ConfigurationPropertyOptions.None,
-			DefaultValue = false)]
-		public bool UseActiveDirectory {
-			get { return (bool) base ["useActiveDirectory"]; }
-			set { base ["useActiveDirectory"] = value; }
-		}
+        public override void ApplyConfiguration(BindingElement bindingElement)
+        {
+            var b = (MsmqTransportBindingElement)bindingElement;
+            base.ApplyConfiguration(b);
+            b.MaxPoolSize = MaxPoolSize;
+            b.QueueTransferProtocol = QueueTransferProtocol;
+            b.UseActiveDirectory = UseActiveDirectory;
+        }
 
-		public override void ApplyConfiguration (BindingElement bindingElement)
-		{
-			var b = (MsmqTransportBindingElement) bindingElement;
-			base.ApplyConfiguration (b);
-			b.MaxPoolSize = MaxPoolSize;
-			b.QueueTransferProtocol = QueueTransferProtocol;
-			b.UseActiveDirectory = UseActiveDirectory;
-		}
+        public override void CopyFrom(ServiceModelExtensionElement from)
+        {
+            var e = (MsmqTransportElement)from;
+            base.CopyFrom(from);
+            MaxPoolSize = e.MaxPoolSize;
+            QueueTransferProtocol = e.QueueTransferProtocol;
+            UseActiveDirectory = e.UseActiveDirectory;
+        }
 
-		public override void CopyFrom (ServiceModelExtensionElement from)
-		{
-			var e = (MsmqTransportElement) from;
-			base.CopyFrom (from);
-			MaxPoolSize = e.MaxPoolSize;
-			QueueTransferProtocol = e.QueueTransferProtocol;
-			UseActiveDirectory = e.UseActiveDirectory;
-		}
+        protected override TransportBindingElement CreateDefaultBindingElement()
+        {
+            return new MsmqTransportBindingElement();
+        }
 
-		protected override TransportBindingElement CreateDefaultBindingElement ()
-		{
-			return new MsmqTransportBindingElement ();
-		}
-
-		protected internal override void InitializeFrom (BindingElement bindingElement)
-		{
-			var b = (MsmqTransportBindingElement) bindingElement;
-			base.InitializeFrom (b);
-			MaxPoolSize = b.MaxPoolSize;
-			QueueTransferProtocol = b.QueueTransferProtocol;
-			UseActiveDirectory = b.UseActiveDirectory;
-		}
-	}
-
+        protected internal override void InitializeFrom(BindingElement bindingElement)
+        {
+            var b = (MsmqTransportBindingElement)bindingElement;
+            base.InitializeFrom(b);
+            MaxPoolSize = b.MaxPoolSize;
+            QueueTransferProtocol = b.QueueTransferProtocol;
+            UseActiveDirectory = b.UseActiveDirectory;
+        }
+    }
 }

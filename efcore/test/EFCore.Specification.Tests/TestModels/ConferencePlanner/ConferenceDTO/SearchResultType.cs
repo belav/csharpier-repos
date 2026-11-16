@@ -6,5 +6,5 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner.ConferenceD
 public enum SearchResultType
 {
     Session,
-    Speaker
+    Speaker,
 }

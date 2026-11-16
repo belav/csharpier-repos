@@ -20,8 +20,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         // X509Certificate2Collection.Import does not support SecureString so we just make this work.
-        internal override X509Certificate Import(byte[] blob, SecureString password)
-            => new X509Certificate2(blob, password);
+        internal override X509Certificate Import(byte[] blob, SecureString password) =>
+            new X509Certificate2(blob, password);
 
         internal override X509Certificate Import(string fileName)
         {
@@ -38,7 +38,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         // X509Certificate2Collection.Import does not support SecureString so we just make this work.
-        internal override X509Certificate Import(string fileName, SecureString password)
-            => new X509Certificate2(fileName, password);
+        internal override X509Certificate Import(string fileName, SecureString password) =>
+            new X509Certificate2(fileName, password);
     }
 }

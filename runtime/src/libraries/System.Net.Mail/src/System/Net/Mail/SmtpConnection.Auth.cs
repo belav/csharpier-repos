@@ -8,7 +8,7 @@ namespace System.Net.Mail
         None = 0,
         Login = 1,
         NTLM = 2,
-        GSSAPI = 4
+        GSSAPI = 4,
     };
 
     internal sealed partial class SmtpConnection
@@ -45,37 +45,72 @@ namespace System.Net.Mail
             _supportedAuth = SupportedAuth.None;
             foreach (string extension in extensions)
             {
-                if (string.Compare(extension, 0, AuthExtension, 0,
-                    SizeOfAuthExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    string.Compare(
+                        extension,
+                        0,
+                        AuthExtension,
+                        0,
+                        SizeOfAuthExtension,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     // remove the AUTH text including the following character
                     // to ensure that split only gets the modules supported
-                    string[] authTypes = extension.Remove(0, SizeOfAuthExtension).Split(s_authExtensionSplitters, StringSplitOptions.RemoveEmptyEntries);
+                    string[] authTypes = extension
+                        .Remove(0, SizeOfAuthExtension)
+                        .Split(s_authExtensionSplitters, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string authType in authTypes)
                     {
                         if (string.Equals(authType, AuthLogin, StringComparison.OrdinalIgnoreCase))
                         {
                             _supportedAuth |= SupportedAuth.Login;
                         }
-                        else if (string.Equals(authType, AuthNtlm, StringComparison.OrdinalIgnoreCase))
+                        else if (
+                            string.Equals(authType, AuthNtlm, StringComparison.OrdinalIgnoreCase)
+                        )
                         {
                             _supportedAuth |= SupportedAuth.NTLM;
                         }
-                        else if (string.Equals(authType, AuthGssapi, StringComparison.OrdinalIgnoreCase))
+                        else if (
+                            string.Equals(authType, AuthGssapi, StringComparison.OrdinalIgnoreCase)
+                        )
                         {
                             _supportedAuth |= SupportedAuth.GSSAPI;
                         }
                     }
                 }
-                else if (string.Compare(extension, 0, "dsn ", 0, 3, StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    string.Compare(extension, 0, "dsn ", 0, 3, StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
                 {
                     _dsnEnabled = true;
                 }
-                else if (string.Compare(extension, 0, "STARTTLS", 0, 8, StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    string.Compare(
+                        extension,
+                        0,
+                        "STARTTLS",
+                        0,
+                        8,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     _serverSupportsStartTls = true;
                 }
-                else if (string.Compare(extension, 0, "SMTPUTF8", 0, 8, StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    string.Compare(
+                        extension,
+                        0,
+                        "SMTPUTF8",
+                        0,
+                        8,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     _serverSupportsEai = true;
                 }

@@ -27,6 +27,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
+using Newtonsoft.Json.Tests.Linq;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -37,8 +39,6 @@ using NUnit.Framework;
 #if !(NET20 || NET35)
 using System.Dynamic;
 #endif
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Tests.Linq;
 
 namespace Newtonsoft.Json.Tests.Serialization
 {
@@ -60,27 +60,38 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void IgnoreObjectReferenceLoop()
         {
-            ReferenceLoopHandlingObjectContainerAttribute o = new ReferenceLoopHandlingObjectContainerAttribute();
+            ReferenceLoopHandlingObjectContainerAttribute o =
+                new ReferenceLoopHandlingObjectContainerAttribute();
             o.Value = o;
 
-            string json = JsonConvert.SerializeObject(o, Formatting.Indented, new JsonSerializerSettings
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
-            });
+            string json = JsonConvert.SerializeObject(
+                o,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                }
+            );
             Assert.AreEqual("{}", json);
         }
 
         [Test]
         public void IgnoreObjectReferenceLoopWithPropertyOverride()
         {
-            ReferenceLoopHandlingObjectContainerAttributeWithPropertyOverride o = new ReferenceLoopHandlingObjectContainerAttributeWithPropertyOverride();
+            ReferenceLoopHandlingObjectContainerAttributeWithPropertyOverride o =
+                new ReferenceLoopHandlingObjectContainerAttributeWithPropertyOverride();
             o.Value = o;
 
-            string json = JsonConvert.SerializeObject(o, Formatting.Indented, new JsonSerializerSettings
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
-            });
-            StringAssert.AreEqual(@"{
+            string json = JsonConvert.SerializeObject(
+                o,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                }
+            );
+            StringAssert.AreEqual(
+                @"{
   ""Value"": {
     ""Value"": {
       ""Value"": {
@@ -92,7 +103,9 @@ namespace Newtonsoft.Json.Tests.Serialization
       }
     }
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -101,10 +114,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             ReferenceLoopHandlingList a = new ReferenceLoopHandlingList();
             a.Add(a);
 
-            string json = JsonConvert.SerializeObject(a, Formatting.Indented, new JsonSerializerSettings
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
-            });
+            string json = JsonConvert.SerializeObject(
+                a,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                }
+            );
             Assert.AreEqual("[]", json);
         }
 
@@ -114,10 +131,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             ReferenceLoopHandlingDictionary d = new ReferenceLoopHandlingDictionary();
             d.Add("First", d);
 
-            string json = JsonConvert.SerializeObject(d, Formatting.Indented, new JsonSerializerSettings
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
-            });
+            string json = JsonConvert.SerializeObject(
+                d,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                }
+            );
             Assert.AreEqual("{}", json);
         }
 
@@ -130,7 +151,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Text"": ""Text!"",
   ""Data"": [
     {
@@ -148,7 +170,9 @@ namespace Newtonsoft.Json.Tests.Serialization
       ]
     }
   ]
-}", json);
+}",
+                json
+            );
         }
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
@@ -187,10 +211,12 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             main.Child = child;
 
-            var settings =
-                new JsonSerializerSettings();
+            var settings = new JsonSerializerSettings();
 
-            ExceptionAssert.Throws<JsonSerializationException>(() => JsonConvert.SerializeObject(main, settings), "Self referencing loop detected with type 'Newtonsoft.Json.Tests.Serialization.ReferenceLoopHandlingTests+MainClass'. Path 'Child'.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () => JsonConvert.SerializeObject(main, settings),
+                "Self referencing loop detected with type 'Newtonsoft.Json.Tests.Serialization.ReferenceLoopHandlingTests+MainClass'. Path 'Child'."
+            );
         }
 
         [Test]
@@ -204,8 +230,10 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             main.Child = child;
 
-            var settings =
-                new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+            var settings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            };
 
             var c = JsonConvert.SerializeObject(main, settings);
             Assert.AreEqual(@"{""Child"":{""Name"":""Child1""}}", c);
@@ -249,7 +277,10 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             var settings = new JsonSerializerSettings();
 
-            ExceptionAssert.Throws<JsonSerializationException>(() => JsonConvert.SerializeObject(parent, settings), "Self referencing loop detected with type 'Newtonsoft.Json.Tests.Serialization.ReferenceLoopHandlingTests+DictionaryDynamicObject'. Path 'child'.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () => JsonConvert.SerializeObject(parent, settings),
+                "Self referencing loop detected with type 'Newtonsoft.Json.Tests.Serialization.ReferenceLoopHandlingTests+DictionaryDynamicObject'. Path 'child'."
+            );
         }
 
         [Test]
@@ -262,7 +293,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             child.parent = parent;
             child.name = "child";
 
-            var settings = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+            var settings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            };
 
             var c = JsonConvert.SerializeObject(parent, settings);
             Assert.AreEqual(@"{""child"":{""name"":""child""},""name"":""parent""}", c);
@@ -272,33 +306,34 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void EqualityComparer()
         {
-            AccountWithEquals account = new AccountWithEquals
-            {
-                Name = "main"
-            };
-            AccountWithEquals manager = new AccountWithEquals
-            {
-                Name = "main"
-            };
+            AccountWithEquals account = new AccountWithEquals { Name = "main" };
+            AccountWithEquals manager = new AccountWithEquals { Name = "main" };
             account.Manager = manager;
 
             ExceptionAssert.Throws<JsonSerializationException>(
                 () => JsonConvert.SerializeObject(account),
-                "Self referencing loop detected for property 'Manager' with type 'Newtonsoft.Json.Tests.Serialization.AccountWithEquals'. Path ''.");
+                "Self referencing loop detected for property 'Manager' with type 'Newtonsoft.Json.Tests.Serialization.AccountWithEquals'. Path ''."
+            );
 
-            string json = JsonConvert.SerializeObject(account, new JsonSerializerSettings
-            {
-                EqualityComparer = new ReferenceEqualsEqualityComparer(),
-                Formatting = Formatting.Indented
-            });
+            string json = JsonConvert.SerializeObject(
+                account,
+                new JsonSerializerSettings
+                {
+                    EqualityComparer = new ReferenceEqualsEqualityComparer(),
+                    Formatting = Formatting.Indented,
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""main"",
   ""Manager"": {
     ""Name"": ""main"",
     ""Manager"": null
   }
-}", json);
+}",
+                json
+            );
         }
     }
 
@@ -372,14 +407,11 @@ namespace Newtonsoft.Json.Tests.Serialization
     }
 
     [JsonArray(ItemReferenceLoopHandling = ReferenceLoopHandling.Ignore)]
-    public class ReferenceLoopHandlingList : List<ReferenceLoopHandlingList>
-    {
-    }
+    public class ReferenceLoopHandlingList : List<ReferenceLoopHandlingList> { }
 
     [JsonDictionary(ItemReferenceLoopHandling = ReferenceLoopHandling.Ignore)]
-    public class ReferenceLoopHandlingDictionary : Dictionary<string, ReferenceLoopHandlingDictionary>
-    {
-    }
+    public class ReferenceLoopHandlingDictionary
+        : Dictionary<string, ReferenceLoopHandlingDictionary> { }
 
     [JsonObject(ItemReferenceLoopHandling = ReferenceLoopHandling.Ignore)]
     public class ReferenceLoopHandlingObjectContainerAttribute

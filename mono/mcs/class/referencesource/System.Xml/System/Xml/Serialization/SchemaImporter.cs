@@ -5,20 +5,19 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization  {
-
+namespace System.Xml.Serialization
+{
     using System;
-    using System.Xml.Schema;
-    using System.Collections;
-    using System.ComponentModel;
-    using System.Reflection;
-    using System.Configuration;
-    using System.Xml.Serialization.Configuration;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.Configuration;
+    using System.Reflection;
     using System.Security.Permissions;
+    using System.Xml.Schema;
     using System.Xml.Serialization.Advanced;
-
+    using System.Xml.Serialization.Configuration;
 #if DEBUG
     using System.Diagnostics;
 #endif
@@ -28,8 +27,9 @@ namespace System.Xml.Serialization  {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [PermissionSet(SecurityAction.InheritanceDemand, Name="FullTrust")]
-    public abstract class SchemaImporter {
+    [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
+    public abstract class SchemaImporter
+    {
         XmlSchemas schemas;
         StructMapping root;
         CodeGenerationOptions options;
@@ -41,12 +41,20 @@ namespace System.Xml.Serialization  {
         NameTable groupsInUse;
         SchemaImporterExtensionCollection extensions;
 
-        internal SchemaImporter(XmlSchemas schemas, CodeGenerationOptions options, CodeDomProvider codeProvider, ImportContext context) {
-            if (!schemas.Contains(XmlSchema.Namespace)) {
+        internal SchemaImporter(
+            XmlSchemas schemas,
+            CodeGenerationOptions options,
+            CodeDomProvider codeProvider,
+            ImportContext context
+        )
+        {
+            if (!schemas.Contains(XmlSchema.Namespace))
+            {
                 schemas.AddReference(XmlSchemas.XsdSchema);
                 schemas.SchemaSet.Add(XmlSchemas.XsdSchema);
             }
-            if (!schemas.Contains(XmlReservedNs.NsXml)) {
+            if (!schemas.Contains(XmlReservedNs.NsXml))
+            {
                 schemas.AddReference(XmlSchemas.XmlSchema);
                 schemas.SchemaSet.Add(XmlSchemas.XmlSchema);
             }
@@ -57,7 +65,10 @@ namespace System.Xml.Serialization  {
             Schemas.SetCache(Context.Cache, Context.ShareTypes);
 
 #if CONFIGURATION_DEP
-            SchemaImporterExtensionsSection section = PrivilegedConfigurationManager.GetSection(ConfigurationStrings.SchemaImporterExtensionsSectionPath) as SchemaImporterExtensionsSection;
+            SchemaImporterExtensionsSection section =
+                PrivilegedConfigurationManager.GetSection(
+                    ConfigurationStrings.SchemaImporterExtensionsSectionPath
+                ) as SchemaImporterExtensionsSection;
             if (section != null)
                 extensions = section.SchemaImporterExtensionsInternal;
             else
@@ -65,104 +76,145 @@ namespace System.Xml.Serialization  {
                 extensions = new SchemaImporterExtensionCollection();
         }
 
-        internal ImportContext Context {
-            get { 
+        internal ImportContext Context
+        {
+            get
+            {
                 if (context == null)
                     context = new ImportContext();
                 return context;
             }
         }
 
-        internal CodeDomProvider CodeProvider {
-            get {
+        internal CodeDomProvider CodeProvider
+        {
+            get
+            {
                 if (codeProvider == null)
                     codeProvider = new Microsoft.CSharp.CSharpCodeProvider();
                 return codeProvider;
             }
         }
 
-        public SchemaImporterExtensionCollection Extensions {
-            get {
+        public SchemaImporterExtensionCollection Extensions
+        {
+            get
+            {
                 if (extensions == null)
                     extensions = new SchemaImporterExtensionCollection();
                 return extensions;
             }
         }
 
-        internal Hashtable ImportedElements {
+        internal Hashtable ImportedElements
+        {
             get { return Context.Elements; }
         }
 
-        internal Hashtable ImportedMappings {
+        internal Hashtable ImportedMappings
+        {
             get { return Context.Mappings; }
         }
 
-        internal CodeIdentifiers TypeIdentifiers {
+        internal CodeIdentifiers TypeIdentifiers
+        {
             get { return Context.TypeIdentifiers; }
         }
 
-        internal XmlSchemas Schemas {
-            get { 
+        internal XmlSchemas Schemas
+        {
+            get
+            {
                 if (schemas == null)
                     schemas = new XmlSchemas();
                 return schemas;
             }
         }
 
-        internal TypeScope Scope {
-            get { 
+        internal TypeScope Scope
+        {
+            get
+            {
                 if (scope == null)
                     scope = new TypeScope();
                 return scope;
             }
         }
 
-        internal NameTable GroupsInUse {
-            get { 
+        internal NameTable GroupsInUse
+        {
+            get
+            {
                 if (groupsInUse == null)
                     groupsInUse = new NameTable();
                 return groupsInUse;
             }
         }
 
-        internal NameTable TypesInUse {
-            get { 
+        internal NameTable TypesInUse
+        {
+            get
+            {
                 if (typesInUse == null)
                     typesInUse = new NameTable();
                 return typesInUse;
             }
         }
 
-        internal CodeGenerationOptions Options {
+        internal CodeGenerationOptions Options
+        {
             get { return options; }
         }
 
-        internal void MakeDerived(StructMapping structMapping, Type baseType, bool baseTypeCanBeIndirect) {
+        internal void MakeDerived(
+            StructMapping structMapping,
+            Type baseType,
+            bool baseTypeCanBeIndirect
+        )
+        {
             structMapping.ReferencedByTopLevelElement = true;
             TypeDesc baseTypeDesc;
-            if (baseType != null) {
+            if (baseType != null)
+            {
                 baseTypeDesc = Scope.GetTypeDesc(baseType);
-                if (baseTypeDesc != null) {
+                if (baseTypeDesc != null)
+                {
                     TypeDesc typeDescToChange = structMapping.TypeDesc;
-                    if (baseTypeCanBeIndirect) {
+                    if (baseTypeCanBeIndirect)
+                    {
                         // if baseTypeCanBeIndirect is true, we apply the supplied baseType to the top of the
                         // inheritance chain, not necessarily directly to the imported type.
-                        while (typeDescToChange.BaseTypeDesc != null && typeDescToChange.BaseTypeDesc != baseTypeDesc)
+                        while (
+                            typeDescToChange.BaseTypeDesc != null
+                            && typeDescToChange.BaseTypeDesc != baseTypeDesc
+                        )
                             typeDescToChange = typeDescToChange.BaseTypeDesc;
                     }
-                    if (typeDescToChange.BaseTypeDesc != null && typeDescToChange.BaseTypeDesc != baseTypeDesc)
-                        throw new InvalidOperationException(Res.GetString(Res.XmlInvalidBaseType, structMapping.TypeDesc.FullName, baseType.FullName, typeDescToChange.BaseTypeDesc.FullName));
+                    if (
+                        typeDescToChange.BaseTypeDesc != null
+                        && typeDescToChange.BaseTypeDesc != baseTypeDesc
+                    )
+                        throw new InvalidOperationException(
+                            Res.GetString(
+                                Res.XmlInvalidBaseType,
+                                structMapping.TypeDesc.FullName,
+                                baseType.FullName,
+                                typeDescToChange.BaseTypeDesc.FullName
+                            )
+                        );
                     typeDescToChange.BaseTypeDesc = baseTypeDesc;
                 }
             }
         }
 
-        internal string GenerateUniqueTypeName(string typeName) {
+        internal string GenerateUniqueTypeName(string typeName)
+        {
             typeName = CodeIdentifier.MakeValid(typeName);
             return TypeIdentifiers.AddUnique(typeName, typeName);
         }
 
-        StructMapping CreateRootMapping() {
+        StructMapping CreateRootMapping()
+        {
             TypeDesc typeDesc = Scope.GetTypeDesc(typeof(object));
             StructMapping mapping = new StructMapping();
             mapping.TypeDesc = typeDesc;
@@ -174,14 +226,17 @@ namespace System.Xml.Serialization  {
             return mapping;
         }
 
-        internal StructMapping GetRootMapping() {
+        internal StructMapping GetRootMapping()
+        {
             if (root == null)
                 root = CreateRootMapping();
             return root;
         }
 
-        internal StructMapping ImportRootMapping() {
-            if (!rootImported) {
+        internal StructMapping ImportRootMapping()
+        {
+            if (!rootImported)
+            {
                 rootImported = true;
                 ImportDerivedTypes(XmlQualifiedName.Empty);
             }
@@ -190,16 +245,21 @@ namespace System.Xml.Serialization  {
 
         internal abstract void ImportDerivedTypes(XmlQualifiedName baseName);
 
-        internal void AddReference(XmlQualifiedName name, NameTable references, string error) {
+        internal void AddReference(XmlQualifiedName name, NameTable references, string error)
+        {
             if (name.Namespace == XmlSchema.Namespace)
                 return;
-            if (references[name] != null) {
-                throw new InvalidOperationException(Res.GetString(error, name.Name, name.Namespace));
+            if (references[name] != null)
+            {
+                throw new InvalidOperationException(
+                    Res.GetString(error, name.Name, name.Namespace)
+                );
             }
             references[name] = name;
         }
 
-        internal void RemoveReference(XmlQualifiedName name, NameTable references) {
+        internal void RemoveReference(XmlQualifiedName name, NameTable references)
+        {
             references[name] = null;
         }
 
@@ -211,6 +271,5 @@ namespace System.Xml.Serialization  {
                 scope.AddReserved(CodeExporter.RaisePropertyChangedEventMethod.Name);
             }
         }
-
     }
 }

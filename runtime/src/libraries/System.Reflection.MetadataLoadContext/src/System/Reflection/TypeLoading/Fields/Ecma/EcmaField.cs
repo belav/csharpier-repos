@@ -17,7 +17,11 @@ namespace System.Reflection.TypeLoading.Ecma
         private readonly EcmaModule _module;
         private readonly FieldDefinitionHandle _handle;
 
-        internal EcmaField(RoInstantiationProviderType declaringType, FieldDefinitionHandle handle, Type reflectedType)
+        internal EcmaField(
+            RoInstantiationProviderType declaringType,
+            FieldDefinitionHandle handle,
+            Type reflectedType
+        )
             : base(declaringType, reflectedType)
         {
             Debug.Assert(!handle.IsNil);
@@ -27,15 +31,20 @@ namespace System.Reflection.TypeLoading.Ecma
 
             _handle = handle;
             _module = (EcmaModule)(declaringType.Module);
-            _neverAccessThisExceptThroughFieldDefinitionProperty = handle.GetFieldDefinition(Reader);
+            _neverAccessThisExceptThroughFieldDefinitionProperty = handle.GetFieldDefinition(
+                Reader
+            );
         }
 
         internal sealed override RoModule GetRoModule() => _module;
 
-        protected sealed override IEnumerable<CustomAttributeData> GetTrueCustomAttributes() => FieldDefinition.GetCustomAttributes().ToTrueCustomAttributes(_module);
+        protected sealed override IEnumerable<CustomAttributeData> GetTrueCustomAttributes() =>
+            FieldDefinition.GetCustomAttributes().ToTrueCustomAttributes(_module);
 
         protected sealed override int GetExplicitFieldOffset() => FieldDefinition.GetOffset();
-        protected sealed override MarshalAsAttribute ComputeMarshalAsAttribute() => FieldDefinition.GetMarshallingDescriptor().ToMarshalAsAttribute(_module);
+
+        protected sealed override MarshalAsAttribute ComputeMarshalAsAttribute() =>
+            FieldDefinition.GetMarshallingDescriptor().ToMarshalAsAttribute(_module);
 
         public sealed override int MetadataToken => _handle.GetToken();
 
@@ -56,16 +65,24 @@ namespace System.Reflection.TypeLoading.Ecma
             return true;
         }
 
-        public sealed override int GetHashCode() => _handle.GetHashCode() ^ DeclaringType.GetHashCode();
+        public sealed override int GetHashCode() =>
+            _handle.GetHashCode() ^ DeclaringType.GetHashCode();
 
         protected sealed override string ComputeName() => FieldDefinition.Name.GetString(Reader);
+
         protected sealed override FieldAttributes ComputeAttributes() => FieldDefinition.Attributes;
-        protected sealed override Type ComputeFieldType() => FieldDefinition.DecodeSignature(_module, TypeContext);
 
-        public sealed override Type[] GetOptionalCustomModifiers() => ModifiedType.GetOptionalCustomModifiers();
-        public sealed override Type[] GetRequiredCustomModifiers() => ModifiedType.GetRequiredCustomModifiers();
+        protected sealed override Type ComputeFieldType() =>
+            FieldDefinition.DecodeSignature(_module, TypeContext);
 
-        protected sealed override object? ComputeRawConstantValue() => FieldDefinition.GetDefaultValue().ToRawObject(Reader);
+        public sealed override Type[] GetOptionalCustomModifiers() =>
+            ModifiedType.GetOptionalCustomModifiers();
+
+        public sealed override Type[] GetRequiredCustomModifiers() =>
+            ModifiedType.GetRequiredCustomModifiers();
+
+        protected sealed override object? ComputeRawConstantValue() =>
+            FieldDefinition.GetDefaultValue().ToRawObject(Reader);
 
         public sealed override string ToString()
         {
@@ -73,17 +90,27 @@ namespace System.Reflection.TypeLoading.Ecma
             if (disposedString != null)
                 return disposedString;
 
-            return
-                FieldDefinition.DecodeSignature(EcmaSignatureTypeProviderForToString.Instance, TypeContext) +
-                " " +
-                Name;
+            return FieldDefinition.DecodeSignature(
+                    EcmaSignatureTypeProviderForToString.Instance,
+                    TypeContext
+                )
+                + " "
+                + Name;
         }
 
         private MetadataReader Reader => _module.Reader;
         private MetadataLoadContext Loader => GetRoModule().Loader;
 
-        private ref readonly FieldDefinition FieldDefinition { get { Loader.DisposeCheck(); return ref _neverAccessThisExceptThroughFieldDefinitionProperty; } }
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]  // Block from debugger watch windows so they don't AV the debugged process.
+        private ref readonly FieldDefinition FieldDefinition
+        {
+            get
+            {
+                Loader.DisposeCheck();
+                return ref _neverAccessThisExceptThroughFieldDefinitionProperty;
+            }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly FieldDefinition _neverAccessThisExceptThroughFieldDefinitionProperty;
     }
 }

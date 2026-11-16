@@ -29,9 +29,12 @@ namespace System.Xml.Xsl.Runtime
         {
             switch (navThis!.ComparePosition(navThat))
             {
-                case XmlNodeOrder.Before: return -1;
-                case XmlNodeOrder.Same: return 0;
-                case XmlNodeOrder.After: return 1;
+                case XmlNodeOrder.Before:
+                    return -1;
+                case XmlNodeOrder.Same:
+                    return 0;
+                case XmlNodeOrder.After:
+                    return 1;
             }
 
             // Use this.roots to impose stable ordering

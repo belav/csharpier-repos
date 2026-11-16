@@ -10,7 +10,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDouble1()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  <!-- Comment inbetween-->44.<?a?>44  </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  <!-- Comment inbetween-->44.<?a?>44  </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(44.44d, reader.ReadContentAsDouble());
@@ -19,7 +21,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDouble10()
         {
-            var reader = Utils.CreateFragmentReader("<Root><![CDATA[9]]>9<?a?>9<!-- Comment inbetween-->9.<![CDATA[9]]></Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root><![CDATA[9]]>9<?a?>9<!-- Comment inbetween-->9.<![CDATA[9]]></Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(9999.9d, reader.ReadContentAs(typeof(double), null));
@@ -28,7 +32,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDouble11()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  <!-- Comment inbetween-->44.<?a?>44  </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  <!-- Comment inbetween-->44.<?a?>44  </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(44.44d, reader.ReadContentAs(typeof(double), null));
@@ -37,7 +43,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDouble12()
         {
-            var reader = Utils.CreateFragmentReader("<Root> 44<?a?>.55<!-- Comment inbetween--> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> 44<?a?>.55<!-- Comment inbetween--> </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(44.55d, reader.ReadContentAs(typeof(double), null));
@@ -46,7 +54,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDouble2()
         {
-            var reader = Utils.CreateFragmentReader("<Root> <![CDATA[-0]]><?a?>0<!-- Comment inbetween-->5.5 </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> <![CDATA[-0]]><?a?>0<!-- Comment inbetween-->5.5 </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(-5.5d, reader.ReadContentAsDouble());
@@ -55,7 +65,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDouble3()
         {
-            var reader = Utils.CreateFragmentReader("<Root> <?a?>0<![CDATA[0]]>0<!-- Comment inbetween-->1</Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> <?a?>0<![CDATA[0]]>0<!-- Comment inbetween-->1</Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(1d, reader.ReadContentAsDouble());
@@ -73,7 +85,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDouble5()
         {
-            var reader = Utils.CreateFragmentReader("<Root><![CDATA[9]]>9<?a?>9<!-- Comment inbetween-->9.<![CDATA[9]]></Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root><![CDATA[9]]>9<?a?>9<!-- Comment inbetween-->9.<![CDATA[9]]></Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(9999.9d, reader.ReadContentAsDouble());
@@ -82,7 +96,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDouble6()
         {
-            var reader = Utils.CreateFragmentReader("<Root> 44<?a?>.55<!-- Comment inbetween--> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> 44<?a?>.55<!-- Comment inbetween--> </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(44.55d, reader.ReadContentAsDouble());
@@ -91,7 +107,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDouble7()
         {
-            var reader = Utils.CreateFragmentReader("<Root> <![CDATA[-0]]><?a?>0<!-- Comment inbetween-->5.5 </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> <![CDATA[-0]]><?a?>0<!-- Comment inbetween-->5.5 </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(-5.5d, reader.ReadContentAs(typeof(double), null));
@@ -100,7 +118,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDouble8()
         {
-            var reader = Utils.CreateFragmentReader("<Root> <?a?>0<![CDATA[0]]>0<!-- Comment inbetween-->1</Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> <?a?>0<![CDATA[0]]>0<!-- Comment inbetween-->1</Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(1d, reader.ReadContentAs(typeof(double), null));

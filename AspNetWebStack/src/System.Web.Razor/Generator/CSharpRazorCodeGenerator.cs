@@ -10,17 +10,25 @@ namespace System.Web.Razor.Generator
     {
         private const string HiddenLinePragma = "#line hidden";
 
-        public CSharpRazorCodeGenerator(string className, string rootNamespaceName, string sourceFileName, RazorEngineHost host)
-            : base(className, rootNamespaceName, sourceFileName, host)
-        {
-        }
+        public CSharpRazorCodeGenerator(
+            string className,
+            string rootNamespaceName,
+            string sourceFileName,
+            RazorEngineHost host
+        )
+            : base(className, rootNamespaceName, sourceFileName, host) { }
 
         internal override Func<CodeWriter> CodeWriterFactory
         {
             get { return () => new CSharpCodeWriter(); }
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.CodeDom.CodeSnippetTypeMember.#ctor(System.String)", Justification = "Value is never to be localized")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1303:Do not pass literals as localized parameters",
+            MessageId = "System.CodeDom.CodeSnippetTypeMember.#ctor(System.String)",
+            Justification = "Value is never to be localized"
+        )]
         protected override void Initialize(CodeGeneratorContext context)
         {
             base.Initialize(context);

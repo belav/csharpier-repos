@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,81 +35,84 @@ using System.Transactions;
 
 namespace System.ServiceModel
 {
-	[AttributeUsage (AttributeTargets.Class)]
-	public sealed class CallbackBehaviorAttribute : Attribute,
-		IEndpointBehavior
-	{
-		public CallbackBehaviorAttribute ()
-		{
-			AutomaticSessionShutdown = true;
-			ConcurrencyMode = ConcurrencyMode.Single;
-			// LAMESPEC: it is documented as int.MaxValue, but wrong.
-			MaxItemsInObjectGraph = 0x10000;
-			UseSynchronizationContext = true;
-			ValidateMustUnderstand = true;
+    [AttributeUsage(AttributeTargets.Class)]
+    public sealed class CallbackBehaviorAttribute : Attribute, IEndpointBehavior
+    {
+        public CallbackBehaviorAttribute()
+        {
+            AutomaticSessionShutdown = true;
+            ConcurrencyMode = ConcurrencyMode.Single;
+            // LAMESPEC: it is documented as int.MaxValue, but wrong.
+            MaxItemsInObjectGraph = 0x10000;
+            UseSynchronizationContext = true;
+            ValidateMustUnderstand = true;
 #if !MOBILE && !XAMMAC_4_5
-			TransactionIsolationLevel = IsolationLevel.Unspecified;
+            TransactionIsolationLevel = IsolationLevel.Unspecified;
 #endif
-		}
+        }
 
-		[MonoTODO]
-		public bool AutomaticSessionShutdown { get; set; }
+        [MonoTODO]
+        public bool AutomaticSessionShutdown { get; set; }
 
-		[MonoTODO]
-		public ConcurrencyMode ConcurrencyMode { get; set; }
+        [MonoTODO]
+        public ConcurrencyMode ConcurrencyMode { get; set; }
 
-		[MonoTODO]
-		public bool IgnoreExtensionDataObject { get; set; }
+        [MonoTODO]
+        public bool IgnoreExtensionDataObject { get; set; }
 
-		[MonoTODO]
-		public bool IncludeExceptionDetailInFaults { get; set; }
+        [MonoTODO]
+        public bool IncludeExceptionDetailInFaults { get; set; }
 
-		[MonoTODO]
-		public int MaxItemsInObjectGraph { get; set; }
+        [MonoTODO]
+        public int MaxItemsInObjectGraph { get; set; }
 
 #if !MOBILE && !XAMMAC_4_5
-		[MonoTODO]
-		public IsolationLevel TransactionIsolationLevel { get; set; }
+        [MonoTODO]
+        public IsolationLevel TransactionIsolationLevel { get; set; }
 #endif
 
-		[MonoTODO]
-		public string TransactionTimeout { get; set; }
+        [MonoTODO]
+        public string TransactionTimeout { get; set; }
 
-		[MonoTODO]
-		public bool UseSynchronizationContext { get; set; }
+        [MonoTODO]
+        public bool UseSynchronizationContext { get; set; }
 
-		[MonoTODO]
-		public bool ValidateMustUnderstand { get; set; }
+        [MonoTODO]
+        public bool ValidateMustUnderstand { get; set; }
 
-		void IEndpointBehavior.AddBindingParameters (
-			ServiceEndpoint endpoint,
-			BindingParameterCollection parameters)
-		{
-		}
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection parameters
+        ) { }
 
-		void IEndpointBehavior.ApplyDispatchBehavior (
-			ServiceEndpoint serviceEndpoint,
-			EndpointDispatcher dispatcher)
-		{
-			throw new InvalidOperationException ("This attribute cannot be applied to service endpoint dispatcher");
-		}
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint serviceEndpoint,
+            EndpointDispatcher dispatcher
+        )
+        {
+            throw new InvalidOperationException(
+                "This attribute cannot be applied to service endpoint dispatcher"
+            );
+        }
 
-		[MonoTODO]
-		void IEndpointBehavior.ApplyClientBehavior (
-			ServiceEndpoint serviceEndpoint,
-			ClientRuntime behavior)
-		{
-			if (serviceEndpoint.Contract.CallbackContractType == null)
-				throw new InvalidOperationException ("This attribute can be applied only to duplex service endpoint");
+        [MonoTODO]
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint serviceEndpoint,
+            ClientRuntime behavior
+        )
+        {
+            if (serviceEndpoint.Contract.CallbackContractType == null)
+                throw new InvalidOperationException(
+                    "This attribute can be applied only to duplex service endpoint"
+                );
 
-			throw new NotImplementedException ();
-		}
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		void IEndpointBehavior.Validate (
-			ServiceEndpoint serviceEndpoint)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

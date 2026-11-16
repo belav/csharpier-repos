@@ -11,21 +11,36 @@ namespace System.IdentityModel.Tokens
     {
         readonly byte[] identificationData;
 
-        protected BinaryKeyIdentifierClause(string clauseType, byte[] identificationData, bool cloneBuffer)
-            : this(clauseType, identificationData, cloneBuffer, null, 0)
-        {
-        }
+        protected BinaryKeyIdentifierClause(
+            string clauseType,
+            byte[] identificationData,
+            bool cloneBuffer
+        )
+            : this(clauseType, identificationData, cloneBuffer, null, 0) { }
 
-        protected BinaryKeyIdentifierClause(string clauseType, byte[] identificationData, bool cloneBuffer, byte[] derivationNonce, int derivationLength)
+        protected BinaryKeyIdentifierClause(
+            string clauseType,
+            byte[] identificationData,
+            bool cloneBuffer,
+            byte[] derivationNonce,
+            int derivationLength
+        )
             : base(clauseType, derivationNonce, derivationLength)
         {
             if (identificationData == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("identificationData"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("identificationData")
+                );
             }
             if (identificationData.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("identificationData", SR.GetString(SR.LengthMustBeGreaterThanZero)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "identificationData",
+                        SR.GetString(SR.LengthMustBeGreaterThanZero)
+                    )
+                );
             }
 
             if (cloneBuffer)
@@ -53,8 +68,9 @@ namespace System.IdentityModel.Tokens
             BinaryKeyIdentifierClause that = keyIdentifierClause as BinaryKeyIdentifierClause;
 
             // PreSharp Bug: Parameter 'that' to this public method must be validated: A null-dereference can occur here.
-            #pragma warning suppress 56506
-            return ReferenceEquals(this, that) || (that != null && that.Matches(this.identificationData));
+#pragma warning suppress 56506
+            return ReferenceEquals(this, that)
+                || (that != null && that.Matches(this.identificationData));
         }
 
         public bool Matches(byte[] data)
@@ -66,7 +82,12 @@ namespace System.IdentityModel.Tokens
         {
             if (offset < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("offset", SR.GetString(SR.ValueMustBeNonNegative)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "offset",
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             }
             return SecurityUtils.MatchesBuffer(this.identificationData, 0, data, offset);
         }

@@ -26,6 +26,11 @@ namespace Microsoft.CodeAnalysis.BraceMatching
         /// which set of braces to return.
         /// </para>
         /// </summary>
-        Task<BraceMatchingResult?> FindBracesAsync(Document document, int position, BraceMatchingOptions options, CancellationToken cancellationToken);
+        Task<BraceMatchingResult?> FindBracesAsync(
+            Document document,
+            int position,
+            BraceMatchingOptions options,
+            CancellationToken cancellationToken
+        );
     }
 }

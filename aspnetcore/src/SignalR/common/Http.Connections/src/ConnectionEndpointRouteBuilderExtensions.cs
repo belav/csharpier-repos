@@ -65,14 +65,10 @@ public static class ConnectionEndpointRouteBuilderExtensions
         var options = new HttpConnectionDispatcherOptions();
         configureOptions?.Invoke(options);
 
-        var conventionBuilder = endpoints.MapConnections(
-            pattern,
-            options,
-            b =>
-            {
-                b.UseConnectionHandler<TConnectionHandler>();
-            }
-        );
+        var conventionBuilder = endpoints.MapConnections(pattern, options, b =>
+        {
+            b.UseConnectionHandler<TConnectionHandler>();
+        });
 
         var attributes = typeof(TConnectionHandler).GetCustomAttributes(inherit: true);
         conventionBuilder.Add(e =>

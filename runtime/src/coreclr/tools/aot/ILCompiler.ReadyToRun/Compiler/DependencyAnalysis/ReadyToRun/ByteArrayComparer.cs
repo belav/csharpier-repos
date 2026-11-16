@@ -8,7 +8,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     internal sealed class ByteArrayComparer : IEqualityComparer<byte[]>
     {
         public static ByteArrayComparer Instance = new ByteArrayComparer();
-        
+
         public bool Equals(byte[] a, byte[] b)
         {
             if (a == b)
@@ -28,7 +28,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
             return true;
         }
-        
+
         public int GetHashCode(byte[] a)
         {
             int hash = unchecked(5381 + (a.Length << 7));

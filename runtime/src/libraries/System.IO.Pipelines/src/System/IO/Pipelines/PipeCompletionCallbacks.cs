@@ -11,7 +11,10 @@ namespace System.IO.Pipelines
         private readonly List<PipeCompletionCallback> _callbacks;
         private readonly Exception? _exception;
 
-        public PipeCompletionCallbacks(List<PipeCompletionCallback> callbacks, ExceptionDispatchInfo? edi)
+        public PipeCompletionCallbacks(
+            List<PipeCompletionCallback> callbacks,
+            ExceptionDispatchInfo? edi
+        )
         {
             _callbacks = callbacks;
             _exception = edi?.SourceException;

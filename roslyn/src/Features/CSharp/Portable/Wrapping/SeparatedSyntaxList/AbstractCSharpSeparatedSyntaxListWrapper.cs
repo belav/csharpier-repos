@@ -13,8 +13,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping.SeparatedSyntaxList
         where TListItemSyntax : SyntaxNode
     {
         protected AbstractCSharpSeparatedSyntaxListWrapper()
-            : base(CSharpIndentationService.Instance)
-        {
-        }
+            : base(CSharpIndentationService.Instance) { }
     }
 }

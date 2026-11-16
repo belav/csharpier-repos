@@ -16,7 +16,8 @@ internal static partial class Interop
             uint TokenInformationClass,
             SafeLocalAllocHandle TokenInformation,
             uint TokenInformationLength,
-            out uint ReturnLength);
+            out uint ReturnLength
+        );
 
         [LibraryImport(Interop.Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -25,6 +26,7 @@ internal static partial class Interop
             uint TokenInformationClass,
             SafeLocalAllocHandle TokenInformation,
             uint TokenInformationLength,
-            out uint ReturnLength);
+            out uint ReturnLength
+        );
     }
 }

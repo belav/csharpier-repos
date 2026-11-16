@@ -4,11 +4,11 @@ using System;
 
 class B
 {
-	public static int Main ()
-	{
-		if (C.Print ("x") != "x")
-			return 1;
+    public static int Main()
+    {
+        if (C.Print("x") != "x")
+            return 1;
 
-		return 0;
-	}
+        return 0;
+    }
 }

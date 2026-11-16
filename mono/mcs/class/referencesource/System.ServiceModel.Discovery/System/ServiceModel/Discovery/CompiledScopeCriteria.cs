@@ -20,18 +20,12 @@ namespace System.ServiceModel.Discovery
 
         public string CompiledScope
         {
-            get
-            {
-                return this.compiledScope;
-            }
+            get { return this.compiledScope; }
         }
 
         public CompiledScopeCriteriaMatchBy MatchBy
         {
-            get
-            {
-                return this.matchBy;
-            }
+            get { return this.matchBy; }
         }
     }
 }

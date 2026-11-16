@@ -1,11 +1,11 @@
 ﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,106 +14,106 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml.Tests
 {
-	using System;
-	using Castle.Components.DictionaryAdapter.Tests;
-	using NUnit.Framework;
+    using System;
+    using Castle.Components.DictionaryAdapter.Tests;
+    using NUnit.Framework;
 
-	public class DefaultBehaviorTestCase
-	{
-		[TestFixture]
-		public class SimpleProperty : XmlAdapterTestCase
-		{
-			public interface IFoo : IDictionaryAdapter
-			{
-				string A { get; set; }
-			}
+    public class DefaultBehaviorTestCase
+    {
+        [TestFixture]
+        public class SimpleProperty : XmlAdapterTestCase
+        {
+            public interface IFoo : IDictionaryAdapter
+            {
+                string A { get; set; }
+            }
 
-			[Test]
-			public void Get_Element()
-			{
-				var foo = Create<IFoo>("<Foo> <A>a</A> </Foo>");
+            [Test]
+            public void Get_Element()
+            {
+                var foo = Create<IFoo>("<Foo> <A>a</A> </Foo>");
 
-				Assert.AreEqual("a", foo.A);
-			}
+                Assert.AreEqual("a", foo.A);
+            }
 
-			[Test]
-			public void Get_Element_WithExpectedXsiType()
-			{
-				var foo = Create<IFoo>("<Foo $xsd $xsi> <A xsi:type='xsd:string'>a</A> </Foo>");
+            [Test]
+            public void Get_Element_WithExpectedXsiType()
+            {
+                var foo = Create<IFoo>("<Foo $xsd $xsi> <A xsi:type='xsd:string'>a</A> </Foo>");
 
-				Assert.AreEqual("a", foo.A);
-			}
+                Assert.AreEqual("a", foo.A);
+            }
 
-			[Test]
-			public void Get_Element_WithUnexpectedXsiType()
-			{
-				var foo = Create<IFoo>("<Foo $xsi> <A xsi:type='unexpected'>a</A> </Foo>");
+            [Test]
+            public void Get_Element_WithUnexpectedXsiType()
+            {
+                var foo = Create<IFoo>("<Foo $xsi> <A xsi:type='unexpected'>a</A> </Foo>");
 
-				Assert.IsNull(foo.A);
-			}
+                Assert.IsNull(foo.A);
+            }
 
-			[Test]
-			public void Get_Attribute()
-			{
-				var foo = Create<IFoo>("<Foo A='a'/>");
+            [Test]
+            public void Get_Attribute()
+            {
+                var foo = Create<IFoo>("<Foo A='a'/>");
 
-				Assert.AreEqual("a", foo.A);
-			}
+                Assert.AreEqual("a", foo.A);
+            }
 
-			[Test]
-			public void Set()
-			{
-				var xml = Xml("<Foo/>");
-				var foo = Create<IFoo>(xml);
+            [Test]
+            public void Set()
+            {
+                var xml = Xml("<Foo/>");
+                var foo = Create<IFoo>(xml);
 
-				foo.A = "a";
+                foo.A = "a";
 
-				CustomAssert.AreXmlEquivalent("<Foo> <A>a</A> </Foo>", xml);
-			}
-		}
+                CustomAssert.AreXmlEquivalent("<Foo> <A>a</A> </Foo>", xml);
+            }
+        }
 
-		[TestFixture]
-		public class ComplexProperty : XmlAdapterTestCase
-		{
-			public interface IFoo : IDictionaryAdapter
-			{
-				IBar A { get; set; }
-			}
+        [TestFixture]
+        public class ComplexProperty : XmlAdapterTestCase
+        {
+            public interface IFoo : IDictionaryAdapter
+            {
+                IBar A { get; set; }
+            }
 
-			public interface IBar : IDictionaryAdapter
-			{
-				string B { get; set; }
-			}
+            public interface IBar : IDictionaryAdapter
+            {
+                string B { get; set; }
+            }
 
             [Test]
             public void Get_Element()
             {
                 var foo = Create<IFoo>("<Foo> <A> <B>b</B> </A> </Foo>");
 
-				Assert.NotNull(foo.A);
-				Assert.AreEqual("b", foo.A.B);
+                Assert.NotNull(foo.A);
+                Assert.AreEqual("b", foo.A.B);
             }
 
             [Test]
             public void Get_Attribute()
             {
-				var xml = Xml("<Foo A='a'/>");
+                var xml = Xml("<Foo A='a'/>");
                 var foo = Create<IFoo>(xml);
 
-				Assert.NotNull(foo.A);
-				Assert.IsNull(foo.A.B);
-				CustomAssert.AreXmlEquivalent("<Foo A='a'/>", xml);
+                Assert.NotNull(foo.A);
+                Assert.IsNull(foo.A.B);
+                CustomAssert.AreXmlEquivalent("<Foo A='a'/>", xml);
             }
 
             [Test]
             public void Get_Missing()
             {
-				var xml = Xml("<Foo/>");
+                var xml = Xml("<Foo/>");
                 var foo = Create<IFoo>(xml);
 
-				Assert.NotNull(foo.A);
-				Assert.IsNull(foo.A.B);
-				CustomAssert.AreXmlEquivalent("<Foo/>", xml);
+                Assert.NotNull(foo.A);
+                Assert.IsNull(foo.A.B);
+                CustomAssert.AreXmlEquivalent("<Foo/>", xml);
             }
 
             [Test]
@@ -121,24 +121,28 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 var foo = Create<IFoo>("<Foo> <A> <B>b</B> </A> </Foo>");
 
-				var instanceA = foo.A;
-				var instanceB = foo.A;
+                var instanceA = foo.A;
+                var instanceB = foo.A;
 
-				Assert.AreSame(instanceB, instanceA, "Same component must be returned from successive calls.");
+                Assert.AreSame(
+                    instanceB,
+                    instanceA,
+                    "Same component must be returned from successive calls."
+                );
             }
 
             [Test]
             public void Set()
             {
-                var xmlA = Xml(	"<Foo/>");
-				var xmlB = Xml("<Foo> <A> <B>b</B> </A> </Foo>");
+                var xmlA = Xml("<Foo/>");
+                var xmlB = Xml("<Foo> <A> <B>b</B> </A> </Foo>");
                 var fooA = Create<IFoo>(xmlA);
-				var fooB = Create<IFoo>(xmlB);
+                var fooB = Create<IFoo>(xmlB);
 
                 fooA.A = fooB.A;
-				var b = fooB.A.B;
+                var b = fooB.A.B;
 
-				CustomAssert.AreXmlEquivalent(xmlB, xmlA);
+                CustomAssert.AreXmlEquivalent(xmlB, xmlA);
             }
 
             [Test]
@@ -149,48 +153,48 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
                 foo.A.B = "b";
 
-				CustomAssert.AreXmlEquivalent("<Foo> <A> <B>b</B> </A> </Foo>", xml);
+                CustomAssert.AreXmlEquivalent("<Foo> <A> <B>b</B> </A> </Foo>", xml);
             }
-		}
+        }
 
-		[TestFixture]
-		public class CollectionProperty : XmlAdapterTestCase
-		{
-			public interface IFoo : IDictionaryAdapter
-			{
-				int[] A { get; set; }
-			}
+        [TestFixture]
+        public class CollectionProperty : XmlAdapterTestCase
+        {
+            public interface IFoo : IDictionaryAdapter
+            {
+                int[] A { get; set; }
+            }
 
-			public int[] Items = { 1, 2 };
+            public int[] Items = { 1, 2 };
 
             [Test]
             public void Get_Element()
             {
                 var foo = Create<IFoo>("<Foo> <A> <int>1</int> <int>2</int> </A> </Foo>");
 
-				CollectionAssert.AreEquivalent(Items, foo.A);
+                CollectionAssert.AreEquivalent(Items, foo.A);
             }
 
             [Test]
             public void Get_Attribute()
             {
-				var xml = Xml("<Foo A='a'/>");
+                var xml = Xml("<Foo A='a'/>");
                 var foo = Create<IFoo>(xml);
 
-				Assert.NotNull(foo.A);
-				Assert.IsEmpty(foo.A);
-				CustomAssert.AreXmlEquivalent("<Foo A='a'/>", xml);
+                Assert.NotNull(foo.A);
+                Assert.IsEmpty(foo.A);
+                CustomAssert.AreXmlEquivalent("<Foo A='a'/>", xml);
             }
 
             [Test]
             public void Get_Missing()
             {
-				var xml = Xml("<Foo/>");
+                var xml = Xml("<Foo/>");
                 var foo = Create<IFoo>("<Foo/>");
 
-				Assert.NotNull(foo.A);
-				Assert.IsEmpty(foo.A);
-				CustomAssert.AreXmlEquivalent("<Foo/>", xml);
+                Assert.NotNull(foo.A);
+                Assert.IsEmpty(foo.A);
+                CustomAssert.AreXmlEquivalent("<Foo/>", xml);
             }
 
             [Test]
@@ -201,9 +205,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
                 foo.A = Items;
 
-				CustomAssert.AreXmlEquivalent("<Foo> <A> <int>1</int> <int>2</int> </A> </Foo>", xml);
+                CustomAssert.AreXmlEquivalent(
+                    "<Foo> <A> <int>1</int> <int>2</int> </A> </Foo>",
+                    xml
+                );
             }
-		}
+        }
 
         [TestFixture]
         public class XmlSerializableProperty : XmlAdapterTestCase
@@ -218,8 +225,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 var foo = Create<IFoo>("<Foo> <X> <Text>hello</Text> </X> </Foo>");
 
-				Assert.NotNull(foo.X);
-				Assert.AreEqual("hello", foo.X.Text);
+                Assert.NotNull(foo.X);
+                Assert.AreEqual("hello", foo.X.Text);
             }
 
             [Test]
@@ -227,7 +234,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 var foo = Create<IFoo>("<Foo X='hello'/>");
 
-				Assert.IsNull(foo.X);
+                Assert.IsNull(foo.X);
             }
 
             [Test]
@@ -238,167 +245,194 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
                 foo.X = new FakeStandardXmlSerializable { Text = "hello" };
 
-				CustomAssert.AreXmlEquivalent("<Foo> <X> <Text>hello</Text> </X> </Foo>", xml);
+                CustomAssert.AreXmlEquivalent("<Foo> <X> <Text>hello</Text> </X> </Foo>", xml);
             }
         }
 
-		[TestFixture]
-		public class Nullable : XmlAdapterTestCase
-		{
-			[XmlDefaults(IsNullable = true)]
-			public interface IRoot
-			{
-				string   Value { get; set; }
-				string[] Array { get; set; }
-			}
+        [TestFixture]
+        public class Nullable : XmlAdapterTestCase
+        {
+            [XmlDefaults(IsNullable = true)]
+            public interface IRoot
+            {
+                string Value { get; set; }
+                string[] Array { get; set; }
+            }
 
-			[Test]
-			public void Set_ToNull_Element()
-			{
-				var xml = Xml("<Root> <Value>TestValue</Value> </Root>");
-				var obj = Create<IRoot>(xml);
+            [Test]
+            public void Set_ToNull_Element()
+            {
+                var xml = Xml("<Root> <Value>TestValue</Value> </Root>");
+                var obj = Create<IRoot>(xml);
 
-				obj.Value = null;
+                obj.Value = null;
 
-				CustomAssert.AreXmlEquivalent(Xml("<Root $xsi> <Value xsi:nil='true'/> </Root>"), xml);
-			}
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root $xsi> <Value xsi:nil='true'/> </Root>"),
+                    xml
+                );
+            }
 
-			[Test]
-			public void Set_ToNull_Attribute()
-			{
-				var xml = Xml("<Root Value='TestValue'/>");
-				var obj = Create<IRoot>(xml);
+            [Test]
+            public void Set_ToNull_Attribute()
+            {
+                var xml = Xml("<Root Value='TestValue'/>");
+                var obj = Create<IRoot>(xml);
 
-				obj.Value = null;
+                obj.Value = null;
 
-				CustomAssert.AreXmlEquivalent(Xml("<Root $xsi> <Value xsi:nil='true'/> </Root>"), xml);
-			}
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root $xsi> <Value xsi:nil='true'/> </Root>"),
+                    xml
+                );
+            }
 
-			[Test]
-			public void Set_ToValue_Element()
-			{
-				var xml = Xml("<Root $xsi> <Value xsi:nil='true'/> </Root>");
-				var obj = Create<IRoot>(xml);
+            [Test]
+            public void Set_ToValue_Element()
+            {
+                var xml = Xml("<Root $xsi> <Value xsi:nil='true'/> </Root>");
+                var obj = Create<IRoot>(xml);
 
-				obj.Value = "TestValue";
+                obj.Value = "TestValue";
 
-				CustomAssert.AreXmlEquivalent(Xml("<Root $xsi> <Value>TestValue</Value> </Root>"), xml);
-			}
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root $xsi> <Value>TestValue</Value> </Root>"),
+                    xml
+                );
+            }
 
-			[Test]
-			public void Set_ToArray_Element()
-			{
-				var xml = Xml("<Root $xsi> <Array xsi:nil='true'/> </Root>");
-				var obj = Create<IRoot>(xml);
+            [Test]
+            public void Set_ToArray_Element()
+            {
+                var xml = Xml("<Root $xsi> <Array xsi:nil='true'/> </Root>");
+                var obj = Create<IRoot>(xml);
 
-				obj.Array = new[] { "TestValue" };
+                obj.Array = new[] { "TestValue" };
 
-				CustomAssert.AreXmlEquivalent(Xml("<Root $xsi> <Array> <string>TestValue</string> </Array> </Root>"), xml);
-			}
-		}
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root $xsi> <Array> <string>TestValue</string> </Array> </Root>"),
+                    xml
+                );
+            }
+        }
 
-		[TestFixture]
-		public class Coercion : XmlAdapterTestCase
-		{
-			public interface IFoo : IDictionaryAdapter { string A { get; set; } }
-			public interface IBar : IDictionaryAdapter { string B { get; set; } }
+        [TestFixture]
+        public class Coercion : XmlAdapterTestCase
+        {
+            public interface IFoo : IDictionaryAdapter
+            {
+                string A { get; set; }
+            }
 
-			[Test]
-			public void Coerce()
-			{
-				var xml = Xml("<Foo> <A>a</A> <B>b</B> </Foo>");
-				var foo = Create<IFoo>(xml);
-				var bar = foo.Coerce<IBar>();
+            public interface IBar : IDictionaryAdapter
+            {
+                string B { get; set; }
+            }
 
-				Assert.NotNull(bar);
-				Assert.AreEqual("b", bar.B);
-			}
+            [Test]
+            public void Coerce()
+            {
+                var xml = Xml("<Foo> <A>a</A> <B>b</B> </Foo>");
+                var foo = Create<IFoo>(xml);
+                var bar = foo.Coerce<IBar>();
 
-			[Test]
-			public void SharedXmlAdapters()
-			{
-				var xml = Xml("<Foo> <A>a</A> <B>b</B> </Foo>");
-				var foo = Create<IFoo>(xml);
-				var bar = foo.Coerce<IBar>();
+                Assert.NotNull(bar);
+                Assert.AreEqual("b", bar.B);
+            }
 
-				var fooAdapter = XmlAdapter.For(foo);
-				var barAdapter = XmlAdapter.For(bar);
+            [Test]
+            public void SharedXmlAdapters()
+            {
+                var xml = Xml("<Foo> <A>a</A> <B>b</B> </Foo>");
+                var foo = Create<IFoo>(xml);
+                var bar = foo.Coerce<IBar>();
 
-				Assert.AreNotSame(bar, foo);
-				Assert.AreNotSame(bar.This, foo.This);
-				Assert.AreSame(barAdapter, fooAdapter);
-			}
-		}
+                var fooAdapter = XmlAdapter.For(foo);
+                var barAdapter = XmlAdapter.For(bar);
 
-		[TestFixture]
-		public class VirtualObjects : XmlAdapterTestCase
-		{
-			public interface IObj
-			{
-				IFoo Foo { get; set; }
-			}
+                Assert.AreNotSame(bar, foo);
+                Assert.AreNotSame(bar.This, foo.This);
+                Assert.AreSame(barAdapter, fooAdapter);
+            }
+        }
 
-			public interface IFoo
-			{
-				IBar Bar { get; set; }
-			}
+        [TestFixture]
+        public class VirtualObjects : XmlAdapterTestCase
+        {
+            public interface IObj
+            {
+                IFoo Foo { get; set; }
+            }
 
-			public interface IBar
-			{
-				Guid Id { get; set; }
-			}
+            public interface IFoo
+            {
+                IBar Bar { get; set; }
+            }
 
-			[Test]
-			public void NondestructiveRead()
-			{
-				var xml = Xml("<Obj/>");
-				var obj = Create<IObj>(xml);
+            public interface IBar
+            {
+                Guid Id { get; set; }
+            }
 
-				Assert.True(obj.Foo.Bar.Id == Guid.Empty);
+            [Test]
+            public void NondestructiveRead()
+            {
+                var xml = Xml("<Obj/>");
+                var obj = Create<IObj>(xml);
 
-				CustomAssert.AreXmlEquivalent("<Obj/>", xml);
-			}
+                Assert.True(obj.Foo.Bar.Id == Guid.Empty);
 
-			[Test]
-			public void ObservingRealization()
-			{
-				var realizedObj = false;
-				var realizedFoo = false;
-				var realizedBar = false;
+                CustomAssert.AreXmlEquivalent("<Obj/>", xml);
+            }
 
-				var obj = Create<IObj>("<Obj/>");
-				var foo = obj.Foo;
-				var bar = foo.Bar;
+            [Test]
+            public void ObservingRealization()
+            {
+                var realizedObj = false;
+                var realizedFoo = false;
+                var realizedBar = false;
 
-				AsVirtual(obj).Realized += (s, e) => HandleRealized(s, obj, ref realizedObj, "(This should never happen!)");
-				AsVirtual(foo).Realized += (s, e) => HandleRealized(s, foo, ref realizedFoo, "Sender was Foo's virtual");
-				AsVirtual(bar).Realized += (s, e) => HandleRealized(s, bar, ref realizedBar, "Sender was Bar's virtual");
+                var obj = Create<IObj>("<Obj/>");
+                var foo = obj.Foo;
+                var bar = foo.Bar;
 
-				Assert.True(AsVirtual(obj).IsReal , "Obj exists");
-				Assert.False(AsVirtual(foo).IsReal, "Foo exists");
-				Assert.False(AsVirtual(bar).IsReal, "Bar exists");
+                AsVirtual(obj).Realized += (s, e) =>
+                    HandleRealized(s, obj, ref realizedObj, "(This should never happen!)");
+                AsVirtual(foo).Realized += (s, e) =>
+                    HandleRealized(s, foo, ref realizedFoo, "Sender was Foo's virtual");
+                AsVirtual(bar).Realized += (s, e) =>
+                    HandleRealized(s, bar, ref realizedBar, "Sender was Bar's virtual");
 
-				bar.Id = Guid.NewGuid();
+                Assert.True(AsVirtual(obj).IsReal, "Obj exists");
+                Assert.False(AsVirtual(foo).IsReal, "Foo exists");
+                Assert.False(AsVirtual(bar).IsReal, "Bar exists");
 
-				Assert.True(AsVirtual(obj).IsReal, "Obj exists");
-				Assert.True(AsVirtual(foo).IsReal, "Foo exists");
-				Assert.True(AsVirtual(bar).IsReal, "Bar exists");
+                bar.Id = Guid.NewGuid();
 
-				Assert.False(realizedObj, "Obj was realized");
-				Assert.True(realizedFoo, "Foo was realized");
-				Assert.True(realizedBar, "Bar was realized");
-			}
+                Assert.True(AsVirtual(obj).IsReal, "Obj exists");
+                Assert.True(AsVirtual(foo).IsReal, "Foo exists");
+                Assert.True(AsVirtual(bar).IsReal, "Bar exists");
 
-			private static void HandleRealized(object sender, object expected, ref bool realized, string message)
-			{
-				Assert.AreSame(AsVirtual(expected), sender, message);
-				realized = true;
-			}
+                Assert.False(realizedObj, "Obj was realized");
+                Assert.True(realizedFoo, "Foo was realized");
+                Assert.True(realizedBar, "Bar was realized");
+            }
 
-			private static IVirtual AsVirtual(object source)
-			{
-				return ((IDictionaryAdapter) source).AsVirtual();
-			}
-		}
-	}
+            private static void HandleRealized(
+                object sender,
+                object expected,
+                ref bool realized,
+                string message
+            )
+            {
+                Assert.AreSame(AsVirtual(expected), sender, message);
+                realized = true;
+            }
+
+            private static IVirtual AsVirtual(object source)
+            {
+                return ((IDictionaryAdapter)source).AsVirtual();
+            }
+        }
+    }
 }

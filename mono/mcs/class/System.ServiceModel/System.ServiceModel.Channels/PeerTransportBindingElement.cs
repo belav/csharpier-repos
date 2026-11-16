@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,121 +34,151 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Channels
 {
-	[MonoTODO]
-	public sealed class PeerTransportBindingElement
-		: TransportBindingElement, IPolicyExportExtension, IWsdlExportExtension
-	{
-		long max_recv_message_size = 0x10000;
-		int port;
-		PeerSecuritySettings security = new PeerSecuritySettings ();
+    [MonoTODO]
+    public sealed class PeerTransportBindingElement
+        : TransportBindingElement,
+            IPolicyExportExtension,
+            IWsdlExportExtension
+    {
+        long max_recv_message_size = 0x10000;
+        int port;
+        PeerSecuritySettings security = new PeerSecuritySettings();
 
-		public PeerTransportBindingElement ()
-		{
-		}
+        public PeerTransportBindingElement() { }
 
-		private PeerTransportBindingElement (
-			PeerTransportBindingElement other)
-			: base (other)
-		{
-			max_recv_message_size = other.max_recv_message_size;
-			port = other.port;
-			other.security.CopyTo (security);
-		}
+        private PeerTransportBindingElement(PeerTransportBindingElement other)
+            : base(other)
+        {
+            max_recv_message_size = other.max_recv_message_size;
+            port = other.port;
+            other.security.CopyTo(security);
+        }
 
-		public IPAddress ListenIPAddress { get; set; }
+        public IPAddress ListenIPAddress { get; set; }
 
-		public override long MaxReceivedMessageSize {
-			get { return max_recv_message_size; }
-			set { max_recv_message_size = value; }
-		}
+        public override long MaxReceivedMessageSize
+        {
+            get { return max_recv_message_size; }
+            set { max_recv_message_size = value; }
+        }
 
-		public int Port {
-			get { return port; }
-			set { port = value; }
-		}
+        public int Port
+        {
+            get { return port; }
+            set { port = value; }
+        }
 
-		public override string Scheme {
-			get { return "net.p2p"; }
-		}
+        public override string Scheme
+        {
+            get { return "net.p2p"; }
+        }
 
-		public override bool CanBuildChannelFactory<TChannel> (
-			BindingContext context)
-		{
-			return  typeof (TChannel) == typeof (IOutputChannel) ||
-				typeof (TChannel) == typeof (IDuplexChannel);
-		}
+        public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
+        {
+            return typeof(TChannel) == typeof(IOutputChannel)
+                || typeof(TChannel) == typeof(IDuplexChannel);
+        }
 
-		public override bool CanBuildChannelListener<TChannel> (
-			BindingContext context)
-		{
-			return  typeof (TChannel) == typeof (IInputChannel) ||
-				typeof (TChannel) == typeof (IDuplexChannel);
-		}
+        public override bool CanBuildChannelListener<TChannel>(BindingContext context)
+        {
+            return typeof(TChannel) == typeof(IInputChannel)
+                || typeof(TChannel) == typeof(IDuplexChannel);
+        }
 
-		public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (
-			BindingContext context)
-		{
-			if (!CanBuildChannelFactory<TChannel> (context))
-				throw new ArgumentException (String.Format ("Not supported channel type '{0}'", typeof (TChannel)));
-			if (typeof (TChannel) == typeof (IOutputChannel))
-				return (IChannelFactory<TChannel>) (object) new PeerChannelFactory<IOutputChannel> (this, context);
-			else if (typeof (TChannel) == typeof (IDuplexChannel))
-				return (IChannelFactory<TChannel>) (object) new PeerChannelFactory<IDuplexChannel> (this, context);
-			throw new InvalidOperationException (String.Format ("Not supported channel '{0}' (is incorrectly allowed at construction time)", typeof (TChannel)));
-		}
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
+        {
+            if (!CanBuildChannelFactory<TChannel>(context))
+                throw new ArgumentException(
+                    String.Format("Not supported channel type '{0}'", typeof(TChannel))
+                );
+            if (typeof(TChannel) == typeof(IOutputChannel))
+                return (IChannelFactory<TChannel>)
+                    (object)new PeerChannelFactory<IOutputChannel>(this, context);
+            else if (typeof(TChannel) == typeof(IDuplexChannel))
+                return (IChannelFactory<TChannel>)
+                    (object)new PeerChannelFactory<IDuplexChannel>(this, context);
+            throw new InvalidOperationException(
+                String.Format(
+                    "Not supported channel '{0}' (is incorrectly allowed at construction time)",
+                    typeof(TChannel)
+                )
+            );
+        }
 
-		public override IChannelListener<TChannel> BuildChannelListener<TChannel> (
-			BindingContext context)
-		{
-			if (!CanBuildChannelListener<TChannel> (context))
-				throw new ArgumentException (String.Format ("Not supported channel type '{0}'", typeof (TChannel)));
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
+        {
+            if (!CanBuildChannelListener<TChannel>(context))
+                throw new ArgumentException(
+                    String.Format("Not supported channel type '{0}'", typeof(TChannel))
+                );
 
-			// FIXME: check LocalIPAddress.
+            // FIXME: check LocalIPAddress.
 
-			if (typeof (TChannel) == typeof (IInputChannel))
-				return (IChannelListener<TChannel>) (object) new PeerChannelListener<IInputChannel> (this, context);
-			else if (typeof (TChannel) == typeof (IDuplexChannel))
-				return (IChannelListener<TChannel>) (object) new PeerChannelListener<IDuplexChannel> (this, context);
-			throw new InvalidOperationException (String.Format ("Not supported channel '{0}' (is incorrectly allowed at construction time)", typeof (TChannel)));
-		}
+            if (typeof(TChannel) == typeof(IInputChannel))
+                return (IChannelListener<TChannel>)
+                    (object)new PeerChannelListener<IInputChannel>(this, context);
+            else if (typeof(TChannel) == typeof(IDuplexChannel))
+                return (IChannelListener<TChannel>)
+                    (object)new PeerChannelListener<IDuplexChannel>(this, context);
+            throw new InvalidOperationException(
+                String.Format(
+                    "Not supported channel '{0}' (is incorrectly allowed at construction time)",
+                    typeof(TChannel)
+                )
+            );
+        }
 
-		public override BindingElement Clone ()
-		{
-			return new PeerTransportBindingElement (this);
-		}
+        public override BindingElement Clone()
+        {
+            return new PeerTransportBindingElement(this);
+        }
 
-		public override T GetProperty<T> (BindingContext context)
-		{
-			if (typeof (T) == typeof (IBindingMulticastCapabilities))
-				return (T) (object) this;
-			if (typeof (T) == typeof (ISecurityCapabilities))
-				return (T) (object) this;
-			if (typeof (T) == typeof (IBindingDeliveryCapabilities))
-				return (T) (object) this;
+        public override T GetProperty<T>(BindingContext context)
+        {
+            if (typeof(T) == typeof(IBindingMulticastCapabilities))
+                return (T)(object)this;
+            if (typeof(T) == typeof(ISecurityCapabilities))
+                return (T)(object)this;
+            if (typeof(T) == typeof(IBindingDeliveryCapabilities))
+                return (T)(object)this;
 
-			return base.GetProperty<T> (context);
-		}
+            return base.GetProperty<T>(context);
+        }
 
-		public PeerSecuritySettings Security {
-			get { return security; }
-		}
+        public PeerSecuritySettings Security
+        {
+            get { return security; }
+        }
 
-		[MonoTODO]
-		void IPolicyExportExtension.ExportPolicy (MetadataExporter exporter, PolicyConversionContext contxt)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext contxt
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		void IWsdlExportExtension.ExportEndpoint (WsdlExporter exporter, WsdlEndpointConversionContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        void IWsdlExportExtension.ExportEndpoint(
+            WsdlExporter exporter,
+            WsdlEndpointConversionContext context
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		void IWsdlExportExtension.ExportContract (WsdlExporter exporter, WsdlContractConversionContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        void IWsdlExportExtension.ExportContract(
+            WsdlExporter exporter,
+            WsdlContractConversionContext context
+        )
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

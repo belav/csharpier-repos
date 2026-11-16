@@ -20,11 +20,7 @@ public class TableIndex : Annotatable, ITableIndex
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public TableIndex(
-        string name,
-        Table table,
-        IReadOnlyList<Column> columns,
-        bool unique)
+    public TableIndex(string name, Table table, IReadOnlyList<Column> columns, bool unique)
     {
         Name = name;
         Table = table;
@@ -65,19 +61,17 @@ public class TableIndex : Annotatable, ITableIndex
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => Table.Model.IsReadOnly;
+    public override bool IsReadOnly => Table.Model.IsReadOnly;
 
     /// <inheritdoc />
     public virtual bool IsUnique { get; }
 
     /// <inheritdoc />
-    public virtual IReadOnlyList<bool>? IsDescending
-        => MappedIndexes.First().IsDescending;
+    public virtual IReadOnlyList<bool>? IsDescending => MappedIndexes.First().IsDescending;
 
     /// <inheritdoc />
-    public virtual string? Filter
-        => MappedIndexes.First().GetFilter(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+    public virtual string? Filter =>
+        MappedIndexes.First().GetFilter(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     private IRowIndexValueFactory? _rowIndexValueFactory;
 
@@ -87,10 +81,15 @@ public class TableIndex : Annotatable, ITableIndex
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IRowIndexValueFactory GetRowIndexValueFactory()
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _rowIndexValueFactory, this,
-            static constraint => constraint.Table.Model.Model.GetRelationalDependencies().RowIndexValueFactoryFactory.Create(constraint));
+    public virtual IRowIndexValueFactory GetRowIndexValueFactory() =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _rowIndexValueFactory,
+            this,
+            static constraint =>
+                constraint
+                    .Table.Model.Model.GetRelationalDependencies()
+                    .RowIndexValueFactoryFactory.Create(constraint)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -98,18 +97,15 @@ public class TableIndex : Annotatable, ITableIndex
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((ITableIndex)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((ITableIndex)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <inheritdoc />
-    ITable ITableIndex.Table
-        => Table;
+    ITable ITableIndex.Table => Table;
 
     /// <inheritdoc />
-    IReadOnlyList<IColumn> ITableIndex.Columns
-        => Columns;
+    IReadOnlyList<IColumn> ITableIndex.Columns => Columns;
 
     /// <inheritdoc />
-    IEnumerable<IIndex> ITableIndex.MappedIndexes
-        => MappedIndexes;
+    IEnumerable<IIndex> ITableIndex.MappedIndexes => MappedIndexes;
 }

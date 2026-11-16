@@ -30,69 +30,72 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-	public class HttpRuntime_AppDomainAppPath_MapPath
-		: GHTBaseWeb 
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+    public class HttpRuntime_AppDomainAppPath_MapPath : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
-			GHTTestBegin(frm);
-			// ===================================
-			// testing if the headers object is set
-			// ===================================
-			GHTSubTestBegin("AppDomainAppPath");
-			try 
-			{
-				string s1, s2, s3;
-				s1 = HttpRuntime.AppDomainAppPath;
-				s1 = s1.Replace("\\", "/");
-				s1 = s1.Replace("C:", "c:");
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-				s2 = Server.MapPath(".");
-				s2 = s2.Replace("\\", "/");
-				s2 = s2.Replace("C:", "c:");
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(frm);
+            // ===================================
+            // testing if the headers object is set
+            // ===================================
+            GHTSubTestBegin("AppDomainAppPath");
+            try
+            {
+                string s1,
+                    s2,
+                    s3;
+                s1 = HttpRuntime.AppDomainAppPath;
+                s1 = s1.Replace("\\", "/");
+                s1 = s1.Replace("C:", "c:");
 
-				if (s1 == s2)
-					s3 = "Identical";
-				else
-					s3 = "Not Identical";
+                s2 = Server.MapPath(".");
+                s2 = s2.Replace("\\", "/");
+                s2 = s2.Replace("C:", "c:");
 
-				GHTSubTestAddResult(s1);
-				GHTSubTestAddResult(s2);
-				GHTSubTestAddResult(s3);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestAddResult("unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-				}
+                if (s1 == s2)
+                    s3 = "Identical";
+                else
+                    s3 = "Not Identical";
 
-			GHTSubTestEnd();
-			GHTTestEnd();
-		}
-	}
+                GHTSubTestAddResult(s1);
+                GHTSubTestAddResult(s2);
+                GHTSubTestAddResult(s3);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
+
+            GHTSubTestEnd();
+            GHTTestEnd();
+        }
+    }
 }

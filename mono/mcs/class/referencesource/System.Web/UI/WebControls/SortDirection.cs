@@ -1,21 +1,17 @@
 //------------------------------------------------------------------------------
 // <copyright file="SortDirection.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
 
-
-    public enum SortDirection {
-
-
+    public enum SortDirection
+    {
         Ascending = 0,
 
-
-        Descending = 1
-
+        Descending = 1,
     }
 }

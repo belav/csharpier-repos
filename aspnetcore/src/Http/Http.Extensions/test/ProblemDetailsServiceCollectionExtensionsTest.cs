@@ -25,23 +25,17 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
         collection.AddProblemDetails();
 
         // Assert
-        Assert.Single(
-            collection,
-            (sd) =>
-                sd.ServiceType == typeof(IProblemDetailsService)
-                && sd.ImplementationType == typeof(ProblemDetailsService)
+        Assert.Single(collection, (sd) =>
+            sd.ServiceType == typeof(IProblemDetailsService)
+            && sd.ImplementationType == typeof(ProblemDetailsService)
         );
-        Assert.Single(
-            collection,
-            (sd) =>
-                sd.ServiceType == typeof(IProblemDetailsWriter)
-                && sd.ImplementationType == typeof(DefaultProblemDetailsWriter)
+        Assert.Single(collection, (sd) =>
+            sd.ServiceType == typeof(IProblemDetailsWriter)
+            && sd.ImplementationType == typeof(DefaultProblemDetailsWriter)
         );
-        Assert.Single(
-            collection,
-            (sd) =>
-                sd.ServiceType == typeof(IConfigureOptions<JsonOptions>)
-                && sd.ImplementationType == typeof(ProblemDetailsJsonOptionsSetup)
+        Assert.Single(collection, (sd) =>
+            sd.ServiceType == typeof(IConfigureOptions<JsonOptions>)
+            && sd.ImplementationType == typeof(ProblemDetailsJsonOptionsSetup)
         );
     }
 
@@ -56,23 +50,17 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
         collection.AddProblemDetails();
 
         // Assert
-        Assert.Single(
-            collection,
-            (sd) =>
-                sd.ServiceType == typeof(IProblemDetailsService)
-                && sd.ImplementationType == typeof(ProblemDetailsService)
+        Assert.Single(collection, (sd) =>
+            sd.ServiceType == typeof(IProblemDetailsService)
+            && sd.ImplementationType == typeof(ProblemDetailsService)
         );
-        Assert.Single(
-            collection,
-            (sd) =>
-                sd.ServiceType == typeof(IProblemDetailsWriter)
-                && sd.ImplementationType == typeof(DefaultProblemDetailsWriter)
+        Assert.Single(collection, (sd) =>
+            sd.ServiceType == typeof(IProblemDetailsWriter)
+            && sd.ImplementationType == typeof(DefaultProblemDetailsWriter)
         );
-        Assert.Single(
-            collection,
-            (sd) =>
-                sd.ServiceType == typeof(IConfigureOptions<JsonOptions>)
-                && sd.ImplementationType == typeof(ProblemDetailsJsonOptionsSetup)
+        Assert.Single(collection, (sd) =>
+            sd.ServiceType == typeof(IConfigureOptions<JsonOptions>)
+            && sd.ImplementationType == typeof(ProblemDetailsJsonOptionsSetup)
         );
     }
 
@@ -113,9 +101,8 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
         collection.AddProblemDetails();
 
         // Assert
-        var service = Assert.Single(
-            collection,
-            (sd) => sd.ServiceType == typeof(IProblemDetailsService)
+        var service = Assert.Single(collection, (sd) =>
+            sd.ServiceType == typeof(IProblemDetailsService)
         );
         Assert.Same(customService, service.ImplementationInstance);
     }

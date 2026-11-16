@@ -13,6 +13,7 @@ namespace System.Text.Tests
     public static class IsValidByteTests
     {
         private static byte GetNextValidAsciiByte() => (byte)Random.Shared.Next(0, 127 + 1);
+
         private static byte GetNextInvalidAsciiByte() => (byte)Random.Shared.Next(128, 255 + 1);
 
         [Fact]
@@ -21,14 +22,16 @@ namespace System.Text.Tests
             Assert.True(Ascii.IsValid(ReadOnlySpan<byte>.Empty));
         }
 
-        private static int[] BufferLengths = new[] {
+        private static int[] BufferLengths = new[]
+        {
             1,
             Vector128<byte>.Count - 1,
             Vector128<byte>.Count,
             Vector128<byte>.Count + 1,
             Vector256<byte>.Count - 1,
             Vector256<byte>.Count,
-            Vector256<byte>.Count + 1 };
+            Vector256<byte>.Count + 1,
+        };
 
         public static IEnumerable<object[]> AsciiOnlyBuffers
         {
@@ -38,7 +41,10 @@ namespace System.Text.Tests
 
                 foreach (int length in BufferLengths)
                 {
-                    yield return new object[] { Enumerable.Repeat(GetNextValidAsciiByte(), length).ToArray() };
+                    yield return new object[]
+                    {
+                        Enumerable.Repeat(GetNextValidAsciiByte(), length).ToArray(),
+                    };
                 }
             }
         }

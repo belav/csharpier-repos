@@ -16,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 public class SqlServerQueryTranslationPostprocessor : RelationalQueryTranslationPostprocessor
 {
     private readonly SqlServerJsonPostprocessor _jsonPostprocessor;
-    private readonly SkipWithoutOrderByInSplitQueryVerifier _skipWithoutOrderByInSplitQueryVerifier = new();
+    private readonly SkipWithoutOrderByInSplitQueryVerifier _skipWithoutOrderByInSplitQueryVerifier =
+        new();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -28,10 +29,14 @@ public class SqlServerQueryTranslationPostprocessor : RelationalQueryTranslation
         QueryTranslationPostprocessorDependencies dependencies,
         RelationalQueryTranslationPostprocessorDependencies relationalDependencies,
         QueryCompilationContext queryCompilationContext,
-        IRelationalTypeMappingSource typeMappingSource)
+        IRelationalTypeMappingSource typeMappingSource
+    )
         : base(dependencies, relationalDependencies, queryCompilationContext)
     {
-        _jsonPostprocessor = new SqlServerJsonPostprocessor(typeMappingSource, relationalDependencies.SqlExpressionFactory);
+        _jsonPostprocessor = new SqlServerJsonPostprocessor(
+            typeMappingSource,
+            relationalDependencies.SqlExpressionFactory
+        );
     }
 
     /// <summary>
@@ -62,7 +67,11 @@ public class SqlServerQueryTranslationPostprocessor : RelationalQueryTranslation
                     return shapedQueryExpression;
 
                 case RelationalSplitCollectionShaperExpression relationalSplitCollectionShaperExpression:
-                    foreach (var table in relationalSplitCollectionShaperExpression.SelectExpression.Tables)
+                    foreach (
+                        var table in relationalSplitCollectionShaperExpression
+                            .SelectExpression
+                            .Tables
+                    )
                     {
                         Visit(table);
                     }
@@ -72,7 +81,9 @@ public class SqlServerQueryTranslationPostprocessor : RelationalQueryTranslation
                     return relationalSplitCollectionShaperExpression;
 
                 case SelectExpression { Offset: not null, Orderings.Count: 0 }:
-                    throw new InvalidOperationException(SqlServerStrings.SplitQueryOffsetWithoutOrderBy);
+                    throw new InvalidOperationException(
+                        SqlServerStrings.SplitQueryOffsetWithoutOrderBy
+                    );
 
                 case NonQueryExpression nonQueryExpression:
                     return nonQueryExpression;

@@ -4,15 +4,21 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Symbols;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
-    internal sealed class PlaceholderLocalRewriter : BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+    internal sealed class PlaceholderLocalRewriter
+        : BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
     {
-        internal static BoundNode Rewrite(CSharpCompilation compilation, HashSet<LocalSymbol> declaredLocals, BoundNode node, DiagnosticBag diagnostics)
+        internal static BoundNode Rewrite(
+            CSharpCompilation compilation,
+            HashSet<LocalSymbol> declaredLocals,
+            BoundNode node,
+            DiagnosticBag diagnostics
+        )
         {
             var rewriter = new PlaceholderLocalRewriter(compilation, declaredLocals, diagnostics);
             return rewriter.Visit(node);
@@ -22,7 +28,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private readonly HashSet<LocalSymbol> _declaredLocals;
         private readonly DiagnosticBag _diagnostics;
 
-        private PlaceholderLocalRewriter(CSharpCompilation compilation, HashSet<LocalSymbol> declaredLocals, DiagnosticBag diagnostics)
+        private PlaceholderLocalRewriter(
+            CSharpCompilation compilation,
+            HashSet<LocalSymbol> declaredLocals,
+            DiagnosticBag diagnostics
+        )
         {
             _compilation = compilation;
             _declaredLocals = declaredLocals;
@@ -32,7 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         public override BoundNode VisitLocal(BoundLocal node)
         {
             var result = RewriteLocal(node);
-            Debug.Assert(TypeSymbol.Equals(result.Type, node.Type, TypeCompareKind.ConsiderEverything2));
+            Debug.Assert(
+                TypeSymbol.Equals(result.Type, node.Type, TypeCompareKind.ConsiderEverything2)
+            );
             return result;
         }
 

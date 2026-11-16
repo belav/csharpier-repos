@@ -1,15 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
+using System.Diagnostics;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Playwright;
 using Wasm.Build.Tests;
 using Xunit;
 using Xunit.Abstractions;
-using System.Threading;
-using System.Threading.Tasks;
-using System;
-using System.Diagnostics;
-using Microsoft.Playwright;
 
 #nullable enable
 
@@ -18,9 +18,7 @@ namespace Wasm.Build.Templates.Tests;
 public class InterpPgoTests : WasmTemplateTestBase
 {
     public InterpPgoTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-        : base(output, buildContext)
-    {
-    }
+        : base(output, buildContext) { }
 
     [Theory]
     // Interpreter PGO is not meaningful to enable in debug builds - tiering is inactive there so all methods
@@ -37,43 +35,53 @@ public class InterpPgoTests : WasmTemplateTestBase
         string projectFile = CreateWasmTemplateProject(id, "wasmbrowser");
 
         _testOutput.WriteLine("/// Updating JS");
-        UpdateBrowserMainJs((js) => {
-            // We need to capture INTERNAL so we can explicitly save the PGO table
-            js = js.Replace(
-                "const { setModuleImports, getAssemblyExports, getConfig } = await dotnet",
-                "const { setModuleImports, getAssemblyExports, getConfig, INTERNAL } = await dotnet"
-            );
-            // Enable interpreter PGO + interpreter PGO logging + console output capturing
-            js = js.Replace(
-                ".create()",
-                ".withConsoleForwarding().withElementOnExit().withExitCodeLogging().withExitOnUnhandledError().withRuntimeOptions(['--interp-pgo-logging']).withInterpreterPgo(true).create()"
-            );
-            // Call Greeting in a loop to exercise enough code to cause something to tier,
-            //  then call INTERNAL.interp_pgo_save_data() to save the interp PGO table
-            js = js.Replace(
-                "const text = exports.MyClass.Greeting();",
-                "let text = '';\n" +
-                $"for (let i = 0; i < {iterationCount}; i++) {{ text = exports.MyClass.Greeting(); }};\n" +
-                "await INTERNAL.interp_pgo_save_data();"
-            );
-            return js;
-        }, DefaultTargetFramework);
+        UpdateBrowserMainJs(
+            (js) =>
+            {
+                // We need to capture INTERNAL so we can explicitly save the PGO table
+                js = js.Replace(
+                    "const { setModuleImports, getAssemblyExports, getConfig } = await dotnet",
+                    "const { setModuleImports, getAssemblyExports, getConfig, INTERNAL } = await dotnet"
+                );
+                // Enable interpreter PGO + interpreter PGO logging + console output capturing
+                js = js.Replace(
+                    ".create()",
+                    ".withConsoleForwarding().withElementOnExit().withExitCodeLogging().withExitOnUnhandledError().withRuntimeOptions(['--interp-pgo-logging']).withInterpreterPgo(true).create()"
+                );
+                // Call Greeting in a loop to exercise enough code to cause something to tier,
+                //  then call INTERNAL.interp_pgo_save_data() to save the interp PGO table
+                js = js.Replace(
+                    "const text = exports.MyClass.Greeting();",
+                    "let text = '';\n"
+                        + $"for (let i = 0; i < {iterationCount}; i++) {{ text = exports.MyClass.Greeting(); }};\n"
+                        + "await INTERNAL.interp_pgo_save_data();"
+                );
+                return js;
+            },
+            DefaultTargetFramework
+        );
 
         _testOutput.WriteLine("/// Building");
 
         new DotNetCommand(s_buildEnv, _testOutput)
-                .WithWorkingDirectory(_projectDir!)
-                .Execute($"build -c {config} -bl:{Path.Combine(s_buildEnv.LogRootPath, $"{id}.binlog")}")
-                .EnsureSuccessful();
+            .WithWorkingDirectory(_projectDir!)
+            .Execute(
+                $"build -c {config} -bl:{Path.Combine(s_buildEnv.LogRootPath, $"{id}.binlog")}"
+            )
+            .EnsureSuccessful();
 
         _testOutput.WriteLine("/// Starting server");
 
         // Create a single browser instance and single context to host all our pages.
         // If we don't do this, each page will have its own unique cache and the table won't be loaded.
-        using var runCommand = new RunCommand(s_buildEnv, _testOutput)
-                                    .WithWorkingDirectory(_projectDir!);
+        using var runCommand = new RunCommand(s_buildEnv, _testOutput).WithWorkingDirectory(
+            _projectDir!
+        );
         await using var runner = new BrowserRunner(_testOutput);
-        var url = await runner.StartServerAndGetUrlAsync(runCommand, $"run --no-silent -c {config} --no-build --project \"{projectFile}\" --forward-console");
+        var url = await runner.StartServerAndGetUrlAsync(
+            runCommand,
+            $"run --no-silent -c {config} --no-build --project \"{projectFile}\" --forward-console"
+        );
         IBrowser browser = await runner.SpawnBrowserAsync(url);
         IBrowserContext context = await browser.NewContextAsync();
 
@@ -91,7 +99,10 @@ public class InterpPgoTests : WasmTemplateTestBase
             // Verify that the table was saved after the app ran
             Assert.Contains("Saved interp_pgo table", output);
             // Verify that a specific method was tiered by the Greeting calls and recorded by PGO
-            Assert.Contains("added System.Runtime.CompilerServices.Unsafe:Add<byte> (byte&,int) to table", output);
+            Assert.Contains(
+                "added System.Runtime.CompilerServices.Unsafe:Add<byte> (byte&,int) to table",
+                output
+            );
         }
 
         {
@@ -113,7 +124,10 @@ public class InterpPgoTests : WasmTemplateTestBase
             // Verify that method(s) were found in the table and eagerly tiered
             Assert.Contains("because it was in the interp_pgo table", output);
             // Verify that a specific method was tiered by the Greeting calls and recorded by PGO
-            Assert.Contains("added System.Runtime.CompilerServices.Unsafe:Add<byte> (byte&,int) to table", output);
+            Assert.Contains(
+                "added System.Runtime.CompilerServices.Unsafe:Add<byte> (byte&,int) to table",
+                output
+            );
         }
 
         _testOutput.WriteLine("/// Done");

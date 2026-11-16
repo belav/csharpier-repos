@@ -54,7 +54,10 @@ namespace System.Xml.Xsl.XsltOld
                     {
                         // we cash this query because otherwise current() works incorrectly. Bug #382166.
                         // To be perfect we should use frame.NewNodeSet here
-                        processor.PushActionFrame(CopyNodeSetAction.GetAction(), new XPathArrayIterator(query));
+                        processor.PushActionFrame(
+                            CopyNodeSetAction.GetAction(),
+                            new XPathArrayIterator(query)
+                        );
                         frame.State = NodeSetCopied;
                         break;
                     }
@@ -62,7 +65,10 @@ namespace System.Xml.Xsl.XsltOld
                     XPathNavigator? nav = result as XPathNavigator;
                     if (nav != null)
                     {
-                        processor.PushActionFrame(CopyNodeSetAction.GetAction(), new XPathSingletonIterator(nav));
+                        processor.PushActionFrame(
+                            CopyNodeSetAction.GetAction(),
+                            new XPathSingletonIterator(nav)
+                        );
                         frame.State = NodeSetCopied;
                         break;
                     }

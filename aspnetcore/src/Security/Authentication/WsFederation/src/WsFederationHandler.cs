@@ -312,8 +312,7 @@ public class WsFederationHandler
                         else
                         {
                             validationFailures ??= new List<Exception>(1);
-                            Exception exception =
-                                tokenValidationResult.Exception
+                            Exception exception = tokenValidationResult.Exception
                                 ?? new SecurityTokenValidationException(
                                     $"The TokenHandler: '{tokenHandler}', was unable to validate the Token."
                                 );

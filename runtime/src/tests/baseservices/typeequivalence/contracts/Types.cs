@@ -4,16 +4,14 @@
 using System;
 using System.Runtime.InteropServices;
 
-[assembly:ImportedFromTypeLib("TypeEquivalenceTest")] // Required to support embeddable types
-[assembly:Guid("3B491C47-B176-4CF3-8748-F19E303F1714")]
+[assembly: ImportedFromTypeLib("TypeEquivalenceTest")] // Required to support embeddable types
+[assembly: Guid("3B491C47-B176-4CF3-8748-F19E303F1714")]
 
 namespace TypeEquivalenceTypes
 {
     [ComImport]
     [Guid("F34D4DE8-B891-4D73-B177-C8F1139A9A67")]
-    public interface IEmptyType
-    {
-    }
+    public interface IEmptyType { }
 
     [ComImport]
     [Guid("729E8A0A-ECAB-46F3-A151-EB494B92D40D")]
@@ -69,11 +67,13 @@ namespace TypeEquivalenceTypes
     {
         public int Field;
     }
+
     [Guid("D3F2B4C3-1CE5-45BB-AC9E-5036E580477F")]
     public struct OnlyLoadOnce_2
     {
         public int Field;
     }
+
     [Guid("690FCAC9-4CEC-406A-88DE-DA86B7914EA7")]
     public struct OnlyLoadOnce_3
     {

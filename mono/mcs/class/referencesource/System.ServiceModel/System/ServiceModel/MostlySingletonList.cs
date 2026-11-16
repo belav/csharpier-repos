@@ -11,7 +11,8 @@ namespace System.ServiceModel
     // that is logically a list, but contains just one item in all but
     // the rarest of scenarios.  When this class must be passed around
     // in internal APIs, use it as a ref parameter.
-    struct MostlySingletonList<T> where T : class
+    struct MostlySingletonList<T>
+        where T : class
     {
         int count;
         T singleton;
@@ -70,7 +71,9 @@ namespace System.ServiceModel
         {
             if (this.count != 1 || index != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("index")
+                );
             }
         }
 

@@ -30,7 +30,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            await TestServices.Shell.ExecuteCommandAsync(VSConstants.VSStd12CmdID.NavigateTo, cancellationToken);
+            await TestServices.Shell.ExecuteCommandAsync(
+                VSConstants.VSStd12CmdID.NavigateTo,
+                cancellationToken
+            );
 
             return await WaitForNavigateToFocusAsync(cancellationToken);
 
@@ -74,30 +77,66 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var shellMonitorSelection = await GetRequiredGlobalServiceAsync<SVsShellMonitorSelection, IVsMonitorSelection>(cancellationToken);
-            if (!ErrorHandler.Succeeded(shellMonitorSelection.GetCurrentElementValue((uint)VSConstants.VSSELELEMID.SEID_DocumentFrame, out var windowFrameObject)))
+            var shellMonitorSelection = await GetRequiredGlobalServiceAsync<
+                SVsShellMonitorSelection,
+                IVsMonitorSelection
+            >(cancellationToken);
+            if (
+                !ErrorHandler.Succeeded(
+                    shellMonitorSelection.GetCurrentElementValue(
+                        (uint)VSConstants.VSSELELEMID.SEID_DocumentFrame,
+                        out var windowFrameObject
+                    )
+                )
+            )
             {
-                throw new InvalidOperationException("Tried to get the active document frame but no documents were open.");
+                throw new InvalidOperationException(
+                    "Tried to get the active document frame but no documents were open."
+                );
             }
 
             var windowFrame = (IVsWindowFrame)windowFrameObject;
-            if (!ErrorHandler.Succeeded(windowFrame.GetProperty((int)VsFramePropID.IsProvisional, out var isProvisionalObject)))
+            if (
+                !ErrorHandler.Succeeded(
+                    windowFrame.GetProperty(
+                        (int)VsFramePropID.IsProvisional,
+                        out var isProvisionalObject
+                    )
+                )
+            )
             {
-                throw new InvalidOperationException("The active window frame did not have an 'IsProvisional' property.");
+                throw new InvalidOperationException(
+                    "The active window frame did not have an 'IsProvisional' property."
+                );
             }
 
             return (bool)isProvisionalObject;
         }
 
-        public async Task<string> GetActiveDocumentFileNameAsync(CancellationToken cancellationToken)
+        public async Task<string> GetActiveDocumentFileNameAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var monitorSelection = await GetRequiredGlobalServiceAsync<SVsShellMonitorSelection, IVsMonitorSelection>(cancellationToken);
-            ErrorHandler.ThrowOnFailure(monitorSelection.GetCurrentElementValue((uint)VSConstants.VSSELELEMID.SEID_WindowFrame, out var windowFrameObj));
+            var monitorSelection = await GetRequiredGlobalServiceAsync<
+                SVsShellMonitorSelection,
+                IVsMonitorSelection
+            >(cancellationToken);
+            ErrorHandler.ThrowOnFailure(
+                monitorSelection.GetCurrentElementValue(
+                    (uint)VSConstants.VSSELELEMID.SEID_WindowFrame,
+                    out var windowFrameObj
+                )
+            );
             var windowFrame = (IVsWindowFrame)windowFrameObj;
 
-            ErrorHandler.ThrowOnFailure(windowFrame.GetProperty((int)__VSFPROPID.VSFPROPID_pszMkDocument, out var documentPathObj));
+            ErrorHandler.ThrowOnFailure(
+                windowFrame.GetProperty(
+                    (int)__VSFPROPID.VSFPROPID_pszMkDocument,
+                    out var documentPathObj
+                )
+            );
             var documentPath = (string)documentPathObj;
             return Path.GetFileName(documentPath);
         }
@@ -109,31 +148,55 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             return dte.MainWindow.HWnd;
         }
 
-        public async Task<PauseFileChangesRestorer> PauseFileChangesAsync(CancellationToken cancellationToken)
+        public async Task<PauseFileChangesRestorer> PauseFileChangesAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var fileChangeService = await GetRequiredGlobalServiceAsync<SVsFileChangeEx, IVsFileChangeEx3>(cancellationToken);
+            var fileChangeService = await GetRequiredGlobalServiceAsync<
+                SVsFileChangeEx,
+                IVsFileChangeEx3
+            >(cancellationToken);
             Assumes.Present(fileChangeService);
 
             await fileChangeService.Pause();
             return new PauseFileChangesRestorer(fileChangeService);
         }
 
-        public Task ExecuteCommandAsync(CommandID command, string argument, CancellationToken cancellationToken)
-            => ExecuteCommandAsync(command.Guid, (uint)command.ID, argument, cancellationToken);
+        public Task ExecuteCommandAsync(
+            CommandID command,
+            string argument,
+            CancellationToken cancellationToken
+        ) => ExecuteCommandAsync(command.Guid, (uint)command.ID, argument, cancellationToken);
 
-        public async Task ExecuteCommandAsync(Guid commandGuid, uint commandId, string argument, CancellationToken cancellationToken)
+        public async Task ExecuteCommandAsync(
+            Guid commandGuid,
+            uint commandId,
+            string argument,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var dispatcher = await TestServices.Shell.GetRequiredGlobalServiceAsync<SUIHostCommandDispatcher, IOleCommandTarget>(cancellationToken);
+            var dispatcher = await TestServices.Shell.GetRequiredGlobalServiceAsync<
+                SUIHostCommandDispatcher,
+                IOleCommandTarget
+            >(cancellationToken);
 
             var pvaIn = Marshal.AllocHGlobal(Marshal.SizeOf<VARIANT>());
             try
             {
                 Marshal.GetNativeVariantForObject(argument, pvaIn);
-                ErrorHandler.ThrowOnFailure(dispatcher.Exec(commandGuid, commandId, (uint)OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, pvaIn, IntPtr.Zero));
+                ErrorHandler.ThrowOnFailure(
+                    dispatcher.Exec(
+                        commandGuid,
+                        commandId,
+                        (uint)OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT,
+                        pvaIn,
+                        IntPtr.Zero
+                    )
+                );
             }
             finally
             {
@@ -143,32 +206,59 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             }
         }
 
-        public Task ExecuteCommandAsync<TEnum>(TEnum command, string argument, CancellationToken cancellationToken)
+        public Task ExecuteCommandAsync<TEnum>(
+            TEnum command,
+            string argument,
+            CancellationToken cancellationToken
+        )
             where TEnum : struct, Enum
         {
-            return ExecuteCommandAsync(typeof(TEnum).GUID, Convert.ToUInt32(command), argument, cancellationToken);
+            return ExecuteCommandAsync(
+                typeof(TEnum).GUID,
+                Convert.ToUInt32(command),
+                argument,
+                cancellationToken
+            );
         }
 
-        public Task<bool> IsCommandAvailableAsync(CommandID command, CancellationToken cancellationToken)
-            => IsCommandAvailableAsync(command.Guid, (uint)command.ID, cancellationToken);
+        public Task<bool> IsCommandAvailableAsync(
+            CommandID command,
+            CancellationToken cancellationToken
+        ) => IsCommandAvailableAsync(command.Guid, (uint)command.ID, cancellationToken);
 
-        public Task<bool> IsCommandAvailableAsync<TEnum>(TEnum command, CancellationToken cancellationToken)
+        public Task<bool> IsCommandAvailableAsync<TEnum>(
+            TEnum command,
+            CancellationToken cancellationToken
+        )
             where TEnum : struct, Enum
         {
-            return IsCommandAvailableAsync(typeof(TEnum).GUID, Convert.ToUInt32(command), cancellationToken);
+            return IsCommandAvailableAsync(
+                typeof(TEnum).GUID,
+                Convert.ToUInt32(command),
+                cancellationToken
+            );
         }
 
-        public async Task<bool> IsCommandAvailableAsync(Guid commandGuid, uint commandId, CancellationToken cancellationToken)
+        public async Task<bool> IsCommandAvailableAsync(
+            Guid commandGuid,
+            uint commandId,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var dispatcher = await TestServices.Shell.GetRequiredGlobalServiceAsync<SUIHostCommandDispatcher, IOleCommandTarget>(cancellationToken);
-            OLECMD[] commands =
-            {
-                new OLECMD { cmdID = commandId },
-            };
+            var dispatcher = await TestServices.Shell.GetRequiredGlobalServiceAsync<
+                SUIHostCommandDispatcher,
+                IOleCommandTarget
+            >(cancellationToken);
+            OLECMD[] commands = { new OLECMD { cmdID = commandId } };
 
-            var status = dispatcher.QueryStatus(commandGuid, (uint)commands.Length, commands, pCmdText: IntPtr.Zero);
+            var status = dispatcher.QueryStatus(
+                commandGuid,
+                (uint)commands.Length,
+                commands,
+                pCmdText: IntPtr.Zero
+            );
             ErrorHandler.ThrowOnFailure(status);
             return ((OLECMDF)commands[0].cmdf).HasFlag(OLECMDF.OLECMDF_SUPPORTED)
                 && ((OLECMDF)commands[0].cmdf).HasFlag(OLECMDF.OLECMDF_ENABLED);
@@ -179,14 +269,20 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var fileChangeService = await GetRequiredGlobalServiceAsync<SVsFileChangeEx, IVsFileChangeEx>(cancellationToken);
+            var fileChangeService = await GetRequiredGlobalServiceAsync<
+                SVsFileChangeEx,
+                IVsFileChangeEx
+            >(cancellationToken);
             Assumes.Present(fileChangeService);
 
             var jobSynchronizer = fileChangeService.GetPropertyValue("JobSynchronizer");
             Assumes.Present(jobSynchronizer);
 
             var type = jobSynchronizer.GetType();
-            var methodInfo = type.GetMethod("GetActiveSpawnedTasks", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            var methodInfo = type.GetMethod(
+                "GetActiveSpawnedTasks",
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            );
             Assumes.Present(methodInfo);
 
             while (true)

@@ -32,7 +32,10 @@ namespace System.ComponentModel
         /// class, using the specified type as the data converter for the object this attribute
         /// is bound to.
         /// </summary>
-        public TypeConverterAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
+        public TypeConverterAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type type
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -44,7 +47,10 @@ namespace System.ComponentModel
         /// class, using the specified type name as the data converter for the object this attribute
         /// is bound to.
         /// </summary>
-        public TypeConverterAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] string typeName)
+        public TypeConverterAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                string typeName
+        )
         {
             ArgumentNullException.ThrowIfNull(typeName);
 
@@ -60,9 +66,8 @@ namespace System.ComponentModel
 
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
-            return
-                obj is TypeConverterAttribute other &&
-                other.ConverterTypeName == ConverterTypeName;
+            return obj is TypeConverterAttribute other
+                && other.ConverterTypeName == ConverterTypeName;
         }
 
         public override int GetHashCode() => ConverterTypeName.GetHashCode();

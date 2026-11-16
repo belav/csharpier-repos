@@ -16,16 +16,17 @@ namespace System.Net.Http
 
         private readonly bool _isResultNull;
 
-        public CustomMultipartFormDataRemoteStreamProvider()
-        {
-        }
+        public CustomMultipartFormDataRemoteStreamProvider() { }
 
         public CustomMultipartFormDataRemoteStreamProvider(bool isResultNull)
         {
             _isResultNull = isResultNull;
         }
 
-        public override RemoteStreamInfo GetRemoteStream(HttpContent parent, HttpContentHeaders headers)
+        public override RemoteStreamInfo GetRemoteStream(
+            HttpContent parent,
+            HttpContentHeaders headers
+        )
         {
             string fileName = headers.ContentDisposition.FileName;
             return _isResultNull

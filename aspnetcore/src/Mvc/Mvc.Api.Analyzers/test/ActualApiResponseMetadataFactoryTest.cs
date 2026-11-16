@@ -327,14 +327,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         // Assert
         Assert.True(success);
-        Assert.Collection(
-            responseMetadatas,
-            metadata =>
-            {
-                Assert.False(metadata.IsDefaultResponse);
-                Assert.Equal(200, metadata.StatusCode);
-            }
-        );
+        Assert.Collection(responseMetadatas, metadata =>
+        {
+            Assert.False(metadata.IsDefaultResponse);
+            Assert.Equal(200, metadata.StatusCode);
+        });
     }
 
     [Fact]
@@ -354,13 +351,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         // Assert
         Assert.True(success);
-        Assert.Collection(
-            responseMetadatas,
-            metadata =>
-            {
-                Assert.True(metadata.IsDefaultResponse);
-            }
-        );
+        Assert.Collection(responseMetadatas, metadata =>
+        {
+            Assert.True(metadata.IsDefaultResponse);
+        });
     }
 
     [Fact]
@@ -419,14 +413,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         // Assert
         Assert.True(success);
-        Assert.Collection(
-            responseMetadatas,
-            metadata =>
-            {
-                Assert.False(metadata.IsDefaultResponse);
-                Assert.Equal(200, metadata.StatusCode);
-            }
-        );
+        Assert.Collection(responseMetadatas, metadata =>
+        {
+            Assert.False(metadata.IsDefaultResponse);
+            Assert.Equal(200, metadata.StatusCode);
+        });
     }
 
     private async Task<(

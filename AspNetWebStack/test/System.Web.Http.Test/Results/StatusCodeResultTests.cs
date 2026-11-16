@@ -19,7 +19,13 @@ namespace System.Web.Http.Results
             HttpRequestMessage request = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { new StatusCodeResult(statusCode, request); }, "request");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new StatusCodeResult(statusCode, request);
+                },
+                "request"
+            );
         }
 
         [Fact]
@@ -66,7 +72,10 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                IHttpActionResult result = new StatusCodeResult(expectedStatusCode, expectedRequest);
+                IHttpActionResult result = new StatusCodeResult(
+                    expectedStatusCode,
+                    expectedRequest
+                );
 
                 // Act
                 Task<HttpResponseMessage> task = result.ExecuteAsync(CancellationToken.None);
@@ -91,7 +100,13 @@ namespace System.Web.Http.Results
             ApiController controller = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { new StatusCodeResult(statusCode, controller); }, "controller");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new StatusCodeResult(statusCode, controller);
+                },
+                "controller"
+            );
         }
 
         [Fact]
@@ -177,8 +192,13 @@ namespace System.Web.Http.Results
             StatusCodeResult result = new StatusCodeResult(statusCode, controller);
 
             // Act & Assert
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() =>
-                { HttpRequestMessage ignore = result.Request; }, "ApiController.Request must not be null.");
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    HttpRequestMessage ignore = result.Request;
+                },
+                "ApiController.Request must not be null."
+            );
         }
 
         [Fact]
@@ -217,8 +237,6 @@ namespace System.Web.Http.Results
             return HttpStatusCode.Continue;
         }
 
-        private class FakeController : ApiController
-        {
-        }
+        private class FakeController : ApiController { }
     }
 }

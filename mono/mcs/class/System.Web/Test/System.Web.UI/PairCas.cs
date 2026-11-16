@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,42 +26,42 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class PairCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor0_Deny_Unrestricted()
+        {
+            Pair p = new Pair();
+            Assert.IsNull(p.First, "First");
+            Assert.IsNull(p.Second, "Second");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class PairCas : AspNetHostingMinimal {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor2_Deny_Unrestricted()
+        {
+            Pair p = new Pair(String.Empty, String.Empty);
+            Assert.IsNotNull(p.First, "First");
+            Assert.IsNotNull(p.Second, "Second");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor0_Deny_Unrestricted ()
-		{
-			Pair p = new Pair ();
-			Assert.IsNull (p.First, "First");
-			Assert.IsNull (p.Second, "Second");
-		}
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor2_Deny_Unrestricted ()
-		{
-			Pair p = new Pair (String.Empty, String.Empty);
-			Assert.IsNotNull (p.First, "First");
-			Assert.IsNotNull (p.Second, "Second");
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (Pair); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(Pair); }
+        }
+    }
 }

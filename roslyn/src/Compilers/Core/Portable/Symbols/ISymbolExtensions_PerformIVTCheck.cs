@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
         internal static IVTConclusion PerformIVTCheck(
             this AssemblyIdentity assemblyGrantingAccessIdentity,
             ImmutableArray<byte> assemblyWantingAccessKey,
-            ImmutableArray<byte> grantedToPublicKey)
+            ImmutableArray<byte> grantedToPublicKey
+        )
         {
             // This gets a bit complicated. Let's break it down.
             //
@@ -46,7 +47,7 @@ namespace Microsoft.CodeAnalysis
             //   WantingAssembly then we're done; any assembly named WantingAssembly is a friend of GrantingAssembly.
             //
             //   Incidentally, the C# compiler produces error CS1726, ERR_FriendAssemblySNReq, and VB produces
-            //   the error VB31535, ERR_FriendAssemblyStrongNameRequired, when compiling 
+            //   the error VB31535, ERR_FriendAssemblyStrongNameRequired, when compiling
             //   a strong-named GrantingAssembly that names a weak-named WantingAssembly as its friend.
             //
             // * If the answer to q1 is "no" and the answer to q3 is "yes" then we are in a situation where
@@ -73,7 +74,7 @@ namespace Microsoft.CodeAnalysis
             // 8    NO  YES NO  NO  NO MATCH         GrantingAssembly has named a strong-named WantingAssembly as a friend, but this WantingAssembly is weak-named.
             // 9    NO  NO  YES NO  SUCCESS, BAD REF GrantingAssembly has named any WantingAssembly as a friend, but WantingAssembly should not be referring to a weak-named GrantingAssembly.
             // 10   NO  NO  NO  NO  SUCCESS          GrantingAssembly has named any WantingAssembly as its friend.
-            //                                     
+            //
             // (*) GrantingAssembly was not built with a Roslyn compiler, which would have prevented this.
             //
             // This method never returns NoRelationshipClaimed because if control got here, then we assume
@@ -82,7 +83,9 @@ namespace Microsoft.CodeAnalysis
             bool q1 = assemblyGrantingAccessIdentity.IsStrongName;
             bool q2 = !grantedToPublicKey.IsDefaultOrEmpty;
             bool q3 = !assemblyWantingAccessKey.IsDefaultOrEmpty;
-            bool q4 = (q2 & q3) && ByteSequenceComparer.Equals(grantedToPublicKey, assemblyWantingAccessKey);
+            bool q4 =
+                (q2 & q3)
+                && ByteSequenceComparer.Equals(grantedToPublicKey, assemblyWantingAccessKey);
 
             // Cases 2, 3, 7 and 8:
             if (q2 && !q4)

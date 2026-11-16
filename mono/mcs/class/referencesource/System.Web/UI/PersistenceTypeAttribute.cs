@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // <copyright file="PersistenceTypeAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-    using System.Runtime.InteropServices;
-
+namespace System.Web.UI
+{
     using System;
     using System.ComponentModel;
+    using System.Runtime.InteropServices;
 
     /// <devdoc>
     ///     LiteralContentAttribute indicates whether the contents within a tag representing
@@ -24,33 +24,32 @@ namespace System.Web.UI {
     ///     control is treated as a literal content tag.
     /// </devdoc>
     [AttributeUsage(AttributeTargets.All)]
-    public sealed class PersistenceModeAttribute : Attribute {
-
-
+    public sealed class PersistenceModeAttribute : Attribute
+    {
         /// <devdoc>
         ///     This marks a property or event as persistable in the HTML tag as an attribute.
         /// </devdoc>
-        public static readonly PersistenceModeAttribute Attribute = new PersistenceModeAttribute(PersistenceMode.Attribute);
-
+        public static readonly PersistenceModeAttribute Attribute = new PersistenceModeAttribute(
+            PersistenceMode.Attribute
+        );
 
         /// <devdoc>
         ///     This marks a property or event as persistable within the HTML tag as a nested tag.
         /// </devdoc>
-        public static readonly PersistenceModeAttribute InnerProperty = new PersistenceModeAttribute(PersistenceMode.InnerProperty);
-
-
-        /// <devdoc>
-        ///     This marks a property or event as persistable within the HTML tag as a child.
-        /// </devdoc>
-        public static readonly PersistenceModeAttribute InnerDefaultProperty = new PersistenceModeAttribute(PersistenceMode.InnerDefaultProperty);
-
+        public static readonly PersistenceModeAttribute InnerProperty =
+            new PersistenceModeAttribute(PersistenceMode.InnerProperty);
 
         /// <devdoc>
         ///     This marks a property or event as persistable within the HTML tag as a child.
         /// </devdoc>
-        public static readonly PersistenceModeAttribute EncodedInnerDefaultProperty = new PersistenceModeAttribute(PersistenceMode.EncodedInnerDefaultProperty);
+        public static readonly PersistenceModeAttribute InnerDefaultProperty =
+            new PersistenceModeAttribute(PersistenceMode.InnerDefaultProperty);
 
-    
+        /// <devdoc>
+        ///     This marks a property or event as persistable within the HTML tag as a child.
+        /// </devdoc>
+        public static readonly PersistenceModeAttribute EncodedInnerDefaultProperty =
+            new PersistenceModeAttribute(PersistenceMode.EncodedInnerDefaultProperty);
 
         /// <devdoc>
         /// </devdoc>
@@ -58,52 +57,54 @@ namespace System.Web.UI {
 
         private PersistenceMode mode = PersistenceMode.Attribute;
 
-
-
         /// <internalonly/>
-        public PersistenceModeAttribute(PersistenceMode mode) {
-            if (mode < PersistenceMode.Attribute || mode > PersistenceMode.EncodedInnerDefaultProperty) {
+        public PersistenceModeAttribute(PersistenceMode mode)
+        {
+            if (
+                mode < PersistenceMode.Attribute
+                || mode > PersistenceMode.EncodedInnerDefaultProperty
+            )
+            {
                 throw new ArgumentOutOfRangeException("mode");
             }
             this.mode = mode;
         }
 
-
-
         /// <devdoc>
         /// </devdoc>
-        public PersistenceMode Mode {
-            get {
-                return mode;
-            }
+        public PersistenceMode Mode
+        {
+            get { return mode; }
         }
 
-
         /// <internalonly/>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return Mode.GetHashCode();
         }
 
-
         /// <devdoc>
         /// </devdoc>
         /// <internalonly/>
-        public override bool Equals(object obj) {
-            if (obj == this) {
+        public override bool Equals(object obj)
+        {
+            if (obj == this)
+            {
                 return true;
             }
-            if ((obj != null) && (obj is PersistenceModeAttribute)) {
-                return((PersistenceModeAttribute)obj).Mode == mode;
+            if ((obj != null) && (obj is PersistenceModeAttribute))
+            {
+                return ((PersistenceModeAttribute)obj).Mode == mode;
             }
 
             return false;
         }
 
-
         /// <devdoc>
         /// </devdoc>
         /// <internalonly/>
-        public override bool IsDefaultAttribute() {
+        public override bool IsDefaultAttribute()
+        {
             return this.Equals(Default);
         }
     }

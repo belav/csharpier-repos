@@ -4,19 +4,17 @@ using System;
 
 class X
 {
-	public static void Main ()
-	{
-		Span<int> stackSpan = stackalloc int[100];
+    public static void Main()
+    {
+        Span<int> stackSpan = stackalloc int[100];
 
-		bool b = false;
+        bool b = false;
 
-		var r1 = !b ? stackalloc char[1] : throw null;
-		var r2 = b ? throw null : stackalloc char[1];
-		var r3 = b ? stackalloc char[1] : stackalloc char[2];
-	}
+        var r1 = !b ? stackalloc char[1] : throw null;
+        var r2 = b ? throw null : stackalloc char[1];
+        var r3 = b ? stackalloc char[1] : stackalloc char[2];
+    }
 
-	// Disables verifier
-	unsafe void Foo ()
-	{
-	}
+    // Disables verifier
+    unsafe void Foo() { }
 }

@@ -20,45 +20,64 @@ using Microsoft.CodeAnalysis.Simplification;
 namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
 {
     [Shared]
-    [ExportLanguageService(typeof(FSharpUnusedDeclarationsDiagnosticAnalyzerService), LanguageNames.FSharp)]
+    [ExportLanguageService(
+        typeof(FSharpUnusedDeclarationsDiagnosticAnalyzerService),
+        LanguageNames.FSharp
+    )]
     internal class FSharpUnusedDeclarationsDiagnosticAnalyzerService : ILanguageService
     {
         private readonly IFSharpUnusedDeclarationsDiagnosticAnalyzer _analyzer;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FSharpUnusedDeclarationsDiagnosticAnalyzerService(IFSharpUnusedDeclarationsDiagnosticAnalyzer analyzer)
+        public FSharpUnusedDeclarationsDiagnosticAnalyzerService(
+            IFSharpUnusedDeclarationsDiagnosticAnalyzer analyzer
+        )
         {
             _analyzer = analyzer;
         }
 
-        public Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(DiagnosticDescriptor descriptor, Document document, CancellationToken cancellationToken)
+        public Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
+            DiagnosticDescriptor descriptor,
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             return _analyzer.AnalyzeSemanticsAsync(descriptor, document, cancellationToken);
         }
     }
 
     [DiagnosticAnalyzer(LanguageNames.FSharp)]
-    internal class FSharpUnusedDeclarationsDiagnosticAnalyzer : DocumentDiagnosticAnalyzer, IBuiltInAnalyzer
+    internal class FSharpUnusedDeclarationsDiagnosticAnalyzer
+        : DocumentDiagnosticAnalyzer,
+            IBuiltInAnalyzer
     {
         private const string DescriptorId = IDEDiagnosticIds.ValueAssignedIsUnusedDiagnosticId;
 
-        private readonly DiagnosticDescriptor _descriptor =
-            new DiagnosticDescriptor(
-                    DescriptorId,
-                    ExternalAccessFSharpResources.TheValueIsUnused,
-                    ExternalAccessFSharpResources.TheValueIsUnused,
-                    DiagnosticCategory.Style, DiagnosticSeverity.Hidden, isEnabledByDefault: true, customTags: FSharpDiagnosticCustomTags.Unnecessary);
+        private readonly DiagnosticDescriptor _descriptor = new DiagnosticDescriptor(
+            DescriptorId,
+            ExternalAccessFSharpResources.TheValueIsUnused,
+            ExternalAccessFSharpResources.TheValueIsUnused,
+            DiagnosticCategory.Style,
+            DiagnosticSeverity.Hidden,
+            isEnabledByDefault: true,
+            customTags: FSharpDiagnosticCustomTags.Unnecessary
+        );
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(_descriptor);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(_descriptor);
 
         public bool IsHighPriority => false;
 
         public override int Priority => 80; // Default = 50
 
-        public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(Document document, CancellationToken cancellationToken)
+        public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var analyzer = document.Project.Services.GetService<FSharpUnusedDeclarationsDiagnosticAnalyzerService>();
+            var analyzer =
+                document.Project.Services.GetService<FSharpUnusedDeclarationsDiagnosticAnalyzerService>();
             if (analyzer == null)
             {
                 return Task.FromResult(ImmutableArray<Diagnostic>.Empty);
@@ -67,7 +86,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
             return analyzer.AnalyzeSemanticsAsync(_descriptor, document, cancellationToken);
         }
 
-        public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(Document document, CancellationToken cancellationToken)
+        public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             return Task.FromResult(ImmutableArray<Diagnostic>.Empty);
         }

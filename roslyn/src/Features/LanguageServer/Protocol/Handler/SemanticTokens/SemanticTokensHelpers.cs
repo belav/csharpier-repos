@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             SemanticTokensRefreshQueue semanticTokensRefreshQueue,
             LSP.Range[] ranges,
             RequestContext context,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (ranges.Length == 0)
             {
@@ -41,25 +42,33 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             // results but will speed up how quickly we can respond to the client's request.
             var document = contextDocument.WithFrozenPartialSemantics(cancellationToken);
             var project = document.Project;
-            var options = globalOptions.GetClassificationOptions(project.Language) with { ForceFrozenPartialSemanticsForCrossProcessOperations = true };
+            var options = globalOptions.GetClassificationOptions(project.Language) with
+            {
+                ForceFrozenPartialSemanticsForCrossProcessOperations = true,
+            };
 
             // The results from the range handler should not be cached since we don't want to cache
             // partial token results. In addition, a range request is only ever called with a whole
             // document request, so caching range results is unnecessary since the whole document
             // handler will cache the results anyway.
             var capabilities = context.GetRequiredClientCapabilities();
-            var tokensData = await SemanticTokensHelpers.ComputeSemanticTokensDataAsync(
-                capabilities,
-                document,
-                ranges,
-                options,
-                cancellationToken).ConfigureAwait(false);
+            var tokensData = await SemanticTokensHelpers
+                .ComputeSemanticTokensDataAsync(
+                    capabilities,
+                    document,
+                    ranges,
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // The above call to get semantic tokens may be inaccurate (because we use frozen partial semantics).  Kick
             // off a request to ensure that the OOP side gets a fully up to compilation for this project.  Once it does
             // we can optionally choose to notify our caller to do a refresh if we computed a compilation for a new
             // solution snapshot.
-            await semanticTokensRefreshQueue.TryEnqueueRefreshComputationAsync(project, cancellationToken).ConfigureAwait(false);
+            await semanticTokensRefreshQueue
+                .TryEnqueueRefreshComputationAsync(project, cancellationToken)
+                .ConfigureAwait(false);
             return tokensData;
         }
 
@@ -71,15 +80,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             Document document,
             LSP.Range[]? ranges,
             ClassificationOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var tokenTypesToIndex = SemanticTokensSchema.GetSchema(capabilities.HasVisualStudioLspCapability()).TokenTypeToIndex;
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var tokenTypesToIndex = SemanticTokensSchema
+                .GetSchema(capabilities.HasVisualStudioLspCapability())
+                .TokenTypeToIndex;
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
             using var _1 = Classifier.GetPooledList(out var classifiedSpans);
             using var _2 = Classifier.GetPooledList(out var updatedClassifiedSpans);
 
-            // We either calculate the tokens for the full document span, or the user 
+            // We either calculate the tokens for the full document span, or the user
             // can pass in a range from the full document if they wish.
             ranges ??= [ProtocolConversions.TextSpanToRange(root.FullSpan, text)];
             using var _ = ArrayBuilder<TextSpan>.GetInstance(ranges.Length, out var textSpans);
@@ -89,7 +103,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             }
 
             await GetClassifiedSpansForDocumentAsync(
-                classifiedSpans, document, textSpans.ToImmutableArray(), options, cancellationToken).ConfigureAwait(false);
+                    classifiedSpans,
+                    document,
+                    textSpans.ToImmutableArray(),
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // Classified spans are not guaranteed to be returned in a certain order so we sort them to be safe.
             classifiedSpans.Sort(ClassifiedSpanComparer.Instance);
@@ -100,7 +120,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
             // TO-DO: We should implement support for streaming if LSP adds support for it:
             // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1276300
-            return ComputeTokens(capabilities, text.Lines, updatedClassifiedSpans, tokenTypesToIndex);
+            return ComputeTokens(
+                capabilities,
+                text.Lines,
+                updatedClassifiedSpans,
+                tokenTypesToIndex
+            );
         }
 
         private static async Task GetClassifiedSpansForDocumentAsync(
@@ -108,40 +133,68 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             Document document,
             ImmutableArray<TextSpan> textSpans,
             ClassificationOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var classificationService = document.GetRequiredLanguageService<IClassificationService>();
+            var classificationService =
+                document.GetRequiredLanguageService<IClassificationService>();
 
             // We always return both syntactic and semantic classifications.  If there is a syntactic classifier running on the client
             // then the semantic token classifications will override them.
 
             // `includeAdditiveSpans` will add token modifiers such as 'static', which we want to include in LSP.
-            var spans = await ClassifierHelper.GetClassifiedSpansAsync(
-                document, textSpans, options, includeAdditiveSpans: true, cancellationToken).ConfigureAwait(false);
+            var spans = await ClassifierHelper
+                .GetClassifiedSpansAsync(
+                    document,
+                    textSpans,
+                    options,
+                    includeAdditiveSpans: true,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // The spans returned to us may include some empty spans, which we don't care about. We also don't care
             // about the 'text' classification.  It's added for everything between real classifications (including
             // whitespace), and just means 'don't classify this'.  No need for us to actually include that in
             // semantic tokens as it just wastes space in the result.
-            var nonEmptySpans = spans.Where(s => !s.TextSpan.IsEmpty && s.ClassificationType != ClassificationTypeNames.Text);
+            var nonEmptySpans = spans.Where(s =>
+                !s.TextSpan.IsEmpty && s.ClassificationType != ClassificationTypeNames.Text
+            );
             classifiedSpans.AddRange(nonEmptySpans);
         }
 
-        private static void ConvertMultiLineToSingleLineSpans(SourceText text, SegmentedList<ClassifiedSpan> classifiedSpans, SegmentedList<ClassifiedSpan> updatedClassifiedSpans)
+        private static void ConvertMultiLineToSingleLineSpans(
+            SourceText text,
+            SegmentedList<ClassifiedSpan> classifiedSpans,
+            SegmentedList<ClassifiedSpan> updatedClassifiedSpans
+        )
         {
-
             for (var spanIndex = 0; spanIndex < classifiedSpans.Count; spanIndex++)
             {
                 var span = classifiedSpans[spanIndex];
-                text.GetLinesAndOffsets(span.TextSpan, out var startLine, out var startOffset, out var endLine, out var endOffSet);
+                text.GetLinesAndOffsets(
+                    span.TextSpan,
+                    out var startLine,
+                    out var startOffset,
+                    out var endLine,
+                    out var endOffSet
+                );
 
                 // If the start and end of the classified span are not on the same line, we're dealing with a multi-line span.
                 // Since VS doesn't support multi-line spans/tokens, we need to break the span up into single-line spans.
                 if (startLine != endLine)
                 {
                     ConvertToSingleLineSpan(
-                        text, classifiedSpans, updatedClassifiedSpans, ref spanIndex, span.ClassificationType,
-                        startLine, startOffset, endLine, endOffSet);
+                        text,
+                        classifiedSpans,
+                        updatedClassifiedSpans,
+                        ref spanIndex,
+                        span.ClassificationType,
+                        startLine,
+                        startOffset,
+                        endLine,
+                        endOffSet
+                    );
                 }
                 else
                 {
@@ -159,7 +212,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 int startLine,
                 int startOffset,
                 int endLine,
-                int endOffSet)
+                int endOffSet
+            )
             {
                 var numLinesInSpan = endLine - startLine + 1;
                 Contract.ThrowIfTrue(numLinesInSpan < 1);
@@ -193,7 +247,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                     // Omit 0-length spans created in this fashion.
                     if (textSpan.Length > 0)
                     {
-                        var updatedClassifiedSpan = new ClassifiedSpan(textSpan, classificationType);
+                        var updatedClassifiedSpan = new ClassifiedSpan(
+                            textSpan,
+                            classificationType
+                        );
                         updatedClassifiedSpans.Add(updatedClassifiedSpan);
                     }
 
@@ -203,8 +260,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                     //     var x = @"one ""
                     //               two";
                     // The check below ensures we correctly return the spans in the correct order, i.e. 'one', '""', 'two'.
-                    while (spanIndex + 1 < originalClassifiedSpans.Count &&
-                        textSpan.Contains(originalClassifiedSpans[spanIndex + 1].TextSpan))
+                    while (
+                        spanIndex + 1 < originalClassifiedSpans.Count
+                        && textSpan.Contains(originalClassifiedSpans[spanIndex + 1].TextSpan)
+                    )
                     {
                         updatedClassifiedSpans.Add(originalClassifiedSpans[spanIndex + 1]);
                         spanIndex++;
@@ -217,7 +276,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             ClientCapabilities capabilities,
             TextLineCollection lines,
             SegmentedList<ClassifiedSpan> classifiedSpans,
-            IReadOnlyDictionary<string, int> tokenTypesToIndex)
+            IReadOnlyDictionary<string, int> tokenTypesToIndex
+        )
         {
             using var _ = ArrayBuilder<int>.GetInstance(classifiedSpans.Count, out var data);
 
@@ -226,17 +286,38 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             var lastLineNumber = 0;
             var lastStartCharacter = 0;
 
-            var tokenTypeMap = SemanticTokensSchema.GetSchema(capabilities.HasVisualStudioLspCapability()).TokenTypeMap;
+            var tokenTypeMap = SemanticTokensSchema
+                .GetSchema(capabilities.HasVisualStudioLspCapability())
+                .TokenTypeMap;
 
-            for (var currentClassifiedSpanIndex = 0; currentClassifiedSpanIndex < classifiedSpans.Count; currentClassifiedSpanIndex++)
+            for (
+                var currentClassifiedSpanIndex = 0;
+                currentClassifiedSpanIndex < classifiedSpans.Count;
+                currentClassifiedSpanIndex++
+            )
             {
                 currentClassifiedSpanIndex = ComputeNextToken(
-                    lines, ref lastLineNumber, ref lastStartCharacter, classifiedSpans,
-                    currentClassifiedSpanIndex, tokenTypeMap, tokenTypesToIndex,
-                    out var deltaLine, out var startCharacterDelta, out var tokenLength,
-                    out var tokenType, out var tokenModifiers);
+                    lines,
+                    ref lastLineNumber,
+                    ref lastStartCharacter,
+                    classifiedSpans,
+                    currentClassifiedSpanIndex,
+                    tokenTypeMap,
+                    tokenTypesToIndex,
+                    out var deltaLine,
+                    out var startCharacterDelta,
+                    out var tokenLength,
+                    out var tokenType,
+                    out var tokenModifiers
+                );
 
-                data.AddRange(deltaLine, startCharacterDelta, tokenLength, tokenType, tokenModifiers);
+                data.AddRange(
+                    deltaLine,
+                    startCharacterDelta,
+                    tokenLength,
+                    tokenType,
+                    tokenModifiers
+                );
             }
 
             return data.ToArray();
@@ -254,7 +335,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             out int startCharacterDeltaOut,
             out int tokenLengthOut,
             out int tokenTypeOut,
-            out int tokenModifiersOut)
+            out int tokenModifiersOut
+        )
         {
             // Each semantic token is represented in LSP by five numbers:
             //     1. Token line number delta, relative to the previous token
@@ -295,7 +377,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             // Classified spans with the same text span should be combined into one token.
             while (classifiedSpans[currentClassifiedSpanIndex].TextSpan == originalTextSpan)
             {
-                var classificationType = classifiedSpans[currentClassifiedSpanIndex].ClassificationType;
+                var classificationType = classifiedSpans[
+                    currentClassifiedSpanIndex
+                ].ClassificationType;
                 if (classificationType == ClassificationTypeNames.StaticSymbol)
                 {
                     // 4. Token modifiers - each set bit will be looked up in SemanticTokensLegend.tokenModifiers
@@ -315,7 +399,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
                 // Break out of the loop if we have no more classified spans left, or if the next classified span has
                 // a different text span than our current text span.
-                if (currentClassifiedSpanIndex + 1 >= classifiedSpans.Count || classifiedSpans[currentClassifiedSpanIndex + 1].TextSpan != originalTextSpan)
+                if (
+                    currentClassifiedSpanIndex + 1 >= classifiedSpans.Count
+                    || classifiedSpans[currentClassifiedSpanIndex + 1].TextSpan != originalTextSpan
+                )
                 {
                     break;
                 }
@@ -338,7 +425,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                     tokenTypeStr = classificationType;
                 }
 
-                Contract.ThrowIfFalse(tokenTypesToIndex.TryGetValue(tokenTypeStr, out var tokenTypeIndex), "No matching token type index found.");
+                Contract.ThrowIfFalse(
+                    tokenTypesToIndex.TryGetValue(tokenTypeStr, out var tokenTypeIndex),
+                    "No matching token type index found."
+                );
                 return tokenTypeIndex;
             }
         }
@@ -347,7 +437,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         {
             public static readonly ClassifiedSpanComparer Instance = new();
 
-            public int Compare(ClassifiedSpan x, ClassifiedSpan y) => x.TextSpan.CompareTo(y.TextSpan);
+            public int Compare(ClassifiedSpan x, ClassifiedSpan y) =>
+                x.TextSpan.CompareTo(y.TextSpan);
         }
     }
 }

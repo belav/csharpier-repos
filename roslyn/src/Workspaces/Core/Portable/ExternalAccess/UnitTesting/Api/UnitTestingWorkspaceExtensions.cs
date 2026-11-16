@@ -10,11 +10,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 {
     internal static class UnitTestingWorkspaceExtensions
     {
-        public static IDisposable RegisterTextDocumentOpenedEventHandler(this Workspace workspace, Action<UnitTestingTextDocumentEventArgsWrapper> action)
-            => new EventHandlerWrapper(workspace, action, opened: true);
+        public static IDisposable RegisterTextDocumentOpenedEventHandler(
+            this Workspace workspace,
+            Action<UnitTestingTextDocumentEventArgsWrapper> action
+        ) => new EventHandlerWrapper(workspace, action, opened: true);
 
-        public static IDisposable RegisterTextDocumentClosedEventHandler(this Workspace workspace, Action<UnitTestingTextDocumentEventArgsWrapper> action)
-            => new EventHandlerWrapper(workspace, action, opened: false);
+        public static IDisposable RegisterTextDocumentClosedEventHandler(
+            this Workspace workspace,
+            Action<UnitTestingTextDocumentEventArgsWrapper> action
+        ) => new EventHandlerWrapper(workspace, action, opened: false);
 
         private sealed class EventHandlerWrapper : IDisposable
         {
@@ -22,10 +26,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             private readonly EventHandler<TextDocumentEventArgs> _handler;
             private readonly bool _opened;
 
-            internal EventHandlerWrapper(Workspace workspace, Action<UnitTestingTextDocumentEventArgsWrapper> action, bool opened)
+            internal EventHandlerWrapper(
+                Workspace workspace,
+                Action<UnitTestingTextDocumentEventArgsWrapper> action,
+                bool opened
+            )
             {
                 _workspace = workspace;
-                _handler = (sender, args) => action(new UnitTestingTextDocumentEventArgsWrapper(args));
+                _handler = (sender, args) =>
+                    action(new UnitTestingTextDocumentEventArgsWrapper(args));
                 _opened = opened;
 
                 if (_opened)

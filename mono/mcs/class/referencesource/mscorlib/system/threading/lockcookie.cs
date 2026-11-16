@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
@@ -10,15 +10,16 @@
 ** Class:    LockCookie
 **
 **
-** Purpose: Defines the lock that implements 
+** Purpose: Defines the lock that implements
 **          single-writer/multiple-reader semantics
 **
 **
 ===========================================================*/
 
-namespace System.Threading {
-
+namespace System.Threading
+{
     using System;
+
     [System.Runtime.InteropServices.ComVisible(true)]
     public struct LockCookie
     {
@@ -32,7 +33,7 @@ namespace System.Threading {
             // review - Microsoft!
             return _dwFlags + _dwWriterSeqNum + _wReaderAndWriterLevel + _dwThreadID;
         }
-        
+
         public override bool Equals(Object obj)
         {
             if (obj is LockCookie)
@@ -40,22 +41,23 @@ namespace System.Threading {
             else
                 return false;
         }
-        
+
         public bool Equals(LockCookie obj)
         {
-            return obj._dwFlags == _dwFlags && obj._dwWriterSeqNum == _dwWriterSeqNum &&
-                obj._wReaderAndWriterLevel == _wReaderAndWriterLevel && obj._dwThreadID == _dwThreadID;
+            return obj._dwFlags == _dwFlags
+                && obj._dwWriterSeqNum == _dwWriterSeqNum
+                && obj._wReaderAndWriterLevel == _wReaderAndWriterLevel
+                && obj._dwThreadID == _dwThreadID;
         }
-        
+
         public static bool operator ==(LockCookie a, LockCookie b)
         {
             return a.Equals(b);
         }
-        
+
         public static bool operator !=(LockCookie a, LockCookie b)
         {
             return !(a == b);
         }
     }
 }
-

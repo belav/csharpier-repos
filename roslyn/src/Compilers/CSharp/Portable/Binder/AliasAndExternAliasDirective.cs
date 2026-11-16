@@ -17,13 +17,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         public readonly SyntaxReference? ExternAliasDirectiveReference;
         public readonly bool SkipInLookup;
 
-        public AliasAndExternAliasDirective(AliasSymbol alias, ExternAliasDirectiveSyntax? externAliasDirective, bool skipInLookup)
+        public AliasAndExternAliasDirective(
+            AliasSymbol alias,
+            ExternAliasDirectiveSyntax? externAliasDirective,
+            bool skipInLookup
+        )
         {
             this.Alias = alias;
             this.ExternAliasDirectiveReference = externAliasDirective?.GetReference();
             this.SkipInLookup = skipInLookup;
         }
 
-        public ExternAliasDirectiveSyntax? ExternAliasDirective => (ExternAliasDirectiveSyntax?)ExternAliasDirectiveReference?.GetSyntax();
+        public ExternAliasDirectiveSyntax? ExternAliasDirective =>
+            (ExternAliasDirectiveSyntax?)ExternAliasDirectiveReference?.GetSyntax();
     }
 }

@@ -29,7 +29,12 @@ namespace System.Net.Http.Tests
             Assert.False(readOnlyDictionary.ContainsKey(UnexpectedKey));
             Assert.False(dictionary.ContainsKey(UnexpectedKey));
 
-            Assert.True(readOnlyDictionary.TryGetValue(ExpectedKey, out object? getValueFromReadOnlyDictionary));
+            Assert.True(
+                readOnlyDictionary.TryGetValue(
+                    ExpectedKey,
+                    out object? getValueFromReadOnlyDictionary
+                )
+            );
             Assert.True(dictionary.TryGetValue(ExpectedKey, out object? getValueFromDictionary));
             Assert.Equal(ExpectedValue, getValueFromReadOnlyDictionary);
             Assert.Equal(ExpectedValue, getValueFromDictionary);

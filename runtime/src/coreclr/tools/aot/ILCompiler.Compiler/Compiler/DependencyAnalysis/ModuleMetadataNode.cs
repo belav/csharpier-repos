@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using ILCompiler.DependencyAnalysisFramework;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 using Debug = System.Diagnostics.Debug;
@@ -36,19 +34,32 @@ namespace ILCompiler.DependencyAnalysis
 
             // Global module type always generates metadata because it's really convenient to
             // have something in an assembly that always generates metadata.
-            dependencies.Add(factory.TypeMetadata(_module.GetGlobalModuleType()), "Global module type");
-            if (_module is EcmaModule ecmaModule
+            dependencies.Add(
+                factory.TypeMetadata(_module.GetGlobalModuleType()),
+                "Global module type"
+            );
+            if (
+                _module is EcmaModule ecmaModule
                 && ecmaModule.EntryPoint is MethodDesc entrypoint
-                && !factory.MetadataManager.IsReflectionBlocked(entrypoint))
+                && !factory.MetadataManager.IsReflectionBlocked(entrypoint)
+            )
             {
                 dependencies.Add(factory.ReflectedMethod(entrypoint), "Reflectable entrypoint");
             }
 
             EcmaAssembly ecmaAssembly = (EcmaAssembly)_module;
 
-            CustomAttributeBasedDependencyAlgorithm.AddDependenciesDueToCustomAttributes(ref dependencies, factory, ecmaAssembly);
+            CustomAttributeBasedDependencyAlgorithm.AddDependenciesDueToCustomAttributes(
+                ref dependencies,
+                factory,
+                ecmaAssembly
+            );
 
-            foreach (EcmaModule satelliteModule in ((UsageBasedMetadataManager)factory.MetadataManager).GetSatelliteAssemblies(ecmaAssembly))
+            foreach (
+                EcmaModule satelliteModule in (
+                    (UsageBasedMetadataManager)factory.MetadataManager
+                ).GetSatelliteAssemblies(ecmaAssembly)
+            )
             {
                 dependencies.Add(factory.ModuleMetadata(satelliteModule), "Satellite assembly");
             }
@@ -65,7 +76,15 @@ namespace ILCompiler.DependencyAnalysis
         public override bool HasDynamicDependencies => false;
         public override bool HasConditionalStaticDependencies => false;
         public override bool StaticDependenciesAreComputed => true;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
     }
 }

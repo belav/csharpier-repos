@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,60 +33,52 @@ using System.Collections.Generic;
 
 namespace System.Web.Compilation
 {
-	class BuildProviderGroup : List <BuildProvider>
-	{
-		// Prefix for the assembly to be generated
-		public string NamePrefix {
-			get;
-			private set;
-		}
+    class BuildProviderGroup : List<BuildProvider>
+    {
+        // Prefix for the assembly to be generated
+        public string NamePrefix { get; private set; }
 
-		// Can the group accept only one build provider
-		public bool Standalone {
-			get; set;
-		}
+        // Can the group accept only one build provider
+        public bool Standalone { get; set; }
 
-		// Is the group for global.asax
-		public bool Application 
-		{
-			get;
-			private set;
-		}
+        // Is the group for global.asax
+        public bool Application { get; private set; }
 
-		// Does the group contain the originally requested virtual path
-		public bool Master {
-			get; set;
-		}
+        // Does the group contain the originally requested virtual path
+        public bool Master { get; set; }
 
-		// Compiler type for this group
-		public CompilerType CompilerType {
-			get;
-			private set;
-		}
-		
-		public BuildProviderGroup ()
-		{
-		}
+        // Compiler type for this group
+        public CompilerType CompilerType { get; private set; }
 
-		public void AddProvider (BuildProvider bp) 
-		{
-			if (Count == 0) {
-				// We need to set the name prefix
-				if (bp is ApplicationFileBuildProvider) {
-					NamePrefix = "App_global.asax";
-					Application = true;
-				} else if (bp is ThemeDirectoryBuildProvider) {
-					NamePrefix = "App_Theme";
-					Master = true;
-				} else
-					NamePrefix = "App_Web";
+        public BuildProviderGroup() { }
 
-				CompilerType ct = BuildManager.GetDefaultCompilerTypeForLanguage (bp.LanguageName, null);
-				if (ct != null)
-					CompilerType = ct;
-			}
+        public void AddProvider(BuildProvider bp)
+        {
+            if (Count == 0)
+            {
+                // We need to set the name prefix
+                if (bp is ApplicationFileBuildProvider)
+                {
+                    NamePrefix = "App_global.asax";
+                    Application = true;
+                }
+                else if (bp is ThemeDirectoryBuildProvider)
+                {
+                    NamePrefix = "App_Theme";
+                    Master = true;
+                }
+                else
+                    NamePrefix = "App_Web";
 
-			Add (bp);
-		}
-	}
+                CompilerType ct = BuildManager.GetDefaultCompilerTypeForLanguage(
+                    bp.LanguageName,
+                    null
+                );
+                if (ct != null)
+                    CompilerType = ct;
+            }
+
+            Add(bp);
+        }
+    }
 }

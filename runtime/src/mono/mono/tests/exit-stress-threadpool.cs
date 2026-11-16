@@ -4,16 +4,20 @@ using System.Threading;
 
 public class Tests
 {
-	public static void Main (String[] args) {
-		new Thread (delegate () {
-				Thread.Sleep (100);
-				Environment.Exit (0);
-		}).Start ();
+    public static void Main(String[] args)
+    {
+        new Thread(
+            delegate()
+            {
+                Thread.Sleep(100);
+                Environment.Exit(0);
+            }
+        ).Start();
 
-		while (true) {
-			Action a = delegate () {
-			};
-			a.BeginInvoke (null, null);
-		}
-	}
+        while (true)
+        {
+            Action a = delegate() { };
+            a.BeginInvoke(null, null);
+        }
+    }
 }

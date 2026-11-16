@@ -135,7 +135,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Telemetry
         [DataMember(Order = 19)]
         public bool Concurrent { get; set; }
 
-        internal AnalyzerTelemetryInfo(AnalyzerActionCounts actionCounts, int suppressionActionCounts, TimeSpan executionTime)
+        internal AnalyzerTelemetryInfo(
+            AnalyzerActionCounts actionCounts,
+            int suppressionActionCounts,
+            TimeSpan executionTime
+        )
         {
             CompilationStartActionsCount = actionCounts.CompilationStartActionsCount;
             CompilationEndActionsCount = actionCounts.CompilationEndActionsCount;
@@ -167,8 +171,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Telemetry
         /// <summary>
         /// Create telemetry info for a specific analyzer, such as count of registered actions, the total execution time, etc.
         /// </summary>
-        public AnalyzerTelemetryInfo()
-        {
-        }
+        public AnalyzerTelemetryInfo() { }
     }
 }

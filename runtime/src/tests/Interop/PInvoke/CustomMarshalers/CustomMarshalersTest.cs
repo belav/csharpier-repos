@@ -13,14 +13,20 @@ namespace PInvokeTests
     {
         [DllImport(nameof(CustomMarshalersNative))]
         public static extern void Unsupported(
-            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalType = "System.Runtime.InteropServices.CustomMarshalers.TypeToTypeInfoMarshaler")]
-            Type type
+            [MarshalAs(
+                UnmanagedType.CustomMarshaler,
+                MarshalType = "System.Runtime.InteropServices.CustomMarshalers.TypeToTypeInfoMarshaler"
+            )]
+                Type type
         );
 
         [DllImport(nameof(CustomMarshalersNative))]
         public static extern void Unsupported(
-            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalType = "System.Runtime.InteropServices.CustomMarshalers.ExpandoToDispatchExMarshaler")]
-            IReflect expando
+            [MarshalAs(
+                UnmanagedType.CustomMarshaler,
+                MarshalType = "System.Runtime.InteropServices.CustomMarshalers.ExpandoToDispatchExMarshaler"
+            )]
+                IReflect expando
         );
     }
 
@@ -31,8 +37,12 @@ namespace PInvokeTests
         {
             try
             {
-                Assert.Throws<PlatformNotSupportedException>(() => CustomMarshalersNative.Unsupported(typeof(object)));
-                Assert.Throws<PlatformNotSupportedException>(() => CustomMarshalersNative.Unsupported((IReflect)typeof(object)));
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    CustomMarshalersNative.Unsupported(typeof(object))
+                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    CustomMarshalersNative.Unsupported((IReflect)typeof(object))
+                );
             }
             catch (System.Exception e)
             {

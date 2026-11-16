@@ -7,8 +7,10 @@ namespace System.Reflection.Tests
 {
     public class DefaultBinderTests
     {
-        private const BindingFlags flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
-        private const BindingFlags invokeFlags = flags | BindingFlags.InvokeMethod | BindingFlags.OptionalParamBinding;
+        private const BindingFlags flags =
+            BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
+        private const BindingFlags invokeFlags =
+            flags | BindingFlags.InvokeMethod | BindingFlags.OptionalParamBinding;
         private static Binder binder = Type.DefaultBinder;
 
         [Fact]
@@ -16,7 +18,15 @@ namespace System.Reflection.Tests
         {
             MethodInfo[] methods = typeof(Sample).GetMethods();
             object[] methodArgs = new object[] { "value" };
-            MethodBase method = binder.BindToMethod(flags, methods, ref methodArgs, null, null, new[] { "par1" }, out var _);
+            MethodBase method = binder.BindToMethod(
+                flags,
+                methods,
+                ref methodArgs,
+                null,
+                null,
+                new[] { "par1" },
+                out var _
+            );
             Assert.NotNull(method);
             Assert.Equal("MethodMoreParameters", method.Name);
         }
@@ -26,7 +36,15 @@ namespace System.Reflection.Tests
         {
             MethodInfo[] methods = typeof(Sample).GetMethods();
             object[] methodArgs = new object[] { "value", 1 };
-            MethodBase method = binder.BindToMethod(flags, methods, ref methodArgs, null, null, new[] { "param1", "param2" }, out var _);
+            MethodBase method = binder.BindToMethod(
+                flags,
+                methods,
+                ref methodArgs,
+                null,
+                null,
+                new[] { "param1", "param2" },
+                out var _
+            );
             Assert.NotNull(method);
             Assert.Equal("SampleMethod", method.Name);
         }
@@ -36,7 +54,15 @@ namespace System.Reflection.Tests
         {
             MethodInfo[] methods = typeof(Sample).GetMethods();
             object[] methodArgs = new object[] { 1, "value" };
-            MethodBase method = binder.BindToMethod(flags, methods, ref methodArgs, null, null, new[] { "param2", "param1" }, out var _);
+            MethodBase method = binder.BindToMethod(
+                flags,
+                methods,
+                ref methodArgs,
+                null,
+                null,
+                new[] { "param2", "param1" },
+                out var _
+            );
             Assert.NotNull(method);
             Assert.Equal("SampleMethod", method.Name);
         }
@@ -46,7 +72,15 @@ namespace System.Reflection.Tests
         {
             MethodInfo[] methods = typeof(Sample).GetMethods();
             object[] methodArgs = new object[] { "value", true };
-            MethodBase method = binder.BindToMethod(flags, methods, ref methodArgs, null, null, new[] { "param1", "param3" }, out var _);
+            MethodBase method = binder.BindToMethod(
+                flags,
+                methods,
+                ref methodArgs,
+                null,
+                null,
+                new[] { "param1", "param3" },
+                out var _
+            );
             Assert.NotNull(method);
             Assert.Equal("SampleMethod", method.Name);
         }
@@ -54,17 +88,38 @@ namespace System.Reflection.Tests
         [Fact]
         public static void DefaultBinderNamedParametersMissingRequiredParameterThrowsMissingMethodException()
         {
-            MethodInfo[] methods = new MethodInfo[] { typeof(Sample).GetMethod("NoDefaultParameterMethod") };
+            MethodInfo[] methods = new MethodInfo[]
+            {
+                typeof(Sample).GetMethod("NoDefaultParameterMethod"),
+            };
             object[] methodArgs = new object[] { "value", 1 };
-            Assert.Throws<MissingMethodException>(() => binder.BindToMethod(flags, methods, ref methodArgs, null, null, new[] { "param1", "param2" }, out var _));
+            Assert.Throws<MissingMethodException>(() =>
+                binder.BindToMethod(
+                    flags,
+                    methods,
+                    ref methodArgs,
+                    null,
+                    null,
+                    new[] { "param1", "param2" },
+                    out var _
+                )
+            );
         }
 
         [Fact]
-        public static void DefaultBinderNamedParametersMixedOrderNoDefaults ()
+        public static void DefaultBinderNamedParametersMixedOrderNoDefaults()
         {
             MethodInfo[] methods = typeof(Sample).GetMethods();
             object[] methodArgs = new object[] { true, "value", 3.14, 1 };
-            MethodBase method = binder.BindToMethod(flags, methods, ref methodArgs, null, null, new[] { "param3", "param1", "param4", "param2" }, out var _);
+            MethodBase method = binder.BindToMethod(
+                flags,
+                methods,
+                ref methodArgs,
+                null,
+                null,
+                new[] { "param3", "param1", "param4", "param2" },
+                out var _
+            );
             Assert.NotNull(method);
             Assert.Equal("NoDefaultParameterMethod", method.Name);
         }
@@ -74,7 +129,15 @@ namespace System.Reflection.Tests
         {
             MethodInfo[] methods = typeof(Sample).GetMethods();
             object[] methodArgs = new object[] { "value", 1, true, 3.14 };
-            MethodBase method = binder.BindToMethod(flags, methods, ref methodArgs, null, null, null, out var _);
+            MethodBase method = binder.BindToMethod(
+                flags,
+                methods,
+                ref methodArgs,
+                null,
+                null,
+                null,
+                out var _
+            );
             Assert.NotNull(method);
             Assert.Equal("NoDefaultParameterMethod", method.Name);
         }
@@ -84,7 +147,15 @@ namespace System.Reflection.Tests
         {
             MethodInfo[] methods = typeof(Test).GetMethods();
             object[] methodArgs = new object[] { null, null };
-            MethodBase method = binder.BindToMethod(flags, methods, ref methodArgs, null, null, null, out var _);
+            MethodBase method = binder.BindToMethod(
+                flags,
+                methods,
+                ref methodArgs,
+                null,
+                null,
+                null,
+                out var _
+            );
             Assert.NotNull(method);
             Assert.Equal("SampleMethod", method.Name);
         }
@@ -94,7 +165,9 @@ namespace System.Reflection.Tests
         {
             MethodInfo[] methods = typeof(Sample).GetMethods();
             object[] methodArgs = new object[] { true, "value", 3.14, 1 };
-            Assert.Throws<MissingMethodException>(() => binder.BindToMethod(flags, methods, ref methodArgs, null, null, null, out var _));
+            Assert.Throws<MissingMethodException>(() =>
+                binder.BindToMethod(flags, methods, ref methodArgs, null, null, null, out var _)
+            );
         }
 
         [Fact]
@@ -102,7 +175,15 @@ namespace System.Reflection.Tests
         {
             MethodInfo[] methods = typeof(Sample).GetMethods();
             object[] methodArgs = new object[] { 8, "value" };
-            MethodBase method = binder.BindToMethod(flags, methods, ref methodArgs, null, null, new[] { "par5", "par1" }, out var _);
+            MethodBase method = binder.BindToMethod(
+                flags,
+                methods,
+                ref methodArgs,
+                null,
+                null,
+                new[] { "par5", "par1" },
+                out var _
+            );
             Assert.NotNull(method);
             Assert.Equal("MethodMoreParameters", method.Name);
         }
@@ -115,7 +196,17 @@ namespace System.Reflection.Tests
             object[] methodArgs = new object[] { "value", 3 };
             string[] paramNames = new string[] { "param1", "param2" };
 
-            int result = (int)t.InvokeMember("SampleMethod", invokeFlags, null, instance, methodArgs, null, null, paramNames);
+            int result = (int)
+                t.InvokeMember(
+                    "SampleMethod",
+                    invokeFlags,
+                    null,
+                    instance,
+                    methodArgs,
+                    null,
+                    null,
+                    paramNames
+                );
             Assert.Equal(3, result);
         }
 
@@ -127,7 +218,17 @@ namespace System.Reflection.Tests
             object[] methodArgs = new object[] { "value", true };
             string[] paramNames = new string[] { "param1", "param3" };
 
-            int result = (int)t.InvokeMember("SampleMethod", invokeFlags, null, instance, methodArgs, null, null, paramNames);
+            int result = (int)
+                t.InvokeMember(
+                    "SampleMethod",
+                    invokeFlags,
+                    null,
+                    instance,
+                    methodArgs,
+                    null,
+                    null,
+                    paramNames
+                );
             Assert.Equal(7, result);
         }
 
@@ -139,7 +240,17 @@ namespace System.Reflection.Tests
             object[] methodArgs = new object[] { "value", true };
             string[] paramNames = new string[] { "param1", "param4" };
 
-            int result = (int)t.InvokeMember("AnotherMethod", invokeFlags, null, instance, methodArgs, null, null, paramNames);
+            int result = (int)
+                t.InvokeMember(
+                    "AnotherMethod",
+                    invokeFlags,
+                    null,
+                    instance,
+                    methodArgs,
+                    null,
+                    null,
+                    paramNames
+                );
             Assert.Equal(7, result);
         }
 
@@ -151,7 +262,17 @@ namespace System.Reflection.Tests
             object[] methodArgs = new object[] { true, "value" };
             string[] paramNames = new string[] { "param4", "param1" };
 
-            int result = (int)t.InvokeMember("AnotherMethod", invokeFlags, null, instance, methodArgs, null, null, paramNames);
+            int result = (int)
+                t.InvokeMember(
+                    "AnotherMethod",
+                    invokeFlags,
+                    null,
+                    instance,
+                    methodArgs,
+                    null,
+                    null,
+                    paramNames
+                );
             Assert.Equal(7, result);
         }
 
@@ -163,7 +284,17 @@ namespace System.Reflection.Tests
             object[] methodArgs = new object[] { 3, "value2", true, "value" };
             string[] paramNames = new string[] { "param3", "param2", "param4", "param1" };
 
-            int result = (int)t.InvokeMember("AnotherMethod", invokeFlags, null, instance, methodArgs, null, null, paramNames);
+            int result = (int)
+                t.InvokeMember(
+                    "AnotherMethod",
+                    invokeFlags,
+                    null,
+                    instance,
+                    methodArgs,
+                    null,
+                    null,
+                    paramNames
+                );
             Assert.Equal(8, result);
         }
 
@@ -172,12 +303,15 @@ namespace System.Reflection.Tests
         [InlineData(null)]
         public static void InvokeWithCreateInstance(string name)
         {
-            Assert.IsType<Sample>(typeof(Sample).InvokeMember(name, BindingFlags.CreateInstance, null, null, null));
+            Assert.IsType<Sample>(
+                typeof(Sample).InvokeMember(name, BindingFlags.CreateInstance, null, null, null)
+            );
         }
 
         public class Test
         {
             public void TestMethod(int param1) { }
+
             public void SampleMethod(int param2 = 2, bool param3 = false) { }
         }
 
@@ -193,7 +327,12 @@ namespace System.Reflection.Tests
                 return 1;
             }
 
-            public void NoDefaultParameterMethod(string param1, int param2, bool param3, double param4) { }
+            public void NoDefaultParameterMethod(
+                string param1,
+                int param2,
+                bool param3,
+                double param4
+            ) { }
 
             public static int SampleMethod(string param1, int param2 = 2, bool param3 = false)
             {
@@ -205,7 +344,12 @@ namespace System.Reflection.Tests
                 return param2;
             }
 
-            public int AnotherMethod(string param1, string param2 = "", int param3 = 2, bool param4 = false)
+            public int AnotherMethod(
+                string param1,
+                string param2 = "",
+                int param3 = 2,
+                bool param4 = false
+            )
             {
                 if (param4)
                 {
@@ -215,7 +359,13 @@ namespace System.Reflection.Tests
                 return param3;
             }
 
-            public void MethodMoreParameters(string par1, string par2 = "", int par3 = 2, bool par4 = false, short par5 = 1) { }
+            public void MethodMoreParameters(
+                string par1,
+                string par2 = "",
+                int par3 = 2,
+                bool par4 = false,
+                short par5 = 1
+            ) { }
         }
     }
 }

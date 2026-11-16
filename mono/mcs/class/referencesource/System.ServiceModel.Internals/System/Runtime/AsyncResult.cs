@@ -10,7 +10,11 @@ namespace System.Runtime
     using System.Threading;
 
     // AsyncResult starts acquired; Complete releases.
-    [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.ManualResetEvent, SupportsAsync = true, ReleaseMethod = "Complete")]
+    [Fx.Tag.SynchronizationPrimitive(
+        Fx.Tag.BlocksUsing.ManualResetEvent,
+        SupportsAsync = true,
+        ReleaseMethod = "Complete"
+    )]
     abstract class AsyncResult : IAsyncResult
     {
         static AsyncCallback asyncCompletionWrapperCallback;
@@ -49,10 +53,7 @@ namespace System.Runtime
 
         public object AsyncState
         {
-            get
-            {
-                return state;
-            }
+            get { return state; }
         }
 
         public WaitHandle AsyncWaitHandle
@@ -78,26 +79,17 @@ namespace System.Runtime
 
         public bool CompletedSynchronously
         {
-            get
-            {
-                return completedSynchronously;
-            }
+            get { return completedSynchronously; }
         }
 
         public bool HasCallback
         {
-            get
-            {
-                return this.callback != null;
-            }
+            get { return this.callback != null; }
         }
 
         public bool IsCompleted
         {
-            get
-            {
-                return isCompleted;
-            }
+            get { return isCompleted; }
         }
 
         // used in conjunction with PrepareAsyncCompletion to allow for finally blocks
@@ -105,24 +97,19 @@ namespace System.Runtime
 
         object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
 
         // subclasses like TraceAsyncResult can use this to wrap the callback functionality in a scope
-        protected Action<AsyncCallback, IAsyncResult> VirtualCallback
-        {
-            get;
-            set;
-        }
+        protected Action<AsyncCallback, IAsyncResult> VirtualCallback { get; set; }
 
         protected void Complete(bool completedSynchronously)
         {
             if (this.isCompleted)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(InternalSR.AsyncResultCompletedTwice(GetType())));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(InternalSR.AsyncResultCompletedTwice(GetType()))
+                );
             }
 
 #if DEBUG
@@ -156,7 +143,10 @@ namespace System.Runtime
             {
                 // If we completedSynchronously, then there's no chance that the manualResetEvent was created so
                 // we don't need to worry about a ----
-                Fx.Assert(this.manualResetEvent == null, "No ManualResetEvent should be created for a synchronous AsyncResult.");
+                Fx.Assert(
+                    this.manualResetEvent == null,
+                    "No ManualResetEvent should be created for a synchronous AsyncResult."
+                );
                 this.isCompleted = true;
             }
             else
@@ -193,7 +183,9 @@ namespace System.Runtime
                         throw;
                     }
 
-                    throw Fx.Exception.AsError(new CallbackException(InternalSR.AsyncCallbackThrewException, e));
+                    throw Fx.Exception.AsError(
+                        new CallbackException(InternalSR.AsyncCallbackThrewException, e)
+                    );
                 }
 #pragma warning restore 1634
             }
@@ -209,7 +201,9 @@ namespace System.Runtime
         {
             if (result == null)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(InternalSR.InvalidNullAsyncResult));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(InternalSR.InvalidNullAsyncResult)
+                );
             }
             if (result.CompletedSynchronously)
             {
@@ -257,7 +251,9 @@ namespace System.Runtime
         }
 
         // Note: this should be used only by the TransactedAsyncResult
-        protected void SetBeforePrepareAsyncCompletionAction(Action beforePrepareAsyncCompletionAction)
+        protected void SetBeforePrepareAsyncCompletionAction(
+            Action beforePrepareAsyncCompletionAction
+        )
         {
             this.beforePrepareAsyncCompletionAction = beforePrepareAsyncCompletionAction;
         }
@@ -278,7 +274,9 @@ namespace System.Runtime
             this.nextAsyncCompletion = callback;
             if (AsyncResult.asyncCompletionWrapperCallback == null)
             {
-                AsyncResult.asyncCompletionWrapperCallback = Fx.ThunkCallback(new AsyncCallback(AsyncCompletionWrapperCallback));
+                AsyncResult.asyncCompletionWrapperCallback = Fx.ThunkCallback(
+                    new AsyncCallback(AsyncCompletionWrapperCallback)
+                );
             }
             return AsyncResult.asyncCompletionWrapperCallback;
         }
@@ -306,7 +304,9 @@ namespace System.Runtime
         {
             if (result == null)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(InternalSR.InvalidNullAsyncResult));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(InternalSR.InvalidNullAsyncResult)
+                );
             }
 
             callback = null;
@@ -325,7 +325,9 @@ namespace System.Runtime
             callback = GetNextCompletion();
             if (callback == null)
             {
-                ThrowInvalidAsyncResult("Only call Check/SyncContinue once per async operation (once per PrepareAsyncCompletion).");
+                ThrowInvalidAsyncResult(
+                    "Only call Check/SyncContinue once per async operation (once per PrepareAsyncCompletion)."
+                );
             }
             return true;
         }
@@ -339,7 +341,11 @@ namespace System.Runtime
 
         protected static void ThrowInvalidAsyncResult(IAsyncResult result)
         {
-            throw Fx.Exception.AsError(new InvalidOperationException(InternalSR.InvalidAsyncResultImplementation(result.GetType())));
+            throw Fx.Exception.AsError(
+                new InvalidOperationException(
+                    InternalSR.InvalidAsyncResultImplementation(result.GetType())
+                )
+            );
         }
 
         protected static void ThrowInvalidAsyncResult(string debugText)
@@ -372,7 +378,9 @@ namespace System.Runtime
 
             if (asyncResult.endCalled)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(InternalSR.AsyncResultAlreadyEnded));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(InternalSR.AsyncResultAlreadyEnded)
+                );
             }
 
 #if DEBUG
@@ -415,9 +423,12 @@ namespace System.Runtime
             {
                 AsyncResult = result;
             }
-            
-            [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode,
-                Justification = "Debug-only facility")]
+
+            [SuppressMessage(
+                FxCop.Category.Performance,
+                FxCop.Rule.AvoidUncalledPrivateCode,
+                Justification = "Debug-only facility"
+            )]
             public AsyncResult AsyncResult { get; set; }
         }
 #endif

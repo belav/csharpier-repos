@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
             IGlyphService glyphService,
             ImmutableArray<ISymbol> members,
             ImmutableArray<PickMembersOption> options,
-            bool selectAll)
+            bool selectAll
+        )
         {
             _allMembers = members.Select(m => new MemberSymbolViewModel(m, glyphService)).ToList();
             MemberContainers = _allMembers;
@@ -51,9 +52,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
         internal void Filter(string searchText)
         {
             searchText = searchText.Trim();
-            MemberContainers = searchText.Length == 0
-                ? _allMembers
-                : _allMembers.Where(m => m.SymbolAutomationText.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            MemberContainers =
+                searchText.Length == 0
+                    ? _allMembers
+                    : _allMembers
+                        .Where(m =>
+                            m.SymbolAutomationText.IndexOf(
+                                searchText,
+                                StringComparison.OrdinalIgnoreCase
+                            ) >= 0
+                        )
+                        .ToList();
             NotifyPropertyChanged(nameof(MemberContainers));
         }
 
@@ -75,11 +84,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
 
         public int? SelectedIndex
         {
-            get
-            {
-                return _selectedIndex;
-            }
-
+            get { return _selectedIndex; }
             set
             {
                 var newSelectedIndex = value == -1 ? null : value;
@@ -106,7 +111,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
                     return string.Empty;
                 }
 
-                return string.Format(ServicesVSResources.Move_0_above_1, MemberContainers[SelectedIndex.Value].SymbolAutomationText, MemberContainers[SelectedIndex.Value - 1].SymbolAutomationText);
+                return string.Format(
+                    ServicesVSResources.Move_0_above_1,
+                    MemberContainers[SelectedIndex.Value].SymbolAutomationText,
+                    MemberContainers[SelectedIndex.Value - 1].SymbolAutomationText
+                );
             }
         }
 
@@ -119,7 +128,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
                     return string.Empty;
                 }
 
-                return string.Format(ServicesVSResources.Move_0_below_1, MemberContainers[SelectedIndex.Value].SymbolAutomationText, MemberContainers[SelectedIndex.Value + 1].SymbolAutomationText);
+                return string.Format(
+                    ServicesVSResources.Move_0_below_1,
+                    MemberContainers[SelectedIndex.Value].SymbolAutomationText,
+                    MemberContainers[SelectedIndex.Value + 1].SymbolAutomationText
+                );
             }
         }
 
@@ -195,7 +208,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
             public bool IsChecked
             {
                 get => _isChecked;
-
                 set
                 {
                     Option.Value = value;

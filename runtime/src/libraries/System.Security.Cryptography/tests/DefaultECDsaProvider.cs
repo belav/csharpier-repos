@@ -31,5 +31,4 @@ namespace System.Security.Cryptography.EcDsa.Tests
     {
         private static readonly IECDsaProvider s_provider = new ECDsaProvider();
     }
-
 }

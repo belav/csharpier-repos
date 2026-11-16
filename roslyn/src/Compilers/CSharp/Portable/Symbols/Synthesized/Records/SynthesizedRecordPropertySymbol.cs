@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CSharpSyntaxNode syntax,
             ParameterSymbol backingParameter,
             bool isOverride,
-            BindingDiagnosticBag diagnostics)
+            BindingDiagnosticBag diagnostics
+        )
             : base(
                 containingType,
                 syntax: syntax,
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 isExplicitInterfaceImplementation: false,
                 explicitInterfaceType: null,
                 aliasQualifierOpt: null,
-                modifiers: DeclarationModifiers.Public | (isOverride ? DeclarationModifiers.Override : DeclarationModifiers.None),
+                modifiers: DeclarationModifiers.Public
+                    | (isOverride ? DeclarationModifiers.Override : DeclarationModifiers.None),
                 hasInitializer: true, // Synthesized record properties always have a synthesized initializer
                 isAutoProperty: true,
                 isExpressionBodied: false,
@@ -35,26 +37,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 backingParameter.Name,
                 indexerNameAttributeLists: new SyntaxList<AttributeListSyntax>(),
                 backingParameter.GetFirstLocation(),
-                diagnostics)
+                diagnostics
+            )
         {
             BackingParameter = (SourceParameterSymbol)backingParameter;
         }
 
-        public override IAttributeTargetSymbol AttributesOwner => BackingParameter as IAttributeTargetSymbol ?? this;
+        public override IAttributeTargetSymbol AttributesOwner =>
+            BackingParameter as IAttributeTargetSymbol ?? this;
 
-        protected override Location TypeLocation
-            => ((ParameterSyntax)CSharpSyntaxNode).Type!.Location;
+        protected override Location TypeLocation =>
+            ((ParameterSyntax)CSharpSyntaxNode).Type!.Location;
 
-        public override SyntaxList<AttributeListSyntax> AttributeDeclarationSyntaxList
-            => BackingParameter.AttributeDeclarationList;
+        public override SyntaxList<AttributeListSyntax> AttributeDeclarationSyntaxList =>
+            BackingParameter.AttributeDeclarationList;
 
-        protected override SourcePropertyAccessorSymbol CreateGetAccessorSymbol(bool isAutoPropertyAccessor, BindingDiagnosticBag diagnostics)
+        protected override SourcePropertyAccessorSymbol CreateGetAccessorSymbol(
+            bool isAutoPropertyAccessor,
+            BindingDiagnosticBag diagnostics
+        )
         {
             Debug.Assert(isAutoPropertyAccessor);
             return CreateAccessorSymbol(isGet: true, CSharpSyntaxNode, diagnostics);
         }
 
-        protected override SourcePropertyAccessorSymbol CreateSetAccessorSymbol(bool isAutoPropertyAccessor, BindingDiagnosticBag diagnostics)
+        protected override SourcePropertyAccessorSymbol CreateSetAccessorSymbol(
+            bool isAutoPropertyAccessor,
+            BindingDiagnosticBag diagnostics
+        )
         {
             Debug.Assert(isAutoPropertyAccessor);
             return CreateAccessorSymbol(isGet: false, CSharpSyntaxNode, diagnostics);
@@ -69,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private SourcePropertyAccessorSymbol CreateAccessorSymbol(
             bool isGet,
             CSharpSyntaxNode syntax,
-            BindingDiagnosticBag diagnostics)
+            BindingDiagnosticBag diagnostics
+        )
         {
             var usesInit = !isGet && ShouldUseInit(ContainingType);
             return SourcePropertyAccessorSymbol.CreateAccessorSymbol(
@@ -80,19 +91,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 _modifiers,
                 ((ParameterSyntax)syntax).Identifier.GetLocation(),
                 syntax,
-                diagnostics);
+                diagnostics
+            );
         }
 
-        protected override (TypeWithAnnotations Type, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindType(BindingDiagnosticBag diagnostics)
+        protected override (
+            TypeWithAnnotations Type,
+            ImmutableArray<ParameterSymbol> Parameters
+        ) MakeParametersAndBindType(BindingDiagnosticBag diagnostics)
         {
-            return (BackingParameter.TypeWithAnnotations,
-                    ImmutableArray<ParameterSymbol>.Empty);
+            return (BackingParameter.TypeWithAnnotations, ImmutableArray<ParameterSymbol>.Empty);
         }
 
-        public static bool HaveCorrespondingSynthesizedRecordPropertySymbol(SourceParameterSymbol parameter)
+        public static bool HaveCorrespondingSynthesizedRecordPropertySymbol(
+            SourceParameterSymbol parameter
+        )
         {
-            return parameter.ContainingSymbol is SynthesizedPrimaryConstructor &&
-                   parameter.ContainingType.GetMembersUnordered().Any((s, parameter) => (s as SynthesizedRecordPropertySymbol)?.BackingParameter == (object)parameter, parameter);
+            return parameter.ContainingSymbol is SynthesizedPrimaryConstructor
+                && parameter
+                    .ContainingType.GetMembersUnordered()
+                    .Any(
+                        (s, parameter) =>
+                            (s as SynthesizedRecordPropertySymbol)?.BackingParameter
+                            == (object)parameter,
+                        parameter
+                    );
         }
     }
 }

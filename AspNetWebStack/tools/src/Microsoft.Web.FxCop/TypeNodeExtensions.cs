@@ -52,7 +52,10 @@ namespace Microsoft.Web.FxCop
                 return false;
             }
 
-            TypeNode targetType = _taskGeneric.GetGenericTemplateInstance(_taskGeneric.DeclaringModule, type.ConsolidatedTemplateArguments);
+            TypeNode targetType = _taskGeneric.GetGenericTemplateInstance(
+                _taskGeneric.DeclaringModule,
+                type.ConsolidatedTemplateArguments
+            );
             return targetType.Name.UniqueIdKey == type.Name.UniqueIdKey;
         }
 
@@ -89,7 +92,11 @@ namespace Microsoft.Web.FxCop
             AssemblyNode taskAssembly = null;
 
             // Check if the type's located in mscorlib
-            TypeNode taskTypeNode = GetTypeNode(FrameworkAssemblies.Mscorlib, TaskNamespace, TaskGenericType);
+            TypeNode taskTypeNode = GetTypeNode(
+                FrameworkAssemblies.Mscorlib,
+                TaskNamespace,
+                TaskGenericType
+            );
             if (taskTypeNode != null)
             {
                 taskAssembly = FrameworkAssemblies.Mscorlib;
@@ -101,9 +108,10 @@ namespace Microsoft.Web.FxCop
             }
             else
             {
-                AssemblyReference assemblyReference = type.DeclaringModule
-                                                          .AssemblyReferences
-                                                          .FirstOrDefault(reference => reference.Name.Equals(TaskPortableAssembly, StringComparison.Ordinal));
+                AssemblyReference assemblyReference =
+                    type.DeclaringModule.AssemblyReferences.FirstOrDefault(reference =>
+                        reference.Name.Equals(TaskPortableAssembly, StringComparison.Ordinal)
+                    );
                 Contract.Assert(assemblyReference != null);
                 taskAssembly = assemblyReference.Assembly;
             }

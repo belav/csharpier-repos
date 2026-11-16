@@ -15,12 +15,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class IOperationTests_IBlock : SemanticModelTestBase
     {
-
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void BlockFlow_01()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0219
 
 class C
@@ -36,7 +36,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -71,7 +72,8 @@ Block[B2] - Exit
         [Fact]
         public void BlockFlow_02()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 
 class C
@@ -86,7 +88,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -101,7 +104,8 @@ Block[B1] - Exit
         [Fact]
         public void BlockFlow_03()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0219
 
 class C
@@ -121,7 +125,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -174,7 +179,8 @@ Block[B3] - Exit
         [Fact]
         public void BlockFlow_04()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0219
 
 class C
@@ -194,7 +200,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -237,7 +244,8 @@ Block[B2] - Exit
         [Fact]
         public void BlockFlow_05()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 
 class C
@@ -255,7 +263,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -270,7 +279,8 @@ Block[B1] - Exit
         [Fact]
         public void BlockFlow_06()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0219
 
 class C
@@ -292,7 +302,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -345,7 +356,8 @@ Block[B3] - Exit
         [Fact]
         public void BlockFlow_07()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 
 class C
@@ -365,7 +377,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -380,7 +393,8 @@ Block[B1] - Exit
         [Fact]
         public void BlockFlow_08()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 
 class C
@@ -413,7 +427,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -428,7 +443,8 @@ Block[B1] - Exit
         [Fact]
         public void BlockFlow_09()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0219
 
 class C
@@ -458,7 +474,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -517,7 +534,8 @@ Block[B2] - Exit
         [Fact]
         public void BlockFlow_10()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0219
 
 class C
@@ -539,7 +557,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -600,7 +619,8 @@ Block[B3] - Exit
         [Fact]
         public void BlockFlow_11()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0219
 
 class C
@@ -617,7 +637,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -660,7 +681,8 @@ Block[B2] - Exit
         [Fact]
         public void BlockFlow_12()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -686,7 +708,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -777,7 +800,8 @@ Block[B6] - Exit
         [Fact]
         public void BlockFlow_13()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 #pragma warning disable CS0219
 class C
@@ -805,7 +829,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]

@@ -8,13 +8,12 @@ namespace System.ServiceModel.Channels
 
     public sealed class JavascriptCallbackResponseMessageProperty
     {
-        static readonly string JavascriptCallbackResponseMessagePropertyName = "javascriptCallbackResponse";
+        static readonly string JavascriptCallbackResponseMessagePropertyName =
+            "javascriptCallbackResponse";
 
-        public JavascriptCallbackResponseMessageProperty()
-        {
-        }
+        public JavascriptCallbackResponseMessageProperty() { }
 
-        public static string Name 
+        public static string Name
         {
             get { return JavascriptCallbackResponseMessagePropertyName; }
         }

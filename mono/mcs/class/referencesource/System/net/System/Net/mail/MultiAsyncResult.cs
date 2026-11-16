@@ -7,17 +7,15 @@ namespace System.Net.Mime
         int outstanding;
         object context;
 
-        internal MultiAsyncResult(object context, AsyncCallback callback, object state) : base(context,state,callback)
+        internal MultiAsyncResult(object context, AsyncCallback callback, object state)
+            : base(context, state, callback)
         {
             this.context = context;
         }
 
         internal object Context
         {
-            get
-            {
-                return this.context;
-            }
+            get { return this.context; }
         }
 
         internal void Enter()

@@ -11,10 +11,17 @@ using Xunit;
 public class TimeOut
 {
     [Fact]
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+        "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+    )]
     public static void OpenStandardXXX_WriteTimeOut()
     {
-        using (Stream standardOut = Console.OpenStandardOutput(), standardIn = Console.OpenStandardInput(), standardError = Console.OpenStandardError())
+        using (
+            Stream standardOut = Console.OpenStandardOutput(),
+                standardIn = Console.OpenStandardInput(),
+                standardError = Console.OpenStandardError()
+        )
         {
             Assert.Throws<InvalidOperationException>(() => standardOut.WriteTimeout);
             Assert.Throws<InvalidOperationException>(() => standardIn.WriteTimeout);
@@ -27,10 +34,17 @@ public class TimeOut
     }
 
     [Fact]
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+        "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+    )]
     public static void OpenStandardXXX_ReadTimeOut()
     {
-        using (Stream standardOut = Console.OpenStandardOutput(), standardIn = Console.OpenStandardInput(), standardError = Console.OpenStandardError())
+        using (
+            Stream standardOut = Console.OpenStandardOutput(),
+                standardIn = Console.OpenStandardInput(),
+                standardError = Console.OpenStandardError()
+        )
         {
             Assert.Throws<InvalidOperationException>(() => standardOut.ReadTimeout);
             Assert.Throws<InvalidOperationException>(() => standardIn.ReadTimeout);
@@ -43,10 +57,17 @@ public class TimeOut
     }
 
     [Fact]
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+        "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+    )]
     public static void OpenStandardXXX_CanTimeOut()
     {
-        using (Stream standardOut = Console.OpenStandardOutput(), standardIn = Console.OpenStandardInput(), standardError = Console.OpenStandardError())
+        using (
+            Stream standardOut = Console.OpenStandardOutput(),
+                standardIn = Console.OpenStandardInput(),
+                standardError = Console.OpenStandardError()
+        )
         {
             Assert.False(standardOut.CanTimeout);
             Assert.False(standardIn.CanTimeout);

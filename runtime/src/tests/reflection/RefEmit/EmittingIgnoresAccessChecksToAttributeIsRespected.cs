@@ -11,57 +11,89 @@ class BaseClass1 { }
 
 public class Test_EmittingIgnoresAccessChecksToAttributeIsRespected
 {
-
     [Fact]
     public static void TestEntryPoint()
     {
-        AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("testassembly"), AssemblyBuilderAccess.Run);
+        AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+            new AssemblyName("testassembly"),
+            AssemblyBuilderAccess.Run
+        );
         ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("testmodule");
-        ConstructorInfo ignoreAccessChecksToAttributeCtor = DefineIgnoresAccessChecksToAttribute(moduleBuilder);
+        ConstructorInfo ignoreAccessChecksToAttributeCtor = DefineIgnoresAccessChecksToAttribute(
+            moduleBuilder
+        );
 
         {
             Type type = typeof(BaseClass1);
-            AddInstanceOfIgnoresAccessChecksToAttribute(assemblyBuilder, ignoreAccessChecksToAttributeCtor, type.Assembly);
-            TypeBuilder typeBuilder = moduleBuilder.DefineType("DerivedTypeFor" + type.Name, TypeAttributes.Public, type);
+            AddInstanceOfIgnoresAccessChecksToAttribute(
+                assemblyBuilder,
+                ignoreAccessChecksToAttributeCtor,
+                type.Assembly
+            );
+            TypeBuilder typeBuilder = moduleBuilder.DefineType(
+                "DerivedTypeFor" + type.Name,
+                TypeAttributes.Public,
+                type
+            );
             typeBuilder.CreateType();
         }
 
         {
             Type type = typeof(BaseClass2);
-            AddInstanceOfIgnoresAccessChecksToAttribute(assemblyBuilder, ignoreAccessChecksToAttributeCtor, type.Assembly);
-            TypeBuilder typeBuilder = moduleBuilder.DefineType("DerivedTypeFor" + type.Name, TypeAttributes.Public, type);
+            AddInstanceOfIgnoresAccessChecksToAttribute(
+                assemblyBuilder,
+                ignoreAccessChecksToAttributeCtor,
+                type.Assembly
+            );
+            TypeBuilder typeBuilder = moduleBuilder.DefineType(
+                "DerivedTypeFor" + type.Name,
+                TypeAttributes.Public,
+                type
+            );
             typeBuilder.CreateType();
         }
         Console.WriteLine("PASS");
     }
 
-    static void AddInstanceOfIgnoresAccessChecksToAttribute(AssemblyBuilder assemblyBuilder, ConstructorInfo ignoreAccessChecksToAttributeCtor, Assembly assembly)
+    static void AddInstanceOfIgnoresAccessChecksToAttribute(
+        AssemblyBuilder assemblyBuilder,
+        ConstructorInfo ignoreAccessChecksToAttributeCtor,
+        Assembly assembly
+    )
     {
         // Add this assembly level attribute:
         // [assembly: System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute(assemblyName)]
         ConstructorInfo attributeConstructor = ignoreAccessChecksToAttributeCtor;
-        CustomAttributeBuilder customAttributeBuilder =
-            new CustomAttributeBuilder(attributeConstructor, new object[] { assembly.GetName().Name });
+        CustomAttributeBuilder customAttributeBuilder = new CustomAttributeBuilder(
+            attributeConstructor,
+            new object[] { assembly.GetName().Name }
+        );
         assemblyBuilder.SetCustomAttribute(customAttributeBuilder);
     }
 
     static ConstructorInfo DefineIgnoresAccessChecksToAttribute(ModuleBuilder mb)
     {
-        TypeBuilder attributeTypeBuilder =
-            mb.DefineType("System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute",
-                           TypeAttributes.Public | TypeAttributes.Class,
-                           typeof(Attribute));
+        TypeBuilder attributeTypeBuilder = mb.DefineType(
+            "System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute",
+            TypeAttributes.Public | TypeAttributes.Class,
+            typeof(Attribute)
+        );
 
         // Create backing field as:
         // private string assemblyName;
-        FieldBuilder assemblyNameField =
-            attributeTypeBuilder.DefineField("assemblyName", typeof(string), FieldAttributes.Private);
+        FieldBuilder assemblyNameField = attributeTypeBuilder.DefineField(
+            "assemblyName",
+            typeof(string),
+            FieldAttributes.Private
+        );
 
         // Create ctor as:
         // public IgnoresAccessChecksToAttribute(string)
-        ConstructorBuilder constructorBuilder = attributeTypeBuilder.DefineConstructor(MethodAttributes.Public,
-                                                     CallingConventions.HasThis,
-                                                     new Type[] { assemblyNameField.FieldType });
+        ConstructorBuilder constructorBuilder = attributeTypeBuilder.DefineConstructor(
+            MethodAttributes.Public,
+            CallingConventions.HasThis,
+            new Type[] { assemblyNameField.FieldType }
+        );
 
         ILGenerator il = constructorBuilder.GetILGenerator();
 
@@ -77,18 +109,20 @@ public class Test_EmittingIgnoresAccessChecksToAttributeIsRespected
         // Define property as:
         // public string AssemblyName {get { return this.assemblyName; } }
         PropertyBuilder propertyBuilder = attributeTypeBuilder.DefineProperty(
-                "AssemblyName",
-                PropertyAttributes.None,
-                CallingConventions.HasThis,
-                returnType: typeof(string),
-                parameterTypes: null);
+            "AssemblyName",
+            PropertyAttributes.None,
+            CallingConventions.HasThis,
+            returnType: typeof(string),
+            parameterTypes: null
+        );
 
         MethodBuilder getterMethodBuilder = attributeTypeBuilder.DefineMethod(
-                                               "get_AssemblyName",
-                                               MethodAttributes.Public,
-                                               CallingConventions.HasThis,
-                                               returnType: typeof(string),
-                                               parameterTypes: null);
+            "get_AssemblyName",
+            MethodAttributes.Public,
+            CallingConventions.HasThis,
+            returnType: typeof(string),
+            parameterTypes: null
+        );
         propertyBuilder.SetGetMethod(getterMethodBuilder);
 
         // Generate body:
@@ -104,21 +138,23 @@ public class Test_EmittingIgnoresAccessChecksToAttributeIsRespected
 
         // Find the ctor that takes only AttributeTargets
         ConstructorInfo attributeUsageConstructorInfo =
-            attributeUsageTypeInfo.DeclaredConstructors
-                .Single(c => c.GetParameters().Length == 1 &&
-                             c.GetParameters()[0].ParameterType == typeof(AttributeTargets));
+            attributeUsageTypeInfo.DeclaredConstructors.Single(c =>
+                c.GetParameters().Length == 1
+                && c.GetParameters()[0].ParameterType == typeof(AttributeTargets)
+            );
 
         // Find the property to set AllowMultiple
-        PropertyInfo allowMultipleProperty =
-            attributeUsageTypeInfo.DeclaredProperties
-                .Single(f => string.Equals(f.Name, "AllowMultiple"));
+        PropertyInfo allowMultipleProperty = attributeUsageTypeInfo.DeclaredProperties.Single(f =>
+            string.Equals(f.Name, "AllowMultiple")
+        );
 
         // Create a builder to construct the instance via the ctor and property
-        CustomAttributeBuilder customAttributeBuilder =
-            new CustomAttributeBuilder(attributeUsageConstructorInfo,
-                                        new object[] { AttributeTargets.Assembly },
-                                        new PropertyInfo[] { allowMultipleProperty },
-                                        new object[] { true });
+        CustomAttributeBuilder customAttributeBuilder = new CustomAttributeBuilder(
+            attributeUsageConstructorInfo,
+            new object[] { AttributeTargets.Assembly },
+            new PropertyInfo[] { allowMultipleProperty },
+            new object[] { true }
+        );
 
         // Attach this attribute instance to the newly defined attribute type
         attributeTypeBuilder.SetCustomAttribute(customAttributeBuilder);
@@ -127,5 +163,3 @@ public class Test_EmittingIgnoresAccessChecksToAttributeIsRespected
         return attributeTypeBuilder.CreateTypeInfo().DeclaredConstructors.Single();
     }
 }
-
-

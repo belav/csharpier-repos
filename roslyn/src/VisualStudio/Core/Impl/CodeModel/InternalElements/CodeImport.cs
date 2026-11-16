@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             AbstractCodeElement parent,
-            string dottedName)
+            string dottedName
+        )
         {
             var element = new CodeImport(state, fileCodeModel, parent, dottedName);
             var result = (EnvDTE80.CodeImport)ComAggregate.CreateAggregatedObject(element);
@@ -34,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string dottedName)
+            string dottedName
+        )
         {
             var element = new CodeImport(state, fileCodeModel, nodeKind, dottedName);
             return (EnvDTE80.CodeImport)ComAggregate.CreateAggregatedObject(element);
@@ -47,7 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             AbstractCodeElement parent,
-            string dottedName)
+            string dottedName
+        )
             : base(state, fileCodeModel)
         {
             _parentHandle = new ParentHandle<AbstractCodeElement>(parent);
@@ -58,7 +61,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string dottedName)
+            string dottedName
+        )
             : base(state, fileCodeModel, nodeKind)
         {
             _dottedName = dottedName;
@@ -68,9 +72,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         {
             node = null;
 
-            var parentNode = _parentHandle.Value != null
-                ? _parentHandle.Value.LookupNode()
-                : FileCodeModel.GetSyntaxRoot();
+            var parentNode =
+                _parentHandle.Value != null
+                    ? _parentHandle.Value.LookupNode()
+                    : FileCodeModel.GetSyntaxRoot();
 
             if (parentNode == null)
             {
@@ -114,11 +119,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public string Alias
         {
-            get
-            {
-                return CodeModelService.GetImportAlias(LookupNode());
-            }
-
+            get { return CodeModelService.GetImportAlias(LookupNode()); }
             set
             {
                 // TODO: Implement
@@ -128,11 +129,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public string Namespace
         {
-            get
-            {
-                return CodeModelService.GetImportNamespaceOrType(LookupNode());
-            }
-
+            get { return CodeModelService.GetImportNamespaceOrType(LookupNode()); }
             set
             {
                 // TODO: Implement
@@ -145,13 +142,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             get { return EmptyCollection.Create(this.State, this); }
         }
 
-        protected override string GetName()
-            => CodeModelService.GetName(LookupNode());
+        protected override string GetName() => CodeModelService.GetName(LookupNode());
 
-        protected override void SetName(string value)
-            => throw Exceptions.ThrowEFail();
+        protected override void SetName(string value) => throw Exceptions.ThrowEFail();
 
-        protected override string GetFullName()
-            => CodeModelService.GetFullName(LookupNode(), semanticModel: null);
+        protected override string GetFullName() =>
+            CodeModelService.GetFullName(LookupNode(), semanticModel: null);
     }
 }

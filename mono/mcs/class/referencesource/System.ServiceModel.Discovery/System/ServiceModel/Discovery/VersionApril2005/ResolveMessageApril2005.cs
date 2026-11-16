@@ -9,12 +9,10 @@ namespace System.ServiceModel.Discovery.VersionApril2005
     [MessageContract(IsWrapped = false)]
     class ResolveMessageApril2005
     {
-        [MessageBodyMember(Name = ProtocolStrings.SchemaNames.ResolveElement, Namespace = ProtocolStrings.VersionApril2005.Namespace)]
-        public ResolveCriteriaApril2005 Resolve
-        {
-            get;
-            set;
-        }
+        [MessageBodyMember(
+            Name = ProtocolStrings.SchemaNames.ResolveElement,
+            Namespace = ProtocolStrings.VersionApril2005.Namespace
+        )]
+        public ResolveCriteriaApril2005 Resolve { get; set; }
     }
 }
-

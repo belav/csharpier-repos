@@ -11,14 +11,20 @@ namespace System.Security.Cryptography.X509Certificates
         internal const uint CERT_STORE_ENUM_ARCHIVED_FLAG = 0x00000200;
         internal const uint CERT_STORE_CREATE_NEW_FLAG = 0x00002000;
 
-        internal static SafeCertContextHandle DuplicateCertificateContext(X509Certificate2 certificate)
+        internal static SafeCertContextHandle DuplicateCertificateContext(
+            X509Certificate2 certificate
+        )
         {
-            SafeCertContextHandle safeCertContext = Interop.Crypt32.CertDuplicateCertificateContext(certificate.Handle);
+            SafeCertContextHandle safeCertContext = Interop.Crypt32.CertDuplicateCertificateContext(
+                certificate.Handle
+            );
             GC.KeepAlive(certificate);
             return safeCertContext;
         }
 
-        internal static SafeCertStoreHandle ExportToMemoryStore(X509Certificate2Collection collection)
+        internal static SafeCertStoreHandle ExportToMemoryStore(
+            X509Certificate2Collection collection
+        )
         {
             SafeCertStoreHandle safeCertStoreHandle;
 
@@ -29,7 +35,8 @@ namespace System.Security.Cryptography.X509Certificates
                 Interop.Crypt32.X509_ASN_ENCODING | Interop.Crypt32.PKCS_7_ASN_ENCODING,
                 IntPtr.Zero,
                 CERT_STORE_ENUM_ARCHIVED_FLAG | CERT_STORE_CREATE_NEW_FLAG,
-                IntPtr.Zero);
+                IntPtr.Zero
+            );
 
             if (safeCertStoreHandle == null || safeCertStoreHandle.IsInvalid)
             {
@@ -44,11 +51,14 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 using (SafeCertContextHandle handle = DuplicateCertificateContext(x509))
                 {
-                    if (!Interop.Crypt32.CertAddCertificateLinkToStore(
-                        safeCertStoreHandle,
-                        handle,
-                        Interop.Crypt32.CERT_STORE_ADD_ALWAYS,
-                        SafeCertContextHandle.InvalidHandle))
+                    if (
+                        !Interop.Crypt32.CertAddCertificateLinkToStore(
+                            safeCertStoreHandle,
+                            handle,
+                            Interop.Crypt32.CERT_STORE_ADD_ALWAYS,
+                            SafeCertContextHandle.InvalidHandle
+                        )
+                    )
                     {
                         throw new CryptographicException(Marshal.GetLastPInvokeError());
                     }
@@ -58,15 +68,23 @@ namespace System.Security.Cryptography.X509Certificates
             return safeCertStoreHandle;
         }
 
-        internal static X509Certificate2Collection GetCertificates(SafeCertStoreHandle safeCertStoreHandle)
+        internal static X509Certificate2Collection GetCertificates(
+            SafeCertStoreHandle safeCertStoreHandle
+        )
         {
             X509Certificate2Collection collection = new X509Certificate2Collection();
-            IntPtr pEnumContext = Interop.Crypt32.CertEnumCertificatesInStore(safeCertStoreHandle, IntPtr.Zero);
+            IntPtr pEnumContext = Interop.Crypt32.CertEnumCertificatesInStore(
+                safeCertStoreHandle,
+                IntPtr.Zero
+            );
             while (pEnumContext != IntPtr.Zero)
             {
                 X509Certificate2 certificate = new X509Certificate2(pEnumContext);
                 collection.Add(certificate);
-                pEnumContext = Interop.Crypt32.CertEnumCertificatesInStore(safeCertStoreHandle, pEnumContext);
+                pEnumContext = Interop.Crypt32.CertEnumCertificatesInStore(
+                    safeCertStoreHandle,
+                    pEnumContext
+                );
             }
 
             return collection;

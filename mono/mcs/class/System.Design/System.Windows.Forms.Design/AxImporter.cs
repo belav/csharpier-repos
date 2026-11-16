@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,139 +34,140 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms.Design
 {
-	[MonoTODO]
-	public class AxImporter
-	{
-		#region Public Instance Constructors
+    [MonoTODO]
+    public class AxImporter
+    {
+        #region Public Instance Constructors
 
-		[MonoTODO]
-		public AxImporter (AxImporter.Options options)
-		{
-			this.options = options;
-		}
+        [MonoTODO]
+        public AxImporter(AxImporter.Options options)
+        {
+            this.options = options;
+        }
 
-		#endregion Public Instance Constructors
+        #endregion Public Instance Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
 
-		[MonoTODO]
-		public string[] GeneratedAssemblies
-		{
-			get
-			{
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoTODO]
+        public string[] GeneratedAssemblies
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public string[] GeneratedSources
-		{
-			get
-			{
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoTODO]
+        public string[] GeneratedSources
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		#endregion Public Instance Properties
+        #endregion Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
 
-		[MonoTODO]
-		public TYPELIBATTR[] GeneratedTypeLibAttributes
-		{
-			get
-			{
-				throw new NotImplementedException ();
-			}
-		}
+        [MonoTODO]
+        public TYPELIBATTR[] GeneratedTypeLibAttributes
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public string GenerateFromFile (FileInfo file)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public string GenerateFromFile(FileInfo file)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public string GenerateFromTypeLibrary (UCOMITypeLib typeLib)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public string GenerateFromTypeLibrary(UCOMITypeLib typeLib)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public string GenerateFromTypeLibrary (UCOMITypeLib typeLib, Guid clsid)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public string GenerateFromTypeLibrary(UCOMITypeLib typeLib, Guid clsid)
+        {
+            throw new NotImplementedException();
+        }
 
-		#endregion Public Instance Methods
+        #endregion Public Instance Methods
 
-		#region Public Static Methods
+        #region Public Static Methods
 
-		[MonoTODO]
-		public static string GetFileOfTypeLib (ref TYPELIBATTR tlibattr)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static string GetFileOfTypeLib(ref TYPELIBATTR tlibattr)
+        {
+            throw new NotImplementedException();
+        }
 
-		#endregion Public Static Methods
+        #endregion Public Static Methods
 
-		#region Internal Instance Fields
+        #region Internal Instance Fields
 
-		internal AxImporter.Options options;
+        internal AxImporter.Options options;
 
-		#endregion Internal Instance Fields
+        #endregion Internal Instance Fields
 
-		public sealed class Options
-		{
-			#region Public Instance Constructors
+        public sealed class Options
+        {
+            #region Public Instance Constructors
 
-			public Options ()
-			{
-			}
+            public Options() { }
 
-			#endregion Public Instance Constructors
+            #endregion Public Instance Constructors
 
-			#region Public Instance Fields
+            #region Public Instance Fields
 
-			[MonoTODO]
-			public bool delaySign;
-			[MonoTODO]
-			public bool genSources;
-			[MonoTODO]
-			public string keyContainer;
-			[MonoTODO]
-			public string keyFile;
-			[MonoTODO]
-			public StrongNameKeyPair keyPair;
+            [MonoTODO]
+            public bool delaySign;
 
-			[MonoTODO]
-			public bool noLogo;
-			[MonoTODO]
-			public string outputDirectory;
-			[MonoTODO]
-			public string outputName;
-			[MonoTODO]
-			public bool overwriteRCW;
-			[MonoTODO]
-			public byte[] publicKey;
-			[MonoTODO]
-			public AxImporter.IReferenceResolver references;
-			[MonoTODO]
-			public bool silentMode;
-			[MonoTODO]
-			public bool verboseMode;
-			[MonoTODO]
-			public bool msBuildErrors;
+            [MonoTODO]
+            public bool genSources;
 
-			#endregion Public Instance Fields
-		}
+            [MonoTODO]
+            public string keyContainer;
 
-		public interface IReferenceResolver
-		{
-			string ResolveActiveXReference (UCOMITypeLib typeLib);
-			string ResolveComReference (AssemblyName name);
-			string ResolveComReference (UCOMITypeLib typeLib);
-			string ResolveManagedReference (string assemName);
-		}
-	}
+            [MonoTODO]
+            public string keyFile;
+
+            [MonoTODO]
+            public StrongNameKeyPair keyPair;
+
+            [MonoTODO]
+            public bool noLogo;
+
+            [MonoTODO]
+            public string outputDirectory;
+
+            [MonoTODO]
+            public string outputName;
+
+            [MonoTODO]
+            public bool overwriteRCW;
+
+            [MonoTODO]
+            public byte[] publicKey;
+
+            [MonoTODO]
+            public AxImporter.IReferenceResolver references;
+
+            [MonoTODO]
+            public bool silentMode;
+
+            [MonoTODO]
+            public bool verboseMode;
+
+            [MonoTODO]
+            public bool msBuildErrors;
+
+            #endregion Public Instance Fields
+        }
+
+        public interface IReferenceResolver
+        {
+            string ResolveActiveXReference(UCOMITypeLib typeLib);
+            string ResolveComReference(AssemblyName name);
+            string ResolveComReference(UCOMITypeLib typeLib);
+            string ResolveManagedReference(string assemName);
+        }
+    }
 }

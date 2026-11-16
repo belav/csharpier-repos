@@ -1,11 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-using System;  
-using System.Runtime.InteropServices;  
+using System;
+using System.Runtime.InteropServices;
 
 namespace structinreg
 {
- 
     class Program3
     {
         public struct S1
@@ -82,7 +81,7 @@ namespace structinreg
             public byte g;
             public byte h;
         }
-        
+
         public struct S11
         {
             public byte a;
@@ -193,7 +192,7 @@ namespace structinreg
         public delegate void MyCallback19(S19 s);
         public delegate void MyCallback20(S20 s);
         public delegate void MyCallback30(S30 s1, S30 s2, S30 s3);
-        
+
         [DllImport("jitstructtests_lib")]
         public static extern void InvokeCallback1(MyCallback1 callback, S1 s);
 
@@ -253,7 +252,7 @@ namespace structinreg
 
         [DllImport("jitstructtests_lib")]
         public static extern void InvokeCallback20(MyCallback20 callback, S20 s);
-        
+
         [DllImport("jitstructtests_lib")]
         public static extern void InvokeCallback30(MyCallback30 callback, S30 s1, S30 s2, S30 s3);
 
@@ -317,7 +316,7 @@ namespace structinreg
         [DllImport("jitstructtests_lib")]
         public static extern S20 InvokeCallback20R(MyCallback20 callback, S20 s);
 
-        static public int Main1()
+        public static int Main1()
         {
             Program3 p = new Program3();
             S1 s1 = new S1();
@@ -328,117 +327,144 @@ namespace structinreg
 
             try
             {
-                InvokeCallback1((par) =>
-                {
-                    Console.WriteLine("S1: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
-                    if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                InvokeCallback1(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s1);
+                        Console.WriteLine("S1: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
+                        if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s1
+                );
 
                 S2 s2;
                 s2.x = 1;
                 s2.y = 2;
                 s2.z = 3;
-                InvokeCallback2((par) =>
-                {
-                    Console.WriteLine("S2: {0}, {1}, {2}", par.x, par.y, par.z);
-                    if (par.x != 1 || par.y != 2 || par.z != 3)
+                InvokeCallback2(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s2);
+                        Console.WriteLine("S2: {0}, {1}, {2}", par.x, par.y, par.z);
+                        if (par.x != 1 || par.y != 2 || par.z != 3)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s2
+                );
 
                 S3 s3;
                 s3.x = 1;
                 s3.y = 2;
                 s3.z = 3;
-                InvokeCallback3((par) =>
-                {
-                    Console.WriteLine("S3: {0}, {1}, {2}", par.x, par.y, par.z);
-                    if (par.x != 1 || par.y != 2 || par.z != 3)
+                InvokeCallback3(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s3);
+                        Console.WriteLine("S3: {0}, {1}, {2}", par.x, par.y, par.z);
+                        if (par.x != 1 || par.y != 2 || par.z != 3)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s3
+                );
 
                 S4 s4;
                 s4.x = 1;
                 s4.y = 2;
-                InvokeCallback4((par) =>
-                {
-                    Console.WriteLine("S4: {0}, {1}", par.x, par.y);
-                    if (par.x != 1 || par.y != 2)
+                InvokeCallback4(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s4);
+                        Console.WriteLine("S4: {0}, {1}", par.x, par.y);
+                        if (par.x != 1 || par.y != 2)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s4
+                );
 
                 S5 s5;
                 s5.x = 1;
                 s5.y = 2;
-                InvokeCallback5((par) =>
-                {
-                    Console.WriteLine("S5: {0}, {1}", par.x, par.y);
-                    if (par.x != 1 || par.y != 2)
+                InvokeCallback5(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s5);
+                        Console.WriteLine("S5: {0}, {1}", par.x, par.y);
+                        if (par.x != 1 || par.y != 2)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s5
+                );
 
                 S6 s6;
                 s6.x = 1;
                 s6.y = 2;
                 s6.z = 3;
                 s6.w = 4;
-                InvokeCallback6((par) =>
-                {
-                    Console.WriteLine("S6: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
-                    if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                InvokeCallback6(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s6);
+                        Console.WriteLine("S6: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
+                        if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s6
+                );
 
                 S7 s7;
                 s7.x = 1;
                 s7.y = 2;
                 s7.z = 3;
-                InvokeCallback7((par) =>
-                {
-                    Console.WriteLine("S7: {0}, {1}, {2}", par.x, par.y, par.z);
-                    if (par.x != 1 || par.y != 2 || par.z != 3)
+                InvokeCallback7(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s7);
+                        Console.WriteLine("S7: {0}, {1}, {2}", par.x, par.y, par.z);
+                        if (par.x != 1 || par.y != 2 || par.z != 3)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s7
+                );
 
                 S8 s8;
                 s8.x = 1;
                 s8.y = 2;
-                InvokeCallback8((par) =>
-                {
-                    Console.WriteLine("S8: {0}, {1}", par.x, par.y);
-                    if (par.x != 1 || par.y != 2)
+                InvokeCallback8(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s8);
+                        Console.WriteLine("S8: {0}, {1}", par.x, par.y);
+                        if (par.x != 1 || par.y != 2)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s8
+                );
 
                 S9 s9;
                 s9.x = 1;
                 s9.y = 2;
                 s9.z = 3;
                 s9.w = 4;
-                InvokeCallback9((par) =>
-                {
-                    Console.WriteLine("S9: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
-                    if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                InvokeCallback9(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s9);
+                        Console.WriteLine("S9: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
+                        if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s9
+                );
 
                 S10 s10;
                 s10.a = 1;
@@ -449,15 +475,36 @@ namespace structinreg
                 s10.f = 6;
                 s10.g = 7;
                 s10.h = 8;
-                InvokeCallback10((par) =>
-                {
-                    Console.WriteLine("S10: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", par.a, par.b, par.c, par.d, par.e, par.f, par.g, par.h);
-                    if (par.a != 1 || par.b != 2 || par.c != 3 || par.d != 4 ||
-                        par.e != 5 || par.f != 6 || par.g != 7 || par.h != 8)
+                InvokeCallback10(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s10);
+                        Console.WriteLine(
+                            "S10: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}",
+                            par.a,
+                            par.b,
+                            par.c,
+                            par.d,
+                            par.e,
+                            par.f,
+                            par.g,
+                            par.h
+                        );
+                        if (
+                            par.a != 1
+                            || par.b != 2
+                            || par.c != 3
+                            || par.d != 4
+                            || par.e != 5
+                            || par.f != 6
+                            || par.g != 7
+                            || par.h != 8
+                        )
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s10
+                );
 
                 S11 s11;
                 s11.a = 1;
@@ -465,14 +512,24 @@ namespace structinreg
                 s11.c = 3;
                 s11.d = 4;
                 s11.e = 5;
-                InvokeCallback11((par) =>
-                {
-                    Console.WriteLine("S11: {0}, {1}, {2}, {3}, {4}", par.a, par.b, par.c, par.d, par.e);
-                    if (par.a != 1 || par.b != 2 || par.c != 3 || par.d != 4 || par.e != 5)
+                InvokeCallback11(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s11);
+                        Console.WriteLine(
+                            "S11: {0}, {1}, {2}, {3}, {4}",
+                            par.a,
+                            par.b,
+                            par.c,
+                            par.d,
+                            par.e
+                        );
+                        if (par.a != 1 || par.b != 2 || par.c != 3 || par.d != 4 || par.e != 5)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s11
+                );
 
                 S12 s12;
                 s12.a = 1;
@@ -484,39 +541,68 @@ namespace structinreg
                 s12.g = 7;
                 s12.h = 8;
                 s12.i = 9;
-                InvokeCallback12((par) =>
-                {
-                    Console.WriteLine("S12: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", par.a, par.b, par.c, par.d, par.e, par.f, par.g, par.h, par.i);
-                    if (par.a != 1 || par.b != 2 || par.c != 3 || par.d != 4 ||
-                        par.e != 5 || par.f != 6 || par.g != 7 || par.h != 8 || par.i != 9)
+                InvokeCallback12(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s12);
+                        Console.WriteLine(
+                            "S12: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}",
+                            par.a,
+                            par.b,
+                            par.c,
+                            par.d,
+                            par.e,
+                            par.f,
+                            par.g,
+                            par.h,
+                            par.i
+                        );
+                        if (
+                            par.a != 1
+                            || par.b != 2
+                            || par.c != 3
+                            || par.d != 4
+                            || par.e != 5
+                            || par.f != 6
+                            || par.g != 7
+                            || par.h != 8
+                            || par.i != 9
+                        )
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s12
+                );
 
                 S13 s13;
                 s13.hasValue = 1;
                 s13.x = 2;
-                InvokeCallback13((par) =>
-                {
-                    Console.WriteLine("S13: {0}, {1}", par.hasValue, par.x);
-                    if (par.hasValue != 1 || par.x != 2)
+                InvokeCallback13(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s13);
+                        Console.WriteLine("S13: {0}, {1}", par.hasValue, par.x);
+                        if (par.hasValue != 1 || par.x != 2)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s13
+                );
 
                 S14 s14;
                 s14.x = 1;
                 s14.y = 2;
-                InvokeCallback14((par) =>
-                {
-                    Console.WriteLine("S14: {0}, {1}", par.x, par.y);
-                    if (par.x != 1 || par.y != 2)
+                InvokeCallback14(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s14);
+                        Console.WriteLine("S14: {0}, {1}", par.x, par.y);
+                        if (par.x != 1 || par.y != 2)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s14
+                );
 
                 S15 s15;
                 s15.a = 1;
@@ -528,80 +614,118 @@ namespace structinreg
                 s15.g = 7;
                 s15.h = 8;
                 s15.i = 9;
-                InvokeCallback15((par) =>
-                {
-                    Console.WriteLine("S15: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", par.a, par.b, par.c, par.d, par.e, par.f, par.g, par.h, par.i);
-                    if (par.a != 1 || par.b != 2 || par.c != 3 || par.d != 4 ||
-                        par.e != 5 || par.f != 6 || par.g != 7 || par.h != 8 || par.i != 9)
+                InvokeCallback15(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s15);
+                        Console.WriteLine(
+                            "S15: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}",
+                            par.a,
+                            par.b,
+                            par.c,
+                            par.d,
+                            par.e,
+                            par.f,
+                            par.g,
+                            par.h,
+                            par.i
+                        );
+                        if (
+                            par.a != 1
+                            || par.b != 2
+                            || par.c != 3
+                            || par.d != 4
+                            || par.e != 5
+                            || par.f != 6
+                            || par.g != 7
+                            || par.h != 8
+                            || par.i != 9
+                        )
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s15
+                );
 
                 S16 s16;
                 s16.x = 1;
                 s16.y = 2;
-                InvokeCallback16((par) =>
-                {
-                    Console.WriteLine("S16: {0}, {1}", par.x, par.y);
-                    if (par.x != 1 || par.y != 2)
+                InvokeCallback16(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s16);
+                        Console.WriteLine("S16: {0}, {1}", par.x, par.y);
+                        if (par.x != 1 || par.y != 2)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s16
+                );
 
                 S17 s17;
                 s17.x = 1;
                 s17.y = 2;
-                InvokeCallback17((par) =>
-                {
-                    Console.WriteLine("S17: {0}, {1}", par.x, par.y);
-                    if (par.x != 1 || par.y != 2)
+                InvokeCallback17(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s17);
+                        Console.WriteLine("S17: {0}, {1}", par.x, par.y);
+                        if (par.x != 1 || par.y != 2)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s17
+                );
 
                 S18 s18;
                 s18.x = 1;
                 s18.y = 2;
                 s18.z = 3;
-                InvokeCallback18((par) =>
-                {
-                    Console.WriteLine("S18: {0}, {1}, {2}", par.x, par.y, par.z);
-                    if (par.x != 1 || par.y != 2 || par.z != 3)
+                InvokeCallback18(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s18);
+                        Console.WriteLine("S18: {0}, {1}, {2}", par.x, par.y, par.z);
+                        if (par.x != 1 || par.y != 2 || par.z != 3)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s18
+                );
 
                 S19 s19;
                 s19.x = 1;
                 s19.y = 2;
                 s19.z = 3;
                 s19.w = 4;
-                InvokeCallback19((par) =>
-                {
-                    Console.WriteLine("S19: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
-                    if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                InvokeCallback19(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s19);
+                        Console.WriteLine("S19: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
+                        if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s19
+                );
 
                 S20 s20;
                 s20.x = 1;
                 s20.y = 2;
                 s20.z = 3;
                 s20.w = 4;
-                InvokeCallback20((par) =>
-                {
-                    Console.WriteLine("S20: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
-                    if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                InvokeCallback20(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s20);
+                        Console.WriteLine("S20: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
+                        if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s20
+                );
 
                 S30 s30;
                 s30.x = 1;
@@ -616,287 +740,476 @@ namespace structinreg
                 s30_3.y = 6;
 
                 InvokeCallback30(p.Test30, s30, s30_2, s30_3);
-                S1 s1r = InvokeCallback1R((par) =>
-                {
-                    Console.WriteLine("S1: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
-                    if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                S1 s1r = InvokeCallback1R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-
-                }, s1);
+                        Console.WriteLine("S1: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
+                        if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s1
+                );
                 Console.WriteLine("S1R: {0}, {1}, {2}, {3}", s1r.x, s1r.y, s1r.z, s1r.w);
                 if (s1r.x != 1 || s1r.y != 2 || s1r.z != 3 || s1r.w != 4)
                 {
                     throw new System.Exception();
                 }
 
-                S2 s2r = InvokeCallback2R((par) =>
-                {
-                    Console.WriteLine("S2: {0}, {1}, {2}", par.x, par.y, par.z);
-                    if (par.x != 1 || par.y != 2 || par.z != 3)
+                S2 s2r = InvokeCallback2R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s2);
+                        Console.WriteLine("S2: {0}, {1}, {2}", par.x, par.y, par.z);
+                        if (par.x != 1 || par.y != 2 || par.z != 3)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s2
+                );
                 Console.WriteLine("S2R: {0}, {1}, {2}", s2r.x, s2r.y, s2r.z);
                 if (s2r.x != 1 || s2r.y != 2 || s2r.z != 3)
                 {
                     throw new System.Exception();
                 }
 
-                S3 s3r = InvokeCallback3R((par) =>
-                {
-                    Console.WriteLine("S3: {0}, {1}, {2}", par.x, par.y, par.z);
-                    if (par.x != 1 || par.y != 2 || par.z != 3)
+                S3 s3r = InvokeCallback3R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s3);
+                        Console.WriteLine("S3: {0}, {1}, {2}", par.x, par.y, par.z);
+                        if (par.x != 1 || par.y != 2 || par.z != 3)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s3
+                );
                 Console.WriteLine("S3R: {0}, {1}, {2}", s3r.x, s3r.y, s3r.z);
                 if (s3r.x != 1 || s3r.y != 2 || s3r.z != 3)
                 {
                     throw new System.Exception();
                 }
 
-                S4 s4r = InvokeCallback4R((par) =>
-                {
-                    Console.WriteLine("S4: {0}, {1}", par.x, par.y);
-                    if (par.x != 1 || par.y != 2)
+                S4 s4r = InvokeCallback4R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s4);
+                        Console.WriteLine("S4: {0}, {1}", par.x, par.y);
+                        if (par.x != 1 || par.y != 2)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s4
+                );
                 Console.WriteLine("S4R: {0}, {1}", s4r.x, s4r.y);
                 if (s4r.x != 1 || s4r.y != 2)
                 {
                     throw new System.Exception();
                 }
 
-                S5 s5r = InvokeCallback5R((par) =>
-                {
-                    Console.WriteLine("S5: {0}, {1}", par.x, par.y);
-                    if (par.x != 1 || par.y != 2)
+                S5 s5r = InvokeCallback5R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s5);
+                        Console.WriteLine("S5: {0}, {1}", par.x, par.y);
+                        if (par.x != 1 || par.y != 2)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s5
+                );
                 Console.WriteLine("S5R: {0}, {1}", s5r.x, s5r.y);
                 if (s5r.x != 1 || s5r.y != 2)
                 {
                     throw new System.Exception();
                 }
 
-                S6 s6r = InvokeCallback6R((par) =>
-                {
-                    Console.WriteLine("S6: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
-                    if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                S6 s6r = InvokeCallback6R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s6);
+                        Console.WriteLine("S6: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
+                        if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s6
+                );
                 Console.WriteLine("S6R: {0}, {1}, {2}, {3}", s6r.x, s6r.y, s6r.z, s6r.w);
                 if (s6r.x != 1 || s6r.y != 2 || s6r.z != 3 || s6r.w != 4)
                 {
                     throw new System.Exception();
                 }
 
-                S7 s7r = InvokeCallback7R((par) =>
-                {
-                    Console.WriteLine("S7: {0}, {1}, {2}", par.x, par.y, par.z);
-                    if (par.x != 1 || par.y != 2 || par.z != 3)
+                S7 s7r = InvokeCallback7R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s7);
+                        Console.WriteLine("S7: {0}, {1}, {2}", par.x, par.y, par.z);
+                        if (par.x != 1 || par.y != 2 || par.z != 3)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s7
+                );
                 Console.WriteLine("S7R: {0}, {1}, {2}", s7r.x, s7r.y, s7r.z);
                 if (s7r.x != 1 || s7r.y != 2 || s7r.z != 3)
                 {
                     throw new System.Exception();
                 }
 
-                S8 s8r = InvokeCallback8R((par) =>
-                {
-                    Console.WriteLine("S8: {0}, {1}", par.x, par.y);
-                    if (par.x != 1 || par.y != 2)
+                S8 s8r = InvokeCallback8R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s8);
+                        Console.WriteLine("S8: {0}, {1}", par.x, par.y);
+                        if (par.x != 1 || par.y != 2)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s8
+                );
                 Console.WriteLine("S8R: {0}, {1}", s8r.x, s8r.y);
                 if (s8r.x != 1 || s8r.y != 2)
                 {
                     throw new System.Exception();
                 }
 
-                S9 s9r = InvokeCallback9R((par) =>
-                {
-                    Console.WriteLine("S9: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
-                    if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                S9 s9r = InvokeCallback9R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s9);
+                        Console.WriteLine("S9: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
+                        if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s9
+                );
                 Console.WriteLine("S9R: {0}, {1}, {2}, {3}", s9r.x, s9r.y, s9r.z, s9r.w);
                 if (s9r.x != 1 || s9r.y != 2 || s9r.z != 3 || s9r.w != 4)
                 {
                     throw new System.Exception();
                 }
 
-                S10 s10r = InvokeCallback10R((par) =>
-                {
-                    Console.WriteLine("S10: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", par.a, par.b, par.c, par.d, par.e, par.f, par.g, par.h);
-                    if (par.a != 1 || par.b != 2 || par.c != 3 || par.d != 4 ||
-                        par.e != 5 || par.f != 6 || par.g != 7 || par.h != 8)
+                S10 s10r = InvokeCallback10R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s10);
-                Console.WriteLine("S10R: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", s10r.a, s10r.b, s10r.c, s10r.d, s10r.e, s10r.f, s10r.g, s10r.h);
-                if (s10r.a != 1 || s10r.b != 2 || s10r.c != 3 || s10r.d != 4 ||
-                    s10r.e != 5 || s10r.f != 6 || s10r.g != 7 || s10r.h != 8)
+                        Console.WriteLine(
+                            "S10: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}",
+                            par.a,
+                            par.b,
+                            par.c,
+                            par.d,
+                            par.e,
+                            par.f,
+                            par.g,
+                            par.h
+                        );
+                        if (
+                            par.a != 1
+                            || par.b != 2
+                            || par.c != 3
+                            || par.d != 4
+                            || par.e != 5
+                            || par.f != 6
+                            || par.g != 7
+                            || par.h != 8
+                        )
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s10
+                );
+                Console.WriteLine(
+                    "S10R: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}",
+                    s10r.a,
+                    s10r.b,
+                    s10r.c,
+                    s10r.d,
+                    s10r.e,
+                    s10r.f,
+                    s10r.g,
+                    s10r.h
+                );
+                if (
+                    s10r.a != 1
+                    || s10r.b != 2
+                    || s10r.c != 3
+                    || s10r.d != 4
+                    || s10r.e != 5
+                    || s10r.f != 6
+                    || s10r.g != 7
+                    || s10r.h != 8
+                )
                 {
                     throw new System.Exception();
                 }
 
-                S11 s11r = InvokeCallback11R((par) =>
-                {
-                    Console.WriteLine("S11: {0}, {1}, {2}, {3}, {4}", par.a, par.b, par.c, par.d, par.e);
-                    if (par.a != 1 || par.b != 2 || par.c != 3 || par.d != 4 || par.e != 5)
+                S11 s11r = InvokeCallback11R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s11);
-                Console.WriteLine("S11R: {0}, {1}, {2}, {3}, {4}", s11r.a, s11r.b, s11r.c, s11r.d, s11r.e);
+                        Console.WriteLine(
+                            "S11: {0}, {1}, {2}, {3}, {4}",
+                            par.a,
+                            par.b,
+                            par.c,
+                            par.d,
+                            par.e
+                        );
+                        if (par.a != 1 || par.b != 2 || par.c != 3 || par.d != 4 || par.e != 5)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s11
+                );
+                Console.WriteLine(
+                    "S11R: {0}, {1}, {2}, {3}, {4}",
+                    s11r.a,
+                    s11r.b,
+                    s11r.c,
+                    s11r.d,
+                    s11r.e
+                );
                 if (s11r.a != 1 || s11r.b != 2 || s11r.c != 3 || s11r.d != 4 || s11r.e != 5)
                 {
                     throw new System.Exception();
                 }
 
-                S12 s12r = InvokeCallback12R((par) =>
-                {
-                    Console.WriteLine("S12: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", par.a, par.b, par.c, par.d, par.e, par.f, par.g, par.h, par.i);
-                    if (par.a != 1 || par.b != 2 || par.c != 3 || par.d != 4 ||
-                        par.e != 5 || par.f != 6 || par.g != 7 || par.h != 8 || par.i != 9)
+                S12 s12r = InvokeCallback12R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s12);
-                Console.WriteLine("S12R: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", s12r.a, s12r.b, s12r.c, s12r.d, s12r.e, s12r.f, s12r.g, s12r.h, s12r.i);
-                if (s12r.a != 1 || s12r.b != 2 || s12r.c != 3 || s12r.d != 4 ||
-                    s12r.e != 5 || s12r.f != 6 || s12r.g != 7 || s12r.h != 8 || s12r.i != 9)
+                        Console.WriteLine(
+                            "S12: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}",
+                            par.a,
+                            par.b,
+                            par.c,
+                            par.d,
+                            par.e,
+                            par.f,
+                            par.g,
+                            par.h,
+                            par.i
+                        );
+                        if (
+                            par.a != 1
+                            || par.b != 2
+                            || par.c != 3
+                            || par.d != 4
+                            || par.e != 5
+                            || par.f != 6
+                            || par.g != 7
+                            || par.h != 8
+                            || par.i != 9
+                        )
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s12
+                );
+                Console.WriteLine(
+                    "S12R: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}",
+                    s12r.a,
+                    s12r.b,
+                    s12r.c,
+                    s12r.d,
+                    s12r.e,
+                    s12r.f,
+                    s12r.g,
+                    s12r.h,
+                    s12r.i
+                );
+                if (
+                    s12r.a != 1
+                    || s12r.b != 2
+                    || s12r.c != 3
+                    || s12r.d != 4
+                    || s12r.e != 5
+                    || s12r.f != 6
+                    || s12r.g != 7
+                    || s12r.h != 8
+                    || s12r.i != 9
+                )
                 {
                     throw new System.Exception();
                 }
 
-                S13 s13r = InvokeCallback13R((par) =>
-                {
-                    Console.WriteLine("S13: {0}, {1}", par.hasValue, par.x);
-                    if (par.hasValue != 1 || par.x != 2)
+                S13 s13r = InvokeCallback13R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s13);
+                        Console.WriteLine("S13: {0}, {1}", par.hasValue, par.x);
+                        if (par.hasValue != 1 || par.x != 2)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s13
+                );
                 Console.WriteLine("S13R: {0}, {1}", s13r.hasValue, s13r.x);
                 if (s13r.hasValue != 1 || s13r.x != 2)
                 {
                     throw new System.Exception();
                 }
 
-                S14 s14r = InvokeCallback14R((par) =>
-                {
-                    Console.WriteLine("S14: {0}, {1}", par.x, par.y);
-                    if (par.x != 1 || par.y != 2)
+                S14 s14r = InvokeCallback14R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s14);
+                        Console.WriteLine("S14: {0}, {1}", par.x, par.y);
+                        if (par.x != 1 || par.y != 2)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s14
+                );
                 Console.WriteLine("S14R: {0}, {1}", s14r.x, s14r.y);
                 if (s14r.x != 1 || s14r.y != 2)
                 {
                     throw new System.Exception();
                 }
 
-                S15 s15r = InvokeCallback15R((par) =>
-                {
-                    Console.WriteLine("S15: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", par.a, par.b, par.c, par.d, par.e, par.f, par.g, par.h, par.i);
-                    if (par.a != 1 || par.b != 2 || par.c != 3 || par.d != 4 ||
-                        par.e != 5 || par.f != 6 || par.g != 7 || par.h != 8 || par.i != 9)
+                S15 s15r = InvokeCallback15R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s15);
-                Console.WriteLine("S15R: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", s15r.a, s15r.b, s15r.c, s15r.d, s15r.e, s15r.f, s15r.g, s15r.h, s15r.i);
-                if (s15r.a != 1 || s15r.b != 2 || s15r.c != 3 || s15r.d != 4 ||
-                    s15r.e != 5 || s15r.f != 6 || s15r.g != 7 || s15r.h != 8 || s15r.i != 9)
+                        Console.WriteLine(
+                            "S15: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}",
+                            par.a,
+                            par.b,
+                            par.c,
+                            par.d,
+                            par.e,
+                            par.f,
+                            par.g,
+                            par.h,
+                            par.i
+                        );
+                        if (
+                            par.a != 1
+                            || par.b != 2
+                            || par.c != 3
+                            || par.d != 4
+                            || par.e != 5
+                            || par.f != 6
+                            || par.g != 7
+                            || par.h != 8
+                            || par.i != 9
+                        )
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s15
+                );
+                Console.WriteLine(
+                    "S15R: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}",
+                    s15r.a,
+                    s15r.b,
+                    s15r.c,
+                    s15r.d,
+                    s15r.e,
+                    s15r.f,
+                    s15r.g,
+                    s15r.h,
+                    s15r.i
+                );
+                if (
+                    s15r.a != 1
+                    || s15r.b != 2
+                    || s15r.c != 3
+                    || s15r.d != 4
+                    || s15r.e != 5
+                    || s15r.f != 6
+                    || s15r.g != 7
+                    || s15r.h != 8
+                    || s15r.i != 9
+                )
                 {
                     throw new System.Exception();
                 }
 
-                S16 s16r = InvokeCallback16R((par) =>
-                {
-                    Console.WriteLine("S16: {0}, {1}", par.x, par.y);
-                    if (par.x != 1 || par.y != 2)
+                S16 s16r = InvokeCallback16R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s16);
+                        Console.WriteLine("S16: {0}, {1}", par.x, par.y);
+                        if (par.x != 1 || par.y != 2)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s16
+                );
                 Console.WriteLine("S16R: {0}, {1}", s16r.x, s16r.y);
                 if (s16r.x != 1 || s16r.y != 2)
                 {
                     throw new System.Exception();
                 }
 
-                S17 s17r = InvokeCallback17R((par) =>
-                {
-                    Console.WriteLine("S17: {0}, {1}", par.x, par.y);
-                    if (par.x != 1 || par.y != 2)
+                S17 s17r = InvokeCallback17R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s17);
+                        Console.WriteLine("S17: {0}, {1}", par.x, par.y);
+                        if (par.x != 1 || par.y != 2)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s17
+                );
                 Console.WriteLine("S17R: {0}, {1}", s17r.x, s17r.y);
                 if (s17r.x != 1 || s17r.y != 2)
                 {
                     throw new System.Exception();
                 }
 
-                S18 s18r = InvokeCallback18R((par) =>
-                {
-                    Console.WriteLine("S18: {0}, {1}, {2}", par.x, par.y, par.z);
-                    if (par.x != 1 || par.y != 2 || par.z != 3)
+                S18 s18r = InvokeCallback18R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s18);
+                        Console.WriteLine("S18: {0}, {1}, {2}", par.x, par.y, par.z);
+                        if (par.x != 1 || par.y != 2 || par.z != 3)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s18
+                );
                 Console.WriteLine("S18R: {0}, {1}, {2}", s18r.x, s18r.y, s18r.z);
                 if (s18r.x != 1 || s18r.y != 2 || s18r.z != 3)
                 {
                     throw new System.Exception();
                 }
 
-                S19 s19r = InvokeCallback19R((par) =>
-                {
-                    Console.WriteLine("S19: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
-                    if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                S19 s19r = InvokeCallback19R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s19);
+                        Console.WriteLine("S19: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
+                        if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s19
+                );
                 Console.WriteLine("S19R: {0}, {1}, {2}, {3}", s19r.x, s19r.y, s19r.z, s19r.w);
                 if (s19r.x != 1 || s19r.y != 2 || s19r.z != 3 || s19r.w != 4)
                 {
                     throw new System.Exception();
                 }
 
-                S20 s20r = InvokeCallback20R((par) =>
-                {
-                    Console.WriteLine("S20: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
-                    if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                S20 s20r = InvokeCallback20R(
+                    (par) =>
                     {
-                        throw new System.Exception();
-                    }
-                }, s20);
+                        Console.WriteLine("S20: {0}, {1}, {2}, {3}", par.x, par.y, par.z, par.w);
+                        if (par.x != 1 || par.y != 2 || par.z != 3 || par.w != 4)
+                        {
+                            throw new System.Exception();
+                        }
+                    },
+                    s20
+                );
                 Console.WriteLine("S20R: {0}, {1}, {2}, {3}", s20r.x, s20r.y, s20r.z, s20r.w);
                 if (s20r.x != 1 || s20r.y != 2 || s20r.z != 3 || s20r.w != 4)
                 {
@@ -910,12 +1223,26 @@ namespace structinreg
             }
             return 100;
         }
-        
+
         void Test30(S30 par1, S30 par2, S30 par3)
         {
-            Console.WriteLine("S30: {0}, {1}, {2}, {3}, {4}, {5}", par1.x, par1.y, par2.x, par2.y, par3.x, par3.y);
-            if (par1.x != 1 || par1.y != 2 || par2.x != 3 || par2.y != 4 ||
-                par3.x != 5 || par3.y != 6)
+            Console.WriteLine(
+                "S30: {0}, {1}, {2}, {3}, {4}, {5}",
+                par1.x,
+                par1.y,
+                par2.x,
+                par2.y,
+                par3.x,
+                par3.y
+            );
+            if (
+                par1.x != 1
+                || par1.y != 2
+                || par2.x != 3
+                || par2.y != 4
+                || par3.x != 5
+                || par3.y != 6
+            )
             {
                 throw new System.Exception();
             }

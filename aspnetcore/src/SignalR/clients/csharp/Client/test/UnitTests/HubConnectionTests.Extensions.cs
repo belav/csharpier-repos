@@ -25,18 +25,11 @@ public partial class HubConnectionTests
         [Fact]
         public async Task OnAsync()
         {
-            await InvokeOn(
-                (hubConnection, tcs) =>
-                    hubConnection.On(
-                        "Foo",
-                        () =>
-                        {
-                            tcs.SetResult(new object[0]);
-                            return Task.CompletedTask;
-                        }
-                    ),
-                new object[0]
-            );
+            await InvokeOn((hubConnection, tcs) => hubConnection.On("Foo", () =>
+                    {
+                        tcs.SetResult(new object[0]);
+                        return Task.CompletedTask;
+                    }), new object[0]);
         }
 
         [Fact]
@@ -52,18 +45,11 @@ public partial class HubConnectionTests
         [Fact]
         public async Task OnT1Async()
         {
-            await InvokeOn(
-                (hubConnection, tcs) =>
-                    hubConnection.On<int>(
-                        "Foo",
-                        r =>
-                        {
-                            tcs.SetResult(new object[] { r });
-                            return Task.CompletedTask;
-                        }
-                    ),
-                new object[] { 42 }
-            );
+            await InvokeOn((hubConnection, tcs) => hubConnection.On<int>("Foo", r =>
+                    {
+                        tcs.SetResult(new object[] { r });
+                        return Task.CompletedTask;
+                    }), new object[] { 42 });
         }
 
         [Fact]
@@ -71,9 +57,8 @@ public partial class HubConnectionTests
         {
             await InvokeOn(
                 (hubConnection, tcs) =>
-                    hubConnection.On<int, string>(
-                        "Foo",
-                        (r1, r2) => tcs.SetResult(new object[] { r1, r2 })
+                    hubConnection.On<int, string>("Foo", (r1, r2) =>
+                        tcs.SetResult(new object[] { r1, r2 })
                     ),
                 new object[] { 42, "abc" }
             );
@@ -82,18 +67,11 @@ public partial class HubConnectionTests
         [Fact]
         public async Task OnT2Async()
         {
-            await InvokeOn(
-                (hubConnection, tcs) =>
-                    hubConnection.On<int, string>(
-                        "Foo",
-                        (r1, r2) =>
-                        {
-                            tcs.SetResult(new object[] { r1, r2 });
-                            return Task.CompletedTask;
-                        }
-                    ),
-                new object[] { 42, "abc" }
-            );
+            await InvokeOn((hubConnection, tcs) => hubConnection.On<int, string>("Foo", (r1, r2) =>
+                    {
+                        tcs.SetResult(new object[] { r1, r2 });
+                        return Task.CompletedTask;
+                    }), new object[] { 42, "abc" });
         }
 
         [Fact]
@@ -101,9 +79,8 @@ public partial class HubConnectionTests
         {
             await InvokeOn(
                 (hubConnection, tcs) =>
-                    hubConnection.On<int, string, float>(
-                        "Foo",
-                        (r1, r2, r3) => tcs.SetResult(new object[] { r1, r2, r3 })
+                    hubConnection.On<int, string, float>("Foo", (r1, r2, r3) =>
+                        tcs.SetResult(new object[] { r1, r2, r3 })
                     ),
                 new object[] { 42, "abc", 24.0f }
             );
@@ -113,15 +90,11 @@ public partial class HubConnectionTests
         public async Task OnT3Async()
         {
             await InvokeOn(
-                (hubConnection, tcs) =>
-                    hubConnection.On<int, string, float>(
-                        "Foo",
-                        (r1, r2, r3) =>
-                        {
-                            tcs.SetResult(new object[] { r1, r2, r3 });
-                            return Task.CompletedTask;
-                        }
-                    ),
+                (hubConnection, tcs) => hubConnection.On<int, string, float>("Foo", (r1, r2, r3) =>
+                    {
+                        tcs.SetResult(new object[] { r1, r2, r3 });
+                        return Task.CompletedTask;
+                    }),
                 new object[] { 42, "abc", 24.0f }
             );
         }
@@ -131,9 +104,8 @@ public partial class HubConnectionTests
         {
             await InvokeOn(
                 (hubConnection, tcs) =>
-                    hubConnection.On<int, string, float, double>(
-                        "Foo",
-                        (r1, r2, r3, r4) => tcs.SetResult(new object[] { r1, r2, r3, r4 })
+                    hubConnection.On<int, string, float, double>("Foo", (r1, r2, r3, r4) =>
+                        tcs.SetResult(new object[] { r1, r2, r3, r4 })
                     ),
                 new object[] { 42, "abc", 24.0f, 10d }
             );
@@ -144,14 +116,11 @@ public partial class HubConnectionTests
         {
             await InvokeOn(
                 (hubConnection, tcs) =>
-                    hubConnection.On<int, string, float, double>(
-                        "Foo",
-                        (r1, r2, r3, r4) =>
-                        {
-                            tcs.SetResult(new object[] { r1, r2, r3, r4 });
-                            return Task.CompletedTask;
-                        }
-                    ),
+                    hubConnection.On<int, string, float, double>("Foo", (r1, r2, r3, r4) =>
+                    {
+                        tcs.SetResult(new object[] { r1, r2, r3, r4 });
+                        return Task.CompletedTask;
+                    }),
                 new object[] { 42, "abc", 24.0f, 10d }
             );
         }
@@ -321,13 +290,10 @@ public partial class HubConnectionTests
 
             try
             {
-                hubConnection.On<int>(
-                    "Foo",
-                    r =>
-                    {
-                        receiveTcs.SetResult(r);
-                    }
-                );
+                hubConnection.On<int>("Foo", r =>
+                {
+                    receiveTcs.SetResult(r);
+                });
                 await hubConnection.StartAsync().DefaultTimeout();
 
                 await connection
@@ -371,14 +337,11 @@ public partial class HubConnectionTests
 
             try
             {
-                hubConnection.On<int>(
-                    "Foo",
-                    r =>
-                    {
-                        receiveTcs.SetResult(r);
-                        return Task.CompletedTask;
-                    }
-                );
+                hubConnection.On<int>("Foo", r =>
+                {
+                    receiveTcs.SetResult(r);
+                    return Task.CompletedTask;
+                });
                 await hubConnection.StartAsync().DefaultTimeout();
 
                 await connection
@@ -422,13 +385,10 @@ public partial class HubConnectionTests
 
             try
             {
-                hubConnection.On<int>(
-                    "Foo",
-                    r =>
-                    {
-                        receiveTcs.SetResult(r);
-                    }
-                );
+                hubConnection.On<int>("Foo", r =>
+                {
+                    receiveTcs.SetResult(r);
+                });
                 await hubConnection.StartAsync().DefaultTimeout();
 
                 await connection
@@ -472,14 +432,11 @@ public partial class HubConnectionTests
 
             try
             {
-                hubConnection.On<int>(
-                    "Foo",
-                    r =>
-                    {
-                        receiveTcs.SetResult(r);
-                        return Task.CompletedTask;
-                    }
-                );
+                hubConnection.On<int>("Foo", r =>
+                {
+                    receiveTcs.SetResult(r);
+                    return Task.CompletedTask;
+                });
                 await hubConnection.StartAsync().DefaultTimeout();
 
                 await connection
@@ -519,15 +476,11 @@ public partial class HubConnectionTests
         {
             var returnValue = 46;
             var result = await InvokeOnWithResult(
-                (hubConnection, tcs) =>
-                    hubConnection.On(
-                        "Foo",
-                        () =>
-                        {
-                            tcs.SetResult(new object[0]);
-                            return returnValue;
-                        }
-                    ),
+                (hubConnection, tcs) => hubConnection.On("Foo", () =>
+                    {
+                        tcs.SetResult(new object[0]);
+                        return returnValue;
+                    }),
                 new object[0]
             );
             Assert.Equal(returnValue, result);
@@ -538,16 +491,12 @@ public partial class HubConnectionTests
         {
             var returnValue = 1220;
             var result = await InvokeOnWithResult(
-                (hubConnection, tcs) =>
-                    hubConnection.On(
-                        "Foo",
-                        async () =>
-                        {
-                            tcs.SetResult(new object[0]);
-                            await Task.CompletedTask;
-                            return returnValue;
-                        }
-                    ),
+                (hubConnection, tcs) => hubConnection.On("Foo", async () =>
+                    {
+                        tcs.SetResult(new object[0]);
+                        await Task.CompletedTask;
+                        return returnValue;
+                    }),
                 new object[0]
             );
             Assert.Equal(returnValue, result);
@@ -558,15 +507,11 @@ public partial class HubConnectionTests
         {
             var returnValue = "buffalo";
             var result = await InvokeOnWithResult(
-                (hubConnection, tcs) =>
-                    hubConnection.On<int, string>(
-                        "Foo",
-                        r =>
-                        {
-                            tcs.SetResult(new object[] { r });
-                            return returnValue;
-                        }
-                    ),
+                (hubConnection, tcs) => hubConnection.On<int, string>("Foo", r =>
+                    {
+                        tcs.SetResult(new object[] { r });
+                        return returnValue;
+                    }),
                 new object[] { 42 }
             );
             Assert.Equal(returnValue, result);
@@ -577,16 +522,12 @@ public partial class HubConnectionTests
         {
             var returnValue = 2;
             var result = await InvokeOnWithResult(
-                (hubConnection, tcs) =>
-                    hubConnection.On<int, int>(
-                        "Foo",
-                        async r =>
-                        {
-                            tcs.SetResult(new object[] { r });
-                            await Task.CompletedTask;
-                            return returnValue;
-                        }
-                    ),
+                (hubConnection, tcs) => hubConnection.On<int, int>("Foo", async r =>
+                    {
+                        tcs.SetResult(new object[] { r });
+                        await Task.CompletedTask;
+                        return returnValue;
+                    }),
                 new object[] { 42 }
             );
 
@@ -598,15 +539,11 @@ public partial class HubConnectionTests
         {
             var returnValue = "ret";
             var result = await InvokeOnWithResult(
-                (hubConnection, tcs) =>
-                    hubConnection.On<int, string, string>(
-                        "Foo",
-                        (r1, r2) =>
-                        {
-                            tcs.SetResult(new object[] { r1, r2 });
-                            return returnValue;
-                        }
-                    ),
+                (hubConnection, tcs) => hubConnection.On<int, string, string>("Foo", (r1, r2) =>
+                    {
+                        tcs.SetResult(new object[] { r1, r2 });
+                        return returnValue;
+                    }),
                 new object[] { 42, "abc" }
             );
             Assert.Equal(returnValue, result);
@@ -617,15 +554,11 @@ public partial class HubConnectionTests
         {
             var returnResult = 928;
             var result = await InvokeOnWithResult(
-                (hubConnection, tcs) =>
-                    hubConnection.On<int, string, int>(
-                        "Foo",
-                        (r1, r2) =>
-                        {
-                            tcs.SetResult(new object[] { r1, r2 });
-                            return Task.FromResult(returnResult);
-                        }
-                    ),
+                (hubConnection, tcs) => hubConnection.On<int, string, int>("Foo", (r1, r2) =>
+                    {
+                        tcs.SetResult(new object[] { r1, r2 });
+                        return Task.FromResult(returnResult);
+                    }),
                 new object[] { 42, "abc" }
             );
             Assert.Equal(returnResult, result);
@@ -637,14 +570,11 @@ public partial class HubConnectionTests
             var returnValue = "bob";
             var result = await InvokeOnWithResult(
                 (hubConnection, tcs) =>
-                    hubConnection.On<int, string, float, string>(
-                        "Foo",
-                        (r1, r2, r3) =>
-                        {
-                            tcs.SetResult(new object[] { r1, r2, r3 });
-                            return returnValue;
-                        }
-                    ),
+                    hubConnection.On<int, string, float, string>("Foo", (r1, r2, r3) =>
+                    {
+                        tcs.SetResult(new object[] { r1, r2, r3 });
+                        return returnValue;
+                    }),
                 new object[] { 42, "abc", 24.0f }
             );
             Assert.Equal(returnValue, result);
@@ -656,14 +586,11 @@ public partial class HubConnectionTests
             var returnResult = "random";
             var result = await InvokeOnWithResult(
                 (hubConnection, tcs) =>
-                    hubConnection.On<int, string, float, string>(
-                        "Foo",
-                        (r1, r2, r3) =>
-                        {
-                            tcs.SetResult(new object[] { r1, r2, r3 });
-                            return Task.FromResult(returnResult);
-                        }
-                    ),
+                    hubConnection.On<int, string, float, string>("Foo", (r1, r2, r3) =>
+                    {
+                        tcs.SetResult(new object[] { r1, r2, r3 });
+                        return Task.FromResult(returnResult);
+                    }),
                 new object[] { 42, "abc", 24.0f }
             );
             Assert.Equal(returnResult, result);
@@ -675,14 +602,11 @@ public partial class HubConnectionTests
             var returnResult = 233;
             var result = await InvokeOnWithResult(
                 (hubConnection, tcs) =>
-                    hubConnection.On<int, string, float, double, int>(
-                        "Foo",
-                        (r1, r2, r3, r4) =>
-                        {
-                            tcs.SetResult(new object[] { r1, r2, r3, r4 });
-                            return returnResult;
-                        }
-                    ),
+                    hubConnection.On<int, string, float, double, int>("Foo", (r1, r2, r3, r4) =>
+                    {
+                        tcs.SetResult(new object[] { r1, r2, r3, r4 });
+                        return returnResult;
+                    }),
                 new object[] { 42, "abc", 24.0f, 10d }
             );
             Assert.Equal(returnResult, result);
@@ -694,14 +618,11 @@ public partial class HubConnectionTests
             var returnResult = "alphabet";
             var result = await InvokeOnWithResult(
                 (hubConnection, tcs) =>
-                    hubConnection.On<int, string, float, double, string>(
-                        "Foo",
-                        (r1, r2, r3, r4) =>
-                        {
-                            tcs.SetResult(new object[] { r1, r2, r3, r4 });
-                            return returnResult;
-                        }
-                    ),
+                    hubConnection.On<int, string, float, double, string>("Foo", (r1, r2, r3, r4) =>
+                    {
+                        tcs.SetResult(new object[] { r1, r2, r3, r4 });
+                        return returnResult;
+                    }),
                 new object[] { 42, "abc", 24.0f, 10d }
             );
             Assert.Equal(returnResult, result);
@@ -856,14 +777,11 @@ public partial class HubConnectionTests
                         char,
                         string,
                         string
-                    >(
-                        "Foo",
-                        (r1, r2, r3, r4, r5, r6, r7, r8) =>
-                        {
-                            tcs.SetResult(new object[] { r1, r2, r3, r4, r5, r6, r7, r8 });
-                            return returnResult;
-                        }
-                    ),
+                    >("Foo", (r1, r2, r3, r4, r5, r6, r7, r8) =>
+                    {
+                        tcs.SetResult(new object[] { r1, r2, r3, r4, r5, r6, r7, r8 });
+                        return returnResult;
+                    }),
                 new object[] { 42, "abc", 24.0f, 10d, "123", 24, 'c', "XYZ" }
             );
             Assert.Equal(returnResult, result);

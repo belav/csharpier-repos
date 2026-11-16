@@ -31,9 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 get { return string.Format("T{0}", _current.ToString()); }
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             object System.Collections.IEnumerator.Current
             {
@@ -74,8 +72,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         private static string GenerateTemplateArgs(int arity)
         {
-            if (arity == 0) return string.Empty;
-            return string.Format("<{0}>", string.Join(",", TemplateArgEnumerable.Instance.Take(arity)));
+            if (arity == 0)
+                return string.Empty;
+            return string.Format(
+                "<{0}>",
+                string.Join(",", TemplateArgEnumerable.Instance.Take(arity))
+            );
         }
 
         private static void AppendEmptyClass(StringBuilder sb, string root, int arity)
@@ -86,7 +88,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             sb.AppendLine(" {}");
         }
 
-        private static void CompileAndCheckSymbolCount(string source, string symbolName, int expectedSymbolCount)
+        private static void CompileAndCheckSymbolCount(
+            string source,
+            string symbolName,
+            int expectedSymbolCount
+        )
         {
             var compilation = CreateCompilation(source);
 

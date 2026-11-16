@@ -15,7 +15,7 @@ namespace System.Data.Objects
     using System.Data.Metadata.Edm;
     using System.Diagnostics;
 
-    /// <summary> 
+    /// <summary>
     ///   This class represents a query parameter at the object layer, which consists
     ///   of a Name, a Type and a Value.
     /// </summary>
@@ -34,7 +34,7 @@ namespace System.Data.Objects
         ///   specified parameter name is valid. Parameter names must start with a letter,
         ///   and may only contain letters (A-Z, a-z), numbers (0-9) and underscores (_).
         /// </summary>
-        internal static bool ValidateParameterName (string name)
+        internal static bool ValidateParameterName(string name)
         {
             // Note: Parameter names must begin with a letter, and may contain only
             // letters, numbers and underscores.
@@ -55,7 +55,7 @@ namespace System.Data.Objects
 
         /// <summary>
         ///   This constructor creates an unbound (i.e., value-less) parameter from the
-        ///   specified name and type. The value can be set at any time through the 
+        ///   specified name and type. The value can be set at any time through the
         ///   public 'Value' property.
         /// </summary>
         /// <param name="name">
@@ -72,25 +72,30 @@ namespace System.Data.Objects
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         ///   If the value of the name argument is invalid. Parameter names must start
-        ///   with a letter and may only contain letters (A-Z, a-z), numbers (0-9) and 
+        ///   with a letter and may only contain letters (A-Z, a-z), numbers (0-9) and
         ///   underscores (_).
         /// </exception>
-        public ObjectParameter (string name, Type type)
+        public ObjectParameter(string name, Type type)
         {
             EntityUtil.CheckArgumentNull(name, "name");
             EntityUtil.CheckArgumentNull(type, "type");
 
             if (!ObjectParameter.ValidateParameterName(name))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectParameter_InvalidParameterName(name), "name");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ObjectParameter_InvalidParameterName(name),
+                    "name"
+                );
             }
 
-            this._name  = name;
-            this._type  = type;
+            this._name = name;
+            this._type = type;
 
             // If the parameter type is Nullable<>, we need to extract out the underlying
             // Nullable<> type argument.
-            this._mappableType = System.Data.Objects.ELinq.TypeSystem.GetNonNullableType(this._type);
+            this._mappableType = System.Data.Objects.ELinq.TypeSystem.GetNonNullableType(
+                this._type
+            );
         }
 
         #endregion
@@ -116,26 +121,31 @@ namespace System.Data.Objects
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         ///   If the value of the name argument is invalid. Parameter names must start
-        ///   with a letter and may only contain letters (A-Z, a-z), numbers (0-9) and 
+        ///   with a letter and may only contain letters (A-Z, a-z), numbers (0-9) and
         ///   underscores (_).
         /// </exception>
-        public ObjectParameter (string name, object value)
+        public ObjectParameter(string name, object value)
         {
             EntityUtil.CheckArgumentNull(name, "name");
             EntityUtil.CheckArgumentNull(value, "value");
 
             if (!ObjectParameter.ValidateParameterName(name))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectParameter_InvalidParameterName(name), "name");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ObjectParameter_InvalidParameterName(name),
+                    "name"
+                );
             }
 
-            this._name  = name;
-            this._type  = value.GetType();
+            this._name = name;
+            this._type = value.GetType();
             this._value = value;
 
             // If the parameter type is Nullable<>, we need to extract out the underlying
             // Nullable<> type argument.
-            this._mappableType = System.Data.Objects.ELinq.TypeSystem.GetNonNullableType(this._type);
+            this._mappableType = System.Data.Objects.ELinq.TypeSystem.GetNonNullableType(
+                this._type
+            );
         }
 
         #endregion
@@ -168,7 +178,7 @@ namespace System.Data.Objects
             this._effectiveType = template._effectiveType;
             this._value = template._value;
         }
-                
+
         #endregion
 
         #region Private Fields
@@ -220,10 +230,7 @@ namespace System.Data.Objects
         /// </summary>
         public string Name
         {
-            get
-            {
-                return this._name;
-            }
+            get { return this._name; }
         }
 
         /// <summary>
@@ -231,30 +238,20 @@ namespace System.Data.Objects
         /// </summary>
         public Type ParameterType
         {
-            get
-            {
-                return this._type;
-            }
+            get { return this._type; }
         }
 
         /// <summary>
-        ///   The parameter value, which can be set at any time (and subsequently 
-        ///   changed) before query execution. Note that type-checking is not 
-        ///   enforced between the declared parameter type and the type of the 
-        ///   specified value; such validation is left up to the underlying 
+        ///   The parameter value, which can be set at any time (and subsequently
+        ///   changed) before query execution. Note that type-checking is not
+        ///   enforced between the declared parameter type and the type of the
+        ///   specified value; such validation is left up to the underlying
         ///   provider(s) at execution time.
         /// </summary>
         public object Value
         {
-            get
-            {
-                return this._value;
-            }
-
-            set
-            {
-                this._value = value;
-            }
+            get { return this._value; }
+            set { this._value = value; }
         }
 
         #endregion
@@ -271,11 +268,7 @@ namespace System.Data.Objects
         /// </summary>
         internal TypeUsage TypeUsage
         {
-            get
-            {
-                return _effectiveType;
-            }
-
+            get { return _effectiveType; }
             set
             {
                 Debug.Assert(null == _effectiveType, "Effective type should only be set once");
@@ -284,18 +277,15 @@ namespace System.Data.Objects
         }
 
         /// <summary>
-        ///   The mappable parameter type; this is primarily used to handle the case of 
-        ///   Nullable parameter types. For example, metadata knows nothing about 'int?', 
+        ///   The mappable parameter type; this is primarily used to handle the case of
+        ///   Nullable parameter types. For example, metadata knows nothing about 'int?',
         ///   only 'Int32'. For internal use only.
         /// </summary>
         internal Type MappableType
         {
-            get
-            {
-                return this._mappableType;
-            }
+            get { return this._mappableType; }
         }
-        
+
         #endregion
 
         #region Internal Methods
@@ -312,19 +302,21 @@ namespace System.Data.Objects
         {
             return new ObjectParameter(this);
         }
-                
+
         /// <summary>
         ///   This internal method ensures that the specified type is a scalar
-        ///   type supported by the underlying provider by ensuring that scalar 
+        ///   type supported by the underlying provider by ensuring that scalar
         ///   metadata for this type is retrievable.
         /// </summary>
-        internal bool ValidateParameterType (ClrPerspective perspective)
+        internal bool ValidateParameterType(ClrPerspective perspective)
         {
             TypeUsage type = null;
 
             // The parameter type metadata is only valid if it's scalar or enumeration type metadata.
-            if ((perspective.TryGetType(this._mappableType, out type)) && 
-                (TypeSemantics.IsScalarType(type)))
+            if (
+                (perspective.TryGetType(this._mappableType, out type))
+                && (TypeSemantics.IsScalarType(type))
+            )
             {
                 return true;
             }

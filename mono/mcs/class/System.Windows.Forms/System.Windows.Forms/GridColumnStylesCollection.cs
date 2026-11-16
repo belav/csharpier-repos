@@ -29,296 +29,326 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-	[Editor("System.Windows.Forms.Design.DataGridColumnCollectionEditor, " + Consts.AssemblySystem_Design, typeof(System.Drawing.Design.UITypeEditor))]
-	[ListBindable(false)]
-	public class GridColumnStylesCollection : BaseCollection, IList
-	{
-		private ArrayList items;
-		private DataGridTableStyle owner;
-		private bool fire_event;
+    [Editor(
+        "System.Windows.Forms.Design.DataGridColumnCollectionEditor, "
+            + Consts.AssemblySystem_Design,
+        typeof(System.Drawing.Design.UITypeEditor)
+    )]
+    [ListBindable(false)]
+    public class GridColumnStylesCollection : BaseCollection, IList
+    {
+        private ArrayList items;
+        private DataGridTableStyle owner;
+        private bool fire_event;
 
-		internal GridColumnStylesCollection (DataGridTableStyle tablestyle)
-		{
-			items = new ArrayList ();
-			owner = tablestyle;
-			fire_event = true;
-		}
+        internal GridColumnStylesCollection(DataGridTableStyle tablestyle)
+        {
+            items = new ArrayList();
+            owner = tablestyle;
+            fire_event = true;
+        }
 
-		#region Public Instance Properties
-		public DataGridColumnStyle this [string columnName] {
-			get {
-				int idx = FromColumnNameToIndex (columnName);
-				return idx == -1 ? null : this [idx];
-			}
-		}
+        #region Public Instance Properties
+        public DataGridColumnStyle this[string columnName]
+        {
+            get
+            {
+                int idx = FromColumnNameToIndex(columnName);
+                return idx == -1 ? null : this[idx];
+            }
+        }
 
-		public DataGridColumnStyle this [int index] {
-			get { return (DataGridColumnStyle) items[index]; }
-		}
+        public DataGridColumnStyle this[int index]
+        {
+            get { return (DataGridColumnStyle)items[index]; }
+        }
 
-		
-		public DataGridColumnStyle this [PropertyDescriptor propertyDesciptor] {
-			get {
-				for (int i = 0; i < items.Count; i++) {
-					DataGridColumnStyle column = (DataGridColumnStyle) items[i];
-					if (column.PropertyDescriptor.Equals (propertyDesciptor))
-						return column;
-				}
-				
-				return null;
-			}
-		}
+        public DataGridColumnStyle this[PropertyDescriptor propertyDesciptor]
+        {
+            get
+            {
+                for (int i = 0; i < items.Count; i++)
+                {
+                    DataGridColumnStyle column = (DataGridColumnStyle)items[i];
+                    if (column.PropertyDescriptor.Equals(propertyDesciptor))
+                        return column;
+                }
 
-		protected override ArrayList List {
-			get { return items; }
-		}
+                return null;
+            }
+        }
 
-		int ICollection.Count {
-			get { return items.Count;}
-		}
+        protected override ArrayList List
+        {
+            get { return items; }
+        }
 
-		bool ICollection.IsSynchronized {
-			get { return false; }
-		}
+        int ICollection.Count
+        {
+            get { return items.Count; }
+        }
 
-		object ICollection.SyncRoot {
-			get { return this; }
-		}
+        bool ICollection.IsSynchronized
+        {
+            get { return false; }
+        }
 
-		bool IList.IsFixedSize {
-			get { return false; }
-		}
+        object ICollection.SyncRoot
+        {
+            get { return this; }
+        }
 
-		bool IList.IsReadOnly {
-			get { return false; }
-		}
+        bool IList.IsFixedSize
+        {
+            get { return false; }
+        }
 
-		object IList.this [int index] {
-			get { return items[index]; }
-			set { throw new NotSupportedException (); }
-		}
+        bool IList.IsReadOnly
+        {
+            get { return false; }
+        }
 
-		#endregion Public Instance Properties
-		
-		#region Private Instance Properties
-		internal bool FireEvents {
-			get { return fire_event;}
-			set { fire_event = value;}
-		}
-		#endregion Private Instance Properties
+        object IList.this[int index]
+        {
+            get { return items[index]; }
+            set { throw new NotSupportedException(); }
+        }
 
-		#region Public Instance Methods
-		public virtual int Add (DataGridColumnStyle column)
-		{
-			// TODO: MS allows duplicate columns. How they diferenciate between them?
-			if (FromColumnNameToIndex (column.MappingName) != -1) {
-				throw new ArgumentException ("The ColumnStyles collection already has a column with this mapping name");
-			}
-			
-			column.TableStyle = owner;
-			column.SetDataGridInternal (owner.DataGrid);
-			ConnectColumnEvents (column);
-			int cnt = items.Add (column);
-			OnCollectionChanged (new CollectionChangeEventArgs (CollectionChangeAction.Add, column));
-			return cnt;
-		}
+        #endregion Public Instance Properties
 
-		public void AddRange (DataGridColumnStyle[] columns)
-		{
-			foreach (DataGridColumnStyle mi in columns)
-				Add (mi);
-		}
+        #region Private Instance Properties
+        internal bool FireEvents
+        {
+            get { return fire_event; }
+            set { fire_event = value; }
+        }
+        #endregion Private Instance Properties
 
-		public void Clear ()
-		{
-			items.Clear ();
-			OnCollectionChanged (new CollectionChangeEventArgs (CollectionChangeAction.Refresh , null));
-		}
+        #region Public Instance Methods
+        public virtual int Add(DataGridColumnStyle column)
+        {
+            // TODO: MS allows duplicate columns. How they diferenciate between them?
+            if (FromColumnNameToIndex(column.MappingName) != -1)
+            {
+                throw new ArgumentException(
+                    "The ColumnStyles collection already has a column with this mapping name"
+                );
+            }
 
-		public bool Contains (DataGridColumnStyle column)
-		{
-			return (FromColumnNameToIndex (column.MappingName) != -1);
-		}
+            column.TableStyle = owner;
+            column.SetDataGridInternal(owner.DataGrid);
+            ConnectColumnEvents(column);
+            int cnt = items.Add(column);
+            OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Add, column));
+            return cnt;
+        }
 
-		public bool Contains (PropertyDescriptor propertyDescriptor )
-		{
-			return (this [propertyDescriptor] != null);
-		}
+        public void AddRange(DataGridColumnStyle[] columns)
+        {
+            foreach (DataGridColumnStyle mi in columns)
+                Add(mi);
+        }
 
-		public bool Contains (string name)
-		{
-			return (FromColumnNameToIndex (name) != -1);
-		}
+        public void Clear()
+        {
+            items.Clear();
+            OnCollectionChanged(
+                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, null)
+            );
+        }
 
-		void ICollection.CopyTo (Array array, int index)
-		{
-			items.CopyTo (array, index);
-		}
+        public bool Contains(DataGridColumnStyle column)
+        {
+            return (FromColumnNameToIndex(column.MappingName) != -1);
+        }
 
-		IEnumerator IEnumerable.GetEnumerator ()
-		{
-			return items.GetEnumerator ();
-		}
+        public bool Contains(PropertyDescriptor propertyDescriptor)
+        {
+            return (this[propertyDescriptor] != null);
+        }
 
-		int IList.Add (object value)
-		{
-			return Add ((DataGridColumnStyle)value);
-		}
+        public bool Contains(string name)
+        {
+            return (FromColumnNameToIndex(name) != -1);
+        }
 
-		void IList.Clear ()
-		{
-			Clear ();
-		}
+        void ICollection.CopyTo(Array array, int index)
+        {
+            items.CopyTo(array, index);
+        }
 
-		bool IList.Contains (object value)
-		{
-			return Contains ((DataGridColumnStyle)value);
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return items.GetEnumerator();
+        }
 
-		int IList.IndexOf (object value)
-		{
-			return IndexOf ((DataGridColumnStyle)value);
-		}
+        int IList.Add(object value)
+        {
+            return Add((DataGridColumnStyle)value);
+        }
 
-		void IList.Insert (int index, object value)
-		{
-			throw new NotSupportedException ();
-		}
+        void IList.Clear()
+        {
+            Clear();
+        }
 
-		void IList.Remove (object value)
-		{
-			Remove ((DataGridColumnStyle)value);
-		}
+        bool IList.Contains(object value)
+        {
+            return Contains((DataGridColumnStyle)value);
+        }
 
-		void IList.RemoveAt (int index)
-		{
-			RemoveAt (index);
-		}
-		
-		public int IndexOf (DataGridColumnStyle element)
-		{
-			return items.IndexOf (element);
-		}
-		
-		protected void OnCollectionChanged (CollectionChangeEventArgs e)
-		{
-			if (fire_event && CollectionChanged != null)
-				CollectionChanged (this, e);
-		}
-		
-		public void Remove (DataGridColumnStyle column)
-		{
-			items.Remove (column);
-			DisconnectColumnEvents (column);
-			OnCollectionChanged (new CollectionChangeEventArgs (CollectionChangeAction.Remove, column));
-		}
-		
-		public void RemoveAt (int index)
-		{
-			DataGridColumnStyle item = (DataGridColumnStyle)items[index];
-			items.RemoveAt (index);
-			DisconnectColumnEvents (item);
-			OnCollectionChanged (new CollectionChangeEventArgs (CollectionChangeAction.Remove, item));
-		}
-		
-		public void ResetPropertyDescriptors ()
-		{
-			for (int i = 0; i < items.Count; i++) {
-				DataGridColumnStyle column = (DataGridColumnStyle) items[i];
-				if (column.PropertyDescriptor != null) {
-					column.PropertyDescriptor = null;
-				}
-			}
-		}
+        int IList.IndexOf(object value)
+        {
+            return IndexOf((DataGridColumnStyle)value);
+        }
 
-		#endregion Public Instance Methods
+        void IList.Insert(int index, object value)
+        {
+            throw new NotSupportedException();
+        }
 
-		#region Events
-		public event CollectionChangeEventHandler CollectionChanged;
-		#endregion Events
-		
-		#region Private Instance Methods
-		void ConnectColumnEvents (DataGridColumnStyle col)
-		{
-			col.AlignmentChanged += new EventHandler (ColumnAlignmentChangedEvent);
-			col.FontChanged += new EventHandler (ColumnFontChangedEvent);
-			col.HeaderTextChanged += new EventHandler (ColumnHeaderTextChanged);
-			col.MappingNameChanged += new EventHandler (ColumnMappingNameChangedEvent);
-			col.NullTextChanged += new EventHandler (ColumnNullTextChangedEvent);
-			col.PropertyDescriptorChanged += new EventHandler (ColumnPropertyDescriptorChanged);
-			col.ReadOnlyChanged += new EventHandler (ColumnReadOnlyChangedEvent);
-			col.WidthChanged += new EventHandler (ColumnWidthChangedEvent);
-		}
+        void IList.Remove(object value)
+        {
+            Remove((DataGridColumnStyle)value);
+        }
 
-		void DisconnectColumnEvents (DataGridColumnStyle col)
-		{
-			col.AlignmentChanged -= new EventHandler (ColumnAlignmentChangedEvent);
-			col.FontChanged -= new EventHandler (ColumnFontChangedEvent);
-			col.HeaderTextChanged -= new EventHandler (ColumnHeaderTextChanged);
-			col.MappingNameChanged -= new EventHandler (ColumnMappingNameChangedEvent);
-			col.NullTextChanged -= new EventHandler (ColumnNullTextChangedEvent);
-			col.PropertyDescriptorChanged -= new EventHandler (ColumnPropertyDescriptorChanged);
-			col.ReadOnlyChanged -= new EventHandler (ColumnReadOnlyChangedEvent);
-			col.WidthChanged -= new EventHandler (ColumnWidthChangedEvent);
-		}
+        void IList.RemoveAt(int index)
+        {
+            RemoveAt(index);
+        }
 
-		void ColumnAlignmentChangedEvent (object sender, EventArgs e)
-		{
-			// XXX should this do a CollectionChangedEvent (Refresh, sender)?
-		}
+        public int IndexOf(DataGridColumnStyle element)
+        {
+            return items.IndexOf(element);
+        }
 
-		void ColumnFontChangedEvent (object sender, EventArgs e)
-		{
-			// XXX should this do a CollectionChangedEvent (Refresh, sender)?
-		}
+        protected void OnCollectionChanged(CollectionChangeEventArgs e)
+        {
+            if (fire_event && CollectionChanged != null)
+                CollectionChanged(this, e);
+        }
 
-		void ColumnHeaderTextChanged (object sender, EventArgs e)
-		{
-			// XXX should this do a CollectionChangedEvent (Refresh, sender)?
-		}
+        public void Remove(DataGridColumnStyle column)
+        {
+            items.Remove(column);
+            DisconnectColumnEvents(column);
+            OnCollectionChanged(
+                new CollectionChangeEventArgs(CollectionChangeAction.Remove, column)
+            );
+        }
 
-		void ColumnMappingNameChangedEvent (object sender, EventArgs e)
-		{
-			// XXX should this do a CollectionChangedEvent (Refresh, sender)?
-		}
+        public void RemoveAt(int index)
+        {
+            DataGridColumnStyle item = (DataGridColumnStyle)items[index];
+            items.RemoveAt(index);
+            DisconnectColumnEvents(item);
+            OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Remove, item));
+        }
 
-		void ColumnNullTextChangedEvent (object sender, EventArgs e)
-		{
-			// XXX should this do a CollectionChangedEvent (Refresh, sender)?
-		}
+        public void ResetPropertyDescriptors()
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                DataGridColumnStyle column = (DataGridColumnStyle)items[i];
+                if (column.PropertyDescriptor != null)
+                {
+                    column.PropertyDescriptor = null;
+                }
+            }
+        }
 
-		void ColumnPropertyDescriptorChanged (object sender, EventArgs e)
-		{
-			// XXX should this do a CollectionChangedEvent (Refresh, sender)?
-			OnCollectionChanged (new CollectionChangeEventArgs (CollectionChangeAction.Refresh, sender));
-		}
+        #endregion Public Instance Methods
 
-		void ColumnReadOnlyChangedEvent (object sender, EventArgs e)
-		{
-			// XXX should this do a CollectionChangedEvent (Refresh, sender)?
-		}
+        #region Events
+        public event CollectionChangeEventHandler CollectionChanged;
+        #endregion Events
 
-		void ColumnWidthChangedEvent (object sender, EventArgs e)
-		{
-			// XXX should this do a CollectionChangedEvent (Refresh, sender)?
-		}
+        #region Private Instance Methods
+        void ConnectColumnEvents(DataGridColumnStyle col)
+        {
+            col.AlignmentChanged += new EventHandler(ColumnAlignmentChangedEvent);
+            col.FontChanged += new EventHandler(ColumnFontChangedEvent);
+            col.HeaderTextChanged += new EventHandler(ColumnHeaderTextChanged);
+            col.MappingNameChanged += new EventHandler(ColumnMappingNameChangedEvent);
+            col.NullTextChanged += new EventHandler(ColumnNullTextChangedEvent);
+            col.PropertyDescriptorChanged += new EventHandler(ColumnPropertyDescriptorChanged);
+            col.ReadOnlyChanged += new EventHandler(ColumnReadOnlyChangedEvent);
+            col.WidthChanged += new EventHandler(ColumnWidthChangedEvent);
+        }
 
-		private int FromColumnNameToIndex (string columnName)
-		{
-			for (int i = 0; i < items.Count; i++) {
-				DataGridColumnStyle column = (DataGridColumnStyle) items[i];
-				
-				if (column.MappingName == null || column.MappingName == string.Empty)
-					continue;
+        void DisconnectColumnEvents(DataGridColumnStyle col)
+        {
+            col.AlignmentChanged -= new EventHandler(ColumnAlignmentChangedEvent);
+            col.FontChanged -= new EventHandler(ColumnFontChangedEvent);
+            col.HeaderTextChanged -= new EventHandler(ColumnHeaderTextChanged);
+            col.MappingNameChanged -= new EventHandler(ColumnMappingNameChangedEvent);
+            col.NullTextChanged -= new EventHandler(ColumnNullTextChangedEvent);
+            col.PropertyDescriptorChanged -= new EventHandler(ColumnPropertyDescriptorChanged);
+            col.ReadOnlyChanged -= new EventHandler(ColumnReadOnlyChangedEvent);
+            col.WidthChanged -= new EventHandler(ColumnWidthChangedEvent);
+        }
 
-				if (String.Compare (column.MappingName, columnName, true) == 0) {
-					return i;
-				}
-			}
-			
-			return -1;
-		}
+        void ColumnAlignmentChangedEvent(object sender, EventArgs e)
+        {
+            // XXX should this do a CollectionChangedEvent (Refresh, sender)?
+        }
 
-		#endregion Private Instance Methods
-	}
+        void ColumnFontChangedEvent(object sender, EventArgs e)
+        {
+            // XXX should this do a CollectionChangedEvent (Refresh, sender)?
+        }
+
+        void ColumnHeaderTextChanged(object sender, EventArgs e)
+        {
+            // XXX should this do a CollectionChangedEvent (Refresh, sender)?
+        }
+
+        void ColumnMappingNameChangedEvent(object sender, EventArgs e)
+        {
+            // XXX should this do a CollectionChangedEvent (Refresh, sender)?
+        }
+
+        void ColumnNullTextChangedEvent(object sender, EventArgs e)
+        {
+            // XXX should this do a CollectionChangedEvent (Refresh, sender)?
+        }
+
+        void ColumnPropertyDescriptorChanged(object sender, EventArgs e)
+        {
+            // XXX should this do a CollectionChangedEvent (Refresh, sender)?
+            OnCollectionChanged(
+                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, sender)
+            );
+        }
+
+        void ColumnReadOnlyChangedEvent(object sender, EventArgs e)
+        {
+            // XXX should this do a CollectionChangedEvent (Refresh, sender)?
+        }
+
+        void ColumnWidthChangedEvent(object sender, EventArgs e)
+        {
+            // XXX should this do a CollectionChangedEvent (Refresh, sender)?
+        }
+
+        private int FromColumnNameToIndex(string columnName)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                DataGridColumnStyle column = (DataGridColumnStyle)items[i];
+
+                if (column.MappingName == null || column.MappingName == string.Empty)
+                    continue;
+
+                if (String.Compare(column.MappingName, columnName, true) == 0)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        #endregion Private Instance Methods
+    }
 }

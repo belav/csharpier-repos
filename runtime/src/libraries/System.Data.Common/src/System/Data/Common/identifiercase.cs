@@ -7,6 +7,6 @@ namespace System.Data.Common
     {
         Unknown = 0,
         Insensitive = 1,
-        Sensitive = 2
+        Sensitive = 2,
     }
 }

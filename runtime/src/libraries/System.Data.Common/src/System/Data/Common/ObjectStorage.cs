@@ -21,14 +21,21 @@ namespace System.Data.Common
             NUMBER,
             STRING,
             BOOLEAN,
-            ARRAY
+            ARRAY,
         };
 
         private object?[] _values = default!; // Late-initialized
         private readonly bool _implementsIXmlSerializable;
 
         internal ObjectStorage(DataColumn column, Type type)
-        : base(column, type, null, DBNull.Value, typeof(ICloneable).IsAssignableFrom(type), GetStorageType(type))
+            : base(
+                column,
+                type,
+                null,
+                DBNull.Value,
+                typeof(ICloneable).IsAssignableFrom(type),
+                GetStorageType(type)
+            )
         {
             _implementsIXmlSerializable = typeof(IXmlSerializable).IsAssignableFrom(type);
         }
@@ -94,7 +101,6 @@ namespace System.Data.Common
             return CompareWithFamilies(valueNo1, value);
         }
 
-
         private int CompareTo(object? valueNo1, object? valueNo2)
         {
             if (valueNo1 == null)
@@ -128,8 +134,7 @@ namespace System.Data.Common
             Families Family2 = GetFamily(valueNo2.GetType());
             if (Family1 < Family2)
                 return -1;
-            else
-                if (Family1 > Family2)
+            else if (Family1 > Family2)
                 return 1;
             else
             {
@@ -148,24 +153,24 @@ namespace System.Data.Common
                         valueNo2 = Convert.ToDouble(valueNo2, FormatProvider);
                         break;
                     case Families.ARRAY:
-                        {
-                            Array arr1 = (Array)valueNo1;
-                            Array arr2 = (Array)valueNo2;
-                            if (arr1.Length > arr2.Length)
-                                return 1;
-                            else if (arr1.Length < arr2.Length)
-                                return -1;
-                            else
-                            { // same number of elements
-                                for (int i = 0; i < arr1.Length; i++)
-                                {
-                                    int c = CompareTo(arr1.GetValue(i), arr2.GetValue(i));
-                                    if (c != 0)
-                                        return c;
-                                }
+                    {
+                        Array arr1 = (Array)valueNo1;
+                        Array arr2 = (Array)valueNo2;
+                        if (arr1.Length > arr2.Length)
+                            return 1;
+                        else if (arr1.Length < arr2.Length)
+                            return -1;
+                        else
+                        { // same number of elements
+                            for (int i = 0; i < arr1.Length; i++)
+                            {
+                                int c = CompareTo(arr1.GetValue(i), arr2.GetValue(i));
+                                if (c != 0)
+                                    return c;
                             }
-                            return 0;
                         }
+                        return 0;
+                    }
                     default:
                         valueNo1 = valueNo1.ToString()!;
                         valueNo2 = valueNo2.ToString()!;
@@ -194,21 +199,36 @@ namespace System.Data.Common
         {
             switch (Type.GetTypeCode(dataType))
             {
-                case TypeCode.Boolean: return Families.BOOLEAN;
-                case TypeCode.Char: return Families.STRING;
-                case TypeCode.SByte: return Families.STRING;
-                case TypeCode.Byte: return Families.STRING;
-                case TypeCode.Int16: return Families.NUMBER;
-                case TypeCode.UInt16: return Families.NUMBER;
-                case TypeCode.Int32: return Families.NUMBER;
-                case TypeCode.UInt32: return Families.NUMBER;
-                case TypeCode.Int64: return Families.NUMBER;
-                case TypeCode.UInt64: return Families.NUMBER;
-                case TypeCode.Single: return Families.NUMBER;
-                case TypeCode.Double: return Families.NUMBER;
-                case TypeCode.Decimal: return Families.NUMBER;
-                case TypeCode.DateTime: return Families.DATETIME;
-                case TypeCode.String: return Families.STRING;
+                case TypeCode.Boolean:
+                    return Families.BOOLEAN;
+                case TypeCode.Char:
+                    return Families.STRING;
+                case TypeCode.SByte:
+                    return Families.STRING;
+                case TypeCode.Byte:
+                    return Families.STRING;
+                case TypeCode.Int16:
+                    return Families.NUMBER;
+                case TypeCode.UInt16:
+                    return Families.NUMBER;
+                case TypeCode.Int32:
+                    return Families.NUMBER;
+                case TypeCode.UInt32:
+                    return Families.NUMBER;
+                case TypeCode.Int64:
+                    return Families.NUMBER;
+                case TypeCode.UInt64:
+                    return Families.NUMBER;
+                case TypeCode.Single:
+                    return Families.NUMBER;
+                case TypeCode.Double:
+                    return Families.NUMBER;
+                case TypeCode.Decimal:
+                    return Families.NUMBER;
+                case TypeCode.DateTime:
+                    return Families.DATETIME;
+                case TypeCode.String:
+                    return Families.STRING;
                 default:
                     if (typeof(TimeSpan) == dataType)
                     {
@@ -336,7 +356,6 @@ namespace System.Data.Common
                 return (new Uri(s));
             }
 
-
             if (_implementsIXmlSerializable)
             {
                 object Obj = System.Activator.CreateInstance(_dataType, true)!;
@@ -365,7 +384,10 @@ namespace System.Data.Common
             if (null == xmlAttrib)
             { // this means type implements IXmlSerializable
                 Type? type = null;
-                string? typeName = xmlReader.GetAttribute(Keywords.MSD_INSTANCETYPE, Keywords.MSDNS);
+                string? typeName = xmlReader.GetAttribute(
+                    Keywords.MSD_INSTANCETYPE,
+                    Keywords.MSDNS
+                );
                 if (string.IsNullOrEmpty(typeName))
                 { // No CDT polumorphism
                     string? xsdTypeName = xmlReader.GetAttribute(Keywords.TYPE, Keywords.XSINS); // this xsd type: Base type polymorphism
@@ -383,8 +405,8 @@ namespace System.Data.Common
                         isBaseCLRType = true;
                     }
                     else if (_dataType == typeof(object))
-                    {// there is no Keywords.MSD_INSTANCETYPE and no Keywords.TYPE
-                        legacyUDT = true;             // see if our type is object
+                    { // there is no Keywords.MSD_INSTANCETYPE and no Keywords.TYPE
+                        legacyUDT = true; // see if our type is object
                     }
                 }
 
@@ -419,13 +441,20 @@ namespace System.Data.Common
                         if (!isBaseCLRType)
                         {
                             retValue = System.Activator.CreateInstance(type, true)!;
-                            Debug.Assert(xmlReader is DataTextReader, "Invalid DataTextReader is being passed to customer");
+                            Debug.Assert(
+                                xmlReader is DataTextReader,
+                                "Invalid DataTextReader is being passed to customer"
+                            );
                             ((IXmlSerializable)retValue).ReadXml(xmlReader);
                         }
                         else
-                        {  // Process Base CLR type
-                           // for Element Node, if it is Empty, ReadString does not move to End Element; we need to move it
-                            if (type == typeof(string) && xmlReader.NodeType == XmlNodeType.Element && xmlReader.IsEmptyElement)
+                        { // Process Base CLR type
+                            // for Element Node, if it is Empty, ReadString does not move to End Element; we need to move it
+                            if (
+                                type == typeof(string)
+                                && xmlReader.NodeType == XmlNodeType.Element
+                                && xmlReader.IsEmptyElement
+                            )
                             {
                                 retValue = string.Empty;
                             }
@@ -448,7 +477,10 @@ namespace System.Data.Common
             }
             else
             {
-                XmlSerializer deserializerWithRootAttribute = ObjectStorage.GetXmlSerializer(_dataType, xmlAttrib);
+                XmlSerializer deserializerWithRootAttribute = ObjectStorage.GetXmlSerializer(
+                    _dataType,
+                    xmlAttrib
+                );
                 retValue = deserializerWithRootAttribute.Deserialize(xmlReader);
             }
 
@@ -458,7 +490,7 @@ namespace System.Data.Common
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         public override string ConvertObjectToXml(object value)
         {
-            if ((value == null) || (value == _nullValue))// this case won't happen,  this is added in case if code in xml saver changes
+            if ((value == null) || (value == _nullValue)) // this case won't happen,  this is added in case if code in xml saver changes
                 return string.Empty;
 
             Type type = _dataType;
@@ -491,22 +523,34 @@ namespace System.Data.Common
                 return (strwriter.ToString());
             }
 
-            XmlSerializer serializerWithOutRootAttribute = ObjectStorage.GetXmlSerializer(value.GetType());
+            XmlSerializer serializerWithOutRootAttribute = ObjectStorage.GetXmlSerializer(
+                value.GetType()
+            );
             serializerWithOutRootAttribute.Serialize(strwriter, value);
             return strwriter.ToString();
         }
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        public override void ConvertObjectToXml(object value, XmlWriter xmlWriter, XmlRootAttribute? xmlAttrib)
+        public override void ConvertObjectToXml(
+            object value,
+            XmlWriter xmlWriter,
+            XmlRootAttribute? xmlAttrib
+        )
         {
             if (null == xmlAttrib)
             { // implements IXmlSerializable
-                Debug.Assert(xmlWriter is DataTextWriter, "Invalid DataTextWriter is being passed to customer");
+                Debug.Assert(
+                    xmlWriter is DataTextWriter,
+                    "Invalid DataTextWriter is being passed to customer"
+                );
                 ((IXmlSerializable)value).WriteXml(xmlWriter);
             }
             else
             {
-                XmlSerializer serializerWithRootAttribute = ObjectStorage.GetXmlSerializer(value.GetType(), xmlAttrib);
+                XmlSerializer serializerWithRootAttribute = ObjectStorage.GetXmlSerializer(
+                    value.GetType(),
+                    xmlAttrib
+                );
                 serializerWithRootAttribute.Serialize(xmlWriter, value);
             }
         }
@@ -516,7 +560,12 @@ namespace System.Data.Common
             return new object[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             object?[] typedStore = (object?[])store;
             typedStore[storeIndex] = _values[record];
@@ -527,7 +576,10 @@ namespace System.Data.Common
             {
                 if (dt.Kind == DateTimeKind.Local)
                 {
-                    typedStore[storeIndex] = DateTime.SpecifyKind(dt.ToUniversalTime(), DateTimeKind.Local);
+                    typedStore[storeIndex] = DateTime.SpecifyKind(
+                        dt.ToUniversalTime(),
+                        DateTimeKind.Local
+                    );
                 }
             }
         }
@@ -545,8 +597,12 @@ namespace System.Data.Common
         }
 
         private static readonly object s_tempAssemblyCacheLock = new object();
-        private static Dictionary<KeyValuePair<Type, XmlRootAttribute>, XmlSerializer>? s_tempAssemblyCache;
-        private static readonly XmlSerializerFactory s_serializerFactory = new XmlSerializerFactory();
+        private static Dictionary<
+            KeyValuePair<Type, XmlRootAttribute>,
+            XmlSerializer
+        >? s_tempAssemblyCache;
+        private static readonly XmlSerializerFactory s_serializerFactory =
+            new XmlSerializerFactory();
 
         /// <summary>
         /// throw an InvalidOperationException if type implements IDynamicMetaObjectProvider and not IXmlSerializable
@@ -557,8 +613,10 @@ namespace System.Data.Common
         /// <remarks>IDynamicMetaObjectProvider was introduced in .NET Framework V4.0 into System.Core</remarks>
         internal static void VerifyIDynamicMetaObjectProvider(Type type)
         {
-            if (typeof(IDynamicMetaObjectProvider).IsAssignableFrom(type) &&
-               !typeof(IXmlSerializable).IsAssignableFrom(type))
+            if (
+                typeof(IDynamicMetaObjectProvider).IsAssignableFrom(type)
+                && !typeof(IXmlSerializable).IsAssignableFrom(type)
+            )
             {
                 throw ADP.InvalidOperation(SR.Xml_DynamicWithoutXmlSerializable);
             }
@@ -580,12 +638,16 @@ namespace System.Data.Common
         internal static XmlSerializer GetXmlSerializer(Type type, XmlRootAttribute attribute)
         {
             XmlSerializer? serializer = null;
-            KeyValuePair<Type, XmlRootAttribute> key = new KeyValuePair<Type, XmlRootAttribute>(type, attribute);
+            KeyValuePair<Type, XmlRootAttribute> key = new KeyValuePair<Type, XmlRootAttribute>(
+                type,
+                attribute
+            );
 
             // _tempAssemblyCache is a readonly instance, lock on write to copy & add then replace the original instance.
-            Dictionary<KeyValuePair<Type, XmlRootAttribute>, XmlSerializer>? cache = s_tempAssemblyCache;
+            Dictionary<KeyValuePair<Type, XmlRootAttribute>, XmlSerializer>? cache =
+                s_tempAssemblyCache;
             if ((null == cache) || !cache.TryGetValue(key, out serializer))
-            {   // not in cache, try again with lock because it may need to grow
+            { // not in cache, try again with lock because it may need to grow
                 lock (s_tempAssemblyCacheLock)
                 {
                     cache = s_tempAssemblyCache;
@@ -597,27 +659,39 @@ namespace System.Data.Common
 
                         // if still not in cache, make cache larger and add new XmlSerializer
                         if (null != cache)
-                        {   // create larger cache, because dictionary is not reader/writer safe
+                        { // create larger cache, because dictionary is not reader/writer safe
                             // copy cache so that all readers don't take lock - only potential new writers
                             // same logic used by DbConnectionFactory
                             Dictionary<KeyValuePair<Type, XmlRootAttribute>, XmlSerializer> tmp =
                                 new Dictionary<KeyValuePair<Type, XmlRootAttribute>, XmlSerializer>(
-                                    1 + cache.Count, TempAssemblyComparer.s_default);
-                            foreach (KeyValuePair<KeyValuePair<Type, XmlRootAttribute>, XmlSerializer> entry in cache)
-                            {   // copy contents from old cache to new cache
+                                    1 + cache.Count,
+                                    TempAssemblyComparer.s_default
+                                );
+                            foreach (
+                                KeyValuePair<
+                                    KeyValuePair<Type, XmlRootAttribute>,
+                                    XmlSerializer
+                                > entry in cache
+                            )
+                            { // copy contents from old cache to new cache
                                 tmp.Add(entry.Key, entry.Value);
                             }
                             cache = tmp;
                         }
                         else
-                        {   // initial creation of cache
-                            cache = new Dictionary<KeyValuePair<Type, XmlRootAttribute>, XmlSerializer>(
-                                TempAssemblyComparer.s_default);
+                        { // initial creation of cache
+                            cache = new Dictionary<
+                                KeyValuePair<Type, XmlRootAttribute>,
+                                XmlSerializer
+                            >(TempAssemblyComparer.s_default);
                         }
 
                         // attribute is modifiable - but usuage from XmlSaver & XmlDataLoader & XmlDiffLoader
                         // the instances are not modified, but to be safe - copy the XmlRootAttribute before caching
-                        key = new KeyValuePair<Type, XmlRootAttribute>(type, new XmlRootAttribute());
+                        key = new KeyValuePair<Type, XmlRootAttribute>(
+                            type,
+                            new XmlRootAttribute()
+                        );
                         key.Value.ElementName = attribute.ElementName;
                         key.Value.Namespace = attribute.Namespace;
                         key.Value.DataType = attribute.DataType;
@@ -632,21 +706,38 @@ namespace System.Data.Common
             return serializer;
         }
 
-        private sealed class TempAssemblyComparer : IEqualityComparer<KeyValuePair<Type, XmlRootAttribute>>
+        private sealed class TempAssemblyComparer
+            : IEqualityComparer<KeyValuePair<Type, XmlRootAttribute>>
         {
-            internal static readonly IEqualityComparer<KeyValuePair<Type, XmlRootAttribute>> s_default = new TempAssemblyComparer();
+            internal static readonly IEqualityComparer<
+                KeyValuePair<Type, XmlRootAttribute>
+            > s_default = new TempAssemblyComparer();
 
             private TempAssemblyComparer() { }
 
-            public bool Equals(KeyValuePair<Type, XmlRootAttribute> x, KeyValuePair<Type, XmlRootAttribute> y)
+            public bool Equals(
+                KeyValuePair<Type, XmlRootAttribute> x,
+                KeyValuePair<Type, XmlRootAttribute> y
+            )
             {
-                return ((x.Key == y.Key) &&                                         // same type
-                        (((x.Value == null) && (y.Value == null)) ||                // XmlRootAttribute both null
-                         ((x.Value != null) && (y.Value != null) &&                 // XmlRootAttribute both with value
-                          (x.Value.ElementName == y.Value.ElementName) &&           // all attribute elements are equal
-                          (x.Value.Namespace == y.Value.Namespace) &&
-                          (x.Value.DataType == y.Value.DataType) &&
-                          (x.Value.IsNullable == y.Value.IsNullable))));
+                return (
+                    (x.Key == y.Key)
+                    && // same type
+                    (
+                        ((x.Value == null) && (y.Value == null))
+                        || // XmlRootAttribute both null
+                        (
+                            (x.Value != null)
+                            && (y.Value != null)
+                            && // XmlRootAttribute both with value
+                            (x.Value.ElementName == y.Value.ElementName)
+                            && // all attribute elements are equal
+                            (x.Value.Namespace == y.Value.Namespace)
+                            && (x.Value.DataType == y.Value.DataType)
+                            && (x.Value.IsNullable == y.Value.IsNullable)
+                        )
+                    )
+                );
             }
 
             public int GetHashCode(KeyValuePair<Type, XmlRootAttribute> obj)

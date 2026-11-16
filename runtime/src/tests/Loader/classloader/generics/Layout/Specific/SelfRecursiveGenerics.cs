@@ -2,18 +2,18 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public class SelfRecursiveGenerics
 {
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void WillFailOnCoreCLRDueToLimitationsInTypeLoader()
     {
         Console.WriteLine(new SelfReferentialGenericStructWithNoFieldsAutoNonLoadable<int, byte>());
     }
+
     [Fact]
     public static void TestEntryPoint()
     {
@@ -43,53 +43,69 @@ public class SelfRecursiveGenerics
         }
     }
 
-    public class Container<T> {
+    public class Container<T>
+    {
         public struct Nested { }
     }
 
     [StructLayout(LayoutKind.Auto)]
-    public struct SelfReferentialStructWithNoFieldsAuto {
+    public struct SelfReferentialStructWithNoFieldsAuto
+    {
         public Container<SelfReferentialStructWithNoFieldsAuto>.Nested Nested;
     }
+
     [StructLayout(LayoutKind.Sequential)]
-    public struct SelfReferentialStructWithNoFieldsSequential {
+    public struct SelfReferentialStructWithNoFieldsSequential
+    {
         public Container<SelfReferentialStructWithNoFieldsSequential>.Nested Nested;
     }
+
     [StructLayout(LayoutKind.Sequential)]
-    public struct SelfReferentialStructWithStringFieldSequential {
+    public struct SelfReferentialStructWithStringFieldSequential
+    {
         public Container<SelfReferentialStructWithStringFieldSequential>.Nested Nested;
         public string String;
     }
 
     [StructLayout(LayoutKind.Explicit)]
-    public struct SelfReferentialStructWithExplicitLayout {
+    public struct SelfReferentialStructWithExplicitLayout
+    {
         [FieldOffset(1)]
         public Container<SelfReferentialStructWithExplicitLayout>.Nested Nested;
+
         [FieldOffset(0)]
         public int Fld1;
+
         [FieldOffset(4)]
         public int Fld2;
     }
 
     [StructLayout(LayoutKind.Auto)]
-    public struct SelfReferentialGenericStructWithNoFieldsAutoNonLoadable<T,V> {
-        public Container<SelfReferentialGenericStructWithNoFieldsAutoNonLoadable<V,T>>.Nested Nested;
+    public struct SelfReferentialGenericStructWithNoFieldsAutoNonLoadable<T, V>
+    {
+        public Container<
+            SelfReferentialGenericStructWithNoFieldsAutoNonLoadable<V, T>
+        >.Nested Nested;
     }
 
     [StructLayout(LayoutKind.Auto)]
-    public struct SelfReferentialGenericStructWithNoFieldsAuto<T> {
+    public struct SelfReferentialGenericStructWithNoFieldsAuto<T>
+    {
         public Container<SelfReferentialGenericStructWithNoFieldsAuto<T>>.Nested Nested;
     }
+
     [StructLayout(LayoutKind.Sequential)]
-    public struct SelfReferentialGenericStructWithNoFieldsSequential<T> {
+    public struct SelfReferentialGenericStructWithNoFieldsSequential<T>
+    {
         public Container<SelfReferentialGenericStructWithNoFieldsSequential<T>>.Nested Nested;
     }
+
     [StructLayout(LayoutKind.Sequential)]
-    public struct SelfReferentialGenericStructWithStringFieldSequential<T> {
+    public struct SelfReferentialGenericStructWithStringFieldSequential<T>
+    {
         public Container<SelfReferentialGenericStructWithStringFieldSequential<T>>.Nested Nested;
         public string String;
     }
-
 
     /// <summary>
     /// List of T expressed as a value type

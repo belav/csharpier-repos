@@ -3,7 +3,6 @@
 
 using System;
 using System.Reflection.Metadata;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 
@@ -18,11 +17,15 @@ namespace ILCompiler
         private readonly EcmaType _type;
         private readonly PropertyDefinitionHandle _handle;
 
-        private PropertyDefinition Definition => _type.MetadataReader.GetPropertyDefinition(_handle);
+        private PropertyDefinition Definition =>
+            _type.MetadataReader.GetPropertyDefinition(_handle);
 
         public PropertySignature Signature =>
-            new EcmaSignatureParser(_type.EcmaModule, _type.MetadataReader.GetBlobReader(Definition.Signature), NotFoundBehavior.Throw)
-            .ParsePropertySignature();
+            new EcmaSignatureParser(
+                _type.EcmaModule,
+                _type.MetadataReader.GetBlobReader(Definition.Signature),
+                NotFoundBehavior.Throw
+            ).ParsePropertySignature();
 
         public MethodDesc GetMethod
         {
@@ -44,34 +47,22 @@ namespace ILCompiler
 
         public CustomAttributeHandleCollection GetCustomAttributes
         {
-            get
-            {
-                return Definition.GetCustomAttributes();
-            }
+            get { return Definition.GetCustomAttributes(); }
         }
 
         public MetadataType OwningType
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         }
 
         public string Name
         {
-            get
-            {
-                return _type.MetadataReader.GetString(Definition.Name);
-            }
+            get { return _type.MetadataReader.GetString(Definition.Name); }
         }
 
         public PropertyDefinitionHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         }
 
         public PropertyPseudoDesc(EcmaType type, PropertyDefinitionHandle handle)
@@ -82,11 +73,13 @@ namespace ILCompiler
 
         public override TypeSystemContext Context => _type.Context;
 
-        public override bool Equals(object obj) => obj is not PropertyPseudoDesc property ? false : this == property;
+        public override bool Equals(object obj) =>
+            obj is not PropertyPseudoDesc property ? false : this == property;
 
         public override int GetHashCode() => _type.GetHashCode() ^ _handle.GetHashCode();
 
-        public static bool operator ==(PropertyPseudoDesc a, PropertyPseudoDesc b) => a._type == b._type && a._handle == b._handle;
+        public static bool operator ==(PropertyPseudoDesc a, PropertyPseudoDesc b) =>
+            a._type == b._type && a._handle == b._handle;
 
         public static bool operator !=(PropertyPseudoDesc a, PropertyPseudoDesc b) => !(a == b);
     }

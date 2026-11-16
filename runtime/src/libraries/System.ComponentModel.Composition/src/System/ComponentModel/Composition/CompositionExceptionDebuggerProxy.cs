@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
 

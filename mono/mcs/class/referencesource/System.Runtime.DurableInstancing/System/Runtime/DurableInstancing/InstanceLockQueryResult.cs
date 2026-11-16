@@ -11,7 +11,8 @@ namespace System.Runtime.DurableInstancing
     [Fx.Tag.XamlVisible(false)]
     public sealed class InstanceLockQueryResult : InstanceStoreQueryResult
     {
-        static readonly ReadOnlyDictionaryInternal<Guid, Guid> EmptyQueryResult = new ReadOnlyDictionaryInternal<Guid, Guid>(new Dictionary<Guid, Guid>(0));
+        static readonly ReadOnlyDictionaryInternal<Guid, Guid> EmptyQueryResult =
+            new ReadOnlyDictionaryInternal<Guid, Guid>(new Dictionary<Guid, Guid>(0));
 
         // Zero
         public InstanceLockQueryResult()

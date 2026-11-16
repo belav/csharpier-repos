@@ -4,11 +4,11 @@
 
 #nullable disable
 
-using Roslyn.Test.Performance.Utilities;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.IO;
+using System.Linq;
+using Roslyn.Test.Performance.Utilities;
 using static Roslyn.Test.Performance.Utilities.TestUtilities;
 
 namespace Roslyn.Test.Performance.Utilities
@@ -44,7 +44,8 @@ namespace Roslyn.Test.Performance.Utilities
         private int _startEventAbsoluteInstance = 1;
         private int _stopEventAbsoluteInstance = 1;
 
-        public TraceManager(string cpcPath) : base()
+        public TraceManager(string cpcPath)
+            : base()
         {
             _cpcPath = cpcPath;
             _scenarioGenerator = new ScenarioGenerator();
@@ -54,24 +55,43 @@ namespace Roslyn.Test.Performance.Utilities
 
         public void Setup()
         {
-            ShellOutVital(_cpcPath, "/Setup /SkipClean", workingDirectory: TestUtilities.GetCPCDirectoryPath());
+            ShellOutVital(
+                _cpcPath,
+                "/Setup /SkipClean",
+                workingDirectory: TestUtilities.GetCPCDirectoryPath()
+            );
         }
 
         public void Start()
         {
-            ShellOutVital(_cpcPath, "/Start /SkipClean", workingDirectory: TestUtilities.GetCPCDirectoryPath());
+            ShellOutVital(
+                _cpcPath,
+                "/Start /SkipClean",
+                workingDirectory: TestUtilities.GetCPCDirectoryPath()
+            );
         }
 
         public void Stop()
         {
             var scenariosXmlPath = Path.Combine(GetCPCDirectoryPath(), "scenarios.xml");
-            var consumptionTempResultsPath = Path.Combine(GetCPCDirectoryPath(), "ConsumptionTempResults.xml");
-            ShellOutVital(_cpcPath, $"/Stop /SkipClean /ScenarioPath=\"{scenariosXmlPath}\" /ConsumptionTempResultsPath=\"{consumptionTempResultsPath}\"", workingDirectory: TestUtilities.GetCPCDirectoryPath());
+            var consumptionTempResultsPath = Path.Combine(
+                GetCPCDirectoryPath(),
+                "ConsumptionTempResults.xml"
+            );
+            ShellOutVital(
+                _cpcPath,
+                $"/Stop /SkipClean /ScenarioPath=\"{scenariosXmlPath}\" /ConsumptionTempResultsPath=\"{consumptionTempResultsPath}\"",
+                workingDirectory: TestUtilities.GetCPCDirectoryPath()
+            );
         }
 
         public void Cleanup()
         {
-            ShellOutVital(_cpcPath, "/Cleanup /SkipClean", workingDirectory: TestUtilities.GetCPCDirectoryPath());
+            ShellOutVital(
+                _cpcPath,
+                "/Cleanup /SkipClean",
+                workingDirectory: TestUtilities.GetCPCDirectoryPath()
+            );
         }
 
         public void StartScenarios()
@@ -134,15 +154,11 @@ namespace Roslyn.Test.Performance.Utilities
 
         private Stopwatch _stopwatch;
 
-        public WallClockTraceManager()
-        {
-        }
+        public WallClockTraceManager() { }
 
         public bool HasWarmUpIteration => false;
 
-        public void Initialize()
-        {
-        }
+        public void Initialize() { }
 
         // We have one WallClockTraceManager per test, so we don't
         // need to worry about other tests showing up
@@ -157,9 +173,7 @@ namespace Roslyn.Test.Performance.Utilities
             Log($"AVERAGE: {average}");
         }
 
-        public void EndEvent()
-        {
-        }
+        public void EndEvent() { }
 
         public void EndScenario()
         {
@@ -167,29 +181,17 @@ namespace Roslyn.Test.Performance.Utilities
             _durations.Add(_stopwatch.ElapsedMilliseconds);
         }
 
-        public void EndScenarios()
-        {
-        }
+        public void EndScenarios() { }
 
-        public void ResetScenarioGenerator()
-        {
-        }
+        public void ResetScenarioGenerator() { }
 
-        public void Setup()
-        {
-        }
+        public void Setup() { }
 
-        public void Start()
-        {
-        }
+        public void Start() { }
 
-        public void StartEvent()
-        {
-        }
+        public void StartEvent() { }
 
-        public void StartScenarios()
-        {
-        }
+        public void StartScenarios() { }
 
         public void StartScenario(string scenarioName, string processName)
         {
@@ -197,16 +199,10 @@ namespace Roslyn.Test.Performance.Utilities
             _stopwatch = Stopwatch.StartNew();
         }
 
-        public void Stop()
-        {
-        }
+        public void Stop() { }
 
-        public void WriteScenarios(string[] scenarios)
-        {
-        }
+        public void WriteScenarios(string[] scenarios) { }
 
-        public void WriteScenariosFileToDisk()
-        {
-        }
+        public void WriteScenariosFileToDisk() { }
     }
 }

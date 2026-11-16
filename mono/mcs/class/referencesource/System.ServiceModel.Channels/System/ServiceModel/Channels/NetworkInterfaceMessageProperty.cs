@@ -25,11 +25,7 @@ namespace System.ServiceModel.Channels
             get { return PropertyName; }
         }
 
-        public int InterfaceIndex
-        {
-            get;
-            private set;
-        }
+        public int InterfaceIndex { get; private set; }
 
         public static bool TryGet(Message message, out NetworkInterfaceMessageProperty property)
         {
@@ -41,7 +37,10 @@ namespace System.ServiceModel.Channels
             return TryGet(message.Properties, out property);
         }
 
-        public static bool TryGet(MessageProperties properties, out NetworkInterfaceMessageProperty property)
+        public static bool TryGet(
+            MessageProperties properties,
+            out NetworkInterfaceMessageProperty property
+        )
         {
             if (properties == null)
             {

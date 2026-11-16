@@ -11,11 +11,15 @@ namespace System.ServiceModel.Activation
     using System.ServiceModel.Activation.Interop;
     using System.Threading;
 
-    [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - All member methods are security critical. The class might be used outside of the restricted SecurityContext." +
-        "Ensure they do not accidentally satisfy any demands.")]
+    [Fx.Tag.SecurityNote(
+        Miscellaneous = "RequiresReview - All member methods are security critical. The class might be used outside of the restricted SecurityContext."
+            + "Ensure they do not accidentally satisfy any demands."
+    )]
     class HostedImpersonationContext
     {
-        [Fx.Tag.SecurityNote(Critical = "Stores the impersonation token handle. Since we're allowing 'safe' Impersonation of the token we got from asp.net we need to protect this value.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Stores the impersonation token handle. Since we're allowing 'safe' Impersonation of the token we got from asp.net we need to protect this value."
+        )]
         [SecurityCritical]
         SafeCloseHandleCritical tokenHandle;
 
@@ -27,16 +31,22 @@ namespace System.ServiceModel.Activation
         [SecurityCritical]
         bool isImpersonated;
 
-        [Fx.Tag.SecurityNote(Critical = "Calls two safe native methods under OpenCurrentThreadTokenCritical: GetCurrentThread and OpenThreadToken." +
-            "Marshal.GetLastWin32Error captures current thread token in a SecurityCritical field.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls two safe native methods under OpenCurrentThreadTokenCritical: GetCurrentThread and OpenThreadToken."
+                + "Marshal.GetLastWin32Error captures current thread token in a SecurityCritical field."
+        )]
         [SecurityCritical]
         public HostedImpersonationContext()
         {
             if (ServiceHostingEnvironment.AspNetCompatibilityEnabled)
             {
                 int error;
-                bool isSuccess = SafeNativeMethods.OpenCurrentThreadTokenCritical(TokenAccessLevels.Query | TokenAccessLevels.Impersonate,
-                    true, out tokenHandle, out error);
+                bool isSuccess = SafeNativeMethods.OpenCurrentThreadTokenCritical(
+                    TokenAccessLevels.Query | TokenAccessLevels.Impersonate,
+                    true,
+                    out tokenHandle,
+                    out error
+                );
 
                 if (isSuccess)
                 {
@@ -49,39 +59,47 @@ namespace System.ServiceModel.Activation
                     tokenHandle = null;
                     if (error != SafeNativeMethods.ERROR_NO_TOKEN)
                     {
-                        throw FxTrace.Exception.AsError(new Win32Exception(error, SR.Hosting_ImpersonationFailed));
+                        throw FxTrace.Exception.AsError(
+                            new Win32Exception(error, SR.Hosting_ImpersonationFailed)
+                        );
                     }
                 }
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SetHandleAsInvalid which has a LinkDemand for UnmanagedCode.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SetHandleAsInvalid which has a LinkDemand for UnmanagedCode."
+        )]
         [SecurityCritical]
         static void CloseInvalidOutSafeHandleCritical(SafeHandle handle)
         {
             // Workaround for 64-bit CLR bug VSWhidbey 546830 - sometimes invalid SafeHandles come back null.
             if (handle != null)
             {
-                Fx.Assert(handle.IsInvalid, "CloseInvalidOutSafeHandle called with a valid handle!");
+                Fx.Assert(
+                    handle.IsInvalid,
+                    "CloseInvalidOutSafeHandle called with a valid handle!"
+                );
 
                 // Calls SuppressFinalize.
                 handle.SetHandleAsInvalid();
             }
         }
 
-
         public bool IsImpersonated
         {
-            [Fx.Tag.SecurityNote(Critical = "Accesses SecurityCritical isImpersonated field.", Safe = "Does not leak control or mutable/harmful data, no potential for harm.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Accesses SecurityCritical isImpersonated field.",
+                Safe = "Does not leak control or mutable/harmful data, no potential for harm."
+            )]
             [SecuritySafeCritical]
-            get
-            {
-                return isImpersonated;
-            }
+            get { return isImpersonated; }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses SecurityCritical tokenHandle field and uses LinkDemanded DangerousGetHandle method as well as UnsafeCreate." +
-            "Caller should use with care, must take responsibility for reverting impersonation.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses SecurityCritical tokenHandle field and uses LinkDemanded DangerousGetHandle method as well as UnsafeCreate."
+                + "Caller should use with care, must take responsibility for reverting impersonation."
+        )]
         [SecurityCritical]
         public IDisposable Impersonate()
         {
@@ -92,7 +110,9 @@ namespace System.ServiceModel.Activation
             HostedInnerImpersonationContext context = null;
             lock (tokenHandle)
             {
-                context = HostedInnerImpersonationContext.UnsafeCreate(tokenHandle.DangerousGetHandle());
+                context = HostedInnerImpersonationContext.UnsafeCreate(
+                    tokenHandle.DangerousGetHandle()
+                );
                 GC.KeepAlive(tokenHandle);
             }
             return context;
@@ -127,7 +147,9 @@ namespace System.ServiceModel.Activation
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Keeps track of impersonated user, caller must use with care and call Dispose at the appropriate time.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Keeps track of impersonated user, caller must use with care and call Dispose at the appropriate time."
+        )]
 #pragma warning disable 618 // have not moved to the v4 security model yet
         [SecurityCritical(SecurityCriticalScope.Everything)]
 #pragma warning restore 618
@@ -139,14 +161,18 @@ namespace System.ServiceModel.Activation
             {
                 if (impersonatedContext == null)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.Hosting_ImpersonationFailed));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.Hosting_ImpersonationFailed)
+                    );
                 }
                 this.impersonatedContext = impersonatedContext;
             }
 
             public static HostedInnerImpersonationContext UnsafeCreate(IntPtr token)
             {
-                return new HostedInnerImpersonationContext(HostingEnvironmentWrapper.UnsafeImpersonate(token));
+                return new HostedInnerImpersonationContext(
+                    HostingEnvironmentWrapper.UnsafeImpersonate(token)
+                );
             }
 
             public void Dispose()

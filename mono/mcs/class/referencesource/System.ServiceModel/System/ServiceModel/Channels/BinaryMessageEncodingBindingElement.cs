@@ -4,15 +4,18 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.Reflection;
-    using System.ServiceModel.Description;
-    using System.Runtime.Serialization;
-    using System.ServiceModel;
-    using System.Xml;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
+    using System.Xml;
 
-    public sealed class BinaryMessageEncodingBindingElement : MessageEncodingBindingElement, IWsdlExportExtension, IPolicyExportExtension
+    public sealed class BinaryMessageEncodingBindingElement
+        : MessageEncodingBindingElement,
+            IWsdlExportExtension,
+            IPolicyExportExtension
     {
         int maxReadPoolSize;
         int maxWritePoolSize;
@@ -31,7 +34,9 @@ namespace System.ServiceModel.Channels
             EncoderDefaults.ReaderQuotas.CopyTo(this.readerQuotas);
             this.maxSessionSize = BinaryEncoderDefaults.MaxSessionSize;
             this.binaryVersion = BinaryEncoderDefaults.BinaryVersion;
-            this.messageVersion = MessageVersion.CreateVersion(BinaryEncoderDefaults.EnvelopeVersion);
+            this.messageVersion = MessageVersion.CreateVersion(
+                BinaryEncoderDefaults.EnvelopeVersion
+            );
             this.compressionFormat = EncoderDefaults.DefaultCompressionFormat;
         }
 
@@ -52,28 +57,21 @@ namespace System.ServiceModel.Channels
         [DefaultValue(EncoderDefaults.DefaultCompressionFormat)]
         public CompressionFormat CompressionFormat
         {
-            get
-            {
-                return this.compressionFormat;
-            }
-            set
-            {
-                this.compressionFormat = value;
-            }
+            get { return this.compressionFormat; }
+            set { this.compressionFormat = value; }
         }
 
         /* public */
         BinaryVersion BinaryVersion
         {
-            get
-            {
-                return binaryVersion;
-            }
+            get { return binaryVersion; }
             set
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 }
                 this.binaryVersion = value;
             }
@@ -90,27 +88,39 @@ namespace System.ServiceModel.Channels
                 }
                 if (value.Envelope != BinaryEncoderDefaults.EnvelopeVersion)
                 {
-                    string errorMsg = SR.GetString(SR.UnsupportedEnvelopeVersion, this.GetType().FullName, BinaryEncoderDefaults.EnvelopeVersion, value.Envelope);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(errorMsg));
+                    string errorMsg = SR.GetString(
+                        SR.UnsupportedEnvelopeVersion,
+                        this.GetType().FullName,
+                        BinaryEncoderDefaults.EnvelopeVersion,
+                        value.Envelope
+                    );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(errorMsg)
+                    );
                 }
 
-                this.messageVersion = MessageVersion.CreateVersion(BinaryEncoderDefaults.EnvelopeVersion, value.Addressing);
+                this.messageVersion = MessageVersion.CreateVersion(
+                    BinaryEncoderDefaults.EnvelopeVersion,
+                    value.Addressing
+                );
             }
         }
 
         [DefaultValue(EncoderDefaults.MaxReadPoolSize)]
         public int MaxReadPoolSize
         {
-            get
-            {
-                return this.maxReadPoolSize;
-            }
+            get { return this.maxReadPoolSize; }
             set
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                                                    SR.GetString(SR.ValueMustBePositive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBePositive)
+                        )
+                    );
                 }
                 this.maxReadPoolSize = value;
             }
@@ -119,16 +129,18 @@ namespace System.ServiceModel.Channels
         [DefaultValue(EncoderDefaults.MaxWritePoolSize)]
         public int MaxWritePoolSize
         {
-            get
-            {
-                return this.maxWritePoolSize;
-            }
+            get { return this.maxWritePoolSize; }
             set
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                                                    SR.GetString(SR.ValueMustBePositive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBePositive)
+                        )
+                    );
                 }
                 this.maxWritePoolSize = value;
             }
@@ -136,10 +148,7 @@ namespace System.ServiceModel.Channels
 
         public XmlDictionaryReaderQuotas ReaderQuotas
         {
-            get
-            {
-                return this.readerQuotas;
-            }
+            get { return this.readerQuotas; }
             set
             {
                 if (value == null)
@@ -151,16 +160,18 @@ namespace System.ServiceModel.Channels
         [DefaultValue(BinaryEncoderDefaults.MaxSessionSize)]
         public int MaxSessionSize
         {
-            get
-            {
-                return this.maxSessionSize;
-            }
+            get { return this.maxSessionSize; }
             set
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                                                    SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
 
                 this.maxSessionSize = value;
@@ -171,38 +182,52 @@ namespace System.ServiceModel.Channels
         {
             if (this.compressionFormat != CompressionFormat.None)
             {
-                ITransportCompressionSupport compressionSupport = context.GetInnerProperty<ITransportCompressionSupport>();
-                if (compressionSupport == null || !compressionSupport.IsCompressionFormatSupported(this.compressionFormat))
+                ITransportCompressionSupport compressionSupport =
+                    context.GetInnerProperty<ITransportCompressionSupport>();
+                if (
+                    compressionSupport == null
+                    || !compressionSupport.IsCompressionFormatSupported(this.compressionFormat)
+                )
                 {
-                    throw FxTrace.Exception.AsError(new NotSupportedException(SR.GetString(
-                        SR.TransportDoesNotSupportCompression,
-                        this.compressionFormat.ToString(),
-                        this.GetType().Name,
-                        CompressionFormat.None.ToString())));
+                    throw FxTrace.Exception.AsError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.TransportDoesNotSupportCompression,
+                                this.compressionFormat.ToString(),
+                                this.GetType().Name,
+                                CompressionFormat.None.ToString()
+                            )
+                        )
+                    );
                 }
             }
         }
 
         void SetMaxReceivedMessageSizeFromTransport(BindingContext context)
         {
-            TransportBindingElement transport = context.Binding.Elements.Find<TransportBindingElement>();
+            TransportBindingElement transport =
+                context.Binding.Elements.Find<TransportBindingElement>();
             if (transport != null)
             {
-                // We are guaranteed that a transport exists when building a binding;  
-                // Allow the regular flow/checks to happen rather than throw here 
-                // (InternalBuildChannelListener will call into the BindingContext. Validation happens there and it will throw) 
+                // We are guaranteed that a transport exists when building a binding;
+                // Allow the regular flow/checks to happen rather than throw here
+                // (InternalBuildChannelListener will call into the BindingContext. Validation happens there and it will throw)
                 this.maxReceivedMessageSize = transport.MaxReceivedMessageSize;
             }
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             VerifyCompression(context);
             SetMaxReceivedMessageSizeFromTransport(context);
             return InternalBuildChannelFactory<TChannel>(context);
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             VerifyCompression(context);
             SetMaxReceivedMessageSizeFromTransport(context);
@@ -222,14 +247,15 @@ namespace System.ServiceModel.Channels
         public override MessageEncoderFactory CreateMessageEncoderFactory()
         {
             return new BinaryMessageEncoderFactory(
-                this.MessageVersion, 
-                this.MaxReadPoolSize, 
-                this.MaxWritePoolSize, 
-                this.MaxSessionSize, 
-                this.ReaderQuotas, 
+                this.MessageVersion,
+                this.MaxReadPoolSize,
+                this.MaxWritePoolSize,
+                this.MaxSessionSize,
+                this.ReaderQuotas,
                 this.maxReceivedMessageSize,
-                this.BinaryVersion, 
-                this.CompressionFormat);
+                this.BinaryVersion,
+                this.CompressionFormat
+            );
         }
 
         public override T GetProperty<T>(BindingContext context)
@@ -248,28 +274,47 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        void IPolicyExportExtension.ExportPolicy(MetadataExporter exporter, PolicyConversionContext policyContext)
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext policyContext
+        )
         {
             if (policyContext == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("policyContext");
             }
             XmlDocument document = new XmlDocument();
-            policyContext.GetBindingAssertions().Add(document.CreateElement(
-                MessageEncodingPolicyConstants.BinaryEncodingPrefix,
-                MessageEncodingPolicyConstants.BinaryEncodingName,
-                MessageEncodingPolicyConstants.BinaryEncodingNamespace));
+            policyContext
+                .GetBindingAssertions()
+                .Add(
+                    document.CreateElement(
+                        MessageEncodingPolicyConstants.BinaryEncodingPrefix,
+                        MessageEncodingPolicyConstants.BinaryEncodingName,
+                        MessageEncodingPolicyConstants.BinaryEncodingNamespace
+                    )
+                );
         }
 
-        void IWsdlExportExtension.ExportContract(WsdlExporter exporter, WsdlContractConversionContext context) { }
-        void IWsdlExportExtension.ExportEndpoint(WsdlExporter exporter, WsdlEndpointConversionContext context)
+        void IWsdlExportExtension.ExportContract(
+            WsdlExporter exporter,
+            WsdlContractConversionContext context
+        ) { }
+
+        void IWsdlExportExtension.ExportEndpoint(
+            WsdlExporter exporter,
+            WsdlEndpointConversionContext context
+        )
         {
             if (context == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
 
-            SoapHelper.SetSoapVersion(context, exporter, MessageVersion.Soap12WSAddressing10.Envelope);
+            SoapHelper.SetSoapVersion(
+                context,
+                exporter,
+                MessageVersion.Soap12WSAddressing10.Envelope
+            );
         }
 
         internal override bool IsMatch(BindingElement b)
@@ -286,7 +331,10 @@ namespace System.ServiceModel.Channels
                 return false;
 
             // compare XmlDictionaryReaderQuotas
-            if (this.readerQuotas.MaxStringContentLength != binary.ReaderQuotas.MaxStringContentLength)
+            if (
+                this.readerQuotas.MaxStringContentLength
+                != binary.ReaderQuotas.MaxStringContentLength
+            )
                 return false;
             if (this.readerQuotas.MaxArrayLength != binary.ReaderQuotas.MaxArrayLength)
                 return false;
@@ -294,7 +342,9 @@ namespace System.ServiceModel.Channels
                 return false;
             if (this.readerQuotas.MaxDepth != binary.ReaderQuotas.MaxDepth)
                 return false;
-            if (this.readerQuotas.MaxNameTableCharCount != binary.ReaderQuotas.MaxNameTableCharCount)
+            if (
+                this.readerQuotas.MaxNameTableCharCount != binary.ReaderQuotas.MaxNameTableCharCount
+            )
                 return false;
 
             if (this.MaxSessionSize != binary.MaxSessionSize)

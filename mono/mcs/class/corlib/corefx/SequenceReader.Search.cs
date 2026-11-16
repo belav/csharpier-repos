@@ -8,9 +8,11 @@ using System.Runtime.CompilerServices;
 namespace System.Buffers
 {
 #if __MonoCS__
-    public ref partial struct SequenceReader<T> where T : IEquatable<T>
+    public ref partial struct SequenceReader<T>
+        where T : IEquatable<T>
 #else
-    public ref partial struct SequenceReader<T> where T : unmanaged, IEquatable<T>
+    public ref partial struct SequenceReader<T>
+        where T : unmanaged, IEquatable<T>
 #endif
     {
         /// <summary>
@@ -20,7 +22,11 @@ namespace System.Buffers
         /// <param name="delimiter">The delimiter to look for.</param>
         /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if found.</param>
         /// <returns>True if the <paramref name="delimiter"/> was found.</returns>
-        public bool TryReadTo(out ReadOnlySpan<T> span, T delimiter, bool advancePastDelimiter = true)
+        public bool TryReadTo(
+            out ReadOnlySpan<T> span,
+            T delimiter,
+            bool advancePastDelimiter = true
+        )
         {
             ReadOnlySpan<T> remaining = UnreadSpan;
             int index = remaining.IndexOf(delimiter);
@@ -37,7 +43,14 @@ namespace System.Buffers
 
         private bool TryReadToSlow(out ReadOnlySpan<T> span, T delimiter, bool advancePastDelimiter)
         {
-            if (!TryReadToInternal(out ReadOnlySequence<T> sequence, delimiter, advancePastDelimiter, CurrentSpan.Length - CurrentSpanIndex))
+            if (
+                !TryReadToInternal(
+                    out ReadOnlySequence<T> sequence,
+                    delimiter,
+                    advancePastDelimiter,
+                    CurrentSpan.Length - CurrentSpanIndex
+                )
+            )
             {
                 span = default;
                 return false;
@@ -56,7 +69,12 @@ namespace System.Buffers
         /// <param name="delimiterEscape">If found prior to <paramref name="delimiter"/> it will skip that occurrence.</param>
         /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if found.</param>
         /// <returns>True if the <paramref name="delimiter"/> was found.</returns>
-        public bool TryReadTo(out ReadOnlySpan<T> span, T delimiter, T delimiterEscape, bool advancePastDelimiter = true)
+        public bool TryReadTo(
+            out ReadOnlySpan<T> span,
+            T delimiter,
+            T delimiterEscape,
+            bool advancePastDelimiter = true
+        )
         {
             ReadOnlySpan<T> remaining = UnreadSpan;
             int index = remaining.IndexOf(delimiter);
@@ -72,9 +90,23 @@ namespace System.Buffers
             return TryReadToSlow(out span, delimiter, delimiterEscape, index, advancePastDelimiter);
         }
 
-        private bool TryReadToSlow(out ReadOnlySpan<T> span, T delimiter, T delimiterEscape, int index, bool advancePastDelimiter)
+        private bool TryReadToSlow(
+            out ReadOnlySpan<T> span,
+            T delimiter,
+            T delimiterEscape,
+            int index,
+            bool advancePastDelimiter
+        )
         {
-            if (!TryReadToSlow(out ReadOnlySequence<T> sequence, delimiter, delimiterEscape, index, advancePastDelimiter))
+            if (
+                !TryReadToSlow(
+                    out ReadOnlySequence<T> sequence,
+                    delimiter,
+                    delimiterEscape,
+                    index,
+                    advancePastDelimiter
+                )
+            )
             {
                 span = default;
                 return false;
@@ -85,7 +117,13 @@ namespace System.Buffers
             return true;
         }
 
-        private bool TryReadToSlow(out ReadOnlySequence<T> sequence, T delimiter, T delimiterEscape, int index, bool advancePastDelimiter)
+        private bool TryReadToSlow(
+            out ReadOnlySequence<T> sequence,
+            T delimiter,
+            T delimiterEscape,
+            int index,
+            bool advancePastDelimiter
+        )
         {
             SequenceReader<T> copy = this;
 
@@ -147,7 +185,10 @@ namespace System.Buffers
                 else
                 {
                     // No delimiter, need to check the end of the span for odd number of escapes then advance
-                    if (remaining.Length > 0 && remaining[remaining.Length - 1].Equals(delimiterEscape))
+                    if (
+                        remaining.Length > 0
+                        && remaining[remaining.Length - 1].Equals(delimiterEscape)
+                    )
                     {
                         int escapeCount = 1;
                         int i = remaining.Length - 2;
@@ -159,7 +200,7 @@ namespace System.Buffers
 
                         escapeCount += remaining.Length - 2 - i;
                         if (i < 0 && priorEscape)
-                            priorEscape = (escapeCount & 1) == 0;   // equivalent to incrementing escapeCount before setting priorEscape
+                            priorEscape = (escapeCount & 1) == 0; // equivalent to incrementing escapeCount before setting priorEscape
                         else
                             priorEscape = (escapeCount & 1) != 0;
                     }
@@ -173,7 +214,7 @@ namespace System.Buffers
                 AdvanceCurrentSpan(remaining.Length);
                 remaining = CurrentSpan;
 
-            Continue:
+                Continue:
                 index = remaining.IndexOf(delimiter);
             } while (!End);
 
@@ -190,12 +231,21 @@ namespace System.Buffers
         /// <param name="delimiter">The delimiter to look for.</param>
         /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if found.</param>
         /// <returns>True if the <paramref name="delimiter"/> was found.</returns>
-        public bool TryReadTo(out ReadOnlySequence<T> sequence, T delimiter, bool advancePastDelimiter = true)
+        public bool TryReadTo(
+            out ReadOnlySequence<T> sequence,
+            T delimiter,
+            bool advancePastDelimiter = true
+        )
         {
             return TryReadToInternal(out sequence, delimiter, advancePastDelimiter);
         }
 
-        private bool TryReadToInternal(out ReadOnlySequence<T> sequence, T delimiter, bool advancePastDelimiter, int skip = 0)
+        private bool TryReadToInternal(
+            out ReadOnlySequence<T> sequence,
+            T delimiter,
+            bool advancePastDelimiter,
+            int skip = 0
+        )
         {
             Debug.Assert(skip >= 0);
             SequenceReader<T> copy = this;
@@ -241,7 +291,12 @@ namespace System.Buffers
         /// <param name="delimiterEscape">If found prior to <paramref name="delimiter"/> it will skip that occurrence.</param>
         /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if found.</param>
         /// <returns>True if the <paramref name="delimiter"/> was found.</returns>
-        public bool TryReadTo(out ReadOnlySequence<T> sequence, T delimiter, T delimiterEscape, bool advancePastDelimiter = true)
+        public bool TryReadTo(
+            out ReadOnlySequence<T> sequence,
+            T delimiter,
+            T delimiterEscape,
+            bool advancePastDelimiter = true
+        )
         {
             SequenceReader<T> copy = this;
 
@@ -267,7 +322,11 @@ namespace System.Buffers
 
                         // Count our escapes
                         int escapeCount = 0;
-                        for (int i = index; i > 0 && remaining[i - 1].Equals(delimiterEscape); i--, escapeCount++)
+                        for (
+                            int i = index;
+                            i > 0 && remaining[i - 1].Equals(delimiterEscape);
+                            i--, escapeCount++
+                        )
                             ;
                         if (escapeCount == index && priorEscape)
                         {
@@ -302,7 +361,11 @@ namespace System.Buffers
                 // No delimiter, need to check the end of the span for odd number of escapes then advance
                 {
                     int escapeCount = 0;
-                    for (int i = remaining.Length; i > 0 && remaining[i - 1].Equals(delimiterEscape); i--, escapeCount++)
+                    for (
+                        int i = remaining.Length;
+                        i > 0 && remaining[i - 1].Equals(delimiterEscape);
+                        i--, escapeCount++
+                    )
                         ;
                     if (priorEscape && escapeCount == remaining.Length)
                     {
@@ -330,12 +393,17 @@ namespace System.Buffers
         /// <param name="advancePastDelimiter">True to move past the first found instance of any of the given <paramref name="delimiters"/>.</param>
         /// <returns>True if any of the <paramref name="delimiters"/> were found.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool TryReadToAny(out ReadOnlySpan<T> span, ReadOnlySpan<T> delimiters, bool advancePastDelimiter = true)
+        public bool TryReadToAny(
+            out ReadOnlySpan<T> span,
+            ReadOnlySpan<T> delimiters,
+            bool advancePastDelimiter = true
+        )
         {
             ReadOnlySpan<T> remaining = UnreadSpan;
-            int index = delimiters.Length == 2
-                ? remaining.IndexOfAny(delimiters[0], delimiters[1])
-                : remaining.IndexOfAny(delimiters);
+            int index =
+                delimiters.Length == 2
+                    ? remaining.IndexOfAny(delimiters[0], delimiters[1])
+                    : remaining.IndexOfAny(delimiters);
 
             if (index != -1)
             {
@@ -347,9 +415,20 @@ namespace System.Buffers
             return TryReadToAnySlow(out span, delimiters, advancePastDelimiter);
         }
 
-        private bool TryReadToAnySlow(out ReadOnlySpan<T> span, ReadOnlySpan<T> delimiters, bool advancePastDelimiter)
+        private bool TryReadToAnySlow(
+            out ReadOnlySpan<T> span,
+            ReadOnlySpan<T> delimiters,
+            bool advancePastDelimiter
+        )
         {
-            if (!TryReadToAnyInternal(out ReadOnlySequence<T> sequence, delimiters, advancePastDelimiter, CurrentSpan.Length - CurrentSpanIndex))
+            if (
+                !TryReadToAnyInternal(
+                    out ReadOnlySequence<T> sequence,
+                    delimiters,
+                    advancePastDelimiter,
+                    CurrentSpan.Length - CurrentSpanIndex
+                )
+            )
             {
                 span = default;
                 return false;
@@ -366,12 +445,21 @@ namespace System.Buffers
         /// <param name="delimiters">The delimiters to look for.</param>
         /// <param name="advancePastDelimiter">True to move past the first found instance of any of the given <paramref name="delimiters"/>.</param>
         /// <returns>True if any of the <paramref name="delimiters"/> were found.</returns>
-        public bool TryReadToAny(out ReadOnlySequence<T> sequence, ReadOnlySpan<T> delimiters, bool advancePastDelimiter = true)
+        public bool TryReadToAny(
+            out ReadOnlySequence<T> sequence,
+            ReadOnlySpan<T> delimiters,
+            bool advancePastDelimiter = true
+        )
         {
             return TryReadToAnyInternal(out sequence, delimiters, advancePastDelimiter);
         }
 
-        private bool TryReadToAnyInternal(out ReadOnlySequence<T> sequence, ReadOnlySpan<T> delimiters, bool advancePastDelimiter, int skip = 0)
+        private bool TryReadToAnyInternal(
+            out ReadOnlySequence<T> sequence,
+            ReadOnlySpan<T> delimiters,
+            bool advancePastDelimiter,
+            int skip = 0
+        )
         {
             SequenceReader<T> copy = this;
             if (skip > 0)
@@ -380,9 +468,10 @@ namespace System.Buffers
 
             while (!End)
             {
-                int index = delimiters.Length == 2
-                    ? remaining.IndexOfAny(delimiters[0], delimiters[1])
-                    : remaining.IndexOfAny(delimiters);
+                int index =
+                    delimiters.Length == 2
+                        ? remaining.IndexOfAny(delimiters[0], delimiters[1])
+                        : remaining.IndexOfAny(delimiters);
 
                 if (index != -1)
                 {
@@ -417,7 +506,11 @@ namespace System.Buffers
         /// <param name="delimiter">The multi (T) delimiter.</param>
         /// <param name="advancePastDelimiter">True to move past the <paramref name="delimiter"/> if found.</param>
         /// <returns>True if the <paramref name="delimiter"/> was found.</returns>
-        public bool TryReadTo(out ReadOnlySequence<T> sequence, ReadOnlySpan<T> delimiter, bool advancePastDelimiter = true)
+        public bool TryReadTo(
+            out ReadOnlySequence<T> sequence,
+            ReadOnlySpan<T> delimiter,
+            bool advancePastDelimiter = true
+        )
         {
             if (delimiter.Length == 0)
             {
@@ -521,9 +614,11 @@ namespace System.Buffers
             {
                 // Advance past all matches in the current span
                 int i;
-                for (i = CurrentSpanIndex; i < CurrentSpan.Length && CurrentSpan[i].Equals(value); i++)
-                {
-                }
+                for (
+                    i = CurrentSpanIndex;
+                    i < CurrentSpan.Length && CurrentSpan[i].Equals(value);
+                    i++
+                ) { }
 
                 int advanced = i - CurrentSpanIndex;
                 if (advanced == 0)
@@ -553,9 +648,11 @@ namespace System.Buffers
             {
                 // Advance past all matches in the current span
                 int i;
-                for (i = CurrentSpanIndex; i < CurrentSpan.Length && values.IndexOf(CurrentSpan[i]) != -1; i++)
-                {
-                }
+                for (
+                    i = CurrentSpanIndex;
+                    i < CurrentSpan.Length && values.IndexOf(CurrentSpan[i]) != -1;
+                    i++
+                ) { }
 
                 int advanced = i - CurrentSpanIndex;
                 if (advanced == 0)
@@ -588,7 +685,12 @@ namespace System.Buffers
                 for (i = CurrentSpanIndex; i < CurrentSpan.Length; i++)
                 {
                     T value = CurrentSpan[i];
-                    if (!value.Equals(value0) && !value.Equals(value1) && !value.Equals(value2) && !value.Equals(value3))
+                    if (
+                        !value.Equals(value0)
+                        && !value.Equals(value1)
+                        && !value.Equals(value2)
+                        && !value.Equals(value3)
+                    )
                     {
                         break;
                     }
@@ -753,7 +855,13 @@ namespace System.Buffers
                 // Need to check the next segment
                 while (true)
                 {
-                    if (!Sequence.TryGet(ref nextPosition, out ReadOnlyMemory<T> nextSegment, advance: true))
+                    if (
+                        !Sequence.TryGet(
+                            ref nextPosition,
+                            out ReadOnlyMemory<T> nextSegment,
+                            advance: true
+                        )
+                    )
                     {
                         // Nothing left
                         return false;

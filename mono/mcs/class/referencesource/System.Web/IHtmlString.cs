@@ -6,9 +6,11 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-namespace System.Web {
+namespace System.Web
+{
     // Marker interface implemented by objects that should NOT be HTML encoded when <%: o %> is used
-    public interface IHtmlString {
+    public interface IHtmlString
+    {
         string ToHtmlString();
     }
 }

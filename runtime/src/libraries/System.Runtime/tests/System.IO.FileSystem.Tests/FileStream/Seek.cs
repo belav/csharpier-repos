@@ -18,7 +18,15 @@ namespace System.IO.Tests
                 fs.Write(TestBuffer, 0, TestBuffer.Length);
             }
 
-            using (FileStream fs = new FileStream(fileName, FileMode.Append, FileAccess.Write, FileShare.Read, bufferSize))
+            using (
+                FileStream fs = new FileStream(
+                    fileName,
+                    FileMode.Append,
+                    FileAccess.Write,
+                    FileShare.Read,
+                    bufferSize
+                )
+            )
             {
                 long length = fs.Length;
                 Assert.Throws<IOException>(() => fs.Seek(length - 1, SeekOrigin.Begin));

@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Reflection;
-using System.ComponentModel.Composition.Hosting;
 using Xunit;
 
 namespace System.ComponentModel.Composition.Registration.Tests
@@ -13,38 +13,49 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
     public interface IContract2 { }
 
-    public class ClassWithLifetimeConcerns : IContract1, IContract2, IDisposable, IPartImportsSatisfiedNotification
+    public class ClassWithLifetimeConcerns
+        : IContract1,
+            IContract2,
+            IDisposable,
+            IPartImportsSatisfiedNotification
     {
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
-        public void OnImportsSatisfied()
-        {
-        }
+        public void OnImportsSatisfied() { }
     }
 
     static class DELETE_ME_TESTER
     {
-        public static PartBuilder ExportInterfaces(this PartBuilder pb) { return null; }
+        public static PartBuilder ExportInterfaces(this PartBuilder pb)
+        {
+            return null;
+        }
     }
 
     public class ExportInterfacesContractExclusionTests
     {
-        static readonly Type[] s_contractInterfaces = new[] { typeof(IContract1), typeof(IContract2) };
+        static readonly Type[] s_contractInterfaces = new[]
+        {
+            typeof(IContract1),
+            typeof(IContract2),
+        };
 
         [Fact]
         public void WhenExportingInterfaces_NoPredicate_OnlyContractInterfacesAreExported()
         {
             var rb = new RegistrationBuilder();
 
-            rb.ForType<ClassWithLifetimeConcerns>()
-                .ExportInterfaces();
+            rb.ForType<ClassWithLifetimeConcerns>().ExportInterfaces();
 
-            Primitives.ComposablePartDefinition part = new TypeCatalog(new[] { typeof(ClassWithLifetimeConcerns) }, rb).Single();
+            Primitives.ComposablePartDefinition part = new TypeCatalog(
+                new[] { typeof(ClassWithLifetimeConcerns) },
+                rb
+            ).Single();
 
             var exportedContracts = part.ExportDefinitions.Select(ed => ed.ContractName).ToArray();
-            var expectedContracts = s_contractInterfaces.Select(ci => AttributedModelServices.GetContractName(ci)).ToArray();
+            var expectedContracts = s_contractInterfaces
+                .Select(ci => AttributedModelServices.GetContractName(ci))
+                .ToArray();
 
             Assert.Equal(expectedContracts, exportedContracts);
         }
@@ -57,11 +68,18 @@ namespace System.ComponentModel.Composition.Registration.Tests
             var rb = new RegistrationBuilder();
 
             rb.ForType<ClassWithLifetimeConcerns>()
-                .ExportInterfaces(i => { seenInterfaces.Add(i); return true; });
+                .ExportInterfaces(i =>
+                {
+                    seenInterfaces.Add(i);
+                    return true;
+                });
 
             rb.MapType(typeof(ClassWithLifetimeConcerns).GetTypeInfo());
 
-            Primitives.ComposablePartDefinition part = new TypeCatalog(new[] { typeof(ClassWithLifetimeConcerns) }, rb).Single();
+            Primitives.ComposablePartDefinition part = new TypeCatalog(
+                new[] { typeof(ClassWithLifetimeConcerns) },
+                rb
+            ).Single();
 
             Assert.Equal(s_contractInterfaces, seenInterfaces);
         }

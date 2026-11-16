@@ -18,73 +18,116 @@ namespace System.Web.Razor.Test.Framework
         public static UnclassifiedCodeSpanConstructor EmptyCSharp(this SpanFactory self)
         {
             return new UnclassifiedCodeSpanConstructor(
-                self.Span(SpanKind.Code, new CSharpSymbol(self.LocationTracker.CurrentLocation, String.Empty, CSharpSymbolType.Unknown)));
+                self.Span(
+                    SpanKind.Code,
+                    new CSharpSymbol(
+                        self.LocationTracker.CurrentLocation,
+                        String.Empty,
+                        CSharpSymbolType.Unknown
+                    )
+                )
+            );
         }
 
         public static UnclassifiedCodeSpanConstructor EmptyVB(this SpanFactory self)
         {
             return new UnclassifiedCodeSpanConstructor(
-                self.Span(SpanKind.Code, new VBSymbol(self.LocationTracker.CurrentLocation, String.Empty, VBSymbolType.Unknown)));
+                self.Span(
+                    SpanKind.Code,
+                    new VBSymbol(
+                        self.LocationTracker.CurrentLocation,
+                        String.Empty,
+                        VBSymbolType.Unknown
+                    )
+                )
+            );
         }
 
         public static SpanConstructor EmptyHtml(this SpanFactory self)
         {
-            return self.Span(SpanKind.Markup, new HtmlSymbol(self.LocationTracker.CurrentLocation, String.Empty, HtmlSymbolType.Unknown))
+            return self.Span(
+                    SpanKind.Markup,
+                    new HtmlSymbol(
+                        self.LocationTracker.CurrentLocation,
+                        String.Empty,
+                        HtmlSymbolType.Unknown
+                    )
+                )
                 .With(new MarkupCodeGenerator());
         }
 
         public static UnclassifiedCodeSpanConstructor Code(this SpanFactory self, string content)
         {
             return new UnclassifiedCodeSpanConstructor(
-                self.Span(SpanKind.Code, content, markup: false));
+                self.Span(SpanKind.Code, content, markup: false)
+            );
         }
 
         public static SpanConstructor CodeTransition(this SpanFactory self)
         {
-            return self.Span(SpanKind.Transition, SyntaxConstants.TransitionString, markup: false).Accepts(AcceptedCharacters.None);
+            return self.Span(SpanKind.Transition, SyntaxConstants.TransitionString, markup: false)
+                .Accepts(AcceptedCharacters.None);
         }
 
         public static SpanConstructor CodeTransition(this SpanFactory self, string content)
         {
-            return self.Span(SpanKind.Transition, content, markup: false).Accepts(AcceptedCharacters.None);
+            return self.Span(SpanKind.Transition, content, markup: false)
+                .Accepts(AcceptedCharacters.None);
         }
 
         public static SpanConstructor CodeTransition(this SpanFactory self, CSharpSymbolType type)
         {
-            return self.Span(SpanKind.Transition, SyntaxConstants.TransitionString, type).Accepts(AcceptedCharacters.None);
+            return self.Span(SpanKind.Transition, SyntaxConstants.TransitionString, type)
+                .Accepts(AcceptedCharacters.None);
         }
 
-        public static SpanConstructor CodeTransition(this SpanFactory self, string content, CSharpSymbolType type)
+        public static SpanConstructor CodeTransition(
+            this SpanFactory self,
+            string content,
+            CSharpSymbolType type
+        )
         {
             return self.Span(SpanKind.Transition, content, type).Accepts(AcceptedCharacters.None);
         }
 
         public static SpanConstructor CodeTransition(this SpanFactory self, VBSymbolType type)
         {
-            return self.Span(SpanKind.Transition, SyntaxConstants.TransitionString, type).Accepts(AcceptedCharacters.None);
+            return self.Span(SpanKind.Transition, SyntaxConstants.TransitionString, type)
+                .Accepts(AcceptedCharacters.None);
         }
 
-        public static SpanConstructor CodeTransition(this SpanFactory self, string content, VBSymbolType type)
+        public static SpanConstructor CodeTransition(
+            this SpanFactory self,
+            string content,
+            VBSymbolType type
+        )
         {
             return self.Span(SpanKind.Transition, content, type).Accepts(AcceptedCharacters.None);
         }
 
         public static SpanConstructor MarkupTransition(this SpanFactory self)
         {
-            return self.Span(SpanKind.Transition, SyntaxConstants.TransitionString, markup: true).Accepts(AcceptedCharacters.None);
+            return self.Span(SpanKind.Transition, SyntaxConstants.TransitionString, markup: true)
+                .Accepts(AcceptedCharacters.None);
         }
 
         public static SpanConstructor MarkupTransition(this SpanFactory self, string content)
         {
-            return self.Span(SpanKind.Transition, content, markup: true).Accepts(AcceptedCharacters.None);
+            return self.Span(SpanKind.Transition, content, markup: true)
+                .Accepts(AcceptedCharacters.None);
         }
 
         public static SpanConstructor MarkupTransition(this SpanFactory self, HtmlSymbolType type)
         {
-            return self.Span(SpanKind.Transition, SyntaxConstants.TransitionString, type).Accepts(AcceptedCharacters.None);
+            return self.Span(SpanKind.Transition, SyntaxConstants.TransitionString, type)
+                .Accepts(AcceptedCharacters.None);
         }
 
-        public static SpanConstructor MarkupTransition(this SpanFactory self, string content, HtmlSymbolType type)
+        public static SpanConstructor MarkupTransition(
+            this SpanFactory self,
+            string content,
+            HtmlSymbolType type
+        )
         {
             return self.Span(SpanKind.Transition, content, type).Accepts(AcceptedCharacters.None);
         }
@@ -94,12 +137,20 @@ namespace System.Web.Razor.Test.Framework
             return self.Span(SpanKind.MetaCode, content, markup: false);
         }
 
-        public static SpanConstructor MetaCode(this SpanFactory self, string content, CSharpSymbolType type)
+        public static SpanConstructor MetaCode(
+            this SpanFactory self,
+            string content,
+            CSharpSymbolType type
+        )
         {
             return self.Span(SpanKind.MetaCode, content, type);
         }
 
-        public static SpanConstructor MetaCode(this SpanFactory self, string content, VBSymbolType type)
+        public static SpanConstructor MetaCode(
+            this SpanFactory self,
+            string content,
+            VBSymbolType type
+        )
         {
             return self.Span(SpanKind.MetaCode, content, type);
         }
@@ -109,37 +160,58 @@ namespace System.Web.Razor.Test.Framework
             return self.Span(SpanKind.MetaCode, content, markup: true);
         }
 
-        public static SpanConstructor MetaMarkup(this SpanFactory self, string content, HtmlSymbolType type)
+        public static SpanConstructor MetaMarkup(
+            this SpanFactory self,
+            string content,
+            HtmlSymbolType type
+        )
         {
             return self.Span(SpanKind.MetaCode, content, type);
         }
 
-        public static SpanConstructor Comment(this SpanFactory self, string content, CSharpSymbolType type)
+        public static SpanConstructor Comment(
+            this SpanFactory self,
+            string content,
+            CSharpSymbolType type
+        )
         {
             return self.Span(SpanKind.Comment, content, type);
         }
 
-        public static SpanConstructor Comment(this SpanFactory self, string content, VBSymbolType type)
+        public static SpanConstructor Comment(
+            this SpanFactory self,
+            string content,
+            VBSymbolType type
+        )
         {
             return self.Span(SpanKind.Comment, content, type);
         }
 
-        public static SpanConstructor Comment(this SpanFactory self, string content, HtmlSymbolType type)
+        public static SpanConstructor Comment(
+            this SpanFactory self,
+            string content,
+            HtmlSymbolType type
+        )
         {
             return self.Span(SpanKind.Comment, content, type);
         }
 
         public static SpanConstructor Markup(this SpanFactory self, string content)
         {
-            return self.Span(SpanKind.Markup, content, markup: true).With(new MarkupCodeGenerator());
+            return self.Span(SpanKind.Markup, content, markup: true)
+                .With(new MarkupCodeGenerator());
         }
 
         public static SpanConstructor Markup(this SpanFactory self, params string[] content)
         {
-            return self.Span(SpanKind.Markup, content, markup: true).With(new MarkupCodeGenerator());
+            return self.Span(SpanKind.Markup, content, markup: true)
+                .With(new MarkupCodeGenerator());
         }
 
-        public static SourceLocation GetLocationAndAdvance(this SourceLocationTracker self, string content)
+        public static SourceLocation GetLocationAndAdvance(
+            this SourceLocationTracker self,
+            string content
+        )
         {
             SourceLocation ret = self.CurrentLocation;
             self.UpdateLocation(content);
@@ -158,7 +230,7 @@ namespace System.Web.Razor.Test.Framework
             return new SpanFactory()
             {
                 MarkupTokenizerFactory = doc => new HtmlTokenizer(doc),
-                CodeTokenizerFactory = doc => new CSharpTokenizer(doc)
+                CodeTokenizerFactory = doc => new CSharpTokenizer(doc),
             };
         }
 
@@ -167,7 +239,7 @@ namespace System.Web.Razor.Test.Framework
             return new SpanFactory()
             {
                 MarkupTokenizerFactory = doc => new HtmlTokenizer(doc),
-                CodeTokenizerFactory = doc => new VBTokenizer(doc)
+                CodeTokenizerFactory = doc => new VBTokenizer(doc),
             };
         }
 
@@ -206,7 +278,11 @@ namespace System.Web.Razor.Test.Framework
             return new SpanConstructor(kind, symbols);
         }
 
-        private SpanConstructor CreateSymbolSpan(SpanKind kind, string content, Func<SourceLocation, ISymbol> ctor)
+        private SpanConstructor CreateSymbolSpan(
+            SpanKind kind,
+            string content,
+            Func<SourceLocation, ISymbol> ctor
+        )
         {
             SourceLocation start = LocationTracker.CurrentLocation;
             LocationTracker.UpdateLocation(content);
@@ -257,19 +333,35 @@ namespace System.Web.Razor.Test.Framework
 
     public static class SpanConstructorExtensions
     {
-        public static SpanConstructor Accepts(this SpanConstructor self, AcceptedCharacters accepted)
+        public static SpanConstructor Accepts(
+            this SpanConstructor self,
+            AcceptedCharacters accepted
+        )
         {
             return self.With(eh => eh.AcceptedCharacters = accepted);
         }
 
-        public static SpanConstructor AutoCompleteWith(this SpanConstructor self, string autoCompleteString)
+        public static SpanConstructor AutoCompleteWith(
+            this SpanConstructor self,
+            string autoCompleteString
+        )
         {
             return AutoCompleteWith(self, autoCompleteString, atEndOfSpan: false);
         }
 
-        public static SpanConstructor AutoCompleteWith(this SpanConstructor self, string autoCompleteString, bool atEndOfSpan)
+        public static SpanConstructor AutoCompleteWith(
+            this SpanConstructor self,
+            string autoCompleteString,
+            bool atEndOfSpan
+        )
         {
-            return self.With(new AutoCompleteEditHandler(SpanConstructor.TestTokenizer) { AutoCompleteString = autoCompleteString, AutoCompleteAtEndOfSpan = atEndOfSpan });
+            return self.With(
+                new AutoCompleteEditHandler(SpanConstructor.TestTokenizer)
+                {
+                    AutoCompleteString = autoCompleteString,
+                    AutoCompleteAtEndOfSpan = atEndOfSpan,
+                }
+            );
         }
 
         public static SpanConstructor WithEditorHints(this SpanConstructor self, EditorHints hints)
@@ -310,7 +402,14 @@ namespace System.Web.Razor.Test.Framework
 
         public SpanConstructor AsImplicitExpression(ISet<string> keywords, bool acceptTrailingDot)
         {
-            return _self.With(new ImplicitExpressionEditHandler(SpanConstructor.TestTokenizer, keywords, acceptTrailingDot))
+            return _self
+                .With(
+                    new ImplicitExpressionEditHandler(
+                        SpanConstructor.TestTokenizer,
+                        keywords,
+                        acceptTrailingDot
+                    )
+                )
                 .With(new ExpressionCodeGenerator());
         }
 

@@ -17,7 +17,7 @@ namespace Microsoft.NET.Build.Tasks
         public const string AllowExplicitVersion = "AllowExplicitVersion";
         public const string RelativePath = "RelativePath";
         public const string DiagnosticLevel = "DiagnosticLevel";
-        public const string Implementation = "Implementation";      //  Metadata on WinMD references
+        public const string Implementation = "Implementation"; //  Metadata on WinMD references
 
         // Target Metadata
         public const string RuntimeIdentifier = "RuntimeIdentifier";
@@ -100,6 +100,7 @@ namespace Microsoft.NET.Build.Tasks
 
         // Resource assemblies
         public const string Culture = "Culture";
+
         // The DestinationSubDirectory is the directory containing the asset, relative to the destination folder.
         public const string DestinationSubDirectory = "DestinationSubDirectory";
 

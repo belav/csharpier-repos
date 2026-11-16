@@ -13,7 +13,10 @@ namespace System.Collections.Generic
         // Returns an IEnumerator for this enumerable Object.  The enumerator provides
         // a simple way to access all the contents of a collection.
 #if MONO
-        [DynamicDependency(nameof(Array.InternalArray__IEnumerable_GetEnumerator) + "``1 ", typeof(Array))]
+        [DynamicDependency(
+            nameof(Array.InternalArray__IEnumerable_GetEnumerator) + "``1 ",
+            typeof(Array)
+        )]
 #endif
         new IEnumerator<T> GetEnumerator();
     }

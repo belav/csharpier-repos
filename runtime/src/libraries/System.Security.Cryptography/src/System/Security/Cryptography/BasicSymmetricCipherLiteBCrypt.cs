@@ -23,7 +23,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> key,
             bool ownsParentHandle,
             ReadOnlySpan<byte> iv,
-            bool encrypting)
+            bool encrypting
+        )
         {
             if (!iv.IsEmpty)
             {
@@ -82,9 +83,9 @@ namespace System.Security.Cryptography
 
             int BCryptTransform(ReadOnlySpan<byte> input, Span<byte> output)
             {
-                return _encrypting ?
-                    Interop.BCrypt.BCryptEncrypt(_hKey, input, _currentIv, output) :
-                    Interop.BCrypt.BCryptDecrypt(_hKey, input, _currentIv, output);
+                return _encrypting
+                    ? Interop.BCrypt.BCryptEncrypt(_hKey, input, _currentIv, output)
+                    : Interop.BCrypt.BCryptDecrypt(_hKey, input, _currentIv, output);
             }
         }
 
@@ -121,6 +122,5 @@ namespace System.Security.Cryptography
             _hKey?.Dispose();
             _hKey = null!;
         }
-
     }
 }

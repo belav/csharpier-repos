@@ -20,6 +20,7 @@ namespace System.IO.Pipes
             internal ManualResetValueTaskSourceCore<int> _source; // mutable struct; do not make this readonly
             internal NativeOverlapped* _overlapped;
             internal CancellationTokenRegistration _cancellationRegistration;
+
             /// <summary>
             /// 0 when the operation hasn't been scheduled, non-zero when either the operation has completed,
             /// in which case its value is a packed combination of the error code and number of bytes, or when
@@ -44,12 +45,22 @@ namespace System.IO.Pipes
             {
                 _result = 0;
                 _memoryHandle = memory.Pin();
-                _overlapped = _pipeStream._threadPoolBinding!.AllocateNativeOverlapped(_preallocatedOverlapped);
+                _overlapped = _pipeStream._threadPoolBinding!.AllocateNativeOverlapped(
+                    _preallocatedOverlapped
+                );
             }
 
             public ValueTaskSourceStatus GetStatus(short token) => _source.GetStatus(token);
-            public void OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags) => _source.OnCompleted(continuation, state, token, flags);
+
+            public void OnCompleted(
+                Action<object?> continuation,
+                object? state,
+                short token,
+                ValueTaskSourceOnCompletedFlags flags
+            ) => _source.OnCompleted(continuation, state, token, flags);
+
             void IValueTaskSource.GetResult(short token) => GetResult(token);
+
             public int GetResult(short token)
             {
                 try
@@ -72,19 +83,22 @@ namespace System.IO.Pipes
                 {
                     try
                     {
-                        _cancellationRegistration = cancellationToken.UnsafeRegister(static (s, token) =>
-                        {
-                            PipeValueTaskSource vts = (PipeValueTaskSource)s!;
-                            if (vts._pipeStream.InternalHandle is { IsClosed: false } handle)
+                        _cancellationRegistration = cancellationToken.UnsafeRegister(
+                            static (s, token) =>
                             {
-                                try
+                                PipeValueTaskSource vts = (PipeValueTaskSource)s!;
+                                if (vts._pipeStream.InternalHandle is { IsClosed: false } handle)
                                 {
-                                    Interop.Kernel32.CancelIoEx(handle, vts._overlapped);
-                                    // Ignore all failures: no matter whether it succeeds or fails, completion is handled via the IOCallback.
+                                    try
+                                    {
+                                        Interop.Kernel32.CancelIoEx(handle, vts._overlapped);
+                                        // Ignore all failures: no matter whether it succeeds or fails, completion is handled via the IOCallback.
+                                    }
+                                    catch (ObjectDisposedException) { } // in case the SafeHandle is (erroneously) closed concurrently
                                 }
-                                catch (ObjectDisposedException) { } // in case the SafeHandle is (erroneously) closed concurrently
-                            }
-                        }, this);
+                            },
+                            this
+                        );
                     }
                     catch (OutOfMemoryException)
                     {
@@ -131,9 +145,14 @@ namespace System.IO.Pipes
             }
 
             /// <summary>Invoked when the asynchronous operation has completed asynchronously.</summary>
-            private static void IOCallback(uint errorCode, uint numBytes, NativeOverlapped* pOverlapped)
+            private static void IOCallback(
+                uint errorCode,
+                uint numBytes,
+                NativeOverlapped* pOverlapped
+            )
             {
-                PipeValueTaskSource? vts = (PipeValueTaskSource?)ThreadPoolBoundHandle.GetNativeOverlappedState(pOverlapped);
+                PipeValueTaskSource? vts = (PipeValueTaskSource?)
+                    ThreadPoolBoundHandle.GetNativeOverlappedState(pOverlapped);
                 Debug.Assert(vts is not null);
                 Debug.Assert(vts._overlapped == pOverlapped, "Overlaps don't match");
 
@@ -141,7 +160,12 @@ namespace System.IO.Pipes
                 // to ensure the value we're setting is non-zero).  If it was already non-0 (the common case), then
                 // the call site already finished scheduling the async operation, in which case we're ready to complete.
                 Debug.Assert(numBytes < int.MaxValue);
-                if (Interlocked.Exchange(ref vts._result, (1ul << 63) | ((ulong)numBytes << 32) | errorCode) != 0)
+                if (
+                    Interlocked.Exchange(
+                        ref vts._result,
+                        (1ul << 63) | ((ulong)numBytes << 32) | errorCode
+                    ) != 0
+                )
                 {
                     vts.Complete(errorCode, numBytes);
                 }
@@ -160,7 +184,8 @@ namespace System.IO.Pipes
         {
             internal readonly bool _isWrite;
 
-            internal ReadWriteValueTaskSource(PipeStream stream, bool isWrite) : base(stream) => _isWrite = isWrite;
+            internal ReadWriteValueTaskSource(PipeStream stream, bool isWrite)
+                : base(stream) => _isWrite = isWrite;
 
             private protected override void CompleteCore(uint errorCode, uint numBytes)
             {
@@ -195,7 +220,11 @@ namespace System.IO.Pipes
                     case Interop.Errors.ERROR_OPERATION_ABORTED:
                         // Cancellation
                         CancellationToken ct = _cancellationRegistration.Token;
-                        _source.SetException(ct.IsCancellationRequested ? new OperationCanceledException(ct) : new OperationCanceledException());
+                        _source.SetException(
+                            ct.IsCancellationRequested
+                                ? new OperationCanceledException(ct)
+                                : new OperationCanceledException()
+                        );
                         break;
 
                     default:
@@ -208,7 +237,8 @@ namespace System.IO.Pipes
 
         internal sealed class ConnectionValueTaskSource : PipeValueTaskSource
         {
-            internal ConnectionValueTaskSource(NamedPipeServerStream server) : base(server) { }
+            internal ConnectionValueTaskSource(NamedPipeServerStream server)
+                : base(server) { }
 
             private protected override void CompleteCore(uint errorCode, uint numBytes)
             {
@@ -224,12 +254,18 @@ namespace System.IO.Pipes
                     case Interop.Errors.ERROR_OPERATION_ABORTED:
                         // Cancellation
                         CancellationToken ct = _cancellationRegistration.Token;
-                        _source.SetException(ct.CanBeCanceled && !ct.IsCancellationRequested ? Error.GetOperationAborted() : new OperationCanceledException(ct));
+                        _source.SetException(
+                            ct.CanBeCanceled && !ct.IsCancellationRequested
+                                ? Error.GetOperationAborted()
+                                : new OperationCanceledException(ct)
+                        );
                         break;
 
                     default:
                         // Failure
-                        _source.SetException(Win32Marshal.GetExceptionForWin32Error((int)errorCode));
+                        _source.SetException(
+                            Win32Marshal.GetExceptionForWin32Error((int)errorCode)
+                        );
                         break;
                 }
             }

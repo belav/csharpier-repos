@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,48 +31,61 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Tokens
 {
-	public class SigningCredentials
-	{
-		SecurityKey key;
-		string sig_alg;
-		string dig_alg;
-		SecurityKeyIdentifier identifier;
+    public class SigningCredentials
+    {
+        SecurityKey key;
+        string sig_alg;
+        string dig_alg;
+        SecurityKeyIdentifier identifier;
 
-		public SigningCredentials (SecurityKey signingKey, string signatureAlgorithm, string digestAlgorithm)
-		{
-			if (signingKey == null)
-				throw new ArgumentNullException ("signingKey");
-			if (signatureAlgorithm == null)
-				throw new ArgumentNullException ("signatureAlgorithm");
-			if (digestAlgorithm == null)
-				throw new ArgumentNullException ("digestAlgorithm");
-			this.key = signingKey;
-			this.sig_alg = signatureAlgorithm;
-			this.dig_alg = digestAlgorithm;
-		}
+        public SigningCredentials(
+            SecurityKey signingKey,
+            string signatureAlgorithm,
+            string digestAlgorithm
+        )
+        {
+            if (signingKey == null)
+                throw new ArgumentNullException("signingKey");
+            if (signatureAlgorithm == null)
+                throw new ArgumentNullException("signatureAlgorithm");
+            if (digestAlgorithm == null)
+                throw new ArgumentNullException("digestAlgorithm");
+            this.key = signingKey;
+            this.sig_alg = signatureAlgorithm;
+            this.dig_alg = digestAlgorithm;
+        }
 
-		public SigningCredentials (SecurityKey signingKey, string signatureAlgorithm, string digestAlgorithm, SecurityKeyIdentifier signingKeyIdentifier)
-			: this (signingKey, signatureAlgorithm, digestAlgorithm)
-		{
-			if (signingKeyIdentifier == null)
-				throw new ArgumentNullException ("signingKeyIdentifier");
-			this.identifier = signingKeyIdentifier;
-		}
+        public SigningCredentials(
+            SecurityKey signingKey,
+            string signatureAlgorithm,
+            string digestAlgorithm,
+            SecurityKeyIdentifier signingKeyIdentifier
+        )
+            : this(signingKey, signatureAlgorithm, digestAlgorithm)
+        {
+            if (signingKeyIdentifier == null)
+                throw new ArgumentNullException("signingKeyIdentifier");
+            this.identifier = signingKeyIdentifier;
+        }
 
-		public string DigestAlgorithm {
-			get { return dig_alg; }
-		}
+        public string DigestAlgorithm
+        {
+            get { return dig_alg; }
+        }
 
-		public string SignatureAlgorithm {
-			get { return sig_alg; }
-		}
+        public string SignatureAlgorithm
+        {
+            get { return sig_alg; }
+        }
 
-		public SecurityKey SigningKey {
-			get { return key; }
-		}
+        public SecurityKey SigningKey
+        {
+            get { return key; }
+        }
 
-		public SecurityKeyIdentifier SigningKeyIdentifier {
-			get { return identifier; }
-		}
-	}
+        public SecurityKeyIdentifier SigningKeyIdentifier
+        {
+            get { return identifier; }
+        }
+    }
 }

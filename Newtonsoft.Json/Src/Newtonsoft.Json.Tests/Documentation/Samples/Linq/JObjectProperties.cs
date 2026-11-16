@@ -45,11 +45,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            JObject o = new JObject
-            {
-                { "name1", "value1" },
-                { "name2", "value2" }
-            };
+            JObject o = new JObject { { "name1", "value1" }, { "name2", "value2" } };
 
             foreach (JProperty property in o.Properties())
             {

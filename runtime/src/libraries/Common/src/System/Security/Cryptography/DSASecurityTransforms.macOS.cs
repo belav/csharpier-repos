@@ -30,7 +30,8 @@ namespace System.Security.Cryptography
                 byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(
                     includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
                     exportPrivate: includePrivateParameters,
-                    password: ExportPassword);
+                    password: ExportPassword
+                );
 
                 try
                 {
@@ -39,7 +40,8 @@ namespace System.Security.Cryptography
                         DSAKeyFormatHelper.ReadSubjectPublicKeyInfo(
                             keyBlob,
                             out int localRead,
-                            out DSAParameters key);
+                            out DSAParameters key
+                        );
                         Debug.Assert(localRead == keyBlob.Length);
                         return key;
                     }
@@ -49,7 +51,8 @@ namespace System.Security.Cryptography
                             keyBlob,
                             (ReadOnlySpan<char>)ExportPassword,
                             out int localRead,
-                            out DSAParameters key);
+                            out DSAParameters key
+                        );
                         Debug.Assert(localRead == keyBlob.Length);
                         return key;
                     }
@@ -62,7 +65,12 @@ namespace System.Security.Cryptography
 
             public override void ImportParameters(DSAParameters parameters)
             {
-                if (parameters.P == null || parameters.Q == null || parameters.G == null || parameters.Y == null)
+                if (
+                    parameters.P == null
+                    || parameters.Q == null
+                    || parameters.G == null
+                    || parameters.Y == null
+                )
                     throw new ArgumentException(SR.Cryptography_InvalidDsaParameters_MissingFields);
 
                 // J is not required and is not even used on CNG blobs.
@@ -85,7 +93,9 @@ namespace System.Security.Cryptography
                     throw new CryptographicException(SR.Cryptography_InvalidKeySize);
 
                 if (parameters.Q.Length != 20)
-                    throw new CryptographicException(SR.Cryptography_InvalidDsaParameters_QRestriction_ShortKey);
+                    throw new CryptographicException(
+                        SR.Cryptography_InvalidDsaParameters_QRestriction_ShortKey
+                    );
 
                 ThrowIfDisposed();
 
@@ -119,7 +129,8 @@ namespace System.Security.Cryptography
             public override void ImportEncryptedPkcs8PrivateKey(
                 ReadOnlySpan<byte> passwordBytes,
                 ReadOnlySpan<byte> source,
-                out int bytesRead)
+                out int bytesRead
+            )
             {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
@@ -128,7 +139,8 @@ namespace System.Security.Cryptography
             public override void ImportEncryptedPkcs8PrivateKey(
                 ReadOnlySpan<char> password,
                 ReadOnlySpan<byte> source,
-                out int bytesRead)
+                out int bytesRead
+            )
             {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
@@ -183,7 +195,10 @@ namespace System.Security.Cryptography
 
                 try
                 {
-                    return Interop.AppleCrypto.ImportEphemeralKey(rented.AsSpan(0, written), hasPrivateKey);
+                    return Interop.AppleCrypto.ImportEphemeralKey(
+                        rented.AsSpan(0, written),
+                        hasPrivateKey
+                    );
                 }
                 finally
                 {
@@ -193,20 +208,30 @@ namespace System.Security.Cryptography
 
             public override unsafe void ImportSubjectPublicKeyInfo(
                 ReadOnlySpan<byte> source,
-                out int bytesRead)
+                out int bytesRead
+            )
             {
                 ThrowIfDisposed();
 
                 fixed (byte* ptr = &MemoryMarshal.GetReference(source))
                 {
-                    using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length))
+                    using (
+                        MemoryManager<byte> manager = new PointerMemoryManager<byte>(
+                            ptr,
+                            source.Length
+                        )
+                    )
                     {
                         // Validate the DER value and get the number of bytes.
                         DSAKeyFormatHelper.ReadSubjectPublicKeyInfo(
                             manager.Memory,
-                            out int localRead);
+                            out int localRead
+                        );
 
-                        SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.ImportEphemeralKey(source.Slice(0, localRead), false);
+                        SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.ImportEphemeralKey(
+                            source.Slice(0, localRead),
+                            false
+                        );
                         SetKey(SecKeyPair.PublicOnly(publicKey));
 
                         bytesRead = localRead;

@@ -8,14 +8,21 @@ namespace System.Configuration
 {
     public sealed class TypeNameConverter : ConfigurationConverterBase
     {
-        public override object ConvertTo(ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
         {
             // Make the check here since for some reason value.GetType is not System.Type but RuntimeType
-            if (!(value is Type)) ValidateType(value, typeof(Type));
+            if (!(value is Type))
+                ValidateType(value, typeof(Type));
 
             string result = null;
 
-            if (value != null) result = ((Type)value).AssemblyQualifiedName;
+            if (value != null)
+                result = ((Type)value).AssemblyQualifiedName;
 
             return result;
         }
@@ -24,7 +31,8 @@ namespace System.Configuration
         {
             Type result = TypeUtil.GetType((string)data, false);
 
-            if (result == null) throw new ArgumentException(SR.Format(SR.Type_cannot_be_resolved, (string)data));
+            if (result == null)
+                throw new ArgumentException(SR.Format(SR.Type_cannot_be_resolved, (string)data));
 
             return result;
         }

@@ -31,18 +31,18 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle ("Mono.MonoConfig")]
-[assembly: AssemblyDescription ("Utility for modifying .NET configuration files")]
-[assembly: AssemblyConfiguration ("Development version")]
-[assembly: AssemblyProduct ("mconfig")]
-[assembly: AssemblyCompany ("MONO development team")]
-[assembly: AssemblyCopyright ("Copyright (c) 2007 Novell, Inc")]
-[assembly: AssemblyCulture ("")]
+[assembly: AssemblyTitle("Mono.MonoConfig")]
+[assembly: AssemblyDescription("Utility for modifying .NET configuration files")]
+[assembly: AssemblyConfiguration("Development version")]
+[assembly: AssemblyProduct("mconfig")]
+[assembly: AssemblyCompany("MONO development team")]
+[assembly: AssemblyCopyright("Copyright (c) 2007 Novell, Inc")]
+[assembly: AssemblyCulture("")]
 
-[assembly: CLSCompliant (false)]
-[assembly: ComVisible (false)]
+[assembly: CLSCompliant(false)]
+[assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion ("0.1.0.0")]
+[assembly: AssemblyVersion("0.1.0.0")]
 
 #if KEYFILE
 [assembly: AssemblyKeyFile("../../mono.snk")]

@@ -6,16 +6,18 @@ namespace System.ServiceModel.Discovery.VersionCD1
 {
     using System.Runtime;
 
-    sealed class ResolveDuplexCD1AsyncResult : ResolveDuplexAsyncResult<ResolveMessageCD1, IDiscoveryResponseContractCD1>
+    sealed class ResolveDuplexCD1AsyncResult
+        : ResolveDuplexAsyncResult<ResolveMessageCD1, IDiscoveryResponseContractCD1>
     {
-        internal ResolveDuplexCD1AsyncResult(ResolveMessageCD1 resolveMessage,
+        internal ResolveDuplexCD1AsyncResult(
+            ResolveMessageCD1 resolveMessage,
             IDiscoveryServiceImplementation discoveryServiceImpl,
             IMulticastSuppressionImplementation multicastSuppressionImpl,
             AsyncCallback callback,
-            object state)
+            object state
+        )
             : base(resolveMessage, discoveryServiceImpl, multicastSuppressionImpl, callback, state)
-        {
-        }
+        { }
 
         public static void End(IAsyncResult result)
         {
@@ -28,7 +30,10 @@ namespace System.ServiceModel.Discovery.VersionCD1
             {
                 if (TD.DiscoveryMessageWithNoContentIsEnabled())
                 {
-                    TD.DiscoveryMessageWithNoContent(this.Context.EventTraceActivity, ProtocolStrings.TracingStrings.Resolve);
+                    TD.DiscoveryMessageWithNoContent(
+                        this.Context.EventTraceActivity,
+                        ProtocolStrings.TracingStrings.Resolve
+                    );
                 }
 
                 return false;
@@ -46,17 +51,20 @@ namespace System.ServiceModel.Discovery.VersionCD1
             DiscoveryMessageSequence discoveryMessageSequence,
             EndpointDiscoveryMetadata matchingEndpoint,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
             return responseChannel.BeginResolveMatchOperation(
-                ResolveMatchesMessageCD1.Create(
-                discoveryMessageSequence,
-                matchingEndpoint),
+                ResolveMatchesMessageCD1.Create(discoveryMessageSequence, matchingEndpoint),
                 callback,
-                state);
+                state
+            );
         }
 
-        protected override void EndSendResolveResponse(IDiscoveryResponseContractCD1 responseChannel, IAsyncResult result)
+        protected override void EndSendResolveResponse(
+            IDiscoveryResponseContractCD1 responseChannel,
+            IAsyncResult result
+        )
         {
             responseChannel.EndResolveMatchOperation(result);
         }
@@ -66,17 +74,20 @@ namespace System.ServiceModel.Discovery.VersionCD1
             DiscoveryMessageSequence discoveryMessageSequence,
             EndpointDiscoveryMetadata proxyEndpointDiscoveryMetadata,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
             return responseChannel.BeginHelloOperation(
-                HelloMessageCD1.Create(
-                discoveryMessageSequence,
-                proxyEndpointDiscoveryMetadata),
+                HelloMessageCD1.Create(discoveryMessageSequence, proxyEndpointDiscoveryMetadata),
                 callback,
-                state);
+                state
+            );
         }
 
-        protected override void EndSendProxyAnnouncement(IDiscoveryResponseContractCD1 responseChannel, IAsyncResult result)
+        protected override void EndSendProxyAnnouncement(
+            IDiscoveryResponseContractCD1 responseChannel,
+            IAsyncResult result
+        )
         {
             responseChannel.EndHelloOperation(result);
         }

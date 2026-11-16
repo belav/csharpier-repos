@@ -25,15 +25,16 @@
 // THE SOFTWARE.
 #if SECURITY_DEP && MONO_FEATURE_BTLS
 using System;
+
 namespace Mono.Btls
 {
-	[Flags]
-	enum MonoBtlsSslRenegotiateMode
-	{
-		NEVER = 0,
-		ONCE,
-		FREELY,
-		IGNORE
-	}
+    [Flags]
+    enum MonoBtlsSslRenegotiateMode
+    {
+        NEVER = 0,
+        ONCE,
+        FREELY,
+        IGNORE,
+    }
 }
 #endif

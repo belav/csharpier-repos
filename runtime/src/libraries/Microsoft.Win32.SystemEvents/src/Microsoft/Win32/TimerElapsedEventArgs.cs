@@ -25,10 +25,7 @@ namespace Microsoft.Win32
         /// </devdoc>
         public IntPtr TimerId
         {
-            get
-            {
-                return _timerId;
-            }
+            get { return _timerId; }
         }
     }
 }

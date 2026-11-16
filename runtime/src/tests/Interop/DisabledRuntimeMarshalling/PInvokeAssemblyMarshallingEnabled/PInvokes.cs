@@ -10,7 +10,8 @@ namespace DisabledRuntimeMarshalling.PInvokeAssemblyMarshallingEnabled;
 
 public class PInvokes
 {
-    public static bool IsWindowsX86Process => OperatingSystem.IsWindows() && RuntimeInformation.ProcessArchitecture == Architecture.X86;
+    public static bool IsWindowsX86Process =>
+        OperatingSystem.IsWindows() && RuntimeInformation.ProcessArchitecture == Architecture.X86;
     public static bool IsNotWindowsX86Process => !IsWindowsX86Process;
 
     [ConditionalFact(nameof(IsNotWindowsX86Process))]
@@ -20,7 +21,13 @@ public class PInvokes
         bool b = true;
 
         // By default, bool is a 4-byte Windows BOOL, which will cause us to incorrectly marshal back the struct from native code.
-        Assert.False(DisabledRuntimeMarshallingNative.CheckStructWithShortAndBool(new StructWithShortAndBool(s, b), s, b));
+        Assert.False(
+            DisabledRuntimeMarshallingNative.CheckStructWithShortAndBool(
+                new StructWithShortAndBool(s, b),
+                s,
+                b
+            )
+        );
     }
 
     [Fact]
@@ -31,8 +38,13 @@ public class PInvokes
         // We use a the "green check mark" character so that we use both bytes and
         // have a value that can't be accidentally round-tripped.
         char c = '\u2705';
-        Assert.False(DisabledRuntimeMarshallingNative.CheckStructWithWCharAndShort(new StructWithWCharAndShort(s, c), s, c));
-
+        Assert.False(
+            DisabledRuntimeMarshallingNative.CheckStructWithWCharAndShort(
+                new StructWithWCharAndShort(s, c),
+                s,
+                c
+            )
+        );
     }
 
     [ConditionalFact(nameof(IsNotWindowsX86Process))]
@@ -41,7 +53,13 @@ public class PInvokes
         short s = 41;
         bool b = true;
 
-        Assert.True(DisabledRuntimeMarshallingNative.CheckStructWithShortAndBool(new StructWithShortAndBoolWithMarshalAs(s, b), s, b));
+        Assert.True(
+            DisabledRuntimeMarshallingNative.CheckStructWithShortAndBool(
+                new StructWithShortAndBoolWithMarshalAs(s, b),
+                s,
+                b
+            )
+        );
     }
 
     [Fact]
@@ -52,7 +70,13 @@ public class PInvokes
         // We use a the "green check mark" character so that we use both bytes and
         // have a value that can't be accidentally round-tripped.
         char c = '\u2705';
-        Assert.False(DisabledRuntimeMarshallingNative.CheckStructWithWCharAndShort(new StructWithWCharAndShortWithMarshalAs(s, c), s, c));
+        Assert.False(
+            DisabledRuntimeMarshallingNative.CheckStructWithWCharAndShort(
+                new StructWithWCharAndShortWithMarshalAs(s, c),
+                s,
+                c
+            )
+        );
     }
 
     [ConditionalFact(nameof(IsWindowsX86Process))]
@@ -63,7 +87,13 @@ public class PInvokes
 
         // By default, bool is a 4-byte Windows BOOL, which will make the calculation of stack space for the stdcall calling convention
         // incorrect, causing the entry point to not be found.
-        Assert.Throws<EntryPointNotFoundException>(() => DisabledRuntimeMarshallingNative.CheckStructWithShortAndBool(new StructWithShortAndBool(s, b), s, b));
+        Assert.Throws<EntryPointNotFoundException>(() =>
+            DisabledRuntimeMarshallingNative.CheckStructWithShortAndBool(
+                new StructWithShortAndBool(s, b),
+                s,
+                b
+            )
+        );
     }
 
     [Fact]
@@ -72,7 +102,13 @@ public class PInvokes
     {
         short s = 41;
         char c = '\u2705';
-        Assert.Throws<MarshalDirectiveException>(() => DisabledRuntimeMarshallingNative.CheckStructWithWCharAndShort(new StructWithShortAndGeneric<char>(s, c), s, c));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            DisabledRuntimeMarshallingNative.CheckStructWithWCharAndShort(
+                new StructWithShortAndGeneric<char>(s, c),
+                s,
+                c
+            )
+        );
     }
 
     [Fact]
@@ -82,7 +118,13 @@ public class PInvokes
         // We use a the "green check mark" character so that we use both bytes and
         // have a value that can't be accidentally round-tripped.
         char c = '\u2705';
-        Assert.True(DisabledRuntimeMarshallingNative.CheckStructWithWCharAndShort(new StructWithShortAndGeneric<short>(s, (short)c), s, (short)c));
+        Assert.True(
+            DisabledRuntimeMarshallingNative.CheckStructWithWCharAndShort(
+                new StructWithShortAndGeneric<short>(s, (short)c),
+                s,
+                (short)c
+            )
+        );
     }
 
     [Fact]
@@ -91,6 +133,12 @@ public class PInvokes
     {
         short s = 41;
         bool b = true;
-        Assert.True(DisabledRuntimeMarshallingNative.CheckStructWithShortAndBoolWithVariantBool(new StructWithShortAndBoolWithMarshalAs(s, b), s, b));
+        Assert.True(
+            DisabledRuntimeMarshallingNative.CheckStructWithShortAndBoolWithVariantBool(
+                new StructWithShortAndBoolWithMarshalAs(s, b),
+                s,
+                b
+            )
+        );
     }
 }

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.InvertConditional
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
             var (document, span, cancellationToken) = context;
-            var conditional = await FindConditionalAsync(document, span, cancellationToken).ConfigureAwait(false);
+            var conditional = await FindConditionalAsync(document, span, cancellationToken)
+                .ConfigureAwait(false);
 
             if (conditional == null || !ShouldOffer(conditional))
             {
@@ -32,26 +33,52 @@ namespace Microsoft.CodeAnalysis.InvertConditional
                 CodeAction.Create(
                     FeaturesResources.Invert_conditional,
                     c => InvertConditionalAsync(document, conditional, c),
-                    nameof(FeaturesResources.Invert_conditional)),
-                conditional.Span);
+                    nameof(FeaturesResources.Invert_conditional)
+                ),
+                conditional.Span
+            );
         }
 
         private static async Task<TConditionalExpressionSyntax?> FindConditionalAsync(
-            Document document, TextSpan span, CancellationToken cancellationToken)
-            => await document.TryGetRelevantNodeAsync<TConditionalExpressionSyntax>(span, cancellationToken).ConfigureAwait(false);
+            Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        ) =>
+            await document
+                .TryGetRelevantNodeAsync<TConditionalExpressionSyntax>(span, cancellationToken)
+                .ConfigureAwait(false);
 
         private static async Task<Document> InvertConditionalAsync(
-            Document document, TConditionalExpressionSyntax conditional, CancellationToken cancellationToken)
+            Document document,
+            TConditionalExpressionSyntax conditional,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var editor = new SyntaxEditor(root, document.Project.Solution.Services);
 
-            editor.Generator.SyntaxFacts.GetPartsOfConditionalExpression(conditional,
-                out var condition, out var whenTrue, out var whenFalse);
+            editor.Generator.SyntaxFacts.GetPartsOfConditionalExpression(
+                conditional,
+                out var condition,
+                out var whenTrue,
+                out var whenFalse
+            );
 
-            editor.ReplaceNode(condition, editor.Generator.Negate(editor.Generator.SyntaxGeneratorInternal, condition, semanticModel, cancellationToken));
+            editor.ReplaceNode(
+                condition,
+                editor.Generator.Negate(
+                    editor.Generator.SyntaxGeneratorInternal,
+                    condition,
+                    semanticModel,
+                    cancellationToken
+                )
+            );
             editor.ReplaceNode(whenTrue, whenFalse.WithTriviaFrom(whenTrue));
             editor.ReplaceNode(whenFalse, whenTrue.WithTriviaFrom(whenFalse));
 

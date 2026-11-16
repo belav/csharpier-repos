@@ -8,12 +8,15 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
 
-    [ConfigurationCollection(typeof(ComPersistableTypeElement), AddItemName = ConfigurationStrings.Type)]
-    public sealed class ComPersistableTypeElementCollection : ServiceModelEnhancedConfigurationElementCollection<ComPersistableTypeElement>
+    [ConfigurationCollection(
+        typeof(ComPersistableTypeElement),
+        AddItemName = ConfigurationStrings.Type
+    )]
+    public sealed class ComPersistableTypeElementCollection
+        : ServiceModelEnhancedConfigurationElementCollection<ComPersistableTypeElement>
     {
         public ComPersistableTypeElementCollection()
-            : base(ConfigurationStrings.Type)
-        { }
+            : base(ConfigurationStrings.Type) { }
 
         protected override bool ThrowOnDuplicate
         {
@@ -32,5 +35,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-

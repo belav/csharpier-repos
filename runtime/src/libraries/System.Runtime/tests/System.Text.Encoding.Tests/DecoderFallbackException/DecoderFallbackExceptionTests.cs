@@ -26,7 +26,9 @@ namespace System.Text.Tests
         [InlineData(".")]
         public void Ctor_String(string message)
         {
-            DecoderFallbackException decoderFallbackException = new DecoderFallbackException(message);
+            DecoderFallbackException decoderFallbackException = new DecoderFallbackException(
+                message
+            );
             Assert.Null(decoderFallbackException.BytesUnknown);
             Assert.Equal(0, decoderFallbackException.Index);
             Assert.Null(decoderFallbackException.StackTrace);
@@ -37,7 +39,11 @@ namespace System.Text.Tests
 
         public static IEnumerable<object[]> Ctor_String_Exception_TestData()
         {
-            yield return new object[] { "Test message.", new InvalidOperationException("Inner exception message.") };
+            yield return new object[]
+            {
+                "Test message.",
+                new InvalidOperationException("Inner exception message."),
+            };
             yield return new object[] { "", null };
         }
 

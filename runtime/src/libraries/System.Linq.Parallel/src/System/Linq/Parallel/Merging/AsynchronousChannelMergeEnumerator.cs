@@ -31,21 +31,25 @@ namespace System.Linq.Parallel
     {
         private readonly AsynchronousChannel<T>[] _channels; // The channels being enumerated.
         private IntValueEvent? _consumerEvent; // The consumer event.
-        private readonly bool[] _done;       // Tracks which channels are done.
-        private int _channelIndex;  // The next channel from which we'll dequeue.
-        private T? _currentElement;  // The remembered element from the previous MoveNext.
+        private readonly bool[] _done; // Tracks which channels are done.
+        private int _channelIndex; // The next channel from which we'll dequeue.
+        private T? _currentElement; // The remembered element from the previous MoveNext.
 
         //-----------------------------------------------------------------------------------
         // Allocates a new enumerator over a set of one-to-one channels.
         //
 
         internal AsynchronousChannelMergeEnumerator(
-            QueryTaskGroupState taskGroupState, AsynchronousChannel<T>[] channels, IntValueEvent? consumerEvent)
+            QueryTaskGroupState taskGroupState,
+            AsynchronousChannel<T>[] channels,
+            IntValueEvent? consumerEvent
+        )
             : base(taskGroupState)
         {
             Debug.Assert(channels != null);
 #if DEBUG
-            foreach (AsynchronousChannel<T> c in channels) Debug.Assert(c != null);
+            foreach (AsynchronousChannel<T> c in channels)
+                Debug.Assert(c != null);
 #endif
 
             _channels = channels;
@@ -68,7 +72,9 @@ namespace System.Linq.Parallel
             {
                 if (_channelIndex == -1 || _channelIndex == _channels.Length)
                 {
-                    throw new InvalidOperationException(SR.PLINQ_CommonEnumerator_Current_NotStarted);
+                    throw new InvalidOperationException(
+                        SR.PLINQ_CommonEnumerator_Current_NotStarted
+                    );
                 }
 
                 return _currentElement!;
@@ -148,7 +154,10 @@ namespace System.Linq.Parallel
                         if (!current.IsChunkBufferEmpty)
                         {
                             bool dequeueResult = current.TryDequeue(ref _currentElement);
-                            Debug.Assert(dequeueResult, "channel isn't empty, yet the dequeue failed, hmm");
+                            Debug.Assert(
+                                dequeueResult,
+                                "channel isn't empty, yet the dequeue failed, hmm"
+                            );
                             return true;
                         }
 
@@ -160,8 +169,14 @@ namespace System.Linq.Parallel
 
                     if (isDone)
                     {
-                        Debug.Assert(_channels[currChannelIndex].IsDone, "thought this channel was done");
-                        Debug.Assert(_channels[currChannelIndex].IsChunkBufferEmpty, "thought this channel was empty");
+                        Debug.Assert(
+                            _channels[currChannelIndex].IsDone,
+                            "thought this channel was done"
+                        );
+                        Debug.Assert(
+                            _channels[currChannelIndex].IsChunkBufferEmpty,
+                            "thought this channel was empty"
+                        );
 
                         // Increment the count of done channels that we've seen. If this reaches the
                         // total number of channels, we know we're finally done.
@@ -192,7 +207,11 @@ namespace System.Linq.Parallel
                             for (int i = 0; i < _channels.Length; i++)
                             {
                                 bool channelIsDone = false;
-                                if (!_done[i] && _channels[i].TryDequeue(ref _currentElement, ref channelIsDone))
+                                if (
+                                    !_done[i]
+                                    && _channels[i]
+                                        .TryDequeue(ref _currentElement, ref channelIsDone)
+                                )
                                 {
                                     // The channel has received an item since the last time we checked.
                                     // Just return and let the consumer process the element returned.

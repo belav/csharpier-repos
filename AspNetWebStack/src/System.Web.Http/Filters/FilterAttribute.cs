@@ -8,11 +8,20 @@ using System.Web.Http.Internal;
 
 namespace System.Web.Http.Filters
 {
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "We want to allow inheritance")]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "We want to allow inheritance"
+    )]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = true
+    )]
     public abstract class FilterAttribute : Attribute, IFilter
     {
-        private static readonly ConcurrentDictionary<Type, bool> _attributeUsageCache = new ConcurrentDictionary<Type, bool>();
+        private static readonly ConcurrentDictionary<Type, bool> _attributeUsageCache =
+            new ConcurrentDictionary<Type, bool>();
 
         public virtual bool AllowMultiple
         {
@@ -21,9 +30,11 @@ namespace System.Web.Http.Filters
 
         private static bool AllowsMultiple(Type attributeType)
         {
-            return _attributeUsageCache.GetOrAdd(
-                attributeType,
-                type => type.GetCustomAttributes<AttributeUsageAttribute>(inherit: true).First().AllowMultiple);
+            return _attributeUsageCache.GetOrAdd(attributeType, type =>
+                type.GetCustomAttributes<AttributeUsageAttribute>(inherit: true)
+                    .First()
+                    .AllowMultiple
+            );
         }
     }
 }

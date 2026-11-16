@@ -20,7 +20,9 @@ namespace MS.Internal.Xml.XPath
             _arg = arg;
             _funcType = funcType;
         }
-        private BooleanFunctions(BooleanFunctions other) : base(other)
+
+        private BooleanFunctions(BooleanFunctions other)
+            : base(other)
         {
             _arg = Clone(other._arg);
             _funcType = other._funcType;
@@ -46,6 +48,7 @@ namespace MS.Internal.Xml.XPath
         {
             return number != 0 && !double.IsNaN(number);
         }
+
         internal static bool toBoolean(string str)
         {
             return str.Length > 0;
@@ -54,19 +57,25 @@ namespace MS.Internal.Xml.XPath
         internal bool toBoolean(XPathNodeIterator nodeIterator)
         {
             object result = _arg!.Evaluate(nodeIterator);
-            if (result is XPathNodeIterator) return _arg.Advance() != null;
+            if (result is XPathNodeIterator)
+                return _arg.Advance() != null;
 
             string? str = result as string;
             if (str != null)
                 return toBoolean(str);
 
-            if (result is double) return toBoolean((double)result);
-            if (result is bool) return (bool)result;
+            if (result is double)
+                return toBoolean((double)result);
+            if (result is bool)
+                return (bool)result;
             Debug.Assert(result is XPathNavigator, "Unknown value type");
             return true;
         }
 
-        public override XPathResultType StaticType { get { return XPathResultType.Boolean; } }
+        public override XPathResultType StaticType
+        {
+            get { return XPathResultType.Boolean; }
+        }
 
         private bool Not(XPathNodeIterator nodeIterator)
         {
@@ -79,11 +88,14 @@ namespace MS.Internal.Xml.XPath
             Debug.Assert(nodeIterator.Current != null);
             string lang = nodeIterator.Current.XmlLang;
             return (
-               lang.StartsWith(str, StringComparison.OrdinalIgnoreCase) &&
-               (lang.Length == str.Length || lang[str.Length] == '-')
+                lang.StartsWith(str, StringComparison.OrdinalIgnoreCase)
+                && (lang.Length == str.Length || lang[str.Length] == '-')
             );
         }
 
-        public override XPathNodeIterator Clone() { return new BooleanFunctions(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new BooleanFunctions(this);
+        }
     }
 }

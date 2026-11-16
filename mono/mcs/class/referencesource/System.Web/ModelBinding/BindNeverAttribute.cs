@@ -1,12 +1,15 @@
-﻿namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding
+{
     using System;
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public sealed class BindNeverAttribute : BindingBehaviorAttribute {
-
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Property,
+        AllowMultiple = false,
+        Inherited = true
+    )]
+    public sealed class BindNeverAttribute : BindingBehaviorAttribute
+    {
         public BindNeverAttribute()
-            : base(BindingBehavior.Never) {
-        }
-
+            : base(BindingBehavior.Never) { }
     }
 }

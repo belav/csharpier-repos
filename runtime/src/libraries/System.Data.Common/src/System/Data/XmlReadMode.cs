@@ -11,6 +11,6 @@ namespace System.Data
         InferSchema = 3,
         DiffGram = 4,
         Fragment = 5,
-        InferTypedSchema = 6
+        InferTypedSchema = 6,
     }
 }

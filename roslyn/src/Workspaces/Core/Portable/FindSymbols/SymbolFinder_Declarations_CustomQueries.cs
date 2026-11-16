@@ -25,23 +25,42 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// <summary>
         /// Find the symbols for declarations made in source with a matching name.
         /// </summary>
-        public static Task<IEnumerable<ISymbol>> FindSourceDeclarationsAsync(Solution solution, Func<string, bool> predicate, CancellationToken cancellationToken = default)
-            => FindSourceDeclarationsAsync(solution, predicate, SymbolFilter.All, cancellationToken);
+        public static Task<IEnumerable<ISymbol>> FindSourceDeclarationsAsync(
+            Solution solution,
+            Func<string, bool> predicate,
+            CancellationToken cancellationToken = default
+        ) => FindSourceDeclarationsAsync(solution, predicate, SymbolFilter.All, cancellationToken);
 
         /// <summary>
         /// Find the symbols for declarations made in source with a matching name.
         /// </summary>
-        public static async Task<IEnumerable<ISymbol>> FindSourceDeclarationsAsync(Solution solution, Func<string, bool> predicate, SymbolFilter filter, CancellationToken cancellationToken = default)
+        public static async Task<IEnumerable<ISymbol>> FindSourceDeclarationsAsync(
+            Solution solution,
+            Func<string, bool> predicate,
+            SymbolFilter filter,
+            CancellationToken cancellationToken = default
+        )
         {
             using var query = SearchQuery.CreateCustom(predicate);
             var declarations = await FindSourceDeclarationsWithCustomQueryAsync(
-                solution, query, filter, cancellationToken).ConfigureAwait(false);
+                    solution,
+                    query,
+                    filter,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return declarations;
         }
 
-        internal static async Task<ImmutableArray<ISymbol>> FindSourceDeclarationsWithCustomQueryAsync(
-            Solution solution, SearchQuery query, SymbolFilter filter, CancellationToken cancellationToken)
+        internal static async Task<
+            ImmutableArray<ISymbol>
+        > FindSourceDeclarationsWithCustomQueryAsync(
+            Solution solution,
+            SearchQuery query,
+            SymbolFilter filter,
+            CancellationToken cancellationToken
+        )
         {
             if (solution == null)
             {
@@ -53,13 +72,24 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 return ImmutableArray<ISymbol>.Empty;
             }
 
-            using (Logger.LogBlock(FunctionId.SymbolFinder_Solution_Predicate_FindSourceDeclarationsAsync, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.SymbolFinder_Solution_Predicate_FindSourceDeclarationsAsync,
+                    cancellationToken
+                )
+            )
             {
                 using var _ = ArrayBuilder<ISymbol>.GetInstance(out var result);
                 foreach (var projectId in solution.ProjectIds)
                 {
                     var project = solution.GetRequiredProject(projectId);
-                    var symbols = await FindSourceDeclarationsWithCustomQueryAsync(project, query, filter, cancellationToken).ConfigureAwait(false);
+                    var symbols = await FindSourceDeclarationsWithCustomQueryAsync(
+                            project,
+                            query,
+                            filter,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     result.AddRange(symbols);
                 }
 
@@ -70,23 +100,42 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// <summary>
         /// Find the symbols for declarations made in source with a matching name.
         /// </summary>
-        public static Task<IEnumerable<ISymbol>> FindSourceDeclarationsAsync(Project project, Func<string, bool> predicate, CancellationToken cancellationToken = default)
-            => FindSourceDeclarationsAsync(project, predicate, SymbolFilter.All, cancellationToken);
+        public static Task<IEnumerable<ISymbol>> FindSourceDeclarationsAsync(
+            Project project,
+            Func<string, bool> predicate,
+            CancellationToken cancellationToken = default
+        ) => FindSourceDeclarationsAsync(project, predicate, SymbolFilter.All, cancellationToken);
 
         /// <summary>
         /// Find the symbols for declarations made in source with a matching name.
         /// </summary>
-        public static async Task<IEnumerable<ISymbol>> FindSourceDeclarationsAsync(Project project, Func<string, bool> predicate, SymbolFilter filter, CancellationToken cancellationToken = default)
+        public static async Task<IEnumerable<ISymbol>> FindSourceDeclarationsAsync(
+            Project project,
+            Func<string, bool> predicate,
+            SymbolFilter filter,
+            CancellationToken cancellationToken = default
+        )
         {
             using var query = SearchQuery.CreateCustom(predicate);
             var declarations = await FindSourceDeclarationsWithCustomQueryAsync(
-                project, query, filter, cancellationToken).ConfigureAwait(false);
+                    project,
+                    query,
+                    filter,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return declarations;
         }
 
-        internal static async Task<ImmutableArray<ISymbol>> FindSourceDeclarationsWithCustomQueryAsync(
-            Project project, SearchQuery query, SymbolFilter filter, CancellationToken cancellationToken)
+        internal static async Task<
+            ImmutableArray<ISymbol>
+        > FindSourceDeclarationsWithCustomQueryAsync(
+            Project project,
+            SearchQuery query,
+            SymbolFilter filter,
+            CancellationToken cancellationToken
+        )
         {
             if (project == null)
             {
@@ -98,14 +147,30 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 return ImmutableArray<ISymbol>.Empty;
             }
 
-            using (Logger.LogBlock(FunctionId.SymbolFinder_Project_Predicate_FindSourceDeclarationsAsync, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.SymbolFinder_Project_Predicate_FindSourceDeclarationsAsync,
+                    cancellationToken
+                )
+            )
             {
-                if (await project.ContainsSymbolsWithNameAsync(query.GetPredicate(), filter, cancellationToken).ConfigureAwait(false))
+                if (
+                    await project
+                        .ContainsSymbolsWithNameAsync(
+                            query.GetPredicate(),
+                            filter,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                )
                 {
-                    var compilation = await project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
+                    var compilation = await project
+                        .GetRequiredCompilationAsync(cancellationToken)
+                        .ConfigureAwait(false);
 
-                    var unfiltered = compilation.GetSymbolsWithName(query.GetPredicate(), filter, cancellationToken)
-                                                .ToImmutableArray();
+                    var unfiltered = compilation
+                        .GetSymbolsWithName(query.GetPredicate(), filter, cancellationToken)
+                        .ToImmutableArray();
 
                     return DeclarationFinder.FilterByCriteria(unfiltered, filter);
                 }

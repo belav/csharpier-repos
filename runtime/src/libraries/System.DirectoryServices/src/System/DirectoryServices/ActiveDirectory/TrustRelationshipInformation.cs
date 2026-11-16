@@ -11,14 +11,14 @@ namespace System.DirectoryServices.ActiveDirectory
         External = 3,
         Forest = 4,
         Kerberos = 5,
-        Unknown = 6
+        Unknown = 6,
     }
 
     public enum TrustDirection
     {
         Inbound = 1,
         Outbound = 2,
-        Bidirectional = Outbound | Inbound
+        Bidirectional = Outbound | Inbound,
     }
 
     public class TrustRelationshipInformation
@@ -31,7 +31,11 @@ namespace System.DirectoryServices.ActiveDirectory
 
         internal TrustRelationshipInformation() { }
 
-        internal TrustRelationshipInformation(DirectoryContext context, string? source, TrustObject obj)
+        internal TrustRelationshipInformation(
+            DirectoryContext context,
+            string? source,
+            TrustObject obj
+        )
         {
             // security context
             this.context = context;
@@ -40,8 +44,10 @@ namespace System.DirectoryServices.ActiveDirectory
             // target
             this.target = obj.DnsDomainName ?? obj.NetbiosDomainName;
             // direction
-            if ((obj.Flags & (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_DIRECT_OUTBOUND) != 0 &&
-                (obj.Flags & (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_DIRECT_INBOUND) != 0)
+            if (
+                (obj.Flags & (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_DIRECT_OUTBOUND) != 0
+                && (obj.Flags & (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_DIRECT_INBOUND) != 0
+            )
                 direction = TrustDirection.Bidirectional;
             else if ((obj.Flags & (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_DIRECT_OUTBOUND) != 0)
                 direction = TrustDirection.Outbound;

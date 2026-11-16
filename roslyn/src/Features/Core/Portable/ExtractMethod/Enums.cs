@@ -11,14 +11,14 @@ internal enum DeclarationBehavior
     MoveIn,
     MoveOut,
     SplitIn,
-    SplitOut
+    SplitOut,
 }
 
 internal enum ReturnBehavior
 {
     None,
     Initialization,
-    Assignment
+    Assignment,
 }
 
 internal enum ParameterBehavior
@@ -26,5 +26,5 @@ internal enum ParameterBehavior
     None,
     Input,
     Out,
-    Ref
+    Ref,
 }

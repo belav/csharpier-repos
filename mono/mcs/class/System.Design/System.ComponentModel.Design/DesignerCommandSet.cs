@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,29 +34,27 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-	public class DesignerCommandSet
-	{
-		DesignerActionListCollection action_lists =
-			new DesignerActionListCollection ();
-		DesignerVerbCollection verbs =
-			new DesignerVerbCollection ();
+    public class DesignerCommandSet
+    {
+        DesignerActionListCollection action_lists = new DesignerActionListCollection();
+        DesignerVerbCollection verbs = new DesignerVerbCollection();
 
-		public DesignerCommandSet ()
-		{
-		}
-		
-		public DesignerActionListCollection ActionLists {
-			get { return action_lists; }
-		}
+        public DesignerCommandSet() { }
 
-		[MonoTODO]
-		public virtual ICollection GetCommands (string name)
-		{
-			throw new NotImplementedException ();
-		}
+        public DesignerActionListCollection ActionLists
+        {
+            get { return action_lists; }
+        }
 
-		public DesignerVerbCollection Verbs {
-			get { return verbs; }
-		}
-	}
+        [MonoTODO]
+        public virtual ICollection GetCommands(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DesignerVerbCollection Verbs
+        {
+            get { return verbs; }
+        }
+    }
 }

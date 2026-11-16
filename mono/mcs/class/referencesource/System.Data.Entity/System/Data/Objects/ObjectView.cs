@@ -29,7 +29,7 @@ namespace System.Data.Objects
     /// <para>
     /// This class provides an implementation of IBindingList that exposes a list of elements to be bound,
     /// provides a mechanism to change the membership of the list,
-    /// and events to notify interested objects when the membership of the list is modified 
+    /// and events to notify interested objects when the membership of the list is modified
     /// or an element in the list is modified.
     /// </para>
     /// <para>
@@ -42,14 +42,14 @@ namespace System.Data.Objects
         /// <summary>
         /// Specifies whether events handled from an underlying collection or individual bound item
         /// should result in list change events being fired from this IBindingList.
-        /// <b>True</b> to prevent events from being fired from this IBindingList; 
+        /// <b>True</b> to prevent events from being fired from this IBindingList;
         /// otherwise <b>false</b> to allow events to propogate.
         /// </summary>
-        private bool _suspendEvent; 
-       
+        private bool _suspendEvent;
+
         // Delegate for IBindingList.ListChanged event.
         private ListChangedEventHandler onListChanged;
-       
+
         /// <summary>
         /// Object that listens for underlying collection or individual bound item changes,
         /// and notifies this object when they occur.
@@ -62,7 +62,7 @@ namespace System.Data.Objects
         private int _addNewIndex = -1;
 
         /// <summary>
-        /// Object that maintains the underlying bound list, 
+        /// Object that maintains the underlying bound list,
         /// and specifies the operations allowed on that list.
         /// </summary>
         private IObjectViewData<TElement> _viewData;
@@ -71,7 +71,7 @@ namespace System.Data.Objects
         /// Construct a new instance of ObjectView using the supplied IObjectViewData and event data source.
         /// </summary>
         /// <param name="viewData">
-        /// Object that maintains the underlying bound list, 
+        /// Object that maintains the underlying bound list,
         /// and specifies the operations allowed on that list.
         /// </param>
         /// <param name="eventDataSource">
@@ -112,7 +112,7 @@ namespace System.Data.Objects
 
                 int oldIndex = _addNewIndex;
 
-                // Reset the addNewIndex here so that the IObjectView.CollectionChanged method 
+                // Reset the addNewIndex here so that the IObjectView.CollectionChanged method
                 // will not attempt to examine the item being removed.
                 // See IObjectView.CollectionChanged method for details.
                 _addNewIndex = -1;
@@ -136,7 +136,7 @@ namespace System.Data.Objects
         /// Commit a new item to the binding list.
         /// </summary>
         /// <param name="itemIndex">
-        /// Index of item to be committed.  
+        /// Index of item to be committed.
         /// This index must match the index of the item created by the last call to IBindindList.AddNew;
         /// otherwise this method is a nop.
         /// </param>
@@ -181,8 +181,13 @@ namespace System.Data.Objects
             _addNewIndex = _viewData.Add(newItem, true);
 
             _listener.RegisterEntityEvents(newItem);
-            OnListChanged(ListChangedType.ItemAdded, _addNewIndex /* newIndex*/, -1 /*oldIndex*/);
-            
+            OnListChanged(
+                ListChangedType.ItemAdded,
+                _addNewIndex /* newIndex*/
+                ,
+                -1 /*oldIndex*/
+            );
+
             return newItem;
         }
 
@@ -223,14 +228,8 @@ namespace System.Data.Objects
 
         public event System.ComponentModel.ListChangedEventHandler ListChanged
         {
-            add
-            {
-                onListChanged += value;
-            }
-            remove
-            {
-                onListChanged -= value;
-            }
+            add { onListChanged += value; }
+            remove { onListChanged -= value; }
         }
 
         void IBindingList.AddIndex(PropertyDescriptor property)
@@ -268,15 +267,12 @@ namespace System.Data.Objects
         /// </param>
         /// <remarks>
         /// This strongly-typed indexer is used by the data binding in WebForms and ASP.NET
-        /// to determine the Type of elements in the bound list. 
+        /// to determine the Type of elements in the bound list.
         /// The list of properties available for binding can then be determined from that element Type.
         /// </remarks>
         public TElement this[int index]
         {
-            get
-            {
-                return _viewData.List[index];
-            }
+            get { return _viewData.List[index]; }
             set
             {
                 // this represents a ROW basically whole entity, we should not allow any setting
@@ -288,10 +284,7 @@ namespace System.Data.Objects
 
         object IList.this[int index]
         {
-            get
-            {
-                return _viewData.List[index];
-            }
+            get { return _viewData.List[index]; }
             set
             {
                 // this represents a ROW basically whole entity, we should not allow any setting
@@ -301,10 +294,7 @@ namespace System.Data.Objects
 
         bool IList.IsReadOnly
         {
-            get 
-            {
-                return !(_viewData.AllowNew || _viewData.AllowRemove);
-            }
+            get { return !(_viewData.AllowNew || _viewData.AllowRemove); }
         }
 
         bool IList.IsFixedSize
@@ -336,7 +326,12 @@ namespace System.Data.Objects
                 if (!_viewData.FiresEventOnAdd)
                 {
                     _listener.RegisterEntityEvents(value);
-                    OnListChanged(ListChangedType.ItemAdded, index /*newIndex*/, -1/* oldIndex*/);
+                    OnListChanged(
+                        ListChangedType.ItemAdded,
+                        index /*newIndex*/
+                        ,
+                        -1 /* oldIndex*/
+                    );
                 }
             }
 
@@ -359,9 +354,9 @@ namespace System.Data.Objects
                 try
                 {
                     // Suspend list changed events during the clear, since the IObjectViewData declared that it wouldn't fire an event.
-                    // It's possible the IObjectViewData could implement Clear by repeatedly calling Remove, 
+                    // It's possible the IObjectViewData could implement Clear by repeatedly calling Remove,
                     // and we don't want these events to percolate during the Clear operation.
-                    _suspendEvent = true; 
+                    _suspendEvent = true;
                     _viewData.Clear();
                 }
                 finally
@@ -369,7 +364,12 @@ namespace System.Data.Objects
                     _suspendEvent = false;
                 }
 
-                OnListChanged(ListChangedType.Reset, -1 /*newIndex*/, -1/* oldIndex*/); // Indexes not used for reset event.
+                OnListChanged(
+                    ListChangedType.Reset,
+                    -1 /*newIndex*/
+                    ,
+                    -1 /* oldIndex*/
+                ); // Indexes not used for reset event.
             }
         }
 
@@ -420,7 +420,7 @@ namespace System.Data.Objects
             {
                 throw EntityUtil.IncompatibleArgument();
             }
-            
+
             Debug.Assert(((IList)this).Contains(value), "Value does not exist in view.");
 
             ((ICancelAddNew)this).EndNew(_addNewIndex);
@@ -434,7 +434,12 @@ namespace System.Data.Objects
             if (removed && !_viewData.FiresEventOnRemove)
             {
                 _listener.UnregisterEntityEvents(item);
-                OnListChanged(ListChangedType.ItemDeleted, index /* newIndex */, -1 /* oldIndex */);
+                OnListChanged(
+                    ListChangedType.ItemDeleted,
+                    index /* newIndex */
+                    ,
+                    -1 /* oldIndex */
+                );
             }
         }
 
@@ -456,7 +461,7 @@ namespace System.Data.Objects
         {
             ((IList)_viewData.List).CopyTo(array, index);
         }
-   
+
         object ICollection.SyncRoot
         {
             get { return this; }
@@ -476,7 +481,11 @@ namespace System.Data.Objects
 
         private void OnListChanged(ListChangedType listchangedType, int newIndex, int oldIndex)
         {
-            ListChangedEventArgs changeArgs = new ListChangedEventArgs(listchangedType, newIndex, oldIndex);
+            ListChangedEventArgs changeArgs = new ListChangedEventArgs(
+                listchangedType,
+                newIndex,
+                oldIndex
+            );
             OnListChanged(changeArgs);
         }
 
@@ -488,15 +497,20 @@ namespace System.Data.Objects
                 onListChanged(this, changeArgs);
             }
         }
-        
-        void IObjectView.EntityPropertyChanged(object sender, PropertyChangedEventArgs e) 
+
+        void IObjectView.EntityPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Debug.Assert(sender is TElement, "Entity should be of type TElement");
-            
+
             int index = ((IList)this).IndexOf((TElement)sender);
-            OnListChanged(ListChangedType.ItemChanged, index /*newIndex*/, index/*oldIndex*/);
+            OnListChanged(
+                ListChangedType.ItemChanged,
+                index /*newIndex*/
+                ,
+                index /*oldIndex*/
+            );
         }
-        
+
         /// <summary>
         /// Handle a change in the underlying collection bound by this ObjectView.
         /// </summary>
@@ -504,7 +518,7 @@ namespace System.Data.Objects
         /// <param name="e">
         /// Event arguments that specify the type of modification and the associated item.
         /// </param>
-        void IObjectView.CollectionChanged(object sender, CollectionChangeEventArgs e) 
+        void IObjectView.CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             // If there is a pending edit of a new item in the bound list (indicated by _addNewIndex >= 0)
             // and the collection membership changed due to an operation external to this ObjectView,
@@ -513,7 +527,7 @@ namespace System.Data.Objects
             // If the modification was made through this ObjectView, the pending edit would have been implicitly committed,
             // and there would be no need to examine it here.
             TElement addNew = default(TElement);
-            
+
             if (_addNewIndex >= 0)
             {
                 addNew = this[_addNewIndex];

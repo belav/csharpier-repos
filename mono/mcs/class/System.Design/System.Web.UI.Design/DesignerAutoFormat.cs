@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,44 +28,42 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
-using System.ComponentModel.Design;
-using System.ComponentModel;
-using System.Web.UI.WebControls;
 using System.Collections;
+using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-	public abstract class DesignerAutoFormat
-	{
-		protected DesignerAutoFormat (string name)
-		{
-		}
+    public abstract class DesignerAutoFormat
+    {
+        protected DesignerAutoFormat(string name) { }
 
-		[MonoTODO]
-		public string Name {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public string Name
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public DesignerAutoFormatStyle Style {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public DesignerAutoFormatStyle Style
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public abstract void Apply (Control control);
+        public abstract void Apply(Control control);
 
-		[MonoTODO]
-		public virtual Control GetPreviewControl (Control runtimeControl)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual Control GetPreviewControl(Control runtimeControl)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public override string ToString ()
-		{
-			return base.ToString ();
-		}
-	}
+        [MonoTODO]
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+    }
 }
-

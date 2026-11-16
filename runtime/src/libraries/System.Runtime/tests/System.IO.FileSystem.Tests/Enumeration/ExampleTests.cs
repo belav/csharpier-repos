@@ -22,24 +22,28 @@ namespace System.IO.Tests.Enumeration
             File.Create(Path.Join(testDirectory.FullName, "two")).Dispose();
             Directory.CreateDirectory(Path.Join(testDirectory.FullName, "three"));
 
-            IEnumerable<string> fileNames =
-                new FileSystemEnumerable<string>(
-                    testDirectory.FullName,
-                    (ref FileSystemEntry entry) => entry.FileName.ToString())
-                {
-                    ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory
-                };
+            IEnumerable<string> fileNames = new FileSystemEnumerable<string>(
+                testDirectory.FullName,
+                (ref FileSystemEntry entry) => entry.FileName.ToString()
+            )
+            {
+                ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory,
+            };
 
             FSAssert.EqualWhenOrdered(new string[] { "one", "two" }, fileNames);
         }
 
-        private static IEnumerable<FileInfo> GetFilesWithExtensions(string directory,
-            bool recursive, params string[] extensions)
+        private static IEnumerable<FileInfo> GetFilesWithExtensions(
+            string directory,
+            bool recursive,
+            params string[] extensions
+        )
         {
             return new FileSystemEnumerable<FileInfo>(
                 directory,
                 (ref FileSystemEntry entry) => (FileInfo)entry.ToFileSystemInfo(),
-                new EnumerationOptions() { RecurseSubdirectories = recursive })
+                new EnumerationOptions() { RecurseSubdirectories = recursive }
+            )
             {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
                 {
@@ -51,7 +55,7 @@ namespace System.IO.Tests.Enumeration
                             return true;
                     }
                     return false;
-                }
+                },
             };
         }
 
@@ -68,22 +72,29 @@ namespace System.IO.Tests.Enumeration
 
             FSAssert.EqualWhenOrdered(
                 new string[] { "file.one", "file.three" },
-                GetFilesWithExtensions(testDirectory.FullName, false, ".one", ".three").Select(f => f.Name));
+                GetFilesWithExtensions(testDirectory.FullName, false, ".one", ".three")
+                    .Select(f => f.Name)
+            );
 
             FSAssert.EqualWhenOrdered(
                 new string[] { "file.one", "file.three", "subfile.one" },
-                GetFilesWithExtensions(testDirectory.FullName, true, ".one", ".three").Select(f => f.Name));
+                GetFilesWithExtensions(testDirectory.FullName, true, ".one", ".three")
+                    .Select(f => f.Name)
+            );
         }
 
         private static int CountFiles(string directory, bool recursive)
         {
-            return (new FileSystemEnumerable<int>(
-                directory,
-                (ref FileSystemEntry entry) => 1,
-                new EnumerationOptions() { RecurseSubdirectories = recursive })
-            {
-                ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory
-            }).Count();
+            return (
+                new FileSystemEnumerable<int>(
+                    directory,
+                    (ref FileSystemEntry entry) => 1,
+                    new EnumerationOptions() { RecurseSubdirectories = recursive }
+                )
+                {
+                    ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory,
+                }
+            ).Count();
         }
 
         [Fact]
@@ -104,13 +115,16 @@ namespace System.IO.Tests.Enumeration
 
         private static long CountFileBytes(string directory, bool recursive)
         {
-            return (new FileSystemEnumerable<long>(
-                directory,
-                (ref FileSystemEntry entry) => entry.Length,
-                new EnumerationOptions() { RecurseSubdirectories = recursive })
-            {
-                ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory
-            }).Sum();
+            return (
+                new FileSystemEnumerable<long>(
+                    directory,
+                    (ref FileSystemEntry entry) => entry.Length,
+                    new EnumerationOptions() { RecurseSubdirectories = recursive }
+                )
+                {
+                    ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory,
+                }
+            ).Sum();
         }
 
         [Fact]

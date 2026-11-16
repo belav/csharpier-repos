@@ -27,12 +27,8 @@ public class SqlServerShortTypeMapping : ShortTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqlServerShortTypeMapping(
-        string storeType,
-        DbType? dbType = System.Data.DbType.Int16)
-        : base(storeType, dbType)
-    {
-    }
+    public SqlServerShortTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Int16)
+        : base(storeType, dbType) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -41,17 +37,15 @@ public class SqlServerShortTypeMapping : ShortTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerShortTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqlServerShortTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqlServerShortTypeMapping(parameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -59,6 +53,6 @@ public class SqlServerShortTypeMapping : ShortTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override string GenerateNonNullSqlLiteral(object value)
-        => $"CAST({base.GenerateNonNullSqlLiteral(value)} AS {StoreType})";
+    protected override string GenerateNonNullSqlLiteral(object value) =>
+        $"CAST({base.GenerateNonNullSqlLiteral(value)} AS {StoreType})";
 }

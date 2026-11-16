@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis.FileHeaders
         public FileHeader ParseFileHeader(SyntaxNode root)
         {
             var firstToken = root.GetFirstToken(includeZeroWidth: true);
-            var firstNonWhitespaceTrivia = IndexOfFirstNonWhitespaceTrivia(firstToken.LeadingTrivia);
+            var firstNonWhitespaceTrivia = IndexOfFirstNonWhitespaceTrivia(
+                firstToken.LeadingTrivia
+            );
 
             if (firstNonWhitespaceTrivia == -1)
             {
@@ -83,7 +85,11 @@ namespace Microsoft.CodeAnalysis.FileHeaders
                     if (sb.Length == 0)
                     {
                         var commentText = GetTextContextOfComment(trivia);
-                        var triviaStringParts = commentText.Span.Trim().ToString().Replace("\r\n", "\n").Split('\n');
+                        var triviaStringParts = commentText
+                            .Span.Trim()
+                            .ToString()
+                            .Replace("\r\n", "\n")
+                            .Split('\n');
 
                         foreach (var part in triviaStringParts)
                         {
@@ -131,7 +137,12 @@ namespace Microsoft.CodeAnalysis.FileHeaders
                 sb.Remove(sb.Length - eolLength, eolLength);
             }
 
-            return new FileHeader(sb.ToString(), fileHeaderStart, fileHeaderEnd, CommentPrefix.Length);
+            return new FileHeader(
+                sb.ToString(),
+                fileHeaderStart,
+                fileHeaderEnd,
+                CommentPrefix.Length
+            );
         }
 
         /// <summary>
@@ -146,8 +157,10 @@ namespace Microsoft.CodeAnalysis.FileHeaders
             for (var index = 0; index < triviaList.Count; index++)
             {
                 var currentTrivia = triviaList[index];
-                if (currentTrivia.RawKind != EndOfLineTriviaKind
-                    && currentTrivia.RawKind != WhitespaceTriviaKind)
+                if (
+                    currentTrivia.RawKind != EndOfLineTriviaKind
+                    && currentTrivia.RawKind != WhitespaceTriviaKind
+                )
                 {
                     // encountered non-whitespace trivia -> the search is done.
                     return index;

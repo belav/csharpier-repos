@@ -1910,8 +1910,8 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
             ActionDescriptor = actionDescriptor,
             HttpContext = httpContext,
             RouteData = routeData ?? new RouteData(),
-            ValueProviderFactories =
-                valueProviderFactories?.ToList() ?? new List<IValueProviderFactory>(),
+            ValueProviderFactories = valueProviderFactories?.ToList()
+                ?? new List<IValueProviderFactory>(),
             ViewStartFactories = new List<Func<IRazorPage>>(),
         };
 

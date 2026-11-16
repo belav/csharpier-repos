@@ -54,8 +54,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
             }
         }
 
-        internal void SelectionChanged(int selectedIndex)
-            => _setting.ChangeStyle(selectedIndex);
+        internal void SelectionChanged(int selectedIndex) => _setting.ChangeStyle(selectedIndex);
 
         private void OnSettingChanged(object sender, EventArgs e)
         {

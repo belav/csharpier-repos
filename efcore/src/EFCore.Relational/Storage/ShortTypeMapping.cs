@@ -34,27 +34,26 @@ public class ShortTypeMapping : RelationalTypeMapping
     /// </summary>
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
-    public ShortTypeMapping(
-        string storeType,
-        DbType? dbType = System.Data.DbType.Int16)
-        : base(storeType, typeof(short), dbType, jsonValueReaderWriter: JsonInt16ReaderWriter.Instance)
-    {
-    }
+    public ShortTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Int16)
+        : base(
+            storeType,
+            typeof(short),
+            dbType,
+            jsonValueReaderWriter: JsonInt16ReaderWriter.Instance
+        ) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="ShortTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
     protected ShortTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new ShortTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new ShortTypeMapping(parameters);
 }

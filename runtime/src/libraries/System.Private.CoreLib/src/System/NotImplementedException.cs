@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when a requested method or operation is not implemented.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class NotImplementedException : SystemException
     {
         public NotImplementedException()
@@ -19,21 +21,26 @@ namespace System
         {
             HResult = HResults.E_NOTIMPL;
         }
+
         public NotImplementedException(string? message)
             : base(message)
         {
             HResult = HResults.E_NOTIMPL;
         }
+
         public NotImplementedException(string? message, Exception? inner)
             : base(message, inner)
         {
             HResult = HResults.E_NOTIMPL;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected NotImplementedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected NotImplementedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

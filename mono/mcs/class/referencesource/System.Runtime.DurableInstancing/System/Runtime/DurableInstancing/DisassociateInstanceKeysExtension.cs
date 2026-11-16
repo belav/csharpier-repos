@@ -17,15 +17,8 @@ namespace System.Runtime.DurableInstancing
 
         internal bool AutomaticDisassociationEnabled
         {
-            get
-            {
-                return this.automaticDisassociationEnabled;
-            }
-
-            set
-            {
-                this.automaticDisassociationEnabled = value;
-            }
+            get { return this.automaticDisassociationEnabled; }
+            set { this.automaticDisassociationEnabled = value; }
         }
     }
 }

@@ -505,16 +505,12 @@ public class RequestResponseTests
     [ConditionalFact]
     public async Task GetServerVariableDoesNotCrash()
     {
-        await Helpers.StressLoad(
-            _fixture.Client,
-            "/GetServerVariableStress",
-            response =>
-            {
-                var text = response.Content.ReadAsStringAsync().Result;
-                Assert.StartsWith("Response Begin", text);
-                Assert.EndsWith("Response End", text);
-            }
-        );
+        await Helpers.StressLoad(_fixture.Client, "/GetServerVariableStress", response =>
+        {
+            var text = response.Content.ReadAsStringAsync().Result;
+            Assert.StartsWith("Response Begin", text);
+            Assert.EndsWith("Response End", text);
+        });
     }
 
     [ConditionalFact]
@@ -682,9 +678,8 @@ public class RequestResponseTests
         );
         var response = await _fixture.Client.SendAsync(request);
         Assert.Equal((HttpStatusCode)code, response.StatusCode);
-        Assert.DoesNotContain(
-            response.Headers,
-            h => h.Key.Equals("transfer-encoding", StringComparison.InvariantCultureIgnoreCase)
+        Assert.DoesNotContain(response.Headers, h =>
+            h.Key.Equals("transfer-encoding", StringComparison.InvariantCultureIgnoreCase)
         );
     }
 
@@ -835,15 +830,13 @@ public class RequestResponseTests
                 ""
             );
 
-            await _fixture.Client.RetryRequestAsync(
-                "/WaitingRequestCount",
-                async message => await message.Content.ReadAsStringAsync() == "1"
+            await _fixture.Client.RetryRequestAsync("/WaitingRequestCount", async message =>
+                await message.Content.ReadAsStringAsync() == "1"
             );
         }
 
-        await _fixture.Client.RetryRequestAsync(
-            "/WaitingRequestCount",
-            async message => await message.Content.ReadAsStringAsync() == "0"
+        await _fixture.Client.RetryRequestAsync("/WaitingRequestCount", async message =>
+            await message.Content.ReadAsStringAsync() == "0"
         );
     }
 

@@ -19,8 +19,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem), nameof(HasHardwareFlowControl))]
         public void ErrorEvent_RxOver()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 ErrorEventHandler errEventHandler = new ErrorEventHandler(com1);
 
@@ -58,8 +66,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void ErrorEvent_RxParity()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 ErrorEventHandler errEventHandler = new ErrorEventHandler(com1);
 
@@ -97,8 +113,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void ErrorEvent_Frame()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 ErrorEventHandler errEventHandler = new ErrorEventHandler(com1);
 
@@ -141,9 +165,8 @@ namespace System.IO.Ports.Tests
 
         private class ErrorEventHandler : TestEventHandler<SerialError>
         {
-            public ErrorEventHandler(SerialPort com) : base(com, false, false)
-            {
-            }
+            public ErrorEventHandler(SerialPort com)
+                : base(com, false, false) { }
 
             public void HandleEvent(object source, SerialErrorReceivedEventArgs e)
             {

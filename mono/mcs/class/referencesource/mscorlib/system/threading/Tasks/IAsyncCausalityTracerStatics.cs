@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>AlfreMen</OWNER>
@@ -21,16 +21,48 @@ namespace Windows.Foundation.Diagnostics
     [Guid("50850B26-267E-451B-A890-AB6A370245EE")]
     [WindowsRuntimeImport]
     internal interface IAsyncCausalityTracerStatics
-	{
-		void TraceOperationCreation(CausalityTraceLevel traceLevel, CausalitySource source, Guid platformId, ulong operationId, string operationName, ulong relatedContext);
-		void TraceOperationCompletion(CausalityTraceLevel traceLevel, CausalitySource source, Guid platformId, ulong operationId, AsyncCausalityStatus status);
-		void TraceOperationRelation(CausalityTraceLevel traceLevel, CausalitySource source, Guid platformId, ulong operationId, CausalityRelation relation);
-		void TraceSynchronousWorkStart(CausalityTraceLevel traceLevel, CausalitySource source, Guid platformId, ulong operationId, CausalitySynchronousWork work);
-		void TraceSynchronousWorkCompletion(CausalityTraceLevel traceLevel, CausalitySource source, CausalitySynchronousWork work);
+    {
+        void TraceOperationCreation(
+            CausalityTraceLevel traceLevel,
+            CausalitySource source,
+            Guid platformId,
+            ulong operationId,
+            string operationName,
+            ulong relatedContext
+        );
+        void TraceOperationCompletion(
+            CausalityTraceLevel traceLevel,
+            CausalitySource source,
+            Guid platformId,
+            ulong operationId,
+            AsyncCausalityStatus status
+        );
+        void TraceOperationRelation(
+            CausalityTraceLevel traceLevel,
+            CausalitySource source,
+            Guid platformId,
+            ulong operationId,
+            CausalityRelation relation
+        );
+        void TraceSynchronousWorkStart(
+            CausalityTraceLevel traceLevel,
+            CausalitySource source,
+            Guid platformId,
+            ulong operationId,
+            CausalitySynchronousWork work
+        );
+        void TraceSynchronousWorkCompletion(
+            CausalityTraceLevel traceLevel,
+            CausalitySource source,
+            CausalitySynchronousWork work
+        );
+
         //These next 2 functions could've been represented as an event except that the EventRegistrationToken wasn't being propagated to WinRT
-        EventRegistrationToken add_TracingStatusChanged(System.EventHandler<TracingStatusChangedEventArgs> eventHandler);
+        EventRegistrationToken add_TracingStatusChanged(
+            System.EventHandler<TracingStatusChangedEventArgs> eventHandler
+        );
         void remove_TracingStatusChanged(EventRegistrationToken token);
-	}
+    }
 
     [ComImport]
     [Guid("410B7711-FF3B-477F-9C9A-D2EFDA302DC3")]
@@ -49,16 +81,16 @@ namespace Windows.Foundation.Diagnostics
     [WindowsRuntimeImport]
     internal sealed class TracingStatusChangedEventArgs : ITracingStatusChangedEventArgs
     {
-        public extern bool Enabled 
+        public extern bool Enabled
         {
             [MethodImpl(MethodImplOptions.InternalCall)]
             get;
         }
-        
-        public extern CausalityTraceLevel TraceLevel 
+
+        public extern CausalityTraceLevel TraceLevel
         {
             [MethodImpl(MethodImplOptions.InternalCall)]
-            get; 
+            get;
         }
     }
 
@@ -68,28 +100,28 @@ namespace Windows.Foundation.Diagnostics
         Join,
         Choice,
         Cancel,
-        Error
+        Error,
     }
 
     internal enum CausalitySource
     {
         Application,
         Library,
-        System
+        System,
     }
 
     internal enum CausalitySynchronousWork
     {
         CompletionNotification,
         ProgressNotification,
-        Execution
+        Execution,
     }
 
     internal enum CausalityTraceLevel
     {
         Required,
         Important,
-        Verbose
+        Verbose,
     }
 
     internal enum AsyncCausalityStatus
@@ -97,7 +129,6 @@ namespace Windows.Foundation.Diagnostics
         Canceled = 2,
         Completed = 1,
         Error = 3,
-        Started = 0
+        Started = 0,
     }
-
 }

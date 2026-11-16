@@ -18,9 +18,7 @@ namespace System.Web.Mvc
         private Dictionary<string, ModelMetadata> _propertyMetadata;
 
         public ModelBindingContext()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         // copies certain values that won't change between parent and child objects,
         // e.g. ValueProvider, ModelState
@@ -35,28 +33,34 @@ namespace System.Web.Mvc
 
         public bool FallbackToEmptyPrefix { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value", Justification = "Cannot remove setter as that's a breaking change")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "value",
+            Justification = "Cannot remove setter as that's a breaking change"
+        )]
         public object Model
         {
             get { return ModelMetadata.Model; }
-            set { throw new InvalidOperationException(MvcResources.ModelMetadata_PropertyNotSettable); }
+            set
+            {
+                throw new InvalidOperationException(MvcResources.ModelMetadata_PropertyNotSettable);
+            }
         }
 
         public ModelMetadata ModelMetadata { get; set; }
 
         public string ModelName
         {
-            get
-            {
-                return _modelName;
-            }
-            set 
-            {
-                _modelName = value ?? String.Empty;
-            }
+            get { return _modelName; }
+            set { _modelName = value ?? String.Empty; }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "The containing type is mutable.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "The containing type is mutable."
+        )]
         public ModelStateDictionary ModelState
         {
             get
@@ -70,11 +74,19 @@ namespace System.Web.Mvc
             set { _modelState = value; }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value", Justification = "Cannot remove setter as that's a breaking change")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "value",
+            Justification = "Cannot remove setter as that's a breaking change"
+        )]
         public Type ModelType
         {
             get { return ModelMetadata.ModelType; }
-            set { throw new InvalidOperationException(MvcResources.ModelMetadata_PropertyNotSettable); }
+            set
+            {
+                throw new InvalidOperationException(MvcResources.ModelMetadata_PropertyNotSettable);
+            }
         }
 
         public Predicate<string> PropertyFilter
@@ -96,7 +108,10 @@ namespace System.Web.Mvc
             {
                 if (_propertyMetadata == null)
                 {
-                    _propertyMetadata = ModelMetadata.PropertiesAsArray.ToDictionaryFast(m => m.PropertyName, StringComparer.OrdinalIgnoreCase);
+                    _propertyMetadata = ModelMetadata.PropertiesAsArray.ToDictionaryFast(
+                        m => m.PropertyName,
+                        StringComparer.OrdinalIgnoreCase
+                    );
                 }
 
                 return _propertyMetadata;
@@ -107,11 +122,17 @@ namespace System.Web.Mvc
 
         internal IUnvalidatedValueProvider UnvalidatedValueProvider
         {
-            get { return (ValueProvider as IUnvalidatedValueProvider) ?? new UnvalidatedValueProviderWrapper(ValueProvider); }
+            get
+            {
+                return (ValueProvider as IUnvalidatedValueProvider)
+                    ?? new UnvalidatedValueProviderWrapper(ValueProvider);
+            }
         }
 
         // Used to wrap an IValueProvider in an IUnvalidatedValueProvider
-        private sealed class UnvalidatedValueProviderWrapper : IValueProvider, IUnvalidatedValueProvider
+        private sealed class UnvalidatedValueProviderWrapper
+            : IValueProvider,
+                IUnvalidatedValueProvider
         {
             private readonly IValueProvider _backingProvider;
 

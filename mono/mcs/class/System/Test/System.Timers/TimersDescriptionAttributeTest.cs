@@ -1,5 +1,5 @@
 //
-// TimersDescriptionAttributeTest.cs 
+// TimersDescriptionAttributeTest.cs
 //	- Unit tests for System.Timers.TimersDescriptionAttribute
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,31 +27,30 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Timers;
+using NUnit.Framework;
 
-namespace MonoTests.System.Timers {
+namespace MonoTests.System.Timers
+{
+    [TestFixture]
+    public class TimersDescriptionAttributeTest
+    {
+        [Test]
+        [Category("NotWorking")]
+        public void AnyString()
+        {
+            TimersDescriptionAttribute tda = new TimersDescriptionAttribute("Mono");
+            Assert.IsNull(tda.Description, "Description");
+        }
 
-	[TestFixture]
-	public class TimersDescriptionAttributeTest {
-
-		[Test]
-		[Category ("NotWorking")]
-		public void AnyString ()
-		{
-			TimersDescriptionAttribute tda = new TimersDescriptionAttribute ("Mono");
-			Assert.IsNull (tda.Description, "Description");
-		}
-
-		[Test]
-		[Category ("NotWorking")]
-		public void ExistingResourceName ()
-		{
-			TimersDescriptionAttribute tda = new TimersDescriptionAttribute ("TimerEnabled");
-			Assert.IsNotNull (tda.Description, "Description");
-			Assert.IsFalse ("TimerEnabled" == tda.Description, "!Equal");
-		}
-	}
+        [Test]
+        [Category("NotWorking")]
+        public void ExistingResourceName()
+        {
+            TimersDescriptionAttribute tda = new TimersDescriptionAttribute("TimerEnabled");
+            Assert.IsNotNull(tda.Description, "Description");
+            Assert.IsFalse("TimerEnabled" == tda.Description, "!Equal");
+        }
+    }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,35 +29,35 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Util;
-
+using NUnit.Framework;
 using StandAloneRunnerSupport;
 using StandAloneTests;
 
-using NUnit.Framework;
-
 namespace StandAloneTests.ChildrenAsProperties
 {
-	[TestCase ("ChildrenAsProperties", "PagesSection.ChildrenAsProperties")]
-	public sealed class Test_01 : ITestCase
-	{
-		public string PhysicalPath {
-			get { return Path.Combine (Consts.BasePhysicalDir, "ChildrenAsProperties"); }
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase("ChildrenAsProperties", "PagesSection.ChildrenAsProperties")]
+    public sealed class Test_01 : ITestCase
+    {
+        public string PhysicalPath
+        {
+            get { return Path.Combine(Consts.BasePhysicalDir, "ChildrenAsProperties"); }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("default.aspx", Default_Aspx));
-			return true;
-		}
-		
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<div>12345snap test snap</div>\n<div>123454444</div>\n";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-	}
+        public string VirtualPath
+        {
+            get { return "/"; }
+        }
+
+        public bool SetUp(List<TestRunItem> runItems)
+        {
+            runItems.Add(new TestRunItem("default.aspx", Default_Aspx));
+            return true;
+        }
+
+        void Default_Aspx(string result, TestRunItem runItem)
+        {
+            string originalHtml = "<div>12345snap test snap</div>\n<div>123454444</div>\n";
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
+        }
+    }
 }

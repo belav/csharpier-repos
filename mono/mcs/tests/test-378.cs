@@ -2,10 +2,10 @@
 
 public unsafe struct Foo
 {
-        public Foo *foo;
+    public Foo* foo;
 }
 
 public class C
 {
-	public static void Main () {}
+    public static void Main() { }
 }

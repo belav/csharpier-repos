@@ -42,14 +42,21 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
         IDiagnosticAnalyzerService analyzerService,
         IGlobalOptionService globalOptions,
         ITextBufferVisibilityTracker? visibilityTracker,
-        IAsynchronousOperationListener listener) : AsynchronousTaggerProvider<TTag>(threadingContext, globalOptions, visibilityTracker, listener)
+        IAsynchronousOperationListener listener
+    )
+        : AsynchronousTaggerProvider<TTag>(
+            threadingContext,
+            globalOptions,
+            visibilityTracker,
+            listener
+        )
     {
         private readonly DiagnosticKind _diagnosticKind = diagnosticKind;
         private readonly IDiagnosticService _diagnosticService = diagnosticService;
         private readonly IDiagnosticAnalyzerService _analyzerService = analyzerService;
 
         // The following three fields are used to help calculate diagnostic performance for syntax errors upon file open.
-        // During TagsChanged notification for syntax errors, VSPlatform will check the buffer's property bag for a 
+        // During TagsChanged notification for syntax errors, VSPlatform will check the buffer's property bag for a
         // key with name "syntax-squiggle-count". If found, it will determine that there were syntax errors in the document and
         // fire telemetry with timing information.
         //
@@ -62,7 +69,9 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
         //    is later found after modification, then we do *not* add the entry to the property bag.
         private static readonly object s_initialDiagnosticRequestInfoKey = new();
         private const string SyntaxSquiggleCountPropertyName = "syntax-squiggle-count";
-        private readonly bool _requiresBeforeTagsChangedNotification = diagnosticKind == DiagnosticKind.CompilerSyntax && typeof(TTag).IsAssignableFrom(typeof(IErrorTag));
+        private readonly bool _requiresBeforeTagsChangedNotification =
+            diagnosticKind == DiagnosticKind.CompilerSyntax
+            && typeof(TTag).IsAssignableFrom(typeof(IErrorTag));
 
         private readonly AbstractDiagnosticsTaggerProvider<TTag> _callback = callback;
 
@@ -76,20 +85,29 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
         /// </summary>
         protected sealed override bool CancelOnNewWork => true;
 
-        protected sealed override bool TagEquals(TTag tag1, TTag tag2)
-            => _callback.TagEquals(tag1, tag2);
+        protected sealed override bool TagEquals(TTag tag1, TTag tag2) =>
+            _callback.TagEquals(tag1, tag2);
 
-        protected sealed override ITaggerEventSource CreateEventSource(ITextView? textView, ITextBuffer subjectBuffer)
-            => CreateEventSourceWorker(subjectBuffer, _diagnosticService);
+        protected sealed override ITaggerEventSource CreateEventSource(
+            ITextView? textView,
+            ITextBuffer subjectBuffer
+        ) => CreateEventSourceWorker(subjectBuffer, _diagnosticService);
 
         protected sealed override Task ProduceTagsAsync(
-            TaggerContext<TTag> context, DocumentSnapshotSpan spanToTag, int? caretPosition, CancellationToken cancellationToken)
+            TaggerContext<TTag> context,
+            DocumentSnapshotSpan spanToTag,
+            int? caretPosition,
+            CancellationToken cancellationToken
+        )
         {
             return ProduceTagsAsync(context, spanToTag, cancellationToken);
         }
 
         private async Task ProduceTagsAsync(
-            TaggerContext<TTag> context, DocumentSnapshotSpan documentSpanToTag, CancellationToken cancellationToken)
+            TaggerContext<TTag> context,
+            DocumentSnapshotSpan documentSpanToTag,
+            CancellationToken cancellationToken
+        )
         {
             if (!_callback.IsEnabled)
                 return;
@@ -112,7 +130,10 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
             // is generating code that it doesn't want errors shown for.
             var buffer = snapshot.TextBuffer;
             var suppressedDiagnosticsSpans = (NormalizedSnapshotSpanCollection?)null;
-            buffer.Properties.TryGetProperty(PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey, out suppressedDiagnosticsSpans);
+            buffer.Properties.TryGetProperty(
+                PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
+                out suppressedDiagnosticsSpans
+            );
 
             var sourceText = snapshot.AsText();
 
@@ -125,24 +146,38 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
                 // NOTE: We pass 'includeSuppressedDiagnostics: true' to ensure that IDE0079 (unnecessary suppressions)
                 // are flagged and faded in the editor. IDE0079 analyzer requires all source suppressed diagnostics to
                 // be provided to it to function correctly.
-                var diagnostics = await _analyzerService.GetDiagnosticsForSpanAsync(
-                    document,
-                    requestedSpan.Span.ToTextSpan(),
-                    diagnosticKind: _diagnosticKind,
-                    includeSuppressedDiagnostics: true,
-                    cancellationToken: cancellationToken).ConfigureAwait(false);
+                var diagnostics = await _analyzerService
+                    .GetDiagnosticsForSpanAsync(
+                        document,
+                        requestedSpan.Span.ToTextSpan(),
+                        diagnosticKind: _diagnosticKind,
+                        includeSuppressedDiagnostics: true,
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 foreach (var diagnosticData in diagnostics)
                 {
                     if (_callback.IncludeDiagnostic(diagnosticData) && !diagnosticData.IsSuppressed)
                     {
-                        var diagnosticSpans = _callback.GetLocationsToTag(diagnosticData)
-                            .Select(loc => loc.UnmappedFileSpan.GetClampedTextSpan(sourceText).ToSnapshotSpan(snapshot));
+                        var diagnosticSpans = _callback
+                            .GetLocationsToTag(diagnosticData)
+                            .Select(loc =>
+                                loc.UnmappedFileSpan.GetClampedTextSpan(sourceText)
+                                    .ToSnapshotSpan(snapshot)
+                            );
                         foreach (var diagnosticSpan in diagnosticSpans)
                         {
-                            if (diagnosticSpan.IntersectsWith(requestedSpan) && !IsSuppressed(suppressedDiagnosticsSpans, diagnosticSpan))
+                            if (
+                                diagnosticSpan.IntersectsWith(requestedSpan)
+                                && !IsSuppressed(suppressedDiagnosticsSpans, diagnosticSpan)
+                            )
                             {
-                                var tagSpan = _callback.CreateTagSpan(workspace, diagnosticSpan, diagnosticData);
+                                var tagSpan = _callback.CreateTagSpan(
+                                    workspace,
+                                    diagnosticSpan,
+                                    diagnosticData
+                                );
                                 if (tagSpan != null)
                                     context.AddTag(tagSpan);
                             }
@@ -177,7 +212,10 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
             var properties = snapshot.TextBuffer.Properties;
 
             // Verify this is the initial diagnostic result
-            if (properties.GetProperty<int>(s_initialDiagnosticRequestInfoKey) != snapshot.Version.VersionNumber)
+            if (
+                properties.GetProperty<int>(s_initialDiagnosticRequestInfoKey)
+                != snapshot.Version.VersionNumber
+            )
                 return;
 
             // Verify we haven't already set the property used to determine time taken to first error calculated
@@ -188,7 +226,9 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
             properties[SyntaxSquiggleCountPropertyName] = -1;
         }
 
-        private static bool IsSuppressed(NormalizedSnapshotSpanCollection? suppressedSpans, SnapshotSpan span)
-            => suppressedSpans != null && suppressedSpans.IntersectsWith(span);
+        private static bool IsSuppressed(
+            NormalizedSnapshotSpanCollection? suppressedSpans,
+            SnapshotSpan span
+        ) => suppressedSpans != null && suppressedSpans.IntersectsWith(span);
     }
 }

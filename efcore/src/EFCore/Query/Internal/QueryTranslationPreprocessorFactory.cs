@@ -17,7 +17,9 @@ public class QueryTranslationPreprocessorFactory : IQueryTranslationPreprocessor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public QueryTranslationPreprocessorFactory(QueryTranslationPreprocessorDependencies dependencies)
+    public QueryTranslationPreprocessorFactory(
+        QueryTranslationPreprocessorDependencies dependencies
+    )
     {
         Dependencies = dependencies;
     }
@@ -36,6 +38,7 @@ public class QueryTranslationPreprocessorFactory : IQueryTranslationPreprocessor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual QueryTranslationPreprocessor Create(QueryCompilationContext queryCompilationContext)
-        => new(Dependencies, queryCompilationContext);
+    public virtual QueryTranslationPreprocessor Create(
+        QueryCompilationContext queryCompilationContext
+    ) => new(Dependencies, queryCompilationContext);
 }

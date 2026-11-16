@@ -1,5 +1,5 @@
 //
-// XmlMapping.cs: 
+// XmlMapping.cs:
 //
 // Author:
 //   John Donagher (john@webmeta.com)
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,82 +34,82 @@ using System.Collections;
 
 namespace System.Xml.Serialization
 {
-	public abstract class XmlMapping
-	{
-		ObjectMap map;
-		ArrayList relatedMaps;
-		SerializationFormat format;
-		SerializationSource source;
-		
-		internal string _elementName;
-		internal string _namespace;
-		
-		string key;
+    public abstract class XmlMapping
+    {
+        ObjectMap map;
+        ArrayList relatedMaps;
+        SerializationFormat format;
+        SerializationSource source;
 
-		internal XmlMapping ()
-		{
-		}
+        internal string _elementName;
+        internal string _namespace;
 
-		internal XmlMapping (string elementName, string ns)
-		{
-			_elementName = elementName;
-			_namespace = ns;
-		}
+        string key;
 
-		[MonoTODO]
-		public string XsdElementName
-		{
-			get { return _elementName; }
-		}
+        internal XmlMapping() { }
 
-		public string ElementName
-		{
-			get { return _elementName; }
-		}
+        internal XmlMapping(string elementName, string ns)
+        {
+            _elementName = elementName;
+            _namespace = ns;
+        }
 
-		public string Namespace
-		{
-			get { return _namespace; }
-		}
-		
-		public void SetKey (string key)
-		{
-			this.key = key;
-		}
-		
-		internal string GetKey ()
-		{
-			return key;
-		}
+        [MonoTODO]
+        public string XsdElementName
+        {
+            get { return _elementName; }
+        }
 
-		internal ObjectMap ObjectMap
-		{
-			get { return map; }
-			set { map = value; }
-		}
+        public string ElementName
+        {
+            get { return _elementName; }
+        }
 
-		internal ArrayList RelatedMaps
-		{
-			get { return relatedMaps; }
-			set { relatedMaps = value; }
-		}
+        public string Namespace
+        {
+            get { return _namespace; }
+        }
 
-		internal SerializationFormat Format
-		{
-			get { return format; }
-			set { format = value; }
-		}
-		
-		internal SerializationSource Source
-		{
-			get { return source; }
-			set { source = value; }
-		}
-	}
+        public void SetKey(string key)
+        {
+            this.key = key;
+        }
 
-	internal class ObjectMap
-	{
-	}
+        internal string GetKey()
+        {
+            return key;
+        }
 
-	internal enum SerializationFormat { Encoded, Literal }
+        internal ObjectMap ObjectMap
+        {
+            get { return map; }
+            set { map = value; }
+        }
+
+        internal ArrayList RelatedMaps
+        {
+            get { return relatedMaps; }
+            set { relatedMaps = value; }
+        }
+
+        internal SerializationFormat Format
+        {
+            get { return format; }
+            set { format = value; }
+        }
+
+        internal SerializationSource Source
+        {
+            get { return source; }
+            set { source = value; }
+        }
+    }
+
+    internal class ObjectMap { }
+
+    internal enum SerializationFormat
+    {
+        Encoded,
+        Literal,
+    }
 }

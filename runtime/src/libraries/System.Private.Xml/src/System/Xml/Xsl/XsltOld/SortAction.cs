@@ -16,6 +16,7 @@ namespace System.Xml.Xsl.XsltOld
         private Avt? _dataTypeAvt;
         private Avt? _orderAvt;
         private Avt? _caseOrderAvt;
+
         // Compile time precalculated AVTs
         private string? _lang;
         private XmlDataType _dataType = XmlDataType.Text;
@@ -35,7 +36,8 @@ namespace System.Xml.Xsl.XsltOld
             // better to remove this method completely and not call it here, but that may
             // change exception types for some stylesheets.
             CultureInfo cultInfo = new CultureInfo(value);
-            if (!XmlComplianceUtil.IsValidLanguageID(value)
+            if (
+                !XmlComplianceUtil.IsValidLanguageID(value)
                 && (value.Length == 0 || cultInfo == null)
             )
             {
@@ -131,7 +133,12 @@ namespace System.Xml.Xsl.XsltOld
             _order = ParseOrder(PrecalculateAvt(ref _orderAvt));
             _caseOrder = ParseCaseOrder(PrecalculateAvt(ref _caseOrderAvt));
 
-            if (_langAvt == null && _dataTypeAvt == null && _orderAvt == null && _caseOrderAvt == null)
+            if (
+                _langAvt == null
+                && _dataTypeAvt == null
+                && _orderAvt == null
+                && _caseOrderAvt == null
+            )
             {
                 _sort = new Sort(_selectKey, _lang, _dataType, _order, _caseOrder);
             }
@@ -174,14 +181,21 @@ namespace System.Xml.Xsl.XsltOld
             Debug.Assert(processor != null && frame != null);
             Debug.Assert(frame.State == Initialized);
 
-            processor.AddSort(_sort ??
-                new Sort(
-                    _selectKey,
-                    _langAvt == null ? _lang : ParseLang(_langAvt.Evaluate(processor, frame)),
-                    _dataTypeAvt == null ? _dataType : ParseDataType(_dataTypeAvt.Evaluate(processor, frame), _manager!),
-                    _orderAvt == null ? _order : ParseOrder(_orderAvt.Evaluate(processor, frame)),
-                    _caseOrderAvt == null ? _caseOrder : ParseCaseOrder(_caseOrderAvt.Evaluate(processor, frame))
-                )
+            processor.AddSort(
+                _sort
+                    ?? new Sort(
+                        _selectKey,
+                        _langAvt == null ? _lang : ParseLang(_langAvt.Evaluate(processor, frame)),
+                        _dataTypeAvt == null
+                            ? _dataType
+                            : ParseDataType(_dataTypeAvt.Evaluate(processor, frame), _manager!),
+                        _orderAvt == null
+                            ? _order
+                            : ParseOrder(_orderAvt.Evaluate(processor, frame)),
+                        _caseOrderAvt == null
+                            ? _caseOrder
+                            : ParseCaseOrder(_caseOrderAvt.Evaluate(processor, frame))
+                    )
             );
             frame.Finished();
         }

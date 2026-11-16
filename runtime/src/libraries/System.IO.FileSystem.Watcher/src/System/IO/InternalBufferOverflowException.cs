@@ -10,13 +10,16 @@ namespace System.IO
     ///    The exception that is thrown when the internal buffer overflows.
     /// </devdoc>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class InternalBufferOverflowException : SystemException
     {
         /// <devdoc>
         ///    Initializes a new default instance of the <see cref='System.IO.InternalBufferOverflowException'/> class.
         /// </devdoc>
-        public InternalBufferOverflowException() : base()
+        public InternalBufferOverflowException()
+            : base()
         {
             HResult = HResults.InternalBufferOverflow;
         }
@@ -24,7 +27,8 @@ namespace System.IO
         /// <devdoc>
         ///    Initializes a new instance of the <see cref='System.IO.InternalBufferOverflowException'/> class with the error message to be displayed specified.
         /// </devdoc>
-        public InternalBufferOverflowException(string? message) : base(message)
+        public InternalBufferOverflowException(string? message)
+            : base(message)
         {
             HResult = HResults.InternalBufferOverflow;
         }
@@ -33,16 +37,19 @@ namespace System.IO
         ///    Initializes a new instance of the <see cref='System.IO.InternalBufferOverflowException'/>
         ///    class with the message to be displayed and the generated inner exception specified.
         /// </devdoc>
-        public InternalBufferOverflowException(string? message, Exception? inner) : base(message, inner)
+        public InternalBufferOverflowException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.InternalBufferOverflow;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected InternalBufferOverflowException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

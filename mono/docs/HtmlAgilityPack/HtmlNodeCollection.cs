@@ -42,9 +42,12 @@ namespace HtmlAgilityPack
                 int index = GetNodeIndex(node);
                 if (index == -1)
                 {
-                    throw new ArgumentOutOfRangeException("node",
-                                                          "Node \"" + node.CloneNode(false).OuterHtml +
-                                                          "\" was not found in the collection");
+                    throw new ArgumentOutOfRangeException(
+                        "node",
+                        "Node \""
+                            + node.CloneNode(false).OuterHtml
+                            + "\" was not found in the collection"
+                    );
                 }
                 return index;
             }
@@ -447,8 +450,8 @@ namespace HtmlAgilityPack
         public IEnumerable<HtmlNode> DescendantNodes()
         {
             foreach (HtmlNode item in _items)
-                foreach (HtmlNode n in item.DescendantNodes())
-                    yield return n;
+            foreach (HtmlNode n in item.DescendantNodes())
+                yield return n;
         }
 
         /// <summary>
@@ -458,8 +461,8 @@ namespace HtmlAgilityPack
         public IEnumerable<HtmlNode> Descendants()
         {
             foreach (HtmlNode item in _items)
-                foreach (HtmlNode n in item.Descendants())
-                    yield return n;
+            foreach (HtmlNode n in item.Descendants())
+                yield return n;
         }
 
         /// <summary>
@@ -469,8 +472,8 @@ namespace HtmlAgilityPack
         public IEnumerable<HtmlNode> Descendants(string name)
         {
             foreach (HtmlNode item in _items)
-                foreach (HtmlNode n in item.Descendants(name))
-                    yield return n;
+            foreach (HtmlNode n in item.Descendants(name))
+                yield return n;
         }
 
         /// <summary>
@@ -480,8 +483,8 @@ namespace HtmlAgilityPack
         public IEnumerable<HtmlNode> Elements()
         {
             foreach (HtmlNode item in _items)
-                foreach (HtmlNode n in item.ChildNodes)
-                    yield return n;
+            foreach (HtmlNode n in item.ChildNodes)
+                yield return n;
         }
 
         /// <summary>
@@ -492,8 +495,8 @@ namespace HtmlAgilityPack
         public IEnumerable<HtmlNode> Elements(string name)
         {
             foreach (HtmlNode item in _items)
-                foreach (HtmlNode n in item.Elements(name))
-                    yield return n;
+            foreach (HtmlNode n in item.Elements(name))
+                yield return n;
         }
 
         /// <summary>
@@ -503,8 +506,8 @@ namespace HtmlAgilityPack
         public IEnumerable<HtmlNode> Nodes()
         {
             foreach (HtmlNode item in _items)
-                foreach (HtmlNode n in item.ChildNodes)
-                    yield return n;
+            foreach (HtmlNode n in item.ChildNodes)
+                yield return n;
         }
 
         #endregion

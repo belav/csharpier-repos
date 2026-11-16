@@ -7,8 +7,8 @@
 using System;
 using System.Collections.Immutable;
 using System.Threading;
-using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.CSharp.Emit;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private TypeWithAnnotations.Boxed _lazyType;
 
-        internal SubstitutedFieldSymbol(SubstitutedNamedTypeSymbol containingType, FieldSymbol substitutedFrom)
+        internal SubstitutedFieldSymbol(
+            SubstitutedNamedTypeSymbol containingType,
+            FieldSymbol substitutedFrom
+        )
             : base((FieldSymbol)substitutedFrom.OriginalDefinition)
         {
             _containingType = containingType;
@@ -28,8 +31,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (_lazyType == null)
             {
-                var type = _containingType.TypeSubstitution.SubstituteType(OriginalDefinition.GetFieldType(fieldsBeingBound));
-                Interlocked.CompareExchange(ref _lazyType, new TypeWithAnnotations.Boxed(type), null);
+                var type = _containingType.TypeSubstitution.SubstituteType(
+                    OriginalDefinition.GetFieldType(fieldsBeingBound)
+                );
+                Interlocked.CompareExchange(
+                    ref _lazyType,
+                    new TypeWithAnnotations.Boxed(type),
+                    null
+                );
             }
 
             return _lazyType.Value;
@@ -37,26 +46,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return _containingType;
-            }
+            get { return _containingType; }
         }
 
         public override NamedTypeSymbol ContainingType
         {
-            get
-            {
-                return _containingType;
-            }
+            get { return _containingType; }
         }
 
         public override FieldSymbol OriginalDefinition
         {
-            get
-            {
-                return _underlyingField;
-            }
+            get { return _underlyingField; }
         }
 
         public override bool IsImplicitlyDeclared
@@ -100,13 +100,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // containing a fixed-size buffer.  Given the rarity there would be little
             // benefit to "optimizing" the performance of this by caching the
             // translated implementation type.
-            return (NamedTypeSymbol)_containingType.TypeSubstitution.SubstituteType(OriginalDefinition.FixedImplementationType(emitModule)).Type;
+            return (NamedTypeSymbol)
+                _containingType
+                    .TypeSubstitution.SubstituteType(
+                        OriginalDefinition.FixedImplementationType(emitModule)
+                    )
+                    .Type;
         }
 
         public override RefKind RefKind => _underlyingField.RefKind;
 
         public override ImmutableArray<CustomModifier> RefCustomModifiers =>
-            _containingType.TypeSubstitution.SubstituteCustomModifiers(_underlyingField.RefCustomModifiers);
+            _containingType.TypeSubstitution.SubstituteCustomModifiers(
+                _underlyingField.RefCustomModifiers
+            );
 
         public override bool Equals(Symbol obj, TypeCompareKind compareKind)
         {
@@ -116,7 +123,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             var other = obj as FieldSymbol;
-            return (object)other != null && TypeSymbol.Equals(_containingType, other.ContainingType, compareKind) && OriginalDefinition == other.OriginalDefinition;
+            return (object)other != null
+                && TypeSymbol.Equals(_containingType, other.ContainingType, compareKind)
+                && OriginalDefinition == other.OriginalDefinition;
         }
 
         public override int GetHashCode()
@@ -124,7 +133,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var code = this.OriginalDefinition.GetHashCode();
 
             // If the containing type of the original definition is the same as our containing type
-            // it's possible that we will compare equal to the original definition under certain conditions 
+            // it's possible that we will compare equal to the original definition under certain conditions
             // (e.g, ignoring nullability) and want to retain the same hashcode. As such only make
             // the containing type part of the hashcode when we know equality isn't possible
             var containingHashCode = _containingType.GetHashCode();

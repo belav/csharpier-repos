@@ -7,18 +7,12 @@ namespace System.Configuration
     {
         public override ConfigurationElementCollectionType CollectionType
         {
-            get
-            {
-                return ConfigurationElementCollectionType.BasicMap;
-            }
+            get { return ConfigurationElementCollectionType.BasicMap; }
         }
 
         protected override string ElementName
         {
-            get
-            {
-                return "setting";
-            }
+            get { return "setting"; }
         }
 
         protected override ConfigurationElement CreateNewElement()

@@ -19,11 +19,16 @@ namespace System.Web.Http.Internal
                 throw Error.ArgumentNull("parameterBinding");
             }
 
-            IValueProviderParameterBinding valueProviderParameterBinding = parameterBinding as IValueProviderParameterBinding;
+            IValueProviderParameterBinding valueProviderParameterBinding =
+                parameterBinding as IValueProviderParameterBinding;
             if (valueProviderParameterBinding != null)
             {
-                IEnumerable<ValueProviderFactory> valueProviderFactories = valueProviderParameterBinding.ValueProviderFactories;
-                if (valueProviderFactories.Any() && valueProviderFactories.All(factory => factory is IUriValueProviderFactory))
+                IEnumerable<ValueProviderFactory> valueProviderFactories =
+                    valueProviderParameterBinding.ValueProviderFactories;
+                if (
+                    valueProviderFactories.Any()
+                    && valueProviderFactories.All(factory => factory is IUriValueProviderFactory)
+                )
                 {
                     return true;
                 }
