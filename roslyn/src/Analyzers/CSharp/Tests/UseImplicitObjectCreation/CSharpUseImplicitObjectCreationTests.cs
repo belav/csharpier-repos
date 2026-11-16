@@ -147,11 +147,11 @@ public class UseImplicitObjectCreationTests
                 Sources =
                 {
                     """
-                        class C
-                        {
-                            {|#0:E|} c = new {|#1:E|}();
-                        }
-                        """,
+                    class C
+                    {
+                        {|#0:E|} c = new {|#1:E|}();
+                    }
+                    """,
                 },
                 ExpectedDiagnostics =
                 {

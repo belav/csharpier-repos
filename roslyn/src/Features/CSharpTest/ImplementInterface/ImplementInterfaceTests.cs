@@ -576,14 +576,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                     Sources =
                     {
                         """
-                            #nullable enable
+                        #nullable enable
 
-                            using System;
+                        using System;
 
-                            class C : {|CS0535:{|CS0535:IInterface|}|}
-                            {
-                            }
-                            """,
+                        class C : {|CS0535:{|CS0535:IInterface|}|}
+                        {
+                        }
+                        """,
                     },
                     AdditionalProjects =
                     {
@@ -592,14 +592,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                             Sources =
                             {
                                 """
-                                    #nullable enable
+                                #nullable enable
 
-                                    public interface IInterface
-                                    {
-                                        void M(string? s1, string s2);
-                                        string this[string? s1, string s2] { get; set; }
-                                    }
-                                    """,
+                                public interface IInterface
+                                {
+                                    void M(string? s1, string s2);
+                                    string this[string? s1, string s2] { get; set; }
+                                }
+                                """,
                             },
                         },
                     },
@@ -610,31 +610,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                     Sources =
                     {
                         """
-                            #nullable enable
+                        #nullable enable
 
-                            using System;
+                        using System;
 
-                            class C : IInterface
+                        class C : IInterface
+                        {
+                            public string this[string? s1, string s2]
                             {
-                                public string this[string? s1, string s2]
+                                get
                                 {
-                                    get
-                                    {
-                                        throw new NotImplementedException();
-                                    }
-
-                                    set
-                                    {
-                                        throw new NotImplementedException();
-                                    }
+                                    throw new NotImplementedException();
                                 }
 
-                                public void M(string? s1, string s2)
+                                set
                                 {
                                     throw new NotImplementedException();
                                 }
                             }
-                            """,
+
+                            public void M(string? s1, string s2)
+                            {
+                                throw new NotImplementedException();
+                            }
+                        }
+                        """,
                     },
                 },
                 CodeActionEquivalenceKey =
@@ -1281,26 +1281,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                     Sources =
                     {
                         """
-                            interface I
-                            {
-                                void Method1();
-                            }
+                        interface I
+                        {
+                            void Method1();
+                        }
 
-                            class C : I
-                            {
-                                I i;
+                        class C : I
+                        {
+                            I i;
 
-                                public void Method1()
-                                {
-                                    i.Method1();
-                                }
-                            }
-
-                            class D : {|CS0535:I|}
+                            public void Method1()
                             {
-                                int i;
+                                i.Method1();
                             }
-                            """,
+                        }
+
+                        class D : {|CS0535:I|}
+                        {
+                            int i;
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -2631,39 +2631,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                     Sources =
                     {
                         """
-                            interface I
+                        interface I
+                        {
+                            int M();
+                        }
+
+                        interface I2
+                        {
+                            int M2();
+                        }
+
+                        class A : I, I2
+                        {
+                            int I.M()
                             {
-                                int M();
+                                return 0;
                             }
 
-                            interface I2
+                            int I2.M2()
                             {
-                                int M2();
+                                return 0;
                             }
+                        }
 
-                            class A : I, I2
+                        class B : I, {|CS0535:I2|}
+                        {
+                            A a;
+
+                            public int M()
                             {
-                                int I.M()
-                                {
-                                    return 0;
-                                }
-
-                                int I2.M2()
-                                {
-                                    return 0;
-                                }
+                                return ((I)a).M();
                             }
-
-                            class B : I, {|CS0535:I2|}
-                            {
-                                A a;
-
-                                public int M()
-                                {
-                                    return ((I)a).M();
-                                }
-                            }
-                            """,
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -2712,39 +2712,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                     Sources =
                     {
                         """
-                            interface I
+                        interface I
+                        {
+                            int M();
+                        }
+
+                        interface I2
+                        {
+                            int M2();
+                        }
+
+                        class A : I, I2
+                        {
+                            int I.M()
                             {
-                                int M();
+                                return 0;
                             }
 
-                            interface I2
+                            int I2.M2()
                             {
-                                int M2();
+                                return 0;
                             }
+                        }
 
-                            class A : I, I2
+                        class B : {|CS0535:I|}, I2
+                        {
+                            A a;
+
+                            public int M2()
                             {
-                                int I.M()
-                                {
-                                    return 0;
-                                }
-
-                                int I2.M2()
-                                {
-                                    return 0;
-                                }
+                                return ((I2)a).M2();
                             }
-
-                            class B : {|CS0535:I|}, I2
-                            {
-                                A a;
-
-                                public int M2()
-                                {
-                                    return ((I2)a).M2();
-                                }
-                            }
-                            """,
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -2788,30 +2788,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                     Sources =
                     {
                         """
-                            interface I
-                            {
-                                int M();
-                            }
+                        interface I
+                        {
+                            int M();
+                        }
 
-                            class A : I
+                        class A : I
+                        {
+                            int I.M()
                             {
-                                int I.M()
-                                {
-                                    return 0;
-                                }
+                                return 0;
                             }
+                        }
 
-                            class B : I
+                        class B : I
+                        {
+                            A a;
+                            A aa;
+
+                            public int M()
                             {
-                                A a;
-                                A aa;
-
-                                public int M()
-                                {
-                                    return ((I)a).M();
-                                }
+                                return ((I)a).M();
                             }
-                            """,
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -2849,30 +2849,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                     Sources =
                     {
                         """
-                            interface I
-                            {
-                                int M();
-                            }
+                        interface I
+                        {
+                            int M();
+                        }
 
-                            class A : I
+                        class A : I
+                        {
+                            int I.M()
                             {
-                                int I.M()
-                                {
-                                    return 0;
-                                }
+                                return 0;
                             }
+                        }
 
-                            class B : I
+                        class B : I
+                        {
+                            A a;
+                            A aa;
+
+                            public int M()
                             {
-                                A a;
-                                A aa;
-
-                                public int M()
-                                {
-                                    return ((I)aa).M();
-                                }
+                                return ((I)aa).M();
                             }
-                            """,
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -2927,43 +2927,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                     Sources =
                     {
                         """
-                            interface I
-                            {
-                                int M();
-                            }
+                        interface I
+                        {
+                            int M();
+                        }
 
-                            interface I2
-                            {
-                                int M2();
-                            }
+                        interface I2
+                        {
+                            int M2();
+                        }
 
-                            class A : I
+                        class A : I
+                        {
+                            int I.M()
                             {
-                                int I.M()
-                                {
-                                    return 0;
-                                }
+                                return 0;
                             }
+                        }
 
-                            class B : I2
+                        class B : I2
+                        {
+                            int I2.M2()
                             {
-                                int I2.M2()
-                                {
-                                    return 0;
-                                }
+                                return 0;
                             }
+                        }
 
-                            class C : I, {|CS0535:I2|}
+                        class C : I, {|CS0535:I2|}
+                        {
+                            A a;
+                            B b;
+
+                            public int M()
                             {
-                                A a;
-                                B b;
-
-                                public int M()
-                                {
-                                    return ((I)a).M();
-                                }
+                                return ((I)a).M();
                             }
-                            """,
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -3016,43 +3016,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                     Sources =
                     {
                         """
-                            interface I
-                            {
-                                int M();
-                            }
+                        interface I
+                        {
+                            int M();
+                        }
 
-                            interface I2
-                            {
-                                int M2();
-                            }
+                        interface I2
+                        {
+                            int M2();
+                        }
 
-                            class A : I
+                        class A : I
+                        {
+                            int I.M()
                             {
-                                int I.M()
-                                {
-                                    return 0;
-                                }
+                                return 0;
                             }
+                        }
 
-                            class B : I2
+                        class B : I2
+                        {
+                            int I2.M2()
                             {
-                                int I2.M2()
-                                {
-                                    return 0;
-                                }
+                                return 0;
                             }
+                        }
 
-                            class C : {|CS0535:I|}, I2
+                        class C : {|CS0535:I|}, I2
+                        {
+                            A a;
+                            B b;
+
+                            public int M2()
                             {
-                                A a;
-                                B b;
-
-                                public int M2()
-                                {
-                                    return ((I2)b).M2();
-                                }
+                                return ((I2)b).M2();
                             }
-                            """,
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -7358,28 +7358,28 @@ class C : I
                     Sources =
                     {
                         """
-                            public interface I
-                            {
-                                void Goo();
-                            }
+                        public interface I
+                        {
+                            void Goo();
+                        }
 
-                            public interface I2
-                            {
-                                void Goo2();
-                            }
+                        public interface I2
+                        {
+                            void Goo2();
+                        }
 
-                            partial class C : I
+                        partial class C : I
+                        {
+                            void I.Goo()
                             {
-                                void I.Goo()
-                                {
-                                    throw new System.NotImplementedException();
-                                }
+                                throw new System.NotImplementedException();
                             }
+                        }
 
-                            partial class C : {|CS0535:I2|}
-                            {
-                            }
-                            """,
+                        partial class C : {|CS0535:I2|}
+                        {
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -7401,10 +7401,10 @@ class C : I
                     Sources =
                     {
                         """
-                            public class Test : {|CS0535:{|CS0535:IGoo|}|}
-                            {
-                            }
-                            """,
+                        public class Test : {|CS0535:{|CS0535:IGoo|}|}
+                        {
+                        }
+                        """,
                     },
                     AdditionalProjects =
                     {
@@ -7413,10 +7413,10 @@ class C : I
                             Sources =
                             {
                                 """
-                                    Public Interface IGoo
-                                        Property IndexProp(ByVal p1 As Integer) As String
-                                    End Interface
-                                    """,
+                                Public Interface IGoo
+                                    Property IndexProp(ByVal p1 As Integer) As String
+                                End Interface
+                                """,
                             },
                         },
                     },
@@ -7427,19 +7427,19 @@ class C : I
                     Sources =
                     {
                         """
-                            public class Test : IGoo
+                        public class Test : IGoo
+                        {
+                            string IGoo.get_IndexProp(int p1)
                             {
-                                string IGoo.get_IndexProp(int p1)
-                                {
-                                    throw new System.NotImplementedException();
-                                }
-
-                                void IGoo.set_IndexProp(int p1, string Value)
-                                {
-                                    throw new System.NotImplementedException();
-                                }
+                                throw new System.NotImplementedException();
                             }
-                            """,
+
+                            void IGoo.set_IndexProp(int p1, string Value)
+                            {
+                                throw new System.NotImplementedException();
+                            }
+                        }
+                        """,
                     },
                 },
                 CodeActionEquivalenceKey =
@@ -7461,12 +7461,12 @@ class C : I
                     Sources =
                     {
                         """
-                            using System;
+                        using System;
 
-                            class C : {|CS0535:{|CS0535:I|}|}
-                            {
-                            }
-                            """,
+                        class C : {|CS0535:{|CS0535:I|}|}
+                        {
+                        }
+                        """,
                     },
                     AdditionalProjects =
                     {
@@ -7475,10 +7475,10 @@ class C : I
                             Sources =
                             {
                                 """
-                                    Public Interface I
-                                        Property P(x As Integer)
-                                    End Interface
-                                    """,
+                                Public Interface I
+                                    Property P(x As Integer)
+                                End Interface
+                                """,
                             },
                         },
                     },
@@ -7489,21 +7489,21 @@ class C : I
                     Sources =
                     {
                         """
-                            using System;
+                        using System;
 
-                            class C : I
+                        class C : I
+                        {
+                            public object get_P(int x)
                             {
-                                public object get_P(int x)
-                                {
-                                    throw new NotImplementedException();
-                                }
-
-                                public void set_P(int x, object Value)
-                                {
-                                    throw new NotImplementedException();
-                                }
+                                throw new NotImplementedException();
                             }
-                            """,
+
+                            public void set_P(int x, object Value)
+                            {
+                                throw new NotImplementedException();
+                            }
+                        }
+                        """,
                     },
                 },
                 CodeActionEquivalenceKey =
@@ -7522,12 +7522,12 @@ class C : I
                     Sources =
                     {
                         """
-                            using System;
+                        using System;
 
-                            class C : {|CS0535:I|}
-                            {
-                            }
-                            """,
+                        class C : {|CS0535:I|}
+                        {
+                        }
+                        """,
                     },
                     AdditionalProjects =
                     {
@@ -7536,13 +7536,13 @@ class C : I
                             Sources =
                             {
                                 """
-                                    using System;
-                                    internal class ShouldBeRemovedAttribute : Attribute { }
-                                    public interface I
-                                    {
-                                        string this[[ShouldBeRemovedAttribute] int i] { get; set; }
-                                    }
-                                    """,
+                                using System;
+                                internal class ShouldBeRemovedAttribute : Attribute { }
+                                public interface I
+                                {
+                                    string this[[ShouldBeRemovedAttribute] int i] { get; set; }
+                                }
+                                """,
                             },
                         },
                     },
@@ -7553,24 +7553,24 @@ class C : I
                     Sources =
                     {
                         """
-                            using System;
+                        using System;
 
-                            class C : I
+                        class C : I
+                        {
+                            public string this[int i]
                             {
-                                public string this[int i]
+                                get
                                 {
-                                    get
-                                    {
-                                        throw new NotImplementedException();
-                                    }
+                                    throw new NotImplementedException();
+                                }
 
-                                    set
-                                    {
-                                        throw new NotImplementedException();
-                                    }
+                                set
+                                {
+                                    throw new NotImplementedException();
                                 }
                             }
-                            """,
+                        }
+                        """,
                     },
                 },
                 CodeActionEquivalenceKey =
@@ -8983,22 +8983,22 @@ partial class C
                     Sources =
                     {
                         """
-                            interface IInterface
-                            {
-                                void Method1();
+                        interface IInterface
+                        {
+                            void Method1();
 
-                                protected void M1();
-                                protected int P1 {get;}
-                            }
+                            protected void M1();
+                            protected int P1 {get;}
+                        }
 
-                            class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        {
+                            public void Method1()
                             {
-                                public void Method1()
-                                {
-                                    throw new System.NotImplementedException();
-                                }
+                                throw new System.NotImplementedException();
                             }
-                            """,
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -9030,28 +9030,28 @@ partial class C
                     Sources =
                     {
                         """
-                            interface IInterface
-                            {
-                                protected void M1();
-                                protected int P1 {get;}
-                            }
+                        interface IInterface
+                        {
+                            protected void M1();
+                            protected int P1 {get;}
+                        }
 
-                            class Class : IInterface
+                        class Class : IInterface
+                        {
+                            int IInterface.P1
                             {
-                                int IInterface.P1
-                                {
-                                    get
-                                    {
-                                        throw new System.NotImplementedException();
-                                    }
-                                }
-
-                                void IInterface.M1()
+                                get
                                 {
                                     throw new System.NotImplementedException();
                                 }
                             }
-                            """,
+
+                            void IInterface.M1()
+                            {
+                                throw new System.NotImplementedException();
+                            }
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -9088,19 +9088,19 @@ partial class C
                     Sources =
                     {
                         """
-                            interface IInterface
-                            {
-                                void Method1();
+                        interface IInterface
+                        {
+                            void Method1();
 
-                                protected void M1();
-                                protected int P1 {get;}
-                            }
+                            protected void M1();
+                            protected int P1 {get;}
+                        }
 
-                            abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
-                            {
-                                public abstract void Method1();
-                            }
-                            """,
+                        abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        {
+                            public abstract void Method1();
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -9134,22 +9134,22 @@ partial class C
                     Sources =
                     {
                         """
-                            interface IInterface
-                            {
-                                void Method1();
+                        interface IInterface
+                        {
+                            void Method1();
 
-                                int P1 {get; protected set;}
-                                int P2 {protected get; set;}
-                            }
+                            int P1 {get; protected set;}
+                            int P2 {protected get; set;}
+                        }
 
-                            class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        {
+                            public void Method1()
                             {
-                                public void Method1()
-                                {
-                                    throw new System.NotImplementedException();
-                                }
+                                throw new System.NotImplementedException();
                             }
-                            """,
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -9181,41 +9181,41 @@ partial class C
                     Sources =
                     {
                         """
-                            interface IInterface
-                            {
-                                int P1 {get; protected set;}
-                                int P2 {protected get; set;}
-                            }
+                        interface IInterface
+                        {
+                            int P1 {get; protected set;}
+                            int P2 {protected get; set;}
+                        }
 
-                            class Class : IInterface
+                        class Class : IInterface
+                        {
+                            int IInterface.P1
                             {
-                                int IInterface.P1
+                                get
                                 {
-                                    get
-                                    {
-                                        throw new System.NotImplementedException();
-                                    }
-
-                                    set
-                                    {
-                                        throw new System.NotImplementedException();
-                                    }
+                                    throw new System.NotImplementedException();
                                 }
 
-                                int IInterface.P2
+                                set
                                 {
-                                    get
-                                    {
-                                        throw new System.NotImplementedException();
-                                    }
-
-                                    set
-                                    {
-                                        throw new System.NotImplementedException();
-                                    }
+                                    throw new System.NotImplementedException();
                                 }
                             }
-                            """,
+
+                            int IInterface.P2
+                            {
+                                get
+                                {
+                                    throw new System.NotImplementedException();
+                                }
+
+                                set
+                                {
+                                    throw new System.NotImplementedException();
+                                }
+                            }
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -9250,19 +9250,19 @@ partial class C
                     Sources =
                     {
                         """
-                            interface IInterface
-                            {
-                                void Method1();
+                        interface IInterface
+                        {
+                            void Method1();
 
-                                int P1 {get; protected set;}
-                                int P2 {protected get; set;}
-                            }
+                            int P1 {get; protected set;}
+                            int P2 {protected get; set;}
+                        }
 
-                            abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
-                            {
-                                public abstract void Method1();
-                            }
-                            """,
+                        abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        {
+                            public abstract void Method1();
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -9405,10 +9405,10 @@ partial class C
                     Sources =
                     {
                         """
-                            class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                            {
-                            }
-                            """,
+                        class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                        {
+                        }
+                        """,
                     },
                     AdditionalProjects =
                     {
@@ -9417,14 +9417,14 @@ partial class C
                             Sources =
                             {
                                 """
-                                    public interface IInterface
-                                    {
-                                        void Method1();
+                                public interface IInterface
+                                {
+                                    void Method1();
 
-                                        internal void M1();
-                                        internal int P1 {get;}
-                                    }
-                                    """,
+                                    internal void M1();
+                                    internal int P1 {get;}
+                                }
+                                """,
                             },
                         },
                     },
@@ -9435,14 +9435,14 @@ partial class C
                     Sources =
                     {
                         """
-                            class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        {
+                            public void Method1()
                             {
-                                public void Method1()
-                                {
-                                    throw new System.NotImplementedException();
-                                }
+                                throw new System.NotImplementedException();
                             }
-                            """,
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -9464,10 +9464,10 @@ partial class C
                     Sources =
                     {
                         """
-                            class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                            {
-                            }
-                            """,
+                        class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                        {
+                        }
+                        """,
                     },
                     AdditionalProjects =
                     {
@@ -9476,14 +9476,14 @@ partial class C
                             Sources =
                             {
                                 """
-                                    public interface IInterface
-                                    {
-                                        void Method1();
+                                public interface IInterface
+                                {
+                                    void Method1();
 
-                                        internal void M1();
-                                        internal int P1 {get;}
-                                    }
-                                    """,
+                                    internal void M1();
+                                    internal int P1 {get;}
+                                }
+                                """,
                             },
                         },
                     },
@@ -9494,14 +9494,14 @@ partial class C
                     Sources =
                     {
                         """
-                            class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        {
+                            void IInterface.Method1()
                             {
-                                void IInterface.Method1()
-                                {
-                                    throw new System.NotImplementedException();
-                                }
+                                throw new System.NotImplementedException();
                             }
-                            """,
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -9522,10 +9522,10 @@ partial class C
                     Sources =
                     {
                         """
-                            abstract class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                            {
-                            }
-                            """,
+                        abstract class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                        {
+                        }
+                        """,
                     },
                     AdditionalProjects =
                     {
@@ -9534,14 +9534,14 @@ partial class C
                             Sources =
                             {
                                 """
-                                    public interface IInterface
-                                    {
-                                        void Method1();
+                                public interface IInterface
+                                {
+                                    void Method1();
 
-                                        internal void M1();
-                                        internal int P1 {get;}
-                                    }
-                                    """,
+                                    internal void M1();
+                                    internal int P1 {get;}
+                                }
+                                """,
                             },
                         },
                     },
@@ -9552,11 +9552,11 @@ partial class C
                     Sources =
                     {
                         """
-                            abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
-                            {
-                                public abstract void Method1();
-                            }
-                            """,
+                        abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        {
+                            public abstract void Method1();
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -10032,10 +10032,10 @@ partial class C
                     Sources =
                     {
                         """
-                            class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                            {
-                            }
-                            """,
+                        class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                        {
+                        }
+                        """,
                     },
                     AdditionalProjects =
                     {
@@ -10044,14 +10044,14 @@ partial class C
                             Sources =
                             {
                                 """
-                                    public interface IInterface
-                                    {
-                                        void Method1();
+                                public interface IInterface
+                                {
+                                    void Method1();
 
-                                        int P1 {get; internal set;}
-                                        int P2 {internal get; set;}
-                                    }
-                                    """,
+                                    int P1 {get; internal set;}
+                                    int P2 {internal get; set;}
+                                }
+                                """,
                             },
                         },
                     },
@@ -10062,14 +10062,14 @@ partial class C
                     Sources =
                     {
                         """
-                            class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        {
+                            public void Method1()
                             {
-                                public void Method1()
-                                {
-                                    throw new System.NotImplementedException();
-                                }
+                                throw new System.NotImplementedException();
                             }
-                            """,
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -10091,10 +10091,10 @@ partial class C
                     Sources =
                     {
                         """
-                            class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                            {
-                            }
-                            """,
+                        class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                        {
+                        }
+                        """,
                     },
                     AdditionalProjects =
                     {
@@ -10103,14 +10103,14 @@ partial class C
                             Sources =
                             {
                                 """
-                                    public interface IInterface
-                                    {
-                                        void Method1();
+                                public interface IInterface
+                                {
+                                    void Method1();
 
-                                        int P1 {get; internal set;}
-                                        int P2 {internal get; set;}
-                                    }
-                                    """,
+                                    int P1 {get; internal set;}
+                                    int P2 {internal get; set;}
+                                }
+                                """,
                             },
                         },
                     },
@@ -10121,14 +10121,14 @@ partial class C
                     Sources =
                     {
                         """
-                            class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        {
+                            void IInterface.Method1()
                             {
-                                void IInterface.Method1()
-                                {
-                                    throw new System.NotImplementedException();
-                                }
+                                throw new System.NotImplementedException();
                             }
-                            """,
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },
@@ -10149,10 +10149,10 @@ partial class C
                     Sources =
                     {
                         """
-                            abstract class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
-                            {
-                            }
-                            """,
+                        abstract class Class : {|CS0535:{|CS0535:{|CS0535:IInterface|}|}|}
+                        {
+                        }
+                        """,
                     },
                     AdditionalProjects =
                     {
@@ -10161,14 +10161,14 @@ partial class C
                             Sources =
                             {
                                 """
-                                    public interface IInterface
-                                    {
-                                        void Method1();
+                                public interface IInterface
+                                {
+                                    void Method1();
 
-                                        int P1 {get; internal set;}
-                                        int P2 {internal get; set;}
-                                    }
-                                    """,
+                                    int P1 {get; internal set;}
+                                    int P2 {internal get; set;}
+                                }
+                                """,
                             },
                         },
                     },
@@ -10179,11 +10179,11 @@ partial class C
                     Sources =
                     {
                         """
-                            abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
-                            {
-                                public abstract void Method1();
-                            }
-                            """,
+                        abstract class Class : {|CS0535:{|CS0535:IInterface|}|}
+                        {
+                            public abstract void Method1();
+                        }
+                        """,
                     },
                     MarkupHandling = MarkupMode.Allow,
                 },

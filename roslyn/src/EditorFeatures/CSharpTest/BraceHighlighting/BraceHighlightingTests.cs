@@ -23,33 +23,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         [WpfTheory]
         [InlineData(
             """
-                public class C$$ {
-                }
-                """
+            public class C$$ {
+            }
+            """
         )]
         [InlineData(
             """
-                public class C $$[|{|]
-                [|}|]
-                """
+            public class C $$[|{|]
+            [|}|]
+            """
         )]
         [InlineData(
             """
-                public class C {$$
-                }
-                """
+            public class C {$$
+            }
+            """
         )]
         [InlineData(
             """
-                public class C {
-                $$}
-                """
+            public class C {
+            $$}
+            """
         )]
         [InlineData(
             """
-                public class C [|{|]
-                [|}|]$$
-                """
+            public class C [|{|]
+            [|}|]$$
+            """
         )]
         public async Task TestCurlies(string testCase)
         {
@@ -59,52 +59,52 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         [WpfTheory]
         [InlineData(
             """
-                public class C $$[|{|]
-                  public void Goo(){}
-                [|}|]
-                """
+            public class C $$[|{|]
+              public void Goo(){}
+            [|}|]
+            """
         )]
         [InlineData(
             """
-                public class C {$$
-                  public void Goo(){}
-                }
-                """
+            public class C {$$
+              public void Goo(){}
+            }
+            """
         )]
         [InlineData(
             """
-                public class C {
-                  public void Goo$$[|(|][|)|]{}
-                }
-                """
+            public class C {
+              public void Goo$$[|(|][|)|]{}
+            }
+            """
         )]
         [InlineData(
             """
-                public class C {
-                  public void Goo($$){}
-                }
-                """
+            public class C {
+              public void Goo($$){}
+            }
+            """
         )]
         [InlineData(
             """
-                public class C {
-                  public void Goo[|(|][|)|]$$[|{|][|}|]
-                }
-                """
+            public class C {
+              public void Goo[|(|][|)|]$$[|{|][|}|]
+            }
+            """
         )]
         [InlineData(
             """
-                public class C {
-                  public void Goo(){$$}
-                }
-                """
+            public class C {
+              public void Goo(){$$}
+            }
+            """
         )]
         [InlineData(
             """
-                public class C {
-                  public void Goo()[|{|][|}|]$$
-                }
-                """
+            public class C {
+              public void Goo()[|{|][|}|]$$
+            }
+            """
         )]
         public async Task TestTouchingItems(string testCase)
         {

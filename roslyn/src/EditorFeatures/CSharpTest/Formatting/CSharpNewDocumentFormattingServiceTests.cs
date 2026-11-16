@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
                 {
                     """
 
-                        """,
+                    """,
                 };
             }
         }

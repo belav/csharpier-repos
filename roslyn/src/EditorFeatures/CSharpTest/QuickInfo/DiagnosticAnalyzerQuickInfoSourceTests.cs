@@ -224,8 +224,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
         // False negative: Aliased attribute is not supported
         [InlineData(
             """
-                [SM("CodeQuality", "IDE0051$$"
-                """,
+            [SM("CodeQuality", "IDE0051$$"
+            """,
             false
         )]
         public async Task QuickInfoSuppressMessageAttributeUseCases(

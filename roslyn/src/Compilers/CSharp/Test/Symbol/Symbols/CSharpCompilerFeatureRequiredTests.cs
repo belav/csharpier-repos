@@ -21,37 +21,36 @@ public class CSharpCompilerFeatureRequiredTests
     private readonly CompilerFeatureRequiredTests_CSharp _csharpTest =
         new CompilerFeatureRequiredTests_CSharp();
 
-    protected override CSharpTestSource GetUsage() =>
-        """
-            #pragma warning disable 168 // Unused local
-            OnType onType;
-            OnType.M();
-            OnMethod.M();
-            OnMethodReturn.M();
-            OnParameter.M(1);
-            _ = OnField.Field;
-            OnProperty.Property = 1;
-            _ = OnProperty.Property;
-            OnPropertySetter.Property = 1;
-            _ = OnPropertySetter.Property;
-            OnPropertyGetter.Property = 1;
-            _ = OnPropertyGetter.Property;
-            OnEvent.Event += () => {};
-            OnEvent.Event -= () => {};
-            OnEventAdder.Event += () => {};
-            OnEventAdder.Event -= () => {};
-            OnEventRemover.Event += () => {};
-            OnEventRemover.Event -= () => {};
-            OnEnum onEnum;
-            _ = OnEnumMember.A;
-            OnClassTypeParameter<int> onClassTypeParameter;
-            OnMethodTypeParameter.M<int>();
-            OnDelegateType onDelegateType;
-            OnIndexedPropertyParameter.set_Property(1, 1);
-            _ = OnIndexedPropertyParameter.get_Property(1);
-            new OnThisIndexerParameter()[1] = 1;
-            _ = new OnThisIndexerParameter()[1];
-            """;
+    protected override CSharpTestSource GetUsage() => """
+        #pragma warning disable 168 // Unused local
+        OnType onType;
+        OnType.M();
+        OnMethod.M();
+        OnMethodReturn.M();
+        OnParameter.M(1);
+        _ = OnField.Field;
+        OnProperty.Property = 1;
+        _ = OnProperty.Property;
+        OnPropertySetter.Property = 1;
+        _ = OnPropertySetter.Property;
+        OnPropertyGetter.Property = 1;
+        _ = OnPropertyGetter.Property;
+        OnEvent.Event += () => {};
+        OnEvent.Event -= () => {};
+        OnEventAdder.Event += () => {};
+        OnEventAdder.Event -= () => {};
+        OnEventRemover.Event += () => {};
+        OnEventRemover.Event -= () => {};
+        OnEnum onEnum;
+        _ = OnEnumMember.A;
+        OnClassTypeParameter<int> onClassTypeParameter;
+        OnMethodTypeParameter.M<int>();
+        OnDelegateType onDelegateType;
+        OnIndexedPropertyParameter.set_Property(1, 1);
+        _ = OnIndexedPropertyParameter.get_Property(1);
+        new OnThisIndexerParameter()[1] = 1;
+        _ = new OnThisIndexerParameter()[1];
+        """;
 
     internal override string VisualizeRealIL(
         IModuleSymbol peModule,

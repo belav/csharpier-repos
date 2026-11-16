@@ -123,8 +123,7 @@ public class LazyLoadProxySqliteTest
         }
     }
 
-    protected override string SerializedBlogs2 =>
-        """
+    protected override string SerializedBlogs2 => """
 {
   "$id": "1",
   "$values": [
@@ -903,8 +902,7 @@ public class LazyLoadProxySqliteTest
 }
 """;
 
-    protected override string SerializedBlogs1 =>
-        """
+    protected override string SerializedBlogs1 => """
 [
   {
     "Writer": {

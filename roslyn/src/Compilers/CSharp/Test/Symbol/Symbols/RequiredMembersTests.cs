@@ -8424,8 +8424,9 @@ public class Derived : Base
         );
     }
 
-    private static string TupleWithRequiredMemberDefinition(bool setsRequiredMembers) =>
-        $$"""
+    private static string TupleWithRequiredMemberDefinition(
+        bool setsRequiredMembers
+    ) => $$"""
             namespace System
             {
                 public struct ValueTuple<T1, T2>

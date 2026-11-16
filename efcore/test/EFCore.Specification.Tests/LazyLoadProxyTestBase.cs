@@ -3090,8 +3090,7 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
         VerifyBlogs(newBlogs);
     }
 
-    protected virtual string SerializedBlogs2 =>
-        """
+    protected virtual string SerializedBlogs2 => """
 {
   "$id": "1",
   "$values": [
@@ -3870,8 +3869,7 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
 }
 """;
 
-    protected virtual string SerializedBlogs1 =>
-        """
+    protected virtual string SerializedBlogs1 => """
 [
   {
     "Writer": {

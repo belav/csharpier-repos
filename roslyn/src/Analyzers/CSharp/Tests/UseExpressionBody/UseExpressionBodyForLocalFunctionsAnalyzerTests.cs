@@ -923,11 +923,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     Sources =
                     {
                         """
-                            {|IDE0061:int Bar(int x)
-                            {
-                                return x;
-                            }|}
-                            """,
+                        {|IDE0061:int Bar(int x)
+                        {
+                            return x;
+                        }|}
+                        """,
                     },
                 },
                 FixedState =
@@ -935,8 +935,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     Sources =
                     {
                         """
-                            int Bar(int x) => x;
-                            """,
+                        int Bar(int x) => x;
+                        """,
                     },
                 },
                 LanguageVersion = LanguageVersion.CSharp9,
@@ -961,8 +961,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     Sources =
                     {
                         """
-                            {|IDE0061:int Bar(int x) => x;|}
-                            """,
+                        {|IDE0061:int Bar(int x) => x;|}
+                        """,
                     },
                 },
                 FixedState =
@@ -970,8 +970,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     Sources =
                     {
                         """
-                            int Bar(int x) { return x; }
-                            """,
+                        int Bar(int x) { return x; }
+                        """,
                     },
                 },
                 LanguageVersion = LanguageVersion.CSharp9,

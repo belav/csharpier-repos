@@ -2549,19 +2549,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     Sources =
                     {
                         """
-                            partial class C
-                            {
-                                private int [|_v|];
-                            }
-                            """,
+                        partial class C
+                        {
+                            private int [|_v|];
+                        }
+                        """,
                         """
-                            partial class C
+                        partial class C
+                        {
+                            public C()
                             {
-                                public C()
-                                {
-                                }
                             }
-                            """,
+                        }
+                        """,
                     },
                 },
                 FixedState =
@@ -2569,20 +2569,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     Sources =
                     {
                         """
-                            partial class C
-                            {
-                                private int _v;
-                            }
-                            """,
+                        partial class C
+                        {
+                            private int _v;
+                        }
+                        """,
                         """
-                            partial class C
+                        partial class C
+                        {
+                            public C(int v)
                             {
-                                public C(int v)
-                                {
-                                    _v = v;
-                                }
+                                _v = v;
                             }
-                            """,
+                        }
+                        """,
                     },
                 },
             }.RunAsync();
@@ -2598,23 +2598,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     Sources =
                     {
                         """
-                            partial class C
-                            {
-                                private int [|_v|];
+                        partial class C
+                        {
+                            private int [|_v|];
 
-                                public C()
-                                {
-                                }
-                            }
-                            """,
-                        """
-                            partial class C
+                            public C()
                             {
-                                public C(object goo)
-                                {
-                                }
                             }
-                            """,
+                        }
+                        """,
+                        """
+                        partial class C
+                        {
+                            public C(object goo)
+                            {
+                            }
+                        }
+                        """,
                     },
                 },
                 FixedState =
@@ -2622,24 +2622,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     Sources =
                     {
                         """
-                            partial class C
-                            {
-                                private int _v;
+                        partial class C
+                        {
+                            private int _v;
 
-                                public C()
-                                {
-                                }
-                            }
-                            """,
-                        """
-                            partial class C
+                            public C()
                             {
-                                public C(object goo, int v)
-                                {
-                                    _v = v;
-                                }
                             }
-                            """,
+                        }
+                        """,
+                        """
+                        partial class C
+                        {
+                            public C(object goo, int v)
+                            {
+                                _v = v;
+                            }
+                        }
+                        """,
                     },
                 },
                 CodeActionIndex = 1,
@@ -2656,19 +2656,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     Sources =
                     {
                         """
-                            partial class C
-                            {
-                                private int [|_v|];
-                            }
-                            """,
+                        partial class C
+                        {
+                            private int [|_v|];
+                        }
+                        """,
                         """
-                            partial class C
+                        partial class C
+                        {
+                            public C()
                             {
-                                public C()
-                                {
-                                }
                             }
-                            """,
+                        }
+                        """,
                     },
                 },
                 FixedState =
@@ -2676,20 +2676,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
                     Sources =
                     {
                         """
-                            partial class C
-                            {
-                                private int _v;
-                            }
-                            """,
+                        partial class C
+                        {
+                            private int _v;
+                        }
+                        """,
                         """
-                            partial class C
+                        partial class C
+                        {
+                            public C(int v = 0)
                             {
-                                public C(int v = 0)
-                                {
-                                    _v = v;
-                                }
+                                _v = v;
                             }
-                            """,
+                        }
+                        """,
                     },
                 },
                 CodeActionIndex = 1,

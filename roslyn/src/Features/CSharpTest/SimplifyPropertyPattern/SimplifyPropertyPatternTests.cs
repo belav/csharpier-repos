@@ -708,20 +708,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyPropertyPattern
                     Sources =
                     {
                         """
-                            using System;
-                            using System.Reflection;
+                        using System;
+                        using System.Reflection;
 
-                            class C
+                        class C
+                        {
+                            void S(Type t)
                             {
-                                void S(Type t)
+                                if (t is { Assembly: { EntryPoint.CallingConvention: CallingConventions.Any } })
                                 {
-                                    if (t is { Assembly: { EntryPoint.CallingConvention: CallingConventions.Any } })
-                                    {
 
-                                    }
                                 }
                             }
-                            """,
+                        }
+                        """,
                     },
                     ExpectedDiagnostics =
                     {

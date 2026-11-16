@@ -92,8 +92,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SpellCheck
                 Environment.NewLine,
                 Enumerable
                     .Range(0, 5500)
-                    .Select(v =>
-                        $$"""
+                    .Select(v => $$"""
 class {|Identifier:A{{v}}|}
 {
 }

@@ -1005,15 +1005,15 @@ public partial class C
     [Theory]
     [InlineData(
         """
-            file class Outer1 { }
-            file class Outer2 { }
-            """,
+        file class Outer1 { }
+        file class Outer2 { }
+        """,
         "Outer2"
     )]
     [InlineData(
         """
-            file class Outer { }
-            """,
+        file class Outer { }
+        """,
         "Outer"
     )]
     public void Determinism(string source, string fileTypeName)

@@ -694,13 +694,13 @@ public sealed class MakeStructMemberReadOnlyTests
                 Sources =
                 {
                     """
-                        struct S
-                        {
-                            int i;
+                    struct S
+                    {
+                        int i;
 
-                            int X { readonly get => 0; set { } }
-                        }
-                        """,
+                        int X { readonly get => 0; set { } }
+                    }
+                    """,
                 },
                 ExpectedDiagnostics =
                 {
@@ -742,13 +742,13 @@ public sealed class MakeStructMemberReadOnlyTests
                 Sources =
                 {
                     """
-                        struct S
-                        {
-                            int i;
+                    struct S
+                    {
+                        int i;
 
-                            int this[int x] { readonly get => 0; set { } }
-                        }
-                        """,
+                        int this[int x] { readonly get => 0; set { } }
+                    }
+                    """,
                 },
                 ExpectedDiagnostics =
                 {
