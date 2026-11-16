@@ -3961,12 +3961,17 @@ public abstract record C<T>
             );
 
             edits.VerifySemantics(
-                new[] { SemanticEdit(SemanticEditKind.Update, c => methodName switch
+                new[]
+                {
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        methodName switch
                         {
                             ".ctor" => c.GetCopyConstructor("C"),
                             "Equals" => c.GetSpecializedEqualsOverload("C"),
                             _ => c.GetMember("C." + methodName),
-                        }) },
+                        }
+                    ),
+                },
                 capabilities: EditAndContinueCapabilities.UpdateParameters
             );
         }
@@ -4032,12 +4037,16 @@ public abstract record C<T>
 
             var edits = GetTopEdits(src1, src2);
 
-            edits.VerifySemantics(SemanticEdit(SemanticEditKind.Update, c => methodName switch
+            edits.VerifySemantics(
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    methodName switch
                     {
                         ".ctor" => c.GetCopyConstructor("C"),
                         "Equals" => c.GetSpecializedEqualsOverload("C"),
                         _ => c.GetMember("C." + methodName),
-                    }));
+                    }
+                )
+            );
         }
 
         [Theory]
@@ -4060,12 +4069,16 @@ public abstract record C<T>
 
             var edits = GetTopEdits(src1, src2);
 
-            edits.VerifySemantics(SemanticEdit(SemanticEditKind.Update, c => methodName switch
+            edits.VerifySemantics(
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    methodName switch
                     {
                         ".ctor" => c.GetCopyConstructor("C"),
                         "Equals" => c.GetSpecializedEqualsOverload("C"),
                         _ => c.GetMember("C." + methodName),
-                    }));
+                    }
+                )
+            );
 
             edits.VerifySemanticDiagnostics();
         }
@@ -4118,12 +4131,17 @@ public abstract record C<T>
             );
 
             edits.VerifySemantics(
-                new[] { SemanticEdit(SemanticEditKind.Update, c => methodName switch
+                new[]
+                {
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        methodName switch
                         {
                             ".ctor" => c.GetCopyConstructor("C"),
                             "Equals" => c.GetSpecializedEqualsOverload("C"),
                             _ => c.GetMember("C." + methodName),
-                        }) },
+                        }
+                    ),
+                },
                 capabilities: EditAndContinueCapabilities.UpdateParameters
             );
         }

@@ -37,7 +37,8 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void InvalidOptionsThrows()
         {
-            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new FixedWindowRateLimiter(
                     new FixedWindowRateLimiterOptions
                     {
                         PermitLimit = -1,
@@ -46,8 +47,10 @@ namespace System.Threading.RateLimiting.Test
                         Window = TimeSpan.FromMinutes(2),
                         AutoReplenishment = false,
                     }
-                ));
-            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new FixedWindowRateLimiter(
                     new FixedWindowRateLimiterOptions
                     {
                         PermitLimit = 1,
@@ -56,8 +59,10 @@ namespace System.Threading.RateLimiting.Test
                         Window = TimeSpan.FromMinutes(2),
                         AutoReplenishment = false,
                     }
-                ));
-            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new FixedWindowRateLimiter(
                     new FixedWindowRateLimiterOptions
                     {
                         PermitLimit = 1,
@@ -66,8 +71,10 @@ namespace System.Threading.RateLimiting.Test
                         Window = TimeSpan.MinValue,
                         AutoReplenishment = false,
                     }
-                ));
-            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new FixedWindowRateLimiter(
                     new FixedWindowRateLimiterOptions
                     {
                         PermitLimit = 1,
@@ -76,8 +83,10 @@ namespace System.Threading.RateLimiting.Test
                         Window = TimeSpan.FromMinutes(-2),
                         AutoReplenishment = false,
                     }
-                ));
-            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new FixedWindowRateLimiter(
                     new FixedWindowRateLimiterOptions
                     {
                         PermitLimit = 1,
@@ -86,7 +95,8 @@ namespace System.Threading.RateLimiting.Test
                         Window = TimeSpan.Zero,
                         AutoReplenishment = false,
                     }
-                ));
+                )
+            );
         }
 
         [Fact]

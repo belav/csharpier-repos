@@ -22,7 +22,8 @@ public abstract class NorthwindKeylessEntitiesQueryRelationalTestBase<TFixture>
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                AssertQuery(async, ss => ss.Set<CustomerQuery>()
+                AssertQuery(async, ss =>
+                    ss.Set<CustomerQuery>()
                         .Select(cq => new
                         {
                             cq.City,
@@ -32,7 +33,8 @@ public abstract class NorthwindKeylessEntitiesQueryRelationalTestBase<TFixture>
                                 .ToList(),
                         })
                         .OrderBy(x => x.City)
-                        .Take(2))
+                        .Take(2)
+                )
             )
         ).Message;
 

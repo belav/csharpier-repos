@@ -76,12 +76,14 @@ app.MapGet("/hello/{name}", SayHello);
 
 app.MapGet("/null-result", IResult () => null!);
 
-app.MapGet("/todo/{id}", Results<Ok<Todo>, NotFound, BadRequest> (int id) => id switch
+app.MapGet("/todo/{id}", Results<Ok<Todo>, NotFound, BadRequest> (int id) =>
+    id switch
     {
         <= 0 => TypedResults.BadRequest(),
         >= 1 and <= 10 => TypedResults.Ok(new Todo(id, "Walk the dog")),
         _ => TypedResults.NotFound(),
-    });
+    }
+);
 
 var extensions = new Dictionary<string, object?>() { { "traceId", "traceId123" } };
 
@@ -90,7 +92,8 @@ var errors = new Dictionary<string, string[]>()
     { "Title", new[] { "The Title field is required." } },
 };
 
-app.MapGet("/problem/{problemType}", (string problemType) => problemType switch
+app.MapGet("/problem/{problemType}", (string problemType) =>
+    problemType switch
     {
         "plain" => Results.Problem(statusCode: 500, extensions: extensions),
         "object" => Results.Problem(
@@ -106,7 +109,8 @@ app.MapGet("/problem/{problemType}", (string problemType) => problemType switch
         ),
         "validationTyped" => TypedResults.ValidationProblem(errors, extensions: extensions),
         _ => TypedResults.NotFound(),
-    });
+    }
+);
 
 app.MapPost("/todos", (TodoBindable todo) => todo);
 app.MapGet("/todos", () =>

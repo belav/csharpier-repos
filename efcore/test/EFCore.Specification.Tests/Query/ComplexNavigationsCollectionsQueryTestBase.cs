@@ -1990,7 +1990,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Including_reference_navigation_and_projecting_collection_navigation(
         bool async
-    ) => AssertQuery(async, ss => ss.Set<Level1>()
+    ) =>
+        AssertQuery(async, ss =>
+            ss.Set<Level1>()
                 .Include(e => e.OneToOne_Required_FK1)
                     .ThenInclude(e => e.OneToOne_Optional_FK2)
                 .Select(e => new Level1
@@ -1998,7 +2000,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     Id = e.Id,
                     OneToOne_Required_FK1 = e.OneToOne_Required_FK1,
                     OneToMany_Required1 = e.OneToMany_Required1,
-                }));
+                })
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

@@ -52,7 +52,9 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupBy_is_optimized_when_projecting_anonymous_type_containing_group_key_and_multiple_group_aggregates(
         bool async
-    ) => AssertQuery(async, ss => ss.Set<ArubaOwner>()
+    ) =>
+        AssertQuery(async, ss =>
+            ss.Set<ArubaOwner>()
                 .GroupBy(o => o.FirstName)
                 .Select(g => new
                 {
@@ -60,7 +62,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     key2 = g.Key,
                     max = g.Max(p => p.Id),
                     min = g.Min(s => s.Id + 2),
-                }));
+                })
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -146,7 +149,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Grouping_by_all_columns_with_aggregate_function_works_1(bool async) =>
-        AssertQueryScalar(async, ss => ss.Set<ArubaOwner>()
+        AssertQueryScalar(async, ss =>
+            ss.Set<ArubaOwner>()
                 .GroupBy(
                     o => new
                     {
@@ -157,7 +161,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     },
                     c => new { c.LastName, c.FirstName },
                     (k, g) => g.Count()
-                ));
+                )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -191,7 +196,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Grouping_by_all_columns_with_aggregate_function_works_6(bool async) =>
-        AssertQuery(async, ss => ss.Set<ArubaOwner>()
+        AssertQuery(async, ss =>
+            ss.Set<ArubaOwner>()
                 .GroupBy(
                     o => o,
                     c => c,
@@ -202,7 +208,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                             k.Alias,
                             Count = g.Count(),
                         }
-                ));
+                )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -225,22 +232,26 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Grouping_by_all_columns_with_aggregate_function_works_9(bool async) =>
-        AssertQuery(async, ss => from o in ss.Set<ArubaOwner>() group o by o into g select new
+        AssertQuery(async, ss =>
+            from o in ss.Set<ArubaOwner>() group o by o into g select new
             {
                 g.Key.Id,
                 g.Key.Alias,
                 Count = g.Count(),
-            });
+            }
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Grouping_by_all_columns_with_aggregate_function_works_10(bool async) =>
-        AssertQuery(async, ss => from o in ss.Set<ArubaOwner>() group o by o into g select new
+        AssertQuery(async, ss =>
+            from o in ss.Set<ArubaOwner>() group o by o into g select new
             {
                 g.Key.Id,
                 Sum = g.Sum(x => x.Id),
                 Count = g.Count(),
-            });
+            }
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -539,10 +550,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Whats_new_2021_sample_4(bool async) =>
         AssertQuery(async, ss =>
-            from person in ss.Set<Person>()
-            join shoes in ss.Set<Shoes>() on person.Age equals shoes.Age
-            group shoes by shoes.Style into people
-            select new
+            from person in ss.Set<Person>() join shoes in ss.Set<Shoes>() on person.Age equals shoes.Age group shoes by shoes.Style into people select new
             {
                 people.Key,
                 Style = people.Select(p => p.Style).FirstOrDefault(),
@@ -583,7 +591,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     {
         var size = 11;
 
-        return AssertQuery(async, ss => ss.Set<Person>()
+        return AssertQuery(async, ss =>
+            ss.Set<Person>()
                 .Where(p => p.Feet.Size == size && p.MiddleInitial != null && p.Feet.Id != 1)
                 .GroupBy(p => new { p.Feet.Size, p.Feet.Person.LastName })
                 .Select(g => new
@@ -591,13 +600,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     g.Key.LastName,
                     g.Key.Size,
                     Min = g.Min(p => p.Feet.Size),
-                }));
+                })
+        );
     }
 
     [ConditionalTheory] // From #24869
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Whats_new_2021_sample_8(bool async) =>
-        AssertCount(async, ss => ss.Set<Person>()
+        AssertCount(async, ss =>
+            ss.Set<Person>()
                 .Include(x => x.Shoes)
                 .Include(x => x.Feet)
                 .GroupBy(x => new { x.Feet.Id, x.Feet.Size })
@@ -608,7 +619,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     Sum = x.Sum(el => el.Id),
                     SumOver60 = x.Sum(el => el.Id) / (decimal)60,
                     TotalCallOutCharges = x.Sum(el => el.Feet.Size == 11 ? 1 : 0),
-                }));
+                })
+        );
 
     [ConditionalTheory] // From #24591
     [MemberData(nameof(IsAsyncData))]

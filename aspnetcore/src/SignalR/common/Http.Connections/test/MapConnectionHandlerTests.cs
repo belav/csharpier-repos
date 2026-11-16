@@ -427,13 +427,13 @@ public class MapConnectionHandlerTests
     [WebSocketsSupportedCondition]
     public async Task MapConnectionHandlerWithWebSocketSubProtocolSetsProtocol()
     {
-        using var host = BuildWebHost<MyConnectionHandler>("/socket", options => options
-                .WebSockets
-                .SubProtocolSelector = subprotocols =>
+        using var host = BuildWebHost<MyConnectionHandler>("/socket", options =>
+            options.WebSockets.SubProtocolSelector = subprotocols =>
             {
                 Assert.Equal(new[] { "protocol1", "protocol2" }, subprotocols.ToArray());
                 return "protocol1";
-            });
+            }
+        );
 
         await host.StartAsync();
 

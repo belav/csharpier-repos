@@ -376,7 +376,8 @@ namespace LibraryImportGenerator.UnitTests
                     INamedTypeSymbol outAttribute = newComp.GetTypeByMetadataName(
                         TypeNames.System_Runtime_InteropServices_OutAttribute
                     )!;
-                    Assert.Collection(targetMethod.Parameters, param => Assert.Collection(
+                    Assert.Collection(targetMethod.Parameters, param =>
+                        Assert.Collection(
                             param.GetAttributes(),
                             attr =>
                             {
@@ -398,7 +399,8 @@ namespace LibraryImportGenerator.UnitTests
                                 Assert.Empty(attr.ConstructorArguments);
                                 Assert.Empty(attr.NamedArguments);
                             }
-                        ));
+                        )
+                    );
                 },
                 TestTargetFramework.Standard
             );

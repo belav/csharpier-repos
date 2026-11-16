@@ -825,7 +825,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_over_10_nested_ternary_condition(bool isAsync) =>
-        AssertQuery(isAsync, os => from c in os.Set<Customer>() select c.CustomerID == "1" ? "01"
+        AssertQuery(isAsync, os =>
+            from c in os.Set<Customer>() select c.CustomerID == "1" ? "01"
             : c.CustomerID == "2" ? "02"
             : c.CustomerID == "3" ? "03"
             : c.CustomerID == "4" ? "04"
@@ -836,7 +837,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             : c.CustomerID == "9" ? "09"
             : c.CustomerID == "10" ? "10"
             : c.CustomerID == "11" ? "11"
-            : null);
+            : null
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2625,7 +2627,9 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Take_on_top_level_and_on_collection_projection_with_outer_apply(
         bool async
-    ) => AssertFirstOrDefault(async, ss => ss.Set<Order>()
+    ) =>
+        AssertFirstOrDefault(async, ss =>
+            ss.Set<Order>()
                 .Where(o => o.CustomerID.StartsWith("F"))
                 .Select(o => new Order
                 {
@@ -2642,7 +2646,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                         .Skip(0)
                         .Take(10)
                         .ToList(),
-                }));
+                })
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

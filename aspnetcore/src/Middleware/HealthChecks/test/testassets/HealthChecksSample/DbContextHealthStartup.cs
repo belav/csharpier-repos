@@ -46,7 +46,8 @@ public class DbContextHealthStartup
         //
         app.UseHealthChecks("/health");
 
-        app.Map("/createdatabase", b => b.Run(
+        app.Map("/createdatabase", b =>
+            b.Run(
                 async (context) =>
                 {
                     await context.Response.WriteAsync("Creating the database...\n");
@@ -58,9 +59,11 @@ public class DbContextHealthStartup
                     await context.Response.WriteAsync("Done\n");
                     await context.Response.WriteAsync("Go to /health to see the health status\n");
                 }
-            ));
+            )
+        );
 
-        app.Map("/deletedatabase", b => b.Run(
+        app.Map("/deletedatabase", b =>
+            b.Run(
                 async (context) =>
                 {
                     await context.Response.WriteAsync("Deleting the database...\n");
@@ -72,7 +75,8 @@ public class DbContextHealthStartup
                     await context.Response.WriteAsync("Done\n");
                     await context.Response.WriteAsync("Go to /health to see the health status\n");
                 }
-            ));
+            )
+        );
 
         app.Run(
             async (context) =>

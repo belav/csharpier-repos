@@ -331,7 +331,8 @@ app.MapGet("/value-task", () => ValueTask.CompletedTask);
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoints = GetEndpointsFromCompilation(compilation);
 
-        VerifyStaticEndpointModels(result, endpointModels => Assert.Collection(
+        VerifyStaticEndpointModels(result, endpointModels =>
+            Assert.Collection(
                 endpointModels,
                 endpointModel =>
                 {
@@ -345,7 +346,8 @@ app.MapGet("/value-task", () => ValueTask.CompletedTask);
                     Assert.True(endpointModel.Response.IsAwaitable);
                     Assert.True(endpointModel.Response.HasNoResponse);
                 }
-            ));
+            )
+        );
 
         var httpContext = CreateHttpContext();
         await endpoints[0].RequestDelegate(httpContext);

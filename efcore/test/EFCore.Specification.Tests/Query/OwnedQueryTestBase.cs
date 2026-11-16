@@ -831,14 +831,17 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupBy_with_multiple_aggregates_on_owned_navigation_properties(
         bool async
-    ) => AssertQuery(async, ss => ss.Set<OwnedPerson>()
+    ) =>
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>()
                 .GroupBy(e => 1, x => x.PersonAddress.Country.Planet.Star)
                 .Select(e => new
                 {
                     p1 = e.Average(x => x.Id),
                     p2 = e.Sum(x => x.Id),
                     p3 = e.Max(x => x.Name.Length),
-                }));
+                })
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

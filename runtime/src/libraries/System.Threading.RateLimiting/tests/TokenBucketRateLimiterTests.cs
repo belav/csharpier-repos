@@ -39,7 +39,8 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void InvalidOptionsThrows()
         {
-            AssertExtensions.Throws<ArgumentException>("options", () => new TokenBucketRateLimiter(
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new TokenBucketRateLimiter(
                     new TokenBucketRateLimiterOptions
                     {
                         TokenLimit = -1,
@@ -49,8 +50,10 @@ namespace System.Threading.RateLimiting.Test
                         TokensPerPeriod = 1,
                         AutoReplenishment = false,
                     }
-                ));
-            AssertExtensions.Throws<ArgumentException>("options", () => new TokenBucketRateLimiter(
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new TokenBucketRateLimiter(
                     new TokenBucketRateLimiterOptions
                     {
                         TokenLimit = 1,
@@ -60,8 +63,10 @@ namespace System.Threading.RateLimiting.Test
                         TokensPerPeriod = 1,
                         AutoReplenishment = false,
                     }
-                ));
-            AssertExtensions.Throws<ArgumentException>("options", () => new TokenBucketRateLimiter(
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new TokenBucketRateLimiter(
                     new TokenBucketRateLimiterOptions
                     {
                         TokenLimit = 1,
@@ -71,8 +76,10 @@ namespace System.Threading.RateLimiting.Test
                         TokensPerPeriod = -1,
                         AutoReplenishment = false,
                     }
-                ));
-            AssertExtensions.Throws<ArgumentException>("options", () => new TokenBucketRateLimiter(
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new TokenBucketRateLimiter(
                     new TokenBucketRateLimiterOptions
                     {
                         TokenLimit = 1,
@@ -82,8 +89,10 @@ namespace System.Threading.RateLimiting.Test
                         TokensPerPeriod = 1,
                         AutoReplenishment = false,
                     }
-                ));
-            AssertExtensions.Throws<ArgumentException>("options", () => new TokenBucketRateLimiter(
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new TokenBucketRateLimiter(
                     new TokenBucketRateLimiterOptions
                     {
                         TokenLimit = 1,
@@ -93,8 +102,10 @@ namespace System.Threading.RateLimiting.Test
                         TokensPerPeriod = 1,
                         AutoReplenishment = false,
                     }
-                ));
-            AssertExtensions.Throws<ArgumentException>("options", () => new TokenBucketRateLimiter(
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new TokenBucketRateLimiter(
                     new TokenBucketRateLimiterOptions
                     {
                         TokenLimit = 1,
@@ -104,7 +115,8 @@ namespace System.Threading.RateLimiting.Test
                         TokensPerPeriod = 1,
                         AutoReplenishment = false,
                     }
-                ));
+                )
+            );
         }
 
         [Fact]

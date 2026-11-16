@@ -827,11 +827,13 @@ public class CommandLineApplicationTests
         var arguments = new[] { "--unexpected", "run" };
         var app = new CommandLineApplication(throwOnUnexpectedArg: false);
         var commandRan = false;
-        app.Command("run", c => c.OnExecute(() =>
+        app.Command("run", c =>
+            c.OnExecute(() =>
             {
                 commandRan = true;
                 return 0;
-            }));
+            })
+        );
         app.OnExecute(() => 0);
 
         app.Execute(arguments);
@@ -849,11 +851,13 @@ public class CommandLineApplicationTests
             continueAfterUnexpectedArg: true
         );
         var commandRan = false;
-        app.Command("run", c => c.OnExecute(() =>
+        app.Command("run", c =>
+            c.OnExecute(() =>
             {
                 commandRan = true;
                 return 0;
-            }));
+            })
+        );
         app.OnExecute(() => 0);
 
         app.Execute(unexpectedOption, "run");

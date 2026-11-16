@@ -1077,12 +1077,14 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Contains_with_local_enumerable_inline(bool async) =>
-        await AssertQuery(async, ss => ss.Set<Customer>()
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
                 .Where(c =>
                     new List<string> { "ABCDE", "ALFKI" }
                         .Where(e => e != null)
                         .Contains(c.CustomerID)
-                ));
+                )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1090,21 +1092,25 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     {
         var id = "ALFKI";
 
-        await AssertQuery(async, ss => ss.Set<Customer>()
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
                 .Where(c =>
                     new List<string> { "ABCDE", id }
                         .Where(e => e != null)
                         .Contains(c.CustomerID)
-                ));
+                )
+        );
 
         id = "ANATR";
 
-        await AssertQuery(async, ss => ss.Set<Customer>()
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
                 .Where(c =>
                     new List<string> { "ABCDE", id }
                         .Where(e => e != null)
                         .Contains(c.CustomerID)
-                ));
+                )
+        );
     }
 
     [ConditionalTheory]
@@ -1150,12 +1156,14 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Contains_with_local_ordered_enumerable_inline(bool async) =>
-        AssertQuery(async, ss => ss.Set<Customer>()
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
                 .Where(c =>
                     new List<string> { "ABCDE", "ALFKI" }
                         .Order()
                         .Contains(c.CustomerID)
-                ));
+                )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1163,21 +1171,25 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     {
         var id = "ALFKI";
 
-        await AssertQuery(async, ss => ss.Set<Customer>()
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
                 .Where(c =>
                     new List<string> { "ABCDE", id }
                         .Order()
                         .Contains(c.CustomerID)
-                ));
+                )
+        );
 
         id = "ANATR";
 
-        await AssertQuery(async, ss => ss.Set<Customer>()
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
                 .Where(c =>
                     new List<string> { "ABCDE", id }
                         .Order()
                         .Contains(c.CustomerID)
-                ));
+                )
+        );
     }
 
     [ConditionalTheory]
@@ -1223,12 +1235,14 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Contains_with_local_read_only_collection_inline(bool async) =>
-        AssertQuery(async, ss => ss.Set<Customer>()
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
                 .Where(c =>
                     new List<string> { "ABCDE", "ALFKI" }
                         .AsReadOnly()
                         .Contains(c.CustomerID)
-                ));
+                )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1238,21 +1252,25 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     {
         var id = "ALFKI";
 
-        await AssertQuery(async, ss => ss.Set<Customer>()
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
                 .Where(c =>
                     new List<string> { "ABCDE", id }
                         .AsReadOnly()
                         .Contains(c.CustomerID)
-                ));
+                )
+        );
 
         id = "ANATR";
 
-        await AssertQuery(async, ss => ss.Set<Customer>()
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
                 .Where(c =>
                     new List<string> { "ABCDE", id }
                         .AsReadOnly()
                         .Contains(c.CustomerID)
-                ));
+                )
+        );
     }
 
     [ConditionalTheory]
@@ -1261,7 +1279,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     {
         var id = "ALFKI";
 
-        await AssertQuery(async, ss => ss.Set<Customer>()
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
                 .Where(c =>
                     new List<Customer>
                     {
@@ -1270,11 +1289,13 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                     }
                         .Select(i => i.CustomerID)
                         .Contains(c.CustomerID)
-                ));
+                )
+        );
 
         id = "ANATR";
 
-        await AssertQuery(async, ss => ss.Set<Customer>()
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
                 .Where(c =>
                     new List<Customer>
                     {
@@ -1283,7 +1304,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                     }
                         .Select(i => i.CustomerID)
                         .Contains(c.CustomerID)
-                ));
+                )
+        );
     }
 
     [ConditionalTheory]
@@ -1539,14 +1561,16 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task List_Contains_with_constant_list(bool async) =>
-        AssertQuery(async, ss => ss.Set<Customer>()
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
                 .Where(c =>
                     new List<Customer>
                     {
                         new() { CustomerID = "ALFKI" },
                         new() { CustomerID = "ANATR" },
                     }.Contains(c)
-                ));
+                )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1577,14 +1601,16 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Contains_with_constant_list_value_type_id(bool async) =>
-        AssertQuery(async, ss => ss.Set<Order>()
+        AssertQuery(async, ss =>
+            ss.Set<Order>()
                 .Where(o =>
                     new List<Order>
                     {
                         new() { OrderID = 10248 },
                         new() { OrderID = 10249 },
                     }.Contains(o)
-                ));
+                )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2086,14 +2112,16 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Count_after_client_projection(bool async) =>
-        AssertCount(async, ss => ss.Set<Order>()
+        AssertCount(async, ss =>
+            ss.Set<Order>()
                 // ReSharper disable once ConvertTypeCheckToNullCheck
                 .Select(o => new
                 {
                     o.OrderID,
                     Customer = o.Customer is Customer ? new { o.Customer.ContactName } : null,
                 })
-                .Take(1));
+                .Take(1)
+        );
 
     public virtual Task Not_Any_false(bool async) =>
         AssertQuery(async, ss =>

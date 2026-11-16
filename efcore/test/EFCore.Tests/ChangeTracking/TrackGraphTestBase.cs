@@ -328,10 +328,12 @@ public abstract class TrackGraphTestBase
                     "Dreams:1 ---Are--> Dreams.Are#AreMade:1",
                     "Dreams:1 ---Made--> Dreams.Made#AreMade:1",
                 },
-                TrackGraph(context, sweet, node => node.Entry.State =
+                TrackGraph(context, sweet, node =>
+                    node.Entry.State =
                         node.Entry.Metadata.IsOwned() ? node.SourceEntry.State
                         : node.Entry.IsKeySet ? EntityState.Unchanged
-                        : EntityState.Added)
+                        : EntityState.Added
+                )
             );
         }
 

@@ -1185,7 +1185,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Query_source_materialization_bug_4547(bool async) =>
-        AssertQueryScalar(async, ss => from e3 in ss.Set<Level3>() join e1 in ss.Set<Level1>()
+        AssertQueryScalar(async, ss =>
+            from e3 in ss.Set<Level3>() join e1 in ss.Set<Level1>()
                 on e3.Id equals (
                     from subQuery2 in ss.Set<Level2>()
                     join subQuery3 in ss.Set<Level3>()
@@ -1198,7 +1199,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     select subQuery3 != null ? (int?)subQuery3.Id : null
                 )
                     .Where(x => x != null)
-                    .FirstOrDefault() select e1.Id);
+                    .FirstOrDefault() select e1.Id
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1513,7 +1515,9 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Projection_select_correct_table_with_anonymous_projection_in_subquery(
         bool async
-    ) => AssertQuery(async, ss => (
+    ) =>
+        AssertQuery(async, ss =>
+            (
                 from l2 in ss.Set<Level2>()
                 join l1 in ss.Set<Level1>() on l2.Level1_Required_Id equals l1.Id
                 join l3 in ss.Set<Level3>() on l1.Id equals l3.Level2_Required_Id
@@ -1523,14 +1527,17 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             )
                 .OrderBy(l => l.l1.Id)
                 .Take(3)
-                .Select(l => l.l2.Name));
+                .Select(l => l.l2.Name)
+        );
 
     // see issue #31887
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Projection_select_correct_table_in_subquery_when_materialization_is_not_required_in_multiple_joins(
         bool async
-    ) => AssertQuery(async, ss => (
+    ) =>
+        AssertQuery(async, ss =>
+            (
                 from l2 in ss.Set<Level2>()
                 join l1 in ss.Set<Level1>() on l2.Level1_Required_Id equals l1.Id
                 join l3 in ss.Set<Level3>() on l1.Id equals l3.Level2_Required_Id
@@ -1540,7 +1547,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             )
                 .OrderBy(l1 => l1.Id)
                 .Take(3)
-                .Select(l1 => l1.Name));
+                .Select(l1 => l1.Name)
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2186,14 +2194,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
         bool async
     ) =>
         AssertQuery(async, ss =>
-            from l2o in ss.Set<Level2>()
-            where l2o.Id == 7
-            select (
-                from l2i in ss.Set<Level2>()
-                join l1i in ss.Set<Level1>() on l2i.Level1_Required_Id equals l1i.Id
-                orderby l2i.Id
-                select new { Navigation = l2i.OneToOne_Required_FK_Inverse2, Constant = 7 }
-            )
+            from l2o in ss.Set<Level2>() where l2o.Id == 7 select (from l2i in ss.Set<Level2>() join l1i in ss.Set<Level1>() on l2i.Level1_Required_Id equals l1i.Id orderby l2i.Id select new { Navigation = l2i.OneToOne_Required_FK_Inverse2, Constant = 7 })
                 .First()
                 .Navigation.Name
         );
@@ -2532,7 +2533,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupJoin_in_subquery_with_client_result_operator(bool async) =>
-        AssertQuery(async, ss => from l1 in ss.Set<Level1>() where
+        AssertQuery(async, ss =>
+            from l1 in ss.Set<Level1>() where
                 (
                     from l1_inner in ss.Set<Level1>()
                     join l2_inner in ss.Set<Level2>()
@@ -2542,7 +2544,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     select l1_inner
                 )
                     .Distinct()
-                    .Count() > 7 where l1.Id < 3 select l1.Name);
+                    .Count() > 7 where l1.Id < 3 select l1.Name
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2565,7 +2568,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupJoin_in_subquery_with_client_projection_nested1(bool async) =>
-        AssertQuery(async, ss => from l1_outer in ss.Set<Level1>() where
+        AssertQuery(async, ss =>
+            from l1_outer in ss.Set<Level1>() where
                 (
                     from l1_middle in ss.Set<Level1>()
                     join l2_middle in ss.Set<Level2>()
@@ -2585,7 +2589,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                 )
                     .OrderBy(l1 => l1.Id)
                     .Take(10)
-                    .Count() > 4 where l1_outer.Id < 2 select l1_outer.Name);
+                    .Count() > 4 where l1_outer.Id < 2 select l1_outer.Name
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2706,8 +2711,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                 select l1
             )
                 .OrderBy(l1 => l1.Id)
-                .Take(15)
-            select l1.Id
+                .Take(15) select l1.Id
         );
 
     [ConditionalTheory]
@@ -2751,8 +2755,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             )
                 .Distinct()
                 .OrderBy(id => id)
-                .Take(20)
-            select l1
+                .Take(20) select l1
         );
 
     [ConditionalTheory]
@@ -2776,7 +2779,9 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Explicit_GroupJoin_in_subquery_with_multiple_result_operator_distinct_count_materializes_main_clause(
         bool async
-    ) => AssertQuery(async, ss => from l1 in ss.Set<Level1>() where
+    ) =>
+        AssertQuery(async, ss =>
+            from l1 in ss.Set<Level1>() where
                 (
                     from l1_inner in ss.Set<Level1>()
                     join l2 in ss.Set<Level2>()
@@ -2786,7 +2791,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     select l1_inner
                 )
                     .Distinct()
-                    .Count() > 4 select l1);
+                    .Count() > 4 select l1
+        );
 
     // issue #31887
     [ConditionalTheory]
@@ -3045,9 +3051,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
         bool async
     ) =>
         AssertQuery(async, ss =>
-            from l1 in ss.Set<Level1>()
-            where l1.Id < 3
-            select (from l3 in ss.Set<Level3>() select l3)
+            from l1 in ss.Set<Level1>() where l1.Id < 3 select (from l3 in ss.Set<Level3>() select l3)
                 .Distinct()
                 .OrderBy(l => l.Id)
                 .Skip(1)
@@ -4019,7 +4023,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Null_check_different_structure_does_not_remove_null_checks(bool async) =>
-        AssertQuery(async, ss => ss.Set<Level1>()
+        AssertQuery(async, ss =>
+            ss.Set<Level1>()
                 .Where(l1 =>
                     (
                         l1.OneToOne_Optional_FK1 == null ? null
@@ -4029,7 +4034,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                             ? null
                         : l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2.OneToOne_Optional_PK3.Name
                     ) == "L4 01"
-                ));
+                )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -4167,7 +4173,9 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Nested_SelectMany_correlated_with_join_table_correctly_translated_to_apply(
         bool async
-    ) => AssertQuery(async, ss => ss.Set<Level1>()
+    ) =>
+        AssertQuery(async, ss =>
+            ss.Set<Level1>()
                 .SelectMany(l1 =>
                     l1.OneToMany_Optional1.DefaultIfEmpty()
                         .SelectMany(l2 =>
@@ -4179,7 +4187,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                                     l3Name = l4.OneToOne_Optional_PK_Inverse4.Name,
                                 })
                         )
-                ));
+                )
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -4260,7 +4269,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Nested_object_constructed_from_group_key_properties(bool async) =>
-        AssertQuery(async, ss => ss.Set<Level1>()
+        AssertQuery(async, ss =>
+            ss.Set<Level1>()
                 .Where(l1 => l1.OneToOne_Optional_FK1 != null)
                 .GroupBy(l1 => new
                 {
@@ -4290,7 +4300,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         },
                     },
                     Aggregate = g.Sum(x => x.Name.Length),
-                }));
+                })
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -4414,9 +4425,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Distinct_skip_without_orderby(bool async) =>
         AssertQuery(async, ss =>
-            from l1 in ss.Set<Level1>()
-            where l1.Id < 3
-            select (from l3 in ss.Set<Level3>() select l3)
+            from l1 in ss.Set<Level1>() where l1.Id < 3 select (from l3 in ss.Set<Level3>() select l3)
                 .Distinct()
                 .Skip(1)
                 .OrderBy(e => e.Id)
@@ -4428,9 +4437,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Distinct_take_without_orderby(bool async) =>
         AssertQuery(async, ss =>
-            from l1 in ss.Set<Level1>()
-            where l1.Id < 3
-            select (from l3 in ss.Set<Level3>() select l3)
+            from l1 in ss.Set<Level1>() where l1.Id < 3 select (from l3 in ss.Set<Level3>() select l3)
                 .Distinct()
                 .Take(1)
                 .OrderBy(e => e.Id)
